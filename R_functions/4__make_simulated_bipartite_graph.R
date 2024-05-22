@@ -82,6 +82,12 @@ make_simulated_bipartite_graph <- function(bipartite_graph, n_reps = 99){
                                 tidygraph::arrange(type, name, rep) %>%
                                 tidygraph::mutate(overall = "overall")
               
+  
+  if (n_reps == 1){
+    result <- result %>%
+      mutate(name = stringr::str_sub(name, 1, str_length(name) - 5))
+  }
+  
     attr(result, "n_reps") <- n_reps
     
     result

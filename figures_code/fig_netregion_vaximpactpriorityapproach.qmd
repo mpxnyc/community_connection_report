@@ -1,7 +1,7 @@
 ```{r}
 #| label: fig-vaximpactpriorityapproach
-#| fig-cap : "Person Network Structure Resulting from Vaccination Campaign"
-#| fig-width: 9
+#| fig-cap : "fig-vaximpactpriorityapproach"
+#| fig-width: 7
 #| fig-height: 9
 
 
@@ -10,24 +10,34 @@
 
 
 table_vaximpactpriorityapproach() %>%
+  filter(intervention_priority == "contact") %>%
+  filter(strata == "overall") %>%
   ggplot() +
-  geom_bar(aes(x = ranking, y = prop, fill = measure), stat = "identity", width = 1, position = "stack") +
-  facet_grid(strata ~ intervention_priority) +
   theme_void() +
   theme(
     legend.position = "bottom",
     axis.ticks.length = unit(2, "mm"),
     axis.ticks.x = element_line(color = "black"),
-    axis.title.x = element_text(margin = margin(1,1,1,1, "cm")),
-    strip.clip = "off"
+    axis.title = element_text(margin = margin(1,1,1,1, "cm")),
+    strip.clip = "off",
+    axis.text = element_text(),
+    axis.title.y = element_text(angle = 90),
+    plot.margin = margin(2,2,2,2, "cm"),
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5)
   ) +
   scale_fill_manual("Network Region", values = c(mpxnyc_colors$dark_pink, mpxnyc_colors$dark_blue, mpxnyc_colors$dark_purple, mpxnyc_colors$dark_green, mpxnyc_colors$dark_brown)) +
   scale_color_manual(values = c("contact" = "white", "movement" = "white")) +
-  scale_x_continuous("Number of Included Neighborhoods", breaks = c(  0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100), limits = c(0, 100)) +
-  scale_y_continuous(limits = c(0, 1.1)) +
-  geom_hline(yintercept = 0.5, color = "white", size = 0.1) +
-  geom_hline(yintercept = 0.25, color = "white", size = 0.1) +
-  geom_hline(yintercept = 0.75, color = "white", size = 0.1) 
+  scale_x_continuous("Number of community districts included in intervention", breaks = c(  0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)) +
+  scale_y_continuous("Proportion of participants in each network region", labels = scales::percent) +
+  geom_hline(yintercept = 0.5, color = "black", size = 0.2) +
+  geom_hline(yintercept = 0.25, color = "black", size = 0.2) +
+  geom_hline(yintercept = 0.75, color = "black", size = 0.2) + 
+    geom_bar(aes(x = ranking, y = prop, fill = measure), stat = "identity", width = 0.9, position = "stack", color = "white", size = 0.1) +
+    labs(
+          title = "Effect of intervention on structure of social contact network",
+          subtitle = "MPX NYC, New York, 2022",
+          caption = "Data source: MPX NYC 2022")
 
 
 

@@ -5,7 +5,8 @@ mark_n_neighborhoods <- function(bipartite_graph_sim, n_neighborhoods, intervent
   bipartite_graph_sim_ranked <- bipartite_graph_sim %>% 
     activate(nodes) %>%
     mutate(intervention_ranking = NA) %>%
-    mutate(stratum = {{strata}}) 
+    mutate(stratum = {{strata}}) %>%
+    mutate(vax_place = NA)
   
   
   strata_levels             <- bipartite_graph_sim_ranked %>%

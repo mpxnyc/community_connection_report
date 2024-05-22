@@ -8,47 +8,51 @@ title: "Manuscript: MPX NYC Intervention Strategy"
 #| fig-width: 7
 #| fig-height: 7
 #| label: fig-radargroupsex
-#| fig-cap: "MPX NYC (2022): Social or Sexual Contact in Group Setting over Past 4 Weeks"
+#| fig-cap: "fig-radargroupsex"
 #| 
 
 
 
 
   targets::tar_read(participant_data) %>%
-    mutate(groupSex = factor(groupSex, c("no", "yes"), c("No", "Yes"))) %>%
-    group_by(groupSex) %>%
-    summarize(count = n()) %>%
-    ungroup() %>%
-    filter(!is.na(groupSex)) %>%
-    mutate(level = groupSex) %>%
-    mutate(proportion = count / sum(count)) %>%
-  ggplot2::ggplot() + 
-        ggplot2::geom_bar(aes(x = level, fill = level, y = proportion), width = 1, stat = "identity") + 
-        ggplot2::theme_void() + 
-        ggplot2::theme(
-                        legend.position = "none", 
-                        panel.grid.major.y = ggplot2::element_line(size = 0.1),
-                        axis.text.x = element_text(),
-                        axis.text.y = element_text()
-                        ) + 
-        ggplot2::scale_fill_manual(values = c(
-                                              mpxnyc_colors$dark_blue, 
-                                              mpxnyc_colors$dark_pink, 
-                                              mpxnyc_colors$dark_purple, 
-                                              mpxnyc_colors$light_blue, mpxnyc_colors$light_pink, 
-                                              mpxnyc_colors$light_purple)
-          ) + 
-    ggplot2::scale_x_discrete(drop = FALSE) +
-    ggplot2::scale_y_continuous(labels = scales::percent) + 
-    theme(
-      plot.margin = margin(2,2,2,2, "cm"),
-      plot.title = element_text(hjust = 0.5),
-      plot.subtitle = element_text(hjust = 0.5)
-    ) + 
-    labs(
-          title = "Social or sexual contact in group setting over prior 4 weeks",
-          subtitle = "MPX NYC, New York, 2022",
-          caption = "Data source: MPX NYC 2022")
+                mutate(groupSex = factor(groupSex, c("no", "yes"), c("No", "Yes"))) %>%
+                group_by(groupSex) %>%
+                summarize(count = n()) %>%
+                ungroup() %>%
+                filter(!is.na(groupSex)) %>%
+                mutate(level = groupSex) %>%
+                mutate(proportion = count / sum(count)) %>%
+    
+                ggplot2::ggplot() + 
+                            ggplot2::geom_bar(aes(x = level, fill = level, y = proportion), width = 1, stat = "identity") + 
+                            ggplot2::theme_void() + 
+                            ggplot2::theme(
+                                            legend.position    = "none", 
+                                            panel.grid.major.y = ggplot2::element_line(size = 0.1),
+                                            axis.text.x        = element_text(),
+                                            axis.text.y        = element_text()
+                                            ) + 
+                            ggplot2::scale_fill_manual(values = c(
+                                                                  dark_blue, 
+                                                                  dark_pink, 
+                                                                  dark_purple, 
+                                                                  light_blue, 
+                                                                  light_pink, 
+                                                                  light_purple
+                                                                  )
+                              ) + 
+                            ggplot2::scale_x_discrete(drop = FALSE) +
+                            ggplot2::scale_y_continuous(labels = scales::percent) + 
+                            ggplot2::theme(
+                                          plot.margin = margin(2,2,2,2, "cm"),
+                                          plot.title = element_text(hjust = 0.5),
+                                          plot.subtitle = element_text(hjust = 0.5)
+                                        ) + 
+                            labs(
+                                  title    = "Social or sexual contact in group setting over prior 4 weeks",
+                                  subtitle = "MPX NYC, New York, 2022",
+                                  caption  = "Data source: MPX NYC 2022"
+                                  )
   
 
 ```
