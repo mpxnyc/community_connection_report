@@ -28,48 +28,63 @@ title: "Manuscript: MPX NYC Intervention Strategy"
   
   
  bar_graph <- graph_data %>%
-   filter(group %in% c("Group A", "Group B")) %>%
+                      filter(group %in% c("Group A", "Group B")) %>%
                       ggplot() +
-                      geom_bar(aes(x = community, y = prop, fill = group), stat = "identity", color = "black", size = 0.3, width = 0.8) +
-   theme_void() +
-   theme(
-     legend.position = "none",
-     plot.margin = margin(3, 0, 3, 0, "cm"),
-     axis.text = element_text(size = 7),
-     panel.grid.major.x = element_line(color = "grey"),
-     plot.title = element_text(size = 7)
-   ) +
-   scale_fill_manual(values = c("Group A" = dark_pink, "Group B" = dark_blue, "Group C" = "grey")) +
-   scale_y_continuous(labels = scales::percent) +
-   scale_x_discrete(limits = rev) +
-   coord_flip() +
-   labs(
-     subtitle = "% Participants in\ncommunity district"
-   ) 
+                        geom_bar(
+                                  aes(x = community, y = prop, fill = group), 
+                                  stat = "identity", 
+                                  color = "black", 
+                                  size = 0.3, 
+                                  width = 0.8
+                                  ) +
+                       theme_void() +
+                       theme(
+                         legend.position = "none",
+                         plot.margin = margin(3, 0, 3, 0, "cm"),
+                         axis.text = element_text(size = 7),
+                         panel.grid.major.x = element_line(color = "grey"),
+                         plot.title = element_text(size = 7)
+                       ) +
+                       scale_fill_manual(values = c("Group A" = dark_pink, "Group B" = dark_blue, "Group C" = "grey")) +
+                       scale_y_continuous(labels = scales::percent) +
+                       scale_x_discrete(limits = rev) +
+                       coord_flip() +
+                       labs(
+                         subtitle = "% Participants in\ncommunity district"
+                       ) 
+ 
+ 
+ 
  
  map_graph <- mpxnyc::community_sf_obj %>%
                    left_join(graph_data) %>%
-   ggplot() +
-   geom_sf(aes(fill = group, alpha = group), color = "black") +
-   theme_void() +
-   theme(
-     legend.position = "none",
-           plot.margin = margin(2,1,2,1, "cm"),
-      plot.title = element_text(hjust = 0.5),
-      plot.subtitle = element_text(hjust = 0.5)
-   ) +
-   scale_fill_manual(values = c("Group A" = dark_pink, "Group B" = dark_blue, "Group C" = light_purple), na.value = "grey") + 
-   scale_alpha_manual(values = c("Group A" = 1, "Group B" = 1, "Group C" = 0.5)) +
-    labs(
-          title = "33% of participants reachable through 3 community districts",
-          subtitle = "MPX NYC, New York, 2022",
-          caption = "Data source: MPX NYC 2022")
-   
+                   ggplot() +
+                         geom_sf(aes(fill = group, alpha = group), color = "black") +
+                         theme_void() +
+                         theme(
+                           legend.position = "none",
+                           lot.margin = margin(2,1,2,1, "cm"),
+                            plot.title = element_text(hjust = 0.5),
+                            plot.subtitle = element_text(hjust = 0.5
+                                                         )
+                         ) +
+                         scale_fill_manual(
+                                          values = c(
+                                                        "Group A" = dark_pink, 
+                                                        "Group B" = dark_blue, 
+                                                        "Group C" = light_purple
+                                                        ), 
+                                           na.value = "grey"
+                                           ) + 
+                         scale_alpha_manual(values = c("Group A" = 1, "Group B" = 1, "Group C" = 0.5)) +
+                         labs(
+                                title     = captions_and_titles("barmapcoverage")$title,
+                                subtitle  = captions_and_titles("barmapcoverage")$subtitle,
+                                caption   = captions_and_titles("barmapcoverage")$caption
+                                )
+                   
   
  
-
- 
- #cowplot::plot_grid(map_graph, bar_graph, ncol = 1, rel_heights = c(4,2))
 
  
  cowplot::ggdraw(map_graph) +

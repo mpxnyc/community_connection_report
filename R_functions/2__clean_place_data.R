@@ -27,7 +27,8 @@ contact_places <- raw_data_places %>%
                       ) %>%
                       dplyr::filter(!is.na(home_neighborhood) & !is.na(place_neighborhood)) %>%
                       dplyr::select(-c(inHomeCensusTract, inHomeCommunity, inHomeNeighborhood, inHomeBorough)) %>%
-                      dplyr::tibble()
+                      dplyr::tibble() %>%
+                      dplyr::filter(!is.na(placeSex))
 
 contact_places
 }
