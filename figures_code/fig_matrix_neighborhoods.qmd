@@ -5,10 +5,10 @@ title: "Manuscript: MPX NYC Intervention Strategy"
 
 
 ```{r}
-#| fig-width: 10
+#| fig-width: 8
 #| fig-height: 10
 #| label: fig-matrixneighborhood
-#| fig-cap: "Age of MPX NYC Participants"
+#| fig-cap: "fig-matrixneighborhood"
 #| 
 
  data_tiles <- mpxnyc::community_sf_obj %>%
@@ -81,12 +81,27 @@ main_data %>%
     )
   ) +
   theme(
-    axis.text = element_text(size = 8, color = "grey"),
+    axis.text = element_text(size = 7, color = "black"),
     axis.text.x = element_text(angle = 90),
+    axis.title = element_text(),
+    axis.title.y = element_text(angle = 90),
     legend.position = "none"
   ) +
-  scale_x_discrete(position = "top") +
-  scale_y_discrete( limits=rev)
+  scale_x_discrete("Destination community district", position = "top") +
+  scale_y_discrete("Origin community district",  limits=rev) + 
+      ggplot2::theme(
+        plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5, margin = margin(1, 0, 15, 0)),
+        plot.caption = element_text(margin = margin(15, 0, 0, 0)),
+        axis.title.y = element_text(margin = margin(0, 5, 0, 0, "mm")),
+        axis.title.x = element_text(margin = margin(0, 0, 5, 0, "mm")),
+      ) + 
+    labs(
+      title    = captions_and_titles("matrixneighborhood")$title,
+      subtitle = captions_and_titles("matrixneighborhood")$subtitle,
+      caption  = captions_and_titles("matrixneighborhood")$caption
+    )
+  
 
 
 

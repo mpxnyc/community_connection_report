@@ -69,7 +69,7 @@ load_initial_settings <- function(){
   list_labels_groupSex_table1[["genderId"]][["levels"]][["transgender-woman"]]      <- "Transgender Women"
   
   list_labels_groupSex_table1[["hivPrep"]] <- list()
-  list_labels_groupSex_table1[["hivPrep"]][["label"]] <- "HIV Status / PrEP Use"
+  list_labels_groupSex_table1[["hivPrep"]][["label"]] <- "HIV Status/\nPrEP Use"
   list_labels_groupSex_table1[["hivPrep"]][["levels"]][["no"]]                     <- "Not on PrEP"
   list_labels_groupSex_table1[["hivPrep"]][["levels"]][["yes"]]                    <- "On PrEP"
   list_labels_groupSex_table1[["hivPrep"]][["levels"]][["living-with-hiv"]]        <- "Living with HIV"

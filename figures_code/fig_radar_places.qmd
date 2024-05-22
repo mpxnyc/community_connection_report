@@ -6,7 +6,7 @@ title: "Manuscript: MPX NYC Intervention Strategy"
 ```{r}
 #| fig-cap: "fig-places"
 #| fig-width: 7
-#| fig-height: 13
+#| fig-height: 7
 #| label: fig-places
 
 
@@ -45,7 +45,9 @@ working_data  %>%
                                 ggplot() +
                                 geom_bar(aes(x = placeType, y = proportion, fill = placeType), stat = "identity", width = 1) +
                                 #geom_text(aes(x = level, y = proportion, label = prop_label), color = "black", nudge_y = 0.35, size = 3) +
-                                geom_text(aes(x = 0, y = -0.8, label = paste("n =", n)), data = figure_n_counts, size = 4) +
+                                geom_text(aes(x = 0, y = -0.8, label = paste("n =", n)), data = figure_n_counts, size = 5) +
+  
+  geom_text(aes(label = prop_label, x = placeType, y = proportion + 0.25), size = 4, alpha = 0.7) +
                                 coord_polar() +
                                 scale_fill_manual("", values = c(dark_blue, light_blue, dark_purple, light_purple, dark_pink, light_pink, light_green, dark_green))    +
                                 scale_color_manual(values = c(
@@ -64,13 +66,14 @@ working_data  %>%
                                   strip.text.y = element_text(),
                                   plot.margin = margin(2, 2, 2, 2, "cm"),
                                   plot.title = element_text(hjust = 0.5),
-                                  plot.subtitle = element_text(hjust = 0.5)
+                                  plot.subtitle = element_text(hjust = 0.5),
+                                  plot.caption = element_text(margin = margin(15, 0,0,0, "mm"))
                                 ) +
                                 scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1)) + 
   labs(
           title    = captions_and_titles("places")$title,
           subtitle = captions_and_titles("places")$subtitle,
-          caption  = captions_and_titles("places")$caption)
+          caption  = captions_and_titles("places")$caption) 
   
 
 

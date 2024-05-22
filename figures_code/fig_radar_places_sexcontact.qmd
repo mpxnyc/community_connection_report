@@ -5,9 +5,11 @@ title: "Manuscript: MPX NYC Intervention Strategy"
 
 ```{r}
 #| fig-cap: "fig-placessexcontact"
-#| fig-width: 7
-#| fig-height: 10
+#| fig-width: 12
+#| fig-height: 7
 #| label: fig-placessexcontact
+
+
 
 
 labels_place_type <- c(
@@ -50,7 +52,8 @@ working_data  %>%
   mutate(prop_label = scales::percent(proportion, accuracy = 1)) %>%
   ggplot() +
     geom_bar(aes(x = placeType, y = proportion, fill = placeType), stat = "identity", width = 1) +
-    geom_text(aes(x = 0, y = -0.8, label = paste("n =", n)), data = figure_n_counts, size = 4) +
+    geom_text(aes(x = 0, y = -0.8, label = paste("n =", n)), data = figure_n_counts, size = 5) +
+    geom_text(aes(label = prop_label, x = placeType, y = proportion + 0.3), size = 3, face = "bold", alpha = 0.7) +
     facet_grid( . ~ placeSex, switch = "y") +
     coord_polar() +
     scale_fill_manual("", values = c(
@@ -69,9 +72,10 @@ working_data  %>%
       legend.position = "bottom",
       strip.text    = element_text( hjust = 0.5),
       strip.text.y  = element_text(),
-      plot.margin   = margin(2, 2, 2, 2, "cm"),
+      plot.margin   = margin(2, 0, 2, 0, "cm"),
       plot.title    = element_text(hjust = 0.5),
-      plot.subtitle = element_text(hjust = 0.5)
+      plot.subtitle = element_text(hjust = 0.5, margin = margin(1, 0, 15, 0, "mm")),
+      plot.caption = element_text(margin = margin(15, 0, 0, 0, "mm"))
       ) +
     scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1)) +
     labs(

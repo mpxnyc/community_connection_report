@@ -6,7 +6,7 @@ title: "Manuscript: MPX NYC Intervention Strategy"
 
 ```{r}
 #| fig-width: 7
-#| fig-height: 14
+#| fig-height: 8
 #| label: fig-barmapcoverage
 #| fig-cap: "fig-barmapcoverage"
 #| 
@@ -33,9 +33,7 @@ title: "Manuscript: MPX NYC Intervention Strategy"
                         geom_bar(
                                   aes(x = community, y = prop, fill = group), 
                                   stat = "identity", 
-                                  color = "black", 
-                                  size = 0.3, 
-                                  width = 0.8
+                                  width = 0.4
                                   ) +
                        theme_void() +
                        theme(
@@ -43,14 +41,14 @@ title: "Manuscript: MPX NYC Intervention Strategy"
                          plot.margin = margin(3, 0, 3, 0, "cm"),
                          axis.text = element_text(size = 7),
                          panel.grid.major.x = element_line(color = "grey"),
-                         plot.title = element_text(size = 7)
+                         plot.subtitle = element_text(size = 8, margin = margin(1, 0, 0, 0, "mm"))
                        ) +
                        scale_fill_manual(values = c("Group A" = dark_pink, "Group B" = dark_blue, "Group C" = "grey")) +
                        scale_y_continuous(labels = scales::percent) +
                        scale_x_discrete(limits = rev) +
                        coord_flip() +
                        labs(
-                         subtitle = "% Participants in\ncommunity district"
+                         subtitle = "% Participants in community district"
                        ) 
  
  
@@ -59,36 +57,40 @@ title: "Manuscript: MPX NYC Intervention Strategy"
  map_graph <- mpxnyc::community_sf_obj %>%
                    left_join(graph_data) %>%
                    ggplot() +
+                          geom_sf(fill = "grey") +
                          geom_sf(aes(fill = group, alpha = group), color = "black") +
                          theme_void() +
                          theme(
-                           legend.position = "none",
-                           lot.margin = margin(2,1,2,1, "cm"),
+                           legend.position = "bottom",
+                           plot.margin = margin(2,1,2,1, "cm"),
                             plot.title = element_text(hjust = 0.5),
-                            plot.subtitle = element_text(hjust = 0.5
-                                                         )
+                            plot.subtitle = element_text(hjust = 0.5, margin = margin(2, 0, 15, 0, "mm")),
+                           plot.caption = element_text(margin = margin(15, 0, 0,0, "mm"))
                          ) +
                          scale_fill_manual(
+                           "Intervention Group", 
                                           values = c(
                                                         "Group A" = dark_pink, 
                                                         "Group B" = dark_blue, 
                                                         "Group C" = light_purple
                                                         ), 
-                                           na.value = "grey"
+                                           na.value = "grey",
+                           na.translate = FALSE
                                            ) + 
                          scale_alpha_manual(values = c("Group A" = 1, "Group B" = 1, "Group C" = 0.5)) +
                          labs(
                                 title     = captions_and_titles("barmapcoverage")$title,
                                 subtitle  = captions_and_titles("barmapcoverage")$subtitle,
                                 caption   = captions_and_titles("barmapcoverage")$caption
-                                )
+                                ) +
+   guides(alpha = "none")
                    
   
  
 
  
  cowplot::ggdraw(map_graph) +
-  cowplot::draw_plot(bar_graph, 0.1, 0.43, 0.25, 0.3)
+  cowplot::draw_plot(bar_graph, 0.1, 0.35, 0.25, 0.5)
 
   
 ```

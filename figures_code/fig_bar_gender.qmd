@@ -6,7 +6,7 @@ title: "Manuscript: MPX NYC Intervention Strategy"
 
 ```{r}
 #| fig-width: 7
-#| fig-height: 5
+#| fig-height: 7
 #| label: fig-radargender
 #| fig-cap: "fig-radargender"
 #| 
@@ -32,28 +32,31 @@ gender_id_labels <- c(
   ggplot2::ggplot() + 
         ggplot2::geom_bar(aes(x = level, fill = level, y = proportion), width = 1, stat = "identity") + 
         ggplot2::theme_void() + 
-        ggplot2::theme(
-                        legend.position = "none", 
-                        panel.grid.major.y = ggplot2::element_line(size = 0.1),
-                        axis.text.x = element_text(angle = 45),
-                        axis.text.y = element_text()
-                        ) + 
-        ggplot2::scale_fill_manual(values = c(
-                                              mpxnyc_colors$dark_blue, 
-                                              mpxnyc_colors$dark_pink, 
-                                              mpxnyc_colors$dark_purple, 
-                                              mpxnyc_colors$light_blue, 
-                                              mpxnyc_colors$light_pink, 
-                                              mpxnyc_colors$light_purple,
-                                              mpxnyc_colors$light_green)
-          ) + 
-    ggplot2::scale_x_discrete(drop = FALSE) +
-    ggplot2::scale_y_continuous(labels = scales::percent) + 
+          ggplot2::theme(
+                          legend.position = "none", 
+                          panel.grid.major.y = ggplot2::element_line(size = 0.1),
+                          axis.text.x = element_text(),
+                          axis.text.y = element_text(),
+                          axis.title.y = element_text(angle = 90)
+                          ) + 
+          ggplot2::scale_fill_manual(values = c(
+                                                dark_blue, 
+                                                dark_pink, 
+                                                dark_purple, 
+                                                light_blue, 
+                                                light_pink, 
+                                                light_purple)
+            ) + 
+      ggplot2::scale_x_discrete(drop = FALSE) +
+      ggplot2::scale_y_continuous("Proportion of participants", labels = scales::percent) + 
       ggplot2::theme(
-        plot.margin = margin(2,2,2,2, "cm"),
-        plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5)
-      ) + 
+        plot.margin = margin(2,0,2,0, "cm"),
+        plot.title = element_text(hjust = 0.5, margin = margin(0, 0, 2, 0, "mm")),
+        plot.subtitle = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),
+        axis.title.y = element_text(margin = margin(0, 10, 0, 0, "mm")),
+        plot.caption = element_text(margin = margin(15, 0, 0, 0)),
+        panel.margin = margin(5, 5, 5, 5, "mm")
+      ) +
     labs(
       title    = captions_and_titles("radargender")$title,
       subtitle = captions_and_titles("radargender")$subtitle,
