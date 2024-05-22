@@ -25,10 +25,10 @@ list_labels_descriptives_by_demogroup[["stratum"]] <- targets::tar_read(initial_
 
   targets::tar_read(data_radar_graphic_demo_group_raw) %>%
                         dplyr::mutate(stratum = stratum_demo_group) %>%
-    #filter(stratum_demo_group %in% c("black-cisgender-man", "latinx-cisgender-man")) %>%
                         mpxnyc::plot_radar_demographics_by_stratum(
                           list_labels = list_labels_descriptives_by_demogroup
-                        )
+                        ) +
+    labs(title = "hello")
 
 
 ```

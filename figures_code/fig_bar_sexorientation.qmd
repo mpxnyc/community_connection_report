@@ -8,7 +8,7 @@ title: "Manuscript: MPX NYC Intervention Strategy"
 #| fig-width: 7
 #| fig-height: 5
 #| label: fig-radarsexorientation
-#| fig-cap: "Sexual Orientation of MPX NYC Participants"
+#| fig-cap: "fig-radarsexorientation"
 #| 
 
 
@@ -48,8 +48,15 @@ sexorient_labels <- c(
           ) + 
     ggplot2::scale_x_discrete(drop = FALSE) +
     ggplot2::scale_y_continuous(labels = scales::percent) + 
-    theme(
-      plot.margin = margin(2,2,2,2, "cm")
+      ggplot2::theme(
+        plot.margin = margin(2,2,2,2, "cm"),
+        plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5)
+      ) + 
+    labs(
+      title    = captions_and_titles("radarsexorientation")$title,
+      subtitle = captions_and_titles("radarsexorientation")$subtitle,
+      caption  = captions_and_titles("radarsexorientation")$caption
     )
   
 

@@ -33,6 +33,38 @@ captions_and_titles <- function(figure_name){
     list_captions_and_titles[["networkcoverage"]][["subtitle"]]   <- "MPX NYC, New York, 2022"
     list_captions_and_titles[["networkcoverage"]][["caption"]]    <- "Data source: MPX NYC 2022"
     
+    list_captions_and_titles[["vaximpactpriorityapproach"]]                 <- list()
+    list_captions_and_titles[["vaximpactpriorityapproach"]][["title"]]      <- "Effect of intervention on structure of social contact network"
+    list_captions_and_titles[["vaximpactpriorityapproach"]][["subtitle"]]   <- "MPX NYC, New York, 2022"
+    list_captions_and_titles[["vaximpactpriorityapproach"]][["caption"]]    <- "Data source: MPX NYC 2022"
+    
+    
+    list_captions_and_titles[["radarage"]]                 <- list()
+    list_captions_and_titles[["radarage"]][["title"]]      <- "Age at time of participation"
+    list_captions_and_titles[["radarage"]][["subtitle"]]   <- "MPX NYC, New York, 2022"
+    list_captions_and_titles[["radarage"]][["caption"]]    <- "Data source: MPX NYC 2022"
+    
+    
+    list_captions_and_titles[["radarchannel"]]                 <- list()
+    list_captions_and_titles[["radarchannel"]][["title"]]      <- "Study recruitment channel used"
+    list_captions_and_titles[["radarchannel"]][["subtitle"]]   <- "MPX NYC, New York, 2022"
+    list_captions_and_titles[["radarchannel"]][["caption"]]    <- "Data source: MPX NYC 2022"
+    
+    
+    list_captions_and_titles[["radargender"]]                 <- list()
+    list_captions_and_titles[["radargender"]][["title"]]      <- "Gender identity at time of participation"
+    list_captions_and_titles[["radargender"]][["subtitle"]]   <- "MPX NYC, New York, 2022"
+    list_captions_and_titles[["radargender"]][["caption"]]    <- "Data source: MPX NYC 2022"
+    
+    list_captions_and_titles[["radarrace"]]                 <- list()
+    list_captions_and_titles[["radarrace"]][["title"]]      <- "Race at time of participation"
+    list_captions_and_titles[["radarrace"]][["subtitle"]]   <- "MPX NYC, New York, 2022"
+    list_captions_and_titles[["radarrace"]][["caption"]]    <- "Data source: MPX NYC 2022"
+    
+    list_captions_and_titles[["radarsexorientation"]]                 <- list()
+    list_captions_and_titles[["radarsexorientation"]][["title"]]      <- "Sexual orientation at time of participation"
+    list_captions_and_titles[["radarsexorientation"]][["subtitle"]]   <- "MPX NYC, New York, 2022"
+    list_captions_and_titles[["radarsexorientation"]][["caption"]]    <- "Data source: MPX NYC 2022"
     
     
     
