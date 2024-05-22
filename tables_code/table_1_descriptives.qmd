@@ -2,6 +2,8 @@
 #| tbl-cap: "Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks"
 #| label: tbl-descriptives-by-groupsex
 
+list_labels_groupSex_table1 <- targets::tar_read(initial_settings)$labels_list
+
 
 table_1_descriptives <- targets::tar_read(data_table_1_people_by_groupSex) %>%
                                 mutate(stratum = stratum_groupSex) %>%

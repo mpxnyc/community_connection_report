@@ -9,7 +9,18 @@ title: "Manuscript: MPX NYC Intervention Strategy"
 #| fig-height: 15
 #| label: fig-demogroup
 #| fig-cap: "Demographic Characteristics of Race-Gender groups"
-#| 
+
+
+
+
+
+
+
+list_labels_descriptives_by_demogroup <- targets::tar_read(initial_settings)$labels_list[c("age", "hivPrep", "monkeypoxVaccine", "sexOrientation")]
+
+list_labels_descriptives_by_demogroup[["stratum"]] <- list_labels_descriptives_by_demogroup[["demo_group"]]
+
+
 
 
   targets::tar_read(data_radar_graphic_demo_group) %>%

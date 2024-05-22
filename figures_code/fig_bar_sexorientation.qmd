@@ -20,7 +20,7 @@ sexorient_labels <- c(
                        "something-else" = "Another\nOrientation"
                       )
 
-  mpxnyc_1_person_data %>%
+  targets::tar_read(participant_data) %>%
     mutate(sexOrientation = factor(sexOrientation, names(sexorient_labels), sexorient_labels )) %>%
     group_by(sexOrientation) %>%
     summarize(count = n()) %>%
