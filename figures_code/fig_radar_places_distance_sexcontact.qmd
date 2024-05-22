@@ -1,0 +1,79 @@
+---
+title: "Manuscript: MPX NYC Intervention Strategy"
+---
+
+
+```{r}
+#| fig-cap: "Place Types by Sexual Contact and Distance"
+#| fig-width: 7
+#| fig-height: 10
+#| label: fig-placesdistancesexcontact
+
+
+labels_place_type <- c(
+  "concert" = "Concert/Theatre/Show",
+  "theatre/show" = "Concert/Theatre/Show",
+  "darkroom" = "Dark Room/Sex Party",
+  "sex-party" = "Dark Room/Sex Party",
+  "dance-party" = "Dance Party",
+  "sport-game" = "Sport Game",
+  "private-residence-" = "Private Residence",
+  "something-else" = "Something Else"
+)
+  
+
+
+ working_data <- targets::tar_read(places_data) %>%
+   mutate(placeType = factor(placeType, names(labels_place_type), labels_place_type)) %>%
+   mutate(placeSex = factor(placeSex, c("no", "yes"), c("Social\nContact", "Sexual\nContact"))) %>%
+  filter(!is.na(placeSex))
+ 
+figure_n_counts <-  working_data %>%
+                                group_by(distanceFromHome, placeSex) %>%
+                                summarize(n = n() )
+
+
+
+working_data  %>%
+                                arrange(placeType, placeSex, distanceFromHome) %>%
+  group_by(placeType, placeSex, distanceFromHome) %>%
+  summarize(count = n()) %>%
+  ungroup() %>%
+   group_by( placeSex, distanceFromHome) %>%
+  mutate(proportion = count / sum(count)) %>%
+  ungroup() %>%
+                                mutate(prop_label = scales::percent(proportion, accuracy = 1)) %>%
+                                ggplot() +
+                                geom_bar(aes(x = placeType, y = proportion, fill = placeType), stat = "identity", width = 1) +
+                                #geom_text(aes(x = level, y = proportion, label = prop_label), color = "black", nudge_y = 0.35, size = 3) +
+                                geom_text(aes(x = 0, y = -0.8, label = paste("n =", n)), data = figure_n_counts, size = 4) +
+                                facet_grid(distanceFromHome ~ placeSex ) +
+                                coord_polar() +
+                                scale_fill_manual("", values = c(dark_blue, light_blue, dark_purple, light_purple, dark_pink, light_pink, light_green, dark_green))    +
+                                scale_color_manual(values = c(
+                                  "Dance Party" = dark_blue, 
+                                  "Sport Game" = light_blue, 
+                                  "Dark Room/Sex Party" = dark_purple, 
+                                  "Concert/Theatre/Show" = light_purple, 
+                                  "Private Residence" = dark_pink, 
+                                  "Something Else" = light_pink))    +
+                                theme_void() +
+                                theme(
+                                  #panel.grid.major = element_line(color = "grey"),
+                                  #panel.grid.major = element_line(size = 0.2, color = "grey"),
+                                  legend.position = "bottom",
+                                  strip.text = element_text( hjust = 0.5),
+                                  strip.text.y = element_text(angle = -90),
+                                  plot.margin = margin(2, 2, 2, 2, "cm"),
+                                  plot.title = element_text(hjust = 0.5),
+                                  plot.subtitle = element_text(hjust = 0.5)
+                                ) +
+                                scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1)) +
+    labs(
+          title = "Type of venue for contact by type of contact and distance from home",
+          subtitle = "MPX NYC, New York, 2022",
+          caption = "Data source: MPX NYC 2022")
+
+
+
+```

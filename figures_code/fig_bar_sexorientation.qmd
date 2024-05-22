@@ -1,0 +1,56 @@
+---
+title: "Manuscript: MPX NYC Intervention Strategy"
+---
+
+
+
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+#| label: fig-radarsexorientation
+#| fig-cap: "Sexual Orientation of MPX NYC Participants"
+#| 
+
+
+sexorient_labels <- c(
+                      "gay" = "Gay", 
+                      "bisexual" = "Bisexual", 
+                      "queer" = "Queer",
+                      "straight" = "Straight",
+                       "something-else" = "Another\nOrientation"
+                      )
+
+  mpxnyc_1_person_data %>%
+    mutate(sexOrientation = factor(sexOrientation, names(sexorient_labels), sexorient_labels )) %>%
+    group_by(sexOrientation) %>%
+    summarize(count = n()) %>%
+    filter(!is.na(sexOrientation)) %>%
+    ungroup() %>%
+    mutate(level = sexOrientation) %>%
+    mutate(proportion = count / sum(count)) %>%
+  ggplot2::ggplot() + 
+        ggplot2::geom_bar(aes(x = level, fill = level, y = proportion), width = 1, stat = "identity") + 
+        ggplot2::theme_void() + 
+        ggplot2::theme(
+                        legend.position = "none", 
+                        panel.grid.major.y = ggplot2::element_line(size = 0.1),
+                        axis.text.x = element_text(angle = 45),
+                        axis.text.y = element_text()
+                        ) + 
+        ggplot2::scale_fill_manual(values = c(
+                                              mpxnyc_colors$dark_blue, 
+                                              mpxnyc_colors$dark_pink, 
+                                              mpxnyc_colors$dark_purple, 
+                                              mpxnyc_colors$light_blue, 
+                                              mpxnyc_colors$light_pink, 
+                                              mpxnyc_colors$light_purple,
+                                              mpxnyc_colors$light_green)
+          ) + 
+    ggplot2::scale_x_discrete(drop = FALSE) +
+    ggplot2::scale_y_continuous(labels = scales::percent) + 
+    theme(
+      plot.margin = margin(2,2,2,2, "cm")
+    )
+  
+
+```

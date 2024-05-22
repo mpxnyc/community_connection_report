@@ -1,0 +1,93 @@
+---
+title: "Manuscript: MPX NYC Intervention Strategy"
+---
+
+
+
+```{r}
+#| fig-width: 10
+#| fig-height: 10
+#| label: fig-matrixneighborhood
+#| fig-cap: "Age of MPX NYC Participants"
+#| 
+
+ data_tiles <- mpxnyc::community_sf_obj %>%
+   transmute(to_community = community, from_community = community) %>%
+   expand(to_community, from_community) %>%
+   mutate(
+     from_borough = str_sub(from_community, 1, 2),
+     to_borough   = str_sub(to_community, 1, 2)
+     ) %>%
+   mutate(borough = ifelse(from_borough == to_borough, from_borough, "Between"))
+
+
+
+nodes_home <-  targets::tar_read(places_data) %>% 
+  transmute(neighborhood = home_neighborhood, community = home_community, borough = home_borough)
+
+nodes_place <-  targets::tar_read(places_data) %>% 
+  transmute(neighborhood = place_neighborhood, community = place_community, borough = place_borough)
+
+nodes <- nodes_home %>% 
+  rbind(nodes_place) %>%
+  mutate(name = community) %>%
+  select(name) 
+
+main_data <- targets::tar_read(places_data) %>%
+  transmute(from = home_community, to = place_community) %>%
+  group_by(from, to) %>%
+  summarize(weight = n()) %>%
+  tbl_graph(edges = .) %>%
+  mutate(borough = str_sub(name, 1, 2)) %>%
+  mutate(deg = igraph::strength(.)) %>%
+  arrange(borough) %>%
+  activate(edges) %>%
+  mutate(from_borough = .N()$borough[from], to_borough = .N()$borough[to]) %>%
+  mutate(borough = ifelse(from_borough == to_borough, from_borough, "Between")) %>%
+  mutate(from_name = .N()$name[from], to_name = .N()$name[to]) %>%
+  data.frame() 
+
+main_data %>%
+  ggplot() +
+    geom_tile(aes(y = from_community, x = to_community, fill = borough), data = data_tiles) + 
+    geom_point(aes(y =from_name, x = to_name, size = weight), color = "white", data = main_data, alpha = 0.7) +
+      geom_point(aes(y =from_name, x = to_name, size = weight), color = "black", data = main_data %>% filter(borough == "Between"), alpha = 0.5) +
+    theme_void() +
+  scale_color_manual(values = c(
+                                              "BK" = mpxnyc_colors$dark_blue, 
+                                              "BX" = mpxnyc_colors$dark_pink, 
+                                              "MN" = mpxnyc_colors$dark_purple, 
+                                              "QN" = mpxnyc_colors$light_orange, 
+                                              "SI" = mpxnyc_colors$dark_green, 
+                                              "Between" = "white"
+                                              )) +
+  
+  scale_fill_manual(values = c(
+                                              "BK" = mpxnyc_colors$dark_blue, 
+                                              "BX" = mpxnyc_colors$dark_pink, 
+                                              "MN" = mpxnyc_colors$dark_purple, 
+                                              "QN" = mpxnyc_colors$light_orange, 
+                                              "SI" = mpxnyc_colors$dark_green, 
+                                              "Between" = "white"
+                                              )) +
+  scale_edge_color_manual(values = c(
+    mpxnyc_colors$dark_blue, 
+                                              "BK" = mpxnyc_colors$dark_blue, 
+                                              "BX" = mpxnyc_colors$dark_pink, 
+                                              "MN" = mpxnyc_colors$dark_purple, 
+                                              "QN" = mpxnyc_colors$light_orange, 
+                                              "SI" = mpxnyc_colors$dark_green, 
+                                              "Between" = "white"
+    )
+  ) +
+  theme(
+    axis.text = element_text(size = 8, color = "grey"),
+    axis.text.x = element_text(angle = 90),
+    legend.position = "none"
+  ) +
+  scale_x_discrete(position = "top") +
+  scale_y_discrete( limits=rev)
+
+
+
+```

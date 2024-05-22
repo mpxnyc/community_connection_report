@@ -1,0 +1,483 @@
+---
+title: "Tables and Figures: MPX NYC Intervention Strategy"
+author: "Keletso Makofane"
+
+crossref: 
+  thm-prefix: Box
+  thm-title: Box
+  tbl-prefix: Table
+  tbl-title: Table
+editor: visual
+always_allow_html: true
+prefer-html: true
+fig-cap-location: top 
+execute:
+  echo: false
+  warning: false
+  message: false
+format:
+  html:
+      toc: true
+      code-fold: true
+---
+
+```{r update_mpxnyc_package, include = FALSE, messages=FALSE, warning = FALSE}
+remotes::install_github("KeletsoMakofane/mpxnyc", auth_token = "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")
+```
+
+```{r load_libraries, include = FALSE, messages=FALSE, warning = FALSE}
+library(tidyverse)
+library(ggplot2)
+library(mpxnyc)
+library(sf)
+library(tidygraph)
+library(ggraph)
+library(igraph)
+
+
+
+mpxnyc_colors <- mpxnyc::mpxnyc_colors
+attach(mpxnyc_colors)
+
+```
+
+```{r update_data_pipeline, include=FALSE, messages=FALSE, warning = FALSE}
+
+
+targets::tar_make() # Runs the data pipeline shown in _targets.R
+
+
+```
+
+```{r labels}
+list_labels_groupSex_table1 <- list()
+
+list_labels_groupSex_table1[["age"]] <- list()
+list_labels_groupSex_table1[["age"]][["label"]] <- "Age"
+list_labels_groupSex_table1[["age"]][["levels"]][["18-24"]] <- "18-24"
+list_labels_groupSex_table1[["age"]][["levels"]][["25-34"]] <- "25-34"
+list_labels_groupSex_table1[["age"]][["levels"]][["35-44"]] <- "35-44"
+list_labels_groupSex_table1[["age"]][["levels"]][["45-54"]] <- "45-54"
+list_labels_groupSex_table1[["age"]][["levels"]][["55+"]]   <- "55+"
+
+list_labels_groupSex_table1[["borough"]] <- list()
+list_labels_groupSex_table1[["borough"]][["label"]]           <- "Borough"
+list_labels_groupSex_table1[["borough"]][["levels"]][["Bronx"]]           <- "Bronx"
+list_labels_groupSex_table1[["borough"]][["levels"]][["Brooklyn"]]        <- "Brooklyn"
+list_labels_groupSex_table1[["borough"]][["levels"]][["Manhattan"]]       <- "Manhattan"
+list_labels_groupSex_table1[["borough"]][["levels"]][["Queens"]]          <- "Queens"
+list_labels_groupSex_table1[["borough"]][["levels"]][["Staten Island"]]   <- "Staten Island"
+
+list_labels_groupSex_table1[["countFriends"]] <- list()
+list_labels_groupSex_table1[["countFriends"]][["label"]] <- "Queer/Trans Friends"
+list_labels_groupSex_table1[["countFriends"]][["levels"]][["0"]]     <- "0"
+list_labels_groupSex_table1[["countFriends"]][["levels"]][["1-5"]]   <- "1-5"
+list_labels_groupSex_table1[["countFriends"]][["levels"]][["6-10"]]  <- "6-10"
+list_labels_groupSex_table1[["countFriends"]][["levels"]][["11-15"]] <- "11-15"
+list_labels_groupSex_table1[["countFriends"]][["levels"]][["16+"]]   <- "16+"
+
+list_labels_groupSex_table1[["countSex"]] <- list()
+list_labels_groupSex_table1[["countSex"]][["label"]] <- "Sex Partners"
+list_labels_groupSex_table1[["countSex"]][["levels"]][["0"]]     <- "0"
+list_labels_groupSex_table1[["countSex"]][["levels"]][["1"]]     <- "1"
+list_labels_groupSex_table1[["countSex"]][["levels"]][["2"]]     <- "2"
+list_labels_groupSex_table1[["countSex"]][["levels"]][["3"]]     <- "3"
+list_labels_groupSex_table1[["countSex"]][["levels"]][["4"]]     <- "4"
+list_labels_groupSex_table1[["countSex"]][["levels"]][["5+"]]    <- "5"
+
+list_labels_groupSex_table1[["demo_group"]] <- list()
+list_labels_groupSex_table1[["demo_group"]][["label"]] <- "Race-Gender"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["black-cisgender-man"]]    <- "Black Cisgender Men"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["cisgender-woman"]]        <- "Cisgender Women"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["latinx-cisgender-man"]]   <- "Latinx Cisgender Men"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["non-binary"]]             <- "Non-Binary People"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["other"]]                  <- "Another Demographic"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["other-cisgender-man"]]    <- "Other Cisgender Men"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["transgender-man"]]        <- "Transgender Men"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["transgender-woman"]]      <- "Transgender Women"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["white-cisgender-man"]]    <- "White Cisgender Men"
+
+list_labels_groupSex_table1[["genderId"]] <- list()
+list_labels_groupSex_table1[["genderId"]][["label"]] <- "Gender Identity"
+list_labels_groupSex_table1[["genderId"]][["levels"]][["cisgender-man"]]    <- "Cisgender Men"
+list_labels_groupSex_table1[["genderId"]][["levels"]][["cisgender-woman"]]        <- "Cisgender Women"
+list_labels_groupSex_table1[["genderId"]][["levels"]][["non-binary"]]             <- "Non-Binary People"
+list_labels_groupSex_table1[["genderId"]][["levels"]][["other"]]                  <- "Another Demographic"
+list_labels_groupSex_table1[["genderId"]][["levels"]][["transgender-man"]]        <- "Transgender Men"
+list_labels_groupSex_table1[["genderId"]][["levels"]][["transgender-woman"]]      <- "Transgender Women"
+
+list_labels_groupSex_table1[["hivPrep"]] <- list()
+list_labels_groupSex_table1[["hivPrep"]][["label"]] <- "HIV Status / PrEP Use"
+list_labels_groupSex_table1[["hivPrep"]][["levels"]][["no"]]                     <- "Not on PrEP"
+list_labels_groupSex_table1[["hivPrep"]][["levels"]][["yes"]]                    <- "On PrEP"
+list_labels_groupSex_table1[["hivPrep"]][["levels"]][["living-with-hiv"]]        <- "Living with HIV"
+
+list_labels_groupSex_table1[["hivStatus"]] <- list()
+list_labels_groupSex_table1[["hivStatus"]][["label"]] <- "HIV Status"
+list_labels_groupSex_table1[["hivStatus"]][["levels"]][["living-with-hiv"]]       <- "Living with HIV"
+list_labels_groupSex_table1[["hivStatus"]][["levels"]][["not-living-with-hiv"]]   <- "Not living with HIV"
+list_labels_groupSex_table1[["hivStatus"]][["levels"]][["unsure"]]                <- "Unsure"
+
+list_labels_groupSex_table1[["monkeypoxVaccine"]] <- list()
+list_labels_groupSex_table1[["monkeypoxVaccine"]][["label"]] <- "MPOX Vaccination"
+list_labels_groupSex_table1[["monkeypoxVaccine"]][["levels"]][["yes"]]                   <- "Vaccinated"
+list_labels_groupSex_table1[["monkeypoxVaccine"]][["levels"]][["no"]]                    <- "Unvaccinated"
+
+list_labels_groupSex_table1[["race"]] <- list()
+list_labels_groupSex_table1[["race"]][["label"]] <- "Race"
+list_labels_groupSex_table1[["race"]][["levels"]][["asian"]]                    <- "Asian"
+list_labels_groupSex_table1[["race"]][["levels"]][["black"]]                    <- "Black"
+list_labels_groupSex_table1[["race"]][["levels"]][["latinx"]]                   <- "Latinx"
+list_labels_groupSex_table1[["race"]][["levels"]][["multiple"]]                 <- "Multiple Races"
+list_labels_groupSex_table1[["race"]][["levels"]][["other"]]                    <- "Other"
+list_labels_groupSex_table1[["race"]][["levels"]][["white"]]                    <- "White"
+
+list_labels_groupSex_table1[["sexOrientation"]] <- list()
+list_labels_groupSex_table1[["sexOrientation"]][["label"]] <- "Sexual Orientation"
+list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["bisexual"]]       <- "Bisexual"
+list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["gay"]]            <- "Gay"
+list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["queer"]]          <- "Queer"
+list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["something-else"]] <- "Something Else"
+list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["straight"]]       <- "Straight"
+
+list_labels_groupSex_table1[["stratum"]] <- list()
+list_labels_groupSex_table1[["stratum"]][["label"]] <- "Group Sex or Physical Contact"
+list_labels_groupSex_table1[["stratum"]][["levels"]][["yes"]]       <- "Physical / Sexual\nContact"
+list_labels_groupSex_table1[["stratum"]][["levels"]][["no"]]            <- "No\nContact"
+list_labels_groupSex_table1[["stratum"]][["levels"]][["overall"]]            <- "Overall"
+
+
+
+
+list_labels_descriptives_by_demogroup <- list()
+
+list_labels_descriptives_by_demogroup[["demo_group"]] <- list()
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]] <- list()
+
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["black-cisgender-man"]]  <- "Black Cisgender\nMan"
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["latinx-cisgender-man"]] <- "Latinx Cisgender\nMan"
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["white-cisgender-man"]]  <- "White Cisgender\nMan"
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["other-cisgender-man"]]  <- "Other Cisgender\nMan"
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["transgender-man"]]      <- "Transgender\nMan"
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["transgender-woman"]]    <- "Transgender\nWoman"
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["non-binary"]]           <- "Non-Binary\nPerson"
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["cisgender-woman"]]      <- "Cisgender\nWoman"
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["other"]]                <- "Another\nDemographic"
+
+
+
+```
+
+```{r labels2}
+list_labels_groupSex_table1 <- list()
+
+list_labels_groupSex_table1[["age"]] <- list()
+list_labels_groupSex_table1[["age"]][["label"]] <- "Age"
+list_labels_groupSex_table1[["age"]][["levels"]][["18-24"]] <- "18-24"
+list_labels_groupSex_table1[["age"]][["levels"]][["25-34"]] <- "25-34"
+list_labels_groupSex_table1[["age"]][["levels"]][["35-44"]] <- "35-44"
+list_labels_groupSex_table1[["age"]][["levels"]][["45-54"]] <- "45-54"
+list_labels_groupSex_table1[["age"]][["levels"]][["55+"]]   <- "55+"
+
+list_labels_groupSex_table1[["borough"]] <- list()
+list_labels_groupSex_table1[["borough"]][["label"]]           <- "Borough"
+list_labels_groupSex_table1[["borough"]][["levels"]][["Bronx"]]           <- "Bronx"
+list_labels_groupSex_table1[["borough"]][["levels"]][["Brooklyn"]]        <- "Brooklyn"
+list_labels_groupSex_table1[["borough"]][["levels"]][["Manhattan"]]       <- "Manhattan"
+list_labels_groupSex_table1[["borough"]][["levels"]][["Queens"]]          <- "Queens"
+list_labels_groupSex_table1[["borough"]][["levels"]][["Staten Island"]]   <- "Staten Island"
+
+list_labels_groupSex_table1[["countFriends"]] <- list()
+list_labels_groupSex_table1[["countFriends"]][["label"]] <- "Queer/Trans Friends"
+list_labels_groupSex_table1[["countFriends"]][["levels"]][["0"]]     <- "0"
+list_labels_groupSex_table1[["countFriends"]][["levels"]][["1-5"]]   <- "1-5"
+list_labels_groupSex_table1[["countFriends"]][["levels"]][["6-10"]]  <- "6-10"
+list_labels_groupSex_table1[["countFriends"]][["levels"]][["11-15"]] <- "11-15"
+list_labels_groupSex_table1[["countFriends"]][["levels"]][["16+"]]   <- "16+"
+
+list_labels_groupSex_table1[["countSex"]] <- list()
+list_labels_groupSex_table1[["countSex"]][["label"]] <- "Sex Partners"
+list_labels_groupSex_table1[["countSex"]][["levels"]][["0"]]     <- "0"
+list_labels_groupSex_table1[["countSex"]][["levels"]][["1"]]     <- "1"
+list_labels_groupSex_table1[["countSex"]][["levels"]][["2"]]     <- "2"
+list_labels_groupSex_table1[["countSex"]][["levels"]][["3"]]     <- "3"
+list_labels_groupSex_table1[["countSex"]][["levels"]][["4"]]     <- "4"
+list_labels_groupSex_table1[["countSex"]][["levels"]][["5+"]]    <- "5"
+
+list_labels_groupSex_table1[["demo_group"]] <- list()
+list_labels_groupSex_table1[["demo_group"]][["label"]] <- "Race-Gender"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["black-cisgender-man"]]    <- "Black Cisgender Men"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["cisgender-woman"]]        <- "Cisgender Women"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["latinx-cisgender-man"]]   <- "Latinx Cisgender Men"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["non-binary"]]             <- "Non-Binary People"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["other"]]                  <- "Another Demographic"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["other-cisgender-man"]]    <- "Other Cisgender Men"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["transgender-man"]]        <- "Transgender Men"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["transgender-woman"]]      <- "Transgender Women"
+list_labels_groupSex_table1[["demo_group"]][["levels"]][["white-cisgender-man"]]    <- "White Cisgender Men"
+
+list_labels_groupSex_table1[["genderId"]] <- list()
+list_labels_groupSex_table1[["genderId"]][["label"]] <- "Gender Identity"
+list_labels_groupSex_table1[["genderId"]][["levels"]][["cisgender-man"]]    <- "Cisgender Men"
+list_labels_groupSex_table1[["genderId"]][["levels"]][["cisgender-woman"]]        <- "Cisgender Women"
+list_labels_groupSex_table1[["genderId"]][["levels"]][["non-binary"]]             <- "Non-Binary People"
+list_labels_groupSex_table1[["genderId"]][["levels"]][["other"]]                  <- "Another Demographic"
+list_labels_groupSex_table1[["genderId"]][["levels"]][["transgender-man"]]        <- "Transgender Men"
+list_labels_groupSex_table1[["genderId"]][["levels"]][["transgender-woman"]]      <- "Transgender Women"
+
+list_labels_groupSex_table1[["hivPrep"]] <- list()
+list_labels_groupSex_table1[["hivPrep"]][["label"]] <- "HIV Status / PrEP Use"
+list_labels_groupSex_table1[["hivPrep"]][["levels"]][["no"]]                <- "Not on PrEP"
+list_labels_groupSex_table1[["hivPrep"]][["levels"]][["yes"]]   <- "On PrEP"
+list_labels_groupSex_table1[["hivPrep"]][["levels"]][["living-with-hiv"]]       <- "Living with HIV"
+
+list_labels_groupSex_table1[["hivStatus"]] <- list()
+list_labels_groupSex_table1[["hivStatus"]][["label"]] <- "HIV Status"
+list_labels_groupSex_table1[["hivStatus"]][["levels"]][["living-with-hiv"]]       <- "Living with HIV"
+list_labels_groupSex_table1[["hivStatus"]][["levels"]][["not-living-with-hiv"]]   <- "Not living with HIV"
+list_labels_groupSex_table1[["hivStatus"]][["levels"]][["unsure"]]                <- "Unsure"
+
+list_labels_groupSex_table1[["monkeypoxVaccine"]] <- list()
+list_labels_groupSex_table1[["monkeypoxVaccine"]][["label"]] <- "MPOX Vaccination"
+list_labels_groupSex_table1[["monkeypoxVaccine"]][["levels"]][["yes"]]                   <- "Vaccinated"
+list_labels_groupSex_table1[["monkeypoxVaccine"]][["levels"]][["no"]]                    <- "Unvaccinated"
+
+list_labels_groupSex_table1[["race"]] <- list()
+list_labels_groupSex_table1[["race"]][["label"]] <- "Race"
+list_labels_groupSex_table1[["race"]][["levels"]][["asian"]]                    <- "Asian"
+list_labels_groupSex_table1[["race"]][["levels"]][["black"]]                    <- "Black"
+list_labels_groupSex_table1[["race"]][["levels"]][["latinx"]]                   <- "Latinx"
+list_labels_groupSex_table1[["race"]][["levels"]][["multiple"]]                 <- "Multiple Races"
+list_labels_groupSex_table1[["race"]][["levels"]][["other"]]                    <- "Other"
+list_labels_groupSex_table1[["race"]][["levels"]][["white"]]                    <- "White"
+
+list_labels_groupSex_table1[["sexOrientation"]] <- list()
+list_labels_groupSex_table1[["sexOrientation"]][["label"]] <- "Sexual Orientation"
+list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["bisexual"]]       <- "Bisexual"
+list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["gay"]]            <- "Gay"
+list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["queer"]]          <- "Queer"
+list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["something-else"]] <- "Something Else"
+list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["straight"]]       <- "Straight"
+
+list_labels_groupSex_table1[["stratum"]] <- list()
+list_labels_groupSex_table1[["stratum"]][["label"]] <- "Group Sex or Physical Contact"
+list_labels_groupSex_table1[["stratum"]][["levels"]][["yes"]]       <- "Physical / Sexual\nContact"
+list_labels_groupSex_table1[["stratum"]][["levels"]][["no"]]            <- "No\nContact"
+list_labels_groupSex_table1[["stratum"]][["levels"]][["overall"]]            <- "Overall"
+
+
+
+
+
+
+
+list_labels_descriptives_by_demogroup <- list()
+
+list_labels_descriptives_by_demogroup[["demo_group"]] <- list()
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]] <- list()
+
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["black-cisgender-man"]]  <- "Black Cisgender\nMan"
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["latinx-cisgender-man"]] <- "Latinx Cisgender\nMan"
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["white-cisgender-man"]]  <- "White Cisgender\nMan"
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["other-cisgender-man"]]  <- "Other Cisgender\nMan"
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["transgender-man"]]      <- "Transgender\nMan"
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["transgender-woman"]]    <- "Transgender\nWoman"
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["non-binary"]]           <- "Non-Binary\nPerson"
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["cisgender-woman"]]      <- "Cisgender\nWoman"
+list_labels_descriptives_by_demogroup[["demo_group"]][["levels"]][["other"]]                <- "Another\nDemographic"
+
+list_labels_descriptives_by_demogroup <- list_labels_groupSex_table1[c("age", "hivPrep", "monkeypoxVaccine", "sexOrientation")]
+
+list_labels_descriptives_by_demogroup[["stratum"]] <- list_labels_groupSex_table1[["demo_group"]]
+
+
+```
+
+```{r}
+
+
+table_vaxcoverageappraochracegender <- function(){
+                        targets::tar_read(data_vaccination_coverage) %>%
+                          filter(intervention_setting == "home.social.sexual") %>%
+                          filter(
+                            !is.na(demo_group)
+                          ) %>%
+                          filter(
+                            !(demo_group %in% c("missing", "other", "non-binary", "other-cisgender-man", "cisgender-woman", "transgender-man", "transgender-woman"))
+                          ) %>%
+                          filter(
+                            intervention_priority == "contact"
+                          ) %>%
+                          group_by(
+                            rep, 
+                            demo_group, 
+                            intervention_ranking, 
+                            intervention_setting, 
+                            intervention_priority, 
+                            strata) %>%
+                          summarize(count = n()) %>%
+                          group_by(
+                            rep, 
+                            demo_group, 
+                            intervention_setting, 
+                            intervention_priority, 
+                            strata) %>%
+                          arrange(intervention_setting) %>%
+                          mutate(prop = count / sum(count)) %>%
+                          mutate(cumprop = cumsum(prop)) %>%
+                          group_by(demo_group, intervention_ranking, intervention_setting, intervention_priority, strata) %>%
+                          summarize(
+                            prop_ci_lb = quantile(prop, 0.025), 
+                            prop_ci_ub = quantile(prop, 0.975), 
+                            prop = mean(prop),
+                            cumprop_ci_lb = quantile(cumprop, 0.025), 
+                            cumprop_ci_ub = quantile(cumprop, 0.975), 
+                            cumprop = mean(cumprop),
+                          ) %>%
+                          filter(intervention_ranking < 250) 
+}
+
+
+
+table_vaxcoverageracegenderapproach <- function(){
+      targets::tar_read(data_vaccination_coverage) %>%
+                  filter(intervention_setting == "home.social.sexual") %>%
+                  filter(!is.na(demo_group)) %>%
+                  filter(!(demo_group %in% c("missing", "other", "non-binary", "other-cisgender-man", "cisgender-woman", "transgender-man", "transgender-woman"))) %>%
+                  filter(intervention_priority == "contact") %>%
+                  group_by(rep, demo_group, intervention_ranking, intervention_setting, intervention_priority, strata) %>%
+                  summarize(count = n()) %>%
+                  group_by(rep, demo_group, intervention_setting, intervention_priority, strata) %>%
+                  arrange(intervention_setting) %>%
+                  mutate(prop = count / sum(count)) %>%
+                  mutate(cumprop = cumsum(prop)) %>%
+                  group_by(demo_group, intervention_ranking, intervention_setting, intervention_priority, strata) %>%
+                  summarize(
+                    prop_ci_lb = quantile(prop, 0.025), 
+                    prop_ci_ub = quantile(prop, 0.975), 
+                    prop = mean(prop),
+                    cumprop_ci_lb = quantile(cumprop, 0.025), 
+                    cumprop_ci_ub = quantile(cumprop, 0.975), 
+                    cumprop = mean(cumprop),
+                  ) %>%
+                  filter(intervention_ranking < 250)
+}
+
+
+
+
+table_agemix <- function(){
+  targets::tar_read(data_contact_matrices) %>%
+            dplyr::mutate(
+                            activity_setting = factor(
+                                                        activity_setting, 
+                                                        c("home", "home.social", "home.social.sexual"), 
+                                                        c("Home", "Home + Social", "Home + Social + Sexual")
+                                                        )
+                            )
+}
+
+
+
+table_racegendermix <- function(){
+  targets::tar_read(data_contact_matrices) %>%
+    dplyr::mutate(activity_setting = factor(activity_setting, c("home", "home.social", "home.social.sexual"), c("Home", "Home + Social", "Home + Social + Sexual")))
+}
+
+
+table_vaximpactpriorityapproach <- function(){
+  targets::tar_read(data_vaccination_network_impact) %>%
+                        dplyr::mutate(n_vaccinated = node_count - n_total) %>%
+                        dplyr::select(strata, intervention_priority, intervention_setting, ranking, n_lcc, n_singleton, n_remainder, n_vaccinated) %>%
+                        tidyr::pivot_longer(c(n_lcc, n_singleton, n_remainder, n_vaccinated), names_to = "measure", values_to = "count") %>%
+                        dplyr::filter(measure != "n_vaccinated") %>%
+                        dplyr::filter(intervention_setting == "home.social.sexual") %>%
+                        dplyr::group_by(strata, intervention_priority, intervention_setting, ranking) %>%
+                        dplyr::mutate(prop = count / sum(count)) %>%
+  dplyr::mutate(prop_label = scales::percent(prop, accuracy = 1)) %>%
+  dplyr::mutate(label_height = prop / 2) %>%
+                        dplyr::ungroup()
+}
+
+
+
+table_placesdistancesexcontact <- function(){
+  targets::tar_read(data_radar_places_by_distanceFromHome) %>%
+    group_by(level)
+}
+
+table_placessexcontact <- function(){
+  targets::tar_read(data_radar_places_by_distanceFromHome)
+}
+
+
+
+
+
+
+
+targets::tar_source(files = "R_functions")
+initial_settings <- tar_read(initial_settings)
+
+a <-targets::tar_read(bipartite_graph) %>%
+                      make_simulated_bipartite_graph(n_reps = 1) %>%
+                       make_vaccination_campaign_data(
+                         list_intervention_priority = initial_settings[["list_intervention_priority"]], 
+                         list_intervention_settings = initial_settings[["list_intervention_settings"]], 
+                         n_neighborhoods_input      = initial_settings[["n_neighborhoods"]]
+                         ) 
+
+#using a, figure out communities vs count of people it takes when vaccinated
+
+```
+
+
+# Key Messages
+## Message 1: Go to interventions miss the mark
+{{< include figures_code/fig_radar_groupsex.qmd >}}
+
+{{< include figures_code/fig_radar_places.qmd >}}
+
+{{< include figures_code/fig_radar_places_sexcontact.qmd >}}
+
+{{< include figures_code/fig_radar_places_distance_sexcontact.qmd >}}
+
+
+
+## Message 2: It is possible to do better
+
+{{< include figures_code/fig_matrix_neighborhoods.qmd >}}
+
+{{< include figures_code/fig_netregion_vaximpactpriorityapproach.qmd >}}
+
+
+
+## Message 3: We need to anticipate health disparities
+
+{{< include figures_code/fig_radar_demogroup.qmd >}}
+
+
+## Message 4: About the Study
+
+{{< include figures_code/fig_bar_age.qmd >}}
+
+{{< include figures_code/fig_bar_gender.qmd >}}
+
+{{< include figures_code/fig_bar_sexorientation.qmd >}}
+
+{{< include figures_code/fig_bar_race.qmd >}}
+
+{{< include figures_code/fig_bar_channel.qmd >}}
+
+
+
+
+
+
+
+
+
+
+
+
+

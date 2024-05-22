@@ -1,0 +1,57 @@
+---
+title: "Manuscript: MPX NYC Intervention Strategy"
+---
+
+
+
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+#| label: fig-radargender
+#| fig-cap: "Gender Identity of MPX NYC Participants"
+#| 
+
+
+gender_id_labels <- c(
+                      "cisgender-man" = "Cisgender\nMan", 
+                      "non-binary" = "Non\nBinary", 
+                      "cisgender-woman" = "Cisgender\nWoman",
+                      "transgender-man" = "Transgender\nMan", 
+                      "transgender-woman" = "Transgender\nWoman", 
+                      "other" = "Other\nDemographic\nGroups"
+                      )
+
+  targets::tar_read(participant_data) %>%
+    mutate(genderId = factor(genderId, names(gender_id_labels), gender_id_labels )) %>%
+    group_by(genderId) %>%
+    summarize(count = n()) %>%
+    filter(!is.na(genderId)) %>%
+    ungroup() %>%
+    mutate(level = genderId) %>%
+    mutate(proportion = count / sum(count)) %>%
+  ggplot2::ggplot() + 
+        ggplot2::geom_bar(aes(x = level, fill = level, y = proportion), width = 1, stat = "identity") + 
+        ggplot2::theme_void() + 
+        ggplot2::theme(
+                        legend.position = "none", 
+                        panel.grid.major.y = ggplot2::element_line(size = 0.1),
+                        axis.text.x = element_text(angle = 45),
+                        axis.text.y = element_text()
+                        ) + 
+        ggplot2::scale_fill_manual(values = c(
+                                              mpxnyc_colors$dark_blue, 
+                                              mpxnyc_colors$dark_pink, 
+                                              mpxnyc_colors$dark_purple, 
+                                              mpxnyc_colors$light_blue, 
+                                              mpxnyc_colors$light_pink, 
+                                              mpxnyc_colors$light_purple,
+                                              mpxnyc_colors$light_green)
+          ) + 
+    ggplot2::scale_x_discrete(drop = FALSE) +
+    ggplot2::scale_y_continuous(labels = scales::percent) + 
+    theme(
+      plot.margin = margin(2,2,2,2, "cm")
+    )
+  
+
+```

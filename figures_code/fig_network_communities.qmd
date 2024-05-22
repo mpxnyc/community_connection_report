@@ -1,0 +1,33 @@
+---
+title: "Manuscript: MPX NYC Intervention Strategy"
+---
+
+
+
+```{r}
+#| fig-width: 7
+#| fig-height: 7
+#| label: fig-networkcommunities
+#| fig-cap: "Age of MPX NYC Participants"
+#| 
+
+
+targets::tar_read(places_data) %>%
+   transmute(from = home_community, to = place_community) %>%
+   group_by(from, to) %>%
+   summarize(weight = n()) %>%
+   ggplot() +
+   geom_tile(aes(x = from, y = to, fill = weight)) +
+   scale_fill_gradient(low = "white", high = dark_blue) +
+  coord_flip() +
+  theme_void() +
+  theme(
+    legend.position = "bottom",
+    axis.text = element_text()
+  ) 
+
+
+
+
+
+```
