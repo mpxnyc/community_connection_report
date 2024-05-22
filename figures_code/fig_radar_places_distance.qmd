@@ -1,13 +1,10 @@
----
-title: "Manuscript: MPX NYC Intervention Strategy"
----
 
 
 ```{r}
-#| fig-cap: "fig-placesdistances"
-#| fig-width: 10
-#| fig-height: 10
-#| label: fig-placesdistances
+#| fig-width: 7
+#| fig-height: 7
+#| 
+
 
 
 labels_place_type <- c(
@@ -58,15 +55,22 @@ working_data  %>%
                                   "Private Residence" = dark_pink, 
                                   "Something Else" = light_pink))    +
                                 theme_void() +
-                                theme(
-                                  #panel.grid.major = element_line(color = "grey"),
-                                  #panel.grid.major = element_line(size = 0.2, color = "grey"),
-                                  legend.position = "bottom",
-                                  strip.text = element_text( face = "bold", size = 14, margin = margin(5,5,5,5,"mm")),
-                                  strip.text.y = element_text(),
-                                  plot.margin = margin(2, 2, 2, 2, "cm")
-                                ) +
-                                scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1))
+    theme(
+      legend.position = "bottom",
+      strip.text    = element_text( hjust = 0.5),
+      strip.text.y  = element_text(),
+      plot.margin   = margin(0, 0, 0, 0, "cm"),
+      plot.title    = element_text(hjust = 0.5),
+      plot.subtitle = element_text(hjust = 0.5, margin = margin(1, 0, 15, 0, "mm")),
+      plot.caption = element_text(margin = margin(15, 0, 0, 0, "mm"))
+      ) +
+                                scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1)) +
+    labs(
+          title    = captions_and_titles("placessexcontactdistance")$title,
+          subtitle = captions_and_titles("placessexcontactdistance")$subtitle,
+          caption  = captions_and_titles("placessexcontactdistance")$caption
+          )
+  
 
 
 

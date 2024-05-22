@@ -23,6 +23,13 @@ captions_and_titles <- function(figure_name){
     list_captions_and_titles[["placesdistancesexcontact"]][["subtitle"]]   <- "New York, United States,  Jul - Nov 2022"
     list_captions_and_titles[["placesdistancesexcontact"]][["caption"]]    <- "Data source: MPX NYC. www.mpxresponse.org"
     
+    
+    list_captions_and_titles[["placessexcontactdistance"]]                 <- list()
+    list_captions_and_titles[["placessexcontactdistance"]][["title"]]      <- "Type of venue for contact by distance from home"
+    list_captions_and_titles[["placessexcontactdistance"]][["subtitle"]]   <- "New York, United States,  Jul - Nov 2022"
+    list_captions_and_titles[["placessexcontactdistance"]][["caption"]]    <- "Data source: MPX NYC. www.mpxresponse.org"
+    
+    
     list_captions_and_titles[["barmapcoverage"]]                 <- list()
     list_captions_and_titles[["barmapcoverage"]][["title"]]      <- "33% of participants reachable through 3 community districts"
     list_captions_and_titles[["barmapcoverage"]][["subtitle"]]   <- "New York, United States,  Jul - Nov 2022"
@@ -75,6 +82,8 @@ captions_and_titles <- function(figure_name){
     list_captions_and_titles[["demogroup"]][["title"]]      <- "Demographic characteristics"
     list_captions_and_titles[["demogroup"]][["subtitle"]]   <- "New York, United States,  Jul - Nov 2022"
     list_captions_and_titles[["demogroup"]][["caption"]]    <- "Data source: MPX NYC. www.mpxresponse.org"
+    
+    
     
     
     list_captions_and_titles[[figure_name]]

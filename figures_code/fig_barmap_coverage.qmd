@@ -1,15 +1,11 @@
----
-title: "Manuscript: MPX NYC Intervention Strategy"
----
 
 
 
 ```{r}
 #| fig-width: 7
 #| fig-height: 8
-#| label: fig-barmapcoverage
-#| fig-cap: "fig-barmapcoverage"
-#| 
+
+
 
   graph_data <- targets::tar_read(data_vaccination_coverage_raw) %>%
                       filter(intervention_priority == "contact", intervention_setting == "home.social.sexual") %>%
@@ -58,11 +54,11 @@ title: "Manuscript: MPX NYC Intervention Strategy"
                    left_join(graph_data) %>%
                    ggplot() +
                           geom_sf(fill = "grey") +
-                         geom_sf(aes(fill = group, alpha = group), color = "black") +
+                         geom_sf(aes(fill = group, alpha = group), color = "white") +
                          theme_void() +
                          theme(
                            legend.position = "bottom",
-                           plot.margin = margin(2,1,2,1, "cm"),
+                           plot.margin = margin(0,0,0,0, "cm"),
                             plot.title = element_text(hjust = 0.5),
                             plot.subtitle = element_text(hjust = 0.5, margin = margin(2, 0, 15, 0, "mm")),
                            plot.caption = element_text(margin = margin(15, 0, 0,0, "mm"))
