@@ -4,7 +4,7 @@ captions_and_titles <- function(figure_name){
    
   
     list_captions_and_titles <- list()
-    list_captions_and_titles[["common_caption"]] <- "Data source: MPX NYC. www.mpxresponse.org"
+    list_captions_and_titles[["common_caption"]] <- "Data source: MPX NYC (an annonymous survey of 1,304 participants). www.mpxresponse.org"
     
     list_captions_and_titles[["radargroupsex"]]                          <- list()
     list_captions_and_titles[["radargroupsex"]][["title"]]               <- "Social or sexual contact in group setting over prior 4 weeks"
@@ -29,19 +29,22 @@ captions_and_titles <- function(figure_name){
     list_captions_and_titles[["barmapcoverage"]]                          <- list()
     list_captions_and_titles[["barmapcoverage"]][["title"]]               <- "33% of participants reachable through 3 community districts"
     list_captions_and_titles[["barmapcoverage"]][["subtitle"]]            <- "New York, United States,  Jul - Nov 2022"
-    list_captions_and_titles[["barmapcoverage"]][["caption"]]             <- "It may be possible to mount geographically targeted interventions that have impact across New York City. We ranked community districts in terms of the number of participants who reside or reported close physical contact in them. The top 3 community districts (MN04, BK01, MN10, which comprise Group 1) together account for about one third of participants. The next 8 community districts (Group B) account for another third of participants."
+    list_captions_and_titles[["barmapcoverage"]][["caption"]]             <- "It may be possible to mount geographically targeted interventions that have impact across New York City. We ranked community districts in terms of the number of participants who reside or reported close physical contact in them. The top 3 community districts (MN04, BK01, MN10, which comprise Group A) together account for about one third of participants. The next 8 community districts (Group B) account for another third of participants."
     
     list_captions_and_titles[["matrixneighborhood"]]                      <- list()
     list_captions_and_titles[["matrixneighborhood"]][["title"]]           <- "Movement between community districts in New York City"
     list_captions_and_titles[["matrixneighborhood"]][["subtitle"]]        <- "New York, United States,  Jul - Nov 2022"
-    list_captions_and_titles[["matrixneighborhood"]][["caption"]]         <- "We asked participants to show the location of their home, and the locations of places where they had close physical contact in a group setting. The axis on the left shows the home community district of each participant, and the top axis shows the destination community. The size of each circle is proportional to the number of respondents with a home in the district on the left who had contact in a district showed at the top."
+    list_captions_and_titles[["matrixneighborhood"]][["caption"]]         <- "We asked participants to show the location of their home, and the locations of places where they had close physical contact in a group setting. The axis on the left shows the home community district of each participant, and the top axis shows the destination community. The size of each circle is proportional to the number of respondents with a home in the community on the left who had contact in a community showed at the top."
     
     list_captions_and_titles[["networkcoverage"]]                         <- list()
     list_captions_and_titles[["networkcoverage"]][["title"]]              <- "Community districts densely connected"
     list_captions_and_titles[["networkcoverage"]][["subtitle"]]           <- "New York, United States,  Jul - Nov 2022"
-    list_captions_and_titles[["networkcoverage"]][["caption"]]            <- "We asked participants to show the location of their home, and the locations of places where they had close physical contact in a group setting. We constructed a network where nodes are community districts and a tie between a given pair of nodes indicates that study participants were present in both community districts. The thickness of the tie is proportional with the number of study participants who have been present in both community districts."
+    list_captions_and_titles[["networkcoverage"]][["caption"]]            <- "We asked participants to show the location of their home, and the locations of places where they had close physical contact in a group setting. We constructed a network where nodes are community districts. A tie between a given pair of nodes indicates that at least one study participant was present in both community districts. The thickness of the tie is proportional to the number of study participants who have been present in both community districts."
     
-
+    list_captions_and_titles[["radarracegender"]]                 <- list()
+    list_captions_and_titles[["radarracegender"]][["title"]]      <- "Race and gender of participants"
+    list_captions_and_titles[["radarracegender"]][["subtitle"]]   <- "New York, United States,  Jul - Nov 2022"
+    list_captions_and_titles[["radarracegender"]][["caption"]]    <- ""
     
     list_captions_and_titles[["radarage"]]                 <- list()
     list_captions_and_titles[["radarage"]][["title"]]      <- "Age of participants"

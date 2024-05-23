@@ -5,7 +5,7 @@
 list_labels_groupSex_table1 <- targets::tar_read(initial_settings)$labels_list
 
 
-table_1_descriptives <- targets::tar_read(data_table_1_people_by_groupSex) %>%
+table_1_descriptives <- targets::tar_read(data_table_1_people_by_groupSex_raw) %>%
                                 mutate(stratum = stratum_groupSex) %>%
                                 dplyr::group_by(variable) %>%
                                 dplyr::mutate(var_label = c(variable[1], rep(NA, length(variable) - 1))) %>%

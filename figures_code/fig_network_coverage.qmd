@@ -56,7 +56,7 @@
                       select(name) %>%
                       left_join(graph_data)
   
-  place_graph %>%
+ plot <- place_graph %>%
     activate(nodes) %>%
     mutate(deg = igraph::degree(.)) %>%
     filter(deg > 0) %>%
@@ -79,7 +79,9 @@
       labs(
             title     = captions_and_titles("networkcoverage")$title,
             subtitle  = captions_and_titles("networkcoverage")$subtitle,
-            caption   = captions_and_titles("networkcoverage")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
+            caption   = captions_and_titles("networkcoverage")$caption %>% str_wrap(140) %>% paste0("\n\n", captions_and_titles("common_caption") )
             )
+ 
+ apply_style_spacing_remainder(plot)
   
 ```

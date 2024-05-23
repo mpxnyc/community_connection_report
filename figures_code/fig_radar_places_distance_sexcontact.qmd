@@ -1,7 +1,7 @@
 
 ```{r}
-#| fig-width: 7
-#| fig-height: 8
+#| fig-width: 11
+#| fig-height: 10
 #| 
 
 
@@ -23,10 +23,12 @@ labels_place_sex <- c(
                     )
   
 
+labels_distance_from_home <- c("Same Neighborhood" = "Same neighborhood\nas home", "Same Borough" = "Same borough\nas home", "Different Borough" = "Different borough\nfrom home")
 
  working_data <- targets::tar_read(places_data) %>%
                        mutate(placeType = factor(placeType, names(labels_place_type), labels_place_type)) %>%
-                       mutate(placeSex = factor(placeSex, names(labels_place_sex), labels_place_sex)) 
+                       mutate(placeSex = factor(placeSex, names(labels_place_sex), labels_place_sex)) %>%
+   mutate(distanceFromHome = factor(distanceFromHome, names(labels_distance_from_home), labels_distance_from_home))
  
 figure_n_counts <-  working_data %>%
                                 group_by(distanceFromHome, placeSex) %>%
@@ -34,7 +36,7 @@ figure_n_counts <-  working_data %>%
 
 
 
-working_data  %>%
+plot <- working_data  %>%
   arrange(placeType, placeSex, distanceFromHome) %>%
   group_by(placeType, placeSex, distanceFromHome) %>%
   summarize(count = n()) %>%
@@ -74,9 +76,8 @@ working_data  %>%
     labs(
           title     = captions_and_titles("placesdistancesexcontact")$title,
           subtitle  = captions_and_titles("placesdistancesexcontact")$subtitle,
-          caption   = captions_and_titles("placesdistancesexcontact")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
+          caption   = captions_and_titles("placesdistancesexcontact")$caption %>% str_wrap(150) %>% paste0("\n\n", captions_and_titles("common_caption") )
           )
 
-
-
+apply_style_spacing_place(plot)
 ```

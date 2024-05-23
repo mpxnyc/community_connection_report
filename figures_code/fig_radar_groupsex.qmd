@@ -8,7 +8,7 @@
 
 
 
-  targets::tar_read(participant_data) %>%
+plot <-   targets::tar_read(participant_data) %>%
                 mutate(groupSex = factor(groupSex, c("no", "yes"), c("No", "Yes"))) %>%
                 group_by(groupSex) %>%
                 summarize(count = n()) %>%
@@ -19,6 +19,7 @@
     
                 ggplot2::ggplot() + 
                             ggplot2::geom_bar(aes(x = level, fill = level, y = proportion), width = 1, stat = "identity") + 
+                            ggplot2::geom_text(aes(x = level, label = count, y = proportion + 0.05), width = 1, stat = "identity") + 
                             ggplot2::theme_void() + 
                             ggplot2::theme(
                                             legend.position    = "none", 
@@ -36,7 +37,7 @@
                                                                   )
                               ) + 
                             ggplot2::scale_x_discrete(drop = FALSE) +
-                            ggplot2::scale_y_continuous(labels = scales::percent) + 
+                            ggplot2::scale_y_continuous("Proportion of participants", labels = scales::percent) + 
                             ggplot2::theme(
                                           plot.margin = margin(0,0,0,0, "cm"),
                                           plot.title = element_text(hjust = 0.5 ),
@@ -46,9 +47,9 @@
                             labs(
                                   title    = captions_and_titles("radargroupsex")$title,
                                   subtitle = captions_and_titles("radargroupsex")$subtitle,
-                                  caption  = captions_and_titles("radargroupsex")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") ) 
+                                  caption  = captions_and_titles("radargroupsex")$caption %>% str_wrap(95) %>% paste0("\n\n", captions_and_titles("common_caption") ) 
 
                                   )
   
-
+apply_style_spacing_remainder(plot)
 ```

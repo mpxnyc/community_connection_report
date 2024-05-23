@@ -2,7 +2,7 @@
 
 
 ```{r}
-#| fig-width: 7
+#| fig-width: 11
 #| fig-height: 7
 
 
@@ -32,7 +32,7 @@ local_colors <- mpxnyc_colors$all_colors
 names(local_colors) <- NULL
 
 
-  targets::tar_read(participant_data) %>%
+ plot <-  targets::tar_read(participant_data) %>%
     group_by(demo_group) %>%
     summarize(count = n()) %>%
     ungroup() %>%
@@ -47,6 +47,7 @@ names(local_colors) <- NULL
   ggplot2::ggplot() + 
              ggplot2::theme_void() + 
         ggplot2::geom_bar(aes(x = level, y = proportion, fill = level), width = 1, stat = "identity") + 
+       ggplot2::geom_text(aes(x = level, y = proportion + 0.05, label = count), alpha = 0.7) +
           ggplot2::theme(
                           legend.position = "none", 
                           panel.grid.major.y = ggplot2::element_line(size = 0.1),
@@ -65,9 +66,11 @@ names(local_colors) <- NULL
         plot.caption = element_text(margin = margin(15, 0, 0, 0), hjust = 0)
       ) +
     labs(
-      title    = captions_and_titles("radarrace")$title,
-      subtitle = captions_and_titles("radarrace")$subtitle,
-      caption  = captions_and_titles("radarrace")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
+      title    = captions_and_titles("radarracegender")$title,
+      subtitle = captions_and_titles("radarracegender")$subtitle,
+      caption  = captions_and_titles("radarracegender")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
     ) 
+  
+     apply_style_spacing_descriptives(plot)
   
 ```

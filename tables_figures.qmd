@@ -2,6 +2,7 @@
 title: "MPX NYC"
 subtitle: "Key findings and recommendations"
 author: "Keletso Makofane"
+date: 23 May 2024
 
 crossref: 
   thm-prefix: Box
@@ -22,6 +23,8 @@ format:
   revealjs:
     incremental: true
     scrollable: true
+    fig-align: center
+    align: center
 ---
 
 ```{r update_mpxnyc_package, include = FALSE, messages=FALSE, warning = FALSE}
@@ -179,16 +182,47 @@ targets::tar_source(files = "R_functions")
 
 
 ```{r}
-apply_style_spacing <- function(plot, caption_hjust = 1){
+apply_style_spacing_descriptives <- function(plot, caption_hjust = 1){
+  
+  plot +
+    theme_void() +
+    theme(
+        plot.title    = element_text(hjust = 0.5, margin = margin(0, 0, 1, 0, "mm")),
+        plot.subtitle = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),
+        axis.title.y  = element_text(angle = 90, margin = margin(0, 10, 0, 0, "mm")),
+        plot.caption  = element_text(margin = margin(15, 0, 0, 0), hjust = caption_hjust),
+        panel.margin  = margin(1,1,1,1, "cm"),
+        plot.margin   = margin(1,1,1,1, "cm"),
+                legend.position = "none", 
+                          panel.grid.major.y = ggplot2::element_line(size = 0.1),
+                          axis.text.x = element_text(),
+                          axis.text.y = element_text()
+    )
+}
+
+apply_style_spacing_remainder <- function(plot, caption_hjust = 0){
   
   plot +
     theme(
-        plot.title    = element_text(hjust = 0.5, margin = margin(0, 0, 5, 0, "mm")),
+        plot.title    = element_text(hjust = 0.5, margin = margin(0, 0, 1, 0, "mm")),
         plot.subtitle = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),
-        axis.title.y  = element_text(margin = margin(0, 10, 0, 0, "mm")),
-        plot.caption  = element_text(margin = margin(15, 0, 0, 0), hjust = caption_hjust),
+        axis.title.y  = element_text(angle = 90, margin = margin(0, 10, 0, 0, "mm")),
+        plot.caption  = element_text( hjust = caption_hjust),
+        panel.margin  = margin(1,1,1,1, "cm"),
         plot.margin   = margin(1,1,1,1, "cm")
     )
+}
+
+apply_style_spacing_place <- function(plot, caption_hjust = 0){
+  
+  plot +
+     theme(
+         plot.title    = element_text(hjust = 0.5, margin = margin(0, 0, 1, 0, "mm")),
+         plot.subtitle = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),
+         plot.caption  = element_text( hjust = caption_hjust, margin = margin(1, 1, 1, 1, "cm")),
+         #panel.margin  = margin(1,1,1,1, "cm"),
+         plot.margin   = margin(1,1,1,1, "cm")
+     )
 }
 
 ```

@@ -1,8 +1,8 @@
 
 
 ```{r}
-#| fig-width: 8
-#| fig-height: 10
+#| fig-width: 9
+#| fig-height: 11
 
 #| 
 
@@ -42,7 +42,7 @@ main_data <- targets::tar_read(places_data) %>%
   mutate(from_name = .N()$name[from], to_name = .N()$name[to]) %>%
   data.frame() 
 
-main_data %>%
+plot <- main_data %>%
   ggplot() +
     geom_tile(aes(y = from_community, x = to_community, fill = borough), data = data_tiles) + 
     geom_point(aes(y =from_name, x = to_name, size = weight), color = "white", data = main_data, alpha = 0.7) +
@@ -83,7 +83,7 @@ main_data %>%
     legend.position = "none"
   ) +
   scale_x_discrete("Destination community district", position = "top") +
-  scale_y_discrete("Origin community district",  limits=rev) + 
+  scale_y_discrete("Home community district",  limits=rev) + 
       ggplot2::theme(
         plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5, margin = margin(1, 0, 15, 0)),
@@ -94,10 +94,10 @@ main_data %>%
     labs(
       title    = captions_and_titles("matrixneighborhood")$title,
       subtitle = captions_and_titles("matrixneighborhood")$subtitle,
-      caption  = captions_and_titles("matrixneighborhood")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
+      caption  = captions_and_titles("matrixneighborhood")$caption %>% str_wrap(130) %>% paste0("\n\n", captions_and_titles("common_caption") )
     )
   
 
-
+apply_style_spacing_remainder(plot)
 
 ```

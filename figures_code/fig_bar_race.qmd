@@ -31,6 +31,7 @@ race_labels <- c(
     mutate(level = factor(level, names(race_labels), race_labels)) %>%
   ggplot2::ggplot() + 
         ggplot2::geom_bar(aes(x = level, fill = level, y = proportion), width = 1, stat = "identity") + 
+        ggplot2::geom_text(aes(x = level, y = proportion + 0.05, label = count), alpha = 0.7) +
          ggplot2::theme_void() + 
           ggplot2::theme(
                           legend.position = "none", 

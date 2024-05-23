@@ -16,7 +16,7 @@ sexorient_labels <- c(
                        "something-else" = "Another\nOrientation"
                       )
 
-  targets::tar_read(participant_data) %>%
+plot <-  targets::tar_read(participant_data) %>%
     mutate(sexOrientation = factor(sexOrientation, names(sexorient_labels), sexorient_labels )) %>%
     group_by(sexOrientation) %>%
     summarize(count = n()) %>%
@@ -26,6 +26,7 @@ sexorient_labels <- c(
     mutate(proportion = count / sum(count)) %>%
   ggplot2::ggplot() + 
         ggplot2::geom_bar(aes(x = level, fill = level, y = proportion), width = 1, stat = "identity") + 
+      ggplot2::geom_text(aes(x = level, y = proportion + 0.05, label = count), alpha = 0.7) +
        ggplot2::theme_void() + 
           ggplot2::theme(
                           legend.position = "none", 
@@ -58,5 +59,6 @@ sexorient_labels <- c(
       caption  = captions_and_titles("radarsexorientation")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
     )
   
+       apply_style_spacing_descriptives(plot)
 
 ```

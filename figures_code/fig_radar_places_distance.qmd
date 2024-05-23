@@ -1,8 +1,8 @@
 
 
 ```{r}
-#| fig-width: 7
-#| fig-height: 7
+#| fig-width: 10
+#| fig-height: 8
 #| 
 
 
@@ -18,12 +18,13 @@ labels_place_type <- c(
   "something-else" = "Something Else"
 )
   
-
+labels_distance_from_home <- c("Same Neighborhood" = "Same neighborhood\nas home", "Same Borough" = "Same borough\nas home", "Different Borough" = "Different borough\nfrom home")
 
  working_data <- targets::tar_read(places_data) %>%
    mutate(placeType = factor(placeType, names(labels_place_type), labels_place_type)) %>%
    mutate(placeSex = factor(placeSex, c("no", "yes"), c("Social\nContact", "Sexual\nContact"))) %>%
-  filter(!is.na(placeSex)) 
+  filter(!is.na(placeSex)) %>%
+   mutate(distanceFromHome = factor(distanceFromHome, names(labels_distance_from_home), labels_distance_from_home))
   
 figure_n_counts <-  working_data %>%
                                 group_by(distanceFromHome) %>%
@@ -31,7 +32,7 @@ figure_n_counts <-  working_data %>%
 
 
 
-working_data  %>%
+plot <- working_data  %>%
                                 arrange(placeType,  distanceFromHome) %>%
   group_by(placeType, distanceFromHome) %>%
   summarize(count = n()) %>%
@@ -42,7 +43,9 @@ working_data  %>%
                                 mutate(prop_label = scales::percent(proportion, accuracy = 1)) %>%
                                 ggplot() +
                                 geom_bar(aes(x = placeType, y = proportion, fill = placeType), stat = "identity", width = 1) +
-                                #geom_text(aes(x = level, y = proportion, label = prop_label), color = "black", nudge_y = 0.35, size = 3) +
+
+      geom_text(aes(label = prop_label, x = placeType, y = proportion + 0.3), size = 3, face = "bold", alpha = 0.7) +
+
                                 geom_text(aes(x = 0, y = -0.8, label = paste("n =", n)), data = figure_n_counts, size = 4) +
                                 facet_grid( . ~ distanceFromHome, switch = "y") +
                                 coord_polar() +
@@ -68,10 +71,10 @@ working_data  %>%
     labs(
           title    = captions_and_titles("placesdistance")$title,
           subtitle = captions_and_titles("placesdistance")$subtitle,
-          caption  = captions_and_titles("placesdistance")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
+          caption  = captions_and_titles("placesdistance")$caption %>% str_wrap(150) %>% paste0("\n\n", captions_and_titles("common_caption") )
           )
   
 
-
+apply_style_spacing_place(plot)
 
 ```
