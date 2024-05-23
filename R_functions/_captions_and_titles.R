@@ -4,7 +4,7 @@ captions_and_titles <- function(figure_name){
    
   
     list_captions_and_titles <- list()
-    list_captions_and_titles[["common_caption"]] <- "Data source: MPX NYC (annonymous survey of 1,304 participants in New York City). www.mpxresponse.org"
+    list_captions_and_titles[["common_caption"]] <- "Data source: MPX NYC Survey (restricted to 1,304 participants in New York City). www.mpxresponse.org"
     
     list_captions_and_titles[["radargroupsex"]]                          <- list()
     list_captions_and_titles[["radargroupsex"]][["title"]]               <- "Social or sexual contact in group setting over prior 4 weeks"
