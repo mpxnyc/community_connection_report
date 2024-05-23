@@ -5,7 +5,7 @@ captions_and_titles <- function(figure_name){
     list_captions_and_titles[["radargroupsex"]]                    <- list()
     list_captions_and_titles[["radargroupsex"]][["title"]]         <- "Social or sexual contact in group setting over prior 4 weeks"
     list_captions_and_titles[["radargroupsex"]][["subtitle"]]      <- "New York, United States,  Jul - Nov 2022"
-    list_captions_and_titles[["radargroupsex"]][["caption"]]       <- "Data source: MPX NYC. www.mpxresponse.org"
+    list_captions_and_titles[["radargroupsex"]][["caption"]]       <- "Data source: MPX NYC - an annonymous survey of queer and trans people in New York City. www.mpxresponse.org. We asked participants whether over the preceding 4 weeks they 'had sex with two or more people at the same time, or had close physical contact with multiple people at the same time (e.g. at a party, sport game, concert, show)'. About two-fifths said yes."
     
     list_captions_and_titles[["places"]]                           <- list()
     list_captions_and_titles[["places"]][["title"]]                <- "Type of venue for contact over past 4 weeks"
