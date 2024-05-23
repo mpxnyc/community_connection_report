@@ -19,8 +19,8 @@
                       mutate(group = "Group A") %>%
                       mutate(group = ifelse(cumprop > 0.33, "Group B", group)) %>%
                       mutate(group = ifelse(cumprop > 0.66, "Group C", group)) %>%
-                      mutate(group = lead(group)) %>%
-                      mutate(group = ifelse(is.na(group), "Group C", group)) 
+                      mutate(group = lag(group)) %>%
+                      mutate(group = ifelse(is.na(group), "Group A", group)) 
   
   
 
@@ -55,6 +55,7 @@
    guides(alpha = "none")
                    
   
+
  
 
  
