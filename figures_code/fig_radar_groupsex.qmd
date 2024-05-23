@@ -41,12 +41,13 @@
                                           plot.margin = margin(0,0,0,0, "cm"),
                                           plot.title = element_text(hjust = 0.5 ),
                                           plot.subtitle = element_text(hjust = 0.5, margin = margin(1, 0, 15, 0, "mm")),
-                                          plot.caption = element_text(margin = margin(15, 0, 0, 0, "mm"))
+                                          plot.caption = element_text(margin = margin(15, 0, 0, 0, "mm"), hjust = 0)
                                         ) + 
                             labs(
                                   title    = captions_and_titles("radargroupsex")$title,
                                   subtitle = captions_and_titles("radargroupsex")$subtitle,
-                                  caption  = captions_and_titles("radargroupsex")$caption
+                                  caption  = captions_and_titles("radargroupsex")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") ) 
+
                                   )
   
 

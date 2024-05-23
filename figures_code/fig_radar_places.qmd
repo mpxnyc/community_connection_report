@@ -63,14 +63,14 @@ working_data  %>%
                                   strip.text.y = element_text(),
                                   #plot.margin = margin(2, 2, 2, 2, "cm"),
                                   plot.title = element_text(hjust = 0.5),
-                                  plot.subtitle = element_text(hjust = 0.5),
+                                  plot.subtitle = element_text(hjust = 0.5, margin = margin(5, 0, 15, 0)),
                                   plot.caption = element_text(margin = margin(15, 0,0,0, "mm"))
                                 ) +
                                 scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1)) + 
   labs(
           title    = captions_and_titles("places")$title,
           subtitle = captions_and_titles("places")$subtitle,
-          caption  = captions_and_titles("places")$caption) 
+          caption  = captions_and_titles("places")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )) 
   
 
 

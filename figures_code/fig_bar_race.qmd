@@ -54,13 +54,13 @@ race_labels <- c(
         plot.title = element_text(hjust = 0.5, margin = margin(0, 0, 2, 0, "mm")),
         plot.subtitle = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),
         axis.title.y = element_text(margin = margin(0, 10, 0, 0, "mm")),
-        plot.caption = element_text(margin = margin(15, 0, 0, 0)),
+        plot.caption = element_text(margin = margin(15, 0, 0, 0), hjust = 0),
         panel.margin = margin(5, 5, 5, 5, "mm")
       ) +
     labs(
       title    = captions_and_titles("radarrace")$title,
       subtitle = captions_and_titles("radarrace")$subtitle,
-      caption  = captions_and_titles("radarrace")$caption
+      caption  = captions_and_titles("radarrace")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
     )
   
 ```

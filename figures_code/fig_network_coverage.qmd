@@ -73,12 +73,13 @@
         legend.position = "none",
         plot.margin = margin(0,0,0,0, "cm"),
         plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5)
+        plot.subtitle = element_text(hjust = 0.5),
+        plot.caption = element_text(hjust = 0)
       ) + 
       labs(
             title     = captions_and_titles("networkcoverage")$title,
             subtitle  = captions_and_titles("networkcoverage")$subtitle,
-            caption   = captions_and_titles("networkcoverage")$caption
+            caption   = captions_and_titles("networkcoverage")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
             )
   
 ```

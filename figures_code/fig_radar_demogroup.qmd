@@ -167,12 +167,13 @@ plot_a <- ggplot() +
       labs(
         title = captions_and_titles("demogroup")$title,
         subtitle = captions_and_titles("demogroup")$subtitle,
-        caption = captions_and_titles("demogroup")$caption
+        caption = captions_and_titles("demogroup")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
       ) +
       theme_void() +
       theme(
         plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5)
+        plot.subtitle = element_text(hjust = 0.5),
+        plot.caption = element_text(hjust = 0)
       ) +
       cowplot::draw_plot(cowplot::ggdraw(main_body), 0, 0, 1, 1)
 
@@ -352,12 +353,13 @@ plot_b <- ggplot() +
       labs(
         title = captions_and_titles("demogroup")$title,
         subtitle = captions_and_titles("demogroup")$subtitle,
-        caption = captions_and_titles("demogroup")$caption
+        caption = captions_and_titles("demogroup")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
       ) +
       theme_void() +
       theme(
         plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5)
+        plot.subtitle = element_text(hjust = 0.5),
+        plot.caption = element_text( hjust = 0)
       ) +
       cowplot::draw_plot(cowplot::ggdraw(main_body), 0, 0, 1, 1)
 

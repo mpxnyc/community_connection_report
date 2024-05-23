@@ -20,7 +20,7 @@ table_vaximpactpriorityapproach() %>%
     plot.margin         = margin(0,0,0,0, "cm"),
     plot.title          = element_text(hjust = 0.5),
     plot.subtitle       = element_text(hjust = 0.5, margin = margin(5,0,15,0, "mm")),
-    plot.caption        = element_text(margin = margin(20, 0, 0, 0))
+    plot.caption        = element_text(margin = margin(20, 0, 0, 0), hjust = 0)
   ) +
   scale_fill_manual("Network Region", values = c(
                                                   dark_pink, 
@@ -51,7 +51,7 @@ table_vaximpactpriorityapproach() %>%
     labs(
           title    = captions_and_titles("vaximpactpriorityapproach")$title,
           subtitle = captions_and_titles("vaximpactpriorityapproach")$subtitle,
-          caption  = captions_and_titles("vaximpactpriorityapproach")$caption)
+          caption  = captions_and_titles("vaximpactpriorityapproach")$caption  %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") ))
 
 
 
