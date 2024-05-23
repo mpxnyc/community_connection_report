@@ -104,10 +104,6 @@ tar_target(
   name = data_vaccination_coverage_raw,
   command = make_vaccination_coverage_data(data_vaccination_campaign_raw)
 ),
-tar_target(
-  name = data_vaccination_network_impact_raw,
-  command = make_vaccination_network_impact_data(data_vaccination_campaign_raw,  n_neighborhoods_input = initial_settings[["n_neighborhoods"]])
-),
   tar_target(
     name = bipartite_graph_sim,
     command = make_simulated_bipartite_graph(bipartite_graph, n_reps = initial_settings[["n_reps_graph"]])
@@ -135,8 +131,4 @@ tar_target(
 tar_target(
   name = data_vaccination_coverage_sim,
   command = make_vaccination_coverage_data(data_vaccination_campaign_sim)
-),
-tar_target(
-  name = data_vaccination_network_impact_sim,
-  command = make_vaccination_network_impact_data(data_vaccination_campaign_sim,  n_neighborhoods_input = initial_settings[["n_neighborhoods"]])
 ))

@@ -4,7 +4,7 @@ captions_and_titles <- function(figure_name){
    
   
     list_captions_and_titles <- list()
-    list_captions_and_titles[["common_caption"]] <- "Data source: MPX NYC (an annonymous survey of 1,304 participants). www.mpxresponse.org"
+    list_captions_and_titles[["common_caption"]] <- "Data source: MPX NYC (annonymous survey of 1,304 participants in New York City). www.mpxresponse.org"
     
     list_captions_and_titles[["radargroupsex"]]                          <- list()
     list_captions_and_titles[["radargroupsex"]][["title"]]               <- "Social or sexual contact in group setting over prior 4 weeks"
@@ -27,9 +27,9 @@ captions_and_titles <- function(figure_name){
     list_captions_and_titles[["placesdistancesexcontact"]][["caption"]]   <- "We asked participants to show the location of their home, and the locations of places where they had close physical contact in a group setting.  For each place, they indicated what kind of venue it was and whether they had sexual contact there. Though among places where participants had sex, the further the place was, the less likely it was to be a private residence, private residencs were the predominant venue for sexual contact."
     
     list_captions_and_titles[["barmapcoverage"]]                          <- list()
-    list_captions_and_titles[["barmapcoverage"]][["title"]]               <- "33% of participants reachable through 3 community districts"
+    list_captions_and_titles[["barmapcoverage"]][["title"]]               <- "Large number of individuals reachable in limited geographic area"
     list_captions_and_titles[["barmapcoverage"]][["subtitle"]]            <- "New York, United States,  Jul - Nov 2022"
-    list_captions_and_titles[["barmapcoverage"]][["caption"]]             <- "It may be possible to mount geographically targeted interventions that have impact across New York City. We ranked community districts in terms of the number of participants who reside or reported close physical contact in them. The top 3 community districts (MN04, BK01, MN10, which comprise Group A) together account for about one third of participants. The next 8 community districts (Group B) account for another third of participants."
+    list_captions_and_titles[["barmapcoverage"]][["caption"]]             <- "It may be possible to mount geographically targeted interventions that have impact across New York City. We ranked community districts in terms of the number of participants who reside or reported close physical contact in them. The top 5 community districts (which comprise Group A) together account for about one third of participants. The next 8 community districts (Group B) account for another third of participants."
     
     list_captions_and_titles[["matrixneighborhood"]]                      <- list()
     list_captions_and_titles[["matrixneighborhood"]][["title"]]           <- "Movement between community districts in New York City"
