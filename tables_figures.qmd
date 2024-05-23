@@ -178,6 +178,22 @@ targets::tar_source(files = "R_functions")
 ```
 
 
+```{r}
+apply_style_spacing <- function(plot, caption_hjust = 1){
+  
+  plot +
+    theme(
+        plot.title    = element_text(hjust = 0.5, margin = margin(0, 0, 5, 0, "mm")),
+        plot.subtitle = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),
+        axis.title.y  = element_text(margin = margin(0, 10, 0, 0, "mm")),
+        plot.caption  = element_text(margin = margin(15, 0, 0, 0), hjust = caption_hjust),
+        plot.margin   = margin(1,1,1,1, "cm")
+    )
+}
+
+```
+
+
 ## 
 
 {{< include figures_code/fig_radar_groupsex.qmd >}}
@@ -210,6 +226,8 @@ targets::tar_source(files = "R_functions")
 
 {{< include figures_code/fig_radar_demogroup.qmd >}}
 
+##
+{{< include figures_code/fig_bar_racegender.qmd >}}
 
 ##
 

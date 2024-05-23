@@ -9,7 +9,7 @@
 
 
 
-  targets::tar_read(participant_data) %>%
+  fig <- targets::tar_read(participant_data) %>%
     group_by(age) %>%
     summarize(count = n()) %>%
     ungroup() %>%
@@ -40,7 +40,7 @@
         plot.title = element_text(hjust = 0.5, margin = margin(0, 0, 5, 0, "mm")),
         plot.subtitle = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),
         axis.title.y = element_text(margin = margin(0, 10, 0, 0, "mm")),
-        plot.caption = element_text(margin = margin(15, 0, 0, 0), hjust = 0)
+        plot.caption = element_text(margin = margin(15, 0, 0, 0), hjust = 1)
       ) + 
     labs(
       title    = captions_and_titles("radarage")$title,
@@ -49,4 +49,5 @@
     )
   
 
+  apply_style_spacing(fig)
 ```

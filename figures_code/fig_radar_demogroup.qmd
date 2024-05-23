@@ -80,7 +80,7 @@ plot_radar_legend_single <- function (data, variable_name, list_labels)
 
 
 
-list_labels_descriptives_by_demogroup <- targets::tar_read(initial_settings)$labels_list[c( "monkeypoxVaccine", "hivPrep", "sexOrientation")]
+list_labels_descriptives_by_demogroup <- targets::tar_read(initial_settings)$labels_list[c("hivPrep", "monkeypoxVaccine", "sexOrientation")]
 
 list_labels_descriptives_by_demogroup[["stratum"]] <- list()
 list_labels_descriptives_by_demogroup[["stratum"]][["levels"]] <- list()
@@ -173,7 +173,7 @@ plot_a <- ggplot() +
       theme(
         plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
-        plot.caption = element_text(hjust = 0)
+        plot.caption = element_text(hjust = 1)
       ) +
       cowplot::draw_plot(cowplot::ggdraw(main_body), 0, 0, 1, 1)
 
@@ -266,7 +266,7 @@ plot_radar_legend_single <- function (data, variable_name, list_labels)
 
 
 
-list_labels_descriptives_by_demogroup <- targets::tar_read(initial_settings)$labels_list[c( "monkeypoxVaccine", "hivPrep", "sexOrientation")]
+list_labels_descriptives_by_demogroup <- targets::tar_read(initial_settings)$labels_list[c( "hivPrep", "monkeypoxVaccine", "sexOrientation")]
 
 list_labels_descriptives_by_demogroup[["stratum"]] <- list()
 list_labels_descriptives_by_demogroup[["stratum"]][["levels"]] <- list()
@@ -359,7 +359,7 @@ plot_b <- ggplot() +
       theme(
         plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
-        plot.caption = element_text( hjust = 0)
+        plot.caption = element_text( hjust = 1)
       ) +
       cowplot::draw_plot(cowplot::ggdraw(main_body), 0, 0, 1, 1)
 
