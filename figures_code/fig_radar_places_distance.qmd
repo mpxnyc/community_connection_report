@@ -48,7 +48,7 @@ plot <- working_data  %>%
 
                                 geom_text(aes(x = 0, y = -0.8, label = paste("n =", n)), data = figure_n_counts, size = 4) +
                                 facet_grid( . ~ distanceFromHome, switch = "y") +
-                                coord_polar() +
+                                coord_polar(clip = FALSE) +
                                 scale_fill_manual("", values = c(dark_blue, light_blue, dark_purple, light_purple, dark_pink, light_pink, light_green, dark_green))    +
                                 scale_color_manual(values = c(
                                   "Dance Party" = dark_blue, 
