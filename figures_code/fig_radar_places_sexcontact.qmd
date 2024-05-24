@@ -54,7 +54,7 @@ plot <- working_data  %>%
     geom_text(aes(x = 0, y = -0.8, label = paste("n =", n)), data = figure_n_counts, size = 5) +
     geom_text(aes(label = prop_label, x = placeType, y = proportion + 0.3), size = 3, face = "bold", alpha = 0.7) +
     facet_grid( . ~ placeSex, switch = "y") +
-    coord_polar() +
+    coord_polar(clip = FALSE) +
     scale_fill_manual("", values = c(
                                       dark_blue, 
                                       light_blue, 
