@@ -6,60 +6,10 @@
 #| fig-height: 10
 
 
-  
-  graph_data <- targets::tar_read(data_vaccination_coverage_raw) %>%
-                      filter(intervention_priority == "contact", intervention_setting == "home.social.sexual") %>%
-    group_by(vax_place) %>%
-                      summarize(count = n()) %>%
-                      ungroup() %>%
-                      arrange(-count) %>%
-                      mutate(community = factor(vax_place, unique(vax_place))) %>%
-                      mutate(prop = count / sum(count)) %>%
-                      mutate(cumprop = cumsum(prop)) %>%
-                      mutate(group = "Group A") %>%
-                      mutate(group = ifelse(cumprop > 0.33, "Group B", group)) %>%
-                      mutate(group = ifelse(cumprop > 0.66, "Group C", group)) %>%
-                      mutate(group = lag(group)) %>%
-                      mutate(group = ifelse(is.na(group), "Group A", group)) 
-  
-  
 
- 
- 
- map_graph <- mpxnyc::community_sf_obj %>%
-                   left_join(graph_data) %>%
-                   ggplot() +
-                          geom_sf(fill = "grey") +
-                         geom_sf(aes(fill = group, alpha = group), color = "white") +
-                         theme_void() +
-                         theme(
-                           axis.text = element_blank(),
-                           legend.position = "bottom"
-                         ) +
-                         scale_fill_manual(
-                           "Intervention Group", 
-                                          values = c(
-                                                        "Group A" = dark_pink, 
-                                                        "Group B" = dark_blue, 
-                                                        "Group C" = light_purple
-                                                        ), 
-                                           na.value = "grey",
-                           na.translate = FALSE
-                                           ) + 
-                         scale_alpha_manual(values = c("Group A" = 1, "Group B" = 1, "Group C" = 0.5)) +
-                         labs(
-                                title     = captions_and_titles("barmapcoverage")$title,
-                                subtitle  = captions_and_titles("barmapcoverage")$subtitle,
-                                caption   = captions_and_titles("barmapcoverage")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
-                                ) +
-   guides(alpha = "none")
-                   
-  
-
- 
-
- 
-apply_style_spacing_remainder(map_graph, caption_hjust = 0)
+ make_map_coverage_plot() %>%
+   add_caption("map_coverage") %>%
+   apply_style_spacing_remainder(caption_hjust = 0)
 
 
 ```

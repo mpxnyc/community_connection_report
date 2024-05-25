@@ -407,6 +407,38 @@ make_two_stratum_radar_plot <- function(data){
 }
 
 
+  make_map_coverage_plot <- function(){
+      graph_data <- targets::tar_read(data_vaccination_coverage_raw) %>%
+                      filter(intervention_priority == "contact", intervention_setting == "home.social.sexual") %>%
+                      group_by(vax_place) %>%
+                      summarize(count = n(), group = first(group)) %>%
+        rename(name = vax_place)
+      
+      mpxnyc::community_sf_obj %>%
+        rename(name = 1) %>%
+                   left_join(graph_data) %>%
+                   ggplot() +
+                          geom_sf(fill = "grey") +
+                         geom_sf(aes(fill = group, alpha = group), color = "white") +
+                         theme_void() +
+                         theme(
+                           axis.text = element_blank(),
+                           legend.position = "bottom"
+                         ) +
+                         scale_fill_manual(
+                           "Intervention Group", 
+                                          values = c(
+                                                        "Group A" = dark_pink, 
+                                                        "Group B" = dark_blue, 
+                                                        "Group C" = light_purple
+                                                        ), 
+                                           na.value = "grey",
+                           na.translate = FALSE
+                                           ) + 
+                         scale_alpha_manual(values = c("Group A" = 1, "Group B" = 1, "Group C" = 0.5)) +
+   guides(alpha = "none")
+  }
+
 
 add_caption <- function(plot, plot_name){
   

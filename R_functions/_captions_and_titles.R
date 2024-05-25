@@ -27,10 +27,10 @@ captions_and_titles <- function(figure_name){
     list_captions_and_titles[["radar_placetype_sex_distance"]][["subtitle"]]  <- "New York, United States, Aug. - Nov. 2022"
     list_captions_and_titles[["radar_placetype_sex_distance"]][["caption"]]   <- "We asked participants to show the location of their home and the locations of places where they had close, physical contact in a group setting. For each place, they indicated what kind of venue it was and whether they had sexual contact there. Among places for sexual contact, the further away from home a place was, the less likely it was to be a private residence. At each distance, however, private residencs were the predominant venue for sexual contact."
     
-    list_captions_and_titles[["barmapcoverage"]]                          <- list()
-    list_captions_and_titles[["barmapcoverage"]][["title"]]               <- "Figure 5. Large number of individuals reachable in limited geographic area"
-    list_captions_and_titles[["barmapcoverage"]][["subtitle"]]            <- "New York, United States, Aug. - Nov. 2022"
-    list_captions_and_titles[["barmapcoverage"]][["caption"]]             <- "It may be possible to mount geographically targeted interventions that have impact across New York City. We ranked community districts in terms of the number of participants who reside or reported close, physical contact in them. The top five community districts (which comprise Group A) together account for about one third of participants. The next eight community districts (Group B) account for another third of participants."
+    list_captions_and_titles[["map_coverage"]]                          <- list()
+    list_captions_and_titles[["map_coverage"]][["title"]]               <- "Figure 5. Large number of individuals reachable in limited geographic area"
+    list_captions_and_titles[["map_coverage"]][["subtitle"]]            <- "New York, United States, Aug. - Nov. 2022"
+    list_captions_and_titles[["map_coverage"]][["caption"]]             <- "It may be possible to mount geographically targeted interventions that have impact across New York City. We ranked community districts in terms of the number of participants who reside or reported close, physical contact in them. The top five community districts (which comprise Group A) together account for about one third of participants. The next eight community districts (Group B) account for another third of participants."
     
     list_captions_and_titles[["matrixneighborhood"]]                      <- list()
     list_captions_and_titles[["matrixneighborhood"]][["title"]]           <- "Figure 6. Movement between community districts in New York City"
