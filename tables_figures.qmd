@@ -228,6 +228,200 @@ apply_style_spacing_place <- function(plot, caption_hjust = 0){
 ```
 
 
+
+```{r}
+make_descriptive_data <- function(variable){
+  
+  var <- enquo(variable)
+  var_t <- as_label(var)
+  
+  labels <- targets::tar_read(initial_settings)[["labels_list"]][[var_t]][["levels"]] %>% unlist()
+  
+  levels <- names(labels)
+  
+ targets::tar_read(participant_data) %>%
+    mutate(level = {{var}})  %>%
+    mutate(level = factor(level, levels,  labels)) %>%
+   filter(!is.na(level)) %>%
+     group_by(level) %>%
+     summarize(count = n()) %>%
+     ungroup() %>%
+   mutate(proportion = count / sum(count)) 
+}
+
+make_crosstable_data <- function(data, variable, stratum_1, stratum_2){
+  
+  variable             <- enquo(variable)
+  stratum_1            <- enquo(stratum_1)
+  stratum_2            <- enquo(stratum_2)
+  
+  variable_t           <- as_label(variable)
+  stratum_1_t          <- as_label(stratum_1)
+  stratum_2_t          <- as_label(stratum_2)
+  
+  labels_variable      <- targets::tar_read(initial_settings)[["labels_list"]][[variable_t]][["levels"]] %>% unlist()
+  labels_stratum_1     <- targets::tar_read(initial_settings)[["labels_list"]][[stratum_1_t]][["levels"]] %>% unlist()
+  labels_stratum_2     <- targets::tar_read(initial_settings)[["labels_list"]][[stratum_2_t]][["levels"]] %>% unlist()
+  
+  levels_variable  <- names(labels_variable)
+  levels_stratum_1 <- names(labels_stratum_1)
+  levels_stratum_2 <- names(labels_stratum_2)
+  
+  
+  data  %>%
+       mutate(
+              level = {{variable}} %>% factor(levels_variable, labels_variable), 
+              stratum_1 = {{stratum_1}} %>% factor(levels_stratum_1, labels_stratum_1), 
+              stratum_2 = {{stratum_2}} %>% factor(levels_stratum_2, labels_stratum_2)
+              ) %>%
+      arrange(level, stratum_1, stratum_2) %>%
+      group_by(level, stratum_1, stratum_2) %>%
+      summarize(count = n()) %>%
+      ungroup() %>%
+      group_by(stratum_1, stratum_2) %>%
+      mutate(proportion = count / sum(count)) %>%
+      ungroup() %>%
+      mutate(prop_label = scales::percent(proportion, accuracy = 1)) 
+}
+
+make_stratified_data <- function(data, variable, stratum){
+  
+  variable             <- enquo(variable)
+  stratum              <- enquo(stratum)
+  
+  variable_t           <- as_label(variable)
+  stratum_t            <- as_label(stratum)
+  
+  labels_variable      <- targets::tar_read(initial_settings)[["labels_list"]][[variable_t]][["levels"]] %>% unlist()
+  labels_stratum       <- targets::tar_read(initial_settings)[["labels_list"]][[stratum_t]][["levels"]] %>% unlist()
+  
+
+  levels_variable      <- names(labels_variable)
+  levels_stratum       <- names(labels_stratum)
+  
+
+  data  %>%
+    mutate(
+      level = {{variable}} %>% factor(levels_variable, labels_variable),
+      stratum = {{stratum}} %>% factor(levels_stratum, labels_stratum)) %>%
+      arrange(level, stratum) %>%
+      group_by(level, stratum) %>%
+      summarize(count = n()) %>%
+      ungroup() %>%
+      group_by(stratum) %>%
+      mutate(proportion = count / sum(count)) %>%
+      ungroup() %>%
+      mutate(prop_label = scales::percent(proportion, accuracy = 1)) 
+}
+
+make_bar_plot <- function(data){
+  
+  ggplot2::ggplot(data) + 
+    ggplot2::geom_bar(aes(x = level, fill = level, y = proportion), width = 1, stat = "identity") + 
+    ggplot2::geom_text(aes(x = level, y = proportion + 0.05, label = count), alpha = 0.7) +
+    ggplot2::theme_void() + 
+    ggplot2::scale_fill_manual(values = c(
+                                                dark_blue, 
+                                                dark_pink, 
+                                                dark_purple, 
+                                                light_blue, 
+                                                light_pink, 
+                                                light_purple,
+                                                mid_blue,
+                                                mid_purple,
+                                                light_orange)
+            ) + 
+    ggplot2::scale_x_discrete(drop = FALSE) +
+    ggplot2::scale_y_continuous("Proportion of participants", labels = scales::percent)
+}
+
+make_one_stratum_radar_plot <- function(data){
+  
+  data_n_counts <- data %>%
+    group_by(stratum) %>%
+    summarize(n = sum(count))
+  
+    ggplot(data) +
+    geom_bar(aes(x = level, y = proportion, fill = level), stat = "identity", width = 1) +
+    geom_text(aes(x = 0, y = -0.8, label = paste("n =", n)), data = data_n_counts, size = 5) +
+    geom_text(aes(label = prop_label, x = level, y = proportion + 0.3), size = 3, face = "bold", alpha = 0.7) +
+    facet_grid( . ~ stratum, switch = "y") +
+    coord_polar(clip = FALSE) +
+    scale_fill_manual("", values = c(
+                                      dark_blue, 
+                                      light_blue, 
+                                      dark_purple, 
+                                      light_purple, 
+                                      dark_pink, 
+                                      light_pink, 
+                                      light_green, 
+                                      dark_green
+                                      )
+                      )    +
+    theme_void() +
+    theme(
+      legend.position = "bottom",
+      strip.text    = element_text( hjust = 0.5),
+      strip.text.y  = element_text(),
+      plot.title    = element_text(hjust = 0.5),
+      plot.subtitle = element_text(hjust = 0.5, margin = margin(1, 0, 15, 0, "mm")),
+      plot.caption  = element_text( hjust = 0)
+      ) +
+    scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1))
+}
+
+
+
+make_two_stratum_radar_plot <- function(data){
+    data_n_counts <- data %>%
+    group_by(stratum_1, stratum_2) %>%
+    summarize(n = sum(count))
+  
+    ggplot(data) +
+    geom_bar(aes(x = level, y = proportion, fill = level), stat = "identity", width = 1) +
+    geom_text(aes(x = 0, y = -0.8, label = paste("n =", n)), data = data_n_counts, size = 5) +
+    geom_text(aes(label = prop_label, x = level, y = proportion + 0.3), size = 3, face = "bold", alpha = 0.7) +
+    facet_grid( stratum_1 ~ stratum_2, switch = "y") +
+    coord_polar(clip = FALSE) +
+    scale_fill_manual("", values = c(
+                                      dark_blue, 
+                                      light_blue, 
+                                      dark_purple, 
+                                      light_purple, 
+                                      dark_pink, 
+                                      light_pink, 
+                                      light_green, 
+                                      dark_green
+                                      )
+                      )    +
+    theme_void() +
+    theme(
+      legend.position = "bottom",
+      strip.text    = element_text( hjust = 0.5),
+      strip.text.y  = element_text(),
+      plot.title    = element_text(hjust = 0.5),
+      plot.subtitle = element_text(hjust = 0.5, margin = margin(1, 0, 15, 0, "mm")),
+      plot.caption  = element_text( hjust = 0)
+      ) +
+    scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1))
+}
+
+
+
+add_caption <- function(plot, plot_name){
+  
+  plot + 
+  labs(
+      title    = captions_and_titles(plot_name)$title,
+      subtitle = captions_and_titles(plot_name)$subtitle,
+      caption  = captions_and_titles(plot_name)$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
+    )
+}
+
+
+
+```
+
 # 
 Interventions that focus on public venues where queer and trans people have sex are not sufficient to stop an outbreak.
 

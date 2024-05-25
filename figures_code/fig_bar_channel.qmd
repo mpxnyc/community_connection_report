@@ -7,41 +7,10 @@
 #| 
 
 
-channel_labels <- c(
-                      "grindr" = "Grindr", 
-                      "unknown" = "Unknown\nChannel", 
-                      "partner_toolkit" = "Toolkit",
-                      "instagram" = "Instagram", 
-                      "twitter" = "Twitter"
-                      )
+make_descriptive_data(channel) %>%
+  make_bar_plot() %>%
+  add_caption("bar_channel") %>%
+  apply_style_spacing_descriptives()
 
-plot <- targets::tar_read(participant_data)  %>%
-    mutate(channel = factor(channel, names(channel_labels), channel_labels )) %>%
-    group_by(channel) %>%
-    summarize(count = n()) %>%
-    filter(!is.na(channel)) %>%
-    ungroup() %>%
-    mutate(level = channel) %>%
-    mutate(proportion = count / sum(count)) %>%
-  ggplot2::ggplot() + 
-        ggplot2::geom_bar(aes(x = level, fill = level, y = proportion), width = 1, stat = "identity") + 
-      ggplot2::geom_text(aes(x = level, y = proportion + 0.05, label = count), alpha = 0.7) +
-          ggplot2::scale_fill_manual(values = c(
-                                                dark_blue, 
-                                                dark_pink, 
-                                                dark_purple, 
-                                                light_blue, 
-                                                light_pink, 
-                                                light_purple)
-            ) + 
-      ggplot2::scale_x_discrete(drop = FALSE) +
-      ggplot2::scale_y_continuous("Proportion of participants", labels = scales::percent) + 
-    labs(
-      title    = captions_and_titles("radarchannel")$title,
-      subtitle = captions_and_titles("radarchannel")$subtitle,
-      caption  = captions_and_titles("radarchannel")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
-    )
 
-    
-    apply_style_spacing_descriptives(plot)
 ```

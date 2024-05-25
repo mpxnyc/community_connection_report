@@ -5,51 +5,9 @@
 #| fig-height: 7
 #| 
 
+make_descriptive_data(groupSex) %>%  
+  make_bar_plot() %>%
+  add_caption("bar_group_sex") %>%
+  apply_style_spacing_descriptives()
 
-
-
-plot <-   targets::tar_read(participant_data) %>%
-                mutate(groupSex = factor(groupSex, c("no", "yes"), c("No", "Yes"))) %>%
-                group_by(groupSex) %>%
-                summarize(count = n()) %>%
-                ungroup() %>%
-                filter(!is.na(groupSex)) %>%
-                mutate(level = groupSex) %>%
-                mutate(proportion = count / sum(count)) %>%
-    
-                ggplot2::ggplot() + 
-                            ggplot2::geom_bar(aes(x = level, fill = level, y = proportion), width = 1, stat = "identity") + 
-                            ggplot2::geom_text(aes(x = level, label = count, y = proportion + 0.05), width = 1, stat = "identity") + 
-                            ggplot2::theme_void() + 
-                            ggplot2::theme(
-                                            legend.position    = "none", 
-                                            panel.grid.major.y = ggplot2::element_line(size = 0.1),
-                                            axis.text.x        = element_text(),
-                                            axis.text.y        = element_text()
-                                            ) + 
-                            ggplot2::scale_fill_manual(values = c(
-                                                                  dark_blue, 
-                                                                  dark_pink, 
-                                                                  dark_purple, 
-                                                                  light_blue, 
-                                                                  light_pink, 
-                                                                  light_purple
-                                                                  )
-                              ) + 
-                            ggplot2::scale_x_discrete(drop = FALSE) +
-                            ggplot2::scale_y_continuous("Proportion of participants", labels = scales::percent) + 
-                            ggplot2::theme(
-                                          plot.margin = margin(0,0,0,0, "cm"),
-                                          plot.title = element_text(hjust = 0.5 ),
-                                          plot.subtitle = element_text(hjust = 0.5, margin = margin(1, 0, 15, 0, "mm")),
-                                          plot.caption = element_text(margin = margin(15, 0, 0, 0, "mm"), hjust = 0)
-                                        ) + 
-                            labs(
-                                  title    = captions_and_titles("radargroupsex")$title,
-                                  subtitle = captions_and_titles("radargroupsex")$subtitle,
-                                  caption  = captions_and_titles("radargroupsex")$caption %>% str_wrap(95) %>% paste0("\n\n", captions_and_titles("common_caption") ) 
-
-                                  )
-  
-apply_style_spacing_remainder(plot)
 ```

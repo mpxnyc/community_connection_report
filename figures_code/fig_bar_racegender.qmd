@@ -7,70 +7,11 @@
 
 
 
-list_labels_descriptives_by_demogroup <- targets::tar_read(initial_settings)$labels_list[c( "hivPrep", "monkeypoxVaccine", "sexOrientation")]
 
-list_labels_descriptives_by_demogroup[["stratum"]] <- list()
-list_labels_descriptives_by_demogroup[["stratum"]][["levels"]] <- list()
-
-list_labels_descriptives_by_demogroup[["stratum"]][["levels"]][["white-cisgender-man"]]  <- "White\nCisgender\nMan"
-list_labels_descriptives_by_demogroup[["stratum"]][["levels"]][["latinx-cisgender-man"]] <- "Latinx\nCisgender\nMan"
-list_labels_descriptives_by_demogroup[["stratum"]][["levels"]][["black-cisgender-man"]]  <- "Black\nCisgender\nMan"
-list_labels_descriptives_by_demogroup[["stratum"]][["levels"]][["other-cisgender-man"]]  <- "Other\nCisgender\nMan"
-list_labels_descriptives_by_demogroup[["stratum"]][["levels"]][["non-binary"]]           <- "Non-Binary\nPerson"
-list_labels_descriptives_by_demogroup[["stratum"]][["levels"]][["transgender-man"]]      <- "Transgender\nMan"
-list_labels_descriptives_by_demogroup[["stratum"]][["levels"]][["transgender-woman"]]    <- "Transgender\nWoman"
-list_labels_descriptives_by_demogroup[["stratum"]][["levels"]][["cisgender-woman"]]      <- "Cisgender\nWoman"
-list_labels_descriptives_by_demogroup[["stratum"]][["levels"]][["other"]]                <- "Another\nDemographic"
+make_descriptive_data(demo_group) %>%    
+  make_bar_plot() %>%
+  add_caption("bar_demo_group") %>%
+  apply_style_spacing_descriptives()
 
 
-
-
-demo_group_labels <- list_labels_descriptives_by_demogroup[["stratum"]][["levels"]]
-
-
-local_colors <- mpxnyc_colors$all_colors
-names(local_colors) <- NULL
-
-
- plot <-  targets::tar_read(participant_data) %>%
-    group_by(demo_group) %>%
-    summarize(count = n()) %>%
-    ungroup() %>%
-    filter(!is.na(demo_group)) %>%
-    mutate(level = demo_group) %>%
-    mutate(proportion = count / sum(count)) %>%
-    mutate(level = as.character(level)) %>%
-    arrange(count) %>%
-    mutate(level = as.character(level)) %>%
-    mutate(level = factor(level, names(demo_group_labels), demo_group_labels)) %>%
-    filter(!is.na(level)) %>%
-  ggplot2::ggplot() + 
-             ggplot2::theme_void() + 
-        ggplot2::geom_bar(aes(x = level, y = proportion, fill = level), width = 1, stat = "identity") + 
-       ggplot2::geom_text(aes(x = level, y = proportion + 0.05, label = count), alpha = 0.7) +
-          ggplot2::theme(
-                          legend.position = "none", 
-                          panel.grid.major.y = ggplot2::element_line(size = 0.1),
-                          axis.text.x = element_text(),
-                          axis.text.y = element_text(),
-                          axis.title.y = element_text(angle = 90)
-                          ) + 
-      ggplot2::scale_x_discrete("", drop = FALSE) +
-      ggplot2::scale_y_continuous("Proportion of participants", labels = scales::percent) + 
-    ggplot2::scale_fill_manual(values = local_colors) +
-      ggplot2::theme(
-        plot.margin = margin(0,0,0,0, "cm"),
-        plot.title = element_text(hjust = 0.5, margin = margin(0, 0, 2, 0, "mm")),
-        plot.subtitle = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),
-        axis.title.x = element_text(margin = margin(0, 10, 0, 0, "mm")),
-        plot.caption = element_text(margin = margin(15, 0, 0, 0), hjust = 0)
-      ) +
-    labs(
-      title    = captions_and_titles("radarracegender")$title,
-      subtitle = captions_and_titles("radarracegender")$subtitle,
-      caption  = captions_and_titles("radarracegender")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
-    ) 
-  
-     apply_style_spacing_descriptives(plot)
-  
 ```

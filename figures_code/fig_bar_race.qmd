@@ -9,59 +9,11 @@
 
 
 
-race_labels <- c(
-  "white" = "White",
-  "latinx" = "Latinx",
-  "black" = "Black",
-  "asian" = "Asian",
-  "multiple" = "Multi\nRacial",
-  "other" = "Another\nGroup"
-)
 
 
-  targets::tar_read(participant_data) %>%
-    group_by(race) %>%
-    summarize(count = n()) %>%
-    ungroup() %>%
-    filter(!is.na(race)) %>%
-    mutate(level = race) %>%
-    mutate(proportion = count / sum(count)) %>%
-    mutate(level = as.character(level)) %>%
-    arrange(count) %>%
-    mutate(level = factor(level, names(race_labels), race_labels)) %>%
-  ggplot2::ggplot() + 
-        ggplot2::geom_bar(aes(x = level, fill = level, y = proportion), width = 1, stat = "identity") + 
-        ggplot2::geom_text(aes(x = level, y = proportion + 0.05, label = count), alpha = 0.7) +
-         ggplot2::theme_void() + 
-          ggplot2::theme(
-                          legend.position = "none", 
-                          panel.grid.major.y = ggplot2::element_line(size = 0.1),
-                          axis.text.x = element_text(),
-                          axis.text.y = element_text(),
-                          axis.title.y = element_text(angle = 90)
-                          ) + 
-          ggplot2::scale_fill_manual(values = c(
-                                                dark_blue, 
-                                                dark_pink, 
-                                                dark_purple, 
-                                                light_blue, 
-                                                light_pink, 
-                                                light_purple)
-            ) + 
-      ggplot2::scale_x_discrete(drop = FALSE) +
-      ggplot2::scale_y_continuous("Proportion of participants", labels = scales::percent) + 
-      ggplot2::theme(
-        plot.margin = margin(0,0,0,0, "cm"),
-        plot.title = element_text(hjust = 0.5, margin = margin(0, 0, 2, 0, "mm")),
-        plot.subtitle = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),
-        axis.title.y = element_text(margin = margin(0, 10, 0, 0, "mm")),
-        plot.caption = element_text(margin = margin(15, 0, 0, 0), hjust = 1),
-        panel.margin = margin(5, 5, 5, 5, "mm")
-      ) +
-    labs(
-      title    = captions_and_titles("radarrace")$title,
-      subtitle = captions_and_titles("radarrace")$subtitle,
-      caption  = captions_and_titles("radarrace")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
-    )
+  make_descriptive_data(race) %>%
+      make_bar_plot() %>%
+      add_caption("bar_race") %>%
+      apply_style_spacing_descriptives()
   
 ```

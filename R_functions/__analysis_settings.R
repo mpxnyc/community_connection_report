@@ -48,25 +48,26 @@ load_initial_settings <- function(){
   list_labels_groupSex_table1[["countSex"]][["levels"]][["5+"]]    <- "5"
   
   list_labels_groupSex_table1[["demo_group"]] <- list()
-  list_labels_groupSex_table1[["demo_group"]][["label"]] <- "Race-Gender"
-  list_labels_groupSex_table1[["demo_group"]][["levels"]][["black-cisgender-man"]]    <- "Black Cisgender Men"
-  list_labels_groupSex_table1[["demo_group"]][["levels"]][["cisgender-woman"]]        <- "Cisgender Women"
-  list_labels_groupSex_table1[["demo_group"]][["levels"]][["latinx-cisgender-man"]]   <- "Latinx Cisgender Men"
-  list_labels_groupSex_table1[["demo_group"]][["levels"]][["non-binary"]]             <- "Non-Binary People"
-  list_labels_groupSex_table1[["demo_group"]][["levels"]][["other"]]                  <- "Another Demographic"
-  list_labels_groupSex_table1[["demo_group"]][["levels"]][["other-cisgender-man"]]    <- "Other Cisgender Men"
-  list_labels_groupSex_table1[["demo_group"]][["levels"]][["transgender-man"]]        <- "Transgender Men"
-  list_labels_groupSex_table1[["demo_group"]][["levels"]][["transgender-woman"]]      <- "Transgender Women"
-  list_labels_groupSex_table1[["demo_group"]][["levels"]][["white-cisgender-man"]]    <- "White Cisgender Men"
+  list_labels_groupSex_table1[["demo_group"]][["levels"]][["white-cisgender-man"]]  <- "White\nCisgender\nMan"
+  list_labels_groupSex_table1[["demo_group"]][["levels"]][["latinx-cisgender-man"]] <- "Latinx\nCisgender\nMan"
+  list_labels_groupSex_table1[["demo_group"]][["levels"]][["black-cisgender-man"]]  <- "Black\nCisgender\nMan"
+  list_labels_groupSex_table1[["demo_group"]][["levels"]][["other-cisgender-man"]]  <- "Other\nCisgender\nMan"
+  list_labels_groupSex_table1[["demo_group"]][["levels"]][["non-binary"]]           <- "Non-Binary\nPerson"
+  list_labels_groupSex_table1[["demo_group"]][["levels"]][["transgender-man"]]      <- "Transgender\nMan"
+  list_labels_groupSex_table1[["demo_group"]][["levels"]][["transgender-woman"]]    <- "Transgender\nWoman"
+  list_labels_groupSex_table1[["demo_group"]][["levels"]][["cisgender-woman"]]      <- "Cisgender\nWoman"
+  list_labels_groupSex_table1[["demo_group"]][["levels"]][["other"]]                <- "Another\nDemographic"
   
   list_labels_groupSex_table1[["genderId"]] <- list()
   list_labels_groupSex_table1[["genderId"]][["label"]] <- "Gender Identity"
-  list_labels_groupSex_table1[["genderId"]][["levels"]][["cisgender-man"]]    <- "Cisgender Men"
-  list_labels_groupSex_table1[["genderId"]][["levels"]][["cisgender-woman"]]        <- "Cisgender Women"
-  list_labels_groupSex_table1[["genderId"]][["levels"]][["non-binary"]]             <- "Non-Binary People"
+  list_labels_groupSex_table1[["genderId"]][["levels"]][["cisgender-man"]]          <- "Cisgender\nMan"
+  list_labels_groupSex_table1[["genderId"]][["levels"]][["non-binary"]]             <- "Non\nBinary"
+  list_labels_groupSex_table1[["genderId"]][["levels"]][["transgender-man"]]        <- "Transgender\nMan"
+  list_labels_groupSex_table1[["genderId"]][["levels"]][["transgender-woman"]]      <- "Transgender\nWoman"
+  list_labels_groupSex_table1[["genderId"]][["levels"]][["cisgender-woman"]]        <- "Cisgender\nWoman"
   list_labels_groupSex_table1[["genderId"]][["levels"]][["other"]]                  <- "Another Demographic"
-  list_labels_groupSex_table1[["genderId"]][["levels"]][["transgender-man"]]        <- "Transgender Men"
-  list_labels_groupSex_table1[["genderId"]][["levels"]][["transgender-woman"]]      <- "Transgender Women"
+
+
   
   list_labels_groupSex_table1[["hivPrep"]] <- list()
   list_labels_groupSex_table1[["hivPrep"]][["label"]] <- "HIV Status/\nPrEP Use"
@@ -87,26 +88,67 @@ load_initial_settings <- function(){
   
   list_labels_groupSex_table1[["race"]] <- list()
   list_labels_groupSex_table1[["race"]][["label"]] <- "Race"
-  list_labels_groupSex_table1[["race"]][["levels"]][["asian"]]                    <- "Asian"
-  list_labels_groupSex_table1[["race"]][["levels"]][["black"]]                    <- "Black"
-  list_labels_groupSex_table1[["race"]][["levels"]][["latinx"]]                   <- "Latinx"
-  list_labels_groupSex_table1[["race"]][["levels"]][["multiple"]]                 <- "Multiple Races"
-  list_labels_groupSex_table1[["race"]][["levels"]][["other"]]                    <- "Other"
   list_labels_groupSex_table1[["race"]][["levels"]][["white"]]                    <- "White"
+  list_labels_groupSex_table1[["race"]][["levels"]][["latinx"]]                   <- "Latinx"
+  list_labels_groupSex_table1[["race"]][["levels"]][["black"]]                    <- "Black"
+  list_labels_groupSex_table1[["race"]][["levels"]][["asian"]]                    <- "Asian"
+  list_labels_groupSex_table1[["race"]][["levels"]][["multiple"]]                 <- "Multi\nRacial"
+  list_labels_groupSex_table1[["race"]][["levels"]][["other"]]                    <- "Another\nGroup"
+  
+  
   
   list_labels_groupSex_table1[["sexOrientation"]] <- list()
   list_labels_groupSex_table1[["sexOrientation"]][["label"]] <- "Sexual Orientation"
-  list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["bisexual"]]       <- "Bisexual"
   list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["gay"]]            <- "Gay"
-  list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["queer"]]          <- "Queer"
-  list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["something-else"]] <- "Something Else"
+  list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["bisexual"]]       <- "Bisexual"
   list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["straight"]]       <- "Straight"
+  list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["queer"]]          <- "Queer"
+  list_labels_groupSex_table1[["sexOrientation"]][["levels"]][["something-else"]] <- "Another\nOrientation"
+
+  
+
+  
+  list_labels_groupSex_table1[["channel"]] <- list()
+  list_labels_groupSex_table1[["channel"]][["label"]]                             <- "Channel"
+  list_labels_groupSex_table1[["channel"]][["levels"]][["grindr"]]                <- "Grindr"
+  list_labels_groupSex_table1[["channel"]][["levels"]][["unknown"]]               <- "Unknown\nChannel"
+  list_labels_groupSex_table1[["channel"]][["levels"]][["partner_toolkit"]]       <- "Toolkit"
+  list_labels_groupSex_table1[["channel"]][["levels"]][["instagram"]]             <- "Instagram"
+  list_labels_groupSex_table1[["channel"]][["levels"]][["twitter"]]               <- "Twitter"
+  
+  
+  list_labels_groupSex_table1[["placeType"]] <- list()
+  list_labels_groupSex_table1[["placeType"]][["label"]]                              <- "Place Type"
+  list_labels_groupSex_table1[["placeType"]][["levels"]][["concert"]]                <- "Concert/Theatre/Show"
+  list_labels_groupSex_table1[["placeType"]][["levels"]][["theatre/show"]]           <- "Concert/Theatre/Show"
+  list_labels_groupSex_table1[["placeType"]][["levels"]][["darkroom"]]               <- "Dark Room/Sex Party"
+  list_labels_groupSex_table1[["placeType"]][["levels"]][["sex-party"]]              <- "Dark Room/Sex Party"
+  list_labels_groupSex_table1[["placeType"]][["levels"]][["dance-party"]]            <- "Dance Party"
+  list_labels_groupSex_table1[["placeType"]][["levels"]][["sport-game"]]             <- "Sport Game"
+  list_labels_groupSex_table1[["placeType"]][["levels"]][["private-residence-"]]     <- "Private Residence"
+  list_labels_groupSex_table1[["placeType"]][["levels"]][["something-else"]]         <- "Something Else"
+
+  list_labels_groupSex_table1[["placeSex"]] <- list()
+  list_labels_groupSex_table1[["placeSex"]][["label"]]                               <- "Place Sex"
+  list_labels_groupSex_table1[["placeSex"]][["levels"]][["no"]]                      <- "Social Contact"
+  list_labels_groupSex_table1[["placeSex"]][["levels"]][["yes"]]                     <- "Sexual Contact"
+  
+  list_labels_groupSex_table1[["distanceFromHome"]] <- list()
+  list_labels_groupSex_table1[["distanceFromHome"]][["label"]]                               <- "Distance from home"
+  list_labels_groupSex_table1[["distanceFromHome"]][["levels"]][["Same Neighborhood"]]       <- "Same neighborhood\nas home"
+  list_labels_groupSex_table1[["distanceFromHome"]][["levels"]][["Same Borough"]]            <- "Same borough\nas home"
+  list_labels_groupSex_table1[["distanceFromHome"]][["levels"]][["Different Borough"]]       <- "Different borough\nfrom home"
+  
+  list_labels_groupSex_table1[["groupSex"]] <- list()
+  list_labels_groupSex_table1[["groupSex"]][["label"]]                             <- "Group Sex or Physical Contact"
+  list_labels_groupSex_table1[["groupSex"]][["levels"]][["yes"]]                   <- "Yes"
+  list_labels_groupSex_table1[["groupSex"]][["levels"]][["no"]]                    <- "No"
   
   list_labels_groupSex_table1[["stratum"]] <- list()
-  list_labels_groupSex_table1[["stratum"]][["label"]] <- "Group Sex or Physical Contact"
-  list_labels_groupSex_table1[["stratum"]][["levels"]][["yes"]]       <- "Physical / Sexual\nContact"
-  list_labels_groupSex_table1[["stratum"]][["levels"]][["no"]]            <- "No\nContact"
-  list_labels_groupSex_table1[["stratum"]][["levels"]][["overall"]]            <- "Overall"
+  list_labels_groupSex_table1[["stratum"]][["label"]]                             <- "Group Sex or Physical Contact"
+  list_labels_groupSex_table1[["stratum"]][["levels"]][["yes"]]                   <- "Physical / Sexual\nContact"
+  list_labels_groupSex_table1[["stratum"]][["levels"]][["no"]]                    <- "No\nContact"
+  list_labels_groupSex_table1[["stratum"]][["levels"]][["overall"]]               <- "Overall"
   
   
   settings[["labels_list"]] <- list_labels_groupSex_table1

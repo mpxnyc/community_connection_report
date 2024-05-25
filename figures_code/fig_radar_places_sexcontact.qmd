@@ -8,81 +8,13 @@
 
 
 
-
-labels_place_type <- c(
-                      "concert"            = "Concert/Theatre/Show",
-                      "theatre/show"       = "Concert/Theatre/Show",
-                      "darkroom"           = "Dark Room/Sex Party",
-                      "sex-party"          = "Dark Room/Sex Party",
-                      "dance-party"        = "Dance Party",
-                      "sport-game"         = "Sport Game",
-                      "private-residence-" = "Private Residence",
-                      "something-else"     = "Something Else"
-                    )
-
-labels_place_sex <- c(
-                      "no"            = "Social Contact",
-                      "yes"           = "Sexual Contact"
-                    )
-  
-labels_distance_from_home <- c("Same Neighborhood" = "Same neighborhood\nas home", "Same Borough" = "Same borough\nas home", "Different Borough" = "Different borough\nfrom home")
+targets::tar_read(places_data) %>%
+  make_stratified_data(placeType, placeSex) %>%
+  make_one_stratum_radar_plot() %>%
+  add_caption("radar_placetype_placesex") %>%
+  apply_style_spacing_place()
 
 
-working_data <- targets::tar_read(places_data) %>%
-                           mutate(placeType = factor(placeType, names(labels_place_type), labels_place_type)) %>%
-                           mutate(placeSex  = factor(placeSex,  names(labels_place_sex),  labels_place_sex)) %>%
-  mutate(distanceFromHome = factor(distanceFromHome, names(labels_distance_from_home), labels_distance_from_home))
- 
-
-figure_n_counts <-  working_data %>%
-                                group_by(placeSex) %>%
-                                summarize(n = n() )
-
-
-
-plot <- working_data  %>%
-  arrange(placeType,  placeSex) %>%
-  group_by(placeType, placeSex) %>%
-  summarize(count = n()) %>%
-  ungroup() %>%
-  group_by(  placeSex) %>%
-  mutate(proportion = count / sum(count)) %>%
-  ungroup() %>%
-  mutate(prop_label = scales::percent(proportion, accuracy = 1)) %>%
-  ggplot() +
-    geom_bar(aes(x = placeType, y = proportion, fill = placeType), stat = "identity", width = 1) +
-    geom_text(aes(x = 0, y = -0.8, label = paste("n =", n)), data = figure_n_counts, size = 5) +
-    geom_text(aes(label = prop_label, x = placeType, y = proportion + 0.3), size = 3, face = "bold", alpha = 0.7) +
-    facet_grid( . ~ placeSex, switch = "y") +
-    coord_polar(clip = FALSE) +
-    scale_fill_manual("", values = c(
-                                      dark_blue, 
-                                      light_blue, 
-                                      dark_purple, 
-                                      light_purple, 
-                                      dark_pink, 
-                                      light_pink, 
-                                      light_green, 
-                                      dark_green
-                                      )
-                      )    +
-    theme_void() +
-    theme(
-      legend.position = "bottom",
-      strip.text    = element_text( hjust = 0.5),
-      strip.text.y  = element_text(),
-      plot.title    = element_text(hjust = 0.5),
-      plot.subtitle = element_text(hjust = 0.5, margin = margin(1, 0, 15, 0, "mm")),
-      plot.caption  = element_text( hjust = 0)
-      ) +
-    scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1)) +
-    labs(
-          title    = captions_and_titles("placessexcontact")$title,
-          subtitle = captions_and_titles("placessexcontact")$subtitle,
-          caption  = captions_and_titles("placessexcontact")$caption %>% str_wrap(130) %>% paste0("\n\n", captions_and_titles("common_caption") )
-          )
-  
-apply_style_spacing_place(plot)
 
 
 

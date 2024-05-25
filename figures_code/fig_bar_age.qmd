@@ -7,36 +7,9 @@
 
 
 
+make_descriptive_data(age) %>%
+    make_bar_plot() %>%
+    add_caption("bar_age") %>%
+    apply_style_spacing_descriptives()
 
-
-  plot <- targets::tar_read(participant_data) %>%
-    group_by(age) %>%
-    summarize(count = n()) %>%
-    ungroup() %>%
-    filter(!is.na(age)) %>%
-    mutate(level = age) %>%
-    mutate(proportion = count / sum(count)) %>%
-    ggplot2::ggplot() + 
-          ggplot2::geom_bar(aes(x = level, fill = level, y = proportion), width = 1, stat = "identity") + 
-    ggplot2::geom_text(aes(x = level, y = proportion + 0.05, label = count), alpha = 0.7) +
-          ggplot2::theme_void() + 
-          ggplot2::scale_fill_manual(values = c(
-                                                dark_blue, 
-                                                dark_pink, 
-                                                dark_purple, 
-                                                light_blue, 
-                                                light_pink, 
-                                                light_purple)
-            ) + 
-      ggplot2::scale_x_discrete(drop = FALSE) +
-      ggplot2::scale_y_continuous("Proportion of participants", labels = scales::percent) + 
-
-    labs(
-      title    = captions_and_titles("radarage")$title,
-      subtitle = captions_and_titles("radarage")$subtitle,
-      caption  = captions_and_titles("radarage")$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
-    )
-  
-
-  apply_style_spacing_descriptives(plot)
 ```
