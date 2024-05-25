@@ -32,10 +32,10 @@ captions_and_titles <- function(figure_name){
     list_captions_and_titles[["map_coverage"]][["subtitle"]]            <- "New York, United States, Aug. - Nov. 2022"
     list_captions_and_titles[["map_coverage"]][["caption"]]             <- "It may be possible to mount geographically targeted interventions that have impact across New York City. We ranked community districts in terms of the number of participants who reside or reported close, physical contact in them. The top five community districts (which comprise Group A) together account for about one third of participants. The next eight community districts (Group B) account for another third of participants."
     
-    list_captions_and_titles[["matrixneighborhood"]]                      <- list()
-    list_captions_and_titles[["matrixneighborhood"]][["title"]]           <- "Figure 6. Movement between community districts in New York City"
-    list_captions_and_titles[["matrixneighborhood"]][["subtitle"]]        <- "New York, United States, Aug. - Nov. 2022"
-    list_captions_and_titles[["matrixneighborhood"]][["caption"]]         <- "We asked participants to show the location of their home and the locations of places where they had close, physical contact in a group setting. The axis on the left shows the home community district of each participant, and the top axis shows the destination community. The size of each circle is proportional to the number of respondents with a home in the community on the left who had contact in a community showed at the top."
+    list_captions_and_titles[["matrix_places"]]                      <- list()
+    list_captions_and_titles[["matrix_places"]][["title"]]           <- "Figure 6. Movement between community districts in New York City"
+    list_captions_and_titles[["matrix_places"]][["subtitle"]]        <- "New York, United States, Aug. - Nov. 2022"
+    list_captions_and_titles[["matrix_places"]][["caption"]]         <- "We asked participants to show the location of their home and the locations of places where they had close, physical contact in a group setting. The axis on the left shows the home community district of each participant, and the top axis shows the destination community. The size of each circle is proportional to the number of respondents with a home in the community on the left who had contact in a community showed at the top."
     
     list_captions_and_titles[["networkcoverage"]]                         <- list()
     list_captions_and_titles[["networkcoverage"]][["title"]]              <- "Figure 7. Community districts densely connected"

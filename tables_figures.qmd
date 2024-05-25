@@ -452,6 +452,93 @@ add_caption <- function(plot, plot_name){
 
 
 
+make_place_network_data <- function(){
+  targets::tar_read(places_data) %>%
+      transmute(from = home_community, to = place_community) %>%
+      group_by(from, to) %>%
+      summarize(weight = n()) %>%
+      tbl_graph(edges = .) %>%
+      mutate(borough = str_sub(name, 1, 2)) %>%
+      mutate(deg = igraph::strength(.)) %>%
+      arrange(borough) %>%
+      activate(edges) %>%
+      mutate(from_borough = .N()$borough[from], to_borough = .N()$borough[to]) %>%
+      mutate(borough = ifelse(from_borough == to_borough, from_borough, "Between")) %>%
+      mutate(from_name = .N()$name[from], to_name = .N()$name[to]) %>%
+      data.frame() 
+}
+
+plot_place_network_matrix <- function(data){
+  
+   data_tiles <- mpxnyc::community_sf_obj %>%
+   transmute(to_community = community, from_community = community) %>%
+   expand(to_community, from_community) %>%
+   mutate(
+     from_borough = str_sub(from_community, 1, 2),
+     to_borough   = str_sub(to_community, 1, 2)
+     ) %>%
+   mutate(borough = ifelse(from_borough == to_borough, from_borough, "Between"))
+   
+   
+  data %>% 
+    ggplot() +
+    geom_tile(aes(y = from_community, x = to_community, fill = borough), data = data_tiles) + 
+    geom_point(aes(y =from_name, x = to_name, size = weight), color = "white", data = data, alpha = 0.7) +
+      geom_point(aes(y =from_name, x = to_name, size = weight), color = "black", data = data %>% filter(borough == "Between"), alpha = 0.5) +
+    theme_void() +
+  scale_color_manual(values = c(
+                                              "BK" = mpxnyc_colors$dark_blue, 
+                                              "BX" = mpxnyc_colors$dark_pink, 
+                                              "MN" = mpxnyc_colors$dark_purple, 
+                                              "QN" = mpxnyc_colors$light_orange, 
+                                              "SI" = mpxnyc_colors$dark_green, 
+                                              "Between" = "white"
+                                              )) +
+  
+  scale_fill_manual(values = c(
+                                              "BK" = mpxnyc_colors$dark_blue, 
+                                              "BX" = mpxnyc_colors$dark_pink, 
+                                              "MN" = mpxnyc_colors$dark_purple, 
+                                              "QN" = mpxnyc_colors$light_orange, 
+                                              "SI" = mpxnyc_colors$dark_green, 
+                                              "Between" = "white"
+                                              )) +
+  scale_edge_color_manual(values = c(
+    mpxnyc_colors$dark_blue, 
+                                              "BK" = mpxnyc_colors$dark_blue, 
+                                              "BX" = mpxnyc_colors$dark_pink, 
+                                              "MN" = mpxnyc_colors$dark_purple, 
+                                              "QN" = mpxnyc_colors$light_orange, 
+                                              "SI" = mpxnyc_colors$dark_green, 
+                                              "Between" = "white"
+    )
+  ) +
+  theme(
+    axis.text = element_text(size = 7, color = "black"),
+    axis.text.x = element_text(angle = 90),
+    axis.title = element_text(),
+    axis.title.y = element_text(angle = 90),
+    legend.position = "none"
+  ) +
+  scale_x_discrete("Destination community district", position = "top") +
+  scale_y_discrete("Home community district",  limits=rev) 
+}
+
+plot_place_network_viz <- function(data){
+   
+  data %>% 
+    transmute(from = from_name, to = to_name, weight = weight) %>%
+    tidygraph::tbl_graph(edges = .) %>%
+    ggraph() +
+ geom_edge_link( aes(filter = weight > 10), alpha = 0.5, linewidth = 4) +
+      geom_edge_link( aes(linewidth = weight, filter = weight <= 10 & weight > 5), alpha = 0.5, , linewidth = 1) +
+      geom_edge_link( aes(linewidth = weight, filter = weight <= 5 ), alpha = 0.5, , linewidth = 0.1) +
+      geom_node_label(aes(label = name , color = group, size = prop)) +
+      theme_void() +
+      scale_color_manual(values = c("Group A" = dark_pink, "Group B" = dark_blue, "Group C" = "grey"))
+  
+}
+
 ```
 
 # 
