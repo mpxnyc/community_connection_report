@@ -110,7 +110,23 @@ apply_style_spacing_remainder <- function(plot, caption_hjust = 0){
         plot.caption  = element_text( hjust = caption_hjust),
         panel.margin  = margin(1,1,1,1, "cm"),
         plot.margin   = margin(1,1,1,1, "cm")
-    )
+    ) +
+            scale_fill_manual("", values = c(
+                                      dark_blue,
+                                      dark_pink,
+                                      dark_purple,
+                                      light_blue,
+                                      light_pink,
+                                      light_purple,
+                                      light_orange,
+                                      dark_green,
+                                      light_green,
+                                      mid_blue,
+                                      mid_purple,
+                                      dark_brown,
+                                      mid_brown,
+                                      light_brown
+                                    )) 
 }
 
 apply_style_spacing_place <- function(plot, caption_hjust = 0){
@@ -137,6 +153,34 @@ apply_style_spacing_place <- function(plot, caption_hjust = 0){
          plot.subtitle = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),
          plot.caption  = element_text( hjust = caption_hjust, margin = margin(1, 1, 1, 1, "cm")),
          plot.margin   = margin(1,1,1,1, "cm")
+     )
+}
+
+apply_style_spacing_grouped_radar <- function(plot, caption_hjust = 0){
+    
+  plot +
+        scale_fill_manual("", values = c(
+                                      dark_blue,
+                                      dark_pink,
+                                      dark_purple,
+                                      light_blue,
+                                      light_pink,
+                                      light_purple,
+                                      light_orange,
+                                      dark_green,
+                                      light_green,
+                                      mid_blue,
+                                      mid_purple,
+                                      dark_brown,
+                                      mid_brown,
+                                      light_brown
+                                    )) +
+     theme(
+         plot.title    = element_text(hjust = 0.5, margin = margin(0, 0, 1, 0, "mm")),
+         plot.subtitle = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),
+         plot.caption  = element_text( hjust = caption_hjust, margin = margin(1, 1, 1, 1, "cm")),
+         plot.margin   = margin(1,1,1,1, "cm"),
+         legend.position = "bottom"
      )
 }
 
@@ -279,7 +323,7 @@ make_3_way_table <- function(variable = overall,stratum_variable_a = overall,str
         strata_a = stratum_variable_a_name,
         strata_b = stratum_variable_b_name) %>%
       ungroup() %>%
-      select(variable, strata_a, strata_b, names(.))
+      select(variable, strata_a, strata_b, names(.)) 
   
 }
 
@@ -290,11 +334,32 @@ make_2_way_table <- function(variable = overall, stratum_variable = overall, per
     rename(stratum = stratum_a, strata = strata_a)
 }
 
-make_1_way_table <- function(variable = overall,person_analysis = TRUE){
+make_1_way_table <- function(variable = overall, person_analysis = TRUE){
   
   make_2_way_table({{variable}}, person_analysis = person_analysis) %>%
     select(-stratum, -strata)
 }
+
+
+
+make_coverage_table <- function(){
+  targets::tar_read(bipartite_graph_coverage) %>%
+                    filter(type) %>%
+                    data.frame() %>%
+                    group_by(intervention_contact_place) %>%
+                    summarize(count = n()) %>%
+                    arrange(-count) %>%
+                    mutate(proportion = count / sum(count)) %>%
+                    rename(name = intervention_contact_place) %>%
+                    mutate(cum_prop = cumsum(proportion)) %>%
+                    mutate(group = "Group A") %>%
+                    mutate(group = ifelse(cum_prop >= 0.33, "Group B", group)) %>%
+                    mutate(group = ifelse(cum_prop >= 0.66, "Group C", group)) %>%
+                    mutate(group = lag(group)) %>%
+                    mutate(group = ifelse(is.na(group), "Group A", group))
+}
+
+
 
 
 ```
@@ -362,36 +427,33 @@ make_two_stratum_radar_plot <- function(data){
     scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1))
 }
 
-make_map_coverage_plot <- function(){
-      graph_data <- targets::tar_read(data_vaccination_coverage_raw) %>%
-                      filter(intervention_priority == "contact", intervention_setting == "home.social.sexual") %>%
-                      group_by(vax_place) %>%
-                      summarize(count = n(), group = first(group)) %>%
-        rename(name = vax_place)
-      
-      mpxnyc::community_sf_obj %>%
-        rename(name = 1) %>%
-                   left_join(graph_data) %>%
-                   ggplot() +
-                          geom_sf(fill = "grey") +
-                         geom_sf(aes(fill = group, alpha = group), color = "white") +
-                         theme_void() +
-                         theme(
-                           axis.text = element_blank(),
-                           legend.position = "bottom"
-                         ) +
-                         scale_fill_manual(
-                           "Intervention Group", 
-                                          values = c(
-                                                        "Group A" = dark_pink, 
-                                                        "Group B" = dark_blue, 
-                                                        "Group C" = light_purple
-                                                        ), 
-                                           na.value = "grey",
-                           na.translate = FALSE
-                                           ) + 
-                         scale_alpha_manual(values = c("Group A" = 1, "Group B" = 1, "Group C" = 0.5)) +
-   guides(alpha = "none")
+make_grouped_radar_plot <- function(data){
+  data %>%
+      filter(!is.na(stratum)) %>%
+      ggplot() +
+      geom_bar(aes(x = level, y = proportion, fill = level), stat = "identity", width = 1) +
+      facet_wrap(. ~ stratum) +
+      coord_polar() +
+      theme_void()  +
+      scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1))
+}
+
+make_map_coverage_plot <- function(data){
+  
+  
+  map_object <- mpxnyc::community_sf_obj %>%
+                    rename(name = 1) %>%
+                    left_join(data) 
+                  
+  
+  ggplot(map_object) +
+    geom_sf(fill = "grey") +
+    geom_sf(aes(fill = group), color = "white") +
+    theme_void() +
+    theme(
+      axis.text = element_blank(),
+      legend.position = "bottom"
+      ) 
   }
 
 
@@ -524,7 +586,13 @@ It is possible to strategically intervene by understanding how different parts o
 In order to successfully intervene we need to understand how easily we can reach people with interventions like vaccine. 
 
 ##
-{{< include figures_code/fig_radar_demogroup.qmd >}}
+{{< include figures_code/fig_radar_sexOrientation_demo_group.qmd >}}
+
+##
+{{< include figures_code/fig_radar_monkeypoxVaccine_demo_group.qmd >}}
+
+##
+{{< include figures_code/fig_radar_hivPrep_demo_group.qmd >}}
 
 
 # About MPX NYC

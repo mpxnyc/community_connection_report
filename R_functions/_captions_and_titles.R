@@ -82,6 +82,22 @@ captions_and_titles <- function(figure_name){
     list_captions_and_titles[["demogroupb"]][["subtitle"]]   <- "New York, United States, Aug. - Nov. 2022"
     list_captions_and_titles[["demogroupb"]][["caption"]]    <- ""
     
+    list_captions_and_titles[["radar_sexOrientation_demo_group"]]                         <- list()
+    list_captions_and_titles[["radar_sexOrientation_demo_group"]][["title"]]              <- "Sexual Orientation by Race-Gender"
+    list_captions_and_titles[["radar_sexOrientation_demo_group"]][["subtitle"]]           <- "New York, United States, Aug. - Nov 2022"
+    list_captions_and_titles[["radar_sexOrientation_demo_group"]][["caption"]]            <- ""
+    
+    list_captions_and_titles[["radar_hivPrep_demo_group"]]                         <- list()
+    list_captions_and_titles[["radar_hivPrep_demo_group"]][["title"]]              <- "HIV/PreP Status by Race-Gender"
+    list_captions_and_titles[["radar_hivPrep_demo_group"]][["subtitle"]]           <- "New York, United States, Aug. - Nov 2022"
+    list_captions_and_titles[["radar_hivPrep_demo_group"]][["caption"]]            <- ""
+    
+    list_captions_and_titles[["radar_monkeypoxVaccine_demo_group"]]                         <- list()
+    list_captions_and_titles[["radar_monkeypoxVaccine_demo_group"]][["title"]]              <- "MPOX Vaccination Status by Race-Gender"
+    list_captions_and_titles[["radar_monkeypoxVaccine_demo_group"]][["subtitle"]]           <- "New York, United States, Aug. - Nov 2022"
+    list_captions_and_titles[["radar_monkeypoxVaccine_demo_group"]][["caption"]]            <- ""
+    
+    
     
     list_captions_and_titles[[figure_name]]
 }

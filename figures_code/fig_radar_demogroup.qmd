@@ -11,6 +11,8 @@ plot_radar_graphic_single <- function(data, variable_name = "age", stratum_input
     variable_labels <- list_labels[[variable_name]][["levels"]]
     stratum_levels <- names(list_labels[["stratum"]][["levels"]])
     stratum_labels <- list_labels[["stratum"]][["levels"]]
+    
+    
     data %>% dplyr::filter(variable == variable_name, stratum == 
         stratum_input) %>% dplyr::mutate(variable = as.character(variable), 
         stratum = as.character(stratum), level = as.character(level)) %>% 

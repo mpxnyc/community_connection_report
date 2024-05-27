@@ -77,25 +77,14 @@ list(
     command = make_bipartite_graph(places_data, participant_data, analytic_scale = initial_settings[["analytic_scale"]])
   ),  
   tar_target(
-    name = bipartite_graph_raw,
-    command = make_simulated_bipartite_graph(bipartite_graph, n_reps = 1)
-  ),
-tar_target(
-  name = data_vaccination_campaign_raw,
-  command = make_vaccination_campaign_data(bipartite_graph_raw, list_intervention_priority = initial_settings[["list_intervention_priority"]], list_intervention_settings = initial_settings[["list_intervention_settings"]], n_neighborhoods_input = initial_settings[["n_neighborhoods"]])
-),
-tar_target(
-  name = data_vaccination_coverage_raw,
-  command = make_vaccination_coverage_data(data_vaccination_campaign_raw)
-),
-  tar_target(
     name = bipartite_graph_sim,
     command = make_simulated_bipartite_graph(bipartite_graph, n_reps = initial_settings[["n_reps_graph"]])
-  ),  tar_target(
-    name = data_vaccination_campaign_sim,
-    command = make_vaccination_campaign_data(bipartite_graph_sim, list_intervention_priority = initial_settings[["list_intervention_priority"]], list_intervention_settings = initial_settings[["list_intervention_settings"]], n_neighborhoods_input = initial_settings[["n_neighborhoods"]])
   ),
-tar_target(
-  name = data_vaccination_coverage_sim,
-  command = make_vaccination_coverage_data(data_vaccination_campaign_sim)
-))
+  tar_target(
+    name = bipartite_graph_coverage,
+    command = add_coverage_data_to_bipartite(bipartite_graph)
+  ),
+  tar_target(
+    name = bipartite_graph_coverage_sim,
+    command = add_coverage_data_to_bipartite(bipartite_graph_sim)
+  ))
