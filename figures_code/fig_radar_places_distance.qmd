@@ -9,8 +9,8 @@
 
 
 
-targets::tar_read(places_data) %>%
-  make_stratified_data(placeType, distanceFromHome) %>%
+make_2_way_table(placeType, distanceFromHome, person_analysis = FALSE) %>%
+          filter(!is.na(level)) %>%
   make_one_stratum_radar_plot() %>%
   add_caption("radar_placetype_distance") %>%
   apply_style_spacing_place()

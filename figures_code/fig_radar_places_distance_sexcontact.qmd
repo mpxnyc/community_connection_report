@@ -5,8 +5,8 @@
 #| 
 
 
-targets::tar_read(places_data) %>%
-  make_crosstable_data(placeType, placeSex, distanceFromHome) %>%
+  make_3_way_table(placeType, placeSex, distanceFromHome, person_analysis = FALSE) %>%
+    filter(!is.na(level)) %>%
   make_two_stratum_radar_plot() %>%
   add_caption("radar_placetype_sex_distance") %>%
   apply_style_spacing_place()

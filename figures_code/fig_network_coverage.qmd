@@ -7,81 +7,8 @@
 
 
 
-  graph <- targets::tar_read(data_vaccination_campaign_raw) %>%
-                  purrr::keep(
-                    function(graph){
-                      intervention_priority <- graph %>% 
-                                                    activate(nodes) %>%
-                                                    pull(intervention_priority) %>%
-                                                    {.[1]}
-                      
-                              intervention_setting <- graph %>% 
-                                                    activate(nodes) %>%
-                                                    pull(intervention_setting) %>%
-                                {.[1]}
-                              
-                                strata <- graph %>% 
-                                                    activate(nodes) %>%
-                                                    pull(strata) %>%
-                                                    {.[1]}
-                              
-                 intervention_priority == "contact" & intervention_setting == "home.social.sexual" & strata == "overall"
-                              
-                    }
-                  )
-  
-  
-    graph_data <- targets::tar_read(data_vaccination_coverage_raw) %>%
-                      filter(intervention_priority == "contact", intervention_setting == "home.social.sexual") %>%
-                      group_by(vax_place) %>%
-                      summarize(count = n()) %>%
-                      ungroup() %>%
-                      arrange(-count) %>%
-                      mutate(community = factor(vax_place, unique(vax_place))) %>%
-                      mutate(prop = count / sum(count)) %>%
-                      mutate(cumprop = cumsum(prop)) %>%
-                      mutate(group = "Group A") %>%
-                      mutate(group = ifelse(cumprop > 0.33, "Group B", group)) %>%
-                      mutate(group = ifelse(cumprop > 0.66, "Group C", group)) %>%
-                      mutate(group = lead(group)) %>%
-                      mutate(group = ifelse(is.na(group), "Group C", group)) %>%
-                      mutate(name = community)
-    
-    
-    
-    
-  place_graph <- graph[[1]] %>%
-                      igraph::bipartite_projection(which = "false") %>%
-                      as_tbl_graph() %>%
-                      select(name) %>%
-                      left_join(graph_data)
-  
- plot <- place_graph %>%
-    activate(nodes) %>%
-    mutate(deg = igraph::degree(.)) %>%
-    filter(deg > 0) %>%
-    filter(!is.na(group)) %>%
-    ggraph() +
-      geom_edge_link( aes(filter = weight > 10), alpha = 0.5, linewidth = 4) +
-      geom_edge_link( aes(linewidth = weight, filter = weight <= 10 & weight > 5), alpha = 0.5, , linewidth = 1) +
-      geom_edge_link( aes(linewidth = weight, filter = weight <= 5 ), alpha = 0.5, , linewidth = 0.1) +
-      geom_node_label(aes(label = name , color = group, size = prop)) +
-      theme_void() +
-      scale_color_manual(values = c("Group A" = dark_pink, "Group B" = dark_blue, "Group C" = "grey")) +
-      scale_linewidth_continuous() +
-      theme(
-        legend.position = "none",
-        plot.margin = margin(0,0,0,0, "cm"),
-        plot.title = element_text(hjust = 0.5),
-        plot.subtitle = element_text(hjust = 0.5),
-        plot.caption = element_text(hjust = 0)
-      ) + 
-      labs(
-            title     = captions_and_titles("networkcoverage")$title,
-            subtitle  = captions_and_titles("networkcoverage")$subtitle,
-            caption   = captions_and_titles("networkcoverage")$caption %>% str_wrap(140) %>% paste0("\n\n", captions_and_titles("common_caption") )
-            )
- 
- apply_style_spacing_remainder(plot)
+plot_place_network_viz() %>%
+   add_caption("networkcoverage") %>%
+   apply_style_spacing_remainder()
   
 ```
