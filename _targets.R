@@ -81,22 +81,6 @@ list(
     command = make_simulated_bipartite_graph(bipartite_graph, n_reps = 1)
   ),
 tar_target(
-  name = data_table_1_people_by_groupSex_raw,
-  command = make_person_data_by_groupSex(bipartite_graph_raw)
-),
-tar_target(
-  name = data_radar_graphic_demo_group_raw,
-  command = make_person_data_by_demo_group(bipartite_graph_raw)
-),
-tar_target(
-  name = data_radar_places_by_distanceFromHome_raw,
-  command = make_place_data_by_distanceFromHome(bipartite_graph_raw)
-),
-tar_target(
-  name = data_contact_matrices_raw,
-  command = make_social_contact_matrix_data(bipartite_graph_raw, age, demo_group, sexOrientation)
-),
-tar_target(
   name = data_vaccination_campaign_raw,
   command = make_vaccination_campaign_data(bipartite_graph_raw, list_intervention_priority = initial_settings[["list_intervention_priority"]], list_intervention_settings = initial_settings[["list_intervention_settings"]], n_neighborhoods_input = initial_settings[["n_neighborhoods"]])
 ),
@@ -107,24 +91,7 @@ tar_target(
   tar_target(
     name = bipartite_graph_sim,
     command = make_simulated_bipartite_graph(bipartite_graph, n_reps = initial_settings[["n_reps_graph"]])
-  ),
-  tar_target(
-    name = data_table_1_people_by_groupSex_sim,
-    command = make_person_data_by_groupSex(bipartite_graph_sim)
-  ),
-  tar_target(
-    name = data_radar_graphic_demo_group_sim,
-    command = make_person_data_by_demo_group(bipartite_graph_sim)
-  ),
-  tar_target(
-    name = data_radar_places_by_distanceFromHome_sim,
-    command = make_place_data_by_distanceFromHome(bipartite_graph_sim)
-  ),
-  tar_target(
-    name = data_contact_matrices_sim,
-    command = make_social_contact_matrix_data(bipartite_graph_sim, age, demo_group, sexOrientation)
-  ),
-  tar_target(
+  ),  tar_target(
     name = data_vaccination_campaign_sim,
     command = make_vaccination_campaign_data(bipartite_graph_sim, list_intervention_priority = initial_settings[["list_intervention_priority"]], list_intervention_settings = initial_settings[["list_intervention_settings"]], n_neighborhoods_input = initial_settings[["n_neighborhoods"]])
   ),
