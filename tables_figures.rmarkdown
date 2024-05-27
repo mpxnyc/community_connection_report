@@ -55,15 +55,12 @@ targets::tar_make() # Runs the data pipeline shown in _targets.R
 
 ```
 
-
-
 ```{r}
 
 
 targets::tar_source(files = "R_functions")
 
 ```
-
 
 ```{r}
 apply_style_spacing_descriptives <- function(plot, caption_hjust = 1){
@@ -209,8 +206,6 @@ add_caption <- function(plot, plot_name){
 }
 
 ```
-
-
 
 ```{r}
 
@@ -422,7 +417,6 @@ plot_heatmap_contact <- function(data){
 
 ```
 
-
 ```{r}
 
 make_bar_plot <- function(data){
@@ -612,82 +606,388 @@ plot_place_network_viz <- function(){
 
 ```
 
+
 # 
 Interventions that focus on public venues where queer and trans people have sex are not sufficient to stop an outbreak.
 
 ## 
-{{< include figures_code/fig_radar_groupsex.qmd >}}
+
+
+```{r}
+#| fig-width: 7
+#| fig-height: 7
+#| 
+
+make_1_way_table(groupSex) %>%  
+  make_bar_plot() %>%
+  add_caption("bar_group_sex") %>%
+  apply_style_spacing_descriptives()
+
+```
+
+
 
 ##
-{{< include figures_code/fig_radar_places_sexcontact.qmd >}}
+
+
+```{r}
+#| fig-width: 9
+#| fig-height: 8
+#| 
+
+
+
+
+
+  make_2_way_table(placeType, placeSex, person_analysis = FALSE) %>%
+        filter(!is.na(level)) %>%
+        make_one_stratum_radar_plot() %>%
+        add_caption("radar_placetype_placesex") %>%
+        apply_style_spacing_place()
+
+
+
+
+
+```
+
+
 
 ## 
-{{< include figures_code/fig_radar_places_distance.qmd >}}
+
+
+```{r}
+#| fig-width: 10
+#| fig-height: 8
+#| 
+
+
+
+
+
+make_2_way_table(placeType, distanceFromHome, person_analysis = FALSE) %>%
+          filter(!is.na(level)) %>%
+  make_one_stratum_radar_plot() %>%
+  add_caption("radar_placetype_distance") %>%
+  apply_style_spacing_place()
+
+
+
+```
+
+
 
 ##
-{{< include figures_code/fig_radar_places_distance_sexcontact.qmd >}}
+
+```{r}
+#| fig-width: 11
+#| fig-height: 10
+#| 
+
+
+  make_3_way_table(placeType, placeSex, distanceFromHome, person_analysis = FALSE) %>%
+    filter(!is.na(level)) %>%
+  make_two_stratum_radar_plot() %>%
+  add_caption("radar_placetype_sex_distance") %>%
+  apply_style_spacing_place()
+
+```
+
+
 
 #
 It is possible to strategically intervene by understanding how different parts of the city are connected through queer and trans connection. 
 
 ##
-{{< include figures_code/fig_barmap_coverage.qmd >}}
+
+
+
+```{r}
+#| fig-width: 7
+#| fig-height: 10
+
+make_coverage_table() %>%
+  make_map_coverage_plot() %>%
+  add_caption("map_coverage") %>%
+  apply_style_spacing_remainder(caption_hjust = 0)
+
+
+```
+
+
 
 ##
-{{< include figures_code/fig_matrix_neighborhoods.qmd >}}
+
+
+```{r}
+#| fig-width: 9
+#| fig-height: 11
+
+
+  make_place_network_data() %>%
+    plot_place_network_matrix() %>%
+    add_caption("matrix_places") %>%
+    apply_style_spacing_remainder()
+
+```
+
+
 
 ##
-{{< include figures_code/fig_network_coverage.qmd >}}
+
+
+
+```{r}
+#| fig-width: 9
+#| fig-height: 9
+
+
+
+plot_place_network_viz() %>%
+   add_caption("networkcoverage") %>%
+   apply_style_spacing_remainder()
+  
+```
+
+
 
 
 # And how subgroup of people are connected as a result
 
 ## 
-{{< include figures_code/fig_heatmap_age.qmd >}}
+
+
+```{r}
+#| fig-width: 7
+#| fig-height: 10
+
+
+make_contact_matrix_table(age) %>%
+  plot_heatmap_contact() %>%
+  add_caption("radar_hivPrep_demo_group") %>%
+  apply_style_spacing_heatmap()
+
+
+
+```
+
+
 
 ## 
-{{< include figures_code/fig_heatmap_demo_group.qmd >}}
+
+
+```{r}
+#| fig-width: 7
+#| fig-height: 10
+
+
+make_contact_matrix_table(demo_group) %>%
+  plot_heatmap_contact() %>%
+  add_caption("radar_hivPrep_demo_group") %>%
+  apply_style_spacing_heatmap()
+
+
+
+```
+
+
 
 
 ## 
-{{< include figures_code/fig_heatmap_sexOrientation.qmd >}}
+
+
+```{r}
+#| fig-width: 7
+#| fig-height: 10
+
+
+make_contact_matrix_table(sexOrientation) %>%
+  plot_heatmap_contact() %>%
+  add_caption("radar_hivPrep_demo_group") %>%
+  apply_style_spacing_heatmap()
+
+
+
+```
+
+
 
 # 
 In order to successfully intervene we need to understand how easily we can reach people with interventions like vaccine. 
 
 ##
-{{< include figures_code/fig_radar_sexOrientation_demo_group.qmd >}}
+
+
+```{r}
+#| fig-width: 7
+#| fig-height: 10
+
+make_2_way_table(sexOrientation, demo_group) %>%
+  make_grouped_radar_plot() %>%
+  add_caption("radar_sexOrientation_demo_group") %>%
+  apply_style_spacing_grouped_radar()
+
+```
+
+
 
 ##
-{{< include figures_code/fig_radar_monkeypoxVaccine_demo_group.qmd >}}
+
+
+```{r}
+#| fig-width: 7
+#| fig-height: 10
+
+make_2_way_table(monkeypoxVaccine, demo_group) %>%
+  make_grouped_radar_plot() %>%
+  add_caption("radar_monkeypoxVaccine_demo_group") %>%
+  apply_style_spacing_grouped_radar()
+
+```
+
+
 
 ##
-{{< include figures_code/fig_radar_hivPrep_demo_group.qmd >}}
+
+
+```{r}
+#| fig-width: 10
+#| fig-height: 10
+
+make_2_way_table(hivPrep, demo_group) %>%
+  make_grouped_radar_plot() %>%
+  add_caption("radar_hivPrep_demo_group") %>%
+  apply_style_spacing_grouped_radar()
+
+```
+
+
 
 
 # About MPX NYC
 ## Descriptive Statistics
 
 ###
-{{< include figures_code/fig_bar_racegender.qmd >}}
+
+
+
+```{r}
+#| fig-width: 11
+#| fig-height: 7
+
+
+
+
+make_1_way_table(demo_group) %>%    
+  make_bar_plot() %>%
+  add_caption("bar_demo_group") %>%
+  apply_style_spacing_descriptives()
+
+
+```
+
+
 
 ###
-{{< include figures_code/fig_bar_age.qmd >}}
+
+
+```{r}
+#| fig-width: 7
+#| fig-height: 7
+
+
+make_1_way_table(age) %>%
+    make_bar_plot() %>%
+    add_caption("bar_age") %>%
+    apply_style_spacing_descriptives()
+
+```
+
+
 
 ###
-{{< include figures_code/fig_bar_channel.qmd >}}
+
+
+```{r}
+#| fig-width: 7
+#| fig-height: 7
+
+#| 
+
+
+make_1_way_table(channel) %>%
+  make_bar_plot() %>%
+  add_caption("bar_channel") %>%
+  apply_style_spacing_descriptives()
+
+
+```
+
+
 
 ###
-{{< include figures_code/fig_bar_gender.qmd >}}
+
+
+
+```{r}
+#| fig-width: 9
+#| fig-height: 7
+
+#| 
+
+
+
+
+make_1_way_table(genderId) %>%  
+  make_bar_plot() %>%
+  add_caption("bar_gender") %>%
+  apply_style_spacing_descriptives()
+ 
+```
+
+
 
 ###
-{{< include figures_code/fig_bar_race.qmd >}}
+
+
+
+```{r}
+#| fig-width: 7
+#| fig-height: 7
+
+#| 
+
+
+
+
+
+  make_1_way_table(race) %>%
+      make_bar_plot() %>%
+      add_caption("bar_race") %>%
+      apply_style_spacing_descriptives()
+  
+```
+
+
 
 ###
-{{< include figures_code/fig_bar_sexorientation.qmd >}}
 
 
 
+```{r}
+#| fig-width: 7
+#| fig-height: 7
 
+#| 
+
+
+
+make_1_way_table(sexOrientation) %>%    
+  make_bar_plot() %>%
+  add_caption("bar_sex_orientation") %>%
+  apply_style_spacing_descriptives()
+
+
+```
 
 
