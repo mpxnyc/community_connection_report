@@ -87,5 +87,17 @@ list(
 tar_target(
   name = intervention_coverage_data_sim,
   command = conduct_all_campaigns(bipartite_graph_sim, bipartite_graph)
+),
+tar_target(
+  name = graph_evolution_data,
+  command = get_graph_evolution(bipartite_graph, intervention_coverage_data)
+),
+tar_target(
+  name = graph_evolution_data_sim,
+  command = get_graph_evolution(bipartite_graph_sim, intervention_coverage_data_sim)
 )
 )
+
+
+get_graph_evolution(targets::tar_read(bipartite_graph_sim), targets::tar_read(intervention_coverage_data_sim))
+get_graph_evolution(targets::tar_read(bipartite_graph), targets::tar_read(intervention_coverage_data))
