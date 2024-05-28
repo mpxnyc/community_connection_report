@@ -99,5 +99,4 @@ tar_target(
 )
 
 
-get_graph_evolution(targets::tar_read(bipartite_graph_sim), targets::tar_read(intervention_coverage_data_sim))
-get_graph_evolution(targets::tar_read(bipartite_graph), targets::tar_read(intervention_coverage_data))
+
