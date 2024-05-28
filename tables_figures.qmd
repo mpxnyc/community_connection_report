@@ -65,7 +65,7 @@ targets::tar_source(files = "R_functions")
 ```
 
 
-```{r}
+```{r plot_styling}
 apply_style_spacing_descriptives <- function(plot, caption_hjust = 1){
   
   plot +
@@ -190,12 +190,32 @@ apply_style_spacing_heatmap <- function(plot, caption_hjust = 0){
     theme(
         plot.title    = element_text(hjust = 0.5, margin = margin(0, 0, 1, 0, "mm")),
         plot.subtitle = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),
+        plot.caption  = element_text( hjust = caption_hjust),
+        panel.margin  = margin(1,1,1,1, "cm"),
+        plot.margin   = margin(1,1,1,1, "cm"),
+        legend.position = "bottom"
+    ) +
+      scale_fill_gradient2("", trans = "log", low = dark_blue, mid = "white", high = dark_pink)  
+}
+
+apply_style_spacing_coverage <- function(plot, caption_hjust = 0){
+  
+  plot +
+        scale_fill_manual("", values = c(
+                                      dark_blue,
+                                      dark_pink,
+                                      light_blue
+                                    )) +
+    theme(
+        plot.title    = element_text(hjust = 0.5, margin = margin(0, 0, 1, 0, "mm")),
+        plot.subtitle = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),
         axis.title.y  = element_text(angle = 90, margin = margin(0, 10, 0, 0, "mm")),
         plot.caption  = element_text( hjust = caption_hjust),
         panel.margin  = margin(1,1,1,1, "cm"),
-        plot.margin   = margin(1,1,1,1, "cm")
-    ) +
-      scale_fill_gradient2("", trans = "log", low = dark_blue, mid = "white", high = dark_pink)  
+        plot.margin   = margin(1,1,1,1, "cm"),
+        legend.position = "none"
+      
+    )  
 }
 
 add_caption <- function(plot, plot_name){
@@ -212,10 +232,41 @@ add_caption <- function(plot, plot_name){
 
 
 
-```{r}
+```{r plot_data}
 
 
-make_place_network_data <- function(){
+get_variable_labels <- function(variable_name, person_analysis = TRUE){
+    
+  variable_labels           <- targets::tar_read(initial_settings)[["labels_list"]][[variable_name]][["levels"]] %>% unlist()
+  variable_levels           <- names(variable_labels)
+  
+  if (is.null(variable_labels)){
+    if (person_analysis){
+          variable_labels <- targets::tar_read(bipartite_graph_coverage) %>%
+                          tidygraph::activate(nodes) %>%
+                          tidygraph::filter(type) %>%
+                          data.frame() %>%
+                          {.[,variable_name]} %>%
+                          unique()
+    
+    variable_levels <- variable_labels
+    } else {
+              
+    variable_labels <- targets::tar_read(bipartite_graph_coverage) %>%
+                          tidygraph::activate(edges) %>%
+                          tidygraph::filter(type) %>%
+                          data.frame() %>%
+                          {.[,variable_name]} %>%
+                          unique()
+    
+    variable_levels <- variable_labels
+    }} 
+  
+  return(list(variable_levels = variable_levels, variable_labels = variable_labels))
+
+}
+
+make_commuting_network_data <- function(){
   
 home_data <-  targets::tar_read(bipartite_graph) %>%
                 activate(edges) %>%
@@ -241,7 +292,27 @@ place_data <-  targets::tar_read(bipartite_graph) %>%
   
 }
 
-make_3_way_table <- function(variable = overall,stratum_variable_a = overall,stratum_variable_b = overall, person_analysis = TRUE){
+make_coattendance_network_data <- function(){
+  
+  targets::tar_read(bipartite_graph) %>%
+    igraph::bipartite_projection(which = "false") %>%
+    tidygraph::as_tbl_graph() %>%
+    activate(edges) %>%
+    mutate(from_name = .N()$name[from], to_name = .N()$name[to]) %>%
+    data.frame() %>%
+    transmute(from = from_name, to = to_name, weight = weight) %>%
+    mutate(
+      new_from =  ifelse(from > to, from, to), 
+      new_to = ifelse(from > to, to, from)
+      ) %>%
+    transmute(from = new_from, to = new_to, weight = weight) %>%
+    group_by(from, to) %>%
+    summarize(weight = sum(weight))
+  
+  
+}
+
+make_3_way_table <- function(variable = overall,stratum_variable_a = overall, stratum_variable_b = overall, person_analysis = TRUE){
   variable           <- enquo(variable)
   stratum_variable_a <- enquo(stratum_variable_a)
   stratum_variable_b <- enquo(stratum_variable_b)
@@ -250,28 +321,31 @@ make_3_way_table <- function(variable = overall,stratum_variable_a = overall,str
   stratum_variable_a_name <- quo_name(stratum_variable_a)
   stratum_variable_b_name <- quo_name(stratum_variable_b)
   
+  get_variable_labels(variable_name)
   
-  variable_labels           <- targets::tar_read(initial_settings)[["labels_list"]][[variable_name]][["levels"]] %>% unlist()
-  stratum_variable_a_labels <- targets::tar_read(initial_settings)[["labels_list"]][[stratum_variable_a_name]][["levels"]] %>% unlist()
-  stratum_variable_b_labels <- targets::tar_read(initial_settings)[["labels_list"]][[stratum_variable_b_name]][["levels"]] %>% unlist()
+  variable_levels <- get_variable_labels(variable_name)[["variable_levels"]]
+  variable_labels <- get_variable_labels(variable_name)[["variable_labels"]]
   
-  variable_levels           <- names(variable_labels)
-  stratum_variable_a_levels <- names(stratum_variable_a_labels)
-  stratum_variable_b_levels <- names(stratum_variable_b_labels)
+    stratum_variable_a_levels <- get_variable_labels(stratum_variable_a_name)[["variable_levels"]]
+  stratum_variable_a_labels <- get_variable_labels(stratum_variable_a_name)[["variable_labels"]]
+  
+  
+    stratum_variable_b_levels <- get_variable_labels(stratum_variable_b_name)[["variable_levels"]]
+  stratum_variable_b_labels <- get_variable_labels(stratum_variable_b_name)[["variable_labels"]]
   
   if (person_analysis){
-      original_data_raw  <- targets::tar_read(bipartite_graph) %>%
+      original_data_raw  <- targets::tar_read(bipartite_graph_coverage) %>%
                                 activate(nodes) %>%
                                 filter(type == TRUE) 
       
-      simulated_data_raw <- targets::tar_read(bipartite_graph_sim) %>%
+      simulated_data_raw <- targets::tar_read(bipartite_graph_coverage_sim) %>%
                                 activate(nodes) %>%
                                 filter(type == TRUE) 
   } else {
-      original_data_raw  <- targets::tar_read(bipartite_graph) %>%
+      original_data_raw  <- targets::tar_read(bipartite_graph_coverage) %>%
                                 activate(edges) 
       
-      simulated_data_raw <- targets::tar_read(bipartite_graph_sim) %>%
+      simulated_data_raw <- targets::tar_read(bipartite_graph_coverage_sim) %>%
                                 activate(edges)
   }
   
@@ -357,29 +431,32 @@ make_1_way_table <- function(variable = overall, person_analysis = TRUE){
 
 
 make_coverage_table <- function(){
-  targets::tar_read(bipartite_graph_coverage) %>%
-                    filter(type) %>%
-                    data.frame() %>%
-                    group_by(intervention_contact_place) %>%
-                    summarize(count = n()) %>%
-                    arrange(-count) %>%
-                    mutate(proportion = count / sum(count)) %>%
-                    rename(name = intervention_contact_place) %>%
+  make_1_way_table(intervention_contact_place) %>%
+    arrange(-proportion)  %>%
+    mutate(level = as.character(level)) %>%
+    mutate(level = factor(level, unique(level))) %>%
                     mutate(cum_prop = cumsum(proportion)) %>%
                     mutate(group = "Group A") %>%
                     mutate(group = ifelse(cum_prop >= 0.33, "Group B", group)) %>%
                     mutate(group = ifelse(cum_prop >= 0.66, "Group C", group)) %>%
                     mutate(group = lag(group)) %>%
-                    mutate(group = ifelse(is.na(group), "Group A", group))
+                    mutate(group = ifelse(is.na(group), "Group A", group)) %>%
+    mutate(name = level)
 }
 
 
 make_contact_matrix_table <- function(variable){
+  variable <- enquo(variable)
+  
+  variable_name <- quo_name(variable)
+  
+  
   data <- targets::tar_read(bipartite_graph) %>%
   filter(!(demo_group %in% c("missing", "other")) | !type) %>%
                     igraph::bipartite.projection(which = "true") %>%
                     as_tbl_graph(directed = FALSE) %>%
                     mutate(connection_var = {{variable}}) %>%
+    mutate(connection_var = factor(connection_var, get_variable_labels(variable_name)[["variable_levels"]], get_variable_labels(variable_name)[["variable_labels"]])) %>%
                     activate(edges) %>%
                     mutate(
                       from_level = .N()$connection_var[from], 
@@ -404,16 +481,7 @@ conditional %>%
 }
 
 
-plot_heatmap_contact <- function(data){
-  data %>%
-  ggplot() +
-  geom_tile(aes(y = from_level, x = to_level, fill = bias)) +
-   theme_void() +
-  theme(
-    axis.text.x = element_text(angle = 45),
-    axis.text.y = element_text(angle = 45)
-  )
-}
+
 
 
 
@@ -428,11 +496,25 @@ plot_heatmap_contact <- function(data){
 make_bar_plot <- function(data){
   
   ggplot2::ggplot(data) + 
-    ggplot2::geom_bar(aes(x = level, fill = level, y = proportion), width = 1, stat = "identity") + 
+    ggplot2::geom_bar(aes(x = level, fill = level, y = proportion), width = 1, stat = "identity", color = "black") + 
     ggplot2::geom_text(aes(x = level, y = proportion + 0.05, label = count), alpha = 0.7) +
     ggplot2::theme_void() + 
     ggplot2::scale_x_discrete(drop = FALSE) +
     ggplot2::scale_y_continuous("Proportion of participants", labels = scales::percent)
+}
+
+make_coverage_plot <- function(data){
+  
+  ggplot2::ggplot(data) + 
+    ggplot2::geom_bar(aes(y = level, fill = group, x = proportion), width = 1, stat = "identity", color = "black") + 
+    ggplot2::theme_void() + 
+    ggplot2::scale_y_discrete(drop = FALSE, limits = rev) +
+    ggplot2::scale_x_continuous("Proportion of participants", labels = scales::percent) + 
+    ggplot2::theme(
+              axis.text = element_text(),
+        panel.grid.major.y = element_line()
+    )
+
 }
 
 make_one_stratum_radar_plot <- function(data){
@@ -443,7 +525,7 @@ make_one_stratum_radar_plot <- function(data){
   data %>%
     mutate(prop_label = scales::percent(proportion, accuracy = 1)) %>%
     ggplot() +
-    geom_bar(aes(x = level, y = proportion, fill = level), stat = "identity", width = 1) +
+    geom_bar(aes(x = level, y = proportion, fill = level), stat = "identity", width = 1, color = "black") +
     geom_text(aes(x = 0, y = -0.8, label = paste("n =", n)), data = data_n_counts, size = 5) +
     geom_text(aes(label = prop_label, x = level, y = proportion + 0.3), size = 3, face = "bold", alpha = 0.7) +
     facet_grid( . ~ stratum, switch = "y") +
@@ -468,7 +550,7 @@ make_two_stratum_radar_plot <- function(data){
     data %>%
           mutate(prop_label = scales::percent(proportion, accuracy = 1)) %>%
     ggplot() +
-    geom_bar(aes(x = level, y = proportion, fill = level), stat = "identity", width = 1) +
+    geom_bar(aes(x = level, y = proportion, fill = level), stat = "identity", width = 1, color = "black") +
     geom_text(aes(x = 0, y = -0.8, label = paste("n =", n)), data = data_n_counts, size = 5) +
     geom_text(aes(label = prop_label, x = level, y = proportion + 0.3), size = 3, face = "bold", alpha = 0.7) +
     facet_grid( stratum_a ~ stratum_b, switch = "y") +
@@ -489,7 +571,7 @@ make_grouped_radar_plot <- function(data){
   data %>%
       filter(!is.na(stratum)) %>%
       ggplot() +
-      geom_bar(aes(x = level, y = proportion, fill = level), stat = "identity", width = 1) +
+      geom_bar(aes(x = level, y = proportion, fill = level), stat = "identity", width = 1, color = "black") +
       facet_wrap(. ~ stratum) +
       coord_polar() +
       theme_void()  +
@@ -506,7 +588,7 @@ make_map_coverage_plot <- function(data){
   
   ggplot(map_object) +
     geom_sf(fill = "grey") +
-    geom_sf(aes(fill = group), color = "white") +
+    geom_sf(aes(fill = group), color = "black") +
     theme_void() +
     theme(
       axis.text = element_blank(),
@@ -524,6 +606,7 @@ plot_place_network_matrix <- function(data){
    
   data %>% 
     ggplot() +
+    geom_point(aes(y =from, x = to), data = data_tiles, color = "white") +
       geom_point(aes(y =from, x = to, size = weight), color = "black", alpha = 0.5) +
     theme_void() +
   theme(
@@ -610,6 +693,23 @@ plot_place_network_viz <- function(){
   
 }
 
+plot_heatmap_contact <- function(data){
+
+   
+  
+  data %>%
+    ggplot() +
+    geom_tile(aes(y = from_level, x = to_level, fill = bias), color = "black") +
+    theme_void() +
+    theme(
+      axis.text.x = element_text(),
+      axis.text.y = element_text(),
+      axis.title = element_blank()
+    ) +
+    scale_x_discrete(drop = FALSE) +
+    scale_x_discrete(drop = FALSE) 
+}
+
 ```
 
 # 
@@ -631,10 +731,16 @@ Interventions that focus on public venues where queer and trans people have sex 
 It is possible to strategically intervene by understanding how different parts of the city are connected through queer and trans connection. 
 
 ##
-{{< include figures_code/fig_barmap_coverage.qmd >}}
+{{< include figures_code/fig_map_coverage.qmd >}}
+
+##
+{{< include figures_code/fig_bar_coverage.qmd >}}
 
 ##
 {{< include figures_code/fig_matrix_neighborhoods.qmd >}}
+
+##
+{{< include figures_code/fig_matrix_co_att_neighborhoods.qmd >}}
 
 ##
 {{< include figures_code/fig_network_coverage.qmd >}}
