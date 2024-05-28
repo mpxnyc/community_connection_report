@@ -6,19 +6,17 @@ make_simulated_bipartite_graph <- function(bipartite_graph, n_reps = 99){
                                 tidygraph::activate(nodes) %>%
                                 tidygraph::filter(type) %>%
                                 data.frame() %>%
-                                tibble()
+                                tibble() %>%
+                                select(-rep)
                                 
   n_participants       <- dim(participant_data)[1]
 
 
-  if (n_reps > 1){
+
     participants         <- participant_data  %>%
                                     dplyr::pull(name) %>%
                                     sample(n_participants * n_reps, replace = TRUE)
-  } else {
-    participants         <- participant_data  %>%
-                                    dplyr::pull(name)
-  }
+
 
                                 
   rep_labels           <- seq(n_reps) %>%
@@ -83,42 +81,10 @@ make_simulated_bipartite_graph <- function(bipartite_graph, n_reps = 99){
                                 tidygraph::mutate(overall = "overall")
               
   
-  if (n_reps == 1){
-    result <- result %>%
-      mutate(name = stringr::str_sub(name, 1, str_length(name) - 5))
-  }
   
     attr(result, "n_reps") <- n_reps
     
     result
 
 }
-
-
-if (FALSE){
-  
-  bipartite_graph                             <- targets::tar_read(bipartite_graph)
-  
-  test <- make_simulated_bipartite_graph(
-                                  bipartite_graph, 
-                                  n_reps = 10
-                                  )
-  
-  
-    test_outcome_1 <- test %>%
-                        tidygraph::activate(nodes) %>%
-                        tidygraph::pull(rep) %>%
-                        table(useNA = "always")
-    
-    test_outcome_2 <- test %>%
-                        tidygraph::activate(edges) %>%
-                        tidygraph::pull(rep) %>%
-                        table(useNA = "always")
-                    
-    
-    test_outcome_1[length(test_outcome_1)] == 0
-    test_outcome_2[length(test_outcome_2)] == 0
-  
-}
-
 

@@ -35,7 +35,9 @@ make_bipartite_graph <- function(place_data, participant_data, analytic_scale = 
                                    dplyr::bind_rows()
   
   
-  tidygraph::tbl_graph(nodes = nodes, edges = edges, node_key = "name")
+  tidygraph::tbl_graph(nodes = nodes, edges = edges, node_key = "name") %>%
+    activate(nodes) %>%
+    mutate(rep = 1)
 
   
 }

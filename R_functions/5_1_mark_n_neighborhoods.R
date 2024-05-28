@@ -1,4 +1,4 @@
-mark_n_neighborhoods <- function(bipartite_graph_sim, n_neighborhoods, intervention_priority_input, intervention_setting_input, strata){
+mark_n_neighborhoods <- function(bipartite_graph_sim, n_neighborhoods, intervention_priority_input, strata){
   
   strata <- rlang::enquo(strata)
   
@@ -6,7 +6,7 @@ mark_n_neighborhoods <- function(bipartite_graph_sim, n_neighborhoods, intervent
     activate(nodes) %>%
     mutate(intervention_ranking = NA) %>%
     mutate(stratum = {{strata}}) %>%
-    mutate(vax_place = NA)
+    mutate(intervention_contact_place = NA)
   
   
   strata_levels             <- bipartite_graph_sim_ranked %>%
@@ -29,11 +29,10 @@ mark_n_neighborhoods <- function(bipartite_graph_sim, n_neighborhoods, intervent
         top_neighborhoods          <- find_top_neighborhoods(
           accumulated_value, 
           intervention_priority_input, 
-          intervention_setting_input, 
           stratum)
         
         
-        result <- mark_top_neighborhoods(accumulated_value, top_neighborhoods, intervention_setting_input)
+        result <- mark_top_neighborhoods(accumulated_value, top_neighborhoods)
         
         
         return(result)
@@ -42,7 +41,6 @@ mark_n_neighborhoods <- function(bipartite_graph_sim, n_neighborhoods, intervent
     ) %>%
     mutate(strata                = rlang::quo_text(strata)) %>%
     mutate(intervention_priority = intervention_priority_input) %>%
-    mutate(intervention_setting  = paste(intervention_setting_input, collapse=".")) %>%
     mutate(intervention_ranking  = ifelse(is.na(intervention_ranking), 999, intervention_ranking))
   
 }

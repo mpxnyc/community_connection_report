@@ -81,10 +81,11 @@ list(
     command = make_simulated_bipartite_graph(bipartite_graph, n_reps = initial_settings[["n_reps_graph"]])
   ),
   tar_target(
-    name = bipartite_graph_coverage,
-    command = add_coverage_data_to_bipartite(bipartite_graph)
+    name = intervention_coverage_data,
+    command = conduct_all_campaigns(bipartite_graph, bipartite_graph)
   ),
-  tar_target(
-    name = bipartite_graph_coverage_sim,
-    command = add_coverage_data_to_bipartite(bipartite_graph_sim)
-  ))
+tar_target(
+  name = intervention_coverage_data_sim,
+  command = conduct_all_campaigns(bipartite_graph_sim, bipartite_graph)
+)
+)

@@ -1,8 +1,6 @@
 
-find_top_neighborhoods <- function(bipartite_graph_sim_ranked, intervention_priority_input, intervention_setting_input, stratum_input){
+find_top_neighborhoods <- function(bipartite_graph_sim_ranked, intervention_priority_input, stratum_input){
   bipartite_graph_sim_ranked %>%
-    tidygraph::activate(edges) %>%
-    tidygraph::filter(intervention_setting %in% intervention_setting_input) %>%
     tidygraph::activate(nodes) %>%
     tidygraph::filter(is.na(intervention_ranking)) %>%
     tidygraph::filter(stratum == stratum_input | !type) %>%

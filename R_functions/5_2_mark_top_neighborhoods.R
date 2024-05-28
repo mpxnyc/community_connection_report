@@ -1,38 +1,41 @@
-mark_top_neighborhoods <- function(bipartite_graph_sim_ranked, top_neighborhoods, intervention_setting_input){
+mark_top_neighborhoods <- function(bipartite_graph_sim, top_neighborhoods){
   
-  to_be_marked <- bipartite_graph_sim_ranked %>%
-    activate(edges) %>%
-    filter(intervention_setting %in% intervention_setting_input) %>%
-    activate(nodes) %>%
-    filter(is.na(intervention_ranking)) %>%
-    igraph::neighborhood(nodes = top_neighborhoods) %>%
-    unlist() %>%
-    names() %>%
-    unique()
+  places_and_people_to_be_marked       <- bipartite_graph_sim %>%
+                                            activate(nodes) %>%
+                                            filter(is.na(intervention_ranking)) %>%
+                                            igraph::neighborhood(nodes = top_neighborhoods) %>%
+                                            unlist() %>%
+                                            names() %>%
+                                            unique()
   
   
+  helper_get_intervention_contact_place <- function(name){
+    vax_places         <- bipartite_graph_sim %>%
+                              activate(nodes) %>%
+                              filter(name %in% places_and_people_to_be_marked) %>%
+                              activate(edges) %>%
+                              mutate(name = .N()$name[from], place = .N()$name[to]) %>%
+                              data.frame()
+    
+    vax_places_vec <- vax_places$place
+    names(vax_places_vec) <- vax_places$name
+    
+    vax_places_vec[name]
+  }
+
   
-  
-  vax_places <- bipartite_graph_sim_ranked %>%
-    activate(nodes) %>%
-    filter(name %in% to_be_marked) %>%
-    activate(edges) %>%
-    mutate(name = .N()$name[from], place = .N()$name[to]) %>%
-    data.frame()
-  
-  vax_places_vec <- vax_places$place
-  names(vax_places_vec) <- vax_places$name
+
 
   
   
   
-  current_top_rank    <- attr(bipartite_graph_sim_ranked, "top_rank") 
+  current_top_rank    <- attr(bipartite_graph_sim, "top_rank") 
   next_top_rank       <- current_top_rank + 1
   
-  result <- bipartite_graph_sim_ranked %>%
-    activate(nodes) %>%
-    mutate(intervention_ranking = ifelse(name %in% to_be_marked, next_top_rank, intervention_ranking)) %>%
-    mutate(vax_place = ifelse(name %in% to_be_marked, vax_places_vec[name], vax_place))
+  result <- bipartite_graph_sim %>%
+              activate(nodes) %>%
+              mutate(intervention_ranking = ifelse(name %in% places_and_people_to_be_marked, next_top_rank, intervention_ranking)) %>%
+              mutate(intervention_contact_place = ifelse(name %in% places_and_people_to_be_marked, helper_get_intervention_contact_place(name), intervention_contact_place))
   
   attr(result, "top_rank") <- next_top_rank
   

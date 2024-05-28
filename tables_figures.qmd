@@ -242,7 +242,7 @@ get_variable_labels <- function(variable_name, person_analysis = TRUE){
   
   if (is.null(variable_labels)){
     if (person_analysis){
-          variable_labels <- targets::tar_read(bipartite_graph_coverage) %>%
+          variable_labels <- targets::tar_read(bipartite_graph) %>%
                           tidygraph::activate(nodes) %>%
                           tidygraph::filter(type) %>%
                           data.frame() %>%
@@ -252,7 +252,7 @@ get_variable_labels <- function(variable_name, person_analysis = TRUE){
     variable_levels <- variable_labels
     } else {
               
-    variable_labels <- targets::tar_read(bipartite_graph_coverage) %>%
+    variable_labels <- targets::tar_read(bipartite_graph) %>%
                           tidygraph::activate(edges) %>%
                           tidygraph::filter(type) %>%
                           data.frame() %>%
@@ -430,18 +430,39 @@ make_1_way_table <- function(variable = overall, person_analysis = TRUE){
 
 
 
-make_coverage_table <- function(){
-  make_1_way_table(intervention_contact_place) %>%
-    arrange(-proportion)  %>%
-    mutate(level = as.character(level)) %>%
-    mutate(level = factor(level, unique(level))) %>%
-                    mutate(cum_prop = cumsum(proportion)) %>%
-                    mutate(group = "Group A") %>%
-                    mutate(group = ifelse(cum_prop >= 0.33, "Group B", group)) %>%
-                    mutate(group = ifelse(cum_prop >= 0.66, "Group C", group)) %>%
-                    mutate(group = lag(group)) %>%
-                    mutate(group = ifelse(is.na(group), "Group A", group)) %>%
-    mutate(name = level)
+make_coverage_table_sim <- function(intervention_priority_input = "contact", intervention_stratification_input = "overall"){
+
+  
+    targets::tar_read(intervention_coverage_data_sim)[["place_coverage"]] %>%
+    filter(
+      intervention_priority == intervention_priority_input, 
+      intervention_stratification == intervention_stratification_input
+      ) %>%
+    mutate(level = intervention_contact_place) %>%
+        group_by(intervention_priority, intervention_ranking, intervention_stratification) %>%
+    summarize(
+              mean_count = mean(count), 
+              count_ci_lb = quantile(count, 0.025), 
+              count_ci_ub = quantile(count, 0.975),
+              mean_proportion = mean(proportion),
+              proportion_ci_lb = quantile(proportion, 0.025),
+              proportion_ci_ub = quantile(proportion, 0.975),
+              mean_cum_prop = mean(cum_prop),
+              cum_prop_ci_lb = quantile(cum_prop, 0.025),
+              cum_prop_ci_ub = quantile(cum_prop, 0.975)
+              )
+
+}
+
+
+make_coverage_table <- function(intervention_priority_input = "contact", intervention_stratification_input = "overall"){
+  targets::tar_read(intervention_coverage_data)[["place_coverage"]] %>%
+    filter(
+      intervention_priority == intervention_priority_input, 
+      intervention_stratification == intervention_stratification_input
+      ) %>%
+    mutate(level = intervention_contact_place) 
+
 }
 
 
@@ -582,7 +603,7 @@ make_map_coverage_plot <- function(data){
   
   
   map_object <- mpxnyc::community_sf_obj %>%
-                    rename(name = 1) %>%
+                    rename(level = 1) %>%
                     left_join(data) 
                   
   
