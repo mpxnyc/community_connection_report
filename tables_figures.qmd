@@ -796,7 +796,7 @@ plot_heatmap_contact          <- function(data){
 make_1_way_table(demo_group) %>%    
   make_bar_plot() %>%
   add_caption("bar_demo_group") %>%
-  apply_style_spacing_descriptives()
+  apply_style_bar_plot()
 
 
 ```
@@ -811,7 +811,7 @@ make_1_way_table(demo_group) %>%
 make_1_way_table(age) %>%
     make_bar_plot() %>%
     add_caption("bar_age") %>%
-    apply_style_spacing_descriptives()
+    apply_style_bar_plot()
 
 ```
 
@@ -827,7 +827,7 @@ make_1_way_table(age) %>%
 make_1_way_table(channel) %>%
   make_bar_plot() %>%
   add_caption("bar_channel") %>%
-  apply_style_spacing_descriptives()
+  apply_style_bar_plot()
 
 
 ```
@@ -846,7 +846,7 @@ make_1_way_table(channel) %>%
 make_1_way_table(genderId) %>%  
   make_bar_plot() %>%
   add_caption("bar_gender") %>%
-  apply_style_spacing_descriptives()
+  apply_style_bar_plot()
  
 ```
 
@@ -865,7 +865,7 @@ make_1_way_table(genderId) %>%
   make_1_way_table(race) %>%
       make_bar_plot() %>%
       add_caption("bar_race") %>%
-      apply_style_spacing_descriptives()
+      apply_style_bar_plot()
   
 ```
 
@@ -882,60 +882,60 @@ make_1_way_table(genderId) %>%
 make_1_way_table(sexOrientation) %>%    
   make_bar_plot() %>%
   add_caption("bar_sex_orientation") %>%
-  apply_style_spacing_descriptives()
+  apply_style_bar_plot()
 
 
 ```
 
 ## 
 
-```{r plot_bar_sexOrientation_demo_group}
+```{r plot_radar_grid_sexOrientation_demo_group}
 #| fig-width: 7
 #| fig-height: 10
 
 make_2_way_table(sexOrientation, demo_group) %>%
   make_grouped_radar_plot() %>%
   add_caption("radar_sexOrientation_demo_group") %>%
-  apply_style_spacing_grouped_radar()
+  apply_style_radar_grid_plot()
 
 ```
 
 ## 
 
-```{r plot_radar_monkeypoxVaccine_demo_group}
+```{r plot_radar_grid_monkeypoxVaccine_demo_group}
 #| fig-width: 7
 #| fig-height: 10
 
 make_2_way_table(monkeypoxVaccine, demo_group) %>%
   make_grouped_radar_plot() %>%
   add_caption("radar_monkeypoxVaccine_demo_group") %>%
-  apply_style_spacing_grouped_radar()
+  apply_style_radar_grid_plot()
 
 ```
 
 ## 
 
-```{r plot_radar_hivPrep_demo_group}
+```{r plot_radar_grid_hivPrep_demo_group}
 #| fig-width: 10
 #| fig-height: 10
 
 make_2_way_table(hivPrep, demo_group) %>%
   make_grouped_radar_plot() %>%
   add_caption("radar_hivPrep_demo_group") %>%
-  apply_style_spacing_grouped_radar()
+  apply_style_radar_grid_plot()
 
 ```
 
 ## 
 
-```{r}
+```{r plot_bar_groupsex}
 #| fig-width: 7
 #| fig-height: 7
 #| 
 
 make_1_way_table(groupSex) %>%  
   make_bar_plot() %>%
-  apply_style_spacing_descriptives()
+  apply_style_bar_plot()
 
 ```
 
@@ -943,7 +943,7 @@ make_1_way_table(groupSex) %>%
 
 ## 
 
-```{r}
+```{r plot_radar_facet_placetype_placesex}
 #| fig-width: 9
 #| fig-height: 8
 #| 
@@ -956,7 +956,7 @@ make_1_way_table(groupSex) %>%
         filter(!is.na(level)) %>%
         make_one_stratum_radar_plot() %>%
         add_caption("radar_placetype_placesex") %>%
-        apply_style_spacing_place()
+        apply_style_rdar_facet_plot()
 
 
 
@@ -966,7 +966,7 @@ make_1_way_table(groupSex) %>%
 
 ## 
 
-```{r}
+```{r plot_radar_facet_placetype_distancefromhome}
 #| fig-width: 9
 #| fig-height: 8
 #| 
@@ -978,7 +978,7 @@ make_1_way_table(groupSex) %>%
 make_2_way_table(placeType, distanceFromHome, person_analysis = FALSE) %>%
           filter(!is.na(level)) %>%
   make_one_stratum_radar_plot() %>%
-  apply_style_spacing_place()
+  apply_style_rdar_facet_plot()
 
 
 
@@ -986,7 +986,7 @@ make_2_way_table(placeType, distanceFromHome, person_analysis = FALSE) %>%
 
 ## 
 
-```{r}
+```{r plot_radar_facet_placetype_placesex_distancefromhome}
 #| fig-width: 11
 #| fig-height: 10
 #| 
@@ -996,7 +996,7 @@ make_2_way_table(placeType, distanceFromHome, person_analysis = FALSE) %>%
     filter(!is.na(level)) %>%
   make_two_stratum_radar_plot() %>%
   add_caption("radar_placetype_sex_distance") %>%
-  apply_style_spacing_place()
+  apply_style_rdar_facet_plot()
 
 ```
 
