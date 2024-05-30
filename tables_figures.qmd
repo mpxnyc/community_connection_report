@@ -48,13 +48,12 @@ attach(mpxnyc_colors)
 ```
 
 ```{r scripts}
-tar_source(files = "R_functions")
-tar_source(files = "R_functions/1_data_processing")
-tar_source(files = "R_functions/2_data_summary")
-tar_source(files = "R_functions/3_data_extract")
-tar_source(files = "R_functions/4_plot")
+targets::tar_source(files = "R_functions")
+targets::tar_source(files = "R_functions/1_data_processing")
+targets::tar_source(files = "R_functions/2_data_summary")
+targets::tar_source(files = "R_functions/3_data_extract")
+targets::tar_source(files = "R_functions/4_plot")
 ```
-
 
 ```{r update_data_pipeline, include=FALSE, messages=FALSE, warning = FALSE}
 
@@ -64,15 +63,12 @@ targets::tar_make() # Runs the data pipeline shown in _targets.R
 
 ```
 
-
-
 ```{r}
 
 
 targets::tar_source(files = "R_functions")
 
 ```
-
 
 ```{r plot_styling}
 apply_style_spacing_descriptives <- function(plot, caption_hjust = 1){
@@ -227,19 +223,9 @@ apply_style_spacing_coverage <- function(plot, caption_hjust = 0){
     )  
 }
 
-add_caption <- function(plot, plot_name){
-  
-  plot + 
-  labs(
-      title    = captions_and_titles(plot_name)$title,
-      subtitle = captions_and_titles(plot_name)$subtitle,
-      caption  = captions_and_titles(plot_name)$caption %>% str_wrap(110) %>% paste0("\n\n", captions_and_titles("common_caption") )
-    )
-}
+
 
 ```
-
-
 
 ```{r plot_data}
 
@@ -548,7 +534,6 @@ plot_network_impact             <- function(data){
 
 ```
 
-
 ```{r plot_code}
 
 make_bar_plot                 <- function(data){
@@ -797,100 +782,365 @@ plot_heatmap_contact          <- function(data){
 
 ```
 
-
-
-
 # People
 
-##
-{{< include figures_code/fig_bar_racegender.qmd >}}
+## 
 
-##
-{{< include figures_code/fig_bar_age.qmd >}}
+```{r plot_bar_demogroup}
+#| fig-width: 11
+#| fig-height: 7
 
-##
-{{< include figures_code/fig_bar_channel.qmd >}}
 
-##
-{{< include figures_code/fig_bar_gender.qmd >}}
 
-##
-{{< include figures_code/fig_bar_race.qmd >}}
 
-##
-{{< include figures_code/fig_bar_sexorientation.qmd >}}
+make_1_way_table(demo_group) %>%    
+  make_bar_plot() %>%
+  add_caption("bar_demo_group") %>%
+  apply_style_spacing_descriptives()
 
-##
-{{< include figures_code/fig_radar_sexOrientation_demo_group.qmd >}}
 
-##
-{{< include figures_code/fig_radar_monkeypoxVaccine_demo_group.qmd >}}
+```
 
-##
-{{< include figures_code/fig_radar_hivPrep_demo_group.qmd >}}
+## 
 
-##
-{{< include figures_code/fig_bar_groupsex.qmd >}}
+```{r plot_bar_age}
+#| fig-width: 7
+#| fig-height: 7
 
+
+make_1_way_table(age) %>%
+    make_bar_plot() %>%
+    add_caption("bar_age") %>%
+    apply_style_spacing_descriptives()
+
+```
+
+## 
+
+```{r plot_bar_channel}
+#| fig-width: 7
+#| fig-height: 7
+
+#| 
+
+
+make_1_way_table(channel) %>%
+  make_bar_plot() %>%
+  add_caption("bar_channel") %>%
+  apply_style_spacing_descriptives()
+
+
+```
+
+## 
+
+```{r plot_bar_gender}
+#| fig-width: 9
+#| fig-height: 7
+
+#| 
+
+
+
+
+make_1_way_table(genderId) %>%  
+  make_bar_plot() %>%
+  add_caption("bar_gender") %>%
+  apply_style_spacing_descriptives()
+ 
+```
+
+## 
+
+```{r plot_bar_race}
+#| fig-width: 7
+#| fig-height: 7
+
+#| 
+
+
+
+
+
+  make_1_way_table(race) %>%
+      make_bar_plot() %>%
+      add_caption("bar_race") %>%
+      apply_style_spacing_descriptives()
+  
+```
+
+## 
+
+```{r plot_bar_sexorientation}
+#| fig-width: 7
+#| fig-height: 7
+
+#| 
+
+
+
+make_1_way_table(sexOrientation) %>%    
+  make_bar_plot() %>%
+  add_caption("bar_sex_orientation") %>%
+  apply_style_spacing_descriptives()
+
+
+```
+
+## 
+
+```{r plot_bar_sexOrientation_demo_group}
+#| fig-width: 7
+#| fig-height: 10
+
+make_2_way_table(sexOrientation, demo_group) %>%
+  make_grouped_radar_plot() %>%
+  add_caption("radar_sexOrientation_demo_group") %>%
+  apply_style_spacing_grouped_radar()
+
+```
+
+## 
+
+```{r plot_radar_monkeypoxVaccine_demo_group}
+#| fig-width: 7
+#| fig-height: 10
+
+make_2_way_table(monkeypoxVaccine, demo_group) %>%
+  make_grouped_radar_plot() %>%
+  add_caption("radar_monkeypoxVaccine_demo_group") %>%
+  apply_style_spacing_grouped_radar()
+
+```
+
+## 
+
+```{r plot_radar_hivPrep_demo_group}
+#| fig-width: 10
+#| fig-height: 10
+
+make_2_way_table(hivPrep, demo_group) %>%
+  make_grouped_radar_plot() %>%
+  add_caption("radar_hivPrep_demo_group") %>%
+  apply_style_spacing_grouped_radar()
+
+```
+
+## 
+
+```{r}
+#| fig-width: 7
+#| fig-height: 7
+#| 
+
+make_1_way_table(groupSex) %>%  
+  make_bar_plot() %>%
+  apply_style_spacing_descriptives()
+
+```
 
 # Places
 
-##
-{{< include figures_code/fig_radar_places_sexcontact.qmd >}}
+## 
+
+```{r}
+#| fig-width: 9
+#| fig-height: 8
+#| 
+
+
+
+
+
+  make_2_way_table(placeType, placeSex, person_analysis = FALSE) %>%
+        filter(!is.na(level)) %>%
+        make_one_stratum_radar_plot() %>%
+        add_caption("radar_placetype_placesex") %>%
+        apply_style_spacing_place()
+
+
+
+
+
+```
 
 ## 
-{{< include figures_code/fig_radar_places_distance.qmd >}}
 
-##
-{{< include figures_code/fig_radar_places_distance_sexcontact.qmd >}}
+```{r}
+#| fig-width: 9
+#| fig-height: 8
+#| 
 
+
+
+
+
+make_2_way_table(placeType, distanceFromHome, person_analysis = FALSE) %>%
+          filter(!is.na(level)) %>%
+  make_one_stratum_radar_plot() %>%
+  apply_style_spacing_place()
+
+
+
+```
+
+## 
+
+```{r}
+#| fig-width: 11
+#| fig-height: 10
+#| 
+
+
+  make_3_way_table(placeType, placeSex, distanceFromHome, person_analysis = FALSE) %>%
+    filter(!is.na(level)) %>%
+  make_two_stratum_radar_plot() %>%
+  add_caption("radar_placetype_sex_distance") %>%
+  apply_style_spacing_place()
+
+```
 
 # People Mixing through Places
 
 ## 
-{{< include figures_code/fig_heatmap_age.qmd >}}
+
+```{r plot_matrix_mixing_age}
+#| fig-width: 10
+#| fig-height: 10
+
+
+make_contact_matrix_table(age) %>%
+  plot_heatmap_contact() %>%
+  add_caption("radar_hivPrep_demo_group") %>%
+  apply_style_spacing_heatmap()
+
+
+
+```
 
 ## 
-{{< include figures_code/fig_heatmap_demo_group.qmd >}}
+
+```{r plot_matrix_mixing_demo_group}
+#| fig-width: 10
+#| fig-height: 10
+
+
+make_contact_matrix_table(demo_group) %>%
+  plot_heatmap_contact() %>%
+  add_caption("radar_hivPrep_demo_group") %>%
+  apply_style_spacing_heatmap()
+
+
+
+```
 
 ## 
-{{< include figures_code/fig_heatmap_sexOrientation.qmd >}}
 
+```{r plot_matrix_mixing_sexorientation}
+#| fig-width: 10
+#| fig-height: 10
+
+
+make_contact_matrix_table(sexOrientation) %>%
+  plot_heatmap_contact() %>%
+  add_caption("radar_hivPrep_demo_group") %>%
+  apply_style_spacing_heatmap()
+
+
+
+```
 
 # Places connecting through People
 
-##
-{{< include figures_code/fig_network_coverage.qmd >}}
+## 
 
-##
-{{< include figures_code/fig_matrix_neighborhoods.qmd >}}
-
-##
-{{< include figures_code/fig_matrix_co_att_neighborhoods.qmd >}}
+```{r plot_netviz_places}
+#| fig-width: 9
+#| fig-height: 9
 
 
+make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
+  plot_place_network_viz() %>%
+  add_caption("networkcoverage") 
+  
+```
 
+## 
+
+```{r plot_matrix_movement_travel}
+#| fig-width: 9
+#| fig-height: 11
+
+
+  make_commuting_network_data() %>%
+    plot_place_network_matrix() %>%
+    add_caption("matrix_places") %>%
+    apply_style_spacing_remainder()
+  
+  
+
+```
+
+
+## 
+
+```{r plot_matrix_movement_coattendance}
+#| fig-width: 9
+#| fig-height: 11
+
+
+  make_coattendance_network_data() %>%
+    plot_place_network_matrix() %>%
+    add_caption("matrix_places") %>%
+    apply_style_spacing_remainder()
+  
+  
+
+```
 
 
 # Interventions
 
 ## 
-{{< include figures_code/fig_map_coverage.qmd >}}
+
+```{r plot_map_coverage}
+#| fig-width: 7
+#| fig-height: 10
+
+make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
+  make_map_coverage_plot() %>%
+  add_caption("map_coverage") %>%
+  apply_style_spacing_coverage(caption_hjust = 0)
 
 
-##
-{{< include figures_code/fig_bar_coverage.qmd >}}
+```
 
-##
-{{< include figures_code/fig_net_impact.qmd >}}
+## 
 
-
-
-
+```{r plot_bar_coverage}
+#| fig-width: 14
+#| fig-height: 7
 
 
+make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
+    make_coverage_plot() %>%
+    add_caption("bar_age") %>%
+    apply_style_spacing_coverage()
+
+```
+
+## 
+
+```{r plot_net_impact}
+#| fig-width: 7
+#| fig-height: 7
 
 
+make_network_impact_table() %>%
+    plot_network_impact() %>%
+    add_caption("bar_age") %>%
+    apply_style_spacing_descriptives()
 
 
+```
 
