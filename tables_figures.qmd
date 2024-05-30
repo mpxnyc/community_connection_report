@@ -47,6 +47,15 @@ attach(mpxnyc_colors)
 
 ```
 
+```{r scripts}
+tar_source(files = "R_functions")
+tar_source(files = "R_functions/1_data_processing")
+tar_source(files = "R_functions/2_data_summary")
+tar_source(files = "R_functions/3_data_extract")
+tar_source(files = "R_functions/4_plot")
+```
+
+
 ```{r update_data_pipeline, include=FALSE, messages=FALSE, warning = FALSE}
 
 
@@ -507,16 +516,27 @@ conditional %>%
   ungroup()
 }
 
-make_network_impact_table <- function(){
+make_network_impact_table       <- function(){
     targets::tar_read(graph_evolution_data) %>%
-          transmute(intervention_ranking, n_lcc = mean_n_lcc, n_remainder = mean_n_remainder, n_singleton = mean_n_singleton, intervention_priority, intervention_stratification) %>%
+          dplyr::transmute(
+                    intervention_ranking, 
+                    n_lcc                       = mean_n_lcc, 
+                    n_remainder                 = mean_n_remainder, 
+                    n_singleton                 = mean_n_singleton, 
+                    intervention_priority, 
+                    intervention_stratification
+                    ) %>%
           tidyr::pivot_longer(cols = c(n_lcc, n_remainder, n_singleton))
       }
 
-plot_network_impact <- function(data){
+plot_network_impact             <- function(data){
   data %>%
     ggplot2::ggplot() +
-    ggplot2::geom_bar(aes(x = intervention_ranking, y = value, fill = name), stat = "identity", position = "fill") +
+    ggplot2::geom_bar(
+                      aes(x = intervention_ranking, y = value, fill = name), 
+                      stat = "identity", 
+                      position = "fill"
+                      ) +
     ggplot2::facet_grid(intervention_stratification ~ intervention_priority)
 }
 

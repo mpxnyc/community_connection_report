@@ -21,7 +21,7 @@ get_graph_evolution <- function(bipartite_graph_sim, intervention_coverage_data_
       function(rank){
         
         working_graph %>%
-          filter(intervention_ranking >= rank | is.na(intervention_ranking)) %>%
+          filter(intervention_ranking >= rank - 1 | is.na(intervention_ranking)) %>%
           get_component_analysis() %>%
           mutate(intervention_ranking = rank)
         

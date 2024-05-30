@@ -48,6 +48,10 @@ options(clustermq.scheduler = "multicore")
 
 # Run the R scripts in the R/ folder with your custom functions:
 tar_source(files = "R_functions")
+tar_source(files = "R_functions/1_data_processing")
+tar_source(files = "R_functions/2_data_summary")
+tar_source(files = "R_functions/3_data_extract")
+tar_source(files = "R_functions/4_plot")
 # source("other_functions.R") # Source other scripts as needed.
 
 # Replace the target list below with your own:
