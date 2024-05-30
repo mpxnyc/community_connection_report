@@ -956,7 +956,7 @@ make_1_way_table(groupSex) %>%
         filter(!is.na(level)) %>%
         make_one_stratum_radar_plot() %>%
         add_caption("radar_placetype_placesex") %>%
-        apply_style_rdar_facet_plot()
+        apply_style_radar_facet_plot()
 
 
 
@@ -978,7 +978,7 @@ make_1_way_table(groupSex) %>%
 make_2_way_table(placeType, distanceFromHome, person_analysis = FALSE) %>%
           filter(!is.na(level)) %>%
   make_one_stratum_radar_plot() %>%
-  apply_style_rdar_facet_plot()
+  apply_style_radar_facet_plot()
 
 
 
@@ -996,7 +996,7 @@ make_2_way_table(placeType, distanceFromHome, person_analysis = FALSE) %>%
     filter(!is.na(level)) %>%
   make_two_stratum_radar_plot() %>%
   add_caption("radar_placetype_sex_distance") %>%
-  apply_style_rdar_facet_plot()
+  apply_style_radar_facet_plot()
 
 ```
 
@@ -1012,7 +1012,7 @@ make_2_way_table(placeType, distanceFromHome, person_analysis = FALSE) %>%
 make_contact_matrix_table(age) %>%
   plot_heatmap_contact() %>%
   add_caption("radar_hivPrep_demo_group") %>%
-  apply_style_spacing_heatmap()
+  apply_style_matrix_mixing_plot()
 
 
 
@@ -1028,7 +1028,7 @@ make_contact_matrix_table(age) %>%
 make_contact_matrix_table(demo_group) %>%
   plot_heatmap_contact() %>%
   add_caption("radar_hivPrep_demo_group") %>%
-  apply_style_spacing_heatmap()
+  apply_style_matrix_mixing_plot()
 
 
 
@@ -1044,7 +1044,7 @@ make_contact_matrix_table(demo_group) %>%
 make_contact_matrix_table(sexOrientation) %>%
   plot_heatmap_contact() %>%
   add_caption("radar_hivPrep_demo_group") %>%
-  apply_style_spacing_heatmap()
+  apply_style_matrix_mixing_plot()
 
 
 
@@ -1061,7 +1061,8 @@ make_contact_matrix_table(sexOrientation) %>%
 
 make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
   plot_place_network_viz() %>%
-  add_caption("networkcoverage") 
+  add_caption("networkcoverage") %>%
+  apply_style_network_viz()
   
 ```
 
@@ -1075,12 +1076,11 @@ make_coverage_table(intervention_priority = "contact", intervention_stratificati
   make_commuting_network_data() %>%
     plot_place_network_matrix() %>%
     add_caption("matrix_places") %>%
-    apply_style_spacing_remainder()
+    apply_style_matrix_movement()
   
   
 
 ```
-
 
 ## 
 
@@ -1092,7 +1092,7 @@ make_coverage_table(intervention_priority = "contact", intervention_stratificati
   make_coattendance_network_data() %>%
     plot_place_network_matrix() %>%
     add_caption("matrix_places") %>%
-    apply_style_spacing_remainder()
+    apply_style_matrix_movement()
   
   
 
@@ -1110,7 +1110,7 @@ make_coverage_table(intervention_priority = "contact", intervention_stratificati
 make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
   make_map_coverage_plot() %>%
   add_caption("map_coverage") %>%
-  apply_style_spacing_coverage(caption_hjust = 0)
+  apply_style_coverage_map(caption_hjust = 0)
 
 
 ```
@@ -1125,7 +1125,7 @@ make_coverage_table(intervention_priority = "contact", intervention_stratificati
 make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
     make_coverage_plot() %>%
     add_caption("bar_age") %>%
-    apply_style_spacing_coverage()
+    apply_style_coverage_bar()
 
 ```
 

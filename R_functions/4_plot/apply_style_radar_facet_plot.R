@@ -1,4 +1,4 @@
-apply_style_rdar_facet_plot <- function(plot, caption_hjust = 0){
+apply_style_radar_facet_plot <- function(plot, caption_hjust = 0){
   
   plot +
     scale_fill_manual("", values = c(
