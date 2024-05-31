@@ -1,4 +1,4 @@
-clean_participant_data <- function(raw_data_participants) {
+clean_data_people <- function(raw_data_participants) {
 
   race_levels             <- c("White", "Latinx", "Black", "Asian", "Other", "Multiple races reported")
   race_labels             <- c("white", "latinx", "black", "asian", "other", "multiple")

@@ -1,4 +1,5 @@
-clean_place_data <- function(raw_data_places){
+clean_data_places <- function(raw_data_places){
+  
 
   placeSex_labels             <- c("yes", "no", "i-don't-remember")
   placeSex_levels             <- c("yes", "no", "no")

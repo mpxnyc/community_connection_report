@@ -70,19 +70,19 @@ list(
   ),
   tar_target(
     name = data_people_clean,
-    command = clean_participant_data(data_people_raw)
+    command = clean_data_people(data_people_raw)
   ),
   tar_target(
     name = data_places_clean,
-    command = clean_place_data(data_places_raw)
+    command = clean_data_places(data_places_raw)
   ),
   tar_target(
     name = data_bipartite_graph_collected,
-    command = make_bipartite_graph(data_places_clean, data_people_clean, analytic_scale = initial_settings[["analytic_scale"]])
+    command = create_bipartite_graph_collected(data_places_clean, data_people_clean, analytic_scale = initial_settings[["analytic_scale"]])
   ),  
   tar_target(
     name = data_bipartite_graph_simulated,
-    command = make_simulated_bipartite_graph(data_bipartite_graph_collected, n_reps = initial_settings[["n_reps_graph"]])
+    command = create_bipartite_graph_simulated(data_bipartite_graph_collected, n_reps = initial_settings[["n_reps_graph"]])
   ),
   tar_target(
     name = data_intervention_results_coverage_collected,

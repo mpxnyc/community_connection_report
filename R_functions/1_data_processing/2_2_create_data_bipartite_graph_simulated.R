@@ -1,5 +1,5 @@
 
-make_simulated_bipartite_graph <- function(bipartite_graph, n_reps = 99){
+create_bipartite_graph_simulated <- function(bipartite_graph, n_reps = 99){
   
 
   participant_data     <- bipartite_graph %>%

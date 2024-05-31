@@ -1,4 +1,4 @@
-make_bipartite_graph <- function(place_data, participant_data, analytic_scale = "neighborhood"){
+create_bipartite_graph_collected <- function(place_data, participant_data, analytic_scale = "neighborhood"){
   
   place_edges                 <- place_data %>%
                                     dplyr::rename(from = userId) %>%
