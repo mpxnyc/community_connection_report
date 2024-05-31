@@ -1,4 +1,4 @@
-mark_top_neighborhoods <- function(bipartite_graph_sim, top_neighborhoods){
+mark_top_spatial_units <- function(bipartite_graph_sim, top_neighborhoods){
   
   places_and_people_to_be_marked       <- bipartite_graph_sim %>%
                                             activate(nodes) %>%

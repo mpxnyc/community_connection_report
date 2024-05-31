@@ -1,4 +1,4 @@
-  mark_n_neighborhoods <- function(bipartite_graph_sim, n_neighborhoods, intervention_priority_input, strata){
+mark_n_spatial_units <- function(bipartite_graph_sim, n_neighborhoods, intervention_priority_input, strata){
   
   strata <- rlang::enquo(strata)
   
@@ -26,13 +26,13 @@
         
         stratum <- strata_levels[(next_value %% n_strata) + 1]
         
-        top_neighborhoods          <- find_top_neighborhoods(
+        top_neighborhoods          <- find_top_spatial_units(
           accumulated_value, 
           intervention_priority_input, 
           stratum)
         
         
-        result <- mark_top_neighborhoods(accumulated_value, top_neighborhoods)
+        result <- mark_top_spatial_units(accumulated_value, top_neighborhoods)
         
         
         return(result)

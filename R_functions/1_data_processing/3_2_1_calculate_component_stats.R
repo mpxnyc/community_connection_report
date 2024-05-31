@@ -1,4 +1,4 @@
-get_component_analysis <- function(bipartite_graph) {
+calculate_component_stats <- function(bipartite_graph) {
   
   working_graph       <- bipartite_graph %>%
     igraph::bipartite_projection(which = "true") %>%

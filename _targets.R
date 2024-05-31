@@ -94,11 +94,11 @@ tar_target(
 ),
 tar_target(
   name = graph_evolution_data,
-  command = get_graph_evolution(data_bipartite_graph_collected, data_intervention_results_coverage_collected)
+  command = make_intervention_results_centrality(data_bipartite_graph_collected, data_intervention_results_coverage_collected)
 ),
 tar_target(
   name = graph_evolution_data_sim,
-  command = get_graph_evolution(data_bipartite_graph_simulated, data_intervention_results_coverage_simulated)
+  command = make_intervention_results_centrality(data_bipartite_graph_simulated, data_intervention_results_coverage_simulated)
 )
 )
 

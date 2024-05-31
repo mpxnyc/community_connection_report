@@ -1,4 +1,4 @@
-get_graph_evolution <- function(bipartite_graph_sim, intervention_coverage_data_sim, intervention_priority_input = "contact", intervention_stratification_input = "overall"){
+make_intervention_results_centrality <- function(bipartite_graph_sim, intervention_coverage_data_sim, intervention_priority_input = "contact", intervention_stratification_input = "overall"){
   
   rankings <- intervention_coverage_data_sim[["place_coverage"]] %>%
     filter(intervention_priority == intervention_priority_input) %>%
@@ -22,7 +22,7 @@ get_graph_evolution <- function(bipartite_graph_sim, intervention_coverage_data_
         
         working_graph %>%
           filter(intervention_ranking >= rank - 1 | is.na(intervention_ranking)) %>%
-          get_component_analysis() %>%
+          calculate_component_stats() %>%
           mutate(intervention_ranking = rank)
         
         
