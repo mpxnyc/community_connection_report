@@ -1,4 +1,4 @@
-mark_n_neighborhoods <- function(bipartite_graph_sim, n_neighborhoods, intervention_priority_input, strata){
+  mark_n_neighborhoods <- function(bipartite_graph_sim, n_neighborhoods, intervention_priority_input, strata){
   
   strata <- rlang::enquo(strata)
   

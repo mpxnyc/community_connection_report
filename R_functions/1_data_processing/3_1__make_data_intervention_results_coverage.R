@@ -1,4 +1,4 @@
-conduct_all_campaigns <- function(bipartite_graph_sim, bipartite_graph){
+make_data_intervention_results_coverage <- function(bipartite_graph_sim, bipartite_graph){
   
   list_results <- list()
   
