@@ -3,7 +3,7 @@ make_coverage_table_sim         <- function(intervention_priority_input = "conta
   
   
   
-  targets::tar_read(intervention_coverage_data_sim)[["place_coverage"]] %>%
+  targets::tar_read(data_intervention_results_coverage_simulated)[["place_coverage"]] %>%
     filter(
       intervention_priority == intervention_priority_input, 
       intervention_stratification == intervention_stratification_input
@@ -29,7 +29,7 @@ make_coverage_table_sim         <- function(intervention_priority_input = "conta
 }
 
 make_coverage_table             <- function(intervention_priority_input = "contact", intervention_stratification_input = "overall"){
-  targets::tar_read(intervention_coverage_data)[["place_coverage"]] %>%
+  targets::tar_read(data_intervention_results_coverage_collected)[["place_coverage"]] %>%
     filter(
       intervention_priority == intervention_priority_input, 
       intervention_stratification == intervention_stratification_input

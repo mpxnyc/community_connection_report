@@ -61,44 +61,44 @@ list(
   command = load_initial_settings()
 ),
   tar_target(
-    name = raw_data_participants,
+    name = data_people_raw,
     command = readRDS("/Users/keletso/Documents/_data/mpxnyc/mpxnyc_person_data.R")
   ),
   tar_target(
-    name = raw_data_places,
+    name = data_places_raw,
     command = readRDS("/Users/keletso/Documents/_data/mpxnyc/mpxnyc_place_data.R")
   ),
   tar_target(
-    name = participant_data,
-    command = clean_participant_data(raw_data_participants)
+    name = data_people_clean,
+    command = clean_participant_data(data_people_raw)
   ),
   tar_target(
-    name = places_data,
-    command = clean_place_data(raw_data_places)
+    name = data_places_clean,
+    command = clean_place_data(data_places_raw)
   ),
   tar_target(
-    name = bipartite_graph,
-    command = make_bipartite_graph(places_data, participant_data, analytic_scale = initial_settings[["analytic_scale"]])
+    name = data_bipartite_graph_collected,
+    command = make_bipartite_graph(data_places_clean, data_people_clean, analytic_scale = initial_settings[["analytic_scale"]])
   ),  
   tar_target(
-    name = bipartite_graph_sim,
-    command = make_simulated_bipartite_graph(bipartite_graph, n_reps = initial_settings[["n_reps_graph"]])
+    name = data_bipartite_graph_simulated,
+    command = make_simulated_bipartite_graph(data_bipartite_graph_collected, n_reps = initial_settings[["n_reps_graph"]])
   ),
   tar_target(
-    name = intervention_coverage_data,
-    command = conduct_all_campaigns(bipartite_graph, bipartite_graph)
+    name = data_intervention_results_coverage_collected,
+    command = conduct_all_campaigns(data_bipartite_graph_collected, data_bipartite_graph_collected)
   ),
 tar_target(
-  name = intervention_coverage_data_sim,
-  command = conduct_all_campaigns(bipartite_graph_sim, bipartite_graph)
+  name = data_intervention_results_coverage_simulated,
+  command = conduct_all_campaigns(data_bipartite_graph_simulated, data_bipartite_graph_collected)
 ),
 tar_target(
   name = graph_evolution_data,
-  command = get_graph_evolution(bipartite_graph, intervention_coverage_data)
+  command = get_graph_evolution(data_bipartite_graph_collected, data_intervention_results_coverage_collected)
 ),
 tar_target(
   name = graph_evolution_data_sim,
-  command = get_graph_evolution(bipartite_graph_sim, intervention_coverage_data_sim)
+  command = get_graph_evolution(data_bipartite_graph_simulated, data_intervention_results_coverage_simulated)
 )
 )
 

@@ -4,7 +4,7 @@ make_table_mixing       <- function(variable){
   variable_name <- quo_name(variable)
   
   
-  data <- targets::tar_read(bipartite_graph) %>%
+  data <- targets::tar_read(data_bipartite_graph_collected) %>%
     filter(!(demo_group %in% c("missing", "other")) | !type) %>%
     igraph::bipartite.projection(which = "true") %>%
     as_tbl_graph(directed = FALSE) %>%

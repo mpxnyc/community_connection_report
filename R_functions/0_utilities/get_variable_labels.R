@@ -5,7 +5,7 @@ get_variable_labels             <- function(variable_name, person_analysis = TRU
   
   if (is.null(variable_labels)){
     if (person_analysis){
-      variable_labels <- targets::tar_read(bipartite_graph) %>%
+      variable_labels <- targets::tar_read(data_bipartite_graph_collected) %>%
         tidygraph::activate(nodes) %>%
         tidygraph::filter(type) %>%
         data.frame() %>%
@@ -15,7 +15,7 @@ get_variable_labels             <- function(variable_name, person_analysis = TRU
       variable_levels <- variable_labels
     } else {
       
-      variable_labels <- targets::tar_read(bipartite_graph) %>%
+      variable_labels <- targets::tar_read(data_bipartite_graph_collected) %>%
         tidygraph::activate(edges) %>%
         tidygraph::filter(type) %>%
         data.frame() %>%

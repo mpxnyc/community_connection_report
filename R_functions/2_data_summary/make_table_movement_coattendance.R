@@ -1,6 +1,6 @@
 make_table_movement_coattendance  <- function(){
   
-  targets::tar_read(bipartite_graph) %>%
+  targets::tar_read(data_bipartite_graph_collected) %>%
     igraph::bipartite_projection(which = "false") %>%
     tidygraph::as_tbl_graph() %>%
     activate(edges) %>%

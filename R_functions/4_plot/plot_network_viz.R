@@ -1,6 +1,6 @@
 plot_network_viz        <- function(data){
   
-  graph_object <- targets::tar_read(bipartite_graph) %>%
+  graph_object <- targets::tar_read(data_bipartite_graph_collected) %>%
     igraph::bipartite_projection(which = "false") %>%
     tidygraph::as_tbl_graph() %>%
     dplyr::rename(level = name) %>% 

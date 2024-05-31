@@ -20,18 +20,18 @@ make_table_freq3                <- function(variable = overall,stratum_variable_
   stratum_variable_b_labels <- get_variable_labels(stratum_variable_b_name)[["variable_labels"]]
   
   if (person_analysis){
-    original_data_raw  <- targets::tar_read(bipartite_graph_coverage) %>%
+    original_data_raw  <- targets::tar_read(data_bipartite_graph_collected) %>%
       activate(nodes) %>%
       filter(type == TRUE) 
     
-    simulated_data_raw <- targets::tar_read(bipartite_graph_coverage_sim) %>%
+    simulated_data_raw <- targets::tar_read(data_bipartite_graph_simulated) %>%
       activate(nodes) %>%
       filter(type == TRUE) 
   } else {
-    original_data_raw  <- targets::tar_read(bipartite_graph_coverage) %>%
+    original_data_raw  <- targets::tar_read(data_bipartite_graph_collected) %>%
       activate(edges) 
     
-    simulated_data_raw <- targets::tar_read(bipartite_graph_coverage_sim) %>%
+    simulated_data_raw <- targets::tar_read(data_bipartite_graph_simulated) %>%
       activate(edges)
   }
   

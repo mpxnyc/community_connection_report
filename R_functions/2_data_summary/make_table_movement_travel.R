@@ -1,6 +1,6 @@
 make_table_movement_travel        <- function(){
   
-  home_data <-  targets::tar_read(bipartite_graph) %>%
+  home_data <-  targets::tar_read(data_bipartite_graph_collected) %>%
     activate(edges) %>%
     filter(home) %>%
     mutate(person_name = .N()$name[from]) %>%
@@ -8,7 +8,7 @@ make_table_movement_travel        <- function(){
     data.frame() %>%
     select(home_name, person_name)
   
-  place_data <-  targets::tar_read(bipartite_graph) %>%
+  place_data <-  targets::tar_read(data_bipartite_graph_collected) %>%
     activate(edges) %>%
     filter(!home) %>%
     mutate(person_name = .N()$name[from]) %>%
