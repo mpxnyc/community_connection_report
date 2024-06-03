@@ -2,35 +2,30 @@ make_intervention_results_coverage <- function(bipartite_graph_sim, bipartite_gr
   
   list_results <- list()
   
-  n_neighborhoods <- bipartite_graph %>%
-                          activate(nodes) %>%
-                          filter(rep == 1) %>%
-                          filter(!type) %>%
-                          igraph::gorder()
   
   working_bipartite_graph_sim <- bipartite_graph_sim %>%
                                   mutate(intervention_ranking = NA) %>%
                                   mutate(intervention_contact_place = NA) 
   
-  list_results[[1]] <- mark_n_spatial_units(working_bipartite_graph_sim, n_neighborhoods,  intervention_priority = "contact",  overall) %>%
+  list_results[[1]] <- mark_spatial_units(working_bipartite_graph_sim,  intervention_priority = "contact",  overall) %>%
     activate(nodes) %>%
     data.frame() %>%
     mutate(intervention_priority = "contact") %>%
     mutate(intervention_stratification = "overall")
   
-  list_results[[2]] <- mark_n_spatial_units(working_bipartite_graph_sim, n_neighborhoods,  intervention_priority = "movement",  overall) %>%
+  list_results[[2]] <- mark_spatial_units(working_bipartite_graph_sim,  intervention_priority = "movement",  overall) %>%
   activate(nodes) %>%
     data.frame() %>%
     mutate(intervention_priority = "movement") %>%
     mutate(intervention_stratification = "overall")
   
-  list_results[[3]] <- mark_n_spatial_units(working_bipartite_graph_sim, n_neighborhoods,  intervention_priority = "contact",  demo_group) %>% 
+  list_results[[3]] <- mark_spatial_units(working_bipartite_graph_sim,  intervention_priority = "contact",  demo_group) %>% 
   activate(nodes) %>%
     data.frame() %>%
     mutate(intervention_priority = "contact") %>%
     mutate(intervention_stratification = "demo_group")
   
-  list_results[[4]] <- mark_n_spatial_units(working_bipartite_graph_sim, n_neighborhoods,  intervention_priority = "movement",  demo_group) %>%
+  list_results[[4]] <- mark_spatial_units(working_bipartite_graph_sim,  intervention_priority = "movement",  demo_group) %>%
   activate(nodes) %>%
     data.frame() %>%
     mutate(intervention_priority = "movement") %>%

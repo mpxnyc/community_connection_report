@@ -1,25 +1,24 @@
-
-
-
-mark_n_spatial_units <- function(bipartite_graph, n_neighborhoods, intervention_priority_input, strata){
+mark_spatial_units <- function(bipartite_graph, intervention_priority_input, strata){
   
   strata           <- rlang::enquo(strata)
   strata_name      <- rlang::quo_text(strata)
   
   
   coverage_graph   <- helper_initialize_coverage_graph(bipartite_graph, {{strata}})
+  
   n_strata         <- attr(coverage_graph, "n_strata")
   strata_levels    <- attr(coverage_graph, "strata_levels")
+  n_spatial_units  <- attr(coverage_graph, "n_spatial_units")
   
 
-  seq(n_neighborhoods) %>%
+  seq(n_spatial_units) %>%
     purrr::reduce(
       function(accumulated_value, next_value){
         
         stratum                     <- strata_levels[(next_value %% n_strata) + 1]
-        top_neighborhoods           <- find_top_spatial_units(accumulated_value, intervention_priority_input, stratum)
+        top_spatial_units           <- find_top_spatial_units(accumulated_value, intervention_priority_input, stratum)
         
-        mark_top_spatial_units(accumulated_value, top_neighborhoods)
+        mark_top_spatial_units(accumulated_value, top_spatial_units)
         
       },
       .init = coverage_graph
