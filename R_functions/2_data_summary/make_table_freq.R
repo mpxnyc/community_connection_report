@@ -29,10 +29,12 @@ make_table_freq3                <- function(variable = overall,stratum_variable_
       filter(type == TRUE) 
   } else {
     original_data_raw  <- targets::tar_read(data_bipartite_graph_collected) %>%
-      activate(edges) 
+      activate(edges)  %>% 
+      filter(placeType != "home")
     
     simulated_data_raw <- targets::tar_read(data_bipartite_graph_simulated) %>%
-      activate(edges)
+      activate(edges) %>% 
+      filter(placeType != "home")
   }
   
   
@@ -46,6 +48,11 @@ make_table_freq3                <- function(variable = overall,stratum_variable_
       level           = {{variable}},
       stratum_a       = {{stratum_variable_a}},
       stratum_b       = {{stratum_variable_b}}
+    ) %>%
+    mutate(
+      level = as.character(level),
+      stratum_a = as.character(stratum_a),
+      stratum_b = as.character(stratum_b)
     ) %>%
     mutate(
       level = factor(level, variable_levels, variable_labels),
@@ -66,6 +73,11 @@ make_table_freq3                <- function(variable = overall,stratum_variable_
       level           = {{variable}},
       stratum_a       = {{stratum_variable_a}},
       stratum_b       = {{stratum_variable_b}}
+    ) %>%
+    mutate(
+      level = as.character(level),
+      stratum_a = as.character(stratum_a),
+      stratum_b = as.character(stratum_b)
     ) %>%
     mutate(
       level = factor(level, variable_levels, variable_labels),

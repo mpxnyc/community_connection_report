@@ -1,6 +1,6 @@
 
-find_top_spatial_units <- function(bipartite_graph_sim_ranked, intervention_priority_input, stratum_input){
-  bipartite_graph_sim_ranked %>%
+find_top_spatial_units <- function(bipartite_graph, intervention_priority_input, stratum_input){
+  bipartite_graph %>%
     tidygraph::activate(nodes) %>%
     tidygraph::filter(is.na(intervention_ranking)) %>%
     tidygraph::filter(stratum == stratum_input | !type) %>%

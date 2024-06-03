@@ -1,5 +1,6 @@
 
-******* CLEAN ********
+******* CLEAN **************
+****************************
 clean_data_people 
 - This function cleans survey data related to participants and limits it to new york residents and places
 - Though we measured the countfriends, countphysical, and countSsex variables using integers, we converted it to an ordinal variable. We recoded those who answered unsure about questions HIV status, and monkeypoxVax to "no". 
@@ -8,6 +9,7 @@ clean_data_places
 - This function cleans survey data related to places and limits places to those in new york city according to boundary maps provided by [...]
 
 ******* CREATE DATA ********
+****************************
 create_bipartite_graph_collected
 - This function constructs a bipartite graph where nodes are people and places (meaning either the records relating to partitipant home location, or the locations of physical and social contact in a congregate setting). 
 - By definition, a bipartite graph has two classes of nodes, and ties cannont exists between a pair of nodes of the same class.
@@ -17,8 +19,10 @@ create_bipartite_graph_simulated
 
 
 ******* CALCULATE INTERVENTION RESULTS ********
-** COVERAGE **
+***********************************************
 
+** COVERAGE **
+**************
 find_top_spatial_units
 - This returns the ****n_reps**** intervention-unranked place nodes in bipartite_graph_simulated that have the highest graph-ranking either in terms of their overall degree, conditional on the rep. (1 top node times *n_reps* reps). 
 

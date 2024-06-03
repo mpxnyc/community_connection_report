@@ -22,7 +22,6 @@ make_coverage_table_sim         <- function(intervention_priority_input = "conta
       cum_prop_ci_ub = quantile(cum_prop, 0.975)
     ) %>%
     ungroup() %>%
-    mutate(level = as.character(level)) %>%
     arrange(-count) %>%
     mutate(level = factor(level, unique(.$level) ))
   

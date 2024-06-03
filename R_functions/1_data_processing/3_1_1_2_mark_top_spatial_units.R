@@ -1,6 +1,6 @@
-mark_top_spatial_units <- function(bipartite_graph_sim, top_neighborhoods){
+mark_top_spatial_units <- function(bipartite_graph, top_neighborhoods){
   
-  places_and_people_to_be_marked       <- bipartite_graph_sim %>%
+  places_and_people_to_be_marked       <- bipartite_graph %>%
                                             activate(nodes) %>%
                                             filter(is.na(intervention_ranking)) %>%
                                             igraph::neighborhood(nodes = top_neighborhoods) %>%
@@ -10,7 +10,7 @@ mark_top_spatial_units <- function(bipartite_graph_sim, top_neighborhoods){
   
   
   helper_get_intervention_contact_place <- function(name){
-    vax_places         <- bipartite_graph_sim %>%
+    vax_places         <- bipartite_graph %>%
                               activate(nodes) %>%
                               filter(name %in% places_and_people_to_be_marked) %>%
                               activate(edges) %>%
@@ -23,16 +23,10 @@ mark_top_spatial_units <- function(bipartite_graph_sim, top_neighborhoods){
     vax_places_vec[name]
   }
 
-  
-
-
-  
-  
-  
-  current_top_rank    <- attr(bipartite_graph_sim, "top_rank") 
+  current_top_rank    <- attr(bipartite_graph, "top_rank") 
   next_top_rank       <- current_top_rank + 1
   
-  result <- bipartite_graph_sim %>%
+  result <- bipartite_graph %>%
               activate(nodes) %>%
               mutate(intervention_ranking = ifelse(name %in% places_and_people_to_be_marked, next_top_rank, intervention_ranking)) %>%
               mutate(intervention_contact_place = ifelse(name %in% places_and_people_to_be_marked, helper_get_intervention_contact_place(name), intervention_contact_place))

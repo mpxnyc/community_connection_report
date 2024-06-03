@@ -1,4 +1,4 @@
-make_data_intervention_results_coverage <- function(bipartite_graph_sim, bipartite_graph){
+make_intervention_results_coverage <- function(bipartite_graph_sim, bipartite_graph){
   
   list_results <- list()
   
@@ -47,7 +47,6 @@ final_result[["person_coverage"]] <- all_data %>%
                                           filter(type)
 
 final_result[["place_coverage"]] <- final_result[["person_coverage"]] %>%
-                                          arrange() %>%
                                           group_by(intervention_contact_place, intervention_priority, intervention_stratification, rep) %>%
                                           summarize(count = n(), intervention_ranking = first(intervention_ranking)) %>%
                                           arrange(-count) %>%
