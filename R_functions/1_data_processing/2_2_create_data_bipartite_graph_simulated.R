@@ -1,6 +1,7 @@
 
 create_bipartite_graph_simulated <- function(bipartite_graph, n_reps = 99){
   
+  n_spatial_units <- attr(bipartite_graph, "n_spatial_units") 
 
   participant_data     <- bipartite_graph %>%
                                 tidygraph::activate(nodes) %>%
@@ -83,6 +84,7 @@ create_bipartite_graph_simulated <- function(bipartite_graph, n_reps = 99){
   
   
     attr(result, "n_reps") <- n_reps
+    attr(result, "n_spatial_units") <- n_spatial_units
     
     result
 

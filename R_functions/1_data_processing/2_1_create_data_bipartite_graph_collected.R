@@ -1,5 +1,21 @@
 create_bipartite_graph_collected <- function(place_data, participant_data, analytic_scale = "neighborhood"){
   
+  if (analytic_scale == "neighborhood"){
+    
+    n_spatial_units <- dim(mpxnyc::neighborhood_sf_obj)[1]
+    
+  } else if (analytic_scale == "community"){
+    
+    n_spatial_units <- dim(mpxnyc::community_sf_obj)[1]
+    
+  } else if (analytic_scale == "borough"){
+    
+    n_spatial_units <- dim(mpxnyc::borough_sf_obj)[1]
+    
+  } else if (analytic_scale == "census_tract"){
+    n_spatial_units <- dim(mpxnyc::census_tract_sf_obj)[1]
+  }
+  
   place_edges                 <- place_data %>%
                                     dplyr::rename(from = userId) %>%
                                     dplyr::mutate(to = mpxnyc::convert_spatial_unit_ny(input_census_tract = censusTractPlace, convert_to = analytic_scale)) %>%
@@ -35,10 +51,13 @@ create_bipartite_graph_collected <- function(place_data, participant_data, analy
                                    dplyr::bind_rows()
   
   
-  tidygraph::tbl_graph(nodes = nodes, edges = edges, node_key = "name") %>%
-    activate(nodes) %>%
-    mutate(rep = 1)
-
+  graph <- tidygraph::tbl_graph(nodes = nodes, edges = edges, node_key = "name") %>%
+                  activate(nodes) %>%
+                  mutate(rep = 1)
+  
+  attr(graph, "n_spatial_units") <- n_spatial_units
+  
+  graph
   
 }
 
