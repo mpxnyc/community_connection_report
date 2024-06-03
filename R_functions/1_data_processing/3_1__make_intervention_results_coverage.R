@@ -1,51 +1,34 @@
-make_intervention_results_coverage <- function(bipartite_graph_sim, bipartite_graph){
+make_intervention_results_coverage <- function(data_bipartite_graph){
   
   list_results <- list()
   
+  list_results[[1]] <- data_bipartite_graph %>%
+                              mark_spatial_units( intervention_priority = "contact",  overall) 
   
-  working_bipartite_graph_sim <- bipartite_graph_sim %>%
-                                  mutate(intervention_ranking = NA) %>%
-                                  mutate(intervention_contact_place = NA) 
+  list_results[[2]] <- data_bipartite_graph %>%
+                              mark_spatial_units(intervention_priority = "movement",  overall) 
   
-  list_results[[1]] <- mark_spatial_units(working_bipartite_graph_sim,  intervention_priority = "contact",  overall) %>%
-    activate(nodes) %>%
-    data.frame() %>%
-    mutate(intervention_priority = "contact") %>%
-    mutate(intervention_stratification = "overall")
+  list_results[[3]] <- data_bipartite_graph %>%
+                              mark_spatial_units(intervention_priority = "contact",  demo_group) 
   
-  list_results[[2]] <- mark_spatial_units(working_bipartite_graph_sim,  intervention_priority = "movement",  overall) %>%
-  activate(nodes) %>%
-    data.frame() %>%
-    mutate(intervention_priority = "movement") %>%
-    mutate(intervention_stratification = "overall")
+  list_results[[4]] <- data_bipartite_graph %>%
+                              mark_spatial_units(intervention_priority = "movement",  demo_group) 
   
-  list_results[[3]] <- mark_spatial_units(working_bipartite_graph_sim,  intervention_priority = "contact",  demo_group) %>% 
-  activate(nodes) %>%
-    data.frame() %>%
-    mutate(intervention_priority = "contact") %>%
-    mutate(intervention_stratification = "demo_group")
-  
-  list_results[[4]] <- mark_spatial_units(working_bipartite_graph_sim,  intervention_priority = "movement",  demo_group) %>%
-  activate(nodes) %>%
-    data.frame() %>%
-    mutate(intervention_priority = "movement") %>%
-    mutate(intervention_stratification = "demo_group")
-  
+
+  all_data          <- list_results %>%
+                              bind_rows() %>%
+                              select(name, intervention_contact_place, intervention_contact_place, intervention_priority, strata, intervention_ranking, type, rep)
   
   final_result <- list()
   
-all_data <- list_results %>%
-              bind_rows() %>%
-              select(name, intervention_contact_place, intervention_contact_place, intervention_priority, intervention_stratification, intervention_ranking, type, rep)
-  
-final_result[["person_coverage"]] <- all_data %>%
+  final_result[["person_coverage"]] <- all_data %>%
                                           filter(type)
 
-final_result[["place_coverage"]] <- final_result[["person_coverage"]] %>%
-                                          group_by(intervention_contact_place, intervention_priority, intervention_stratification, rep) %>%
+  final_result[["place_coverage"]] <- final_result[["person_coverage"]] %>%
+                                          group_by(intervention_contact_place, intervention_priority, strata, rep) %>%
                                           summarize(count = n(), intervention_ranking = first(intervention_ranking)) %>%
                                           arrange(-count) %>%
-                                          group_by(intervention_priority, intervention_stratification, rep) %>%
+                                          group_by(intervention_priority, strata, rep) %>%
                                           mutate(proportion = count / sum(count)) %>%
                                           mutate(cum_prop = cumsum(proportion)) %>%
                                           mutate(group = "Group A") %>%
@@ -56,11 +39,11 @@ final_result[["place_coverage"]] <- final_result[["person_coverage"]] %>%
   tibble()
   
 
-final_result[["person_coverage"]] <- final_result[["person_coverage"]] %>%
+  final_result[["person_coverage"]] <- final_result[["person_coverage"]] %>%
                                             left_join(final_result[["place_coverage"]])  %>% 
-                                            select(name, intervention_priority, intervention_stratification, rep, intervention_contact_place, intervention_ranking, proportion, cum_prop, group) %>% 
+                                            select(name, intervention_priority, strata, rep, intervention_contact_place, intervention_ranking, proportion, cum_prop, group) %>% 
   tibble()
 
-final_result 
+  final_result 
 
 }

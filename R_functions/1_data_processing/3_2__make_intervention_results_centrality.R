@@ -2,7 +2,7 @@ make_intervention_results_centrality <- function(bipartite_graph_sim, interventi
   
   rankings <- intervention_coverage_data_sim[["place_coverage"]] %>%
     filter(intervention_priority == intervention_priority_input) %>%
-    filter(intervention_stratification == intervention_stratification_input) %>%
+    filter(strata == intervention_stratification_input) %>%
     transmute(name = intervention_contact_place, intervention_ranking) %>%
     arrange(intervention_ranking)
   

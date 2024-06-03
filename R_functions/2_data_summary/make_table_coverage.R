@@ -31,7 +31,7 @@ make_coverage_table             <- function(intervention_priority_input = "conta
   targets::tar_read(data_intervention_results_coverage_collected)[["place_coverage"]] %>%
     filter(
       intervention_priority == intervention_priority_input, 
-      intervention_stratification == intervention_stratification_input
+      strata == intervention_stratification_input
     ) %>%
     mutate(level = intervention_contact_place) %>%
     ungroup() %>%
