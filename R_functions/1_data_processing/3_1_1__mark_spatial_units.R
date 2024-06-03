@@ -27,7 +27,8 @@ mark_spatial_units <- function(bipartite_graph, intervention_priority_input, str
     mutate(intervention_priority = intervention_priority_input) %>%
     mutate(intervention_ranking  = ifelse(is.na(intervention_ranking), 999, intervention_ranking)) %>%
     data.frame() %>%
-    tibble()
+    tibble() %>%
+    filter(type)
   
 }
 

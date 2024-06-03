@@ -26,6 +26,8 @@ mark_top_spatial_units <- function(bipartite_graph, top_neighborhoods){
   current_top_rank    <- attr(bipartite_graph, "top_rank") 
   next_top_rank       <- current_top_rank + 1
   
+  print(next_top_rank)
+  
   result <- bipartite_graph %>%
               activate(nodes) %>%
               mutate(intervention_ranking = ifelse(name %in% places_and_people_to_be_marked, next_top_rank, intervention_ranking)) %>%

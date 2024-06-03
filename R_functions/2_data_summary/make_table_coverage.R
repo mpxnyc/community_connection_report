@@ -6,10 +6,10 @@ make_coverage_table_sim         <- function(intervention_priority_input = "conta
   targets::tar_read(data_intervention_results_coverage_simulated)[["place_coverage"]] %>%
     filter(
       intervention_priority == intervention_priority_input, 
-      intervention_stratification == intervention_stratification_input
+      strata == intervention_stratification_input
     ) %>%
     mutate(level = intervention_contact_place) %>%
-    group_by(intervention_priority, intervention_ranking, intervention_stratification) %>%
+    group_by(intervention_priority, intervention_ranking, strata) %>%
     summarize(
       mean_count = mean(count), 
       count_ci_lb = quantile(count, 0.025), 
@@ -22,21 +22,27 @@ make_coverage_table_sim         <- function(intervention_priority_input = "conta
       cum_prop_ci_ub = quantile(cum_prop, 0.975)
     ) %>%
     ungroup() %>%
-    arrange(-count) %>%
-    mutate(level = factor(level, unique(.$level) ))
+    arrange(-mean_count) 
   
 }
 
 make_coverage_table             <- function(intervention_priority_input = "contact", intervention_stratification_input = "overall"){
-  targets::tar_read(data_intervention_results_coverage_collected)[["place_coverage"]] %>%
-    filter(
-      intervention_priority == intervention_priority_input, 
-      strata == intervention_stratification_input
-    ) %>%
-    mutate(level = intervention_contact_place) %>%
-    ungroup() %>%
-    mutate(level = as.character(level)) %>%
-    arrange(-count) %>%
-    mutate(level = factor(level, unique(.$level) ))
+ 
+  simulated_data <- make_coverage_table_sim(intervention_priority_input, intervention_stratification_input)
   
+  
+   collected_data <- targets::tar_read(data_intervention_results_coverage_collected)[["place_coverage"]] %>%
+                        filter(
+                          intervention_priority == intervention_priority_input, 
+                          strata == intervention_stratification_input
+                        ) %>%
+                        mutate(level = intervention_contact_place) %>%
+                        ungroup() %>%
+                        mutate(level = as.character(level)) %>%
+                        arrange(-count)
+   
+   simulated_data %>%
+     left_join(collected_data, by = c("strata", "intervention_priority", "intervention_ranking")) %>%
+     select(intervention_priority, strata, intervention_ranking, count, names(.))
+                      
 }
