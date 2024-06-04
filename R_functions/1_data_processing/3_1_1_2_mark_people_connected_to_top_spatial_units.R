@@ -1,4 +1,4 @@
-mark_top_spatial_units <- function(bipartite_graph, top_neighborhoods){
+mark_people_connected_to_top_spatial_units <- function(bipartite_graph, top_neighborhoods){
   
   places_and_people_to_be_marked       <- bipartite_graph %>%
                                             activate(nodes) %>%

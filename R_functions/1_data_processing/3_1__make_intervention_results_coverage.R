@@ -3,7 +3,7 @@ make_intervention_results_coverage <- function(data_bipartite_graph){
   list_results <- list()
   
   list_results[[1]] <- data_bipartite_graph %>%
-                              mark_spatial_units( intervention_priority = "contact",  overall) 
+                              mark_spatial_units(intervention_priority = "contact",  overall) 
   
   list_results[[2]] <- data_bipartite_graph %>%
                               mark_spatial_units(intervention_priority = "movement",  overall) 
@@ -17,14 +17,14 @@ make_intervention_results_coverage <- function(data_bipartite_graph){
 
   all_data          <- list_results %>%
                               bind_rows() %>%
-                              select(name, intervention_contact_place, intervention_contact_place, intervention_priority, strata, intervention_ranking, type, rep)
+                              select(name, intervention_contact_place, intervention_priority, strata, intervention_ranking, rep)
   
   final_result <- list()
   
   final_result[["person_coverage"]] <- all_data 
 
   final_result[["place_coverage"]] <- final_result[["person_coverage"]] %>%
-                                          group_by(intervention_contact_place, intervention_priority, strata, rep) %>%
+                                          group_by(intervention_ranking, intervention_contact_place, intervention_priority, strata, rep) %>%
                                           summarize(count = n()) %>%
                                           arrange(-count) %>%
                                           group_by(intervention_priority, strata, rep) %>%
