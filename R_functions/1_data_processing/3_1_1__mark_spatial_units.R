@@ -39,8 +39,7 @@ helper_initialize_coverage_graph <- function(bipartite_graph, strata){
   bipartite_graph_initialized                            <- bipartite_graph %>% 
     activate(nodes) %>%
     mutate(intervention_ranking = NA) %>%
-    #mutate(stratum = {{strata}}) %>%
-    mutate(stratum = overall) %>%
+    mutate(stratum = {{strata}}) %>%
     mutate(intervention_contact_place = NA)
   
   attr(bipartite_graph_initialized, "top_rank")          <- 0

@@ -26,17 +26,20 @@ make_intervention_results_coverage <- function(data_bipartite_graph){
   final_result[["place_coverage"]] <- final_result[["person_coverage"]] %>%
                                           group_by(intervention_ranking, intervention_contact_place, intervention_priority, strata, rep) %>%
                                           summarize(count = n()) %>%
-                                          arrange(-count) %>%
+                                          arrange(-count, intervention_ranking, intervention_priority, strata, rep) %>%
                                           group_by(intervention_priority, strata, rep) %>%
+    arrange(intervention_ranking) %>%
                                           mutate(proportion = count / sum(count)) %>%
                                           mutate(cum_prop = cumsum(proportion)) %>%
     mutate(rank = 1:n()) %>%
+    ungroup() %>%
                                           mutate(group = "Group A") %>%
                                           mutate(group = ifelse(cum_prop >= 0.33, "Group B", group)) %>%
                                           mutate(group = ifelse(cum_prop >= 0.66, "Group C", group)) %>%
                                           mutate(group = lag(group)) %>%
                                           mutate(group = ifelse(is.na(group), "Group A", group))  %>%
-  tibble()
+  tibble() %>%
+    arrange(intervention_ranking, intervention_priority, strata)
   
 
   final_result[["person_coverage"]] <- final_result[["person_coverage"]] %>%
@@ -47,3 +50,10 @@ make_intervention_results_coverage <- function(data_bipartite_graph){
   final_result 
 
 }
+
+
+testing <- function(){
+  data_bipartite_graph <- targets::tar_read(data_bipartite_graph_collected) 
+}
+
+
