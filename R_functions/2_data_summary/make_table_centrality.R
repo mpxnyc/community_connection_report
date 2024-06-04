@@ -1,12 +1,57 @@
 make_table_centrality       <- function(){
-  targets::tar_read(data_intervention_results_centrality_collected) %>%
-    dplyr::transmute(
-      intervention_ranking, 
-      n_lcc                       = mean_n_lcc, 
-      n_remainder                 = mean_n_remainder, 
-      n_singleton                 = mean_n_singleton, 
-      intervention_priority, 
-      intervention_stratification
-    ) %>%
-    tidyr::pivot_longer(cols = c(n_lcc, n_remainder, n_singleton))
-}
+  collected_n <- targets::tar_read(data_intervention_results_centrality_collected) %>%
+                    dplyr::transmute(
+                      intervention_ranking, 
+                      lcc                       = mean_n_lcc, 
+                      remainder                 = mean_n_remainder, 
+                      singleton                 = mean_n_singleton, 
+                      intervention_priority, 
+                      intervention_stratification
+                    ) %>%
+                    tidyr::pivot_longer(cols = c(lcc, remainder, singleton)) %>%
+                    rename(est = value)
+  
+  
+  simulated_mean <- targets::tar_read(data_intervention_results_centrality_simulated) %>%
+                    dplyr::transmute(
+                      intervention_ranking, 
+                      lcc                       = mean_n_lcc, 
+                      remainder                 = mean_n_remainder, 
+                      singleton                 = mean_n_singleton, 
+                      intervention_priority, 
+                      intervention_stratification
+                    ) %>%
+                    tidyr::pivot_longer(cols = c(lcc, remainder, singleton)) %>%
+                    rename(bootstrap_est = value)
+  
+  simulated_ci_lb <- targets::tar_read(data_intervention_results_centrality_simulated) %>%
+                    dplyr::transmute(
+                      intervention_ranking, 
+                      lcc                       = ci_lb_n_lcc, 
+                      remainder                 = ci_lb_n_remainder, 
+                      singleton                 = ci_lb_n_singleton, 
+                      intervention_priority, 
+                      intervention_stratification
+                    ) %>%
+                    tidyr::pivot_longer(cols = c(lcc, remainder, singleton)) %>%
+                    rename(bootstrap_ci_lb = value)
+  
+  simulated_ci_ub <- targets::tar_read(data_intervention_results_centrality_simulated) %>%
+                        dplyr::transmute(
+                          intervention_ranking, 
+                          lcc                       = ci_ub_n_lcc, 
+                          remainder                 = ci_ub_n_remainder, 
+                          singleton                 = ci_ub_n_singleton, 
+                          intervention_priority, 
+                          intervention_stratification
+                        ) %>%
+                        tidyr::pivot_longer(cols = c(lcc, remainder, singleton)) %>%
+                        rename(bootstrap_ci_ub = value)
+  
+  
+  collected_n %>%
+    left_join(simulated_mean,  by = c("intervention_ranking", "intervention_priority", "intervention_stratification", "name")) %>%
+    left_join(simulated_ci_lb, by = c("intervention_ranking", "intervention_priority", "intervention_stratification", "name")) %>%
+    left_join(simulated_ci_ub, by = c("intervention_ranking", "intervention_priority", "intervention_stratification", "name"))
+
+  }

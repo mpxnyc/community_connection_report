@@ -1,8 +1,8 @@
 calculate_component_stats <- function(bipartite_graph) {
   
   working_graph       <- bipartite_graph %>%
-    igraph::bipartite_projection(which = "true") %>%
-    tidygraph::as_tbl_graph() 
+                            igraph::bipartite_projection(which = "true") %>%
+                            tidygraph::as_tbl_graph() 
   
   
   component_membership <- igraph::components(working_graph)$membership
