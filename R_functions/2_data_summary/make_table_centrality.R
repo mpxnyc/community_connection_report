@@ -1,5 +1,5 @@
 make_table_centrality       <- function(){
-  targets::tar_read(graph_evolution_data) %>%
+  targets::tar_read(data_intervention_results_centrality_collected) %>%
     dplyr::transmute(
       intervention_ranking, 
       n_lcc                       = mean_n_lcc, 
