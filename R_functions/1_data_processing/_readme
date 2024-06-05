@@ -3,10 +3,10 @@
 ****************************
 1_1_clean_data_people 
 - This function cleans survey data related to participants and limits it to new york residents and places
-- Though we measured the countfriends, countphysical, and countSsex variables using integers, we converted it to an ordinal variable. We recoded those who answered unsure about questions HIV status, and monkeypoxVax to "no". 
+- Though we measured the countfriends, countphysical, and countSsex variables using integers, we converted these measures to ordinal variables. We recoded those who answered "unsure" about questions HIV status, and monkeypoxVax to "no". 
 
 1_2_clean_data_places
-- This function cleans survey data related to places and limits places to those in new york city according to boundary maps provided by [...]
+- This function cleans survey data related to places and limits places to those in new york city according to boundary maps provided by the City of New York and saved in the mpxnyc library.
 
 ******* CREATE DATA ********
 ****************************
@@ -24,10 +24,10 @@
 ** COVERAGE **
 **************
 3_1_1_1_find_top_spatial_units
-- This returns the ****n_reps**** intervention-unranked place nodes in bipartite_graph_simulated that have the highest graph-ranking either in terms of their overall degree, conditional on the rep. (1 top node times *n_reps* reps). 
+- This returns the ****n_reps**** intervention-unranked place nodes in data_bipartite_graph_simulated that have the highest graph-ranking, conditional on the rep. (1 top node times *n_reps* reps). 
 
 3_1_1_2_mark_people_connected_to_top_spatial_units
-- This takes the **n_reps** top spatial units along with a bipartite_graph_simulated object and it returns a bipartite_graph_simulated which has:
+- This takes the **n_reps** top spatial units along with a data_bipartite_graph_simulated object and it returns a data_bipartite_graph_simulated which has:
 -- marked the top spatial units with the intervention_rank of the highest node + 1. 
 -- marked the people connected with a top spatial unit with the same intervention_rank.
 
