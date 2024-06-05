@@ -1,8 +1,7 @@
-mark_spatial_units <- function(bipartite_graph, intervention_priority_input, strata){
+find_participant_intervention_contact_place <- function(bipartite_graph, intervention_priority_input, strata){
   
   strata           <- rlang::enquo(strata)
   strata_name      <- rlang::quo_text(strata)
-  
   
   coverage_graph   <- helper_initialize_coverage_graph(bipartite_graph, {{strata}})
   
@@ -14,11 +13,9 @@ mark_spatial_units <- function(bipartite_graph, intervention_priority_input, str
   seq(n_spatial_units) %>%
     purrr::reduce(
       function(accumulated_value, next_value){
-        
-        stratum                     <- strata_levels[(next_value %% n_strata) + 1]
-        top_spatial_units           <- find_top_spatial_units(accumulated_value, intervention_priority_input, stratum)
-        
-        mark_people_connected_to_top_spatial_units(accumulated_value, top_spatial_units)
+        strata_levels[(next_value %% n_strata) + 1] %>%
+            find_top_spatial_units(accumulated_value, intervention_priority_input, .) %>%
+            mark_people_connected_to_top_spatial_units(accumulated_value, .)
         
       },
       .init = coverage_graph
