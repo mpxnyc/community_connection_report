@@ -1,20 +1,20 @@
 
 ******* CLEAN **************
 ****************************
-clean_data_people 
+1_1_clean_data_people 
 - This function cleans survey data related to participants and limits it to new york residents and places
 - Though we measured the countfriends, countphysical, and countSsex variables using integers, we converted it to an ordinal variable. We recoded those who answered unsure about questions HIV status, and monkeypoxVax to "no". 
 
-clean_data_places
+1_2_clean_data_places
 - This function cleans survey data related to places and limits places to those in new york city according to boundary maps provided by [...]
 
 ******* CREATE DATA ********
 ****************************
-create_bipartite_graph_collected
+2_1_create_data_bipartite_graph_collected
 - This function constructs a bipartite graph where nodes are people and places (meaning either the records relating to partitipant home location, or the locations of physical and social contact in a congregate setting). 
 - By definition, a bipartite graph has two classes of nodes, and ties cannont exists between a pair of nodes of the same class.
 
-create_bipartite_graph_simulated
+2_2_create_data_bipartite_graph_simulated
 - This function constructs a bipartite graph n_person_nodes_original * n_reps person + n_place_nodes. The person nodes are randomly sampled with replacement from the original sample.
 
 
@@ -23,23 +23,27 @@ create_bipartite_graph_simulated
 
 ** COVERAGE **
 **************
-find_top_spatial_units
+3_1_1_1_find_top_spatial_units
 - This returns the ****n_reps**** intervention-unranked place nodes in bipartite_graph_simulated that have the highest graph-ranking either in terms of their overall degree, conditional on the rep. (1 top node times *n_reps* reps). 
 
-mark_top_spatial_units
+3_1_1_2_mark_people_connected_to_top_spatial_units
 - This takes the **n_reps** top spatial units along with a bipartite_graph_simulated object and it returns a bipartite_graph_simulated which has:
 -- marked the top spatial units with the intervention_rank of the highest node + 1. 
 -- marked the people connected with a top spatial unit with the same intervention_rank.
 
-mark_n_spatial_units
+3_1_1__find_participant_intervention_contact_place
 - This loops find_top_spatial_units and mark_top_spatial_units until all the nodes in the bipartite_graph_simulated are marked.
 
-make_data_intervention_results_coverage
+3_1__make_intervention_results_coverage
 - uses function *mark_n_spatial_units* to show coverage results under 4 different sets of assumptions based on either ranking spatial units by their total number of people associated with them, or to rank them according to the number of non-residents associated with them on one axis, and whether the ranking is stratified or overall on the other hand.
 
 ** CENTRALITY **
-make_intervention_results_centrality
+3_2__make_intervention_results_centrality
 - takes data_bipartite_graph_simulated and data_intervention_results_coverage, filters out ranked nodes, and calculates graph descriptives using calculate_component_stats
 
-calculate_component_stats
+
+3_2_1__get_centrality_results
+
+
+3_2_1_1_calculate_component_stats
 - takes data_bipartite_graph_simulated and data_bipartite_graph_collected and, for each value of intervention_ranking, analyzes the connected components of the graph after removing all nodes that have a higher value for intervention_ranking

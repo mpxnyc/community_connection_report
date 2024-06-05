@@ -26,7 +26,6 @@ mark_people_connected_to_top_spatial_units <- function(bipartite_graph, top_neig
   current_top_rank    <- attr(bipartite_graph, "top_rank") 
   next_top_rank       <- current_top_rank + 1
   
-  print(next_top_rank)
   
   result <- bipartite_graph %>%
               activate(nodes) %>%

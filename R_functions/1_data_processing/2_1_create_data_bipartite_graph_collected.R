@@ -1,4 +1,4 @@
-create_bipartite_graph_collected <- function(place_data, participant_data, analytic_scale = "neighborhood"){
+create_data_bipartite_graph_collected <- function(place_data, participant_data, analytic_scale = "neighborhood"){
   
   if (analytic_scale == "neighborhood"){
     
