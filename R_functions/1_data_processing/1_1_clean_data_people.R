@@ -45,6 +45,7 @@ clean_participant_data <- function(raw_data_participants) {
       demo_group       = as.character(genderId),
       demo_group       = ifelse(race %in% c("black", "white", "latinx") & genderId == "cisgender-man", paste(stringr::str_to_lower(race) , demo_group, sep = "-"), demo_group),
       demo_group       = ifelse(!(race %in% c("black", "white", "latinx")) & genderId == "cisgender-man", paste("other", demo_group, sep = "-"), demo_group),
+      demo_group       = ifelse(is.na(demo_group), "other", demo_group),
       demo_group       = factor(demo_group),
       overall          = "overall"
     ) %>%
