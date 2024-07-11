@@ -4,7 +4,8 @@ plot_netimpact_bar             <- function(data){
     ggplot2::geom_bar(
       aes(x = intervention_ranking, y = est, fill = name), 
       stat = "identity", 
-      position = "fill"
-    ) +
-    ggplot2::facet_grid(intervention_stratification ~ intervention_priority)
+      position = "fill",
+      width = 1,
+      alpha = 0.8
+    ) 
 }

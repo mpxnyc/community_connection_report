@@ -486,7 +486,7 @@ make_table_freq2(placeType, placeSex, person_analysis = FALSE) %>%
 #| 
 
 make_table_freq2(placeType, placeSex, person_analysis = FALSE) %>%
-        draw_table_bar()
+        draw_table_stratified()
 
 ```
 
@@ -555,7 +555,7 @@ make_table_freq2(placeType, distanceFromHome, person_analysis = FALSE) %>%
 
 
   make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE) %>%
-    draw_table_bar()
+    draw_table_stratified2()
 
 ```
 
@@ -677,7 +677,50 @@ make_coverage_table(intervention_priority = "contact", intervention_stratificati
 #| fig-width: 9
 #| fig-height: 11
 
-
+# 
+# groupColors <- c("MN" = dark_blue, "BK" = dark_purple, "QN" = dark_pink, "SI" = dark_orange, "BX" = light_purple)
+# 
+#   data <- make_table_movement_travel() %>%
+#     ungroup() %>%
+#     rename(from = to, to = from) %>%
+#     tbl_graph(edges = .) %>%
+#     mutate(deg = igraph::degree(.)) %>%
+#     mutate(borough = str_sub(name, 1, 2)) %>%
+#     filter(deg > 10) %>%
+#     arrange(borough, -deg) %>%
+#     get.adjacency(attr = "weight") %>%
+#     as.matrix()
+#   
+# data2 <- data.frame(name = attr(data, "dimnames")[[1]]) %>%
+#               mutate(borough = str_sub(name, 1, 2)) %>%
+#               mutate( col = groupColors[borough])
+#               
+# col = pull(data2, col)
+# names(col) <- NULL
+#   
+#   data %>%
+#     chorddiag::chorddiag( groupColors = col, groupThickness = 0.2, chordedgeColor = NULL, fadeLevel = 0.05, type = "bipartite")
+#   
+#   
+#   
+#   san_data <-  make_table_movement_travel() %>%
+#     ungroup() %>%
+#     rename(from = to, to = from) %>%
+#     mutate(from = paste(from, "f"), to = paste(to, "t")) %>%
+#     tbl_graph(edges = .) %>%
+#     mutate(group = str_sub(name, 1, 2))
+#   
+#   
+#   nodes <- san_data %>% activate(nodes) %>% data.frame()
+#     edges <- san_data %>% activate(edges) %>% data.frame() %>%
+#       mutate(from = from -1, to = to -1)
+#   
+#   
+# networkD3::sankeyNetwork(Links = edges, Nodes = nodes, Source = "from",
+#               Target = "to", Value = "weight", NodeID = "name",
+#               units = "TWh", fontSize = 12, nodeWidth = 30, NodeGroup = "group")
+# 
+#   
   make_table_movement_travel() %>%
     plot_matrix_movement() %>%
   add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
@@ -785,6 +828,7 @@ make_coverage_table(intervention_priority = "contact", intervention_stratificati
 
 
 make_table_centrality() %>%
+  filter(intervention_ranking < 41) %>%
     plot_netimpact_bar() %>%
   add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
   add_title("Race-Gender of MPX NYC Participants") %>%

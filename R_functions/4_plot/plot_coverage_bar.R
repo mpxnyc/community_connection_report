@@ -1,6 +1,9 @@
 plot_coverage_bar            <- function(data){
   
   data %>%
+    arrange(-proportion) %>%
+    mutate(level = as.character(level)) %>%
+    mutate(level = factor(level, unique(.$level))) %>%
     ggplot2::ggplot() + 
     ggplot2::geom_bar(
       aes(x = level, 

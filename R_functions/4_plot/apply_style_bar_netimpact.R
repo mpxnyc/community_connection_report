@@ -29,5 +29,6 @@ apply_style_bar_netimpact <- function(plot, caption_hjust = 1){
       panel.grid.major.y = ggplot2::element_line(size = 0.1),
       axis.text.x        = element_text(),
       axis.text.y        = element_text()
-    )
+    ) +
+    scale_y_continuous("", labels = scales::percent)
 }

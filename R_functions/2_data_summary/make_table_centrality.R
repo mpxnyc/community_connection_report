@@ -1,5 +1,6 @@
-make_table_centrality       <- function(){
+make_table_centrality       <- function(intervention_stratification_input = "overall", intervention_priority_input = "contact"){
   collected_n <- targets::tar_read(data_intervention_results_centrality_collected) %>%
+                    dplyr::filter(intervention_stratification == intervention_stratification_input, intervention_priority == intervention_priority_input) %>%
                     dplyr::transmute(
                       intervention_ranking, 
                       lcc                       = mean_n_lcc, 
@@ -52,6 +53,9 @@ make_table_centrality       <- function(){
   collected_n %>%
     left_join(simulated_mean,  by = c("intervention_ranking", "intervention_priority", "intervention_stratification", "name")) %>%
     left_join(simulated_ci_lb, by = c("intervention_ranking", "intervention_priority", "intervention_stratification", "name")) %>%
-    left_join(simulated_ci_ub, by = c("intervention_ranking", "intervention_priority", "intervention_stratification", "name"))
+    left_join(simulated_ci_ub, by = c("intervention_ranking", "intervention_priority", "intervention_stratification", "name")) %>%
+    group_by(intervention_ranking, intervention_priority, intervention_stratification) %>%
+    mutate(empty = !(sum(est) > 0)) %>%
+    filter()
 
   }
