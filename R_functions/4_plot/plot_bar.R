@@ -9,7 +9,8 @@ plot_bar                 <- function(data){
     ) + 
     ggplot2::geom_text(
       aes(x = level, y = proportion + 0.05, label = count), 
-      alpha = 0.7
+      alpha = 0.1,
+      size = 8
     ) +
     ggplot2::theme_void() + 
     ggplot2::scale_x_discrete(
@@ -18,5 +19,10 @@ plot_bar                 <- function(data){
     ggplot2::scale_y_continuous(
       "Proportion of participants", 
       labels = scales::percent
+    ) +
+    ggplot2::scale_x_discrete(
+      labels = scales::label_wrap(10)
     )
+  
+  
 }
