@@ -149,22 +149,6 @@ make_table_freq2(sexOrientation, demo_group) %>%
   apply_style_radar_grid_plot()
 ```
 
-```{r hiv_prep}
-#| fig-width: 10
-#| fig-height: 10
-
-make_table_freq2(hivPrep, demo_group) %>%
-  plot_radar_grid() %>%
-  add_caption() %>%
-  add_title("HIV and PrEP status of MPX NYC participants by race and gender") %>%
-  apply_style_radar_grid_plot()
-
-```
-
-- Number of sexual contacts
-- Number of friends
-- Amount of group sex
-- Amount of going out
 
 
 ## How do they move in the city
@@ -190,8 +174,8 @@ make_table_freq2(hivPrep, demo_group) %>%
 
 
 ```{r netviz}
-#| fig-width: 9
-#| fig-height: 9
+#| fig-width: 8
+#| fig-height: 8
 
 
 make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
@@ -226,18 +210,21 @@ make_coverage_table(intervention_priority = "contact", intervention_stratificati
 
 
 ```{r map}
-
+#| fig-width: 10
+#| fig-height: 10
+#| 
 map_plot <- make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
-  plot_coverage_map()  %>%
-      apply_style_coverage_map()
+                  plot_coverage_map()  %>%
+                  apply_style_coverage_map()
 
 bar_plot <- make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
-  filter(intervention_ranking < 15) %>%
-    plot_coverage_bar() %>%
-      apply_style_coverage_bar()
+                  filter(group != "Group C") %>%
+                  plot_coverage_bar() %>%
+                  apply_style_coverage_bar() 
 
+  cowplot::ggdraw(map_plot) +
+  cowplot::draw_plot(bar_plot, x = .1, y = .55, width = 0.25, height = 0.25)
 
-cowplot::plot_grid(map_plot, bar_plot)
 ```
 
 

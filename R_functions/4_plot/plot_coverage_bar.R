@@ -2,11 +2,11 @@ plot_coverage_bar            <- function(data){
   
   data %>%
     arrange(-proportion) %>%
-    mutate(level = as.character(level)) %>%
-    mutate(level = factor(level, unique(.$level))) %>%
+    mutate(name = as.character(name)) %>%
+    mutate(name = factor(name, unique(.$name))) %>%
     ggplot2::ggplot() + 
     ggplot2::geom_bar(
-      aes(x = level, 
+      aes(x = name, 
           fill = group, 
           y = proportion
       ), 
@@ -14,17 +14,6 @@ plot_coverage_bar            <- function(data){
       stat = "identity", 
       color = "black"
     ) + 
-    ggplot2::theme_void() + 
-    ggplot2::scale_x_discrete(
-    ) +
-    ggplot2::scale_y_continuous(
-      "Proportion of participants", 
-      labels = scales::percent
-    ) + 
-    ggplot2::theme(
-      axis.text = element_text(),
-      axis.text.x = element_text(angle = 90),
-      panel.grid.major.y = element_line()
-    )
+    ggplot2::coord_flip()
   
 }

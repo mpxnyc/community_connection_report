@@ -1,6 +1,7 @@
 apply_style_coverage_map <- function(plot, caption_hjust = 0){
   
   plot +
+    theme_void() +
     scale_fill_manual("", values = c(
       dark_blue,
       dark_pink,
@@ -13,7 +14,7 @@ apply_style_coverage_map <- function(plot, caption_hjust = 0){
       plot.caption  = element_text( hjust = caption_hjust),
       panel.margin  = margin(1,1,1,1, "cm"),
       plot.margin   = margin(1,1,1,1, "cm"),
-      legend.position = "none"
+      legend.position = "right"
       
     )  
 }

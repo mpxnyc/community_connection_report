@@ -3,29 +3,25 @@ plot_network_viz        <- function(data){
   graph_object <- targets::tar_read(data_bipartite_graph_collected) %>%
     igraph::bipartite_projection(which = "false") %>%
     tidygraph::as_tbl_graph() %>%
-    dplyr::rename(level = name) %>% 
+    select(name) %>%
     dplyr::left_join(data) %>%
-    dplyr::select(level, group) %>%
-    dplyr::mutate(deg = igraph::degree(.)) %>%
-    dplyr::filter(!is.na(group)) %>%
     tidygraph::activate(edges) %>%
-    dplyr::mutate(group_from = .N()$group[from], group_to = .N()$group[to]) %>%
-    dplyr::mutate(outer_edges = group_from == "Group C" | group_to == "Group C") %>%
-    tidygraph::to_directed() 
+    mutate(from_group = .N()$group[from], to_group = .N()$group[to]) %>%
+    tidygraph::to_directed() %>%
+    activate(nodes) %>%
+    mutate(borough = mpxnyc::convert_spatial_unit_ny(input_community_district = name, convert_to = "borough")) %>%
+    mutate(group = ifelse(is.na(group), "Group C", group)) %>%
+    mutate(deg = degree(.)) %>%
+    filter(deg > 0)
   
-  from  <- graph_object %>% pull(from)
-  to    <- graph_object %>% pull(to)
-  weight <- graph_object %>% pull(weight)
-  
-  ggraph(graph_object) +
-    geom_edge_link( aes(linewidth = weight), alpha = 0.3, , linewidth = 0.1) +
-    geom_node_point(aes(color = group, filter = group %in% c("Group C") ), size = 2) +
-    geom_edge_link( aes(linewidth = weight, filter = !outer_edges), alpha = 0.1) +
 
-    geom_node_label(aes(label = level , fill = group, size = deg, filter = group %in% c("Group A", "Group B")),  color = "white") +
+  
+  ggraph(graph_object, layout = 'igraph', algorithm = 'kk') +
+    geom_edge_link(aes( filter = from_group == "Group C" | to_group == "Group C"), edge_width = 0.1, alpha = 0.6) +
+    geom_edge_link( aes(linewidth = weight, filter = from_group != "Group C" & to_group != "Group C"), alpha = 0.4, color = light_orange) +
+    geom_node_point(aes(label = name , color = borough,  filter = group == "Group C"), size = 1) +
+    geom_node_label(aes(label = name , fill = borough, size = mean_count, filter = group != "Group C"), color = "white") +
     theme_void() +
-    scale_color_manual(values = c("Group A" = dark_pink, "Group B" = dark_blue, "Group C" = "grey")) +
-    scale_fill_manual(values = c("Group A" = dark_pink, "Group B" = dark_blue, "Group C" = "grey")) +
     scale_linewidth_continuous() +
     theme(
       legend.position = "none",

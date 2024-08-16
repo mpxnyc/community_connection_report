@@ -44,6 +44,8 @@ make_coverage_table             <- function(intervention_priority_input = "conta
    simulated_data %>%
      left_join(collected_data, by = c("strata", "intervention_priority", "intervention_ranking")) %>%
      select(  level, intervention_ranking, group, intervention_priority, strata, count, names(.)) %>%
-     rename(name = level)
+     rename(name = level) %>%
+     mutate(borough = mpxnyc::convert_spatial_unit_ny(input_community_district = name, convert_to = "borough")) %>%
+     select(name, borough, names(.))
                       
 }
