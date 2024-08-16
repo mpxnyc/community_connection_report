@@ -5,5 +5,6 @@ apply_style_network_viz <- function(plot){
     
     theme(
       legend.position = "right"
-    )
+    ) +
+    guides(color = guide_legend(), fill = "none", size = "none", edge_linewidth = "none")
 }

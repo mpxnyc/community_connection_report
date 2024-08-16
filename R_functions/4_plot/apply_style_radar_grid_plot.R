@@ -22,6 +22,6 @@ apply_style_radar_grid_plot <- function(plot, caption_hjust = 0){
       plot.subtitle = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),
       plot.caption  = element_text( hjust = caption_hjust, margin = margin(1, 1, 1, 1, "cm")),
       plot.margin   = margin(1,1,1,1, "cm"),
-      legend.position = "bottom"
+      legend.position = "right"
     )
 }

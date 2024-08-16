@@ -59,8 +59,8 @@ plot_radar_stratified2   <- function(data){
     ggplot2::theme_void() +
     ggplot2::theme(
       legend.position = "bottom",
-      strip.text    = element_text( hjust = 0.5),
-      strip.text.y  = element_text(),
+      strip.text    = element_text( hjust = 0.5, size = 10),
+      strip.text.y  = element_text(angle =90),
       plot.title    = element_text(hjust = 0.5),
       plot.subtitle = element_text(hjust = 0.5, margin = margin(1, 0, 15, 0, "mm")),
       plot.caption  = element_text( hjust = 0)
@@ -83,5 +83,5 @@ plot_radar_grid       <- function(data){
     ggplot2::facet_wrap(. ~ stratum) +
     ggplot2::coord_polar() +
     ggplot2::theme_void()  +
-    ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1))
+    ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.5, 1))
 }

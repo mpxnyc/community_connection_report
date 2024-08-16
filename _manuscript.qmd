@@ -140,7 +140,7 @@ We used the nonparametric bootstrap to calculate point estimates and 95% confide
 
 ```{r sex_orientation}
 #| fig-width: 10
-#| fig-height: 10
+#| fig-height: 8.5
 
 make_table_freq2(sexOrientation, demo_group) %>%
   plot_radar_grid() %>%
@@ -155,8 +155,8 @@ make_table_freq2(sexOrientation, demo_group) %>%
 
 
 ```{r movement}
-#| fig-width: 10
-#| fig-height: 10
+#| fig-width: 13
+#| fig-height: 12
 
   make_table_movement_travel() %>%
     plot_matrix_movement() %>%
@@ -187,11 +187,11 @@ make_coverage_table(intervention_priority = "contact", intervention_stratificati
 ```
 
 ```{r placetype}
-#| fig-width: 10
+#| fig-width: 9
 #| fig-height: 9
 
-  make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE) %>%
-    filter(!is.na(level)) %>%
+make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE) %>%
+  filter(!is.na(level)) %>%
   plot_radar_stratified2() %>%
   add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
   add_title("MPX NYC contact venue type by distance from home and sexual contact") %>%
@@ -231,11 +231,14 @@ bar_plot <- make_coverage_table(intervention_priority = "contact", intervention_
 
 
 ```{r graph_connectedness}
+#| fig-width: 8
+#| fig-height: 5
+
 make_table_centrality() %>%
   filter(intervention_ranking < 41) %>%
     plot_netimpact_bar() %>%
   add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
-  add_title("Connectedness of network of community districts connected by MPX NYC participants") %>%
+  add_title("Proportion of participants in largest connected network component") %>%
     apply_style_bar_netimpact()
 
 ```

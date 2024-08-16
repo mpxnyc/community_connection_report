@@ -37,5 +37,6 @@ apply_style_matrix_movement <- function(plot, caption_hjust = 0){
       dark_green,
       dark_brown
     )) +
-    guides(color = guide_legend(), fill = guide_legend(), weight = "none")
+    scale_size_continuous() +
+    guides(color = guide_legend(), fill = guide_legend(), size = "none")
 }

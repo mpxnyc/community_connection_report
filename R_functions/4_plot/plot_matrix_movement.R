@@ -21,5 +21,6 @@ plot_matrix_movement    <- function(data){
     ) +
     ggplot2::geom_point(
       aes(y =from, x = to, size = weight, color = to_borough)
-    ) 
+    ) + 
+    guides(colour = guide_legend(), fill = guide_legend(), size = "none")
 }
