@@ -1,4 +1,11 @@
 make_table_centrality       <- function(intervention_stratification_input = "overall", intervention_priority_input = "contact"){
+  
+  n_participants <- targets::tar_read(data_bipartite_graph_collected) %>%
+    activate(nodes) %>%
+    filter(type) %>%
+    igraph::gorder()
+  
+  
   collected_n <- targets::tar_read(data_intervention_results_centrality_collected) %>%
                     dplyr::filter(intervention_stratification == intervention_stratification_input, intervention_priority == intervention_priority_input) %>%
                     dplyr::transmute(
@@ -56,6 +63,7 @@ make_table_centrality       <- function(intervention_stratification_input = "ove
     left_join(simulated_ci_ub, by = c("intervention_ranking", "intervention_priority", "intervention_stratification", "name")) %>%
     group_by(intervention_ranking, intervention_priority, intervention_stratification) %>%
     mutate(empty = !(sum(est) > 0)) %>%
-    filter()
-
+    pivot_wider(names_from = name, values_from = est, id_cols = c(intervention_ranking, intervention_priority, intervention_stratification) ) %>%
+    mutate(n_participants = n_participants) %>%
+    mutate(n_unvaccinated = singleton + remainder + lcc)
   }

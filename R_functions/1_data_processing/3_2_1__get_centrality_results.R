@@ -29,7 +29,7 @@ get_centrality_results <- function(bipartite_graph_sim, intervention_coverage_da
       function(rank){
         
         working_graph %>%
-          filter(intervention_ranking >= rank - 1 | is.na(intervention_ranking)) %>%
+          filter(intervention_ranking > rank - 1 | is.na(intervention_ranking)) %>%
           calculate_component_stats() %>%
           mutate(intervention_ranking = rank)
         

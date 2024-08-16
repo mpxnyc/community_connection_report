@@ -11,8 +11,7 @@ plot_network_viz        <- function(data){
     activate(nodes) %>%
     mutate(borough = mpxnyc::convert_spatial_unit_ny(input_community_district = name, convert_to = "borough")) %>%
     mutate(group = ifelse(is.na(group), "Group C", group)) %>%
-    mutate(deg = degree(.)) %>%
-    filter(deg > 0)
+    mutate(deg = degree(.)) 
   
 
   

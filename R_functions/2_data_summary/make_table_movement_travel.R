@@ -1,5 +1,7 @@
 make_table_movement_travel        <- function(){
   
+
+  
   home_data <-  targets::tar_read(data_bipartite_graph_collected) %>%
     activate(edges) %>%
     filter(home) %>%
