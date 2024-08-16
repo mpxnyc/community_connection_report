@@ -27,22 +27,23 @@ make_coverage_table_sim         <- function(intervention_priority_input = "conta
 }
 
 make_coverage_table             <- function(intervention_priority_input = "contact", intervention_stratification_input = "overall"){
- 
-  simulated_data <- make_coverage_table_sim(intervention_priority_input, intervention_stratification_input)
+
+  simulated_data      <- make_coverage_table_sim(intervention_priority_input, intervention_stratification_input)
   
   
-   collected_data <- targets::tar_read(data_intervention_results_coverage_collected)[["place_coverage"]] %>%
-                        filter(
-                          intervention_priority == intervention_priority_input, 
-                          strata == intervention_stratification_input
-                        ) %>%
-                        mutate(level = intervention_contact_place) %>%
-                        ungroup() %>%
-                        mutate(level = as.character(level)) %>%
-                        arrange(-count)
-   
+  collected_data      <- targets::tar_read(data_intervention_results_coverage_collected)[["place_coverage"]] %>%
+                              filter(
+                                intervention_priority == intervention_priority_input, 
+                                strata == intervention_stratification_input
+                              ) %>%
+                              mutate(level = intervention_contact_place) %>%
+                              ungroup() %>%
+                              mutate(level = as.character(level)) %>%
+                              arrange(-count)
+         
    simulated_data %>%
      left_join(collected_data, by = c("strata", "intervention_priority", "intervention_ranking")) %>%
-     select(intervention_priority, strata, intervention_ranking, count, names(.))
+     select(  level, intervention_ranking, group, intervention_priority, strata, count, names(.)) %>%
+     rename(name = level)
                       
 }

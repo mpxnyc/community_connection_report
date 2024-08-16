@@ -1,36 +1,25 @@
+
+
+
+
 plot_matrix_movement    <- function(data){
   
   data_tiles <- mpxnyc::community_sf_obj %>%
     dplyr::transmute(to = community, from = community) %>%
-    tidyr::expand(to, from)
+    tidyr::expand(to, from) %>%
+    mutate(from_borough = mpxnyc::convert_spatial_unit_ny(input_community_district = from, convert_to = "borough")) %>%
+    mutate(to_borough = mpxnyc::convert_spatial_unit_ny(input_community_district = to, convert_to = "borough"))
   
-  
-  data %>% 
+  data  %>% 
+    mutate(from_borough = mpxnyc::convert_spatial_unit_ny(input_community_district = from, convert_to = "borough")) %>%
+    mutate(to_borough = mpxnyc::convert_spatial_unit_ny(input_community_district = to, convert_to = "borough")) %>%
     ggplot2::ggplot() +
-    ggplot2::geom_point(
-      aes(y =from, x = to), 
-      data = data_tiles, 
-      color = "white"
+    ggplot2::geom_tile(
+      aes(y =from, x = to, fill = from_borough), 
+      data = data_tiles,
+      alpha = 0.2
     ) +
     ggplot2::geom_point(
-      aes(y =from, x = to, size = weight), 
-      color = "black", 
-      alpha = 0.5
-    ) +
-    ggplot2::theme_void() +
-    ggplot2::theme(
-      axis.text        = element_text(size = 7, color = "black"),
-      axis.text.x      = element_text(angle = 90),
-      axis.title       = element_text(),
-      axis.title.y     = element_text(angle = 90),
-      legend.position  = "none"
-    ) +
-    ggplot2::scale_x_discrete(
-      "Destination community district", 
-      position = "top"
-    ) +
-    ggplot2::scale_y_discrete(
-      "Home community district",  
-      limits=rev
+      aes(y =from, x = to, size = weight, color = to_borough)
     ) 
 }

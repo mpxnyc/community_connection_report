@@ -7,7 +7,6 @@ plot_network_viz        <- function(data){
     dplyr::left_join(data) %>%
     dplyr::select(level, group) %>%
     dplyr::mutate(deg = igraph::degree(.)) %>%
-    #dplyr::filter(deg > 0) %>%
     dplyr::filter(!is.na(group)) %>%
     tidygraph::activate(edges) %>%
     dplyr::mutate(group_from = .N()$group[from], group_to = .N()$group[to]) %>%
