@@ -139,7 +139,7 @@ We used the nonparametric bootstrap to calculate point estimates and 95% confide
 
 # Results
 
-## Who are these people
+## Regarding People
 
 ```{r sex_orientation}
 #| fig-width: 10
@@ -152,30 +152,14 @@ make_table_freq2(sexOrientation, demo_group) %>%
   apply_style_radar_grid_plot()
 ```
 
+## People in places
+
+### Overall Sample
+
+### Sample by Race
 
 
-## How do they move in the city
-
-
-```{r movement}
-#| fig-width: 13
-#| fig-height: 12
-
-  make_table_movement_travel() %>%
-    plot_matrix_movement() %>%
-  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
-  add_title("Movement between boroughs by MPX NYC Participants") %>%
-    apply_style_matrix_movement()
-```
-
-
-
-
-
-
-
-
-
+## Regarding Places
 
 
 ```{r placetype}
@@ -193,11 +177,49 @@ make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE)
 
 
 
-## How could we intervene
+## People connecting through places
+
+```{r movement}
+#| fig-width: 13
+#| fig-height: 12
+
+  make_table_movement_travel() %>%
+    plot_matrix_movement() %>%
+  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
+  add_title("Movement between boroughs by MPX NYC Participants") %>%
+    apply_style_matrix_movement()
+```
 
 
 
 
+
+```{r netviz}
+#| fig-width: 8
+#| fig-height: 8
+
+
+make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
+  plot_network_viz() %>%
+  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
+  add_title("Network of community districts connected by MPX NYC participants") %>%
+  apply_style_network_viz()
+  
+```
+
+
+
+
+
+
+
+
+
+
+
+
+### Intervention Efficiency
+#### Efficient Coverage
 
 
 
@@ -219,19 +241,7 @@ bar_plot <- make_coverage_table(intervention_priority = "contact", intervention_
 
 ```
 
-
-```{r netviz}
-#| fig-width: 8
-#| fig-height: 8
-
-
-make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
-  plot_network_viz() %>%
-  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
-  add_title("Network of community districts connected by MPX NYC participants") %>%
-  apply_style_network_viz()
-  
-```
+#### Efficient Disruption
 
 ```{r graph_connectedness}
 #| fig-width: 8
