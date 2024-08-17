@@ -12,9 +12,9 @@ find_top_spatial_units <- function(bipartite_graph, intervention_priority_input,
     tidygraph::mutate(movement = igraph::strength(.)) %>%
     data.frame() %>%
     dplyr::mutate(count = .[,intervention_priority_input]) %>%
-    arrange(rep, -count) %>%
-    group_by(rep) %>%
-    summarize(name = first(name)) %>%
-    pull(name)
+    dplyr::arrange(rep, -count) %>%
+    dplyr::group_by(rep) %>%
+    dplyr::summarize(name = first(name)) %>%
+    dplyr::pull(name)
 }
 

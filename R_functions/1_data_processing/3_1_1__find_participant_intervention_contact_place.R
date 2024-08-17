@@ -19,12 +19,12 @@ find_participant_intervention_contact_place <- function(bipartite_graph, interve
       },
       .init = coverage_graph
     ) %>%
-    mutate(strata                = strata_name) %>%
-    mutate(intervention_priority = intervention_priority_input) %>%
-    mutate(intervention_ranking  = ifelse(is.na(intervention_ranking), 999, intervention_ranking)) %>%
+    dplyr::mutate(strata                = strata_name) %>%
+    dplyr::mutate(intervention_priority = intervention_priority_input) %>%
+    dplyr::mutate(intervention_ranking  = ifelse(is.na(intervention_ranking), 999, intervention_ranking)) %>%
     data.frame() %>%
-    tibble() %>%
-    filter(type)
+    dplyr::tibble() %>%
+    dplyr::filter(type)
   
 }
 
@@ -33,15 +33,15 @@ find_participant_intervention_contact_place <- function(bipartite_graph, interve
 helper_initialize_coverage_graph <- function(bipartite_graph, strata){
   
   bipartite_graph_initialized                            <- bipartite_graph %>% 
-    activate(nodes) %>%
-    mutate(intervention_ranking = NA) %>%
-    mutate(stratum = {{strata}}) %>%
-    mutate(intervention_contact_place = NA)
+                                                                  tidygraph::activate(nodes) %>%
+                                                                  tidygraph::mutate(intervention_ranking = NA) %>%
+                                                                  tidygraph::mutate(stratum = {{strata}}) %>%
+                                                                  tidygraph::mutate(intervention_contact_place = NA)
   
   attr(bipartite_graph_initialized, "top_rank")          <- 0
   attr(bipartite_graph_initialized, "strata_levels")     <- bipartite_graph_initialized %>%
-    filter(type) %>%
-    pull(stratum) %>%
+    tidygraph::filter(type) %>%
+    tidygraph::pull(stratum) %>%
     unique()
   
   attr(bipartite_graph_initialized, "n_strata")          <- attr(bipartite_graph_initialized, "strata_levels") %>% 

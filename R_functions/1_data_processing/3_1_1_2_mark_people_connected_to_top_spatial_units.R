@@ -31,9 +31,9 @@ mark_people_connected_to_top_spatial_units <- function(bipartite_graph, top_neig
   
   
   result <- bipartite_graph %>%
-              activate(nodes) %>%
-              mutate(intervention_ranking = ifelse(name %in% places_and_people_to_be_marked, next_top_rank, intervention_ranking)) %>%
-              mutate(intervention_contact_place = ifelse(name %in% places_and_people_to_be_marked, helper_get_intervention_contact_place(name), intervention_contact_place))
+              tidygraph::activate(nodes) %>%
+              tidygraph::mutate(intervention_ranking = ifelse(name %in% places_and_people_to_be_marked, next_top_rank, intervention_ranking)) %>%
+              tidygraph::mutate(intervention_contact_place = ifelse(name %in% places_and_people_to_be_marked, helper_get_intervention_contact_place(name), intervention_contact_place))
   
   attr(result, "top_rank") <- next_top_rank
   
