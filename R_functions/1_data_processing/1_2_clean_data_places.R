@@ -1,12 +1,15 @@
-clean_data_places <- function(raw_data_places){
+clean_data_places <- function(raw_data_places, factor_levels){
   
+  placeSex                    <- get_variable_levels("placeSex", factor_levels)
+  placeSex_levels             <- placeSex[["variable_levels"]]
+  placeSex_labels             <- placeSex[["variable_labels"]]
 
-  placeSex_labels             <- c("yes", "no", "i-don't-remember")
-  placeSex_levels             <- c("yes", "no", "no")
-  intervention_setting_levels <- c("home", "no", "yes")
-  intervention_setting_labels <- c("home", "social", "sexual")
+  intervention_setting        <- get_variable_levels("intervention_setting", factor_levels)
+  intervention_setting_levels <- intervention_setting[["variable_levels"]]
+  intervention_setting_labels <- intervention_setting[["variable_labels"]]
+
   
-contact_places <- raw_data_places %>%
+raw_data_places %>%
                       dplyr::mutate(
                         placeSex             = factor(placeSex, placeSex_labels, placeSex_levels),
                         intervention_setting = ifelse(is.na(placeSex), "home", as.character(placeSex)),
@@ -31,6 +34,6 @@ contact_places <- raw_data_places %>%
                       dplyr::tibble() %>%
                       dplyr::filter(!is.na(placeSex))
 
-contact_places
+
 }
 

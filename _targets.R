@@ -40,11 +40,11 @@ tar_target(
   ),
   tar_target(
     name = data_people_clean,
-    command = clean_data_people(data_people_raw)
+    command = clean_data_people(data_people_raw, factor_levels)
   ),
   tar_target(
     name = data_places_clean,
-    command = clean_data_places(data_places_raw)
+    command = clean_data_places(data_places_raw, factor_levels)
   ),
   tar_target(
     name = data_bipartite_graph_collected,

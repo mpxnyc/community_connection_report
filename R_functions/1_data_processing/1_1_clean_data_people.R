@@ -1,26 +1,44 @@
-clean_data_people <- function(raw_data_participants) {
+clean_data_people <- function(raw_data_participants, factor_levels) {
   
-  race_levels             <- c("White", "Latinx", "Black", "Asian", "Other", "Multiple races reported")
-  race_labels             <- c("white", "latinx", "black", "asian", "other", "multiple")
-  count_friends_intervals <- c(-1, 0, 5, 10, 15, 1000000000)
-  count_friends_labels    <- c("0", "1-5", "6-10", "11-15", "16+")
-  countPhysical_intervals <- c(-1, 0, 1, 2, 3, 4,  1000000000)
-  countPhysical_labels    <- c("0", "1", "2", "3", "4", "5+")
-  countSex_intervals      <- c(-1, 0, 1, 2, 3, 4,  1000000000)
-  countSex_labels         <- c("0", "1", "2", "3", "4", "5+")
-  travelTime_intervals    <- c(-1, 15, 30, 45, 1000000000000000)
-  travelTime_labels       <- c("0-15 min", "16-30 min", "31-45 min", "45+ min" )
-  count_places_intervals  <- c(-1, 0, 1, 2, 3, 4, 5, 1000000000000)
-  count_places_labels     <- c("0", "1", "2", "3", "4", "5", "6+")
-  age_levels              <- c("18-24", "25-34", "35-44", "45-54", "55-64", "65+")
-  age_labels              <- c("18-24", "25-34", "35-44", "45-54", "55+", "55+")
-  hivStatus_levels        <- c("living-with-hiv", "not-living-with-hiv", "unsure")
-  hivStatus_labels        <- c("living-with-hiv", "not-living-with-hiv", "not-living-with-hiv")
-  monkeypoxVaccine_levels <- c("yes", "no", "unsure")
-  monkeypoxVaccine_labels <- c("yes", "no", "no")
-  hivSuppressed_levels    <- c("yes", "no", "unsure")
-  hivSuppressed_labels    <- c("yes", "no", "no")
+  race                    <- get_variable_levels("race", factor_levels)
+  race_levels             <- race[["variable_levels"]]
+  race_labels             <- race[["variable_labels"]]
   
+  count_friends           <- get_variable_levels("countFriends", factor_levels)
+  count_friends_intervals <- count_friends[["variable_levels"]]
+  count_friends_labels    <- count_friends[["variable_labels"]]
+  
+  countPhysical           <- get_variable_levels("countPhysical", factor_levels)
+  countPhysical_intervals <- countPhysical[["variable_levels"]]
+  countPhysical_labels    <- countPhysical[["variable_labels"]]
+  
+  countSex                <- get_variable_levels("countSex", factor_levels)
+  countSex_intervals      <- countPhysical[["variable_levels"]]
+  countSex_labels         <- countPhysical[["variable_labels"]]
+  
+  travelTime              <- get_variable_levels("travelTime", factor_levels)
+  travelTime_intervals    <- travelTime[["variable_levels"]]
+  travelTime_labels       <- travelTime[["variable_labels"]]
+  
+  count_places            <- get_variable_levels("count_places", factor_levels)
+  count_places_intervals  <- count_places[["variable_levels"]]
+  count_places_labels     <- count_places[["variable_labels"]]
+  
+  age                     <- get_variable_levels("age", factor_levels)
+  age_levels              <- age[["variable_levels"]]
+  age_labels              <- age[["variable_labels"]]
+  
+  hivStatus               <- get_variable_levels("hivStatus", factor_levels)
+  hivStatus_levels        <- hivStatus[["variable_levels"]]
+  hivStatus_labels        <- hivStatus[["variable_labels"]]
+  
+  monkeypoxVaccine        <- get_variable_levels("monkeypoxVaccine", factor_levels)
+  monkeypoxVaccine_levels <- monkeypoxVaccine[["variable_levels"]]
+  monkeypoxVaccine_labels <- monkeypoxVaccine[["variable_labels"]]
+
+  hivSuppressed           <- get_variable_levels("hivSuppressed", factor_levels)
+  hivSuppressed_levels    <- hivSuppressed[["variable_levels"]]
+  hivSuppressed_labels    <- hivSuppressed[["variable_labels"]]
   
   
   raw_data_participants %>%
