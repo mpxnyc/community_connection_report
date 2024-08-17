@@ -1,12 +1,10 @@
 plot_matrix_mixing         <- function(data){
   
-  
-  
   data %>%
     mutate(label_est_text = scales::percent(mean_bias - 1, accuracy = 1)) %>%
     mutate(significant = log(ci_lb_bias) * log(cl_ub_bias) > 0) %>%
     ggplot() +
-    geom_tile(aes(y = from_level, x = to_level, fill = mean_bias), color = "black") +
+    geom_point(aes(y = from_level, x = to_level, color = log(mean_bias)), size = 40) +
     geom_text(aes(y = from_level, x = to_level, label = label_est_text, alpha = significant), size = 10) +
     theme_void() +
     theme(

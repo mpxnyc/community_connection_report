@@ -192,7 +192,52 @@ make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE)
 
 
 
+```{r plot_matrix_mixing_age}
+#| fig-width: 8.5
+#| fig-height: 8.5
 
+
+make_table_mixing(age) %>%
+  plot_matrix_mixing() %>%
+  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
+  add_title("Race-Gender of MPX NYC Participants") %>%
+  apply_style_matrix_mixing_plot()
+
+
+
+```
+
+
+```{r plot_matrix_mixing_sexorientation}
+#| fig-width: 9.5
+#| fig-height: 9.5
+
+
+make_table_mixing(sexOrientation) %>%
+  plot_matrix_mixing() %>%
+  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
+  add_title("Race-Gender of MPX NYC Participants") %>%
+  apply_style_matrix_mixing_plot()
+
+
+
+```
+
+
+```{r plot_matrix_mixing_demo_group}
+#| fig-width: 14
+#| fig-height: 14
+
+
+make_table_mixing(demo_group) %>%
+  plot_matrix_mixing() %>%
+  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
+  add_title("Race-Gender of MPX NYC Participants") %>%
+  apply_style_matrix_mixing_plot()
+
+
+
+```
 
 ```{r netviz}
 #| fig-width: 8
