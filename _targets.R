@@ -48,11 +48,11 @@ tar_target(
   ),
   tar_target(
     name = data_bipartite_graph_collected,
-    command = create_data_bipartite_graph_collected(data_places_clean, data_people_clean, analytic_scale = initial_settings[["analytic_scale"]])
+    command = create_data_bipartite_graph_collected(data_places_clean, data_people_clean, initial_settings)
   ),  
   tar_target(
     name = data_bipartite_graph_simulated,
-    command = create_data_bipartite_graph_simulated(data_bipartite_graph_collected, n_reps = initial_settings[["n_reps_graph"]])
+    command = create_data_bipartite_graph_simulated(data_bipartite_graph_collected, initial_settings)
   ),
   tar_target(
     name = data_intervention_results_coverage_collected,
