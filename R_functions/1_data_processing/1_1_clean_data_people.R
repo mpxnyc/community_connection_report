@@ -13,8 +13,8 @@ clean_data_people <- function(raw_data_participants, factor_levels) {
   countPhysical_labels    <- countPhysical[["variable_labels"]]
   
   countSex                <- get_variable_levels("countSex", factor_levels)
-  countSex_intervals      <- countPhysical[["variable_levels"]]
-  countSex_labels         <- countPhysical[["variable_labels"]]
+  countSex_intervals      <- countSex[["variable_levels"]]
+  countSex_labels         <- countSex[["variable_labels"]]
   
   travelTime              <- get_variable_levels("travelTime", factor_levels)
   travelTime_intervals    <- travelTime[["variable_levels"]]
