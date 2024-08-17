@@ -22,6 +22,14 @@ list(
   name = initial_settings,
   command = load_initial_settings()
 ),
+tar_target(
+  name = factor_levels,
+  command = load_factor_levels()
+),
+tar_target(
+  name = factor_labels,
+  command = load_factor_labels()
+),
   tar_target(
     name = data_people_raw,
     command = readRDS("/Users/keletso/Documents/_data/mpxnyc/mpxnyc_person_data.R")

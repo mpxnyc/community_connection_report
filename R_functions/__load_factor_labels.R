@@ -1,34 +1,10 @@
-load_initial_settings <- function(){
+load_factor_labels <- function(){
   
-  settings <- list()
-  
-  settings[["n_reps_graph"]]     <- 10
-  settings[["n_neighborhoods"]]  <- 67
-  settings[["list_intervention_priority"]] <- list("contact", "movement")
-  settings[["list_intervention_settings"]] <- list(c("home"), c("home", "social"), c("home", "social", "sexual"))
-  
-  settings[["analytic_scale"]]  <- "community"
-  
-   
-  
+
   
   list_labels <- list()
   
-  list_labels[["age"]] <- list()
-  list_labels[["age"]][["label"]] <- "Age"
-  list_labels[["age"]][["levels"]][["18-24"]] <- "18-24"
-  list_labels[["age"]][["levels"]][["25-34"]] <- "25-34"
-  list_labels[["age"]][["levels"]][["35-44"]] <- "35-44"
-  list_labels[["age"]][["levels"]][["45-54"]] <- "45-54"
-  list_labels[["age"]][["levels"]][["55+"]]   <- "55+"
   
-  list_labels[["borough"]] <- list()
-  list_labels[["borough"]][["label"]]           <- "Borough"
-  list_labels[["borough"]][["levels"]][["Bronx"]]           <- "Bronx"
-  list_labels[["borough"]][["levels"]][["Brooklyn"]]        <- "Brooklyn"
-  list_labels[["borough"]][["levels"]][["Manhattan"]]       <- "Manhattan"
-  list_labels[["borough"]][["levels"]][["Queens"]]          <- "Queens"
-  list_labels[["borough"]][["levels"]][["Staten Island"]]   <- "Staten Island"
   
   list_labels[["countFriends"]] <- list()
   list_labels[["countFriends"]][["label"]] <- "Queer/Trans Friends"
@@ -68,8 +44,8 @@ load_initial_settings <- function(){
   list_labels[["genderId"]][["levels"]][["cisgender-woman"]]        <- "Cisgender Woman"
   list_labels[["genderId"]][["levels"]][["other"]]                  <- "Another Demographic"
   list_labels[["genderId"]][["levels"]][["missing"]]                  <- "Another Demographic"
-
-
+  
+  
   
   list_labels[["hivPrep"]] <- list()
   list_labels[["hivPrep"]][["label"]] <- "HIV Status/ PrEP Use"
@@ -106,9 +82,9 @@ load_initial_settings <- function(){
   list_labels[["sexOrientation"]][["levels"]][["straight"]]       <- "Straight"
   list_labels[["sexOrientation"]][["levels"]][["queer"]]          <- "Queer"
   list_labels[["sexOrientation"]][["levels"]][["something-else"]] <- "Another Orientation"
-
   
-
+  
+  
   
   list_labels[["channel"]] <- list()
   list_labels[["channel"]][["label"]]                             <- "Channel"
@@ -129,7 +105,7 @@ load_initial_settings <- function(){
   list_labels[["placeType"]][["levels"]][["sport-game"]]             <- "Sport Game"
   list_labels[["placeType"]][["levels"]][["private-residence-"]]     <- "Private Residence"
   list_labels[["placeType"]][["levels"]][["something-else"]]         <- "Something Else"
-
+  
   list_labels[["placeSex"]] <- list()
   list_labels[["placeSex"]][["label"]]                               <- "Place Sex"
   list_labels[["placeSex"]][["levels"]][["no"]]                      <- "Social Contact"
@@ -152,10 +128,8 @@ load_initial_settings <- function(){
   list_labels[["stratum"]][["levels"]][["no"]]                    <- "No Contact"
   list_labels[["stratum"]][["levels"]][["overall"]]               <- "Overall"
   
+   list_labels
   
-  settings[["labels_list"]] <- list_labels
-  
-  settings
 }
 
 

@@ -1,4 +1,4 @@
-get_variable_labels             <- function(variable_name, person_analysis = TRUE){
+get_variable_levels             <- function(variable_name, person_analysis = TRUE){
   
   variable_labels           <- targets::tar_read(factor_labels)[[variable_name]][["levels"]] %>% unlist()
   variable_levels           <- names(variable_labels)
