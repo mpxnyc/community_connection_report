@@ -139,7 +139,26 @@ We used the nonparametric bootstrap to calculate point estimates and 95% confide
 
 # Results
 
+```{r eval = FALSE}
+#| tbl-cap: "Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks"
+#| label: tbl-descriptives-by-groupsex
+
+list_labels_groupSex_table1 <- targets::tar_read(initial_settings)$labels_list
+
+
+table_1_descriptives <- targets::tar_read(data_table_1_people_by_groupSex_raw) %>%
+                                mutate(stratum = stratum_groupSex) %>%
+                                dplyr::group_by(variable) %>%
+                                dplyr::mutate(var_label = c(variable[1], rep(NA, length(variable) - 1))) %>%
+                                dplyr::ungroup() %>%
+                                mpxnyc::draw_table_1(list_labels_groupSex_table1)
+
+table_1_descriptives
+```
+
 ## Regarding People
+
+
 
 ```{r sex_orientation}
 #| fig-width: 10
@@ -150,6 +169,23 @@ make_table_freq2(sexOrientation, demo_group) %>%
   add_caption() %>%
   add_title("Sexual orientation of MPX NYC participants by race and gender") %>%
   apply_style_radar_grid_plot()
+```
+
+```{r prep_hiv}
+#| fig-width: 10
+#| fig-height: 8.5
+
+make_table_freq2(hivPrep, demo_group) %>%
+  plot_radar_grid() %>%
+  add_caption() %>%
+  add_title("PrEP and HIV status of MPX NYC participants by race and gender") %>%
+  apply_style_radar_grid_plot()
+```
+
+
+```{r home_map}
+
+
 ```
 
 ## People in places
