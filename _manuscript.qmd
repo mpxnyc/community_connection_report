@@ -184,7 +184,17 @@ make_table_freq2(hivPrep, demo_group) %>%
 
 
 ```{r home_map}
+make_table_freq1(community) %>%
+  plot_map_choro(proportion) %>%
+  apply_style_choro_map(show.na = TRUE)
 
+```
+
+```{r home_by_race_map}
+make_table_freq2(community, race) %>%
+  filter(stratum %in% c("White", "Black", "Latinx")) %>%
+  plot_map_choro_stratified(proportion) %>%
+  apply_style_choro_map(show.na = FALSE)
 
 ```
 
