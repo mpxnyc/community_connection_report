@@ -3,7 +3,7 @@ create_data_bipartite_graph_simulated <- function(bipartite_graph, initial_setti
   
   n_reps = initial_settings[["n_reps_graph"]]
   
-  n_spatial_units <- attr(bipartite_graph, "n_spatial_units") 
+  n_spatial_units      <- attr(bipartite_graph, "n_spatial_units") 
 
   participant_data     <- bipartite_graph %>%
                                 tidygraph::activate(nodes) %>%
@@ -13,14 +13,10 @@ create_data_bipartite_graph_simulated <- function(bipartite_graph, initial_setti
                                 select(-rep)
                                 
   n_participants       <- dim(participant_data)[1]
-
-
-
-    participants         <- participant_data  %>%
-                                    dplyr::pull(name) %>%
-                                    sample(n_participants * n_reps, replace = TRUE)
-
-
+  
+  participants         <- participant_data  %>%
+                                dplyr::pull(name) %>%
+                                sample(n_participants * n_reps, replace = TRUE)
                                 
   rep_labels           <- seq(n_reps) %>%
                                 rep(each = n_participants)
@@ -38,7 +34,7 @@ create_data_bipartite_graph_simulated <- function(bipartite_graph, initial_setti
                                 dplyr::select(-from) %>%
                                 dplyr::tibble()
     
-
+  
   new_edges           <- data.frame(  
                                       old_from = participants,
                                       new_from = uuid::UUIDgenerate(n = length(participants), output = "string"),
@@ -53,7 +49,7 @@ create_data_bipartite_graph_simulated <- function(bipartite_graph, initial_setti
                                 dplyr::mutate(from = new_from) %>%
                                 dplyr::select(from, to, rep, names(.))
                                   
-                   
+  # Remember that each person is associated with a home at the very least, so there are no person nodes who are not represented in edge data.                 
   cross_walk_people   <- new_edges %>%
                                 dplyr::transmute(name = new_from, old_name = old_from, rep) %>%
                                 unique() %>%
@@ -76,9 +72,9 @@ create_data_bipartite_graph_simulated <- function(bipartite_graph, initial_setti
                                 tidygraph::activate(edges) %>%
                                 tidygraph::select(-old_from, -new_from) %>%
                                 tidygraph::mutate(
-                                      from_name = tidygraph::.N()$name[from], 
-                                      to_name = tidygraph::.N()$name[to]
-                                      ) %>%
+                                                  from_name = tidygraph::.N()$name[from], 
+                                                  to_name = tidygraph::.N()$name[to]
+                                                  ) %>%
                                 tidygraph::activate(nodes) %>%
                                 tidygraph::arrange(type, name, rep) %>%
                                 tidygraph::mutate(overall = "overall")

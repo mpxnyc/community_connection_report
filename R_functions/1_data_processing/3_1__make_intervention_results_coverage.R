@@ -8,9 +8,9 @@ make_intervention_results_coverage <- function(data_bipartite_graph){
   
 
   all_data                <- list_results %>%
-                                bind_rows() %>%
-                                select(name, intervention_contact_place, intervention_priority, strata, intervention_ranking, rep)
-    
+                                    dplyr::bind_rows() %>%
+                                    dplyr::select(name, intervention_contact_place, intervention_priority, strata, intervention_ranking, rep)
+                                    
   
   final_result                      <- list()
   
@@ -45,8 +45,5 @@ make_intervention_results_coverage <- function(data_bipartite_graph){
 }
 
 
-testing <- function(){
-  data_bipartite_graph <- targets::tar_read(data_bipartite_graph_collected) 
-}
 
 

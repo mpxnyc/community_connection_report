@@ -16,7 +16,6 @@ find_participant_intervention_contact_place <- function(bipartite_graph, interve
         strata_levels[(next_value %% n_strata) + 1] %>%
             find_top_spatial_units(accumulated_value, intervention_priority_input, .) %>%
             mark_people_connected_to_top_spatial_units(accumulated_value, .)
-        
       },
       .init = coverage_graph
     ) %>%
