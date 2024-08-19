@@ -11,7 +11,7 @@ execute:
 
 
 
-```{r libraries}
+```{r libraries, echo=FALSE}
 
 library(tidyverse)
 library(ggplot2)
@@ -21,7 +21,7 @@ library(tidygraph)
 library(ggraph)
 library(igraph)
 
-
+library(targets)
 
 mpxnyc_colors <- mpxnyc::mpxnyc_colors
 attach(mpxnyc_colors)
@@ -29,7 +29,7 @@ attach(mpxnyc_colors)
 ```
 
 
-```{r scripts}
+```{r scripts, echo=FALSE, warning=FALSE}
 targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
 targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/1_data_processing")
 targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/2_data_summary")
@@ -140,6 +140,27 @@ We defined operational efficiency as the ratio between the number of people vacc
 We used the nonparametric bootstrap to calculate point estimates and 95% confidenceintervals (CI). This was based on resampling individual participants with replacement.
 
 # Results
+
+```{r}
+
+tar_read(data_bipartite_graph_simulated) %>%
+  mpxnyc::make_table_1_datatable(by = overall, variables = c(age, genderId, race, sexOrientation, channel, hivPrep, monkeypoxVaccine, countSex, countFriends)) %>%
+  rename(stratum = stratum_overall) %>%
+  mpxnyc::draw_table_1(tar_read(factor_labels))
+
+
+```
+
+```{r}
+
+tar_read(data_bipartite_graph_simulated) %>%
+  mpxnyc::make_table_1_datatable(by = groupSex, variables = c(age, genderId, race, sexOrientation, channel, hivPrep, monkeypoxVaccine, countSex, countFriends)) %>%
+  rename(stratum = stratum_groupSex) %>%
+  mpxnyc::draw_table_1(tar_read(factor_labels))
+
+
+```
+
 
 ```{r eval = FALSE}
 #| tbl-cap: "Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks"

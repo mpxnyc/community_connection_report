@@ -3,8 +3,22 @@ load_factor_labels <- function(){
 
   
   list_labels <- list()
+
+  list_labels[["age"]] <- list()
+  list_labels[["age"]][["label"]] <- "Age"
+  list_labels[["age"]][["levels"]][["18-24"]]          <- "18-24"
+  list_labels[["age"]][["levels"]][["25-34"]]          <- "25-34"
+  list_labels[["age"]][["levels"]][["35-44"]]          <- "35-44"
+  list_labels[["age"]][["levels"]][["45-54"]]          <- "45-54"
+  list_labels[["age"]][["levels"]][["55+"]]            <- "55+"
   
-  
+  list_labels[["channel"]] <- list()
+  list_labels[["channel"]][["label"]] <- "Recruitment Channel"
+  list_labels[["channel"]][["levels"]][["grindr"]]                   <- "Grindr"
+  list_labels[["channel"]][["levels"]][["partner_toolkit"]]          <- "Partner toolkit"
+  list_labels[["channel"]][["levels"]][["instagram"]]                <- "Instagram"
+  list_labels[["channel"]][["levels"]][["twitter"]]                  <- "Twitter"
+  list_labels[["channel"]][["levels"]][["unknown"]]                  <- "Unknown"
   
   list_labels[["countFriends"]] <- list()
   list_labels[["countFriends"]][["label"]] <- "Queer/Trans Friends"
@@ -45,8 +59,6 @@ load_factor_labels <- function(){
   list_labels[["genderId"]][["levels"]][["other"]]                  <- "Another Demographic"
   list_labels[["genderId"]][["levels"]][["missing"]]                  <- "Another Demographic"
   
-  
-  
   list_labels[["hivPrep"]] <- list()
   list_labels[["hivPrep"]][["label"]] <- "HIV Status/ PrEP Use"
   list_labels[["hivPrep"]][["levels"]][["no"]]                     <- "Not on PrEP"
@@ -74,7 +86,6 @@ load_factor_labels <- function(){
   list_labels[["race"]][["levels"]][["other"]]                    <- "Another Group"
   
   
-  
   list_labels[["sexOrientation"]] <- list()
   list_labels[["sexOrientation"]][["label"]] <- "Sexual Orientation"
   list_labels[["sexOrientation"]][["levels"]][["gay"]]            <- "Gay"
@@ -82,17 +93,6 @@ load_factor_labels <- function(){
   list_labels[["sexOrientation"]][["levels"]][["straight"]]       <- "Straight"
   list_labels[["sexOrientation"]][["levels"]][["queer"]]          <- "Queer"
   list_labels[["sexOrientation"]][["levels"]][["something-else"]] <- "Another Orientation"
-  
-  
-  
-  
-  list_labels[["channel"]] <- list()
-  list_labels[["channel"]][["label"]]                             <- "Channel"
-  list_labels[["channel"]][["levels"]][["grindr"]]                <- "Grindr"
-  list_labels[["channel"]][["levels"]][["unknown"]]               <- "Unknown Channel"
-  list_labels[["channel"]][["levels"]][["partner_toolkit"]]       <- "Toolkit"
-  list_labels[["channel"]][["levels"]][["instagram"]]             <- "Instagram"
-  list_labels[["channel"]][["levels"]][["twitter"]]               <- "Twitter"
   
   
   list_labels[["placeType"]] <- list()
