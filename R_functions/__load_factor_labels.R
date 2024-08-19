@@ -12,6 +12,15 @@ load_factor_labels <- function(){
   list_labels[["age"]][["levels"]][["45-54"]]          <- "45-54"
   list_labels[["age"]][["levels"]][["55+"]]            <- "55+"
   
+  
+  list_labels[["borough"]] <- list()
+  list_labels[["borough"]][["label"]] <- "Borough"
+  list_labels[["borough"]][["levels"]][["bronx"]]          <- "Bronx"
+  list_labels[["borough"]][["levels"]][["brooklyn"]]       <- "Brooklyn"
+  list_labels[["borough"]][["levels"]][["manhattan"]]      <- "Manhattan"
+  list_labels[["borough"]][["levels"]][["queens"]]         <- "Queens"
+  list_labels[["borough"]][["levels"]][["staten_island"]]  <- "Staten Island"
+  
   list_labels[["channel"]] <- list()
   list_labels[["channel"]][["label"]] <- "Recruitment Channel"
   list_labels[["channel"]][["levels"]][["grindr"]]                   <- "Grindr"
@@ -29,13 +38,22 @@ load_factor_labels <- function(){
   list_labels[["countFriends"]][["levels"]][["16+"]]   <- "16+"
   
   list_labels[["countSex"]] <- list()
-  list_labels[["countSex"]][["label"]] <- "Sex Partners"
+  list_labels[["countSex"]][["label"]] <- "Sex partners"
   list_labels[["countSex"]][["levels"]][["0"]]     <- "0"
   list_labels[["countSex"]][["levels"]][["1"]]     <- "1"
   list_labels[["countSex"]][["levels"]][["2"]]     <- "2"
   list_labels[["countSex"]][["levels"]][["3"]]     <- "3"
   list_labels[["countSex"]][["levels"]][["4"]]     <- "4"
-  list_labels[["countSex"]][["levels"]][["5+"]]    <- "5"
+  list_labels[["countSex"]][["levels"]][["5+"]]    <- "5+"
+  
+  list_labels[["countPhysical"]] <- list()
+  list_labels[["countPhysical"]][["label"]] <- "Physical contact partners"
+  list_labels[["countPhysical"]][["levels"]][["0"]]     <- "0"
+  list_labels[["countPhysical"]][["levels"]][["1"]]     <- "1"
+  list_labels[["countPhysical"]][["levels"]][["2"]]     <- "2"
+  list_labels[["countPhysical"]][["levels"]][["3"]]     <- "3"
+  list_labels[["countPhysical"]][["levels"]][["4"]]     <- "4"
+  list_labels[["countPhysical"]][["levels"]][["5+"]]    <- "5+"
   
   list_labels[["demo_group"]] <- list()
   list_labels[["demo_group"]][["levels"]][["white-cisgender-man"]]  <- "White Cisgender Man"
@@ -75,6 +93,11 @@ load_factor_labels <- function(){
   list_labels[["monkeypoxVaccine"]][["label"]] <- "MPOX Vaccination"
   list_labels[["monkeypoxVaccine"]][["levels"]][["yes"]]                   <- "Vaccinated"
   list_labels[["monkeypoxVaccine"]][["levels"]][["no"]]                    <- "Unvaccinated"
+  
+  list_labels[["monkeypoxTest"]] <- list()
+  list_labels[["monkeypoxTest"]][["label"]] <- "MPOX Test"
+  list_labels[["monkeypoxTest"]][["levels"]][["yes"]]                   <- "Yes"
+  list_labels[["monkeypoxTest"]][["levels"]][["no"]]                    <- "No"
   
   list_labels[["race"]] <- list()
   list_labels[["race"]][["label"]] <- "Race"
@@ -122,9 +145,13 @@ load_factor_labels <- function(){
   list_labels[["groupSex"]][["levels"]][["yes"]]                   <- "Yes"
   list_labels[["groupSex"]][["levels"]][["no"]]                    <- "No"
   
+  list_labels[["overall"]] <- list()
+  list_labels[["overall"]][["label"]]                             <- "Total participants"
+  list_labels[["overall"]][["levels"]][["overall"]]                   <- "Count (%)"
+  
   list_labels[["stratum"]] <- list()
   list_labels[["stratum"]][["label"]]                             <- "Group Sex or Physical Contact"
-  list_labels[["stratum"]][["levels"]][["yes"]]                   <- "Physical / Sexual Contact"
+  list_labels[["stratum"]][["levels"]][["yes"]]                   <- "Contact"
   list_labels[["stratum"]][["levels"]][["no"]]                    <- "No Contact"
   list_labels[["stratum"]][["levels"]][["overall"]]               <- "Overall"
   

@@ -3,7 +3,12 @@ clean_data_people <- function(raw_data_participants, factor_levels) {
   
   raw_data_participants %>%
     dplyr::mutate(
+      borough          = mpxnyc::convert_spatial_unit_ny(censusTractHome, convert_to = "borough"),
+      community        = mpxnyc::convert_spatial_unit_ny(censusTractHome, convert_to = "community")
+    ) %>%
+    dplyr::mutate(
       age              = factor(age,              factor_levels[["age"]][["current_levels"]],               factor_levels[["age"]][["new_levels"]]),
+      borough          = factor(borough,          factor_levels[["borough"]][["current_levels"]],           factor_levels[["borough"]][["new_levels"]]),
       channel          = factor(channel,          factor_levels[["channel"]][["current_levels"]],           factor_levels[["channel"]][["new_levels"]]),
       countFriends     = cut(countFriends,        factor_levels[["countFriends"]][["current_levels"]],      factor_levels[["countFriends"]][["new_levels"]]),
       countPhysical    = cut(countPhysical,       factor_levels[["countPhysical"]][["current_levels"]],     factor_levels[["countPhysical"]][["new_levels"]]),
@@ -15,8 +20,6 @@ clean_data_people <- function(raw_data_participants, factor_levels) {
       travelTime       = cut(travelTime,          factor_levels[["travelTime"]][["current_levels"]],        factor_levels[["travelTime"]][["new_levels"]])
     ) %>%
     dplyr::mutate(
-      borough          = mpxnyc::convert_spatial_unit_ny(censusTractHome, convert_to = "borough"),
-      community        = mpxnyc::convert_spatial_unit_ny(censusTractHome, convert_to = "community"),
       demo_group       = as.character(genderId),
       demo_group       = ifelse(race %in% c("black", "white", "latinx") & genderId == "cisgender-man", paste(stringr::str_to_lower(race) , demo_group, sep = "-"), demo_group),
       demo_group       = ifelse(!(race %in% c("black", "white", "latinx")) & genderId == "cisgender-man", paste("other", demo_group, sep = "-"), demo_group),

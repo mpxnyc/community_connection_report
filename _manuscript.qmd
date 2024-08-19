@@ -15,7 +15,7 @@ execute:
 
 library(tidyverse)
 library(ggplot2)
-library(mpxnyc)
+#library(mpxnyc)
 library(sf)
 library(tidygraph)
 library(ggraph)
@@ -143,23 +143,24 @@ We used the nonparametric bootstrap to calculate point estimates and 95% confide
 
 ```{r}
 
-tar_read(data_bipartite_graph_simulated) %>%
-  mpxnyc::make_table_1_datatable(by = overall, variables = c(age, genderId, race, sexOrientation, channel, hivPrep, monkeypoxVaccine, countSex, countFriends)) %>%
-  rename(stratum = stratum_overall) %>%
-  mpxnyc::draw_table_1(tar_read(factor_labels))
+
+a <- tar_read(data_bipartite_graph_collected) %>%
+  make_table_1_datatable(by = groupSex, variables = c(overall, age, genderId, race, sexOrientation, channel, hivPrep, monkeypoxVaccine, monkeypoxTest, monkeypoxTest, countSex, countFriends, countPhysical, borough)) %>%
+  mutate(stratum = stratum_groupSex) 
+
+b <- tar_read(data_bipartite_graph_collected) %>%
+  mutate(groupSex = "overall") %>%
+  make_table_1_datatable(by = groupSex, variables = c(overall, age, genderId, race, sexOrientation, channel, hivPrep, monkeypoxVaccine, monkeypoxTest, monkeypoxTest, countSex, countFriends, countPhysical, borough)) %>%
+  mutate(stratum = stratum_groupSex) 
+
+
+rbind(a, b) %>%
+  draw_table_1(tar_read(factor_labels))
 
 
 ```
 
-```{r}
 
-tar_read(data_bipartite_graph_simulated) %>%
-  mpxnyc::make_table_1_datatable(by = groupSex, variables = c(age, genderId, race, sexOrientation, channel, hivPrep, monkeypoxVaccine, countSex, countFriends)) %>%
-  rename(stratum = stratum_groupSex) %>%
-  mpxnyc::draw_table_1(tar_read(factor_labels))
-
-
-```
 
 
 ```{r eval = FALSE}

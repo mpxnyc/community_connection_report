@@ -6,6 +6,11 @@ load_factor_levels <- function(){
   list_levels[["age"]][["current_levels"]]                        <- c("18-24", "25-34", "35-44", "45-54", "55-64", "65+")
   list_levels[["age"]][["new_levels"]]                            <- c("18-24", "25-34", "35-44", "45-54", "55+", "55+")
   
+  list_levels[["borough"]]                                            <- list()
+  list_levels[["borough"]][["current_levels"]]                        <- c("Bronx", "Brooklyn", "Manhattan", "Queens", "Staten Island")
+  list_levels[["borough"]][["new_levels"]]                            <- c("bronx", "brooklyn", "manhattan", "queens", "staten_island")
+  
+  
   list_levels[["channel"]]                                        <- list()
   list_levels[["channel"]][["current_levels"]]                    <- c("grindr", "partner_toolkit", "instagram", "twitter", "unknown")
   list_levels[["channel"]][["new_levels"]]                        <- c("grindr", "partner_toolkit", "instagram", "twitter", "unknown")
