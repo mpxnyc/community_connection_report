@@ -29,7 +29,7 @@ attach(mpxnyc_colors)
 ```
 
 
-```{r scripts, echo=FALSE, warning=FALSE}
+```{r scripts, echo=FALSE, warning=FALSE, message=FALSE}
 targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
 targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/1_data_processing")
 targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/2_data_summary")
@@ -49,31 +49,63 @@ targets::tar_make() # Runs the data pipeline shown in _targets.R
 ## Data Collection 
 
 ### Recruitment
-- Consultation
-- Campaign direction
+- built a website, newsletter, and audience for the newsletter 
+- suggested Burness as an ad agency 
+- suggested creative for campaign is based on emojis used by queer and trans people 
+- suggested using Grindr, Instagram, and Twitter as digital channels for recruitment and Fire Island Ferry Terminal for an out-of-home ad 
+- selected which LinkNYC kiosks to use for out-of-home ads 
+- administered a sub-committee from the community forum to act as a focus group for choosing which creative direction to use for graphic design 
+- wrote the script for influencers to read during their recordings 
+- selected which influencers to pay on Cameo 
+- supported Burness in the development of a social media toolkit 
+- identified a consultant for translating materials from English to Spanish
 
 ### Questionnaire 
-- Compiled
-- Piloted with feedback survey
- -Translated 
+
  
-### Instrument 
-Designed and developed from scratch using NextJs  (upcoming article)
-Incorporates aesthetics of recruitment campaign
-Safety Features: Annonymous (age and geo-cordinates intentioinally coarse)
+### Data collection instrument 
+
+
+### Data Storage
+
 
 ### Ethical Review
 Approved by XXXX
 
 ## Measures 
-### Participant and Contact Venue Characteristics
+### Participants 
 We solicited information on participant sociodemographics, utilization of healthcare services such as pre-exposure prophylaxis (PrEP), HIV treatment and vaccination against MPOX; connection to queer or transgender community through sex and socializing; and location of primary residence. 
 
-Gender identity was measured using a two-step approach: first, we solicited the participant’s current gender (), and then their sex assigned at birth (). Those whose gender identity was not concordant with the gender commonly associated with their sex assigned at birth were categorized as transgender. We used current gender to further categorize transgender people into men and women. Race was measured using a multiple selection question based on census categories ().  We defined gender-race subgroup as the combination of gender identity and race. 
+Gender identity was measured using a two-step approach: first, we solicited the participant’s current gender (), and then their sex assigned at birth (). Those whose gender identity was not concordant with the gender commonly associated with their sex assigned at birth were categorized as transgender. We used current gender to further categorize transgender people into men and women. Race was measured using a multiple selection question based on census categories ().  We defined gender-race subgroup as the combination of gender identity and race. We collapsed small cells across racial groups. 
 
-Finally, we asked whether participants had engaged in group sex or had physical contact in a congregate setting in the four weeks before taking the survey. Those who answered in the affirmative are said to have had contact. We solicited the locations of the venues at which the contact happened which we refer to as contact venues. 
+### Contact venues
+We asked whether participants had engaged in group sex or had physical contact in a congregate setting in the four weeks before taking the survey. Among those who answered positively, we solicited the locations of the venues at which the contact happened. We refer to these locations as contact venues. 
 
-For each contact venue, participants indicated the type of place it was () and whether they had sexual (as opposed to non-sexual physical) contact there. As a crude measure of the distance between contact venues, and participant residences, we categorized contact venues into those that are in the same neighborhood as the residence, the same borough but different neighborhood, and a different borough.
+For each contact venue, participants indicated the type of place it was () and whether they had sexual (vs. non-sexual physical) contact there. 
+
+As a crude measure of the distance between the contact venue and participant residence, we categorized contact venues into those that are in the same neighborhood as the residence, the same borough but different neighborhood, or a different borough than the participant's residence.
+
+
+## Statistican Analysis
+We tabulated participant responses to questions about healthcare access, connection with community, and demographics by report of contact. To describe social and sexual contact patterns prior to hypothesized interventions, we visualized contact venue characteristics by sexual contact and distance between venue and home, we calculated the overall transmission efficiency of the social mixing network, and plotted the mixing propensity across sub-groups defined by race-gender, sexual orientation, and age. We examined the operational efficiency, transmission impact, and distributional equity for each intervention approach. 
+
+We used the nonparametric bootstrap to calculate point estimates and 95% confidenceintervals (CI). This was based on resampling individual participants with replacement.
+
+### Movement
+We
+
+### Mixing
+We
+
+### Hypothestical Intervention
+We assessed 12 hypothetical vaccination campaigns. Vaccination approaches vary by the setting in which vaccination is conducted, the approach to ranking neighborhoods, and by the vaccination coverage goal. In total, we examined 12 vaccination campaigns (two approaches x three settings x two intervention goals). Under each campaign, neighborhoods of New York City are ranked and then vaccinated in the order of their ranking until a pre-specified vaccination coverage goal is reached.
+
+We assume that vaccination can be conducted in three settings: the neighborhoods that contains the participants’ residences, social contact venues, and sexual contact venues. We examined vaccination campaigns that are conducted in residences, residences and social contact venues, and residences and all contact venues.
+
+We examined two approaches to prioritizing neighborhoods. In the first, neighborhoods are ranked by the number of additional individuals who would be vaccinated in each neighborhood if participants in higher-ranking neighborhoods were vaccinated. In the second, the first approach is applied separately for each race-gender sub-group. The resulting ranking lists are then merged so that all the neighborhoods that have the same ranking in the sub-group-specific lists have a tied ranking in the new list. Finally, duplicate neighborhood names are removed from the new list, keeping the highest ranked copy of the neighborhood name in each instance. We name the former approach a ‘race-gender-blind’ approach and the latter a ‘race-gender-sensitive’ approach.
+
+Finally, we examined two coverage goals. In the first, the vaccination campaign would end once 33% of the overall population receives the vaccine, in the second, the campaign would end once 66% of the population are vaccinated.
+
 
 ### Social and Sexual Contact Patterns
 
@@ -180,7 +212,7 @@ table_1_descriptives <- targets::tar_read(data_table_1_people_by_groupSex_raw) %
 table_1_descriptives
 ```
 
-## Regarding People
+
 
 
 
@@ -209,27 +241,33 @@ make_table_freq2(hivPrep, demo_group) %>%
 
 ```{r home_map}
 make_table_freq1(community) %>%
-  plot_map_choro(proportion) %>%
-  apply_style_choro_map(show.na = TRUE)
+  arrange(-proportion) %>%
+  mutate(cum_proportion = cumsum(proportion)) %>%
+  mutate(group = c(rep("First 5", 5), rep("Next 5", 5), rep("Remainder", n() - 10))) %>%
+  mutate(stratum = "Overall") %>%
+  plot_map_choro(group) %>%
+  apply_style_chorofill_map(show.na = TRUE)
 
 ```
 
 ```{r home_by_race_map}
 make_table_freq2(community, race) %>%
   filter(stratum %in% c("White", "Black", "Latinx")) %>%
-  plot_map_choro_stratified(proportion) %>%
-  apply_style_choro_map(show.na = FALSE)
+  arrange(strata, -proportion) %>%
+  group_by(stratum) %>%
+  mutate(cum_proportion = cumsum(proportion)) %>%
+  mutate(group = c(rep("First 5", 5), rep("Next 5", 5), rep("Remainder", n() - 10))) %>%
+  plot_map_choro_stratified(group) %>%
+  apply_style_chorofill_map(show.na = FALSE)
 
 ```
 
-## People in places
-
-### Overall Sample
-
-### Sample by Race
 
 
-## Regarding Places
+
+
+
+
 
 
 ```{r placetype}
@@ -247,7 +285,7 @@ make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE)
 
 
 
-## People connecting through places
+
 
 ```{r movement}
 #| fig-width: 13
@@ -333,9 +371,6 @@ make_coverage_table(intervention_priority = "contact", intervention_stratificati
 
 
 
-### Intervention Efficiency
-#### Efficient Coverage
-
 
 
 ```{r map}
@@ -356,7 +391,7 @@ bar_plot <- make_coverage_table(intervention_priority = "contact", intervention_
 
 ```
 
-#### Efficient Disruption
+
 
 ```{r graph_connectedness}
 #| fig-width: 8
@@ -370,3 +405,5 @@ make_table_centrality() %>%
     apply_style_bar_netimpact()
 
 ```
+
+

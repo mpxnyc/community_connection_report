@@ -32,7 +32,9 @@ draw_table_1 <- function(data_table, list_labels){
   
   working_data_strata %>%
     dplyr::rename(` `=variable, `  ` = level) %>%
-    knitr::kable(booktabs = TRUE, align = "llcccccccccc") %>%
-    kableExtra::kable_classic(bootstrap_options = "striped", full_width = FALSE) %>%
-    kableExtra::column_spec(1, bold = TRUE, border_right = FALSE)
+    gt::gt()
+    # knitr::kable(booktabs = TRUE, align = "llcccccccccc") %>%
+    # kableExtra::kable_classic( full_width = FALSE) %>%
+    # kableExtra::column_spec(1, bold = TRUE, border_right = FALSE) %>%
+    # kableExtra::kable_paper()
 }

@@ -16,16 +16,21 @@ plot_map_choro_stratified        <- function(data, fill){
                                         mpxnyc::community_sf_obj %>%
                                           dplyr::rename(level = 1) %>%
                                           dplyr::left_join(data_internal, by = "level") %>%
-                                          dplyr::mutate(stratum = stratum_input)
+                                          dplyr::mutate(stratum = stratum_input) %>%
+                                          dplyr::filter(!stringr::str_detect(level, "SI"))
                         }
                       ) %>%
                       bind_rows()
   
+
   
-  map_object %>%
-    ggplot() +
-    geom_sf(fill = "grey") +
-    geom_sf(aes(fill = {{fill}}), color = "black") +
-    facet_grid(. ~ stratum)
+  
+ map_object %>%
+            ggplot() +
+            geom_sf(fill = "grey") +
+            geom_sf(aes(fill = {{fill}}), color = "black") +
+            facet_grid(. ~ stratum)
+  
+
 
 }
