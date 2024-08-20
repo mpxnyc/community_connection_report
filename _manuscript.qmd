@@ -29,7 +29,7 @@ attach(mpxnyc_colors)
 ```
 
 
-```{r scripts, echo=FALSE, warning=FALSE, message=FALSE}
+```{r scripts, echo=FALSE, warning=FALSE, message=FALSE, include= FALSE}
 targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
 targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/1_data_processing")
 targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/2_data_summary")
@@ -47,30 +47,24 @@ targets::tar_make() # Runs the data pipeline shown in _targets.R
 # Methods
 
 ## Data Collection 
+We conducted an annonymous cross-sectional online survey among people who identify as queer or trans and live in New York, and people who have had sexual contact with queer and trans people in New York City. Inclusion criteria were XXXX. Exclusion criteria were YYYYYY.  
 
 ### Recruitment
-- built a website, newsletter, and audience for the newsletter 
-- suggested Burness as an ad agency 
-- suggested creative for campaign is based on emojis used by queer and trans people 
-- suggested using Grindr, Instagram, and Twitter as digital channels for recruitment and Fire Island Ferry Terminal for an out-of-home ad 
-- selected which LinkNYC kiosks to use for out-of-home ads 
-- administered a sub-committee from the community forum to act as a focus group for choosing which creative direction to use for graphic design 
-- wrote the script for influencers to read during their recordings 
-- selected which influencers to pay on Cameo 
-- supported Burness in the development of a social media toolkit 
-- identified a consultant for translating materials from English to Spanish
+In collaboration with a marketing agency, we developed and implemented a study recruitment and health information campaign. The campaign provided basic information on MPOX and invites potential participants to take their survey. The camapaign had two components: paid advertisement on social media and strategic out-of-home locations (e.g. Electronic posters at the Fire Island Ferry Terminal building), and a social media toolkit containing materials that community members and organizations could share on their own social media accounts. We also paid queer influencers to record videos sharing information about the study and about mpox for the purpose of sharing these through paid ads and through the social media toolkit. The marketing campaign was conducted in Spanish and English. 
+
+The overall marketing concept was decided during an open meeting of the RESPND-MI Community Forum through discussion with X participants of diverse backgrounds. a sub-committee from the community forum to act as a focus group for choosing which creative direction to use for graphic design. Paid queer influencers were chosen by solicing suggestions from community forum members. We made sure to have X, X, X, and X. 
 
 ### Questionnaire 
-
+The questionnaire was designed to be completed in XX minutes. We describe the content below, and the process of developing it here. A team of X investigators developed the initial draft questionnaire prioritizing X, X, X. These were circulated among the investigator team for review and comment. The near-final questionnaire was circulated among community forum (?). 
  
 ### Data collection instrument 
+We designed and implemented a novel online survey instrument which captures spatial information at a resolution fine enough to analyze overall patterns in social and sexual contact in the population but coarse enough to preserve the annonymity of the survey. 
 
+This was accomplished through a user interface that resembles the google maps (r) search interface linked to the google maps API. To collect spatial data, participants were prompted to indicate all venues where they had had physical or sexual contact in a congregate setting over the preceding 4 weeks. The user interface allows the participant to search by neighborhood, place name, street address, and other markers which are admitted by the google maps search interface. When the user taps on a place in the map, a pop-up window asks them to confirm the location. If they do confirm, they receive a series of questions related to that particular venue. Once all the questions relating to a venue are answered, the user is allowed to tap on the map again to indicate a second venue, etc. 
 
-### Data Storage
+In addition, the survey instrument collected data thorugh other question formats (multiple choice, single choice, etc.). The look and feel of the data colleciton instrument was consistent with the visual identity established by the campaign. Data were stored in a custom built graph database system hosted on a secure cloud server platform. 
 
-
-### Ethical Review
-Approved by XXXX
+The instrument was validated thorugh 3 rounds of user testing before data collection. Users were asked to comment on [AIRTABLE].
 
 ## Measures 
 ### Participants 
@@ -86,107 +80,46 @@ For each contact venue, participants indicated the type of place it was () and w
 As a crude measure of the distance between the contact venue and participant residence, we categorized contact venues into those that are in the same neighborhood as the residence, the same borough but different neighborhood, or a different borough than the participant's residence.
 
 
-## Statistican Analysis
-We tabulated participant responses to questions about healthcare access, connection with community, and demographics by report of contact. To describe social and sexual contact patterns prior to hypothesized interventions, we visualized contact venue characteristics by sexual contact and distance between venue and home, we calculated the overall transmission efficiency of the social mixing network, and plotted the mixing propensity across sub-groups defined by race-gender, sexual orientation, and age. We examined the operational efficiency, transmission impact, and distributional equity for each intervention approach. 
-
-We used the nonparametric bootstrap to calculate point estimates and 95% confidenceintervals (CI). This was based on resampling individual participants with replacement.
-
-### Movement
-We
-
-### Mixing
-We
-
-### Hypothestical Intervention
-We assessed 12 hypothetical vaccination campaigns. Vaccination approaches vary by the setting in which vaccination is conducted, the approach to ranking neighborhoods, and by the vaccination coverage goal. In total, we examined 12 vaccination campaigns (two approaches x three settings x two intervention goals). Under each campaign, neighborhoods of New York City are ranked and then vaccinated in the order of their ranking until a pre-specified vaccination coverage goal is reached.
-
-We assume that vaccination can be conducted in three settings: the neighborhoods that contains the participants’ residences, social contact venues, and sexual contact venues. We examined vaccination campaigns that are conducted in residences, residences and social contact venues, and residences and all contact venues.
-
-We examined two approaches to prioritizing neighborhoods. In the first, neighborhoods are ranked by the number of additional individuals who would be vaccinated in each neighborhood if participants in higher-ranking neighborhoods were vaccinated. In the second, the first approach is applied separately for each race-gender sub-group. The resulting ranking lists are then merged so that all the neighborhoods that have the same ranking in the sub-group-specific lists have a tied ranking in the new list. Finally, duplicate neighborhood names are removed from the new list, keeping the highest ranked copy of the neighborhood name in each instance. We name the former approach a ‘race-gender-blind’ approach and the latter a ‘race-gender-sensitive’ approach.
-
-Finally, we examined two coverage goals. In the first, the vaccination campaign would end once 33% of the overall population receives the vaccine, in the second, the campaign would end once 66% of the population are vaccinated.
+### Spatial mixing 
+To understand how the contact venues and residences of different kinds of participants are clustered in space, we examined the l
 
 
-### Social and Sexual Contact Patterns
+The spatial mixing coefficient from characteristic X to characteristic Y compares the conditional probability of someone with charestic X sharing a community district with someone with characteristic Y to the marginal probability of having characteristic Y. The spatial mixing coefficient is defined as the ratio between these two probabilities minus 1. 
 
-To examine spatial patterns of social and sexual interaction, study data were organized into a social mixing network whose nodes represent participants and weighted ties represent the number of neighborhoods a given pair of individuals both live or had contact in. We used characteristics of this network to characterize patterns of social and sexual contact among participants.
+We also contructed a spatial transmission network consisting of individuals. In this network, a pair of individuals has a tie between them if they share at least one community district. The weight of tie is proportional to the number of community districts they share. 
 
-We define transmission efficiency as the proportion of nodes in the largest connected component of the social mixing network. A connected component is a subset of nodes such that each node is reachable from any other node within that subset while no node outside this subset can reach a node within it. A node is reachable from another node if it is possible to connect the pair by tracing along the ties of the network “without lifting the pen. Networks that represent social systems often consist of one “giant connected component” which includes a large proportion of the nodes along with smaller connected components including singletons or those unconnected to any other node. The fewer and larger the connected components of a network are, the more efficient it is for a pathogen to spread across that network along network ties. 
-
-We also define mixing propensity between two sub-groups as a measure of the extent to which members of one sub-group live and have contact in the same neighborhoods as those in another sub-group. This measure compares two probabilities: the probability of a member of the former sub-group living or having contact in the same neighborhoods as the latter sub-group, and the overall probability of living or having contact in the same neighborhoods as the latter sub-group. It is calculated by subtracting 1 from the ratio between the first and second probabilities. 
-
-A negative mixing propensity indicates that the former sub-group is less likely to live and have contact in the same neighborhoods as the latter group than they would have if they chose neighborhoods at random. Conversely, a positive mixing propensity indicates that the former sub-group has a better than random chance of living or having contact in the same neighborhoods as the latter sub-group. 
-
-
-
-## Epidemic Scenario and Hypothetical Interventions
-To understand the potential impact of a vaccination campaign to contain the spread of a
-novel pathogen that spreads through person-to-person contact in the queer and trans
-communities of New York City, we constructed a simplified epidemic scenario and
-assessed the efficiency, impact, and equity of a set of hypothetical intervention
-vaccination interventions.
-
-### Epidemic Scenario
-We assume that a non-lethal pathogen has infected a small number of individuals in
-New York City. The pathogen is perfectly transmissible so that if one person in a given
-neighborhood acquires it, all individuals who reside or have contact in that
-neighborhood will be infected (we can imagine that each neighborhood in New York City
-has only one physical venue where queer and trans people live, socialize, and have
-sex, and that the pathogen is perfectly transmissible inside that venue). Finally, we
-assume that there is a 100% efficacious vaccine which prevents both acquisition and
-onward transmission of the pathogen.
-
-### Vaccination Interventions
-We assessed 12 hypothetical vaccination campaigns. Vaccination approaches vary by
-the setting in which vaccination is conducted, the approach to ranking neighborhoods,
-and by the vaccination coverage goal. In total, we examined 12 vaccination campaigns
-(two approaches x three settings x two intervention goals). Under each campaign,
-neighborhoods of New York City are ranked and then vaccinated in the order of their
-ranking until a pre-specified vaccination coverage goal is reached.
-
-We assume that vaccination can be conducted in three settings: the neighborhoods that
-contains the participants’ residences, social contact venues, or sexual contact venues.
-We examined vaccination campaigns that are conducted in residences, residences and
-social contact venues, and residences and all contact venues.
-
-We examined two approaches to prioritizing neighborhoods. In the first, neighborhoods
-are ranked by the number of additional individuals who would be vaccinated in each
-neighborhood if participants in higher-ranking neighborhoods were vaccinated. In the
-second, the first approach is applied separately for each race-gender sub-group. The
-resulting ranking lists are then merged so that all the neighborhoods that have the same
-ranking in the sub-group-specific lists have a tied ranking in the new list. Finally,
-duplicate neighborhood names are removed from the new list, keeping the highest
-ranked copy of the neighborhood name in each instance. We name the former
-approach a ‘race-gender-blind’ approach and the latter a ‘race-gender-sensitive’
-approach.
-
-Finally, we examined two coverage goals. In the first, the vaccination campaign would
-end once 33% of the overall population receives the vaccine, in the second, the
-campaign would end once 66% of the population are vaccinated.
 
 ## Statistical Analysis
-We tabulated participant responses to questions about healthcare access, connection with community, and demographics by report of contact. To describe social and sexual contact patterns prior to hypothesized interventions, we visualized contact venue characteristics by sexual contact and distance between venue and home, we calculated the overall transmission efficiency of the social mixing network, and plotted the mixing propensity across sub-groups defined by race-gender, sexual orientation, and age. We examined the operational efficiency, transmission impact, and distributional equity for each intervention approach. 
+We tabulated participant responses to questions about healthcare access, connection with community, and demographics by report of contact. We also tabulated the characteristic of contact venues. We visualized the flow of study participants between home and contact venues using a matrix plot. We plotted this measure for subgroups defined by race-gender, sexual orientation, and age.
 
-We defined operational efficiency as the ratio between the number of people vaccinated and the number of neighborhoods included in the vaccination campaign – the higher the number of people vaccinated per neighborhood included, the more efficient the intervention is. Transmission impact is defined as the percentage reduction in the transmission efficiency of the social mixing network that results from removing vaccinated nodes from the network. The higher the reduction in transmission efficiency, the higher the transmission impact of the vaccination intervention. Distributional equity is defined as the extent to which vaccination coverage within sub-groups defined by demographic variables mirrors overall population coverage. Intervention approaches that lead to bigger deviations between within and across sub-group coverage are considered inequitable.
+### Hypothetical Intervention
+We examined the efficiency and transmission impact of a hypothetical intervention to prioritize community district according to the amount of contact and vaccinate those districts in order of that priorization. We assume that vaccinating a community district means rendering every individuals who lives in or has had contact in that community district unable to acquire or transmit a hypothetical pathogen.
 
-We used the nonparametric bootstrap to calculate point estimates and 95% confidenceintervals (CI). This was based on resampling individual participants with replacement.
+Efficiency was examined by understanding what the minimum number of community districts to be vaccinated to cover 33% of the population, and separately to cover 66% of the population. 
+
+Transmission impact was examined by understanding the impact on the underlying spatial transmission network of removing community districts which have been vaccinated. 
+
+### Statistical Inference
+We used the non-parametric bootstrap to calculate point estimates and 95% confidence intervals (CI). This was based on re-sampling individual participants with replacement.
+
+
 
 # Results
 
 ```{r}
 
 
-a <- tar_read(data_bipartite_graph_collected) %>%
+by_group_sex <- tar_read(data_bipartite_graph_collected) %>%
   make_table_1_datatable(by = groupSex, variables = c(overall, age, genderId, race, sexOrientation, channel, hivPrep, monkeypoxVaccine, monkeypoxTest, monkeypoxTest, countSex, countFriends, countPhysical, borough)) %>%
   mutate(stratum = stratum_groupSex) 
 
-b <- tar_read(data_bipartite_graph_collected) %>%
+overall <- tar_read(data_bipartite_graph_collected) %>%
   mutate(groupSex = "overall") %>%
   make_table_1_datatable(by = groupSex, variables = c(overall, age, genderId, race, sexOrientation, channel, hivPrep, monkeypoxVaccine, monkeypoxTest, monkeypoxTest, countSex, countFriends, countPhysical, borough)) %>%
   mutate(stratum = stratum_groupSex) 
 
 
-rbind(a, b) %>%
+rbind(by_group_sex, overall) %>%
   draw_table_1(tar_read(factor_labels))
 
 
