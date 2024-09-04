@@ -94,7 +94,7 @@ make_table_freq3                <- function(variable = overall,stratum_variable_
   
   
   original_data %>%
-          dplyr::left_join(simulated_data) %>%
+          dplyr::left_join(simulated_data, by = c("level", "stratum_a", "stratum_b")) %>%
           dplyr::arrange(stratum_a, stratum_b, level) %>%
           dplyr::mutate(
             variable = variable_name,
