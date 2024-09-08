@@ -10,6 +10,10 @@ execute:
 editor: 
   markdown: 
     wrap: 72
+format: 
+  docx:
+    toc: true
+bibliography: bibliography.bib
 ---
 
 ```{r libraries, echo=FALSE}
@@ -42,6 +46,14 @@ targets::tar_make() # Runs the data pipeline shown in _targets.R
 
 ```
 
+# To Do
+
+1.  Measures of centrality and density
+2.  Results
+3.  Introduction
+4.  Discussion
+5.  Appendices
+
 # Methods
 
 ```{r text_variables}
@@ -54,54 +66,55 @@ end_date   <- targets::tar_read(data_bipartite_graph_collected) %>% data.frame()
 
 As part of The Rapid Epidemiologic Study of Prevalence, Networks, and
 Demographics of Monkeypox Infection (RESPND-MI), we implemented a brief,
-anonymous, online survey. Data were collected from 20 August 2022 to 15
-November 2022 among transgender people and gay, bisexual, and other men
-who have sex with men in New York City.
+anonymous, online survey among transgender people and gay, bisexual, and
+other men who have sex with men. Data were collected from 20 August 2022
+to 15 November 2022 in New York City.
 
 ### RESPND-MI Community Forum
 
-To benefit from the practice-based knowledge held by individuals and
-queer and trans organizations, and to ensure that we were not
-duplicating efforts, we planned a rapid consultation meeting at the
-outset of the project. Investigators compiled a list of 53 key
-stakeholders in New York City. To maximize participation, these
-individuals were invited via email by investigators with whom they had a
-prior relationship (where possible).
+To elicit input about the study from queer and trans individuals and
+organizations who do health-related work, we held a rapid consultation
+meeting at the outset of the project. Investigators compiled a list of
+53 invitees and invited them. To maximize uptake, we attempted to match
+each invitee with an investigator they had a prior relationship with.
 
-At the consultation meeting on 27 June 2022, participants requested a
-weekly meeting since there were no similar fora dedicated to mpox
-epidemiology, research, and health programs at the time. We held the
-RESPND-MI Queer and Trans Community Forum weekly from June to August
-2022. Though the main purpose of the Community Forum was to share
-information and coordinate response efforts, we also used the meeting to
-consult about specific decisions. About 80 people participated in the
-from June to August 2022.
+At the consultation meeting, participants requested that the RESPND-MI
+team host a weekly meeting since there were no other venues for
+discussing the outbreak from the perspectives of organizations that
+deliver services to queer and trans individuals, and individuals who had
+experienced mpox infection. We named the space the RESPND-MI Queer and
+Trans Community Forum and held it weekly from June to August 2022.
+Though the main purpose of the Community Forum was to share information
+and allow organizations and individuals to coordinate political action ,
+it was also used to consult on study-related decisions. About 80
+individuals participated in the Community Forum over the 2-month period
+we held it. Further details can be found in a previous publication
+[@roth2023global].
 
 ### Recruitment
 
-We collaborated with a marketing agency to develop and conduct a study
-recruitment and health information campaign in English and Spanish. Our
-brief to the ageny was to create a name and visual identity that convey
-scientific rigor, build trust with the community we aimed to survey, and
-to stand out in a crowded online advertising space (see
-@fig-requirements). As a starting point, we suggested a campaign that
-playfully communicates using emojis that are used to communicate about
-sex on online hookup platforms. Four marketing concepts (see
-@fig-options) and two campaign names were developed by the marketing
-agency and presented to the RESPND-MI Community Forum. The final concept
-and name were decided by consensus.
+We collaborated with a marketing agency to design and implement a study
+recruitment campaign in English and Spanish. The brief was to create a
+name and visual identity that convey scientific rigor, build trust with
+the community, and to stand out in a crowded online advertising space
+(see @fig-requirements). As a starting point, we suggested a campaign
+that playfully communicates using emojis that have sexual connotations.
+Two campaign names and four marketing concepts (see @fig-options) were
+developed by the marketing agency and presented to the RESPND-MI
+Community Forum. The final concept and name were decided by consensus
+during that meeting.
 
 [![Requirements for MPX NYC
 Study](images/clipboard-2397454480.png){#fig-requirements
 fig-alt="Requirements for MPX NYC Study"}](https://www.mpxresponse.org)
 
-Marketing materials included graphics for paid mobile ads, out-of-home
-ads, videos by paid queer influencers, and a style guide for all
-public-facing materials of the MPX NYC study (including colors, icons,
-and fonts). We organized these materials into a "social media toolkit"
-so that they would be easy for individuals and organizations to share
-through their own social media accounts. Advertisements were placed
-through Grindr, Twitter, Instagram, and electronic billboards.
+Marketing materials included graphics, videos by queer influencers, and
+a style guide (including colors, icons, and fonts) for all public-facing
+materials of the MPX NYC study. We organized these materials into a
+"social media toolkit" so that they would be easy for individuals and
+organizations to share through their own social media accounts.
+Advertisements were placed through Grindr, Twitter, Instagram, and
+outdoor electronic billboards.
 
 ![Options for visual identity of MPX
 NYC](images/clipboard-22126019.png){#fig-options
@@ -110,40 +123,31 @@ fig-alt="Options for visual identity of MPX NYC"}
 ### Data collection instrument
 
 We designed and implemented a novel online survey instrument which
-captures detailed spatial information while maintaining anonymity. The
-look and feel of the data collection instrument was based on the MPX NYC
-style guide.
+captures coarsened spatial information to maintain anonymity. Along with
+standard question formats (multiple choice, single choice, text field
+etc.) we developed a question format to elicit spatial data.
 
-Along with standard question formats (multiple choice, single choice,
-and text field etc.) we developed a novel question format (which we call
-the map-input question format here) to elicit spatial information.
+In the map-input question format, participants are prompted to indicate
+all places of a particular type by tapping on a displayed map (see
+@fig-mapinputformat). Each time the user taps on the map, a marker
+appears and a pop-up window asks them to answer a series of questions
+related to that location. Spatial data were coarsened by transforming
+longitude-latitude coordinates into the identifiers of the census tract
+that contain them. Census tracts are a spatial unit that exhaustively
+divides the United States into areas ranging from $2500$ to $8000$ in
+population size [@uscensus2022].
 
-In map-input questions, participants are prompted to indicate all places
-of a particular type by tapping on a map (see @fig-mapinputformat). Each
-time the user taps on the map, a marker appears and a pop-up window asks
-them to confirm the location. One confirmed, participants answer a
-series of questions related to that location. Once those are answered,
-the user is allowed to tap on the map again to indicate another location
-or to move on the next question.
+The look and feel of the data collection instrument was based on the MPX
+NYC style guide. The front end was developed as a single-page web
+application using the React/NextJS framework [@nextjsd2024]. It uses the
+Google Maps [@google2024] and Federal Communications Commission
+[@federal] APIs to collect and transform spatial data. The backend was a
+custom-built neo4j graph database [@neo4j2024] hosted on a commercial
+cloud server platform. The instrument underwent two rounds of user
+testing before data collection started.
 
 ![Map input question format developed for MPX
 NYC](images/clipboard-1908474363.png){#fig-mapinputformat}
-
-To protect anonymity, spatial data were saved as census tract
-identifiers rather than latitude-logitude coordinates. Census tracts are
-a spatial unit that exhaustively divides the united states up into areas
-ranging from XX to XXX in population size (CITE).
-
-For each place that a user adds using the map-input question format, the
-Google maps API (CITE) returns the latitude and longitude to the user's
-device. The coordinates are sent from the user's device to the Federal
-Communications Commission API (<https://geo.fcc.gov/api/census/>) which
-returns the identifier for the census block containing the spatial
-coordinates. The census black identifier is transformed into a census
-tract identifier by truncating the last X digits (CITE), then it is
-transmitted to the study database. Data were stored in a custom-built
-graph database system hosted on a commercial cloud server platform. The
-instrument underwent two rounds of user testing before data collection.
 
 ### Inclusion and Exclusion Criteria
 
@@ -169,123 +173,115 @@ Health Institutional Review Board (IRB22-0761).
 
 ### Participants
 
-The questionnaire was implemented in English and Spanish and designed to
-take less than 5 minutes to complete. It measured participant
-sociodemographics, utilization of healthcare services such as
-pre-exposure prophylaxis (PrEP), HIV treatment and vaccination against
-MPOX; connection to queer or transgender community through sex and
-socializing; and location of primary residence.
+The brief (5 minute) questionnaire was implemented in English and
+Spanish. It measured participant demographics, utilization of healthcare
+services; and connection to queer or transgender community.
 
 Gender identity was measured using a two-step approach: first, we
 solicited the participant’s current gender (man, woman, trans man, trans
-woman, non-binary, Other), and then their sex assigned at birth (male,
-female, other). Those whose gender identity was not concordant with the
-gender commonly associated with their sex assigned at birth were
-categorized as transgender. We used current gender to further categorize
-transgender people into men and women.
+woman, non-binary, other), and then sex assigned at birth (male, female,
+other). Those whose gender identity and sex assigned at birth were not
+concordant were categorized as transgender. We used current gender to
+further categorize transgender people into men and women.
 
 Race was measured using a multiple selection question based on census
-categories (White, Black, Latino/a/x, Asian, Pacific Islander, Other).
-
-We defined gender-race subgroup as the combination of gender identity
-and race, collapsing small cells across racial group (White Cisgender
-Man, Latinx Cisgender Man, Black Cisgender Man, Other Cisgender Man,
-Non-Binary Person, Transgender Man, Transgender Woman, Cisgender Woman,
-Another Demographic).
+categories (white, black, latino/a/x, asian, pacific islander, other).
+We combined gender identity and race to form a gender-race variable,
+collapsing small cells across racial groups (white cisgender man, latinx
+cisgender man, black cisgender man, other cisgender man, non-binary
+person, transgender man, transgender woman, cisgender woman, another
+demographic).
 
 ### Residence and Contact venues
 
-Using the map-input question format, we asked the location of
-participants' primary residence. Among those who reported physical or
-sexual contact at a congregate setting in the preceding 4 weeks, we
-solicited the locations of the venues at which the contact happened. We
-refer to these locations as "contact venues".
-
-For each contact venue (see @fig-mapinputformat), participants indicated
-the type of place it was (Dance party, Sex Party, Darkroom, Sport Game,
-Concert, Theatre/Show, Private Residence, Sex Club, Bathhouse, Park,
-Something Else) and whether they had sexual or (non-sexual) physical
-contact there.
+Using the map-input question format, we solicited the census tract of
+participants' primary residences. Among those who reported physical or
+sexual contact in a group setting in the preceding 4 weeks, we solicited
+the locations of the venues at which the contact happened. We refer to
+these locations as "contact venues". For each contact venue (see
+@fig-mapinputformat), participants indicated the type of place it was
+(dance party, sex party, darkroom, sport game, concert, theatre/show,
+private residence, sex club, bathhouse, park, something else) and
+whether they had sexual (vs. non-sexual) contact there.
 
 ## Statistical Analysis
 
-### Participant characteristics
+### Participant and contact venue characteristics
 
-Participant characteristics and contact venue characteristics were
-tabulated.
+Participant characteristics were tabulated by contact in the preceding 4
+weeks. We also tabulated contact venue characteristics by distance from
+home and by sexual contact.
 
-### Contact venue characteristics
-
-We tabulated contact venue characteristics by distance from home and by
-sexual contact. Census tract identifiers were converted into community
-district identifiers. Community districts are defined by the City of New
-York (CITAION). Census tracts are nested in community districts.
-
-We approximated the distance from home to each contact venue using an
-ordinal variable with levels: same community district as home; different
-community district but same borough as home; different borough than
-home.
+Census tract identifiers were converted into community district
+identifiers. Census tracts are nested in community districts. They are
+defined by the City of New York [@nycopendata2022]. For each contact
+venue, we approximated the distance from home to that venue using an
+ordinal variable with three levels: same community district as home;
+different community district but same borough as home; different borough
+than home.
 
 ### Spatial sorting and mixing
 
 To understand how different demographic groups mix in physical space, we
-constructed a spatial overlap network. In this network, nodes are
+defined $\psi_{a \rightarrow b} \in [-1,\infty]$ as the spatial
+selection coefficient of subgroup $a$ for subgroup $b$. The spacial
+selection coefficient is defined as the spacial selection ratio less 1.
+The numerator for this ratio is the conditional probability of someone
+in subgroup $a$ sharing a community district with someone in subgroup
+$b$. The denominator is the marginal probability of having
+characteristic $b$.
+
+This measure is $0$ when contact venues and residences for subgroups $a$
+and $b$ are distributed independently of each other in space; positive
+if contact venues and residences for subgroup $a$ tend to be in the same
+community districts as those for subgroup $b$; and negative if subgroup
+$a$ tends to be in community districts that do not have contact venues
+and residences for subgroup $b$.
+
+### Community district overlap network
+
+We constructed a community district overlap network where nodes are
 participants and weighted ties indicate that number of community
-districts shared by those participants. Two participants are said to
-share community district if they each have at least one residence or
-contact venue in that community district.
+districts shared by those participants. We say two participants share a
+community district if both have a residence or contact venue in that
+community district.
 
-We define a spatial overlap ratio as the ratio of the two probabilities
-to follow, less 1. The spatial overlap ratio from characteristic $a$ to
-characteristic $b$ is the ratio of the conditional probability of
-someone with characteristics $a$ sharing a community district with
-someone with characteristic $b$ with the marginal probability of having
-characteristic $b$. The spatial mixing coefficient is defined as this
-ratio less 1. This measure ranges from -1 to 1. It is 0 when subgroups
-$a$ and $b$ are perfectly mixed, positive if subgroup $a$ tends to share
-community districts with subgroup $b$, and negative when subgroup $a$
-tends to not share community districts with subgroup $b$.
+In this network, the weighted degree of a node represents the number of
+individuals that node shares a community district with. The density of
+the network represents the extent to which all individuals are connected
+to all other individuals through shared community districts. The
+centrality of a node represents the degree to which the individual
+represented by that node acts as a bridge between different, otherwise
+disconnected parts of the spatial overlap network.
 
-As a crude measure of the distance between the contact venue and
-participant residence, we categorized contact venues into those that are
-in the same community as the residence, the same borough but different
-community, or a different borough than the participant's residence.
+### Hypothetical immunization intervention
 
-We visualized the movement of study participants between home and
-contact venues using a matrix plot.
+We examined the coverage efficiency and network impact of a hypothetical
+intervention to slow down the wide dissemination of a novel pathogen.
+The intervention a) lists community districts in decreasing order of
+count of residences and contact venues, b) immunizes all individuals who
+have a residence or contact venue in the top district, c) removes all
+contact venues and residences for immunized individuals. We say the
+hypothetical intervention is of order $k\in \mathbb{Z}$ if steps are
+completed $k$ times (or until everybody is immunized).
 
-### Intervention efficiency and network impact
+#### Efficiency
 
-We examined the efficiency and transmission impact of a hypothetical
-intervention to stop the dissemination of a pathogen. The intervention
-a) lists community districts in decreasing order of popularity (in terms
-of residence and contact venues), b) renders all individuals in the top
-$n$ community districts unable to acquire or transmit the pathogen (i.e.
-immunize).
+We examined coverage efficiency by plotting the proportion of immunized
+individuals against the order of the hypothetical intervention ($k$)
+carried out in community districts. For low $k$, the proportion of
+immunized individuals will grow faster than the order of the
+hypothetical intervention.
 
-Because of spatial clustering, we would expect the first few community
-districts to contain more people than the last few districts in the
-list. i.e. for low $n$, the number of immunized individuals will grow
-faster than the number of community districts vaccinated. This tendency
-will be reinforced by the removal of individuals in unvaccinated
-community districts who are associated with a community district that
-has been vaccinated. In other words, vaccinating an individual in a
-particular community district removes that individual from that district
-and any other community districts they are associated with. We examined
-intervention efficiency by plotting the proportion of immunized
-individuals against $n$.
+#### Spatial network impact
 
-In the spatial overlap network, immunizing a community district removes
-all individuals associated with that community district from the
-network, possibly changing the structure of the network.
-
-Efficiency was examined by understanding what the minimum number of
-community districts to be vaccinated to cover 33% of the population, and
-separately to cover 66% of the population.
-
-Transmission impact was examined by understanding the impact of removing
-community districts which have been vaccinated on the spatial overlap
-network.
+We used the community district overlap network to understand how the
+hypothetical intervention would likely affect transmission dynamics. In
+that network, immunizing a community district removes all individuals
+who have a residence or contact place in that that community district
+from the network. For each $k$, we calculated density and centrality
+measures to show how it would evolve as more community districts are
+immunized.
 
 ### Statistical Inference
 
@@ -294,7 +290,7 @@ We used the non-parametric bootstrap to calculate point estimates and
 replacement `r targets::tar_read(initial_settings)$n_reps_graph` times.
 For each measure, the lower and upper bound of confidence intervals were
 calculated as the 0.025th and 0.975th quantiles of the empirical
-distribution produced by re-sampling.
+distribution produced by re-sampling. @tbl-descriptives
 
 # Results
 
@@ -302,7 +298,7 @@ distribution produced by re-sampling.
 
 ```{r table_1}
 #| tbl-cap: "Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks"
-#| label: tbl-descriptives-by-groupsex
+#| label: tbl-descriptives
 
 by_group_sex <- tar_read(data_bipartite_graph_collected) %>%
   make_table_1_datatable(by = groupSex, variables = c(overall, age, genderId, race, sexOrientation, channel, hivPrep, monkeypoxVaccine, monkeypoxTest, monkeypoxTest, countSex, countFriends, countPhysical, borough)) %>%
@@ -359,7 +355,7 @@ make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE)
 
 ```
 
-## Participants connecting in space
+## Participants connecting through contact venues
 
 ```{r movement}
 #| fig-width: 13
@@ -465,30 +461,20 @@ make_table_centrality() %>%
 
 # Acknowledgements
 
-LinkNYC and Grindr advertisements were provided as donations-in-kind.
+We are grateful to sponsors of the study: amfAR; Center for AIDS
+research at Harvard University; UCLA, and to the XX individual donors
+who gave amounts ranging from XX to XX. LinkNYC and Grindr
+advertisements donated free advertising to the study, neo4j provided a
+free license for their proprietary database software. Cody Patrick Nolan
+coordinated translation of the survey instrument and marketing
+materials. Antón Castellanos-Usiglu conducted the translation and
+verified them with Cody Patrick Nolan, Chema Jiménez, Juan Pablo Amaya
+Amaris, Santiago Aguilera Mijares, and María Andrea Santos Guzmán. We
+thank the MPX NYC participants for contributing to the study. Pedro
+Carneiro and Nguyen Tran drafted the questionnaire. Lisa Berkman, Tom
+Carpino, David Barr, and Judy Auerbach reviewed the questionnaire.
+Sudipta Saha coordinated study activities. Keletso Makofane developed
+and coded the survey instrument. The survey instrument uses the FCC Data
+API but is not endorsed or certified by the FCC.
 
-Cody Patrick Nolan coordinated translation of the survey instrument and
-marketing materials. Antón Castellanos-Usiglu, who was engaged as a
-professional translator, conducted the translation and verifieed them
-with Cody Patrick Nolan, Chema Jiménez, Juan Pablo Amaya Amaris,
-Santiago Aguilera Mijares, and María Andrea Santos Guzmán.
-
-Developed questionnaire:
-
--   Pedro Carneiro
-
--   Nguyen Tran
-
--   Keletso Makofane
-
-Reviewed questionnaire:
-
--   Lisa Berkman
-
--   Tom Carpino
-
--   David Barr
-
--   Judy Auerbach
-
-Neo4j gave us a free license
+# References

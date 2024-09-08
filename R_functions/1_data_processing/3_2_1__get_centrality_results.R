@@ -28,12 +28,19 @@ get_centrality_results <- function(bipartite_graph_sim, intervention_coverage_da
     purrr::map(
       function(rank){
         
-        working_graph %>%
-          tidygraph::filter(intervention_ranking > rank - 1 | is.na(intervention_ranking)) %>%
-          calculate_component_stats() %>%
-          dplyr::mutate(intervention_ranking = rank)
+        inner_working_graph <- working_graph %>%
+                                    tidygraph::filter(intervention_ranking > rank - 1 | is.na(intervention_ranking)) %>%
+          select(- intervention_ranking)
         
         
+        components <- inner_working_graph %>%
+                            calculate_component_stats() 
+        
+        centrality <- inner_working_graph %>%
+                            calculate_centrality_stats() %>%
+                            dplyr::mutate(intervention_ranking = rank)
+        
+        cbind(components, centrality)
       }
     ) %>%
     dplyr::bind_rows() %>%
