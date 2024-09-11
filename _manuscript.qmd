@@ -1,8 +1,9 @@
 ---
 title: "MPX NYC"
 subtitle: "Key findings and recommendations"
-author: "Keletso Makofane"
+author: "Keletso Lehola Lekoatsa"
 date: 23 May 2024
+prefer-html: true
 execute:
   echo: false
   warning: false
@@ -241,18 +242,18 @@ and residences for subgroup $b$.
 ### Community district overlap network
 
 We constructed a community district overlap network where nodes are
-participants and weighted ties indicate that number of community
+participants and weighted ties indicate the number of community
 districts shared by those participants. We say two participants share a
 community district if both have a residence or contact venue in that
 community district.
 
 In this network, the weighted degree of a node represents the number of
-individuals that node shares a community district with. The density of
-the network represents the extent to which all individuals are connected
-to all other individuals through shared community districts. The
-centrality of a node represents the degree to which the individual
-represented by that node acts as a bridge between different, otherwise
-disconnected parts of the spatial overlap network.
+nodes it shares community districts with. The density of the network
+represents the extent to which all individuals are connected to all
+other individuals through shared community districts. The centrality of
+a node represents the degree to which the individual represented by that
+node acts as a bridge between different, otherwise disconnected parts of
+the spatial overlap network.
 
 ### Hypothetical immunization intervention
 
@@ -318,39 +319,37 @@ rbind(by_group_sex, overall) %>%
 
 ```{r sex_orientation}
 #| fig-cap: "Sexual orientation of MPX NYC participants by race and gender"
-#| label: fig-descriptives-by-groupsex
+#| label: fig-sexorientation-racegender
 #| fig-width: 10
 #| fig-height: 8.5
 
 make_table_freq2(sexOrientation, demo_group) %>%
   plot_radar_grid() %>%
-  add_caption() %>%
-  #add_title("Sexual orientation of MPX NYC participants by race and gender") %>%
   apply_style_radar_grid_plot()
 ```
 
 ```{r prep_hiv}
+#| fig-cap: "PrEP and HIV Status of MPX NYC participants by race and gender"
+#| label: fig-prephiv-racegender
 #| fig-width: 10
 #| fig-height: 8.5
 
 make_table_freq2(hivPrep, demo_group) %>%
   plot_radar_grid() %>%
-  add_caption() %>%
-  add_title("PrEP and HIV status of MPX NYC participants by race and gender") %>%
   apply_style_radar_grid_plot()
 ```
 
 ## Contact venues
 
 ```{r placetype}
+#| fig-cap: "MPX NYC contact venue type by distance from home and sexual contact"
+#| label: fig-places-distance-sexcontact
 #| fig-width: 9
 #| fig-height: 9
 
 make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE) %>%
   filter(!is.na(level)) %>%
   plot_radar_stratified2() %>%
-  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
-  add_title("MPX NYC contact venue type by distance from home and sexual contact") %>%
   apply_style_radar_facet_plot()
 
 ```
@@ -358,57 +357,57 @@ make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE)
 ## Participants connecting through contact venues
 
 ```{r movement}
+#| fig-cap: "Movement between home and contact venues by MPX NYC participant"
+#| label: fig-communities-movement
 #| fig-width: 13
 #| fig-height: 12
 
   make_table_movement_travel() %>%
     plot_matrix_movement() %>%
-  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
-  add_title("Movement between boroughs by MPX NYC Participants") %>%
     apply_style_matrix_movement()
 ```
 
-```{r plot_matrix_mixing_age}
-#| fig-width: 8.5
-#| fig-height: 8.5
+```{r netviz_places}
+#| fig-cap: "Network of community districts connected by MPX NYC participants"
+#| label: fig-communities-network
+#| fig-width: 8
+#| fig-height: 8
 
 
-make_table_mixing(age) %>%
-  plot_matrix_mixing() %>%
-  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
-  add_title("Race-Gender of MPX NYC Participants") %>%
-  apply_style_matrix_mixing_plot()
-
-
-
+make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
+  plot_network_viz() %>%
+  apply_style_network_viz()
+  
 ```
 
-```{r plot_matrix_mixing_sexorientation}
-#| fig-width: 9.5
-#| fig-height: 9.5
-
-
-make_table_mixing(sexOrientation) %>%
-  plot_matrix_mixing() %>%
-  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
-  add_title("Race-Gender of MPX NYC Participants") %>%
-  apply_style_matrix_mixing_plot()
 
 
 
-```
-
-```{r plot_matrix_mixing_demo_group}
-#| fig-width: 14
-#| fig-height: 14
 
 
-make_table_mixing(demo_group) %>%
-  plot_matrix_mixing() %>%
-  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
-  add_title("Race-Gender of MPX NYC Participants") %>%
-  apply_style_matrix_mixing_plot()
+```{r}
+#| fig-cap:  "Social mixing matrices for MPX NYC participants by race-gender (top), sexual orientation (bottom left), and age (bottom right)"
+#| label: fig-subgroup-mixing
+#| fig-width: 16
+#| fig-height: 22
 
+mixing_demo_group_panel          <- make_table_mixing(demo_group) %>%
+                                      plot_matrix_mixing() %>%
+                                      apply_style_matrix_mixing_plot()
+
+
+mixing_sexOrientation_panel      <- make_table_mixing(sexOrientation) %>%
+                                      plot_matrix_mixing() %>%
+                                      apply_style_matrix_mixing_plot()
+
+
+mixing_age_panel                 <- make_table_mixing(age) %>%
+                                      plot_matrix_mixing() %>%
+                                      apply_style_matrix_mixing_plot()
+
+mixing_bottom_panel              <- cowplot::plot_grid(mixing_sexOrientation_panel, mixing_age_panel, nrow = 1)
+
+cowplot::plot_grid(mixing_demo_group_panel, mixing_bottom_panel, ncol=1, rel_heights = c(2,1.1))
 
 
 ```
@@ -416,6 +415,8 @@ make_table_mixing(demo_group) %>%
 ## Efficient and effective interventions
 
 ```{r map}
+#| fig-cap: "High-coverage community districts"
+#| label: fig-hiimpact-communities
 #| fig-width: 10
 #| fig-height: 10
 #| 
@@ -433,31 +434,41 @@ bar_plot <- make_coverage_table(intervention_priority = "contact", intervention_
 
 ```
 
-```{r netviz_places}
+
+
+
+```{r}
+#| fig-cap: "Evolution of spatial network centrality"
+#| label: fig-centrality-measures
 #| fig-width: 8
-#| fig-height: 8
+#| fig-height: 9
 
 
-make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
-  plot_network_viz() %>%
-  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
-  add_title("Network of community districts connected by MPX NYC participants") %>%
-  apply_style_network_viz()
-  
+centrality_lcc         <- make_table_centrality() %>% 
+                                plot_netimpact_bar() %>%
+                                apply_style_line_plot() %>%
+                                add_title("% Unvaccinated and in largest connected component") %>%
+                                {. + theme(legend.position = "bottom")}
+
+centrality_closeness   <- make_table_centrality() %>%
+                                plot_centrality_bar(avg_closeness) %>%
+                                apply_style_line_plot() %>%
+                                add_title("Average closeness centrality")
+
+centrality_betweenness <- make_table_centrality() %>%
+                                plot_centrality_bar(avg_betweenness) %>%
+                                apply_style_line_plot() %>%
+                                add_title("Average betweenness centrality")
+
+
+centrality_top         <- centrality_lcc
+
+centrality_bottom      <- cowplot::plot_grid(centrality_closeness, centrality_betweenness, nrow = 1)
+
+cowplot::plot_grid(centrality_top, centrality_bottom, ncol = 1, rel_heights = c(2,1))
+
 ```
 
-```{r graph_connectedness}
-#| fig-width: 8
-#| fig-height: 5
-
-make_table_centrality() %>%
-  filter(intervention_ranking < 41) %>%
-    plot_netimpact_bar() %>%
-  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
-  add_title("Proportion of unreached in largest connected network component") %>%
-    apply_style_bar_netimpact()
-
-```
 
 # Acknowledgements
 
