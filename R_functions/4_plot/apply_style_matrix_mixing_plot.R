@@ -8,7 +8,10 @@ apply_style_matrix_mixing_plot <- function(plot, caption_hjust = 0){
       panel.margin  = margin(1,1,1,1, "cm"),
       plot.margin   = margin(1,1,1,1, "cm"),
       legend.position = "none",
-      axis.text    = element_text(angle = 45)
+      axis.text    = element_text()
     ) +
-    scale_color_gradient2(low = dark_blue, high = dark_pink, mid = "white")
+    scale_fill_gradient2(low = dark_blue, high = dark_pink) +
+    scale_color_gradient2(low = dark_blue, high = dark_pink) +
+    scale_x_discrete(labels = scales::label_wrap(4), drop = TRUE, position = "top") +
+    scale_y_discrete(labels = scales::label_wrap(4), drop = TRUE, limits = rev)
 }

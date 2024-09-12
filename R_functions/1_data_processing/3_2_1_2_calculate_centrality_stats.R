@@ -27,16 +27,16 @@ calculate_centrality_stats <- function(bipartite_graph) {
       group_by(rep) %>%
       summarize(
         avg_betweenness = mean(betweenness, na.rm = TRUE),
-        avg_closeness = mean(closeness, na.rm = TRUE)
+        sd_closeness = mean(closeness, na.rm = TRUE)
         ) %>%
       ungroup() %>%
       summarize(
         mean_avg_betweenness     = mean(avg_betweenness, na.rm = TRUE),
-        mean_avg_closeness       = mean(avg_closeness, na.rm = TRUE),
+        mean_sd_closeness       = mean(sd_closeness, na.rm = TRUE),
         ci_lb_avg_betweenness    = quantile(avg_betweenness, 0.025, na.rm = TRUE),
-        ci_lb_avg_closeness      = quantile(avg_closeness, 0.025, na.rm = TRUE),
+        ci_lb_sd_closeness       = quantile(sd_closeness, 0.025, na.rm = TRUE),
         ci_ub_avg_betweenness    = quantile(avg_betweenness, 0.975, na.rm = TRUE),
-        ci_ub_avg_closeness      = quantile(avg_closeness, 0.975, na.rm = TRUE)
+        ci_ub_sd_closeness       = quantile(sd_closeness, 0.975, na.rm = TRUE)
       )
 
         

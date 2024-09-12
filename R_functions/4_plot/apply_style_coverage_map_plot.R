@@ -6,7 +6,9 @@ apply_style_coverage_map <- function(plot, caption_hjust = 0){
       dark_blue,
       dark_pink,
       light_blue
-    )) +
+    ),
+    na.translate = FALSE
+    ) +
     theme(
       plot.title    = element_text(hjust = 0.5, margin = margin(0, 0, 1, 0, "mm")),
       plot.subtitle = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),

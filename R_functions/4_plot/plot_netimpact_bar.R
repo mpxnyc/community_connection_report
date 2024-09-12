@@ -5,6 +5,7 @@ plot_netimpact_bar             <- function(data){
     dplyr::select(intervention_ranking, lcc, unvaccinated) %>%
     dplyr::filter(intervention_ranking < 41) %>%
     tidyr::pivot_longer(c(lcc, unvaccinated), names_to = "type", values_to = "proportion") %>%
+    dplyr::mutate(type = factor(type, c("lcc", "unvaccinated"), c("Unvaccinated in LCC", "Total unvaccinated") )) %>%
     ggplot2::ggplot() +
     ggplot2::geom_point(
       aes(x = intervention_ranking, y = proportion, color = type), 

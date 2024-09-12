@@ -65,8 +65,8 @@ end_date   <- targets::tar_read(data_bipartite_graph_collected) %>% data.frame()
 
 ## Data Collection
 
-As part of The Rapid Epidemiologic Study of Prevalence, Networks, and
-Demographics of Monkeypox Infection (RESPND-MI), we implemented a brief,
+Under the aegis of The Rapid Epidemiologic Study of Prevalence, Networks, and
+Demographics of Monkeypox Infection (RESPND-MI), we implemented MPX NYC - a brief,
 anonymous, online survey among transgender people and gay, bisexual, and
 other men who have sex with men. Data were collected from 20 August 2022
 to 15 November 2022 in New York City.
@@ -239,21 +239,13 @@ community districts as those for subgroup $b$; and negative if subgroup
 $a$ tends to be in community districts that do not have contact venues
 and residences for subgroup $b$.
 
-### Community district overlap network
+### Participant spatial overlap network
 
-We constructed a community district overlap network where nodes are
+We constructed a network where nodes are
 participants and weighted ties indicate the number of community
 districts shared by those participants. We say two participants share a
 community district if both have a residence or contact venue in that
 community district.
-
-In this network, the weighted degree of a node represents the number of
-nodes it shares community districts with. The density of the network
-represents the extent to which all individuals are connected to all
-other individuals through shared community districts. The centrality of
-a node represents the degree to which the individual represented by that
-node acts as a bridge between different, otherwise disconnected parts of
-the spatial overlap network.
 
 ### Hypothetical immunization intervention
 
@@ -263,8 +255,8 @@ The intervention a) lists community districts in decreasing order of
 count of residences and contact venues, b) immunizes all individuals who
 have a residence or contact venue in the top district, c) removes all
 contact venues and residences for immunized individuals. We say the
-hypothetical intervention is of order $k\in \mathbb{Z}$ if steps are
-completed $k$ times (or until everybody is immunized).
+hypothetical intervention is of order $k\in \mathbb{Z}$ if these steps are
+completed $k$ times.
 
 #### Efficiency
 
@@ -274,15 +266,17 @@ carried out in community districts. For low $k$, the proportion of
 immunized individuals will grow faster than the order of the
 hypothetical intervention.
 
-#### Spatial network impact
+#### Network impact
 
 We used the community district overlap network to understand how the
 hypothetical intervention would likely affect transmission dynamics. In
 that network, immunizing a community district removes all individuals
 who have a residence or contact place in that that community district
-from the network. For each $k$, we calculated density and centrality
-measures to show how it would evolve as more community districts are
+from the network. (This is analogous to using a 100% efficacious vaccine and achieving 100% coverage in immunized community districts.) For each $k$, we calculated centrality
+measures to show how the participant spatial overlap network would evolve as more community districts are
 immunized.
+
+
 
 ### Statistical Inference
 
@@ -359,8 +353,8 @@ make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE)
 ```{r movement}
 #| fig-cap: "Movement between home and contact venues by MPX NYC participant"
 #| label: fig-communities-movement
-#| fig-width: 13
-#| fig-height: 12
+#| fig-width: 10
+#| fig-height: 10
 
   make_table_movement_travel() %>%
     plot_matrix_movement() %>%
@@ -388,8 +382,8 @@ make_coverage_table(intervention_priority = "contact", intervention_stratificati
 ```{r}
 #| fig-cap:  "Social mixing matrices for MPX NYC participants by race-gender (top), sexual orientation (bottom left), and age (bottom right)"
 #| label: fig-subgroup-mixing
-#| fig-width: 16
-#| fig-height: 22
+#| fig-width: 12
+#| fig-height: 17
 
 mixing_demo_group_panel          <- make_table_mixing(demo_group) %>%
                                       plot_matrix_mixing() %>%
@@ -440,32 +434,42 @@ bar_plot <- make_coverage_table(intervention_priority = "contact", intervention_
 ```{r}
 #| fig-cap: "Evolution of spatial network centrality"
 #| label: fig-centrality-measures
-#| fig-width: 8
-#| fig-height: 9
+#| fig-width: 10
+#| fig-height: 7
 
 
 centrality_lcc         <- make_table_centrality() %>% 
                                 plot_netimpact_bar() %>%
                                 apply_style_line_plot() %>%
-                                add_title("% Unvaccinated and in largest connected component") %>%
-                                {. + theme(legend.position = "bottom")}
+  {. + theme(legend.position = "top", axis.title.y = element_text(angle = 90, margin = margin(0, 20, 0, 0)), axis.title.x = element_text(margin = margin(20,0,0,0)), axis.text.x = element_text()) +
+      scale_x_continuous("Intervention order") +
+                                   scale_y_continuous("% Participants unvaccinated", labels = scales::percent)}
 
 centrality_closeness   <- make_table_centrality() %>%
-                                plot_centrality_bar(avg_closeness) %>%
+                                plot_centrality_bar(sd_closeness) %>%
                                 apply_style_line_plot() %>%
-                                add_title("Average closeness centrality")
+  {. + 
+                                    scale_y_continuous("Se. closeness centrality") + 
+      theme(axis.title.y = element_text(angle = 90, margin = margin(0,20,0,0)), plot.margin = margin(80, 0, 40, 40), axis.title.x = element_text(margin = margin(20,0,0,0))) +
+      scale_x_continuous("Intervention order")
+    }
+
 
 centrality_betweenness <- make_table_centrality() %>%
                                 plot_centrality_bar(avg_betweenness) %>%
-                                apply_style_line_plot() %>%
-                                add_title("Average betweenness centrality")
+                                apply_style_line_plot()  %>%
+  {. + 
+                                    scale_y_continuous("Avg. betweenness centrality") + 
+      theme(axis.title.y = element_text(angle = 90, margin = margin(0,20,0,0)), plot.margin = margin(40, 0, 80, 40), axis.title.x = element_text(margin = margin(20,0,0,0))) +
+      scale_x_continuous("Intervention order")
+    }
 
 
 centrality_top         <- centrality_lcc
 
-centrality_bottom      <- cowplot::plot_grid(centrality_closeness, centrality_betweenness, nrow = 1)
+centrality_bottom      <- cowplot::plot_grid(centrality_closeness, centrality_betweenness, ncol = 1)
 
-cowplot::plot_grid(centrality_top, centrality_bottom, ncol = 1, rel_heights = c(2,1))
+cowplot::plot_grid(centrality_top, centrality_bottom, nrow = 1, rel_widths = c(2,1))
 
 ```
 
@@ -473,19 +477,24 @@ cowplot::plot_grid(centrality_top, centrality_bottom, ncol = 1, rel_heights = c(
 # Acknowledgements
 
 We are grateful to sponsors of the study: amfAR; Center for AIDS
-research at Harvard University; UCLA, and to the XX individual donors
-who gave amounts ranging from XX to XX. LinkNYC and Grindr
-advertisements donated free advertising to the study, neo4j provided a
-free license for their proprietary database software. Cody Patrick Nolan
-coordinated translation of the survey instrument and marketing
-materials. Antón Castellanos-Usiglu conducted the translation and
-verified them with Cody Patrick Nolan, Chema Jiménez, Juan Pablo Amaya
-Amaris, Santiago Aguilera Mijares, and María Andrea Santos Guzmán. We
-thank the MPX NYC participants for contributing to the study. Pedro
-Carneiro and Nguyen Tran drafted the questionnaire. Lisa Berkman, Tom
-Carpino, David Barr, and Judy Auerbach reviewed the questionnaire.
-Sudipta Saha coordinated study activities. Keletso Makofane developed
+Research at Harvard University; UCLA, and to the XX individual donors
+who gave amounts ranging from XX to XX. LinkNYC and Grindr donated advertising to the study, neo4j donated a license for their proprietary database software. 
+
+Consulted: Eric Tchetgen Tchetgen, Forrest W. Crawford, and Kenneth Mayer on technical aspects of the study
+
+Translation: Cody Patrick Nolan coordinated translation of the survey instrument and marketing
+materials. Antón Castellanos-Usiglu conducted the translation and verified them with Cody Patrick Nolan, Chema Jiménez, Juan Pablo Amaya Amaris, Santiago Aguilera Mijares, and María Andrea Santos Guzmán. 
+
+Questionnaire Drafting: Keletso Makofane, Pedro Carneiro and Nguyen Tran drafted the questionnaire. 
+
+Questionnaire Review: Lisa Berkman, Tom Carpino, David Barr, and Judy Auerbach reviewed the questionnaire.
+
+Admin: Sudipta Saha coordinated study activities, Christian Urrutia extended the admin capabilities of PrEPP4All to the study, Keletso Makofane kept financial records
+
+Keletso Makofane developed
 and coded the survey instrument. The survey instrument uses the FCC Data
 API but is not endorsed or certified by the FCC.
+
+Most of all, we thank, and stand in solidarity with, the MPX NYC participants who gave of their time to make the study a success.
 
 # References
