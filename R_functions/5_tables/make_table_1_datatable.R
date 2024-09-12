@@ -32,7 +32,7 @@ make_table_1_datatable <- function(bipartite_graph_sim, by = groupSex, variables
                                       dplyr::select({{variables}}) %>%
                                       names()
 
-  n_reps                      <- 1
+  n_reps                      <- working_data %>% pull(rep) %>% max()
 
 
   result                      <-  lapply(
@@ -49,16 +49,23 @@ make_table_1_datatable <- function(bipartite_graph_sim, by = groupSex, variables
                                         }
   ) %>%
     dplyr::bind_rows() %>%
+    dplyr::group_by(rep, .dots = c(paste0(rep("stratum_", length(names_by)), names_by), "level", "variable")) %>%
+    dplyr::summarize(
+      count              = mean(count, na.rm = TRUE),
+      proportion         = mean(proportion, na.rm = TRUE),
+      chisq              = dplyr::first(chisq)
+    ) %>%
     dplyr::group_by(.dots = c(paste0(rep("stratum_", length(names_by)), names_by), "level", "variable")) %>%
     dplyr::summarize(
+      proportion_mean    = mean(proportion),
+      count_mean         = mean(count),
       count_ci_lb        = quantile(count, 0.025, na.rm = TRUE),
       count_ci_ub        = quantile(count, 0.975, na.rm = TRUE),
       proportion_ci_lb   = quantile(proportion, 0.025, na.rm = TRUE),
       proportion_ci_ub   = quantile(proportion, 0.975, na.rm = TRUE),
-      count              = mean(count, na.rm = TRUE),
-      proportion         = mean(proportion, na.rm = TRUE)
+      chisq              = dplyr::first(chisq)
     ) %>%
-    dplyr::select(any_of(c(paste0(rep("stratum_", length(names_by)), names_by), "variable", "level")), count, count_ci_lb, count_ci_ub, proportion, proportion_ci_lb, proportion_ci_ub) %>%
+    dplyr::select(any_of(c(paste0(rep("stratum_", length(names_by)), names_by), "variable", "level")), count_mean, count_ci_lb, count_ci_ub, proportion_mean, proportion_ci_lb, proportion_ci_ub, chisq) %>%
     dplyr::ungroup()
 
   result
@@ -105,9 +112,11 @@ make_table_1_datatable_single <- function(data, by, variables){
                                         dplyr::mutate(variable = variable) %>%
                                         dplyr::select(variable, level, names(.))
 
+        chisq.calc     <- chisq.test(table_data)
 
-        result               <- counts %>%
-                                        dplyr::left_join(props)
+        result              <- counts %>%
+                                        dplyr::left_join(props) %>%
+                                        dplyr::mutate(chisq = chisq.calc$statistic)
 
 
         result

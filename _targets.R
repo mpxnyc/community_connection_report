@@ -65,11 +65,11 @@ tar_target(
   tar_target(
     name = data_intervention_results_centrality_collected,
     command = make_intervention_results_centrality(data_bipartite_graph_collected, data_intervention_results_coverage_collected)
-  ),
-  tar_target(
-    name = data_intervention_results_centrality_simulated,
-    command = make_intervention_results_centrality(data_bipartite_graph_simulated, data_intervention_results_coverage_simulated)
-  )
+  )#,
+  # tar_target(
+  #   name = data_intervention_results_centrality_simulated,
+  #   command = make_intervention_results_centrality(data_bipartite_graph_simulated, data_intervention_results_coverage_simulated)
+  # )
 )
 
 

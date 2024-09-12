@@ -36,39 +36,39 @@ make_table_centrality       <- function(intervention_stratification_input = "ove
     tidyr::pivot_longer(cols = c(lcc, remainder, singleton, avg_betweenness, sd_closeness)) %>%
     dplyr::rename(bootstrap_est = value)
   
-  simulated_ci_lb    <- targets::tar_read(data_intervention_results_centrality_simulated) %>%
-                                dplyr::transmute(
-                                                  intervention_ranking, 
-                                                  lcc                       = ci_lb_n_lcc, 
-                                                  remainder                 = ci_lb_n_remainder, 
-                                                  singleton                 = ci_lb_n_singleton, 
-                                                  avg_betweenness           = ci_lb_avg_betweenness,
-                                                  sd_closeness              = ci_lb_sd_closeness,
-                                                  intervention_priority, 
-                                                  intervention_stratification
-                                ) %>%
-    tidyr::pivot_longer(cols = c(lcc, remainder, singleton, avg_betweenness, sd_closeness)) %>%
-    dplyr::rename(bootstrap_ci_lb = value)
-  
-  simulated_ci_ub    <- targets::tar_read(data_intervention_results_centrality_simulated) %>%
-                                dplyr::transmute(
-                                                  intervention_ranking, 
-                                                  lcc                       = ci_ub_n_lcc, 
-                                                  remainder                 = ci_ub_n_remainder, 
-                                                  singleton                 = ci_ub_n_singleton, 
-                                                  avg_betweenness           = ci_ub_avg_betweenness,
-                                                  sd_closeness             = ci_ub_sd_closeness,
-                                                  intervention_priority, 
-                                                  intervention_stratification
-                                ) %>%
-    tidyr::pivot_longer(cols = c(lcc, remainder, singleton, avg_betweenness, sd_closeness)) %>%
-    dplyr::rename(bootstrap_ci_ub = value)
+  # simulated_ci_lb    <- targets::tar_read(data_intervention_results_centrality_simulated) %>%
+  #                               dplyr::transmute(
+  #                                                 intervention_ranking, 
+  #                                                 lcc                       = ci_lb_n_lcc, 
+  #                                                 remainder                 = ci_lb_n_remainder, 
+  #                                                 singleton                 = ci_lb_n_singleton, 
+  #                                                 avg_betweenness           = ci_lb_avg_betweenness,
+  #                                                 sd_closeness              = ci_lb_sd_closeness,
+  #                                                 intervention_priority, 
+  #                                                 intervention_stratification
+  #                               ) %>%
+  #   tidyr::pivot_longer(cols = c(lcc, remainder, singleton, avg_betweenness, sd_closeness)) %>%
+  #   dplyr::rename(bootstrap_ci_lb = value)
+  # 
+  # simulated_ci_ub    <- targets::tar_read(data_intervention_results_centrality_simulated) %>%
+  #                               dplyr::transmute(
+  #                                                 intervention_ranking, 
+  #                                                 lcc                       = ci_ub_n_lcc, 
+  #                                                 remainder                 = ci_ub_n_remainder, 
+  #                                                 singleton                 = ci_ub_n_singleton, 
+  #                                                 avg_betweenness           = ci_ub_avg_betweenness,
+  #                                                 sd_closeness             = ci_ub_sd_closeness,
+  #                                                 intervention_priority, 
+  #                                                 intervention_stratification
+  #                               ) %>%
+  #   tidyr::pivot_longer(cols = c(lcc, remainder, singleton, avg_betweenness, sd_closeness)) %>%
+  #   dplyr::rename(bootstrap_ci_ub = value)
   
   
   collected_n %>%
     dplyr::left_join(simulated_mean,  by = c("intervention_ranking", "intervention_priority", "intervention_stratification", "name")) %>%
-    dplyr::left_join(simulated_ci_lb, by = c("intervention_ranking", "intervention_priority", "intervention_stratification", "name")) %>%
-    dplyr::left_join(simulated_ci_ub, by = c("intervention_ranking", "intervention_priority", "intervention_stratification", "name")) %>%
+    #dplyr::left_join(simulated_ci_lb, by = c("intervention_ranking", "intervention_priority", "intervention_stratification", "name")) %>%
+    #dplyr::left_join(simulated_ci_ub, by = c("intervention_ranking", "intervention_priority", "intervention_stratification", "name")) %>%
     dplyr::group_by(intervention_ranking, intervention_priority, intervention_stratification) %>%
     dplyr::mutate(empty = !(sum(est) > 0)) %>%
     tidyr::pivot_wider(names_from = name, values_from = est, id_cols = c(intervention_ranking, intervention_priority, intervention_stratification) ) %>%

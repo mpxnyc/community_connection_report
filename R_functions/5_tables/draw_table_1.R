@@ -12,8 +12,8 @@ draw_table_1 <- function(data_table, list_labels){
     working_data[[var]]       <- data_table %>%
       dplyr::ungroup() %>%
       dplyr::filter(variable == var) %>%
-      dplyr::mutate(proportion = scales::percent(proportion, accuracy = 1)) %>%
-      dplyr::mutate(result = paste0(round(count, 1), " (", proportion, ")")) %>%
+      dplyr::mutate(across(contains("proportion"), function(x) scales::percent(x, accuracy = 1))) %>%
+      dplyr::mutate(result = paste0(round(count, 1), " (", proportion, "; CI:",proportion_ci_lb, " to ", proportion_ci_ub, ")")) %>%
       dplyr::mutate(stratum = factor(stratum, names(list_labels[["stratum"]][["levels"]]), list_labels[["stratum"]][["levels"]])) %>%
       tidyr::pivot_wider(values_from = result, names_from = stratum, id_cols = c(variable, level)) %>%
       dplyr::arrange(variable, level) %>%

@@ -47,6 +47,7 @@ targets::tar_make() # Runs the data pipeline shown in _targets.R
 
 ```
 
+
 # To Do
 
 1.  Measures of centrality and density
@@ -57,11 +58,13 @@ targets::tar_make() # Runs the data pipeline shown in _targets.R
 
 # Methods
 
+
 ```{r text_variables}
 start_date <- targets::tar_read(data_bipartite_graph_collected) %>% data.frame() %>% pull(createdAt) %>% min(na.rm= TRUE)
 end_date   <- targets::tar_read(data_bipartite_graph_collected) %>% data.frame() %>% pull(createdAt) %>% max(na.rm= TRUE)
 
 ```
+
 
 ## Data Collection
 
@@ -313,6 +316,7 @@ had higher access to PrEP, mpox testing, and mpox vaccine. Those who had
 contact were similar to those who did not in age, gender, race, sexual
 orientation, and residential borough.
 
+
 ```{r table1b}
 #| tbl-cap: "Pasdfadfasfsa"
 #| label: tbl-test
@@ -514,10 +518,12 @@ rbind(by_group_sex, overall) %>%
 
 ```
 
+
 Sexual orientation, however, varied accross sub-groups defined by race
 and gender. Cisgender men tended to be predominantly gay identified
 whereas non-binary persons, transgender men were predominantly queer.
 Transgender and cisgender women straight or bisexual.
+
 
 ```{r sex_orientation}
 #| fig-cap: "Sexual orientation of MPX NYC participants by race and gender"
@@ -530,11 +536,13 @@ make_table_freq2(sexOrientation, demo_group) %>%
   apply_style_radar_grid_plot()
 ```
 
+
 There was varying access to services by race and gender. For example,
 among white cisgender men, more were on PrEP than not whereas among
 latinx and black men, more were not on PrEP than were. Strikingly,
 unlike any other group, more black cisgender men were living with HIV
 than on PrEP.
+
 
 ```{r prep_hiv}
 #| fig-cap: "PrEP and HIV Status of MPX NYC participants by race and gender"
@@ -546,6 +554,7 @@ make_table_freq2(hivPrep, demo_group) %>%
   plot_radar_grid() %>%
   apply_style_radar_grid_plot()
 ```
+
 
 ## Contact venues
 
@@ -561,6 +570,7 @@ The further away from home, the more likely contact venues were to be
 dance paries or sex parties, though the overall proportion was still low
 compared to private residences.
 
+
 ```{r placetype}
 #| fig-cap: "MPX NYC contact venue type by distance from home and sexual contact"
 #| label: fig-places-distance-sexcontact
@@ -573,6 +583,7 @@ make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE)
   apply_style_radar_facet_plot()
 
 ```
+
 
 ## Participants connecting through contact venues
 
@@ -587,6 +598,7 @@ received the most visitors within Brooklyn, and within Manhattan the
 district of MN04 was most visited. These include the neighborhoods X, X,
 X, X in BK01, and X, X, X, X in MN04.
 
+
 ```{r movement}
 #| fig-cap: "Movement between home and contact venues by MPX NYC participant"
 #| label: fig-communities-movement
@@ -597,6 +609,7 @@ X, X in BK01, and X, X, X, X in MN04.
     plot_matrix_movement() %>%
     apply_style_matrix_movement()
 ```
+
 
 The most popular community districts in Brooklyn and Manhattan were
 connected via shared visitors or residents. Different sub-groups showed
@@ -611,6 +624,7 @@ men live. Gay identified participants preferred to live and play in
 community districts where bisexual, straight and queer identified
 participants did not live. Similarly, those groups selected against
 community districts in which gay identified individuals live or play.
+
 
 ```{r netviz_places}
 #| fig-cap: "Network of community districts connected by MPX NYC participants"
@@ -652,6 +666,7 @@ cowplot::plot_grid(mixing_demo_group_panel, mixing_bottom_panel, ncol=1, rel_hei
 
 ```
 
+
 ## Efficient and effective interventions
 
 Under the hypothetical intervention, it would take an intervention of
@@ -664,6 +679,7 @@ mount an intervention of order 13. The additional community districts
 would be MN12, BK04, MN02, BK08, MN07, MN09, BK02, and MN05. A table of
 community districts and their constituent neightborhoods can be found in
 Appendix X.
+
 
 ```{r map}
 #| fig-cap: "High-coverage community districts"
@@ -727,10 +743,8 @@ cowplot::plot_grid(centrality_top, centrality_bottom, nrow = 1, rel_widths = c(2
 
 ```
 
-# Discussion
 
-Group sex is ubiquitous. The sex happens in physical space, it is
-important to study space and sex at the same time.
+# Discussion
 
 People who are more likely to have contact are also more likely to use
 health-promoting interventions such as PrEP, mpox vaccination. But are
@@ -756,16 +770,6 @@ others. Even as spatial networks are considered as conduits for the
 transmission of pathogens, they should be conceptualized and conduits
 for information and other health-promoting resources.
 
-Network connectivity declines after about 10 community districts. We
-have to assume that we are working on a well connected network and
-conduct interventions concurrently instead of sequentially as we have
-proposed here.
-
-We must overreact in places which are hubs. Extend to international gay
-travel.
-
-Extend to contact tracing light.
-
 Background in programming:
 
 -   we make the asusmption of networking, but networks are not measured.
@@ -777,9 +781,6 @@ Background in programming:
 
 -   WE are called to reconsider the categorical imperative and move
     towards a network-based understanding of community.
-
--   Next step: This is a flavor of CLM. We call on UNAIDS and WHO to
-    generate technical guidance to conduct these studies.
 
 Reccomendations:
 
@@ -832,10 +833,6 @@ Methodologically,
     we don't properly conceptualize the relational nature of public
     heatlh programs, we are doomed to host webinar after webinar of
     platitudes.
-
--   Can help with HIV and STIs and can help us to conceive of a pandemic
-    prepareness program that extends beyond webinars conducted on unfair
-    terms to queer and trans people doing work.
 
 While many researchers have been paid by funding organizations to talk
 about mpox, few have contributed anything that can help us stop it and
@@ -918,3 +915,4 @@ Most of all, we thank, and stand in solidarity with, the MPX NYC
 participants who gave of their time to make the study a success.
 
 # References
+
