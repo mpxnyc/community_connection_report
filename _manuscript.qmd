@@ -313,8 +313,9 @@ had higher access to PrEP, mpox testing, and mpox vaccine. Those who had
 contact were similar to those who did not in age, gender, race, sexual
 orientation, and residential borough.
 
-```{r table1b}
-
+```{r tbl_descriptives}
+#| fig-cap: "Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks"
+#| label: fig-descriptives
 
 targets::tar_read(data_bipartite_graph_collected) %>%
   tidygraph::activate(nodes) %>%
@@ -345,73 +346,15 @@ gtsummary::tbl_summary(by = groupSex) %>%
   gt::tab_source_note(gt::md("*Data source: MPX NYC 2022*")) 
 
 
-
 ```
 
-```{r table_1, eval = FALSE}
-#| tbl-cap: "Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks"
-#| label: tbl-descriptives
-
-by_group_sex     <- tar_read(data_bipartite_graph_simulated) %>%
-                          make_table_1_datatable(
-                                                by = groupSex, 
-                                                variables = c(
-                                                              overall, 
-                                                              age, 
-                                                              genderId, 
-                                                              race, 
-                                                              sexOrientation, 
-                                                              channel, 
-                                                              hivPrep, 
-                                                              monkeypoxVaccine, 
-                                                              monkeypoxTest, 
-                                                              monkeypoxTest, 
-                                                              countSex, 
-                                                              countFriends, 
-                                                              countPhysical, 
-                                                              borough
-                                                              )) %>%
-                          dplyr::mutate(stratum = stratum_groupSex) 
-
-
-overall           <- tar_read(data_bipartite_graph_simulated) %>%
-                          dplyr::mutate(groupSex = "overall") %>%
-                          make_table_1_datatable(
-                                                by = groupSex, 
-                                                variables = c(
-                                                              overall, 
-                                                              age, 
-                                                              genderId, 
-                                                              race, 
-                                                              sexOrientation, 
-                                                              channel, 
-                                                              hivPrep, 
-                                                              monkeypoxVaccine, 
-                                                              monkeypoxTest, 
-                                                              monkeypoxTest, 
-                                                              countSex, 
-                                                              countFriends, 
-                                                              countPhysical, 
-                                                              borough
-                                                              )
-                                                ) %>%
-                          dplyr::mutate(
-                                        stratum = stratum_groupSex
-                                        ) 
-
-
-rbind(by_group_sex, overall) %>%
-  draw_table_1(tar_read(factor_labels))
-
-
-```
 
 Sexual orientation, however, varied accross sub-groups defined by race
 and gender. Cisgender men tended to be predominantly gay identified
 whereas non-binary persons, transgender men were predominantly queer.
 Transgender and cisgender women straight or bisexual.
 
-```{r sex_orientation}
+```{r fig_sex_orientation_racegender}
 #| fig-cap: "Sexual orientation of MPX NYC participants by race and gender"
 #| label: fig-sexorientation-racegender
 #| fig-width: 10
@@ -420,6 +363,7 @@ Transgender and cisgender women straight or bisexual.
 make_table_freq2(sexOrientation, demo_group) %>%
   plot_radar_grid() %>%
   apply_style_radar_grid_plot()
+
 ```
 
 There was varying access to services by race and gender. For example,
@@ -428,7 +372,7 @@ latinx and black men, more were not on PrEP than were. Strikingly,
 unlike any other group, more black cisgender men were living with HIV
 than on PrEP.
 
-```{r prep_hiv}
+```{r fig_prephiv_racegender}
 #| fig-cap: "PrEP and HIV Status of MPX NYC participants by race and gender"
 #| label: fig-prephiv-racegender
 #| fig-width: 10
@@ -453,7 +397,7 @@ The further away from home, the more likely contact venues were to be
 dance paries or sex parties, though the overall proportion was still low
 compared to private residences.
 
-```{r placetype}
+```{r fig_places_distance_sexcontact}
 #| fig-cap: "MPX NYC contact venue type by distance from home and sexual contact"
 #| label: fig-places-distance-sexcontact
 #| fig-width: 9
@@ -479,7 +423,7 @@ received the most visitors within Brooklyn, and within Manhattan the
 district of MN04 was most visited. These include the neighborhoods X, X,
 X, X in BK01, and X, X, X, X in MN04.
 
-```{r movement}
+```{r fig_communities_movement}
 #| fig-cap: "Movement between home and contact venues by MPX NYC participant"
 #| label: fig-communities-movement
 #| fig-width: 10
@@ -504,7 +448,7 @@ community districts where bisexual, straight and queer identified
 participants did not live. Similarly, those groups selected against
 community districts in which gay identified individuals live or play.
 
-```{r netviz_places}
+```{r fig_communities_network}
 #| fig-cap: "Network of community districts connected by MPX NYC participants"
 #| label: fig-communities-network
 #| fig-width: 8
@@ -517,7 +461,7 @@ make_coverage_table(intervention_priority = "contact", intervention_stratificati
   
 ```
 
-```{r}
+```{r fig_subgroup_mixing}
 #| fig-cap:  "Social mixing matrices for MPX NYC participants by race-gender (top), sexual orientation (bottom left), and age (bottom right)"
 #| label: fig-subgroup-mixing
 #| fig-width: 12
@@ -557,7 +501,7 @@ would be MN12, BK04, MN02, BK08, MN07, MN09, BK02, and MN05. A table of
 community districts and their constituent neightborhoods can be found in
 Appendix X.
 
-```{r map}
+```{r fig_hiimpact_communities}
 #| fig-cap: "High-coverage community districts"
 #| label: fig-hiimpact-communities
 #| fig-width: 10
@@ -577,47 +521,7 @@ bar_plot <- make_coverage_table(intervention_priority = "contact", intervention_
 
 ```
 
-```{r eval = FALSE}
-#| fig-cap: "Evolution of spatial network centrality"
-#| label: fig-centrality-measures
-#| fig-width: 10
-#| fig-height: 7
 
-
-centrality_lcc         <- make_table_centrality() %>% 
-                                plot_netimpact_bar() %>%
-                                apply_style_line_plot() %>%
-  {. + theme(legend.position = "top", axis.title.y = element_text(angle = 90, margin = margin(0, 20, 0, 0)), axis.title.x = element_text(margin = margin(20,0,0,0)), axis.text.x = element_text()) +
-      scale_x_continuous("Intervention order") +
-                                   scale_y_continuous("% Participants unvaccinated", labels = scales::percent)}
-
-centrality_closeness   <- make_table_centrality() %>%
-                                plot_centrality_bar(sd_closeness) %>%
-                                apply_style_line_plot() %>%
-  {. + 
-                                    scale_y_continuous("Se. closeness centrality") + 
-      theme(axis.title.y = element_text(angle = 90, margin = margin(0,20,0,0)), plot.margin = margin(80, 0, 40, 40), axis.title.x = element_text(margin = margin(20,0,0,0))) +
-      scale_x_continuous("Intervention order")
-    }
-
-
-centrality_betweenness <- make_table_centrality() %>%
-                                plot_centrality_bar(avg_betweenness) %>%
-                                apply_style_line_plot()  %>%
-  {. + 
-                                    scale_y_continuous("Avg. betweenness centrality") + 
-      theme(axis.title.y = element_text(angle = 90, margin = margin(0,20,0,0)), plot.margin = margin(40, 0, 80, 40), axis.title.x = element_text(margin = margin(20,0,0,0))) +
-      scale_x_continuous("Intervention order")
-    }
-
-
-centrality_top         <- centrality_lcc
-
-centrality_bottom      <- cowplot::plot_grid(centrality_closeness, centrality_betweenness, ncol = 1)
-
-cowplot::plot_grid(centrality_top, centrality_bottom, nrow = 1, rel_widths = c(2,1))
-
-```
 
 # Discussion
 
