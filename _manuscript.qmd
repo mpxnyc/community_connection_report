@@ -314,145 +314,37 @@ contact were similar to those who did not in age, gender, race, sexual
 orientation, and residential borough.
 
 ```{r table1b}
-#| tbl-cap: "Pasdfadfasfsa"
-#| label: tbl-test
-
-summarize_one_variable <- function(level, stratum){
-  
-  variable_name <- quo_name(level)
-  
-  collected_data         <- targets::tar_read(data_bipartite_graph_collected) %>%
-                                    tidygraph::activate(nodes) %>%
-                                    tidygraph::filter(type) %>%
-                                    data.frame() %>%
-                                    dplyr::transmute(level = {{level}}, stratum = {{stratum}}) %>%
-                                    dplyr::filter(!is.na(level), !is.na(stratum))
-
-  simulated_data         <- targets::tar_read(data_bipartite_graph_simulated) %>%
-                                    tidygraph::activate(nodes) %>%
-                                    tidygraph::filter(type) %>%
-                                    data.frame() %>%
-                                    dplyr::transmute(rep, level = {{level}}, stratum = {{stratum}}) %>%
-                                    dplyr::filter(!is.na(level), !is.na(stratum))
-
-  collected_counts       <- collected_data %>%
-                                    dplyr::group_by(level, stratum) %>%
-                                    dplyr::summarize(count = dplyr::n()) %>%
-                                    dplyr::filter(!is.na(level) & !is.na(count))
-  
-  simulated_counts       <- simulated_data %>%
-                                    dplyr::group_by(rep, level, stratum) %>%
-                                    dplyr::summarize(count = dplyr::n()) %>%
-                                    dplyr::filter(!is.na(level) & !is.na(count)) %>%
-                                    dplyr::group_by(level, stratum) %>%
-                                    dplyr::summarize(
-                                      count_mean    = mean(count, na.rm = TRUE),
-                                      count_ci_lb   = quantile(count, 0.025),
-                                      count_ci_ub   = quantile(count, 0.975)
-                                      )
-  
-  collected_chisq        <- collected_data %>%
-                                    table() %>%
-                                    chisq.test() %>%
-                                    {.$statistic}
-  
-  simulated_chisq        <- simulated_data %>%
-                                    pull(rep) %>%
-                                    max() %>%
-                                    seq() %>%
-                                    map(
-                                      function(x){
-                                        simulated_data %>%
-                                          dplyr::filter(rep == x) %>%
-                                          dplyr::select(-rep) %>%
-                                          table() %>%
-                                          chisq.test() %>%
-                                          {.$statistic}
-                                      }
-                                    ) %>%
-                                    unlist()
-  
-p_value                  <- sum(collected_chisq > simulated_chisq) / length(simulated_chisq)
-
-collected_counts %>%
-  left_join(simulated_counts) %>%
-  mutate(p = p_value) %>%
-  mutate(variable = variable_name)
-              
-  
-}
-
-summarize_variables <- function(..., stratum){
-  level_list <- enquos(...)
-  
-  {{level_list}} %>%
-    purrr::map(
-      function(x) {
-        summarize_one_variable({{x}}, {{stratum}})
-      }
-    ) %>%
-    dplyr::bind_rows() %>%
-    dplyr::ungroup() %>%
-    group_by(variable, stratum) %>%
-    dplyr::transmute(
-      variable, 
-      level, 
-      stratum, 
-      count, 
-      prop = count / sum(count), 
-      prop_ci_lb = count_ci_lb / sum(count), 
-      prop_ci_ub = count_ci_ub / sum(count), 
-      p
-    ) %>%
-    ungroup() %>%
-    dplyr::mutate(
-      prop         = scales::percent(prop, accuracy = 1),
-      prop_ci_lb   = scales::percent(prop_ci_lb, accuracy = 1, suffix = ""),
-      prop_ci_ub   = scales::percent(prop_ci_ub, accuracy = 1, suffix = ""),
-    ) %>%
-    transmute(
-      variable, level, stratum, text = paste0(count, " (", prop, ")"), p = round(p, 3)
-    ) %>%
-    mutate(p = ifelse(p < 0.001, "<0.001", as.character(p))) %>%
-    ungroup
-
-}
-
-pre_result <- summarize_variables( 
-                    age, 
-                    gender, 
-                    race, 
-                    demo_group,
-                    sexOrientation, 
-                    channel, 
-                    hivPrep, 
-                    monkeypoxVaccine, 
-                    monkeypoxTest, 
-                    countSex, 
-                    countFriends, 
-                    countPhysical, 
-                    borough,
-                    stratum = groupSex
-                    ) %>%
-  tidyr::pivot_wider(id_cols = c(variable, level, p), values_from = text, names_from = stratum) 
 
 
-result_labels <- pre_result %>% 
-                    transmute(variable_label = variable, variable, level = "", no= "", yes = "", p) %>%
-                    unique()
+targets::tar_read(data_bipartite_graph_collected) %>%
+  tidygraph::activate(nodes) %>%
+  data.frame() %>%
+  dplyr::mutate(genderId = as.character(genderId)) %>%
+  dplyr::mutate(genderId = ifelse(genderId == "missing", NA, genderId)) %>%
+  dplyr::select( age,
+    genderId, 
+                                                              race, 
+                                                              sexOrientation, 
+                                                              channel, 
+                                                              hivPrep, 
+                                                              monkeypoxVaccine, 
+                                                              monkeypoxTest, 
+                                                              monkeypoxTest, 
+                                                              countSex, 
+                                                              countFriends, 
+                                                              countPhysical, 
+                                                              borough, groupSex) %>%
+gtsummary::tbl_summary(by = groupSex) %>%
+  gtsummary::add_p() %>%
+  gtsummary::add_overall() %>%
+  gtsummary::add_n() %>%
+  gtsummary::modify_header(label ~ "**Variable**") %>%
+  gtsummary::modify_spanning_header(c("stat_1", "stat_2") ~ "**Group contact past 4 weeks**") %>%
+  gtsummary::bold_labels() %>%
+    gtsummary::as_gt() %>%
+  gt::tab_source_note(gt::md("*Data source: MPX NYC 2022*")) 
 
-result <- pre_result %>%
-  mutate(p = "", variable_label = "") %>%
-              rbind(result_labels) %>%
-              arrange(variable, desc(p)) %>%
-  select(variable_label, level, no, yes, p)
 
- result %>%
-  knitr::kable(booktabs = TRUE, align = "llccr") %>%
-     kableExtra::column_spec(1, bold = TRUE, border_right = FALSE) %>%
-     kableExtra::kable_paper(full_width = FALSE) %>%
-     kableExtra::kable_styling(font_size = 7, full_width = FALSE)
-  
 
 ```
 
