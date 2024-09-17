@@ -27,7 +27,6 @@ helper_calculate_bias <- function(data_input, variable){
     igraph::bipartite.projection(which = "true") %>%
     as_tbl_graph(directed = FALSE) %>%
     mutate(connection_var = {{variable}}) %>%
-    mutate(connection_var = factor(connection_var, get_variable_labels(variable_name)[["variable_levels"]], get_variable_labels(variable_name)[["variable_labels"]])) %>%
     activate(edges) %>%
     mutate(
       rep = .N()$rep[from],
@@ -56,5 +55,6 @@ helper_calculate_bias <- function(data_input, variable){
     group_by(from_level, to_level) %>%
     summarize(mean_bias = mean(log_bias), ci_lb_bias = quantile(log_bias, 0.025), cl_ub_bias =  quantile(log_bias, 0.975)) %>%
     transmute(from_level, to_level, mean_bias = exp(mean_bias), ci_lb_bias = exp(ci_lb_bias), cl_ub_bias = exp(cl_ub_bias)) %>%
-    ungroup()
+    ungroup() %>%
+    drop_na() 
 }

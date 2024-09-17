@@ -6,30 +6,38 @@ load_factor_levels <- function(){
   list_levels[["age"]][["current_levels"]]                        <- c("18-24", "25-34", "35-44", "45-54", "55-64", "65+")
   list_levels[["age"]][["new_levels"]]                            <- c("18-24", "25-34", "35-44", "45-54", "55+", "55+")
   
-  list_levels[["borough"]]                                            <- list()
-  list_levels[["borough"]][["current_levels"]]                        <- c("Bronx", "Brooklyn", "Manhattan", "Queens", "Staten Island")
-  list_levels[["borough"]][["new_levels"]]                            <- c("bronx", "brooklyn", "manhattan", "queens", "staten_island")
+  list_levels[["genderId"]]                                       <- list()
+  list_levels[["genderId"]][["current_levels"]]                   <- c("cisgender-man", "cisgender-woman", "non-binary", "other", "transgender-man", "transgender-woman")
+  list_levels[["genderId"]][["new_levels"]]                       <- c("cisgender-man", "cisgender-woman", "non-binary", "other", "transgender-man", "transgender-woman")
   
+  list_levels[["borough"]]                                        <- list()
+  list_levels[["borough"]][["current_levels"]]                    <- c("Bronx", "Brooklyn", "Manhattan", "Queens", "Staten Island")
+  list_levels[["borough"]][["new_levels"]]                        <- c("bronx", "brooklyn", "manhattan", "queens", "staten_island")
   
   list_levels[["channel"]]                                        <- list()
   list_levels[["channel"]][["current_levels"]]                    <- c("grindr", "partner_toolkit", "instagram", "twitter", "unknown")
   list_levels[["channel"]][["new_levels"]]                        <- c("grindr", "partner_toolkit", "instagram", "twitter", "unknown")
   
-  list_levels[["count_places"]]                                   <- list()
-  list_levels[["count_places"]][["current_levels"]]               <- c(-1, 0, 1, 2, 3, 4, 5, 1000000000000)
-  list_levels[["count_places"]][["new_levels"]]                   <- c("0", "1", "2", "3", "4", "5", "6+")
+  list_levels[["count_placesCut"]]                                   <- list()
+  list_levels[["count_placesCut"]][["current_levels"]]               <- c(-1, 0, 1, 2, 3, 4, 5, 1000000000000)
+  list_levels[["count_placesCut"]][["new_levels"]]                   <- c("0", "1", "2", "3", "4", "5", "6+")
   
-  list_levels[["countFriends"]]                                   <- list()
-  list_levels[["countFriends"]][["current_levels"]]               <- c(-1, 0, 5, 10, 15, 1000000000)
-  list_levels[["countFriends"]][["new_levels"]]                   <- c("0", "1-5", "6-10", "11-15", "16+")
+  list_levels[["countFriendsCut"]]                                   <- list()
+  list_levels[["countFriendsCut"]][["current_levels"]]               <- c(-1, 0, 5, 10, 15, 1000000000)
+  list_levels[["countFriendsCut"]][["new_levels"]]                   <- c("0", "1-5", "6-10", "11-15", "16+")
   
-  list_levels[["countPhysical"]]                                  <- list()
-  list_levels[["countPhysical"]][["current_levels"]]              <- c(-1, 0, 1, 2, 3, 4,  1000000000)
-  list_levels[["countPhysical"]][["new_levels"]]                  <- c("0", "1", "2", "3", "4", "5+")
+  list_levels[["countPhysicalCut"]]                                  <- list()
+  list_levels[["countPhysicalCut"]][["current_levels"]]              <- c(-1, 0, 1, 2, 3, 4,  1000000000)
+  list_levels[["countPhysicalCut"]][["new_levels"]]                  <- c("0", "1", "2", "3", "4", "5+")
   
-  list_levels[["countSex"]]                                       <- list()
-  list_levels[["countSex"]][["current_levels"]]                   <- c(-1, 0, 1, 2, 3, 4,  1000000000)
-  list_levels[["countSex"]][["new_levels"]]                       <- c("0", "1", "2", "3", "4", "5+")
+  list_levels[["countSexCut"]]                                       <- list()
+  list_levels[["countSexCut"]][["current_levels"]]                   <- c(-1, 0, 1, 2, 3, 4,  1000000000)
+  list_levels[["countSexCut"]][["new_levels"]]                       <- c("0", "1", "2", "3", "4", "5+")
+  
+  list_levels[["createdAtCut"]]                                       <- list()
+  list_levels[["createdAtCut"]][["current_levels"]]                   <- c(date("2022-08-30"), date("2022-09-01"), date("2022-09-10"), date("2022-09-12"), date("2022-11-14"))
+  list_levels[["createdAtCut"]][["new_levels"]]                       <- c("30-31 Aug 2022", "01-10 Sep 2022","10-11 Sep 2022", "12 Sep - 31 Nov 2022")
+  
   
   list_levels[["race"]]                                           <- list()
   list_levels[["race"]][["current_levels"]]                       <- c("White", "Latinx", "Black", "Asian", "Other", "Multiple races reported")
@@ -55,9 +63,11 @@ load_factor_levels <- function(){
   list_levels[["placeSex"]][["current_levels"]]                   <- c("yes", "no", "i-don't-remember")
   list_levels[["placeSex"]][["new_levels"]]                       <- c("yes", "no", "no")
   
-  list_levels[["travelTime"]]                                     <- list()
-  list_levels[["travelTime"]][["current_levels"]]                 <- c(-1, 15, 30, 45, 1000000000000000)
-  list_levels[["travelTime"]][["new_levels"]]                     <- c("0-15 min", "16-30 min", "31-45 min", "45+ min" )
+  list_levels[["travelTimeCut"]]                                     <- list()
+  list_levels[["travelTimeCut"]][["current_levels"]]                 <- c(-1, 15, 30, 45, 1000000000000000)
+  list_levels[["travelTimeCut"]][["new_levels"]]                     <- c("0-15 min", "16-30 min", "31-45 min", "45+ min" )
+  
+  
   
   list_levels
   

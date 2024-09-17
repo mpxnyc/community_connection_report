@@ -38,20 +38,25 @@ create_data_bipartite_graph_collected <- function(place_data, participant_data, 
                                    dplyr::bind_rows() 
   
   
+  
+  
   person_nodes               <- participant_data %>%
-                                    dplyr::rename(name = userId) %>%
+                                    dplyr::mutate(name = userId) %>%
                                     dplyr::select(name, names(.)) %>%
                                     dplyr::mutate(type = TRUE)
   
   place_nodes                <- edges %>%
-                                    dplyr::transmute(name = to) %>%
+                                    dplyr::mutate(name = to) %>%
                                     unique() %>%
-                                    dplyr::mutate(type = FALSE)
+                                    dplyr::mutate(type = FALSE) %>%
+                                    dplyr::select(name, type)
   
   
   nodes                      <- list(person_nodes, place_nodes) %>%
                                    dplyr::bind_rows()
   
+  labelled::var_label(nodes)           <- labelled::var_label(person_nodes)
+  labelled::var_label(edges)           <- labelled::var_label(place_edges)
   
   graph <- tidygraph::tbl_graph(nodes = nodes, edges = edges, node_key = "name") %>%
                   activate(nodes) %>%

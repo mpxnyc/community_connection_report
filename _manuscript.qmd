@@ -36,6 +36,8 @@ attach(mpxnyc_colors)
 
 ```{r scripts, echo=FALSE, warning=FALSE, message=FALSE, include= FALSE}
 targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
+
+
 targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/1_data_processing")
 targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/2_data_summary")
 targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/3_data_extract")
@@ -319,40 +321,19 @@ orientation, and residential borough.
 
 targets::tar_read(data_bipartite_graph_collected) %>%
   tidygraph::activate(nodes) %>%
-  tidygraph::filter(type) %>%
   data.frame() %>%
-  dplyr::mutate(genderId = as.character(genderId)) %>%
-  dplyr::mutate(genderId = ifelse(genderId == "missing", NA, genderId)) %>%
+  dplyr::filter(type) %>%
   dplyr::select(
-    "age",
-    "race",
-    "genderId",
-    "demo_group",
-    "sexOrientation",
-    "borough" ,
-    "channel",
-    "countFriends",
-    "countPhysical",
-    "countSex",
-    "travelTime",
-    "groupSex",
-    "hivStatus",
-    "hivSuppressed",
-    "num_symptoms",
-    "hivPrep",
-    "monkeypoxTest",
-    "monkeypoxVaccine",
-    "createdAt"
-) %>%
-  mutate(hivPrep = ifelse(hivPrep == "living-with-hiv", NA, hivPrep)) %>%
-  mutate(createdAt = cut(createdAt, c(date("2022-08-30"), date("2022-09-01"), date("2022-09-10"), date("2022-09-12"), date("2022-11-14")), 
-                         c("30-31 Aug 2022", "01-10 Sep 2022","10-11 Sep 2022", "12 Sep - 31 Nov 2022"))) %>%
+    "age", "race", "genderId", "demo_group", "sexOrientation", "borough" , "channel", "createdAtCut",
+    "countFriendsCut", "countPhysicalCut", "countSexCut", "travelTimeCut", "groupSex",
+    "hivStatus", "hivSuppressed", "num_symptoms", "hivPrep", "monkeypoxTest", "monkeypoxVaccine"
+  ) %>%
 gtsummary::tbl_summary(by = groupSex) %>%
   gtsummary::add_p() %>%
   gtsummary::add_overall() %>%
   gtsummary::add_n() %>%
   gtsummary::modify_header(label ~ "**Variable**") %>%
-  gtsummary::modify_spanning_header(c("stat_1", "stat_2") ~ "**Group contact past 4 weeks**") %>%
+  gtsummary::modify_spanning_header(c("stat_1", "stat_2") ~ "**Recent physical or sexual contact in group setting**") %>%
   gtsummary::bold_labels() %>%
     gtsummary::as_gt() %>%
   gt::tab_source_note(gt::md("*Data source: MPX NYC 2022*")) 

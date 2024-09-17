@@ -9,7 +9,7 @@ clean_data_places <- function(raw_data_places, factor_levels, factor_labels){
   intervention_setting_labels <- intervention_setting[["variable_labels"]]
 
   
-raw_data_places %>%
+  clean_data <- raw_data_places %>%
                       dplyr::mutate(
                         placeSex             = factor(placeSex, placeSex_labels, placeSex_levels),
                         intervention_setting = ifelse(is.na(placeSex), "home", as.character(placeSex)),
@@ -33,6 +33,11 @@ raw_data_places %>%
                       dplyr::select(-c(inHomeCensusTract, inHomeCommunity, inHomeNeighborhood, inHomeBorough)) %>%
                       dplyr::tibble() %>%
                       dplyr::filter(!is.na(placeSex))
+
+labelled::var_label(clean_data)  <- factor_labels[["places"]] %>%
+  purrr::map(function(x) x$label)
+
+clean_data
 
 
 }

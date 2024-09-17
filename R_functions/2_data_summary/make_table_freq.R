@@ -1,4 +1,4 @@
-make_table_freq3                <- function(variable = overall,stratum_variable_a = overall, stratum_variable_b = overall, person_analysis = TRUE){
+make_table_freq3                <- function(variable = overall, stratum_variable_a = overall, stratum_variable_b = overall, person_analysis = TRUE){
   variable                           <- enquo(variable)
   stratum_variable_a                 <- enquo(stratum_variable_a)
   stratum_variable_b                 <- enquo(stratum_variable_b)
@@ -7,12 +7,12 @@ make_table_freq3                <- function(variable = overall,stratum_variable_
   stratum_variable_b_name            <- quo_name(stratum_variable_b)
   
   
-  variable_levels                    <- get_variable_labels(variable_name)[["variable_levels"]]
-  variable_labels                    <- get_variable_labels(variable_name)[["variable_labels"]]
-  stratum_variable_a_levels          <- get_variable_labels(stratum_variable_a_name)[["variable_levels"]]
-  stratum_variable_a_labels          <- get_variable_labels(stratum_variable_a_name)[["variable_labels"]]
-  stratum_variable_b_levels          <- get_variable_labels(stratum_variable_b_name)[["variable_levels"]]
-  stratum_variable_b_labels          <- get_variable_labels(stratum_variable_b_name)[["variable_labels"]]
+  variable_levels                    <- get_variable_labels(variable_name) %>% names()
+  variable_labels                    <- get_variable_labels(variable_name) %>% unname()
+  stratum_variable_a_levels          <- get_variable_labels(stratum_variable_a_name) %>% names()
+  stratum_variable_a_labels          <- get_variable_labels(stratum_variable_a_name) %>% unname()
+  stratum_variable_b_levels          <- get_variable_labels(stratum_variable_b_name) %>% names()
+  stratum_variable_b_labels          <- get_variable_labels(stratum_variable_b_name) %>% unname()
   
   if (person_analysis){
     original_data_raw    <- targets::tar_read(data_bipartite_graph_collected) %>%
@@ -46,11 +46,11 @@ make_table_freq3                <- function(variable = overall,stratum_variable_
                                                 stratum_a = as.character(stratum_a),
                                                 stratum_b = as.character(stratum_b)
                                               ) %>%
-                                              dplyr::mutate(
-                                                level = factor(level, variable_levels, variable_labels),
-                                                stratum_a = factor(stratum_a, stratum_variable_a_levels, stratum_variable_a_labels),
-                                                stratum_b = factor(stratum_b, stratum_variable_b_levels, stratum_variable_b_labels)
-                                              ) %>%
+                                              # dplyr::mutate(
+                                              #   level = factor(level, variable_levels, variable_labels),
+                                              #   stratum_a = factor(stratum_a, stratum_variable_a_levels, stratum_variable_a_labels),
+                                              #   stratum_b = factor(stratum_b, stratum_variable_b_levels, stratum_variable_b_labels)
+                                              # ) %>%
                                               dplyr::group_by(level, stratum_a, stratum_b) %>%
                                               dplyr::summarize(count = n()) %>%
                                               dplyr::ungroup() %>%
@@ -71,11 +71,11 @@ make_table_freq3                <- function(variable = overall,stratum_variable_
                                                 stratum_a = as.character(stratum_a),
                                                 stratum_b = as.character(stratum_b)
                                               ) %>%
-                                              dplyr::mutate(
-                                                level = factor(level, variable_levels, variable_labels),
-                                                stratum_a = factor(stratum_a, stratum_variable_a_levels, stratum_variable_a_labels),
-                                                stratum_b = factor(stratum_b, stratum_variable_b_levels, stratum_variable_b_labels)
-                                              ) %>%
+                                              # dplyr::mutate(
+                                              #   level = factor(level, variable_levels, variable_labels),
+                                              #   stratum_a = factor(stratum_a, stratum_variable_a_levels, stratum_variable_a_labels),
+                                              #   stratum_b = factor(stratum_b, stratum_variable_b_levels, stratum_variable_b_labels)
+                                              # ) %>%
                                               dplyr::group_by(rep, level, stratum_a, stratum_b) %>%
                                               dplyr::summarize(count = n()) %>%
                                               dplyr::ungroup() %>%

@@ -25,6 +25,3 @@ draw_table_stratified <- function(table){
   
 }
 
-
-make_table_freq2(sexOrientation, demo_group) %>%
-  draw_table_stratified() 
