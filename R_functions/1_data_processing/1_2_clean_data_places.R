@@ -1,4 +1,4 @@
-clean_data_places <- function(raw_data_places, factor_levels){
+clean_data_places <- function(raw_data_places, factor_levels, factor_labels){
   
   placeSex                    <- get_variable_levels("placeSex", factor_levels)
   placeSex_levels             <- placeSex[["variable_levels"]]

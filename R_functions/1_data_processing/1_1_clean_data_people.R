@@ -1,4 +1,4 @@
-clean_data_people <- function(raw_data_participants, factor_levels) {
+clean_data_people <- function(raw_data_participants, factor_levels, factor_labels) {
   
   
   raw_data_participants %>%

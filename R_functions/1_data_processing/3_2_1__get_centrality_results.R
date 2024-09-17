@@ -19,8 +19,12 @@ get_centrality_results <- function(bipartite_graph_sim, intervention_coverage_da
                           max()
   
   working_graph     <- bipartite_graph_sim %>%
-                          dplyr::left_join(rankings) %>%
+                          dplyr::left_join(rankings, by = "name") %>%
                           dplyr::select(name, intervention_ranking, type, rep)
+  
+  total_participants <- working_graph %>%
+                            pull(type) %>%
+                            sum()
   
   rankings %>%
     dplyr::pull(intervention_ranking) %>%
@@ -29,24 +33,27 @@ get_centrality_results <- function(bipartite_graph_sim, intervention_coverage_da
       function(rank){
         
         inner_working_graph <- working_graph %>%
-                                    tidygraph::filter(intervention_ranking > rank - 1 | is.na(intervention_ranking)) %>%
-          select(- intervention_ranking)
+                                    tidygraph::filter(intervention_ranking > rank - 1 | is.na(intervention_ranking)) 
         
         
-        components <- inner_working_graph %>%
-                            calculate_component_stats() 
+        components          <- inner_working_graph %>%
+                                    calculate_component_stats() 
         
-        centrality <- inner_working_graph %>%
-                            calculate_centrality_stats() %>%
-                            dplyr::mutate(intervention_ranking = rank)
         
-        cbind(components, centrality)
+        components %>%
+          mutate(intervention_ranking = rank)
       }
     ) %>%
     dplyr::bind_rows() %>%
     dplyr::mutate(
                   intervention_priority = intervention_priority_input,
                   intervention_stratification = intervention_stratification_input
-    ) 
+    ) %>% 
+    dplyr::select(intervention_ranking, names(.)) %>%
+    dplyr::mutate(n_vaccinated = total_participants - n_lcc - n_remainder) %>%
+    tidyr::pivot_longer(c(n_lcc, n_remainder, n_vaccinated), names_to = "group", values_to = "count") %>%
+    dplyr::group_by(intervention_priority, intervention_stratification, intervention_ranking) %>%
+    dplyr::mutate(proportion = count / sum(count)) %>%
+    dplyr::ungroup()
   
 }

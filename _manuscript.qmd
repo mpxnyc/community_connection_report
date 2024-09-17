@@ -319,22 +319,34 @@ orientation, and residential borough.
 
 targets::tar_read(data_bipartite_graph_collected) %>%
   tidygraph::activate(nodes) %>%
+  tidygraph::filter(type) %>%
   data.frame() %>%
   dplyr::mutate(genderId = as.character(genderId)) %>%
   dplyr::mutate(genderId = ifelse(genderId == "missing", NA, genderId)) %>%
-  dplyr::select( age,
-    genderId, 
-                                                              race, 
-                                                              sexOrientation, 
-                                                              channel, 
-                                                              hivPrep, 
-                                                              monkeypoxVaccine, 
-                                                              monkeypoxTest, 
-                                                              monkeypoxTest, 
-                                                              countSex, 
-                                                              countFriends, 
-                                                              countPhysical, 
-                                                              borough, groupSex) %>%
+  dplyr::select(
+    "age",
+    "race",
+    "genderId",
+    "demo_group",
+    "sexOrientation",
+    "borough" ,
+    "channel",
+    "countFriends",
+    "countPhysical",
+    "countSex",
+    "travelTime",
+    "groupSex",
+    "hivStatus",
+    "hivSuppressed",
+    "num_symptoms",
+    "hivPrep",
+    "monkeypoxTest",
+    "monkeypoxVaccine",
+    "createdAt"
+) %>%
+  mutate(hivPrep = ifelse(hivPrep == "living-with-hiv", NA, hivPrep)) %>%
+  mutate(createdAt = cut(createdAt, c(date("2022-08-30"), date("2022-09-01"), date("2022-09-10"), date("2022-09-12"), date("2022-11-14")), 
+                         c("30-31 Aug 2022", "01-10 Sep 2022","10-11 Sep 2022", "12 Sep - 31 Nov 2022"))) %>%
 gtsummary::tbl_summary(by = groupSex) %>%
   gtsummary::add_p() %>%
   gtsummary::add_overall() %>%
@@ -501,8 +513,8 @@ would be MN12, BK04, MN02, BK08, MN07, MN09, BK02, and MN05. A table of
 community districts and their constituent neightborhoods can be found in
 Appendix X.
 
-```{r fig_hiimpact_communities}
-#| fig-cap: "High-coverage community districts"
+```{r fig_hiimpact_communities_contact}
+#| fig-cap: "High-coverage community districts - Contact"
 #| label: fig-hiimpact-communities
 #| fig-width: 10
 #| fig-height: 10
@@ -518,6 +530,65 @@ bar_plot <- make_coverage_table(intervention_priority = "contact", intervention_
 
   cowplot::ggdraw(map_plot) +
   cowplot::draw_plot(bar_plot, x = .1, y = .55, width = 0.25, height = 0.25)
+
+```
+
+
+
+```{r fig_hiimpact_communities_movement}
+#| fig-cap: "High-coverage community districts - Movement"
+#| label: fig-hiimpact-communities-movement
+#| fig-width: 10
+#| fig-height: 10
+#| 
+map_plot <- make_coverage_table(intervention_priority = "movement", intervention_stratification = "overall") %>%
+                  plot_coverage_map()  %>%
+                  apply_style_coverage_map()
+
+bar_plot <- make_coverage_table(intervention_priority = "movement", intervention_stratification = "overall") %>%
+                  filter(group != "Group C") %>%
+                  plot_coverage_bar() %>%
+                  apply_style_coverage_bar() 
+
+  cowplot::ggdraw(map_plot) +
+  cowplot::draw_plot(bar_plot, x = .1, y = .55, width = 0.25, height = 0.27)
+
+```
+
+```{r}
+#| fig-cap: "Network impact"
+#| label: fig-netimpact
+#| fig-width: 8
+#| fig-height: 5
+
+tar_read(data_intervention_results_centrality_collected) %>%
+  filter(intervention_stratification == "overall") %>%
+  filter(intervention_ranking <= 40) %>%
+  mutate(intervention_priority = factor(intervention_priority, c("contact", "movement"), c("Contact-based Prioritization", "Movement-based prioritization"))) %>%
+  mutate(group = factor(group, c("n_vaccinated", "n_remainder", "n_lcc"), c("Vaccinated", "Unvaccinated in LCC", "Unvaccinated not in LCC"))) %>%
+  ggplot() +
+  geom_bar(aes(y = proportion, x = intervention_ranking, fill = group), stat = "identity", width = 1) +
+  geom_hline(aes(yintercept = 0.5), size = 0.1) +
+  geom_hline(aes(yintercept = 0.25), size = 0.1) +
+  geom_hline(aes(yintercept = 0.75), size = 0.1) +
+  geom_vline(aes(xintercept = 10), size = 0.1) +
+  geom_vline(aes(xintercept = 20), size = 0.1) +
+  geom_vline(aes(xintercept = 30), size = 0.1) +
+  facet_grid( . ~ intervention_priority ) +
+  #coord_polar(start = 0.5*pi) +
+  scale_y_continuous("Proportion of participants", limits = c(0, 1), labels = scales::percent) +
+  scale_x_continuous("Intervention order", limits = c(0, 40), breaks = c(0, 10, 20, 30, 40)) +
+  theme_void() +
+  scale_fill_manual("", values = c(light_blue, mid_blue, dark_blue)) +
+  theme(
+    axis.text = element_text(),
+    axis.title = element_text(margin = margin(15,5,5,5)),
+    axis.title.y = element_text(angle = 90), 
+    legend.position = "bottom",
+    plot.margin = margin(10,10,10,10),
+    strip.text = element_text(margin = margin(10, 10, 10, 10))
+  )
+
 
 ```
 

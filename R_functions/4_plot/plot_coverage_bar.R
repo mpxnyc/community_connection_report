@@ -1,7 +1,7 @@
 plot_coverage_bar            <- function(data){
   
   data %>%
-    arrange(-proportion) %>%
+    arrange(intervention_ranking) %>%
     mutate(name = as.character(name)) %>%
     mutate(name = factor(name, unique(.$name))) %>%
     ggplot2::ggplot() + 

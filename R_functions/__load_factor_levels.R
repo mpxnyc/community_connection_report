@@ -44,7 +44,7 @@ load_factor_levels <- function(){
   list_levels[["hivSuppressed"]][["new_levels"]]                  <- c("yes", "no", "no")
   
   list_levels[["intervention_setting"]]                           <- list()
-  list_levels[["intervention_setting"]][["current_levels"]]       <-  c("home", "no", "yes")
+  list_levels[["intervention_setting"]][["current_levels"]]       <- c("home", "no", "yes")
   list_levels[["intervention_setting"]][["new_levels"]]           <- c("home", "social", "sexual")
   
   list_levels[["monkeypoxVaccine"]]                               <- list()

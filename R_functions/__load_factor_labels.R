@@ -141,7 +141,7 @@ load_factor_labels <- function(){
   list_labels[["distanceFromHome"]][["levels"]][["Different Borough"]]       <- "Different borough from home"
   
   list_labels[["groupSex"]] <- list()
-  list_labels[["groupSex"]][["label"]]                             <- "Group Sex or Physical Contact"
+  list_labels[["groupSex"]][["label"]]                             <- "Recent Group sexual or physical contact"
   list_labels[["groupSex"]][["levels"]][["yes"]]                   <- "Yes"
   list_labels[["groupSex"]][["levels"]][["no"]]                    <- "No"
   
