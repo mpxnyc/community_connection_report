@@ -27,6 +27,7 @@ clean_data_people <- function(raw_data_participants, factor_levels, factor_label
                                                 countSexCut         = cut(countSex,            factor_levels[["countSexCut"]][["current_levels"]],          factor_levels[["countSexCut"]][["new_levels"]]),
                                                 travelTimeCut       = cut(travelTime,          factor_levels[["travelTimeCut"]][["current_levels"]],        factor_levels[["travelTimeCut"]][["new_levels"]]),
                                                 createdAtCut        = cut(createdAt,           factor_levels[["createdAtCut"]][["current_levels"]],         factor_levels[["createdAtCut"]][["new_levels"]]),
+                                                NumSymptomsCut      = cut(num_symptoms,        factor_levels[["NumSymptomsCut"]][["current_levels"]],       factor_levels[["NumSymptomsCut"]][["new_levels"]])
                                 ) %>%
                                 dplyr::mutate(
                                   demo_group       = as.character(genderId),

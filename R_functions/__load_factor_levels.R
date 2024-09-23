@@ -59,6 +59,10 @@ load_factor_levels <- function(){
   list_levels[["monkeypoxVaccine"]][["current_levels"]]           <- c("yes", "no", "unsure")
   list_levels[["monkeypoxVaccine"]][["new_levels"]]               <- c("yes", "no", "no")
   
+  list_levels[["NumSymptomsCut"]]                                 <- list()
+  list_levels[["NumSymptomsCut"]][["current_levels"]]             <- c(-1, 1,  1000000000)
+  list_levels[["NumSymptomsCut"]][["new_levels"]]                 <- c("0", "1+")
+  
   list_levels[["placeSex"]]                                       <- list()
   list_levels[["placeSex"]][["current_levels"]]                   <- c("yes", "no", "i-don't-remember")
   list_levels[["placeSex"]][["new_levels"]]                       <- c("yes", "no", "no")

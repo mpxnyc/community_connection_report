@@ -5,8 +5,11 @@ make_table_movement_travel        <- function(){
                                         tidygraph::filter(home) %>%
                                         tidygraph::mutate(person_name = .N()$name[from]) %>%
                                         tidygraph::mutate(home_name = .N()$name[to]) %>%
+                                        tidygraph::mutate(censusTract = .N()$censusTractHome[from]) %>%
+                                        tidygraph::mutate(home_borough = mpxnyc::convert_spatial_unit_ny(censusTract, convert_to = "borough")) %>%
                                         data.frame() %>%
-                                        dplyr::transmute(home_name, person_name)
+                                        dplyr::transmute(home_name, person_name, home_borough) %>%
+    tibble()
   
   place_data                <-  targets::tar_read(data_bipartite_graph_collected) %>%
                                         tidygraph::activate(edges) %>%
@@ -18,16 +21,15 @@ make_table_movement_travel        <- function(){
                                         dplyr::tibble()
   
   home_data_with_borough    <- place_data %>%
-                                        dplyr::group_by(place_name) %>%
-                                        dplyr::summarize(place_borough = first(place_borough)) %>%
-                                        dplyr::right_join(home_data, by = c("place_name" = "home_name")) %>%
-                                        dplyr::rename(home_name = place_name, home_borough = place_borough) %>%
-                                        dplyr::tibble()
+    left_join(home_data, by = "person_name")
   
-  place_data %>% 
-        dplyr::left_join(home_data_with_borough) %>%
-        dplyr::transmute(from = home_name, to = place_name, from_borough = home_borough, to_borough = place_borough) %>%
+
+  
+  home_data_with_borough %>% 
+        dplyr::rename(from = home_name, to = place_name, from_borough = home_borough, to_borough = place_borough) %>%
         dplyr::group_by(from, to, from_borough, to_borough) %>%
-        dplyr::summarize(weight = dplyr::n()) 
+    dplyr::summarize(weight = dplyr::n()) %>%
+    dplyr::ungroup()
+  
   
 }
