@@ -51,32 +51,36 @@ targets::tar_make() # Runs the data pipeline shown in _targets.R
 
 # Video Series
 
-Queens -> Brooklyn but not brooklyn to queens
+Queens -\> Brooklyn but not brooklyn to queens
 
+0.  Updates
 
-0. Updates
-- [ ] Put bar graphs above the matrix
-- [ ] Do community detection on place network
+-   [ ] Put bar graphs above the matrix
+-   [ ] Do community detection on place network
 
-1. Intro / Overview
+1.  Intro / Overview
 
-2. Managing
-- [ ] Goals + tasks: internal / external
-- [ ] Social capital: internal / external
-- [ ] Resources: financial / non-financial
+2.  Managing
 
-3. Case study
-- [ ] Technical: questionnaire + protocol + translation
-- [ ] Technical: web app dev + testing + validation
-- [ ] External: consultation (group and one-on-one)
-- [ ] External: press
-- [ ] External: marketing
-- [ ] External: partnerships
-- [ ] Administration: financial planning + fundraising
-- [ ] Administration: financial tracking + reporting
-- [ ] Administration: IRB
+-   [ ] Goals + tasks: internal / external
+-   [ ] Social capital: internal / external
+-   [ ] Resources: financial / non-financial
+
+3.  Case study
+
+-   [ ] Technical: questionnaire + protocol + translation
+-   [ ] Technical: web app dev + testing + validation
+-   [ ] External: consultation (group and one-on-one)
+-   [ ] External: press
+-   [ ] External: marketing
+-   [ ] External: partnerships
+-   [ ] Administration: financial planning + fundraising
+-   [ ] Administration: financial tracking + reporting
+-   [ ] Administration: IRB
 
 # Methods
+
+Recall ring vaccination
 
 ```{r text_variables}
 start_date <- targets::tar_read(data_bipartite_graph_collected) %>% data.frame() %>% pull(createdAt) %>% min(na.rm= TRUE)
@@ -90,28 +94,52 @@ Under the Rapid Epidemiologic Study of Prevalence, Networks, and
 Demographics of Monkeypox Infection (RESPND-MI), we implemented MPX
 NYC - a brief, anonymous, online survey among transgender people and
 gay, bisexual, and other men who have sex with men. Data were collected
-from 20 August 2022 to 15 November 2022 in New York City.
+in New York city from 20 August to 15 November 2022.
 
 ### RESPND-MI Community Forum
 
-To elicit input about study design and recruitment from queer and trans
-individuals and organizations in health-related fields, we held a rapid
-consultation meeting at the outset. Investigators compiled a list of 53
-invitees. To maximize uptake, invitations were sent via the email
-accounts of investigators who had prior relationships with invitees
-where possible.
+We set out to conduct a study to guide interventions that would disrupt
+chains of mpox transmission in New York City. To recruit for this study
+and to communicate about mpox in a culturally competent manner, we
+planned a marketing and communication campaign for gay, bisexual and
+other men who have sex with men. Based on principles articulated by
+activists in the global response to HIV, we prioritized rapid
+consultation with a wide variety of stakeholders at the study design
+stage (rather than at the results dissemination stage). These included
+city and state government officials, local LGBTQ+ organizations with
+health or advocacy programs, individual activists, researchers, people
+in the nightlife/entertainment industry of New York, and queer and trans
+people in general.
 
-At the initial consultation meeting on 27 June 2022, participants
-requested that the RESPND-MI team host a weekly meeting since they had
-no other venues for discussing the outbreak from the perspectives of
-service organizations and individuals who had experienced mpox
-infection. We named the space the RESPND-MI LGBTQ+ Community Forum and
-held it weekly until August 2022. Though the main purpose of the
-Community Forum was to share information and allow organizations and
-individuals to coordinate political action, it was also used to consult
-on study-related decisions. About 80 individuals participated in the
-Community Forum over the 2-month period we held it. Further details can
-be found in a previous publication [@roth2023global].
+Our goals were to validate our understanding of the unfolding mpox
+health threat, to understand how our planned interventions fit in a
+broader response by different stakeholders, and to gather specific
+feedback on our plans. While much of this engagement occured through
+one-on-one meetings, the RESPND-MI team planned a consultation meeting
+on 27 June 2022 to widen our reach. Participants of that meeting
+approved of the planned study and communication campaign, and requested
+that we host a weekly call to enable collective learning and discussion
+about the outbreak. We named this the RESPND-MI LGBTQ+ Community Forum.
+We opened the call to the public and advertised it on our website and
+social media, and through the press. From the initial meeting to the end
+of August 2022, about 80 individuals participated in the Community
+Forum. The meeting became a coordination mechanism for action across
+different stakeholders and allowed the development of a comprehensive
+collective response to mpox. Participants collaborated to develop and
+share resources such as vaccine locators, policy briefs, health
+communications materials, etc.
+
+It also continued to be a consultation forum. The RESPND-MI team
+obtained continuous feedback on study-related matters including the
+recruitment campaign, the design of a novel spatial data collection tool
+and the development of the study questionnaire. The feedback obtained
+through this sustained engagement led to several concrete improvements
+in our approach: e.g. we went from targeting gay and bisexual men in our
+communications to addressing queer and trans communities more generally.
+We also went from planning an English survey to one implemented in
+English and Spanish. Further details about the Community Forum and the
+principles that animated this work have been previously published
+[@roth2023global].
 
 ### Recruitment
 
@@ -120,60 +148,68 @@ recruitment campaign in English and Spanish. The initial brief was to
 create a name and visual identity that convey scientific rigor, build
 trust with the community, and stand out in a crowded online marketplace
 (see @fig-requirements). As a starting point, we suggested a campaign
-that playfully communicates using emojis that have sexual connotations.
-Two campaign names and four marketing concepts (see @fig-options) were
-developed by the marketing agency and presented to the RESPND-MI
-Community Forum. The final concept (which used emojis) and name were
-decided by consensus during that meeting.
+that playfully uses emojis that have sexual connotations. Two campaign
+names and four marketing concepts (see @fig-options) were developed by
+the marketing agency and presented to a meeting of the RESPND-MI
+Community Forum. The final concept and name were decided by consensus
+during that meeting.
 
 [![Requirements for MPX NYC
 Study](images/clipboard-2397454480.png){#fig-requirements
 fig-alt="Requirements for MPX NYC Study"}](https://www.mpxresponse.org)
 
-Marketing materials included graphics, videos by queer influencers, and
-a style guide (including colors, icons, and fonts) for all public-facing
-materials of the MPX NYC study. We organized these materials into a
-"social media toolkit" so that they would be easy for individuals and
-organizations to share through their own social media accounts.
-Advertisements were placed through Grindr, Twitter, Instagram, and
-outdoor electronic billboards.
+Marketing materials were developed based on the concept and name. These
+included graphics, videos by queer influencers, and a style guide
+(including colors, icons, and fonts) for all public-facing materials of
+the MPX NYC study. We organized these materials into a "social media
+toolkit" and shared them through the study website to enable individuals
+and organizations to share them through their own social media accounts.
+We also used them for paid advertising through Grindr, Twitter,
+Instagram, and outdoor electronic billboards.
 
-The marketing campaign for MPX NYC won the XXXX award in 20XX, and the
-RESPND-MI project was recognized thorugh the inclusion of the principal
-investigator in the OUT100 list for 2022.
+The marketing campaign for MPX NYC was among those that won a
+Health+Wellness award from Graphic Design USA in 2023
+([https://gdusa.com/2023-health-wellness-awards-winner?rns=0\|41441831\|41441872\|41441882](https://gdusa.com/2023-health-wellness-awards-winner?rns=0|41441831|41441872|41441882))
+and was recognized by Out Magainze through the inclusion of the
+pirncipal investigator in the 2022 OUT100 list for "LGBTQ+ Policy Makers
+and Advocates Changing the World"
+(<https://www.out.com/print/2022/10/27/out100-2022-lgbtq-policy-makers-and-advocates-changing-world#rebelltitem29>).
 
 ![Options for visual identity of MPX
 NYC](images/clipboard-22126019.png){#fig-options
 fig-alt="Options for visual identity of MPX NYC"}
 
-### Data collection instrument
+### Location-input question format
 
-We rapidly designed, tested, and implemented a novel online survey
-instrument which captures rich spatial information while protecting
-participant anonymity. Along with standard question formats (multiple
-choice, single choice, text field etc.) we developed the map-input
-question format to elicit spatial data.
+To encourage disclosure of sensitive information, we conducted an
+anonymous survey. However, we sought to collect spatial data - this
+bears the risk of accidentally identifying participants through specific
+locations included in their record (e.g. the spatial coordination of
+their residence). We rapidly designed, tested, and implemented a novel
+online survey instrument which captures rich spatial information while
+protecting participant anonymity by coarsening the spatial information.
+Along with standard question formats (multiple choice, single choice,
+text field etc.) we developed what we term the location-input question
+format.
 
-In the map-input question format, participants are prompted to indicate
-all places of a particular type by tapping on a displayed map (see
-@fig-mapinputformat). Each time the user taps, a marker appears and a
-pop-up window prompts them to answer a series of questions related to
-that location. To protect participant anonymity, spatial data are
-coarsened by transforming longitude-latitude coordinates into
-identifiers for the census tracts that contain them. Census tracts are a
-spatial unit that exhaustively divides the United States into areas
-ranging from $2500$ to $8000$ in population size [@uscensus2022].
+In the location-input question format, the participant is prompted to
+indicate all places of a particular type by tapping on a displayed map
+(see @fig-mapinputformat). Each time the user taps, they place a marker
+and a pop-up window prompts them to answer a series of questions related
+to the location indicated by the marker. Each place is saved (along with
+it's location and question responses) as part of the participants's
+record in the study database. Locaton data, however, are transformed
+from longitude-latitude coordinates into census tracts identifiers
+before transmission to the study database. Census tracts are a spatial
+unit that exhaustively divides the United States into areas ranging from
+$2500$ to $8000$ in population size [@uscensus2022].
 
-The look and feel of the data collection instrument was based on the MPX
-NYC style guide. The front end was developed as a single-page web
-application using the React/NextJS framework [@nextjsd2024]. It uses the
-Google Maps [@google2024] API to elicit spatial coordinates, and the
-Federal Communications Commission [@federal] API to transform them into
-census tract identifiers before data are transmitted to the back end.
-The back end was hosted on a commercial cloud server platform. It
-consisted of a Express.js server linked to custom-built neo4j graph
-database [@neo4j2024]. The instrument underwent two rounds of user
-testing before data collection started.
+The front end was developed as a single-page web application using the
+React/NextJS framework [@nextjsd2024] with a look and feel based on the
+MPX NYC style guide. It uses the Google Maps [@google2024] API to elicit
+spatial coordinates, and the Federal Communications Commission
+[@federal] API to transform them into census tract identifiers. The back
+end was a custom-built neo4j graph database [@neo4j2024].
 
 ![Map input question format developed for MPX
 NYC](images/clipboard-1908474363.png){#fig-mapinputformat}
@@ -183,9 +219,9 @@ NYC](images/clipboard-1908474363.png){#fig-mapinputformat}
 Potential participants were included in the study if they consented to
 participate, were over 18 years of age, identified as transgender, gay,
 bisexual, or as men who have sex with other men, and were in New York
-City in the four weeks preceding the survey. Potential participants were
-excluded if they were younger than 18 years of age or they withdrew
-consent.
+City in the four weeks preceding their participation. Potential
+participants were excluded if they were younger than 18 years of age or
+they withdrew consent.
 
 ### Translation
 
@@ -320,9 +356,21 @@ distribution produced by re-sampling.
 perc_sti <- "0%"
 
 ```
+
 ## Participants
 
-The MPX NYC survey was open from 30 September to 15 November, 2022, and rapidly recruited a diverse group of participants (see @fig-descriptives). About 70% of participants were recruited over two 48 hour periods: half were recruited from 30 to 31 Aug, and another 20% from 10 to 11 September). Over 50% of participants were between the ages of 18-34 at the time of the survey. Two fifths were white cisgender men, about 15% were latinx cisgender men, and 10% were black cisgender men. About 5% of participants were transgender (with slightly over half being transgender men). Non-binary individuals comprised 7%. Two thirds of participants identified as gay, 14% as bisexual, and 12% as queer. Just under half of participants resided in the borough of Manhattan, and one third lived in Brooklyn.
+The MPX NYC survey was open from 30 September to 15 November, 2022, and
+rapidly recruited a diverse group of participants (see
+@fig-descriptives). About 70% of participants were recruited over two 48
+hour periods: half were recruited from 30 to 31 Aug, and another 20%
+from 10 to 11 September). Over 50% of participants were between the ages
+of 18-34 at the time of the survey. Two fifths were white cisgender men,
+about 15% were latinx cisgender men, and 10% were black cisgender men.
+About 5% of participants were transgender (with slightly over half being
+transgender men). Non-binary individuals comprised 7%. Two thirds of
+participants identified as gay, 14% as bisexual, and 12% as queer. Just
+under half of participants resided in the borough of Manhattan, and one
+third lived in Brooklyn.
 
 ```{r fig_sex_orientation_racegender}
 #| fig-cap: "Sexual orientation of MPX NYC participants by race and gender"
@@ -336,11 +384,33 @@ make_table_freq2(sexOrientation, demo_group) %>%
 
 ```
 
-The sexual orientation of participants differed by gender (see @fig-sexorientation-racegender). The vast majority of cisgender men identified as gay, with some identifying as bisexual. Transgender men were most likely to identify as queer,  bisexual, or gay whereas transgender women tended to identify as straight, bisexual, or other sexual orientations. Cisgender women tended to be straight, followed by biseuxual, followed by queer. For non-binary people, most identifed as queer, followed by gay and bisexual.
+The sexual orientation of participants differed by gender (see
+@fig-sexorientation-racegender). The vast majority of cisgender men
+identified as gay, with some identifying as bisexual. Transgender men
+were most likely to identify as queer, bisexual, or gay whereas
+transgender women tended to identify as straight, bisexual, or other
+sexual orientations. Cisgender women tended to be straight, followed by
+biseuxual, followed by queer. For non-binary people, most identifed as
+queer, followed by gay and bisexual.
 
-In terms of health status, one in ten participants reported living with HIV - the overwhelming majority were virally suppressed. In addition, about `r perc_sti` reported at least one STI symptom. In terms of health services, two out of five participants were on PrEP at the time they took the survey, two-thirds had received the MPOX vaccine though only 8% had received MPOX testing. 
+In terms of health status, one in ten participants reported living with
+HIV - the overwhelming majority were virally suppressed. In addition,
+about `r perc_sti` reported at least one STI symptom. In terms of health
+services, two out of five participants were on PrEP at the time they
+took the survey, two-thirds had received the MPOX vaccine though only 8%
+had received MPOX testing.
 
-MPX NYC participants were deeply connected to queer and trans people in New York City. About two-thirds reported being in recent (preceding 4 weeks) contact with 1 - 10 friends in this community whereas only 20% reported not being in contact with queer and trans friends over the same period. About half of the participants had betwen 1 and 3 recent sex partners with 15% reporting over 5 partners. Related to sex partners, about one third reported spending less than 15 minutes on average when traveling to a hookup while a third spent 16-30 minutes. Almost one of four participants reported having physical (non-sexual) contact with over 5 individuals over the preceding four weeks, and one third reported having no recent contact. 
+MPX NYC participants were deeply connected to queer and trans people in
+New York City. About two-thirds reported being in recent (preceding 4
+weeks) contact with 1 - 10 friends in this community whereas only 20%
+reported not being in contact with queer and trans friends over the same
+period. About half of the participants had betwen 1 and 3 recent sex
+partners with 15% reporting over 5 partners. Related to sex partners,
+about one third reported spending less than 15 minutes on average when
+traveling to a hookup while a third spent 16-30 minutes. Almost one of
+four participants reported having physical (non-sexual) contact with
+over 5 individuals over the preceding four weeks, and one third reported
+having no recent contact.
 
 ```{r tbl_descriptives}
 #| fig-cap: "Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks"
@@ -368,10 +438,24 @@ gtsummary::tbl_summary(by = groupSex) %>%
 
 ```
 
+Participants who reported recent physical or sexual contact in a group
+setting were slightly younger than those who did not. They were more
+likely to identify as gay and less likely to identify as straight. Those
+who had contact were more likely to live in Manhattan and less likely to
+live in Queens. Surprisingly, they were less likely to have been
+recruited through a Grindr advertisement. They were also more likely to
+have been recruited before the first Grindr pop-up advertisement on 1
+September 2022.
 
-Participants who reported recent physical or sexual contact in a group setting were slightly younger than those who did not. They were more likely to identify as gay and less likely to identify as straight. Those who had contact were more likely to live in Manhattan and less likely to live in Queens. Surprisingly, they were less likely to have been recruited through a Grindr advertisement. They were also more likely to have been recruited before the first Grindr pop-up advertisement on 1 September 2022. 
-
-Finally, those who reported recent contact in a group setting did not differ with those who did not in terms of their HIV status and viral suppression. They were more likely to have at least one STI symptom than those who did not have recent contact in a group setting. This group had higher utilization of PrEP, mpox testing, and mpox vaccine. They were more closely connected with the queer and trans community: they reported more contact with friends, more physical contact partners and more sexual contact partners. They spent more time travelling to hookups than participants who had not had recent contact in a group setting. 
+Finally, those who reported recent contact in a group setting did not
+differ with those who did not in terms of their HIV status and viral
+suppression. They were more likely to have at least one STI symptom than
+those who did not have recent contact in a group setting. This group had
+higher utilization of PrEP, mpox testing, and mpox vaccine. They were
+more closely connected with the queer and trans community: they reported
+more contact with friends, more physical contact partners and more
+sexual contact partners. They spent more time travelling to hookups than
+participants who had not had recent contact in a group setting.
 
 ## Contact venues
 
@@ -379,7 +463,17 @@ Finally, those who reported recent contact in a group setting did not differ wit
 make_table_freq3(groupSex)
 
 ```
-Among all MPX NYC participants, 40% (530) reported reported having had sex or physical contact with two or more people at the same time. These participants identified $604$ locations at which they had contact (contact venues). About two out of five contact venues were private residences, and about a quarter were dance parties. More than half of the places contace venues were in Manhattan, while less than a third were in the Brooklyn. A quarter of all contact venues were in the same community as participants' residences, a third were in a different borough, and the remainder were in the same borough as home, but a different community district.
+
+Among all MPX NYC participants, 40% (530) reported reported having had
+sex or physical contact with two or more people at the same time. These
+participants identified $604$ locations at which they had contact
+(contact venues). About two out of five contact venues were private
+residences, and about a quarter were dance parties. More than half of
+the places contace venues were in Manhattan, while less than a third
+were in the Brooklyn. A quarter of all contact venues were in the same
+community as participants' residences, a third were in a different
+borough, and the remainder were in the same borough as home, but a
+different community district.
 
 ```{r}
 
@@ -400,8 +494,13 @@ gtsummary::tbl_summary() %>%
 
 ```
 
-
-Contact venues at which participants had sexual contact were overwhelmingly private residences whereas contact venues at which they had non-sexual physical contact were mostly dance parties (see @fig-places-distance-sexcontact). The closer to home a location was, the more likely it was to be a private residence and the more likely it was the site of sexual contact. By contrast, the futher from home a contac venue was, the less likely it was to be a dance party. 
+Contact venues at which participants had sexual contact were
+overwhelmingly private residences whereas contact venues at which they
+had non-sexual physical contact were mostly dance parties (see
+@fig-places-distance-sexcontact). The closer to home a location was, the
+more likely it was to be a private residence and the more likely it was
+the site of sexual contact. By contrast, the futher from home a contac
+venue was, the less likely it was to be a dance party.
 
 ```{r fig_places_distance_sexcontact}
 #| fig-cap: "MPX NYC contact venue type by distance from home and sexual contact"
@@ -416,15 +515,38 @@ make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE)
 
 ```
 
-## Movement 
+## Movement
 
-@fig-communities-movement maps each contact venue's community district (x-axis) against the participant's home community district (y-axis). The size of the dot is proportional to the total count of contact venues with the given home and contact venue community district. The color of the dt represents the borough of the contact venue.
+@fig-communities-movement maps each contact venue's community district
+(x-axis) against the participant's home community district (y-axis). The
+size of the dot is proportional to the total count of contact venues
+with the given home and contact venue community district. The color of
+the dt represents the borough of the contact venue.
 
-The dots on the diagonal line from top left to bottom right, show prominantly, indicating that a sizeable proportion of movement happens within community districts. The figue also shows four prominant clusters - the cluster at the top left (in pink) shows significant movement between home and contact venues within Brooklyn and the cluster towards the middle of the plot (in purple) shows significant movement within Manhattan. The clusters at the top center and bottom left show significant movement from Brooklyn to Manhattan and from Manhattan to Brooklyn, respectively. 
+The dots on the diagonal line from top left to bottom right, show
+prominantly, indicating that a sizeable proportion of movement happens
+within community districts. The figue also shows four prominant
+clusters - the cluster at the top left (in pink) shows significant
+movement between home and contact venues within Brooklyn and the cluster
+towards the middle of the plot (in purple) shows significant movement
+within Manhattan. The clusters at the top center and bottom left show
+significant movement from Brooklyn to Manhattan and from Manhattan to
+Brooklyn, respectively.
 
-The bar graphs on the right and at the bottom show the overall distribution of home community district among participants who had sexual or social contact in a group setting. Within Brooklyn, Manhattan, and Queens, there is an uneven distribution of homes across community districts (bar graph on right). In Manhatan, for instance, community district MN03 appears to contain a disproportinately large share of residences. 
+The bar graphs on the right and at the bottom show the overall
+distribution of home community district among participants who had
+sexual or social contact in a group setting. Within Brooklyn, Manhattan,
+and Queens, there is an uneven distribution of homes across community
+districts (bar graph on right). In Manhatan, for instance, community
+district MN03 appears to contain a disproportinately large share of
+residences.
 
-The bar graph at the bottom shows that contact venues are even more unevenly distributed across community districts than homes are. The share of contact venues by community districts was 4-6 percentage points higher than the share of residences in MN04, BK01, and MN05. This suggests that participants leave their home community districts to gather in these community districts for social events. 
+The bar graph at the bottom shows that contact venues are even more
+unevenly distributed across community districts than homes are. The
+share of contact venues by community districts was 4-6 percentage points
+higher than the share of residences in MN04, BK01, and MN05. This
+suggests that participants leave their home community districts to
+gather in these community districts for social events.
 
 ```{r}
 #| fig-width: 8
@@ -503,7 +625,6 @@ a
   
 ```
 
-
 ```{r fig_communities_movement}
 #| fig-cap: "Movement between home and contact venues by MPX NYC participant. The figure maps each contact venue's community district (x-axis) against the participant's home community district (y-axis). The size of the dot is proportional to the total count of contact venues with the given home and contact venue community district. The color of the dot represents the borough of the contact venue."
 #| label: fig-communities-movement
@@ -564,9 +685,6 @@ a
 
 ```
 
-
-
-
 ```{r include=FALSE}
 margin_to %>%
   rename(weight_to = weight) %>%
@@ -577,22 +695,23 @@ margin_to %>%
 
 ```
 
-## Mixing 
+## Mixing
 
-@fig-subgroup-mixing quantifies the degree to which individuals with characteristics shown on the left live or play in an overalappoing set of community districts with individuals whose characteristics are shown at the top. Different sub-groups showed different patterns of co-attendance of community districts. Overall, MPX
-NYC participants showed spatial homophily - the spatial selection
-coefficient from a given group to the same group was positive for all
-levels of race-gender, sexual orientation, and age. In addition, black
-cisgender men and non-binary persons tended to visit or live in
-different neighborhoods than white cisgender men. Non-binary persons
-also showed a preference for community districts in which transgender
-men live. Gay identified participants preferred to live and play in
-community districts where bisexual, straight and queer identified
-participants did not live. Similarly, those groups selected against
-community districts in which gay identified individuals live or play.
-
-
-
+@fig-subgroup-mixing quantifies the degree to which individuals with
+characteristics shown on the left live or play in an overalappoing set
+of community districts with individuals whose characteristics are shown
+at the top. Different sub-groups showed different patterns of
+co-attendance of community districts. Overall, MPX NYC participants
+showed spatial homophily - the spatial selection coefficient from a
+given group to the same group was positive for all levels of
+race-gender, sexual orientation, and age. In addition, black cisgender
+men and non-binary persons tended to visit or live in different
+neighborhoods than white cisgender men. Non-binary persons also showed a
+preference for community districts in which transgender men live. Gay
+identified participants preferred to live and play in community
+districts where bisexual, straight and queer identified participants did
+not live. Similarly, those groups selected against community districts
+in which gay identified individuals live or play.
 
 ```{r fig_subgroup_mixing}
 #| fig-cap:  "Social mixing matrices for MPX NYC participants by race-gender (top), sexual orientation (bottom left), and age (bottom right)"
@@ -622,30 +741,104 @@ cowplot::plot_grid(mixing_demo_group_panel, mixing_bottom_panel, ncol=1, rel_hei
 ```
 
 ## Interventions
+
 ### Efficient interventions
 
+Since these data were collected to inform programmatic response to a new
+health threat, we illustrated the implications of the pattern of
+connection between people and places for intervention design through a
+thought experiment: we examined two approaches to conducting a
+hypothetical place-based immunization intervention. In this hypothetical
+intervention, we assume that it is possible to immunize entire community
+districts at a time, but that we can only immunize one comunity district
+at a time. There is one parameter we can vary to produce different
+versions of this intervention: the order in which they are immunized.
 
-Since these data were collected to inform programmatic response to a new health threat, we illustrated the implications of the pattern of connection between people and places for intervention design through a thought experiment: we examined two approaches to conducting a hypothetical place-based immunization intervention. In this hypothetical intervention, we assume that it is possible to immunize entire community districts at a time, but that we can only immunize one comunity district at a time. There is one parameter we can vary to produce different versions of this intervention: the order in which they are immunized.
+We examined two strategies for choosing an ordering of community
+districts. In the first strategy, we ranked districts according to the
+number of contact venues which are contained by the district plus the
+number participants who live in the community district. We call this the
+"contact-based" strategy. In the second strategy, we subtracted from
+this number, the count of contact venues which are in the same community
+district as the participant's home. We call this the "movment-based"
+strategy. Whereas the former strategy prioritizes community districts
+with high contact for the intervention, the latter strategy prioritizes
+community districts with a high level of movement in and out of the
+community district.
 
-We examined two strategies for choosing an ordering of community districts. In the first strategy, we ranked districts according to the number of contact venues which are contained by the district plus the number participants who live in the community district. We call this the "contact-based" strategy. In the second strategy, we subtracted from this number, the count of contact venues which are in the same community district as the participant's home. We call this the "movment-based" strategy. Whereas the former strategy prioritizes community districts with high contact for the intervention, the latter strategy prioritizes community districts with a high level of movement in and out of the community district. 
+We assessed these strategies against two outcomes. The first is the
+total number of immunized people divided by the number of immunized
+community districts, and the second is the proportion of individuals who
+are in the largest connected component of the network that connects
+particiopants through their shared community districts. The former
+measure assesses the efficiency of the intervention (an efficient
+intervention is one which immunizes a high number of people though a low
+number of community districts). The latter assess the effectiveness of
+the intervention in breaking apart the largest connected component of
+the network which connects survey participants through their overalpping
+community districts so as to slow the dissemination of a pathogen
+accross the city.
 
-We assessed these strategies against two outcomes. The first is the total number of immunized people divided by the number of immunized community districts, and the second is the proportion of individuals who are in the largest connected component of the network that connects particiopants through their shared community districts. The former measure assesses the efficiency of the intervention (an efficient intervention is one which immunizes a high number of people though a low number of community districts). The latter assess the effectiveness of the intervention in breaking apart the largest connected component of the network which connects survey participants through their overalpping community districts so as to slow the dissemination of a pathogen accross the city. 
+This network has individuals as nodes. A tie between two individuals
+indicates that those two live or have had a contact event in the same
+community districts. The ties are weighted by the number of community
+districts that are shared by the pair of participants in this way. The
+network encodes the potential for the two individual to make contact
+with one another and transmit a pathogen. The more community districts
+they share, the more likely it is that they will make contact and/or
+transmit a pathogen. The better connected this network is, the more
+likely that a newly introduced infectious disease would disseminate
+quickly accross the population. The less connected it is, the less
+likley that such a dissemination could happen.
 
-This network has individuals as nodes. A tie between two individuals indicates that those two live or have had a contact event in the same community districts. The ties are weighted by the number of community districts that are shared by the pair of participants in this way. The network encodes the potential for the two individual to make contact with one another and transmit a pathogen. The more community districts they share, the more likely it is that they will make contact and/or transmit a pathogen. The better connected this network is, the more likely that a newly introduced infectious disease would disseminate quickly accross the population. The less connected it is, the less likley that such a dissemination could happen. 
+One way to understand how well connected a network is is to examine its
+connected components. A connected component is the set of nodes where
+each node is reachable from any other node by tracing a path through
+network ties, and where there are no nodes excluded from the set which
+are reachable from any node in the set. In many human systems, networks
+have a "large connected component" - connected component that contains
+the vast majority of the nodes in the network - with other, usually much
+smaller, connected components.
 
-One way to understand how well connected a network is is to examine its connected components. A connected component is the set of nodes where each node is reachable from any other node by tracing a path through network ties, and where there are no nodes excluded from the set which are reachable from any node in the set. In many human systems, networks have a "large connected component" - connected component that contains the vast majority of the nodes in the network - with other, usually much smaller, connected components. 
+To assess the effectiveness of the intervention strategy, we calculated
+the proportion of participants which are included in the largest
+connected component as community districts are immunized. To the
+network, immunizing a community district has the effect of removing ties
+between individuals who share that community district, and marking those
+individuals as vaccinated. The more community districts are immunized,
+therefore, the fewer ties there will be in the network, and the smaller
+the proportion of participants included in the largets connected
+component.
 
-To assess the effectiveness of the intervention strategy, we calculated the proportion of participants which are included in the largest connected component as community districts are immunized. To the network, immunizing a community district has the effect of removing ties between individuals who share that community district, and marking those individuals as vaccinated. The more community districts are immunized, therefore, the fewer ties there will be in the network, and the smaller the proportion of participants included in the largets connected component. 
+@fig-hiimpact-communities-movement shows which community districts would
+have to be immunized to immunize 33% of the population (Group A), and
+66% of ther population (Group A + Group B) under both the contact-based
+and movement-based intervention strategies.
 
-@fig-hiimpact-communities-movement shows which community districts would have to be immunized to immunize 33% of the population (Group A), and 66% of ther population (Group A + Group B) under both the contact-based and movement-based intervention strategies. 
+Under the contact-based strategy, it would take five community districts
+to immunize 33% of sthe population. These are MN04, BK01, MN10, BK03,
+and QN01. MN04 includes the neighborhoods XXXXX, BK01 includes XXXXX,
+MN10 includes XXXX, BK03 includes XXX, and QN01 includes XXXX. To reach
+66% of participants with the intervention, it would be necessary to
+immunize 13 community districts. The additional community districts
+would be MN12, BK04, MN02, BK08, MN07, MN09, BK02, and MN05.
 
-Under the contact-based strategy, it would take five community districts to immunize 33% of sthe population. These are MN04, BK01, MN10, BK03, and QN01. MN04 includes the neighborhoods XXXXX, BK01 includes XXXXX,
-MN10 includes XXXX, BK03 includes XXX, and QN01 includes XXXX. To reach 66% of participants with the intervention, it would be necessary to immunize 13 community districts. The additional community districts would be MN12, BK04, MN02, BK08, MN07, MN09, BK02, and MN05. 
+Under the movement-based strategy, it would take six community districts
+to reach 33% of the population: MN04, BK01, MN05, BK04, MN02, and BK03.
+It would take 16 community districts to reach 66% of the population. The
+additional community districts would be: MN64, MN10, QN01, BK08, MN09,
+QN05, BK09, MN11, BK14, and BK07.
 
-Under the movement-based strategy, it would take six community districts to reach 33% of the population: MN04, BK01, MN05, BK04, MN02, and BK03. It would take 16 community districts to reach 66% of the population. The additional community districts would be: MN64, MN10, QN01, BK08, MN09, QN05, BK09, MN11, BK14, and BK07.
-
-@fig-netimpact shows that nearly 100% of individuals are included in the largest connected component before any intervention. For the movement-based strategy, the proportion of the population included in the largest connected component declines more sharply than for the contact-based strategy. In the contact-based strategy, the overall proportion of unvaccinated individuals declines more sharply than in the movement-based strategy. There is not a noticable difference between the two strategies for the first 10 community districts to be immunized - differences between the two strategies start emerging once 10 community districts are immunized. 
-
+@fig-netimpact shows that nearly 100% of individuals are included in the
+largest connected component before any intervention. For the
+movement-based strategy, the proportion of the population included in
+the largest connected component declines more sharply than for the
+contact-based strategy. In the contact-based strategy, the overall
+proportion of unvaccinated individuals declines more sharply than in the
+movement-based strategy. There is not a noticable difference between the
+two strategies for the first 10 community districts to be immunized -
+differences between the two strategies start emerging once 10 community
+districts are immunized.
 
 ```{r fig_hiimpact_communities_contact}
 #| fig-cap: "High-coverage community districts - Contact"
@@ -738,8 +931,6 @@ tar_read(data_intervention_results_centrality_collected) %>%
 
 
 ```
-
-
 
 # Discussion
 
@@ -834,7 +1025,7 @@ Methodologically,
 -   we spearheading technical innovation both in data collection -
     survey instrument.
 
--    and in data wrangling and analysis. use bipartite network to keep
+-   and in data wrangling and analysis. use bipartite network to keep
     and wrangle the data. get to the core of the relational content of
     the work.
 
