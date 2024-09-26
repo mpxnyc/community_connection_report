@@ -27,7 +27,11 @@ clean_data_places <- function(raw_data_places, factor_levels, factor_labels){
                         inHomeNeighborhood   = home_neighborhood == place_neighborhood,
                         inHomeCommunity      = home_community == place_community,
                         inHomeBorough        = home_borough == place_borough,
-                        distanceFromHome     = ifelse(inHomeNeighborhood, "Same Neighborhood", ifelse(inHomeBorough, "Same Borough", "Different Borough")) %>% factor()
+                        distanceFromHome     = ifelse(inHomeCommunity, "Same Community District", ifelse(inHomeBorough, "Same Borough", "Different Borough")) %>% 
+                                                factor(c("Same Community District", "Same Borough",  "Different Borough")),
+                        distanceFromHomeExp  = ifelse(inHomeCensusTract, "Same Census Tract", ifelse(inHomeNeighborhood, "Same Neighborhood", ifelse(inHomeCommunity, "Same Community District", ifelse(inHomeBorough, "Same Borough", "Different Borough")))) %>% 
+                                                factor(c("Same Census Tract", "Same Neighborhood", "Same Community District", "Same Borough", "Different Borough"))
+                        
                       ) %>%
                       dplyr::filter(!is.na(home_neighborhood) & !is.na(place_neighborhood)) %>%
                       dplyr::select(-c(inHomeCensusTract, inHomeCommunity, inHomeNeighborhood, inHomeBorough)) %>%

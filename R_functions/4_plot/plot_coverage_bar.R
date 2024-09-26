@@ -10,10 +10,9 @@ plot_coverage_bar            <- function(data){
           fill = group, 
           y = proportion
       ), 
-      width = 1, 
       stat = "identity", 
-      color = "black"
-    ) + 
-    ggplot2::coord_flip()
+      color = "black",
+      width = 1
+    ) 
   
 }

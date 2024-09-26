@@ -1,6 +1,7 @@
 plot_coverage_map        <- function(data){
   
   map_object <- mpxnyc::community_sf_obj %>%
+    filter(!stringr::str_detect(community, "SI")) %>%
     dplyr::rename(name = 1) %>%
     dplyr::left_join(data, by = "name") 
   

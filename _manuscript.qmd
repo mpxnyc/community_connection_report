@@ -49,13 +49,32 @@ targets::tar_make() # Runs the data pipeline shown in _targets.R
 
 ```
 
-# To Do
+# Video Series
 
-1.  Measures of centrality and density
-2.  Results
-3.  Introduction
-4.  Discussion
-5.  Appendices
+Queens -> Brooklyn but not brooklyn to queens
+
+
+0. Updates
+- [ ] Put bar graphs above the matrix
+- [ ] Do community detection on place network
+
+1. Intro / Overview
+
+2. Managing
+- [ ] Goals + tasks: internal / external
+- [ ] Social capital: internal / external
+- [ ] Resources: financial / non-financial
+
+3. Case study
+- [ ] Technical: questionnaire + protocol + translation
+- [ ] Technical: web app dev + testing + validation
+- [ ] External: consultation (group and one-on-one)
+- [ ] External: press
+- [ ] External: marketing
+- [ ] External: partnerships
+- [ ] Administration: financial planning + fundraising
+- [ ] Administration: financial tracking + reporting
+- [ ] Administration: IRB
 
 # Methods
 
@@ -303,18 +322,25 @@ perc_sti <- "0%"
 ```
 ## Participants
 
-The MPX NYC survey was open from 30 September to 15 November, 2022, and recruited a diverse group of participants. About 70% of participants were recruited over two two-day periods - half were recruited from 30 to 31 Aug, and another fifth from 10 to 11 September). Over 50% of participants were between the ages of 18-34 at the time of the survey. Two fifths were white cisgender men, about 15% were latinx cisgender men, and 10% were black cisgender men. About 5% of participants were transgender (with slightly over half being transgender men). Non-binary individuals comprised 7%. Two thirds of participants identified as gay, 14% as bisexual, and 12% as queer. Just under half of participants resided in the borough of Manhattan, and a third lived in Brooklyn.
+The MPX NYC survey was open from 30 September to 15 November, 2022, and rapidly recruited a diverse group of participants (see @fig-descriptives). About 70% of participants were recruited over two 48 hour periods: half were recruited from 30 to 31 Aug, and another 20% from 10 to 11 September). Over 50% of participants were between the ages of 18-34 at the time of the survey. Two fifths were white cisgender men, about 15% were latinx cisgender men, and 10% were black cisgender men. About 5% of participants were transgender (with slightly over half being transgender men). Non-binary individuals comprised 7%. Two thirds of participants identified as gay, 14% as bisexual, and 12% as queer. Just under half of participants resided in the borough of Manhattan, and one third lived in Brooklyn.
+
+```{r fig_sex_orientation_racegender}
+#| fig-cap: "Sexual orientation of MPX NYC participants by race and gender"
+#| label: fig-sexorientation-racegender
+#| fig-width: 10
+#| fig-height: 8.5
+
+make_table_freq2(sexOrientation, demo_group) %>%
+  plot_radar_grid() %>%
+  apply_style_radar_grid_plot()
+
+```
+
+The sexual orientation of participants differed by gender (see @fig-sexorientation-racegender). The vast majority of cisgender men identified as gay, with some identifying as bisexual. Transgender men were most likely to identify as queer,  bisexual, or gay whereas transgender women tended to identify as straight, bisexual, or other sexual orientations. Cisgender women tended to be straight, followed by biseuxual, followed by queer. For non-binary people, most identifed as queer, followed by gay and bisexual.
 
 In terms of health status, one in ten participants reported living with HIV - the overwhelming majority were virally suppressed. In addition, about `r perc_sti` reported at least one STI symptom. In terms of health services, two out of five participants were on PrEP at the time they took the survey, two-thirds had received the MPOX vaccine though only 8% had received MPOX testing. 
 
 MPX NYC participants were deeply connected to queer and trans people in New York City. About two-thirds reported being in recent (preceding 4 weeks) contact with 1 - 10 friends in this community whereas only 20% reported not being in contact with queer and trans friends over the same period. About half of the participants had betwen 1 and 3 recent sex partners with 15% reporting over 5 partners. Related to sex partners, about one third reported spending less than 15 minutes on average when traveling to a hookup while a third spent 16-30 minutes. Almost one of four participants reported having physical (non-sexual) contact with over 5 individuals over the preceding four weeks, and one third reported having no recent contact. 
-
-Participants who reported recent physical or sexual contact in a group setting were slightly younger than those who did not. They were more likely to identify as gay and less likely to identify as straight. Those who had contact were more likely to live in Manhattan and less likely to live in Queens. Surprisingly, they were less likely to have been recruited through a Grindr advertisement. They were also more likely to have been recruited before the first Grindr pop-up advertisement on 1 September 2022. 
-
-Finally, those who reported recent contact in a group setting did not differ with those who did not in terms of their HIV status and viral suppression. They were more likely to have at least one STI symptom than those who did not have recent contact in a group setting. This group had higher utilization of PrEP, mpox testing, and mpox vaccine. They were more closely connected with the queer and trans community: they reported more contact with friends, more physical contact partners and more sexual contact partners. They spent more time travelling to hookups than participants who had not had recent contact in a group setting. 
-
-
-
 
 ```{r tbl_descriptives}
 #| fig-cap: "Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks"
@@ -343,53 +369,39 @@ gtsummary::tbl_summary(by = groupSex) %>%
 ```
 
 
-Sexual orientation, however, varied accross sub-groups defined by race
-and gender. Cisgender men tended to be predominantly gay identified
-whereas non-binary persons, transgender men were predominantly queer.
-Transgender and cisgender women straight or bisexual.
+Participants who reported recent physical or sexual contact in a group setting were slightly younger than those who did not. They were more likely to identify as gay and less likely to identify as straight. Those who had contact were more likely to live in Manhattan and less likely to live in Queens. Surprisingly, they were less likely to have been recruited through a Grindr advertisement. They were also more likely to have been recruited before the first Grindr pop-up advertisement on 1 September 2022. 
 
-```{r fig_sex_orientation_racegender}
-#| fig-cap: "Sexual orientation of MPX NYC participants by race and gender"
-#| label: fig-sexorientation-racegender
-#| fig-width: 10
-#| fig-height: 8.5
-
-make_table_freq2(sexOrientation, demo_group) %>%
-  plot_radar_grid() %>%
-  apply_style_radar_grid_plot()
-
-```
-
-There was varying access to services by race and gender. For example,
-among white cisgender men, more were on PrEP than not whereas among
-latinx and black men, more were not on PrEP than were. Strikingly,
-unlike any other group, more black cisgender men were living with HIV
-than on PrEP.
-
-```{r fig_prephiv_racegender}
-#| fig-cap: "PrEP and HIV Status of MPX NYC participants by race and gender"
-#| label: fig-prephiv-racegender
-#| fig-width: 10
-#| fig-height: 8.5
-
-make_table_freq2(hivPrep, demo_group) %>%
-  plot_radar_grid() %>%
-  apply_style_radar_grid_plot()
-```
+Finally, those who reported recent contact in a group setting did not differ with those who did not in terms of their HIV status and viral suppression. They were more likely to have at least one STI symptom than those who did not have recent contact in a group setting. This group had higher utilization of PrEP, mpox testing, and mpox vaccine. They were more closely connected with the queer and trans community: they reported more contact with friends, more physical contact partners and more sexual contact partners. They spent more time travelling to hookups than participants who had not had recent contact in a group setting. 
 
 ## Contact venues
 
-From the $530$ participants who reported contact in the 4 weeks preceding
-the survey, we solicited, XXX contact venues. The most popular venue for
-contact was private residences. When we separate venues at which sexual
-contact occured from other venues, we found that sexual contact in
-congregate settings happened predominantly in private residences. By
-contrast, among contact venues in which participants did not have sex,
-dance parties predominated. The proportion of contact venues at which
-sexual contact happened increased the closer to home the venues were.
-The further away from home, the more likely contact venues were to be
-dance paries or sex parties, though the overall proportion was still low
-compared to private residences.
+```{r include=FALSE}
+make_table_freq3(groupSex)
+
+```
+Among all MPX NYC participants, 40% (530) reported reported having had sex or physical contact with two or more people at the same time. These participants identified $604$ locations at which they had contact (contact venues). About two out of five contact venues were private residences, and about a quarter were dance parties. More than half of the places contace venues were in Manhattan, while less than a third were in the Brooklyn. A quarter of all contact venues were in the same community as participants' residences, a third were in a different borough, and the remainder were in the same borough as home, but a different community district.
+
+```{r}
+
+#| fig-cap: "Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks"
+#| label: fig-descriptives2
+
+targets::tar_read(data_bipartite_graph_collected) %>%
+  tidygraph::activate(edges) %>%
+  data.frame() %>%
+    dplyr::filter(!home) %>%
+  dplyr::select(
+     "placeSex", "placeType", "place_borough", "distanceFromHome"
+  ) %>%
+gtsummary::tbl_summary() %>%
+  gtsummary::bold_labels() %>%
+    gtsummary::as_gt() %>%
+  gt::tab_source_note(gt::md("*Data source: MPX NYC 2022*")) 
+
+```
+
+
+Contact venues at which participants had sexual contact were overwhelmingly private residences whereas contact venues at which they had non-sexual physical contact were mostly dance parties (see @fig-places-distance-sexcontact). The closer to home a location was, the more likely it was to be a private residence and the more likely it was the site of sexual contact. By contrast, the futher from home a contac venue was, the less likely it was to be a dance party. 
 
 ```{r fig_places_distance_sexcontact}
 #| fig-cap: "MPX NYC contact venue type by distance from home and sexual contact"
@@ -404,24 +416,19 @@ make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE)
 
 ```
 
-## Participants connecting through contact venues
+## Movement 
 
-Movement between home and contact venues show that there is a strong
-flow within Brooklyn and within Manhattan, with a substantial amount of
-movement from Brooklyn homes to Manhattan contact venues. There was
-substantial, though less, flow from Manhattan to Brooklyn venues.
-Residents of the Bronx and Queens moved from their homes to contact
-venues within their buroughs, and also moved to Manhattan and to a lower
-extent, Brooklyn. Within Brooklyn, the community district of BK01
-received the most visitors within Brooklyn, and within Manhattan the
-district of MN04 was most visited. These include the neighborhoods X, X,
-X, X in BK01, and X, X, X, X in MN04.
+@fig-communities-movement maps each contact venue's community district (x-axis) against the participant's home community district (y-axis). The size of the dot is proportional to the total count of contact venues with the given home and contact venue community district. The color of the dt represents the borough of the contact venue.
 
-```{r fig_communities_movement}
-#| fig-cap: "Movement between home and contact venues by MPX NYC participant"
-#| label: fig-communities-movement
-#| fig-width: 10
-#| fig-height: 10
+The dots on the diagonal line from top left to bottom right, show prominantly, indicating that a sizeable proportion of movement happens within community districts. The figue also shows four prominant clusters - the cluster at the top left (in pink) shows significant movement between home and contact venues within Brooklyn and the cluster towards the middle of the plot (in purple) shows significant movement within Manhattan. The clusters at the top center and bottom left show significant movement from Brooklyn to Manhattan and from Manhattan to Brooklyn, respectively. 
+
+The bar graphs on the right and at the bottom show the overall distribution of home community district among participants who had sexual or social contact in a group setting. Within Brooklyn, Manhattan, and Queens, there is an uneven distribution of homes across community districts (bar graph on right). In Manhatan, for instance, community district MN03 appears to contain a disproportinately large share of residences. 
+
+The bar graph at the bottom shows that contact venues are even more unevenly distributed across community districts than homes are. The share of contact venues by community districts was 4-6 percentage points higher than the share of residences in MN04, BK01, and MN05. This suggests that participants leave their home community districts to gather in these community districts for social events. 
+
+```{r}
+#| fig-width: 8
+#| fig-height: 8
 
 
 margin_to <-  make_table_movement_travel() %>%
@@ -430,21 +437,91 @@ margin_to <-  make_table_movement_travel() %>%
   ungroup() %>%
                     mutate(weight =  100*weight / sum(weight))
 
-margin_from <-  make_table_movement_travel() %>%
-                    group_by(from, from_borough) %>%
-  summarize(weight = sum(weight)) %>%
+margin_from <-  make_table_freq3(community, borough, groupSex, person_analysis = TRUE) %>%
+  filter(stratum_b == "Yes") %>%
+                    transmute(from = level, from_borough = stratum_a, weight = count) %>%
   ungroup() %>%
                     mutate(weight = 100*weight / sum(weight)) 
+
+data_1 <- margin_to %>%
+            rename(community = to, borough = to_borough) %>%
+            mutate(weight = (weight)) 
+
+data_2 <- margin_from %>%
+            rename(community = from, borough = from_borough) %>%
+  mutate(weight = -weight)
+
+data <- data_1 %>%
+            rbind(data_2) %>%
+  group_by(community) %>%
+  mutate(increased = ifelse(abs(weight) == max(abs(weight)), "increased", "decreased")) %>%
+  mutate(increased = ifelse(weight < 0, "decreased", increased)) %>%
+  ungroup() %>%
+  #arrange(community) %>%
+  #arrange(borough, -weight) %>%
+  mutate(community = factor(community, (unique(community))))
+
+
+a <- ggplot(data) +
+  geom_bar(aes(x = community, y = weight, fill = borough, alpha = increased), stat = "identity", size = 0.6, width = 0.8) +
+    geom_bar(aes(x = community, y = weight), fill = "lightgrey", stat = "identity", size = 0.6, width = 0.8, data = . %>% filter(weight < 0)) +
+  #geom_label(aes(x = community, y =  - 18, label = community), angle = 90, size = 3, data = . %>% filter(weight < 0)) +
+  scale_y_continuous("Percentage in community district", breaks = seq(-12,20, 2), limits = c(-12, 18), labels = abs) +
+  scale_alpha_manual("Contact venues", values = c("increased" = 1, "decreased" = 0.6), labels = c("increased" = "Over-represented\nin community district\ncompared to residences", "decreased" = "Under-represented\nin community district\ncompared to residences")) +
+  scale_fill_manual("Borough", values = c(dark_blue, dark_pink, dark_purple, dark_green, dark_orange)) +
+
+    #geom_hline(aes(yintercept = -16), color = "lightgrey", size = 0.3) +
+    #geom_hline(aes(yintercept = -14), color = "lightgrey", size = 0.3) +
+    geom_hline(aes(yintercept = -12), color = "lightgrey", size = 0.3) +
+    geom_hline(aes(yintercept = -10), color = "lightgrey", size = 0.3) +
+      geom_hline(aes(yintercept = -8), color = "lightgrey", size = 0.3) +
+      geom_hline(aes(yintercept = -6), color = "lightgrey", size = 0.3) +
+      geom_hline(aes(yintercept = -4), color = "lightgrey", size = 0.3) +
+      geom_hline(aes(yintercept = -2), color = "lightgrey", size = 0.3) +
+  geom_hline(aes(yintercept = 0), color = "white", size = 1) +
+  geom_hline(aes(yintercept = 2), color = "lightgrey", size = 0.3) +
+  geom_hline(aes(yintercept = 4), color = "lightgrey", size = 0.3) +
+    geom_hline(aes(yintercept = 6), color = "lightgrey", size = 0.3) +
+    geom_hline(aes(yintercept = 8), color = "lightgrey", size = 0.3) +
+    geom_hline(aes(yintercept = 10), color = "lightgrey", size = 0.3) +
+    geom_hline(aes(yintercept = 12), color = "lightgrey", size = 0.3) +
+      geom_hline(aes(yintercept = 14), color = "lightgrey", size = 0.3) +
+      geom_hline(aes(yintercept = 16), color = "lightgrey", size = 0.3) +
+geom_label(aes(x = 10, y = 12, label = "Distribution of\ncontact venues"), angle = 0) +
+  geom_label(aes(x = 10, y = -8, label = "Distribution of\nresidences"), angle = 0) +
+  theme_void() +
+  theme(
+    axis.text.x = element_text(angle = 90, size = 7),
+    axis.text.y = element_text(margin = margin(5,5,5,5)),
+    axis.title.y = element_text(angle = 90),
+    plot.margin = margin(15,15,15,15),
+    legend.position = "bottom"
+  )
+
+a
+  
+  
+```
+
+
+```{r fig_communities_movement}
+#| fig-cap: "Movement between home and contact venues by MPX NYC participant. The figure maps each contact venue's community district (x-axis) against the participant's home community district (y-axis). The size of the dot is proportional to the total count of contact venues with the given home and contact venue community district. The color of the dot represents the borough of the contact venue."
+#| label: fig-communities-movement
+#| fig-width: 10
+#| fig-height: 10
+
+
+
 
   main <- make_table_movement_travel() %>%
               ggplot() +
               geom_tile(aes(y = from, x = to, fill = from_borough), alpha = 0.3) +
     geom_point(aes(y = from, x = to, col = to_borough, size = weight)) +
-    geom_segment(aes(y = from, xend =  weight + 60, x = 60, color = from_borough), data = margin_from, size = 3, alpha = 0.3 ) +
+    #geom_segment(aes(y = from, xend =  weight + 60, x = 60, color = from_borough), data = margin_from, size = 3, alpha = 0.3 ) +
     #geom_point(aes(y = from, x = weight + 60, fill = from_borough, label = from, size = 1, color = from_borough), data = margin_from) +
-        geom_point(aes(x = to, y = -weight - 5, fill = to_borough, label = to, size = 1, color = to_borough), data = margin_to) +
+        #geom_point(aes(x = to, y = -weight - 5, fill = to_borough, label = to, size = 1, color = to_borough), data = margin_to) +
 
-    geom_segment(aes(yend = - weight - 5, y = - 5, x = to, color = to_borough), data = margin_to) +
+    #geom_segment(aes(yend = - weight - 5, y = - 5, x = to, color = to_borough), data = margin_to) +
   theme_void() +
     theme(
       legend.position = "none",
@@ -452,44 +529,57 @@ margin_from <-  make_table_movement_travel() %>%
       axis.text.x = element_text(angle = 90)
     ) +
     scale_x_discrete(position = "top") +
-    scale_y_discrete(position = "left") +
-    geom_segment(aes(x = xcord, y = 0, yend = 55), data = data.frame(xcord = 60 + 2* c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)), size = 0.1) +
-        geom_segment(aes(y = xcord, x = 0, xend = 55), data = data.frame(xcord = -2* c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10) - 5), size = 0.1) +
-    geom_text(
-      aes(y = xcord, x = 57, label = label), 
-      data = data.frame(
-        xcord = -2* c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) - 5) %>% mutate(label = -1 * (xcord + 5)),
-      size = 3,
-      angle = 45
-      ) +
-    geom_text(
-      aes(y = -2, x = xcord, label = label), 
-      data = data.frame(
-        xcord = 60 + 2* c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)) %>% mutate(label =   (xcord - 60)),
-      size = 3,
-      angle = 45
-      ) +
-    geom_text(
-      aes(y = -5, x = 70, label = "% residences"), 
-      size = 3.5,
-      fontface = "plain"
-      ) +
-    geom_text(
-      aes(y = -15, x = 59.5, label = "% contact venues"), 
-      size = 3.5,
-      angle = -90,
-          fontface = "plain"
-      )  
+    scale_y_discrete(position = "left") 
+    #geom_segment(aes(x = xcord, y = 0, yend = 55), data = data.frame(xcord = 60 + 2* c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)), size = 0.6) +
+        #geom_segment(aes(y = xcord, x = 0, xend = 55), data = data.frame(xcord = -2* c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10) - 5), size = 0.6) +
+    # geom_text(
+    #   aes(y = xcord, x = 57, label = label), 
+    #   data = data.frame(
+    #     xcord = -2* c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) - 5) %>% mutate(label = -1 * (xcord + 5)),
+    #   size = 3,
+    #   angle = 45
+    #   ) +
+    # geom_text(
+    #   aes(y = -2, x = xcord, label = label), 
+    #   data = data.frame(
+    #     xcord = 60 + 2* c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)) %>% mutate(label =   (xcord - 60)),
+    #   size = 3,
+    #   angle = 45
+    #   ) +
+    # geom_text(
+    #   aes(y = -5, x = 70, label = "% residences"), 
+    #   size = 3.5,
+    #   fontface = "plain"
+    #   ) +
+    # geom_text(
+    #   aes(y = -15, x = 59.5, label = "% contact venues"), 
+    #   size = 3.5,
+    #   angle = -90,
+    #       fontface = "plain"
+    #   )  
 
   
-  apply_style_matrix_movement(main)
+  apply_style_matrix_movement(main) 
 
 
 ```
 
-The most popular community districts in Brooklyn and Manhattan were
-connected via shared visitors or residents. Different sub-groups showed
-different patterns of co-attendance of community districts. Overall, MPX
+
+
+
+```{r include=FALSE}
+margin_to %>%
+  rename(weight_to = weight) %>%
+  left_join(margin_from, by = c("to" = "from", "to_borough" = "from_borough")) %>%
+  rename(weight_from = weight) %>%
+  mutate(diff = weight_to - weight_from) %>%
+  arrange(- weight_to, -diff) 
+
+```
+
+## Mixing 
+
+@fig-subgroup-mixing quantifies the degree to which individuals with characteristics shown on the left live or play in an overalappoing set of community districts with individuals whose characteristics are shown at the top. Different sub-groups showed different patterns of co-attendance of community districts. Overall, MPX
 NYC participants showed spatial homophily - the spatial selection
 coefficient from a given group to the same group was positive for all
 levels of race-gender, sexual orientation, and age. In addition, black
@@ -501,18 +591,8 @@ community districts where bisexual, straight and queer identified
 participants did not live. Similarly, those groups selected against
 community districts in which gay identified individuals live or play.
 
-```{r fig_communities_network}
-#| fig-cap: "Network of community districts connected by MPX NYC participants"
-#| label: fig-communities-network
-#| fig-width: 8
-#| fig-height: 8
 
 
-make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
-  plot_network_viz() %>%
-  apply_style_network_viz()
-  
-```
 
 ```{r fig_subgroup_mixing}
 #| fig-cap:  "Social mixing matrices for MPX NYC participants by race-gender (top), sexual orientation (bottom left), and age (bottom right)"
@@ -541,60 +621,86 @@ cowplot::plot_grid(mixing_demo_group_panel, mixing_bottom_panel, ncol=1, rel_hei
 
 ```
 
-## Efficient and effective interventions
+## Interventions
+### Efficient interventions
 
-Under the hypothetical intervention, it would take an intervention of
-order 5 to reach 33% of survey participants with an intervention to slow
-down the spread of a novel pathogen. These were MN04, BK01, MN10, BK03,
-and QN01. MN04 includes the neighborhoods XXXXX, BK01 includes XXXXX,
-MN10 includes XXXX, BK03 includes XXX, and QN01 includes XXXX. To reach
-66% of participants with the intervention, it would be necessary to
-mount an intervention of order 13. The additional community districts
-would be MN12, BK04, MN02, BK08, MN07, MN09, BK02, and MN05. A table of
-community districts and their constituent neightborhoods can be found in
-Appendix X.
+
+Since these data were collected to inform programmatic response to a new health threat, we illustrated the implications of the pattern of connection between people and places for intervention design through a thought experiment: we examined two approaches to conducting a hypothetical place-based immunization intervention. In this hypothetical intervention, we assume that it is possible to immunize entire community districts at a time, but that we can only immunize one comunity district at a time. There is one parameter we can vary to produce different versions of this intervention: the order in which they are immunized.
+
+We examined two strategies for choosing an ordering of community districts. In the first strategy, we ranked districts according to the number of contact venues which are contained by the district plus the number participants who live in the community district. We call this the "contact-based" strategy. In the second strategy, we subtracted from this number, the count of contact venues which are in the same community district as the participant's home. We call this the "movment-based" strategy. Whereas the former strategy prioritizes community districts with high contact for the intervention, the latter strategy prioritizes community districts with a high level of movement in and out of the community district. 
+
+We assessed these strategies against two outcomes. The first is the total number of immunized people divided by the number of immunized community districts, and the second is the proportion of individuals who are in the largest connected component of the network that connects particiopants through their shared community districts. The former measure assesses the efficiency of the intervention (an efficient intervention is one which immunizes a high number of people though a low number of community districts). The latter assess the effectiveness of the intervention in breaking apart the largest connected component of the network which connects survey participants through their overalpping community districts so as to slow the dissemination of a pathogen accross the city. 
+
+This network has individuals as nodes. A tie between two individuals indicates that those two live or have had a contact event in the same community districts. The ties are weighted by the number of community districts that are shared by the pair of participants in this way. The network encodes the potential for the two individual to make contact with one another and transmit a pathogen. The more community districts they share, the more likely it is that they will make contact and/or transmit a pathogen. The better connected this network is, the more likely that a newly introduced infectious disease would disseminate quickly accross the population. The less connected it is, the less likley that such a dissemination could happen. 
+
+One way to understand how well connected a network is is to examine its connected components. A connected component is the set of nodes where each node is reachable from any other node by tracing a path through network ties, and where there are no nodes excluded from the set which are reachable from any node in the set. In many human systems, networks have a "large connected component" - connected component that contains the vast majority of the nodes in the network - with other, usually much smaller, connected components. 
+
+To assess the effectiveness of the intervention strategy, we calculated the proportion of participants which are included in the largest connected component as community districts are immunized. To the network, immunizing a community district has the effect of removing ties between individuals who share that community district, and marking those individuals as vaccinated. The more community districts are immunized, therefore, the fewer ties there will be in the network, and the smaller the proportion of participants included in the largets connected component. 
+
+@fig-hiimpact-communities-movement shows which community districts would have to be immunized to immunize 33% of the population (Group A), and 66% of ther population (Group A + Group B) under both the contact-based and movement-based intervention strategies. 
+
+Under the contact-based strategy, it would take five community districts to immunize 33% of sthe population. These are MN04, BK01, MN10, BK03, and QN01. MN04 includes the neighborhoods XXXXX, BK01 includes XXXXX,
+MN10 includes XXXX, BK03 includes XXX, and QN01 includes XXXX. To reach 66% of participants with the intervention, it would be necessary to immunize 13 community districts. The additional community districts would be MN12, BK04, MN02, BK08, MN07, MN09, BK02, and MN05. 
+
+Under the movement-based strategy, it would take six community districts to reach 33% of the population: MN04, BK01, MN05, BK04, MN02, and BK03. It would take 16 community districts to reach 66% of the population. The additional community districts would be: MN64, MN10, QN01, BK08, MN09, QN05, BK09, MN11, BK14, and BK07.
+
+@fig-netimpact shows that nearly 100% of individuals are included in the largest connected component before any intervention. For the movement-based strategy, the proportion of the population included in the largest connected component declines more sharply than for the contact-based strategy. In the contact-based strategy, the overall proportion of unvaccinated individuals declines more sharply than in the movement-based strategy. There is not a noticable difference between the two strategies for the first 10 community districts to be immunized - differences between the two strategies start emerging once 10 community districts are immunized. 
+
 
 ```{r fig_hiimpact_communities_contact}
 #| fig-cap: "High-coverage community districts - Contact"
 #| label: fig-hiimpact-communities
 #| fig-width: 10
-#| fig-height: 10
-#| 
-map_plot <- make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
-                  plot_coverage_map()  %>%
-                  apply_style_coverage_map()
+#| fig-height: 8
 
-bar_plot <- make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
+map_plot_1 <- make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
+                  plot_coverage_map()  %>%
+                  apply_style_coverage_map() %>%
+                  add_title("Contact-based strategy")
+
+bar_plot_1 <- make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
                   filter(group != "Group C") %>%
                   plot_coverage_bar() %>%
                   apply_style_coverage_bar() 
 
-  cowplot::ggdraw(map_plot) +
-  cowplot::draw_plot(bar_plot, x = .1, y = .55, width = 0.25, height = 0.25)
+  finished_plot_1 <- cowplot::ggdraw(map_plot_1) +
+  cowplot::draw_plot(bar_plot_1, x = .1, y = .55, width = 0.25, height = 0.25)
 
 ```
-
-
 
 ```{r fig_hiimpact_communities_movement}
 #| fig-cap: "High-coverage community districts - Movement"
 #| label: fig-hiimpact-communities-movement
 #| fig-width: 10
-#| fig-height: 10
-#| 
-map_plot <- make_coverage_table(intervention_priority = "movement", intervention_stratification = "overall") %>%
-                  plot_coverage_map()  %>%
-                  apply_style_coverage_map()
+#| fig-height: 8
 
-bar_plot <- make_coverage_table(intervention_priority = "movement", intervention_stratification = "overall") %>%
+
+map_plot_2 <- make_coverage_table(intervention_priority = "movement", intervention_stratification = "overall") %>%
+                  plot_coverage_map()  %>%
+                  apply_style_coverage_map() %>%
+                  add_title("Movement-based strategy")
+
+bar_plot_2 <- make_coverage_table(intervention_priority = "movement", intervention_stratification = "overall") %>%
                   filter(group != "Group C") %>%
                   plot_coverage_bar() %>%
                   apply_style_coverage_bar() 
 
-  cowplot::ggdraw(map_plot) +
-  cowplot::draw_plot(bar_plot, x = .1, y = .55, width = 0.25, height = 0.27)
+
+
+  finished_plot_2 <- cowplot::ggdraw(map_plot_2) +
+  cowplot::draw_plot(bar_plot_2, x = .1, y = .55, width = 0.25, height = 0.27)
+  
+  
+finished_plot_map <- cowplot::plot_grid(map_plot_1, map_plot_2)
+finished_plot_bar <- cowplot::plot_grid(bar_plot_1, bar_plot_2)
+
+
+cowplot::plot_grid(finished_plot_map, finished_plot_bar, ncol=1, rel_heights = c(4,1)) 
+
 
 ```
+
+### Disruptive interventions
 
 ```{r}
 #| fig-cap: "Network impact"
@@ -605,16 +711,16 @@ bar_plot <- make_coverage_table(intervention_priority = "movement", intervention
 tar_read(data_intervention_results_centrality_collected) %>%
   filter(intervention_stratification == "overall") %>%
   filter(intervention_ranking <= 40) %>%
-  mutate(intervention_priority = factor(intervention_priority, c("contact", "movement"), c("Contact-based Prioritization", "Movement-based prioritization"))) %>%
+  mutate(intervention_priority = factor(intervention_priority, c("contact", "movement"), c("Contact-based strategy", "Movement-based strategy"))) %>%
   mutate(group = factor(group, c("n_vaccinated", "n_remainder", "n_lcc"), c("Vaccinated", "Unvaccinated in LCC", "Unvaccinated not in LCC"))) %>%
   ggplot() +
   geom_bar(aes(y = proportion, x = intervention_ranking, fill = group), stat = "identity", width = 1) +
-  geom_hline(aes(yintercept = 0.5), size = 0.1) +
-  geom_hline(aes(yintercept = 0.25), size = 0.1) +
-  geom_hline(aes(yintercept = 0.75), size = 0.1) +
-  geom_vline(aes(xintercept = 10), size = 0.1) +
-  geom_vline(aes(xintercept = 20), size = 0.1) +
-  geom_vline(aes(xintercept = 30), size = 0.1) +
+  geom_hline(aes(yintercept = 0.5), size = 1, color = "white") +
+  geom_hline(aes(yintercept = 0.25), size = 1,  color = "white") +
+  geom_hline(aes(yintercept = 0.75), size = 1, color = "white") +
+  geom_vline(aes(xintercept = 10), size = 1, color = "white") +
+  geom_vline(aes(xintercept = 20), size = 1, color = "white") +
+  geom_vline(aes(xintercept = 30), size = 1, color = "white") +
   facet_grid( . ~ intervention_priority ) +
   #coord_polar(start = 0.5*pi) +
   scale_y_continuous("Proportion of participants", limits = c(0, 1), labels = scales::percent) +

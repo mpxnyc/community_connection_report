@@ -6,6 +6,7 @@ apply_style_chorofill_map <- function(plot, show.na = FALSE){
     theme_void() +
     scale_fill_manual(values = c(dark_blue, light_blue, "white"),  na.value = na_value) +
     theme(
-      legend.position = "none"
+      legend.position = "none",
+      plot.margin = margin(0, 0, 0, 40)
     )  
 }
