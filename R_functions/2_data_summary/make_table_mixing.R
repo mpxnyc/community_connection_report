@@ -1,3 +1,79 @@
+
+
+specific_degree_single <- function(graph, variable, level){
+  variable <- enquo(variable)
+
+  variable_name <- dplyr::quo_name(variable)
+
+  truth_vec <- graph %>% 
+                mutate(truth = {{variable}} == level) %>%
+                pull(truth) %>%
+                as.numeric()
+  
+  names <- graph %>%
+              pull(name)
+  
+  rep <- graph %>%
+    pull(rep)
+  
+  degree <- graph %>%
+    mutate(degree = degree(.)) %>%
+    pull(degree)
+  
+  adj_mat <- graph %>%
+                as_adj() 
+  
+  specific_degree <- adj_mat %*% truth_vec
+  
+  specific_degree <- as.numeric(specific_degree)
+  
+  data.frame(
+    name = names,
+    var = variable_name,
+    level = level,
+    degree = degree,
+    specific_degree = specific_degree,
+    rep = rep
+    ) %>%
+    tibble()
+  
+}
+
+specific_degree <- function(graph, variable){
+  
+  levels_vec <- graph %>%
+                  filter(!is.na({{variable}})) %>%
+                  pull({{variable}}) %>%
+                  unique()
+  
+  levels_vec %>%
+    purrr::map(
+              function(level) specific_degree_single(graph, {{variable}}, level)
+              ) %>%
+    bind_rows()
+}
+  
+
+make_table_mixing_2       <- function(variable){
+  
+  targets::tar_read(data_bipartite_graph_simulated) %>%
+    igraph::bipartite.projection(which = "true") %>%
+    as_tbl_graph(directed = FALSE) %>%
+    specific_degree({{variable}}) %>%
+    mutate(bias = specific_degree / degree) %>%
+    group_by(rep, level) %>%
+    summarize(bias = mean(bias, na.rm = TRUE), bias_old = sum(specific_degree)/sum(degree)) %>%
+    group_by(level) %>%
+    summarize(
+      mean_bias = mean(bias), 
+      mean_bias_old = mean(bias_old)
+    )
+ 
+  
+
+}
+
+
 make_table_mixing       <- function(variable){
 
   data_simulated <- targets::tar_read(data_bipartite_graph_simulated) %>%
@@ -27,6 +103,7 @@ helper_calculate_bias <- function(data_input, variable){
     igraph::bipartite.projection(which = "true") %>%
     as_tbl_graph(directed = FALSE) %>%
     mutate(connection_var = {{variable}}) %>%
+    #mutate(connection_var = age) %>%
     activate(edges) %>%
     mutate(
       rep = .N()$rep[from],

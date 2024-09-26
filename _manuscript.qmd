@@ -141,7 +141,7 @@ English and Spanish. Further details about the Community Forum and the
 principles that animated this work have been previously published
 [@roth2023global].
 
-### Recruitment
+### MPX NYC marketing and communication
 
 We collaborated with a marketing agency to design and implement a study
 recruitment campaign in English and Spanish. The initial brief was to
@@ -169,7 +169,7 @@ Instagram, and outdoor electronic billboards.
 
 The marketing campaign for MPX NYC was among those that won a
 Health+Wellness award from Graphic Design USA in 2023
-([https://gdusa.com/2023-health-wellness-awards-winner?rns=0\|41441831\|41441872\|41441882](https://gdusa.com/2023-health-wellness-awards-winner?rns=0|41441831|41441872|41441882))
+(<https://gdusa.com/2023-health-wellness-awards-winner?rns=0%7C41441831%7C41441872%7C41441882>)
 and was recognized by Out Magainze through the inclusion of the
 pirncipal investigator in the 2022 OUT100 list for "LGBTQ+ Policy Makers
 and Advocates Changing the World"
@@ -179,7 +179,7 @@ and Advocates Changing the World"
 NYC](images/clipboard-22126019.png){#fig-options
 fig-alt="Options for visual identity of MPX NYC"}
 
-### Location-input question format
+### MPX NYC Location-input question
 
 To encourage disclosure of sensitive information, we conducted an
 anonymous survey. However, we sought to collect spatial data - this
@@ -252,63 +252,90 @@ further categorize transgender people into men and women.
 Race was measured using a multiple selection question based on census
 categories (white, black, latino/a/x, asian, pacific islander, other).
 We combined gender identity and race to form a gender-race variable,
-collapsing small cells across racial groups (white cisgender man, latinx
-cisgender man, black cisgender man, other cisgender man, non-binary
-person, transgender man, transgender woman, cisgender woman, another
-demographic).
+collapsing small cells across racial groups and into gender groups
+(white cisgender man, latinx cisgender man, black cisgender man, other
+cisgender man, non-binary person, transgender man, transgender woman,
+cisgender woman, another demographic).
 
 ### Residence and Contact venues
 
-Using the map-input question format, we solicited the census tract of
-participants' primary residences. Among those who reported physical or
-sexual contact in a group setting in the preceding 4 weeks, we solicited
-the locations of the venues at which the contact happened. We refer to
-these locations as "contact venues". For each contact venue (see
-@fig-mapinputformat), participants indicated the type of place it was
-(dance party, sex party, darkroom, sport game, concert, theatre/show,
-private residence, sex club, bathhouse, park, something else) and
-whether they had sexual (vs. non-sexual) contact there.
+Using the location-input question format, we solicited the census tract
+of participant primary residence. Among those who reported group
+contact - physical or sexual contact in a group setting in the preceding
+4 weeks - we solicited the locations of the venues at which the contact
+happened. We refer to these locations as "contact venues". For each
+contact venue (see @fig-mapinputformat), participants indicated the type
+of venue it was (dance party, sex party, darkroom, sport game, concert,
+theatre/show, private residence, sex club, bathhouse, park, something
+else). They also indicated whether they had sexual contact or non-sexual
+physical contact at the contact venue. We refer to a dichotomous
+variable called group sex contact below, which is true in the former
+case and false in the latter.
+
+While location data were captured at the census tract level, in this
+analysis, the unit of spatial analysis is the community district.
+Community districts are spatial units that divide New York City into
+regions [@nycopendata2022] which are nested by the five boroughs of New
+York City, and which nest census tracts in the city.
+
+We constructed an approximate measure of distance between each contact
+venue and participant residence by categorizing contact venues into
+those that are: in the same community district as the residence; in a
+different community district but the same borough; and those in a
+different borough. We refer to this measure as distance from home.
 
 ## Statistical Analysis
 
-### Participant and contact venue characteristics
+### Participant characteristics
 
-Participant characteristics were tabulated by contact in the preceding 4
-weeks. We also tabulated contact venue characteristics by distance from
-home and by sexual contact.
-
-Census tract identifiers were converted into community district
-identifiers. Census tracts are nested in community districts. They are
-defined by the City of New York [@nycopendata2022]. For each contact
-venue, we approximated the distance from home to that venue using an
-ordinal variable with three levels: same community district as home;
-different community district but same borough as home; different borough
-than home.
-
-### Spatial sorting and mixing
-
-To understand how different demographic groups mix in physical space, we
-defined $\psi_{a \rightarrow b} \in [-1,\infty]$ as the spatial
-selection coefficient of subgroup $a$ for subgroup $b$. The spacial
-selection coefficient is defined as the spacial selection ratio less 1.
-The numerator for this ratio is the conditional probability of someone
-in subgroup $a$ sharing a community district with someone in subgroup
-$b$. The denominator is the marginal probability of having
-characteristic $b$.
-
-This measure is $0$ when contact venues and residences for subgroups $a$
-and $b$ are distributed independently of each other in space; positive
-if contact venues and residences for subgroup $a$ tend to be in the same
-community districts as those for subgroup $b$; and negative if subgroup
-$a$ tends to be in community districts that do not have contact venues
-and residences for subgroup $b$.
+Participant characteristics and contact venue characteristics were
+tabulated and visualized.
 
 ### Participant spatial overlap network
 
 We constructed a network where nodes are participants and weighted ties
-indicate the number of community districts shared by those participants.
-We say two participants share a community district if both have a
-residence or contact venue in that community district.
+indicate that a pair of participants share at least one community
+district. We say two participants share a community district if both
+have a residence or contact venue in that community district. The weight
+of each tie (or tie weight) is the count of community districts shared
+by a given pair of individuals.
+
+### Spatial sorting and mixing
+
+To understand how different demographic groups mix in physical space, we
+defined $\psi_i(b)$, the individual spatial selection ratio of
+individual $i$ for subgroup $b$. The numerator for the local spatial
+selection ratio is the conditional probability of a given person $i$ of
+characteristic $a$ sharing a community district with persons of
+characteristic $b$. (i.e. the sum of tie weights for ties that link $i$
+with persons $j$ of characteristic $b$ divided by the weighted degree of
+person $i$.)
+
+$$
+\psi_i(b) = \frac{ \sum_{j \in N_b}W_{i \sim j}}{ \sum_{j \in N}W_{i \sim j}  }
+$$
+
+Where $W_{i \sim j}$ is the weight for the tie connecting $i$ and $j$.
+$N$ is the set of all node indices and $N_b \subset N$ is the set of
+indices for nodes with characteristic $b$. By definition, the absence of
+a tie between $i$ and $j$ is equivalent to the presence of a tie with
+$W_{i \sim j} = 0$, and by definition
+$W_{i \sim i} = 0, \forall i\in N$.
+
+The population spatial selection ratio $\psi(a,b)$ of subgroup $a$ for
+subgroup $b$ is the geometric mean of the individual spatial selection
+ratios of all individuals in subgroup $a$:
+
+$$
+\psi(a,b) =  \prod_{i \in N_a}{\psi_i(b) ^\frac{1}{|N_a|}} 
+$$
+
+The spatial selection coefficient is $0$ when contact venues and
+residences for subgroups $a$ and $b$ are distributed in space
+independently of each other; positive if members of subgroup $a$ tend to
+share community districts with those of subgroup $b$; and negative if
+members of subgroup $a$ tend to not share community districts with
+subgroup $b$.
 
 ### Hypothetical immunization intervention
 
