@@ -158,6 +158,12 @@ load_factor_labels <- function(){
   
   list_labels_places <- list()
   
+  list_labels_places[["intervention_setting"]] <- list()
+  list_labels_places[["intervention_setting"]][["label"]]                              <- "Intervention setting"
+  list_labels_places[["intervention_setting"]][["levels"]][["home"]]                   <- "Home"
+  list_labels_places[["intervention_setting"]][["levels"]][["no"]]                     <- "Sex venue"
+  list_labels_places[["intervention_setting"]][["levels"]][["yes"]]                    <- "Phys venue"
+  
   list_labels_places[["place_borough"]] <- list()
   list_labels_places[["place_borough"]][["label"]]                              <- "Place type"
   list_labels_places[["place_borough"]][["levels"]][["Bronx"]]          <- "Bronx"

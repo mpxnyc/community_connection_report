@@ -56,30 +56,32 @@ specific_degree <- function(graph, variable){
 
 make_table_mixing_2       <- function(variable){
   
-  working_graph <- targets::tar_read(data_bipartite_graph_simulated) %>%
-            igraph::bipartite.projection(which = "true") %>%
-            as_tbl_graph(directed = FALSE) 
+
+  working_graph                <- targets::tar_read(data_bipartite_graph_simulated) %>%
+                                      igraph::bipartite.projection(which = "true") %>%
+                                      as_tbl_graph(directed = FALSE) 
   
- specific_degree_data <-  working_graph %>%
-   mutate(ego_level = {{variable}}) %>%
-                        specific_degree({{variable}}) %>%
-   #mutate(ego_level = age) %>%
-   #specific_degree(age) %>%
-                        mutate(preference = specific_degree / degree) %>%
-   data.frame()
+
+  specific_degree_data         <-  working_graph %>%
+                                      mutate(ego_level = {{variable}}) %>%
+                                      specific_degree({{variable}}) %>%
+                                      #mutate(ego_level = age) %>%
+                                      #specific_degree(age) %>%
+                                      mutate(preference = specific_degree / degree) %>%
+                                      data.frame()
  
- preference <- working_graph %>%
-   data.frame() %>%
-   left_join(specific_degree_data, by = c("name", "rep")) %>%
-   mutate(ego_level = {{variable}}) %>%
-   #mutate(ego_level = age) %>%
-                        group_by(rep, ego_level, alter_level) %>%
-                        summarize(preference = mean(preference, na.rm = TRUE)) %>%
-                        ungroup()
- 
- prevalence <- working_graph %>%
-   data.frame() %>%
-   mutate(level = {{variable}}) %>%
+ preference                    <- working_graph %>%
+                                     data.frame() %>%
+                                     left_join(specific_degree_data, by = c("name", "rep")) %>%
+                                     mutate(ego_level = {{variable}}) %>%
+                                     #mutate(ego_level = age) %>%
+                                                          group_by(rep, ego_level, alter_level) %>%
+                                                          summarize(preference = mean(preference, na.rm = TRUE)) %>%
+                                                          ungroup()
+                                   
+ prevalence                    <- working_graph %>%
+                                    data.frame() %>%
+                                    mutate(level = {{variable}}) %>%
    #mutate(level = age) %>%
                    group_by(rep, level) %>%
                    summarize(count = n()) %>%

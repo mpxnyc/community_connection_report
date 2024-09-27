@@ -49,6 +49,7 @@ targets::tar_make() # Runs the data pipeline shown in _targets.R
 
 ```
 
+
 # Video Series
 
 Queens -\> Brooklyn but not brooklyn to queens
@@ -82,11 +83,13 @@ Queens -\> Brooklyn but not brooklyn to queens
 
 Recall ring vaccination
 
+
 ```{r text_variables}
 start_date <- targets::tar_read(data_bipartite_graph_collected) %>% data.frame() %>% pull(createdAt) %>% min(na.rm= TRUE)
 end_date   <- targets::tar_read(data_bipartite_graph_collected) %>% data.frame() %>% pull(createdAt) %>% max(na.rm= TRUE)
 
 ```
+
 
 ## Data Collection
 
@@ -384,10 +387,12 @@ distribution produced by re-sampling.
 
 # Results
 
+
 ```{r}
 perc_sti <- "0%"
 
 ```
+
 
 ## Participants
 
@@ -404,6 +409,7 @@ participants identified as gay, 14% as bisexual, and 12% as queer. Just
 under half of participants resided in the borough of Manhattan, and one
 third lived in Brooklyn.
 
+
 ```{r fig_sex_orientation_racegender}
 #| fig-cap: "Sexual orientation of MPX NYC participants by race and gender"
 #| label: fig-sexorientation-racegender
@@ -415,6 +421,7 @@ make_table_freq2(sexOrientation, demo_group) %>%
   apply_style_radar_grid_plot()
 
 ```
+
 
 The sexual orientation of participants differed by gender (see
 @fig-sexorientation-racegender). The vast majority of cisgender men
@@ -444,6 +451,7 @@ four participants reported having physical (non-sexual) contact with
 over 5 individuals over the preceding four weeks, and one third reported
 having no recent contact.
 
+
 ```{r tbl_descriptives}
 #| fig-cap: "Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks"
 #| label: fig-descriptives
@@ -469,6 +477,7 @@ gtsummary::tbl_summary(by = groupSex) %>%
 
 ```
 
+
 Participants who reported recent physical or sexual contact in a group
 setting were slightly younger than those who did not. They were more
 likely to identify as gay and less likely to identify as straight. Those
@@ -490,10 +499,12 @@ participants who had not had recent contact in a group setting.
 
 ## Contact venues
 
+
 ```{r include=FALSE}
 make_table_freq3(groupSex)
 
 ```
+
 
 Among all MPX NYC participants, 40% (530) reported reported having had
 sex or physical contact with two or more people at the same time. These
@@ -505,6 +516,7 @@ were in the Brooklyn. A quarter of all contact venues were in the same
 community as participants' residences, a third were in a different
 borough, and the remainder were in the same borough as home, but a
 different community district.
+
 
 ```{r}
 
@@ -523,6 +535,7 @@ targets::tar_read(data_bipartite_graph_collected) %>%
 
 ```
 
+
 Contact venues at which participants had sexual contact were
 overwhelmingly private residences whereas contact venues at which they
 had non-sexual physical contact were mostly dance parties (see
@@ -530,6 +543,7 @@ had non-sexual physical contact were mostly dance parties (see
 more likely it was to be a private residence and the more likely it was
 the site of sexual contact. By contrast, the futher from home a contac
 venue was, the less likely it was to be a dance party.
+
 
 ```{r fig_places_distance_sexcontact}
 #| fig-cap: "MPX NYC contact venue type by distance from home and sexual contact"
@@ -543,6 +557,7 @@ make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE)
   apply_style_radar_facet_plot()
 
 ```
+
 
 ## Movement
 
@@ -576,6 +591,7 @@ share of contact venues by community districts was 4-6 percentage points
 higher than the share of residences in MN04, BK01, and MN05. This
 suggests that participants leave their home community districts to
 gather in these community districts for social events.
+
 
 ```{r}
 #| fig-width: 8
@@ -722,6 +738,7 @@ margin_to %>%
 
 ```
 
+
 ## Mixing
 
 @fig-subgroup-mixing quantifies the degree to which individuals with
@@ -739,6 +756,7 @@ identified participants preferred to live and play in community
 districts where bisexual, straight and queer identified participants did
 not live. Similarly, those groups selected against community districts
 in which gay identified individuals live or play.
+
 
 ```{r fig_subgroup_mixing}
 #| fig-cap:  "Social mixing matrices for MPX NYC participants by race-gender (top), sexual orientation (bottom left), and age (bottom right)"
@@ -768,6 +786,7 @@ cowplot::plot_grid(mixing_demo_group_panel, mixing_bottom_panel, ncol=1, rel_hei
 
 
 ```
+
 
 ## Interventions
 
@@ -869,6 +888,7 @@ two strategies for the first 10 community districts to be immunized -
 differences between the two strategies start emerging once 10 community
 districts are immunized.
 
+
 ```{r fig_hiimpact_communities_contact}
 #| fig-cap: "High-coverage community districts: contact vs movement-based strategy"
 #| label: fig-hiimpact-communities
@@ -915,7 +935,9 @@ cowplot::plot_grid(finished_plot_map, finished_plot_bar, ncol=1, rel_heights = c
 
 ```
 
+
 ### Disruptive interventions
+
 
 ```{r}
 #| fig-cap: "Network impact"
@@ -929,6 +951,7 @@ make_table_centrality() %>%
 
 
 ```
+
 
 # Discussion
 
@@ -1121,3 +1144,4 @@ Most of all, we thank, and stand in solidarity with, the MPX NYC
 participants who gave of their time to make the study a success.
 
 # References
+
