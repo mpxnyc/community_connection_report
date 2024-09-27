@@ -106,7 +106,8 @@ make_table_mixing_2       <- function(variable){
    mean_bias = mean_selection_coef ,
    ci_lb_bias = ci_lb_selection_coef,
    cl_ub_bias = ci_ub_selection_coef
- )
+ ) %>%
+   drop_na() 
 
 }
 

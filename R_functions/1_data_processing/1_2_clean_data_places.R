@@ -38,8 +38,35 @@ clean_data_places <- function(raw_data_places, factor_levels, factor_labels){
                       dplyr::tibble() %>%
                       dplyr::filter(!is.na(placeSex))
 
-labelled::var_label(clean_data)  <- factor_labels[["places"]] %>%
-                                            purrr::map(function(x) x$label)
+  variable_labels  <- factor_labels[["places"]] %>%
+    purrr::map(
+      function(x) {
+        x$label
+      }
+    ) 
+  
+  value_labels    <- factor_labels[["places"]] %>% 
+    purrr::map(
+      function(x) {
+        result <- x$levels %>% 
+          unlist() 
+        names(result) <- names(x$levels)
+        
+        result
+      }) 
+  
+  value_labels %>%
+    purrr::map2(
+      names(value_labels),
+      function(variable, var_name) {
+        clean_data[, var_name] <<- clean_data %>%
+          pull(var_name) %>%
+          factor(names(variable), as.character(variable))
+        
+      }
+    )
+  
+labelled::var_label(clean_data)  <- variable_labels
 
 clean_data
 

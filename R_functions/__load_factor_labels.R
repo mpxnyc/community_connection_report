@@ -96,6 +96,11 @@ load_factor_labels <- function(){
   list_labels_people[["hivStatus"]][["levels"]][["living-with-hiv"]]       <- "Living with HIV"
   list_labels_people[["hivStatus"]][["levels"]][["not-living-with-hiv"]]   <- "Not living with HIV"
   
+  list_labels_people[["hivSuppressed"]] <- list()
+  list_labels_people[["hivSuppressed"]][["label"]]  <- "HIV viral suppression"
+  list_labels_people[["hivSuppressed"]][["levels"]][["yes"]]                     <- "Suppressed"
+  list_labels_people[["hivSuppressed"]][["levels"]][["no"]]                      <- "Not Suppressed"
+  
   list_labels_people[["monkeypoxVaccine"]] <- list()
   list_labels_people[["monkeypoxVaccine"]][["label"]] <- "MPOX Vaccination"
   list_labels_people[["monkeypoxVaccine"]][["levels"]][["yes"]]                   <- "Vaccinated"
@@ -153,6 +158,14 @@ load_factor_labels <- function(){
   
   list_labels_places <- list()
   
+  list_labels_places[["place_borough"]] <- list()
+  list_labels_places[["place_borough"]][["label"]]                              <- "Place type"
+  list_labels_places[["place_borough"]][["levels"]][["Bronx"]]          <- "Bronx"
+  list_labels_places[["place_borough"]][["levels"]][["Brooklyn"]]       <- "Brooklyn"
+  list_labels_places[["place_borough"]][["levels"]][["Manhattan"]]      <- "Manhattan"
+  list_labels_places[["place_borough"]][["levels"]][["Queens"]]         <- "Queens"
+  list_labels_places[["place_borough"]][["levels"]][["Staten Island"]]  <- "Staten Island"
+  
   list_labels_places[["placeType"]] <- list()
   list_labels_places[["placeType"]][["label"]]                              <- "Place type"
   list_labels_places[["placeType"]][["levels"]][["concert"]]                <- "Concert/Theatre/Show"
@@ -170,10 +183,10 @@ load_factor_labels <- function(){
   list_labels_places[["placeSex"]][["levels"]][["yes"]]                     <- "Had sex"
   
   list_labels_places[["distanceFromHome"]] <- list()
-  list_labels_places[["distanceFromHome"]][["label"]]                               <- "Distance from home"
-  list_labels_places[["distanceFromHome"]][["levels"]][["Same Neighborhood"]]       <- "Same neighborhood as home"
-  list_labels_places[["distanceFromHome"]][["levels"]][["Same Borough"]]            <- "Same borough as home"
-  list_labels_places[["distanceFromHome"]][["levels"]][["Different Borough"]]       <- "Different borough from home"
+  list_labels_places[["distanceFromHome"]][["label"]]                                     <- "Distance from home"
+  list_labels_places[["distanceFromHome"]][["levels"]][["Same Community District"]]       <- "Same community as home"
+  list_labels_places[["distanceFromHome"]][["levels"]][["Same Borough"]]                  <- "Same borough as home"
+  list_labels_places[["distanceFromHome"]][["levels"]][["Different Borough"]]              <- "Different borough from home"
   
   
   list(people = list_labels_people, places = list_labels_places)
