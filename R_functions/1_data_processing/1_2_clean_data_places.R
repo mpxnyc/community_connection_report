@@ -39,7 +39,7 @@ clean_data_places <- function(raw_data_places, factor_levels, factor_labels){
                       dplyr::filter(!is.na(placeSex))
 
 labelled::var_label(clean_data)  <- factor_labels[["places"]] %>%
-  purrr::map(function(x) x$label)
+                                            purrr::map(function(x) x$label)
 
 clean_data
 

@@ -54,8 +54,13 @@ load_factor_labels <- function(){
   list_labels_people[["countPhysicalCut"]][["levels"]][["4"]]     <- "4"
   list_labels_people[["countPhysicalCut"]][["levels"]][["5+"]]    <- "5+"
   
+  
   list_labels_people[["createdAtCut"]] <- list()
   list_labels_people[["createdAtCut"]][["label"]] <- "Recruitment date"
+  list_labels_people[["createdAtCut"]][["levels"]][["30-31 Aug 2022"]]          <- "30-31 Aug 2022"
+  list_labels_people[["createdAtCut"]][["levels"]][["01-10 Sep 2022"]]          <- "01-10 Sep 2022"
+  list_labels_people[["createdAtCut"]][["levels"]][["10-11 Sep 2022"]]          <- "10-11 Sep 2022"
+  list_labels_people[["createdAtCut"]][["levels"]][["12 Sep - 31 Nov 2022"]]    <- "12 Sep - 31 Nov 2022"
   
   list_labels_people[["demo_group"]] <- list()
   list_labels_people[["demo_group"]][["label"]]                            <- "Race x gender"
@@ -104,7 +109,7 @@ load_factor_labels <- function(){
   list_labels_people[["NumSymptomsCut"]] <- list()
   list_labels_people[["NumSymptomsCut"]][["label"]] <- "Number STI Symptoms"
   list_labels_people[["NumSymptomsCut"]][["levels"]][["0"]]                   <- "0"
-  list_labels_people[["NumSymptomsCut"]][["levels"]][["1+"]]                    <- "1+"
+  list_labels_people[["NumSymptomsCut"]][["levels"]][["1+"]]                  <- "1+"
   
   list_labels_people[["race"]] <- list()
   list_labels_people[["race"]][["label"]] <- "Race"
@@ -123,6 +128,15 @@ load_factor_labels <- function(){
   list_labels_people[["sexOrientation"]][["levels"]][["straight"]]       <- "Straight"
   list_labels_people[["sexOrientation"]][["levels"]][["queer"]]          <- "Queer"
   list_labels_people[["sexOrientation"]][["levels"]][["something-else"]] <- "Another Orientation"
+  
+
+  list_labels_people[["travelTimeCut"]] <- list()
+  list_labels_people[["travelTimeCut"]][["label"]] <- "Willing travel time for hooking up"
+  list_labels_people[["travelTimeCut"]][["levels"]][["0-15 min"]]        <- "0-15 min"
+  list_labels_people[["travelTimeCut"]][["levels"]][["16-30 min"]]       <- "16-30 min"
+  list_labels_people[["travelTimeCut"]][["levels"]][["31-45 min"]]       <- "31-45 min"
+  list_labels_people[["travelTimeCut"]][["levels"]][["45+ min"]]         <- "45+ min"
+
   
   list_labels_people[["groupSex"]] <- list()
   list_labels_people[["groupSex"]][["label"]]                             <- "Recent group sexual or physical contact"

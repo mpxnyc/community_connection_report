@@ -12,14 +12,14 @@ clean_data_people <- function(raw_data_participants, factor_levels, factor_label
     
     
                                 dplyr::mutate(
-                                                age              = factor(age,              factor_levels[["age"]][["current_levels"]],               factor_levels[["age"]][["new_levels"]]),
-                                                borough          = factor(borough,          factor_levels[["borough"]][["current_levels"]],           factor_levels[["borough"]][["new_levels"]]),
-                                                channel          = factor(channel,          factor_levels[["channel"]][["current_levels"]],           factor_levels[["channel"]][["new_levels"]]),
-                                                hivStatus        = factor(hivStatus,        factor_levels[["hivStatus"]][["current_levels"]],         factor_levels[["hivStatus"]][["new_levels"]]),
-                                                hivSuppressed    = factor(hivSuppressed,    factor_levels[["hivSuppressed"]][["current_levels"]],     factor_levels[["hivSuppressed"]][["new_levels"]]),
-                                                monkeypoxVaccine = factor(monkeypoxVaccine, factor_levels[["monkeypoxVaccine"]][["current_levels"]],  factor_levels[["monkeypoxVaccine"]][["new_levels"]]),
-                                                race             = factor(race,             factor_levels[["race"]][["current_levels"]],              factor_levels[["race"]][["new_levels"]]),
-                                                genderId         = factor(genderId,         factor_levels[["genderId"]][["current_levels"]],          factor_levels[["genderId"]][["new_levels"]])
+                                                age              = factor(age,                 factor_levels[["age"]][["current_levels"]],                 factor_levels[["age"]][["new_levels"]]),
+                                                borough          = factor(borough,             factor_levels[["borough"]][["current_levels"]],             factor_levels[["borough"]][["new_levels"]]),
+                                                channel          = factor(channel,             factor_levels[["channel"]][["current_levels"]],             factor_levels[["channel"]][["new_levels"]]),
+                                                hivStatus        = factor(hivStatus,           factor_levels[["hivStatus"]][["current_levels"]],           factor_levels[["hivStatus"]][["new_levels"]]),
+                                                hivSuppressed    = factor(hivSuppressed,       factor_levels[["hivSuppressed"]][["current_levels"]],       factor_levels[["hivSuppressed"]][["new_levels"]]),
+                                                monkeypoxVaccine = factor(monkeypoxVaccine,    factor_levels[["monkeypoxVaccine"]][["current_levels"]],    factor_levels[["monkeypoxVaccine"]][["new_levels"]]),
+                                                race             = factor(race,                factor_levels[["race"]][["current_levels"]],                factor_levels[["race"]][["new_levels"]]),
+                                                genderId         = factor(genderId,            factor_levels[["genderId"]][["current_levels"]],            factor_levels[["genderId"]][["new_levels"]])
                                 ) %>%
                                 dplyr::mutate(
                                                 countFriendsCut     = cut(countFriends,        factor_levels[["countFriendsCut"]][["current_levels"]],      factor_levels[["countFriendsCut"]][["new_levels"]]),
@@ -67,20 +67,18 @@ clean_data_people <- function(raw_data_participants, factor_levels, factor_label
                                                           }) 
   
   
-  
-  load_factor_labels()[["people"]] %>%
-    names() %>%
-    map(
-      function(variable){
+  value_labels %>%
+    purrr::map2(
+      names(value_labels),
+      function(variable, var_name) {
+        clean_data[, var_name] <<- clean_data %>%
+                                      pull(var_name) %>%
+                                      factor(names(variable), as.character(variable))
         
-        if (!is.null(get_variable_labels(variable))){
-          clean_data[[variable]] <<- clean_data[[variable]] %>%
-            factor(names(get_variable_labels(variable)), get_variable_labels(variable))
-        }
-        
-
       }
     )
+  
+  
   
   labelled::var_label(clean_data)  <- variable_labels
   

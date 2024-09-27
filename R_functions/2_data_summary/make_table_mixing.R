@@ -30,7 +30,7 @@ specific_degree_single <- function(graph, variable, level){
   data.frame(
     name = names,
     var = variable_name,
-    level = level,
+    alter_level = level,
     degree = degree,
     specific_degree = specific_degree,
     rep = rep
@@ -56,20 +56,57 @@ specific_degree <- function(graph, variable){
 
 make_table_mixing_2       <- function(variable){
   
-  targets::tar_read(data_bipartite_graph_simulated) %>%
-    igraph::bipartite.projection(which = "true") %>%
-    as_tbl_graph(directed = FALSE) %>%
-    specific_degree({{variable}}) %>%
-    mutate(bias = specific_degree / degree) %>%
-    group_by(rep, level) %>%
-    summarize(bias = mean(bias, na.rm = TRUE), bias_old = sum(specific_degree)/sum(degree)) %>%
-    group_by(level) %>%
-    summarize(
-      mean_bias = mean(bias), 
-      mean_bias_old = mean(bias_old)
-    )
- 
+  working_graph <- targets::tar_read(data_bipartite_graph_simulated) %>%
+            igraph::bipartite.projection(which = "true") %>%
+            as_tbl_graph(directed = FALSE) 
   
+ specific_degree_data <-  working_graph %>%
+   mutate(ego_level = {{variable}}) %>%
+                        specific_degree({{variable}}) %>%
+   #mutate(ego_level = age) %>%
+   #specific_degree(age) %>%
+                        mutate(preference = specific_degree / degree) %>%
+   data.frame()
+ 
+ preference <- working_graph %>%
+   data.frame() %>%
+   left_join(specific_degree_data, by = c("name", "rep")) %>%
+   mutate(ego_level = {{variable}}) %>%
+   #mutate(ego_level = age) %>%
+                        group_by(rep, ego_level, alter_level) %>%
+                        summarize(preference = mean(preference, na.rm = TRUE)) %>%
+                        ungroup()
+ 
+ prevalence <- working_graph %>%
+   data.frame() %>%
+   mutate(level = {{variable}}) %>%
+   #mutate(level = age) %>%
+                   group_by(rep, level) %>%
+                   summarize(count = n()) %>%
+                   ungroup() %>%
+                   group_by(rep) %>%
+                   mutate(prevalence = count / sum(count)) %>%
+   ungroup()
+ 
+ 
+ preference %>%
+   left_join(prevalence, by = c("rep", "alter_level" = "level")) %>%
+   mutate(selection_coef = preference / prevalence ) %>%
+   select(rep, ego_level, alter_level, selection_coef) %>%
+   group_by(ego_level, alter_level) %>%
+   summarize(
+              mean_selection_coef = mean(selection_coef), 
+              ci_lb_selection_coef = quantile(selection_coef, 0.025, na.rm = TRUE),
+              ci_ub_selection_coef  = quantile(selection_coef, 0.975, na.rm = TRUE)
+              ) %>%
+   ungroup() %>%
+ mutate(
+   from_level = ego_level, 
+   to_level = alter_level, 
+   mean_bias = mean_selection_coef ,
+   ci_lb_bias = ci_lb_selection_coef,
+   cl_ub_bias = ci_ub_selection_coef
+ )
 
 }
 

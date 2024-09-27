@@ -1,7 +1,7 @@
 ---
 title: "MPX NYC"
 subtitle: "Key findings and recommendations"
-author: "Keletso Lehola Lekoatsa"
+author: "Keletso Lehola Lekoatsa Makofane"
 date: 23 May 2024
 prefer-html: true
 execute:
@@ -448,9 +448,8 @@ targets::tar_read(data_bipartite_graph_collected) %>%
   data.frame() %>%
   dplyr::filter(type) %>%
   dplyr::select(
-    "age", "race", "genderId", "demo_group", "sexOrientation", "borough" , "channel", "createdAtCut",
-    "countFriendsCut", "countPhysicalCut", "countSexCut", "travelTimeCut", "groupSex",
-    "hivStatus", "hivSuppressed", "NumSymptomsCut", "hivPrep", "monkeypoxTest", "monkeypoxVaccine"
+    "age", "race", "genderId", "demo_group", "sexOrientation", "borough" , "channel", "groupSex","countFriendsCut", "countPhysicalCut", 
+    "hivStatus", "hivSuppressed", "NumSymptomsCut", "hivPrep", "monkeypoxTest", "countSexCut", "travelTimeCut", "createdAtCut", "monkeypoxVaccine"
   ) %>%
 gtsummary::tbl_summary(by = groupSex) %>%
   gtsummary::add_p() %>%
@@ -746,17 +745,17 @@ in which gay identified individuals live or play.
 #| fig-width: 12
 #| fig-height: 17
 
-mixing_demo_group_panel          <- make_table_mixing(demo_group) %>%
+mixing_demo_group_panel          <- make_table_mixing_2(demo_group) %>%
                                       plot_matrix_mixing() %>%
                                       apply_style_matrix_mixing_plot()
 
 
-mixing_sexOrientation_panel      <- make_table_mixing(sexOrientation) %>%
+mixing_sexOrientation_panel      <- make_table_mixing_2(sexOrientation) %>%
                                       plot_matrix_mixing() %>%
                                       apply_style_matrix_mixing_plot()
 
 
-mixing_age_panel                 <- make_table_mixing(age) %>%
+mixing_age_panel                 <- make_table_mixing_2(age) %>%
                                       plot_matrix_mixing() %>%
                                       apply_style_matrix_mixing_plot()
 
