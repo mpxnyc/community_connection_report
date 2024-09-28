@@ -11,9 +11,7 @@ execute:
 editor: 
   markdown: 
     wrap: 72
-format: 
-  docx:
-    toc: true
+format: html
 bibliography: bibliography.bib
 ---
 
@@ -154,9 +152,9 @@ the marketing agency and presented to a meeting of the RESPND-MI
 Community Forum. The final concept and name were decided by consensus
 during that meeting.
 
-[![Requirements for MPX NYC
+![Requirements for MPX NYC
 Study](images/clipboard-2397454480.png){#fig-requirements
-fig-alt="Requirements for MPX NYC Study"}](https://www.mpxresponse.org)
+fig-alt="Requirements for MPX NYC Study" fig-align="center" width="799"}
 
 Marketing materials were developed based on the concept and name. These
 included graphics, videos by queer influencers, and a style guide
@@ -404,15 +402,27 @@ participants identified as gay, 14% as bisexual, and 12% as queer. Just
 under half of participants resided in the borough of Manhattan, and one
 third lived in Brooklyn.
 
-```{r fig_sex_orientation_racegender}
-#| fig-cap: "Sexual orientation of MPX NYC participants by race and gender"
-#| label: fig-sexorientation-racegender
-#| fig-width: 10
-#| fig-height: 8.5
+```{r tbl_people_descriptives}
+#| fig-cap: "Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks"
+#| label: fig-people-descriptives
 
-make_table_freq2(sexOrientation, demo_group) %>%
-  plot_radar_grid() %>%
-  apply_style_radar_grid_plot()
+targets::tar_read(data_bipartite_graph_collected) %>%
+  tidygraph::activate(nodes) %>%
+  data.frame() %>%
+  dplyr::filter(type) %>%
+  dplyr::select(
+    "age", "race", "genderId", "demo_group", "sexOrientation", "borough" , "channel", "groupSex","countFriendsCut", "countPhysicalCut", 
+    "hivStatus", "hivSuppressed", "NumSymptomsCut", "hivPrep", "monkeypoxTest", "countSexCut", "travelTimeCut", "createdAtCut", "monkeypoxVaccine"
+  ) %>%
+gtsummary::tbl_summary(by = groupSex) %>%
+  gtsummary::add_overall(last = TRUE) %>%
+    gtsummary::modify_spanning_header(c("stat_1", "stat_2", "stat_0") ~ "**Physical or sexual contact in group setting in past 4 weeks**") %>%
+  gtsummary::add_p() %>%
+  gtsummary::modify_header(label ~ "**Variable**") %>%
+  gtsummary::bold_labels() %>%
+    gtsummary::as_gt() %>%
+  gt::tab_source_note(gt::md("*Data source: MPX NYC 2022*")) 
+
 
 ```
 
@@ -424,6 +434,18 @@ transgender women tended to identify as straight, bisexual, or other
 sexual orientations. Cisgender women tended to be straight, followed by
 biseuxual, followed by queer. For non-binary people, most identifed as
 queer, followed by gay and bisexual.
+
+```{r fig_sex_orientation_racegender}
+#| fig-cap: "Sexual orientation of MPX NYC participants by race and gender"
+#| label: fig-sexorientation-racegender
+#| fig-width: 10
+#| fig-height: 8.5
+
+make_table_freq2(sexOrientation, demo_group) %>%
+  plot_radar_grid() %>%
+  apply_style_radar_grid_plot()
+
+```
 
 In terms of health status, one in ten participants reported living with
 HIV - the overwhelming majority were virally suppressed. In addition,
@@ -444,30 +466,7 @@ four participants reported having physical (non-sexual) contact with
 over 5 individuals over the preceding four weeks, and one third reported
 having no recent contact.
 
-```{r tbl_descriptives}
-#| fig-cap: "Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks"
-#| label: fig-descriptives
 
-targets::tar_read(data_bipartite_graph_collected) %>%
-  tidygraph::activate(nodes) %>%
-  data.frame() %>%
-  dplyr::filter(type) %>%
-  dplyr::select(
-    "age", "race", "genderId", "demo_group", "sexOrientation", "borough" , "channel", "groupSex","countFriendsCut", "countPhysicalCut", 
-    "hivStatus", "hivSuppressed", "NumSymptomsCut", "hivPrep", "monkeypoxTest", "countSexCut", "travelTimeCut", "createdAtCut", "monkeypoxVaccine"
-  ) %>%
-gtsummary::tbl_summary(by = groupSex) %>%
-  gtsummary::add_p() %>%
-  gtsummary::add_overall() %>%
-  gtsummary::add_n() %>%
-  gtsummary::modify_header(label ~ "**Variable**") %>%
-  gtsummary::modify_spanning_header(c("stat_1", "stat_2") ~ "**Physical or sexual contact in group setting in past 4 weeks**") %>%
-  gtsummary::bold_labels() %>%
-    gtsummary::as_gt() %>%
-  gt::tab_source_note(gt::md("*Data source: MPX NYC 2022*")) 
-
-
-```
 
 Participants who reported recent physical or sexual contact in a group
 setting were slightly younger than those who did not. They were more
@@ -506,18 +505,22 @@ community as participants' residences, a third were in a different
 borough, and the remainder were in the same borough as home, but a
 different community district.
 
-```{r}
+```{r tbl_places_descriptives}
 
 #| fig-cap: "Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks"
-#| label: fig-descriptives2
+#| label: fig-places-descriptives
 
 targets::tar_read(data_bipartite_graph_collected) %>%
         tidygraph::activate(edges) %>%
         data.frame() %>%
         dplyr::filter(!home) %>%
         dplyr::select("placeSex", "placeType", "place_borough", "distanceFromHome") %>%
-        gtsummary::tbl_summary() %>%
-        gtsummary::bold_labels() %>%
+        gtsummary::tbl_summary(by = placeSex) %>%
+ gtsummary::add_overall(last = TRUE) %>%
+    gtsummary::modify_spanning_header(c("stat_1", "stat_2", "stat_0") ~ "**Sexual contact at contact venue**") %>%
+  gtsummary::add_p() %>%
+  gtsummary::modify_header(label ~ "**Variable**") %>%
+  gtsummary::bold_labels() %>%
         gtsummary::as_gt() %>%
         gt::tab_source_note(gt::md("*Data source: MPX NYC 2022*")) 
 
@@ -578,109 +581,13 @@ suggests that participants leave their home community districts to
 gather in these community districts for social events.
 
 ```{r}
-#| fig-width: 8
-#| fig-height: 8
+#| fig-width: 10
+#| fig-height: 7
 
 
-margin_to               <-  make_table_movement_travel() %>%
-                                dplyr::group_by(to, to_borough) %>%
-                                dplyr::summarize(weight = sum(weight)) %>%
-                                dplyr::ungroup() %>%
-                                dplyr::mutate(weight =  100  *weight / sum(weight))
-
-margin_from             <-  make_table_freq3(
-                                              community, borough, groupSex, 
-                                              person_analysis = TRUE
-                                              ) %>%
-                                dplyr::filter(stratum_b == "Yes") %>%
-                                dplyr::transmute(
-                                                from = level, 
-                                                from_borough = stratum_a, 
-                                                weight = count
-                                                ) %>%
-                                dplyr::ungroup() %>%
-                                dplyr::mutate(
-                                              weight = 100*weight / sum(weight)
-                                              ) 
-
-
-data_1                 <-  margin_to %>%
-                                dplyr::rename(community = to, borough = to_borough) %>%
-                                dplyr::mutate(weight = (weight)) 
-
-data_2                 <- margin_from %>%
-                                dplyr::rename(community = from, borough = from_borough) %>%
-                                dplyr::mutate(weight = -weight)
-
-data                   <- data_1 %>%
-                                rbind(data_2) %>%
-                                dplyr::group_by(community) %>%
-                                dplyr::mutate(increased = ifelse(abs(weight) == max(abs(weight)), "increased", "decreased")) %>%
-                                dplyr::mutate(increased = ifelse(weight < 0, "decreased", increased)) %>%
-                                dplyr::ungroup() %>%
-                                dplyr::mutate(community = factor(community, (unique(community))))
-
-
-ggplot(data) +
-    geom_bar(
-            aes(x = community, y = weight, fill = borough, alpha = increased), 
-            stat = "identity", 
-            size = 0.6, 
-            width = 0.8
-            ) +
-    geom_bar(
-            aes(x = community, y = weight), 
-            fill = "lightgrey", 
-            stat = "identity", 
-            size = 0.6, 
-            width = 0.8, 
-            data = . %>% filter(weight < 0)
-            ) +
-  scale_y_continuous(
-                    "Percentage in community district", 
-                    breaks = seq(-12,20, 2), 
-                    limits = c(-12, 18), 
-                    labels = abs
-                    ) +
-  scale_alpha_manual(
-    "Contact venues", 
-    values = c("increased" = 1, "decreased" = 0.6), 
-    labels = c(
-              "increased" = "Over-represented\nin community district\ncompared to residences", 
-              "decreased" = "Under-represented\nin community district\ncompared to residences"
-              )) +
-  scale_fill_manual(
-                    "Borough", 
-                    values = c(dark_blue, dark_pink, dark_purple, dark_green, dark_orange)
-                    ) +
-  
-  geom_hline(aes(yintercept = -12), color = "lightgrey", size = 0.3) +
-  geom_hline(aes(yintercept = -10), color = "lightgrey", size = 0.3) +
-  geom_hline(aes(yintercept = -8), color = "lightgrey", size = 0.3) +
-  geom_hline(aes(yintercept = -6), color = "lightgrey", size = 0.3) +
-  geom_hline(aes(yintercept = -4), color = "lightgrey", size = 0.3) +
-  geom_hline(aes(yintercept = -2), color = "lightgrey", size = 0.3) +
-  geom_hline(aes(yintercept = 0), color = "white", size = 1) +
-  geom_hline(aes(yintercept = 2), color = "lightgrey", size = 0.3) +
-  geom_hline(aes(yintercept = 4), color = "lightgrey", size = 0.3) +
-  geom_hline(aes(yintercept = 6), color = "lightgrey", size = 0.3) +
-  geom_hline(aes(yintercept = 8), color = "lightgrey", size = 0.3) +
-  geom_hline(aes(yintercept = 10), color = "lightgrey", size = 0.3) +
-  geom_hline(aes(yintercept = 12), color = "lightgrey", size = 0.3) +
-  geom_hline(aes(yintercept = 14), color = "lightgrey", size = 0.3) +
-  geom_hline(aes(yintercept = 16), color = "lightgrey", size = 0.3) +
-  
-  geom_label(aes(x = 10, y = 12, label = "Distribution of\ncontact venues"), angle = 0) +
-  geom_label(aes(x = 10, y = -8, label = "Distribution of\nresidences"), angle = 0) +
-  theme_void() +
-  theme(
-    axis.text.x = element_text(angle = 90, size = 7),
-    axis.text.y = element_text(margin = margin(5,5,5,5)),
-    axis.title.y = element_text(angle = 90),
-    plot.margin = margin(15,15,15,15),
-    legend.position = "bottom"
-  )
-
+make_table_home_vs_place_dbn() %>%
+  plot_home_vs_residence_dbn_bar() %>%
+  apply_style_home_vs_residence_dbn_bar_plot()
 
   
   
@@ -693,34 +600,14 @@ ggplot(data) +
 #| fig-height: 10
 
 
-main         <- make_table_movement_travel() %>%
-                    ggplot() +
-                    geom_tile(aes(y = from, x = to, fill = from_borough), alpha = 0.3) +
-                    geom_point(aes(y = from, x = to, col = to_borough, size = weight)) +
-                    theme_void() +
-                      theme(
-                        legend.position = "none",
-                        axis.text = element_text(),
-                        axis.text.x = element_text(angle = 90)
-                      ) +
-                      scale_x_discrete(position = "top") +
-                      scale_y_discrete(position = "left") 
-  
-  apply_style_matrix_movement(main) 
+make_table_movement_travel() %>%
+  plot_matrix_movement() %>%
+  apply_style_matrix_movement() 
 
 
 ```
 
-```{r include=FALSE}
 
-margin_to %>%
-  rename(weight_to = weight) %>%
-  left_join(margin_from, by = c("to" = "from", "to_borough" = "from_borough")) %>%
-  rename(weight_from = weight) %>%
-  mutate(diff = weight_to - weight_from) %>%
-  arrange(- weight_to, -diff) 
-
-```
 
 ## Mixing
 

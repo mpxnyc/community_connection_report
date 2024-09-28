@@ -165,7 +165,7 @@ load_factor_labels <- function(){
   list_labels_places[["intervention_setting"]][["levels"]][["yes"]]                    <- "Phys venue"
   
   list_labels_places[["place_borough"]] <- list()
-  list_labels_places[["place_borough"]][["label"]]                              <- "Place type"
+  list_labels_places[["place_borough"]][["label"]]                              <- "Borough"
   list_labels_places[["place_borough"]][["levels"]][["Bronx"]]          <- "Bronx"
   list_labels_places[["place_borough"]][["levels"]][["Brooklyn"]]       <- "Brooklyn"
   list_labels_places[["place_borough"]][["levels"]][["Manhattan"]]      <- "Manhattan"
