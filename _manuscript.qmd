@@ -241,54 +241,45 @@ York City, and which in turn nest census tracts.
 
 We constructed an approximate measure of distance between participant residence and contact venues by categorizing the venues into those that are: in the same community district as the residence; in a different community district but the same borough; and those in a different borough. We refer to this measure as distance from home below.
 
+
 ## Statistical Analysis
 
-### Participant characteristics and spatial overlap network
-
 Participant individual characteristics and contact venue characteristics were
-tabulated and visualized. We constructed a network where nodes are participants and weighted ties
-indicate that a pair of participants share at least one community
-district. We say two participants share a community district if both
-have a residence or contact venue in that community district. The weight
-of each tie (or tie weight) is the count of community districts shared
-by a given pair of individuals.
+tabulated and visualized. 
 
-### Spatial sorting and mixing
+### Spatial overlap network
 
-To understand how different demographic groups mix in physical space, we
-defined $\psi_i(b)$ - the individual spatial selection ratio of
-individual $i$ for subgroup $b$. The numerator for the ratio is the
-conditional probability of person $i$ 
-sharing a community district with persons of characteristic $b$. (i.e.
-the sum of tie weights for ties that link $i$ with persons $j\in N_b$ of
-characteristic $b$ divided by the weighted degree of person $i$). The
-denominator is the prevalence of characteristic $b$ in the population.
+Consider a network $(N, \sim)$ where nodes $N$ are participants. There is a tie between individuals $i,j \in N$ (i.e. $i \sim j$) if individuals $i$ and $j$ share a community district. We say individual $i$ shares a community district with individual $j$ if both have a residence or contact venue in that community district. $W_{i\sim j}$ is defined as the count of community districts shared by $i$ and $j$. $N_a, N_b \subset N$ are disjoint subsets of $N$ (i.e. $N_a \cap N_b = \phi$). By definition, the absence of
+a tie between $i$ and $j$ is equivalent to the presence of a tie with weight
+$W_{i \sim j} = 0$, and by definition $W_{i \sim i} = 0, \forall i\in N$.
+
+### Patterns of interaction
+To analyze patterns of mixing (in physical space) across different demographic groups, we define the spatial selection ratio of characteristic $a$ for characteristic $b$: 
 
 $$
-\psi_i(b) = \frac{ |N| \sum_{j \in N_b}W_{i \sim j}}{ |N_b| \sum_{j \in N}W_{i \sim j} } 
-$$
+\psi(a,b) = \frac{|N|}{|N_a||N_b|} \sum_{i \in N_a}{ \frac{  \sum_{j \in N_b}W_{i \sim j}}{  \sum_{j \in N}W_{i \sim j} } } 
+$$ 
 
-Where $W_{i \sim j}$ is the weight for the tie connecting $i$ and $j$.
-$N$ is the set of all node indices and $N_b \subset N$ is the set of
-indices for nodes with characteristic $b$. By definition, the absence of
-a tie between $i$ and $j$ is equivalent to the presence of a tie with
-$W_{i \sim j} = 0$, and by definition
-$W_{i \sim i} = 0, \forall i\in N$.
+The spatial selection coefficient is $1$ when contact venues and
+residences for subgroups $N_a$ and $N_b$ are distributed in space
+independently of each other; greater than one if members of subgroup $a$ tend to
+share community districts with those of subgroup $b$; and smaller than one if
+members of subgroup $a$ tend to not share community districts with
+subgroup $b$.
 
-The population spatial selection ratio $\psi(a,b)$ of subgroup $a$ for
-subgroup $b$ is the mean of the individual spatial selection ratios of
-all individuals $i$ in subgroup $a$:
+The spatial selection ratio  can be written as the mean of $\psi_i(b)$ ($i \in N_a$), the individual spatial selection ratio of an individual $i$ for subgroup $b$. i.e.
 
 $$
 \psi(a,b) = \frac{1}{|N_a|} \sum_{i \in N_a}{\psi_i(b) } 
+$$ 
+
+
+where 
+
+$$
+\psi_i(b) = \frac{  \sum_{j \in N_b}W_{i \sim j}}{  \sum_{j \in N}W_{i \sim j} } \div \frac{|N_b|}{|N|}
 $$
 
-The spatial selection coefficient is $1$ when contact venues and
-residences for subgroups $a$ and $b$ are distributed in space
-independently of each other; greater than one if members of subgroup $a$ tend to
-share community districts with those of subgroup $b$; and smaler than one if
-members of subgroup $a$ tend to not share community districts with
-subgroup $b$.
 
 We calculated the spatial selection coefficient across groups defined by
 race-gender, sexual orientation, and age. We visualized the coefficient
@@ -307,21 +298,18 @@ districts at a time, but that we can only immunize one community district
 at a time. There is only one parameter we can vary to produce different
 versions of this intervention: the order in which community districts are immunized.
 
-We examined two strategies for choosing an ordering. In the first strategy, we ranked districts according to the
-number of contact venues and residences contained by the community district among people who reported group contact. We call this the
+We examined two strategies for choosing an ordering. In the first strategy, we ranked districts according to the number of contact venues and residences contained (counting only the residences of participants who reported group contact). We call this the
 "contact-based" strategy. In the second strategy, we subtracted from
 this number, the count of contact venues which are in the same community
-district as the participant's home. We call this the "movment-based"
+district as the participant's home. We call this the "movement-based"
 strategy. Whereas the former strategy prioritizes community districts
 with a high amount of sexual or physical contact, the latter strategy prioritizes
 community districts with a high level of movement entering and leaving the
 community district.
 
-We assessed these strategies against two outcomes. The first is the
-total number of immunized people divided by the number of immunized
-community districts, and the second is the proportion of individuals who
-are in the largest connected component of the network that connects
-particiopants through their shared community districts. The former
+We assessed these strategies against two outcomes. The first is the spatial efficiency - total number of immunized people divided by the number of immunized
+community districts, and the second is the spatial network impact - the proportion of individuals who
+are in the largest connected component of spatial overlap network. The former
 measure assesses the efficiency of the intervention (an efficient
 intervention is one which immunizes a high number of people though a low
 number of community districts). The latter assess the effectiveness of

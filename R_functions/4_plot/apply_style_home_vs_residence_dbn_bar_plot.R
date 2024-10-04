@@ -4,12 +4,12 @@ apply_style_home_vs_residence_dbn_bar_plot <- function(plot){
     scale_y_continuous(
       "Proportion in community district", 
       breaks = seq(-0.12,0.20, 0.02), 
-      limits = c(-0.12, 0.18), 
+      limits = c(-0.06, 0.06), 
       labels = function(x) {scales::percent(abs(x))},
     ) +
     scale_alpha_manual(
       "Contact venues", 
-      values = c("highlight" = 1, "lowlight" = 0.4), 
+      values = c("contact_venue" = 1, "residence" = 0.4), 
       labels = c(
         "highlight" = "Over-represented\nin community district\ncompared to residences", 
         "lowlight" = "Under-represented\nin community district\ncompared to residences"

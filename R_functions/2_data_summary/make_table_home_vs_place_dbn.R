@@ -25,11 +25,18 @@ make_table_home_vs_place_dbn <- function(){
     ) %>%
     dplyr::rename(community = from, borough = from_borough) %>%
     dplyr::mutate(weight = -weight) %>%
-    dplyr::select(community, borough, weight)
+    dplyr::select(community, borough, weight) %>%
+    dplyr::mutate(residence = "residence")
   
-contact_venue_proportions %>%
-    rbind(residence_proportions) %>%
-    dplyr::group_by(community) %>%
+working_data <- contact_venue_proportions %>%
+                    dplyr::mutate(residence = "contact_venue") %>%
+                    rbind(residence_proportions) %>%
+                    dplyr::mutate(borough = as.character(borough)) %>%
+                    dplyr::mutate(borough = ifelse(community == "QN01", "Queens", borough))
+
+working_data %>%
+    dplyr::group_by( borough, community) %>%
+  dplyr::summarize(weight = sum(weight)) %>%
     dplyr::mutate(highlight = ifelse(
       abs(weight) == max(abs(weight)), 
       "highlight", 
@@ -38,7 +45,8 @@ contact_venue_proportions %>%
     ) %>%
     dplyr::mutate(highlight = ifelse(weight < 0, "lowlight", highlight)) %>%
     dplyr::ungroup() %>%
-    dplyr::mutate(community = factor(community, (unique(community))))
-  
+  dplyr::mutate(community = as.character(community)) %>%
+    #dplyr::arrange(borough, -weight) %>%
+    dplyr::mutate(community = factor(community, unique(community))) 
   
 }
