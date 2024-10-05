@@ -242,73 +242,25 @@ York City, and which in turn nest census tracts.
 We constructed an approximate measure of distance between participant residence and contact venues by categorizing the venues into those that are: in the same community district as the residence; in a different community district but the same borough; and those in a different borough. We refer to this measure as distance from home below.
 
 
-## Statistical Analysis
 
-Participant individual characteristics and contact venue characteristics were
-tabulated and visualized. 
+### Spatial Overlap Graph
+Data were organized into a spatial overlap network. We define the spatial overlap network, whose nodes represent participants. A weighted tie between two individuals indicates that they share a community district. We say two individuals share a community district if they both have a residence or contact venue in that district. The weights of network ties indicate the number of community districts the two participants share. A tie of weight $0$ is equivalent to the absence of a tie.
 
-### Patterns of interaction
-To analyze patterns of mixing (in physical space) across different demographic groups, we define the spatial selection ratio of characteristic $a$ for characteristic $b$: 
-
-$$
-\psi(a,b) = \frac{|N|}{|N_a||N_b|} \sum_{i \in N_a}{ \frac{  \sum_{j \in N_b}W_{i \sim j}}{  \sum_{j \in N}W_{i \sim j} } } 
-$$ 
-
-The spatial selection coefficient is $1$ when contact venues and
-residences for subgroups $N_a$ and $N_b$ are distributed in space
-independently of each other; greater than one if members of subgroup $a$ tend to
-share community districts with those of subgroup $b$; and smaller than one if
-members of subgroup $a$ tend to not share community districts with
-subgroup $b$.
-
-We calculated the spatial selection coefficient across groups defined by
-race-gender, sexual orientation, and age. We visualized the coefficient
-in terms of it's deviation from 1. (i.e. we plotted $\psi(a,b) -1$
-rather than $\psi(a,b)$).
-
-### Hypothetical immunization intervention
-
-Since these data were collected to inform programmatic response to a new
-health threat, we illustrated the implications of the pattern of
-connection between people and places for intervention design through a
-thought experiment: we examined two approaches to conducting a
-hypothetical place-based immunization intervention. In this hypothetical
-intervention, we assume that it is possible to immunize entire community
-districts at a time, but that we can only immunize one community district
-at a time. There is only one parameter we can vary to produce different
-versions of this intervention: the order in which community districts are immunized.
-
-We examined two strategies for choosing an ordering. In the first strategy, we ranked districts according to the number of contact venues and residences contained (counting only the residences of participants who reported group contact). We call this the
-"contact-based" strategy. In the second strategy, we subtracted from
-this number, the count of contact venues which are in the same community
-district as the participant's home. We call this the "movement-based"
-strategy. Whereas the former strategy prioritizes community districts
-with a high amount of sexual or physical contact, the latter strategy prioritizes
-community districts with a high level of movement entering and leaving the
-community district.
-
-We assessed these strategies against two outcomes. The first is the spatial efficiency - total number of immunized people divided by the number of immunized
-community districts, and the second is the spatial network impact - the proportion of individuals who
-are in the largest connected component of spatial overlap network. The former
-measure assesses the efficiency of the intervention (an efficient
-intervention is one which immunizes a high number of people though a low
-number of community districts). The latter assess the effectiveness of
-the intervention in breaking apart the largest connected component of
-the network which connects survey participants through their overalpping
-community districts so as to slow the dissemination of a pathogen
-accross the city.
-
-This network has individuals as nodes. A tie between two individuals
-indicates that those two live or have had a contact event in the same
-community districts. The ties are weighted by the number of community
-districts that are shared by the pair of participants in this way. The
-network encodes the potential for the two individual to make contact
+The network encodes the potential for the two individual to make contact
 with one another and transmit a pathogen. The more community districts
 they share, the more likely it is that they will make contact and/or
 transmit a pathogen. The better connected this network is, the more
 likely that a newly introduced infectious disease would disseminate
 quickly accross the population. The less connected it is, the less
 likley that such a dissemination could happen.
+## Statistical Analysis
+
+Participant individual characteristics and contact venue characteristics were
+tabulated and visualized. 
+
+
+
+### Connected components
 
 One way to understand how well connected a network is is to examine its
 connected components. A connected component is the set of nodes where
@@ -319,16 +271,43 @@ have a "large connected component" - connected component that contains
 the vast majority of the nodes in the network - with other, usually much
 smaller, connected components.
 
-To assess the effectiveness of the intervention strategy, we calculated
-the proportion of participants which are included in the largest
-connected component as community districts are immunized. To the
-network, immunizing a community district has the effect of removing ties
-between individuals who share that community district, and marking those
-individuals as vaccinated. The more community districts are immunized,
-therefore, the fewer ties there will be in the network, and the smaller
-the proportion of participants included in the largets connected
-component.
 
+### Spatial selection
+It is of interest to understand how different sub-groups mix in space. This allows more insight into the likely path of a newly introduce infectious disease through the population. To analyze patterns of mixing (in physical space) across different demographic groups, we define the spatial selection ratio - a measure of the propensity for participants in one sub-group to have residences and contact venues in the same community districts of some other given sub-group. The spatial selection coefficient is $1$ when contact venues and residences for the first subgroup are distributed in space
+independently of the other subgroup; greater than one if members of the former subgroup tend to share community districts with those of the latter; and smaller than one if
+the first sub-group tend to not share community districts the second.
+
+We calculated the spatial selection coefficient across groups defined by
+race-gender, sexual orientation, and age. We visualized the coefficient
+in terms of it's deviation from 1. (i.e. we plotted $\psi(a,b) -1$
+rather than $\psi(a,b)$).
+
+More formally, consider a graph $G(N, \sim)$ where nodes $N$ are participants.  There is a tie between individuals $i,j \in N$ (i.e. $i \sim j$) if individuals $i$ and $j$ share a community district. $W_{i\sim j}$ is defined as the count of community districts shared by $i$ and $j$. $N_a, N_b \subset N$ are disjoint subsets of $N$ (i.e. $N_a \cap N_b = \phi$). By definition, $W_{i \sim i} = 0, \forall i\in N$.
+
+Then the spatial selection ratio of characteristic $a$ for characteristic $b$ is:
+
+$$
+\psi(a,b) = \frac{|N|}{|N_a||N_b|} \sum_{i \in N_a}{ \frac{  \sum_{j \in N_b}W_{i \sim j}}{  \sum_{j \in N}W_{i \sim j} } } 
+$$ 
+
+
+
+### Hypothetical immunization intervention
+
+We illustrate how the pattern of spatial connection among queer and trans people should inform early responses to novel infectious diseases. We examined the impact of a simplified, spatially-targeted intervention to immunize against a novel pathogen. In this hypothetical intervention, we assume that it is possible to immunize an entire community district at a time, but that we can only immunize one community district
+at a time. We examine two strategies for sequencing the community districts to have maximum impact and assess these strategies against two outcomes defined below.
+
+In the contact-based strategy, we rank districts according to the number of contact venues and residences they contained (counting only the residences of participants who reported group contact). In the movement-based strategy, we subtract from
+this number, the count of contact venues which are in the same community
+district as the participant's home.  Whereas the contact-based strategy prioritizes community districts with a high amount of sexual or physical contact, the latter strategy prioritizes community districts with a high level of movement entering and leaving the community district.
+
+We consider two outcome: spatial efficiency - total number of immunized people divided by the number of immunized community districts; and spatial network impact - the proportion of individuals who are in the largest connected component of spatial overlap network. The former measure assesses the efficiency of the intervention (an efficient
+intervention is one which immunizes a high number of people though a low
+number of community districts). The latter assess the effectiveness of
+the intervention in breaking apart the largest connected component of
+the spatial overlap network. These statistics are calculated for each number of community districts immunized. 
+
+We assume that the once a person is immunized, they are unable to acquire or transmit the pathogen. Their node is removed from the spatial overlap network as the ties between it and the rest of the network can no longer be thought of as potentiual conduits for an ifectious disease.
 
 # Results
 
