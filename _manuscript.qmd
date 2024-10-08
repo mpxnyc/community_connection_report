@@ -137,78 +137,6 @@ All study materials were professionally translated from English to Spanish. The 
 
 The study was reviewed and approved by the T.H. Chan School of Public Health Institutional Review Board (IRB22-0761).
 
-## Study Data
-
-### MPX NYC Study Data Graph
-
-Data were organized into the MPX NYC Study Graph for the purpose of analysis. The graph (or network) has nodes which represent participants and community districts, and edges, which connect the nodes. Each of these are represented as a table (i.e. there is a nodes table, and an edges table). We describe the tables below.
-
-#### Nodes and Edges
-
-##### Nodes Table
-
-The nodes table represents each unique node in the MPX NYC Study Data graph as a row. There are two types of nodes (rows) in the study graph - participant nodes and community district nodes. Participant nodes (rows) each represent a person who took the MPX NYC survey. Community district nodes (rows) each represent one of the XX community districts of New York City. Participant characteristics such as age and gender identity are stored as columns in the nodes table. The first column of the table stores a unique identifyer for the node. These data comprise survey responses for person nodes and are missing for community district nodes.
-
-The brief (5 minute) questionnaire was implemented in English and Spanish. It measured participant demographics, utilization of healthcare services; and social connection to queer or transgender community.
-
-Gender identity was measured using a two-step approach: first, we solicited the participant’s current gender (man, woman, trans man, trans woman, non-binary, other), and then sex assigned at birth (male, female, other). Those whose gender identity and sex assigned at birth were not concordant were categorized as transgender. We used current gender to further categorize transgender people into men and women.
-
-Race was measured using a multiple selection question (white, black, latino/a/x, asian, pacific islander, other). We combined gender identity and race to form a gender-race variable, collapsing small cells across racial groups and into gender groups (white cisgender man, latinx cisgender man, black cisgender man, other cisgender man, non-binary person, transgender man, transgender woman, cisgender woman, another demographic).
-
-##### Edges Table
-
-The edges table represents each location a participant entered while completing their response as a row. The first and second columns of the table show the unique identifiers of the two nodes the edge links together. Locaton characterstics (such as location type) are stored as columns in this table. The MPX NYC Study Graph is a bipartite graph - the only allowable edges are those between a person and a community district.
-
-Using the location-input question format, we solicited the census tract of participants' primary residence. Among those who reported group contact - physical or sexual contact in a group setting in the preceding 4 weeks - we solicited the locations of the venues at which the contact happened. We refer to these locations as "contact venues". For each contact venue (see @fig-mapinputformat), participants indicated the type (dance party, sex party, darkroom, sport game, concert, theatre/show, private residence, sex club, bathhouse, park, something else) and whether they had sexual contact at that venue.
-
-While location data were captured at the census tract level, in this analysis, the unit of spatial analysis is the community district. Community districts are spatial units that divide New York City into regions [@nycopendata2022] which are nested by the five boroughs of New York City, and which in turn nest census tracts.
-
-We constructed an approximate measure of the distance between participant residence and contact venues by categorizing the venues into those that are: in the same community district as the residence; in a different community district but the same borough; or in a different borough. We refer to this measure as distance from home.
-
-#### Interpretation
-
-The graph shows how participants affiliate with community districts in New York City. There are two related graphs that are more immediately interpretable, the MPX NYC Participant Graph, and the MPX NYC Community District Graph. These are each bipartite projections of the MPX NYC Study Data graph.
-
-### MPX NYC Participant Graph
-
-#### Nodes and Edges
-
-The MPX NYC Participant Graph node table has survey participants as nodes. A weighted tie between two individuals indicates that they both have a residence or contact venue in the same community district. The node table is similar in structure as the big graph. The edge table shows the unique identifiers of the pair of nodes it connects, and a column for edge weights. The weights indicate the number of community districts the pair share. A tie of weight $0$ is equivalent to the absence of a tie.
-
-#### Interpretation
-
-The network encodes the potential for a pair of individuals to make contact with one another and transmit a pathogen. The more community districts they share, the more likely it is that they will make contact and/or transmit a pathogen. Of interest is the overall connectendess of the community overlap network. The better connected this network is, the more likely that a newly introduced infectious disease would disseminate quickly accross the population. Also of interest is the patterning of potential interactons between among participants from different demographic groups. It is useful to understand how different groups mix in space because it allows us to better predict the path of a newly introduced pathogen through different sections of the population.
-
-##### Giant connected component
-
-We calculated the proportion of participants contained by the largest connected component to understand how connected it is.
-
-A connected component of a network is a subset of nodes where each node is reachable from any other node by tracing a path through network ties, and where there are no nodes excluded from the set which are reachable from a node included in the set. In many human systems, networks display a "giant connected component" - a connected component that contains the vast majority of the nodes in the network - with other, usually much smaller, connected components.
-
-##### Spatial selection coefficient
-
-We calculated the spatial selection coefficient - a measure of the propensity for members of one subgroup to have residences and contact venues in the same community districts of members of another, given subgroup.
-
-The spatial selection coefficient is defined as the spatial selection ratio minus one. The spatial selection ratio is $1$ when contact venues and residences for the first subgroup are distributed in space independently of the other subgroup; greater than one if members of the former subgroup tend to share community districts with those of the latter; and smaller than one if the first sub-group tend to not share community districts with the second. The spatial selection coefficient is defined as the spatial selection ratio minus 1. We calculated the spatial selection coefficient across groups defined by race-gender, sexual orientation, and age.
-
-More formally, consider a graph $G(N, \sim)$ where nodes (set $N$) represent participants and $i \sim j$ denotes that $i, j\in N$ are connected in graoh $G$. There is a tie between individuals $i,j \in N$ (i.e. $i \sim j$) if individuals $i$ and $j$ share a community district. We say individual $i$ shares a community district with individual $j$ if both have a residence or contact venue in that community district. $W_{i\sim j}$ is defined as the count of community districts shared by $i$ and $j$. $N_a, N_b \subset N$ are disjoint subsets of $N$ (i.e. $N_a \cap N_b = \phi$). By definition $W_{i \sim i} = 0, \forall i\in N$. We define $\psi(a,b)$ the spatial selection ratio of characteristic $a$ for characteristic $b$:
-
-$$
-\psi(a,b) = \frac{|N|}{|N_a||N_b|} \sum_{i \in N_a}{ \frac{  \sum_{j \in N_b}W_{i \sim j}}{  \sum_{j \in N}W_{i \sim j} } } 
-$$
-
-### MPX NYC Community District Graph
-
-#### Nodes and Edges
-
-The MPX NYC Community District Graph has community districts as nodes. Two community districts have a weighted tie between them if at least one individual has a residence or contact venue in both community districts (i.e. if they are both connected to the same community district in the MPX NYC person-place network). The weight of the tie is the count of such individuals. A tie of weight $0$ is equivalent to the absence of a tie.
-
-#### Interpretation
-
-This network encodes the potential for contagion to occur across community districts - the higher the number of individuals a pair of community districts shares, the higher the likelihood of transmitting a pathogen from one community district to the other. The fewer the participants that are common to two community districts, the less likely transmission is to occur between them.
-
-Of interest is each community district's importance in the transmission dynamics of a novel pathogen, given the flow of people in and out of the district. We measured this using the spatial network centrality of each community district. Spatial network centrality is defined as weighted network degree in the participant overlap network.
-
 ## Measures
 
 ### Participants
@@ -221,71 +149,65 @@ Race was measured using a multiple selection question (white, black, latino/a/x,
 
 ### Residence and Contact venues
 
+While location data were captured at the census tract level, in this analysis, the unit of spatial analysis is the community district. Community districts are spatial units that divide New York City into regions [@nycopendata2022] which are nested by the five boroughs of New York City, and which in turn nest census tracts.
+
 Using the location-input question format, we solicited the census tract of participants' primary residence. Among those who reported group contact (i.e. physical or sexual contact in a group setting in the preceding 4 weeks) we solicited the locations of the venues at which the contact happened. We refer to these locations as "contact venues". For each contact venue (see @fig-mapinputformat), participants indicated the type (dance party, sex party, darkroom, sport game, concert, theatre/show, private residence, sex club, bathhouse, park, something else) and whether they had sexual contact at that venue.
 
-While location data were captured at the census tract level, in this analysis, the unit of spatial analysis is the community district. Community districts are spatial units that divide New York City into regions [@nycopendata2022] which are nested by the five boroughs of New York City, and which in turn nest census tracts.
+##### Distance from home
 
 We constructed an approximate measure of the distance between participant residence and contact venues by categorizing the venues into those that are: in the same community district as the residence; in a different community district but the same borough; or in a different borough. We refer to this measure as distance from home.
 
-### Social and spatial networks
+### MPX NYC Participant Spatial Overlap Network
 
-#### MPX NYC person-place network
+To understand how the population representd by MPX NYC study data are connected through the spaces they co-inhabit, we constructed the MPX NYC participant spatial overlap network. This network has survey participants as nodes, and weighted ties that represent shared community districts. A weighted tie between two individuals indicates that they both have a residence or contact venue in the same community district. The weight is given by the count of community districts the pair share.
 
-Data were collected and stored as the MPX NYC person-place network where nodes are survey participants as well as community districts. Ties can only exist between a participant and a community district - they indicate that the participant has a residence or contact venue in that community district. Tie characteristics encode the characteristics of contact venues.
+The network encodes the potential for a pair of individuals to make contact with one another and transmit a pathogen. The more community districts they share, the more likely it is that they will make contact and/or transmit a pathogen. Of interest is the overall connectedness of the network, and the patterning of connections among participants from different demographic groups.
 
-Of interest is the pattern of movement from residences to contact venues. We calculated the distribytion of residences accross community districts, and separately the distribuytion of contact venues accross community districts. We calculated the difference in proportions for each community district, showing how survey participants move in the city.
+##### Connectedness: Size of largest connected component
 
-This network yields two others that were used in the analysis - the spatial overlap network, and the participant overlap network described below.
+To assess connectedness, we calculated the proportion of nodes in the largest connected componnent of the MPX NYC participant spatial overlap network. A connected component is a subset of nodes where each node is reachable from any other node by tracing a path through network ties, and where there are no nodes excluded from the set which are reachable from a node included in the set. The bigger the largest connected component is, the more easily a pathogen could disseminate across the entire network.
 
-#### Participant overlap network
+##### Mixing: Spatial selection coefficient
 
-The person overlap network has community districts as nodes. Two community districts have a weighted tie between them if at least one individual has a residence or contact venue in both community districts (i.e. if they are both connected to the same community district in the MPX NYC person-place network). The weight of the tie is the count of such individuals. A tie of weight $0$ is equivalent to the absence of a tie.
+To gain an understanding of how different subgroups mix in space - a measure of the propensity for members of one subgroup to have residences and contact venues in the same community districts of members of another, given subgroup. The spatial selection coefficient is defined as the spatial selection ratio minus one. The spatial selection ratio is $1$ when contact venues and residences for the first subgroup are distributed in space independently of the other subgroup; greater than one if members of the former subgroup tend to share community districts with those of the latter; and smaller than one if the first sub-group tend to not share community districts with the second. The spatial selection coefficient is defined as the spatial selection ratio minus 1. We calculated the spatial selection coefficient across groups defined by race-gender, sexual orientation, and age.
 
-This network encodes the potential for contagion to occur across community districts - the higher the number of individuals a pair of community districts shares, the higher the likelihood of transmitting a pathogen from one community district to the other. The fewer the participants that are common to two community districts, the less likely transmission is to occur between them.
+More formally, consider a graph $G(N, \sim)$ where nodes (set $N$) represent participants and $i \sim j$ denotes that $i, j\in N$ are connected in $G$. There is a tie between individuals $i,j \in N$ (i.e. $i \sim j$) if individuals $i$ and $j$ share a community district. We say individual $i$ shares a community district with individual $j$ if both have a residence or contact venue in that community district. $W_{i\sim j}$ is defined as the count of community districts shared by $i$ and $j$. $N_a, N_b \subset N$ are disjoint subsets of $N$ (i.e. $N_a \cap N_b = \phi$). By definition $W_{i \sim i} = 0, \forall i\in N$.
 
-Of interest is each community district's importance in the transmission dynamics of a novel pathogen, given the flow of people in and out of the district. We measured this using the spatial network centrality of each community district. Spatial network centrality is defined as weighted network degree in the participant overlap network.
-
-#### Community district overlap network
-
-The community district overlap network has survey participants as nodes. A weighted tie between two individuals indicates that they both have a residence or contact venue in the same community district. The weights indicate the number of community districts the pair share. A tie of weight $0$ is equivalent to the absence of a tie.
-
-The network encodes the potential for a pair of individuals to make contact with one another and transmit a pathogen. The more community districts they share, the more likely it is that they will make contact and/or transmit a pathogen. Of interest is the overall connectendess of the community overlap network. The better connected this network is, the more likely that a newly introduced infectious disease would disseminate quickly accross the population. Also of interest is the patterning of potential interactons between among participants from different demographic groups. It is useful to understand how different groups mix in space because it allows us to better predict the path of a newly introduced pathogen through different sections of the population.
-
-##### Connected components
-
-We calculated the proportion of participants contained by the largest connected component to understand how connected it is.
-
-A connected component of a network is a subset of nodes where each node is reachable from any other node by tracing a path through network ties, and where there are no nodes excluded from the set which are reachable from a node included in the set. In many human systems, networks display a "giant connected component" - a connected component that contains the vast majority of the nodes in the network - with other, usually much smaller, connected components.
-
-##### Spatial selection coefficient
-
-We calculated the spatial selection coefficient - a measure of the propensity for members of one subgroup to have residences and contact venues in the same community districts of members of another, given subgroup.
-
-The spatial selection coefficient is defined as the spatial selection ratio minus one. The spatial selection ratio is $1$ when contact venues and residences for the first subgroup are distributed in space independently of the other subgroup; greater than one if members of the former subgroup tend to share community districts with those of the latter; and smaller than one if the first sub-group tend to not share community districts with the second. The spatial selection coefficient is defined as the spatial selection ratio minus 1. We calculated the spatial selection coefficient across groups defined by race-gender, sexual orientation, and age.
-
-More formally, consider a graph $G(N, \sim)$ where nodes (set $N$) represent participants and $i \sim j$ denotes that $i, j\in N$ are connected in graoh $G$. There is a tie between individuals $i,j \in N$ (i.e. $i \sim j$) if individuals $i$ and $j$ share a community district. We say individual $i$ shares a community district with individual $j$ if both have a residence or contact venue in that community district. $W_{i\sim j}$ is defined as the count of community districts shared by $i$ and $j$. $N_a, N_b \subset N$ are disjoint subsets of $N$ (i.e. $N_a \cap N_b = \phi$). By definition $W_{i \sim i} = 0, \forall i\in N$. We define $\psi(a,b)$ the spatial selection ratio of characteristic $a$ for characteristic $b$:
+We define $\psi(a,b)$ the spatial selection ratio of characteristic $a$ for characteristic $b$:
 
 $$
 \psi(a,b) = \frac{|N|}{|N_a||N_b|} \sum_{i \in N_a}{ \frac{  \sum_{j \in N_b}W_{i \sim j}}{  \sum_{j \in N}W_{i \sim j} } } 
 $$
 
+## 
+
 ## Statistical Analysis
 
 ### Descriptive analysis
 
-Participant individual characteristics and contact venue characteristics were tabulated and visualized.
+To describe the study population, we tabulated participant characteristics against report of physical or sexual contact in a congregate setting, and visualized seuxal orientation and race-gender. To describe the contact places, we tabulate their characteristics against sexual contact, we tabulate type vs. distance from home, vs sexual contact.
+
+To investigate flow of people between different community districts, we visualized the differences in the distributions of contact venues across community districts and residences accross community deistricts, as well as visualize the cross tabulation between home community district and contact place community district.
+
+We calculated the spatial selection coefficient for age, sexual orientation, and race-gender.
 
 ### Assessing strategies for outbreak control
 
-To illustrate how the pattern of spatial connection among queer and trans people should inform early responses to novel infectious diseases, we examined the impact of a simplified, spatially-targeted intervention to immunize against a novel pathogen. In this hypothetical intervention, community districts are ordered by priority and are immunized one at a time, beginning with the highest priority community district. (To immunize a community district is to immunize all individuals who have a contact venue or residence in that community district.)
+To illustrate how the pattern of spatial connection among queer and trans people should inform early responses to novel infectious diseases, we examined the impact of a simplified, spatially-targeted intervention to immunize against a novel pathogen. In this hypothetical intervention, community districts are ordered by priority and are immunized one at a time, beginning with the highest priority community district.
+
+We assume that to immunize a community district is to immunize all individuals who have a contact venue or residence in that community district; and that once a person is immunized, they are unable to acquire or transmit the pathogen.
+
+#### Intervention strategies
 
 In the contact-based strategy, we rank districts according to the number of contact venues and residences they contain (counting only the residences of participants who reported group contact). In the movement-based strategy, we rank districts according to the degree to which it is connected with other community districts through the exchange of individuals.
 
 Whereas the contact-based strategy prioritizes community districts with a high amount of sexual or physical contact, the latter strategy prioritizes community districts with a high level of movement (individuals entering and leaving the community district).
 
-We assume that the once a person is immunized, they are unable to acquire or transmit the pathogen. Their node is removed from the spatial overlap network as the ties between it and the rest of the network can no longer be thought of as potentiual conduits for an ifectious disease.
+#### Intervention outcomes
 
 We examine the relative impact of two strategies for prioritizing the community districts. Impact is assessed in terms of spatial efficiency (the ability to immunize many individuals through few community districts), and their spatial network impact (the ability to break the spatial overlap network into many small connected components rather than one giant connected component).
+
+Network impact: Their node is removed from the spatial overlap network as the ties between it and the rest of the network can no longer be thought of as potentiual conduits for an ifectious disease.
 
 # Results
 
@@ -388,8 +310,6 @@ make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE)
   apply_style_radar_facet_plot()
 
 ```
-
-## Movement
 
 @fig-communities-movement maps each contact venue's community district (x-axis) against the participant's home community district (y-axis). The size of the dot is proportional to the total count of contact venues with the given home and contact venue community district. The color of the dt represents the borough of the contact venue.
 
