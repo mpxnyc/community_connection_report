@@ -5,7 +5,7 @@ apply_style_home_vs_residence_dbn_bar_plot <- function(plot){
       "Proportion in community district", 
       breaks = seq(-0.12,0.20, 0.02), 
       limits = c(-0.06, 0.06), 
-      labels = function(x) {scales::percent(abs(x))},
+      labels = function(x) {scales::percent((x))},
     ) +
     scale_alpha_manual(
       "Contact venues", 
@@ -26,7 +26,8 @@ apply_style_home_vs_residence_dbn_bar_plot <- function(plot){
       plot.margin = margin(15,15,15,15),
       legend.position = "bottom",
       legend.box = "vertical",
-      legend.box.margin = margin(1,1,1,1, "cm")
+      legend.box.margin = margin(1,1,1,1, "cm"),
+      panel.grid.major = element_line(color = "lightgrey", size = 0.1)
     ) +
     guides( alpha = guide_legend(order = 2), fill = guide_legend(order = 1))
   
