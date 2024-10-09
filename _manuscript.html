@@ -199,34 +199,20 @@ div.csl-indent {
 </section>
 <section id="residence-and-contact-venues" class="level3">
 <h3 class="anchored" data-anchor-id="residence-and-contact-venues">Residence and Contact venues</h3>
-<p>While location data were captured at the census tract level, in this analysis, the unit of spatial analysis is the community district. Community districts are spatial units that divide New York City into regions <span class="citation" data-cites="nycopendata2022">(<a href="#ref-nycopendata2022" role="doc-biblioref">NYC OpenData 2022</a>)</span> which are nested by the five boroughs of New York City, and which in turn nest census tracts.</p>
-<p>Using the location-input question format, we solicited the census tract of participants’ primary residence. Among those who reported group contact (i.e.&nbsp;physical or sexual contact in a group setting in the preceding 4 weeks) we solicited the locations of the venues at which the contact happened. We refer to these locations as “contact venues”. For each contact venue (see <a href="#fig-mapinputformat">Figure&nbsp;3</a>), participants indicated the type (dance party, sex party, darkroom, sport game, concert, theatre/show, private residence, sex club, bathhouse, park, something else) and whether they had sexual contact at that venue.</p>
-<section id="distance-from-home" class="level5">
-<h5 class="anchored" data-anchor-id="distance-from-home">Distance from home</h5>
+<p>Using the location-input question format, we solicited the census tract of participants’ primary residence. Among those who reported group contact (i.e.&nbsp;physical or sexual contact in a group setting in the preceding 4 weeks) we solicited the census tracts of the venues at which the contact happened. We refer to these locations as “contact venues”. For each contact venue (see <a href="#fig-mapinputformat">Figure&nbsp;3</a>), participants indicated the type (dance party, sex party, darkroom, sport game, concert, theatre/show, private residence, sex club, bathhouse, park, something else) and whether they had sexual contact at that venue.</p>
+<p>In this analysis, the unit of spatial analysis is the community district. Census tract identifiers were converted to community district identifiers. Community districts are spatial units that divide New York City into regions <span class="citation" data-cites="nycopendata2022">(<a href="#ref-nycopendata2022" role="doc-biblioref">NYC OpenData 2022</a>)</span> which are nested by the five boroughs of New York City, and which in turn nest census tracts.</p>
 <p>We constructed an approximate measure of the distance between participant residence and contact venues by categorizing the venues into those that are: in the same community district as the residence; in a different community district but the same borough; or in a different borough. We refer to this measure as distance from home.</p>
-</section>
 </section>
 <section id="mpx-nyc-participant-spatial-overlap-network" class="level3">
 <h3 class="anchored" data-anchor-id="mpx-nyc-participant-spatial-overlap-network">MPX NYC Participant Spatial Overlap Network</h3>
-<p>To understand how the population representd by MPX NYC study data are connected through the spaces they co-inhabit, we constructed the MPX NYC participant spatial overlap network. This network has survey participants as nodes, and weighted ties that represent shared community districts. A weighted tie between two individuals indicates that they both have a residence or contact venue in the same community district. The weight is given by the count of community districts the pair share.</p>
-<p>The network encodes the potential for a pair of individuals to make contact with one another and transmit a pathogen. The more community districts they share, the more likely it is that they will make contact and/or transmit a pathogen. Of interest is the overall connectedness of the network, and the patterning of connections among participants from different demographic groups.</p>
-<section id="connectedness-size-of-largest-connected-component" class="level5">
-<h5 class="anchored" data-anchor-id="connectedness-size-of-largest-connected-component">Connectedness: Size of largest connected component</h5>
-<p>To assess connectedness, we calculated the proportion of nodes in the largest connected componnent of the MPX NYC participant spatial overlap network. A connected component is a subset of nodes where each node is reachable from any other node by tracing a path through network ties, and where there are no nodes excluded from the set which are reachable from a node included in the set. The bigger the largest connected component is, the more easily a pathogen could disseminate across the entire network.</p>
+<p>To understand how the population represented by MPX NYC study data are connected through interactions in the spaces they co-inhabit, we constructed the MPX NYC participant spatial overlap network. This network has survey participants as nodes, and weighted ties that represent shared community districts. A weighted tie between two individuals indicates that they both have a residence or contact venue in the same community district. The weight is given by the count of community districts the pair share.</p>
+<p>This network encodes the potential for a pair of individuals to make contact with one another and transmit a pathogen. The more community districts they share, the more likely it is that they will make contact and/or transmit a pathogen. Of interest is the overall connectedness of the network, and the patterning of connections among participants from different demographic groups. The more connected a graph is, the more easily a pathogen could disseminate across the entire network.</p>
+<p>To assess connectedness, we calculated the proportion of nodes in the largest connected component of the MPX NYC participant spatial overlap network. A connected component of a network is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network network ties. For this analysis, we consider a network with a larger largest connected component to be better connected than a network with a smaller largest connected component.</p>
+<p>To gain an understanding of how different subgroups mix in New York City community districts, we define the spatial selection coefficient <span class="math inline">\(\psi(a,b)\)</span>, a measure of the propensity for members of subgroup <span class="math inline">\(a\)</span> to have residences and contact venues in the same community districts as members of subgroup <span class="math inline">\(b\)</span>. The spatial selection coefficient is defined as the spatial selection ratio minus one. i.e.</p>
+<p><span class="math display">\[ \psi(a,b) = r(a,b) - 1 \]</span></p>
+<p>The spatial selection ratio of subgroup a for subgroup b <span class="math inline">\(r(a,b)\)</span> is defined as the average preference of subgroup a for subgroup b divided by the prevalence of subgroup b. For each node in subgroup a, preference for subgroup b is given by the number of alters in subgroup b divided by the total number of alters (an alter is any node connected to the node under consideration).</p>
+<p>This spatial selection coefficient is <span class="math inline">\(0\)</span> when contact venues and residences for a given subgroup are distributed in space independently of another; positive if members of the former subgroup tend to share community districts with those of the latter; and negative if they tend to not share community districts.</p>
 </section>
-<section id="mixing-spatial-selection-coefficient" class="level5">
-<h5 class="anchored" data-anchor-id="mixing-spatial-selection-coefficient">Mixing: Spatial selection coefficient</h5>
-<p>To gain an understanding of how different subgroups mix in space - a measure of the propensity for members of one subgroup to have residences and contact venues in the same community districts of members of another, given subgroup. The spatial selection coefficient is defined as the spatial selection ratio minus one. The spatial selection ratio is <span class="math inline">\(1\)</span> when contact venues and residences for the first subgroup are distributed in space independently of the other subgroup; greater than one if members of the former subgroup tend to share community districts with those of the latter; and smaller than one if the first sub-group tend to not share community districts with the second. The spatial selection coefficient is defined as the spatial selection ratio minus 1. We calculated the spatial selection coefficient across groups defined by race-gender, sexual orientation, and age.</p>
-<p>More formally, consider a graph <span class="math inline">\(G(N, \sim)\)</span> where nodes (set <span class="math inline">\(N\)</span>) represent participants and <span class="math inline">\(i \sim j\)</span> denotes that <span class="math inline">\(i, j\in N\)</span> are connected in <span class="math inline">\(G\)</span>. There is a tie between individuals <span class="math inline">\(i,j \in N\)</span> (i.e.&nbsp;<span class="math inline">\(i \sim j\)</span>) if individuals <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> share a community district. We say individual <span class="math inline">\(i\)</span> shares a community district with individual <span class="math inline">\(j\)</span> if both have a residence or contact venue in that community district. <span class="math inline">\(W_{i\sim j}\)</span> is defined as the count of community districts shared by <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>. <span class="math inline">\(N_a, N_b \subset N\)</span> are disjoint subsets of <span class="math inline">\(N\)</span> (i.e.&nbsp;<span class="math inline">\(N_a \cap N_b = \phi\)</span>). By definition <span class="math inline">\(W_{i \sim i} = 0, \forall i\in N\)</span>.</p>
-<p>We define <span class="math inline">\(\psi(a,b)\)</span> the spatial selection ratio of characteristic <span class="math inline">\(a\)</span> for characteristic <span class="math inline">\(b\)</span>:</p>
-<p><span class="math display">\[
-\psi(a,b) = \frac{|N|}{|N_a||N_b|} \sum_{i \in N_a}{ \frac{  \sum_{j \in N_b}W_{i \sim j}}{  \sum_{j \in N}W_{i \sim j} } }
-\]</span></p>
-</section>
-</section>
-</section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
 </section>
 <section id="statistical-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="statistical-analysis">Statistical Analysis</h2>
@@ -262,23 +248,23 @@ div.csl-indent {
 <div id="fig-people-descriptives" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 
-<div id="xhnkxakbvh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xhnkxakbvh table {
+<div id="hpktcufszj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hpktcufszj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xhnkxakbvh thead, #xhnkxakbvh tbody, #xhnkxakbvh tfoot, #xhnkxakbvh tr, #xhnkxakbvh td, #xhnkxakbvh th {
+#hpktcufszj thead, #hpktcufszj tbody, #hpktcufszj tfoot, #hpktcufszj tr, #hpktcufszj td, #hpktcufszj th {
   border-style: none;
 }
 
-#xhnkxakbvh p {
+#hpktcufszj p {
   margin: 0;
   padding: 0;
 }
 
-#xhnkxakbvh .gt_table {
+#hpktcufszj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -304,12 +290,12 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-#xhnkxakbvh .gt_caption {
+#hpktcufszj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xhnkxakbvh .gt_title {
+#hpktcufszj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -321,7 +307,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-#xhnkxakbvh .gt_subtitle {
+#hpktcufszj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -333,7 +319,7 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-#xhnkxakbvh .gt_heading {
+#hpktcufszj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -345,13 +331,13 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#xhnkxakbvh .gt_bottom_border {
+#hpktcufszj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xhnkxakbvh .gt_col_headings {
+#hpktcufszj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -366,7 +352,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#xhnkxakbvh .gt_col_heading {
+#hpktcufszj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -386,7 +372,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-#xhnkxakbvh .gt_column_spanner_outer {
+#hpktcufszj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -398,15 +384,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-#xhnkxakbvh .gt_column_spanner_outer:first-child {
+#hpktcufszj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xhnkxakbvh .gt_column_spanner_outer:last-child {
+#hpktcufszj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xhnkxakbvh .gt_column_spanner {
+#hpktcufszj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -418,11 +404,11 @@ div.csl-indent {
   width: 100%;
 }
 
-#xhnkxakbvh .gt_spanner_row {
+#hpktcufszj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xhnkxakbvh .gt_group_heading {
+#hpktcufszj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -448,7 +434,7 @@ div.csl-indent {
   text-align: left;
 }
 
-#xhnkxakbvh .gt_empty_group_heading {
+#hpktcufszj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -463,15 +449,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-#xhnkxakbvh .gt_from_md > :first-child {
+#hpktcufszj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xhnkxakbvh .gt_from_md > :last-child {
+#hpktcufszj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xhnkxakbvh .gt_row {
+#hpktcufszj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -490,7 +476,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-#xhnkxakbvh .gt_stub {
+#hpktcufszj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -503,7 +489,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#xhnkxakbvh .gt_stub_row_group {
+#hpktcufszj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -517,15 +503,15 @@ div.csl-indent {
   vertical-align: top;
 }
 
-#xhnkxakbvh .gt_row_group_first td {
+#hpktcufszj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xhnkxakbvh .gt_row_group_first th {
+#hpktcufszj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xhnkxakbvh .gt_summary_row {
+#hpktcufszj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -535,16 +521,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#xhnkxakbvh .gt_first_summary_row {
+#hpktcufszj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xhnkxakbvh .gt_first_summary_row.thick {
+#hpktcufszj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xhnkxakbvh .gt_last_summary_row {
+#hpktcufszj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -554,7 +540,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#xhnkxakbvh .gt_grand_summary_row {
+#hpktcufszj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -564,7 +550,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#xhnkxakbvh .gt_first_grand_summary_row {
+#hpktcufszj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -574,7 +560,7 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-#xhnkxakbvh .gt_last_grand_summary_row_top {
+#hpktcufszj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -584,11 +570,11 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#xhnkxakbvh .gt_striped {
+#hpktcufszj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xhnkxakbvh .gt_table_body {
+#hpktcufszj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -597,7 +583,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#xhnkxakbvh .gt_footnotes {
+#hpktcufszj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -611,7 +597,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#xhnkxakbvh .gt_footnote {
+#hpktcufszj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -620,7 +606,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#xhnkxakbvh .gt_sourcenotes {
+#hpktcufszj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -634,7 +620,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#xhnkxakbvh .gt_sourcenote {
+#hpktcufszj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -642,63 +628,63 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#xhnkxakbvh .gt_left {
+#hpktcufszj .gt_left {
   text-align: left;
 }
 
-#xhnkxakbvh .gt_center {
+#hpktcufszj .gt_center {
   text-align: center;
 }
 
-#xhnkxakbvh .gt_right {
+#hpktcufszj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xhnkxakbvh .gt_font_normal {
+#hpktcufszj .gt_font_normal {
   font-weight: normal;
 }
 
-#xhnkxakbvh .gt_font_bold {
+#hpktcufszj .gt_font_bold {
   font-weight: bold;
 }
 
-#xhnkxakbvh .gt_font_italic {
+#hpktcufszj .gt_font_italic {
   font-style: italic;
 }
 
-#xhnkxakbvh .gt_super {
+#hpktcufszj .gt_super {
   font-size: 65%;
 }
 
-#xhnkxakbvh .gt_footnote_marks {
+#hpktcufszj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xhnkxakbvh .gt_asterisk {
+#hpktcufszj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xhnkxakbvh .gt_indent_1 {
+#hpktcufszj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xhnkxakbvh .gt_indent_2 {
+#hpktcufszj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xhnkxakbvh .gt_indent_3 {
+#hpktcufszj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xhnkxakbvh .gt_indent_4 {
+#hpktcufszj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xhnkxakbvh .gt_indent_5 {
+#hpktcufszj .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1271,23 +1257,23 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="kxlgnrdiad" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kxlgnrdiad table {
+<div id="cnmbxklybu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cnmbxklybu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kxlgnrdiad thead, #kxlgnrdiad tbody, #kxlgnrdiad tfoot, #kxlgnrdiad tr, #kxlgnrdiad td, #kxlgnrdiad th {
+#cnmbxklybu thead, #cnmbxklybu tbody, #cnmbxklybu tfoot, #cnmbxklybu tr, #cnmbxklybu td, #cnmbxklybu th {
   border-style: none;
 }
 
-#kxlgnrdiad p {
+#cnmbxklybu p {
   margin: 0;
   padding: 0;
 }
 
-#kxlgnrdiad .gt_table {
+#cnmbxklybu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1313,12 +1299,12 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-left-color: #D3D3D3;
 }
 
-#kxlgnrdiad .gt_caption {
+#cnmbxklybu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kxlgnrdiad .gt_title {
+#cnmbxklybu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1330,7 +1316,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-width: 0;
 }
 
-#kxlgnrdiad .gt_subtitle {
+#cnmbxklybu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1342,7 +1328,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-width: 0;
 }
 
-#kxlgnrdiad .gt_heading {
+#cnmbxklybu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1354,13 +1340,13 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#kxlgnrdiad .gt_bottom_border {
+#cnmbxklybu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kxlgnrdiad .gt_col_headings {
+#cnmbxklybu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1375,7 +1361,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#kxlgnrdiad .gt_col_heading {
+#cnmbxklybu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1395,7 +1381,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#kxlgnrdiad .gt_column_spanner_outer {
+#cnmbxklybu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1407,15 +1393,15 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 4px;
 }
 
-#kxlgnrdiad .gt_column_spanner_outer:first-child {
+#cnmbxklybu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kxlgnrdiad .gt_column_spanner_outer:last-child {
+#cnmbxklybu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kxlgnrdiad .gt_column_spanner {
+#cnmbxklybu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1427,11 +1413,11 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   width: 100%;
 }
 
-#kxlgnrdiad .gt_spanner_row {
+#cnmbxklybu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kxlgnrdiad .gt_group_heading {
+#cnmbxklybu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1457,7 +1443,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   text-align: left;
 }
 
-#kxlgnrdiad .gt_empty_group_heading {
+#cnmbxklybu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1472,15 +1458,15 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: middle;
 }
 
-#kxlgnrdiad .gt_from_md > :first-child {
+#cnmbxklybu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kxlgnrdiad .gt_from_md > :last-child {
+#cnmbxklybu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kxlgnrdiad .gt_row {
+#cnmbxklybu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1499,7 +1485,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#kxlgnrdiad .gt_stub {
+#cnmbxklybu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1512,7 +1498,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#kxlgnrdiad .gt_stub_row_group {
+#cnmbxklybu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1526,15 +1512,15 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: top;
 }
 
-#kxlgnrdiad .gt_row_group_first td {
+#cnmbxklybu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kxlgnrdiad .gt_row_group_first th {
+#cnmbxklybu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kxlgnrdiad .gt_summary_row {
+#cnmbxklybu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1544,16 +1530,16 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#kxlgnrdiad .gt_first_summary_row {
+#cnmbxklybu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kxlgnrdiad .gt_first_summary_row.thick {
+#cnmbxklybu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kxlgnrdiad .gt_last_summary_row {
+#cnmbxklybu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1563,7 +1549,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#kxlgnrdiad .gt_grand_summary_row {
+#cnmbxklybu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1573,7 +1559,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#kxlgnrdiad .gt_first_grand_summary_row {
+#cnmbxklybu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1583,7 +1569,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-color: #D3D3D3;
 }
 
-#kxlgnrdiad .gt_last_grand_summary_row_top {
+#cnmbxklybu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1593,11 +1579,11 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#kxlgnrdiad .gt_striped {
+#cnmbxklybu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kxlgnrdiad .gt_table_body {
+#cnmbxklybu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1606,7 +1592,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#kxlgnrdiad .gt_footnotes {
+#cnmbxklybu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1620,7 +1606,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#kxlgnrdiad .gt_footnote {
+#cnmbxklybu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1629,7 +1615,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#kxlgnrdiad .gt_sourcenotes {
+#cnmbxklybu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1643,7 +1629,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#kxlgnrdiad .gt_sourcenote {
+#cnmbxklybu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1651,63 +1637,63 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#kxlgnrdiad .gt_left {
+#cnmbxklybu .gt_left {
   text-align: left;
 }
 
-#kxlgnrdiad .gt_center {
+#cnmbxklybu .gt_center {
   text-align: center;
 }
 
-#kxlgnrdiad .gt_right {
+#cnmbxklybu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kxlgnrdiad .gt_font_normal {
+#cnmbxklybu .gt_font_normal {
   font-weight: normal;
 }
 
-#kxlgnrdiad .gt_font_bold {
+#cnmbxklybu .gt_font_bold {
   font-weight: bold;
 }
 
-#kxlgnrdiad .gt_font_italic {
+#cnmbxklybu .gt_font_italic {
   font-style: italic;
 }
 
-#kxlgnrdiad .gt_super {
+#cnmbxklybu .gt_super {
   font-size: 65%;
 }
 
-#kxlgnrdiad .gt_footnote_marks {
+#cnmbxklybu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kxlgnrdiad .gt_asterisk {
+#cnmbxklybu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kxlgnrdiad .gt_indent_1 {
+#cnmbxklybu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kxlgnrdiad .gt_indent_2 {
+#cnmbxklybu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kxlgnrdiad .gt_indent_3 {
+#cnmbxklybu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kxlgnrdiad .gt_indent_4 {
+#cnmbxklybu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kxlgnrdiad .gt_indent_5 {
+#cnmbxklybu .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1976,9 +1962,23 @@ N = 616<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ital
 </ul>
 <p>Most of all, we thank, and stand in solidarity with, the MPX NYC participants who gave of their time to make the study a success.</p>
 </section>
-<section id="references" class="level1 unnumbered">
+<section id="references" class="level1">
+<h1>References</h1>
+</section>
+<section id="appendices" class="level1">
+<h1>Appendices</h1>
+<section id="a.-definition-of-spatial-selection-ratio." class="level2">
+<h2 class="anchored" data-anchor-id="a.-definition-of-spatial-selection-ratio.">A. Definition of spatial selection ratio.</h2>
+<p>Consider a graph <span class="math inline">\(G(N, \sim)\)</span> where nodes (set <span class="math inline">\(N\)</span>) represent participants and <span class="math inline">\(i \sim j\)</span> denotes that <span class="math inline">\(i, j\in N\)</span> are connected in <span class="math inline">\(G\)</span>. There is a tie between individuals <span class="math inline">\(i,j \in N\)</span> (i.e.&nbsp;<span class="math inline">\(i \sim j\)</span>) if individuals <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> share a community district. We say individual <span class="math inline">\(i\)</span> shares a community district with individual <span class="math inline">\(j\)</span> if both have a residence or contact venue in that community district. <span class="math inline">\(W_{i\sim j}\)</span> is defined as the count of community districts shared by <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>. <span class="math inline">\(N_a, N_b \subset N\)</span> are disjoint subsets of <span class="math inline">\(N\)</span> (i.e.&nbsp;<span class="math inline">\(N_a \cap N_b = \phi\)</span>). By definition <span class="math inline">\(W_{i \sim i} = 0, \forall i\in N\)</span>.</p>
+<p>We define <span class="math inline">\(\psi(a,b)\)</span> the spatial selection ratio of characteristic <span class="math inline">\(a\)</span> for characteristic <span class="math inline">\(b\)</span>:</p>
+<p><span class="math display">\[
+\psi(a,b) = \frac{|N|}{|N_a||N_b|} \sum_{i \in N_a}{ \frac{  \sum_{j \in N_b}W_{i \sim j}}{  \sum_{j \in N}W_{i \sim j} } }
+\]</span></p>
+</section>
+<section id="section" class="level2 unnumbered">
 
 
+</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
