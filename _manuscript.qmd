@@ -1,14 +1,14 @@
 ---
 title: "MPX NYC"
 subtitle: "Key findings and recommendations"
-author: "Keletso Lehola Lekoatsa Makofane"
+author: "Keletso Makofane"
 date: 23 May 2024
 prefer-html: true
 execute:
   echo: false
   warning: false
   message: false
-format: html
+format: docx
 bibliography: bibliography.bib
 ---
 
@@ -43,37 +43,6 @@ targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_anal
 targets::tar_make() # Runs the data pipeline shown in _targets.R
 
 ```
-
-# Video Series
-
-Ring vaccination
-
-Queens -\> Brooklyn but not brooklyn to queens
-
-0.  Updates
-
--   [ ] Put bar graphs above the matrix
--   [ ] Do community detection on place network
-
-1.  Intro / Overview
-
-2.  Managing
-
--   [ ] Goals + tasks: internal / external
--   [ ] Social capital: internal / external
--   [ ] Resources: financial / non-financial
-
-3.  Case study
-
--   [ ] Technical: questionnaire + protocol + translation
--   [ ] Technical: web app dev + testing + validation
--   [ ] External: consultation (group and one-on-one)
--   [ ] External: press
--   [ ] External: marketing
--   [ ] External: partnerships
--   [ ] Administration: financial planning + fundraising
--   [ ] Administration: financial tracking + reporting
--   [ ] Administration: IRB
 
 # Methods
 
@@ -151,19 +120,17 @@ Race was measured using a multiple selection question (white, black, latino/a/x,
 
 Using the location-input question format, we solicited the census tract of participants' primary residence. Among those who reported group contact (i.e. physical or sexual contact in a group setting in the preceding 4 weeks) we solicited the census tracts of the venues at which the contact happened. We refer to these locations as "contact venues". For each contact venue (see @fig-mapinputformat), participants indicated the type (dance party, sex party, darkroom, sport game, concert, theatre/show, private residence, sex club, bathhouse, park, something else) and whether they had sexual contact at that venue.
 
-In this analysis, the unit of spatial analysis is the community district. Census tract identifiers were converted to community district identifiers. Community districts are spatial units that divide New York City into regions [@nycopendata2022] which are nested by the five boroughs of New York City, and which in turn nest census tracts.
-
-We constructed an approximate measure of the distance between participant residence and contact venues by categorizing the venues into those that are: in the same community district as the residence; in a different community district but the same borough; or in a different borough. We refer to this measure as distance from home.
+In this analysis, the unit of spatial analysis is the community district. Census tract identifiers were converted to community district identifiers. Community districts are spatial units that divide New York City into regions [@nycopendata2022] which are nested by the five boroughs of New York City, and which in turn nest census tracts. We constructed an approximate measure of the distance between participant residence and contact venues by categorizing the venues into those that are: in the same community district as the residence; in a different community district but the same borough; or in a different borough. We refer to this measure as distance from home.
 
 ### MPX NYC Participant Spatial Overlap Network
 
-To understand how the population represented by MPX NYC study data are connected through interactions in the spaces they co-inhabit, we constructed the MPX NYC participant spatial overlap network. This network has survey participants as nodes, and weighted ties that represent shared community districts. A weighted tie between two individuals indicates that they both have a residence or contact venue in the same community district. The weight is given by the count of community districts the pair share.
+To understand how the population represented by MPX NYC study data are connected through interactions in the physical spaces they socialize in, we constructed the MPX NYC participant spatial overlap network. This network has survey participants as nodes, and weighted ties that represent shared community districts. A weighted tie between two individuals indicates that they both have a residence or contact venue in the same community district. The weight is given by the count of community districts the pair share.
 
 This network encodes the potential for a pair of individuals to make contact with one another and transmit a pathogen. The more community districts they share, the more likely it is that they will make contact and/or transmit a pathogen. Of interest is the overall connectedness of the network, and the patterning of connections among participants from different demographic groups. The more connected a graph is, the more easily a pathogen could disseminate across the entire network.
 
-To assess connectedness, we calculated the proportion of nodes in the largest connected component of the MPX NYC participant spatial overlap network. A connected component of a network is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network network ties. For this analysis, we consider a network with a larger largest connected component to be better connected than a network with a smaller largest connected component.
+To assess connectedness, we calculated the proportion of nodes in the largest connected component of the MPX NYC participant spatial overlap network. A connected component of a network is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties. For this analysis, we consider a network with a larger largest connected component to be better connected than a network with a smaller largest connected component.
 
-To gain an understanding of how different subgroups mix in New York City community districts, we define the spatial selection coefficient $\psi(a,b)$, a measure of the propensity for members of subgroup $a$ to have residences and contact venues in the same community districts as members of subgroup $b$. The spatial selection coefficient is defined as the spatial selection ratio minus one. i.e.
+To gain an understanding of how different subgroups mix in New York City, we define the spatial selection coefficient $\psi(a,b)$, a measure of the propensity for members of subgroup $a$ to have residences and contact venues in the same community districts as members of subgroup $b$. The spatial selection coefficient is defined as the spatial selection ratio minus one. i.e.
 
 $$ \psi(a,b) = r(a,b) - 1 $$
 
@@ -207,19 +174,17 @@ The first is the contact-based strategy, we rank districts according to the numb
 
 The second is the movement-based strategy, where community districts are ranked by their spatial network centrality in the MPX NYC community district participant overlap network. This strategy prioritizes community districts with a high level of connection to other community districts for immunization.
 
-### Intervention simultion algorithm
+#### Intervention simultion algorithm
 
-The algorithm governing the intervention Is as follows:
+The algorithm governing the intervention is as follows:
 
 1.  Rank community districts according to intervention strategy
 
 2.  Immunize the top-ranked community district
 
-3.  Remove all immunized individuals
+3.  Construct MPX NYC Community district participant overlap network and MPX NYC participant spatial overlap network after removing immunized individuals
 
-4.  Construct MPX NYC Community district participant overlap network and MPX NYC participant spatial overlap network based on remaining individuals
-
-5.  Repeat steps 1-4 until all individuals are immunized
+4.  Repeat steps 1-3 until all individuals are immunized
 
 # Results
 
@@ -270,7 +235,7 @@ make_table_freq2(sexOrientation, demo_group) %>%
 
 ```
 
-In terms of health status, one in ten participants reported living with HIV - the overwhelming majority were virally suppressed. In addition, about `r perc_sti` reported at least one STI symptom. In terms of health services, two out of five participants were on PrEP at the time they took the survey, two-thirds had received the MPOX vaccine though only 8% had received MPOX testing.
+In terms of health status, one in ten participants reported living with HIV - the overwhelming majority were virally suppressed. In addition, about 16% reported at least one STI symptom. In terms of health services, two out of five participants were on PrEP at the time they took the survey, two-thirds had received the MPOX vaccine though only 8% had received MPOX testing.
 
 MPX NYC participants were deeply connected to queer and trans people in New York City. About two-thirds reported being in recent (preceding 4 weeks) contact with 1 - 10 friends in this community whereas only 20% reported not being in contact with queer and trans friends over the same period. About half of the participants had betwen 1 and 3 recent sex partners with 15% reporting over 5 partners. Related to sex partners, about one third reported spending less than 15 minutes on average when traveling to a hookup while a third spent 16-30 minutes. Almost one of four participants reported having physical (non-sexual) contact with over 5 individuals over the preceding four weeks, and one third reported having no recent contact.
 
@@ -323,18 +288,13 @@ make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE)
 
 ```
 
-@fig-communities-movement maps each contact venue's community district (x-axis) against the participant's home community district (y-axis). The size of the dot is proportional to the total count of contact venues with the given home and contact venue community district. The color of the dt represents the borough of the contact venue.
+@fig-communities-bar shows the difference in the relative frequency of community districts among contact places as compared to residences. It shows that within Brooklyn, Manhattan, and Queens, there is a small set of community districts which tend to be disproportionately represented among contact venues.
 
-The dots on the diagonal line from top left to bottom right, show prominantly, indicating that a sizeable proportion of movement happens within community districts. The figue also shows four prominant clusters - the cluster at the top left (in pink) shows significant movement between home and contact venues within Brooklyn and the cluster towards the middle of the plot (in purple) shows significant movement within Manhattan. The clusters at the top center and bottom left show significant movement from Brooklyn to Manhattan and from Manhattan to Brooklyn, respectively.
-
-The bar graphs on the right and at the bottom show the overall distribution of home community district among participants who had sexual or social contact in a group setting. Within Brooklyn, Manhattan, and Queens, there is an uneven distribution of homes across community districts (bar graph on right). In Manhatan, for instance, community district MN03 appears to contain a disproportinately large share of residences.
-
-The bar graph at the bottom shows that contact venues are even more unevenly distributed across community districts than homes are. The share of contact venues by community districts was 4-6 percentage points higher than the share of residences in MN04, BK01, and MN05. This suggests that participants leave their home community districts to gather in these community districts for social events.
-
-```{r}
+```{r fig_communities_bar}
+#| label: fig-communities-bar
 #| fig-width: 10
 #| fig-height: 7
-
+#| fig-cap: "Overall Movement between home and contact venues by MPX NYC participant. The figure shows each community districts over-representation among contact venues compared to residences"
 
 make_table_home_vs_place_dbn() %>%
   plot_home_vs_residence_dbn_bar() %>%
@@ -343,6 +303,12 @@ make_table_home_vs_place_dbn() %>%
   
   
 ```
+
+@fig-communities-movement maps each contact venue's community district (x-axis) against the participant's home community district (y-axis). The size of the dot is proportional to the total count of contact venues with the given home and contact venue community district. The color of the dot represents the borough of the contact venue.
+
+The dots on the diagonal line from top left to bottom right, show prominently, indicating that a sizeable proportion of movement happens within community districts. The figure also shows four prominent clusters - the cluster at the top left (in pink) shows significant movement between home and contact venues within Brooklyn and the cluster towards the middle of the plot (in purple) shows significant movement within Manhattan. The clusters at the top center and bottom left show significant movement from Brooklyn to Manhattan and from Manhattan to Brooklyn, respectively.
+
+
 
 ```{r fig_communities_movement}
 #| fig-cap: "Movement between home and contact venues by MPX NYC participant. The figure maps each contact venue's community district (x-axis) against the participant's home community district (y-axis). The size of the dot is proportional to the total count of contact venues with the given home and contact venue community district. The color of the dot represents the borough of the contact venue."
@@ -395,9 +361,9 @@ cowplot::plot_grid(mixing_demo_group_panel, mixing_bottom_panel, ncol=1, rel_hei
 
 ### Efficient interventions
 
-@fig-hiimpact-communities-movement shows which community districts would have to be immunized to immunize 33% of the population (Group A), and 66% of ther population (Group A + Group B) under both the contact-based and movement-based intervention strategies.
+@fig-hiimpact-communities shows which community districts would have to be immunized to immunize 33% of the population (Group A), and 66% of ther population (Group A + Group B) under both the contact-based and movement-based intervention strategies.
 
-Under the contact-based strategy, it would take five community districts to immunize 33% of sthe population. These are MN04, BK01, MN10, BK03, and QN01. MN04 includes the neighborhoods XXXXX, BK01 includes XXXXX, MN10 includes XXXX, BK03 includes XXX, and QN01 includes XXXX. To reach 66% of participants with the intervention, it would be necessary to immunize 13 community districts. The additional community districts would be MN12, BK04, MN02, BK08, MN07, MN09, BK02, and MN05.
+Under the contact-based strategy, it would take five community districts to immunize 33% of the population. These are MN04, BK01, MN10, BK03, and QN01. MN04 includes the neighborhoods XXXXX, BK01 includes XXXXX, MN10 includes XXXX, BK03 includes XXX, and QN01 includes XXXX. To reach 66% of participants with the intervention, it would be necessary to immunize 13 community districts. The additional community districts would be MN12, BK04, MN02, BK08, MN07, MN09, BK02, and MN05.
 
 Under the movement-based strategy, it would take six community districts to reach 33% of the population: MN04, BK01, MN05, BK04, MN02, and BK03. It would take 16 community districts to reach 66% of the population. The additional community districts would be: MN64, MN10, QN01, BK08, MN09, QN05, BK09, MN11, BK14, and BK07.
 
