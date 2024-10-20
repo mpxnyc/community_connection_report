@@ -8,7 +8,7 @@ execute:
   echo: false
   warning: false
   message: false
-format: docx
+format: html
 bibliography: bibliography.bib
 ---
 
@@ -118,19 +118,38 @@ Race was measured using a multiple selection question (white, black, latino/a/x,
 
 ### Residence and Contact venues
 
-Using the location-input question format, we solicited the census tract of participants' primary residence. Among those who reported group contact (i.e. physical or sexual contact in a group setting in the preceding 4 weeks) we solicited the census tracts of the venues at which the contact happened. We refer to these locations as "contact venues". For each contact venue (see @fig-mapinputformat), participants indicated the type (dance party, sex party, darkroom, sport game, concert, theatre/show, private residence, sex club, bathhouse, park, something else) and whether they had sexual contact at that venue.
+Using the location-input question format, we solicited the census tract identifier of participant's primary residence. Among those who reported group contact (i.e. physical or sexual contact in a group setting in the preceding 4 weeks) we solicited the census tracts of the venues at which the contact happened. We refer to these locations as "contact venues". For each contact venue (see @fig-mapinputformat), participants indicated the type (dance party, sex party, darkroom, sport game, concert, theatre/show, private residence, sex club, bathhouse, park, something else) and whether they had sexual contact at that venue.
+
+
+
+
+
+
+## Statistical Analysis
+
+### Participant characteristics
+To describe the study population, we cross-tabulated participant characteristics against report of physical or sexual contact in a congregate setting. We also visualized sexual orientation by race-gender.
+
+### Contact venue characteristics
+To describe the contact places elicited from participants, we cross-tabulated their characteristics.
+To understand how participants move between home and contact places, for every community district, we subtracted the proportion of residences it contains from the proportion of contact places it contains. We further visualized the cross tabulation of home census tract and contact place census tract.
 
 In this analysis, the unit of spatial analysis is the community district. Census tract identifiers were converted to community district identifiers. Community districts are spatial units that divide New York City into regions [@nycopendata2022] which are nested by the five boroughs of New York City, and which in turn nest census tracts. We constructed an approximate measure of the distance between participant residence and contact venues by categorizing the venues into those that are: in the same community district as the residence; in a different community district but the same borough; or in a different borough. We refer to this measure as distance from home.
 
-### MPX NYC Participant Spatial Overlap Network
 
+
+
+### Spatial connectedness 
 To understand how the population represented by MPX NYC study data are connected through interactions in the physical spaces they socialize in, we constructed the MPX NYC participant spatial overlap network. This network has survey participants as nodes, and weighted ties that represent shared community districts. A weighted tie between two individuals indicates that they both have a residence or contact venue in the same community district. The weight is given by the count of community districts the pair share.
 
-This network encodes the potential for a pair of individuals to make contact with one another and transmit a pathogen. The more community districts they share, the more likely it is that they will make contact and/or transmit a pathogen. Of interest is the overall connectedness of the network, and the patterning of connections among participants from different demographic groups. The more connected a graph is, the more easily a pathogen could disseminate across the entire network.
+This network encodes the potential for a pair of individuals to make contact with one another and transmit a pathogen. The more community districts they share, the more likely it is that they will make contact and/or transmit a pathogen. Of interest is the overall connectedness of the network. The more connected a graph is, the more easily a pathogen could disseminate across the entire network.
 
 To assess connectedness, we calculated the proportion of nodes in the largest connected component of the MPX NYC participant spatial overlap network. A connected component of a network is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties. For this analysis, we consider a network with a larger largest connected component to be better connected than a network with a smaller largest connected component.
 
-To gain an understanding of how different subgroups mix in New York City, we define the spatial selection coefficient $\psi(a,b)$, a measure of the propensity for members of subgroup $a$ to have residences and contact venues in the same community districts as members of subgroup $b$. The spatial selection coefficient is defined as the spatial selection ratio minus one. i.e.
+### Spatial Mixing
+The MPX NYC participant spatial overlap network can also be used to analyze the pattern of spatial overlap across different demographic groups. 
+
+We calculated the spatial selection coefficient for age, sexual orientation, and race-gender. We define the spatial selection coefficient $\psi(a,b)$, a measure of the propensity for members of subgroup $a$ to have residences and contact venues in the same community districts as members of subgroup $b$. The spatial selection coefficient is defined as the spatial selection ratio minus one. i.e.
 
 $$ \psi(a,b) = r(a,b) - 1 $$
 
@@ -138,23 +157,9 @@ The spatial selection ratio of subgroup a for subgroup b $r(a,b)$ is defined as 
 
 This spatial selection coefficient is $0$ when contact venues and residences for a given subgroup are distributed in space independently of another; positive if members of the former subgroup tend to share community districts with those of the latter; and negative if they tend to not share community districts.
 
-### MPX NYC Community district participant overlap network
 
-To understand how community districts are connected to one another by the individuals who have residences or contact venues in them, we constructed the MPX NYC community district participant overlap network. This network has community districts as nodes. A weighted tie between two nodes indicates that the two community districts both have at least one individual who has a residence or community district in both places. The weight is given by the count of such individuals.
 
-For any given node in this network, we define spatial network centrality as the weighted degree of that node. (i.e. the sum of the weights for all the ties connected to the node).
-
-## Statistical Analysis
-
-### Descriptive analysis
-
-To describe the study population, we cross-tabulated participant characteristics against report of physical or sexual contact in a congregate setting. We also visualized sexual orientation by race-gender.
-
-To describe the contact places elicited from participants, we cross-tabulated their characteristics. To understand how participants move between home and contact places, for every community district, we subtracted the proportion of residences it contains from the proportion of contact places it contains. We further visualized the cross tabulation of home census tract and contact place census tract.
-
-Finally, we calculated the spatial selection coefficient for age, sexual orientation, and race-gender, and we calculated the proportion in the largest connected component of the MPX NYC participant spatial overlap network.
-
-### Assessing strategies for outbreak control
+### Outbreak control
 
 To illustrate how the pattern of interaction among queer and trans people should inform early responses to novel infectious diseases, we examined the impact of a simplified, spatially-targeted intervention to immunize against a novel pathogen. In this hypothetical intervention, community districts are ordered by priority and are immunized one at a time, beginning with the highest priority community district.
 
@@ -172,7 +177,11 @@ We assessed effectiveness against two strategies for for prioritizing community 
 
 The first is the contact-based strategy, we rank districts according to the number of contact venues and residences they contain (counting only the residences of participants who reported group contact, and who are not yet immunized). This strategy prioritizes community districts with a high amount of sexual or physical contact for immunization.
 
-The second is the movement-based strategy, where community districts are ranked by their spatial network centrality in the MPX NYC community district participant overlap network. This strategy prioritizes community districts with a high level of connection to other community districts for immunization.
+The second is the movement-based strategy, where community districts are ranked by their spatial network centrality. This strategy prioritizes community districts with a high level of connection to other community districts for immunization. 
+
+To calculate spatial network centrality, we constructed a network with community districts as nodes. A weighted tie between two nodes indicates that the two community districts both have at least one individual who has a residence or community district in both places. The weight is given by the count of such individuals. For any given node in this network, we define spatial network centrality as the weighted degree of that node. (i.e. the sum of the weights for all the ties connected to the node).
+
+
 
 #### Intervention simultion algorithm
 
@@ -326,7 +335,7 @@ make_table_movement_travel() %>%
 
 ## Mixing
 
-@fig-subgroup-mixing quantifies the degree to which individuals with characteristics shown on the left live or play in an overalappoing set of community districts with individuals whose characteristics are shown at the top. Different sub-groups showed different patterns of co-attendance of community districts. Overall, MPX NYC participants showed spatial homophily - the spatial selection coefficient from a given group to the same group was positive for all levels of race-gender, sexual orientation, and age. In addition, black cisgender men and non-binary persons tended to visit or live in different neighborhoods than white cisgender men. Non-binary persons also showed a preference for community districts in which transgender men live. Gay identified participants preferred to live and play in community districts where bisexual, straight and queer identified participants did not live. Similarly, those groups selected against community districts in which gay identified individuals live or play.
+@fig-subgroup-mixing quantifies the degree to which individuals with characteristics shown on the left live or play in an overlapping set of community districts with individuals whose characteristics are shown at the top. Different sub-groups showed different patterns of co-attendance of community districts. Overall, MPX NYC participants showed spatial homophily - the spatial selection coefficient from a given group to the same group was positive for all levels of race-gender, sexual orientation, and age. In addition, black cisgender men and non-binary persons tended to visit or live in different neighborhoods than white cisgender men. Non-binary persons also showed a preference for community districts in which transgender men live. Gay identified participants preferred to live and play in community districts where bisexual, straight and queer identified participants did not live. Similarly, those groups selected against community districts in which gay identified individuals live or play.
 
 ```{r fig_subgroup_mixing}
 #| fig-cap:  "Social mixing matrices for MPX NYC participants by race-gender (top), sexual orientation (bottom left), and age (bottom right)"
