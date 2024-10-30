@@ -44,60 +44,6 @@ targets::tar_make() # Runs the data pipeline shown in _targets.R
 
 ```
 
-# Outline
-
-[Participants]{.underline}
-
--   Most recruited through Grindr pop-up ads that were deployed between XX and XX, and between XX and XXX.
-
--   Demographically diverse, with groupings that require different strategies for communication, and possibly different health interventions
-
--   Deeply connected to LGBTI communities socially and sexualy
-
-    -   those who are connected through physical contact in congregate settings have:
-
-        -   better access to health services
-
-        -   deeper connections with LGBTI community
-
-        -   no differences between them and non-contact people by :
-
-            -   race/gender
-
-            -   HIV PrEP
-
-            -   HIV Status
-
-Contact venues
-
--   The majority of contact venues were venues for sexual contact
-
--   These venues tended to be closer to home and tended to be in private residences
-
-    -   The closer to home, the more likely a contact venue is a private residence
-
-Movement
-
--   Participant contact venues concentrated them among fewer community districts than their residences
-
-    -   happened within boroughts
-
-    -   happened across boroughts
-
--   There was variation in distance between contact venues and home
-
-Mixing
-
--   spatial homophily and spatial segregation
-
-Hypothetical Intervention
-
--   few community districts cover many participants
-
--   Contact-neutralizing strategy increases coverage fast whereas movement-neutralizing strategy decreases size of largest connected component fast
-
--   Overall, contact-neutralizing strategy is better
-
 # Methods
 
 ```{r text_variables}
@@ -202,17 +148,23 @@ This network encodes the potential for a pair of individuals to make physical co
 
 Of interest is the overall connectedness of the network. The more connected a network is, the more easily a pathogen could disseminate across the entire network.
 
-To assess connectedness, we calculated the proportion of nodes in the largest connected component (LCC) of the MPX NYC participant spatial overlap network. A connected component of a network is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties. For this analysis, we consider a network with a larger largest connected component to be better connected than a network with a smaller largest connected component. (LCC instead of LArgest)
+To assess connectedness, we calculated the proportion of nodes in the largest connected component (LCC) of the MPX NYC participant spatial overlap network. A connected component of a network is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties. For this analysis, we consider a network with a larger LCC to be better connected than a network with a smaller LCC.
 
 [Spatial mixing coefficient]{.underline}
 
-The MPX NYC participant network can also be used to analyze the pattern of connection across different demographic groups. We did this using the spatial mixing coefficient, which we define below. We calculated the spatial mixing coefficient for age, sexual orientation, and race-gender.
+The MPX NYC participant network can also be used to analyze the pattern of connection across different demographic groups. We did this using the spatial mixing coefficient, which we motivate and define below.
 
-We define the spatial mixing coefficient $\psi(a,b)$ as a measure of the propensity for members of subgroup $a$ to have residences and contact venues in the same community districts as members of subgroup $b$. It is calculated as the spatial mixing ratio minus one. ($\psi(a,b) = r(a,b) - 1$)
+Say there are three types of retired university professors in Boston - A) those who choose to live and socialize in neighborhoods with universities (where they can meet old colleagues and students); B) those who choose to live and socialize away from former colleagues and students; and C) those who choose neighborhoods without regard for university life. And say the proportion of people who are under 25 years of age in Boston is $20\%$ and that the majority of this group are college students. People who are under 25 years of age would be over-represented in neighborhoods with college campuses and residences, and under-represented in those without.
 
-The spatial mixing ratio of subgroup a for subgroup b $r(a,b)$ is defined as the average preference of subgroup a for subgroup b divided by the prevalence of subgroup b. For each node in subgroup a, preference for subgroup b is given by the number of alters in subgroup b divided by the total number of alters (an alter is any node connected to the node under consideration). The average preference is given by the sum of preference among subgroup a divided by the number of nodes in subgroup a. The prevalence of subgroup b is given by the number of nodes in subgroup b divided by the total number of nodes. (preferences in second mention). For instance, if a node in group a, has 10 alters, and 5 of them are in subgroup b, then the preference would be 50%. (departure from independence. (spatial homophily vs. heterophily. random mixing. how to interpret. "generalized epidemic" vs. segregated epidemic. Try and give interpretatino for preference. doctor who is sophisticated. not for the reviewer, for how the reviewer thinks about the audience.)
+To understand what kind of retired professor a particular person is, you could ask her of all the peopple she encountered in the past 12 months, what proportion were under $25$. If she is of type C, we would expect her answer to be about $25\%$. If she avoids universities (i.e. is of type B), the proportion would be lower than $25\%$ and if she seeks them out (i.e. type A), her answer would be greater than $25\%$.
 
-This spatial mixing coefficient is zero when contact venues and residences for a given subgroup are distributed in space independently of another; positive if members of the former subgroup tend to share community districts with those of the latter; and negative if they tend to not share community districts.
+In the context of MPX NYC, we define the mixing ratio of subgroup $a$ for subgroup $b$ as the average preference of subgroup $a$ for subgroup $b$ divided by the prevalence of subgroup $b$. For a given individual (node), preference for subgroup $b$ is given by the number of alters in subgroup $b$ divided by the total number of alters (an alter is any node connected to the node under consideration). The average preference of subgroup $a$ for subgroup $b$ is given by the sum of preferences among individuals in subgroup $a$ divided by the size of subgroup $a$. The spatial mixing coefficient is calculated as the spatial mixing ratio minus one.
+
+In the motivating example, we were soliciting the retired professor's preference for the subgroup: under 25. We were then mentally comparing it with the prevalence of that subgroup ($25\%$). The spatial mixing coefficient makes this comparison by dividing preference by prevalence and subtracting 1. It is zero when contact venues and residences for a given subgroup are distributed in space independently of another; positive if members of the former subgroup tend to share community districts with those of the latter; and negative if they tend to not share community districts.
+
+The spatial mixing coefficient is related to notions in social network analysis and infectious disease modelling. The coefficient of a given sub-group for that same subgroup indicates homophily when it is positive, random mixing when it is zero, and heterophily when it is negative. It goes further by showing, in the case of heterophily, which subgroups members of the focal subgroup tend to be connected with. This is useful in early outbreak investigations as it allows the analyst to understand the potential path of a new pathogen across the population of interest. e.g. where there is strong homophily in the a network like the MPX NYC participant network, a new pathogen will tend to stay within the subgroup it first affected. If there is strong heterophily, on the other hand, the pathogen will tend to disseminate across groups favored by the first subgroup it affected.
+
+We calculated the spatial mixing coefficient across groups defined by age, sexual orientation, and race-gender.
 
 ### Community district network characteristics
 
@@ -243,6 +195,60 @@ For each community district immunized, we updated the MPX NYC participant networ
 To illustrate differences in spatial efficiency across intervention strategies, we visualized the number of community districts it would take to immunize 33% of the population, and 66% of the population respectively. To illustrate differences in spatial network impact across intervention strategies, for each additional community district immunized, we plotted the proportions of individuals who are immunized, unimmunized and in the largest connected component, and unimmunized but outside of the largest connected component.
 
 # Results
+
+## Outline
+
+[Participants]{.underline}
+
+-   Most recruited through Grindr pop-up ads that were deployed between XX and XX, and between XX and XXX.
+
+-   Demographically diverse, with groupings that require different strategies for communication, and possibly different health interventions
+
+-   Deeply connected to LGBTI communities socially and sexualy
+
+    -   those who are connected through physical contact in congregate settings have:
+
+        -   better access to health services
+
+        -   deeper connections with LGBTI community
+
+        -   no differences between them and non-contact people by :
+
+            -   race/gender
+
+            -   HIV PrEP
+
+            -   HIV Status
+
+Contact venues
+
+-   The majority of contact venues were venues for sexual contact
+
+-   These venues tended to be closer to home and tended to be in private residences
+
+    -   The closer to home, the more likely a contact venue is a private residence
+
+Movement
+
+-   Participant contact venues concentrated them among fewer community districts than their residences
+
+    -   happened within boroughts
+
+    -   happened across boroughts
+
+-   There was variation in distance between contact venues and home
+
+Mixing
+
+-   spatial homophily and spatial segregation
+
+Hypothetical Intervention
+
+-   few community districts cover many participants
+
+-   Contact-neutralizing strategy increases coverage fast whereas movement-neutralizing strategy decreases size of largest connected component fast
+
+-   Overall, contact-neutralizing strategy is better
 
 ```{r}
 perc_sti <- "0%"
