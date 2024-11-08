@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Keletso Makofane">
-<meta name="dcterms.date" content="2024-05-23">
+<meta name="dcterms.date" content="2024-10-30">
 
 <title>MPX NYC</title>
 <style>
@@ -69,7 +69,7 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">MPX NYC</h1>
-<p class="subtitle lead">Key findings and recommendations</p>
+<p class="subtitle lead">Methods and Results</p>
 </div>
 
 
@@ -86,7 +86,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 23, 2024</p>
+      <p class="date">October 30, 2024</p>
     </div>
   </div>
   
@@ -183,16 +183,20 @@ div.csl-indent {
 </section>
 <section id="participant-network-characteristics" class="level3">
 <h3 class="anchored" data-anchor-id="participant-network-characteristics">Participant network characteristics</h3>
-<p>To understand how the population represented by MPX NYC study data are potentially connected through interactions in the physical spaces they socialize in, we constructed the MPX NYC participant network. This network has survey participants as nodes, and weighted ties that represent shared community districts. A weighted tie between two individuals indicates that they each have at least one residence or contact venue in a common community district. The weight is given by the count of community districts the pair share in this way.</p>
+<p>To understand how the population represented by MPX NYC study data are potentially connected through interactions in the physical spaces they live and socialize in, we constructed the MPX NYC participant network. This network has survey participants as nodes, and weighted ties that represent shared community districts. A weighted tie between two individuals indicates that they each have at least one residence or contact venue in a common community district. The weight is given by the count of community districts the pair share in this way.</p>
 <p>This network encodes the potential for a pair of individuals to make physical contact with one another in a way that would potentially transmit a pathogen. The more community districts they share, the more likely it is that they would transmit a pathogen, if one member of the pair was infected and the other was not.</p>
 <p><u>Proportion in largest connected component</u></p>
-<p>Of interest is the overall connectedness of the network. The more connected a network is, the more easily a pathogen could disseminate across the entire network.</p>
-<p>To assess connectedness, we calculated the proportion of nodes in the largest connected component (LCC) of the MPX NYC participant spatial overlap network. A connected component of a network is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties. For this analysis, we consider a network with a larger largest connected component to be better connected than a network with a smaller largest connected component.</p>
+<p>Of interest is the overall connectedness of the network. The better connected a network is, the more easily a pathogen could disseminate across the entire network.</p>
+<p>To assess connectedness, we calculated the proportion of nodes in the largest connected component (LCC) of the MPX NYC participant network. A connected component of a network is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties.</p>
+<p>For this analysis, we consider a network with a larger LCC to be better connected than a network with a smaller LCC. This measure will be used to assess the impact of a hypothetical intervention to slow down the dissemination of a new pathogen (more described below).</p>
 <p><u>Spatial mixing coefficient</u></p>
-<p>The MPX NYC participant network can also be used to analyze the pattern of connection across different demographic groups. We did this using the spatial mixing coefficient, which we define below. We calculated the spatial mixing coefficient for age, sexual orientation, and race-gender.</p>
-<p>We define the spatial mixing coefficient <span class="math inline">\(\psi(a,b)\)</span> as a measure of the propensity for members of subgroup <span class="math inline">\(a\)</span> to have residences and contact venues in the same community districts as members of subgroup <span class="math inline">\(b\)</span>. It is calculated as the spatial mixing ratio minus one. (<span class="math inline">\(\psi(a,b) = r(a,b) - 1\)</span>)</p>
-<p>The spatial mixing ratio of subgroup a for subgroup b <span class="math inline">\(r(a,b)\)</span> is defined as the average preference of subgroup a for subgroup b divided by the prevalence of subgroup b. For each node in subgroup a, preference for subgroup b is given by the number of alters in subgroup b divided by the total number of alters (an alter is any node connected to the node under consideration). The average preference is given by the sum of preference among subgroup a divided by the number of nodes in subgroup a. The prevalence of subgroup b is given by the number of nodes in subgroup b divided by the total number of nodes.</p>
-<p>This spatial mixing coefficient is zero when contact venues and residences for a given subgroup are distributed in space independently of another; positive if members of the former subgroup tend to share community districts with those of the latter; and negative if they tend to not share community districts.</p>
+<p>The MPX NYC participant network can also be used to analyze the pattern of connection across different demographic groups. We did this using the spatial mixing coefficient, which we motivate and define below.</p>
+<p>Say there are three types of retired university professors in Boston - A) those who choose to live and socialize in neighborhoods with universities (where they can meet old colleagues and students); B) those who choose to live and socialize away from former colleagues and students; and C) those who choose neighborhoods without regard for university life. And say the proportion of people who are under 25 years of age in Boston is <span class="math inline">\(20\%\)</span> and that the majority of this group are college students. People who are under 25 years of age would be over-represented in neighborhoods with college campuses and residences, and under-represented in those without.</p>
+<p>To understand what kind of retired professor a particular person is, you could ask her of all the peopple she encountered in the past 12 months, what proportion were under <span class="math inline">\(25\)</span>. If she is of type C, we would expect her answer to be about <span class="math inline">\(20\%\)</span>. If she avoids universities (i.e.&nbsp;is of type B), the proportion would be lower than <span class="math inline">\(20\%\)</span> and if she seeks them out (i.e.&nbsp;type A), her answer would be greater than <span class="math inline">\(20\%\)</span>.</p>
+<p>In the context of MPX NYC, we define the mixing ratio of subgroup <span class="math inline">\(a\)</span> for subgroup <span class="math inline">\(b\)</span> as the average preference of subgroup <span class="math inline">\(a\)</span> for subgroup <span class="math inline">\(b\)</span> divided by the prevalence of subgroup <span class="math inline">\(b\)</span>. For a given individual (node), preference for subgroup <span class="math inline">\(b\)</span> is given by the number of alters in subgroup <span class="math inline">\(b\)</span> divided by the total number of alters (an alter is any node connected to the node under consideration). The average preference of subgroup <span class="math inline">\(a\)</span> for subgroup <span class="math inline">\(b\)</span> is given by the sum of preferences among individuals in subgroup <span class="math inline">\(a\)</span> divided by the size of subgroup <span class="math inline">\(a\)</span>. The spatial mixing coefficient is calculated as the spatial mixing ratio minus one.</p>
+<p>In the motivating example, we were soliciting the retired professor’s preference for the subgroup: under 25. We were then mentally comparing it with the prevalence of that subgroup (<span class="math inline">\(20\%\)</span>). The spatial mixing coefficient makes this comparison by dividing preference by prevalence and subtracting 1. It is zero when contact venues and residences for a given subgroup are distributed in space independently of another; positive if members of the former subgroup tend to share community districts with those of the latter; and negative if they tend to not share community districts.</p>
+<p>The spatial mixing coefficient is related to notions in social network analysis and compartmental infectious disease modelling. The coefficient of a given sub-group for that same subgroup indicates homophily when it is positive, random mixing when it is zero, and heterophily when it is negative. It goes further by showing, in the case of heterophily, which subgroups members of the focal subgroup tend to be connected with. This is useful in early outbreak investigations as it allows the analyst to understand the potential path of a new pathogen across the population of interest. e.g.&nbsp;where there is strong homophily in the a network like the MPX NYC participant network, a new pathogen will tend to stay within the subgroup it first affected. If there is strong heterophily, on the other hand, the pathogen will tend to disseminate across groups favored by the first subgroup it affected.</p>
+<p>We calculated the spatial mixing coefficient across groups defined by age, sexual orientation, and race-gender.</p>
 </section>
 <section id="community-district-network-characteristics" class="level3">
 <h3 class="anchored" data-anchor-id="community-district-network-characteristics">Community district network characteristics</h3>
@@ -203,17 +207,16 @@ div.csl-indent {
 <p>To illustrate how the pattern of interaction among queer and trans people should inform early responses to novel infectious diseases, we examined the impact of a simplified, spatially-targeted intervention to immunize the population represented by the MPX NYC dataset against a novel pathogen. We examine the impact of two different approaches to conducting the intervention on two population outcome measures of interest: immunization coverage, and population connectedness.</p>
 <section id="intervention-strategies" class="level4">
 <h4 class="anchored" data-anchor-id="intervention-strategies">Intervention strategies</h4>
-<p>In this hypothetical intervention, community districts are ordered by priority and are immunized one at a time, beginning with the highest priority community district. We assume that to immunize a community district is to immunize each individual who has a contact venue or residence in that community district, unless that individual has already been immunized. We assume that once a person is immunized, they are unable to acquire or transmit the pathogen.</p>
+<p>In this hypothetical intervention, community districts are ordered by priority and are immunized one at a time, beginning with the highest priority community district. We assume that to immunize a community district is to immunize each individual who has a contact venue or residence in that community district. We assume that once a person is immunized, they are unable to acquire or transmit the pathogen, and we assume that everyone can only be immunized once.</p>
 <p>We assessed two strategies for prioritizing community districts: the contact-neutralizing strategy and the movement-neutralizing strategy.</p>
-<p>In the <u>contact-neutralizing</u> strategy, we rank districts according to the number of contact venues and residences they contain (counting only the residences of participants who reported group contact, and who are not yet immunized). This strategy prioritizes community districts with a high amount of sexual or physical contact for immunization.</p>
-<p>In the <u>movement-neutralizing strategy</u>, we rank community districts by their spatial centrality. This strategy prioritizes community districts with a high level of connection to other community districts for immunization.</p>
+<p>In the <u>contact-neutralizing</u> strategy, we rank districts according to the number of contact venues and residences they contain (counting only the residences of participants who reported group contact, and who are not yet immunized). This strategy prioritizes community districts with a high amount of sexual or physical contact for immunization. It attempts to immunize as many people in as few community districts as possible.</p>
+<p>In the <u>movement-neutralizing strategy</u>, we rank community districts by their spatial centrality. This strategy prioritizes community districts with a high level of connection to other community districts for immunization. It attempts to immunize the community districts that are potential hubs for the dissemination of the pathogen across the city early to geographically contain the outbreak.</p>
 </section>
 <section id="intervention-outcomes" class="level4">
 <h4 class="anchored" data-anchor-id="intervention-outcomes">Intervention outcomes</h4>
 <p>For each community district immunized, we updated the MPX NYC participant network by removing nodes that represent immunized individuals. We then calculated the two outcomes each time: spatial efficiency, and spatial network impact.</p>
-<p><u>Spatial efficiency</u> is defined as the total count of immunized individuals divided by the count of immunized community districts.</p>
-<p><u>Spatial network impact</u> defined as the proportion of individuals included in the largest connected component of the MPX NYC participant network.</p>
-<p>To illustrate differences in spatial efficiency across intervention strategies, we visualized the number of community districts it would take to immunize 33% of the population, and 66% of the population respectively. To illustrate differences in spatial network impact across intervention strategies, for each additional community district immunized, we plotted the proportions of individuals who are immunized, unimmunized and in the largest connected component, and unimmunized but outside of the largest connected component.</p>
+<p><u>Spatial efficiency</u> is defined as the total count of immunized individuals divided by the count of immunized community districts. <u>Spatial network impact</u> is defined as the proportion of individuals included in the largest connected component of the MPX NYC participant network.</p>
+<p>To illustrate differences in spatial efficiency across intervention strategies, we visualized the number of community districts it would take to immunize 33% of the population, and 66% of the population respectively. To illustrate differences in spatial network impact across intervention strategies, for each additional community district immunized, we plotted the proportions of individuals who are immunized, unimmunized and in the largest connected component, and unimmunized but outside of the largest connected component, respectively.</p>
 </section>
 </section>
 </section>
@@ -222,28 +225,30 @@ div.csl-indent {
 <h1>Results</h1>
 <section id="participants" class="level2">
 <h2 class="anchored" data-anchor-id="participants">Participants</h2>
-<p>The MPX NYC survey was open from 30 September to 15 November, 2022, and rapidly recruited a diverse group of participants (see <a href="#fig-people-descriptives">Figure&nbsp;4</a>). About 70% of participants were recruited over two 48 hour periods: half were recruited from 30 to 31 Aug, and another 20% from 10 to 11 September). Over 50% of participants were between the ages of 18-34 at the time of the survey. Two fifths were white cisgender men, about 15% were latinx cisgender men, and 10% were black cisgender men. About 5% of participants were transgender (with slightly over half being transgender men). Non-binary individuals comprised 7%. Two thirds of participants identified as gay, 14% as bisexual, and 12% as queer. Just under half of participants resided in the borough of Manhattan, and one third lived in Brooklyn.</p>
+<p>The MPX NYC survey was open from 30 August to 15 November, 2022, but recruited <span class="math inline">\(70\%\)</span> participants in two 48 hour periods: half were recruited from 30 to 31 Aug, and another 20% from 10 to 11 September (see <a href="#fig-people-descriptives">Figure&nbsp;4</a>). Over these periods, the MPX NYC recruitment advertisements were shown to users of Grindr in New York City upon logging on to the app.</p>
+<p>MPX NYC participants are demographically diverse. Over 50% of participants were between the ages of 18-34 at the time of the survey. Two fifths were white cisgender men, about 15% were latinx cisgender men, and 10% were black cisgender men. About 5% of participants were transgender (with slightly over half being transgender men). Non-binary individuals comprised 7% of participants. Two-thirds of participants identified as gay, 14% as bisexual, and 12% as queer. Just under half of participants resided in the borough of Manhattan, and one third in Brooklyn.</p>
+<p>In terms of health status and health services, one in ten participants reported living with HIV - the overwhelming majority were virally suppressed. In addition, about 16% reported at least one STI symptom. Two out of five participants were on PrEP at the time they took the survey. Two-thirds had received the MPOX vaccine, though only 8% had received MPOX testing.</p>
 <div class="cell">
 <div id="fig-people-descriptives" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 
-<div id="cdnqcqrqlr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cdnqcqrqlr table {
+<div id="ltqyuwbwgv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ltqyuwbwgv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cdnqcqrqlr thead, #cdnqcqrqlr tbody, #cdnqcqrqlr tfoot, #cdnqcqrqlr tr, #cdnqcqrqlr td, #cdnqcqrqlr th {
+#ltqyuwbwgv thead, #ltqyuwbwgv tbody, #ltqyuwbwgv tfoot, #ltqyuwbwgv tr, #ltqyuwbwgv td, #ltqyuwbwgv th {
   border-style: none;
 }
 
-#cdnqcqrqlr p {
+#ltqyuwbwgv p {
   margin: 0;
   padding: 0;
 }
 
-#cdnqcqrqlr .gt_table {
+#ltqyuwbwgv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -269,12 +274,12 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-#cdnqcqrqlr .gt_caption {
+#ltqyuwbwgv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cdnqcqrqlr .gt_title {
+#ltqyuwbwgv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -286,7 +291,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-#cdnqcqrqlr .gt_subtitle {
+#ltqyuwbwgv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -298,7 +303,7 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-#cdnqcqrqlr .gt_heading {
+#ltqyuwbwgv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -310,13 +315,13 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#cdnqcqrqlr .gt_bottom_border {
+#ltqyuwbwgv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cdnqcqrqlr .gt_col_headings {
+#ltqyuwbwgv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -331,7 +336,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#cdnqcqrqlr .gt_col_heading {
+#ltqyuwbwgv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -351,7 +356,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-#cdnqcqrqlr .gt_column_spanner_outer {
+#ltqyuwbwgv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -363,15 +368,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-#cdnqcqrqlr .gt_column_spanner_outer:first-child {
+#ltqyuwbwgv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cdnqcqrqlr .gt_column_spanner_outer:last-child {
+#ltqyuwbwgv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cdnqcqrqlr .gt_column_spanner {
+#ltqyuwbwgv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -383,11 +388,11 @@ div.csl-indent {
   width: 100%;
 }
 
-#cdnqcqrqlr .gt_spanner_row {
+#ltqyuwbwgv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cdnqcqrqlr .gt_group_heading {
+#ltqyuwbwgv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -413,7 +418,7 @@ div.csl-indent {
   text-align: left;
 }
 
-#cdnqcqrqlr .gt_empty_group_heading {
+#ltqyuwbwgv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -428,15 +433,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-#cdnqcqrqlr .gt_from_md > :first-child {
+#ltqyuwbwgv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cdnqcqrqlr .gt_from_md > :last-child {
+#ltqyuwbwgv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cdnqcqrqlr .gt_row {
+#ltqyuwbwgv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -455,7 +460,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-#cdnqcqrqlr .gt_stub {
+#ltqyuwbwgv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -468,7 +473,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#cdnqcqrqlr .gt_stub_row_group {
+#ltqyuwbwgv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -482,15 +487,15 @@ div.csl-indent {
   vertical-align: top;
 }
 
-#cdnqcqrqlr .gt_row_group_first td {
+#ltqyuwbwgv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cdnqcqrqlr .gt_row_group_first th {
+#ltqyuwbwgv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cdnqcqrqlr .gt_summary_row {
+#ltqyuwbwgv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -500,16 +505,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#cdnqcqrqlr .gt_first_summary_row {
+#ltqyuwbwgv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cdnqcqrqlr .gt_first_summary_row.thick {
+#ltqyuwbwgv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cdnqcqrqlr .gt_last_summary_row {
+#ltqyuwbwgv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -519,7 +524,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#cdnqcqrqlr .gt_grand_summary_row {
+#ltqyuwbwgv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -529,7 +534,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#cdnqcqrqlr .gt_first_grand_summary_row {
+#ltqyuwbwgv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -539,7 +544,7 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-#cdnqcqrqlr .gt_last_grand_summary_row_top {
+#ltqyuwbwgv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -549,11 +554,11 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#cdnqcqrqlr .gt_striped {
+#ltqyuwbwgv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cdnqcqrqlr .gt_table_body {
+#ltqyuwbwgv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -562,7 +567,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#cdnqcqrqlr .gt_footnotes {
+#ltqyuwbwgv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -576,7 +581,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#cdnqcqrqlr .gt_footnote {
+#ltqyuwbwgv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -585,7 +590,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#cdnqcqrqlr .gt_sourcenotes {
+#ltqyuwbwgv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -599,7 +604,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#cdnqcqrqlr .gt_sourcenote {
+#ltqyuwbwgv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -607,63 +612,63 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#cdnqcqrqlr .gt_left {
+#ltqyuwbwgv .gt_left {
   text-align: left;
 }
 
-#cdnqcqrqlr .gt_center {
+#ltqyuwbwgv .gt_center {
   text-align: center;
 }
 
-#cdnqcqrqlr .gt_right {
+#ltqyuwbwgv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cdnqcqrqlr .gt_font_normal {
+#ltqyuwbwgv .gt_font_normal {
   font-weight: normal;
 }
 
-#cdnqcqrqlr .gt_font_bold {
+#ltqyuwbwgv .gt_font_bold {
   font-weight: bold;
 }
 
-#cdnqcqrqlr .gt_font_italic {
+#ltqyuwbwgv .gt_font_italic {
   font-style: italic;
 }
 
-#cdnqcqrqlr .gt_super {
+#ltqyuwbwgv .gt_super {
   font-size: 65%;
 }
 
-#cdnqcqrqlr .gt_footnote_marks {
+#ltqyuwbwgv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cdnqcqrqlr .gt_asterisk {
+#ltqyuwbwgv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cdnqcqrqlr .gt_indent_1 {
+#ltqyuwbwgv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cdnqcqrqlr .gt_indent_2 {
+#ltqyuwbwgv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cdnqcqrqlr .gt_indent_3 {
+#ltqyuwbwgv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cdnqcqrqlr .gt_indent_4 {
+#ltqyuwbwgv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cdnqcqrqlr .gt_indent_5 {
+#ltqyuwbwgv .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1214,7 +1219,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 </figure>
 </div>
 </div>
-<p>The sexual orientation of participants differed by gender (see <a href="#fig-sexorientation-racegender">Figure&nbsp;5</a>). The vast majority of cisgender men identified as gay, with some identifying as bisexual. Transgender men were most likely to identify as queer, bisexual, or gay whereas transgender women tended to identify as straight, bisexual, or other sexual orientations. Cisgender women tended to be straight, followed by biseuxual, followed by queer. For non-binary people, most identifed as queer, followed by gay and bisexual.</p>
+<p>This diversity of subgroups implies different strategies for communication, and possibly different health interventions. For instance, the sexual orientation of participants differed markedly by gender (see <a href="#fig-sexorientation-racegender">Figure&nbsp;5</a>). The vast majority of cisgender men identified as gay, with some identifying as bisexual. Transgender men, on the other hand, were most likely to identify as queer, followed by bisexual or gay. Transgender women tended to identify as straight, bisexual, or other sexual orientations. Cisgender women participants tended to be straight, followed by bisexual, followed by queer. For non-binary people, most identified as queer, followed by gay and bisexual.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-sexorientation-racegender" class="quarto-figure quarto-figure-center anchored">
@@ -1225,34 +1230,34 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 </div>
 </div>
 </div>
-<p>In terms of health status, one in ten participants reported living with HIV - the overwhelming majority were virally suppressed. In addition, about 16% reported at least one STI symptom. In terms of health services, two out of five participants were on PrEP at the time they took the survey, two-thirds had received the MPOX vaccine though only 8% had received MPOX testing.</p>
-<p>MPX NYC participants were deeply connected to queer and trans people in New York City. About two-thirds reported being in recent (preceding 4 weeks) contact with 1 - 10 friends in this community whereas only 20% reported not being in contact with queer and trans friends over the same period. About half of the participants had betwen 1 and 3 recent sex partners with 15% reporting over 5 partners. Related to sex partners, about one third reported spending less than 15 minutes on average when traveling to a hookup while a third spent 16-30 minutes. Almost one of four participants reported having physical (non-sexual) contact with over 5 individuals over the preceding four weeks, and one third reported having no recent contact.</p>
-<p>Participants who reported recent physical or sexual contact in a group setting were slightly younger than those who did not. They were more likely to identify as gay and less likely to identify as straight. Those who had contact were more likely to live in Manhattan and less likely to live in Queens. Surprisingly, they were less likely to have been recruited through a Grindr advertisement. They were also more likely to have been recruited before the first Grindr pop-up advertisement on 1 September 2022.</p>
-<p>Finally, those who reported recent contact in a group setting did not differ with those who did not in terms of their HIV status and viral suppression. They were more likely to have at least one STI symptom than those who did not have recent contact in a group setting. This group had higher utilization of PrEP, mpox testing, and mpox vaccine. They were more closely connected with the queer and trans community: they reported more contact with friends, more physical contact partners and more sexual contact partners. They spent more time travelling to hookups than participants who had not had recent contact in a group setting.</p>
+<p>MPX NYC participants were deeply connected to queer and trans communities in New York City. About two-thirds reported being in recent (preceding 4 weeks) contact with 1 - 10 queer or trans friends. Only 20% reported not being in contact. About half of the participants had between 1 and 3 recent serial sex partnerships with one fifth reporting four or more partners. About one third of participants reported spending 16-30 minutes when traveling to a hookup while a third spent more than 30 minutes. Almost one in four participants reported having recent physical (non-sexual) contact with 2 or more individuals at the same time, and one third reported having had no contact. [DOUBLE CHECK]</p>
+<p>Among all MPX NYC participants, 40% (530) reported reported having had sex or physical contact with two or more people at the same time. These participants identified <span class="math inline">\(604\)</span> venues at which they had contact. These contact venues are examined in the next section.</p>
+<p>Participants who reported recent physical or sexual contact in a group setting (group contact) were slightly younger than those who did not. They were more likely to identify as gay and less likely to identify as straight. Surprisingly, they were less likely to have been recruited through a Grindr advertisement and more likely to have been recruited before the first Grindr pop-up advertisement on 30 August 2022.</p>
+<p>These participants did not differ from the rest in terms of HIV status or HIV viral suppression, but they were more likely to have at least one STI symptom, and showed higher utilization of PrEP, mpox testing, and mpox vaccine. They were more closely connected with the queer and trans community, reporting more contact with friends, more physical contact partners and more sexual contact partners. They spent more time travelling to hookups than participants who had not had recent contact in a group setting.</p>
 </section>
 <section id="contact-venues" class="level2">
 <h2 class="anchored" data-anchor-id="contact-venues">Contact venues</h2>
-<p>Among all MPX NYC participants, 40% (530) reported reported having had sex or physical contact with two or more people at the same time. These participants identified <span class="math inline">\(604\)</span> locations at which they had contact (contact venues). About two out of five contact venues were private residences, and about a quarter were dance parties. More than half of the places contace venues were in Manhattan, while less than a third were in the Brooklyn. A quarter of all contact venues were in the same community as participants’ residences, a third were in a different borough, and the remainder were in the same borough as home, but a different community district.</p>
+<p>Of the <span class="math inline">\(604\)</span> locations at which participant had physical or sexual contact in a group setting (contact venues), about two out of five were private residences, and about a quarter were dance parties. More than half of the contact venues were in Manhattan, while less than a third were in the Brooklyn. A quarter of all contact venues were in the same community as the participant’s residence, a third were in a different borough, and the remainder were in the same borough as home, but a different community district.</p>
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="kkvcbosynq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kkvcbosynq table {
+<div id="gccxebpskc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gccxebpskc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kkvcbosynq thead, #kkvcbosynq tbody, #kkvcbosynq tfoot, #kkvcbosynq tr, #kkvcbosynq td, #kkvcbosynq th {
+#gccxebpskc thead, #gccxebpskc tbody, #gccxebpskc tfoot, #gccxebpskc tr, #gccxebpskc td, #gccxebpskc th {
   border-style: none;
 }
 
-#kkvcbosynq p {
+#gccxebpskc p {
   margin: 0;
   padding: 0;
 }
 
-#kkvcbosynq .gt_table {
+#gccxebpskc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1278,12 +1283,12 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-left-color: #D3D3D3;
 }
 
-#kkvcbosynq .gt_caption {
+#gccxebpskc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kkvcbosynq .gt_title {
+#gccxebpskc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1295,7 +1300,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-width: 0;
 }
 
-#kkvcbosynq .gt_subtitle {
+#gccxebpskc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1307,7 +1312,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-width: 0;
 }
 
-#kkvcbosynq .gt_heading {
+#gccxebpskc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1319,13 +1324,13 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#kkvcbosynq .gt_bottom_border {
+#gccxebpskc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kkvcbosynq .gt_col_headings {
+#gccxebpskc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1340,7 +1345,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#kkvcbosynq .gt_col_heading {
+#gccxebpskc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1360,7 +1365,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#kkvcbosynq .gt_column_spanner_outer {
+#gccxebpskc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1372,15 +1377,15 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 4px;
 }
 
-#kkvcbosynq .gt_column_spanner_outer:first-child {
+#gccxebpskc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kkvcbosynq .gt_column_spanner_outer:last-child {
+#gccxebpskc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kkvcbosynq .gt_column_spanner {
+#gccxebpskc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1392,11 +1397,11 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   width: 100%;
 }
 
-#kkvcbosynq .gt_spanner_row {
+#gccxebpskc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kkvcbosynq .gt_group_heading {
+#gccxebpskc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1422,7 +1427,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   text-align: left;
 }
 
-#kkvcbosynq .gt_empty_group_heading {
+#gccxebpskc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1437,15 +1442,15 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: middle;
 }
 
-#kkvcbosynq .gt_from_md > :first-child {
+#gccxebpskc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kkvcbosynq .gt_from_md > :last-child {
+#gccxebpskc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kkvcbosynq .gt_row {
+#gccxebpskc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1464,7 +1469,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#kkvcbosynq .gt_stub {
+#gccxebpskc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1477,7 +1482,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#kkvcbosynq .gt_stub_row_group {
+#gccxebpskc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1491,15 +1496,15 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: top;
 }
 
-#kkvcbosynq .gt_row_group_first td {
+#gccxebpskc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kkvcbosynq .gt_row_group_first th {
+#gccxebpskc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kkvcbosynq .gt_summary_row {
+#gccxebpskc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1509,16 +1514,16 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#kkvcbosynq .gt_first_summary_row {
+#gccxebpskc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kkvcbosynq .gt_first_summary_row.thick {
+#gccxebpskc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kkvcbosynq .gt_last_summary_row {
+#gccxebpskc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1528,7 +1533,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#kkvcbosynq .gt_grand_summary_row {
+#gccxebpskc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1538,7 +1543,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#kkvcbosynq .gt_first_grand_summary_row {
+#gccxebpskc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1548,7 +1553,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-color: #D3D3D3;
 }
 
-#kkvcbosynq .gt_last_grand_summary_row_top {
+#gccxebpskc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1558,11 +1563,11 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#kkvcbosynq .gt_striped {
+#gccxebpskc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kkvcbosynq .gt_table_body {
+#gccxebpskc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1571,7 +1576,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#kkvcbosynq .gt_footnotes {
+#gccxebpskc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1585,7 +1590,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#kkvcbosynq .gt_footnote {
+#gccxebpskc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1594,7 +1599,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#kkvcbosynq .gt_sourcenotes {
+#gccxebpskc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1608,7 +1613,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#kkvcbosynq .gt_sourcenote {
+#gccxebpskc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1616,63 +1621,63 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#kkvcbosynq .gt_left {
+#gccxebpskc .gt_left {
   text-align: left;
 }
 
-#kkvcbosynq .gt_center {
+#gccxebpskc .gt_center {
   text-align: center;
 }
 
-#kkvcbosynq .gt_right {
+#gccxebpskc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kkvcbosynq .gt_font_normal {
+#gccxebpskc .gt_font_normal {
   font-weight: normal;
 }
 
-#kkvcbosynq .gt_font_bold {
+#gccxebpskc .gt_font_bold {
   font-weight: bold;
 }
 
-#kkvcbosynq .gt_font_italic {
+#gccxebpskc .gt_font_italic {
   font-style: italic;
 }
 
-#kkvcbosynq .gt_super {
+#gccxebpskc .gt_super {
   font-size: 65%;
 }
 
-#kkvcbosynq .gt_footnote_marks {
+#gccxebpskc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kkvcbosynq .gt_asterisk {
+#gccxebpskc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kkvcbosynq .gt_indent_1 {
+#gccxebpskc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kkvcbosynq .gt_indent_2 {
+#gccxebpskc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kkvcbosynq .gt_indent_3 {
+#gccxebpskc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kkvcbosynq .gt_indent_4 {
+#gccxebpskc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kkvcbosynq .gt_indent_5 {
+#gccxebpskc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1801,7 +1806,7 @@ N = 616<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ital
 </div>
 </div>
 </div>
-<p>Contact venues at which participants had sexual contact were overwhelmingly private residences whereas contact venues at which they had non-sexual physical contact were mostly dance parties (see <a href="#fig-places-distance-sexcontact">Figure&nbsp;6</a>). The closer to home a location was, the more likely it was to be a private residence and the more likely it was the site of sexual contact. By contrast, the futher from home a contac venue was, the less likely it was to be a dance party.</p>
+<p>Contact venues at which participants had sexual contact (rather than non-sexual physical contact) were overwhelmingly private residences whereas contact venues at which they had non-sexual physical contact were mostly dance parties (see <a href="#fig-places-distance-sexcontact">Figure&nbsp;6</a>). The closer to home a location was, the more likely it was to be a private residence and the more likely it was the site of sexual contact. By contrast, the further from home a contact venue was, the more likely it was to be a dance party.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-places-distance-sexcontact" class="quarto-figure quarto-figure-center anchored">
@@ -1812,7 +1817,10 @@ N = 616<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ital
 </div>
 </div>
 </div>
-<p><a href="#fig-communities-bar">Figure&nbsp;7</a> shows the difference in the relative frequency of community districts among contact places as compared to residences. It shows that within Brooklyn, Manhattan, and Queens, there is a small set of community districts which tend to be disproportionately represented among contact venues.</p>
+</section>
+<section id="movement" class="level2">
+<h2 class="anchored" data-anchor-id="movement">Movement</h2>
+<p><a href="#fig-communities-bar">Figure&nbsp;7</a> shows the difference betweeen the proportion of primary residences in each community district and the proprotion of contact venues in each community district. It shows that within Brooklyn, Manhattan, and Queens, there is a small set of community districts which tend to be markedly over-represented among contact venues compared to their share of primary residences. These are BK01, MN05, and QN05, respectively.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-communities-bar" class="quarto-figure quarto-figure-center anchored">
@@ -1838,7 +1846,7 @@ N = 616<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ital
 </section>
 <section id="spatial-mixing" class="level2">
 <h2 class="anchored" data-anchor-id="spatial-mixing">Spatial mixing</h2>
-<p><a href="#fig-subgroup-mixing">Figure&nbsp;9</a> quantifies the degree to which individuals with characteristics shown on the left live or play in an overlapping set of community districts with individuals whose characteristics are shown at the top. Different sub-groups showed different patterns of co-attendance of community districts. Overall, MPX NYC participants showed spatial homophily - the spatial selection coefficient from a given group to the same group was positive for all levels of race-gender, sexual orientation, and age. In addition, black cisgender men and non-binary persons tended to visit or live in different neighborhoods than white cisgender men. Non-binary persons also showed a preference for community districts in which transgender men live. Gay identified participants preferred to live and play in community districts where bisexual, straight and queer identified participants did not live. Similarly, those groups selected against community districts in which gay identified individuals live or play.</p>
+<p><a href="#fig-subgroup-mixing">Figure&nbsp;9</a> quantifies the degree to which individuals with characteristics shown on the left live or play in an overlapping set of community districts with individuals whose characteristics are shown at the top. Overall, MPX NYC participants showed spatial homophily - the spatial selection coefficient from a given group to the same group was positive for all levels of race-gender, sexual orientation, and age. In addition, black cisgender men and non-binary persons tended to visit or live in different neighborhoods than white cisgender men. Non-binary persons also showed a preference for community districts in which transgender men live. Gay identified participants preferred to live and play in community districts where bisexual, straight and queer identified participants did not live. Similarly, those groups selected against community districts in which gay identified individuals live or play.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-subgroup-mixing" class="quarto-figure quarto-figure-center anchored">
@@ -1855,7 +1863,7 @@ N = 616<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ital
 <section id="spatial-efficiency" class="level3">
 <h3 class="anchored" data-anchor-id="spatial-efficiency">Spatial efficiency</h3>
 <p><a href="#fig-hiimpact-communities">Figure&nbsp;10</a> shows which community districts would have to be immunized to immunize 33% of the population (Group A), and 66% of the population (Group A + Group B) under both the contact-neutralizing and movement-neutralizing intervention strategies.</p>
-<p>Under the contact-neutralizing strategy, it would take five community districts to immunize 33% of the population. These are MN04, BK01, MN10, BK03, and QN01. MN04 includes the neighborhoods XXXXX, BK01 includes XXXXX, MN10 includes XXXX, BK03 includes XXX, and QN01 includes XXXX. To reach 66% of participants with the intervention, it would be necessary to immunize 13 community districts. The additional community districts would be MN12, BK04, MN02, BK08, MN07, MN09, BK02, and MN05.</p>
+<p>Under the contact-neutralizing strategy, it would take five community districts to immunize 33% of the population. These are MN04, BK01, MN10, BK03, and QN01. To reach 66% of participants with the intervention, it would be necessary to immunize 13 community districts. The additional community districts would be MN12, BK04, MN02, BK08, MN07, MN09, BK02, and MN05.</p>
 <p>Under the movement-neutralizing strategy, it would take six community districts to reach 33% of the population: MN04, BK01, MN05, BK04, MN02, and BK03. It would take 16 community districts to reach 66% of the population. The additional community districts would be: MN64, MN10, QN01, BK08, MN09, QN05, BK09, MN11, BK14, and BK07.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -1870,7 +1878,7 @@ N = 616<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ital
 </section>
 <section id="spatial-network-impact" class="level3">
 <h3 class="anchored" data-anchor-id="spatial-network-impact">Spatial network impact</h3>
-<p><a href="#fig-netimpact">Figure&nbsp;11</a> shows that nearly 100% of individuals are included in the largest connected component before any intervention. For the movement-neutralizing strategy, the proportion of the population included in the largest connected component declines more sharply than for the contact-neutralizing strategy. In the contact-neutralizing strategy, the overall proportion of unvaccinated individuals declines more sharply than in the movement-neutralizing strategy. There is not a noticeable difference between the two strategies for the first 10 community districts to be immunized - differences between the two strategies start emerging once 10 community districts are immunized.</p>
+<p><a href="#fig-netimpact">Figure&nbsp;11</a> shows that nearly 100% of individuals are included in the largest connected component before any intervention. For the movement-neutralizing strategy, the proportion of the population included in the largest connected component declines more sharply than for the contact-neutralizing strategy as more community districts are immunized. In the contact-neutralizing strategy, the overall proportion of unvaccinated individuals declines more sharply than in the movement-neutralizing strategy. There is not a noticeable difference between the two strategies for the first 10 community districts to be immunized - differences between the two strategies start emerging once 10 community districts are immunized.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-netimpact" class="quarto-figure quarto-figure-center anchored">
@@ -1884,91 +1892,3129 @@ N = 616<span class="gt_footnote_marks" style="white-space:nowrap;font-style:ital
 </section>
 </section>
 </section>
-<section id="discussion" class="level1">
-<h1>Discussion</h1>
-<p>The marketing campaign for MPX NYC was among those that won a Health+Wellness award from Graphic Design USA in 2023 (<a href="https://gdusa.com/2023-health-wellness-awards-winner?rns=0%7C41441831%7C41441872%7C41441882" class="uri">https://gdusa.com/2023-health-wellness-awards-winner?rns=0%7C41441831%7C41441872%7C41441882</a>) and was recognized by Out Magazine through the inclusion of the pirncipal investigator in the 2022 OUT100 list for “LGBTQ+ Policy Makers and Advocates Changing the World” (<a href="https://www.out.com/print/2022/10/27/out100-2022-lgbtq-policy-makers-and-advocates-changing-world#rebelltitem29" class="uri">https://www.out.com/print/2022/10/27/out100-2022-lgbtq-policy-makers-and-advocates-changing-world#rebelltitem29</a>).</p>
-<p>Group sex is ubiquitous. The sex happens in physical space, it is important to study space and sex at the same time.</p>
-<p>People who are more likely to have contact are also more likely to use health-promoting interventions such as PrEP, mpox vaccination. But are not more likely to access mpox testing. The latter is likely more about the inadequate system for testing than its is about health behavior.</p>
-<p>Targeting public group sex venues is an ineffective intervention in the face of a growing threat of a deadly sexually transmitted infection.</p>
-<p>Sexual activity and group sexual activity are not evenly distributed across the city - there are few neighborhoods which, if intensely covered with interventions could slow down transmission across the city more generally.</p>
-<p>There is spatial homophily by race-gender, sexual orientation, and age. And there is some spatial separation between gay identified people and people of other sexual orientations. This is likely to lead to some containment among gay men.</p>
-<p>People who had group contact were also likely to have more friends, more one-on-one physical contact, and more one-on-one sexual contact than others. Even as spatial networks are considered as conduits for the transmission of pathogens, they should be conceptualized and conduits for information and other health-promoting resources.</p>
-<p>Network connectivity declines after about 10 community districts. We have to assume that we are working on a well connected network and conduct interventions concurrently instead of sequentially as we have proposed here.</p>
-<p>We must overreact in places which are hubs. Extend to international gay travel.</p>
-<p>Extend to contact tracing light.</p>
-<p>Background in programming:</p>
-<ul>
-<li><p>we make the asusmption of networking, but networks are not measured.</p></li>
-<li><p>we talk a lot about empowering community, but we need to just ask organizations how much material resources they dedicate to active reponsive work like this, vs.&nbsp;covering overhead. Things are usually what they seem.</p></li>
-<li><p>WE are called to reconsider the categorical imperative and move towards a network-based understanding of community.</p></li>
-<li><p>Next step: This is a flavor of CLM. We call on UNAIDS and WHO to generate technical guidance to conduct these studies.</p></li>
-</ul>
-<p>Reccomendations:</p>
-<ul>
-<li><p>Gov:</p>
-<ul>
-<li><p>hire capable queer and tans people of different backgrounds to convene local groups to monitor the situation and make contingency plans</p></li>
-<li><p>defund centers for pandemic preparendess which have not done any work to prepare us for the onslaught and steer funding to coalitions of local activists, researchers, and government who wish to coordinate efforts to prepare</p></li>
-<li><p>Invest in success and not in prestigious and well-explained failure.</p></li>
-</ul></li>
-<li><p>conduct this kind of survey every year to keep an up-to date map and study its evolution over time. We collected MPX NYC 2 data, which are currently being analysed.</p></li>
-<li><p>convene groups to be ready for the new outbreak instead of wiating for it to kill people before we do anything</p></li>
-<li><p>accept that under biden’s presidency, activists were gaslighted into believing the administration is doing the utmost to slow the spread down whereas it was doing the least. If we are to prevent pain and suffering, we have to assume that city, state, and federal government will provide as much material support as they did through this ground-breaking initiative which was the only of its kind at the time we conducted it.</p></li>
-<li><p>Do whatever you want - climate change is gonna hit us before you get tenure. go wild. have fund. be a freak.</p></li>
-</ul>
-<p>Methodologically,</p>
-<ul>
-<li><p>we spearheading technical innovation both in data collection - survey instrument.</p></li>
-<li><p>and in data wrangling and analysis. use bipartite network to keep and wrangle the data. get to the core of the relational content of the work.</p></li>
-<li><p>we also offer project management tools and skills to large organizations which have branded themselves as mpox-concerned, but have not contributed new knowledge or mounted useful programs.</p></li>
-<li><p>Social network and spatial network analysis is the next fronteir. If we don’t properly conceptualize the relational nature of public heatlh programs, we are doomed to host webinar after webinar of platitudes.</p></li>
-<li><p>Can help with HIV and STIs and can help us to conceive of a pandemic prepareness program that extends beyond webinars conducted on unfair terms to queer and trans people doing work.</p></li>
-</ul>
-<p>While many researchers have been paid by funding organizations to talk about mpox, few have contributed anything that can help us stop it and attend to community needs. Rec is for capable researchers to break rank and do the research they think is necessary with the understanding that people who usually get paid will get paid (professional researchers), and people who usually do not get paid will not get paid (community researchers).</p>
-<p>Our most important recomendation is not to government, which has proven itself to be what it appears to be in the face of actual emergencies, and it is not to large HIV organizations and pundits. It is to queer and trans people who have the skills to produce new and useful knowledge. WE did it cheaper, quicker, and better than the large organizations that have sucked up funding.</p>
-<p>The RESPND-MI project commits to making as much of our workproduct available as possible, and to be available for paid consultations to get projects like these off the ground accross the country and across the world.</p>
+<section id="technical-appendix" class="level1">
+<h1>Technical Appendix</h1>
+<section id="mpx-nyc-spatial-participant-network-data" class="level2">
+<h2 class="anchored" data-anchor-id="mpx-nyc-spatial-participant-network-data">MPX NYC spatial participant network data</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-data" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="_manuscript_files/figure-html/fig-data-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption class="figure-caption">Figure&nbsp;12: MPX NYC spatial participant network data</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="description" class="level4">
+<h4 class="anchored" data-anchor-id="description">Description</h4>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-example-bipartite-nodes" class="anchored">
+
+<div id="buaksppioh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#buaksppioh table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#buaksppioh thead, #buaksppioh tbody, #buaksppioh tfoot, #buaksppioh tr, #buaksppioh td, #buaksppioh th {
+  border-style: none;
+}
+
+#buaksppioh p {
+  margin: 0;
+  padding: 0;
+}
+
+#buaksppioh .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#buaksppioh .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#buaksppioh .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#buaksppioh .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#buaksppioh .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#buaksppioh .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#buaksppioh .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#buaksppioh .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#buaksppioh .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#buaksppioh .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#buaksppioh .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#buaksppioh .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#buaksppioh .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#buaksppioh .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#buaksppioh .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#buaksppioh .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#buaksppioh .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#buaksppioh .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#buaksppioh .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#buaksppioh .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#buaksppioh .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#buaksppioh .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#buaksppioh .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#buaksppioh .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#buaksppioh .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#buaksppioh .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#buaksppioh .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#buaksppioh .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#buaksppioh .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#buaksppioh .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#buaksppioh .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#buaksppioh .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#buaksppioh .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#buaksppioh .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#buaksppioh .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#buaksppioh .gt_left {
+  text-align: left;
+}
+
+#buaksppioh .gt_center {
+  text-align: center;
+}
+
+#buaksppioh .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#buaksppioh .gt_font_normal {
+  font-weight: normal;
+}
+
+#buaksppioh .gt_font_bold {
+  font-weight: bold;
+}
+
+#buaksppioh .gt_font_italic {
+  font-style: italic;
+}
+
+#buaksppioh .gt_super {
+  font-size: 65%;
+}
+
+#buaksppioh .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#buaksppioh .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#buaksppioh .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#buaksppioh .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#buaksppioh .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#buaksppioh .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#buaksppioh .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;1:  <p>Example network data Nodes</p> </caption>
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="name">name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="type">type</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="age">age</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="name" class="gt_row gt_left">1</td>
+<td headers="type" class="gt_row gt_left">person</td>
+<td headers="age" class="gt_row gt_right">18-25</td></tr>
+    <tr><td headers="name" class="gt_row gt_left">2</td>
+<td headers="type" class="gt_row gt_left">person</td>
+<td headers="age" class="gt_row gt_right">18-25</td></tr>
+    <tr><td headers="name" class="gt_row gt_left">3</td>
+<td headers="type" class="gt_row gt_left">person</td>
+<td headers="age" class="gt_row gt_right">18-25</td></tr>
+    <tr><td headers="name" class="gt_row gt_left">4</td>
+<td headers="type" class="gt_row gt_left">person</td>
+<td headers="age" class="gt_row gt_right">18-25</td></tr>
+    <tr><td headers="name" class="gt_row gt_left">5</td>
+<td headers="type" class="gt_row gt_left">person</td>
+<td headers="age" class="gt_row gt_right">26-50</td></tr>
+    <tr><td headers="name" class="gt_row gt_left">6</td>
+<td headers="type" class="gt_row gt_left">person</td>
+<td headers="age" class="gt_row gt_right">26-50</td></tr>
+    <tr><td headers="name" class="gt_row gt_left">7</td>
+<td headers="type" class="gt_row gt_left">person</td>
+<td headers="age" class="gt_row gt_right">26-50</td></tr>
+    <tr><td headers="name" class="gt_row gt_left">8</td>
+<td headers="type" class="gt_row gt_left">person</td>
+<td headers="age" class="gt_row gt_right">26-50</td></tr>
+    <tr><td headers="name" class="gt_row gt_left">A</td>
+<td headers="type" class="gt_row gt_left">community_district</td>
+<td headers="age" class="gt_row gt_right">-</td></tr>
+    <tr><td headers="name" class="gt_row gt_left">B</td>
+<td headers="type" class="gt_row gt_left">community_district</td>
+<td headers="age" class="gt_row gt_right">-</td></tr>
+    <tr><td headers="name" class="gt_row gt_left">C</td>
+<td headers="type" class="gt_row gt_left">community_district</td>
+<td headers="age" class="gt_row gt_right">-</td></tr>
+    <tr><td headers="name" class="gt_row gt_left">D</td>
+<td headers="type" class="gt_row gt_left">community_district</td>
+<td headers="age" class="gt_row gt_right">-</td></tr>
+    <tr><td headers="name" class="gt_row gt_left">E</td>
+<td headers="type" class="gt_row gt_left">community_district</td>
+<td headers="age" class="gt_row gt_right">-</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-example-bipartite-edges" class="anchored">
+
+<div id="zssgjzfogl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zssgjzfogl table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#zssgjzfogl thead, #zssgjzfogl tbody, #zssgjzfogl tfoot, #zssgjzfogl tr, #zssgjzfogl td, #zssgjzfogl th {
+  border-style: none;
+}
+
+#zssgjzfogl p {
+  margin: 0;
+  padding: 0;
+}
+
+#zssgjzfogl .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#zssgjzfogl .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#zssgjzfogl .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#zssgjzfogl .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#zssgjzfogl .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zssgjzfogl .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zssgjzfogl .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zssgjzfogl .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#zssgjzfogl .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#zssgjzfogl .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#zssgjzfogl .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#zssgjzfogl .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#zssgjzfogl .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#zssgjzfogl .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#zssgjzfogl .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#zssgjzfogl .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#zssgjzfogl .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#zssgjzfogl .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#zssgjzfogl .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zssgjzfogl .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#zssgjzfogl .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#zssgjzfogl .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#zssgjzfogl .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zssgjzfogl .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#zssgjzfogl .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#zssgjzfogl .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zssgjzfogl .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zssgjzfogl .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#zssgjzfogl .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zssgjzfogl .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#zssgjzfogl .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zssgjzfogl .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zssgjzfogl .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zssgjzfogl .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zssgjzfogl .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zssgjzfogl .gt_left {
+  text-align: left;
+}
+
+#zssgjzfogl .gt_center {
+  text-align: center;
+}
+
+#zssgjzfogl .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#zssgjzfogl .gt_font_normal {
+  font-weight: normal;
+}
+
+#zssgjzfogl .gt_font_bold {
+  font-weight: bold;
+}
+
+#zssgjzfogl .gt_font_italic {
+  font-style: italic;
+}
+
+#zssgjzfogl .gt_super {
+  font-size: 65%;
+}
+
+#zssgjzfogl .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#zssgjzfogl .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#zssgjzfogl .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#zssgjzfogl .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#zssgjzfogl .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#zssgjzfogl .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#zssgjzfogl .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;2:  <p>Example network data Edges</p> </caption>
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="from">from</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="to">to</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="type">type</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="from" class="gt_row gt_right">1</td>
+<td headers="to" class="gt_row gt_left">A</td>
+<td headers="type" class="gt_row gt_left">home</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">2</td>
+<td headers="to" class="gt_row gt_left">A</td>
+<td headers="type" class="gt_row gt_left">home</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">3</td>
+<td headers="to" class="gt_row gt_left">A</td>
+<td headers="type" class="gt_row gt_left">home</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">3</td>
+<td headers="to" class="gt_row gt_left">B</td>
+<td headers="type" class="gt_row gt_left">sex_contact</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">3</td>
+<td headers="to" class="gt_row gt_left">E</td>
+<td headers="type" class="gt_row gt_left">sex_contact</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">3</td>
+<td headers="to" class="gt_row gt_left">E</td>
+<td headers="type" class="gt_row gt_left">physical_contact</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">4</td>
+<td headers="to" class="gt_row gt_left">B</td>
+<td headers="type" class="gt_row gt_left">home</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">4</td>
+<td headers="to" class="gt_row gt_left">C</td>
+<td headers="type" class="gt_row gt_left">sex_contact</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">4</td>
+<td headers="to" class="gt_row gt_left">D</td>
+<td headers="type" class="gt_row gt_left">physical_contact</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">4</td>
+<td headers="to" class="gt_row gt_left">E</td>
+<td headers="type" class="gt_row gt_left">sex_contact</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">5</td>
+<td headers="to" class="gt_row gt_left">C</td>
+<td headers="type" class="gt_row gt_left">home</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">6</td>
+<td headers="to" class="gt_row gt_left">D</td>
+<td headers="type" class="gt_row gt_left">home</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">6</td>
+<td headers="to" class="gt_row gt_left">E</td>
+<td headers="type" class="gt_row gt_left">sex_contact</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">7</td>
+<td headers="to" class="gt_row gt_left">C</td>
+<td headers="type" class="gt_row gt_left">home</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">8</td>
+<td headers="to" class="gt_row gt_left">C</td>
+<td headers="type" class="gt_row gt_left">home</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The MPX NYC spatial participant data network is a network object that contains all collected data. In this network, nodes comprise of community districts and survey participants. Edges can only exist between a person and a communtiy district - they indicate that the person either lives in or has a contact place in that community district. In <a href="#fig-data">Figure&nbsp;12</a>, participant nodes are blue and community district nodes are pink. e.g.&nbsp;Participants 4, 5, 7, 8 each have a residence or contact venue in community district C. Participant 3 has one contact venues or residence in each of community districts A, B, and two contact venues or a residence and a contact venue in community district E.</p>
 </section>
-<section id="acknowledgements" class="level1">
-<h1>Acknowledgements</h1>
-<p>Sponsors: Greg Millet facilitated funding from amfAR; XXX allowed us to apply for out-of-cylce funding from Center for AIDS Research at Harvard University; Ian Holloway facilitated financial support from UCLA Luskin Center; and individual donors gave funds.</p>
-<p>Donors: LinkNYC and Grindr donated advertising to the study, neo4j donated a license for their proprietary database software.</p>
-<p>Technical: Eric Tchetgen Tchetgen, Forrest W. Crawford, and Kenneth Mayer provided feedback on technical aspects of the study.</p>
-<p>Translation: Cody Patrick Nolan coordinated translation of the survey instrument and marketing materials. Antón Castellanos-Usiglu conducted the translation. Cody Patrick Nolan, Chema Jiménez, Juan Pablo Amaya Amaris, Santiago Aguilera Mijares, and María Andrea Santos Guzmán validated the translation.</p>
-<p>Questionnaire: Keletso Makofane, Pedro Carneiro and Nguyen Tran drafted the questionnaire. Lisa Berkman, Tom Carpino, David Barr, and Judy Auerbach reviewed the questionnaire.</p>
-<p>Admin: Sudipta Saha coordinated study activities, Christian Urrutia and Prep4All provided finance support, James Krellenstein and Joe Osmundson participated in initial planning. Keletso Makofane kept financial records. Lisa Berkman, Kenneth Mayer, and Eric Tchetgen Tchetgen were academic advisors. Lisa Berkman acted as principal investigator for the purpose of securing IRB approval while Keletso Makofane was principal investigator in all other respects.</p>
-<p>Web Development: Keletso Makofane conceptualized and coded the survey instrument (front end - which uses the FCC Data API but is not endorsed or certified by the FCC). Sudpipta Saha identified the FCC Data API, which allowed us to implement the front end. Imran Khan coded the study data server and database (back end). Seema Kara planned out the overall process of web development.</p>
-<p>Communications: Nick Diamond led marketing and communications efforts including managing contracts with Burness marketing agency and administering the LGBT+ Community Forum. Burness developed and implemented the public-facing communications materials. Grant Roth, Keletso Makofane, and Chris Wyman coordinated the initial invitations for the LGBT+ Community Forum. Joe Osmundson shared epidemiologic updates in early meetings of the Community Forum. Jennifer Balenciaga-Barnes led our thinking on the use of gender-inclusive language, Elle Lett and Nguyen Tran provided input on academic writing on gender diversity, Keletso Makofane was responsible for the operationalization and implementation of these ideas. Martez Smith led in-person consultation with Black LGBT individuals in Harlem, New York.</p>
-<p>Fundraising:</p>
-<ul>
-<li><p>Sudpita saha drafted the grants that funded this work.</p></li>
-<li></li>
-</ul>
-<p>Most of all, we thank, and stand in solidarity with, the MPX NYC participants who gave of their time to make the study a success.</p>
-</section>
-<section id="references" class="level1">
-<h1>References</h1>
-</section>
-<section id="appendices" class="level1">
-<h1>Appendices</h1>
-<section id="a.-definition-of-spatial-selection-ratio." class="level2">
-<h2 class="anchored" data-anchor-id="a.-definition-of-spatial-selection-ratio.">A. Definition of spatial selection ratio.</h2>
-<p>Consider a graph <span class="math inline">\(G(N, \sim)\)</span> where nodes (set <span class="math inline">\(N\)</span>) represent participants and <span class="math inline">\(i \sim j\)</span> denotes that <span class="math inline">\(i, j\in N\)</span> are connected in <span class="math inline">\(G\)</span>. There is a tie between individuals <span class="math inline">\(i,j \in N\)</span> (i.e.&nbsp;<span class="math inline">\(i \sim j\)</span>) if individuals <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> share a community district. We say individual <span class="math inline">\(i\)</span> shares a community district with individual <span class="math inline">\(j\)</span> if both have a residence or contact venue in that community district. <span class="math inline">\(W_{i\sim j}\)</span> is defined as the count of community districts shared by <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>. <span class="math inline">\(N_a, N_b \subset N\)</span> are disjoint subsets of <span class="math inline">\(N\)</span> (i.e.&nbsp;<span class="math inline">\(N_a \cap N_b = \phi\)</span>). By definition <span class="math inline">\(W_{i \sim i} = 0, \forall i\in N\)</span>.</p>
-<p>We define <span class="math inline">\(\psi(a,b)\)</span> the spatial selection ratio of characteristic <span class="math inline">\(a\)</span> for characteristic <span class="math inline">\(b\)</span>:</p>
+<section id="definition" class="level4">
+<h4 class="anchored" data-anchor-id="definition">Definition</h4>
+<p>We define the MPX NYC spatial participant graph as</p>
 <p><span class="math display">\[
-\psi(a,b) = \frac{|N|}{|N_a||N_b|} \sum_{i \in N_a}{ \frac{  \sum_{j \in N_b}W_{i \sim j}}{  \sum_{j \in N}W_{i \sim j} } }
+G(N, \phi), \phi:N\times N \rightarrow \mathbb{Z}^+
+\]</span></p>
+<p>where <span class="math inline">\(N\)</span> is a set containing node indices and <span class="math inline">\(\phi\)</span> is a mapping from each possible pair of nodes to the set of positive integers. <span class="math inline">\(\phi(a,b) = 0\)</span> when there is no edge between nodes <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> and <span class="math inline">\(\phi(a,b) &gt; 0\)</span> if there is.</p>
+<p>In the case of the MPX NYC data, the nodes can be partitioned into the sets of study participants <span class="math inline">\(N_p\)</span> and community districts <span class="math inline">\(N_c\)</span>. i.e.</p>
+<p><span class="math display">\[
+N = N_p \cup N_c \text{,   } N_p \cap N_c = \emptyset
+\]</span></p>
+<p>Each individual participant can have a relation with any number of community districts, but not with another participant. Similarly, each community district can have a relation with multiple participants, but not with another community district. i.e.:</p>
+<p><span class="math display">\[
+\phi(a,b) &gt; 0 \Rightarrow a\in N_p, b\in N_c
+\]</span> Finally, we define <span class="math inline">\(M\)</span> as a <span class="math inline">\(q \times r\)</span> weighted adjacency matrix for <span class="math inline">\(G\)</span> where <span class="math inline">\(q = |N_p|\)</span> and <span class="math inline">\(r = |N_c|\)</span>. The <span class="math inline">\(ij^{th}\)</span> entry of <span class="math inline">\(M\)</span> is</p>
+<p><span class="math display">\[
+m^{ij} = \phi(i,j)
+\]</span></p>
+<p>In the MPX NYC data, it is possible for there two be more than one relation between a specific pair of nodes. In this mathematical description, however, we assume that there can only be one edge between a pair of nodes, and summarize the study data by assigning the count of relations as an edge weight. i.e In the case where participant <span class="math inline">\(a \in N_p\)</span> has multiple relations with community district <span class="math inline">\(c \in N_c\)</span>, there is only one edge <span class="math inline">\((a,b)\)</span> in <span class="math inline">\(G\)</span> and the weight of that edge (<span class="math inline">\(\phi(a,b)\)</span>) equals the count of relations.</p>
+<p>The MPX NYC spatial participant graph meets the definition for a bipartite graph. This allows us to easily derive two related graphs - the bipartite projection onto participant nodes <span class="math inline">\(G_p(N_p,\phi_p)\)</span>, and the bipartitie projection onto community district nodes <span class="math inline">\(G_c(N_c,\phi_c)\)</span>. The former graph is used to represent the MPX NYC participant network, and the latter is used to represent the MPX NYC community district network. Both are defined below.</p>
+</section>
+<section id="useful-network-measures" class="level4">
+<h4 class="anchored" data-anchor-id="useful-network-measures">Useful network measures</h4>
+<p><em>Node degree</em><strong>:</strong> the degree of each node (or the count of nodes connected to each node) gives the number of contact places or residences connected with that node.</p>
+</section>
+<section id="mpx-nyc-participant-network" class="level3">
+<h3 class="anchored" data-anchor-id="mpx-nyc-participant-network">MPX NYC participant network</h3>
+<section id="description-1" class="level4">
+<h4 class="anchored" data-anchor-id="description-1">Description</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-data-people" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="_manuscript_files/figure-html/fig-data-people-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption class="figure-caption">Figure&nbsp;13: MPX NYC participant network</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-example-participant-nodes" class="anchored">
+
+<div id="ayvdjbmlsy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ayvdjbmlsy table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ayvdjbmlsy thead, #ayvdjbmlsy tbody, #ayvdjbmlsy tfoot, #ayvdjbmlsy tr, #ayvdjbmlsy td, #ayvdjbmlsy th {
+  border-style: none;
+}
+
+#ayvdjbmlsy p {
+  margin: 0;
+  padding: 0;
+}
+
+#ayvdjbmlsy .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ayvdjbmlsy .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ayvdjbmlsy .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ayvdjbmlsy .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ayvdjbmlsy .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ayvdjbmlsy .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ayvdjbmlsy .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ayvdjbmlsy .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ayvdjbmlsy .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ayvdjbmlsy .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ayvdjbmlsy .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ayvdjbmlsy .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ayvdjbmlsy .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ayvdjbmlsy .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ayvdjbmlsy .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ayvdjbmlsy .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ayvdjbmlsy .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ayvdjbmlsy .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ayvdjbmlsy .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ayvdjbmlsy .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ayvdjbmlsy .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ayvdjbmlsy .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ayvdjbmlsy .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ayvdjbmlsy .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ayvdjbmlsy .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ayvdjbmlsy .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ayvdjbmlsy .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ayvdjbmlsy .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ayvdjbmlsy .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ayvdjbmlsy .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ayvdjbmlsy .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ayvdjbmlsy .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ayvdjbmlsy .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ayvdjbmlsy .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ayvdjbmlsy .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ayvdjbmlsy .gt_left {
+  text-align: left;
+}
+
+#ayvdjbmlsy .gt_center {
+  text-align: center;
+}
+
+#ayvdjbmlsy .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ayvdjbmlsy .gt_font_normal {
+  font-weight: normal;
+}
+
+#ayvdjbmlsy .gt_font_bold {
+  font-weight: bold;
+}
+
+#ayvdjbmlsy .gt_font_italic {
+  font-style: italic;
+}
+
+#ayvdjbmlsy .gt_super {
+  font-size: 65%;
+}
+
+#ayvdjbmlsy .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ayvdjbmlsy .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ayvdjbmlsy .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ayvdjbmlsy .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ayvdjbmlsy .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ayvdjbmlsy .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ayvdjbmlsy .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;3:  <p>Example network data Nodes</p> </caption>
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="name">name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="type">type</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="age">age</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="name" class="gt_row gt_right">1</td>
+<td headers="type" class="gt_row gt_left">person</td>
+<td headers="age" class="gt_row gt_right">18-25</td></tr>
+    <tr><td headers="name" class="gt_row gt_right">2</td>
+<td headers="type" class="gt_row gt_left">person</td>
+<td headers="age" class="gt_row gt_right">18-25</td></tr>
+    <tr><td headers="name" class="gt_row gt_right">3</td>
+<td headers="type" class="gt_row gt_left">person</td>
+<td headers="age" class="gt_row gt_right">18-25</td></tr>
+    <tr><td headers="name" class="gt_row gt_right">4</td>
+<td headers="type" class="gt_row gt_left">person</td>
+<td headers="age" class="gt_row gt_right">18-25</td></tr>
+    <tr><td headers="name" class="gt_row gt_right">5</td>
+<td headers="type" class="gt_row gt_left">person</td>
+<td headers="age" class="gt_row gt_right">26-50</td></tr>
+    <tr><td headers="name" class="gt_row gt_right">6</td>
+<td headers="type" class="gt_row gt_left">person</td>
+<td headers="age" class="gt_row gt_right">26-50</td></tr>
+    <tr><td headers="name" class="gt_row gt_right">7</td>
+<td headers="type" class="gt_row gt_left">person</td>
+<td headers="age" class="gt_row gt_right">26-50</td></tr>
+    <tr><td headers="name" class="gt_row gt_right">8</td>
+<td headers="type" class="gt_row gt_left">person</td>
+<td headers="age" class="gt_row gt_right">26-50</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-example-participant-edges" class="anchored">
+
+<div id="psczfbkjzd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#psczfbkjzd table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#psczfbkjzd thead, #psczfbkjzd tbody, #psczfbkjzd tfoot, #psczfbkjzd tr, #psczfbkjzd td, #psczfbkjzd th {
+  border-style: none;
+}
+
+#psczfbkjzd p {
+  margin: 0;
+  padding: 0;
+}
+
+#psczfbkjzd .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#psczfbkjzd .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#psczfbkjzd .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#psczfbkjzd .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#psczfbkjzd .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#psczfbkjzd .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#psczfbkjzd .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#psczfbkjzd .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#psczfbkjzd .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#psczfbkjzd .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#psczfbkjzd .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#psczfbkjzd .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#psczfbkjzd .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#psczfbkjzd .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#psczfbkjzd .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#psczfbkjzd .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#psczfbkjzd .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#psczfbkjzd .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#psczfbkjzd .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#psczfbkjzd .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#psczfbkjzd .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#psczfbkjzd .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#psczfbkjzd .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#psczfbkjzd .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#psczfbkjzd .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#psczfbkjzd .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#psczfbkjzd .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#psczfbkjzd .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#psczfbkjzd .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#psczfbkjzd .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#psczfbkjzd .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#psczfbkjzd .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#psczfbkjzd .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#psczfbkjzd .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#psczfbkjzd .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#psczfbkjzd .gt_left {
+  text-align: left;
+}
+
+#psczfbkjzd .gt_center {
+  text-align: center;
+}
+
+#psczfbkjzd .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#psczfbkjzd .gt_font_normal {
+  font-weight: normal;
+}
+
+#psczfbkjzd .gt_font_bold {
+  font-weight: bold;
+}
+
+#psczfbkjzd .gt_font_italic {
+  font-style: italic;
+}
+
+#psczfbkjzd .gt_super {
+  font-size: 65%;
+}
+
+#psczfbkjzd .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#psczfbkjzd .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#psczfbkjzd .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#psczfbkjzd .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#psczfbkjzd .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#psczfbkjzd .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#psczfbkjzd .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;4:  <p>Example network data Edges</p> </caption>
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="from">from</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="to">to</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="weight">weight</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="from" class="gt_row gt_right">1</td>
+<td headers="to" class="gt_row gt_right">2</td>
+<td headers="weight" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">1</td>
+<td headers="to" class="gt_row gt_right">3</td>
+<td headers="weight" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">2</td>
+<td headers="to" class="gt_row gt_right">3</td>
+<td headers="weight" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">3</td>
+<td headers="to" class="gt_row gt_right">4</td>
+<td headers="weight" class="gt_row gt_right">3</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">3</td>
+<td headers="to" class="gt_row gt_right">6</td>
+<td headers="weight" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">4</td>
+<td headers="to" class="gt_row gt_right">5</td>
+<td headers="weight" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">4</td>
+<td headers="to" class="gt_row gt_right">6</td>
+<td headers="weight" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">4</td>
+<td headers="to" class="gt_row gt_right">7</td>
+<td headers="weight" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">4</td>
+<td headers="to" class="gt_row gt_right">8</td>
+<td headers="weight" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">5</td>
+<td headers="to" class="gt_row gt_right">7</td>
+<td headers="weight" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">5</td>
+<td headers="to" class="gt_row gt_right">8</td>
+<td headers="weight" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="from" class="gt_row gt_right">7</td>
+<td headers="to" class="gt_row gt_right">8</td>
+<td headers="weight" class="gt_row gt_right">1</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The MPX NYC participant network has participants as nodes. A pair of nodes is connected by a weighted edge if each of the individuals represented by the nodes has at least one contact venue or residence in the same, shared community district. The weight of the edge is given by the count of community districts the pair of nodes have in common. By definition, an edge of weight <span class="math inline">\(0\)</span> is equivalent to the absence of an edge. e.g.&nbsp;Participants 1 and 2 are connected in <a href="#fig-data-people">Figure&nbsp;13</a> since, as shown in <a href="#fig-data-people">Figure&nbsp;13</a> they both have a contact venue or residence in community district A. Participants 4 and 5 are connected in <a href="#fig-data-people">Figure&nbsp;13</a> since they share two community districts in <a href="#fig-data">Figure&nbsp;12</a> (community districts D and E). Because they share two community districts in <a href="#fig-data">Figure&nbsp;12</a>, their edge has a weight of 2 in <a href="#fig-data-people">Figure&nbsp;13</a>.</p>
+</section>
+<section id="definition-1" class="level4">
+<h4 class="anchored" data-anchor-id="definition-1">Definition</h4>
+<p>We define the MPX NYC participant graph as</p>
+<p><span class="math display">\[
+G_p(N_p, \phi_p), \phi_p:N_p\times N_p \rightarrow \mathbb{Z}^+
+\]</span></p>
+<p>where <span class="math inline">\(N_p\)</span> is a set containing node indices for participant nodes and <span class="math inline">\(\phi_p\)</span> is a mapping from each possible pair of participants to the set of positive integers. <span class="math inline">\(\phi_p(a,b) = 0\)</span> when there is no edge between participants <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> and <span class="math inline">\(\phi_p(a,b) &gt; 0\)</span> if there is.</p>
+<p><span class="math inline">\(G_p(N_p, \phi_p)\)</span> can be derived from <span class="math inline">\(G\)</span> by taking the inner product of the <span class="math inline">\(q \times r\)</span> adjacency matrix <span class="math inline">\(M\)</span> with itself:</p>
+<p><span class="math display">\[
+M_p = MM^T
+\]</span></p>
+<p>The result is a <span class="math inline">\(q \times q\)</span> adjacency matrix <span class="math inline">\(M_p\)</span> whose entries <span class="math inline">\(m_p^{ij}\)</span> are used to define <span class="math inline">\(\phi_p\)</span>:</p>
+<p><span class="math display">\[
+\phi_p(i,j) = m_p^{ij}
 \]</span></p>
 </section>
-<section id="b.-intervention-algorithm" class="level2">
-<h2 class="anchored" data-anchor-id="b.-intervention-algorithm">B. Intervention algorithm</h2>
-<p>The algorithm governing the intervention is as follows:</p>
-<ol type="1">
-<li><p>Rank community districts according to intervention strategy</p></li>
-<li><p>Immunize the top-ranked community district</p></li>
-<li><p>Construct MPX NYC Community district participant overlap network and MPX NYC participant spatial overlap network after removing immunized individuals</p></li>
-<li><p>Repeat steps 1-3 until all individuals are immunized</p></li>
-</ol>
-
+<section id="useful-network-measures-1" class="level4">
+<h4 class="anchored" data-anchor-id="useful-network-measures-1">Useful network measures</h4>
+<p><em>Edge weight</em>: the weight of an edge connecting two nodes is the count of community districts those two node share.</p>
+<p><em>Weighted node degree</em>: the weighted degree of each node is the sum of the edge weights for the edges connected to that node.</p>
+<p><em>Proportion in largest connected component</em>: a connected component of a network is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties. The proportion of nodes in the largest connected component is a measure of how well connected a graph is.</p>
 </section>
+</section>
+<section id="mpx-nyc-community-district-network" class="level3">
+<h3 class="anchored" data-anchor-id="mpx-nyc-community-district-network">MPX NYC community district network</h3>
+<section id="description-2" class="level4">
+<h4 class="anchored" data-anchor-id="description-2">Description</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-data-places" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="_manuscript_files/figure-html/fig-data-places-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption class="figure-caption">Figure&nbsp;14: MPX NYC community district network</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-example-place-nodes" class="anchored">
+
+<div id="zmsfccztgf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zmsfccztgf table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#zmsfccztgf thead, #zmsfccztgf tbody, #zmsfccztgf tfoot, #zmsfccztgf tr, #zmsfccztgf td, #zmsfccztgf th {
+  border-style: none;
+}
+
+#zmsfccztgf p {
+  margin: 0;
+  padding: 0;
+}
+
+#zmsfccztgf .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#zmsfccztgf .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#zmsfccztgf .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#zmsfccztgf .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#zmsfccztgf .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zmsfccztgf .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zmsfccztgf .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zmsfccztgf .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#zmsfccztgf .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#zmsfccztgf .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#zmsfccztgf .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#zmsfccztgf .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#zmsfccztgf .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#zmsfccztgf .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#zmsfccztgf .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#zmsfccztgf .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#zmsfccztgf .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#zmsfccztgf .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#zmsfccztgf .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zmsfccztgf .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#zmsfccztgf .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#zmsfccztgf .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#zmsfccztgf .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zmsfccztgf .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#zmsfccztgf .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#zmsfccztgf .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zmsfccztgf .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zmsfccztgf .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#zmsfccztgf .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zmsfccztgf .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#zmsfccztgf .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zmsfccztgf .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zmsfccztgf .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zmsfccztgf .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zmsfccztgf .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zmsfccztgf .gt_left {
+  text-align: left;
+}
+
+#zmsfccztgf .gt_center {
+  text-align: center;
+}
+
+#zmsfccztgf .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#zmsfccztgf .gt_font_normal {
+  font-weight: normal;
+}
+
+#zmsfccztgf .gt_font_bold {
+  font-weight: bold;
+}
+
+#zmsfccztgf .gt_font_italic {
+  font-style: italic;
+}
+
+#zmsfccztgf .gt_super {
+  font-size: 65%;
+}
+
+#zmsfccztgf .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#zmsfccztgf .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#zmsfccztgf .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#zmsfccztgf .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#zmsfccztgf .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#zmsfccztgf .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#zmsfccztgf .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;5:  <p>Example network data Nodes</p> </caption>
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="name">name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="type">type</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="age">age</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="name" class="gt_row gt_left">A</td>
+<td headers="type" class="gt_row gt_left">community_district</td>
+<td headers="age" class="gt_row gt_right">-</td></tr>
+    <tr><td headers="name" class="gt_row gt_left">B</td>
+<td headers="type" class="gt_row gt_left">community_district</td>
+<td headers="age" class="gt_row gt_right">-</td></tr>
+    <tr><td headers="name" class="gt_row gt_left">C</td>
+<td headers="type" class="gt_row gt_left">community_district</td>
+<td headers="age" class="gt_row gt_right">-</td></tr>
+    <tr><td headers="name" class="gt_row gt_left">D</td>
+<td headers="type" class="gt_row gt_left">community_district</td>
+<td headers="age" class="gt_row gt_right">-</td></tr>
+    <tr><td headers="name" class="gt_row gt_left">E</td>
+<td headers="type" class="gt_row gt_left">community_district</td>
+<td headers="age" class="gt_row gt_right">-</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-example-place-edges" class="anchored">
+
+<div id="fqvapjrzie" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fqvapjrzie table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#fqvapjrzie thead, #fqvapjrzie tbody, #fqvapjrzie tfoot, #fqvapjrzie tr, #fqvapjrzie td, #fqvapjrzie th {
+  border-style: none;
+}
+
+#fqvapjrzie p {
+  margin: 0;
+  padding: 0;
+}
+
+#fqvapjrzie .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#fqvapjrzie .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#fqvapjrzie .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#fqvapjrzie .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#fqvapjrzie .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fqvapjrzie .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fqvapjrzie .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fqvapjrzie .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#fqvapjrzie .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#fqvapjrzie .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#fqvapjrzie .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#fqvapjrzie .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#fqvapjrzie .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#fqvapjrzie .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#fqvapjrzie .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#fqvapjrzie .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#fqvapjrzie .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#fqvapjrzie .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#fqvapjrzie .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fqvapjrzie .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#fqvapjrzie .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#fqvapjrzie .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#fqvapjrzie .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fqvapjrzie .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#fqvapjrzie .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#fqvapjrzie .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fqvapjrzie .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fqvapjrzie .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#fqvapjrzie .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fqvapjrzie .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#fqvapjrzie .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fqvapjrzie .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fqvapjrzie .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fqvapjrzie .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fqvapjrzie .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fqvapjrzie .gt_left {
+  text-align: left;
+}
+
+#fqvapjrzie .gt_center {
+  text-align: center;
+}
+
+#fqvapjrzie .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#fqvapjrzie .gt_font_normal {
+  font-weight: normal;
+}
+
+#fqvapjrzie .gt_font_bold {
+  font-weight: bold;
+}
+
+#fqvapjrzie .gt_font_italic {
+  font-style: italic;
+}
+
+#fqvapjrzie .gt_super {
+  font-size: 65%;
+}
+
+#fqvapjrzie .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#fqvapjrzie .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#fqvapjrzie .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#fqvapjrzie .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#fqvapjrzie .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#fqvapjrzie .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#fqvapjrzie .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Table&nbsp;6:  <p>Example network data Edges</p> </caption>
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="from">from</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="to">to</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="weight">weight</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="from" class="gt_row gt_left">A</td>
+<td headers="to" class="gt_row gt_left">B</td>
+<td headers="weight" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="from" class="gt_row gt_left">A</td>
+<td headers="to" class="gt_row gt_left">E</td>
+<td headers="weight" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="from" class="gt_row gt_left">B</td>
+<td headers="to" class="gt_row gt_left">C</td>
+<td headers="weight" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="from" class="gt_row gt_left">B</td>
+<td headers="to" class="gt_row gt_left">D</td>
+<td headers="weight" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="from" class="gt_row gt_left">B</td>
+<td headers="to" class="gt_row gt_left">E</td>
+<td headers="weight" class="gt_row gt_right">3</td></tr>
+    <tr><td headers="from" class="gt_row gt_left">C</td>
+<td headers="to" class="gt_row gt_left">D</td>
+<td headers="weight" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="from" class="gt_row gt_left">C</td>
+<td headers="to" class="gt_row gt_left">E</td>
+<td headers="weight" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="from" class="gt_row gt_left">D</td>
+<td headers="to" class="gt_row gt_left">E</td>
+<td headers="weight" class="gt_row gt_right">2</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The MPX NYC community district network has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a contact venue or residence in both community districts. The weight is the count of participants which are shared by the two community districts.</p>
+</section>
+<section id="definition-2" class="level4">
+<h4 class="anchored" data-anchor-id="definition-2">Definition</h4>
+<p>We define the MPX NYC community district graph as</p>
+<p><span class="math display">\[
+G_c(N_c, \phi_c), \phi_c:N_c\times N_c \rightarrow \mathbb{Z}^+
+\]</span></p>
+<p>where <span class="math inline">\(N_c\)</span> is a set containing node indices for community district nodes and <span class="math inline">\(\phi_c\)</span> is a mapping from each possible pair of community districts to the set of positive integers. <span class="math inline">\(\phi_c(a,b) = 0\)</span> when there is no edge between community districts <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> and <span class="math inline">\(\phi_c(a,b) &gt; 0\)</span> if there is.</p>
+<p><span class="math inline">\(G_c(N_c, \phi_c)\)</span> can be derived from <span class="math inline">\(G\)</span> by taking the inner product of the <span class="math inline">\(r \times q\)</span> matrix <span class="math inline">\(M^T\)</span> with itself:</p>
+<p><span class="math display">\[
+M_c = M^TM
+\]</span></p>
+<p>The result is a <span class="math inline">\(r \times r\)</span> matrix <span class="math inline">\(M_c\)</span>, whose entries <span class="math inline">\(m^{ij}_c\)</span> are used to define <span class="math inline">\(\phi_c\)</span>:</p>
+<p><span class="math display">\[
+\phi_c(i,j) = m_c^{ij}
+\]</span></p>
+</section>
+<section id="useful-network-measures-2" class="level4">
+<h4 class="anchored" data-anchor-id="useful-network-measures-2">Useful network measures</h4>
+<p><em>Weighted degree</em>: the weighted degree of each node is the sum of the edge weights for the edges connected to that node.</p>
+</section>
+</section>
+</section>
+<section id="intervention-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="intervention-algorithm">Intervention Algorithm</h2>
+<section id="movement-neutralizing" class="level3">
+<h3 class="anchored" data-anchor-id="movement-neutralizing">Movement-neutralizing</h3>
+<p>Consider a sequence of graphs <span class="math inline">\(G^{(k)}(N^{(k)}, \phi^{(k)})\)</span> such that <span class="math display">\[
+G^{(0)}(N^{(0)}, \phi^{(0)}) = G(N, \phi)
+\]</span> <span class="math inline">\(G^{(k+1)}(N^{(k+1)}, \phi^{(k+1)})\)</span> is defined as follows:</p>
+<p><span class="math display">\[
+N^{(k+1)} = N^{(k)}/\{n\}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+n : max_{i \in N^{(k)}} \{Deg(G^{(k)},i)\}
+\]</span> then</p>
+<p><span class="math display">\[
+\phi^{(k+1)}(a,b) = \phi^{(k)}(a,b), \forall a,b \in N^{(k+1)}
+\]</span></p>
+</section>
+<section id="contact-neutralizing" class="level3">
+<h3 class="anchored" data-anchor-id="contact-neutralizing">Contact-neutralizing</h3>
+<p>Consider a sequence of graphs <span class="math inline">\(G^{*(k)}(N^{*(k)}, \phi^{*(k)})\)</span> such that <span class="math display">\[
+G^{*(0)}(N^{*(0)}, \phi^{*(0)}) = G(N, \phi)
+\]</span> <span class="math inline">\(G^{*(k+1)}(N^{*(k+1)}, \phi^{*(k+1)})\)</span> is defined as follows:</p>
+<p><span class="math display">\[
+N^{*(k+1)} = N^{*(k)}/\{n^*\}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+n^* : max_{i \in N^{*(k)}} \{Deg(G^{*(k)},i)\}
+\]</span> then</p>
+<p><span class="math display">\[
+\phi^{*(k+1)}(a,b) = \phi^{*(k)}(a,b), \forall a,b \in N^{*(k+1)}
+\]</span></p>
+</section>
+</section>
+</section>
+<section id="references" class="level1 unnumbered">
+
+
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
