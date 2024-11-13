@@ -601,9 +601,9 @@ G(N, \psi) \\
 \text{ where } \psi:N\times N \rightarrow \mathbb{N}_0
 $$
 
-$N$ is a set containing node indices and $\psi$ is a mapping from each possible pair of nodes to the set of non-negative integers. $\psi(a,b) = 0$ when there is no edge between nodes $a$ and $b$ and $\psi(a,b) > 0$ if there is.
+$N$ is a set containing node indices and $\psi$ (the adjacency function for $G$) is a mapping from each possible pair of nodes to the set of non-negative integers. $\psi(a,b) = 0$ when there is no edge between distinct nodes $a,b \in N$ and $\psi(a,b) > 0$ if there is. By definition, a node cannot have an edge with itself. i.e. $\psi(a,a) = 0$ $\forall a \in N$.
 
-In the case of the MPX NYC data, the nodes can be partitioned into the sets of study participants $N_p$ and community districts $N_c$. i.e.
+In the MPX NYC spatial participant graph, nodes can be partitioned into a set of study participants $N_p$ and a set of community districts $N_c$. i.e.
 
 $$
 N_p \cup N_c = N \\ \text{ and }  N_p \cap N_c = \emptyset
@@ -619,9 +619,9 @@ $$
 m^{ij} = \psi(i,j)
 $$
 
-In the MPX NYC data, it is possible for there two be more than one relation between a specific pair of nodes. In this mathematical description, however, we assume that there can only be one edge between a pair of nodes, and summarize the study data by assigning the count of relations as an edge weight. i.e In the case where participant $a \in N_p$ has multiple relations with community district $c \in N_c$, there is only one edge $(a,b)$ in $G$ and the weight of that edge ($\psi(a,b)$) equals the count of relations.
+In the MPX NYC data, it is possible for there two be more than one relation between a specific pair of nodes. In this mathematical description, however, we assume that there can only be one edge between a pair of nodes, and summarize the study data by assigning the count of relations as an edge weight. i.e In the case where participant $a \in N_p$ has $r$ relations with community district $c \in N_c$, there is only one edge $(a,c)$ in $G$ and the weight of that edge equals the count of relations ($\psi(a,c) = r$).
 
-The MPX NYC spatial participant graph meets the definition for a bipartite graph. This allows us to easily derive two related graphs - the bipartite projection onto participant nodes $G_p(N_p,\psi_p)$, and the bipartitie projection onto community district nodes $G_c(N_c,\psi_c)$. The former graph is used to represent the MPX NYC participant network, and the latter is used to represent the MPX NYC community district network. Both are defined below.
+The MPX NYC spatial participant graph meets the definition for a bipartite graph. This allows us to easily derive two related graphs - the bipartite projection onto participant nodes $G_p(N_p,\psi_p)$, and the bipartite projection onto community district nodes $G_c(N_c,\psi_c)$. The former graph is used to represent the MPX NYC participant network, and the latter is used to represent the MPX NYC community district network. Both are defined below.
 
 ### MPX NYC participant network
 
@@ -693,7 +693,7 @@ $$
 G_p(N_p, \psi_p) \\ \text{ where } \psi_p:N_p\times N_p \rightarrow \mathbb{N}_0 
 $$
 
-$N_p$ is a set containing node indices for participant nodes and $\psi_p$ is a mapping from each possible pair of participants to the set of non-negative integers. $\psi_p(a,b) = 0$ when there is no edge between participants $a$ and $b$ and $\psi_p(a,b) > 0$ if there is.
+$N_p$ is a set containing node indices for participant nodes and $\psi_p$ is a mapping from each possible pair of participants to the set of non-negative integers. $\psi_p(a,b) = 0$ when there is no edge between distinct participants $a$ and $b$ and $\psi_p(a,b) > 0$ if there is. By definition, a node cannot have a tie with itself. i.e. $\psi_p(a,a) = 0$ $\forall a \in N_p$.
 
 $G_p(N_p, \psi_p)$ can be derived from $G$ by taking the product of the $q \times r$ adjacency matrix $M$ with its transpose:
 
@@ -776,7 +776,7 @@ $$
 G_c(N_c, \psi_c) \\ \text{ where }  \psi_c:N_c\times N_c \rightarrow \mathbb{N}_0 
 $$
 
-where $N_c$ is a set containing node indices for community district nodes and $\psi_c$ is a mapping from each possible pair of community districts to the set of non-negative integers. $\psi_c(a,b) = 0$ when there is no edge between community districts $a$ and $b$ and $\psi_c(a,b) > 0$ if there is.
+where $N_c$ is a set containing node indices for community district nodes and $\psi_c$ is a mapping from each possible pair of community districts to the set of non-negative integers. $\psi_c(a,b) = 0$ when there is no edge between community districts $a$ and $b$ and $\psi_c(a,b) > 0$ if there is. By definition, a node cannot have a tie with itself. i.e. $\psi_c(a,a) = 0$ $\forall a \in N_c$.
 
 $G_c(N_c, \psi_c)$ can be derived from $G$ by taking the product of the $r \times q$ matrix $M^T$ with its transpose:
 
@@ -792,15 +792,25 @@ $$
 
 ## Useful Network Measures
 
-In this section, we describe network measures that are either useful statistics to interpret in describing MPX NYC data. Some of these are also intermediate steps for calculations shown in the following section. We divide the measures into those that are taken at the level of the node, and those that are taken across the entire network or graph.
+In this section, we describe network measures that are both useful statistics to interpret in describing MPX NYC data and useful intermediate steps in other measures we constructed. We divide the measures into those that are related to egocentric networks, and those related to the overall structure of the network.
 
-### Node degree
+### Egocentric networks
 
-There are two types of nodes in MPX NYC data and that means that node-level attributes have slightly different interpretations depending on the type of node under consideration. What they have in common is that they are measures of weighted network degree.
+We define measures related to the egocentric network-related attributes of nodes in MPX NYC spatial participant network, the MPX NYC participant network, and the MPX NYC community district network. For each of these networks, node attributes have a slightly different interpretation. In addition, since there are two types of nodes in the MPX NYC spatial participant network, attributes have differing meaning depending on the type of node under consideration.
 
-We define four such measures: participant social reach ($R_i$), participant spacial reach ($S_i$), community district social reach ($r_j$) , and community district spacial reach ($s_j$). Each of these measures have a version in which we count only the connections to nodes which are included in some subset of the nodes $A \subset N$. We define the conditional participant social reach ($R_i|A$), conditional participant spacial reach ($S_i|A$), conditional community district social reach ($r_j|A$), and conditional community district spacial reach ($s_j|A$)
+We defined four measures related to node degree which offer a useful interpretation of MPX NYC data: participant social reach ($R_i$), participant spacial reach ($S_i$), community district social reach ($r_j$), and community district spacial reach ($s_j$). 
 
-Participant social reach is defined as the number of connections the focal participant has with other participants through shared space. It is defined as weighted node degree in the MPX NYC participant network. For $i \in N_p$
+We further defined for each of these measures, a measure in which we count only the connections to nodes which are included in some defined subset $A \subset N$ of nodes. We thus define conditional participant social reach ($R_i|A$), conditional participant spacial reach ($S_i|A$), conditional community district social reach ($r_j|A$), and conditional community district spacial reach ($s_j|A$).
+
+#### Participant social reach
+
+Participant social reach is defined as the number of connections the focal participant has with other participants through shared community districts. For participants $i$ and $j$, by "shared community districts", we mean the set 
+
+$$ 
+\{c : \psi(i,c) > 0 \text{ and } \psi(j, c) > 0 \, \text{ for } c \in N_c \}
+$$.
+
+Participant social reach is defined as weighted node degree in the MPX NYC participant network. For participant $i \in N_p$
 
 $$
 R_i = \sum_{j \in N_p}{\psi_p (i,j)}
@@ -810,7 +820,11 @@ $$
 R_i | A= \sum_{j \in N_p}{\psi_p (i,j)I_{x \in A}(x = j) }
 $$
 
-where the indicator function $I_{x \in A}(x)$ equals $1$ when $x\in A$ and $0$ otherwise. Participant spacial reach is defined as the number of connections the focal participant has with community districts. It is defined as the weighted node degree in the MPX NYC spacial participant network. For $i \in N_p$
+where the indicator function $I_{x \in A}(x)$ equals $1$ when $x\in A$ and $0$ otherwise.
+
+#### Participant spacial reach
+
+Participant spacial reach is defined as the number of connections the focal participant has with community districts. It is defined as the weighted node degree in the MPX NYC spacial participant network. For $i \in N_p$
 
 $$
 S_i = \sum_{j \in N_c}{\psi (i,j)}
@@ -819,6 +833,8 @@ $$
 $$
 S_i|A = \sum_{j \in N_c}{\psi (i,j)I_{x \in A}(x = j)}
 $$
+
+#### Community district social reach
 
 Community district social reach is defined as the number of connections the focal community district has with participants. It is defined as the weighted node degree in the MPX NYC spacial participant network. For $j \in N_c$:
 
@@ -830,7 +846,13 @@ $$
 r_j|A = \sum_{i \in N_p}{\psi (i, j)I_{x \in A}(x = i)}
 $$
 
-Community district spacial reach is defined as the number of connections the focal community district has with other community districts through shared participants. It is defined as the weighted node degree in the MPX NYC community district network. For $j \in N_c$
+#### Community district spacial reach
+Community district spacial reach is defined as the number of connections the focal community district has with other community districts through shared participants. For community districts $c$ and $d$, by "shared participants", we mean the set 
+
+$$ 
+\{p : \psi(p,c) > 0 \text{ and } \psi(p, d) > 0 \, \text{ for } p \in N_p \}
+$$
+Community district spacial reach is defined as the weighted node degree in the MPX NYC community district network. For $j \in N_c$
 
 $$
 s_j = \sum_{i \in N_c}{\psi_c (i,j)}
@@ -842,15 +864,107 @@ $$
 
 ### Connected components
 
+In a given network, a connected component is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties.
+
+A connected component of $G(N, \psi)$ is a subset $C \subset N$ such that for $i,j \in C$, $i \not = j$ $$
+\psi(i,j) > 0
+$$
+
+and for $i \in C$, $j \not \in C$:
+
+$$
+\psi(i,j) = 0
+$$
+
+Singletons are trivially connected components. 
+
+It is possible to partition the node set $N$ into connected components. This follows from the facts that connected components form non-overalapping subsets of $N$ and that it is possible to write $N$ as a union of subsets which are each connected components. 
+
+This partitioning is unique. Say there were two partitionings of $N$ into connected components $\{C_t\}$ and $\{C^*_t\}$. That would imply that 
+
+$$ 
+\exists i \in N \text{ such that } i \in C_l \text{, } i \in C^*_k \text{, and } C_l \not = C^*_k
+$$
+but that would imply that 
+
+$$
+\exists j \in C_l \text{ such that } j \not \in C^*_k 
+$$
+
+or
+$$
+\exists j \in C^*_k \text{ such that } j \not \in C_l 
+$$
+
+but since $i \in C_l$ and $i \in C^*_l$:
+
+\begin{align}
+j \in C_l &\Rightarrow \psi(i,j) > 0 \\
+
+&\Rightarrow j \in C^*_k \\
+
+\end{align}
+
+and 
+
+\begin{align}
+j \in C^*_k  &\Rightarrow \psi(i,j) > 0 \\
+
+&\Rightarrow j \in C_l \\
+
+\end{align}
+
+qed
+
+We can therefore uniquely express the node set $N$ as a union of connected components:
+
+$$
+N = \bigcup_{k = 1}^{K}{C_k}
+$$
+
+For a given graph $G$, we define the connected component size sequence $c_k \in \mathbb{N}$, $k \in [1, ..., K]$ as
+
+$$
+c_k = |C_k|
+$$
+
+Because connected components are mutually exclusive and exhaustive of the node set $N$, this sequence has the property that:
+
+$$
+|N| = \sum_{k = 1}^K{c_k}
+$$
+
 ## MPX NYC descriptive statistics
 
 #### Spatial mixing coefficient
 
-We define the spacial mixing coefficient of group A for group B as:
+We define preference of group A for group B as the average proportion of alters from group B among egos from group A.
 
 $$
-\phi(A,B) = \frac{|N_p|}{|A||B|} \sum_{i \in A}{\frac{ R_i | B}{R_i}}
+\text{Pref}(A,B) = \frac{1}{|A|}\sum_{i \in A}{\frac{ R_i | B}{R_i}}
 $$
+
+To understand whether preference of a specific group by another group is higher or lower than we would expect if ego's chose alters randomly, we compare preference for B to the prevalence of group B:
+
+$$
+\text{Prev}(B) = \frac{|B|}{|N_p|}
+$$
+
+The spacial mixing coefficient is the ratio of preference to prevalence minus one:
+
+$$
+\phi(A,B) = \frac{\text{Pref(A,B)}}{\text{Prev}(B)} - 1
+$$
+
+#### Proportion in largest connected component
+
+Given a graph $G$, we define the proportion in the largest connected component as:
+
+$$
+\frac{\max_k{c_k}}{|N|}
+$$
+
+#### Population coverage
 
 ## MPX NYC Intervention Analysis
 
@@ -908,10 +1022,13 @@ $$
 Intervention coverage for community district $n^{(k)}$, the $k^{th}$ community district to be immunized, is defined as:
 
 $$
- r_{n^{(k)}}^{(k-1)} \div \sum_{j 
-= 1}^{|N_c|}{r_{n^{(j)}}^{(j-1)}}
+\frac{ r_{n^{(k)}}^{(k-1)}}{ |N_p|}
 $$
 
 ##### Social network impact
+
+$$
+\frac{\max_t{c_t}}{|N_p|}
+$$
 
 # References
