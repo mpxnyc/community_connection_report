@@ -2,13 +2,17 @@
 title: "MPX NYC"
 subtitle: "Methods and Results"
 author: "Keletso Makofane"
-date: 30 Oct 2024
+date: 13 Nov 2024
 prefer-html: true
 execute:
   echo: false
   warning: false
   message: false
-format: html
+format: 
+  html:
+    toc: true
+    number-sections: true
+    
 bibliography: bibliography.bib
 ---
 
@@ -597,7 +601,7 @@ The MPX NYC spatial participant data network is a network object that contains a
 We define the MPX NYC spatial participant graph as
 
 $$
-G(N, \psi) \\ 
+G(N, \psi) 
 \text{ where } \psi:N\times N \rightarrow \mathbb{N}_0
 $$
 
@@ -606,7 +610,7 @@ $N$ is a set containing node indices and $\psi$ (the adjacency function for $G$)
 In the MPX NYC spatial participant graph, nodes can be partitioned into a set of study participants $N_p$ and a set of community districts $N_c$. i.e.
 
 $$
-N_p \cup N_c = N \\ \text{ and }  N_p \cap N_c = \emptyset
+N_p \cup N_c = N \text{ and }  N_p \cap N_c = \emptyset
 $$
 
 Each individual participant can have a relation with any number of community districts, but not with another participant. Similarly, each community district can have a relation with multiple participants, but not with another community district. i.e.:
@@ -690,7 +694,7 @@ The MPX NYC participant network has participants as nodes. A pair of nodes is co
 We define the MPX NYC participant graph as
 
 $$
-G_p(N_p, \psi_p) \\ \text{ where } \psi_p:N_p\times N_p \rightarrow \mathbb{N}_0 
+G_p(N_p, \psi_p)  \text{ where } \psi_p:N_p\times N_p \rightarrow \mathbb{N}_0 
 $$
 
 $N_p$ is a set containing node indices for participant nodes and $\psi_p$ is a mapping from each possible pair of participants to the set of non-negative integers. $\psi_p(a,b) = 0$ when there is no edge between distinct participants $a$ and $b$ and $\psi_p(a,b) > 0$ if there is. By definition, a node cannot have a tie with itself. i.e. $\psi_p(a,a) = 0$ $\forall a \in N_p$.
@@ -773,7 +777,7 @@ The MPX NYC community district network has community districts as nodes. A pair 
 We define the MPX NYC community district graph as
 
 $$
-G_c(N_c, \psi_c) \\ \text{ where }  \psi_c:N_c\times N_c \rightarrow \mathbb{N}_0 
+G_c(N_c, \psi_c)  \text{ where }  \psi_c:N_c\times N_c \rightarrow \mathbb{N}_0 
 $$
 
 where $N_c$ is a set containing node indices for community district nodes and $\psi_c$ is a mapping from each possible pair of community districts to the set of non-negative integers. $\psi_c(a,b) = 0$ when there is no edge between community districts $a$ and $b$ and $\psi_c(a,b) > 0$ if there is. By definition, a node cannot have a tie with itself. i.e. $\psi_c(a,a) = 0$ $\forall a \in N_c$.
@@ -794,7 +798,7 @@ $$
 
 In this section, we describe network measures that are both useful statistics to interpret in describing MPX NYC data and useful intermediate steps in other measures we constructed. We divide the measures into those that are related to egocentric networks, and those related to the overall structure of the network.
 
-### Egocentric networks
+### Egocentric measures
 
 We define measures related to the egocentric network-related attributes of nodes in MPX NYC spatial participant network, the MPX NYC participant network, and the MPX NYC community district network. For each of these networks, node attributes have a slightly different interpretation. In addition, since there are two types of nodes in the MPX NYC spatial participant network, attributes have differing meaning depending on the type of node under consideration.
 
@@ -862,7 +866,7 @@ $$
 s_j|A = \sum_{i \in N_c}{\psi_c (i,j)I_{x \in A}(x = i)}
 $$
 
-### Connected components
+### Sociocentric measures
 
 In a given network, a connected component is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties.
 
@@ -878,93 +882,57 @@ $$
 
 Singletons are trivially connected components. 
 
-It is possible to partition the node set $N$ into connected components. This follows from the facts that connected components form non-overalapping subsets of $N$ and that it is possible to write $N$ as a union of subsets which are each connected components. 
-
-This partitioning is unique. Say there were two partitionings of $N$ into connected components $\{C_t\}$ and $\{C^*_t\}$. That would imply that 
-
-$$ 
-\exists i \in N \text{ such that } i \in C_l \text{, } i \in C^*_k \text{, and } C_l \not = C^*_k
-$$
-but that would imply that 
-
-$$
-\exists j \in C_l \text{ such that } j \not \in C^*_k 
-$$
-
-or
-$$
-\exists j \in C^*_k \text{ such that } j \not \in C_l 
-$$
-
-but since $i \in C_l$ and $i \in C^*_l$:
-
-\begin{align}
-j \in C_l &\Rightarrow \psi(i,j) > 0 \\
-
-&\Rightarrow j \in C^*_k \\
-
-\end{align}
-
-and 
-
-\begin{align}
-j \in C^*_k  &\Rightarrow \psi(i,j) > 0 \\
-
-&\Rightarrow j \in C_l \\
-
-\end{align}
-
-qed
-
-We can therefore uniquely express the node set $N$ as a union of connected components:
+It is possible to partition the node set $N$ into connected components. This follows from the facts that connected components form non-overalapping subsets of $N$ and that it is possible to write $N$ as a union of subsets which are each connected components. This partitioning is unique, we can therefore uniquely express the node set $N$ as a union of connected components:
 
 $$
 N = \bigcup_{k = 1}^{K}{C_k}
 $$
 
-For a given graph $G$, we define the connected component size sequence $c_k \in \mathbb{N}$, $k \in [1, ..., K]$ as
+#### Participant connected component size sequence
+
+For the MPX NYC participant network $G_p$, we define the connected component size sequence $c_{p,k} \in \mathbb{N}$, $k \in [1, ..., K]$ with elements
 
 $$
-c_k = |C_k|
+c_{p,k} = |C_{p,k}|
 $$
+Where $C_{p,k}$ is a sequency of connected components of $G_p(N_p, \psi_p)$
 
-Because connected components are mutually exclusive and exhaustive of the node set $N$, this sequence has the property that:
+This sequence has the property that:
 
 $$
-|N| = \sum_{k = 1}^K{c_k}
+|N_p| = \sum_{k = 1}^K{c_{p,k}}
 $$
 
 ## MPX NYC descriptive statistics
 
 #### Spatial mixing coefficient
 
-We define preference of group A for group B as the average proportion of alters from group B among egos from group A.
+We define preference of group A for group B ($\Phi(A,B)$) as the average proportion of alters from group B among egos from group A.
 
 $$
-\text{Pref}(A,B) = \frac{1}{|A|}\sum_{i \in A}{\frac{ R_i | B}{R_i}}
+\Phi(A,B) = \frac{1}{|A|}\sum_{i \in A}{\frac{ R_i | B}{R_i}}
 $$
 
 To understand whether preference of a specific group by another group is higher or lower than we would expect if ego's chose alters randomly, we compare preference for B to the prevalence of group B:
 
 $$
-\text{Prev}(B) = \frac{|B|}{|N_p|}
+ \frac{|B|}{|N_p|}
 $$
 
 The spacial mixing coefficient is the ratio of preference to prevalence minus one:
 
 $$
-\phi(A,B) = \frac{\text{Pref(A,B)}}{\text{Prev}(B)} - 1
+\phi(A,B) = \frac{|N_p|}{|B|} \Phi(A,B) - 1
 $$
 
 #### Proportion in largest connected component
 
-Given a graph $G$, we define the proportion in the largest connected component as:
+Given a graph $G_p$, we define the proportion in the largest connected component as:
 
 $$
-\frac{\max_k{c_k}}{|N|}
+\frac{\max_k{c_{p, k}}}{|N_p|}
 $$
 
-#### Population coverage
 
 ## MPX NYC Intervention Analysis
 
@@ -980,17 +948,17 @@ Given $G^{(k)}$, we calculate $G^{(k+1)}$ by selecting a community district $n^{
 
 i.e. Given $G^{(k)}$, we find the node set of $N^{(k+1)}$ as follows:
 
-```{=tex}
+
 \begin{align}
 N^{(k+1)}_c &= N^{(k)}_c \backslash \{n^{(k)}\} \\
 N^{(k+1)}_p &= N^{(k)}_p \backslash \{ s \in N^{(k)}_p : \psi^{(k)}(s,n^{(k)}) > 0 \} \\
 N^{(k+1)}   &= N^{(k+1)}_p \cup N^{(k+1)}_c \\
 \end{align}
-```
+
 The adjacency function $\psi^{(k+1)}$ is given by:
 
 $$
-\psi^{(k+1)}(a,b) = \psi^{(k)}(a,b), \\ \forall a,b \in  N^{(k+1)}
+\psi^{(k+1)}(a,b) = \psi^{(k)}(a,b),  \forall a,b \in  N^{(k+1)}
 $$
 
 Given $G^{(k)}$, $G^{(k+1)}$ is defined:
@@ -1027,8 +995,10 @@ $$
 
 ##### Social network impact
 
+The cumulative social network impact of immunizing $k$ community districts is measured in terms of the size of the largest connected component of the $G_p$ network as a proportion of the total number of participants
+
 $$
-\frac{\max_t{c_t}}{|N_p|}
+\frac{\max_l{c^{(k)}_{p, l}}}{|N_p|}
 $$
 
 # References
