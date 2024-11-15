@@ -4,7 +4,7 @@ apply_style_home_vs_residence_dbn_bar_plot <- function(plot){
     scale_y_continuous(
       "Proportion in community district", 
       breaks = seq(-0.12,0.20, 0.02), 
-      limits = c(-0.06, 0.06), 
+      limits = c(-0.07, 0.07), 
       labels = function(x) {scales::percent((x))},
     ) +
     scale_alpha_manual(

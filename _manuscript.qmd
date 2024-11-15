@@ -116,18 +116,6 @@ The study was reviewed and approved by the T.H. Chan School of Public Health Ins
 
 The brief (5 minute) questionnaire was implemented in English and Spanish. It measured participant demographics; location of primary residence; social and sexual connections to queer or transgender community; health status; utilization of health services; STI-related symptoms, and mpox vaccination status (See Table 1).
 
-All participants were asked whether they had physical and sexual contact in a setting with two or more other people in the four weeks preceding the survey. We refer to this as "group contact" below. Those who answered yes were asked to enter the locations of these settings, which we refer to as "contact venues" below.
-
-### Contact venues and characteristics
-
-Among participants who reported group contact (i.e. physical or sexual contact in a group setting in the preceding 4 weeks) we solicited the census tracts of the places at which the contact happened. We refer to these as "contact venues". For each contact venue (see @fig-mapinputformat), participants indicated the type (dance party, sex party, darkroom, sport game, concert, theatre/show, private residence, sex club, bathhouse, park, something else) and whether they had sexual contact at that venue.
-
-## Statistical Analysis
-
-### Participant characteristics
-
-To describe the study population, we cross-tabulated participant characteristics against group contact. We also visualized sexual orientation by a calculated variable called race-gender (see below).
-
 [Gender identity]{.underline}
 
 Gender identity was measured using a two-step approach: first, we solicited the participant’s current gender (man, woman, trans man, trans woman, non-binary, other), and then sex assigned at birth (male, female, other). Those whose gender identity and sex assigned at birth were not concordant were categorized as transgender. We used current gender to further categorize transgender people into men and women.
@@ -136,11 +124,11 @@ Gender identity was measured using a two-step approach: first, we solicited the 
 
 Race was measured using a multiple selection question (white, black, latino/a/x, asian, pacific islander, other). We combined gender identity and race to form a gender-race variable, collapsing small cells across racial groups and into gender groups (white cisgender man, latinx cisgender man, black cisgender man, other cisgender man, non-binary person, transgender man, transgender woman, cisgender woman, another demographic).
 
+All participants were asked whether they had physical and sexual contact in a setting with two or more other people in the four weeks preceding the survey. We refer to this as "group contact" below. Those who answered yes were asked to enter the locations of these settings, which we refer to as "contact venues" below.
+
 ### Contact venue characteristics
 
-To describe the contact places elicited from participants, we cross-tabulated their characteristics. To understand how participants move between home and contact places, for every community district, we subtracted the proportion of residences it contains from the proportion of contact places it contains. We further visualized the cross tabulation of home census tract and contact place census tract.
-
-In this analysis, the unit of spatial analysis is the community district. Census tract identifiers were converted to community district identifiers. Community districts are spatial units that divide New York City into regions [@nycopendata2022] which are nested by the five boroughs of New York City, and which in turn nest census tracts. We constructed an approximate measure of the distance between participant residence and contact venues by categorizing the venues into those that are: in the same community district as the residence; in a different community district but the same borough; or in a different borough. We refer to this measure as distance from home.
+Among participants who reported group contact (i.e. physical or sexual contact in a group setting in the preceding 4 weeks) we solicited the census tracts of the places at which the contact happened. We refer to these as "contact venues". For each contact venue (see @fig-mapinputformat), participants indicated the type (dance party, sex party, darkroom, sport game, concert, theatre/show, private residence, sex club, bathhouse, park, something else) and whether they had sexual contact at that venue.
 
 ### Participant network characteristics
 
@@ -170,11 +158,43 @@ In the motivating example, we were soliciting the retired professor's preference
 
 The spatial mixing coefficient is related to notions in social network analysis and compartmental infectious disease modelling. The coefficient of a given sub-group for that same subgroup indicates homophily when it is positive, random mixing when it is zero, and heterophily when it is negative. It goes further by showing, in the case of heterophily, which subgroups members of the focal subgroup tend to be connected with. This is useful in early outbreak investigations as it allows the analyst to understand the potential path of a new pathogen across the population of interest. e.g. where there is strong homophily in the a network like the MPX NYC participant network, a new pathogen will tend to stay within the subgroup it first affected. If there is strong heterophily, on the other hand, the pathogen will tend to disseminate across groups favored by the first subgroup it affected.
 
-We calculated the spatial mixing coefficient across groups defined by age, sexual orientation, and race-gender.
-
 ### Community district network characteristics
 
-To understand how community districts represented in study data are connected through participants who have residences and contact venues across them, we constructed the MPX NYC community district network. This is a network with community districts as nodes. A weighted tie between two nodes indicates that the two community districts both have at least one MPX NYX participant who has a residence or community district in both places. The weight is given by the count of such individuals. For each node in the community district network, we define [community district centrality]{.underline} as the weighted degree of the node. (i.e. the sum of the weights for all the ties connected to the node).
+To understand how community districts represented in study data are connected through participants who have residences and contact venues across them, we constructed the MPX NYC community district network. This is a network with community districts as nodes. A weighted tie between two nodes indicates that the two community districts both have at least one MPX NYX participant who has a residence or community district in both places. The weight is given by the count of such individuals.
+
+[Community district centrality]{.underline}
+
+For each node in the community district network, we define community district centrality as the weighted degree of the node. (i.e. the sum of the weights for all the ties connected to the node).
+
+### Home-venue movement network characteristics
+
+We constructed the MPX NYC home-venue movement, which has community districts as nodes. There is a weighted directed edge between a pair of community districts if there is at least one participant whose residence is in the sending node (community district), and at least one contact venue is in the receiving node (community district).
+
+[Net movement from home to contact venue community districts]{.underline}
+
+We calculated net movement from home to contact venue community districts by subtracting in-degree from out-degree for each node and dividing by half of total-degree.
+
+## Statistical Analysis
+
+### Descriptive statistics
+
+[Participants]{.underline}
+
+To describe the study population, we cross-tabulated participant characteristics against group contact. We also visualized sexual orientation by a calculated variable called race-gender (see below).
+
+[Contact venues]{.underline}
+
+To describe the contact places elicited from participants, we cross-tabulated their characteristics. To understand how participants move between home and contact places, for every community district, we subtracted the proportion of residences it contains from the proportion of contact places it contains. We further visualized the cross tabulation of home census tract and contact place census tract.
+
+In this analysis, the unit of spatial analysis is the community district. Census tract identifiers were converted to community district identifiers. Community districts are spatial units that divide New York City into regions [@nycopendata2022] which are nested by the five boroughs of New York City, and which in turn nest census tracts. We constructed an approximate measure of the distance between participant residence and contact venues by categorizing the venues into those that are: in the same community district as the residence; in a different community district but the same borough; or in a different borough. We refer to this measure as distance from home.
+
+[Participant network]{.underline}
+
+We calculated the spatial mixing coefficient across groups defined by age, sexual orientation, and race-gender.
+
+[Home-venue movement network]{.underline}
+
+We visualized net movement from home to contact venues using a bar graph. The overall pattern of movement from home to contact venues across community districts was visualzied by plotting the adjacency matrix for the home-venue movement network.
 
 ### Responding to an outbreak
 
@@ -623,7 +643,7 @@ $$
 m^{ij} = \psi(i,j)
 $$
 
-In the MPX NYC data, it is possible for there two be more than one relation between a specific pair of nodes. In this mathematical description, however, we assume that there can only be one edge between a pair of nodes, and summarize the study data by assigning the count of relations as an edge weight. i.e In the case where participant $a \in N_p$ has $r$ relations with community district $c \in N_c$, there is only one edge $(a,c)$ in $G$ and the weight of that edge equals the count of relations ($\psi(a,c) = r$).
+In this mathematical description, we assume that there can only be one edge between a pair of nodes. In the MPX NYC data, it is possible for there to be more than one relation between a specific pair of nodes. We bridge this gap by assigning the count of relations in MPX NYC study data as an edge weight in the mathematical description. i.e In the case where participant $a \in N_p$ has $r$ relations with community district $c \in N_c$, there is only one edge $(a,c)$ in $G$ and the weight of that edge equals the count of relations ($\psi(a,c) = r$).
 
 The MPX NYC spatial participant graph meets the definition for a bipartite graph. This allows us to easily derive two related graphs - the bipartite projection onto participant nodes $G_p(N_p,\psi_p)$, and the bipartite projection onto community district nodes $G_c(N_c,\psi_c)$. The former graph is used to represent the MPX NYC participant network, and the latter is used to represent the MPX NYC community district network. Both are defined below.
 
@@ -802,13 +822,13 @@ In this section, we describe network measures that are both useful statistics to
 
 We define measures related to the egocentric network-related attributes of nodes in MPX NYC spatial participant network, the MPX NYC participant network, and the MPX NYC community district network. For each of these networks, node attributes have a slightly different interpretation. In addition, since there are two types of nodes in the MPX NYC spatial participant network, attributes have differing meaning depending on the type of node under consideration.
 
-We defined four measures related to node degree which offer a useful interpretation of MPX NYC data: participant social reach ($R_i$), participant spacial reach ($S_i$), community district social reach ($r_j$), and community district spacial reach ($s_j$). 
+We defined four measures related to node degree which offer a useful interpretation of MPX NYC data: participant social reach ($R_i$), participant spacial reach ($S_i$), community district social reach ($r_j$), and community district spacial reach ($s_j$).
 
 We further defined for each of these measures, a measure in which we count only the connections to nodes which are included in some defined subset $A \subset N$ of nodes. We thus define conditional participant social reach ($R_i|A$), conditional participant spacial reach ($S_i|A$), conditional community district social reach ($r_j|A$), and conditional community district spacial reach ($s_j|A$).
 
 #### Participant social reach
 
-Participant social reach is defined as the number of connections the focal participant has with other participants through shared community districts. For participants $i$ and $j$, by "shared community districts", we mean the set 
+Participant social reach is defined as the number of connections the focal participant has with other participants through shared community districts. For participants $i$ and $j$, by "shared community districts", we mean the set
 
 $$ 
 \{c : \psi(i,c) > 0 \text{ and } \psi(j, c) > 0 \, \text{ for } c \in N_c \}
@@ -851,12 +871,12 @@ r_j|A = \sum_{i \in N_p}{\psi (i, j)I_{x \in A}(x = i)}
 $$
 
 #### Community district spacial reach
-Community district spacial reach is defined as the number of connections the focal community district has with other community districts through shared participants. For community districts $c$ and $d$, by "shared participants", we mean the set 
+
+Community district spacial reach is defined as the number of connections the focal community district has with other community districts through shared participants. For community districts $c$ and $d$, by "shared participants", we mean the set
 
 $$ 
 \{p : \psi(p,c) > 0 \text{ and } \psi(p, d) > 0 \, \text{ for } p \in N_p \}
-$$
-Community district spacial reach is defined as the weighted node degree in the MPX NYC community district network. For $j \in N_c$
+$$ Community district spacial reach is defined as the weighted node degree in the MPX NYC community district network. For $j \in N_c$
 
 $$
 s_j = \sum_{i \in N_c}{\psi_c (i,j)}
@@ -867,43 +887,6 @@ s_j|A = \sum_{i \in N_c}{\psi_c (i,j)I_{x \in A}(x = i)}
 $$
 
 ### Sociocentric measures
-
-In a given network, a connected component is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties.
-
-A connected component of $G(N, \psi)$ is a subset $C \subset N$ such that for $i,j \in C$, $i \not = j$ $$
-\psi(i,j) > 0
-$$
-
-and for $i \in C$, $j \not \in C$:
-
-$$
-\psi(i,j) = 0
-$$
-
-Singletons are trivially connected components. 
-
-It is possible to partition the node set $N$ into connected components. This follows from the facts that connected components form non-overalapping subsets of $N$ and that it is possible to write $N$ as a union of subsets which are each connected components. This partitioning is unique, we can therefore uniquely express the node set $N$ as a union of connected components:
-
-$$
-N = \bigcup_{k = 1}^{K}{C_k}
-$$
-
-#### Participant connected component size sequence
-
-For the MPX NYC participant network $G_p$, we define the connected component size sequence $c_{p,k} \in \mathbb{N}$, $k \in [1, ..., K]$ with elements
-
-$$
-c_{p,k} = |C_{p,k}|
-$$
-Where $C_{p,k}$ is a sequency of connected components of $G_p(N_p, \psi_p)$
-
-This sequence has the property that:
-
-$$
-|N_p| = \sum_{k = 1}^K{c_{p,k}}
-$$
-
-## MPX NYC descriptive statistics
 
 #### Spatial mixing coefficient
 
@@ -927,16 +910,47 @@ $$
 
 #### Proportion in largest connected component
 
+In a given network, a connected component is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties.
+
+A connected component of $G(N, \psi)$ is a subset $C \subset N$ such that for $i,j \in C$, $i \not = j$ $$
+\psi(i,j) > 0
+$$
+
+and for $i \in C$, $j \not \in C$:
+
+$$
+\psi(i,j) = 0
+$$
+
+Singletons are trivially connected components.
+
+It is possible to partition the node set $N$ into connected components. This follows from the facts that connected components form non-overalapping subsets of $N$ and that it is possible to write $N$ as a union of subsets which are each connected components. Since this partitioning is unique, we can uniquely express the node set $N$ as a union of connected components:
+
+$$
+N = \bigcup_{k = 1}^{K}{C_k}
+$$
+
+For the MPX NYC participant network $G_p$, we define the connected component size sequence $c_{p,k} \in \mathbb{N}$, $k \in [1, ..., K]$ with elements
+
+$$
+c_{p,k} = |C_{p,k}|
+$$
+
+Where $C_{p,k}$ is a sequence of connected components of $G_p(N_p, \psi_p)$
+
+This sequence has the property that:
+
+$$
+|N_p| = \sum_{k = 1}^K{c_{p,k}}
+$$
+
 Given a graph $G_p$, we define the proportion in the largest connected component as:
 
 $$
 \frac{\max_k{c_{p, k}}}{|N_p|}
 $$
 
-
 ## MPX NYC Intervention Analysis
-
-#### Immunization Intervention
 
 Consider a sequence of graphs with elements $G^{(k)}$ for $k \in \mathbb{N}_0$ constructed so that
 
@@ -948,13 +962,13 @@ Given $G^{(k)}$, we calculate $G^{(k+1)}$ by selecting a community district $n^{
 
 i.e. Given $G^{(k)}$, we find the node set of $N^{(k+1)}$ as follows:
 
-
+```{=tex}
 \begin{align}
 N^{(k+1)}_c &= N^{(k)}_c \backslash \{n^{(k)}\} \\
 N^{(k+1)}_p &= N^{(k)}_p \backslash \{ s \in N^{(k)}_p : \psi^{(k)}(s,n^{(k)}) > 0 \} \\
 N^{(k+1)}   &= N^{(k+1)}_p \cup N^{(k+1)}_c \\
 \end{align}
-
+```
 The adjacency function $\psi^{(k+1)}$ is given by:
 
 $$
@@ -967,17 +981,17 @@ $$
 G^{(k+1)}(N^{(k+1)}, \psi^{(k+1)})
 $$
 
-#### Intervention Approaches
+#### Intervention strategies
 
 We examined two approaches for selecting a community district to immunize, corresponding to different intervention priorities. In the first, we select the next community district to immunize to maximize the number of people to be immunized. In the second, we select the next community district with the goal of minimizing the likelihood of contagion between community districts.
 
-i.e. in the [contact-neutralizing approach]{.underline} $n^{(k+1)}$ satisfies:
+i.e. in the [contact-neutralizing strategy]{.underline} $n^{(k+1)}$ satisfies:
 
 $$
 r_{n^{(k+1)}_\text{contact}} = \max_{j \in N_c^{(k)}}{r_j}
 $$
 
-and in the [movement-neutralizing approach]{.underline} $n^{(k+1)}$ satisfies:
+and in the [movement-neutralizing strategy]{.underline} $n^{(k+1)}$ satisfies:
 
 $$
 s_{n^{(k+1)}_\text{movement}} = \max_{j \in N_c^{(k)}}{s_j}
