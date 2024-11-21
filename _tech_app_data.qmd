@@ -1,0 +1,341 @@
+## Data
+
+### MPX NYC spatial participant network
+
+```{r  echo = FALSE, warning = FALSE, message=FALSE}
+
+mpxnyc_colors <- mpxnyc::mpxnyc_colors
+attach(mpxnyc_colors)
+targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
+
+
+example_nodes <- data.frame(
+                            name = c(
+                                      paste0("Person ", c(1:8)), 
+                                      paste0("Community ", c("a", "b", "c", "d", "e"))
+                                      ),
+                            type = c(rep(TRUE, 8), rep(FALSE, 5)),
+                            label = c(c(1:8, "A", "B", "C", "D", "E")),
+                            age = c(rep("18-25", 4), rep("26-50", 4), rep(NA, 5))
+                            )
+
+example_edges <- data.frame(
+                            from = c(
+                                      "Person 1", 
+                                      "Person 2", 
+                                      "Person 3",
+                                      "Person 3",
+                                      "Person 4",
+                                      "Person 4",
+                                      "Person 5",
+                                      "Person 4",
+                                      "Person 6",
+                                      "Person 3",
+                                      "Person 4",
+                                      "Person 6",
+                                      "Person 7",
+                                      "Person 8",
+                                      "Person 3"
+                                      ),
+                            to   = c(
+                                      "Community a", 
+                                      "Community a", 
+                                      "Community a",
+                                      "Community b",
+                                      "Community b",
+                                      "Community c",
+                                      "Community c",
+                                      "Community d",
+                                      "Community d",
+                                      "Community e",
+                                      "Community e",
+                                      "Community e",
+                                      "Community c",
+                                      "Community c",
+                                      "Community e"
+                                      ),
+                            weight = 1
+                    
+                            )
+
+example_bipartite_network   <- tidygraph::tbl_graph(
+                                                    nodes = example_nodes, 
+                                                    edges = example_edges
+                                                    ) %>%
+  tidygraph::activate(edges) %>%
+                                      mutate(weight_label = as.character(weight)) %>%
+  tidygraph::activate(nodes)
+
+example_place_network <- example_bipartite_network %>%
+                                      igraph::bipartite_projection(which = "false") %>%
+                                      tidygraph::as_tbl_graph() %>%
+                                      tidygraph::mutate(type = FALSE) %>%
+                                      tidygraph::activate(edges) %>%
+                                      tidygraph::mutate(weight_label = as.character(weight)) %>%
+                                      tidygraph::activate(nodes) 
+
+example_participant_network       <- example_bipartite_network %>%
+                                      igraph::bipartite_projection(which = "true") %>%
+                                      tidygraph::as_tbl_graph() %>%
+                                      tidygraph::mutate(type = TRUE) %>%
+                                      tidygraph::activate(edges) %>%
+                                      tidygraph::mutate(weight_label = as.character(weight)) %>%
+                                      tidygraph::activate(nodes)
+
+example_colors        <- c("FALSE" = mpxnyc_colors$dark_pink, "TRUE" = mpxnyc_colors$dark_blue)
+example_size_dot          <- c("FALSE" = 20, "TRUE" = 10)
+example_size_text         <- c("FALSE" = 5, "TRUE" = 10)
+example_edge_width_weight <- c("1" = 0.1, "2" = 1, "3" = 2)
+
+
+```
+
+The MPX NYC spatial participant data network is a network object that contains all collected data. In this network, nodes comprise of community districts and survey participants. Edges can only exist between a person and a communtiy district - they indicate that the person either lives in or has a contact place in that community district. In @fig-data, participant nodes are blue and community district nodes are pink.
+
+```{r echo = FALSE, warning = FALSE, message=FALSE}
+#| fig-cap: "MPX NYC spatial participant network data"
+#| label: fig-data
+#| fig-width: 8
+#| fig-height: 5
+
+
+
+example_bipartite_network %>%
+      ggraph::ggraph(layout = "kk") +
+          ggraph::geom_edge_fan(ggplot2::aes(edge_width = weight_label)) +
+          ggraph::geom_node_point(ggplot2::aes(color = type, size = type)) +
+          ggraph::geom_node_text(ggplot2::aes(label = label, size = type), color = "white") +
+          ggplot2::scale_color_manual(values = example_colors) +
+  ggraph::scale_edge_width_manual(values = example_edge_width_weight) +
+  ggplot2::scale_size_manual(values = example_size_dot) +
+  ggplot2::theme_void()  +
+  ggplot2::theme(
+    legend.position = "none",
+    plot.margin = margin(10,10,10,10)
+  )
+
+
+```
+
+::: columns
+::: column
+```{r  echo = FALSE, warning = FALSE, message=FALSE}
+#| label: tbl-example-bipartite-nodes
+#| tbl-cap: Example network data Nodes
+
+
+example_bipartite_network %>%
+  data.frame() %>%
+  transmute(name = label, type = ifelse(type, "person", "community_district")) %>%
+  gt::gt()
+
+
+```
+:::
+
+::: column
+```{r  echo = FALSE, warning = FALSE, message=FALSE}
+#| label: tbl-example-bipartite-edges
+#| tbl-cap: Example network data Edges
+
+
+
+example_bipartite_network %>%
+  mutate(name = label, type, age) %>%
+  activate(edges) %>%
+  mutate(from_name = .N()$name[from], to_name = .N()$name[to]) %>%
+  data.frame() %>%
+  arrange(from, to) %>%
+  transmute(from = from_name, to = to_name) %>%
+  gt::gt()
+```
+:::
+:::
+
+More formally, we define the MPX NYC spatial participant graph as
+
+$$
+G(N, \psi) 
+\text{ where } \psi:N\times N \rightarrow \mathbb{N}_0
+$$
+
+$N$ is a set containing node indices and $\psi$ (the adjacency function for $G$) is a mapping from each possible pair of nodes to the set of non-negative integers. $\psi(a,b) = 0$ when there is no edge between distinct nodes $a,b \in N$ and $\psi(a,b) > 0$ if there is. By definition, a node cannot have an edge with itself. i.e. $\psi(a,a) = 0$ $\forall a \in N$.
+
+In the MPX NYC spatial participant graph, nodes can be partitioned into a set of study participants $N_p$ and a set of community districts $N_c$. i.e.
+
+$$
+N_p \cup N_c = N \text{ and }  N_p \cap N_c = \emptyset
+$$
+
+Each individual participant can have a relation with any number of community districts, but not with another participant. Similarly, each community district can have a relation with multiple participants, but not with another community district. i.e.:
+
+$$
+\psi(a,b) > 0 \Rightarrow a\in N_p, b\in N_c
+$$ Finally, we define $M$ as a $q \times r$ weighted adjacency matrix for $G$ where $q = |N_p|$ and $r = |N_c|$. The $ij^{th}$ entry of $M$ is
+
+$$
+m^{ij} = \psi(i,j)
+$$
+
+In this mathematical description, we assume that there can only be one edge between a pair of nodes. In the MPX NYC data, it is possible for there to be more than one relation between a specific pair of nodes. We bridge this gap by assigning the count of relations in MPX NYC study data as an edge weight in the mathematical description. i.e In the case where participant $a \in N_p$ has $r$ relations with community district $c \in N_c$, there is only one edge $(a,c)$ in $G$ and the weight of that edge equals the count of relations ($\psi(a,c) = r$).
+
+The MPX NYC spatial participant graph meets the definition for a bipartite graph. This allows us to easily derive two related graphs - the bipartite projection onto participant nodes $G_p(N_p,\psi_p)$, and the bipartite projection onto community district nodes $G_c(N_c,\psi_c)$. The former graph is used to represent the MPX NYC participant network, and the latter is used to represent the MPX NYC community district network. Both are defined below.
+
+### MPX NYC participant network
+
+The MPX NYC participant network has participants as nodes. A pair of nodes is connected by a weighted edge if each of the individuals represented by the nodes has at least one contact venue or residence in the same, shared community district. The weight of the edge is given by the count of community districts the pair of nodes have in common. By definition, an edge of weight $0$ is equivalent to the absence of an edge.
+
+```{r echo = FALSE, warning = FALSE, message=FALSE}
+#| fig-cap: "MPX NYC participant network"
+#| label: fig-data-people
+#| fig-width: 8
+#| fig-height: 5
+
+
+ example_participant_network %>%
+      ggraph::ggraph(layout = "kk") +
+          ggraph::geom_edge_fan(ggplot2::aes(edge_width = weight_label)) +
+          ggraph::geom_node_point(ggplot2::aes(color = type, size = type)) +
+          ggraph::geom_node_text(ggplot2::aes(label = label, size = type), color = "white") +
+          ggplot2::scale_color_manual(values = example_colors) +
+  ggraph::scale_edge_width_manual(values = example_edge_width_weight) +
+  ggplot2::scale_size_manual(values = example_size_dot) +
+  ggplot2::theme_void()  +
+  ggplot2::theme(
+    legend.position = "none",
+    plot.margin = margin(10,10,10,10)
+  )
+
+
+```
+
+::: columns
+::: column
+```{r  echo = FALSE, warning = FALSE, message=FALSE}
+#| label: tbl-example-participant-nodes
+#| tbl-cap: Example network data Nodes
+
+example_participant_network %>%
+  data.frame() %>%
+  transmute(name = label, type = ifelse(type, "person", "community_district")) %>%
+  gt::gt()
+
+
+```
+:::
+
+::: column
+```{r  echo = FALSE, warning = FALSE, message=FALSE}
+#| label: tbl-example-participant-edges
+#| tbl-cap: Example network data Edges
+
+example_participant_network %>%
+  mutate(name = label, type, age) %>%
+  activate(edges) %>%
+  mutate(from_name = .N()$name[from], to_name = .N()$name[to]) %>%
+  data.frame() %>%
+  arrange(from, to) %>%
+  transmute(from = from_name, to = to_name, weight) %>%
+  gt::gt()
+```
+:::
+:::
+
+More formally, we define the MPX NYC participant graph as
+
+$$
+G_p(N_p, \psi_p)  \text{ where } \psi_p:N_p\times N_p \rightarrow \mathbb{N}_0 
+$$
+
+$N_p$ is a set containing node indices for participant nodes and $\psi_p$ is a mapping from each possible pair of participants to the set of non-negative integers. $\psi_p(a,b) = 0$ when there is no edge between distinct participants $a$ and $b$ and $\psi_p(a,b) > 0$ if there is. By definition, a node cannot have a tie with itself. i.e. $\psi_p(a,a) = 0$ $\forall a \in N_p$.
+
+$G_p(N_p, \psi_p)$ can be derived from $G$ by taking the product of the $q \times r$ adjacency matrix $M$ with its transpose:
+
+$$
+M_p = MM^T
+$$
+
+The result is a $q \times q$ adjacency matrix $M_p$ whose entries $m_p^{ij}$ are used to define $\psi_p$:
+
+$$
+\psi_p(i,j) = m_p^{ij}
+$$
+
+### MPX NYC community district network
+
+The MPX NYC community district network has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a contact venue or residence in both community districts. The weight is the count of participants which are shared by the two community districts.
+
+```{r echo = FALSE, warning = FALSE, message=FALSE}
+#| fig-cap: "MPX NYC community district network"
+#| label: fig-data-places
+#| fig-width: 8
+#| fig-height: 5
+
+example_place_network %>%
+      ggraph::ggraph(layout = "kk") +
+          ggraph::geom_edge_fan(ggplot2::aes(edge_width = weight_label)) +
+          ggraph::geom_node_point(ggplot2::aes(color = type, size = type)) +
+          ggraph::geom_node_text(ggplot2::aes(label = label, size = type), color = "white") +
+          ggplot2::scale_color_manual(values = example_colors) +
+  ggraph::scale_edge_width_manual(values = example_edge_width_weight) +
+  ggplot2::scale_size_manual(values = example_size_dot) +
+  ggplot2::theme_void()  +
+  ggplot2::theme(
+    legend.position = "none",
+    plot.margin = margin(10,10,10,10)
+  )
+
+```
+
+::: columns
+::: column
+```{r echo = FALSE, warning = FALSE, message=FALSE}
+#| label: tbl-example-place-nodes
+#| tbl-cap: Example network data Nodes
+
+example_place_network %>%
+  data.frame() %>%
+  transmute(name = label, type = ifelse(type, "person", "community_district")) %>%
+  gt::gt()
+
+```
+:::
+
+::: column
+```{r echo = FALSE, warning = FALSE, message=FALSE}
+#| label: tbl-example-place-edges
+#| tbl-cap: Example network data Edges
+
+
+example_place_network %>%
+  mutate(name = label, type, age) %>%
+  activate(edges) %>%
+  mutate(from_name = .N()$name[from], to_name = .N()$name[to]) %>%
+  data.frame() %>%
+  arrange(from, to) %>%
+  transmute(from = from_name, to = to_name, weight) %>%
+  gt::gt()
+
+```
+:::
+:::
+
+More formally, we define the MPX NYC community district graph as
+
+$$
+G_c(N_c, \psi_c)  \text{ where }  \psi_c:N_c\times N_c \rightarrow \mathbb{N}_0 
+$$
+
+where $N_c$ is a set containing node indices for community district nodes and $\psi_c$ is a mapping from each possible pair of community districts to the set of non-negative integers. $\psi_c(a,b) = 0$ when there is no edge between community districts $a$ and $b$ and $\psi_c(a,b) > 0$ if there is. By definition, a node cannot have a tie with itself. i.e. $\psi_c(a,a) = 0$ $\forall a \in N_c$.
+
+$G_c(N_c, \psi_c)$ can be derived from $G$ by taking the product of the $r \times q$ matrix $M^T$ with its transpose:
+
+$$
+M_c = M^TM
+$$
+
+The result is a $r \times r$ matrix $M_c$, whose entries $m^{ij}_c$ are used to define $\psi_c$:
+
+$$
+\psi_c(i,j) = m_c^{ij}
+$$

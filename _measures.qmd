@@ -1,0 +1,53 @@
+## Measures
+
+### Participant characteristics
+
+The brief (5 minute) questionnaire was implemented in English and Spanish. It measured participant demographics; community district of primary residence; social and sexual connections to queer or transgender community; health status; utilization of health services; STI-related symptoms, and mpox vaccination status (See Table 1).
+
+[Gender identity]{.underline}
+
+Gender identity was measured using a two-step approach: first, we solicited the participant’s current gender (man, woman, trans man, trans woman, non-binary, other), and then sex assigned at birth (male, female, other). Those whose gender identity and sex assigned at birth were not concordant were categorized as transgender. We used current gender to further categorize transgender people into men and women.
+
+[Race-gender]{.underline}
+
+Race was measured using a multiple selection question (white, black, latino/a/x, asian, pacific islander, other). We combined gender identity and race to form a gender-race variable, collapsing small cells across racial groups and into gender groups (white cisgender man, latinx cisgender man, black cisgender man, other cisgender man, non-binary person, transgender man, transgender woman, cisgender woman, another demographic).
+
+### Contact venue characteristics
+
+All participants were asked whether they had physical and sexual contact in a setting with two or more other people in the four weeks preceding the survey. We refer to this as "group contact" below. Those who answered yes were asked to enter the locations of these settings, which we refer to as "contact venues" below.
+
+Among participants who reported group contact (i.e. physical or sexual contact in a group setting in the preceding 4 weeks) we solicited the census tracts of the places at which the contact happened, as well as the venue type (dance party, sex party, darkroom, sport game, concert, theatre/show, private residence, sex club, bathhouse, park, something else) and whether they had sexual contact. We refer to these as "contact venues".
+
+[Community district]{.underline}
+
+In this analysis, the unit of spatial analysis is the community district. Community districts are spatial units that divide New York City into regions [@nycopendata2022] which are nested by the five boroughs of New York City, and which in turn nest census tracts. All census tract identifiers were converted to community district identifiers.
+
+[Distance from home]{.underline}
+
+We constructed an approximate measure of the distance between participant residence and contact venues by categorizing the venues into those that are: in the same community district as the residence; in a different community district but the same borough; or in a different borough. We refer to this measure as distance from home.
+
+### Participant network characteristics
+
+For a pathogen to be transmitted between two people, they have to make contact with one another in a shared physical context. We examined the patterning of shared physical context among participants using the MPX NYC participant network. In this network, survey participants are represented as nodes. A weighted edge between two individuals indicates that they each have at least one residence or contact venue in a common community district. The weight is given by the count of community districts the pair share in this way. The more community districts they share, the more likely it is that they would transmit a pathogen if one member of the pair was infected and the other was not.
+
+Of interest are the overall connectedness of the network and the pattern of connection across different subgroups. The better connected a network is, the more rapidly a pathogen could disseminate across nodes. Patterns of mixing across subgroups shape group-specific rates of infection over time.
+
+[Proportion in largest connected component]{.underline}
+
+We measure connectedness using the proportion of nodes in the largest connected component (LCC) of the MPX NYC participant network. A connected component of a network is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties. We consider a network with a larger LCC to be better connected than a network with a smaller LCC.
+
+[Spatial mixing coefficient]{.underline}
+
+We measure patterns of mixing using the spatial mixing coefficient of subgroup $a$ for subgroup $b$, which is defined as the spatial mixing ratio minus one. This measure is zero when contact venues and residences for a given subgroup are distributed in space independently of another; positive if members of the former subgroup tend to share community districts with those of the latter; and negative if they tend to not share community districts.
+
+The spatial mixing ratio is defined as the average spatial preference of subgroup $a$ for subgroup $b$ divided by the prevalence of subgroup $b$ where, for a given individual participant, spatial preference for subgroup $b$ is given by the sum of the edge weights for nodes who are members of subgroup $b$ divided by the total sum of edge weights. The average spatial preference of subgroup $a$ for subgroup $b$ is given by the average of spatial preference values for subgroup $b$ among individuals in subgroup $a$.
+
+The spatial mixing coefficient is related to ideas in the social network analysis literature. The coefficient of a given subgroup for itself indicates homophily when it is positive, and heterophily when it is negative. In the case of heterophily, it shows which other subgroups members of a given subgroup tend to be connected with. The measure also relates to the literature on compartmental infectious disease models (SIR models). When it is zero, the spatial mixing coefficient indicates random mixing in the population.
+
+### Community district network characteristics
+
+To understand how community districts represented in study data are connected through participants who have residences and contact venues across them, we constructed the MPX NYC community district network. This is a network with community districts as nodes. A weighted tie between two nodes indicates that the two community districts both have at least one MPX NYX participant who has a residence or community district in both places. The weight is given by the count of such individuals. Of interest is the influence each community district has in city-wide outbreak dynamics.
+
+[Community district spatial reach]{.underline}
+
+We measure the influence of each community district using community district spatial reach. For a given community district, this measure is defined as the sum of edge weights for edges connecting that community district to others. It quantifies the level of exchange of individuals between a particular community district and others. number of individuals that a particular community district shares with others.

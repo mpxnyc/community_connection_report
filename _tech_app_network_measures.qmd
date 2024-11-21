@@ -1,0 +1,117 @@
+## Network measures
+
+In this section, we describe network measures that are both useful statistics to interpret in describing MPX NYC data and useful intermediate steps in other measures we constructed. We divide the measures into those that are related to egocentric networks, and those related to the overall structure of the network.
+
+### Egocentric measures
+
+We defined four measures related to node degree which offer a useful interpretation of MPX NYC data: participant social reach ($R_i$), participant spatial reach ($S_i$), community district social reach ($r_j$), and community district spatial reach ($s_j$).
+
+We further defined for each of these measures, a measure in which we count only the connections to nodes which are included in some defined subset $A \subset N$ of nodes. We thus define conditional participant social reach ($R_i|A$), conditional participant spatial reach ($S_i|A$), conditional community district social reach ($r_j|A$), and conditional community district spatial reach ($s_j|A$).
+
+#### Participant social reach
+
+Participant social reach is defined as the number of connections the focal participant has with other participants through shared community districts. For participants $i$ and $j$, by "shared community districts", we mean the set
+
+$$ 
+\{c : \psi(i,c) > 0 \text{ and } \psi(j, c) > 0 \, \text{ for } c \in N_c \}
+$$.
+
+Participant social reach is defined as weighted node degree in the MPX NYC participant network. For participant $i \in N_p$
+
+$$
+R_i = \sum_{j \in N_p}{\psi_p (i,j)}
+$$
+
+$$
+R_i | A= \sum_{j \in N_p}{\psi_p (i,j)I_{x \in A}(x = j) }
+$$
+
+where the indicator function $I_{x \in A}(x)$ equals $1$ when $x\in A$ and $0$ otherwise.
+
+#### Participant spatial reach
+
+Participant spatial reach is defined as the number of connections the focal participant has with community districts. It is defined as the weighted node degree in the MPX NYC spatial participant network. For $i \in N_p$
+
+$$
+S_i = \sum_{j \in N_c}{\psi (i,j)}
+$$
+
+$$
+S_i|A = \sum_{j \in N_c}{\psi (i,j)I_{x \in A}(x = j)}
+$$
+
+#### Community district social reach
+
+Community district social reach is defined as the number of connections the focal community district has with participants. It is defined as the weighted node degree in the MPX NYC spatial participant network. For $j \in N_c$:
+
+$$
+r_j = \sum_{i \in N_p}{\psi (i, j)}
+$$
+
+$$
+r_j|A = \sum_{i \in N_p}{\psi (i, j)I_{x \in A}(x = i)}
+$$
+
+#### Community district spatial reach
+
+Community district spatial reach is defined as the number of connections the focal community district has with other community districts through shared participants. For community districts $c$ and $d$, by "shared participants", we mean the set
+
+$$ 
+\{p : \psi(p,c) > 0 \text{ and } \psi(p, d) > 0 \, \text{ for } p \in N_p \}
+$$ Community district spatial reach is defined as the weighted node degree in the MPX NYC community district network. For $j \in N_c$
+
+$$
+s_j = \sum_{i \in N_c}{\psi_c (i,j)}
+$$
+
+$$
+s_j|A = \sum_{i \in N_c}{\psi_c (i,j)I_{x \in A}(x = i)}
+$$
+
+### Sociocentric measures
+
+#### Spatial mixing coefficient
+
+The MPX NYC participant network can also be used to analyze the pattern of connection across different demographic groups. We did this using the spatial mixing coefficient, which we motivate and define below.
+
+Say there are three types of retired university professors in Boston - A) those who choose to live and socialize in neighborhoods with universities (where they can meet old colleagues and students); B) those who choose to live and socialize away from former colleagues and students; and C) those who choose neighborhoods without regard for university life. And say the proportion of people who are under 25 years of age in Boston is $20\%$ and that the majority of this group are college students. People who are under 25 years of age would be over-represented in neighborhoods with college campuses and residences, and under-represented in those without.
+
+To understand what kind of retired professor a particular person is, you could ask her of all the peopple she encountered in the past 12 months, what proportion were under $25$. If she is of type C, we would expect her answer to be about $20\%$. If she avoids universities (i.e. is of type B), the proportion would be lower than $20\%$ and if she seeks them out (i.e. type A), her answer would be greater than $20\%$.
+
+In the motivating example, we were soliciting the retired professor's preference for the subgroup: under 25. We were then mentally comparing it with the prevalence of that subgroup ($20\%$). The spatial mixing coefficient makes this comparison by dividing preference by prevalence and subtracting 1. It is zero when contact venues and residences for a given subgroup are distributed in space independently of another; positive if members of the former subgroup tend to share community districts with those of the latter; and negative if they tend to not share community districts.
+
+The spatial mixing coefficient is related to notions in social network analysis and compartmental infectious disease modelling. The coefficient of a given sub-group for that same subgroup indicates homophily when it is positive, random mixing when it is zero, and heterophily when it is negative. It goes further by showing, in the case of heterophily, which subgroups members of the focal subgroup tend to be connected with. This is useful in early outbreak investigations as it allows the analyst to understand the potential path of a new pathogen across the population of interest. e.g. where there is strong homophily in the a network like the MPX NYC participant network, a new pathogen will tend to stay within the subgroup it first affected. If there is strong heterophily, on the other hand, the pathogen will tend to disseminate across groups favored by the first subgroup it affected.
+
+We define preference of group A for group B ($\Phi(A,B)$) as the average proportion of alters from group B among egos from group A.
+
+$$
+\Phi(A,B) = \frac{1}{|A|}\sum_{i \in A}{\frac{ R_i | B}{R_i}}
+$$
+
+To understand whether preference of a specific group by another group is higher or lower than we would expect if ego's chose alters randomly, we compare preference for B to the prevalence of group B:
+
+$$
+ \frac{|B|}{|N_p|}
+$$
+
+The spatial mixing coefficient is the ratio of preference to prevalence minus one:
+
+$$
+\phi(A,B) = \frac{|N_p|}{|B|} \Phi(A,B) - 1
+$$
+
+#### Proportion in largest connected component
+
+In a given network, a connected component is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties.
+
+In the MPX NYC participant network, it is possible to uniquely partition the node set $N_p$ into connected components. This follows from the facts that connected components form non-overlapping subsets of $N_p$ and that it is possible to write $N_p$ as a union of subsets $C_k$ which are each connected components.
+
+$$
+N = \bigcup_{k = 1}^{K}{C_k}
+$$
+
+We define the proportion in the largest connected component as:
+
+$$
+\theta_p = \frac{\max_k{|C_k|}}{|N_p|}
+$$

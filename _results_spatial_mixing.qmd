@@ -1,0 +1,38 @@
+## Spatial mixing
+
+@fig-subgroup-mixing quantifies the degree to which individuals with characteristics shown on the left live or play in an overlapping set of community districts with individuals whose characteristics are shown at the top. Overall, MPX NYC participants showed spatial homophily - the spatial selection coefficient from a given group to the same group was positive for all levels of race-gender, sexual orientation, and age. In addition, black cisgender men and non-binary persons tended to visit or live in different neighborhoods than white cisgender men. Non-binary persons also showed a preference for community districts in which transgender men live. Gay identified participants preferred to live and play in community districts where bisexual, straight and queer identified participants did not live. Similarly, those groups selected against community districts in which gay identified individuals live or play.
+
+```{r fig_subgroup_mixing, echo = FALSE, warning = FALSE, message=FALSE}
+#| fig-cap:  "Social mixing matrices for MPX NYC participants by race-gender (top), sexual orientation (bottom left), and age (bottom right)"
+#| label: fig-subgroup-mixing
+#| fig-width: 12
+#| fig-height: 17
+
+
+mpxnyc_colors <- mpxnyc::mpxnyc_colors
+attach(mpxnyc_colors)
+targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
+
+
+mixing_demo_group_panel          <- make_table_mixing_2(demo_group) %>%
+                                      filter(ego_level != "Another Demographic") %>%
+                                      filter(alter_level != "Another Demographic") %>%
+                                      plot_matrix_mixing() %>%
+                                      apply_style_matrix_mixing_plot()
+
+
+mixing_sexOrientation_panel      <- make_table_mixing_2(sexOrientation) %>%
+                                      plot_matrix_mixing() %>%
+                                      apply_style_matrix_mixing_plot()
+
+
+mixing_age_panel                 <- make_table_mixing_2(age) %>%
+                                      plot_matrix_mixing() %>%
+                                      apply_style_matrix_mixing_plot()
+
+mixing_bottom_panel              <- cowplot::plot_grid(mixing_sexOrientation_panel, mixing_age_panel, nrow = 1)
+
+cowplot::plot_grid(mixing_demo_group_panel, mixing_bottom_panel, ncol=1, rel_heights = c(2,1.1))
+
+
+```
