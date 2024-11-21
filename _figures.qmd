@@ -1,15 +1,13 @@
----
-author: "Keletso Makofane"
-footer: "www.mpxresponse.org"
-theme:
-  light: cerulean
-  dark: darkly
 
----
 
 
 
 ```{r include= FALSE}
+mpxnyc_colors <- mpxnyc::mpxnyc_colors
+attach(mpxnyc_colors)
+targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
+
+
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message=FALSE)
 ```
 
@@ -181,7 +179,7 @@ make_table_freq1(demo_group) %>%
 
 ```
 
-### Data
+# Supplementary Figures
 
 ```{r table_bar_demogroup}
 #| fig-height: 8
@@ -725,17 +723,7 @@ make_table_mixing(sexOrientation) %>%
 
 ## Connection by Race-Gender of MPX NYC Participants
 
-```{r plot_netviz_places}
-#| fig-width: 9
-#| fig-height: 9
 
-
-make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
-  plot_network_viz() %>%
-  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
-  apply_style_network_viz()
-  
-```
 
 ## Movement between communities and boroughs
 
@@ -764,110 +752,6 @@ make_coverage_table(intervention_priority = "contact", intervention_stratificati
     draw_table_matrix_mixing()
   
   
-
-```
-
-## Race-Gender of MPX NYC Participants
-
-```{r plot_matrix_movement_coattendance}
-#| fig-width: 9
-#| fig-height: 11
-
-
-  make_table_movement_coattendance() %>%
-    plot_matrix_coattendence() %>%
-  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
-    apply_style_matrix_movement()
-  
-  
-
-```
-
-## 
-
-```{r table_matrix_movement_coattendance}
-#| fig-width: 9
-#| fig-height: 11
-
-
-  make_table_movement_coattendance() %>%
-    draw_table_matrix_mixing()
-  
-  
-
-```
-
-# Interventions
-
-## 
-
-```{r plot_map_coverage}
-#| fig-width: 7
-#| fig-height: 10
-
-make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
-  plot_coverage_map() %>%
-  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
-  add_title("Race-Gender of MPX NYC Participants") %>%
-  apply_style_coverage_map(caption_hjust = 0)
-
-
-```
-
-## 
-
-```{r plot_bar_coverage}
-#| fig-width: 14
-#| fig-height: 7
-
-
-make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
-    plot_coverage_bar() %>%
-  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
-  add_title("Race-Gender of MPX NYC Participants") %>%
-    apply_style_coverage_bar()
-
-```
-
-## 
-
-```{r table_bar_coverage}
-#| fig-width: 7
-#| fig-height: 10
-
-make_coverage_table(intervention_priority = "contact", intervention_stratification = "overall") %>%
-  draw_table_matrix_mixing()
-
-
-```
-
-## 
-
-```{r plot_net_impact}
-#| fig-width: 7
-#| fig-height: 7
-
-
-make_table_centrality() %>%
-  filter(intervention_ranking < 41) %>%
-    plot_netimpact_bar() %>%
-  add_caption("Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org") %>%
-  add_title("Race-Gender of MPX NYC Participants") %>%
-    apply_style_bar_netimpact()
-
-
-```
-
-## 
-
-```{r table_net_impact}
-#| fig-width: 7
-#| fig-height: 7
-
-
-make_table_centrality() %>%
-    draw_table_matrix_mixing()
-
 
 ```
 
