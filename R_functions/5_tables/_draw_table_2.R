@@ -1,5 +1,5 @@
 
-display_table_2 <- function(variable, group, label){
+draw_table_2 <- function(variable, group, label){
   
   make_table_freq2({{variable}}, {{group}}) %>%
     mutate(

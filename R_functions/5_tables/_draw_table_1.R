@@ -1,5 +1,5 @@
 
-display_table_1 <- function(variable, label){
+draw_table_1 <- function(variable, label){
   
   make_table_freq1({{variable}}) %>%
     select(level, count, proportion, proportion_ci_lb, proportion_ci_ub) %>%
