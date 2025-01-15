@@ -1,19 +1,19 @@
 load_factor_labels <- function(){
 
-  
   list_labels_people <- list()
 
   list_labels_people[["age"]] <- list()
-  list_labels_people[["age"]][["label"]] <- "Age"
+  list_labels_people[["age"]][["label"]]                      <- "Age"
+  list_labels_people[["age"]][["question"]]                   <- "How old are you?"
   list_labels_people[["age"]][["levels"]][["18-24"]]          <- "18-24"
   list_labels_people[["age"]][["levels"]][["25-34"]]          <- "25-34"
   list_labels_people[["age"]][["levels"]][["35-44"]]          <- "35-44"
   list_labels_people[["age"]][["levels"]][["45-54"]]          <- "45-54"
   list_labels_people[["age"]][["levels"]][["55+"]]            <- "55+"
   
-  
   list_labels_people[["borough"]] <- list()
-  list_labels_people[["borough"]][["label"]] <- "Borough"
+  list_labels_people[["borough"]][["label"]]                      <- "Borough"
+  list_labels_people[["borough"]][["question"]]                   <- "Borough"
   list_labels_people[["borough"]][["levels"]][["bronx"]]          <- "Bronx"
   list_labels_people[["borough"]][["levels"]][["brooklyn"]]       <- "Brooklyn"
   list_labels_people[["borough"]][["levels"]][["manhattan"]]      <- "Manhattan"
@@ -21,7 +21,8 @@ load_factor_labels <- function(){
   list_labels_people[["borough"]][["levels"]][["staten_island"]]  <- "Staten Island"
   
   list_labels_people[["channel"]] <- list()
-  list_labels_people[["channel"]][["label"]] <- "Recruitment channel"
+  list_labels_people[["channel"]][["label"]]                                <- "Recruitment channel"
+  list_labels_people[["channel"]][["question"]]                             <- "Recruitment channel"
   list_labels_people[["channel"]][["levels"]][["grindr"]]                   <- "Grindr"
   list_labels_people[["channel"]][["levels"]][["partner_toolkit"]]          <- "Partner toolkit"
   list_labels_people[["channel"]][["levels"]][["instagram"]]                <- "Instagram"
@@ -30,6 +31,7 @@ load_factor_labels <- function(){
   
   list_labels_people[["countFriendsCut"]] <- list()
   list_labels_people[["countFriendsCut"]][["label"]] <- "Count of queer/trans friends"
+  list_labels_people[["countFriendsCut"]][["question"]] <- "How many LGBTQ friends do you have who are important to you for any reason? Count only those you have been in touch with over the past 4 weeks."
   list_labels_people[["countFriendsCut"]][["levels"]][["0"]]     <- "0"
   list_labels_people[["countFriendsCut"]][["levels"]][["1-5"]]   <- "1-5"
   list_labels_people[["countFriendsCut"]][["levels"]][["6-10"]]  <- "6-10"
@@ -38,6 +40,7 @@ load_factor_labels <- function(){
   
   list_labels_people[["countSexCut"]] <- list()
   list_labels_people[["countSexCut"]][["label"]] <- "Count of sex partners"
+  list_labels_people[["countSexCut"]][["question"]] <- "Other than the people in the places you mentioned in the previous questions, how many people have you had sexual contact with over the past 4 weeks, excluding primary partners?"
   list_labels_people[["countSexCut"]][["levels"]][["0"]]     <- "0"
   list_labels_people[["countSexCut"]][["levels"]][["1"]]     <- "1"
   list_labels_people[["countSexCut"]][["levels"]][["2"]]     <- "2"
@@ -47,6 +50,7 @@ load_factor_labels <- function(){
   
   list_labels_people[["countPhysicalCut"]] <- list()
   list_labels_people[["countPhysicalCut"]][["label"]] <- "Count of physical contact partners"
+  list_labels_people[["countPhysicalCut"]][["question"]] <- "Count of physical contact partners"
   list_labels_people[["countPhysicalCut"]][["levels"]][["0"]]     <- "0"
   list_labels_people[["countPhysicalCut"]][["levels"]][["1"]]     <- "1"
   list_labels_people[["countPhysicalCut"]][["levels"]][["2"]]     <- "2"

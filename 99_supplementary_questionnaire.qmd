@@ -1,0 +1,56 @@
+# Questionnaire
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyjson)
+library(tidyverse)
+
+
+answers <- read_json("questionnaire.json") %>% 
+                gather_object() %>%
+                enter_object(answers)  %>% 
+                gather_object() %>%
+                json_types() %>%
+                filter(type == "array") %>%
+                gather_array() %>%
+                append_values_string() %>%
+                tibble() %>%
+                transmute(variable = name, language = name.2, answer = string, index = array.index) %>%
+  group_by(variable, language)  
+                
+questions <- read_json("questionnaire.json") %>% 
+                gather_object() %>%
+                enter_object(question)  %>% 
+                gather_object() %>%
+                json_types() %>%
+                gather_array() %>%
+                append_values_string() %>%
+                tibble() %>%
+                transmute(variable = name, language= name.2, question = string) %>%
+  group_by(variable, language) %>%
+    summarize(question = paste(question, collapse = "\n\n")) %>%
+  ungroup()  
+
+data <- questions %>%
+left_join(answers, by = c("variable", "language")) %>%
+  group_by(variable, language) %>%
+  #mutate(question = c(question[1], rep("", length(question) - 1))) %>%
+  ungroup() %>%
+  arrange(variable, index, language) %>%
+    filter(language == "english") %>%
+  select(question, variable, answer) %>%
+  filter(!(variable %in% c("consent"))) %>%
+  select(-variable)
+
+  
+
+
+gt::gt(data, groupname_col = "question" )
+
+```
+
+
+
+
+
+
