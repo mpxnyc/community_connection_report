@@ -9,18 +9,18 @@ plot_radar_stratified   <- function(data){
     dplyr::mutate(prop_label = scales::percent(proportion, accuracy = 1)) |>
     ggplot2::ggplot() +
     ggplot2::geom_bar(
-      aes(x = level, y = proportion, fill = level), 
+      ggplot2::aes(x = level, y = proportion, fill = level), 
       stat   = "identity", 
       width  = 1, 
       color  = "black"
     ) +
     ggplot2::geom_text(
-      aes(x = 0, y = -0.8, label = paste("n =", n)), 
+      ggplot2::aes(x = 0, y = -0.8, label = paste("n =", n)), 
       data  = data_n_counts, 
       size  = 5
     ) +
     ggplot2::geom_text(
-      aes(label = prop_label, x = level, y = proportion + 0.3), 
+      ggplot2::aes(label = prop_label, x = level, y = proportion + 0.3), 
       size  = 3, 
       face  = "bold", 
       alpha = 0.7
@@ -33,7 +33,7 @@ plot_radar_stratified   <- function(data){
       strip.text      = ggplot2::element_text( hjust = 0.5),
       strip.text.y    = ggplot2::element_text(),
       plot.title      = ggplot2::element_text(hjust = 0.5),
-      plot.subtitle   = ggplot2::element_text(hjust = 0.5, margin = margin(1, 0, 15, 0, "mm")),
+      plot.subtitle   = ggplot2::element_text(hjust = 0.5, margin = ggplot2::margin(1, 0, 15, 0, "mm")),
       plot.caption    = ggplot2::element_text( hjust = 0)
     ) +
     ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1))
@@ -75,7 +75,7 @@ plot_radar_grid       <- function(data){
     dplyr::filter(!is.na(stratum)) |>
     ggplot2::ggplot() +
     ggplot2::geom_bar(
-      aes(x = level, y = proportion, fill = level), 
+      ggplot2::aes(x = level, y = proportion, fill = level), 
       stat = "identity",
       width = 1, 
       color = "black"

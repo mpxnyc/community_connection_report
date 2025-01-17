@@ -1,7 +1,7 @@
 apply_style_radar_grid_plot <- function(plot, caption_hjust = 0){
   
   plot +
-    scale_fill_manual("", values = c(
+    ggplot2::scale_fill_manual("", values = c(
       dark_blue,
       dark_pink,
       dark_purple,
@@ -17,11 +17,11 @@ apply_style_radar_grid_plot <- function(plot, caption_hjust = 0){
       mid_brown,
       light_brown
     )) +
-    theme(
-      plot.title    = element_text(hjust = 0.5, margin = margin(0, 0, 1, 0, "mm")),
-      plot.subtitle = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),
-      plot.caption  = element_text( hjust = caption_hjust, margin = margin(1, 1, 1, 1, "cm")),
-      plot.margin   = margin(1,1,1,1, "cm"),
+    ggplot2::theme(
+      plot.title    = ggplot2::element_text(hjust = 0.5, margin = ggplot2::margin(0, 0, 1, 0, "mm")),
+      plot.subtitle = ggplot2::element_text(hjust = 0.5, margin = ggplot2::margin(0, 0, 15, 0, "mm")),
+      plot.caption  = ggplot2::element_text( hjust = caption_hjust, margin = ggplot2::margin(1, 1, 1, 1, "cm")),
+      plot.margin   = ggplot2::margin(1,1,1,1, "cm"),
       legend.position = "bottom"
     )
 }
