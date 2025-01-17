@@ -4,17 +4,17 @@
 library(targets)
 
 # Set target options:
-tar_option_set(
-  packages = c("tidyverse", "data.table", "dtplyr", "tidygraph", "igraph", "mpxnyc") # packages that your targets need to run
-)
+#tar_option_set(
+#  packages = c("tidyverse", "data.table", "dtplyr", "tidygraph", "igraph", "mpxnyc") # packages that your targets need to run
+#)
 
 
 # Run the R scripts in the R/ folder with your custom functions:
-tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
-tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/1_data_processing")
-tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/2_data_summary")
-tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/3_data_extract")
-tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/4_plot")
+
+suppressMessages({
+  targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
+})
+
 
 
 list(    

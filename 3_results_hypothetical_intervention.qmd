@@ -1,4 +1,4 @@
-## Impact of hypothetical outbreak interventions
+## Outbreak interventions
 
 ### Spatial efficiency
 
@@ -22,32 +22,32 @@ targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_anal
 map_plot_1                 <- make_table_coverage(
                                                   intervention_priority = "contact", 
                                                   intervention_stratification = "overall"
-                                                  ) %>%
-                                  plot_coverage_map()  %>%
-                                  apply_style_coverage_map() %>%
+                                                  ) |>
+                                  plot_coverage_map()  |>
+                                  apply_style_coverage_map() |>
                                   add_title("contact-neutralizing strategy")
 
 map_plot_2                 <- make_table_coverage(
                                                   intervention_priority = "movement", 
                                                   intervention_stratification = "overall"
-                                                  ) %>%
-                                  plot_coverage_map()  %>%
-                                  apply_style_coverage_map() %>%
+                                                  ) |>
+                                  plot_coverage_map()  |>
+                                  apply_style_coverage_map() |>
                                   add_title("movement-neutralizing strategy")
 
 bar_plot_1                 <- make_table_coverage(
                                                   intervention_priority = "contact", 
-                                                  intervention_stratification = "overall") %>%
-                                  filter(group != "Group C") %>%
-                                  plot_coverage_bar() %>%
+                                                  intervention_stratification = "overall") |>
+                                  filter(group != "Group C") |>
+                                  plot_coverage_bar() |>
                                   apply_style_coverage_bar() 
 
 bar_plot_2                 <- make_table_coverage(
                                                   intervention_priority = "movement", 
                                                   intervention_stratification = "overall"
-                                                  ) %>%
-                                  filter(group != "Group C") %>%
-                                  plot_coverage_bar() %>%
+                                                  ) |>
+                                  filter(group != "Group C") |>
+                                  plot_coverage_bar() |>
                                   apply_style_coverage_bar() 
 
   
@@ -69,8 +69,8 @@ cowplot::plot_grid(finished_plot_map, finished_plot_bar, ncol=1, rel_heights = c
 #| fig-width: 8
 #| fig-height: 5
 
-make_table_centrality() %>%
-  plot_centrality_bar() %>%
+make_table_centrality() |>
+  plot_centrality_bar() |>
   apply_style_centrality_bar()
 
 
