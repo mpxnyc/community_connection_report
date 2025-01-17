@@ -61,25 +61,25 @@ example_edges <- data.frame(
 example_bipartite_network   <- tidygraph::tbl_graph(
                                                     nodes = example_nodes, 
                                                     edges = example_edges
-                                                    ) %>%
-  tidygraph::activate(edges) %>%
-                                      mutate(weight_label = as.character(weight)) %>%
+                                                    ) |>
+  tidygraph::activate(edges) |>
+                                      dplyr::mutate(weight_label = as.character(weight)) |>
   tidygraph::activate(nodes)
 
-example_place_network <- example_bipartite_network %>%
-                                      igraph::bipartite_projection(which = "false") %>%
-                                      tidygraph::as_tbl_graph() %>%
-                                      tidygraph::mutate(type = FALSE) %>%
-                                      tidygraph::activate(edges) %>%
-                                      tidygraph::mutate(weight_label = as.character(weight)) %>%
+example_place_network <- example_bipartite_network |>
+                                      igraph::bipartite_projection(which = "false") |>
+                                      tidygraph::as_tbl_graph() |>
+                                      tidygraph::mutate(type = FALSE) |>
+                                      tidygraph::activate(edges) |>
+                                      tidygraph::mutate(weight_label = as.character(weight)) |>
                                       tidygraph::activate(nodes) 
 
-example_participant_network       <- example_bipartite_network %>%
-                                      igraph::bipartite_projection(which = "true") %>%
-                                      tidygraph::as_tbl_graph() %>%
-                                      tidygraph::mutate(type = TRUE) %>%
-                                      tidygraph::activate(edges) %>%
-                                      tidygraph::mutate(weight_label = as.character(weight)) %>%
+example_participant_network       <- example_bipartite_network |>
+                                      igraph::bipartite_projection(which = "true") |>
+                                      tidygraph::as_tbl_graph() |>
+                                      tidygraph::mutate(type = TRUE) |>
+                                      tidygraph::activate(edges) |>
+                                      tidygraph::mutate(weight_label = as.character(weight)) |>
                                       tidygraph::activate(nodes)
 
 example_colors        <- c("FALSE" = mpxnyc_colors$dark_pink, "TRUE" = mpxnyc_colors$dark_blue)
@@ -100,7 +100,7 @@ The MPX NYC spatial participant data network is a network object that contains a
 
 
 
-example_bipartite_network %>%
+example_bipartite_network |>
       ggraph::ggraph(layout = "kk") +
           ggraph::geom_edge_fan(ggplot2::aes(edge_width = weight_label)) +
           ggraph::geom_node_point(ggplot2::aes(color = type, size = type)) +
@@ -111,7 +111,7 @@ example_bipartite_network %>%
   ggplot2::theme_void()  +
   ggplot2::theme(
     legend.position = "none",
-    plot.margin = margin(10,10,10,10)
+    plot.margin = ggplot2::margin(10,10,10,10)
   )
 
 
@@ -124,9 +124,9 @@ example_bipartite_network %>%
 #| tbl-cap: Example network data Nodes
 
 
-example_bipartite_network %>%
-  data.frame() %>%
-  transmute(name = label, type = ifelse(type, "person", "community_district")) %>%
+example_bipartite_network |>
+  data.frame() |>
+  dplyr::transmute(name = label, type = ifelse(type, "person", "community_district")) |>
   gt::gt()
 
 
@@ -140,13 +140,13 @@ example_bipartite_network %>%
 
 
 
-example_bipartite_network %>%
-  mutate(name = label, type, age) %>%
-  activate(edges) %>%
-  mutate(from_name = .N()$name[from], to_name = .N()$name[to]) %>%
-  data.frame() %>%
-  arrange(from, to) %>%
-  transmute(from = from_name, to = to_name) %>%
+example_bipartite_network |>
+  dplyr::mutate(name = label, type, age) |>
+  tidygraph::activate(edges) |>
+  dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
+  data.frame() |>
+  dplyr::arrange(from, to) |>
+  dplyr::transmute(from = from_name, to = to_name) |>
   gt::gt()
 ```
 :::
@@ -192,7 +192,7 @@ The MPX NYC participant network has participants as nodes. A pair of nodes is co
 #| fig-height: 5
 
 
- example_participant_network %>%
+ example_participant_network |>
       ggraph::ggraph(layout = "kk") +
           ggraph::geom_edge_fan(ggplot2::aes(edge_width = weight_label)) +
           ggraph::geom_node_point(ggplot2::aes(color = type, size = type)) +
@@ -203,7 +203,7 @@ The MPX NYC participant network has participants as nodes. A pair of nodes is co
   ggplot2::theme_void()  +
   ggplot2::theme(
     legend.position = "none",
-    plot.margin = margin(10,10,10,10)
+    plot.margin = ggplot2::margin(10,10,10,10)
   )
 
 
@@ -215,9 +215,9 @@ The MPX NYC participant network has participants as nodes. A pair of nodes is co
 #| label: tbl-example-participant-nodes
 #| tbl-cap: Example network data Nodes
 
-example_participant_network %>%
-  data.frame() %>%
-  transmute(name = label, type = ifelse(type, "person", "community_district")) %>%
+example_participant_network |>
+  data.frame() |>
+  dplyr::transmute(name = label, type = ifelse(type, "person", "community_district")) |>
   gt::gt()
 
 
@@ -229,13 +229,13 @@ example_participant_network %>%
 #| label: tbl-example-participant-edges
 #| tbl-cap: Example network data Edges
 
-example_participant_network %>%
-  mutate(name = label, type, age) %>%
-  activate(edges) %>%
-  mutate(from_name = .N()$name[from], to_name = .N()$name[to]) %>%
-  data.frame() %>%
-  arrange(from, to) %>%
-  transmute(from = from_name, to = to_name, weight) %>%
+example_participant_network |>
+  dplyr::mutate(name = label, type, age) |>
+  tidygraph::activate(edges) |>
+  dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
+  data.frame() |>
+  dplyr::arrange(from, to) |>
+  dplyr::transmute(from = from_name, to = to_name, weight) |>
   gt::gt()
 ```
 :::
@@ -271,7 +271,7 @@ The MPX NYC community district network has community districts as nodes. A pair 
 #| fig-width: 8
 #| fig-height: 5
 
-example_place_network %>%
+example_place_network |>
       ggraph::ggraph(layout = "kk") +
           ggraph::geom_edge_fan(ggplot2::aes(edge_width = weight_label)) +
           ggraph::geom_node_point(ggplot2::aes(color = type, size = type)) +
@@ -282,7 +282,7 @@ example_place_network %>%
   ggplot2::theme_void()  +
   ggplot2::theme(
     legend.position = "none",
-    plot.margin = margin(10,10,10,10)
+    plot.margin = ggplot2::margin(10,10,10,10)
   )
 
 ```
@@ -293,9 +293,9 @@ example_place_network %>%
 #| label: tbl-example-place-nodes
 #| tbl-cap: Example network data Nodes
 
-example_place_network %>%
-  data.frame() %>%
-  transmute(name = label, type = ifelse(type, "person", "community_district")) %>%
+example_place_network |>
+  data.frame() |>
+  dplyr::transmute(name = label, type = ifelse(type, "person", "community_district")) |>
   gt::gt()
 
 ```
@@ -307,13 +307,13 @@ example_place_network %>%
 #| tbl-cap: Example network data Edges
 
 
-example_place_network %>%
-  mutate(name = label, type, age) %>%
-  activate(edges) %>%
-  mutate(from_name = .N()$name[from], to_name = .N()$name[to]) %>%
-  data.frame() %>%
-  arrange(from, to) %>%
-  transmute(from = from_name, to = to_name, weight) %>%
+example_place_network |>
+  dplyr::mutate(name = label, type, age) |>
+  tidygraph::activate(edges) |>
+  dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
+  data.frame() |>
+  dplyr::arrange(from, to) |>
+  dplyr::transmute(from = from_name, to = to_name, weight) |>
   gt::gt()
 
 ```
