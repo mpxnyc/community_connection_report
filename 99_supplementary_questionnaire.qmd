@@ -6,47 +6,73 @@ library(tidyjson)
 library(tidyverse)
 
 
-answers <- read_json("questionnaire.json") %>% 
-                gather_object() %>%
-                enter_object(answers)  %>% 
-                gather_object() %>%
-                json_types() %>%
-                filter(type == "array") %>%
-                gather_array() %>%
-                append_values_string() %>%
-                tibble() %>%
-                transmute(variable = name, language = name.2, answer = string, index = array.index) %>%
-  group_by(variable, language)  
+answers <- tidyjson::read_json("questionnaire.json") |>
+                tidyjson::gather_object() |>
+                tidyjson::enter_object(answers) |>
+                tidyjson::gather_object() |>
+                tidyjson::json_types() |>
+                tidyjson::filter(type == "array") |>
+                tidyjson::gather_array() |>
+                tidyjson::append_values_string() |>
+                dplyr::tibble() |>
+                dplyr::transmute(variable = name, language = name.2, answer = string, index = array.index) |>
+                dplyr::group_by(variable, language)  
                 
-questions <- read_json("questionnaire.json") %>% 
-                gather_object() %>%
-                enter_object(question)  %>% 
-                gather_object() %>%
-                json_types() %>%
-                gather_array() %>%
-                append_values_string() %>%
-                tibble() %>%
-                transmute(variable = name, language= name.2, question = string) %>%
-  group_by(variable, language) %>%
-    summarize(question = paste(question, collapse = "\n\n")) %>%
-  ungroup()  
-
-data <- questions %>%
-left_join(answers, by = c("variable", "language")) %>%
-  group_by(variable, language) %>%
-  #mutate(question = c(question[1], rep("", length(question) - 1))) %>%
-  ungroup() %>%
-  arrange(variable, index, language) %>%
-    filter(language == "english") %>%
-  select(question, variable, answer) %>%
-  filter(!(variable %in% c("consent"))) %>%
-  select(-variable)
-
-  
+questions <- tidyjson::read_json("questionnaire.json") |>
+                tidyjson::gather_object() |>
+                tidyjson::enter_object(question)  |>
+                tidyjson::gather_object() |>
+                tidyjson::json_types() |>
+                tidyjson::gather_array() |>
+                tidyjson::append_values_string() |>
+                dplyr::tibble() |>
+                dplyr::transmute(variable = name, language= name.2, question = string) |>
+                dplyr::group_by(variable, language) |>
+                dplyr::summarize(question = paste(question, collapse = "\n\n")) |>
+                dplyr::ungroup() |>
+  dplyr::transmute(variable, language, answer = question, index = 0)
 
 
-gt::gt(data, groupname_col = "question" )
 
+data <- answers |>
+  rbind(questions) |>
+  arrange(variable, language, index) |>
+  group_by(variable, language) |>
+  mutate(question = c(answer[1], rep("", length(answer) -1 )), answer = c("", answer[-1])) %>%
+  select(variable, language, question, answer) %>%
+  dplyr::ungroup()
+
+data_english <- data %>%
+  filter(language == "english") %>%
+  select(-c(variable, language)) %>%
+  rename(question_en = question, answer_en = answer)
+
+data_spanish <- data %>%
+  filter(language == "spanish") %>%
+  select(-c(language)) %>%
+  rename(question_sp = question, answer_sp = answer)
+
+data_final <- data_english %>% 
+  cbind(data_spanish) %>%
+  filter(variable != "consent")
+
+gt::gt(data_final, groupname_col = "variable") |>
+  gt::cols_label(
+      question_en = "",
+      answer_en = "",
+      question_sp = "",
+      answer_sp = ""
+  ) |>
+  gt::opt_horizontal_padding(scale = 3) |>
+  gt::tab_style(
+    style = gt::cell_text(size =  "large", align = "left"),
+    locations = gt::cells_row_groups()
+  ) |>
+  gt::tab_options(
+    row_group.padding = 30,
+    row_group.border.top.width = 0,
+    table_body.hlines.width = 0
+  )
 ```
 
 
