@@ -9,7 +9,7 @@ apply_style_home_vs_residence_dbn_bar_plot <- function(plot){
     ) +
     ggplot2::scale_alpha_manual(
       "Contact venues", 
-      values = c("contact_venue" = 1, "residence" = 0.4), 
+      values = c("highlight" = 1, "lowlight" = 0.4), 
       labels = c(
         "highlight" = "Over-represented\nin community district\ncompared to residences", 
         "lowlight" = "Under-represented\nin community district\ncompared to residences"
@@ -23,11 +23,11 @@ apply_style_home_vs_residence_dbn_bar_plot <- function(plot){
       axis.text.x = ggplot2::element_text(angle = 90, size = 7),
       axis.text.y = ggplot2::element_text(margin = ggplot2::margin(5,5,5,5)),
       axis.title.y = ggplot2::element_text(angle = 90),
-      plot.margin = ggplot2::margin(15,15,15,15),
-      legend.position = "bottom",
       legend.box = "vertical",
       legend.box.margin = ggplot2::margin(1,1,1,1, "cm"),
-      panel.grid.major = ggplot2::element_line(color = "lightgrey", size = 0.1)
+      legend.position = "bottom",
+      panel.grid.major = ggplot2::element_line(color = "lightgrey", size = 0.1),
+      plot.margin = ggplot2::margin(15,15,15,15)
     ) +
     ggplot2::guides( alpha = ggplot2::guide_legend(order = 2), fill = ggplot2::guide_legend(order = 1))
   
