@@ -16,6 +16,7 @@ Under the movement-neutralizing strategy, it would take six community districts 
 
 mpxnyc_colors <- mpxnyc::mpxnyc_colors
 attach(mpxnyc_colors)
+
 targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
 
 
@@ -38,7 +39,7 @@ map_plot_2                 <- make_table_coverage(
 bar_plot_1                 <- make_table_coverage(
                                                   intervention_priority = "contact", 
                                                   intervention_stratification = "overall") |>
-                                  filter(group != "Group C") |>
+                                  dplyr::filter(group != "Group C") |>
                                   plot_coverage_bar() |>
                                   apply_style_coverage_bar() 
 
@@ -46,7 +47,7 @@ bar_plot_2                 <- make_table_coverage(
                                                   intervention_priority = "movement", 
                                                   intervention_stratification = "overall"
                                                   ) |>
-                                  filter(group != "Group C") |>
+                                  dplyr::filter(group != "Group C") |>
                                   plot_coverage_bar() |>
                                   apply_style_coverage_bar() 
 

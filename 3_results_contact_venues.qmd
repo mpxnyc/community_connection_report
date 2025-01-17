@@ -19,18 +19,18 @@ Of the $604$ locations at which participant had physical or sexual contact in a 
 #| fig-cap: "Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks"
 #| label: fig-places-descriptives
 
-targets::tar_read(data_bipartite_graph_collected) %>%
-        tidygraph::activate(edges) %>%
-        data.frame() %>%
-        dplyr::filter(!home) %>%
-        dplyr::select("placeSex", "placeType", "place_borough", "distanceFromHome") %>%
-        gtsummary::tbl_summary(by = placeSex) %>%
- gtsummary::add_overall(last = TRUE) %>%
-    gtsummary::modify_spanning_header(c("stat_1", "stat_2", "stat_0") ~ "**Sexual contact at contact venue**") %>%
-  gtsummary::add_p() %>%
-  gtsummary::modify_header(label ~ "**Variable**") %>%
-  gtsummary::bold_labels() %>%
-        gtsummary::as_gt() %>%
+targets::tar_read(data_bipartite_graph_collected) |>
+        tidygraph::activate(edges) |>
+        data.frame() |>
+        dplyr::filter(!home) |>
+        dplyr::select("placeSex", "placeType", "place_borough", "distanceFromHome") |>
+        gtsummary::tbl_summary(by = placeSex) |>
+ gtsummary::add_overall(last = TRUE) |>
+    gtsummary::modify_spanning_header(c("stat_1", "stat_2", "stat_0") ~ "**Sexual contact at contact venue**") |>
+  gtsummary::add_p() |>
+  gtsummary::modify_header(label ~ "**Variable**") |>
+  gtsummary::bold_labels() |>
+        gtsummary::as_gt() |>
         gt::tab_source_note(gt::md("*Data source: MPX NYC 2022*")) 
 
 ```
@@ -43,9 +43,9 @@ Contact venues at which participants had sexual contact (rather than non-sexual 
 #| fig-width: 9
 #| fig-height: 9
 
-make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE) %>%
-  filter(!is.na(level)) %>%
-  plot_radar_stratified2() %>%
+make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE) |>
+  dplyr::filter(!is.na(level)) |>
+  plot_radar_stratified2() |>
   apply_style_radar_facet_plot()
 
 ```
