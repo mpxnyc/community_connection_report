@@ -1,10 +1,3 @@
-___
-execute:
-  echo: false
-  warning: false
-  message: false
-
-___
 
 
 ## Spatial mixing
@@ -23,20 +16,20 @@ attach(mpxnyc_colors)
 targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
 
 
-mixing_demo_group_panel          <- make_table_mixing_2(demo_group) %>%
-                                      filter(ego_level != "Another Demographic") %>%
-                                      filter(alter_level != "Another Demographic") %>%
-                                      plot_matrix_mixing() %>%
+mixing_demo_group_panel          <- make_table_mixing_2(demo_group) |>
+                                      dplyr::filter(ego_level != "Another Demographic") |>
+                                      dplyr::filter(alter_level != "Another Demographic") |>
+                                      plot_matrix_mixing() |>
                                       apply_style_matrix_mixing_plot()
 
 
-mixing_sexOrientation_panel      <- make_table_mixing_2(sexOrientation) %>%
-                                      plot_matrix_mixing() %>%
+mixing_sexOrientation_panel      <- make_table_mixing_2(sexOrientation) |>
+                                      plot_matrix_mixing() |>
                                       apply_style_matrix_mixing_plot()
 
 
-mixing_age_panel                 <- make_table_mixing_2(age) %>%
-                                      plot_matrix_mixing() %>%
+mixing_age_panel                 <- make_table_mixing_2(age) |>
+                                      plot_matrix_mixing() |>
                                       apply_style_matrix_mixing_plot()
 
 mixing_bottom_panel              <- cowplot::plot_grid(mixing_sexOrientation_panel, mixing_age_panel, nrow = 1)
