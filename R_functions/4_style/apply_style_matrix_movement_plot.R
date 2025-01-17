@@ -3,6 +3,14 @@ apply_style_matrix_movement <- function(plot, caption_hjust = 0){
   plot +
     ggplot2::theme_void() +
     ggplot2::theme(
+      legend.position = "none",
+      axis.text = ggplot2::element_text(),
+      axis.text.x = ggplot2::element_text(angle = 90)
+    ) +
+    ggplot2::scale_x_discrete(position = "top") +
+    ggplot2::scale_y_discrete(position = "left") +
+    ggplot2::theme_void() +
+    ggplot2::theme(
       axis.text        = ggplot2::element_text(size = 7, color = "black", margin = ggplot2::margin(10,10,10,10)),
       axis.text.x      = ggplot2::element_text(angle = 90),
       axis.title       = ggplot2::element_text(margin = ggplot2::margin(10,10,10,10)),

@@ -1,8 +1,11 @@
 apply_style_bar_plot <- function(plot, caption_hjust = 1){
   
   plot +
-    theme_void() +
-    scale_fill_manual("", values = c(
+    ggplot2::scale_x_discrete(drop = FALSE) +
+    ggplot2::scale_y_continuous("Proportion of participants", labels = scales::percent) +
+    ggplot2::scale_x_discrete(labels = scales::label_wrap(10)) + 
+    ggplot2::theme_void() +
+    ggplot2::scale_fill_manual("", values = c(
       dark_blue,
       dark_pink,
       dark_purple,
@@ -18,10 +21,9 @@ apply_style_bar_plot <- function(plot, caption_hjust = 1){
       mid_brown,
       light_brown
     )) +
-    theme(
+    ggplot2::theme(
       plot.title         = element_text(hjust = 0.5, margin = margin(0, 0, 1, 0, "mm")),
       plot.subtitle      = element_text(hjust = 0.5, margin = margin(0, 0, 15, 0, "mm")),
-      #axis.title.y       = element_text(angle = 90, margin = margin(0, 10, 0, 0, "mm")),
       plot.caption       = element_text(margin = margin(60, 0, 0, 0), hjust = caption_hjust),
       panel.margin       = margin(1,1,5,1, "cm"),
       plot.margin        = margin(1,1,1,1, "cm"),

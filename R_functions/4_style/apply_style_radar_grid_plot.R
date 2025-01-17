@@ -1,6 +1,7 @@
 apply_style_radar_grid_plot <- function(plot, caption_hjust = 0){
   
   plot +
+    ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.5, 1)) +
     ggplot2::scale_fill_manual("", values = c(
       dark_blue,
       dark_pink,
