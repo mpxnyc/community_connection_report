@@ -13,11 +13,16 @@ library(targets)
 
 suppressMessages({
   targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
+
 })
 
 
 
-list(    
+list( 
+  tar_target(
+    name = questionnaire_text,
+    command = load_questionnaire_text()
+  ),
   tar_target(
   name = initial_settings,
   command = load_initial_settings()
