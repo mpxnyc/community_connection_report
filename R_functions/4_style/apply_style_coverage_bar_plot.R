@@ -1,5 +1,10 @@
 apply_style_coverage_bar <- function(plot, caption_hjust = 0){
   
+  mpxnyc_colors <- targets::tar_read(mpxnyc_colors)
+  light_blue    <- mpxnyc_colors[["light_blue"]]
+  dark_pink     <- mpxnyc_colors[["dark_pink"]]
+  dark_blue     <- mpxnyc_colors[["dark_blue"]]
+  
   plot +
     ggplot2::theme_void() + 
     ggplot2::scale_fill_manual("", values = c(dark_blue, dark_pink, light_blue)) +

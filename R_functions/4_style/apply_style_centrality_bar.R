@@ -1,4 +1,10 @@
 apply_style_centrality_bar <- function(plot){
+  
+  mpxnyc_colors <- targets::tar_read(mpxnyc_colors)
+  light_blue    <- mpxnyc_colors[["light_blue"]]
+  mid_blue      <- mpxnyc_colors[["mid_blue"]]
+  dark_blue     <- mpxnyc_colors[["dark_blue"]]
+  
   plot +
   ggplot2::scale_y_continuous("Proportion of participants", limits = c(0, 1), labels = scales::percent) +
     ggplot2::scale_x_continuous("Intervention order", limits = c(0, 40), breaks = c(0, 10, 20, 30, 40)) +

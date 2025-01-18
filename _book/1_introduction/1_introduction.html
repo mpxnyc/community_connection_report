@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -270,10 +304,25 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div class="quarto-figure quarto-figure-center" style="margin: 100px 0px 100px 0px">
-<figure class="figure">
-<p><img src="images/MPX_eggplant.svg" class="lightbox img-fluid figure-img" width="90"></p>
-</figure>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Access custom defined functions</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_source</span>(<span class="at">files =</span> <span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">"/R_functions"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>tar_source() only sources R scripts. Ignoring non-R files:
+/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/.DS_Store,
+/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/1_data_processing/.DS_Store,
+/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/2_data_summary/_targets.yaml,
+/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/2_data_summary/.DS_Store,
+/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/3_plot/_targets.yaml,
+/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/4_style/_targets.yaml,
+/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/4_style/.DS_Store,
+/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/5_tables/_targets.yaml</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_read</span>(mpxnyc_emojis)[[<span class="st">"unicorn"</span>]] <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  magick<span class="sc">::</span><span class="fu">image_read_svg</span>(<span class="at">width =</span> <span class="dv">350</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="1_introduction_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="175"></p>
+</div>
 </div>
 <p>Background In 2022, the MPOX (previously Monkeypox) virus emerged as a global pathogen largely infecting queer men via social and sexual networks. As a response, we initiated a study to understand the best use of targeted resources to protect individuals across these networks of interaction through social media and vaccination campaigns.</p>
 <p>Possible Directions:</p>

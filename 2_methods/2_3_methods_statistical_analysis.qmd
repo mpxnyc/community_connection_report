@@ -1,6 +1,15 @@
 # Statistical Analysis
 
-![](images/MPX_droplets.svg){.lightbox fig-align="center" style="margin: 100px 0px 100px 0px" width="90"}
+
+
+```{r}
+# Access custom defined functions
+targets::tar_source(files = paste0(here::here(), "/R_functions"))
+
+targets::tar_read(mpxnyc_emojis)[["droplets"]] |>
+  magick::image_read_svg(width = 350)
+
+```
 
 ## Descriptive statistics
 

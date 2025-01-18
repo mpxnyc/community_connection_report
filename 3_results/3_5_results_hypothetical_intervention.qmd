@@ -1,6 +1,18 @@
 ## Outbreak interventions
 
-![](images/MPX_unicorn.svg){.lightbox fig-align="center" style="margin: 100px 0px 100px 0px" width="90"}
+```{r}
+# Access custom defined functions
+targets::tar_source(files = paste0(here::here(), "/R_functions"))
+```
+
+```{r}
+# Access custom defined functions
+targets::tar_source(files = paste0(here::here(), "/R_functions"))
+
+targets::tar_read(mpxnyc_emojis)[["unicorn"]] |>
+  magick::image_read_svg(width = 350)
+
+```
 
 ### Spatial efficiency
 
@@ -15,12 +27,6 @@ Under the movement-neutralizing strategy, it would take six community districts 
 #| label: fig-hiimpact-communities
 #| fig-width: 10
 #| fig-height: 8
-
-mpxnyc_colors <- mpxnyc::mpxnyc_colors
-attach(mpxnyc_colors)
-
-targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
-
 
 map_plot_1                 <- make_table_coverage(
                                                   intervention_priority = "contact", 

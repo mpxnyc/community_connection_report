@@ -20,6 +20,14 @@ suppressMessages({
 
 list( 
   tar_target(
+    name = mpxnyc_emojis,
+    command = load_emojis()
+  ),
+  tar_target(
+    name = mpxnyc_colors,
+    command = load_colors()
+  ),
+  tar_target(
     name = questionnaire_text,
     command = load_questionnaire_text()
   ),

@@ -5,7 +5,15 @@
 
 
 # Data Collection
-![](images/MPX_pignose.svg){.lightbox fig-align="center" style="margin: 100px 0px 100px 0px" width="90"}
+
+```{r}
+# Access custom defined functions
+targets::tar_source(files = paste0(here::here(), "/R_functions"))
+
+targets::tar_read(mpxnyc_emojis)[["pignose"]] |>
+  magick::image_read_svg(width = 350)
+
+```
 
 
 Under the Rapid Epidemiologic Study of Prevalence, Networks, and Demographics of Monkeypox Infection (RESPND-MI), we implemented MPX NYC - a brief, anonymous, online survey among transgender people and gay, bisexual, and other men who have sex with men. Data were collected in New York city from 30 August to 15 November 2022.

@@ -1,26 +1,13 @@
 apply_style_bar_plot <- function(plot, caption_hjust = 1){
   
+  mpxnyc_colors     <- targets::tar_read(mpxnyc_colors)
+  mpxnyc_all_colors <- mpxnyc_colors[["all_colors"]]
+  
   plot +
     ggplot2::theme_void() +
     ggplot2::scale_x_discrete(drop = FALSE, labels = scales::label_wrap(10)) +
     ggplot2::scale_y_continuous("Proportion of participants", labels = scales::percent) +
-    ggplot2::scale_fill_manual("", values = c(
-                                              dark_blue,
-                                              dark_pink,
-                                              dark_purple,
-                                              light_blue,
-                                              light_pink,
-                                              light_purple,
-                                              light_orange,
-                                              dark_green,
-                                              light_green,
-                                              mid_blue,
-                                              mid_purple,
-                                              dark_brown,
-                                              mid_brown,
-                                              light_brown
-                                            )
-                               ) +
+    ggplot2::scale_fill_manual("", values = mpxnyc_all_colors) +
     ggplot2::theme(
                     axis.text.x        = ggplot2::element_text(size = 10),
                     axis.text.y        = ggplot2::element_text(margin = ggplot2::margin(0, 5, 0, 0, "mm")),
