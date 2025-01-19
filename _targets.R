@@ -20,6 +20,10 @@ suppressMessages({
 
 list( 
   tar_target(
+    name = mpxnyc_images,
+    command = load_images()
+  ),
+  tar_target(
     name = mpxnyc_emojis,
     command = load_emojis()
   ),
