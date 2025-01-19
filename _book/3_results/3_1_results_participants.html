@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -306,30 +272,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Access custom defined functions</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_source</span>(<span class="at">files =</span> <span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">"/R_functions"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>tar_source() only sources R scripts. Ignoring non-R files:
-/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/.DS_Store,
-/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/1_data_processing/.DS_Store,
-/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/2_data_summary/_targets.yaml,
-/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/2_data_summary/.DS_Store,
-/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/3_plot/_targets.yaml,
-/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/4_style/_targets.yaml,
-/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/4_style/.DS_Store,
-/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/5_tables/_targets.yaml</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_read</span>(mpxnyc_emojis)[[<span class="st">"peach"</span>]] <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  magick<span class="sc">::</span><span class="fu">image_read_svg</span>(<span class="at">width =</span> <span class="dv">350</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="3_1_results_participants_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="175"></p>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center" style="margin: 100px 0px 100px 0px">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/MPX_peach.svg" class="lightbox img-fluid figure-img" width="90"></p>
+<p><img src="3_1_results_participants_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="384"></p>
 </figure>
+</div>
+</div>
 </div>
 <p>The MPX NYC survey was open from 30 August to 15 November, 2022, but recruited <span class="math inline">\(70\%\)</span> participants in two 48 hour periods: half were recruited from 30 to 31 Aug, and another 20% from 10 to 11 September (see <a href="#fig-people-descriptives">Figure&nbsp;<span>5.1</span></a>). Over these periods, the MPX NYC recruitment advertisements were shown to users of Grindr in New York City upon logging on to the app.</p>
 <p>MPX NYC participants are demographically diverse. Over 50% of participants were between the ages of 18-34 at the time of the survey. Two fifths were white cisgender men, about 15% were latinx cisgender men, and 10% were black cisgender men. About 5% of participants were transgender (with slightly over half being transgender men). Non-binary individuals comprised 7% of participants. Two-thirds of participants identified as gay, 14% as bisexual, and 12% as queer. Just under half of participants resided in the borough of Manhattan, and one third in Brooklyn.</p>
@@ -338,23 +288,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="fig-people-descriptives" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 
-<div id="qjexbzzqwm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qjexbzzqwm table {
+<div id="vfsuvrktpz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vfsuvrktpz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qjexbzzqwm thead, #qjexbzzqwm tbody, #qjexbzzqwm tfoot, #qjexbzzqwm tr, #qjexbzzqwm td, #qjexbzzqwm th {
+#vfsuvrktpz thead, #vfsuvrktpz tbody, #vfsuvrktpz tfoot, #vfsuvrktpz tr, #vfsuvrktpz td, #vfsuvrktpz th {
   border-style: none;
 }
 
-#qjexbzzqwm p {
+#vfsuvrktpz p {
   margin: 0;
   padding: 0;
 }
 
-#qjexbzzqwm .gt_table {
+#vfsuvrktpz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -380,12 +330,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#qjexbzzqwm .gt_caption {
+#vfsuvrktpz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qjexbzzqwm .gt_title {
+#vfsuvrktpz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -397,7 +347,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#qjexbzzqwm .gt_subtitle {
+#vfsuvrktpz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -409,7 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#qjexbzzqwm .gt_heading {
+#vfsuvrktpz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -421,13 +371,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#qjexbzzqwm .gt_bottom_border {
+#vfsuvrktpz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qjexbzzqwm .gt_col_headings {
+#vfsuvrktpz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -442,7 +392,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#qjexbzzqwm .gt_col_heading {
+#vfsuvrktpz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -462,7 +412,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#qjexbzzqwm .gt_column_spanner_outer {
+#vfsuvrktpz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -474,15 +424,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#qjexbzzqwm .gt_column_spanner_outer:first-child {
+#vfsuvrktpz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qjexbzzqwm .gt_column_spanner_outer:last-child {
+#vfsuvrktpz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qjexbzzqwm .gt_column_spanner {
+#vfsuvrktpz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -494,11 +444,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#qjexbzzqwm .gt_spanner_row {
+#vfsuvrktpz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qjexbzzqwm .gt_group_heading {
+#vfsuvrktpz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -524,7 +474,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#qjexbzzqwm .gt_empty_group_heading {
+#vfsuvrktpz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -539,15 +489,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#qjexbzzqwm .gt_from_md > :first-child {
+#vfsuvrktpz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qjexbzzqwm .gt_from_md > :last-child {
+#vfsuvrktpz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qjexbzzqwm .gt_row {
+#vfsuvrktpz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -566,7 +516,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#qjexbzzqwm .gt_stub {
+#vfsuvrktpz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -579,7 +529,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#qjexbzzqwm .gt_stub_row_group {
+#vfsuvrktpz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -593,15 +543,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#qjexbzzqwm .gt_row_group_first td {
+#vfsuvrktpz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qjexbzzqwm .gt_row_group_first th {
+#vfsuvrktpz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qjexbzzqwm .gt_summary_row {
+#vfsuvrktpz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -611,16 +561,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#qjexbzzqwm .gt_first_summary_row {
+#vfsuvrktpz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qjexbzzqwm .gt_first_summary_row.thick {
+#vfsuvrktpz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qjexbzzqwm .gt_last_summary_row {
+#vfsuvrktpz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -630,7 +580,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#qjexbzzqwm .gt_grand_summary_row {
+#vfsuvrktpz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -640,7 +590,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#qjexbzzqwm .gt_first_grand_summary_row {
+#vfsuvrktpz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -650,7 +600,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#qjexbzzqwm .gt_last_grand_summary_row_top {
+#vfsuvrktpz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -660,11 +610,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#qjexbzzqwm .gt_striped {
+#vfsuvrktpz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qjexbzzqwm .gt_table_body {
+#vfsuvrktpz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -673,7 +623,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#qjexbzzqwm .gt_footnotes {
+#vfsuvrktpz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -687,7 +637,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#qjexbzzqwm .gt_footnote {
+#vfsuvrktpz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -696,7 +646,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#qjexbzzqwm .gt_sourcenotes {
+#vfsuvrktpz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -710,7 +660,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#qjexbzzqwm .gt_sourcenote {
+#vfsuvrktpz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -718,63 +668,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#qjexbzzqwm .gt_left {
+#vfsuvrktpz .gt_left {
   text-align: left;
 }
 
-#qjexbzzqwm .gt_center {
+#vfsuvrktpz .gt_center {
   text-align: center;
 }
 
-#qjexbzzqwm .gt_right {
+#vfsuvrktpz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qjexbzzqwm .gt_font_normal {
+#vfsuvrktpz .gt_font_normal {
   font-weight: normal;
 }
 
-#qjexbzzqwm .gt_font_bold {
+#vfsuvrktpz .gt_font_bold {
   font-weight: bold;
 }
 
-#qjexbzzqwm .gt_font_italic {
+#vfsuvrktpz .gt_font_italic {
   font-style: italic;
 }
 
-#qjexbzzqwm .gt_super {
+#vfsuvrktpz .gt_super {
   font-size: 65%;
 }
 
-#qjexbzzqwm .gt_footnote_marks {
+#vfsuvrktpz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qjexbzzqwm .gt_asterisk {
+#vfsuvrktpz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qjexbzzqwm .gt_indent_1 {
+#vfsuvrktpz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qjexbzzqwm .gt_indent_2 {
+#vfsuvrktpz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qjexbzzqwm .gt_indent_3 {
+#vfsuvrktpz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qjexbzzqwm .gt_indent_4 {
+#vfsuvrktpz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qjexbzzqwm .gt_indent_5 {
+#vfsuvrktpz .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

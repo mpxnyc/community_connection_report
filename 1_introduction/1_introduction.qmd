@@ -1,13 +1,31 @@
 # Introduction
 
 ```{r}
+
 # Access custom defined functions
 targets::tar_source(files = paste0(here::here(), "/R_functions"))
 
-targets::tar_read(mpxnyc_emojis)[["unicorn"]] |>
-  magick::image_read_svg(width = 350)
+```
+
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+#| fig-align: center
+
+
+  mpxnyc_colors <- targets::tar_read(mpxnyc_colors)
+  light_purple    <- mpxnyc_colors[["light_purple"]]
+
+  
+ggplot2::ggplot() + 
+ ggplot2::theme_void() +
+ggplot2::geom_point(ggplot2::aes(x = 1, y = 1), size = 80, color = light_purple, shape = 3) +
+    ggimage::geom_image(ggplot2::aes(image=targets::tar_read(mpxnyc_emojis)[["unicorn"]], x = 1, y = 1), size = 0.4) 
 
 ```
+
+
+
 
 Background In 2022, the MPOX (previously Monkeypox) virus emerged as a global pathogen largely infecting queer men via social and sexual networks. As a response, we initiated a study to understand the best use of targeted resources to protect individuals across these networks of interaction through social media and vaccination campaigns.
 

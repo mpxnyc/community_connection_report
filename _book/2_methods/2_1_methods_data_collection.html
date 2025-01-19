@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -317,24 +283,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Access custom defined functions</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_source</span>(<span class="at">files =</span> <span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">"/R_functions"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>tar_source() only sources R scripts. Ignoring non-R files:
-/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/.DS_Store,
-/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/1_data_processing/.DS_Store,
-/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/2_data_summary/_targets.yaml,
-/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/2_data_summary/.DS_Store,
-/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/3_plot/_targets.yaml,
-/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/4_style/_targets.yaml,
-/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/4_style/.DS_Store,
-/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions/5_tables/_targets.yaml</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_read</span>(mpxnyc_emojis)[[<span class="st">"pignose"</span>]] <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  magick<span class="sc">::</span><span class="fu">image_read_svg</span>(<span class="at">width =</span> <span class="dv">350</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<p><img src="2_1_methods_data_collection_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="175"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="2_1_methods_data_collection_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Under the Rapid Epidemiologic Study of Prevalence, Networks, and Demographics of Monkeypox Infection (RESPND-MI), we implemented MPX NYC - a brief, anonymous, online survey among transgender people and gay, bisexual, and other men who have sex with men. Data were collected in New York city from 30 August to 15 November 2022.</p>
@@ -350,8 +305,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="2.2" class="anchored" data-anchor-id="mpx-nyc-marketing-and-communication"><span class="header-section-number">2.2</span> MPX NYC marketing and communication</h2>
 <p>To maximize the speed of recruitment, we invested in a bilingual, culturally competent communication campaign in collaboration with a marketing agency. The brief was to create a name and marketing concept that convey scientific rigor, build trust with the community, and stand out in a crowded online marketplace (see <a href="#fig-requirements">Figure&nbsp;<span>2.1</span></a>). As a starting point, the RESPND-MI team suggested a campaign that playfully uses emojis that have sexual connotations in queer and trans communities, and that integrates LGBT social media influencers as a communication channel.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_read</span>(mpxnyc_images)[[<span class="st">"creative_requirements"</span>]] <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  magick<span class="sc">::</span><span class="fu">image_read</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-requirements" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -364,8 +317,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Two campaign names and four marketing concepts (see <a href="#fig-options">Figure&nbsp;<span>2.2</span></a>) were developed by the marketing agency and presented to a meeting of the RESPND-MI Community Forum. The final concept and name were decided by consensus during that meeting.</p>
 <p>Marketing materials were developed based on the concept. Materials included graphics, videos by queer influencers, and a style guide (including colors, icons, and fonts) for all public-facing materials of the MPX NYC study. We organized these materials into a “social media toolkit” and shared them through the study website to enable individuals and organizations to easily share them through their own social media accounts. We used these materials in advertisements placed through Grindr, Twitter, Instagram, and outdoor electronic billboards.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_read</span>(mpxnyc_images)[[<span class="st">"campaign_graphic"</span>]] <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  magick<span class="sc">::</span><span class="fu">image_read</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-options" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -384,8 +335,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Participants enter elicited places by tapping on the displayed map. For each tap, a pop-up window with a series of questions about that place is triggered, and a marker is displayed. The spatial and response data are saved as part of the participant’s survey record.</p>
 <p>The front end of the MPX NYC survey instrument was developed as a single-page web application using the React/NextJS framework <span class="citation" data-cites="nextjsd2024">[@nextjsd2024]</span> with visual design based on the MPX NYC style guide. The Google Maps API <span class="citation" data-cites="google2024">[@google2024]</span> provides the displayed map and returns longitude-latitude coordinates for each marker placed on the map. The Federal Communications Commission API <span class="citation" data-cites="federal">[@federal]</span> receives longitude-latitude coordinates and transforms them into census tract identifiers. The back end was a custom-built neo4j graph database <span class="citation" data-cites="neo4j2024">[@neo4j2024]</span>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_read</span>(mpxnyc_images)[[<span class="st">"app_graphic"</span>]] <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  magick<span class="sc">::</span><span class="fu">image_read</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-mapinputformat" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
