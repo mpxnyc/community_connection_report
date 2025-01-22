@@ -17,40 +17,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -226,7 +192,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../4_discussion/4_discussion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Discussion*</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Discussion</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../4_discussion/4_discussion_recommendations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Recommendations</span></span></a>
   </div>
 </li>
       </ul>
@@ -234,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../8_acknowledgements/8_2_about_us.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">About us*</span></a>
+ <span class="menu-text">Acknowledgements</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -243,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../8_acknowledgements/8_2_about_us.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">About us*</span></a>
+ <span class="menu-text">Acknowledgements</span></a>
   </div>
 </li>
       </ul>
@@ -278,7 +250,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../9_causal_inference_framework/9_causal_inference_framework.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Towards causality*</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Further projects</span></span></a>
   </div>
 </li>
       </ul>
@@ -310,120 +282,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title">Appendix A — Supplementary Methods</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header"><h1 class="title display-7">Appendix A — Supplementary Methods</h1>
 
-</header><div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
-<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span>files <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"/R_functions"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<section id="data-structure" class="level2" data-number="A.1"><h2 data-number="A.1" class="anchored" data-anchor-id="data-structure">
+</header><section id="data-structure" class="level2" data-number="A.1"><h2 data-number="A.1" class="anchored" data-anchor-id="data-structure">
 <span class="header-section-number">A.1</span> Data structure</h2>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
-<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span>files <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"/R_functions"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 <section id="mpx-nyc-spatial-participant-network" class="level3" data-number="A.1.1"><h3 data-number="A.1.1" class="anchored" data-anchor-id="mpx-nyc-spatial-participant-network">
 <span class="header-section-number">A.1.1</span> MPX NYC spatial participant network</h3>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mpxnyc_colors</span> <span class="op">&lt;-</span> <span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">mpxnyc_colors</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">example_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
-<span>                            name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
-<span>                                      <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Person "</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>                                      <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Community "</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>, <span class="st">"e"</span><span class="op">)</span><span class="op">)</span></span>
-<span>                                      <span class="op">)</span>,</span>
-<span>                            type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="fl">8</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                            label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                            age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"18-25"</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"26-50"</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
-<span>                            <span class="op">)</span></span>
-<span></span>
-<span><span class="va">example_edges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
-<span>                            from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
-<span>                                      <span class="st">"Person 1"</span>, </span>
-<span>                                      <span class="st">"Person 2"</span>, </span>
-<span>                                      <span class="st">"Person 3"</span>,</span>
-<span>                                      <span class="st">"Person 3"</span>,</span>
-<span>                                      <span class="st">"Person 4"</span>,</span>
-<span>                                      <span class="st">"Person 4"</span>,</span>
-<span>                                      <span class="st">"Person 5"</span>,</span>
-<span>                                      <span class="st">"Person 4"</span>,</span>
-<span>                                      <span class="st">"Person 6"</span>,</span>
-<span>                                      <span class="st">"Person 3"</span>,</span>
-<span>                                      <span class="st">"Person 4"</span>,</span>
-<span>                                      <span class="st">"Person 6"</span>,</span>
-<span>                                      <span class="st">"Person 7"</span>,</span>
-<span>                                      <span class="st">"Person 8"</span>,</span>
-<span>                                      <span class="st">"Person 3"</span></span>
-<span>                                      <span class="op">)</span>,</span>
-<span>                            to   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
-<span>                                      <span class="st">"Community a"</span>, </span>
-<span>                                      <span class="st">"Community a"</span>, </span>
-<span>                                      <span class="st">"Community a"</span>,</span>
-<span>                                      <span class="st">"Community b"</span>,</span>
-<span>                                      <span class="st">"Community b"</span>,</span>
-<span>                                      <span class="st">"Community c"</span>,</span>
-<span>                                      <span class="st">"Community c"</span>,</span>
-<span>                                      <span class="st">"Community d"</span>,</span>
-<span>                                      <span class="st">"Community d"</span>,</span>
-<span>                                      <span class="st">"Community e"</span>,</span>
-<span>                                      <span class="st">"Community e"</span>,</span>
-<span>                                      <span class="st">"Community e"</span>,</span>
-<span>                                      <span class="st">"Community c"</span>,</span>
-<span>                                      <span class="st">"Community c"</span>,</span>
-<span>                                      <span class="st">"Community e"</span></span>
-<span>                                      <span class="op">)</span>,</span>
-<span>                            weight <span class="op">=</span> <span class="fl">1</span></span>
-<span>                    </span>
-<span>                            <span class="op">)</span></span>
-<span></span>
-<span><span class="va">example_bipartite_network</span>   <span class="op">&lt;-</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/tbl_graph.html">tbl_graph</a></span><span class="op">(</span></span>
-<span>                                                    nodes <span class="op">=</span> <span class="va">example_nodes</span>, </span>
-<span>                                                    edges <span class="op">=</span> <span class="va">example_edges</span></span>
-<span>                                                    <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>weight_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">example_place_network</span> <span class="op">&lt;-</span> <span class="va">example_bipartite_network</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://r.igraph.org/reference/bipartite_projection.html">bipartite_projection</a></span><span class="op">(</span>which <span class="op">=</span> <span class="st">"false"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/tbl_graph.html">as_tbl_graph</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>type <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>weight_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> </span>
-<span></span>
-<span><span class="va">example_participant_network</span>       <span class="op">&lt;-</span> <span class="va">example_bipartite_network</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://r.igraph.org/reference/bipartite_projection.html">bipartite_projection</a></span><span class="op">(</span>which <span class="op">=</span> <span class="st">"true"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/tbl_graph.html">as_tbl_graph</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>type <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>weight_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">example_colors</span>            <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FALSE"</span> <span class="op">=</span> <span class="va">mpxnyc_colors</span><span class="op">$</span><span class="va">dark_pink</span>, <span class="st">"TRUE"</span> <span class="op">=</span> <span class="va">mpxnyc_colors</span><span class="op">$</span><span class="va">dark_blue</span><span class="op">)</span></span>
-<span><span class="va">example_size_dot</span>          <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FALSE"</span> <span class="op">=</span> <span class="fl">20</span>, <span class="st">"TRUE"</span> <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="va">example_size_text</span>         <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FALSE"</span> <span class="op">=</span> <span class="fl">5</span>, <span class="st">"TRUE"</span> <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="va">example_edge_width_weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1"</span> <span class="op">=</span> <span class="fl">0.1</span>, <span class="st">"2"</span> <span class="op">=</span> <span class="fl">1</span>, <span class="st">"3"</span> <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 <p>Conceptually, the MPX NYC spatial participant data network is a network object that contains all collected data. In this network, nodes comprise of community districts and survey participants. Edges can only exist between a person and a communtiy district - they indicate that the person either lives in or has a contact place in that community district. In <a href="#fig-data">Figure&nbsp;<span>A.1</span></a>, participant nodes are blue and community district nodes are pink. <a href="#tbl-example-bipartite-nodes">Table&nbsp;<span>A.1</span></a> shows the node and <a href="#tbl-example-bipartite-edges">Table&nbsp;<span>A.2</span></a> the edges of the network.</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">example_bipartite_network</span> <span class="op">|&gt;</span></span>
-<span>      <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>layout <span class="op">=</span> <span class="st">"kk"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>          <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_fan.html">geom_edge_fan</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>edge_width <span class="op">=</span> <span class="va">weight_label</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>          <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">type</span>, size <span class="op">=</span> <span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>          <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">label</span>, size <span class="op">=</span> <span class="va">type</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>          <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">example_colors</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/scale_edge_width.html">scale_edge_width_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">example_edge_width_weight</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_size_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">example_size_dot</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span>  <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
-<span>    legend.position <span class="op">=</span> <span class="st">"none"</span>,</span>
-<span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">10</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<div class="cell-output-display">
 <div id="fig-data" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="5_methods_appendix_files/figure-html/fig-data-1.png" class="img-fluid figure-img" width="768"></p>
 <figcaption class="figure-caption">Figure&nbsp;A.1: MPX NYC spatial participant network data</figcaption></figure>
@@ -433,30 +300,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="columns">
 <div class="column">
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">example_bipartite_network</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span>, <span class="st">"person"</span>, <span class="st">"community_district"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<div class="cell-output-display">
 <div id="tbl-example-bipartite-nodes" class="anchored">
 
-<div id="scokcjmbxk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#scokcjmbxk table {
+<div id="zyiscskvgj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zyiscskvgj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#scokcjmbxk thead, #scokcjmbxk tbody, #scokcjmbxk tfoot, #scokcjmbxk tr, #scokcjmbxk td, #scokcjmbxk th {
+#zyiscskvgj thead, #zyiscskvgj tbody, #zyiscskvgj tfoot, #zyiscskvgj tr, #zyiscskvgj td, #zyiscskvgj th {
   border-style: none;
 }
 
-#scokcjmbxk p {
+#zyiscskvgj p {
   margin: 0;
   padding: 0;
 }
 
-#scokcjmbxk .gt_table {
+#zyiscskvgj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -482,12 +345,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#scokcjmbxk .gt_caption {
+#zyiscskvgj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#scokcjmbxk .gt_title {
+#zyiscskvgj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -499,7 +362,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#scokcjmbxk .gt_subtitle {
+#zyiscskvgj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -511,7 +374,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#scokcjmbxk .gt_heading {
+#zyiscskvgj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -523,13 +386,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#scokcjmbxk .gt_bottom_border {
+#zyiscskvgj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#scokcjmbxk .gt_col_headings {
+#zyiscskvgj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -544,7 +407,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#scokcjmbxk .gt_col_heading {
+#zyiscskvgj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -564,7 +427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#scokcjmbxk .gt_column_spanner_outer {
+#zyiscskvgj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -576,15 +439,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#scokcjmbxk .gt_column_spanner_outer:first-child {
+#zyiscskvgj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#scokcjmbxk .gt_column_spanner_outer:last-child {
+#zyiscskvgj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#scokcjmbxk .gt_column_spanner {
+#zyiscskvgj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -596,11 +459,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#scokcjmbxk .gt_spanner_row {
+#zyiscskvgj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#scokcjmbxk .gt_group_heading {
+#zyiscskvgj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -626,7 +489,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#scokcjmbxk .gt_empty_group_heading {
+#zyiscskvgj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -641,15 +504,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#scokcjmbxk .gt_from_md > :first-child {
+#zyiscskvgj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#scokcjmbxk .gt_from_md > :last-child {
+#zyiscskvgj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#scokcjmbxk .gt_row {
+#zyiscskvgj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -668,7 +531,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#scokcjmbxk .gt_stub {
+#zyiscskvgj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -681,7 +544,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#scokcjmbxk .gt_stub_row_group {
+#zyiscskvgj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -695,15 +558,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#scokcjmbxk .gt_row_group_first td {
+#zyiscskvgj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#scokcjmbxk .gt_row_group_first th {
+#zyiscskvgj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#scokcjmbxk .gt_summary_row {
+#zyiscskvgj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -713,16 +576,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#scokcjmbxk .gt_first_summary_row {
+#zyiscskvgj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#scokcjmbxk .gt_first_summary_row.thick {
+#zyiscskvgj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#scokcjmbxk .gt_last_summary_row {
+#zyiscskvgj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -732,7 +595,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#scokcjmbxk .gt_grand_summary_row {
+#zyiscskvgj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -742,7 +605,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#scokcjmbxk .gt_first_grand_summary_row {
+#zyiscskvgj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -752,7 +615,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#scokcjmbxk .gt_last_grand_summary_row_top {
+#zyiscskvgj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -762,11 +625,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#scokcjmbxk .gt_striped {
+#zyiscskvgj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#scokcjmbxk .gt_table_body {
+#zyiscskvgj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -775,7 +638,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#scokcjmbxk .gt_footnotes {
+#zyiscskvgj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -789,7 +652,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#scokcjmbxk .gt_footnote {
+#zyiscskvgj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -798,7 +661,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#scokcjmbxk .gt_sourcenotes {
+#zyiscskvgj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -812,7 +675,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#scokcjmbxk .gt_sourcenote {
+#zyiscskvgj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -820,63 +683,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#scokcjmbxk .gt_left {
+#zyiscskvgj .gt_left {
   text-align: left;
 }
 
-#scokcjmbxk .gt_center {
+#zyiscskvgj .gt_center {
   text-align: center;
 }
 
-#scokcjmbxk .gt_right {
+#zyiscskvgj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#scokcjmbxk .gt_font_normal {
+#zyiscskvgj .gt_font_normal {
   font-weight: normal;
 }
 
-#scokcjmbxk .gt_font_bold {
+#zyiscskvgj .gt_font_bold {
   font-weight: bold;
 }
 
-#scokcjmbxk .gt_font_italic {
+#zyiscskvgj .gt_font_italic {
   font-style: italic;
 }
 
-#scokcjmbxk .gt_super {
+#zyiscskvgj .gt_super {
   font-size: 65%;
 }
 
-#scokcjmbxk .gt_footnote_marks {
+#zyiscskvgj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#scokcjmbxk .gt_asterisk {
+#zyiscskvgj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#scokcjmbxk .gt_indent_1 {
+#zyiscskvgj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#scokcjmbxk .gt_indent_2 {
+#zyiscskvgj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#scokcjmbxk .gt_indent_3 {
+#zyiscskvgj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#scokcjmbxk .gt_indent_4 {
+#zyiscskvgj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#scokcjmbxk .gt_indent_5 {
+#zyiscskvgj .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -947,34 +810,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div><div class="column">
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">example_bipartite_network</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, <span class="va">type</span>, <span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>from_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">from</span><span class="op">]</span>, to_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">to</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">from_name</span>, to <span class="op">=</span> <span class="va">to_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<div class="cell-output-display">
 <div id="tbl-example-bipartite-edges" class="anchored">
 
-<div id="fnjiajfizu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fnjiajfizu table {
+<div id="xclrlnczia" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xclrlnczia table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fnjiajfizu thead, #fnjiajfizu tbody, #fnjiajfizu tfoot, #fnjiajfizu tr, #fnjiajfizu td, #fnjiajfizu th {
+#xclrlnczia thead, #xclrlnczia tbody, #xclrlnczia tfoot, #xclrlnczia tr, #xclrlnczia td, #xclrlnczia th {
   border-style: none;
 }
 
-#fnjiajfizu p {
+#xclrlnczia p {
   margin: 0;
   padding: 0;
 }
 
-#fnjiajfizu .gt_table {
+#xclrlnczia .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1000,12 +855,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#fnjiajfizu .gt_caption {
+#xclrlnczia .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fnjiajfizu .gt_title {
+#xclrlnczia .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1017,7 +872,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#fnjiajfizu .gt_subtitle {
+#xclrlnczia .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1029,7 +884,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#fnjiajfizu .gt_heading {
+#xclrlnczia .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1041,13 +896,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#fnjiajfizu .gt_bottom_border {
+#xclrlnczia .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fnjiajfizu .gt_col_headings {
+#xclrlnczia .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1062,7 +917,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#fnjiajfizu .gt_col_heading {
+#xclrlnczia .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1082,7 +937,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#fnjiajfizu .gt_column_spanner_outer {
+#xclrlnczia .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1094,15 +949,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#fnjiajfizu .gt_column_spanner_outer:first-child {
+#xclrlnczia .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fnjiajfizu .gt_column_spanner_outer:last-child {
+#xclrlnczia .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fnjiajfizu .gt_column_spanner {
+#xclrlnczia .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1114,11 +969,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#fnjiajfizu .gt_spanner_row {
+#xclrlnczia .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fnjiajfizu .gt_group_heading {
+#xclrlnczia .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1144,7 +999,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#fnjiajfizu .gt_empty_group_heading {
+#xclrlnczia .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1159,15 +1014,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#fnjiajfizu .gt_from_md > :first-child {
+#xclrlnczia .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fnjiajfizu .gt_from_md > :last-child {
+#xclrlnczia .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fnjiajfizu .gt_row {
+#xclrlnczia .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1186,7 +1041,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#fnjiajfizu .gt_stub {
+#xclrlnczia .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1199,7 +1054,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fnjiajfizu .gt_stub_row_group {
+#xclrlnczia .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1213,15 +1068,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#fnjiajfizu .gt_row_group_first td {
+#xclrlnczia .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fnjiajfizu .gt_row_group_first th {
+#xclrlnczia .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fnjiajfizu .gt_summary_row {
+#xclrlnczia .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1231,16 +1086,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fnjiajfizu .gt_first_summary_row {
+#xclrlnczia .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fnjiajfizu .gt_first_summary_row.thick {
+#xclrlnczia .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fnjiajfizu .gt_last_summary_row {
+#xclrlnczia .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1250,7 +1105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#fnjiajfizu .gt_grand_summary_row {
+#xclrlnczia .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1260,7 +1115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fnjiajfizu .gt_first_grand_summary_row {
+#xclrlnczia .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1270,7 +1125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#fnjiajfizu .gt_last_grand_summary_row_top {
+#xclrlnczia .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1280,11 +1135,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#fnjiajfizu .gt_striped {
+#xclrlnczia .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fnjiajfizu .gt_table_body {
+#xclrlnczia .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1293,7 +1148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#fnjiajfizu .gt_footnotes {
+#xclrlnczia .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1307,7 +1162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#fnjiajfizu .gt_footnote {
+#xclrlnczia .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1316,7 +1171,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fnjiajfizu .gt_sourcenotes {
+#xclrlnczia .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1330,7 +1185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#fnjiajfizu .gt_sourcenote {
+#xclrlnczia .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1338,63 +1193,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fnjiajfizu .gt_left {
+#xclrlnczia .gt_left {
   text-align: left;
 }
 
-#fnjiajfizu .gt_center {
+#xclrlnczia .gt_center {
   text-align: center;
 }
 
-#fnjiajfizu .gt_right {
+#xclrlnczia .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fnjiajfizu .gt_font_normal {
+#xclrlnczia .gt_font_normal {
   font-weight: normal;
 }
 
-#fnjiajfizu .gt_font_bold {
+#xclrlnczia .gt_font_bold {
   font-weight: bold;
 }
 
-#fnjiajfizu .gt_font_italic {
+#xclrlnczia .gt_font_italic {
   font-style: italic;
 }
 
-#fnjiajfizu .gt_super {
+#xclrlnczia .gt_super {
   font-size: 65%;
 }
 
-#fnjiajfizu .gt_footnote_marks {
+#xclrlnczia .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fnjiajfizu .gt_asterisk {
+#xclrlnczia .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fnjiajfizu .gt_indent_1 {
+#xclrlnczia .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fnjiajfizu .gt_indent_2 {
+#xclrlnczia .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fnjiajfizu .gt_indent_3 {
+#xclrlnczia .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fnjiajfizu .gt_indent_4 {
+#xclrlnczia .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fnjiajfizu .gt_indent_5 {
+#xclrlnczia .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1496,20 +1351,7 @@ m^{ij} = \psi(i,j)
 <span class="header-section-number">A.1.2</span> MPX NYC participant network</h3>
 <p>The MPX NYC participant network has participants as nodes. A pair of nodes is connected by a weighted edge if each of the individuals represented by the nodes has at least one contact venue or residence in the same, shared community district. The weight of the edge is given by the count of community districts the pair of nodes have in common. By definition, an edge of weight <span class="math inline">\(0\)</span> is equivalent to the absence of an edge. <a href="#tbl-example-participant-nodes">Table&nbsp;<span>A.3</span></a> shows the nodes of the participant network shown in <a href="#fig-data-people">Figure&nbsp;<span>A.2</span></a> and <a href="#tbl-example-participant-edges">Table&nbsp;<span>A.4</span></a> show the edges.</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span> <span class="va">example_participant_network</span> <span class="op">|&gt;</span></span>
-<span>      <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>layout <span class="op">=</span> <span class="st">"kk"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>          <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_fan.html">geom_edge_fan</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>edge_width <span class="op">=</span> <span class="va">weight_label</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>          <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">type</span>, size <span class="op">=</span> <span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>          <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">label</span>, size <span class="op">=</span> <span class="va">type</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>          <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">example_colors</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/scale_edge_width.html">scale_edge_width_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">example_edge_width_weight</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_size_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">example_size_dot</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span>  <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
-<span>    legend.position <span class="op">=</span> <span class="st">"none"</span>,</span>
-<span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">10</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<div class="cell-output-display">
 <div id="fig-data-people" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="5_methods_appendix_files/figure-html/fig-data-people-1.png" class="img-fluid figure-img" width="768"></p>
 <figcaption class="figure-caption">Figure&nbsp;A.2: MPX NYC participant network</figcaption></figure>
@@ -1519,30 +1361,26 @@ m^{ij} = \psi(i,j)
 <div class="columns">
 <div class="column">
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">example_participant_network</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span>, <span class="st">"person"</span>, <span class="st">"community_district"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<div class="cell-output-display">
 <div id="tbl-example-participant-nodes" class="anchored">
 
-<div id="riypmxijht" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#riypmxijht table {
+<div id="ghpssnuqps" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ghpssnuqps table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#riypmxijht thead, #riypmxijht tbody, #riypmxijht tfoot, #riypmxijht tr, #riypmxijht td, #riypmxijht th {
+#ghpssnuqps thead, #ghpssnuqps tbody, #ghpssnuqps tfoot, #ghpssnuqps tr, #ghpssnuqps td, #ghpssnuqps th {
   border-style: none;
 }
 
-#riypmxijht p {
+#ghpssnuqps p {
   margin: 0;
   padding: 0;
 }
 
-#riypmxijht .gt_table {
+#ghpssnuqps .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1568,12 +1406,12 @@ m^{ij} = \psi(i,j)
   border-left-color: #D3D3D3;
 }
 
-#riypmxijht .gt_caption {
+#ghpssnuqps .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#riypmxijht .gt_title {
+#ghpssnuqps .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1585,7 +1423,7 @@ m^{ij} = \psi(i,j)
   border-bottom-width: 0;
 }
 
-#riypmxijht .gt_subtitle {
+#ghpssnuqps .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1597,7 +1435,7 @@ m^{ij} = \psi(i,j)
   border-top-width: 0;
 }
 
-#riypmxijht .gt_heading {
+#ghpssnuqps .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1609,13 +1447,13 @@ m^{ij} = \psi(i,j)
   border-right-color: #D3D3D3;
 }
 
-#riypmxijht .gt_bottom_border {
+#ghpssnuqps .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#riypmxijht .gt_col_headings {
+#ghpssnuqps .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1630,7 +1468,7 @@ m^{ij} = \psi(i,j)
   border-right-color: #D3D3D3;
 }
 
-#riypmxijht .gt_col_heading {
+#ghpssnuqps .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1650,7 +1488,7 @@ m^{ij} = \psi(i,j)
   overflow-x: hidden;
 }
 
-#riypmxijht .gt_column_spanner_outer {
+#ghpssnuqps .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1662,15 +1500,15 @@ m^{ij} = \psi(i,j)
   padding-right: 4px;
 }
 
-#riypmxijht .gt_column_spanner_outer:first-child {
+#ghpssnuqps .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#riypmxijht .gt_column_spanner_outer:last-child {
+#ghpssnuqps .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#riypmxijht .gt_column_spanner {
+#ghpssnuqps .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1682,11 +1520,11 @@ m^{ij} = \psi(i,j)
   width: 100%;
 }
 
-#riypmxijht .gt_spanner_row {
+#ghpssnuqps .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#riypmxijht .gt_group_heading {
+#ghpssnuqps .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1712,7 +1550,7 @@ m^{ij} = \psi(i,j)
   text-align: left;
 }
 
-#riypmxijht .gt_empty_group_heading {
+#ghpssnuqps .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1727,15 +1565,15 @@ m^{ij} = \psi(i,j)
   vertical-align: middle;
 }
 
-#riypmxijht .gt_from_md > :first-child {
+#ghpssnuqps .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#riypmxijht .gt_from_md > :last-child {
+#ghpssnuqps .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#riypmxijht .gt_row {
+#ghpssnuqps .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1754,7 +1592,7 @@ m^{ij} = \psi(i,j)
   overflow-x: hidden;
 }
 
-#riypmxijht .gt_stub {
+#ghpssnuqps .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1767,7 +1605,7 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#riypmxijht .gt_stub_row_group {
+#ghpssnuqps .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1781,15 +1619,15 @@ m^{ij} = \psi(i,j)
   vertical-align: top;
 }
 
-#riypmxijht .gt_row_group_first td {
+#ghpssnuqps .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#riypmxijht .gt_row_group_first th {
+#ghpssnuqps .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#riypmxijht .gt_summary_row {
+#ghpssnuqps .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1799,16 +1637,16 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#riypmxijht .gt_first_summary_row {
+#ghpssnuqps .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#riypmxijht .gt_first_summary_row.thick {
+#ghpssnuqps .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#riypmxijht .gt_last_summary_row {
+#ghpssnuqps .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1818,7 +1656,7 @@ m^{ij} = \psi(i,j)
   border-bottom-color: #D3D3D3;
 }
 
-#riypmxijht .gt_grand_summary_row {
+#ghpssnuqps .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1828,7 +1666,7 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#riypmxijht .gt_first_grand_summary_row {
+#ghpssnuqps .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1838,7 +1676,7 @@ m^{ij} = \psi(i,j)
   border-top-color: #D3D3D3;
 }
 
-#riypmxijht .gt_last_grand_summary_row_top {
+#ghpssnuqps .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1848,11 +1686,11 @@ m^{ij} = \psi(i,j)
   border-bottom-color: #D3D3D3;
 }
 
-#riypmxijht .gt_striped {
+#ghpssnuqps .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#riypmxijht .gt_table_body {
+#ghpssnuqps .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1861,7 +1699,7 @@ m^{ij} = \psi(i,j)
   border-bottom-color: #D3D3D3;
 }
 
-#riypmxijht .gt_footnotes {
+#ghpssnuqps .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1875,7 +1713,7 @@ m^{ij} = \psi(i,j)
   border-right-color: #D3D3D3;
 }
 
-#riypmxijht .gt_footnote {
+#ghpssnuqps .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1884,7 +1722,7 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#riypmxijht .gt_sourcenotes {
+#ghpssnuqps .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1898,7 +1736,7 @@ m^{ij} = \psi(i,j)
   border-right-color: #D3D3D3;
 }
 
-#riypmxijht .gt_sourcenote {
+#ghpssnuqps .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1906,63 +1744,63 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#riypmxijht .gt_left {
+#ghpssnuqps .gt_left {
   text-align: left;
 }
 
-#riypmxijht .gt_center {
+#ghpssnuqps .gt_center {
   text-align: center;
 }
 
-#riypmxijht .gt_right {
+#ghpssnuqps .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#riypmxijht .gt_font_normal {
+#ghpssnuqps .gt_font_normal {
   font-weight: normal;
 }
 
-#riypmxijht .gt_font_bold {
+#ghpssnuqps .gt_font_bold {
   font-weight: bold;
 }
 
-#riypmxijht .gt_font_italic {
+#ghpssnuqps .gt_font_italic {
   font-style: italic;
 }
 
-#riypmxijht .gt_super {
+#ghpssnuqps .gt_super {
   font-size: 65%;
 }
 
-#riypmxijht .gt_footnote_marks {
+#ghpssnuqps .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#riypmxijht .gt_asterisk {
+#ghpssnuqps .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#riypmxijht .gt_indent_1 {
+#ghpssnuqps .gt_indent_1 {
   text-indent: 5px;
 }
 
-#riypmxijht .gt_indent_2 {
+#ghpssnuqps .gt_indent_2 {
   text-indent: 10px;
 }
 
-#riypmxijht .gt_indent_3 {
+#ghpssnuqps .gt_indent_3 {
   text-indent: 15px;
 }
 
-#riypmxijht .gt_indent_4 {
+#ghpssnuqps .gt_indent_4 {
   text-indent: 20px;
 }
 
-#riypmxijht .gt_indent_5 {
+#ghpssnuqps .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2013,34 +1851,26 @@ m^{ij} = \psi(i,j)
 </div>
 </div><div class="column">
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">example_participant_network</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, <span class="va">type</span>, <span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>from_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">from</span><span class="op">]</span>, to_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">to</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">from_name</span>, to <span class="op">=</span> <span class="va">to_name</span>, <span class="va">weight</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<div class="cell-output-display">
 <div id="tbl-example-participant-edges" class="anchored">
 
-<div id="qmbwtfwair" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qmbwtfwair table {
+<div id="iiqlodipue" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iiqlodipue table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qmbwtfwair thead, #qmbwtfwair tbody, #qmbwtfwair tfoot, #qmbwtfwair tr, #qmbwtfwair td, #qmbwtfwair th {
+#iiqlodipue thead, #iiqlodipue tbody, #iiqlodipue tfoot, #iiqlodipue tr, #iiqlodipue td, #iiqlodipue th {
   border-style: none;
 }
 
-#qmbwtfwair p {
+#iiqlodipue p {
   margin: 0;
   padding: 0;
 }
 
-#qmbwtfwair .gt_table {
+#iiqlodipue .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2066,12 +1896,12 @@ m^{ij} = \psi(i,j)
   border-left-color: #D3D3D3;
 }
 
-#qmbwtfwair .gt_caption {
+#iiqlodipue .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qmbwtfwair .gt_title {
+#iiqlodipue .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2083,7 +1913,7 @@ m^{ij} = \psi(i,j)
   border-bottom-width: 0;
 }
 
-#qmbwtfwair .gt_subtitle {
+#iiqlodipue .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2095,7 +1925,7 @@ m^{ij} = \psi(i,j)
   border-top-width: 0;
 }
 
-#qmbwtfwair .gt_heading {
+#iiqlodipue .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2107,13 +1937,13 @@ m^{ij} = \psi(i,j)
   border-right-color: #D3D3D3;
 }
 
-#qmbwtfwair .gt_bottom_border {
+#iiqlodipue .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qmbwtfwair .gt_col_headings {
+#iiqlodipue .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2128,7 +1958,7 @@ m^{ij} = \psi(i,j)
   border-right-color: #D3D3D3;
 }
 
-#qmbwtfwair .gt_col_heading {
+#iiqlodipue .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2148,7 +1978,7 @@ m^{ij} = \psi(i,j)
   overflow-x: hidden;
 }
 
-#qmbwtfwair .gt_column_spanner_outer {
+#iiqlodipue .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2160,15 +1990,15 @@ m^{ij} = \psi(i,j)
   padding-right: 4px;
 }
 
-#qmbwtfwair .gt_column_spanner_outer:first-child {
+#iiqlodipue .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qmbwtfwair .gt_column_spanner_outer:last-child {
+#iiqlodipue .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qmbwtfwair .gt_column_spanner {
+#iiqlodipue .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2180,11 +2010,11 @@ m^{ij} = \psi(i,j)
   width: 100%;
 }
 
-#qmbwtfwair .gt_spanner_row {
+#iiqlodipue .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qmbwtfwair .gt_group_heading {
+#iiqlodipue .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2210,7 +2040,7 @@ m^{ij} = \psi(i,j)
   text-align: left;
 }
 
-#qmbwtfwair .gt_empty_group_heading {
+#iiqlodipue .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2225,15 +2055,15 @@ m^{ij} = \psi(i,j)
   vertical-align: middle;
 }
 
-#qmbwtfwair .gt_from_md > :first-child {
+#iiqlodipue .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qmbwtfwair .gt_from_md > :last-child {
+#iiqlodipue .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qmbwtfwair .gt_row {
+#iiqlodipue .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2252,7 +2082,7 @@ m^{ij} = \psi(i,j)
   overflow-x: hidden;
 }
 
-#qmbwtfwair .gt_stub {
+#iiqlodipue .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2265,7 +2095,7 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#qmbwtfwair .gt_stub_row_group {
+#iiqlodipue .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2279,15 +2109,15 @@ m^{ij} = \psi(i,j)
   vertical-align: top;
 }
 
-#qmbwtfwair .gt_row_group_first td {
+#iiqlodipue .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qmbwtfwair .gt_row_group_first th {
+#iiqlodipue .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qmbwtfwair .gt_summary_row {
+#iiqlodipue .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2297,16 +2127,16 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#qmbwtfwair .gt_first_summary_row {
+#iiqlodipue .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qmbwtfwair .gt_first_summary_row.thick {
+#iiqlodipue .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qmbwtfwair .gt_last_summary_row {
+#iiqlodipue .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2316,7 +2146,7 @@ m^{ij} = \psi(i,j)
   border-bottom-color: #D3D3D3;
 }
 
-#qmbwtfwair .gt_grand_summary_row {
+#iiqlodipue .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2326,7 +2156,7 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#qmbwtfwair .gt_first_grand_summary_row {
+#iiqlodipue .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2336,7 +2166,7 @@ m^{ij} = \psi(i,j)
   border-top-color: #D3D3D3;
 }
 
-#qmbwtfwair .gt_last_grand_summary_row_top {
+#iiqlodipue .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2346,11 +2176,11 @@ m^{ij} = \psi(i,j)
   border-bottom-color: #D3D3D3;
 }
 
-#qmbwtfwair .gt_striped {
+#iiqlodipue .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qmbwtfwair .gt_table_body {
+#iiqlodipue .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2359,7 +2189,7 @@ m^{ij} = \psi(i,j)
   border-bottom-color: #D3D3D3;
 }
 
-#qmbwtfwair .gt_footnotes {
+#iiqlodipue .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2373,7 +2203,7 @@ m^{ij} = \psi(i,j)
   border-right-color: #D3D3D3;
 }
 
-#qmbwtfwair .gt_footnote {
+#iiqlodipue .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2382,7 +2212,7 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#qmbwtfwair .gt_sourcenotes {
+#iiqlodipue .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2396,7 +2226,7 @@ m^{ij} = \psi(i,j)
   border-right-color: #D3D3D3;
 }
 
-#qmbwtfwair .gt_sourcenote {
+#iiqlodipue .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2404,63 +2234,63 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#qmbwtfwair .gt_left {
+#iiqlodipue .gt_left {
   text-align: left;
 }
 
-#qmbwtfwair .gt_center {
+#iiqlodipue .gt_center {
   text-align: center;
 }
 
-#qmbwtfwair .gt_right {
+#iiqlodipue .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qmbwtfwair .gt_font_normal {
+#iiqlodipue .gt_font_normal {
   font-weight: normal;
 }
 
-#qmbwtfwair .gt_font_bold {
+#iiqlodipue .gt_font_bold {
   font-weight: bold;
 }
 
-#qmbwtfwair .gt_font_italic {
+#iiqlodipue .gt_font_italic {
   font-style: italic;
 }
 
-#qmbwtfwair .gt_super {
+#iiqlodipue .gt_super {
   font-size: 65%;
 }
 
-#qmbwtfwair .gt_footnote_marks {
+#iiqlodipue .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qmbwtfwair .gt_asterisk {
+#iiqlodipue .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qmbwtfwair .gt_indent_1 {
+#iiqlodipue .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qmbwtfwair .gt_indent_2 {
+#iiqlodipue .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qmbwtfwair .gt_indent_3 {
+#iiqlodipue .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qmbwtfwair .gt_indent_4 {
+#iiqlodipue .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qmbwtfwair .gt_indent_5 {
+#iiqlodipue .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2570,23 +2400,23 @@ M_p = MM^T
 <div class="cell-output-display">
 <div id="tbl-example-place-nodes" class="anchored">
 
-<div id="xsqjzdrnmw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xsqjzdrnmw table {
+<div id="britbljqmj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#britbljqmj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xsqjzdrnmw thead, #xsqjzdrnmw tbody, #xsqjzdrnmw tfoot, #xsqjzdrnmw tr, #xsqjzdrnmw td, #xsqjzdrnmw th {
+#britbljqmj thead, #britbljqmj tbody, #britbljqmj tfoot, #britbljqmj tr, #britbljqmj td, #britbljqmj th {
   border-style: none;
 }
 
-#xsqjzdrnmw p {
+#britbljqmj p {
   margin: 0;
   padding: 0;
 }
 
-#xsqjzdrnmw .gt_table {
+#britbljqmj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2612,12 +2442,12 @@ M_p = MM^T
   border-left-color: #D3D3D3;
 }
 
-#xsqjzdrnmw .gt_caption {
+#britbljqmj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xsqjzdrnmw .gt_title {
+#britbljqmj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2629,7 +2459,7 @@ M_p = MM^T
   border-bottom-width: 0;
 }
 
-#xsqjzdrnmw .gt_subtitle {
+#britbljqmj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2641,7 +2471,7 @@ M_p = MM^T
   border-top-width: 0;
 }
 
-#xsqjzdrnmw .gt_heading {
+#britbljqmj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2653,13 +2483,13 @@ M_p = MM^T
   border-right-color: #D3D3D3;
 }
 
-#xsqjzdrnmw .gt_bottom_border {
+#britbljqmj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xsqjzdrnmw .gt_col_headings {
+#britbljqmj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2674,7 +2504,7 @@ M_p = MM^T
   border-right-color: #D3D3D3;
 }
 
-#xsqjzdrnmw .gt_col_heading {
+#britbljqmj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2694,7 +2524,7 @@ M_p = MM^T
   overflow-x: hidden;
 }
 
-#xsqjzdrnmw .gt_column_spanner_outer {
+#britbljqmj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2706,15 +2536,15 @@ M_p = MM^T
   padding-right: 4px;
 }
 
-#xsqjzdrnmw .gt_column_spanner_outer:first-child {
+#britbljqmj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xsqjzdrnmw .gt_column_spanner_outer:last-child {
+#britbljqmj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xsqjzdrnmw .gt_column_spanner {
+#britbljqmj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2726,11 +2556,11 @@ M_p = MM^T
   width: 100%;
 }
 
-#xsqjzdrnmw .gt_spanner_row {
+#britbljqmj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xsqjzdrnmw .gt_group_heading {
+#britbljqmj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2756,7 +2586,7 @@ M_p = MM^T
   text-align: left;
 }
 
-#xsqjzdrnmw .gt_empty_group_heading {
+#britbljqmj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2771,15 +2601,15 @@ M_p = MM^T
   vertical-align: middle;
 }
 
-#xsqjzdrnmw .gt_from_md > :first-child {
+#britbljqmj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xsqjzdrnmw .gt_from_md > :last-child {
+#britbljqmj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xsqjzdrnmw .gt_row {
+#britbljqmj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2798,7 +2628,7 @@ M_p = MM^T
   overflow-x: hidden;
 }
 
-#xsqjzdrnmw .gt_stub {
+#britbljqmj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2811,7 +2641,7 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#xsqjzdrnmw .gt_stub_row_group {
+#britbljqmj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2825,15 +2655,15 @@ M_p = MM^T
   vertical-align: top;
 }
 
-#xsqjzdrnmw .gt_row_group_first td {
+#britbljqmj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xsqjzdrnmw .gt_row_group_first th {
+#britbljqmj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xsqjzdrnmw .gt_summary_row {
+#britbljqmj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2843,16 +2673,16 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#xsqjzdrnmw .gt_first_summary_row {
+#britbljqmj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xsqjzdrnmw .gt_first_summary_row.thick {
+#britbljqmj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xsqjzdrnmw .gt_last_summary_row {
+#britbljqmj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2862,7 +2692,7 @@ M_p = MM^T
   border-bottom-color: #D3D3D3;
 }
 
-#xsqjzdrnmw .gt_grand_summary_row {
+#britbljqmj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2872,7 +2702,7 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#xsqjzdrnmw .gt_first_grand_summary_row {
+#britbljqmj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2882,7 +2712,7 @@ M_p = MM^T
   border-top-color: #D3D3D3;
 }
 
-#xsqjzdrnmw .gt_last_grand_summary_row_top {
+#britbljqmj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2892,11 +2722,11 @@ M_p = MM^T
   border-bottom-color: #D3D3D3;
 }
 
-#xsqjzdrnmw .gt_striped {
+#britbljqmj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xsqjzdrnmw .gt_table_body {
+#britbljqmj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2905,7 +2735,7 @@ M_p = MM^T
   border-bottom-color: #D3D3D3;
 }
 
-#xsqjzdrnmw .gt_footnotes {
+#britbljqmj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2919,7 +2749,7 @@ M_p = MM^T
   border-right-color: #D3D3D3;
 }
 
-#xsqjzdrnmw .gt_footnote {
+#britbljqmj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2928,7 +2758,7 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#xsqjzdrnmw .gt_sourcenotes {
+#britbljqmj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2942,7 +2772,7 @@ M_p = MM^T
   border-right-color: #D3D3D3;
 }
 
-#xsqjzdrnmw .gt_sourcenote {
+#britbljqmj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2950,63 +2780,63 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#xsqjzdrnmw .gt_left {
+#britbljqmj .gt_left {
   text-align: left;
 }
 
-#xsqjzdrnmw .gt_center {
+#britbljqmj .gt_center {
   text-align: center;
 }
 
-#xsqjzdrnmw .gt_right {
+#britbljqmj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xsqjzdrnmw .gt_font_normal {
+#britbljqmj .gt_font_normal {
   font-weight: normal;
 }
 
-#xsqjzdrnmw .gt_font_bold {
+#britbljqmj .gt_font_bold {
   font-weight: bold;
 }
 
-#xsqjzdrnmw .gt_font_italic {
+#britbljqmj .gt_font_italic {
   font-style: italic;
 }
 
-#xsqjzdrnmw .gt_super {
+#britbljqmj .gt_super {
   font-size: 65%;
 }
 
-#xsqjzdrnmw .gt_footnote_marks {
+#britbljqmj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xsqjzdrnmw .gt_asterisk {
+#britbljqmj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xsqjzdrnmw .gt_indent_1 {
+#britbljqmj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xsqjzdrnmw .gt_indent_2 {
+#britbljqmj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xsqjzdrnmw .gt_indent_3 {
+#britbljqmj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xsqjzdrnmw .gt_indent_4 {
+#britbljqmj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xsqjzdrnmw .gt_indent_5 {
+#britbljqmj .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3048,23 +2878,23 @@ M_p = MM^T
 <div class="cell-output-display">
 <div id="tbl-example-place-edges" class="anchored">
 
-<div id="iiqsvpmsaf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#iiqsvpmsaf table {
+<div id="vwfqlomptz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vwfqlomptz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#iiqsvpmsaf thead, #iiqsvpmsaf tbody, #iiqsvpmsaf tfoot, #iiqsvpmsaf tr, #iiqsvpmsaf td, #iiqsvpmsaf th {
+#vwfqlomptz thead, #vwfqlomptz tbody, #vwfqlomptz tfoot, #vwfqlomptz tr, #vwfqlomptz td, #vwfqlomptz th {
   border-style: none;
 }
 
-#iiqsvpmsaf p {
+#vwfqlomptz p {
   margin: 0;
   padding: 0;
 }
 
-#iiqsvpmsaf .gt_table {
+#vwfqlomptz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3090,12 +2920,12 @@ M_p = MM^T
   border-left-color: #D3D3D3;
 }
 
-#iiqsvpmsaf .gt_caption {
+#vwfqlomptz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#iiqsvpmsaf .gt_title {
+#vwfqlomptz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3107,7 +2937,7 @@ M_p = MM^T
   border-bottom-width: 0;
 }
 
-#iiqsvpmsaf .gt_subtitle {
+#vwfqlomptz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3119,7 +2949,7 @@ M_p = MM^T
   border-top-width: 0;
 }
 
-#iiqsvpmsaf .gt_heading {
+#vwfqlomptz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3131,13 +2961,13 @@ M_p = MM^T
   border-right-color: #D3D3D3;
 }
 
-#iiqsvpmsaf .gt_bottom_border {
+#vwfqlomptz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#iiqsvpmsaf .gt_col_headings {
+#vwfqlomptz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3152,7 +2982,7 @@ M_p = MM^T
   border-right-color: #D3D3D3;
 }
 
-#iiqsvpmsaf .gt_col_heading {
+#vwfqlomptz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3172,7 +3002,7 @@ M_p = MM^T
   overflow-x: hidden;
 }
 
-#iiqsvpmsaf .gt_column_spanner_outer {
+#vwfqlomptz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3184,15 +3014,15 @@ M_p = MM^T
   padding-right: 4px;
 }
 
-#iiqsvpmsaf .gt_column_spanner_outer:first-child {
+#vwfqlomptz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#iiqsvpmsaf .gt_column_spanner_outer:last-child {
+#vwfqlomptz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#iiqsvpmsaf .gt_column_spanner {
+#vwfqlomptz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3204,11 +3034,11 @@ M_p = MM^T
   width: 100%;
 }
 
-#iiqsvpmsaf .gt_spanner_row {
+#vwfqlomptz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#iiqsvpmsaf .gt_group_heading {
+#vwfqlomptz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3234,7 +3064,7 @@ M_p = MM^T
   text-align: left;
 }
 
-#iiqsvpmsaf .gt_empty_group_heading {
+#vwfqlomptz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3249,15 +3079,15 @@ M_p = MM^T
   vertical-align: middle;
 }
 
-#iiqsvpmsaf .gt_from_md > :first-child {
+#vwfqlomptz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#iiqsvpmsaf .gt_from_md > :last-child {
+#vwfqlomptz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#iiqsvpmsaf .gt_row {
+#vwfqlomptz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3276,7 +3106,7 @@ M_p = MM^T
   overflow-x: hidden;
 }
 
-#iiqsvpmsaf .gt_stub {
+#vwfqlomptz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3289,7 +3119,7 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#iiqsvpmsaf .gt_stub_row_group {
+#vwfqlomptz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3303,15 +3133,15 @@ M_p = MM^T
   vertical-align: top;
 }
 
-#iiqsvpmsaf .gt_row_group_first td {
+#vwfqlomptz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#iiqsvpmsaf .gt_row_group_first th {
+#vwfqlomptz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#iiqsvpmsaf .gt_summary_row {
+#vwfqlomptz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3321,16 +3151,16 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#iiqsvpmsaf .gt_first_summary_row {
+#vwfqlomptz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#iiqsvpmsaf .gt_first_summary_row.thick {
+#vwfqlomptz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#iiqsvpmsaf .gt_last_summary_row {
+#vwfqlomptz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3340,7 +3170,7 @@ M_p = MM^T
   border-bottom-color: #D3D3D3;
 }
 
-#iiqsvpmsaf .gt_grand_summary_row {
+#vwfqlomptz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3350,7 +3180,7 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#iiqsvpmsaf .gt_first_grand_summary_row {
+#vwfqlomptz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3360,7 +3190,7 @@ M_p = MM^T
   border-top-color: #D3D3D3;
 }
 
-#iiqsvpmsaf .gt_last_grand_summary_row_top {
+#vwfqlomptz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3370,11 +3200,11 @@ M_p = MM^T
   border-bottom-color: #D3D3D3;
 }
 
-#iiqsvpmsaf .gt_striped {
+#vwfqlomptz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#iiqsvpmsaf .gt_table_body {
+#vwfqlomptz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3383,7 +3213,7 @@ M_p = MM^T
   border-bottom-color: #D3D3D3;
 }
 
-#iiqsvpmsaf .gt_footnotes {
+#vwfqlomptz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3397,7 +3227,7 @@ M_p = MM^T
   border-right-color: #D3D3D3;
 }
 
-#iiqsvpmsaf .gt_footnote {
+#vwfqlomptz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3406,7 +3236,7 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#iiqsvpmsaf .gt_sourcenotes {
+#vwfqlomptz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3420,7 +3250,7 @@ M_p = MM^T
   border-right-color: #D3D3D3;
 }
 
-#iiqsvpmsaf .gt_sourcenote {
+#vwfqlomptz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3428,63 +3258,63 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#iiqsvpmsaf .gt_left {
+#vwfqlomptz .gt_left {
   text-align: left;
 }
 
-#iiqsvpmsaf .gt_center {
+#vwfqlomptz .gt_center {
   text-align: center;
 }
 
-#iiqsvpmsaf .gt_right {
+#vwfqlomptz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#iiqsvpmsaf .gt_font_normal {
+#vwfqlomptz .gt_font_normal {
   font-weight: normal;
 }
 
-#iiqsvpmsaf .gt_font_bold {
+#vwfqlomptz .gt_font_bold {
   font-weight: bold;
 }
 
-#iiqsvpmsaf .gt_font_italic {
+#vwfqlomptz .gt_font_italic {
   font-style: italic;
 }
 
-#iiqsvpmsaf .gt_super {
+#vwfqlomptz .gt_super {
   font-size: 65%;
 }
 
-#iiqsvpmsaf .gt_footnote_marks {
+#vwfqlomptz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#iiqsvpmsaf .gt_asterisk {
+#vwfqlomptz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#iiqsvpmsaf .gt_indent_1 {
+#vwfqlomptz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#iiqsvpmsaf .gt_indent_2 {
+#vwfqlomptz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#iiqsvpmsaf .gt_indent_3 {
+#vwfqlomptz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#iiqsvpmsaf .gt_indent_4 {
+#vwfqlomptz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#iiqsvpmsaf .gt_indent_5 {
+#vwfqlomptz .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3972,7 +3802,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../8_acknowledgements/8_2_about_us.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">About us*</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Acknowledgements</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
