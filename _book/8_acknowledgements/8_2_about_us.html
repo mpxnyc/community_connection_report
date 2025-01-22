@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Community and connection - About us*</title>
+<title>Host or travel [unsimulated] - About us*</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../8_acknowledgements/8_1_acknowledgements.html" rel="next">
+<link href="../5_methods_appendix/5_methods_appendix.html" rel="next">
 <link href="../4_discussion/4_discussion.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -106,7 +106,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Welcome*</span></a>
+ <span class="menu-text">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -228,12 +228,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">About us*</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../8_acknowledgements/8_1_acknowledgements.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Acknowledgements</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -266,7 +260,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../9_causal_inference_framework/9_causal_inference_framework.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Causal interventions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Towards causality*</span></span></a>
   </div>
 </li>
       </ul>
@@ -287,6 +281,10 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>RESPND-MI is a collective of activists and researchers which formed to respond to the 2022 novel outbreak of MPOX among sexual and gender minority individuals in New York City.</p>
+<div id="acknowledgements">
+<p><strong>Principal investigator</strong>: Keletso Makofane, MPH, PhD; <strong>Co-investigators</strong>: Jennifer Barnes-Balenciaga, Nicholas Diamond, MPH, Elle Lett, PhD, MA, MBiostat, Cody Nolan, MD, Martez Smith, LMSW, PhD, Nguyen Tran, MPH, PhD; <strong>Former investigators</strong>: Pedro Botti Careneiro, MPH, PhD, Seema Kara, MPH, James Krellenstein, Ken Nadolski, MPH, Robert Pitts, MD, Grant Roth, MPH, Sudipta Saha, MS, Christian Urrutia, Chris Wyman; <strong>Translators</strong>: Antón Castellanos Usigli, MPH, PhD; <strong>Reference group</strong>: Judith D. Auerbach, PhD (<em>University of California, San Francisco</em>), Lisa Berkman, PhD (<em>Harvard University</em>), Forrest W. Crawford, PhD (<em>Yale University</em>), William C. Goedel, PhD (<em>Brown University</em>), Gregg Gonsalves, PhD (<em>Yale University</em>), Ian W. Holloway, PhD, LCSW, MPH (<em>University of California, Los Angeles</em>), Louise Ivers, MB, BCh, MD, MPH, DTMH (<em>Massachusetts General Hospital)</em>, Lawrence C. Long, MCom, PhD (<em>Boston University)</em>, Kenneth Mayer, MD (<em>The Fenway Institute</em>), Gregorio Millett, MPH (<em>amfAR</em>), Eric J. Tchetgen Tchetgen, PhD (<em>University of Pennsylvania</em>); <strong>Research sponsors and funders</strong>: amfAR, National Institutes of Health, neo4j; <strong>Marketing sponsors and funders</strong>: Grindr, Hub for Health Intervention, UCLA Luskin School of Public Affairs; <strong>Administration</strong>: Christian Urrutia (prep4all), James Krellenstein (prep4all). <strong>Report reviewers</strong>: …</p>
+</div>
 
 
 
@@ -370,6 +368,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
   function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
@@ -531,8 +580,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../8_acknowledgements/8_1_acknowledgements.html" class="pagination-link">
-        <span class="nav-page-text">Acknowledgements</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../5_methods_appendix/5_methods_appendix.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Supplementary Methods</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

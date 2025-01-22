@@ -1,9 +1,5 @@
 ## Movement
 
-```{r}
-# Access custom defined functions
-targets::tar_source(files = paste0(here::here(), "/R_functions"))
-```
 
 ```{r}
 # Access custom defined functions
@@ -16,22 +12,15 @@ targets::tar_source(files = paste0(here::here(), "/R_functions"))
 #| fig-height: 4
 #| fig-align: center
 
-
-  mpxnyc_colors <- targets::tar_read(mpxnyc_colors)
-  light_purple    <- mpxnyc_colors[["dark_brown"]]
-
   
-ggplot2::ggplot() + 
- ggplot2::theme_void() +
-ggplot2::geom_point(ggplot2::aes(x = 1, y = 1), size = 80, color = light_purple, shape = 2) +
-    ggimage::geom_image(ggplot2::aes(image=targets::tar_read(mpxnyc_emojis)[["bear"]], x = 1, y = 1), size = 0.4) 
+plot_icon(icon_name = "bear", color = "dark_brown", shape = 2)
 
 ```
 
 
 @fig-communities-bar shows the difference betweeen the proportion of primary residences in each community district and the proprotion of contact venues in each community district. It shows that within Brooklyn, Manhattan, and Queens, there is a small set of community districts which tend to be markedly over-represented among contact venues compared to their share of primary residences. These are BK01, MN05, and QN05, respectively.
 
-```{r fig_communities_bar, echo = FALSE, message = FALSE, warning=FALSE}
+```{r fig_communities_bar}
 #| label: fig-communities-bar
 #| fig-width: 10
 #| fig-height: 7
@@ -50,7 +39,7 @@ make_table_home_vs_place_dbn() |>
 
 The dots on the diagonal line from top left to bottom right, show prominently, indicating that a sizeable proportion of movement happens within community districts. The figure also shows four prominent clusters - the cluster at the top left (in pink) shows significant movement between home and contact venues within Brooklyn and the cluster towards the middle of the plot (in purple) shows significant movement within Manhattan. The clusters at the top center and bottom left show significant movement from Brooklyn to Manhattan and from Manhattan to Brooklyn, respectively.
 
-```{r fig_communities_movement, echo = FALSE, message = FALSE, warning=FALSE}
+```{r fig_communities_movement}
 #| fig-cap: "Movement between home and contact venues by MPX NYC participant. The figure maps each contact venue's community district (x-axis) against the participant's home community district (y-axis). The size of the dot is proportional to the total count of contact venues with the given home and contact venue community district. The color of the dot represents the borough of the contact venue."
 #| label: fig-communities-movement
 #| fig-width: 10

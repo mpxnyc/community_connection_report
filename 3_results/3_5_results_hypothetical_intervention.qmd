@@ -14,14 +14,7 @@ targets::tar_source(files = paste0(here::here(), "/R_functions"))
 #| fig-align: center
 
 
-  mpxnyc_colors <- targets::tar_read(mpxnyc_colors)
-  light_purple    <- mpxnyc_colors[["light_purple"]]
-
-  
-ggplot2::ggplot() + 
- ggplot2::theme_void() +
-ggplot2::geom_point(ggplot2::aes(x = 1, y = 1), size = 80, color = light_purple, shape = 1) +
-    ggimage::geom_image(ggplot2::aes(image=targets::tar_read(mpxnyc_emojis)[["unicorn"]], x = 1, y = 1), size = 0.4) 
+plot_icon(icon_name = "unicorn", color = "light_purple", shape = 1)
 
 ```
 
@@ -33,7 +26,7 @@ Under the contact-neutralizing strategy, it would take five community districts 
 
 Under the movement-neutralizing strategy, it would take six community districts to reach 33% of the population: MN04, BK01, MN05, BK04, MN02, and BK03. It would take 16 community districts to reach 66% of the population. The additional community districts would be: MN64, MN10, QN01, BK08, MN09, QN05, BK09, MN11, BK14, and BK07.
 
-```{r fig_hiimpact_communities_contact, echo = FALSE, warning = FALSE, message=FALSE}
+```{r fig_hiimpact_communities_contact}
 #| fig-cap: "High-coverage community districts: contact vs movement-neutralizing strategy"
 #| label: fig-hiimpact-communities
 #| fig-width: 10
@@ -83,7 +76,7 @@ cowplot::plot_grid(finished_plot_map, finished_plot_bar, ncol=1, rel_heights = c
 
 @fig-netimpact shows that nearly 100% of individuals are included in the largest connected component before any intervention. For the movement-neutralizing strategy, the proportion of the population included in the largest connected component declines more sharply than for the contact-neutralizing strategy as more community districts are immunized. In the contact-neutralizing strategy, the overall proportion of unvaccinated individuals declines more sharply than in the movement-neutralizing strategy. There is not a noticeable difference between the two strategies for the first 10 community districts to be immunized - differences between the two strategies start emerging once 10 community districts are immunized.
 
-```{r echo = FALSE, warning = FALSE, message=FALSE}
+```{r}
 #| fig-cap: "Network impact"
 #| label: fig-netimpact
 #| fig-width: 8

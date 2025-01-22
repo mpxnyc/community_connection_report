@@ -14,14 +14,7 @@ targets::tar_source(files = paste0(here::here(), "/R_functions"))
 #| fig-align: center
 
 
-  mpxnyc_colors <- targets::tar_read(mpxnyc_colors)
-  light_purple    <- mpxnyc_colors[["light_orange"]]
-
-  
-ggplot2::ggplot() + 
- ggplot2::theme_void() +
-ggplot2::geom_point(ggplot2::aes(x = 1, y = 1), size = 80, color = light_purple, shape = 8) +
-    ggimage::geom_image(ggplot2::aes(image=targets::tar_read(mpxnyc_emojis)[["peach"]], x = 1, y = 1), size = 0.4) 
+plot_icon(icon_name = "peach", color = "light_orange", shape = 8)
 
 ```
 
@@ -32,7 +25,7 @@ MPX NYC participants are demographically diverse. Over 50% of participants were 
 
 In terms of health status and health services, one in ten participants reported living with HIV - the overwhelming majority were virally suppressed. In addition, about 16% reported at least one STI symptom. Two out of five participants were on PrEP at the time they took the survey. Two-thirds had received the MPOX vaccine, though only 8% had received MPOX testing.
 
-```{r tbl_people_descriptives, echo = FALSE, warning = FALSE, message=FALSE}
+```{r tbl_people_descriptives}
 #| fig-cap: "Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks"
 #| label: fig-people-descriptives
 
@@ -59,7 +52,7 @@ gtsummary::tbl_summary(by = groupSex) |>
 
 This diversity of subgroups implies different strategies for communication, and possibly different health interventions. For instance, the sexual orientation of participants differed markedly by gender (see @fig-sexorientation-racegender). The vast majority of cisgender men identified as gay, with some identifying as bisexual. Transgender men, on the other hand, were most likely to identify as queer, followed by bisexual or gay. Transgender women tended to identify as straight, bisexual, or other sexual orientations. Cisgender women participants tended to be straight, followed by bisexual, followed by queer. For non-binary people, most identified as queer, followed by gay and bisexual.
 
-```{r fig_sex_orientation_racegender, echo = FALSE, warning = FALSE, message=FALSE}
+```{r fig_sex_orientation_racegender}
 #| fig-cap: "Sexual orientation of MPX NYC participants by race and gender"
 #| label: fig-sexorientation-racegender
 #| fig-width: 10
