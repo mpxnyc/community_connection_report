@@ -17,6 +17,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -105,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../1_introduction/1_introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction*</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
       </ul>
@@ -264,33 +298,138 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
 <li>
-<a href="#data-structure" id="toc-data-structure" class="nav-link active" data-scroll-target="#data-structure"><span class="header-section-number">A.1</span> Data structure</a>
+<a href="#study-data" id="toc-study-data" class="nav-link active" data-scroll-target="#study-data"><span class="header-section-number">A.1</span> Study data</a>
   <ul class="collapse">
-<li><a href="#mpx-nyc-spatial-participant-network" id="toc-mpx-nyc-spatial-participant-network" class="nav-link" data-scroll-target="#mpx-nyc-spatial-participant-network"><span class="header-section-number">A.1.1</span> MPX NYC spatial participant network</a></li>
-  <li><a href="#mpx-nyc-participant-network" id="toc-mpx-nyc-participant-network" class="nav-link" data-scroll-target="#mpx-nyc-participant-network"><span class="header-section-number">A.1.2</span> MPX NYC participant network</a></li>
-  <li><a href="#mpx-nyc-community-district-network" id="toc-mpx-nyc-community-district-network" class="nav-link" data-scroll-target="#mpx-nyc-community-district-network"><span class="header-section-number">A.1.3</span> MPX NYC community district network</a></li>
+<li><a href="#spatial-participant-network" id="toc-spatial-participant-network" class="nav-link" data-scroll-target="#spatial-participant-network">Spatial participant network</a></li>
+  <li><a href="#participant-network" id="toc-participant-network" class="nav-link" data-scroll-target="#participant-network">Participant network</a></li>
+  <li><a href="#community-district-network" id="toc-community-district-network" class="nav-link" data-scroll-target="#community-district-network">Community district network</a></li>
   </ul>
 </li>
+  <li><a href="#bootstrap-data" id="toc-bootstrap-data" class="nav-link" data-scroll-target="#bootstrap-data"><span class="header-section-number">A.2</span> Bootstrap data</a></li>
   <li>
-<a href="#network-measures" id="toc-network-measures" class="nav-link" data-scroll-target="#network-measures"><span class="header-section-number">A.2</span> Network measures</a>
+<a href="#network-measures" id="toc-network-measures" class="nav-link" data-scroll-target="#network-measures"><span class="header-section-number">A.3</span> Network measures</a>
   <ul class="collapse">
-<li><a href="#egocentric-measures" id="toc-egocentric-measures" class="nav-link" data-scroll-target="#egocentric-measures"><span class="header-section-number">A.2.1</span> Egocentric measures</a></li>
-  <li><a href="#sociocentric-measures" id="toc-sociocentric-measures" class="nav-link" data-scroll-target="#sociocentric-measures"><span class="header-section-number">A.2.2</span> Sociocentric measures</a></li>
+<li><a href="#egocentric-measures" id="toc-egocentric-measures" class="nav-link" data-scroll-target="#egocentric-measures"><span class="header-section-number">A.3.1</span> Egocentric measures</a></li>
+  <li><a href="#sociocentric-measures" id="toc-sociocentric-measures" class="nav-link" data-scroll-target="#sociocentric-measures"><span class="header-section-number">A.3.2</span> Sociocentric measures</a></li>
   </ul>
 </li>
-  <li><a href="#outbreak-intervention-analysis" id="toc-outbreak-intervention-analysis" class="nav-link" data-scroll-target="#outbreak-intervention-analysis"><span class="header-section-number">A.3</span> Outbreak intervention analysis</a></li>
+  <li><a href="#outbreak-intervention-analysis" id="toc-outbreak-intervention-analysis" class="nav-link" data-scroll-target="#outbreak-intervention-analysis"><span class="header-section-number">A.4</span> Outbreak intervention analysis</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header"><h1 class="title display-7">Appendix A — Supplementary Methods</h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title">Appendix A — Supplementary Methods</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 
-</header><section id="data-structure" class="level2" data-number="A.1"><h2 data-number="A.1" class="anchored" data-anchor-id="data-structure">
-<span class="header-section-number">A.1</span> Data structure</h2>
-<section id="mpx-nyc-spatial-participant-network" class="level3" data-number="A.1.1"><h3 data-number="A.1.1" class="anchored" data-anchor-id="mpx-nyc-spatial-participant-network">
-<span class="header-section-number">A.1.1</span> MPX NYC spatial participant network</h3>
+</header><div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
+<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span>files <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"/R_functions"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="study-data" class="level2" data-number="A.1"><h2 data-number="A.1" class="anchored" data-anchor-id="study-data">
+<span class="header-section-number">A.1</span> Study data</h2>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
+<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span>files <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"/R_functions"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="spatial-participant-network" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="spatial-participant-network">Spatial participant network</h3>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mpxnyc_colors</span> <span class="op">&lt;-</span> <span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">mpxnyc_colors</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">example_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>                            name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>                                      <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Person "</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                                      <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Community "</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>, <span class="st">"e"</span><span class="op">)</span><span class="op">)</span></span>
+<span>                                      <span class="op">)</span>,</span>
+<span>                            type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="fl">8</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                            label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                            age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"18-25"</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"26-50"</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span>                            <span class="op">)</span></span>
+<span></span>
+<span><span class="va">example_edges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>                            from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>                                      <span class="st">"Person 1"</span>, </span>
+<span>                                      <span class="st">"Person 2"</span>, </span>
+<span>                                      <span class="st">"Person 3"</span>,</span>
+<span>                                      <span class="st">"Person 3"</span>,</span>
+<span>                                      <span class="st">"Person 4"</span>,</span>
+<span>                                      <span class="st">"Person 4"</span>,</span>
+<span>                                      <span class="st">"Person 5"</span>,</span>
+<span>                                      <span class="st">"Person 4"</span>,</span>
+<span>                                      <span class="st">"Person 6"</span>,</span>
+<span>                                      <span class="st">"Person 3"</span>,</span>
+<span>                                      <span class="st">"Person 4"</span>,</span>
+<span>                                      <span class="st">"Person 6"</span>,</span>
+<span>                                      <span class="st">"Person 7"</span>,</span>
+<span>                                      <span class="st">"Person 8"</span>,</span>
+<span>                                      <span class="st">"Person 3"</span></span>
+<span>                                      <span class="op">)</span>,</span>
+<span>                            to   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>                                      <span class="st">"Community a"</span>, </span>
+<span>                                      <span class="st">"Community a"</span>, </span>
+<span>                                      <span class="st">"Community a"</span>,</span>
+<span>                                      <span class="st">"Community b"</span>,</span>
+<span>                                      <span class="st">"Community b"</span>,</span>
+<span>                                      <span class="st">"Community c"</span>,</span>
+<span>                                      <span class="st">"Community c"</span>,</span>
+<span>                                      <span class="st">"Community d"</span>,</span>
+<span>                                      <span class="st">"Community d"</span>,</span>
+<span>                                      <span class="st">"Community e"</span>,</span>
+<span>                                      <span class="st">"Community e"</span>,</span>
+<span>                                      <span class="st">"Community e"</span>,</span>
+<span>                                      <span class="st">"Community c"</span>,</span>
+<span>                                      <span class="st">"Community c"</span>,</span>
+<span>                                      <span class="st">"Community e"</span></span>
+<span>                                      <span class="op">)</span>,</span>
+<span>                            weight <span class="op">=</span> <span class="fl">1</span></span>
+<span>                    </span>
+<span>                            <span class="op">)</span></span>
+<span></span>
+<span><span class="va">example_bipartite_network</span>   <span class="op">&lt;-</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/tbl_graph.html">tbl_graph</a></span><span class="op">(</span></span>
+<span>                                                    nodes <span class="op">=</span> <span class="va">example_nodes</span>, </span>
+<span>                                                    edges <span class="op">=</span> <span class="va">example_edges</span></span>
+<span>                                                    <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>weight_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">example_place_network</span> <span class="op">&lt;-</span> <span class="va">example_bipartite_network</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://r.igraph.org/reference/bipartite_projection.html">bipartite_projection</a></span><span class="op">(</span>which <span class="op">=</span> <span class="st">"false"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/tbl_graph.html">as_tbl_graph</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>type <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>weight_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">example_participant_network</span>       <span class="op">&lt;-</span> <span class="va">example_bipartite_network</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://r.igraph.org/reference/bipartite_projection.html">bipartite_projection</a></span><span class="op">(</span>which <span class="op">=</span> <span class="st">"true"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/tbl_graph.html">as_tbl_graph</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>type <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>weight_label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">example_colors</span>            <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FALSE"</span> <span class="op">=</span> <span class="va">mpxnyc_colors</span><span class="op">$</span><span class="va">dark_pink</span>, <span class="st">"TRUE"</span> <span class="op">=</span> <span class="va">mpxnyc_colors</span><span class="op">$</span><span class="va">dark_blue</span><span class="op">)</span></span>
+<span><span class="va">example_size_dot</span>          <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FALSE"</span> <span class="op">=</span> <span class="fl">20</span>, <span class="st">"TRUE"</span> <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">example_size_text</span>         <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FALSE"</span> <span class="op">=</span> <span class="fl">5</span>, <span class="st">"TRUE"</span> <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">example_edge_width_weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1"</span> <span class="op">=</span> <span class="fl">0.1</span>, <span class="st">"2"</span> <span class="op">=</span> <span class="fl">1</span>, <span class="st">"3"</span> <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <p>Conceptually, the MPX NYC spatial participant data network is a network object that contains all collected data. In this network, nodes comprise of community districts and survey participants. Edges can only exist between a person and a communtiy district - they indicate that the person either lives in or has a contact place in that community district. In <a href="#fig-data">Figure&nbsp;<span>A.1</span></a>, participant nodes are blue and community district nodes are pink. <a href="#tbl-example-bipartite-nodes">Table&nbsp;<span>A.1</span></a> shows the node and <a href="#tbl-example-bipartite-edges">Table&nbsp;<span>A.2</span></a> the edges of the network.</p>
 <div class="cell">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">example_bipartite_network</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>layout <span class="op">=</span> <span class="st">"kk"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>          <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_fan.html">geom_edge_fan</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>edge_width <span class="op">=</span> <span class="va">weight_label</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>          <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">type</span>, size <span class="op">=</span> <span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>          <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">label</span>, size <span class="op">=</span> <span class="va">type</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>          <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">example_colors</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/scale_edge_width.html">scale_edge_width_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">example_edge_width_weight</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_size_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">example_size_dot</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span>  <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    legend.position <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">10</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div id="fig-data" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="5_methods_appendix_files/figure-html/fig-data-1.png" class="img-fluid figure-img" width="768"></p>
 <figcaption class="figure-caption">Figure&nbsp;A.1: MPX NYC spatial participant network data</figcaption></figure>
@@ -300,26 +439,30 @@ ul.task-list li input[type="checkbox"] {
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">example_bipartite_network</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span>, <span class="st">"person"</span>, <span class="st">"community_district"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div id="tbl-example-bipartite-nodes" class="anchored">
 
-<div id="zyiscskvgj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zyiscskvgj table {
+<div id="sdafmhwdkk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sdafmhwdkk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zyiscskvgj thead, #zyiscskvgj tbody, #zyiscskvgj tfoot, #zyiscskvgj tr, #zyiscskvgj td, #zyiscskvgj th {
+#sdafmhwdkk thead, #sdafmhwdkk tbody, #sdafmhwdkk tfoot, #sdafmhwdkk tr, #sdafmhwdkk td, #sdafmhwdkk th {
   border-style: none;
 }
 
-#zyiscskvgj p {
+#sdafmhwdkk p {
   margin: 0;
   padding: 0;
 }
 
-#zyiscskvgj .gt_table {
+#sdafmhwdkk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -345,12 +488,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#zyiscskvgj .gt_caption {
+#sdafmhwdkk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zyiscskvgj .gt_title {
+#sdafmhwdkk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -362,7 +505,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#zyiscskvgj .gt_subtitle {
+#sdafmhwdkk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -374,7 +517,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#zyiscskvgj .gt_heading {
+#sdafmhwdkk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -386,13 +529,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#zyiscskvgj .gt_bottom_border {
+#sdafmhwdkk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zyiscskvgj .gt_col_headings {
+#sdafmhwdkk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -407,7 +550,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#zyiscskvgj .gt_col_heading {
+#sdafmhwdkk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -427,7 +570,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#zyiscskvgj .gt_column_spanner_outer {
+#sdafmhwdkk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -439,15 +582,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#zyiscskvgj .gt_column_spanner_outer:first-child {
+#sdafmhwdkk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zyiscskvgj .gt_column_spanner_outer:last-child {
+#sdafmhwdkk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zyiscskvgj .gt_column_spanner {
+#sdafmhwdkk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -459,11 +602,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#zyiscskvgj .gt_spanner_row {
+#sdafmhwdkk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zyiscskvgj .gt_group_heading {
+#sdafmhwdkk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -489,7 +632,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#zyiscskvgj .gt_empty_group_heading {
+#sdafmhwdkk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -504,15 +647,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#zyiscskvgj .gt_from_md > :first-child {
+#sdafmhwdkk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zyiscskvgj .gt_from_md > :last-child {
+#sdafmhwdkk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zyiscskvgj .gt_row {
+#sdafmhwdkk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -531,7 +674,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#zyiscskvgj .gt_stub {
+#sdafmhwdkk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -544,7 +687,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#zyiscskvgj .gt_stub_row_group {
+#sdafmhwdkk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -558,15 +701,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#zyiscskvgj .gt_row_group_first td {
+#sdafmhwdkk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zyiscskvgj .gt_row_group_first th {
+#sdafmhwdkk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zyiscskvgj .gt_summary_row {
+#sdafmhwdkk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -576,16 +719,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#zyiscskvgj .gt_first_summary_row {
+#sdafmhwdkk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zyiscskvgj .gt_first_summary_row.thick {
+#sdafmhwdkk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zyiscskvgj .gt_last_summary_row {
+#sdafmhwdkk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -595,7 +738,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#zyiscskvgj .gt_grand_summary_row {
+#sdafmhwdkk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -605,7 +748,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#zyiscskvgj .gt_first_grand_summary_row {
+#sdafmhwdkk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -615,7 +758,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#zyiscskvgj .gt_last_grand_summary_row_top {
+#sdafmhwdkk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -625,11 +768,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#zyiscskvgj .gt_striped {
+#sdafmhwdkk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zyiscskvgj .gt_table_body {
+#sdafmhwdkk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -638,7 +781,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#zyiscskvgj .gt_footnotes {
+#sdafmhwdkk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -652,7 +795,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#zyiscskvgj .gt_footnote {
+#sdafmhwdkk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -661,7 +804,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#zyiscskvgj .gt_sourcenotes {
+#sdafmhwdkk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -675,7 +818,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#zyiscskvgj .gt_sourcenote {
+#sdafmhwdkk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -683,63 +826,63 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#zyiscskvgj .gt_left {
+#sdafmhwdkk .gt_left {
   text-align: left;
 }
 
-#zyiscskvgj .gt_center {
+#sdafmhwdkk .gt_center {
   text-align: center;
 }
 
-#zyiscskvgj .gt_right {
+#sdafmhwdkk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zyiscskvgj .gt_font_normal {
+#sdafmhwdkk .gt_font_normal {
   font-weight: normal;
 }
 
-#zyiscskvgj .gt_font_bold {
+#sdafmhwdkk .gt_font_bold {
   font-weight: bold;
 }
 
-#zyiscskvgj .gt_font_italic {
+#sdafmhwdkk .gt_font_italic {
   font-style: italic;
 }
 
-#zyiscskvgj .gt_super {
+#sdafmhwdkk .gt_super {
   font-size: 65%;
 }
 
-#zyiscskvgj .gt_footnote_marks {
+#sdafmhwdkk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zyiscskvgj .gt_asterisk {
+#sdafmhwdkk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zyiscskvgj .gt_indent_1 {
+#sdafmhwdkk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zyiscskvgj .gt_indent_2 {
+#sdafmhwdkk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zyiscskvgj .gt_indent_3 {
+#sdafmhwdkk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zyiscskvgj .gt_indent_4 {
+#sdafmhwdkk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zyiscskvgj .gt_indent_5 {
+#sdafmhwdkk .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -810,26 +953,34 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">example_bipartite_network</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, <span class="va">type</span>, <span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>from_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">from</span><span class="op">]</span>, to_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">to</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">from_name</span>, to <span class="op">=</span> <span class="va">to_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div id="tbl-example-bipartite-edges" class="anchored">
 
-<div id="xclrlnczia" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xclrlnczia table {
+<div id="tpjihdcefw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tpjihdcefw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xclrlnczia thead, #xclrlnczia tbody, #xclrlnczia tfoot, #xclrlnczia tr, #xclrlnczia td, #xclrlnczia th {
+#tpjihdcefw thead, #tpjihdcefw tbody, #tpjihdcefw tfoot, #tpjihdcefw tr, #tpjihdcefw td, #tpjihdcefw th {
   border-style: none;
 }
 
-#xclrlnczia p {
+#tpjihdcefw p {
   margin: 0;
   padding: 0;
 }
 
-#xclrlnczia .gt_table {
+#tpjihdcefw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -855,12 +1006,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#xclrlnczia .gt_caption {
+#tpjihdcefw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xclrlnczia .gt_title {
+#tpjihdcefw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -872,7 +1023,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#xclrlnczia .gt_subtitle {
+#tpjihdcefw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -884,7 +1035,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#xclrlnczia .gt_heading {
+#tpjihdcefw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -896,13 +1047,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#xclrlnczia .gt_bottom_border {
+#tpjihdcefw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xclrlnczia .gt_col_headings {
+#tpjihdcefw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -917,7 +1068,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#xclrlnczia .gt_col_heading {
+#tpjihdcefw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -937,7 +1088,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#xclrlnczia .gt_column_spanner_outer {
+#tpjihdcefw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -949,15 +1100,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#xclrlnczia .gt_column_spanner_outer:first-child {
+#tpjihdcefw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xclrlnczia .gt_column_spanner_outer:last-child {
+#tpjihdcefw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xclrlnczia .gt_column_spanner {
+#tpjihdcefw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -969,11 +1120,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#xclrlnczia .gt_spanner_row {
+#tpjihdcefw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xclrlnczia .gt_group_heading {
+#tpjihdcefw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -999,7 +1150,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#xclrlnczia .gt_empty_group_heading {
+#tpjihdcefw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1014,15 +1165,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#xclrlnczia .gt_from_md > :first-child {
+#tpjihdcefw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xclrlnczia .gt_from_md > :last-child {
+#tpjihdcefw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xclrlnczia .gt_row {
+#tpjihdcefw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1041,7 +1192,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#xclrlnczia .gt_stub {
+#tpjihdcefw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1054,7 +1205,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#xclrlnczia .gt_stub_row_group {
+#tpjihdcefw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1068,15 +1219,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#xclrlnczia .gt_row_group_first td {
+#tpjihdcefw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xclrlnczia .gt_row_group_first th {
+#tpjihdcefw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xclrlnczia .gt_summary_row {
+#tpjihdcefw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1086,16 +1237,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#xclrlnczia .gt_first_summary_row {
+#tpjihdcefw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xclrlnczia .gt_first_summary_row.thick {
+#tpjihdcefw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xclrlnczia .gt_last_summary_row {
+#tpjihdcefw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1105,7 +1256,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#xclrlnczia .gt_grand_summary_row {
+#tpjihdcefw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1115,7 +1266,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#xclrlnczia .gt_first_grand_summary_row {
+#tpjihdcefw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1125,7 +1276,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#xclrlnczia .gt_last_grand_summary_row_top {
+#tpjihdcefw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1135,11 +1286,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#xclrlnczia .gt_striped {
+#tpjihdcefw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xclrlnczia .gt_table_body {
+#tpjihdcefw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1148,7 +1299,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#xclrlnczia .gt_footnotes {
+#tpjihdcefw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1162,7 +1313,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#xclrlnczia .gt_footnote {
+#tpjihdcefw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1171,7 +1322,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#xclrlnczia .gt_sourcenotes {
+#tpjihdcefw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1185,7 +1336,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#xclrlnczia .gt_sourcenote {
+#tpjihdcefw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1193,63 +1344,63 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#xclrlnczia .gt_left {
+#tpjihdcefw .gt_left {
   text-align: left;
 }
 
-#xclrlnczia .gt_center {
+#tpjihdcefw .gt_center {
   text-align: center;
 }
 
-#xclrlnczia .gt_right {
+#tpjihdcefw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xclrlnczia .gt_font_normal {
+#tpjihdcefw .gt_font_normal {
   font-weight: normal;
 }
 
-#xclrlnczia .gt_font_bold {
+#tpjihdcefw .gt_font_bold {
   font-weight: bold;
 }
 
-#xclrlnczia .gt_font_italic {
+#tpjihdcefw .gt_font_italic {
   font-style: italic;
 }
 
-#xclrlnczia .gt_super {
+#tpjihdcefw .gt_super {
   font-size: 65%;
 }
 
-#xclrlnczia .gt_footnote_marks {
+#tpjihdcefw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xclrlnczia .gt_asterisk {
+#tpjihdcefw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xclrlnczia .gt_indent_1 {
+#tpjihdcefw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xclrlnczia .gt_indent_2 {
+#tpjihdcefw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xclrlnczia .gt_indent_3 {
+#tpjihdcefw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xclrlnczia .gt_indent_4 {
+#tpjihdcefw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xclrlnczia .gt_indent_5 {
+#tpjihdcefw .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1347,11 +1498,23 @@ m^{ij} = \psi(i,j)
 \]</span></p>
 <p>In this mathematical description, we assume that there can only be one edge between a pair of nodes. In the MPX NYC data, it is possible for there to be more than one relation between a specific pair of nodes. We bridge this gap by assigning the count of relations in MPX NYC study data as an edge weight in the mathematical description. i.e In the case where participant <span class="math inline">\(a \in N_p\)</span> has <span class="math inline">\(r\)</span> relations with community district <span class="math inline">\(c \in N_c\)</span>, there is only one edge <span class="math inline">\((a,c)\)</span> in <span class="math inline">\(G\)</span> and the weight of that edge equals the count of relations (<span class="math inline">\(\psi(a,c) = r\)</span>).</p>
 <p>The MPX NYC spatial participant graph meets the definition for a bipartite graph. This allows us to easily derive two related graphs - the bipartite projection onto participant nodes <span class="math inline">\(G_p(N_p,\psi_p)\)</span>, and the bipartite projection onto community district nodes <span class="math inline">\(G_c(N_c,\psi_c)\)</span>. The former graph is used to represent the MPX NYC participant network, and the latter is used to represent the MPX NYC community district network. Both are defined below.</p>
-</section><section id="mpx-nyc-participant-network" class="level3" data-number="A.1.2"><h3 data-number="A.1.2" class="anchored" data-anchor-id="mpx-nyc-participant-network">
-<span class="header-section-number">A.1.2</span> MPX NYC participant network</h3>
+</section><section id="participant-network" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="participant-network">Participant network</h3>
 <p>The MPX NYC participant network has participants as nodes. A pair of nodes is connected by a weighted edge if each of the individuals represented by the nodes has at least one contact venue or residence in the same, shared community district. The weight of the edge is given by the count of community districts the pair of nodes have in common. By definition, an edge of weight <span class="math inline">\(0\)</span> is equivalent to the absence of an edge. <a href="#tbl-example-participant-nodes">Table&nbsp;<span>A.3</span></a> shows the nodes of the participant network shown in <a href="#fig-data-people">Figure&nbsp;<span>A.2</span></a> and <a href="#tbl-example-participant-edges">Table&nbsp;<span>A.4</span></a> show the edges.</p>
 <div class="cell">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span> <span class="va">example_participant_network</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>layout <span class="op">=</span> <span class="st">"kk"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>          <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_fan.html">geom_edge_fan</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>edge_width <span class="op">=</span> <span class="va">weight_label</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>          <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">type</span>, size <span class="op">=</span> <span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>          <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">label</span>, size <span class="op">=</span> <span class="va">type</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>          <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">example_colors</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/scale_edge_width.html">scale_edge_width_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">example_edge_width_weight</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_size_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">example_size_dot</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span>  <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    legend.position <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">10</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div id="fig-data-people" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="5_methods_appendix_files/figure-html/fig-data-people-1.png" class="img-fluid figure-img" width="768"></p>
 <figcaption class="figure-caption">Figure&nbsp;A.2: MPX NYC participant network</figcaption></figure>
@@ -1361,26 +1524,30 @@ m^{ij} = \psi(i,j)
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">example_participant_network</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span>, <span class="st">"person"</span>, <span class="st">"community_district"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div id="tbl-example-participant-nodes" class="anchored">
 
-<div id="ghpssnuqps" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ghpssnuqps table {
+<div id="fmrnscxotp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fmrnscxotp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ghpssnuqps thead, #ghpssnuqps tbody, #ghpssnuqps tfoot, #ghpssnuqps tr, #ghpssnuqps td, #ghpssnuqps th {
+#fmrnscxotp thead, #fmrnscxotp tbody, #fmrnscxotp tfoot, #fmrnscxotp tr, #fmrnscxotp td, #fmrnscxotp th {
   border-style: none;
 }
 
-#ghpssnuqps p {
+#fmrnscxotp p {
   margin: 0;
   padding: 0;
 }
 
-#ghpssnuqps .gt_table {
+#fmrnscxotp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1406,12 +1573,12 @@ m^{ij} = \psi(i,j)
   border-left-color: #D3D3D3;
 }
 
-#ghpssnuqps .gt_caption {
+#fmrnscxotp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ghpssnuqps .gt_title {
+#fmrnscxotp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1423,7 +1590,7 @@ m^{ij} = \psi(i,j)
   border-bottom-width: 0;
 }
 
-#ghpssnuqps .gt_subtitle {
+#fmrnscxotp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1435,7 +1602,7 @@ m^{ij} = \psi(i,j)
   border-top-width: 0;
 }
 
-#ghpssnuqps .gt_heading {
+#fmrnscxotp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1447,13 +1614,13 @@ m^{ij} = \psi(i,j)
   border-right-color: #D3D3D3;
 }
 
-#ghpssnuqps .gt_bottom_border {
+#fmrnscxotp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ghpssnuqps .gt_col_headings {
+#fmrnscxotp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1468,7 +1635,7 @@ m^{ij} = \psi(i,j)
   border-right-color: #D3D3D3;
 }
 
-#ghpssnuqps .gt_col_heading {
+#fmrnscxotp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1488,7 +1655,7 @@ m^{ij} = \psi(i,j)
   overflow-x: hidden;
 }
 
-#ghpssnuqps .gt_column_spanner_outer {
+#fmrnscxotp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1500,15 +1667,15 @@ m^{ij} = \psi(i,j)
   padding-right: 4px;
 }
 
-#ghpssnuqps .gt_column_spanner_outer:first-child {
+#fmrnscxotp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ghpssnuqps .gt_column_spanner_outer:last-child {
+#fmrnscxotp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ghpssnuqps .gt_column_spanner {
+#fmrnscxotp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1520,11 +1687,11 @@ m^{ij} = \psi(i,j)
   width: 100%;
 }
 
-#ghpssnuqps .gt_spanner_row {
+#fmrnscxotp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ghpssnuqps .gt_group_heading {
+#fmrnscxotp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1550,7 +1717,7 @@ m^{ij} = \psi(i,j)
   text-align: left;
 }
 
-#ghpssnuqps .gt_empty_group_heading {
+#fmrnscxotp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1565,15 +1732,15 @@ m^{ij} = \psi(i,j)
   vertical-align: middle;
 }
 
-#ghpssnuqps .gt_from_md > :first-child {
+#fmrnscxotp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ghpssnuqps .gt_from_md > :last-child {
+#fmrnscxotp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ghpssnuqps .gt_row {
+#fmrnscxotp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1592,7 +1759,7 @@ m^{ij} = \psi(i,j)
   overflow-x: hidden;
 }
 
-#ghpssnuqps .gt_stub {
+#fmrnscxotp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1605,7 +1772,7 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#ghpssnuqps .gt_stub_row_group {
+#fmrnscxotp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1619,15 +1786,15 @@ m^{ij} = \psi(i,j)
   vertical-align: top;
 }
 
-#ghpssnuqps .gt_row_group_first td {
+#fmrnscxotp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ghpssnuqps .gt_row_group_first th {
+#fmrnscxotp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ghpssnuqps .gt_summary_row {
+#fmrnscxotp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1637,16 +1804,16 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#ghpssnuqps .gt_first_summary_row {
+#fmrnscxotp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ghpssnuqps .gt_first_summary_row.thick {
+#fmrnscxotp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ghpssnuqps .gt_last_summary_row {
+#fmrnscxotp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1656,7 +1823,7 @@ m^{ij} = \psi(i,j)
   border-bottom-color: #D3D3D3;
 }
 
-#ghpssnuqps .gt_grand_summary_row {
+#fmrnscxotp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1666,7 +1833,7 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#ghpssnuqps .gt_first_grand_summary_row {
+#fmrnscxotp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1676,7 +1843,7 @@ m^{ij} = \psi(i,j)
   border-top-color: #D3D3D3;
 }
 
-#ghpssnuqps .gt_last_grand_summary_row_top {
+#fmrnscxotp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1686,11 +1853,11 @@ m^{ij} = \psi(i,j)
   border-bottom-color: #D3D3D3;
 }
 
-#ghpssnuqps .gt_striped {
+#fmrnscxotp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ghpssnuqps .gt_table_body {
+#fmrnscxotp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1699,7 +1866,7 @@ m^{ij} = \psi(i,j)
   border-bottom-color: #D3D3D3;
 }
 
-#ghpssnuqps .gt_footnotes {
+#fmrnscxotp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1713,7 +1880,7 @@ m^{ij} = \psi(i,j)
   border-right-color: #D3D3D3;
 }
 
-#ghpssnuqps .gt_footnote {
+#fmrnscxotp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1722,7 +1889,7 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#ghpssnuqps .gt_sourcenotes {
+#fmrnscxotp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1736,7 +1903,7 @@ m^{ij} = \psi(i,j)
   border-right-color: #D3D3D3;
 }
 
-#ghpssnuqps .gt_sourcenote {
+#fmrnscxotp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1744,63 +1911,63 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#ghpssnuqps .gt_left {
+#fmrnscxotp .gt_left {
   text-align: left;
 }
 
-#ghpssnuqps .gt_center {
+#fmrnscxotp .gt_center {
   text-align: center;
 }
 
-#ghpssnuqps .gt_right {
+#fmrnscxotp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ghpssnuqps .gt_font_normal {
+#fmrnscxotp .gt_font_normal {
   font-weight: normal;
 }
 
-#ghpssnuqps .gt_font_bold {
+#fmrnscxotp .gt_font_bold {
   font-weight: bold;
 }
 
-#ghpssnuqps .gt_font_italic {
+#fmrnscxotp .gt_font_italic {
   font-style: italic;
 }
 
-#ghpssnuqps .gt_super {
+#fmrnscxotp .gt_super {
   font-size: 65%;
 }
 
-#ghpssnuqps .gt_footnote_marks {
+#fmrnscxotp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ghpssnuqps .gt_asterisk {
+#fmrnscxotp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ghpssnuqps .gt_indent_1 {
+#fmrnscxotp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ghpssnuqps .gt_indent_2 {
+#fmrnscxotp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ghpssnuqps .gt_indent_3 {
+#fmrnscxotp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ghpssnuqps .gt_indent_4 {
+#fmrnscxotp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ghpssnuqps .gt_indent_5 {
+#fmrnscxotp .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1851,26 +2018,34 @@ m^{ij} = \psi(i,j)
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">example_participant_network</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, <span class="va">type</span>, <span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>from_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">from</span><span class="op">]</span>, to_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">to</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">from_name</span>, to <span class="op">=</span> <span class="va">to_name</span>, <span class="va">weight</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div id="tbl-example-participant-edges" class="anchored">
 
-<div id="iiqlodipue" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#iiqlodipue table {
+<div id="ktwhsrmgbs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ktwhsrmgbs table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#iiqlodipue thead, #iiqlodipue tbody, #iiqlodipue tfoot, #iiqlodipue tr, #iiqlodipue td, #iiqlodipue th {
+#ktwhsrmgbs thead, #ktwhsrmgbs tbody, #ktwhsrmgbs tfoot, #ktwhsrmgbs tr, #ktwhsrmgbs td, #ktwhsrmgbs th {
   border-style: none;
 }
 
-#iiqlodipue p {
+#ktwhsrmgbs p {
   margin: 0;
   padding: 0;
 }
 
-#iiqlodipue .gt_table {
+#ktwhsrmgbs .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1896,12 +2071,12 @@ m^{ij} = \psi(i,j)
   border-left-color: #D3D3D3;
 }
 
-#iiqlodipue .gt_caption {
+#ktwhsrmgbs .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#iiqlodipue .gt_title {
+#ktwhsrmgbs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1913,7 +2088,7 @@ m^{ij} = \psi(i,j)
   border-bottom-width: 0;
 }
 
-#iiqlodipue .gt_subtitle {
+#ktwhsrmgbs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1925,7 +2100,7 @@ m^{ij} = \psi(i,j)
   border-top-width: 0;
 }
 
-#iiqlodipue .gt_heading {
+#ktwhsrmgbs .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1937,13 +2112,13 @@ m^{ij} = \psi(i,j)
   border-right-color: #D3D3D3;
 }
 
-#iiqlodipue .gt_bottom_border {
+#ktwhsrmgbs .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#iiqlodipue .gt_col_headings {
+#ktwhsrmgbs .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1958,7 +2133,7 @@ m^{ij} = \psi(i,j)
   border-right-color: #D3D3D3;
 }
 
-#iiqlodipue .gt_col_heading {
+#ktwhsrmgbs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1978,7 +2153,7 @@ m^{ij} = \psi(i,j)
   overflow-x: hidden;
 }
 
-#iiqlodipue .gt_column_spanner_outer {
+#ktwhsrmgbs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1990,15 +2165,15 @@ m^{ij} = \psi(i,j)
   padding-right: 4px;
 }
 
-#iiqlodipue .gt_column_spanner_outer:first-child {
+#ktwhsrmgbs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#iiqlodipue .gt_column_spanner_outer:last-child {
+#ktwhsrmgbs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#iiqlodipue .gt_column_spanner {
+#ktwhsrmgbs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2010,11 +2185,11 @@ m^{ij} = \psi(i,j)
   width: 100%;
 }
 
-#iiqlodipue .gt_spanner_row {
+#ktwhsrmgbs .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#iiqlodipue .gt_group_heading {
+#ktwhsrmgbs .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2040,7 +2215,7 @@ m^{ij} = \psi(i,j)
   text-align: left;
 }
 
-#iiqlodipue .gt_empty_group_heading {
+#ktwhsrmgbs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2055,15 +2230,15 @@ m^{ij} = \psi(i,j)
   vertical-align: middle;
 }
 
-#iiqlodipue .gt_from_md > :first-child {
+#ktwhsrmgbs .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#iiqlodipue .gt_from_md > :last-child {
+#ktwhsrmgbs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#iiqlodipue .gt_row {
+#ktwhsrmgbs .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2082,7 +2257,7 @@ m^{ij} = \psi(i,j)
   overflow-x: hidden;
 }
 
-#iiqlodipue .gt_stub {
+#ktwhsrmgbs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2095,7 +2270,7 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#iiqlodipue .gt_stub_row_group {
+#ktwhsrmgbs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2109,15 +2284,15 @@ m^{ij} = \psi(i,j)
   vertical-align: top;
 }
 
-#iiqlodipue .gt_row_group_first td {
+#ktwhsrmgbs .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#iiqlodipue .gt_row_group_first th {
+#ktwhsrmgbs .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#iiqlodipue .gt_summary_row {
+#ktwhsrmgbs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2127,16 +2302,16 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#iiqlodipue .gt_first_summary_row {
+#ktwhsrmgbs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#iiqlodipue .gt_first_summary_row.thick {
+#ktwhsrmgbs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#iiqlodipue .gt_last_summary_row {
+#ktwhsrmgbs .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2146,7 +2321,7 @@ m^{ij} = \psi(i,j)
   border-bottom-color: #D3D3D3;
 }
 
-#iiqlodipue .gt_grand_summary_row {
+#ktwhsrmgbs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2156,7 +2331,7 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#iiqlodipue .gt_first_grand_summary_row {
+#ktwhsrmgbs .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2166,7 +2341,7 @@ m^{ij} = \psi(i,j)
   border-top-color: #D3D3D3;
 }
 
-#iiqlodipue .gt_last_grand_summary_row_top {
+#ktwhsrmgbs .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2176,11 +2351,11 @@ m^{ij} = \psi(i,j)
   border-bottom-color: #D3D3D3;
 }
 
-#iiqlodipue .gt_striped {
+#ktwhsrmgbs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#iiqlodipue .gt_table_body {
+#ktwhsrmgbs .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2189,7 +2364,7 @@ m^{ij} = \psi(i,j)
   border-bottom-color: #D3D3D3;
 }
 
-#iiqlodipue .gt_footnotes {
+#ktwhsrmgbs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2203,7 +2378,7 @@ m^{ij} = \psi(i,j)
   border-right-color: #D3D3D3;
 }
 
-#iiqlodipue .gt_footnote {
+#ktwhsrmgbs .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2212,7 +2387,7 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#iiqlodipue .gt_sourcenotes {
+#ktwhsrmgbs .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2226,7 +2401,7 @@ m^{ij} = \psi(i,j)
   border-right-color: #D3D3D3;
 }
 
-#iiqlodipue .gt_sourcenote {
+#ktwhsrmgbs .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2234,63 +2409,63 @@ m^{ij} = \psi(i,j)
   padding-right: 5px;
 }
 
-#iiqlodipue .gt_left {
+#ktwhsrmgbs .gt_left {
   text-align: left;
 }
 
-#iiqlodipue .gt_center {
+#ktwhsrmgbs .gt_center {
   text-align: center;
 }
 
-#iiqlodipue .gt_right {
+#ktwhsrmgbs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#iiqlodipue .gt_font_normal {
+#ktwhsrmgbs .gt_font_normal {
   font-weight: normal;
 }
 
-#iiqlodipue .gt_font_bold {
+#ktwhsrmgbs .gt_font_bold {
   font-weight: bold;
 }
 
-#iiqlodipue .gt_font_italic {
+#ktwhsrmgbs .gt_font_italic {
   font-style: italic;
 }
 
-#iiqlodipue .gt_super {
+#ktwhsrmgbs .gt_super {
   font-size: 65%;
 }
 
-#iiqlodipue .gt_footnote_marks {
+#ktwhsrmgbs .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#iiqlodipue .gt_asterisk {
+#ktwhsrmgbs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#iiqlodipue .gt_indent_1 {
+#ktwhsrmgbs .gt_indent_1 {
   text-indent: 5px;
 }
 
-#iiqlodipue .gt_indent_2 {
+#ktwhsrmgbs .gt_indent_2 {
   text-indent: 10px;
 }
 
-#iiqlodipue .gt_indent_3 {
+#ktwhsrmgbs .gt_indent_3 {
   text-indent: 15px;
 }
 
-#iiqlodipue .gt_indent_4 {
+#ktwhsrmgbs .gt_indent_4 {
   text-indent: 20px;
 }
 
-#iiqlodipue .gt_indent_5 {
+#ktwhsrmgbs .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2383,11 +2558,23 @@ M_p = MM^T
 <p><span class="math display">\[
 \psi_p(i,j) = m_p^{ij}
 \]</span></p>
-</section><section id="mpx-nyc-community-district-network" class="level3" data-number="A.1.3"><h3 data-number="A.1.3" class="anchored" data-anchor-id="mpx-nyc-community-district-network">
-<span class="header-section-number">A.1.3</span> MPX NYC community district network</h3>
+</section><section id="community-district-network" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="community-district-network">Community district network</h3>
 <p>The MPX NYC community district network has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a contact venue or residence in both community districts. The weight is the count of participants which are shared by the two community districts. <a href="#fig-data-places">Figure&nbsp;<span>A.3</span></a> shows the community district network derived from the MPX NYC spatial participant data network shown in <a href="#fig-data">Figure&nbsp;<span>A.1</span></a>. <a href="#tbl-example-place-nodes">Table&nbsp;<span>A.5</span></a> shows list the nodes of the former network, and <a href="#tbl-example-place-edges">Table&nbsp;<span>A.6</span></a> shows the edges.</p>
 <div class="cell">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">example_place_network</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>layout <span class="op">=</span> <span class="st">"kk"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>          <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_fan.html">geom_edge_fan</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>edge_width <span class="op">=</span> <span class="va">weight_label</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>          <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">type</span>, size <span class="op">=</span> <span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>          <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">label</span>, size <span class="op">=</span> <span class="va">type</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>          <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">example_colors</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/scale_edge_width.html">scale_edge_width_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">example_edge_width_weight</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_size_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">example_size_dot</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span>  <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    legend.position <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">10</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div id="fig-data-places" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="5_methods_appendix_files/figure-html/fig-data-places-1.png" class="img-fluid figure-img" width="768"></p>
 <figcaption class="figure-caption">Figure&nbsp;A.3: MPX NYC community district network</figcaption></figure>
@@ -2397,26 +2584,30 @@ M_p = MM^T
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">example_place_network</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span>, <span class="st">"person"</span>, <span class="st">"community_district"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div id="tbl-example-place-nodes" class="anchored">
 
-<div id="britbljqmj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#britbljqmj table {
+<div id="qnpqvkhtjr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qnpqvkhtjr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#britbljqmj thead, #britbljqmj tbody, #britbljqmj tfoot, #britbljqmj tr, #britbljqmj td, #britbljqmj th {
+#qnpqvkhtjr thead, #qnpqvkhtjr tbody, #qnpqvkhtjr tfoot, #qnpqvkhtjr tr, #qnpqvkhtjr td, #qnpqvkhtjr th {
   border-style: none;
 }
 
-#britbljqmj p {
+#qnpqvkhtjr p {
   margin: 0;
   padding: 0;
 }
 
-#britbljqmj .gt_table {
+#qnpqvkhtjr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2442,12 +2633,12 @@ M_p = MM^T
   border-left-color: #D3D3D3;
 }
 
-#britbljqmj .gt_caption {
+#qnpqvkhtjr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#britbljqmj .gt_title {
+#qnpqvkhtjr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2459,7 +2650,7 @@ M_p = MM^T
   border-bottom-width: 0;
 }
 
-#britbljqmj .gt_subtitle {
+#qnpqvkhtjr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2471,7 +2662,7 @@ M_p = MM^T
   border-top-width: 0;
 }
 
-#britbljqmj .gt_heading {
+#qnpqvkhtjr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2483,13 +2674,13 @@ M_p = MM^T
   border-right-color: #D3D3D3;
 }
 
-#britbljqmj .gt_bottom_border {
+#qnpqvkhtjr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#britbljqmj .gt_col_headings {
+#qnpqvkhtjr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2504,7 +2695,7 @@ M_p = MM^T
   border-right-color: #D3D3D3;
 }
 
-#britbljqmj .gt_col_heading {
+#qnpqvkhtjr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2524,7 +2715,7 @@ M_p = MM^T
   overflow-x: hidden;
 }
 
-#britbljqmj .gt_column_spanner_outer {
+#qnpqvkhtjr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2536,15 +2727,15 @@ M_p = MM^T
   padding-right: 4px;
 }
 
-#britbljqmj .gt_column_spanner_outer:first-child {
+#qnpqvkhtjr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#britbljqmj .gt_column_spanner_outer:last-child {
+#qnpqvkhtjr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#britbljqmj .gt_column_spanner {
+#qnpqvkhtjr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2556,11 +2747,11 @@ M_p = MM^T
   width: 100%;
 }
 
-#britbljqmj .gt_spanner_row {
+#qnpqvkhtjr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#britbljqmj .gt_group_heading {
+#qnpqvkhtjr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2586,7 +2777,7 @@ M_p = MM^T
   text-align: left;
 }
 
-#britbljqmj .gt_empty_group_heading {
+#qnpqvkhtjr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2601,15 +2792,15 @@ M_p = MM^T
   vertical-align: middle;
 }
 
-#britbljqmj .gt_from_md > :first-child {
+#qnpqvkhtjr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#britbljqmj .gt_from_md > :last-child {
+#qnpqvkhtjr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#britbljqmj .gt_row {
+#qnpqvkhtjr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2628,7 +2819,7 @@ M_p = MM^T
   overflow-x: hidden;
 }
 
-#britbljqmj .gt_stub {
+#qnpqvkhtjr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2641,7 +2832,7 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#britbljqmj .gt_stub_row_group {
+#qnpqvkhtjr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2655,15 +2846,15 @@ M_p = MM^T
   vertical-align: top;
 }
 
-#britbljqmj .gt_row_group_first td {
+#qnpqvkhtjr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#britbljqmj .gt_row_group_first th {
+#qnpqvkhtjr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#britbljqmj .gt_summary_row {
+#qnpqvkhtjr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2673,16 +2864,16 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#britbljqmj .gt_first_summary_row {
+#qnpqvkhtjr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#britbljqmj .gt_first_summary_row.thick {
+#qnpqvkhtjr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#britbljqmj .gt_last_summary_row {
+#qnpqvkhtjr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2692,7 +2883,7 @@ M_p = MM^T
   border-bottom-color: #D3D3D3;
 }
 
-#britbljqmj .gt_grand_summary_row {
+#qnpqvkhtjr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2702,7 +2893,7 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#britbljqmj .gt_first_grand_summary_row {
+#qnpqvkhtjr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2712,7 +2903,7 @@ M_p = MM^T
   border-top-color: #D3D3D3;
 }
 
-#britbljqmj .gt_last_grand_summary_row_top {
+#qnpqvkhtjr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2722,11 +2913,11 @@ M_p = MM^T
   border-bottom-color: #D3D3D3;
 }
 
-#britbljqmj .gt_striped {
+#qnpqvkhtjr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#britbljqmj .gt_table_body {
+#qnpqvkhtjr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2735,7 +2926,7 @@ M_p = MM^T
   border-bottom-color: #D3D3D3;
 }
 
-#britbljqmj .gt_footnotes {
+#qnpqvkhtjr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2749,7 +2940,7 @@ M_p = MM^T
   border-right-color: #D3D3D3;
 }
 
-#britbljqmj .gt_footnote {
+#qnpqvkhtjr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2758,7 +2949,7 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#britbljqmj .gt_sourcenotes {
+#qnpqvkhtjr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2772,7 +2963,7 @@ M_p = MM^T
   border-right-color: #D3D3D3;
 }
 
-#britbljqmj .gt_sourcenote {
+#qnpqvkhtjr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2780,63 +2971,63 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#britbljqmj .gt_left {
+#qnpqvkhtjr .gt_left {
   text-align: left;
 }
 
-#britbljqmj .gt_center {
+#qnpqvkhtjr .gt_center {
   text-align: center;
 }
 
-#britbljqmj .gt_right {
+#qnpqvkhtjr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#britbljqmj .gt_font_normal {
+#qnpqvkhtjr .gt_font_normal {
   font-weight: normal;
 }
 
-#britbljqmj .gt_font_bold {
+#qnpqvkhtjr .gt_font_bold {
   font-weight: bold;
 }
 
-#britbljqmj .gt_font_italic {
+#qnpqvkhtjr .gt_font_italic {
   font-style: italic;
 }
 
-#britbljqmj .gt_super {
+#qnpqvkhtjr .gt_super {
   font-size: 65%;
 }
 
-#britbljqmj .gt_footnote_marks {
+#qnpqvkhtjr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#britbljqmj .gt_asterisk {
+#qnpqvkhtjr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#britbljqmj .gt_indent_1 {
+#qnpqvkhtjr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#britbljqmj .gt_indent_2 {
+#qnpqvkhtjr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#britbljqmj .gt_indent_3 {
+#qnpqvkhtjr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#britbljqmj .gt_indent_4 {
+#qnpqvkhtjr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#britbljqmj .gt_indent_5 {
+#qnpqvkhtjr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2875,26 +3066,34 @@ M_p = MM^T
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">example_place_network</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, <span class="va">type</span>, <span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>from_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">from</span><span class="op">]</span>, to_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">to</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">from_name</span>, to <span class="op">=</span> <span class="va">to_name</span>, <span class="va">weight</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div id="tbl-example-place-edges" class="anchored">
 
-<div id="vwfqlomptz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vwfqlomptz table {
+<div id="tgrzvxmywy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tgrzvxmywy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vwfqlomptz thead, #vwfqlomptz tbody, #vwfqlomptz tfoot, #vwfqlomptz tr, #vwfqlomptz td, #vwfqlomptz th {
+#tgrzvxmywy thead, #tgrzvxmywy tbody, #tgrzvxmywy tfoot, #tgrzvxmywy tr, #tgrzvxmywy td, #tgrzvxmywy th {
   border-style: none;
 }
 
-#vwfqlomptz p {
+#tgrzvxmywy p {
   margin: 0;
   padding: 0;
 }
 
-#vwfqlomptz .gt_table {
+#tgrzvxmywy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2920,12 +3119,12 @@ M_p = MM^T
   border-left-color: #D3D3D3;
 }
 
-#vwfqlomptz .gt_caption {
+#tgrzvxmywy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vwfqlomptz .gt_title {
+#tgrzvxmywy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2937,7 +3136,7 @@ M_p = MM^T
   border-bottom-width: 0;
 }
 
-#vwfqlomptz .gt_subtitle {
+#tgrzvxmywy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2949,7 +3148,7 @@ M_p = MM^T
   border-top-width: 0;
 }
 
-#vwfqlomptz .gt_heading {
+#tgrzvxmywy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2961,13 +3160,13 @@ M_p = MM^T
   border-right-color: #D3D3D3;
 }
 
-#vwfqlomptz .gt_bottom_border {
+#tgrzvxmywy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vwfqlomptz .gt_col_headings {
+#tgrzvxmywy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2982,7 +3181,7 @@ M_p = MM^T
   border-right-color: #D3D3D3;
 }
 
-#vwfqlomptz .gt_col_heading {
+#tgrzvxmywy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3002,7 +3201,7 @@ M_p = MM^T
   overflow-x: hidden;
 }
 
-#vwfqlomptz .gt_column_spanner_outer {
+#tgrzvxmywy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3014,15 +3213,15 @@ M_p = MM^T
   padding-right: 4px;
 }
 
-#vwfqlomptz .gt_column_spanner_outer:first-child {
+#tgrzvxmywy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vwfqlomptz .gt_column_spanner_outer:last-child {
+#tgrzvxmywy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vwfqlomptz .gt_column_spanner {
+#tgrzvxmywy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3034,11 +3233,11 @@ M_p = MM^T
   width: 100%;
 }
 
-#vwfqlomptz .gt_spanner_row {
+#tgrzvxmywy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vwfqlomptz .gt_group_heading {
+#tgrzvxmywy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3064,7 +3263,7 @@ M_p = MM^T
   text-align: left;
 }
 
-#vwfqlomptz .gt_empty_group_heading {
+#tgrzvxmywy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3079,15 +3278,15 @@ M_p = MM^T
   vertical-align: middle;
 }
 
-#vwfqlomptz .gt_from_md > :first-child {
+#tgrzvxmywy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vwfqlomptz .gt_from_md > :last-child {
+#tgrzvxmywy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vwfqlomptz .gt_row {
+#tgrzvxmywy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3106,7 +3305,7 @@ M_p = MM^T
   overflow-x: hidden;
 }
 
-#vwfqlomptz .gt_stub {
+#tgrzvxmywy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3119,7 +3318,7 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#vwfqlomptz .gt_stub_row_group {
+#tgrzvxmywy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3133,15 +3332,15 @@ M_p = MM^T
   vertical-align: top;
 }
 
-#vwfqlomptz .gt_row_group_first td {
+#tgrzvxmywy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vwfqlomptz .gt_row_group_first th {
+#tgrzvxmywy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vwfqlomptz .gt_summary_row {
+#tgrzvxmywy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3151,16 +3350,16 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#vwfqlomptz .gt_first_summary_row {
+#tgrzvxmywy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vwfqlomptz .gt_first_summary_row.thick {
+#tgrzvxmywy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vwfqlomptz .gt_last_summary_row {
+#tgrzvxmywy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3170,7 +3369,7 @@ M_p = MM^T
   border-bottom-color: #D3D3D3;
 }
 
-#vwfqlomptz .gt_grand_summary_row {
+#tgrzvxmywy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3180,7 +3379,7 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#vwfqlomptz .gt_first_grand_summary_row {
+#tgrzvxmywy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3190,7 +3389,7 @@ M_p = MM^T
   border-top-color: #D3D3D3;
 }
 
-#vwfqlomptz .gt_last_grand_summary_row_top {
+#tgrzvxmywy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3200,11 +3399,11 @@ M_p = MM^T
   border-bottom-color: #D3D3D3;
 }
 
-#vwfqlomptz .gt_striped {
+#tgrzvxmywy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vwfqlomptz .gt_table_body {
+#tgrzvxmywy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3213,7 +3412,7 @@ M_p = MM^T
   border-bottom-color: #D3D3D3;
 }
 
-#vwfqlomptz .gt_footnotes {
+#tgrzvxmywy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3227,7 +3426,7 @@ M_p = MM^T
   border-right-color: #D3D3D3;
 }
 
-#vwfqlomptz .gt_footnote {
+#tgrzvxmywy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3236,7 +3435,7 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#vwfqlomptz .gt_sourcenotes {
+#tgrzvxmywy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3250,7 +3449,7 @@ M_p = MM^T
   border-right-color: #D3D3D3;
 }
 
-#vwfqlomptz .gt_sourcenote {
+#tgrzvxmywy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3258,63 +3457,63 @@ M_p = MM^T
   padding-right: 5px;
 }
 
-#vwfqlomptz .gt_left {
+#tgrzvxmywy .gt_left {
   text-align: left;
 }
 
-#vwfqlomptz .gt_center {
+#tgrzvxmywy .gt_center {
   text-align: center;
 }
 
-#vwfqlomptz .gt_right {
+#tgrzvxmywy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vwfqlomptz .gt_font_normal {
+#tgrzvxmywy .gt_font_normal {
   font-weight: normal;
 }
 
-#vwfqlomptz .gt_font_bold {
+#tgrzvxmywy .gt_font_bold {
   font-weight: bold;
 }
 
-#vwfqlomptz .gt_font_italic {
+#tgrzvxmywy .gt_font_italic {
   font-style: italic;
 }
 
-#vwfqlomptz .gt_super {
+#tgrzvxmywy .gt_super {
   font-size: 65%;
 }
 
-#vwfqlomptz .gt_footnote_marks {
+#tgrzvxmywy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vwfqlomptz .gt_asterisk {
+#tgrzvxmywy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vwfqlomptz .gt_indent_1 {
+#tgrzvxmywy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vwfqlomptz .gt_indent_2 {
+#tgrzvxmywy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vwfqlomptz .gt_indent_3 {
+#tgrzvxmywy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vwfqlomptz .gt_indent_4 {
+#tgrzvxmywy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vwfqlomptz .gt_indent_5 {
+#tgrzvxmywy .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3387,15 +3586,29 @@ M_c = M^TM
 <p><span class="math display">\[
 \psi_c(i,j) = m_c^{ij}
 \]</span></p>
-</section></section><section id="network-measures" class="level2" data-number="A.2"><h2 data-number="A.2" class="anchored" data-anchor-id="network-measures">
-<span class="header-section-number">A.2</span> Network measures</h2>
+</section></section><section id="bootstrap-data" class="level2" data-number="A.2"><h2 data-number="A.2" class="anchored" data-anchor-id="bootstrap-data">
+<span class="header-section-number">A.2</span> Bootstrap data</h2>
+<p>To conduct the bootstrap, we start by forming a synthetic dataset <span class="math inline">\(N_p^*\)</span> of re-sampled individuals. To do this, we repeatedly sample a random individual <span class="math inline">\(t\)</span> from the set of people <span class="math inline">\(N_p\)</span> with replacement. Then we assign each sampled individual a new index using function <span class="math display">\[
+l: N \to N^*
+\]</span></p>
+<p>Using the sampled individuals and all the community districts, we form a new network</p>
+<p><span class="math display">\[
+G(N^*, \psi^*)
+\]</span></p>
+<p>where <span class="math inline">\(N^* = N_p^* \cup N_c\)</span>. In this graph, the adjacency function satisfies:</p>
+<p><span class="math display">\[
+\psi^*(a,b) = \psi(l^{-1}(a), b)
+\]</span> for <span class="math inline">\(a \in N_p^*\)</span> and <span class="math inline">\(b \in N_c\)</span>.</p>
+<p>In <span class="math inline">\(G(N^*, \psi^*)\)</span>, individuals are batched into equal groups. Each group represent a repetition of the bootstrap procedure. Then for a given statistic, statistical inference is implemented by calculating the statistic separately in each of these groups and treating the result as a random realization from the distribution of that particular statistic.</p>
+</section><section id="network-measures" class="level2" data-number="A.3"><h2 data-number="A.3" class="anchored" data-anchor-id="network-measures">
+<span class="header-section-number">A.3</span> Network measures</h2>
 <p>In this section, we describe network measures that are both useful statistics to interpret in describing MPX NYC data and useful intermediate steps in other measures we constructed. We divide the measures into those that are related to egocentric networks, and those related to the overall structure of the network.</p>
-<section id="egocentric-measures" class="level3" data-number="A.2.1"><h3 data-number="A.2.1" class="anchored" data-anchor-id="egocentric-measures">
-<span class="header-section-number">A.2.1</span> Egocentric measures</h3>
+<section id="egocentric-measures" class="level3" data-number="A.3.1"><h3 data-number="A.3.1" class="anchored" data-anchor-id="egocentric-measures">
+<span class="header-section-number">A.3.1</span> Egocentric measures</h3>
 <p>We defined four measures related to node degree which offer a useful interpretation of MPX NYC data: participant social reach (<span class="math inline">\(R_i\)</span>), participant spatial reach (<span class="math inline">\(S_i\)</span>), community district social reach (<span class="math inline">\(r_j\)</span>), and community district spatial reach (<span class="math inline">\(s_j\)</span>).</p>
 <p>We further defined for each of these measures, a measure in which we count only the connections to nodes which are included in some defined subset <span class="math inline">\(A \subset N\)</span> of nodes. We thus define conditional participant social reach (<span class="math inline">\(R_i|A\)</span>), conditional participant spatial reach (<span class="math inline">\(S_i|A\)</span>), conditional community district social reach (<span class="math inline">\(r_j|A\)</span>), and conditional community district spatial reach (<span class="math inline">\(s_j|A\)</span>).</p>
-<section id="participant-social-reach" class="level4" data-number="A.2.1.1"><h4 data-number="A.2.1.1" class="anchored" data-anchor-id="participant-social-reach">
-<span class="header-section-number">A.2.1.1</span> Participant social reach</h4>
+<section id="participant-social-reach" class="level4" data-number="A.3.1.1"><h4 data-number="A.3.1.1" class="anchored" data-anchor-id="participant-social-reach">
+<span class="header-section-number">A.3.1.1</span> Participant social reach</h4>
 <p>Participant social reach is defined as the number of connections the focal participant has with other participants through shared community districts. For participants <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>, by “shared community districts”, we mean the set</p>
 <p><span class="math display">\[
 \{c : \psi(i,c) &gt; 0 \text{ and } \psi(j, c) &gt; 0 \, \text{ for } c \in N_c \}
@@ -3408,8 +3621,8 @@ R_i = \sum_{j \in N_p}{\psi_p (i,j)}
 R_i | A= \sum_{j \in N_p}{\psi_p (i,j)I_{x \in A}(x = j) }
 \]</span></p>
 <p>where the indicator function <span class="math inline">\(I_{x \in A}(x)\)</span> equals <span class="math inline">\(1\)</span> when <span class="math inline">\(x\in A\)</span> and <span class="math inline">\(0\)</span> otherwise.</p>
-</section><section id="participant-spatial-reach" class="level4" data-number="A.2.1.2"><h4 data-number="A.2.1.2" class="anchored" data-anchor-id="participant-spatial-reach">
-<span class="header-section-number">A.2.1.2</span> Participant spatial reach</h4>
+</section><section id="participant-spatial-reach" class="level4" data-number="A.3.1.2"><h4 data-number="A.3.1.2" class="anchored" data-anchor-id="participant-spatial-reach">
+<span class="header-section-number">A.3.1.2</span> Participant spatial reach</h4>
 <p>Participant spatial reach is defined as the number of connections the focal participant has with community districts. It is defined as the weighted node degree in the MPX NYC spatial participant network. For <span class="math inline">\(i \in N_p\)</span></p>
 <p><span class="math display">\[
 S_i = \sum_{j \in N_c}{\psi (i,j)}
@@ -3417,8 +3630,8 @@ S_i = \sum_{j \in N_c}{\psi (i,j)}
 <p><span class="math display">\[
 S_i|A = \sum_{j \in N_c}{\psi (i,j)I_{x \in A}(x = j)}
 \]</span></p>
-</section><section id="community-district-social-reach" class="level4" data-number="A.2.1.3"><h4 data-number="A.2.1.3" class="anchored" data-anchor-id="community-district-social-reach">
-<span class="header-section-number">A.2.1.3</span> Community district social reach</h4>
+</section><section id="community-district-social-reach" class="level4" data-number="A.3.1.3"><h4 data-number="A.3.1.3" class="anchored" data-anchor-id="community-district-social-reach">
+<span class="header-section-number">A.3.1.3</span> Community district social reach</h4>
 <p>Community district social reach is defined as the number of connections the focal community district has with participants. It is defined as the weighted node degree in the MPX NYC spatial participant network. For <span class="math inline">\(j \in N_c\)</span>:</p>
 <p><span class="math display">\[
 r_j = \sum_{i \in N_p}{\psi (i, j)}
@@ -3426,8 +3639,8 @@ r_j = \sum_{i \in N_p}{\psi (i, j)}
 <p><span class="math display">\[
 r_j|A = \sum_{i \in N_p}{\psi (i, j)I_{x \in A}(x = i)}
 \]</span></p>
-</section><section id="community-district-spatial-reach" class="level4" data-number="A.2.1.4"><h4 data-number="A.2.1.4" class="anchored" data-anchor-id="community-district-spatial-reach">
-<span class="header-section-number">A.2.1.4</span> Community district spatial reach</h4>
+</section><section id="community-district-spatial-reach" class="level4" data-number="A.3.1.4"><h4 data-number="A.3.1.4" class="anchored" data-anchor-id="community-district-spatial-reach">
+<span class="header-section-number">A.3.1.4</span> Community district spatial reach</h4>
 <p>Community district spatial reach is defined as the number of connections the focal community district has with other community districts through shared participants. For community districts <span class="math inline">\(c\)</span> and <span class="math inline">\(d\)</span>, by “shared participants”, we mean the set</p>
 <p><span class="math display">\[
 \{p : \psi(p,c) &gt; 0 \text{ and } \psi(p, d) &gt; 0 \, \text{ for } p \in N_p \}
@@ -3438,10 +3651,10 @@ s_j = \sum_{i \in N_c}{\psi_c (i,j)}
 <p><span class="math display">\[
 s_j|A = \sum_{i \in N_c}{\psi_c (i,j)I_{x \in A}(x = i)}
 \]</span></p>
-</section></section><section id="sociocentric-measures" class="level3" data-number="A.2.2"><h3 data-number="A.2.2" class="anchored" data-anchor-id="sociocentric-measures">
-<span class="header-section-number">A.2.2</span> Sociocentric measures</h3>
-<section id="spatial-mixing-coefficient" class="level4" data-number="A.2.2.1"><h4 data-number="A.2.2.1" class="anchored" data-anchor-id="spatial-mixing-coefficient">
-<span class="header-section-number">A.2.2.1</span> Spatial mixing coefficient</h4>
+</section></section><section id="sociocentric-measures" class="level3" data-number="A.3.2"><h3 data-number="A.3.2" class="anchored" data-anchor-id="sociocentric-measures">
+<span class="header-section-number">A.3.2</span> Sociocentric measures</h3>
+<section id="spatial-mixing-coefficient" class="level4" data-number="A.3.2.1"><h4 data-number="A.3.2.1" class="anchored" data-anchor-id="spatial-mixing-coefficient">
+<span class="header-section-number">A.3.2.1</span> Spatial mixing coefficient</h4>
 <p>The MPX NYC participant network can also be used to analyze the pattern of connection across different demographic groups. We did this using the spatial mixing coefficient, which we motivate and define below.</p>
 <p>Say there are three types of retired university professors in Boston - A) those who choose to live and socialize in neighborhoods with universities (where they can meet old colleagues and students); B) those who choose to live and socialize away from former colleagues and students; and C) those who choose neighborhoods without regard for university life. And say the proportion of people who are under 25 years of age in Boston is <span class="math inline">\(20\%\)</span> and that the majority of this group are college students. People who are under 25 years of age would be over-represented in neighborhoods with college campuses and residences, and under-represented in those without.</p>
 <p>To understand what kind of retired professor a particular person is, you could ask her of all the peopple she encountered in the past 12 months, what proportion were under <span class="math inline">\(25\)</span>. If she is of type C, we would expect her answer to be about <span class="math inline">\(20\%\)</span>. If she avoids universities (i.e.&nbsp;is of type B), the proportion would be lower than <span class="math inline">\(20\%\)</span> and if she seeks them out (i.e.&nbsp;type A), her answer would be greater than <span class="math inline">\(20\%\)</span>.</p>
@@ -3459,8 +3672,8 @@ s_j|A = \sum_{i \in N_c}{\psi_c (i,j)I_{x \in A}(x = i)}
 <p><span class="math display">\[
 \phi(A,B) = \frac{|N_p|}{|B|} \Phi(A,B) - 1
 \]</span></p>
-</section><section id="proportion-in-largest-connected-component" class="level4" data-number="A.2.2.2"><h4 data-number="A.2.2.2" class="anchored" data-anchor-id="proportion-in-largest-connected-component">
-<span class="header-section-number">A.2.2.2</span> Proportion in largest connected component</h4>
+</section><section id="proportion-in-largest-connected-component" class="level4" data-number="A.3.2.2"><h4 data-number="A.3.2.2" class="anchored" data-anchor-id="proportion-in-largest-connected-component">
+<span class="header-section-number">A.3.2.2</span> Proportion in largest connected component</h4>
 <p>In a given network, a connected component is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties.</p>
 <p>In the MPX NYC participant network, it is possible to uniquely partition the node set <span class="math inline">\(N_p\)</span> into connected components. This follows from the facts that connected components form non-overlapping subsets of <span class="math inline">\(N_p\)</span> and that it is possible to write <span class="math inline">\(N_p\)</span> as a union of subsets <span class="math inline">\(C_k\)</span> which are each connected components.</p>
 <p><span class="math display">\[
@@ -3470,8 +3683,8 @@ N = \bigcup_{k = 1}^{K}{C_k}
 <p><span class="math display">\[
 \theta_p = \frac{\max_k{|C_k|}}{|N_p|}
 \]</span></p>
-</section></section></section><section id="outbreak-intervention-analysis" class="level2" data-number="A.3"><h2 data-number="A.3" class="anchored" data-anchor-id="outbreak-intervention-analysis">
-<span class="header-section-number">A.3</span> Outbreak intervention analysis</h2>
+</section></section></section><section id="outbreak-intervention-analysis" class="level2" data-number="A.4"><h2 data-number="A.4" class="anchored" data-anchor-id="outbreak-intervention-analysis">
+<span class="header-section-number">A.4</span> Outbreak intervention analysis</h2>
 <p>Consider a sequence of graphs <span class="math inline">\(G^{(k)}\)</span> for <span class="math inline">\(k \in \mathbb{N}_0\)</span> constructed so that</p>
 <p><span class="math display">\[
 G^{(0)}(N^{(0)}, \psi^{(0)}) = G(N, \psi).
@@ -3488,8 +3701,8 @@ N^{(k+1)}   = N^{(k)} \backslash \ H^{(k+1)}
 \psi^{(k+1)}(a,b) = \psi^{(k)}(a,b),  \forall a,b \in  N^{(k+1)}
 \]</span></p>
 <p>Note: All measures defined in the previous sections can be calculated based on the updated graph <span class="math inline">\(G^{(k)}\)</span>. We indicate this case by adding a superscript with index number <span class="math inline">\(k\)</span> for the particular measure. e.g.&nbsp;We can define <span class="math inline">\(s_j^{(k)}|A\)</span> relative to graph <span class="math inline">\(G^{(k)}\)</span> just as <span class="math inline">\(s_j|A\)</span> is defined relative to graph <span class="math inline">\(G\)</span>.</p>
-<section id="intervention-strategies" class="level4" data-number="A.3.0.1"><h4 data-number="A.3.0.1" class="anchored" data-anchor-id="intervention-strategies">
-<span class="header-section-number">A.3.0.1</span> Intervention strategies</h4>
+<section id="intervention-strategies" class="level4" data-number="A.4.0.1"><h4 data-number="A.4.0.1" class="anchored" data-anchor-id="intervention-strategies">
+<span class="header-section-number">A.4.0.1</span> Intervention strategies</h4>
 <p>We examined two approaches for selecting a community district to immunize, corresponding to different intervention priorities. In the first, we select the next community district to immunize to maximize the number of people to be immunized. In the second, we select the next community district with the goal of minimizing the likelihood of contagion between community districts.</p>
 <p>i.e.&nbsp;in the <u>contact-neutralizing strategy</u> <span class="math inline">\(n^{(k+1)}\)</span> satisfies:</p>
 <p><span class="math display">\[
@@ -3499,8 +3712,8 @@ r_{n^{(k+1)}} = \max_{j \in N_c^{(k)}}{r_j^{(k)}}
 <p><span class="math display">\[
 s_{n^{(k+1)}} = \max_{j \in N_c^{(k)}}{s_j^{(k)}}
 \]</span></p>
-</section><section id="intervention-outcomes" class="level4" data-number="A.3.0.2"><h4 data-number="A.3.0.2" class="anchored" data-anchor-id="intervention-outcomes">
-<span class="header-section-number">A.3.0.2</span> Intervention outcomes</h4>
+</section><section id="intervention-outcomes" class="level4" data-number="A.4.0.2"><h4 data-number="A.4.0.2" class="anchored" data-anchor-id="intervention-outcomes">
+<span class="header-section-number">A.4.0.2</span> Intervention outcomes</h4>
 <p><u>spatial efficiency</u></p>
 <p>Intervention coverage for community district <span class="math inline">\(n^{(k)}\)</span>, the <span class="math inline">\(k^{th}\)</span> community district to be immunized, is defined as:</p>
 <p><span class="math display">\[
@@ -3516,6 +3729,8 @@ s_{n^{(k+1)}} = \max_{j \in N_c^{(k)}}{s_j^{(k)}}
 \frac{\max_t{C^{(k)}_{t}}}{|N_p|}
 \]</span></p>
 
+
+<!-- -->
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -3810,7 +4025,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Supplementary Results</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb13" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Supplementary Methods</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Access custom defined functions</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_source</span>(<span class="at">files =</span> <span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">"/R_functions"</span>))</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>{{&lt; include 5_1_data_structure.qmd &gt;}}</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>{{&lt; include 5_4_data_bootsrap.qmd &gt;}}</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>{{&lt; include 5_2_network_measures.qmd &gt;}}</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>{{&lt; include 5_3_outbreak_intervention_analysis.qmd &gt;}}</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 

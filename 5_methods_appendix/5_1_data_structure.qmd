@@ -1,4 +1,4 @@
-## Data structure
+## Study data
 
 ```{r}
 # Access custom defined functions
@@ -7,7 +7,7 @@ targets::tar_source(files = paste0(here::here(), "/R_functions"))
 
 
 
-### MPX NYC spatial participant network
+### Spatial participant network {.unnumbered}
 
 ```{r}
 
@@ -186,7 +186,7 @@ In this mathematical description, we assume that there can only be one edge betw
 
 The MPX NYC spatial participant graph meets the definition for a bipartite graph. This allows us to easily derive two related graphs - the bipartite projection onto participant nodes $G_p(N_p,\psi_p)$, and the bipartite projection onto community district nodes $G_c(N_c,\psi_c)$. The former graph is used to represent the MPX NYC participant network, and the latter is used to represent the MPX NYC community district network. Both are defined below.
 
-### MPX NYC participant network
+### Participant network {.unnumbered}
 
 The MPX NYC participant network has participants as nodes. A pair of nodes is connected by a weighted edge if each of the individuals represented by the nodes has at least one contact venue or residence in the same, shared community district. The weight of the edge is given by the count of community districts the pair of nodes have in common. By definition, an edge of weight $0$ is equivalent to the absence of an edge. @tbl-example-participant-nodes shows the nodes of the participant network shown in @fig-data-people and @tbl-example-participant-edges show the edges.
 
@@ -266,7 +266,7 @@ $$
 \psi_p(i,j) = m_p^{ij}
 $$
 
-### MPX NYC community district network
+### Community district network {.unnumbered}
 
 The MPX NYC community district network has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a contact venue or residence in both community districts. The weight is the count of participants which are shared by the two community districts. @fig-data-places shows the community district network derived from the MPX NYC spatial participant data network shown in @fig-data. @tbl-example-place-nodes shows list the nodes of the former network, and @tbl-example-place-edges shows the edges.
 
@@ -344,3 +344,5 @@ The result is a $r \times r$ matrix $M_c$, whose entries $m^{ij}_c$ are used to 
 $$
 \psi_c(i,j) = m_c^{ij}
 $$
+
+
