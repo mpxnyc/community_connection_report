@@ -342,31 +342,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p><a href="#fig-subgroup-mixing">Figure&nbsp;<span>10.1</span></a> quantifies the degree to which individuals with characteristics shown on the left live or play in an overlapping set of community districts with individuals whose characteristics are shown at the top. Overall, MPX NYC participants showed spatial homophily - the spatial selection coefficient from a given group to the same group was positive for all levels of race-gender, sexual orientation, and age. In addition, black cisgender men and non-binary persons tended to visit or live in different neighborhoods than white cisgender men. Non-binary persons also showed a preference for community districts in which transgender men live. Gay identified participants preferred to live and play in community districts where bisexual, straight and queer identified participants did not live. Similarly, those groups selected against community districts in which gay identified individuals live or play.</p>
+<p><span class="quarto-unresolved-ref">?fig-subgroup-mixing</span> quantifies the degree to which individuals with characteristics shown on the left live or play in an overlapping set of community districts with individuals whose characteristics are shown at the top. Overall, MPX NYC participants showed spatial homophily - the spatial selection coefficient from a given group to the same group was positive for all levels of race-gender, sexual orientation, and age. In addition, black cisgender men and non-binary persons tended to visit or live in different neighborhoods than white cisgender men. Non-binary persons also showed a preference for community districts in which transgender men live. Gay identified participants preferred to live and play in community districts where bisexual, straight and queer identified participants did not live. Similarly, those groups selected against community districts in which gay identified individuals live or play.</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mixing_demo_group_panel</span>          <span class="op">&lt;-</span> <span class="fu">make_table_mixing_2</span><span class="op">(</span><span class="va">demo_group</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">ego_level</span> <span class="op">!=</span> <span class="st">"Another Demographic"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">alter_level</span> <span class="op">!=</span> <span class="st">"Another Demographic"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">plot_matrix_mixing</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">apply_style_matrix_mixing_plot</span><span class="op">(</span><span class="op">)</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mixing_demo_group_panel</span> <span class="op">&lt;-</span> <span class="fu">make_table_mixing_2</span><span class="op">(</span><span class="va">demo_group</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">ego_level</span> <span class="op">!=</span> <span class="st">"Another Demographic"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">alter_level</span> <span class="op">!=</span> <span class="st">"Another Demographic"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">plot_matrix_mixing</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">apply_style_matrix_mixing_plot</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span></span>
-<span><span class="va">mixing_sexOrientation_panel</span>      <span class="op">&lt;-</span> <span class="fu">make_table_mixing_2</span><span class="op">(</span><span class="va">sexOrientation</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">plot_matrix_mixing</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">apply_style_matrix_mixing_plot</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="va">mixing_age_panel</span>                 <span class="op">&lt;-</span> <span class="fu">make_table_mixing_2</span><span class="op">(</span><span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">plot_matrix_mixing</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">apply_style_matrix_mixing_plot</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">mixing_bottom_panel</span>              <span class="op">&lt;-</span> <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">mixing_sexOrientation_panel</span>, <span class="va">mixing_age_panel</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">mixing_demo_group_panel</span>, <span class="va">mixing_bottom_panel</span>, ncol<span class="op">=</span><span class="fl">1</span>, rel_heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1.1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">mixing_demo_group_panel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<div id="fig-subgroup-mixing" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="3_4_results_spatial_mixing_files/figure-html/fig-subgroup-mixing-1.png" class="img-fluid figure-img" width="1152"></p>
-<figcaption class="figure-caption">Figure&nbsp;10.1: Social mixing matrices for MPX NYC participants by race-gender (top), sexual orientation (bottom left), and age (bottom right)</figcaption></figure>
+<div id="fig-demogroup-mixing" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="3_4_results_spatial_mixing_files/figure-html/fig-demogroup-mixing-1.png" class="img-fluid figure-img" width="864"></p>
+<figcaption class="figure-caption">Figure&nbsp;10.1: Social mixing matrices for MPX NYC participants by race-gender</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mixing_sexOrientation_panel</span> <span class="op">&lt;-</span> <span class="fu">make_table_mixing_2</span><span class="op">(</span><span class="va">sexOrientation</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">plot_matrix_mixing</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">apply_style_matrix_mixing_plot</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">mixing_sexOrientation_panel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="fig-sexorientation-mixing" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="3_4_results_spatial_mixing_files/figure-html/fig-sexorientation-mixing-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption class="figure-caption">Figure&nbsp;10.2: Social mixing matrix for MPX NYC participants by sexual orientation</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mixing_age_panel</span>                 <span class="op">&lt;-</span> <span class="fu">make_table_mixing_2</span><span class="op">(</span><span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">plot_matrix_mixing</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                      <span class="fu">apply_style_matrix_mixing_plot</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">mixing_age_panel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="fig-age-mixing" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="3_4_results_spatial_mixing_files/figure-html/fig-age-mixing-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption class="figure-caption">Figure&nbsp;10.3: Social mixing matrix for MPX NYC participants by age</figcaption></figure>
 </div>
 </div>
 </div>
