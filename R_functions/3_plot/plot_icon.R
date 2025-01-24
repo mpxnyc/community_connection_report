@@ -9,6 +9,7 @@ plot_icon                 <- function(
                                       ){
   
   
+  
   ggplot2::ggplot() + 
     ggplot2::theme_void() +
     ggplot2::geom_point(ggplot2::aes(x = 1, y = 1), size = size, color =  mpxnyc_colors[[color]], shape = shape, alpha = alpha) +
