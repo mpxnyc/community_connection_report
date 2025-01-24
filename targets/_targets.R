@@ -24,11 +24,11 @@ this_directory <- here::here()
 list( 
   tar_target(
     name = mpxnyc_images,
-    command = load_images(paste0(this_directory, "/images"))
+    command = load_images(paste0(this_directory, "/__const/images"))
   ),
   tar_target(
     name = mpxnyc_emojis,
-    command = load_emojis(paste0(this_directory, "/emojis"))
+    command = load_emojis(paste0(this_directory, "/__const/emojis"))
   ),
   tar_target(
     name = mpxnyc_colors,
