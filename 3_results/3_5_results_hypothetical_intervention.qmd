@@ -1,4 +1,8 @@
-## Outbreak interventions
+---
+bibliography: ../bibliography.bib
+---
+
+# Outbreak interventions {#sec-intervention}
 
 ```{r}
 # Access custom defined functions
@@ -9,16 +13,16 @@ targets::tar_source(files = paste0(here::here(), "/R_functions"))
 
 
 ```{r}
-#| fig-width: 4
-#| fig-height: 4
+#| fig-width: 2
+#| fig-height: 2
 #| fig-align: center
 
 
-plot_icon(icon_name = "unicorn", color = "light_purple", shape = 1)
+plot_icon(icon_name = "unicorn", color = "light_pink", shape = 8)
 
 ```
 
-### Spatial efficiency
+### Spatial efficiency {.unnumbered}
 
 @fig-hiimpact-communities shows which community districts would have to be immunized to immunize 33% of the population (Group A), and 66% of the population (Group A + Group B) under both the contact-neutralizing and movement-neutralizing intervention strategies.
 
@@ -72,7 +76,7 @@ cowplot::plot_grid(finished_plot_map, finished_plot_bar, ncol=1, rel_heights = c
 
 ```
 
-### Spatial network impact
+### Spatial network impact {.unnumbered}
 
 @fig-netimpact shows that nearly 100% of individuals are included in the largest connected component before any intervention. For the movement-neutralizing strategy, the proportion of the population included in the largest connected component declines more sharply than for the contact-neutralizing strategy as more community districts are immunized. In the contact-neutralizing strategy, the overall proportion of unvaccinated individuals declines more sharply than in the movement-neutralizing strategy. There is not a noticeable difference between the two strategies for the first 10 community districts to be immunized - differences between the two strategies start emerging once 10 community districts are immunized.
 
