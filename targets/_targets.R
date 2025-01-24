@@ -1,5 +1,7 @@
 # See targets package documentation
 
+# This code runs from the root folder
+
 # Load packages required to define the pipeline:
 library(targets)
 
@@ -24,11 +26,11 @@ this_directory <- here::here()
 list( 
   tar_target(
     name = mpxnyc_images,
-    command = load_images(paste0(this_directory, "/__const/images"))
+    command = load_images()
   ),
   tar_target(
     name = mpxnyc_emojis,
-    command = load_emojis(paste0(this_directory, "/__const/emojis"))
+    command = load_emojis()
   ),
   tar_target(
     name = mpxnyc_colors,
