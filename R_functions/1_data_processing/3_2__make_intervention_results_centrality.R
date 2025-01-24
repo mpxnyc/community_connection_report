@@ -8,7 +8,7 @@ make_intervention_results_centrality <- function(bipartite_graph_sim, interventi
   list_results[[4]] <- get_centrality_results(bipartite_graph_sim, intervention_coverage_data_sim, intervention_priority_input = "movement", intervention_stratification_input = "demo_group")
   
   
-  list_results %>%
-    bind_rows()
+  list_results |>
+    dplyr::bind_rows()
   
 }

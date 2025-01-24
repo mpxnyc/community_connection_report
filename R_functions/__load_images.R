@@ -1,26 +1,17 @@
-helper_emoji_path <- function(icon){
-  paste0(here::here(), "/R_resources/MPX_", icon, ".svg") 
-}
 
-load_emojis <- function(){
+load_images <- function(path){
   
   
-  emojis <- list()
+  images <- list()
   
-  emojis[["bear"]]        <- helper_emoji_path("bear")
-  emojis[["devil"]]       <- helper_emoji_path("devil")
-  emojis[["droplets"]]    <- helper_emoji_path("droplets")
-  
-  emojis[["eggplant"]]    <- helper_emoji_path("eggplant")
-  emojis[["peach"]]       <- helper_emoji_path("peach")
-  emojis[["pignose"]]     <- helper_emoji_path("pignose")
-  
-  emojis[["taco"]]        <- helper_emoji_path("taco")
-  emojis[["tulip"]]       <- helper_emoji_path("tulip")
-  emojis[["unicorn"]]     <- helper_emoji_path("unicorn")
+  images[["app_graphic"]]                  <- paste0(path, "/image_app_graphic.png")
+  images[["campaign_graphic"]]             <- paste0(path, "/image_campaign_graphic.png") 
+  images[["creative_requirements"]]        <- paste0(path, "/image_creative_requirements.png")  
+  images[["mpxny"]]                        <- paste0(path, "/image_mpxny.png")  
+
 
   
-  emojis
+  images
   
 }
 

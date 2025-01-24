@@ -1,6 +1,6 @@
-load_questionnaire_text <- function(){
+load_questionnaire_text <- function(filepath){
   
-  answers <- tidyjson::read_json("R_resources/questionnaire.json") |>
+  answers <- tidyjson::read_json(filepath) |>
     tidyjson::gather_object() |>
     tidyjson::enter_object(answers) |>
     tidyjson::gather_object() |>
@@ -12,7 +12,7 @@ load_questionnaire_text <- function(){
     dplyr::transmute(variable = name, language = name.2, answer = string, index = array.index) |>
     dplyr::group_by(variable, language)  
   
-  questions <- tidyjson::read_json("R_resources/questionnaire.json") |>
+  questions <- tidyjson::read_json(filepath) |>
     tidyjson::gather_object() |>
     tidyjson::enter_object(question)  |>
     tidyjson::gather_object() |>

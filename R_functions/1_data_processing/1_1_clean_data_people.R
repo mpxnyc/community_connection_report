@@ -1,14 +1,14 @@
 clean_data_people <- function(raw_data_participants, factor_levels, factor_labels) {
   
   
-  clean_data <- raw_data_participants %>%
+  clean_data <- raw_data_participants |>
     
     
                                 dplyr::mutate(
                                                 borough          = mpxnyc::convert_spatial_unit_ny(censusTractHome, convert_to = "borough"),
                                                 community        = mpxnyc::convert_spatial_unit_ny(censusTractHome, convert_to = "community")
-                                            ) %>%
-                                dplyr::filter(!is.na(borough)) %>%
+                                            ) |>
+                                dplyr::filter(!is.na(borough)) |>
     
     
                                 dplyr::mutate(
@@ -20,7 +20,7 @@ clean_data_people <- function(raw_data_participants, factor_levels, factor_label
                                                 monkeypoxVaccine = factor(monkeypoxVaccine,    factor_levels[["monkeypoxVaccine"]][["current_levels"]],    factor_levels[["monkeypoxVaccine"]][["new_levels"]]),
                                                 race             = factor(race,                factor_levels[["race"]][["current_levels"]],                factor_levels[["race"]][["new_levels"]]),
                                                 genderId         = factor(genderId,            factor_levels[["genderId"]][["current_levels"]],            factor_levels[["genderId"]][["new_levels"]])
-                                ) %>%
+                                ) |>
                                 dplyr::mutate(
                                                 countFriendsCut     = cut(countFriends,        factor_levels[["countFriendsCut"]][["current_levels"]],      factor_levels[["countFriendsCut"]][["new_levels"]]),
                                                 countPhysicalCut    = cut(countPhysical,       factor_levels[["countPhysicalCut"]][["current_levels"]],     factor_levels[["countPhysicalCut"]][["new_levels"]]),
@@ -28,7 +28,7 @@ clean_data_people <- function(raw_data_participants, factor_levels, factor_label
                                                 travelTimeCut       = cut(travelTime,          factor_levels[["travelTimeCut"]][["current_levels"]],        factor_levels[["travelTimeCut"]][["new_levels"]]),
                                                 createdAtCut        = cut(createdAt,           factor_levels[["createdAtCut"]][["current_levels"]],         factor_levels[["createdAtCut"]][["new_levels"]]),
                                                 NumSymptomsCut      = cut(num_symptoms,        factor_levels[["NumSymptomsCut"]][["current_levels"]],       factor_levels[["NumSymptomsCut"]][["new_levels"]])
-                                ) %>%
+                                ) |>
                                 dplyr::mutate(
                                   demo_group       = as.character(genderId),
                                   demo_group       = ifelse(
@@ -44,22 +44,22 @@ clean_data_people <- function(raw_data_participants, factor_levels, factor_label
                                   demo_group       = factor(demo_group),
                                   overall          = "overall",
                                   hivPrepStat      = ifelse(is.na(hivPrep), "living-with-hiv", as.character(hivPrep))
-                                ) %>%
+                                ) |>
                                 
                                 dplyr::tibble()
   
   
-  variable_labels  <- factor_labels[["people"]] %>%
+  variable_labels  <- factor_labels[["people"]] |>
                                  purrr::map(
                                            function(x) {
                                              x$label
                                              }
                                            ) 
   
-  value_labels    <- factor_labels[["people"]] %>% 
+  value_labels    <- factor_labels[["people"]] |> 
                                 purrr::map(
                                             function(x) {
-                                                          result <- x$levels %>% 
+                                                          result <- x$levels |> 
                                                                         unlist() 
                                                           names(result) <- names(x$levels)
                                                           
@@ -67,12 +67,12 @@ clean_data_people <- function(raw_data_participants, factor_levels, factor_label
                                                           }) 
   
   
-  value_labels %>%
+  value_labels |>
     purrr::map2(
       names(value_labels),
       function(variable, var_name) {
-        clean_data[, var_name] <<- clean_data %>%
-                                      pull(var_name) %>%
+        clean_data[, var_name] <<- clean_data |>
+                                      dplyr::pull(var_name) |>
                                       factor(names(variable), as.character(variable))
         
       }

@@ -35,7 +35,7 @@ load_factor_levels <- function(){
   list_levels[["countSexCut"]][["new_levels"]]                       <- c("0", "1", "2", "3", "4", "5+")
   
   list_levels[["createdAtCut"]]                                       <- list()
-  list_levels[["createdAtCut"]][["current_levels"]]                   <- c(date("2022-08-30"), date("2022-09-01"), date("2022-09-10"), date("2022-09-12"), date("2022-11-14"))
+  list_levels[["createdAtCut"]][["current_levels"]]                   <- c(lubridate::date("2022-08-30"), lubridate::date("2022-09-01"), lubridate::date("2022-09-10"), lubridate::date("2022-09-12"), lubridate::date("2022-11-14"))
   list_levels[["createdAtCut"]][["new_levels"]]                       <- c("30-31 Aug 2022", "01-10 Sep 2022","10-11 Sep 2022", "12 Sep - 31 Nov 2022")
   
   

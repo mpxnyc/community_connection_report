@@ -10,20 +10,20 @@ find_participant_intervention_contact_place <- function(bipartite_graph, interve
   n_spatial_units  <- attr(coverage_graph, "n_spatial_units")
   
 
-  seq(n_spatial_units) %>%
+  seq(n_spatial_units) |>
     purrr::reduce(
       function(accumulated_value, next_value){
-        strata_levels[(next_value %% n_strata) + 1] %>%
-            find_top_spatial_units(accumulated_value, intervention_priority_input, .) %>%
-            mark_people_connected_to_top_spatial_units(accumulated_value, .)
+        strata_levels[(next_value %% n_strata) + 1] |>
+            {function(x) find_top_spatial_units(accumulated_value, intervention_priority_input, x)}() |>
+            {function(x) mark_people_connected_to_top_spatial_units(accumulated_value, x)}()
       },
       .init = coverage_graph
-    ) %>%
-    dplyr::mutate(strata                = strata_name) %>%
-    dplyr::mutate(intervention_priority = intervention_priority_input) %>%
-    dplyr::mutate(intervention_ranking  = ifelse(is.na(intervention_ranking), 999, intervention_ranking)) %>%
-    data.frame() %>%
-    dplyr::tibble() %>%
+    ) |>
+    dplyr::mutate(strata                = strata_name) |>
+    dplyr::mutate(intervention_priority = intervention_priority_input) |>
+    dplyr::mutate(intervention_ranking  = ifelse(is.na(intervention_ranking), 999, intervention_ranking)) |>
+    data.frame() |>
+    dplyr::tibble() |>
     dplyr::filter(type)
   
 }
@@ -32,19 +32,19 @@ find_participant_intervention_contact_place <- function(bipartite_graph, interve
 
 helper_initialize_coverage_graph <- function(bipartite_graph, strata){
   
-  bipartite_graph_initialized                            <- bipartite_graph %>% 
-                                                                  tidygraph::activate(nodes) %>%
-                                                                  tidygraph::mutate(intervention_ranking = NA) %>%
-                                                                  tidygraph::mutate(stratum = {{strata}}) %>%
+  bipartite_graph_initialized                            <- bipartite_graph |> 
+                                                                  tidygraph::activate(nodes) |>
+                                                                  tidygraph::mutate(intervention_ranking = NA) |>
+                                                                  tidygraph::mutate(stratum = {{strata}}) |>
                                                                   tidygraph::mutate(intervention_contact_place = NA)
   
   attr(bipartite_graph_initialized, "top_rank")          <- 0
-  attr(bipartite_graph_initialized, "strata_levels")     <- bipartite_graph_initialized %>%
-    tidygraph::filter(type) %>%
-    tidygraph::pull(stratum) %>%
+  attr(bipartite_graph_initialized, "strata_levels")     <- bipartite_graph_initialized |>
+    tidygraph::filter(type) |>
+    tidygraph::pull(stratum) |>
     unique()
   
-  attr(bipartite_graph_initialized, "n_strata")          <- attr(bipartite_graph_initialized, "strata_levels") %>% 
+  attr(bipartite_graph_initialized, "n_strata")          <- attr(bipartite_graph_initialized, "strata_levels") |> 
     length()
   
   

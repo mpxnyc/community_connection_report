@@ -11,21 +11,24 @@ library(targets)
 
 # Run the R scripts in the R/ folder with your custom functions:
 
+
 suppressMessages({
-  targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
+  targets::tar_source(files = "R_functions")
 
 })
 
+
+this_directory <- here::here()
 
 
 list( 
   tar_target(
     name = mpxnyc_images,
-    command = load_images()
+    command = load_images(paste0(this_directory, "/images"))
   ),
   tar_target(
     name = mpxnyc_emojis,
-    command = load_emojis()
+    command = load_emojis(paste0(this_directory, "/emojis"))
   ),
   tar_target(
     name = mpxnyc_colors,
@@ -33,7 +36,7 @@ list(
   ),
   tar_target(
     name = questionnaire_text,
-    command = load_questionnaire_text()
+    command = load_questionnaire_text("__const/questionnaire.json")
   ),
   tar_target(
   name = initial_settings,
