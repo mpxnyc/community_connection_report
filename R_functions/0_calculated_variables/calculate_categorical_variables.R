@@ -1,5 +1,7 @@
 calculate_categorical_variables <- function(data, config_list){
   
+  data <- data.frame(data)
+  
   variables <- config_list[[1]][["variables"]] |>
                           purrr::keep(function(x) x$type == "factor") 
   
@@ -15,8 +17,8 @@ calculate_categorical_variables <- function(data, config_list){
     levels         <- eligible_variables[[i]][["response_options"]]  |> names()
     labels         <- eligible_variables[[i]][["response_options"]]  |> unlist()
 
-    data[,name]     <- factor(data |> dplyr::pull(name) , levels, labels)
-    data[,name]     <-  data[,name] |> labelled::set_variable_labels(var_label)
+    data[,name]     <- factor(data[, name] , levels, labels) |> labelled::set_variable_labels(var_label)
+    #data[,name]     <-  data[,name] 
     
   }
   
