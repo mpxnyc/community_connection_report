@@ -1,4 +1,4 @@
-clean_data_people <- function(raw_data_participants, factor_levels, factor_labels) {
+clean_data_people_old <- function(raw_data_participants, factor_levels, factor_labels) {
   
   
   clean_data <- raw_data_participants |>

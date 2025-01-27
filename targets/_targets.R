@@ -41,10 +41,6 @@ list(
     command = load_colors()
   ),
   tar_target(
-    name = questionnaire_text,
-    command = load_questionnaire_text("__const/questionnaire.json")
-  ),
-  tar_target(
   name = initial_settings,
   command = load_initial_settings()
 ),
@@ -66,11 +62,11 @@ tar_target(
   ),
   tar_target(
     name = data_people_clean,
-    command = clean_data_people(data_people_raw, factor_levels, factor_labels)
+    command = clean_data_people(data_people_raw, config_list)
   ),
   tar_target(
     name = data_places_clean,
-    command = clean_data_places(data_places_raw, factor_levels, factor_labels)
+    command = clean_data_places(data_places_raw, config_list)
   ),
   tar_target(
     name = data_bipartite_graph_collected,
