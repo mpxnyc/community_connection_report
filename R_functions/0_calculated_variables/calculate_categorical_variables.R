@@ -1,6 +1,6 @@
 calculate_categorical_variables <- function(data, config_list){
   
-  prelim_variables <- config_list[[1]][["variables"]] |>
+  variables <- config_list[[1]][["variables"]] |>
                           purrr::keep(function(x) x$type == "factor") 
   
   

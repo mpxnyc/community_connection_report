@@ -1,4 +1,4 @@
-clean_data_people_new <- function(raw_data_participants, config_list) {
+clean_data_people <- function(raw_data_participants, config_list) {
   
   #order matters
   
