@@ -1,4 +1,4 @@
-calculate_hivPrepState <- function(person_data){
+calculate_hivPrepStat <- function(person_data){
   
   levels <- c("yes", "no", "living-with-hiv")
   labels <- c("Yes", "No", "Living with HIV")
