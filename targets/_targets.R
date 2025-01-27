@@ -25,6 +25,10 @@ this_directory <- here::here()
 
 list( 
   tar_target(
+    name = config_list,
+    command = load_config_list()
+  ),
+  tar_target(
     name = mpxnyc_images,
     command = load_images()
   ),
