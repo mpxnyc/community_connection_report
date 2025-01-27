@@ -70,7 +70,7 @@ tar_target(
   ),
   tar_target(
     name = data_bipartite_graph_collected,
-    command = create_data_bipartite_graph_collected(data_places_clean, data_people_clean, initial_settings)
+    command = create_data_bipartite_graph_collected(data_places_clean, data_people_clean, config_list)
   ),  
   tar_target(
     name = data_bipartite_graph_simulated,

@@ -22,6 +22,7 @@ make_intervention_results_coverage <- function(data_bipartite_graph){
     dplyr::arrange(-count, intervention_ranking, intervention_priority, strata, rep) |>
     dplyr::group_by(intervention_priority, strata, rep) |>
     dplyr::arrange(intervention_ranking) |>
+    #dplyr::filter(!is.na(intervention_contact_place)) |>
     dplyr::mutate(proportion = count / sum(count)) |>
     dplyr::mutate(cum_prop = cumsum(proportion)) |>
     dplyr::mutate(rank = 1:dplyr::n()) |>
@@ -32,7 +33,7 @@ make_intervention_results_coverage <- function(data_bipartite_graph){
     dplyr::mutate(group = ifelse(is.na(group), "Group A", group))  |>
     dplyr::ungroup() |>
     dplyr::tibble() |>
-    dplyr::arrange(intervention_ranking, intervention_priority, strata)
+    dplyr::arrange(intervention_ranking, intervention_priority, strata) 
   
 
   final_result[["person_coverage"]] <- final_result[["person_coverage"]] |>

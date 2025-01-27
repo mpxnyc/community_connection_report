@@ -20,6 +20,7 @@ calculate_demo_group_variable <- function(person_data){
               "Black cisgender man",
               "Transgender man",
               "Transgender woman",
+              "Non binary",
               "Cisgender woman",
               "Other cisgender man",
               "Cisgender woman",
@@ -40,7 +41,7 @@ calculate_demo_group_variable <- function(person_data){
                     paste("other", demo_group, sep = "-"), 
                     demo_group
                   ),
-                  demo_group       = factor(demo_group)
+                  demo_group       = factor(demo_group, levels, labels)
                   )
   
   
