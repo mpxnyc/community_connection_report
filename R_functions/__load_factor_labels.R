@@ -1,5 +1,44 @@
 load_factor_labels <- function(){
 
+ # config_file      <- tidyjson::read_json("__config.json") |>
+ #                         tidyjson::enter_object(variables) |>
+ #                         tidyjson::gather_object() 
+ # 
+ # response_levels  <- config_file |>
+ #                         tidyjson::enter_object(response_options) |>
+ #                         {function(x) x[["..JSON"]]}() |>
+ #                          purrr::map(function(x) names(x))
+ # 
+ # response_labels  <- config_file |>
+ #                         tidyjson::enter_object(response_options) |>
+ #                         {function(x) x[["..JSON"]]}() |>
+ #                         purrr::map(function(x) x |> unlist())
+ # 
+ # question_labels  <- config_file |>
+ #                         {function(x) x[["..JSON"]]}() |>
+ #                         purrr::map(function(x) x[["label"]])
+ # 
+ # question_text    <- config_file |>
+ #                        {function(x) x[["..JSON"]]}() |>
+ #                         purrr::map(function(x) x[["question"]])
+ # 
+ # 
+ # newlist <- list()
+ # 
+ # for (i in names(question_text)) {
+ #   newlist[[i]]                    <- list()
+ #   newlist[[i]][["label"]]         <- question_labels[[i]]
+ #   newlist[[i]][["question"]]      <- question_text[[i]]
+ #   newlist[[i]][["levels"]]        <- list()
+ #   
+ #   for (j in response_levels[[i]])
+ #   
+ #      newlist[[i]][["levels"]][[j]] <- response_labels[[i]][[j]]
+ # }
+ # 
+ #  
+ # 
+ 
   list_labels_people <- list()
 
   list_labels_people[["age"]] <- list()
