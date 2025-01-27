@@ -9,9 +9,12 @@ calculate_cut_variables_numeric <- function(person_data, config_list){
     
     cut_points <- cut_variables[[i]][["cut_points"]] 
     cut_labels <- cut_variables[[i]][["cut_labels"]] |> unlist() 
+    var_label  <- cut_variables[[i]][["label"]]
     
     person_data[,cut_name] <- cut(person_data |> dplyr::pull(name) |> as.numeric(), cut_points, cut_labels)
+    person_data[,cut_name] <-  person_data[,cut_name] |> labelled::set_variable_labels(var_label)
   }
+  
   
   person_data
 }
