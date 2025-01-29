@@ -1,7 +1,7 @@
 apply_style_bar_plot <- function(plot, caption_hjust = 1){
   
-  mpxnyc_colors     <- targets::tar_read(mpxnyc_colors)
-  mpxnyc_all_colors <- mpxnyc_colors[["all_colors"]]
+  mpxnyc_colors     <- targets::tar_read(config_list)[[1]][["content"]][["colors"]]
+  mpxnyc_all_colors <- mpxnyc_colors[["all_colors"]] |> unlist()
   
   plot +
     ggplot2::theme_void() +

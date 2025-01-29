@@ -7,18 +7,20 @@
 targets::tar_source("../R_functions")
 ```
 
+```{r fig_places_distance_sexcontact}
+#| fig-cap: "MPX NYC contact venue type by distance from home and sexual contact"
+#| label: fig-places-distance-sexcontact
+#| fig-width: 9
+#| fig-height: 9
 
-
-```{r}
-#| fig-width: 2
-#| fig-height: 2
-#| fig-align: center
-
-
-plot_icon(icon_name = "taco", color = "dark_green", shape = 4)
-
+make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE) |>
+  dplyr::filter(!is.na(level)) |>
+  plot_radar_stratified2() |>
+  apply_style_radar_facet_plot()
 
 ```
+
+
 
 Of the $604$ locations at which participant had physical or sexual contact in a group setting (contact venues), about two out of five were private residences, and about a quarter were dance parties. More than half of the contact venues were in Manhattan, while less than a third were in the Brooklyn. A quarter of all contact venues were in the same community as the participant's residence, a third were in a different borough, and the remainder were in the same borough as home, but a different community district.
 
@@ -44,15 +46,15 @@ targets::tar_read(data_bipartite_graph_collected) |>
 
 Contact venues at which participants had sexual contact (rather than non-sexual physical contact) were overwhelmingly private residences whereas contact venues at which they had non-sexual physical contact were mostly dance parties (see @fig-places-distance-sexcontact). The closer to home a location was, the more likely it was to be a private residence and the more likely it was the site of sexual contact. By contrast, the further from home a contact venue was, the more likely it was to be a dance party.
 
-```{r fig_places_distance_sexcontact}
-#| fig-cap: "MPX NYC contact venue type by distance from home and sexual contact"
-#| label: fig-places-distance-sexcontact
-#| fig-width: 9
-#| fig-height: 9
 
-make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE) |>
-  dplyr::filter(!is.na(level)) |>
-  plot_radar_stratified2() |>
-  apply_style_radar_facet_plot()
+
+```{r}
+#| fig-width: 2
+#| fig-height: 2
+#| fig-align: center
+
+
+plot_icon(icon_name = "taco", color = "dark_green", shape = 4)
+
 
 ```

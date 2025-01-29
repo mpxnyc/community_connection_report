@@ -1,6 +1,7 @@
 apply_style_centrality_bar <- function(plot){
   
-  mpxnyc_colors <- targets::tar_read(mpxnyc_colors)
+  mpxnyc_colors     <- targets::tar_read(config_list)[[1]][["content"]][["colors"]]
+  
   light_blue    <- mpxnyc_colors[["light_blue"]]
   mid_blue      <- mpxnyc_colors[["mid_blue"]]
   dark_blue     <- mpxnyc_colors[["dark_blue"]]

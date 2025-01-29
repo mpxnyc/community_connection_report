@@ -1,6 +1,6 @@
 apply_style_matrix_mixing_plot <- function(plot, caption_hjust = 0){
   
-  mpxnyc_colors     <- targets::tar_read(mpxnyc_colors)
+  mpxnyc_colors     <- targets::tar_read(config_list)[[1]][["content"]][["colors"]]
   dark_blue         <- mpxnyc_colors[["dark_blue"]]
   dark_pink         <- mpxnyc_colors[["dark_pink"]]
   

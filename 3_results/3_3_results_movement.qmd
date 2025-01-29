@@ -9,16 +9,20 @@ targets::tar_source("../R_functions")
 
 ```
 
-```{r}
-#| fig-width: 2
-#| fig-height: 2
-#| fig-align: center
 
-  
-plot_icon(icon_name = "bear", color = "dark_orange", shape = 3)
+```{r fig_communities_movement}
+#| fig-cap: "Movement between home and contact venues by MPX NYC participant. The figure maps each contact venue's community district (x-axis) against the participant's home community district (y-axis). The size of the dot is proportional to the total count of contact venues with the given home and contact venue community district. The color of the dot represents the borough of the contact venue."
+#| label: fig-communities-movement
+#| fig-width: 10
+#| fig-height: 10
+
+
+make_table_movement_travel() |>
+  plot_matrix_movement() |>
+  apply_style_matrix_movement() 
+
 
 ```
-
 
 @fig-communities-bar shows the difference betweeen the proportion of primary residences in each community district and the proprotion of contact venues in each community district. It shows that within Brooklyn, Manhattan, and Queens, there is a small set of community districts which tend to be markedly over-represented among contact venues compared to their share of primary residences. These are BK01, MN05, and QN05, respectively.
 
@@ -41,16 +45,14 @@ make_table_home_vs_place_dbn() |>
 
 The dots on the diagonal line from top left to bottom right, show prominently, indicating that a sizeable proportion of movement happens within community districts. The figure also shows four prominent clusters - the cluster at the top left (in pink) shows significant movement between home and contact venues within Brooklyn and the cluster towards the middle of the plot (in purple) shows significant movement within Manhattan. The clusters at the top center and bottom left show significant movement from Brooklyn to Manhattan and from Manhattan to Brooklyn, respectively.
 
-```{r fig_communities_movement}
-#| fig-cap: "Movement between home and contact venues by MPX NYC participant. The figure maps each contact venue's community district (x-axis) against the participant's home community district (y-axis). The size of the dot is proportional to the total count of contact venues with the given home and contact venue community district. The color of the dot represents the borough of the contact venue."
-#| label: fig-communities-movement
-#| fig-width: 10
-#| fig-height: 10
 
 
-make_table_movement_travel() |>
-  plot_matrix_movement() |>
-  apply_style_matrix_movement() 
+```{r}
+#| fig-width: 2
+#| fig-height: 2
+#| fig-align: center
 
+  
+plot_icon(icon_name = "bear", color = "dark_orange", shape = 3)
 
 ```
