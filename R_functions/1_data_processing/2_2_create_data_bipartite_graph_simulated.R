@@ -1,7 +1,7 @@
 
-create_data_bipartite_graph_simulated <- function(bipartite_graph, initial_settings){
+create_data_bipartite_graph_simulated <- function(bipartite_graph, config_list){
   
-  n_reps = initial_settings[["n_reps_graph"]]
+  n_reps = config_list[[1]][["settings"]][["n_reps_graph"]]
   
   n_spatial_units      <- attr(bipartite_graph, "n_spatial_units") 
 

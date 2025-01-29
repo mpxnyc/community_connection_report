@@ -22,14 +22,14 @@ make_intervention_results_coverage <- function(data_bipartite_graph){
     dplyr::arrange(-count, intervention_ranking, intervention_priority, strata, rep) |>
     dplyr::group_by(intervention_priority, strata, rep) |>
     dplyr::arrange(intervention_ranking) |>
-    #dplyr::filter(!is.na(intervention_contact_place)) |>
+    dplyr::filter(!is.na(intervention_contact_place)) |>
     dplyr::mutate(proportion = count / sum(count)) |>
     dplyr::mutate(cum_prop = cumsum(proportion)) |>
     dplyr::mutate(rank = 1:dplyr::n()) |>
     dplyr::mutate(group = "Group A") |>
     dplyr::mutate(group = ifelse(cum_prop >= 0.33, "Group B", group)) |>
     dplyr::mutate(group = ifelse(cum_prop >= 0.66, "Group C", group)) |>
-    dplyr::mutate(group = lag(group)) |>
+    dplyr::mutate(group = dplyr::lag(group)) |>
     dplyr::mutate(group = ifelse(is.na(group), "Group A", group))  |>
     dplyr::ungroup() |>
     dplyr::tibble() |>

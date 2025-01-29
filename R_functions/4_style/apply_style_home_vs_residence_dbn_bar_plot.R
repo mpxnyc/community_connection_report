@@ -1,6 +1,7 @@
 apply_style_home_vs_residence_dbn_bar_plot <- function(plot){
   
-  mpxnyc_colors     <- targets::tar_read(mpxnyc_colors)
+  mpxnyc_colors     <- targets::tar_read(config_list)[[1]][["content"]][["colors"]]
+  
   dark_blue         <- mpxnyc_colors[["dark_blue"]]
   dark_pink         <- mpxnyc_colors[["dark_pink"]]
   dark_purple       <- mpxnyc_colors[["dark_purple"]]

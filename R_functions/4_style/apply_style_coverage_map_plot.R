@@ -1,6 +1,7 @@
 apply_style_coverage_map <- function(plot, caption_hjust = 0){
   
-  mpxnyc_colors <- targets::tar_read(mpxnyc_colors)
+  mpxnyc_colors     <- targets::tar_read(config_list)[[1]][["content"]][["colors"]]
+  
   light_blue    <- mpxnyc_colors[["light_blue"]]
   dark_pink     <- mpxnyc_colors[["dark_pink"]]
   dark_blue     <- mpxnyc_colors[["dark_blue"]]
