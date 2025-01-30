@@ -1,6 +1,6 @@
 
 
-# Movement {#sec-movement}
+# People connecting (in) places {#sec-movement}
 
 
 ```{r}
@@ -9,6 +9,9 @@ targets::tar_source("../R_functions")
 
 ```
 
+## Movement between home to contact venues
+
+### Spatial patterns
 
 ```{r fig_communities_movement}
 #| fig-cap: "Movement between home and contact venues by MPX NYC participant. The figure maps each contact venue's community district (x-axis) against the participant's home community district (y-axis). The size of the dot is proportional to the total count of contact venues with the given home and contact venue community district. The color of the dot represents the borough of the contact venue."
@@ -25,6 +28,8 @@ make_table_movement_travel() |>
 ```
 
 @fig-communities-bar shows the difference betweeen the proportion of primary residences in each community district and the proprotion of contact venues in each community district. It shows that within Brooklyn, Manhattan, and Queens, there is a small set of community districts which tend to be markedly over-represented among contact venues compared to their share of primary residences. These are BK01, MN05, and QN05, respectively.
+
+### Spatial concentration
 
 ```{r fig_communities_bar}
 #| label: fig-communities-bar
@@ -47,12 +52,87 @@ The dots on the diagonal line from top left to bottom right, show prominently, i
 
 
 
+## Mixing
+
+### Race-gender
+
+```{r fig_demogroup_mixing}
+#| fig-cap:  "Social mixing matrices for MPX NYC participants by race-gender"
+#| label: fig-demogroup-mixing
+#| fig-width: 9
+#| fig-height: 9
+
+
+
+mixing_demo_group_panel <- make_table_mixing_2(demo_group) |>
+  dplyr::filter(ego_level != "Another Demographic") |>
+  dplyr::filter(alter_level != "Another Demographic") |>
+  plot_matrix_mixing() |>
+  apply_style_matrix_mixing_plot()
+
+
+mixing_demo_group_panel
+
+
+```
+
+
+
+
+@fig-subgroup-mixing quantifies the degree to which individuals with characteristics shown on the left live or play in an overlapping set of community districts with individuals whose characteristics are shown at the top. Overall, MPX NYC participants showed spatial homophily - the spatial selection coefficient from a given group to the same group was positive for all levels of race-gender, sexual orientation, and age. In addition, black cisgender men and non-binary persons tended to visit or live in different neighborhoods than white cisgender men. Non-binary persons also showed a preference for community districts in which transgender men live. Gay identified participants preferred to live and play in community districts where bisexual, straight and queer identified participants did not live. Similarly, those groups selected against community districts in which gay identified individuals live or play.
+
+
+### Sexual orientation
+
+```{r fig_sexorientation_mixing}
+#| fig-cap:  "Social mixing matrix for MPX NYC participants by sexual orientation"
+#| label: fig-sexorientation-mixing
+#| fig-width: 6
+#| fig-height: 5
+#| 
+mixing_sexOrientation_panel <- make_table_mixing_2(sexOrientation) |>
+                                      plot_matrix_mixing() |>
+                                      apply_style_matrix_mixing_plot()
+
+
+mixing_sexOrientation_panel
+
+
+```
+
+### Age
+
+```{r fig_age_mixing}
+#| fig-cap:  "Social mixing matrix for MPX NYC participants by age"
+#| label: fig-age-mixing
+#| fig-width: 6
+#| fig-height: 6
+mixing_age_panel                 <- make_table_mixing_2(age) |>
+                                      plot_matrix_mixing() |>
+                                      apply_style_matrix_mixing_plot()
+mixing_age_panel
+```
+
+
+
+```{r fig_combined_mixing, include=FALSE}
+#| fig-cap:  "Social mixing matrices for MPX NYC participants by race-gender (top), sexual orientation (bottom left), and age (bottom right)"
+#| label: fig-subgroup-mixing
+#| fig-width: 12
+#| fig-height: 17
+#| 
+
+mixing_bottom_panel              <- cowplot::plot_grid(mixing_sexOrientation_panel, mixing_age_panel, nrow = 1)
+cowplot::plot_grid(mixing_demo_group_panel, mixing_bottom_panel, ncol=1, rel_heights = c(2,1.1))
+```
+
 ```{r}
 #| fig-width: 2
 #| fig-height: 2
 #| fig-align: center
 
-  
-plot_icon(icon_name = "bear", color = "dark_orange", shape = 3)
+
+plot_icon(icon_name = "eggplant", color = "dark_green", shape = 8)
 
 ```
+

@@ -36,7 +36,7 @@ make_example_network_data() |>
 
 make_example_network_data() |>
   data.frame() |>
-  dplyr::transmute(name = label, type = ifelse(type, "person", "community_district")) |>
+  dplyr::transmute(name = label, age, type = ifelse(type, "person", "community_district")) |>
   gt::gt()
 
 
@@ -56,7 +56,7 @@ make_example_network_data() |>
   dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
   data.frame() |>
   dplyr::arrange(from, to) |>
-  dplyr::transmute(from = from_name, to = to_name) |>
+  dplyr::transmute(from = from_name, to = to_name, relation = relation) |>
   gt::gt()
 ```
 :::
