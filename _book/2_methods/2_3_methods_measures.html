@@ -209,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../3_results/3_3_results_movement.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Movement</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">People connecting (in) places</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -327,21 +327,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
 <li>
-<a href="#data-structure" id="toc-data-structure" class="nav-link active" data-scroll-target="#data-structure"><span class="header-section-number">5.1</span> Data structure</a>
+<a href="#data-mpx-nyc-participant-community-network" id="toc-data-mpx-nyc-participant-community-network" class="nav-link active" data-scroll-target="#data-mpx-nyc-participant-community-network"><span class="header-section-number">5.1</span> Data: MPX NYC participant-community network</a>
   <ul class="collapse">
-<li><a href="#participant-community-network" id="toc-participant-community-network" class="nav-link" data-scroll-target="#participant-community-network"><span class="header-section-number">5.1.1</span> Participant-community network</a></li>
-  <li><a href="#communit-district-network" id="toc-communit-district-network" class="nav-link" data-scroll-target="#communit-district-network"><span class="header-section-number">5.1.2</span> Communit district network</a></li>
-  <li><a href="#participant-network" id="toc-participant-network" class="nav-link" data-scroll-target="#participant-network"><span class="header-section-number">5.1.3</span> Participant network</a></li>
+<li><a href="#mpx-nyc-community-district-network" id="toc-mpx-nyc-community-district-network" class="nav-link" data-scroll-target="#mpx-nyc-community-district-network"><span class="header-section-number">5.1.1</span> MPX NYC community district network</a></li>
+  <li><a href="#mpx-nyc-participant-network" id="toc-mpx-nyc-participant-network" class="nav-link" data-scroll-target="#mpx-nyc-participant-network"><span class="header-section-number">5.1.2</span> MPX NYC participant network</a></li>
   </ul>
 </li>
   <li>
 <a href="#node-characteristics" id="toc-node-characteristics" class="nav-link" data-scroll-target="#node-characteristics"><span class="header-section-number">5.2</span> Node characteristics</a>
   <ul class="collapse">
-<li><a href="#people" id="toc-people" class="nav-link" data-scroll-target="#people"><span class="header-section-number">5.2.1</span> People</a></li>
-  <li><a href="#places" id="toc-places" class="nav-link" data-scroll-target="#places"><span class="header-section-number">5.2.2</span> Places</a></li>
+<li><a href="#individual-measures" id="toc-individual-measures" class="nav-link" data-scroll-target="#individual-measures"><span class="header-section-number">5.2.1</span> Individual measures</a></li>
+  <li><a href="#gender-modality" id="toc-gender-modality" class="nav-link" data-scroll-target="#gender-modality"><span class="header-section-number">5.2.2</span> Gender modality</a></li>
+  <li><a href="#race-gender" id="toc-race-gender" class="nav-link" data-scroll-target="#race-gender"><span class="header-section-number">5.2.3</span> Race-gender</a></li>
+  <li><a href="#social-and-spatial-reach" id="toc-social-and-spatial-reach" class="nav-link" data-scroll-target="#social-and-spatial-reach"><span class="header-section-number">5.2.4</span> Social and spatial reach</a></li>
   </ul>
 </li>
-  <li><a href="#edge-characteristics" id="toc-edge-characteristics" class="nav-link" data-scroll-target="#edge-characteristics"><span class="header-section-number">5.3</span> Edge characteristics</a></li>
+  <li>
+<a href="#edge-characteristics" id="toc-edge-characteristics" class="nav-link" data-scroll-target="#edge-characteristics"><span class="header-section-number">5.3</span> Edge characteristics</a>
+  <ul class="collapse">
+<li><a href="#venue-and-contact-type" id="toc-venue-and-contact-type" class="nav-link" data-scroll-target="#venue-and-contact-type"><span class="header-section-number">5.3.1</span> Venue and contact type</a></li>
+  <li><a href="#distance-from-home" id="toc-distance-from-home" class="nav-link" data-scroll-target="#distance-from-home"><span class="header-section-number">5.3.2</span> Distance from home</a></li>
+  </ul>
+</li>
   <li>
 <a href="#network-characteristics" id="toc-network-characteristics" class="nav-link" data-scroll-target="#network-characteristics"><span class="header-section-number">5.4</span> Network characteristics</a>
   <ul class="collapse">
@@ -363,192 +370,103 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_example_network</span><span class="op">(</span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="2_3_methods_measures_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div id="fig-example-bipartite" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="2_3_methods_measures_files/figure-html/fig-example-bipartite-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;5.1: Sample person-place network</figcaption></figure>
 </div>
 </div>
 </div>
-<p>The unit of spatial analysis is the community district. Community districts are spatial units that divide New York City into regions which are nested by the five boroughs of New York City, and which in turn nest census tracts.</p>
-<section id="data-structure" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="data-structure">
-<span class="header-section-number">5.1</span> Data structure</h2>
-<section id="participant-community-network" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="participant-community-network">
-<span class="header-section-number">5.1.1</span> Participant-community network</h3>
-<p>The MPX NYC participant community network is a network with community districts and individuals as nodes, and ties between pairs consisting of one individual and one community district. A tie indicates that the individual as some relation with the community district. This relation can be residence or group contact. Related to this network are the community district network and participant network, described below.</p>
+<section id="data-mpx-nyc-participant-community-network" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="data-mpx-nyc-participant-community-network">
+<span class="header-section-number">5.1</span> Data: MPX NYC participant-community network</h2>
+<p>The MPX NYC participant community network is a network with community districts and individuals as nodes, and ties between pairs consisting of one individual and one community district. While spatial data were collected using census tract identifiers, the unit of spatial analysis is the community district. Community districts are spatial units that divide New York City into regions which are nested by the five boroughs of New York City, and which in turn nest census tracts.</p>
+<p>A tie indicates that the individual as some relation with the community district. This relation can be residence or group contact. Related to this network are the community district network and participant network, described below.</p>
+<section id="mpx-nyc-community-district-network" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="mpx-nyc-community-district-network">
+<span class="header-section-number">5.1.1</span> MPX NYC community district network</h3>
 <div class="cell" data-layout-align="center">
-<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"people"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu">plot_example_network</span><span class="op">(</span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"places"</span><span class="op">)</span>, <span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="fig-example-community" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="2_3_methods_measures_files/figure-html/fig-example-community-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption class="figure-caption">Figure&nbsp;5.2: Sample place-place network</figcaption></figure>
+</div>
+</div>
+</div>
+<p>The MPX NYC community district network is a network with community districts as nodes. A weighted tie between two nodes indicates that the two community districts both have at least one MPX NYX participant who has a residence or community district in both places. The weight is given by the count of such individuals. Of interest is the influence each community district has in city-wide outbreak dynamics. It is measured using community district social and spatial reach.</p>
+</section><section id="mpx-nyc-participant-network" class="level3" data-number="5.1.2"><h3 data-number="5.1.2" class="anchored" data-anchor-id="mpx-nyc-participant-network">
+<span class="header-section-number">5.1.2</span> MPX NYC participant network</h3>
+<div class="cell" data-layout-align="center">
+<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"people"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_example_network</span><span class="op">(</span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="2_3_methods_measures_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="576"></p>
-</figure>
+<div id="fig-example-participant" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="2_3_methods_measures_files/figure-html/fig-example-participant-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption class="figure-caption">Figure&nbsp;5.3: Sample person-person network</figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="communit-district-network" class="level3" data-number="5.1.2"><h3 data-number="5.1.2" class="anchored" data-anchor-id="communit-district-network">
-<span class="header-section-number">5.1.2</span> Communit district network</h3>
-<p>The MPX NYC community district network is a network with community districts as nodes. A weighted tie between two nodes indicates that the two community districts both have at least one MPX NYX participant who has a residence or community district in both places. The weight is given by the count of such individuals. Of interest is the influence each community district has in city-wide outbreak dynamics. It is measured using community district social and spatial reach.</p>
-<div class="cell" data-layout-align="center">
-<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu">plot_example_network</span><span class="op">(</span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"places"</span><span class="op">)</span>, <span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="2_3_methods_measures_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="768"></p>
-</figure>
-</div>
-</div>
-</div>
-</section><section id="participant-network" class="level3" data-number="5.1.3"><h3 data-number="5.1.3" class="anchored" data-anchor-id="participant-network">
-<span class="header-section-number">5.1.3</span> Participant network</h3>
 <p>We examined the patterning of shared physical context among participants using the MPX NYC participant network. In this network, survey participants are represented as nodes. A weighted edge indicates that the individuals represented by the nodes have at least one residence or contact venue in a common community district. The edge weight is given by the count of community districts the pair share. Of interest are the overall connectedness of the network and the pattern of connection across different subgroups.</p>
 </section></section><section id="node-characteristics" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="node-characteristics">
 <span class="header-section-number">5.2</span> Node characteristics</h2>
-<section id="people" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="people">
-<span class="header-section-number">5.2.1</span> People</h3>
+<section id="individual-measures" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="individual-measures">
+<span class="header-section-number">5.2.1</span> Individual measures</h3>
 <p>We measured participant demographics age, race, sex assigned at birth, gender identity, sexual orientation, and community district of residence; health-related questions on HIV status, viral suppression, STI-related symptoms, PrEP use, and mpox vaccination status; and questions related to social and sexual connection with queer and transgender communities: count of recent individual sex contacts, count of recent individual physical (non-sexual) contacts, count of recent important social contacts, and any recent physical or sexual contact in a group setting.</p>
-<section id="gender-modality" class="level4" data-number="5.2.1.1"><h4 data-number="5.2.1.1" class="anchored" data-anchor-id="gender-modality">
-<span class="header-section-number">5.2.1.1</span> Gender modality</h4>
-<p>Gender modality was measured using a two-step approach: first, we solicited the participant’s current gender (man, woman, trans man, trans woman, non-binary, other), and then sex assigned at birth (male, female, other). Those whose gender identity and sex assigned at birth were not concordant were categorized as transgender.</p>
+</section><section id="gender-modality" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="gender-modality">
+<span class="header-section-number">5.2.2</span> Gender modality</h3>
+<p>Gender modality was measured using a two-step approach: first, we solicited the participant’s current gender (man, woman, trans man, trans woman, non-binary, other), and then sex assigned at birth (male, female, other). We then constructed a gender modality variable as follows:</p>
 <table class="table">
-<caption>Sex and gender</caption>
-<colgroup>
-<col style="width: 22%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
 <thead><tr class="header">
-<th></th>
-<th>male</th>
-<th>female</th>
-<th>other</th>
+<th>Condition</th>
+<th>Gender modality</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>man</td>
+<td>Gender is “man” and assigned sex is “male”</td>
 <td>Cisgender man</td>
-<td>Transgender man</td>
-<td>Another demographic</td>
 </tr>
 <tr class="even">
-<td>woman</td>
-<td>Transgender woman</td>
+<td>Gender is “woman” and assigned sex is “female”</td>
 <td>Cisgender woman</td>
-<td>Another demographic</td>
 </tr>
 <tr class="odd">
-<td>trans man</td>
-<td>Transgender man</td>
-<td>Transgender man</td>
+<td>Gender is “man” and assigned sex is “female”</td>
 <td>Transgender man</td>
 </tr>
 <tr class="even">
-<td>trans woman</td>
-<td>Transgender woman</td>
-<td>Transgender woman</td>
+<td>Gender is “woman” and assigned sex is “male”</td>
 <td>Transgender woman</td>
 </tr>
 <tr class="odd">
-<td>non-binary</td>
-<td>Non-binary</td>
-<td>Non-binary</td>
+<td>Gender is “trans man” and sex is any value</td>
+<td>Transgender man</td>
+</tr>
+<tr class="even">
+<td>Gender is “trans woman” and sex is any value</td>
+<td>Transgender woman</td>
+</tr>
+<tr class="odd">
+<td>Gender is “non-binary” and sex is any value</td>
 <td>Non-binary</td>
 </tr>
 <tr class="even">
-<td>other</td>
-<td>Another demographic</td>
-<td>Another demographic</td>
+<td>Gender is “other” and sex is any value</td>
 <td>Another demographic</td>
 </tr>
 </tbody>
-</table></section><section id="race-gender" class="level4" data-number="5.2.1.2"><h4 data-number="5.2.1.2" class="anchored" data-anchor-id="race-gender">
-<span class="header-section-number">5.2.1.2</span> Race-gender</h4>
-<p>Race was measured using a multiple selection question (white, black, latino/a/x, asian, pacific islander, other). We combined gender identity and race to form a gender-race variable, collapsing small cells across racial groups and into gender groups (white cisgender man, latinx cisgender man, black cisgender man, other cisgender man, non-binary person, transgender man, transgender woman, cisgender woman, another demographic).</p>
-<table class="table">
-<caption>Race-gender</caption>
-<colgroup>
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td></td>
-<td>white</td>
-<td>black</td>
-<td>latino/a/x</td>
-<td>asian</td>
-<td>pacific islander</td>
-<td>other</td>
-</tr>
-<tr class="even">
-<td>Cisgender man</td>
-<td>White cisgender man</td>
-<td>Black cisgender man</td>
-<td>Latinx cisgender man</td>
-<td>&nbsp;Other cisgender man</td>
-<td>&nbsp;Other cisgender man</td>
-<td>&nbsp;Other cisgender man</td>
-</tr>
-<tr class="odd">
-<td>Cisgender woman</td>
-<td>Cisgender woman</td>
-<td>Cisgender woman</td>
-<td>Cisgender woman</td>
-<td>Cisgender woman</td>
-<td>Cisgender woman</td>
-<td>Cisgender woman</td>
-</tr>
-<tr class="even">
-<td>Transgender man</td>
-<td>&nbsp;Transgender man</td>
-<td>&nbsp;Transgender man</td>
-<td>&nbsp;Transgender man</td>
-<td>&nbsp;Transgender man</td>
-<td>&nbsp;Transgender man</td>
-<td>&nbsp;Transgender man</td>
-</tr>
-<tr class="odd">
-<td>Transgender woman</td>
-<td>Transgender woman</td>
-<td>Transgender woman</td>
-<td>Transgender woman</td>
-<td>Transgender woman</td>
-<td>Transgender woman</td>
-<td>Transgender woman</td>
-</tr>
-<tr class="even">
-<td>Non-binary</td>
-<td>Non-binary</td>
-<td>Non-binary</td>
-<td>Non-binary</td>
-<td>Non-binary</td>
-<td>Non-binary</td>
-<td>Non-binary</td>
-</tr>
-<tr class="odd">
-<td>Another demographic</td>
-<td>Another demographic</td>
-<td>Another demographic</td>
-<td>Another demographic</td>
-<td>Another demographic</td>
-<td>Another demographic</td>
-<td>Another demographic</td>
-</tr>
-</tbody>
-</table></section></section><section id="places" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="places">
-<span class="header-section-number">5.2.2</span> Places</h3>
-<section id="social-and-spatial-reach" class="level4" data-number="5.2.2.1"><h4 data-number="5.2.2.1" class="anchored" data-anchor-id="social-and-spatial-reach">
-<span class="header-section-number">5.2.2.1</span> Social and spatial reach</h4>
-<p>For a given community district, social reach is defined as the sum of edge weights for edges connecting that community district to individuals (in the MPX NYC spatial participant network). It quantifies the volume or level of contact in the community district. Spatial reach is defined as the sum of edge weights for edges connecting that community district to others (in the MPX NYC community district network. It quantifies the volum eor level of exchange of individuals between a particular community district and others.</p>
-</section></section></section><section id="edge-characteristics" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="edge-characteristics">
+</table></section><section id="race-gender" class="level3" data-number="5.2.3"><h3 data-number="5.2.3" class="anchored" data-anchor-id="race-gender">
+<span class="header-section-number">5.2.3</span> Race-gender</h3>
+<p>We created a Race-gender variable which is a categorical variable with levels identical to the gender modality with one modification: instead of having all cisgender men in one level we divided the group up into white cisgender men, Latinx cisgender men, Black cisgender men, and under the category Other cisgender men, we grouped Asian, Pacific Islander and other cisgender men.</p>
+</section><section id="social-and-spatial-reach" class="level3" data-number="5.2.4"><h3 data-number="5.2.4" class="anchored" data-anchor-id="social-and-spatial-reach">
+<span class="header-section-number">5.2.4</span> Social and spatial reach</h3>
+<p>For a given community district, social reach is defined as the sum of edge weights for edges connecting that community district to individuals (in the MPX NYC spatial participant network). It quantifies the volume or level of contact in the community district. Spatial reach is defined as the sum of edge weights for edges connecting that community district to others (in the MPX NYC community district network. It quantifies the volume or level of exchange of individuals between a particular community district and others.</p>
+</section></section><section id="edge-characteristics" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="edge-characteristics">
 <span class="header-section-number">5.3</span> Edge characteristics</h2>
+<section id="venue-and-contact-type" class="level3" data-number="5.3.1"><h3 data-number="5.3.1" class="anchored" data-anchor-id="venue-and-contact-type">
+<span class="header-section-number">5.3.1</span> Venue and contact type</h3>
 <p>Among participants who reported group contact (i.e.&nbsp;physical or sexual contact in a group setting in the preceding 4 weeks) we solicited the census tracts of the places at which the contact happened, as well as the venue type (dance party, sex party, darkroom, sport game, concert, theatre/show, private residence, sex club, bathhouse, park, something else) and whether they had sexual contact. We refer to these as “contact venues”. For this analysis, all census tract identifiers were converted to community district identifiers.</p>
+</section><section id="distance-from-home" class="level3" data-number="5.3.2"><h3 data-number="5.3.2" class="anchored" data-anchor-id="distance-from-home">
+<span class="header-section-number">5.3.2</span> Distance from home</h3>
 <p>We constructed an approximate measure of the distance between residence and contact venue by categorizing venues into those that are in the same community district as the residence; in a different community district but the same borough; or in a different borough. We refer to this measure as distance from home.</p>
-</section><section id="network-characteristics" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="network-characteristics">
+</section></section><section id="network-characteristics" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="network-characteristics">
 <span class="header-section-number">5.4</span> Network characteristics</h2>
 <section id="size-of-largest-connected-component" class="level3" data-number="5.4.1"><h3 data-number="5.4.1" class="anchored" data-anchor-id="size-of-largest-connected-component">
 <span class="header-section-number">5.4.1</span> Size of largest connected component</h3>
