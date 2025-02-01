@@ -1,11 +1,174 @@
+---
+listing: 
+  contents:
+    - "hgek.qmd"
+  type: default
+---
 
 # Study questionnaire {#sec-appendixquestionnaire}
 
 ```{r}
-
-
-targets::tar_read(config_list)[[1]][["variables"]]
+# Access custom defined functions
+targets::tar_source("../R_functions")
 ```
+
+```{r}
+
+
+data <- targets::tar_read(config_list)[[1]][["variables"]]
+
+```
+
+
+
+
+
+`r cat("::: {.card } \n\n Helloe \n\n Bye \n\n ::: ")`
+
+
+
+
+
+::: {.card }
+
+##### `r data[["age"]][["label"]]`
+
+###### `r data[["age"]][["question"]]`
+
+
+```{r}
+#| fig-height: 3
+#| 
+make_table_freq1(age) |>
+plot_bar() |>
+  apply_style_bar_plot()
+```
+:::
+
+
+::: {.card }
+
+
+##### `r data[["channel"]][["label"]]`
+
+###### `r data[["channel"]][["question"]]`
+
+```{r}
+#| fig-height: 3
+#| 
+make_table_freq1(channel) |>
+plot_bar() |>
+  apply_style_bar_plot()
+```
+:::
+
+
+
+::: {.card }
+
+##### `r data[["countFriends"]][["label"]]`
+
+###### `r data[["countFriends"]][["question"]]`
+
+```{r}
+#| fig-height: 3
+#| 
+make_table_freq1(countFriendsCut) |>
+plot_bar() |>
+  apply_style_bar_plot()
+```
+:::
+
+::: {.card }
+
+
+##### `r data[["countPhysical"]][["label"]]`
+
+###### `r data[["countPhysical"]][["question"]]`
+
+```{r}
+#| fig-height: 3
+#| 
+make_table_freq1(countPhysicalCut) |>
+plot_bar() |>
+  apply_style_bar_plot()
+```
+:::
+
+::: {.card }
+
+
+##### `r data[["countSex"]][["label"]]`
+
+###### `r data[["countSex"]][["question"]]`
+
+```{r}
+#| fig-height: 3
+#| 
+make_table_freq1(countSexCut) |>
+plot_bar() |>
+  apply_style_bar_plot()
+```
+:::
+
+::: {.card }
+
+
+##### `r data[["covidTestPositive"]][["label"]]`
+
+###### `r data[["covidTestPositive"]][["question"]]`
+
+```{r}
+#| fig-height: 3
+#| 
+make_table_freq1(covidTestPositive) |>
+plot_bar() |>
+  apply_style_bar_plot()
+```
+:::
+
+::: {.card }
+
+
+##### `r data[["createdAt"]][["label"]]`
+
+###### `r data[["createdAt"]][["question"]]`
+
+```{r}
+#| fig-height: 3
+#| 
+make_table_freq1(createdAtCut) |>
+plot_bar() |>
+  apply_style_bar_plot()
+```
+:::
+
+::: {.card }
+
+
+##### `r data[["gender"]][["label"]]`
+
+###### `r data[["gender"]][["question"]]`
+
+```{r}
+#| fig-height: 3
+#| 
+make_table_freq1(gender) |>
+plot_bar() |>
+  apply_style_bar_plot()
+```
+:::
+
+
+
+
+
+
+
+
+
+
+
 
 
 

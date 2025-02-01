@@ -2,13 +2,13 @@ plot_bar                 <- function(data){
   
   ggplot2::ggplot(data) + 
     ggplot2::geom_bar(
-      aes(x = level, fill = level, y = proportion), 
+      ggplot2::aes(x = level, fill = level, y = proportion), 
       width = 1, 
       stat = "identity", 
       color = "black"
     ) + 
     ggplot2::geom_text(
-      aes(x = level, y = proportion + 0.05, label = count), 
+      ggplot2::aes(x = level, y = proportion + 0.05, label = count), 
       alpha = 0.1,
       size = 8
     ) 
