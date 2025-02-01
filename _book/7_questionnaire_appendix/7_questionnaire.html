@@ -61,6 +61,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../9_causal_inference_framework/9_causal_inference_framework.html" rel="prev">
+<script src="../site_libs/quarto-listing/list.min.js"></script>
+<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -88,7 +90,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script async="" src="https://hypothes.is/embed.js"></script>
+}</script><script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-filename','listing-file-modified',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-filename","listing-file-modified"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script><script async="" src="https://hypothes.is/embed.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
 <body class="nav-sidebar floating">
 
@@ -213,14 +243,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../3_results/3_4_results_spatial_mixing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mixing</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../3_results/3_5_results_hypothetical_intervention.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Outbreak control</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Outbreak control</span></span></a>
   </div>
 </li>
       </ul>
@@ -237,13 +261,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../4_discussion/4_discussion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Discussion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Discussion</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../4_discussion/4_discussion_recommendations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Recommendations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Recommendations</span></span></a>
   </div>
 </li>
       </ul>
@@ -260,7 +284,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../10_references/10_references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
       </ul>
@@ -328,948 +352,120 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <main class="content" id="quarto-document-content"><header id="title-block-header"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="sec-appendixquestionnaire" class="quarto-section-identifier">Appendix D — Study questionnaire</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
 
 </header><div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"variables"</span><span class="op">]</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>$censusTractHome
-$censusTractHome$question
-[1] "Where in the city do you live? Tap on the map to show your home."
-
-$censusTractHome$label
-[1] "Home census tract"
-
-$censusTractHome$type
-[1] "character"
-
-$censusTractHome$response_options
-named list()
-
-$censusTractHome$cut_points
-list()
-
-$censusTractHome$cut_dates
-list()
-
-$censusTractHome$cut_labels
-list()
-
-
-$age
-$age$question
-[1] "How old are you?"
-
-$age$label
-[1] "Age"
-
-$age$type
-[1] "factor"
-
-$age$response_options
-$age$response_options$`&lt;18`
-[1] "&lt;18"
-
-$age$response_options$`18-24`
-[1] "18-24"
-
-$age$response_options$`25-34`
-[1] "25-34"
-
-$age$response_options$`35-44`
-[1] "35-44"
-
-$age$response_options$`45-54`
-[1] "45-54"
-
-$age$response_options$`55-64`
-[1] "55+"
-
-$age$response_options$`65+`
-[1] "55+"
-
-
-$age$cut_points
-list()
-
-$age$cut_dates
-list()
-
-$age$cut_labels
-list()
-
-
-$anotherQuestion
-$anotherQuestion$question
-[1] "What question do you wish we had asked in the survey?"
-
-$anotherQuestion$label
-[1] "Participant question"
-
-$anotherQuestion$type
-[1] "character"
-
-$anotherQuestion$response_options
-named list()
-
-$anotherQuestion$cut_points
-list()
-
-$anotherQuestion$cut_dates
-list()
-
-$anotherQuestion$cut_labels
-list()
-
-
-$sex
-$sex$question
-[1] "What is your sex assigned at birth?"
-
-$sex$label
-[1] "Assigned sex"
-
-$sex$type
-[1] "factor"
-
-$sex$response_options
-$sex$response_options$male
-[1] "Male"
-
-$sex$response_options$female
-[1] "Female"
-
-$sex$response_options$other
-[1] "Other"
-
-
-$sex$cut_points
-list()
-
-$sex$cut_dates
-list()
-
-$sex$cut_labels
-list()
-
-
-$channel
-$channel$question
-[1] "Recruitment channel"
-
-$channel$label
-[1] "Recruitment channel"
-
-$channel$type
-[1] "factor"
-
-$channel$response_options
-$channel$response_options$grindr
-[1] "Grindr"
-
-$channel$response_options$partner_toolkit
-[1] "Partner toolkit"
-
-$channel$response_options$instagram
-[1] "Instagram"
-
-$channel$response_options$twitter
-[1] "Twitter"
-
-$channel$response_options$unknown
-[1] "Unknown"
-
-
-$channel$cut_points
-list()
-
-$channel$cut_dates
-list()
-
-$channel$cut_labels
-list()
-
-
-$countFriends
-$countFriends$question
-[1] "How many queer and trans friends do you have who are important to you for any reason? Count only those you have been in touch with over the past 4 weeks."
-
-$countFriends$label
-[1] "Recent important social contacts"
-
-$countFriends$type
-[1] "numeric"
-
-$countFriends$response_options
-named list()
-
-$countFriends$cut_points
-$countFriends$cut_points[[1]]
-[1] -1
-
-$countFriends$cut_points[[2]]
-[1] 0
-
-$countFriends$cut_points[[3]]
-[1] 5
-
-$countFriends$cut_points[[4]]
-[1] 10
-
-$countFriends$cut_points[[5]]
-[1] 15
-
-$countFriends$cut_points[[6]]
-[1] 1000000000
-
-
-$countFriends$cut_dates
-list()
-
-$countFriends$cut_labels
-$countFriends$cut_labels[[1]]
-[1] "0"
-
-$countFriends$cut_labels[[2]]
-[1] "1-5"
-
-$countFriends$cut_labels[[3]]
-[1] "6-10"
-
-$countFriends$cut_labels[[4]]
-[1] "11-15"
-
-$countFriends$cut_labels[[5]]
-[1] "16+"
-
-
-
-$countPhysical
-$countPhysical$question
-[1] "How many individuals have you had prolonged physical contact (but no sexual contact) with in the past 4 weeks, excluding group settings?"
-
-$countPhysical$label
-[1] "Recent physical contacts"
-
-$countPhysical$type
-[1] "numeric"
-
-$countPhysical$response_options
-named list()
-
-$countPhysical$cut_points
-$countPhysical$cut_points[[1]]
-[1] -1
-
-$countPhysical$cut_points[[2]]
-[1] 0
-
-$countPhysical$cut_points[[3]]
-[1] 1
-
-$countPhysical$cut_points[[4]]
-[1] 2
-
-$countPhysical$cut_points[[5]]
-[1] 3
-
-$countPhysical$cut_points[[6]]
-[1] 4
-
-$countPhysical$cut_points[[7]]
-[1] 1000000000
-
-
-$countPhysical$cut_dates
-list()
-
-$countPhysical$cut_labels
-$countPhysical$cut_labels[[1]]
-[1] "0"
-
-$countPhysical$cut_labels[[2]]
-[1] "1"
-
-$countPhysical$cut_labels[[3]]
-[1] "2"
-
-$countPhysical$cut_labels[[4]]
-[1] "3"
-
-$countPhysical$cut_labels[[5]]
-[1] "4"
-
-$countPhysical$cut_labels[[6]]
-[1] "5+"
-
-
-
-$countSex
-$countSex$question
-[1] "How many individuals have you had sex with in the past 4 weeks, excluding group sex partners?"
-
-$countSex$label
-[1] "Recent individual sex contacts"
-
-$countSex$type
-[1] "numeric"
-
-$countSex$response_options
-named list()
-
-$countSex$cut_points
-$countSex$cut_points[[1]]
-[1] -1
-
-$countSex$cut_points[[2]]
-[1] 0
-
-$countSex$cut_points[[3]]
-[1] 1
-
-$countSex$cut_points[[4]]
-[1] 2
-
-$countSex$cut_points[[5]]
-[1] 3
-
-$countSex$cut_points[[6]]
-[1] 4
-
-$countSex$cut_points[[7]]
-[1] 1000000000
-
-
-$countSex$cut_dates
-list()
-
-$countSex$cut_labels
-$countSex$cut_labels[[1]]
-[1] "0"
-
-$countSex$cut_labels[[2]]
-[1] "1"
-
-$countSex$cut_labels[[3]]
-[1] "2"
-
-$countSex$cut_labels[[4]]
-[1] "3"
-
-$countSex$cut_labels[[5]]
-[1] "4"
-
-$countSex$cut_labels[[6]]
-[1] "5+"
-
-
-
-$covidTestPositive
-$covidTestPositive$question
-[1] "In the past 4 weeks, did you test positive for COVID-19?"
-
-$covidTestPositive$label
-[1] "Recent covid diagnosis"
-
-$covidTestPositive$type
-[1] "factor"
-
-$covidTestPositive$response_options
-$covidTestPositive$response_options$yes
-[1] "Yes"
-
-$covidTestPositive$response_options$no
-[1] "No"
-
-$covidTestPositive$response_options$`did-not-test`
-[1] "Did not test"
-
-
-$covidTestPositive$cut_points
-list()
-
-$covidTestPositive$cut_dates
-list()
-
-$covidTestPositive$cut_labels
-list()
-
-
-$createdAt
-$createdAt$question
-[1] "Survey date"
-
-$createdAt$label
-[1] "Survey date"
-
-$createdAt$type
-[1] "date"
-
-$createdAt$response_options
-named list()
-
-$createdAt$cut_points
-list()
-
-$createdAt$cut_dates
-$createdAt$cut_dates[[1]]
-[1] "2022-08-30"
-
-$createdAt$cut_dates[[2]]
-[1] "2022-09-01"
-
-$createdAt$cut_dates[[3]]
-[1] "2022-09-10"
-
-$createdAt$cut_dates[[4]]
-[1] "2022-09-12"
-
-$createdAt$cut_dates[[5]]
-[1] "2022-11-14"
-
-
-$createdAt$cut_labels
-$createdAt$cut_labels[[1]]
-[1] "30-31 Aug 2022"
-
-$createdAt$cut_labels[[2]]
-[1] "01-10 Sep 2022"
-
-$createdAt$cut_labels[[3]]
-[1] "10-11 Sep 2022"
-
-$createdAt$cut_labels[[4]]
-[1] "12 Sep - 31 Nov 2022"
-
-
-
-$gender
-$gender$question
-[1] "What is your gender identity?"
-
-$gender$label
-[1] "Current gender"
-
-$gender$type
-[1] "factor"
-
-$gender$response_options
-$gender$response_options$man
-[1] "Man"
-
-$gender$response_options$woman
-[1] "Woman"
-
-$gender$response_options$`trans-man`
-[1] "Trans man"
-
-$gender$response_options$`trans-woman`
-[1] "Trans woman"
-
-$gender$response_options$`non-binary`
-[1] "Non-binary"
-
-$gender$response_options$other
-[1] "Other"
-
-
-$gender$cut_points
-list()
-
-$gender$cut_dates
-list()
-
-$gender$cut_labels
-list()
-
-
-$groupSex
-$groupSex$question
-[1] "Over the past 4 weeks, have you had sex with two or more people at the same time or had close physical contact with multiple people at the same time? (like at a party, sport game, concert, show)"
-
-$groupSex$label
-[1] "Group contact"
-
-$groupSex$type
-[1] "factor"
-
-$groupSex$response_options
-$groupSex$response_options$yes
-[1] "Yes"
-
-$groupSex$response_options$no
-[1] "No"
-
-
-$groupSex$cut_points
-list()
-
-$groupSex$cut_dates
-list()
-
-$groupSex$cut_labels
-list()
-
-
-$hivPrep
-$hivPrep$question
-[1] "Are you on PrEP?"
-
-$hivPrep$label
-[1] "PrEP user"
-
-$hivPrep$type
-[1] "factor"
-
-$hivPrep$response_options
-$hivPrep$response_options$yes
-[1] "Yes"
-
-$hivPrep$response_options$no
-[1] "No"
-
-
-$hivPrep$cut_points
-list()
-
-$hivPrep$cut_dates
-list()
-
-$hivPrep$cut_labels
-list()
-
-
-$hivStatus
-$hivStatus$question
-[1] "What is your HIV status?"
-
-$hivStatus$label
-[1] "HIV status"
-
-$hivStatus$type
-[1] "factor"
-
-$hivStatus$response_options
-$hivStatus$response_options$`living-with-hiv`
-[1] "Living with HIV"
-
-$hivStatus$response_options$`not-living-with-hiv`
-[1] "Not living with HIV"
-
-$hivStatus$response_options$unsure
-[1] "Unsure"
-
-
-$hivStatus$cut_points
-list()
-
-$hivStatus$cut_dates
-list()
-
-$hivStatus$cut_labels
-list()
-
-
-$hivSuppressed
-$hivSuppressed$question
-[1] "Have you been told that your viral load is suppressed or undetectable?"
-
-$hivSuppressed$label
-[1] "HIV supressed"
-
-$hivSuppressed$type
-[1] "factor"
-
-$hivSuppressed$response_options
-$hivSuppressed$response_options$yes
-[1] "Yes"
-
-$hivSuppressed$response_options$no
-[1] "No"
-
-$hivSuppressed$response_options$unsure
-[1] "Unsure"
-
-
-$hivSuppressed$cut_points
-list()
-
-$hivSuppressed$cut_dates
-list()
-
-$hivSuppressed$cut_labels
-list()
-
-
-$monkeypoxCare
-$monkeypoxCare$question
-[1] "Did you receive care by a medical provider for your symptoms?"
-
-$monkeypoxCare$label
-[1] "Monkeypox care"
-
-$monkeypoxCare$type
-[1] "factor"
-
-$monkeypoxCare$response_options
-$monkeypoxCare$response_options$yes
-[1] "Yes"
-
-$monkeypoxCare$response_options$no
-[1] "No"
-
-
-$monkeypoxCare$cut_points
-list()
-
-$monkeypoxCare$cut_dates
-list()
-
-$monkeypoxCare$cut_labels
-list()
-
-
-$monkeypoxTest
-$monkeypoxTest$question
-[1] "In the past 4 weeks, did you receive testing for mpox?"
-
-$monkeypoxTest$label
-[1] "Mpox testing"
-
-$monkeypoxTest$type
-[1] "factor"
-
-$monkeypoxTest$response_options
-$monkeypoxTest$response_options$yes
-[1] "Yes"
-
-$monkeypoxTest$response_options$no
-[1] "No"
-
-
-$monkeypoxTest$cut_points
-list()
-
-$monkeypoxTest$cut_dates
-list()
-
-$monkeypoxTest$cut_labels
-list()
-
-
-$monkeypoxVaccine
-$monkeypoxVaccine$question
-[1] "Have you received at least 1 dose of the monkeypox vaccine?"
-
-$monkeypoxVaccine$label
-[1] "Mpox vaccine"
-
-$monkeypoxVaccine$type
-[1] "factor"
-
-$monkeypoxVaccine$response_options
-$monkeypoxVaccine$response_options$yes
-[1] "Yes"
-
-$monkeypoxVaccine$response_options$no
-[1] "No"
-
-$monkeypoxVaccine$response_options$unsure
-[1] "Unsure"
-
-
-$monkeypoxVaccine$cut_points
-list()
-
-$monkeypoxVaccine$cut_dates
-list()
-
-$monkeypoxVaccine$cut_labels
-list()
-
-
-$sexOrientation
-$sexOrientation$question
-[1] "What is your sexual orientation?"
-
-$sexOrientation$label
-[1] "Sexual orientation"
-
-$sexOrientation$type
-[1] "factor"
-
-$sexOrientation$response_options
-$sexOrientation$response_options$gay
-[1] "Gay"
-
-$sexOrientation$response_options$bisexual
-[1] "Bisexual"
-
-$sexOrientation$response_options$straight
-[1] "Straight"
-
-$sexOrientation$response_options$queer
-[1] "Queer"
-
-$sexOrientation$response_options$`something-else`
-[1] "Something Else"
-
-
-$sexOrientation$cut_points
-list()
-
-$sexOrientation$cut_dates
-list()
-
-$sexOrientation$cut_labels
-list()
-
-
-$genderId
-$genderId$question
-[1] "Gender identity"
-
-$genderId$label
-[1] "Gender identity"
-
-$genderId$type
-[1] "factor"
-
-$genderId$response_options
-$genderId$response_options$`cisgender-man`
-[1] "Cisgender Man"
-
-$genderId$response_options$`non-binary`
-[1] "Non Binary"
-
-$genderId$response_options$`transgender-man`
-[1] "Transgender Man"
-
-$genderId$response_options$`transgender-woman`
-[1] "Transgender Woman"
-
-$genderId$response_options$`cisgender-woman`
-[1] "Cisgender Woman"
-
-$genderId$response_options$other
-[1] "Another Demographic"
-
-$genderId$response_options$missing
-[1] "Another Demographic"
-
-
-$genderId$cut_points
-list()
-
-$genderId$cut_dates
-list()
-
-$genderId$cut_labels
-list()
-
-
-$race
-$race$question
-[1] "Race"
-
-$race$label
-[1] "Race"
-
-$race$type
-[1] "factor"
-
-$race$response_options
-$race$response_options$White
-[1] "White"
-
-$race$response_options$Latinx
-[1] "Latinx"
-
-$race$response_options$Black
-[1] "Black"
-
-$race$response_options$Asian
-[1] "Asian"
-
-$race$response_options$`Multiple races reported`
-[1] "Multi Racial"
-
-$race$response_options$Other
-[1] "Another Group"
-
-
-$race$cut_points
-list()
-
-$race$cut_dates
-list()
-
-$race$cut_labels
-list()
-
-
-$travelTime
-$travelTime$question
-[1] "By the way, how long are you willing to travel to hook up?"
-
-$travelTime$label
-[1] "Hookup travel time"
-
-$travelTime$type
-[1] "numeric"
-
-$travelTime$response_options
-named list()
-
-$travelTime$cut_points
-$travelTime$cut_points[[1]]
-[1] -1
-
-$travelTime$cut_points[[2]]
-[1] 15
-
-$travelTime$cut_points[[3]]
-[1] 30
-
-$travelTime$cut_points[[4]]
-[1] 45
-
-$travelTime$cut_points[[5]]
-[1] 1e+15
-
-
-$travelTime$cut_dates
-list()
-
-$travelTime$cut_labels
-$travelTime$cut_labels[[1]]
-[1] "0-15 min"
-
-$travelTime$cut_labels[[2]]
-[1] "16-30 min"
-
-$travelTime$cut_labels[[3]]
-[1] "31-45 min"
-
-$travelTime$cut_labels[[4]]
-[1] "45+ min"
-
-
-
-$num_symptoms
-$num_symptoms$question
-[1] "Number of symptoms (calculated)"
-
-$num_symptoms$label
-[1] "Number of symptoms (calculated)"
-
-$num_symptoms$type
-[1] "numeric"
-
-$num_symptoms$response_options
-named list()
-
-$num_symptoms$cut_points
-$num_symptoms$cut_points[[1]]
-[1] -1
-
-$num_symptoms$cut_points[[2]]
-[1] 1
-
-$num_symptoms$cut_points[[3]]
-[1] 1000000000
-
-
-$num_symptoms$cut_dates
-list()
-
-$num_symptoms$cut_labels
-$num_symptoms$cut_labels[[1]]
-[1] "0"
-
-$num_symptoms$cut_labels[[2]]
-[1] "1+"
-
-
-
-$placeType
-$placeType$question
-[1] "What kind of place is this?"
-
-$placeType$label
-[1] "Place type"
-
-$placeType$type
-[1] "factor"
-
-$placeType$response_options
-$placeType$response_options$concert
-[1] "Concert/Theatre/Show"
-
-$placeType$response_options$`theatre/show`
-[1] "Concert/Theatre/Show"
-
-$placeType$response_options$darkroom
-[1] "Dark Room/Sex Party"
-
-$placeType$response_options$`sex-party`
-[1] "Dark Room/Sex Party"
-
-$placeType$response_options$`dance-party`
-[1] "Dance Party"
-
-$placeType$response_options$`sport-game`
-[1] "Sport Game"
-
-$placeType$response_options$`private-residence-`
-[1] "Private Residence"
-
-$placeType$response_options$`something-else`
-[1] "Something Else"
-
-
-$placeType$cut_points
-list()
-
-$placeType$cut_dates
-list()
-
-$placeType$cut_labels
-list()
-
-
-$placeSex
-$placeSex$question
-[1] "Did you have sexual contact while at this venue?"
-
-$placeSex$label
-[1] "Sexual contact at place"
-
-$placeSex$type
-[1] "factor"
-
-$placeSex$response_options
-$placeSex$response_options$no
-[1] "Did not have sex"
-
-$placeSex$response_options$yes
-[1] "Had sex"
-
-$placeSex$response_options$`i-don't-remember`
-[1] "Did not have sex"
-
-
-$placeSex$cut_points
-list()
-
-$placeSex$cut_dates
-list()
-
-$placeSex$cut_labels
-list()</code></pre>
+<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
+<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"variables"</span><span class="op">]</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="age" class="level5 card"><h5 class="anchored" data-anchor-id="age">Age</h5>
+<section id="how-old-are-you" class="level6"><h6 class="anchored" data-anchor-id="how-old-are-you">How old are you?</h6>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_table_freq1</span><span class="op">(</span><span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">plot_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">apply_style_bar_plot</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="7_questionnaire_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section></section><section id="recruitment-channel" class="level5 card"><h5 class="anchored" data-anchor-id="recruitment-channel">Recruitment channel</h5>
+<section id="recruitment-channel-1" class="level6"><h6 class="anchored" data-anchor-id="recruitment-channel-1">Recruitment channel</h6>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_table_freq1</span><span class="op">(</span><span class="va">channel</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">plot_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">apply_style_bar_plot</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="7_questionnaire_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section></section><section id="recent-important-social-contacts" class="level5 card"><h5 class="anchored" data-anchor-id="recent-important-social-contacts">Recent important social contacts</h5>
+<section id="how-many-queer-and-trans-friends-do-you-have-who-are-important-to-you-for-any-reason-count-only-those-you-have-been-in-touch-with-over-the-past-4-weeks." class="level6"><h6 class="anchored" data-anchor-id="how-many-queer-and-trans-friends-do-you-have-who-are-important-to-you-for-any-reason-count-only-those-you-have-been-in-touch-with-over-the-past-4-weeks.">How many queer and trans friends do you have who are important to you for any reason? Count only those you have been in touch with over the past 4 weeks.</h6>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_table_freq1</span><span class="op">(</span><span class="va">countFriendsCut</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">plot_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">apply_style_bar_plot</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="7_questionnaire_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section></section><section id="recent-physical-contacts" class="level5 card"><h5 class="anchored" data-anchor-id="recent-physical-contacts">Recent physical contacts</h5>
+<section id="how-many-individuals-have-you-had-prolonged-physical-contact-but-no-sexual-contact-with-in-the-past-4-weeks-excluding-group-settings" class="level6"><h6 class="anchored" data-anchor-id="how-many-individuals-have-you-had-prolonged-physical-contact-but-no-sexual-contact-with-in-the-past-4-weeks-excluding-group-settings">How many individuals have you had prolonged physical contact (but no sexual contact) with in the past 4 weeks, excluding group settings?</h6>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_table_freq1</span><span class="op">(</span><span class="va">countPhysicalCut</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">plot_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">apply_style_bar_plot</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="7_questionnaire_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section></section><section id="recent-individual-sex-contacts" class="level5 card"><h5 class="anchored" data-anchor-id="recent-individual-sex-contacts">Recent individual sex contacts</h5>
+<section id="how-many-individuals-have-you-had-sex-with-in-the-past-4-weeks-excluding-group-sex-partners" class="level6"><h6 class="anchored" data-anchor-id="how-many-individuals-have-you-had-sex-with-in-the-past-4-weeks-excluding-group-sex-partners">How many individuals have you had sex with in the past 4 weeks, excluding group sex partners?</h6>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_table_freq1</span><span class="op">(</span><span class="va">countSexCut</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">plot_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">apply_style_bar_plot</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="7_questionnaire_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section></section><section id="recent-covid-diagnosis" class="level5 card"><h5 class="anchored" data-anchor-id="recent-covid-diagnosis">Recent covid diagnosis</h5>
+<section id="in-the-past-4-weeks-did-you-test-positive-for-covid-19" class="level6"><h6 class="anchored" data-anchor-id="in-the-past-4-weeks-did-you-test-positive-for-covid-19">In the past 4 weeks, did you test positive for COVID-19?</h6>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_table_freq1</span><span class="op">(</span><span class="va">covidTestPositive</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">plot_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">apply_style_bar_plot</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="7_questionnaire_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section></section><section id="survey-date" class="level5 card"><h5 class="anchored" data-anchor-id="survey-date">Survey date</h5>
+<section id="survey-date-1" class="level6"><h6 class="anchored" data-anchor-id="survey-date-1">Survey date</h6>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_table_freq1</span><span class="op">(</span><span class="va">createdAtCut</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">plot_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">apply_style_bar_plot</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="7_questionnaire_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section></section><section id="current-gender" class="level5 card"><h5 class="anchored" data-anchor-id="current-gender">Current gender</h5>
+<section id="what-is-your-gender-identity" class="level6"><h6 class="anchored" data-anchor-id="what-is-your-gender-identity">What is your gender identity?</h6>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_table_freq1</span><span class="op">(</span><span class="va">gender</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">plot_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">apply_style_bar_plot</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="7_questionnaire_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section></section>
 
 
 
-</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1738366873376">
+<div class="body">
+<a href="../7_questionnaire_appendix/hgek.qmd"> </a>
+</div>
+<div class="metadata">
+<a href="../7_questionnaire_appendix/hgek.qmd">
+<div class="metadata-value listing-filename">
+hgek.qmd
+</div>
+<div class="metadata-value listing-file-modified">
+1/31/25, 6:41:13 PM
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
