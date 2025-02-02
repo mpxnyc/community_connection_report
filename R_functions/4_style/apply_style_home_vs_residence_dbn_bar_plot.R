@@ -21,7 +21,7 @@ apply_style_home_vs_residence_dbn_bar_plot <- function(plot){
                                 values = c("highlight" = 1, "lowlight" = 0.4), 
                                 labels = c(
                                   "highlight" = "Over-represented\nin community district\ncompared to residences", 
-                                  "lowlight" = "Under-represented\nin community district\ncompared to residences"
+                                  "lowlight"  = "Under-represented\nin community district\ncompared to residences"
                                 )) +
     ggplot2::scale_fill_manual(
                                 "Borough", 
