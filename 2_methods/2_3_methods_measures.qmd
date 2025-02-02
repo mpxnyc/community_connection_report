@@ -6,10 +6,8 @@ targets::tar_source("../R_functions")
 
 ```
 
-```{r}
+```{r fig.cap=get_figure_details("fig-example-bipartite"), label="fig-example-bipartite"}
 #| fig-align: center
-#| label: fig-example-bipartite
-#| fig-cap: Sample person-place network
 #| 
 make_example_network_data() |>
   plot_example_network(targets::tar_read(config_list))
@@ -24,12 +22,10 @@ A tie indicates that the individual as some relation with the community district
 
 ### MPX NYC community district network
 
-```{r}
+```{r fig.cap=get_figure_details("fig-example-community"), label="fig-example-community"}
 #| fig-width: 8
 #| fig-height: 6
 #| fig-align: center
-#| label: fig-example-community
-#| fig-cap: Sample place-place network
 
 
   plot_example_network(make_example_network_data("places"), targets::tar_read(config_list)) 
@@ -39,12 +35,10 @@ The MPX NYC community district network is a network with community districts as 
 
 ### MPX NYC participant network
 
-```{r}
+```{r fig.cap=get_figure_details("fig-example-participant"), label="fig-example-participant"}
 #| fig-width: 6
 #| fig-height: 4
 #| fig-align: center
-#| label: fig-example-participant
-#| fig-cap: Sample person-person network
 
 make_example_network_data("people") |>
   plot_example_network(targets::tar_read(config_list))
@@ -62,27 +56,48 @@ We measured participant demographics age, race, sex assigned at birth, gender id
 
 Gender modality was measured using a two-step approach: first, we solicited the participant’s current gender (man, woman, trans man, trans woman, non-binary, other), and then sex assigned at birth (male, female, other). We then constructed a gender modality variable as follows:
 
-| Condition                                      | Gender modality     |
-|------------------------------------------------|---------------------|
-| Gender is "man" and assigned sex is "male"     | Cisgender man       |
-| Gender is "woman" and assigned sex is "female" | Cisgender woman     |
-| Gender is "man" and assigned sex is "female"   | Transgender man     |
-| Gender is "woman" and assigned sex is "male"   | Transgender woman   |
-| Gender is "trans man" and sex is any value     | Transgender man     |
-| Gender is "trans woman" and sex is any value   | Transgender woman   |
-| Gender is "non-binary" and sex is any value    | Non-binary          |
-| Gender is "other" and sex is any value         | Another demographic |
+
+```{r}
+#| label: tbl-gendermodality
+#| tbl-cap: !expr 'get_table_details("tbl-gendermodality")'
+#| 
+data.frame(
+  Condition = c(
+                "gender is 'man' and assigned sex is 'male' ", 
+                "gender is 'woman' and assigned sex is 'female'",
+                "gender is 'man' and assigned sex is 'female'",
+                "gender is 'woman' and assigned sex is 'male'",
+                "gender is 'trans man' and sex is any value",
+                "gender is 'trans woman' and sex is any value",
+                "gender is 'non-binary' and sex is any value",
+                "gender is 'other' and sex is any value"
+                ),
+  Result = c(
+              "Cisgender man", 
+              "Cisgender woman",
+              "Transgender man",
+              "Transgender woman",
+              "Transgender man",
+              "Transgender woman",
+              "Non-binary",
+              "Another demographic"
+              )              
+) |>
+  gt::gt()
+```
+
+
+
 
 #### Race-gender
 
 We created a Race-gender variable which is a categorical variable with levels identical to the gender modality with one modification: instead of having all cisgender men in one level we divided the group up into white cisgender men, Latinx cisgender men, Black cisgender men, and under the category Other cisgender men, we grouped Asian, Pacific Islander and other cisgender men.
 
-
 ### Community district measures
-#### Social reach 
 
-For a given community district, social reach is defined as the sum of edge weights for edges connecting that community district to individuals (in the MPX NYC spatial participant network). It quantifies the volume or level of contact in the community district. 
+#### Social reach
 
+For a given community district, social reach is defined as the sum of edge weights for edges connecting that community district to individuals (in the MPX NYC spatial participant network). It quantifies the volume or level of contact in the community district.
 
 #### Spatial reach
 
@@ -91,12 +106,14 @@ For a given community district spatial reach is defined as the sum of edge weigh
 ## Edge characteristics
 
 ### Residence edges
-All participants were asked the location of their residence through the Person-Place Network Map question. Each participant's residences is represented as an edge between the participant and the community district containing their residence. 
+
+All participants were asked the location of their residence through the Person-Place Network Map question. Each participant's residences is represented as an edge between the participant and the community district containing their residence.
 
 ### Contact venue edges
-Participants who indicated recent physical or sexual contact in a group setting were asked for the locations of each of the places where the contact happened. We call these contact places. They are each represented as an edge between the participant and the community district containing the contact place. 
 
-#### Venue type 
+Participants who indicated recent physical or sexual contact in a group setting were asked for the locations of each of the places where the contact happened. We call these contact places. They are each represented as an edge between the participant and the community district containing the contact place.
+
+#### Venue type
 
 Participants were asked the type of venue each contact place was (dance party, sex party, darkroom, sport game, concert, theatre/show, private residence, sex club, bathhouse, park, something else).
 
@@ -107,9 +124,6 @@ Participants were also asked if they had sexual contact at each contact place.
 #### Distance from home
 
 We constructed an approximate measure of the distance between residence and contact venue by categorizing venues into those that are in the same community district as the residence; in a different community district but the same borough; or in a different borough. We refer to this measure as distance from home.
-
-
-
 
 ## Network characteristics
 

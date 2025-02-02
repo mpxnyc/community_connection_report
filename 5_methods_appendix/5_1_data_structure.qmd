@@ -13,9 +13,8 @@ targets::tar_source(files = paste0(here::here(), "/R_functions"))
 
 Conceptually, the MPX NYC spatial participant data network is a network object that contains all collected data. In this network, nodes comprise of community districts and survey participants. Edges can only exist between a person and a communtiy district - they indicate that the person either lives in or has a contact place in that community district. In @fig-data, participant nodes are blue and community district nodes are pink. @tbl-example-bipartite-nodes shows the node and @tbl-example-bipartite-edges the edges of the network.
 
-```{r}
-#| fig-cap: "MPX NYC spatial participant network data"
-#| label: fig-data
+```{r fig.cap=get_figure_details("fig-data"), label="fig-data"}
+
 #| fig-width: 8
 #| fig-height: 5
 
@@ -95,9 +94,7 @@ The MPX NYC spatial participant graph meets the definition for a bipartite graph
 
 The MPX NYC participant network has participants as nodes. A pair of nodes is connected by a weighted edge if each of the individuals represented by the nodes has at least one contact venue or residence in the same, shared community district. The weight of the edge is given by the count of community districts the pair of nodes have in common. By definition, an edge of weight $0$ is equivalent to the absence of an edge. @tbl-example-participant-nodes shows the nodes of the participant network shown in @fig-data-people and @tbl-example-participant-edges show the edges.
 
-```{r}
-#| fig-cap: "MPX NYC participant network"
-#| label: fig-data-people
+```{r fig.cap=get_figure_details("fig-data-people"), label="fig-data-people"}
 #| fig-width: 8
 #| fig-height: 5
 
@@ -165,9 +162,7 @@ $$
 
 The MPX NYC community district network has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a contact venue or residence in both community districts. The weight is the count of participants which are shared by the two community districts. @fig-data-places shows the community district network derived from the MPX NYC spatial participant data network shown in @fig-data. @tbl-example-place-nodes shows list the nodes of the former network, and @tbl-example-place-edges shows the edges.
 
-```{r}
-#| fig-cap: "MPX NYC community district network"
-#| label: fig-data-places
+```{r fig.cap=get_figure_details("fig-data-places"), label="fig-data-places"}
 #| fig-width: 8
 #| fig-height: 5
 

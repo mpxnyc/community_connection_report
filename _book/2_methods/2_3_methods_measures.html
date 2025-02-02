@@ -162,7 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../2_methods/2_1_methods_community_engagement.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Community engagment</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Community engagement</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -289,25 +289,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../5_methods_appendix/5_methods_appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Supplementary Methods</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../6_results_appendix/6_results_appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Supplementary Results</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../9_causal_inference_framework/9_causal_inference_framework.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Further projects</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Supplementary methods</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../7_questionnaire_appendix/7_questionnaire.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Study questionnaire</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Study questionnaire</span></span></a>
   </div>
 </li>
       </ul>
@@ -395,46 +383,519 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We measured participant demographics age, race, sex assigned at birth, gender identity, sexual orientation, and community district of residence; health-related questions on HIV status, viral suppression, STI-related symptoms, PrEP use, and mpox vaccination status; and questions related to social and sexual connection with queer and transgender communities: count of recent individual sex contacts, count of recent individual physical (non-sexual) contacts, count of recent important social contacts, and any recent physical or sexual contact in a group setting.</p>
 <section id="gender-modality" class="level4"><h4 class="anchored" data-anchor-id="gender-modality">Gender modality</h4>
 <p>Gender modality was measured using a two-step approach: first, we solicited the participant’s current gender (man, woman, trans man, trans woman, non-binary, other), and then sex assigned at birth (male, female, other). We then constructed a gender modality variable as follows:</p>
-<table class="table">
-<thead><tr class="header">
-<th>Condition</th>
-<th>Gender modality</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>Gender is “man” and assigned sex is “male”</td>
-<td>Cisgender man</td>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  Condition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>                <span class="st">"gender is 'man' and assigned sex is 'male' "</span>, </span>
+<span>                <span class="st">"gender is 'woman' and assigned sex is 'female'"</span>,</span>
+<span>                <span class="st">"gender is 'man' and assigned sex is 'female'"</span>,</span>
+<span>                <span class="st">"gender is 'woman' and assigned sex is 'male'"</span>,</span>
+<span>                <span class="st">"gender is 'trans man' and sex is any value"</span>,</span>
+<span>                <span class="st">"gender is 'trans woman' and sex is any value"</span>,</span>
+<span>                <span class="st">"gender is 'non-binary' and sex is any value"</span>,</span>
+<span>                <span class="st">"gender is 'other' and sex is any value"</span></span>
+<span>                <span class="op">)</span>,</span>
+<span>  Result <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>              <span class="st">"Cisgender man"</span>, </span>
+<span>              <span class="st">"Cisgender woman"</span>,</span>
+<span>              <span class="st">"Transgender man"</span>,</span>
+<span>              <span class="st">"Transgender woman"</span>,</span>
+<span>              <span class="st">"Transgender man"</span>,</span>
+<span>              <span class="st">"Transgender woman"</span>,</span>
+<span>              <span class="st">"Non-binary"</span>,</span>
+<span>              <span class="st">"Another demographic"</span></span>
+<span>              <span class="op">)</span>              </span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-gendermodality" class="anchored">
+
+<div id="jiozjwoivf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jiozjwoivf table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#jiozjwoivf thead, #jiozjwoivf tbody, #jiozjwoivf tfoot, #jiozjwoivf tr, #jiozjwoivf td, #jiozjwoivf th {
+  border-style: none;
+}
+
+#jiozjwoivf p {
+  margin: 0;
+  padding: 0;
+}
+
+#jiozjwoivf .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jiozjwoivf .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#jiozjwoivf .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jiozjwoivf .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jiozjwoivf .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jiozjwoivf .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jiozjwoivf .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jiozjwoivf .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jiozjwoivf .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jiozjwoivf .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jiozjwoivf .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jiozjwoivf .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jiozjwoivf .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#jiozjwoivf .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#jiozjwoivf .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jiozjwoivf .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jiozjwoivf .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jiozjwoivf .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jiozjwoivf .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jiozjwoivf .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jiozjwoivf .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jiozjwoivf .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#jiozjwoivf .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jiozjwoivf .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#jiozjwoivf .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jiozjwoivf .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jiozjwoivf .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jiozjwoivf .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jiozjwoivf .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jiozjwoivf .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jiozjwoivf .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jiozjwoivf .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jiozjwoivf .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jiozjwoivf .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jiozjwoivf .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jiozjwoivf .gt_left {
+  text-align: left;
+}
+
+#jiozjwoivf .gt_center {
+  text-align: center;
+}
+
+#jiozjwoivf .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jiozjwoivf .gt_font_normal {
+  font-weight: normal;
+}
+
+#jiozjwoivf .gt_font_bold {
+  font-weight: bold;
+}
+
+#jiozjwoivf .gt_font_italic {
+  font-style: italic;
+}
+
+#jiozjwoivf .gt_super {
+  font-size: 65%;
+}
+
+#jiozjwoivf .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#jiozjwoivf .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jiozjwoivf .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#jiozjwoivf .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#jiozjwoivf .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#jiozjwoivf .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#jiozjwoivf .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<caption>Table&nbsp;5.1:  <p>Construction of gender modality variable</p> </caption>
+  <thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Condition">Condition</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Result">Result</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="Condition" class="gt_row gt_left">gender is 'man' and assigned sex is 'male' </td>
+<td headers="Result" class="gt_row gt_left">Cisgender man</td>
 </tr>
-<tr class="even">
-<td>Gender is “woman” and assigned sex is “female”</td>
-<td>Cisgender woman</td>
+<tr>
+<td headers="Condition" class="gt_row gt_left">gender is 'woman' and assigned sex is 'female'</td>
+<td headers="Result" class="gt_row gt_left">Cisgender woman</td>
 </tr>
-<tr class="odd">
-<td>Gender is “man” and assigned sex is “female”</td>
-<td>Transgender man</td>
+<tr>
+<td headers="Condition" class="gt_row gt_left">gender is 'man' and assigned sex is 'female'</td>
+<td headers="Result" class="gt_row gt_left">Transgender man</td>
 </tr>
-<tr class="even">
-<td>Gender is “woman” and assigned sex is “male”</td>
-<td>Transgender woman</td>
+<tr>
+<td headers="Condition" class="gt_row gt_left">gender is 'woman' and assigned sex is 'male'</td>
+<td headers="Result" class="gt_row gt_left">Transgender woman</td>
 </tr>
-<tr class="odd">
-<td>Gender is “trans man” and sex is any value</td>
-<td>Transgender man</td>
+<tr>
+<td headers="Condition" class="gt_row gt_left">gender is 'trans man' and sex is any value</td>
+<td headers="Result" class="gt_row gt_left">Transgender man</td>
 </tr>
-<tr class="even">
-<td>Gender is “trans woman” and sex is any value</td>
-<td>Transgender woman</td>
+<tr>
+<td headers="Condition" class="gt_row gt_left">gender is 'trans woman' and sex is any value</td>
+<td headers="Result" class="gt_row gt_left">Transgender woman</td>
 </tr>
-<tr class="odd">
-<td>Gender is “non-binary” and sex is any value</td>
-<td>Non-binary</td>
+<tr>
+<td headers="Condition" class="gt_row gt_left">gender is 'non-binary' and sex is any value</td>
+<td headers="Result" class="gt_row gt_left">Non-binary</td>
 </tr>
-<tr class="even">
-<td>Gender is “other” and sex is any value</td>
-<td>Another demographic</td>
+<tr>
+<td headers="Condition" class="gt_row gt_left">gender is 'other' and sex is any value</td>
+<td headers="Result" class="gt_row gt_left">Another demographic</td>
 </tr>
 </tbody>
-</table></section><section id="race-gender" class="level4"><h4 class="anchored" data-anchor-id="race-gender">Race-gender</h4>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section><section id="race-gender" class="level4"><h4 class="anchored" data-anchor-id="race-gender">Race-gender</h4>
 <p>We created a Race-gender variable which is a categorical variable with levels identical to the gender modality with one modification: instead of having all cisgender men in one level we divided the group up into white cisgender men, Latinx cisgender men, Black cisgender men, and under the category Other cisgender men, we grouped Asian, Pacific Islander and other cisgender men.</p>
 </section></section><section id="community-district-measures" class="level3"><h3 class="anchored" data-anchor-id="community-district-measures">Community district measures</h3>
 <section id="social-reach" class="level4"><h4 class="anchored" data-anchor-id="social-reach">Social reach</h4>
@@ -460,10 +921,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section><section id="spatial-mixing-ratio" class="level4"><h4 class="anchored" data-anchor-id="spatial-mixing-ratio">Spatial mixing ratio</h4>
 <p>We measure patterns of mixing between a pair of distict subgroups of participants using the spatial mixing ratio. It is a positive real number which is greater than 1 if individuals in the first subgroup tend to live and play in community districts that individuals in the second subgroup do. It is defined as the average (calculated across individuals) spatial preference of the first group for the second group, divided by the prevalence of the second group. For a given individual, spatial preference for a given group is defined as the sum of the weights of the edges connecting to nodes of the second group, divided by the total sum weights.</p>
 <div class="cell" data-layout-align="center">
-<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plot_icon</span><span class="op">(</span>icon_name <span class="op">=</span> <span class="st">"devil"</span>, color <span class="op">=</span> <span class="st">"dark_orange"</span>, shape <span class="op">=</span> <span class="fl">16</span>, alpha <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plot_icon</span><span class="op">(</span>icon_name <span class="op">=</span> <span class="st">"devil"</span>, color <span class="op">=</span> <span class="st">"dark_orange"</span>, shape <span class="op">=</span> <span class="fl">16</span>, alpha <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="2_3_methods_measures_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="192"></p>
+<figure class="figure"><p><img src="2_3_methods_measures_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="192"></p>
 </figure>
 </div>
 </div>
