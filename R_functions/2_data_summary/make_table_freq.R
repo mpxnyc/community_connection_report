@@ -35,6 +35,7 @@ make_table_freq3                <- function(variable = overall, stratum_variable
                                                 stratum_a       = {{stratum_variable_a}},
                                                 stratum_b       = {{stratum_variable_b}}
                                               ) |>
+                                              dplyr::filter(!is.na(level)) |>
                                               dplyr::mutate(
                                                 level = as.character(level),
                                                 stratum_a = as.character(stratum_a),

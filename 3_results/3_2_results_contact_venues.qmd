@@ -7,9 +7,7 @@
 targets::tar_source("../R_functions")
 ```
 
-```{r fig_places_distance_sexcontact}
-#| fig-cap: "MPX NYC contact venue type by distance from home and sexual contact"
-#| label: fig-places-distance-sexcontact
+```{r fig.cap=get_figure_details("fig-places-distance-sexcontact"), label="fig-places-distance-sexcontact"}
 #| fig-width: 9
 #| fig-height: 9
 
@@ -24,9 +22,9 @@ make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE)
 
 Of the $604$ locations at which participant had physical or sexual contact in a group setting (contact venues), about two out of five were private residences, and about a quarter were dance parties. More than half of the contact venues were in Manhattan, while less than a third were in the Brooklyn. A quarter of all contact venues were in the same community as the participant's residence, a third were in a different borough, and the remainder were in the same borough as home, but a different community district.
 
-```{r tbl_places_descriptives}
-#| fig-cap: "Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks"
-#| label: fig-places-descriptives
+```{r}
+#| tbl-cap: !expr 'get_table_details("tbl-places-descriptives")'
+#| label: tbl-places-descriptives
 
 targets::tar_read(data_bipartite_graph_collected) |>
         tidygraph::activate(edges) |>

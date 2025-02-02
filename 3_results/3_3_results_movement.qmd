@@ -13,9 +13,7 @@ targets::tar_source("../R_functions")
 
 ### Spatial patterns
 
-```{r fig_communities_movement}
-#| fig-cap: "Movement between home and contact venues by MPX NYC participant. The figure maps each contact venue's community district (x-axis) against the participant's home community district (y-axis). The size of the dot is proportional to the total count of contact venues with the given home and contact venue community district. The color of the dot represents the borough of the contact venue."
-#| label: fig-communities-movement
+```{r fig.cap=get_figure_details("fig-communities-movement"), label="fig-communities-movement"}
 #| fig-width: 10
 #| fig-height: 10
 
@@ -31,11 +29,10 @@ make_table_movement_travel() |>
 
 ### Spatial concentration
 
-```{r fig_communities_bar}
-#| label: fig-communities-bar
+```{r fig.cap=get_figure_details("fig-communities-bar"), label="fig-communities-bar"}
 #| fig-width: 10
 #| fig-height: 7
-#| fig-cap: "Overall Movement between home and contact venues by MPX NYC participant. The figure shows each community districts over-representation among contact venues compared to residences"
+
 
 make_table_home_vs_place_dbn() |>
   plot_home_vs_residence_dbn_bar() |>
@@ -56,9 +53,7 @@ The dots on the diagonal line from top left to bottom right, show prominently, i
 
 ### Race-gender
 
-```{r fig_demogroup_mixing}
-#| fig-cap:  "Social mixing matrices for MPX NYC participants by race-gender"
-#| label: fig-demogroup-mixing
+```{r fig.cap=get_figure_details("fig-demogroup-mixing"), label="fig-demogroup-mixing"}
 #| fig-width: 9
 #| fig-height: 9
 
@@ -84,9 +79,7 @@ mixing_demo_group_panel
 
 ### Sexual orientation
 
-```{r fig_sexorientation_mixing}
-#| fig-cap:  "Social mixing matrix for MPX NYC participants by sexual orientation"
-#| label: fig-sexorientation-mixing
+```{r fig.cap=get_figure_details("fig-sexorientation-mixing"), label="fig-sexorientation-mixing"}
 #| fig-width: 6
 #| fig-height: 5
 #| 
@@ -102,9 +95,7 @@ mixing_sexOrientation_panel
 
 ### Age
 
-```{r fig_age_mixing}
-#| fig-cap:  "Social mixing matrix for MPX NYC participants by age"
-#| label: fig-age-mixing
+```{r fig.cap=get_figure_details("fig-age-mixing"), label="fig-age-mixing"}
 #| fig-width: 6
 #| fig-height: 6
 mixing_age_panel                 <- make_table_mixing_2(age) |>
@@ -115,9 +106,7 @@ mixing_age_panel
 
 
 
-```{r fig_combined_mixing, include=FALSE}
-#| fig-cap:  "Social mixing matrices for MPX NYC participants by race-gender (top), sexual orientation (bottom left), and age (bottom right)"
-#| label: fig-subgroup-mixing
+```{r fig.cap=get_figure_details("fig-subgroup-mixing"), label="fig-subgroup-mixing"}
 #| fig-width: 12
 #| fig-height: 17
 #| 
