@@ -288,20 +288,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../5_methods_appendix/5_methods_appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The SSNAC framework</span></span></a>
+  <a href="../A_introducing_ssnac/A_introducing_ssnac.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introducing SNACC</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../7_questionnaire_appendix/7_questionnaire.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Study questionnaire</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../6_results_appendix/6_results_appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Published Results</span></span></a>
+  <a href="../B_methods/5_methods_appendix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">MPX NYC methods</span></span></a>
   </div>
 </li>
       </ul>
@@ -323,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header><div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
-<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/targets/man/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -346,7 +340,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="va">bar_plot_1</span>                 <span class="op">&lt;-</span> <span class="fu">make_table_coverage</span><span class="op">(</span></span>
 <span>                                                  intervention_priority <span class="op">=</span> <span class="st">"contact"</span>, </span>
 <span>                                                  intervention_stratification <span class="op">=</span> <span class="st">"overall"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">!=</span> <span class="st">"Group C"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">!=</span> <span class="st">"Group C"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>                                  <span class="fu">plot_coverage_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>                                  <span class="fu">apply_style_coverage_bar</span><span class="op">(</span><span class="op">)</span> </span>
 <span></span>
@@ -354,16 +348,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>                                                  intervention_priority <span class="op">=</span> <span class="st">"movement"</span>, </span>
 <span>                                                  intervention_stratification <span class="op">=</span> <span class="st">"overall"</span></span>
 <span>                                                  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">!=</span> <span class="st">"Group C"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>                                  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">!=</span> <span class="st">"Group C"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>                                  <span class="fu">plot_coverage_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>                                  <span class="fu">apply_style_coverage_bar</span><span class="op">(</span><span class="op">)</span> </span>
 <span></span>
 <span>  </span>
-<span><span class="va">finished_plot_map</span>          <span class="op">&lt;-</span> <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">map_plot_1</span>, <span class="va">map_plot_2</span><span class="op">)</span></span>
-<span><span class="va">finished_plot_bar</span>          <span class="op">&lt;-</span> <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">bar_plot_1</span>, <span class="va">bar_plot_2</span><span class="op">)</span></span>
+<span><span class="va">finished_plot_map</span>          <span class="op">&lt;-</span> <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">map_plot_1</span>, <span class="va">map_plot_2</span><span class="op">)</span></span>
+<span><span class="va">finished_plot_bar</span>          <span class="op">&lt;-</span> <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">bar_plot_1</span>, <span class="va">bar_plot_2</span><span class="op">)</span></span>
 <span></span>
 <span></span>
-<span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">finished_plot_map</span>, <span class="va">finished_plot_bar</span>, ncol<span class="op">=</span><span class="fl">1</span>, rel_heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">finished_plot_map</span>, <span class="va">finished_plot_bar</span>, ncol<span class="op">=</span><span class="fl">1</span>, rel_heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div id="fig-hiimpact-communities" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="3_5_results_hypothetical_intervention_files/figure-html/fig-hiimpact-communities-1.png" class="img-fluid figure-img" width="960"></p>
