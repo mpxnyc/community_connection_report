@@ -288,20 +288,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../5_methods_appendix/5_methods_appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The SSNAC framework</span></span></a>
+  <a href="../A_introducing_ssnac/A_introducing_ssnac.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introducing SNACC</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../7_questionnaire_appendix/7_questionnaire.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Study questionnaire</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../6_results_appendix/6_results_appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Published Results</span></span></a>
+  <a href="../B_methods/5_methods_appendix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">MPX NYC methods</span></span></a>
   </div>
 </li>
       </ul>
@@ -318,12 +312,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header><div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
-<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/targets/man/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_table_freq3</span><span class="op">(</span><span class="va">placeType</span>, <span class="va">placeSex</span>, <span class="va">distanceFromHome</span>, person_analysis <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">level</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">level</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_radar_stratified2</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">apply_style_radar_facet_plot</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
@@ -335,39 +329,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Of the <span class="math inline">\(604\)</span> locations at which participant had physical or sexual contact in a group setting (contact venues), about two out of five were private residences, and about a quarter were dance parties. More than half of the contact venues were in Manhattan, while less than a third were in the Brooklyn. A quarter of all contact venues were in the same community as the participant’s residence, a third were in a different borough, and the remainder were in the same borough as home, but a different community district.</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">data_bipartite_graph_collected</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>        <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/targets/man/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">data_bipartite_graph_collected</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>        <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidygraph/man/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>        <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">home</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="st">"placeSex"</span>, <span class="st">"placeType"</span>, <span class="st">"place_borough"</span>, <span class="st">"distanceFromHome"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>        <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">placeSex</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_overall.html">add_overall</a></span><span class="op">(</span>last <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify.html">modify_spanning_header</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stat_1"</span>, <span class="st">"stat_2"</span>, <span class="st">"stat_0"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"**Sexual contact at contact venue**"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_p.html">add_p</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify.html">modify_header</a></span><span class="op">(</span><span class="va">label</span> <span class="op">~</span> <span class="st">"**Variable**"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html">bold_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>        <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/as_gt.html">as_gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>        <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html">tab_source_note</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html">md</a></span><span class="op">(</span><span class="st">"*Data source: MPX NYC 2022*"</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">home</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span><span class="st">"placeSex"</span>, <span class="st">"placeType"</span>, <span class="st">"place_borough"</span>, <span class="st">"distanceFromHome"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>        <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gtsummary/man/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">placeSex</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gtsummary/man/add_overall.html">add_overall</a></span><span class="op">(</span>last <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gtsummary/man/modify.html">modify_spanning_header</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stat_1"</span>, <span class="st">"stat_2"</span>, <span class="st">"stat_0"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"**Sexual contact at contact venue**"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gtsummary/man/add_p.html">add_p</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gtsummary/man/modify.html">modify_header</a></span><span class="op">(</span><span class="va">label</span> <span class="op">~</span> <span class="st">"**Variable**"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gtsummary/man/bold_italicize_labels_levels.html">bold_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>        <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gtsummary/man/as_gt.html">as_gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>        <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gt/man/tab_source_note.html">tab_source_note</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gt/man/md.html">md</a></span><span class="op">(</span><span class="st">"*Data source: MPX NYC 2022*"</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div id="tbl-places-descriptives" class="anchored">
 
-<div id="ztojprcuxy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ztojprcuxy table {
+<div id="tbwzuyntgx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tbwzuyntgx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ztojprcuxy thead, #ztojprcuxy tbody, #ztojprcuxy tfoot, #ztojprcuxy tr, #ztojprcuxy td, #ztojprcuxy th {
+#tbwzuyntgx thead, #tbwzuyntgx tbody, #tbwzuyntgx tfoot, #tbwzuyntgx tr, #tbwzuyntgx td, #tbwzuyntgx th {
   border-style: none;
 }
 
-#ztojprcuxy p {
+#tbwzuyntgx p {
   margin: 0;
   padding: 0;
 }
 
-#ztojprcuxy .gt_table {
+#tbwzuyntgx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -393,12 +387,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#ztojprcuxy .gt_caption {
+#tbwzuyntgx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ztojprcuxy .gt_title {
+#tbwzuyntgx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -410,7 +404,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#ztojprcuxy .gt_subtitle {
+#tbwzuyntgx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -422,7 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#ztojprcuxy .gt_heading {
+#tbwzuyntgx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -434,13 +428,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ztojprcuxy .gt_bottom_border {
+#tbwzuyntgx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ztojprcuxy .gt_col_headings {
+#tbwzuyntgx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -455,7 +449,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ztojprcuxy .gt_col_heading {
+#tbwzuyntgx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -475,7 +469,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ztojprcuxy .gt_column_spanner_outer {
+#tbwzuyntgx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -487,15 +481,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#ztojprcuxy .gt_column_spanner_outer:first-child {
+#tbwzuyntgx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ztojprcuxy .gt_column_spanner_outer:last-child {
+#tbwzuyntgx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ztojprcuxy .gt_column_spanner {
+#tbwzuyntgx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -507,11 +501,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#ztojprcuxy .gt_spanner_row {
+#tbwzuyntgx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ztojprcuxy .gt_group_heading {
+#tbwzuyntgx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -537,7 +531,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#ztojprcuxy .gt_empty_group_heading {
+#tbwzuyntgx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -552,15 +546,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#ztojprcuxy .gt_from_md > :first-child {
+#tbwzuyntgx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ztojprcuxy .gt_from_md > :last-child {
+#tbwzuyntgx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ztojprcuxy .gt_row {
+#tbwzuyntgx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -579,7 +573,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ztojprcuxy .gt_stub {
+#tbwzuyntgx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -592,7 +586,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ztojprcuxy .gt_stub_row_group {
+#tbwzuyntgx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -606,15 +600,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#ztojprcuxy .gt_row_group_first td {
+#tbwzuyntgx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ztojprcuxy .gt_row_group_first th {
+#tbwzuyntgx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ztojprcuxy .gt_summary_row {
+#tbwzuyntgx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -624,16 +618,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ztojprcuxy .gt_first_summary_row {
+#tbwzuyntgx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ztojprcuxy .gt_first_summary_row.thick {
+#tbwzuyntgx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ztojprcuxy .gt_last_summary_row {
+#tbwzuyntgx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -643,7 +637,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ztojprcuxy .gt_grand_summary_row {
+#tbwzuyntgx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -653,7 +647,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ztojprcuxy .gt_first_grand_summary_row {
+#tbwzuyntgx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -663,7 +657,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#ztojprcuxy .gt_last_grand_summary_row_top {
+#tbwzuyntgx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -673,11 +667,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ztojprcuxy .gt_striped {
+#tbwzuyntgx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ztojprcuxy .gt_table_body {
+#tbwzuyntgx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -686,7 +680,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ztojprcuxy .gt_footnotes {
+#tbwzuyntgx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -700,7 +694,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ztojprcuxy .gt_footnote {
+#tbwzuyntgx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -709,7 +703,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ztojprcuxy .gt_sourcenotes {
+#tbwzuyntgx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -723,7 +717,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ztojprcuxy .gt_sourcenote {
+#tbwzuyntgx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -731,63 +725,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ztojprcuxy .gt_left {
+#tbwzuyntgx .gt_left {
   text-align: left;
 }
 
-#ztojprcuxy .gt_center {
+#tbwzuyntgx .gt_center {
   text-align: center;
 }
 
-#ztojprcuxy .gt_right {
+#tbwzuyntgx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ztojprcuxy .gt_font_normal {
+#tbwzuyntgx .gt_font_normal {
   font-weight: normal;
 }
 
-#ztojprcuxy .gt_font_bold {
+#tbwzuyntgx .gt_font_bold {
   font-weight: bold;
 }
 
-#ztojprcuxy .gt_font_italic {
+#tbwzuyntgx .gt_font_italic {
   font-style: italic;
 }
 
-#ztojprcuxy .gt_super {
+#tbwzuyntgx .gt_super {
   font-size: 65%;
 }
 
-#ztojprcuxy .gt_footnote_marks {
+#tbwzuyntgx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ztojprcuxy .gt_asterisk {
+#tbwzuyntgx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ztojprcuxy .gt_indent_1 {
+#tbwzuyntgx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ztojprcuxy .gt_indent_2 {
+#tbwzuyntgx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ztojprcuxy .gt_indent_3 {
+#tbwzuyntgx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ztojprcuxy .gt_indent_4 {
+#tbwzuyntgx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ztojprcuxy .gt_indent_5 {
+#tbwzuyntgx .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
