@@ -1,0 +1,312 @@
+# Orphan text
+
+## Introduction
+
+```{r}
+# Access custom defined functions
+targets::tar_source(files = paste0(here::here(), "/R_functions"))
+```
+
+## Background
+The Social Spatial Network Analysis with Causal interpretation framework is an approach to incorporating social and spatial context in causal analyses of individual-level epidemiologic data. It explicitly accounts for measured relationships among people, among places, and between people and places.
+
+Social process and relationships to some extent play out in physical space since humans exist and interact in physical space. Network theorists have observed that, for instance, the relation of trust is heavily dependent on the physical context under consideration, along with the social context. For instance, Small, found that women were x more likely to trust strangers to take care of their own children on the premises of a school compared to in public spaces. Another example the idea of propinquity, that spatial nearness between people shapes their likeihood of forming relationships attest to the influence of the spatial on the social.
+
+Physical space, therefore, is an important aspect of any social enquiry. It should be surprising, then, that current models for quantitative causal inference do not consider space as a structure that arrays most causal processes under investigation. On the other hand, the scholarly tradition of causal inference in epidemiology has proven its refusal time and again to develp models that make sense of the social per se, opting rather to concern itself with the causal effects of abstract interventions on the outcomes of contextless humans. 
+
+The SSNAC is a byproduct of an enquiry into the interactions of people in the city as a space. It concerns itself with patterns of connection between places as a result of the exchange of people. Obversely, it concerns itself with patterns of interaction between people as a result of the places they coinhabit. In this study, we enquire about a specific type of social interaction (group sex) in the spatial context it unfolds in. We consider both the proximal spatial context of the hotel room, apartment, or park in which the sex happens as well as the more distal spatial context of the census tract, neighborhoods, district, or borough that is the context of the context.
+
+We were initially interested in understanding how to distribute mpox vaccine to gay men in the most efficient way, given the measured structure of the sexual and social networks we form. We had been struck, in the aftermath of the initial mpox outbreak, at the willingness of informed and uninformed experts to attribute the rapid dissemination of this pathogen in this group to the "structure" of our "sexual network" without studying that structure. Indeed, even if they had consulted the research literature, they would find very few studies that actually measured networks. The vast majority of studies on social networks and health measure what they term egocentric networks. The way those measures are taken, however, almost always guarantees that the actual object under study are the perceptions of study participants of their own social networks. 
+
+We aimed to measure these networks directly and indirectly in order to test some of the explanations offered for the rapid dissemination of mpox and to inform responses. In the process of solving some of the practical challenges occasioned by this endeavor, we developed the major components of the Social Spatial Network Analysis with Causal interpretation framework. Before outlining these, we describe the problems.
+
+### Competing for attention
+- Brevity
+- Ad compaign
+- Color scheme
+- Interactivity RuPaul
+
+### Measuring sensitive information
+
+#### Individual characteristics
+- Coarsened variables like age
+
+#### Relationships
+- Referral via QR code
+
+- Census tract conversion
+
+### Analyzing on-the-fly
+- Graph database with dashboard
+
+
+
+## Social spatial network analysis with causal interpetation
+
+We give a preliminary outline for a framework for organizing and analyzing network data along with spatial data. This framework emerges from a few years of trial and error with epidemiologic analyses of network and spatial data. 
+
+### Integrating spatial and social context
+
+To motivate the framework, we consider a study investigating the risk of acquiring a cold among individuals (pictured as dots in physical space in each frame of @fig-context) in a setting where there is one known infected person. The simplest approach would be to assign average risk of acquiring a cold to each individuals. The problem with this strategy, though, would be that not all individuals have the same risk once we know who the infected person is. Those who are more likely to interact closely with them have higher risk, but not all people are equally likely to interact.
+
+```{r}
+#| layout-nrow: 1
+#| fig-height: 8
+#| fig-width: 10
+#| fig-cap: Approaches to incorporating context in studies of individual health
+#| label: fig-context
+
+mpxnyc_colors            <- targets::tar_read(config_list)[[1]][["content"]][["colors"]]
+
+example_context_graph_base <- function(title = ""){
+  x_coords                 <- c(1, 1, 2, 2, 3, 3, 3.5, 4, 4, 4)
+y_coords                 <- c(2, 3.5, 3, 4, 2, 3, 3.5, 1, 3, 4)
+
+
+
+coords                   <- data.frame(x = x_coords, y = y_coords) 
+
+nodes                    <- data.frame(name = paste("node", 1:10, sep = "_"))
+edges                    <- data.frame(
+                                        from = c("node_1", "node_4", "node_3", "node_5"),
+                                        to   = c("node_2", "node_10", "node_6", "node_8")
+                                      )
+
+example_context_graph    <- tidygraph::tbl_graph(nodes = nodes, edges = edges)
+
+ggraph::ggraph(example_context_graph, coords) +
+  
+                                ggplot2::ylim(0,5) +
+                                ggplot2::xlim(0,5) +
+                                ggplot2::theme_void() +
+                                ggplot2::coord_fixed() +
+  ggplot2::ggtitle(title) +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5, size = 20, color = "darkgrey"))
+} 
+
+
+example_context_graph_outline <- function(plot){
+  plot +
+                                
+                                ggplot2::geom_linerange(y = 0.5, xmin = 0.5, xmax = 4.5) +
+                                ggplot2::geom_linerange(y = 4.5, xmin = 0.5, xmax = 4.5) +
+                                ggplot2::geom_linerange(x = 0.5, ymin = 0.5, ymax = 4.5) +
+                                ggplot2::geom_linerange(x = 4.5, ymin = 0.5, ymax = 4.5)
+}
+
+
+example_context_graph_inner_division <- function(plot){
+  plot   +
+                                
+                                ggplot2::geom_linerange(y = 2.5, xmin = 0.5, xmax = 4.5) +
+                                ggplot2::geom_linerange(x = 2.5, ymin = 0.5, ymax = 4.5) 
+}
+
+
+example_context_graph_inner_gates <- function(plot){
+  plot +
+    ggplot2::geom_linerange(y = 1.5, xmin = 0.6, xmax = 4.4, size = 10, color = "white") +
+                                ggplot2::geom_linerange(y = 3.5, xmin = 0.6, xmax = 4.4, size = 10, color = "white") +
+                                ggplot2::geom_linerange(x = 1.5, ymin = 0.6, ymax = 4.4, size = 10, color = "white") +
+                                ggplot2::geom_linerange(x = 3.6, ymin = 0.6, ymax = 4.4, size = 10, color = "white")
+}
+
+example_context_graph_nodes <- function(plot){
+  plot +
+    ggraph::geom_node_circle(
+                                                          ggplot2::aes(r = 0.1), 
+                                                          fill = "white", 
+                                                          color = mpxnyc_colors$dark_pink
+                                                          ) 
+}
+
+         
+example_context_graph_edges <- function(plot){
+  plot +
+                                    
+                                ggraph::geom_edge_link()
+}                       
+                                  
+                                
+  
+
+
+
+
+
+
+contextless <- example_context_graph_base("Contextless") |>
+                      example_context_graph_outline() |>
+                      example_context_graph_nodes()
+
+social_context <- example_context_graph_base("Social context") |>
+                      example_context_graph_outline() |>
+                      example_context_graph_edges() |>
+                      example_context_graph_nodes()
+
+
+ecological_context <- example_context_graph_base("Ecological context") |>
+                      example_context_graph_outline() |>
+                      example_context_graph_inner_division() |>
+                      example_context_graph_nodes()
+
+spatial_context <- example_context_graph_base("Spatial context") |>
+                      example_context_graph_outline() |>
+                      example_context_graph_inner_division() |>
+                      example_context_graph_inner_gates() |>
+                      example_context_graph_nodes()
+
+ssnac_context  <- example_context_graph_base("SSNAC") |>
+                      example_context_graph_outline() |>
+                      example_context_graph_inner_division() |>
+                      example_context_graph_inner_gates() |>
+                      example_context_graph_edges() |>
+                      example_context_graph_nodes()
+
+
+cowplot::plot_grid(contextless, social_context, ecological_context, spatial_context, ssnac_context)
+
+
+```
+
+
+
+A social network analysis would gain a more granular understanding of risk by assigning people who are connected to other people a higher risk of acquiring the cold than those who have no relationships. In addition, different connected components of the network could be assigned differnet levels of risk.
+
+An ecologic approach would be to divide up the area into households and assign a different level of risk based on the household (third panel from left). If we knew who has a cold, we could assign people in the same household higher risk for acquiring the cold than others. This anlysis, however, would ignore the fact that households are not equally connected.
+
+A spatial analysis would enhance this analysis by enriching household data with a spatial weights matrix indicating which pairs of households are neighrbors (second panel from right). Then the risk of aquiring a cold in a given household would be a function of the risk of aquiring a cold among individuals in neighboring households.
+
+An SSNAC analysis (rightmost panel) would take advantage of both spatial and social network data, assigning risk so that the risk of acquiring the cold is a function of the household the individual belongs to, the neighboring household, and the social network connections.
+
+### The Person-Place graph
+
+The central data structure in a SSNAC is the person-place graph. @fig-ssnac depicts the rightmost frame of @fig-context by showing spatial units as nodes in a network, connecting adjacent spatial units with a network edge, and connecting individuals with the households they belong to. To show the flexibility of this data object, we added an additional type of relationship an individual can have with a household - that of an employee.
+
+The majority of study data are stored as node or edge attributes. For instance, person nodes might have attributes like age and race whereas place nodes could have attributes like density or surface area. An edge linking a person to a place might have an attribute conveying how the person relates to the place. For instance in @fig-ssnac, some edges indicate residence, some indicate next
+
+
+```{r}
+#| label: fig-ssnac
+#| fig-cap: SSNAC Person-place graph
+
+
+data_snac_example <- function(){
+  snacc_nodes <- data.frame(
+                      name = paste("node", 1:14, sep = "_"),
+                      node_type = c(rep("Person", 10), rep("Place", 4))
+                      )
+
+snacc_edges <- data.frame(
+                      from = c("node_1", "node_3", "node_4", "node_5", "node_11", "node_11", "node_12", "node_13", "node_11", "node_11", "node_11", "node_12", "node_13", "node_13", "node_13", "node_13", "node_14", "node_14", "node_11", "node_13"),
+                      to   = c("node_2", "node_6", "node_7", "node_8", "node_12", "node_13", "node_14", "node_14", "node_1", "node_3", "node_4", "node_2", "node_6", "node_7", "node_8", "node_9", "node_5", "node_10", "node_5", "node_5"),
+                      edge_type = c(rep("Friend", 4), rep("Neighbor", 4), rep("Resident", 10), rep("Employee", 2))
+                    ) 
+
+
+tidygraph::tbl_graph(nodes = snacc_nodes, edges = snacc_edges)
+}
+
+plot_ssnac_example <- function(){
+
+
+example_snacc_graph <- data_snac_example()
+
+coords <- data.frame(
+  x = c(1, 1, 2, 2.5, 2.5, 3, 3.5, 3.5, 4, 4, 2, 2, 3, 3),
+  y = c(2, 1, 3, 2.5, 1.5, 3, 2.5, 1.5, 2, 1, 2, 1, 2, 1)
+)
+
+ggraph::ggraph(example_snacc_graph, coords) +
+  ggraph::geom_edge_link2(ggplot2::aes(edge_linetype = edge_type, edge_width = edge_type, edge_color = edge_type)) +
+  ggraph::geom_node_circle(ggplot2::aes(r = 0.1, color = node_type, filter = node_type == "Person"), fill = "white") + 
+  ggraph::geom_node_circle(ggplot2::aes(r = 0.1, color = node_type, filter = node_type == "Place"), fill = "grey")
+}
+
+
+style_ssnac_example <- function(plot){
+  
+  mpxnyc_colors <- targets::tar_read(config_list)[[1]][["content"]][["colors"]]
+  
+  edge_width_key    <- c("Employee" = 0.3, "Friend" = 0.3, "Neighbor" = 1.2, "Resident" = 1.5)
+  edge_linetype_key <- c("Employee" = 1, "Friend" = 2, "Neighbor" = 2, "Resident" = 1)
+  node_color_key    <- c("Person" = mpxnyc_colors$dark_pink, "Place" = "black")
+  edge_color_key    <- c("Employee" = "#000000", "Friend" = "#000000", "Neighbor" = "#000000", "Resident" = mpxnyc_colors$mid_blue)
+
+plot +
+    ggplot2::theme_void() +
+    ggplot2::coord_fixed() +
+    ggraph::scale_edge_width_manual("Edge type", values = edge_width_key) +
+    ggraph::scale_edge_linetype_manual("Edge type", values = edge_linetype_key ) +
+    ggplot2::scale_color_manual("Node type", values = node_color_key) +
+    ggraph::scale_edge_color_manual("Edge type", values =edge_color_key ) +
+    ggplot2::theme(
+      legend.margin = ggplot2::margin(15, 15, 15, 15),
+    )
+
+}
+
+
+plot_ssnac_example() |>
+  style_ssnac_example()
+
+
+
+ 
+```
+
+
+
+
+### Defining SSNAC
+
+A SSNAC is -
+
+At the minimum, a social and spatial network analysis with causal interpretation should include an explicit statement of:
+
+-   what types of observational unit nodes represent
+
+-   what types of ties exist in the network
+
+-   rules about allowable edges
+
+-   the counterfactual contrast
+
+-   theory defining:
+
+    -   meaning of nodes,
+
+    -   meaning of edges
+
+    -   description of spreading process (if necessary)
+    
+    
+
+## Theory
+
+### Old structures in sociology
+
+It is crucial in a SSNAC to be clear about the theory that allows the researcher to depict the situation under study as a person-place network, and that will be used to interpret any results obtained. In particular, it is important to clearly state the research question under investigation before defining nodes and edges. For instance, if we were studying the spread of gossip, we might decide that the only edges which are important for transmission of gossip are friend ties and resident ties. In this case, we would be asserting a theory of causation which states that in this setting, people do not gossip with their neighbors, but do gossip with their friends and with their household members. This is different from the theory under use in an infectious disease investigation in the same setting. In this case, assuming that friends, neighbors, and household members all spend time in confined spaces, all the edges are important to account for in analyzing the transmission of airborne disease.
+
+### New queries in causal inference
+
+There are four types of causal queries that focus on node-level outcomes in the SNACC framework.
+
+-   Person-To-Place: Evaluating the causal impact of a person-level intervention on place-level outcomes for some defined set of people and some defined set of places. e.g. What is the impact of vaccinating college-aged adults in New York City on mpox incidence in Union Square (a favourite hangout spot for college students)
+
+-   Person-to-Person: Evaluating the impact of a person-level intervention on person-level outcomes for some defined sets of people. e.g. How does vaccinating all cisgender white men in New York City affect mpox incidence among Black and Latinx cisgender black men in New York City?
+
+-   Place-to-Place: Evaluating the impact of a place-level intervention on place-level outcomes for some defined sets of places. e.g How does vaccinating Manhattan affect mpox incidence in Brooklyn?
+
+-   Place-to-Person: Evaluating the impact of a place-level intervention on person-level outcomes for some defined set of people and some defined set of places. e.g. How does vaccinating Harlem affect mpox incidence among cisgender black men in New York City
+
+In addition there is an endless potential for constructing causal queries that focus on characteristics that cannot be represented as node characteristics for any single node, but rather are characteristics that emerge as a result of the pattern of interactions among nodes. For examples, see the section on social causal inference. 
+
+
+
+## Theory
+
+### Old structures in sociology
+
+It is crucial in a SSNAC to be clear about the theory that allows the researcher to depict the situation under study as a person-place network, and that will be used to interpret any results obtained. In particular, it is important to clearly state the research question under investigation before defining nodes and edges. For instance, if we were studying the spread of gossip, we might decide that the only edges which are important for transmission of gossip are friend ties and resident ties. In this case, we would be asserting a theory of causation which states that in this setting, people do not gossip with their neighbors, but do gossip with their friends and with their household members. This is different from the theory under use in an infectious disease investigation in the same setting. In this case, assuming that friends, neighbors, and household members all spend time in confined spaces, all the edges are important to account for in analyzing the transmission of airborne disease.
+

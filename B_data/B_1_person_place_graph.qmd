@@ -1,0 +1,160 @@
+
+## Person-Place graph 
+
+
+Conceptually, the MPX NYC spatial participant data network is a network object that contains all collected data. In this network, nodes comprise of community districts and survey participants. Edges can only exist between a person and a communtiy district - they indicate that the person either lives in or has a contact place in that community district. In @fig-data, participant nodes are blue and community district nodes are pink. @tbl-example-bipartite-nodes shows the node and @tbl-example-bipartite-edges the edges of the network.
+
+```{r }
+#| fig-cap: !expr 'get_figure_details("fig-example-bipartite")'
+#| label: fig-example-bipartite
+#| fig-width: 8
+#| fig-height: 5
+
+
+make_example_network_data() |>
+  plot_example_network(targets::tar_read(config_list))
+
+
+
+```
+
+::: columns
+::: column
+```{r}
+#| label: tbl-example-bipartite-nodes
+#| tbl-cap: !expr 'get_table_details("tbl-example-bipartite-nodes")'
+
+
+make_example_network_data() |>
+  data.frame() |>
+  dplyr::transmute(name = label, age, type = ifelse(type, "person", "community_district")) |>
+  gt::gt()
+
+
+```
+:::
+
+::: column
+```{r}
+#| label: tbl-example-bipartite-edges
+#| tbl-cap:  !expr 'get_table_details("tbl-example-bipartite-edges")'
+
+
+
+make_example_network_data() |>
+  dplyr::mutate(name = label, type, age) |>
+  tidygraph::activate(edges) |>
+  dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
+  data.frame() |>
+  dplyr::arrange(from, to) |>
+  dplyr::transmute(from = from_name, to = to_name, relation = relation) |>
+  gt::gt()
+```
+:::
+:::
+
+
+
+
+## Participant network 
+
+The MPX NYC participant network has participants as nodes. A pair of nodes is connected by a weighted edge if each of the individuals represented by the nodes has at least one contact venue or residence in the same, shared community district. The weight of the edge is given by the count of community districts the pair of nodes have in common. By definition, an edge of weight $0$ is equivalent to the absence of an edge. @tbl-example-participant-nodes shows the nodes of the participant network shown in @fig-data-people and @tbl-example-participant-edges show the edges.
+
+```{r}
+#| fig-cap: !expr 'get_figure_details("fig-example-participant")'
+#| label: fig-example-participant
+#| fig-width: 8
+#| fig-height: 5
+
+
+make_example_network_data("people") |>
+  plot_example_network(targets::tar_read(config_list))
+
+
+
+```
+
+::: columns
+::: column
+```{r}
+#| tbl-cap:  !expr 'get_table_details("tbl-example-participant-nodes")'
+#| label: tbl-example-participant-nodes
+
+make_example_network_data("people") |>
+  data.frame() |>
+  dplyr::transmute(name = label, type = ifelse(type, "person", "community_district")) |>
+  gt::gt()
+
+
+```
+:::
+
+::: column
+```{r}
+#| tbl-cap:  !expr 'get_table_details("tbl-example-participant-edges")'
+#| label: tbl-example-participant-edges
+
+make_example_network_data("people") |>
+  dplyr::mutate(name = label, type, age) |>
+  tidygraph::activate(edges) |>
+  dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
+  data.frame() |>
+  dplyr::arrange(from, to) |>
+  dplyr::transmute(from = from_name, to = to_name, weight) |>
+  gt::gt()
+```
+:::
+:::
+
+
+## Community district network 
+
+The MPX NYC community district network has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a contact venue or residence in both community districts. The weight is the count of participants which are shared by the two community districts. @fig-data-places shows the community district network derived from the MPX NYC spatial participant data network shown in @fig-data. @tbl-example-place-nodes shows list the nodes of the former network, and @tbl-example-place-edges shows the edges.
+
+```{r}
+#| fig-cap: !expr 'get_figure_details("fig-example-community")'
+#| label: fig-example-community
+#| fig-width: 8
+#| fig-height: 5
+
+make_example_network_data("places") |>
+  plot_example_network(targets::tar_read(config_list))
+
+```
+
+::: columns
+::: column
+```{r}
+#| tbl-cap:  !expr 'get_table_details("tbl-example-place-nodes")'
+#| label: tbl-example-place-nodes
+
+make_example_network_data("places") |>
+  data.frame() |>
+  dplyr::transmute(name = label, type = ifelse(type, "person", "community_district")) |>
+  gt::gt()
+
+```
+:::
+
+::: column
+```{r}
+#| tbl-cap:  !expr 'get_table_details("tbl-example-place-edges")'
+#| label: tbl-example-place-edges
+
+
+make_example_network_data("places") |>
+  dplyr::mutate(name = label, type, age) |>
+  tidygraph::activate(edges) |>
+  dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
+  data.frame() |>
+  dplyr::arrange(from, to) |>
+  dplyr::transmute(from = from_name, to = to_name, weight) |>
+  gt::gt()
+
+```
+:::
+:::
+
+
+
+
