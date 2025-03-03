@@ -1,0 +1,133 @@
+### Key ideas
+
+#### SSNAC ingredients
+
+The SSNAC framework is an approach to collecting, analyzing and interpreting data which explicitly accounts for relationships among people, the places they physical places they interact in or co-inhabit. 
+
+It is applicable in two situations: when investigators want to describe the patterns in the relations among people, places, and across people and places; or when investigators are interested in inferring causality in the context of the system formed by people and places.
+
+For the descriptive interest, it is necessary to have data on individuals, the physical spatial units they co-inhabit, relationships among individuals (network data), as well as the relationships among spatial units (spatial weights matrix). 
+
+For the causal interest, it is necessary for the investigator should have the data mentioned above, as well as a theory or set of theories about the causal process under investigation. These theories must explicitly state:
+
+-   the meaning of nodes (which entities they represent)
+
+-   the meaning of ties (how they relate the entities they link)
+
+-   an understanding of which ties are relevant to the causal question under investigation
+
+
+
+
+
+
+#### The data are a network
+
+The central data structure in a SSNAC is the person-place graph. @fig-ssnac depicts the rightmost frame of @fig-context by showing spatial units as nodes in a network, connecting adjacent spatial units with a network edge, and connecting individuals with the households they belong to. To show the flexibility of this data object, we added an additional type of relationship an individual can have with a household - that of an employee.
+
+The majority of study data are stored as node or edge attributes. For instance, person nodes might have attributes like age and race whereas place nodes could have attributes like density or surface area. An edge linking a person to a place might have an attribute conveying how the person relates to the place. For instance in @fig-ssnac, some edges indicate residence, some indicate next
+
+
+```{r}
+#| label: fig-ssnac
+#| fig-cap: SSNAC Person-place graph
+
+
+data_snac_example <- function(){
+  snacc_nodes <- data.frame(
+                      name = paste("node", 1:14, sep = "_"),
+                      node_type = c(rep("Person", 10), rep("Place", 4))
+                      )
+
+snacc_edges <- data.frame(
+                      from = c("node_1", "node_3", "node_4", "node_5", "node_11", "node_11", "node_12", "node_13", "node_11", "node_11", "node_11", "node_12", "node_13", "node_13", "node_13", "node_13", "node_14", "node_14", "node_11", "node_13"),
+                      to   = c("node_2", "node_6", "node_7", "node_8", "node_12", "node_13", "node_14", "node_14", "node_1", "node_3", "node_4", "node_2", "node_6", "node_7", "node_8", "node_9", "node_5", "node_10", "node_5", "node_5"),
+                      edge_type = c(rep("Friend", 4), rep("Neighbor", 4), rep("Resident", 10), rep("Employee", 2))
+                    ) 
+
+
+tidygraph::tbl_graph(nodes = snacc_nodes, edges = snacc_edges)
+}
+
+plot_ssnac_example <- function(){
+
+
+example_snacc_graph <- data_snac_example()
+
+coords <- data.frame(
+  x = c(1, 1, 2, 2.5, 2.5, 3, 3.5, 3.5, 4, 4, 2, 2, 3, 3),
+  y = c(2, 1, 3, 2.5, 1.5, 3, 2.5, 1.5, 2, 1, 2, 1, 2, 1)
+)
+
+ggraph::ggraph(example_snacc_graph, coords) +
+  ggraph::geom_edge_link2(ggplot2::aes(edge_linetype = edge_type, edge_width = edge_type, edge_color = edge_type)) +
+  ggraph::geom_node_circle(ggplot2::aes(r = 0.1, color = node_type, filter = node_type == "Person"), fill = "white") + 
+  ggraph::geom_node_circle(ggplot2::aes(r = 0.1, color = node_type, filter = node_type == "Place"), fill = "grey")
+}
+
+
+style_ssnac_example <- function(plot){
+  
+  mpxnyc_colors <- targets::tar_read(config_list)[[1]][["content"]][["colors"]]
+  
+  edge_width_key    <- c("Employee" = 0.3, "Friend" = 0.3, "Neighbor" = 1.2, "Resident" = 1.5)
+  edge_linetype_key <- c("Employee" = 1, "Friend" = 2, "Neighbor" = 2, "Resident" = 1)
+  node_color_key    <- c("Person" = mpxnyc_colors$dark_pink, "Place" = "black")
+  edge_color_key    <- c("Employee" = "#000000", "Friend" = "#000000", "Neighbor" = "#000000", "Resident" = mpxnyc_colors$mid_blue)
+
+plot +
+    ggplot2::theme_void() +
+    ggplot2::coord_fixed() +
+    ggraph::scale_edge_width_manual("Edge type", values = edge_width_key) +
+    ggraph::scale_edge_linetype_manual("Edge type", values = edge_linetype_key ) +
+    ggplot2::scale_color_manual("Node type", values = node_color_key) +
+    ggraph::scale_edge_color_manual("Edge type", values =edge_color_key ) +
+    ggplot2::theme(
+      legend.margin = ggplot2::margin(15, 15, 15, 15),
+    )
+
+}
+
+
+plot_ssnac_example() |>
+  style_ssnac_example()
+
+
+
+ 
+```
+
+
+
+
+
+#### The network is a causal structure
+
+The Person-place graph is a starting point for constructing a causal model, but it is not sufficient. Depending on the causal question, some edges in this graph are relevant and some are not. For example, if we were interested in a rumor network, we might decide to depict only people and not places in the causal graph. We might also choose to ignore the neighbor edges and focus only on the friend and employee ones, if it is the case that rumours are transmitted within households and across friendships but not to neighbors. 
+
+If we were interested in an infectious disease, and in the study setting, there is a stay-at-home order so that friends do not meet, but neighbors possibly meet, then we might keep the neighbor ties and drop the friend and employee ties.  In either case, it is necessary to make changes to the Person-place network through network operations like ignoring or adding ties, or even grouping nodes to form a different graph altogether. 
+
+We explore this in the Analysis appendix.
+
+
+#### Shifting causal structures opens up causal enquiry
+
+There are four types of causal queries that focus on node-level outcomes in the SNACC framework.
+
+-   Person-To-Place: Evaluating the causal impact of a person-level intervention on place-level outcomes for some defined set of people and some defined set of places. e.g. What is the impact of vaccinating college-aged adults in New York City on mpox incidence in Union Square (a favourite hangout spot for college students)
+
+-   Person-to-Person: Evaluating the impact of a person-level intervention on person-level outcomes for some defined sets of people. e.g. How does vaccinating all cisgender white men in New York City affect mpox incidence among Black and Latinx cisgender black men in New York City?
+
+-   Place-to-Place: Evaluating the impact of a place-level intervention on place-level outcomes for some defined sets of places. e.g How does vaccinating Manhattan affect mpox incidence in Brooklyn?
+
+-   Place-to-Person: Evaluating the impact of a place-level intervention on person-level outcomes for some defined set of people and some defined set of places. e.g. How does vaccinating Harlem affect mpox incidence among cisgender black men in New York City
+
+In addition there is an endless potential for constructing causal queries that focus on characteristics that cannot be represented as node characteristics for any single node, but rather are characteristics that emerge as a result of the pattern of interactions among nodes. For examples, see the section on social causal inference. 
+
+
+
+
+
+
+
+

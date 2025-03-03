@@ -1,0 +1,133 @@
+## Integrating context
+
+To motivate the framework, we consider a study investigating the risk of acquiring a cold among individuals (pictured as dots in physical space in each frame of @fig-context) in a setting where there is one known infected person. The simplest approach would be to assign average risk of acquiring a cold to each individuals. The problem with this strategy, though, would be that not all individuals have the same risk once we know who the infected person is. Those who are more likely to interact closely with them have higher risk, but not all people are equally likely to interact.
+
+```{r}
+#| layout-nrow: 1
+#| fig-height: 8
+#| fig-width: 10
+#| fig-cap: Approaches to incorporating context in studies of individual health
+#| label: fig-context
+
+mpxnyc_colors            <- targets::tar_read(config_list)[[1]][["content"]][["colors"]]
+
+example_context_graph_base <- function(title = ""){
+  x_coords                 <- c(1, 1, 2, 2, 3, 3, 3.5, 4, 4, 4)
+y_coords                 <- c(2, 3.5, 3, 4, 2, 3, 3.5, 1, 3, 4)
+
+
+
+coords                   <- data.frame(x = x_coords, y = y_coords) 
+
+nodes                    <- data.frame(name = paste("node", 1:10, sep = "_"))
+edges                    <- data.frame(
+                                        from = c("node_1", "node_4", "node_3", "node_5"),
+                                        to   = c("node_2", "node_10", "node_6", "node_8")
+                                      )
+
+example_context_graph    <- tidygraph::tbl_graph(nodes = nodes, edges = edges)
+
+ggraph::ggraph(example_context_graph, coords) +
+  
+                                ggplot2::ylim(0,5) +
+                                ggplot2::xlim(0,5) +
+                                ggplot2::theme_void() +
+                                ggplot2::coord_fixed() +
+  ggplot2::ggtitle(title) +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5, size = 20, color = "darkgrey"))
+} 
+
+
+example_context_graph_outline <- function(plot){
+  plot +
+                                
+                                ggplot2::geom_linerange(y = 0.5, xmin = 0.5, xmax = 4.5) +
+                                ggplot2::geom_linerange(y = 4.5, xmin = 0.5, xmax = 4.5) +
+                                ggplot2::geom_linerange(x = 0.5, ymin = 0.5, ymax = 4.5) +
+                                ggplot2::geom_linerange(x = 4.5, ymin = 0.5, ymax = 4.5)
+}
+
+
+example_context_graph_inner_division <- function(plot){
+  plot   +
+                                
+                                ggplot2::geom_linerange(y = 2.5, xmin = 0.5, xmax = 4.5) +
+                                ggplot2::geom_linerange(x = 2.5, ymin = 0.5, ymax = 4.5) 
+}
+
+
+example_context_graph_inner_gates <- function(plot){
+  plot +
+    ggplot2::geom_linerange(y = 1.5, xmin = 0.6, xmax = 4.4, size = 10, color = "white") +
+                                ggplot2::geom_linerange(y = 3.5, xmin = 0.6, xmax = 4.4, size = 10, color = "white") +
+                                ggplot2::geom_linerange(x = 1.5, ymin = 0.6, ymax = 4.4, size = 10, color = "white") +
+                                ggplot2::geom_linerange(x = 3.6, ymin = 0.6, ymax = 4.4, size = 10, color = "white")
+}
+
+example_context_graph_nodes <- function(plot){
+  plot +
+    ggraph::geom_node_circle(
+                                                          ggplot2::aes(r = 0.1), 
+                                                          fill = "white", 
+                                                          color = mpxnyc_colors$dark_pink
+                                                          ) 
+}
+
+         
+example_context_graph_edges <- function(plot){
+  plot +
+                                    
+                                ggraph::geom_edge_link()
+}                       
+                                  
+                                
+  
+
+
+
+
+
+contextless <- example_context_graph_base("Contextless") |>
+                      example_context_graph_outline() |>
+                      example_context_graph_nodes()
+
+social_context <- example_context_graph_base("Social context") |>
+                      example_context_graph_outline() |>
+                      example_context_graph_edges() |>
+                      example_context_graph_nodes()
+
+
+ecological_context <- example_context_graph_base("Ecological context") |>
+                      example_context_graph_outline() |>
+                      example_context_graph_inner_division() |>
+                      example_context_graph_nodes()
+
+spatial_context <- example_context_graph_base("Spatial context") |>
+                      example_context_graph_outline() |>
+                      example_context_graph_inner_division() |>
+                      example_context_graph_inner_gates() |>
+                      example_context_graph_nodes()
+
+ssnac_context  <- example_context_graph_base("SSNAC") |>
+                      example_context_graph_outline() |>
+                      example_context_graph_inner_division() |>
+                      example_context_graph_inner_gates() |>
+                      example_context_graph_edges() |>
+                      example_context_graph_nodes()
+
+
+cowplot::plot_grid(contextless, social_context, ecological_context, spatial_context, ssnac_context)
+
+
+```
+
+
+
+A social network analysis would gain a more granular understanding of risk by assigning people who are connected to other people a higher risk of acquiring the cold than those who have no relationships. In addition, different connected components of the network could be assigned differnet levels of risk.
+
+An ecologic approach would be to divide up the area into households and assign a different level of risk based on the household (third panel from left). If we knew who has a cold, we could assign people in the same household higher risk for acquiring the cold than others. This anlysis, however, would ignore the fact that households are not equally connected.
+
+A spatial analysis would enhance this analysis by enriching household data with a spatial weights matrix indicating which pairs of households are neighrbors (second panel from right). Then the risk of aquiring a cold in a given household would be a function of the risk of aquiring a cold among individuals in neighboring households.
+
+An SSNAC analysis (rightmost panel) would take advantage of both spatial and social network data, assigning risk so that the risk of acquiring the cold is a function of the household the individual belongs to, the neighboring household, and the social network connections.
+
