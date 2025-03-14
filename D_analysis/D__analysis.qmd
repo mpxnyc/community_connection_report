@@ -1,9 +1,212 @@
 # Analysis
 
-## Causal inference
+## Causal model
 
-## Network causal inference
-[graphic description of causal model]
+We can write any joint distribution for a study of three people, each with three measures - L, taken at time 1, A, taken at time 2, and Y, taken at time 3.
+
+```{=tex}
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}, L_1) \\
+L_3 &= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
+A_2 &= f_{A_2}(U_{A_2}, L_1, L_2, L_3, A_1) \\
+A_3 &= f_{A_3}(U_{A_3}, L_1, L_2, L_3, A_1, A_2) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
+\end{aligned}
+```
+We can re-factor these function as follows (this way of writing them is intended to demonstrate something about how assumptions translate to mathematics)
+
+```{=tex}
+\begin{aligned}
+L_1 &= f_{L_1}(     &&      && U_{L_1}  &&                         &&                         &&                     &&) \\
+L_2 &= f_{L_2}(     &&      && U_{L_2}, &&                         &&                         && \phi_{L_2}(L_1)           &&) \\
+L_3 &= f_{L_3}(     &&      && U_{L_3}, &&                         &&                         && \phi_{L_3}(L_1, L_2 )     &&) \\
+A_1 &= f_{A_1}(L_1, &&      && U_{A_1}, && g_{A_1}(L_{-1})       &&                         &&                     &&) \\
+A_2 &= f_{A_2}(L_2, &&      && U_{A_2}, && g_{A_2}(L_{-2}),      &&                         && \phi_{A_2}(A_1)           &&) \\
+A_3 &= f_{A_3}(L_3, &&      && U_{A_3}, && g_{A_3}(L_{-3}),      &&                         && \phi_{A_3}(A_1, A_2)      &&) \\
+Y_1 &= f_{Y_1}(L_1, && A_1, && U_{Y_1}, && g_{Y_1}(L_{-1}),     && h_{Y_1}(A_{-1})       &&                     &&) \\
+Y_2 &= f_{Y_2}(L_2, && A_2  && U_{Y_2}, && g_{Y_2}(L_{-2}),     && h_{Y_2}(A_{-2}),      && \phi_{Y_2}(Y_1)           &&) \\
+Y_3 &= f_{Y_3}(L_3, && A_3  && U_{Y_3}, && g_{Y_3}(L_{-3}),      && h_{Y_3}(A_{-3}),      && \phi_{Y_3}(Y_1, Y_2)      &&) \\
+\end{aligned}
+```
+### Classic causal inference
+
+#### Independence assumptions
+
+##### No spillover
+The classic independence assumption asserts that each person's measures are independent of any other person's measures. Using notation: $$
+g_* = h_* = \phi_* = c \in R^t
+$$
+
+##### No interference
+
+This allows us to simplify the structural equation model like this:
+
+```{=tex}
+\begin{aligned}
+L_1 &= f_{L_1}(     &&      && U_{L_1}  &&) \\
+L_2 &= f_{L_2}(     &&      && U_{L_2}  &&) \\
+L_3 &= f_{L_3}(     &&      && U_{L_3}  &&) \\
+A_1 &= f_{A_1}(L_1, &&      && U_{A_1} &&) \\
+A_2 &= f_{A_2}(L_2, &&      && U_{A_2} &&) \\
+A_3 &= f_{A_3}(L_3, &&      && U_{A_3} &&) \\
+Y_1 &= f_{Y_1}(L_1, && A_1, && U_{Y_1} &&) \\
+Y_2 &= f_{Y_2}(L_2, && A_2  && U_{Y_2} &&) \\
+Y_3 &= f_{Y_3}(L_3, && A_3  && U_{Y_3} &&) \\
+\end{aligned}
+```
+
+
+
+#### Homogeneity assumption
+
+The identical distribution assumption asserts that each person's measures arise from the same structural equation model. i.e.:
+
+```{=tex}
+\begin{aligned}
+ f_{L_1} = f_{L_2} = f_{L_3} \\
+ f_{A_1} = f_{A_2} = f_{A_3} \\
+ f_{Y_1} = f_{Y_2} = f_{Y_3}  \\
+\end{aligned}
+```
+This allows us to re-write the structural equation model, dropping the person subscript.
+
+```{=tex}
+\begin{aligned}
+L_1 &= f_{L}(     &&      && U_{L_1}  &&) \\
+L_2 &= f_{L}(     &&      && U_{L_2}  &&) \\
+L_3 &= f_{L}(     &&      && U_{L_3}  &&) \\
+A_1 &= f_{A}(L_1, &&      && U_{A_1} &&) \\
+A_2 &= f_{A}(L_2, &&      && U_{A_2} &&) \\
+A_3 &= f_{A}(L_3, &&      && U_{A_3} &&) \\
+Y_1 &= f_{Y}(L_1, && A_1, && U_{Y_1} &&) \\
+Y_2 &= f_{Y}(L_2, && A_2  && U_{Y_2} &&) \\
+Y_3 &= f_{Y}(L_3, && A_3  && U_{Y_3} &&) \\
+\end{aligned}
+```
+This allows us to simplify the structural equation model for three measures, each taken on three people, into a structural equation model for one person. This is useful because we actually observed three people, yet our model is for one person's measures. Since the measures on each person are identically distributed, this model can be used three times to produce the measures for person 1, person 2, and person 3. The original model produced measures for all three people at one go.
+
+```{=tex}
+\begin{aligned}
+L &= f_{L}(     &&      && U_{L}  &&) \\
+A &= f_{A}(L, &&      && U_{A} &&) \\
+Y &= f_{Y}(L, && A, && U_{Y} &&) \\
+\end{aligned}
+```
+### SSNAC
+
+#### Independence assumptions
+
+##### No spillover
+
+We assume that conditioning on all prior measures, contemporaneous measures are indpendent. In notation:
+
+$$
+ \phi_* = c \in R^t
+$$
+
+##### Network interference
+
+Conditioning on the meausres on i and the measures on nodes connecgted to i, contemporaneous measures are independent. 
+
+
+```{=tex}
+\begin{aligned}
+L_1 &= f_{L_1}(     &&      && U_{L_1}  &&                         &&                         && ) \\
+L_2 &= f_{L_2}(     &&      && U_{L_2}, &&                         &&                         && ) \\
+L_3 &= f_{L_3}(     &&      && U_{L_3}, &&                         &&                         && ) \\
+A_1 &= f_{A_1}(L_1, &&      && U_{A_1}, && g_{A_1}(L,{N_1})       &&                         &&) \\
+A_2 &= f_{A_2}(L_2, &&      && U_{A_2}, && g_{A_2}(L,{N_2}),      &&                         && ) \\
+A_3 &= f_{A_3}(L_3, &&      && U_{A_3}, && g_{A_3}(L,{N_3}),      &&                         &&) \\
+Y_1 &= f_{Y_1}(L_1, && A_1, && U_{Y_1}, && g_{Y_1}(L,{N_1}),     && h_{Y_1}(A,{N_1})       &&  ) \\
+Y_2 &= f_{Y_2}(L_2, && A_2  && U_{Y_2}, && g_{Y_2}(L,{N_2}),     && h_{Y_2}(A,{N_2}),      &&) \\
+Y_3 &= f_{Y_3}(L_3, && A_3  && U_{Y_3}, && g_{Y_3}(L,{N_3}),      && h_{Y_3}(A,{N_3}),      && ) \\
+\end{aligned}
+```
+#### Homogeneity assumptions
+
+The identical distribution assumption asserts that each person's measures (though they are not independent from one another) arise from the same structural equation model. i.e.:
+
+In notation: 
+
+```{=tex}
+\begin{aligned}
+f_{A_1} &= f_{A_2} = f_{A_3} \\
+f_{Y_1} &= g_{Y_2} = f_{Y_3} \\
+f_{Y_1} &= f_{Y_2} = f_{Y_3} \\
+
+\end{aligned}
+```
+
+This assumption implies that: 
+
+```{=tex}
+\begin{aligned}
+g_{A_1} &= g_{A_2} = g_{A_3} \\
+g_{Y_1} &= g_{Y_2} = g_{Y_3} \\
+g_{Y_1} &= g_{Y_2} = g_{Y_3} \\
+
+\end{aligned}
+```
+
+since the each function $f_*$ depends on the value of the function $g_*$.
+
+This allows us to re-write the model like this:
+
+
+```{=tex}
+\begin{aligned}
+L_1 &= f_{L_1}(     &&      && U_{L_1}  &&                         &&                         && ) \\
+L_2 &= f_{L_2}(     &&      && U_{L_2}, &&                         &&                         && ) \\
+L_3 &= f_{L_3}(     &&      && U_{L_3}, &&                         &&                         && ) \\
+A_1 &= f_{A_1}(L_1, &&      && U_{A_1}, && g_{A}(L,{N_1})       &&                         &&) \\
+A_2 &= f_{A_2}(L_2, &&      && U_{A_2}, && g_{A}(L,{N_2}),      &&                         && ) \\
+A_3 &= f_{A_3}(L_3, &&      && U_{A_3}, && g_{A}(L,{N_3}),      &&                         &&) \\
+Y_1 &= f_{Y_1}(L_1, && A_1, && U_{Y_1}, && g_{Y}(L,{N_1}),     && h_{Y}(A,{N_1})       &&  ) \\
+Y_2 &= f_{Y_2}(L_2, && A_2  && U_{Y_2}, && g_{Y}(L,{N_2}),     && h_{Y}(A,{N_2}),      &&) \\
+Y_3 &= f_{Y_3}(L_3, && A_3  && U_{Y_3}, && g_{Y}(L,{N_3}),      && h_{Y}(A,{N_3}),      && ) \\
+\end{aligned}
+```
+
+We can re-write the model like this:
+
+```{=tex}
+\begin{aligned}
+L &= f_{L}(     &&      && U_{L}  &&                         &&                         && ) \\
+A &= f_{A}(L, &&      && U_{A}, && g_{A}(L,{N})       &&                         &&) \\
+Y &= f_{Y}(L, && A, && U_{Y}, && g_{Y}(L,{N}),     && h_{Y}(A,{N})       &&  ) \\
+\end{aligned}
+```
+
+## Causal estimands
+
+### Classic causal inference
+
+#### Average causal effect
+
+#### Principal strata causal effects
+
+### Network causal inference
+
+#### Average causal effect
+
+#### Direct and spillover effects
+
+#### Relational estimands
+
+## Estimation
+
+### Non-parametric estimation
+
+
+### Semi-parametric esitmation
+
+asssume that the order of the entries doesnt matter in g and h functions. We assume that all that matters is the count of non-zero entries on neighbors. also assume everythinbg is dichotomous. Then maximum degree gives t. The number of possible combinations of L, A, Y, NA, NL 2 x 2 x 2 x (t + 1) x (t + 1). If n grows faster than t, the asymptotics work. 
+
+
 
 ## Causal model for outbreak response
 
@@ -35,19 +238,13 @@ Note: All measures defined in the previous sections can be calculated based on t
 
 We examined two approaches for selecting a community district to immunize, corresponding to different intervention priorities. In the first, we select the next community district to immunize to maximize the number of people to be immunized. In the second, we select the next community district with the goal of minimizing the likelihood of contagion between community districts.
 
-
 ##### Contact-neutralizing
 
-
 In the contact-neutralizing strategy $n^{(k+1)}$ satisfies:
-
 
 $$
 r_{n^{(k+1)}} = \max_{j \in N_c^{(k)}}{r_j^{(k)}}
 $$
-
-
-
 
 ##### Movement-neutralizing
 
@@ -81,12 +278,9 @@ $$
 \frac{\max_t{C^{(k)}_{t}}}{|N_p|}
 $$
 
-
-
 ## Statistical inference
 
-To conduct the bootstrap, we start by forming a synthetic dataset $N_p^*$ of re-sampled individuals. To do this, we repeatedly sample a random individual $t$ from the set of people $N_p$ with replacement. Then we assign each sampled individual a new index using function 
-$$
+To conduct the bootstrap, we start by forming a synthetic dataset $N_p^*$ of re-sampled individuals. To do this, we repeatedly sample a random individual $t$ from the set of people $N_p$ with replacement. Then we assign each sampled individual a new index using function $$
 l: N \to N^*
 $$
 
@@ -100,14 +294,6 @@ where $N^* = N_p^* \cup N_c$. In this graph, the adjacency function satisfies:
 
 $$
 \psi^*(a,b) = \psi(l^{-1}(a), b)
-$$
-for $a \in N_p^*$ and $b \in N_c$.
+$$ for $a \in N_p^*$ and $b \in N_c$.
 
-In $G(N^*, \psi^*)$, individuals are batched into equal groups. Each group represent a repetition of the bootstrap procedure. Then for a given statistic, statistical inference is implemented by calculating the statistic separately in each of these groups and treating the result as a random realization from the distribution of that particular statistic. 
-
-
-
-
-
-
-
+In $G(N^*, \psi^*)$, individuals are batched into equal groups. Each group represent a repetition of the bootstrap procedure. Then for a given statistic, statistical inference is implemented by calculating the statistic separately in each of these groups and treating the result as a random realization from the distribution of that particular statistic.

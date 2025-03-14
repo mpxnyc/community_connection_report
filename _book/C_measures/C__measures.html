@@ -318,13 +318,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#notation" id="toc-notation" class="nav-link active" data-scroll-target="#notation"><span class="header-section-number">C.1</span> Notation</a>
+  <li><a href="#preliminaries" id="toc-preliminaries" class="nav-link active" data-scroll-target="#preliminaries"><span class="header-section-number">C.1</span> Preliminaries</a>
   <ul class="collapse">
   <li><a href="#person-place-network" id="toc-person-place-network" class="nav-link" data-scroll-target="#person-place-network"><span class="header-section-number">C.1.1</span> Person-place network</a></li>
   <li><a href="#participant-network" id="toc-participant-network" class="nav-link" data-scroll-target="#participant-network"><span class="header-section-number">C.1.2</span> Participant network</a></li>
   <li><a href="#community-district-network" id="toc-community-district-network" class="nav-link" data-scroll-target="#community-district-network"><span class="header-section-number">C.1.3</span> Community district network</a></li>
   </ul></li>
-  <li><a href="#measures" id="toc-measures" class="nav-link" data-scroll-target="#measures"><span class="header-section-number">C.2</span> Measures</a></li>
+  <li><a href="#structural-equation" id="toc-structural-equation" class="nav-link" data-scroll-target="#structural-equation"><span class="header-section-number">C.2</span> Structural equation</a>
+  <ul class="collapse">
+  <li><a href="#classic-causal-inference" id="toc-classic-causal-inference" class="nav-link" data-scroll-target="#classic-causal-inference"><span class="header-section-number">C.2.1</span> Classic causal inference</a></li>
+  <li><a href="#ssnac" id="toc-ssnac" class="nav-link" data-scroll-target="#ssnac"><span class="header-section-number">C.2.2</span> SSNAC</a></li>
+  </ul></li>
+  <li><a href="#measures" id="toc-measures" class="nav-link" data-scroll-target="#measures"><span class="header-section-number">C.3</span> Measures</a></li>
   </ul>
 </nav>
     </div>
@@ -336,8 +341,8 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="notation" class="level2" data-number="C.1">
-<h2 data-number="C.1" class="anchored" data-anchor-id="notation"><span class="header-section-number">C.1</span> Notation</h2>
+<section id="preliminaries" class="level2" data-number="C.1">
+<h2 data-number="C.1" class="anchored" data-anchor-id="preliminaries"><span class="header-section-number">C.1</span> Preliminaries</h2>
 <section id="person-place-network" class="level3" data-number="C.1.1">
 <h3 data-number="C.1.1" class="anchored" data-anchor-id="person-place-network"><span class="header-section-number">C.1.1</span> Person-place network</h3>
 <p>We define the MPX NYC spatial participant graph as</p>
@@ -395,8 +400,156 @@ M_c = M^TM
 <p>In <span class="math inline">\(G(N^*, \psi^*)\)</span>, individuals are batched into equal groups. Each group represent a repetition of the bootstrap procedure. Then for a given statistic, statistical inference is implemented by calculating the statistic separately in each of these groups and treating the result as a random realization from the distribution of that particular statistic.</p>
 </section>
 </section>
-<section id="measures" class="level2" data-number="C.2">
-<h2 data-number="C.2" class="anchored" data-anchor-id="measures"><span class="header-section-number">C.2</span> Measures</h2>
+<section id="structural-equation" class="level2" data-number="C.2">
+<h2 data-number="C.2" class="anchored" data-anchor-id="structural-equation"><span class="header-section-number">C.2</span> Structural equation</h2>
+<p>We can write any joint distribution for a study of three people, each with three measures - L, taken at time 1, A, taken at time 2, and Y, taken at time 3.</p>
+<span class="math display">\[\begin{aligned}
+L_1 &amp;= f_{L_1}(U_{L_1}) \\
+L_2 &amp;= f_{L_2}(U_{L_2}, L_1) \\
+L_3 &amp;= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
+A_1 &amp;= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
+A_2 &amp;= f_{A_2}(U_{A_2}, L_1, L_2, L_3, A_1) \\
+A_3 &amp;= f_{A_3}(U_{A_3}, L_1, L_2, L_3, A_1, A_2) \\
+Y_1 &amp;= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
+Y_2 &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1) \\
+Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
+\end{aligned}\]</span>
+<p>We can re-factor these function as follows (this way of writing them is intended to demonstrate something about how assumptions translate to mathematics)</p>
+<span class="math display">\[\begin{aligned}
+L_1 &amp;= f_{L_1}(     &amp;&amp;      &amp;&amp; U_{L_1}  &amp;&amp;                         &amp;&amp;                         &amp;&amp;                     &amp;&amp;) \\
+L_2 &amp;= f_{L_2}(     &amp;&amp;      &amp;&amp; U_{L_2}, &amp;&amp;                         &amp;&amp;                         &amp;&amp; \phi(L_1)           &amp;&amp;) \\
+L_3 &amp;= f_{L_3}(     &amp;&amp;      &amp;&amp; U_{L_3}, &amp;&amp;                         &amp;&amp;                         &amp;&amp; \phi(L_1, L_2 )     &amp;&amp;) \\
+A_1 &amp;= f_{A_1}(L_1, &amp;&amp;      &amp;&amp; U_{A_1}, &amp;&amp; g_{A}(L_1, L_2, L_3, 1)  &amp;&amp;                         &amp;&amp;                     &amp;&amp;) \\
+A_2 &amp;= f_{A_2}(L_2, &amp;&amp;      &amp;&amp; U_{A_2}, &amp;&amp; g_{A}(L_1, L_2, L_3, 2), &amp;&amp;                         &amp;&amp; \phi(A_1)           &amp;&amp;) \\
+A_3 &amp;= f_{A_3}(L_3, &amp;&amp;      &amp;&amp; U_{A_3}, &amp;&amp; g_{A}(L_1, L_2, L_3, 3), &amp;&amp;                         &amp;&amp; \phi(A_1, A_2)      &amp;&amp;) \\
+Y_1 &amp;= f_{Y_1}(L_1, &amp;&amp; A_1, &amp;&amp; U_{Y_1}, &amp;&amp; g_{Y}(L_1, L_2, L_3, 1), &amp;&amp; h_{Y}(A_1, A_2, A_3, 1)       &amp;&amp;                     &amp;&amp;) \\
+Y_2 &amp;= f_{Y_2}(L_2, &amp;&amp; A_2  &amp;&amp; U_{Y_2}, &amp;&amp; g_{Y}(L_1, L_2, L_3, 2), &amp;&amp; h_{Y}(A_1, A_2, A_3, 2),      &amp;&amp; \phi(Y_1)           &amp;&amp;) \\
+Y_3 &amp;= f_{Y_3}(L_3, &amp;&amp; A_3  &amp;&amp; U_{Y_3}, &amp;&amp; g_{Y}(L_1, L_2, L_3, 3), &amp;&amp; h_{Y}(A_1, A_2, A_3, 3),      &amp;&amp; \phi(Y_1, Y_2)      &amp;&amp;) \\
+\end{aligned}\]</span>
+<p>such that</p>
+<span class="math display">\[\begin{aligned}
+\frac{\delta g_{A}(L_1, L_2, L_3, i)}{ \delta L_i} = 0  \\
+\frac{\delta g_{Y}(L_1, L_2, L_3, i)}{ \delta L_i} = 0  \\
+\frac{\delta h_{Y}(A_1, A_2, A_3, i)}{ \delta A_i} = 0  \\
+\end{aligned}\]</span>
+<section id="classic-causal-inference" class="level3" data-number="C.2.1">
+<h3 data-number="C.2.1" class="anchored" data-anchor-id="classic-causal-inference"><span class="header-section-number">C.2.1</span> Classic causal inference</h3>
+<section id="independence-assumption" class="level4">
+<h4 class="anchored" data-anchor-id="independence-assumption">Independence assumption</h4>
+<p>i.e.: <span class="math display">\[
+g_* = h_* = \phi_* = c \in R^t
+\]</span> has the following implications</p>
+<span class="math display">\[\begin{aligned}
+L_1 &amp;= f_{L_1}(     &amp;&amp;      &amp;&amp; U_{L_1}  &amp;&amp;) \\
+L_2 &amp;= f_{L_2}(     &amp;&amp;      &amp;&amp; U_{L_2}  &amp;&amp;) \\
+L_3 &amp;= f_{L_3}(     &amp;&amp;      &amp;&amp; U_{L_3}  &amp;&amp;) \\
+A_1 &amp;= f_{A_1}(L_1, &amp;&amp;      &amp;&amp; U_{A_1} &amp;&amp;) \\
+A_2 &amp;= f_{A_2}(L_2, &amp;&amp;      &amp;&amp; U_{A_2} &amp;&amp;) \\
+A_3 &amp;= f_{A_3}(L_3, &amp;&amp;      &amp;&amp; U_{A_3} &amp;&amp;) \\
+Y_1 &amp;= f_{Y_1}(L_1, &amp;&amp; A_1, &amp;&amp; U_{Y_1} &amp;&amp;) \\
+Y_2 &amp;= f_{Y_2}(L_2, &amp;&amp; A_2  &amp;&amp; U_{Y_2} &amp;&amp;) \\
+Y_3 &amp;= f_{Y_3}(L_3, &amp;&amp; A_3  &amp;&amp; U_{Y_3} &amp;&amp;) \\
+\end{aligned}\]</span>
+</section>
+<section id="identical-distribution-assumption" class="level4">
+<h4 class="anchored" data-anchor-id="identical-distribution-assumption">Identical distribution assumption</h4>
+<p>i.e.:</p>
+<span class="math display">\[\begin{aligned}
+f_L &amp;= f_{L_1} = f_{L_2} = f_{L_3} \\
+f_A &amp;= f_{A_1} = f_{A_2} = f_{A_3} \\
+f_Y &amp;= f_{Y_1} = f_{Y_2} = f_{Y_3}  \\
+\end{aligned}\]</span>
+<p>has the folowing implications</p>
+<span class="math display">\[\begin{aligned}
+L_1 &amp;= f_{L}(     &amp;&amp;      &amp;&amp; U_{L_1}  &amp;&amp;) \\
+L_2 &amp;= f_{L}(     &amp;&amp;      &amp;&amp; U_{L_2}  &amp;&amp;) \\
+L_3 &amp;= f_{L}(     &amp;&amp;      &amp;&amp; U_{L_3}  &amp;&amp;) \\
+A_1 &amp;= f_{A}(L_1, &amp;&amp;      &amp;&amp; U_{A_1} &amp;&amp;) \\
+A_2 &amp;= f_{A}(L_2, &amp;&amp;      &amp;&amp; U_{A_2} &amp;&amp;) \\
+A_3 &amp;= f_{A}(L_3, &amp;&amp;      &amp;&amp; U_{A_3} &amp;&amp;) \\
+Y_1 &amp;= f_{Y}(L_1, &amp;&amp; A_1, &amp;&amp; U_{Y_1} &amp;&amp;) \\
+Y_2 &amp;= f_{Y}(L_2, &amp;&amp; A_2  &amp;&amp; U_{Y_2} &amp;&amp;) \\
+Y_3 &amp;= f_{Y}(L_3, &amp;&amp; A_3  &amp;&amp; U_{Y_3} &amp;&amp;) \\
+\end{aligned}\]</span>
+<p>simplified</p>
+<span class="math display">\[\begin{aligned}
+L &amp;= f_{L}(     &amp;&amp;      &amp;&amp; U_{L}  &amp;&amp;) \\
+A &amp;= f_{A}(L, &amp;&amp;      &amp;&amp; U_{A} &amp;&amp;) \\
+Y &amp;= f_{Y}(L, &amp;&amp; A, &amp;&amp; U_{Y} &amp;&amp;) \\
+\end{aligned}\]</span>
+</section>
+</section>
+<section id="ssnac" class="level3" data-number="C.2.2">
+<h3 data-number="C.2.2" class="anchored" data-anchor-id="ssnac"><span class="header-section-number">C.2.2</span> SSNAC</h3>
+<section id="conditional-independence-assumption" class="level4">
+<h4 class="anchored" data-anchor-id="conditional-independence-assumption">Conditional independence assumption</h4>
+<p><span class="math display">\[
+\phi_* = c \in R^t
+\]</span></p>
+<p>has the following implications</p>
+<span class="math display">\[\begin{aligned}
+L_1 &amp;= f_{L_1}(     &amp;&amp;      &amp;&amp; U_{L_1}  &amp;&amp;                         &amp;&amp;                         &amp;&amp;) \\
+L_2 &amp;= f_{L_2}(     &amp;&amp;      &amp;&amp; U_{L_2}, &amp;&amp;                         &amp;&amp;                         &amp;&amp;) \\
+L_3 &amp;= f_{L_3}(     &amp;&amp;      &amp;&amp; U_{L_3}, &amp;&amp;                         &amp;&amp;                         &amp;&amp;) \\
+A_1 &amp;= f_{A_1}(L_1, &amp;&amp;      &amp;&amp; U_{A_1}, &amp;&amp; g_{A}(L_1, L_2, L_3, 1)  &amp;&amp;                         &amp;&amp;) \\
+A_2 &amp;= f_{A_2}(L_2, &amp;&amp;      &amp;&amp; U_{A_2}, &amp;&amp; g_{A}(L_1, L_2, L_3, 2), &amp;&amp;                         &amp;&amp;) \\
+A_3 &amp;= f_{A_3}(L_3, &amp;&amp;      &amp;&amp; U_{A_3}, &amp;&amp; g_{A}(L_1, L_2, L_3, 3), &amp;&amp;                         &amp;&amp; ) \\
+Y_1 &amp;= f_{Y_1}(L_1, &amp;&amp; A_1, &amp;&amp; U_{Y_1}, &amp;&amp; g_{Y}(L_1, L_2, L_3, 1), &amp;&amp; h_{Y}(A_1, A_2, A_3, 1)       &amp;&amp;) \\
+Y_2 &amp;= f_{Y_2}(L_2, &amp;&amp; A_2  &amp;&amp; U_{Y_2}, &amp;&amp; g_{Y}(L_1, L_2, L_3, 2), &amp;&amp; h_{Y}(A_1, A_2, A_3, 2),      &amp;&amp; ) \\
+Y_3 &amp;= f_{Y_3}(L_3, &amp;&amp; A_3  &amp;&amp; U_{Y_3}, &amp;&amp; g_{Y}(L_1, L_2, L_3, 3), &amp;&amp; h_{Y}(A_1, A_2, A_3, 3),      &amp;&amp; ) \\
+\end{aligned}\]</span>
+</section>
+<section id="network-homogeneity-assumption" class="level4">
+<h4 class="anchored" data-anchor-id="network-homogeneity-assumption">Network homogeneity assumption</h4>
+<span class="math display">\[\begin{aligned}
+g_{A}(L_1, L_2, L_3, 1) &amp;= g_{A}(L_1, L_3, L_2, 1) \\
+g_{A}(L_1, L_2, L_3, 2) &amp;= g_{A}(L_3, L_2, L_1, 2) \\
+g_{A}(L_1, L_2, L_3, 3) &amp;= g_{A}(L_2, L_1, L_3, 3) \\
+\end{aligned}\]</span>
+<p>and</p>
+<span class="math display">\[\begin{aligned}
+g_{Y}(L_1, L_2, L_3, 1) &amp;= g_{Y}(L_1, L_3, L_2, 1) \\
+g_{Y}(L_1, L_2, L_3, 2) &amp;= g_{Y}(L_3, L_2, L_1, 2) \\
+g_{Y}(L_1, L_2, L_3, 3) &amp;= g_{Y}(L_2, L_1, L_3, 3) \\
+\end{aligned}\]</span>
+<p>and</p>
+<span class="math display">\[\begin{aligned}
+g_{Y}(A_1, A_2, A_3, 1) &amp;= g_{Y}(A_1, A_3, A_2, 1) \\
+g_{Y}(A_1, A_2, A_3, 2) &amp;= g_{Y}(A_3, A_2, A_1, 2) \\
+g_{Y}(A_1, A_2, A_3, 3) &amp;= g_{Y}(A_2, A_1, A_3, 3) \\
+\end{aligned}\]</span>
+<p>finally</p>
+<span class="math display">\[\begin{aligned}
+f_{L} &amp;= f_{L_1} = f_{L_2} = f_{L_3} \\
+f_{A} &amp;= f_{A_1} = f_{A_2} = f_{A_3} \\
+f_{Y} &amp;= f_{Y_1} = f_{Y_2} = f_{Y_3} \\
+\end{aligned}\]</span>
+<p>Simplified</p>
+<span class="math display">\[\begin{aligned}
+L_i &amp;= f_{L}(     &amp;&amp;      &amp;&amp; U_{L}  &amp;&amp;                         &amp;&amp;                         &amp;&amp;) \\
+A_i &amp;= f_{A}(L_i, &amp;&amp;      &amp;&amp; U_{A}, &amp;&amp; g_{A}(L_1, L_2, L_3, i)  &amp;&amp;                         &amp;&amp;) \\
+Y_i &amp;= f_{Y}(L_i, &amp;&amp; A_i, &amp;&amp; U_{Y}, &amp;&amp; g_{Y}(L_1, L_2, L_3, i), &amp;&amp; h_{Y}(A_1, A_2, A_3, i)       &amp;&amp;) \\
+\end{aligned}\]</span>
+</section>
+<section id="network-exclusion-assumption" class="level4">
+<h4 class="anchored" data-anchor-id="network-exclusion-assumption">Network exclusion assumption</h4>
+<p>i.e.&nbsp;we use the network adjacency matrix to impose a “markov blanket” assumption</p>
+<p>Adjacency matrix</p>
+<span class="math display">\[\begin{pmatrix}
+0 &amp; m_{12} &amp; m_{13} \\
+m_{21} &amp; 0 &amp; m_{23} \\
+m_{31} &amp; m_{32} &amp; 0 \\
+\end{pmatrix}\]</span>
+<span class="math display">\[\begin{aligned}
+L_i &amp;= f_{L}(     &amp;&amp;      &amp;&amp; U_{L}  &amp;&amp;                         &amp;&amp;                         &amp;&amp;) \\
+A_i &amp;= f_{A}(L_i, &amp;&amp;      &amp;&amp; U_{A}, &amp;&amp; g_{A}(m_{1i}L_1, m_{2i}L_2, m_{3i}L_3, i)  &amp;&amp;                         &amp;&amp;) \\
+Y_i &amp;= f_{Y}(L_i, &amp;&amp; A_i, &amp;&amp; U_{Y}, &amp;&amp; g_{Y}(m_{1i}L_1, m_{2i}L_2, m_{3i}L_3, i), &amp;&amp; h_{Y}(m_{1i}A_1, m_{2i}A_2, m_{3i}A_3, i)       &amp;&amp;) \\
+\end{aligned}\]</span>
+</section>
+</section>
+</section>
+<section id="measures" class="level2" data-number="C.3">
+<h2 data-number="C.3" class="anchored" data-anchor-id="measures"><span class="header-section-number">C.3</span> Measures</h2>
 <p>In this section, we describe network measures that are both useful statistics to interpret in describing MPX NYC data and useful intermediate steps in other measures we constructed.</p>
 <p>We defined four measures related to node degree which offer a useful interpretation of MPX NYC data: participant social reach (<span class="math inline">\(R_i\)</span>), participant spatial reach (<span class="math inline">\(S_i\)</span>), community district social reach (<span class="math inline">\(r_j\)</span>), and community district spatial reach (<span class="math inline">\(s_j\)</span>). For each of these, we developed a measure for which we count only the connections to nodes which are included in some defined subset <span class="math inline">\(A \subset N\)</span> of nodes. We thus define conditional participant social reach (<span class="math inline">\(R_i|A\)</span>), conditional participant spatial reach (<span class="math inline">\(S_i|A\)</span>), conditional community district social reach (<span class="math inline">\(r_j|A\)</span>), and conditional community district spatial reach (<span class="math inline">\(s_j|A\)</span>).</p>
 <p>We further defined two measures which summarize the pattern of connection across the people and places in the MPX NYC dataset. The first, the spatial mixing coefficient, can be used to analyze the pattern of connection across different demographic groups. The second, proportion in largest connected component, can be used to analyze the overall connectedness of the MPX NYC Person-Place graph and related graphs.</p>
