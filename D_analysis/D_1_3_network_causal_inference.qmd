@@ -1,0 +1,109 @@
+```{r}
+
+# Access custom defined functions
+targets::tar_source("../R_functions")
+
+```
+
+
+### Network causal inference
+
+See [@aronow2017] for exposure mapping ideas.
+
+#### Independence assumptions
+
+##### No spillover
+
+Just as under classical causal inference, network causal inference as we articulate here, assumes no spillover. See figure \[\] and equations \[\]. It is not necessary to make this restriction to work with network data. Makofane (2021) makes the assumption that contemporaneous measures are arise from conditional Markov Random Field models. We will elaborate a framework (SSNAC-Extension, or SSNACX) at a later stage. In brief, the difference between this articulation and that will be in estimation.
+
+##### Network interference
+
+```{r}
+#| fig-height: 6
+#| fig-width: 6.5
+#| fig-align: center
+#| label: fig-interference-dag
+#| fig-cap: "Causal DANG with network interference"
+
+make_dag("network_interference")   |> plot_swig(node_radius = 0.2) + scale_fill_mpxnyc(option = "light")
+
+
+```
+
+Conditioning on the meausres on i and the measures on nodes connecgted to i, contemporaneous measures are independent.
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}) \\
+L_3 &= f_{L_3}(U_{L_3} ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, L_2) \\
+A_2 &= f_{A_2}(U_{A_2}, L_1, L_2) \\
+A_3 &= f_{A_3}(U_{A_3}, L_3) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, A_1, A_2) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, A_1, A_2) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
+\end{aligned}
+$$ {#eq-networkinterference}
+
+#### Homogeneity assumptions
+
+##### Identical distribution
+
+```{r}
+#| fig-height: 8
+#| fig-width: 7
+#| fig-align: center
+#| label: fig-homogenous-dag
+#| fig-cap: "Causal DANG with homogenous structure"
+
+
+make_dag("homogenous_interference")            |> plot_swig(node_radius = 0.2) + scale_fill_mpxnyc(option = "light")
+
+
+
+```
+
+The identical distribution assumption asserts that each person's measures (though they are not independent from one another) arise from the same structural equation model. i.e.:
+
+In notation:
+
+```{=tex}
+\begin{aligned}
+f_{A_1} &= f_{A_2} = f_{A_3} \\
+f_{Y_1} &= g_{Y_2} = f_{Y_3} \\
+f_{Y_1} &= f_{Y_2} = f_{Y_3} \\
+
+\end{aligned}
+```
+This assumption implies that:
+
+```{=tex}
+\begin{aligned}
+g_{A_1} &= g_{A_2} = g_{A_3} \\
+g_{Y_1} &= g_{Y_2} = g_{Y_3} \\
+g_{Y_1} &= g_{Y_2} = g_{Y_3} \\
+
+\end{aligned}
+```
+since the each function $f_*$ depends on the value of the function $g_*$.
+
+This allows us to re-write the model like this:
+
+##### Permutation invariance
+
+We assume that the order of the entries in the input of functions $g_*$ and $h_*$ does not matter. i.e. these functions are invariant under permutation of the entries in the input vector.
+
+$$
+g(\mathbf{l}) = g(\mathbf{m}) \text{ for } \mathbf{l} \text{ permutation of } \mathbf{m}
+$$
+
+We can re-write the model like this:
+
+$$
+\begin{aligned}
+L_i &= f_{L}( U_{L_i} ) \\
+A_i &= f_{A}( U_{A_i}, L_i, g_{A}(\textbf{L}_{N_i}) ) \\
+Y_i &= f_{Y}( U_{Y_i},  L_i,  g_{Y}(\textbf{L}_{N_i}),   A_i,  h_{Y}(\textbf{L}_{N_i}, \textbf{A}_{N_i} ) ) \\
+\end{aligned}
+$$ {#eq-causal-dang-homogenous}

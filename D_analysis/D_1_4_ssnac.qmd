@@ -1,0 +1,293 @@
+```{r}
+
+# Access custom defined functions
+targets::tar_source("../R_functions")
+
+```
+
+
+### SSNAC
+
+#### Compact graphic representation
+
+```{r }
+#| fig-height: 5
+#| fig-width: 5
+
+structural_nodes <- data.frame(
+  name  = c("L", "A", "Y"),
+  label = c(r"($L_{3 \times 1}$)", r"($A_{3 \times 1})", r"($Y_{3 \times 1}$)") |> latex2exp::TeX(output = "character", bold = TRUE),
+  x = c(1, 2, 3),
+  y = c(2, 1, 1),
+  node_type = "person",
+  node_shape = "covariate"
+) 
+
+structural_edges <- data.frame(
+  from = c("L", "A", "L"),
+  to   = c("A", "Y", "Y")
+)
+
+network_nodes <- data.frame(
+  name  = c("11", "12", "13", "21", "22", "23", "31", "32", "33"),
+  label = c("1", "2", "3", "1", "2", "3", "1", "2", "3"),
+  x  = c( 1, 1, 1, 2, 2, 2, 3, 3, 3),
+  y = c(1, 2, 3, 1, 2, 3, 1, 2, 3),
+  node_type = c("Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person"),
+  node_shape = "covariate"
+)
+
+network_edges <- data.frame(
+  from = c("11", "21", "31", "32", "11", "12", "21", "22"),
+  to   = c("22", "12", "22", "21", "21", "22", "31", "32")
+)
+
+tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges) |>
+  plot_swig(node_radius = 0.2) +
+  ggplot2::theme(
+    plot.margin = ggplot2::margin(10, 10, 10, 10),
+    legend.position = "none"
+  ) +
+  scale_fill_mpxnyc(option = "light")
+
+tidygraph::tbl_graph(nodes = network_nodes, edges = network_edges) |>
+  plot_swig(0, 0, node_radius = 0.2)  +
+  ggplot2::theme(
+    plot.margin = ggplot2::margin(10, 10, 10, 10),
+    legend.position = "none"
+  ) +
+
+  scale_fill_mpxnyc(option = "light")
+
+```
+
+#### Multiple scales and entities
+
+```{r}
+
+
+structural_nodes <- data.frame(
+  name  = c("C", "A", "Y"),
+  label = c(r"($T_{3 \times 1}$)", r"($M_{5 \times 1})", r"($V_{5 \times 1}$)") |> latex2exp::TeX(output = "character", bold = TRUE),
+  x = c(1, 2, 3),
+  y = c(1, 1, 1),
+  node_type = c("Community", "Individual", "Individual"),
+  node_shape = "covariate"
+) 
+
+structural_edges <- data.frame(
+  from = c("C", "A"),
+  to   = c("A", "Y")
+)
+
+network_nodes <- data.frame(
+  name = c("1A", "1B", "1C", "21", "22", "23", "24", "25", "31", "32", "33", "34", "35"),
+  label = c("A", "B", "C", "1", "2", "3", "4", "5", "1", "2", "3", "4", "5"),
+  x  = c( 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3),
+  y =  c(1, 2, 3, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5),
+  node_type = c(rep("Community", 3), rep("Individual", 5), rep("Individual", 5)),
+  node_shape = "covariate"
+)
+
+network_edges <- data.frame(
+  from = c("1A", "1B", "1B", "1C", "1C", "1C", "1A", "1B", "1C", "22", "21", "23", "23", "24", "25"),
+  to =   c("22", "21", "23", "23", "24", "25", "21", "22", "22", "32", "31", "33", "33", "34", "35")
+)
+
+tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges) |>
+  plot_swig(node_radius = 0.15) +
+  ggplot2::theme(
+    plot.margin = ggplot2::margin(10, 10, 10, 10),
+    legend.position = "none"
+  ) +
+
+  scale_fill_mpxnyc(option = "light")
+
+
+
+```
+
+```{r}
+#| fig-width: 7
+#| fig-height: 12
+
+tidygraph::tbl_graph(nodes = network_nodes, edges = network_edges) |>
+  plot_swig(node_radius = 0.2, node_margin = 0)  +
+  ggplot2::theme(
+    plot.margin = ggplot2::margin(10, 10, 10, 10),
+    legend.position = "none"
+  ) +
+
+  scale_fill_mpxnyc(option = "light")
+```
+
+#### Repeated observations
+
+#### Running example 2
+
+```{r}
+
+
+list_nodes <- list()
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V0", label = r"($V_{0}$)", x = 1, y = 8, node_type = "Individual")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R1", label = r"($R_{1}$)", x = 2, y = 2, node_type = "Community")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T1", label = r"($T_{1}$)", x = 3, y = 4, node_type = "Community")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M1", label = r"($M_{1}$)", x = 4, y = 6, node_type = "Individual")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V1", label = r"($V_{1}$)", x = 5, y = 8, node_type = "Individual")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R2", label = r"($R_{2}$)", x = 6, y = 2, node_type = "Community")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T2", label = r"($T_{2}$)", x = 7, y = 4, node_type = "Community")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M2", label = r"($M_{2}$)", x = 8, y = 6, node_type = "Individual")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V2", label = r"($V_{2}$)", x = 9, y = 8, node_type = "Individual")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R3", label = r"($R_{3}$)", x = 10, y = 2, node_type = "Community")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T3", label = r"($T_{3}$)", x = 11, y = 4, node_type = "Community")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M3", label = r"($M_{3}$)", x = 12, y = 6, node_type = "Individual")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V3", label = r"($V_{3}$)", x = 13, y = 8, node_type = "Individual")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R4", label = r"($R_{4}$)", x = 14, y = 2, node_type = "Community")
+
+list_edges <- list()
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "R1")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "R1", to = "T1")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "T1", to = "M1")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M1", to = "V1")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "R2", to = "T2")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "T2", to = "M2")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M2", to = "V2")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "R3", to = "T3")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "T3", to = "M3")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M3", to = "V3")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "R2")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "R3")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M1", to = "M2")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M2", to = "M3")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "M2")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "M3")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V3", to = "R4")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "V1")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "V2")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "V3")
+
+
+structural_nodes <- list_nodes |> 
+  dplyr::bind_rows() |> 
+  dplyr::mutate(label = latex2exp::TeX(label, output = "character", bold = TRUE)) |>
+  dplyr::mutate(node_shape = "covariate")
+
+structural_edges <- list_edges |> dplyr::bind_rows()
+
+
+tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges) |>
+  plot_swig(node_radius = 0.4) +
+  ggplot2::theme(
+    plot.margin = ggplot2::margin(10, 10, 10, 10),
+    legend.position = "none"
+  ) +
+  scale_fill_mpxnyc(option = "light")
+
+
+
+```
+
+```{r}
+
+
+network_nodes_0 <- data.frame(
+  name = c("01", "02", "03", "04", "05"),
+  label = c("1", "2", "3", "4", "5"),
+  x  = c( 0,0,0,0,0),
+  y =  c(1,2,3,4,5),
+  node_type = rep("Individual", 5),
+  node_shape = "covariate"
+)
+
+network_nodes_1 <- data.frame(
+  name = c("1A", "1B", "1C", "2A", "2B", "2C", "31", "32", "33", "34", "35", "41", "42", "43", "44", "45"),
+  label = c("A", "B", "C", "A", "B", "C", "1", "2", "3", "4", "5", "1", "2", "3", "4", "5"),
+  x  = c( 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4),
+  y =  c(1.5,2.5,3.5,1.5,2.5,3.5,1.5,2.25,3,3.75,4.5, 1,2,3,4,5),
+  node_type = c( rep("Community", 3), rep("Community", 3), rep("Individual", 5), rep("Individual", 5)),
+  node_shape = "covariate"
+)
+
+network_nodes_2 <- data.frame(
+  name = c("5A", "5B", "5C", "6A", "6B", "6C", "71", "72", "73", "74", "75", "81", "82", "83", "84", "85"),
+  label = c("A", "B", "C", "A", "B", "C", "1", "2", "3", "4", "5", "1", "2", "3", "4", "5"),
+  x  = 4 + c( 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4),
+  y =  c(1.5,2.5,3.5,1.5,2.5,3.5,1.5,2.25,3,3.75,4.5, 1,2,3,4,5),
+  node_type = c( rep("Community", 3), rep("Community", 3), rep("Individual", 5), rep("Individual", 5)),
+  node_shape = "covariate"
+)
+
+network_nodes_3 <- data.frame(
+  name = c("9A", "9B", "9C", "10A", "10B", "10C", "111", "112", "113", "114", "115", "121", "122", "123", "124", "125"),
+  label = c("A", "B", "C", "A", "B", "C", "1", "2", "3", "4", "5", "1", "2", "3", "4", "5"),
+  x  = 8 + c( 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4),
+  y =  c(1.5,2.5,3.5,1.5,2.5,3.5,1.5,2.25,3,3.75,4.5, 1,2,3,4,5),
+  node_type = c( rep("Community", 3), rep("Community", 3), rep("Individual", 5), rep("Individual", 5)),
+  node_shape = "covariate"
+)
+
+network_nodes_4 <- data.frame(
+  name = c("13A", "13B", "13C"),
+  label = c("A", "B", "C"),
+  x  = 12 + c( 1, 1, 1),
+  y =  c(1.5,2.5,3.5),
+  node_type = c( rep("Community", 3)),
+  node_shape = "covariate"
+)
+
+
+network_edges_1 <- data.frame(
+  from = c("35", "34", "33","32",  "33", "32", "31", "32", "31", "2A", "2B", "2C", "41", "42", "43", "44", "45"),
+  to =   c("2C", "2C", "2C", "2C",  "2B", "2B", "2B", "2A", "2A", "1A", "1B", "1C", "31", "32", "33", "34", "35")
+)
+
+network_edges_2 <- data.frame(
+  from = c("01", "02", "03", "04", "05"),
+  to   = c("1A", "1A", "1A", "1A", "1A")
+)
+
+network_edges_3 <- data.frame(
+  from = c("01", "02", "03", "04", "05"),
+  to   = c("1B", "1B", "1B", "1B", "1B")
+)
+
+network_edges_4 <- data.frame(
+  from = c("01", "02", "03", "04", "05"),
+  to   = c("1C", "1C", "1C", "1C", "1C")
+)
+
+network_edges_5 <- data.frame(
+  from = c("41", "42", "43", "44", "45"),
+  to   = c("01", "02", "03", "04", "05")
+)
+
+network_nodes <- network_nodes_0 |> rbind(network_nodes_1) |> rbind(network_nodes_2) |> rbind(network_nodes_3) |> rbind(network_nodes_4)
+network_edges <- network_edges_1 |> rbind(network_edges_2) |> rbind(network_edges_3) |> rbind(network_edges_4) |> rbind(network_edges_5)
+
+tidygraph::tbl_graph(nodes = network_nodes, edges = network_edges) |>
+  plot_swig(0, 0, node_radius = 0.1, node_margin = 0)  +
+  ggplot2::theme(
+    plot.margin = ggplot2::margin(10, 10, 10, 10),
+    legend.position = "none"
+  ) +
+  scale_fill_mpxnyc(option = "light")
+```
+
+$$
+\begin{aligned}
+V_{0i} &=  f_{V_0}(U_{V_{0i}}) \\
+M_{1i} &=  f_{M_1}(U_{M_{1i}}, \mathbf{T}_{1N_i}) \\
+V_{1i} &=  f_{V_1}(U_{V_{1i}}, V_{0i}, M_{1i}) \\
+M_{2i} &=  f_{M_2}(U_{M_{2i}}, V_{1i}, M_{1i}, \mathbf{T}_{2N_i}) \\
+V_{2i} &=  f_{V_2}(U_{V_{1i}}, V_{1i}, M_{2i}) \\
+M_{3i} &=  f_{M_3}(U_{M_{3i}}, V_{2i}, M_{2i}, \mathbf{T}_{3N_i}) \\
+V_{3i} &=  f_{V_3}(U_{V_{3i}}, V_{1i}, M_{3i}) \\
+R_{1j} &=  f_{R_1}(U_{R_{1j}}, \mathbf{V}_{0}) \\
+T_{1j} &=  f_{T_1}(U_{T_{1j}}, R_{1j}) \\
+R_{2j} &=  f_{R_2}(U_{R_{2j}}, \mathbf{V}_{1} ) \\
+T_{2j} &=  f_{T_2}(U_{T_{2j}}, R_{2j}) \\
+R_{3j} &=  f_{R_3}(U_{R_{3i}}, \mathbf{V}_{2} ) \\
+T_{3j} &=  f_{T_3}(U_{T_{3i}}, R_{3i}) \\
+R_{4j} &=  f_{R_4}(U_{R_{4j}}, \mathbf{V}_{1} ) \\
+\end{aligned}
+$$ {#eq-repeated-observations}
