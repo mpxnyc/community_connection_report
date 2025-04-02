@@ -1,0 +1,50 @@
+## Causal estimands
+
+### Classic causal inference
+
+#### Average causal effect
+
+```{=tex}
+\begin{aligned}
+\frac{1}{n} \sum_i E[Y_i(1) - Y_i(0)]
+\end{aligned}
+```
+### Network causal inference
+
+#### Average Total Effect
+
+$$ 
+\frac{1}{n}\sum_i E[Y_i(1, \textbf{ 1}) - Y_i(0, \textbf{0})]
+$$
+
+#### Average Direct Effect
+
+$$ 
+\frac{1}{n}\sum_i E[Y_i(1, \textbf{ 1}) - Y_i(0, \textbf{1})]
+$$
+
+#### Average Spillover Effect
+
+$$ 
+\frac{1}{n}\sum_i E[Y_i(0, \textbf{ 1}) - Y_i(0, \textbf{0})]
+$$
+
+### SSNAC
+
+#### Person effect on places
+
+$$
+E[\mathbf{R}_{1}], E[\mathbf{R}_{2}^{(\mathbf{m}_1)}], E[\mathbf{R}_{3}^{(\mathbf{m}_1, \mathbf{m}_2)}], E[\mathbf{R}_{4}^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)}]
+$$
+
+#### Place effect on people
+
+$$
+E[\mathbf{V}_{0}], E[\mathbf{V}_{1}^{(\mathbf{t}_{1})}], E[\mathbf{V}_{2}^{(\mathbf{t}_{1}, \mathbf{t}_{2})}], E[\mathbf{V}_{3}^{(\mathbf{t}_{1}, \mathbf{t}_{2}, \mathbf{t}_{3})}]
+$$
+
+#### Program effect on people and places
+
+$$
+E[\mathbf{V}_{0}], E[\mathbf{V}_{1}^{(h)}], E[\mathbf{V}_{2}^{(h)}], E[\mathbf{V}_{3}^{(h)}]
+$$

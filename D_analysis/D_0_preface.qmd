@@ -1,0 +1,23 @@
+```{r}
+
+# Access custom defined functions
+targets::tar_source("../R_functions")
+
+```
+
+
+The goals of this appendix are to motivate the usefulness of the SSNAC framework by (i) describing the prevailing system for thinking about data and causality in the field of epidemiology and, (ii) Contrasting it with the system for causal interpretation advocated by the SSNAC framework.
+
+The prevailing system for causality (as articulated in [@robins1986; @hernán2018]) helps us to sharpen epidemiologic reasoning by providing a template for conducting thought experiments about population health and providing a framework for using observable data to predict the outcomes of our thought experiments.
+
+For instance, imagine we allowed every person in the united states free, unlimited access to healthcare. Under this system, we could ask how the prevalence of diabetes would change if we did that. The system allows us to estimate the degree of change using data that have already been observed. It does this by making assumptions about some aspects of the causal system which links access to healthcare with changes in diabetes prevalence, and modelling other aspects. Crucially, it provides a way to incorporate evidence from observed data in the model.
+
+In summary, the prevailing system for causality both provides a template for us to use in generating thought experiments that can be examined using data, and a framework for using data to calculate quantities that would arise under different conditions of the thought experiments.
+
+One of the crucial assumptions almost universally made by this system is that of independence between observational units - i.e. that the characteristics or health outcomes of behaviors of one person in the study sample are not affected by those of any other person. In our example, this would be the assumption that (for instance), one person's access to healthcare does not affect any other person's diabetes risk. It would imply that the diabetes risk for married men who do not cook, would not be affected by the health education their wives might receive if they had access to healthcare.
+
+The assumption of independence runs counter to our intuition about social life. Humans are social creatures - our lives are defined by our relationships with others. That is why there was a need for the effort that produced this research report. Yet most epidemiologic studies, including randomized trials, operate under the assumption that the individuals under study are not affected by their relationships with others.
+
+The SSNAC helps to expand our toolbox by acknowledging that relationships powerfully shape health. As we describe below, we do so by making a different assumption than the one of independence. This assumption allows us to use much of the statistical machinery developed for the setting where observational units are assumed to be independent.
+
+The rest of the appendix is structured using the analogy commonly used by causal inference specialists to make sense of the statistical frameowrk - the randomized trial. We assume that nature is in the business of conducting randomized trials where it is assigning the treatment of interest on the basis of some observed characteristics. In the section on observed data, we understand observed data as the result of the randomized trial nature ran. Following that, in the section on counterfactual data, we create a different model which shows what would happen if we got to assign the treatment of interest the way we want, not the way that nature did it. In the section on causal estimands, we define an outcome measure we are interested in using to assess the different between different treatment assignments, finally in the section on identification and estimation, we figure out how to calculate that outcome measure in terms of the observed data.
