@@ -1,0 +1,31 @@
+```{r}
+
+# Access custom defined functions
+targets::tar_source("../R_functions")
+
+```
+
+
+### Classic causal inference
+
+To investigate causal estimands, we have to know the possible interventions of interest. We are setting $\textbf{A}=\textbf{a}$.
+
+```{r}
+#| fig-height: 8
+#| fig-width: 7
+#| 
+make_swig("independence")      |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light")
+
+```
+
+$$
+\begin{aligned}
+L_i &= f_{L}( U_{L_i}                       ) \\
+Y_i^{(a_i)} &= f_{Y}(U_{Y_i} , L_i, a_i) \\
+\end{aligned}
+$$ {#eq-structural-equation-homogenous}
+
+
+
