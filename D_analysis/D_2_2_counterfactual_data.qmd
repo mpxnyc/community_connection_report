@@ -6,7 +6,7 @@ targets::tar_source("../R_functions")
 ```
 
 
-### Network causal inference
+### Counterfactual data
 
 We write the counterfactual model
 
@@ -22,6 +22,7 @@ make_swig("network_interference")      |>
 $$
 \begin{aligned}
 L_i &= f_{L}(  U_{L_i}  ) \\
+A_i &= f_{A}( U_{A_i}, L_i, g_{A}(\textbf{L}_{N_i}) ) \\
 Y_i^{(a_i,\textbf{a}_{N_i} )} &= f_{Y}(U_{Y_i}, L_i,  a_i,  g_{Y}(\textbf{L}_{N_i}),      h_{Y}(\textbf{a}_{N_i})         ) \\
 \end{aligned} 
 $$ {#eq-network-interference-dang}
