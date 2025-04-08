@@ -16,10 +16,14 @@ targets::tar_source("../R_functions")
 #| fig-height: 8.5
 
 make_table_freq2(sexOrientation, demo_group) |>
-  plot_radar_grid() |>
-  apply_style_radar_grid_plot()
+  plot_radar_grid() +
+  ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.5, 1)) +
+  theme_mpxnyc() +
+  scale_fill_mpxnyc()
+
 
 ```
+
 
 
 

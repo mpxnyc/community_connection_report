@@ -1,3 +1,13 @@
+
+```{r}
+
+# Access custom defined functions
+targets::tar_source("../R_functions")
+
+```
+
+
+
 ### Observed data
 
 #### Independence assumptions
@@ -14,7 +24,10 @@ Under classic causal inference, we make the assumption of no spillover - that me
 #| fig-cap: "Causal DAG with no spillover"
 
 
-make_dag("full_interference")      |> plot_swig(node_radius = 0.2) + scale_fill_mpxnyc(option = "light")
+make_dag("full_interference")      |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(labels = c("h"), option = "light") +
+  theme_mpxnyc()
 
 
 ```
@@ -44,7 +57,7 @@ In addition to the no spillover assumption, classic causal inference makes the n
 #| label: fig-interference-classic-dag
 #| fig-cap: "Causal DAG with no interference or spillover"
 
-make_dag("independence") |> plot_swig(node_radius = 0.2) + scale_fill_mpxnyc(option = "light")
+make_dag("independence") |> plot_swig(node_radius = 0.2) + scale_fill_mpxnyc(option = "light") + theme_mpxnyc()
 
 
 ```

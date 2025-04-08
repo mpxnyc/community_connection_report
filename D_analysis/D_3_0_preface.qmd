@@ -1,0 +1,133 @@
+
+
+
+#### Compact graphic representation: Causal DANG
+
+As we see in [FIG], using causal DAGs, we stretch the possibility of depicting a causal system including only three people. Trying to depict a system with four people, each wiht three measures, it woul dbe nearly impossible to see clearly which nodes are connected by which arrows. One of the major draws of causal DAG diagrams is that they allow epidemiologists to reason graphically about the structure of confounding or selection. 
+
+We introduce the Causal Directed Acyclic Network Graph (causal DANG), which allows for the representation of complex systems. The causal DANG has precise statistical interpretation under the SSNAC framework. Consider figure [homogenous]. That figure shows us tow pieces of information: the structure of causation within individuals, and the structure of causaltion accross individuals. In the causal DANG, we show these pieces of information separately. 
+
+The first aspect (structural part) of the causal DANG shows the causal structure within individuals. It is a DAG of vector-valued variables $L$, $A$, and $Y$. This DAG has precise standad interpretation. It gives the conditional independencies accross these variables. This is an incomplete set of independencies, however, as the entries of these three vectors connect accros the vectors according to the network. 
+
+The second aspect (network part) of the causal DANG shows the structure of the network or networks which encode the conditional independencies accross individuals. 
+
+
+```{r }
+#| fig-height: 5
+#| fig-width: 5
+
+structural_nodes <- data.frame(
+  name  = c("L", "A", "Y"),
+  label = c(r"($L_{3 \times 1}$)", r"($A_{3 \times 1})", r"($Y_{3 \times 1}$)") |> latex2exp::TeX(output = "character", bold = TRUE),
+  x = c(1, 2, 3),
+  y = c(2, 1, 1),
+  node_type = "person",
+  node_shape = "covariate"
+) 
+
+structural_edges <- data.frame(
+  from = c("L", "A", "L"),
+  to   = c("A", "Y", "Y")
+)
+
+network_nodes <- data.frame(
+  name  = c("11", "12", "13", "21", "22", "23", "31", "32", "33"),
+  label = c("1", "2", "3", "1", "2", "3", "1", "2", "3"),
+  x  = c( 1, 1, 1, 2, 2, 2, 3, 3, 3),
+  y = c(1, 2, 3, 1, 2, 3, 1, 2, 3),
+  node_type = c("Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person", "Person"),
+  node_shape = "covariate"
+)
+
+network_edges <- data.frame(
+  from = c("11", "21", "31", "32", "11", "12", "21", "22"),
+  to   = c("22", "12", "22", "21", "21", "22", "31", "32")
+)
+
+tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges) |>
+  plot_swig(node_radius = 0.2) +
+  ggplot2::theme(
+    plot.margin = ggplot2::margin(10, 10, 10, 10),
+    legend.position = "none"
+  ) +
+  scale_fill_mpxnyc(option = "light")
+
+tidygraph::tbl_graph(nodes = network_nodes, edges = network_edges) |>
+  plot_swig(0, 0, node_radius = 0.2)  +
+  ggplot2::theme(
+    plot.margin = ggplot2::margin(10, 10, 10, 10),
+    legend.position = "none"
+  ) +
+
+  scale_fill_mpxnyc(option = "light")
+
+```
+
+#### Multiple scales and entities
+
+The causal DANG relaxes the assumption that all measures in the causal system can be grouped into non-overlapping sets (i.e. that all measures can be divvied by among study participants). In this framework, different types of entities, represented by vectors of differnt lengthes, can be depicted on the same DANG. 
+
+For example, imagine conducting a flu vaccination drive in a system involving three neighborhoods (Neighborhood A-C) and five people (Person 1-5). The campaign is conducted at the level of the neighborhood. Each person who lives in or visits each neighborhood has a chance of receiving the campaign message, and each person has a chance of becoming vaccinated as a result. Persons 2, 3, 4, and 5 each lived in or visited Neighborhood C. Persons 3 and 1 visited or lived in Neighborhood B, and Persons 1 and 2 visited or lived in Neighborhood A.
+
+This system is encoded by causal DANG [XXX], which represents neighborhood level intervention status using a vector of length 3, person-level exposure to the intervention messging as a vector of length 5, and vaccination status as a vector of length 5 for the structural part. The network part of the causal DANG is given by the graph shown (inset) connecting persons with neighborhoods. 
+
+```{r}
+
+
+structural_nodes <- data.frame(
+  name  = c("C", "A", "Y"),
+  label = c(r"($T_{3 \times 1}$)", r"($M_{5 \times 1})", r"($V_{5 \times 1}$)") |> latex2exp::TeX(output = "character", bold = TRUE),
+  x = c(1, 2, 3),
+  y = c(1, 1, 1),
+  node_type = c("Community", "Individual", "Individual"),
+  node_shape = "covariate"
+) 
+
+structural_edges <- data.frame(
+  from = c("C", "A"),
+  to   = c("A", "Y")
+)
+
+network_nodes <- data.frame(
+  name = c("1A", "1B", "1C", "21", "22", "23", "24", "25", "31", "32", "33", "34", "35"),
+  label = c("A", "B", "C", "1", "2", "3", "4", "5", "1", "2", "3", "4", "5"),
+  x  = c( 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3),
+  y =  c(1, 2, 3, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5),
+  node_type = c(rep("Community", 3), rep("Individual", 5), rep("Individual", 5)),
+  node_shape = "covariate"
+)
+
+network_edges <- data.frame(
+  from = c("1A", "1B", "1B", "1C", "1C", "1C", "1A", "1B", "1C", "22", "21", "23", "23", "24", "25"),
+  to =   c("22", "21", "23", "23", "24", "25", "21", "22", "22", "32", "31", "33", "33", "34", "35")
+)
+
+tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges) |>
+  plot_swig(node_radius = 0.15) +
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc()
+
+
+
+```
+
+```{r}
+#| fig-width: 7
+#| fig-height: 12
+
+tidygraph::tbl_graph(nodes = network_nodes, edges = network_edges) |>
+  plot_swig(node_radius = 0.2, node_margin = 0)  +
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc()
+
+```
+
+
+### Example 3: Longitudinal Data-Driven Vaccination Campaign {.unnumbered}
+
+Imagine a vaccination campaign conducted over three weeks in the city of Nowhereville. Five people live in the city of Nowhereville. They each live in a particular neighborhood, but visit other neighborhoods as well. You are interested in promoting flu vaccination, but want to make sure you understand the likely pattern of flu transmission based on where people live and visit. 
+
+Person 1 lives in Neighborhood A and visit Neighborhood B. Person 2 lives in Neighborhood B, but vists Neighborhoods A and B. Person 3 lives in Neighborhood C and visits Neighborhood B. Persons 5 and 6 live in Neighborhood C and they do not visit any other neighborhoods.
+
+
+

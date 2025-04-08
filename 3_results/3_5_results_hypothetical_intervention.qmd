@@ -22,39 +22,44 @@ map_plot_1                 <- make_table_coverage(
                                                   intervention_priority = "contact", 
                                                   intervention_stratification = "overall"
                                                   ) |>
-                                  plot_coverage_map()  |>
-                                  apply_style_coverage_map() |>
-                                  add_title("contact-neutralizing strategy")
+                                  plot_coverage_map()  +
+                                  scale_fill_mpxnyc() +
+  theme_mpxnyc() 
+
+
 
 map_plot_2                 <- make_table_coverage(
                                                   intervention_priority = "movement", 
                                                   intervention_stratification = "overall"
                                                   ) |>
-                                  plot_coverage_map()  |>
-                                  apply_style_coverage_map() |>
-                                  add_title("movement-neutralizing strategy")
+                                  plot_coverage_map()  +
+                                  scale_fill_mpxnyc() +
+  theme_mpxnyc()
 
 bar_plot_1                 <- make_table_coverage(
                                                   intervention_priority = "contact", 
                                                   intervention_stratification = "overall") |>
                                   dplyr::filter(group != "Group C") |>
-                                  plot_coverage_bar() |>
-                                  apply_style_coverage_bar() 
+                                  plot_coverage_bar() +
+                                  scale_fill_mpxnyc() +
+                                  theme_mpxnyc()
 
 bar_plot_2                 <- make_table_coverage(
                                                   intervention_priority = "movement", 
                                                   intervention_stratification = "overall"
                                                   ) |>
                                   dplyr::filter(group != "Group C") |>
-                                  plot_coverage_bar() |>
-                                  apply_style_coverage_bar() 
+                                  plot_coverage_bar() +
+                                  scale_fill_mpxnyc() +
+                                  theme_mpxnyc()
 
   
 finished_plot_map          <- cowplot::plot_grid(map_plot_1, map_plot_2)
 finished_plot_bar          <- cowplot::plot_grid(bar_plot_1, bar_plot_2)
 
 
-cowplot::plot_grid(finished_plot_map, finished_plot_bar, ncol=1, rel_heights = c(4,1)) 
+
+cowplot::plot_grid(finished_plot_map, finished_plot_bar, ncol=1, rel_heights = c(4,1))
 
 ```
 
@@ -79,8 +84,11 @@ Under the movement-neutralizing strategy, it would take six community districts 
 #| fig-height: 5
 
 make_table_centrality() |>
-  plot_centrality_bar() |>
-  apply_style_centrality_bar()
+  plot_centrality_bar() +
+    ggplot2::scale_y_continuous("Proportion of participants", limits = c(0, 1), labels = scales::percent) +
+    ggplot2::scale_x_continuous("Intervention order", limits = c(0, 40), breaks = c(0, 10, 20, 30, 40)) +
+  scale_fill_mpxnyc() +
+  theme_mpxnyc()
 
 
 ```
