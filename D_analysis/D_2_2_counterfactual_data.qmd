@@ -8,14 +8,16 @@ targets::tar_source("../R_functions")
 
 ### Counterfactual data
 
-We write the counterfactual model
+
+Under network causal inference, we create a structural equation model fo the system under intervention. In teh network causal inference perspectively, it is possible for one observational unit's treatment value to affect another unit's outcome. Recall Person 1 and Person 2 are a married couple. In this perceptvie, setting Person 1;s dress would afect Person2's job oppottunities and vice versa. For PErson 3, however, their job opportunities are only related to factoers related to them. 
 
 ```{r}
 #| fig-height: 8
 #| fig-width: 7
 make_swig("network_interference")      |> 
   plot_swig(node_radius = 0.2) + 
-  scale_fill_mpxnyc(option = "light")
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc()
 
 ```
 

@@ -354,27 +354,34 @@ div.csl-indent {
 <li>
 <a href="#classic-causal-inference" id="toc-classic-causal-inference" class="nav-link active" data-scroll-target="#classic-causal-inference"><span class="header-section-number">D.1</span> Classic causal inference</a>
   <ul class="collapse">
-<li><a href="#observed-data" id="toc-observed-data" class="nav-link" data-scroll-target="#observed-data"><span class="header-section-number">D.1.1</span> Observed data</a></li>
+<li><a href="#example-1-wealth-dress-and-jobs" id="toc-example-1-wealth-dress-and-jobs" class="nav-link" data-scroll-target="#example-1-wealth-dress-and-jobs">Example 1: Wealth, Dress, and Jobs</a></li>
+  <li><a href="#observed-data" id="toc-observed-data" class="nav-link" data-scroll-target="#observed-data"><span class="header-section-number">D.1.1</span> Observed data</a></li>
   <li><a href="#counterfactual-data" id="toc-counterfactual-data" class="nav-link" data-scroll-target="#counterfactual-data"><span class="header-section-number">D.1.2</span> Counterfactual data</a></li>
   <li><a href="#causal-estimands" id="toc-causal-estimands" class="nav-link" data-scroll-target="#causal-estimands"><span class="header-section-number">D.1.3</span> Causal estimands</a></li>
+  <li><a href="#identification-and-estimation" id="toc-identification-and-estimation" class="nav-link" data-scroll-target="#identification-and-estimation"><span class="header-section-number">D.1.4</span> Identification and estimation</a></li>
   </ul>
 </li>
   <li>
 <a href="#network-causal-inference" id="toc-network-causal-inference" class="nav-link" data-scroll-target="#network-causal-inference"><span class="header-section-number">D.2</span> Network causal inference</a>
   <ul class="collapse">
-<li><a href="#observed-data-1" id="toc-observed-data-1" class="nav-link" data-scroll-target="#observed-data-1"><span class="header-section-number">D.2.1</span> Observed data</a></li>
+<li><a href="#example-2-marriage-wealth-dress-jobs" id="toc-example-2-marriage-wealth-dress-jobs" class="nav-link" data-scroll-target="#example-2-marriage-wealth-dress-jobs">Example 2: Marriage, Wealth, Dress, Jobs</a></li>
+  <li><a href="#observed-data-1" id="toc-observed-data-1" class="nav-link" data-scroll-target="#observed-data-1"><span class="header-section-number">D.2.1</span> Observed data</a></li>
   <li><a href="#counterfactual-data-1" id="toc-counterfactual-data-1" class="nav-link" data-scroll-target="#counterfactual-data-1"><span class="header-section-number">D.2.2</span> Counterfactual data</a></li>
   <li><a href="#causal-estimands-1" id="toc-causal-estimands-1" class="nav-link" data-scroll-target="#causal-estimands-1"><span class="header-section-number">D.2.3</span> Causal estimands</a></li>
+  <li><a href="#identification-and-estimation-1" id="toc-identification-and-estimation-1" class="nav-link" data-scroll-target="#identification-and-estimation-1"><span class="header-section-number">D.2.4</span> Identification and estimation</a></li>
   </ul>
 </li>
   <li>
 <a href="#ssnac" id="toc-ssnac" class="nav-link" data-scroll-target="#ssnac"><span class="header-section-number">D.3</span> SSNAC</a>
   <ul class="collapse">
-<li><a href="#observed-data-2" id="toc-observed-data-2" class="nav-link" data-scroll-target="#observed-data-2"><span class="header-section-number">D.3.1</span> Observed data</a></li>
+<li><a href="#example-3-longitudinal-data-driven-vaccination-campaign" id="toc-example-3-longitudinal-data-driven-vaccination-campaign" class="nav-link" data-scroll-target="#example-3-longitudinal-data-driven-vaccination-campaign">Example 3: Longitudinal Data-Driven Vaccination Campaign</a></li>
+  <li><a href="#observational-data" id="toc-observational-data" class="nav-link" data-scroll-target="#observational-data"><span class="header-section-number">D.3.1</span> Observational data</a></li>
   <li><a href="#counterfactual-data-2" id="toc-counterfactual-data-2" class="nav-link" data-scroll-target="#counterfactual-data-2"><span class="header-section-number">D.3.2</span> Counterfactual data</a></li>
   <li><a href="#causal-estimands-2" id="toc-causal-estimands-2" class="nav-link" data-scroll-target="#causal-estimands-2"><span class="header-section-number">D.3.3</span> Causal estimands</a></li>
   </ul>
 </li>
+  <li><a href="#outbreak-control-intervention" id="toc-outbreak-control-intervention" class="nav-link" data-scroll-target="#outbreak-control-intervention"><span class="header-section-number">D.4</span> Outbreak control intervention</a></li>
+  <li><a href="#statistical-inference" id="toc-statistical-inference" class="nav-link" data-scroll-target="#statistical-inference"><span class="header-section-number">D.5</span> Statistical inference</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -386,32 +393,7 @@ div.csl-indent {
 </details>
 </div>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
-<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>The goals of this appendix are to motivate the usefulness of the SSNAC framework by (i) describing the prevailing system for thinking about data and causality in the field of epidemiology and, (ii) Contrasting it with the system for causal interpretation advocated by the SSNAC framework.</p>
-<p>The prevailing system for causality (as articulated in <span class="citation" data-cites="robins1986 hernán2018">(<a href="../10_references/10_references.html#ref-robins1986" role="doc-biblioref">Robins 1986</a>; <a href="../10_references/10_references.html#ref-hern%C3%A1n2018" role="doc-biblioref">Hernán and Robins 2018</a>)</span>) helps us to sharpen epidemiologic reasoning by providing a template for conducting thought experiments about population health and providing a framework for using observable data to predict the outcomes of our thought experiments.</p>
-<p>For instance, imagine we allowed every person in the united states free, unlimited access to healthcare. Under this system, we could ask how the prevalence of diabetes would change if we did that. The system allows us to estimate the degree of change using data that have already been observed. It does this by making assumptions about some aspects of the causal system which links access to healthcare with changes in diabetes prevalence, and modelling other aspects. Crucially, it provides a way to incorporate evidence from observed data in the model.</p>
-<p>In summary, the prevailing system for causality both provides a template for us to use in generating thought experiments that can be examined using data, and a framework for using data to calculate quantities that would arise under different conditions of the thought experiments.</p>
-<p>One of the crucial assumptions almost universally made by this system is that of independence between observational units - i.e.&nbsp;that the characteristics or health outcomes of behaviors of one person in the study sample are not affected by those of any other person. In our example, this would be the assumption that (for instance), one person’s access to healthcare does not affect any other person’s diabetes risk. It would imply that the diabetes risk for married men who do not cook, would not be affected by the health education their wives might receive if they had access to healthcare.</p>
-<p>The assumption of independence runs counter to our intuition about social life. Humans are social creatures - our lives are defined by our relationships with others. That is why there was a need for the effort that produced this research report. Yet most epidemiologic studies, including randomized trials, operate under the assumption that the individuals under study are not affected by their relationships with others.</p>
-<p>The SSNAC helps to expand our toolbox by acknowledging that relationships powerfully shape health. As we describe below, we do so by making a different assumption than the one of independence. This assumption allows us to use much of the statistical machinery developed for the setting where observational units are assumed to be independent.</p>
-<p>The rest of the appendix is structured using the analogy commonly used by causal inference specialists to make sense of the statistical frameowrk - the randomized trial. We assume that nature is in the business of conducting randomized trials where it is assigning the treatment of interest on the basis of some observed characteristics. In the section on observed data, we understand observed data as the result of the randomized trial nature ran. Following that, in the section on counterfactual data, we create a different model which shows what would happen if we got to assign the treatment of interest the way we want, not the way that nature did it. In the section on causal estimands, we define an outcome measure we are interested in using to assess the different between different treatment assignments, finally in the section on identification and estimation, we figure out how to calculate that outcome measure in terms of the observed data.</p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
-<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<section id="classic-causal-inference" class="level2" data-number="D.1"><h2 data-number="D.1" class="anchored" data-anchor-id="classic-causal-inference">
-<span class="header-section-number">D.1</span> Classic causal inference</h2>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
-<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">make_swig</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">graph_type</span><span class="op">)</span><span class="op">{</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">make_swig</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">graph_type</span><span class="op">)</span><span class="op">{</span></span>
 <span>  </span>
 <span>  </span>
 <span>  <span class="va">graph_nodes_list</span>                           <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span> </span>
@@ -504,7 +486,7 @@ div.csl-indent {
 </details>
 </div>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">make_dag</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">graph_type</span><span class="op">)</span><span class="op">{</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">make_dag</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">graph_type</span><span class="op">)</span><span class="op">{</span></span>
 <span>  </span>
 <span>  </span>
 <span>  <span class="va">graph_nodes_list</span>                           <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span> </span>
@@ -585,7 +567,7 @@ div.csl-indent {
 </details>
 </div>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">plot_swig</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">arrow_length_head</span> <span class="op">=</span> <span class="fl">0.2</span>, <span class="va">arrow_length_tail</span> <span class="op">=</span> <span class="fl">0.05</span>, <span class="va">edge_width</span> <span class="op">=</span> <span class="fl">0.2</span>, <span class="va">node_radius</span> <span class="op">=</span> <span class="fl">0.3</span>, <span class="va">node_margin</span> <span class="op">=</span> <span class="fl">0.4</span>, <span class="va">nudge_intervention_labels</span> <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">{</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">plot_swig</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">arrow_length_head</span> <span class="op">=</span> <span class="fl">0.2</span>, <span class="va">arrow_length_tail</span> <span class="op">=</span> <span class="fl">0.05</span>, <span class="va">edge_width</span> <span class="op">=</span> <span class="fl">0.2</span>, <span class="va">node_radius</span> <span class="op">=</span> <span class="fl">0.3</span>, <span class="va">node_margin</span> <span class="op">=</span> <span class="fl">0.4</span>, <span class="va">nudge_intervention_labels</span> <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">{</span></span>
 <span>  </span>
 <span>  <span class="va">variable_names</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">|&gt;</span></span>
 <span>                            <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -642,7 +624,7 @@ div.csl-indent {
 <span>                        mapping     <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x0 <span class="op">=</span> <span class="va">x</span>, y0 <span class="op">=</span> <span class="va">y</span>, r <span class="op">=</span> <span class="va">node_radius</span> <span class="op">+</span> <span class="fl">0.05</span>, fill <span class="op">=</span> <span class="va">node_type</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">node_characteristics</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">node_shape</span> <span class="op">==</span> <span class="st">"covariate"</span><span class="op">)</span></span>
 <span>                        <span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span></span>
-<span>                        mapping     <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">label</span>, fill <span class="op">=</span> <span class="va">node_type</span><span class="op">)</span>,</span>
+<span>                        mapping     <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">label</span><span class="op">)</span>,</span>
 <span>                        color       <span class="op">=</span> <span class="st">"black"</span>,</span>
 <span>                        size        <span class="op">=</span> <span class="fl">3.5</span>,</span>
 <span>                        parse       <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -650,7 +632,7 @@ div.csl-indent {
 <span>                        nudge_x     <span class="op">=</span> <span class="op">-</span><span class="va">nudge_intervention_labels</span></span>
 <span>                        <span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span></span>
-<span>                        mapping     <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">label</span>, fill <span class="op">=</span> <span class="va">node_type</span><span class="op">)</span>,</span>
+<span>                        mapping     <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">label</span><span class="op">)</span>,</span>
 <span>                        color       <span class="op">=</span> <span class="st">"black"</span>,</span>
 <span>                        size        <span class="op">=</span> <span class="fl">3.5</span>,</span>
 <span>                        parse       <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -658,26 +640,50 @@ div.csl-indent {
 <span>                        nudge_x     <span class="op">=</span> <span class="va">nudge_intervention_labels</span></span>
 <span>                        <span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span></span>
-<span>                        mapping     <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">label</span>, fill <span class="op">=</span> <span class="va">node_type</span><span class="op">)</span>,</span>
+<span>                        mapping     <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">label</span><span class="op">)</span>,</span>
 <span>                        color       <span class="op">=</span> <span class="st">"black"</span>,</span>
 <span>                        size        <span class="op">=</span> <span class="fl">3.5</span>,</span>
 <span>                        parse       <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                        data        <span class="op">=</span> <span class="va">node_characteristics</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">node_shape</span> <span class="op">==</span> <span class="st">"covariate"</span><span class="op">)</span></span>
 <span>                        <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
-<span>      legend.position <span class="op">=</span> <span class="st">"none"</span>,</span>
-<span>      plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">20</span><span class="op">)</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="running-example-1" class="level4"><h4 class="anchored" data-anchor-id="running-example-1">Running example 1</h4>
+<p>To do: 1.fix DANG and SWING 2. Fill out structural equations for SNACC 3. Type up written draft</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
+<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The goals of this appendix are to motivate the usefulness of the SSNAC framework by (i) describing the prevailing system for thinking about data and causality in the field of epidemiology and, (ii) Contrasting it with the system for causal interpretation advocated by the SSNAC framework.</p>
+<p>The prevailing system for causality (as articulated in <span class="citation" data-cites="robins1986 hernán2018">(<a href="../10_references/10_references.html#ref-robins1986" role="doc-biblioref">Robins 1986</a>; <a href="../10_references/10_references.html#ref-hern%C3%A1n2018" role="doc-biblioref">Hernán and Robins 2018</a>)</span>) helps us to sharpen epidemiologic reasoning by providing a template for conducting thought experiments about population health and providing a framework for using observable data to predict the outcomes of our thought experiments.</p>
+<p>For instance, imagine we allowed every person in the united states free, unlimited access to healthcare. Under this system, we could ask how the prevalence of diabetes would change if we did that. The system allows us to estimate the degree of change using data that have already been observed. It does this by making assumptions about some aspects of the causal system which links access to healthcare with changes in diabetes prevalence, and modelling other aspects. Crucially, it provides a way to incorporate evidence from observed data in the model.</p>
+<p>In summary, the prevailing system for causality both provides a template for us to use in generating thought experiments that can be examined using data, and a framework for using data to calculate quantities that would arise under different conditions of the thought experiments.</p>
+<p>One of the crucial assumptions almost universally made by this system is that of independence between observational units - i.e.&nbsp;that the characteristics or health outcomes of behaviors of one person in the study sample are not affected by those of any other person. In our example, this would be the assumption that (for instance), one person’s access to healthcare does not affect any other person’s diabetes risk. It would imply that the diabetes risk for married men who do not cook, would not be affected by the health education their wives might receive if they had access to healthcare.</p>
+<p>The assumption of independence runs counter to our intuition about social life. Humans are social creatures - our lives are defined by our relationships with others. That is why there was a need for the effort that produced this research report. Yet most epidemiologic studies, including randomized trials, operate under the assumption that the individuals under study are not affected by their relationships with others.</p>
+<p>The SSNAC helps to expand our toolbox by acknowledging that relationships powerfully shape health. As we describe below, we do so by making a different assumption than the one of independence. This assumption allows us to use much of the statistical machinery developed for the setting where observational units are assumed to be independent.</p>
+<p>The rest of the appendix is structured using the analogy commonly used by causal inference specialists to make sense of the statistical frameowrk - the randomized trial. We assume that nature is in the business of conducting randomized trials where it is assigning the treatment of interest on the basis of some observed characteristics. In the section on observed data, we understand observed data as the result of the randomized trial nature ran. Following that, in the section on counterfactual data, we create a different model which shows what would happen if we got to assign the treatment of interest the way we want, not the way that nature did it. In the section on causal estimands, we define an outcome measure we are interested in using to assess the different between different treatment assignments, finally in the section on identification and estimation, we figure out how to calculate that outcome measure in terms of the observed data.</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
+<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="classic-causal-inference" class="level2" data-number="D.1"><h2 data-number="D.1" class="anchored" data-anchor-id="classic-causal-inference">
+<span class="header-section-number">D.1</span> Classic causal inference</h2>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
+<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="example-1-wealth-dress-and-jobs" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="example-1-wealth-dress-and-jobs">Example 1: Wealth, Dress, and Jobs</h3>
 <p>We are interested in settling an argument about the relationship between dressing in formal wear and job opportunities. One friend thinks that dressing formally clearly brings more job opportunities. Everyone they know who dressed formally she has seen, has many more opportunities than people who dress casually. The other friend thinks that what really brings job opportunities is currently having a job. In their reasoning, having a job causes people to dress formally and causes people to have job opprotunities, but dressing formally does not in itself improve one’s opportunities.</p>
 <p>We conduct a study to try and understand this question. We recruit three people, Person 1, Person 2, and Person 3. Person 1 and Person 2 are married to each other. Person 1 and Person 3 are newly acquainted colleagues. Say Person 1 has job status <span class="math inline">\(L_1\)</span>, Person 2 has job status <span class="math inline">\(L_2\)</span> and Person 3 has job status <span class="math inline">\(L_3\)</span>. Each of these variables can only take on two values: “employed vs.&nbsp;unemployed”. Similarly we define <span class="math inline">\(A_i\)</span> as Person i’s dress (formal vs.&nbsp;informal), and <span class="math inline">\(Y_i\)</span> as their job opportunities (high vs.&nbsp;low). The job status measurement precedes <span class="math inline">\(L_i\)</span> dress <span class="math inline">\(A_i\)</span> in time, and dress precedes job opportunities <span class="math inline">\(Y_i\)</span>.</p>
 <div class="cell" data-layout-align="center">
-<details><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"fully_connected"</span><span class="op">)</span>         <span class="op">|&gt;</span> <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"fully_connected"</span><span class="op">)</span>         <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div id="fig-spillover-classic-dag" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="D__analysis_files/figure-html/fig-spillover-classic-dag-1.png" class="img-fluid figure-img" width="576"></p>
@@ -701,13 +707,21 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
 <p>We can make a model for how each of these people’s measures. If we made no assumptions at all about the causal process, except the time-ordering of measurements, we can represent this model using <a href="#eq-nospillover-dag">Equation&nbsp;<span>D.1</span></a>. This model is visualized as a causal Directed Acyclic Graph (DAG) in <a href="#fig-spillover-classic-dag">Figure&nbsp;<span>D.1</span></a>. Since there are no missing edges between nodes in the DAG, the structural equation model represents any possible joint distribution between the variables in the DAG. This is the most flexible model.</p>
 <p>But the most flexible model is not the most useful one. To fully characterize this system, we would need to estimate 9 functions using one observation of the 9-dimensional joint distribution that gave rise to the three participant’s observations. Epidemiologists take several approaches to improve the ability to understand the system is to simplify it.</p>
 <p>In the first sub-section below, we show how standard assumptions made in classic causal inference narrow down the set of distributions that can be represented by the model. We do the same thing for assumptions made in network causal inference and in the SSNAC framework.</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
+<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section><section id="observed-data" class="level3" data-number="D.1.1"><h3 data-number="D.1.1" class="anchored" data-anchor-id="observed-data">
 <span class="header-section-number">D.1.1</span> Observed data</h3>
 <section id="independence-assumptions" class="level4"><h4 class="anchored" data-anchor-id="independence-assumptions">Independence assumptions</h4>
 <section id="no-spillover" class="level5"><h5 class="anchored" data-anchor-id="no-spillover">No spillover</h5>
 <p>Under classic causal inference, we make the assumption of no spillover - that measurements taken across participants at the same time (e.g.&nbsp;<span class="math inline">\(L_1\)</span>, <span class="math inline">\(L_2\)</span>, and <span class="math inline">\(L_3\)</span>). In <a href="#fig-iwpillover-classic-dag">Figure&nbsp;<span>D.2</span></a>, the arrows that connected the <span class="math inline">\(L_i\)</span>’s, <span class="math inline">\(A_i\)</span>’s and <span class="math inline">\(Y_i\)</span>’s, respectively have been removed. Note that this is shown in <a href="#eq-fully-connected-dag">Equation&nbsp;<span>D.2</span></a>. <span class="math inline">\(L_2\)</span> is no longer a function of <span class="math inline">\(L_1\)</span>, for instance. In general, the <span class="math inline">\(L_i\)</span>’s are not functions of each other, the <span class="math inline">\(A_i\)</span>’s are not functions of each other, and the <span class="math inline">\(Y_i\)</span>’s are not functions of each other. This implies that given all the measurements taken prior to a set of contemporaneous measures, the contemporaneous measures are independent.</p>
 <div class="cell" data-layout-align="center">
-<details><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"full_interference"</span><span class="op">)</span>      <span class="op">|&gt;</span> <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"full_interference"</span><span class="op">)</span>      <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"h"</span><span class="op">)</span>, option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div id="fig-iwpillover-classic-dag" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="D__analysis_files/figure-html/fig-iwpillover-classic-dag-1.png" class="img-fluid figure-img" width="624"></p>
@@ -731,7 +745,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3) \\
 </section><section id="no-interference" class="level5"><h5 class="anchored" data-anchor-id="no-interference">No interference</h5>
 <p>In addition to the no spillover assumption, classic causal inference makes the no interference assumption. We assume tat measurements made across participants, but not at the same time are independent of each other. This is shown as the absence of arrows that connect <span class="math inline">\(L_i\)</span>’s to <span class="math inline">\(A_j\)</span>’s, <span class="math inline">\(L_i\)</span>’s to <span class="math inline">\(Y_j\)</span>’s and <span class="math inline">\(A_i\)</span>’s to <span class="math inline">\(Y_j\)</span> for <span class="math inline">\(i \neq j\)</span></p>
 <div class="cell" data-layout-align="center">
-<details><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"independence"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"independence"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div id="fig-interference-classic-dag" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="D__analysis_files/figure-html/fig-interference-classic-dag-1.png" class="img-fluid figure-img" width="624"></p>
@@ -769,19 +783,24 @@ A_i &amp;= f_{A}( U_{A_i}, L_i) \\
 Y_i &amp;= f_{Y}( U_{Y_i}, L_i, A_i) \\
 \end{aligned}\]</span>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
 <span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section></section></section><section id="counterfactual-data" class="level3" data-number="D.1.2"><h3 data-number="D.1.2" class="anchored" data-anchor-id="counterfactual-data">
 <span class="header-section-number">D.1.2</span> Counterfactual data</h3>
-<p>To investigate causal estimands, we have to know the possible interventions of interest. We are setting <span class="math inline">\(\textbf{A}=\textbf{a}\)</span>.</p>
+<p>In the last section, we modelled the causal system we think is underway in shaping the welath, dress, and job opportunities among the three people in the study. We say how different the modl of the system is based on the framework we adopt. We looked at the framework we call classic causal inference, a framework named network causal inference, the framework we introduce - SSNAC.</p>
+<p>Epidemiologists approach the task of modelling causal systems not just to understand their correlatin structure, but to understand what would happen if a certain intervention were conducted to manipulate a part of hte causal system. Whereas in observational data, we did not concern ourelves with interventinos, just getting an accurate cusal model, now we tend to the taks of asking what woul dhappen if we manipulated some variables shown in the causal DANG. Particularly, we busy ourslevews with the taks of understanding what would happen to the other variables int he causal DANG, and how best to use data we can collect to inform our guess of what would happen.</p>
+<p>We define a counterfactual outcomes <span class="math inline">\(Y_1^{(a_1)}\)</span>, <span class="math inline">\(Y_2^{(a_2)}\)</span>, and <span class="math inline">\(Y_3^{(a_3)}\)</span>, which represent the level of job opportunities, Persons 1, 2, and 3, would have if we set their dress to level <span class="math inline">\(a_1\)</span>, <span class="math inline">\(a_2\)</span>, and <span class="math inline">\(a_3\)</span>, respectively. This system is shown on a Single World Intervention Graph (SWIG).</p>
+<p>A SWIG represents a structural equation model where some of the equations are superceded by the value assigned by the expriementer. For “treamtnet” variables, the diagram separates the value of the variable in the observational setting, to the value that will be used by susbequent equations, which is set by the experimenter.</p>
+<p>Note that bcause of the assumption of no interference and no spillover, each counterfactual outcome is a function only of the treatment value of the same individual.</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_swig</span><span class="op">(</span><span class="st">"independence"</span><span class="op">)</span>      <span class="op">|&gt;</span> </span>
+<details><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_swig</span><span class="op">(</span><span class="st">"independence"</span><span class="op">)</span>      <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="D__analysis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="D__analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p><span id="eq-structural-equation-homogenous"><span class="math display">\[
@@ -797,31 +816,39 @@ Y_i^{(a_i)} &amp;= f_{Y}(U_{Y_i} , L_i, a_i) \\
 <span class="math display">\[\begin{aligned}
 \frac{1}{n} \sum_i E[Y_i(1) - Y_i(0)]
 \end{aligned}\]</span>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
-<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section></section></section><section id="network-causal-inference" class="level2" data-number="D.2"><h2 data-number="D.2" class="anchored" data-anchor-id="network-causal-inference">
-<span class="header-section-number">D.2</span> Network causal inference</h2>
+</section></section><section id="identification-and-estimation" class="level3" data-number="D.1.4"><h3 data-number="D.1.4" class="anchored" data-anchor-id="identification-and-estimation">
+<span class="header-section-number">D.1.4</span> Identification and estimation</h3>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
 <span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</section></section><section id="network-causal-inference" class="level2" data-number="D.2"><h2 data-number="D.2" class="anchored" data-anchor-id="network-causal-inference">
+<span class="header-section-number">D.2</span> Network causal inference</h2>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
 <span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="observed-data-1" class="level3" data-number="D.2.1"><h3 data-number="D.2.1" class="anchored" data-anchor-id="observed-data-1">
+<section id="example-2-marriage-wealth-dress-jobs" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="example-2-marriage-wealth-dress-jobs">Example 2: Marriage, Wealth, Dress, Jobs</h3>
+<p>We mentioned that in our study sample, Person 1 and Person 2 are married to each other, and Person 1 and Person 3 are new colelagues. In the causal system connecting study participants wealth with their dress and their job opportunities, an argument could be made that Person 1’s wealth affects Person 2’s dress, since they pool their individually held wealth. It could also be argued that Person 1’s wealth affects Person 2’s job opportunities if wealth brings the married couple into contact with other couples who are connected to job markets. Finally, we could argue that Person 1’s dress affects Person 2’s job opportunities if some aspect of the reputation Person 2 enjoys in their job market derives from Person 1’s status in that market. The argument is symmetric, Person 2 could also potentially affect Person 1 in the same ways.</p>
+<p>What about the relationship between Person 1 and Person 3? How does that shape the measuresments of either person? We can imagine that the wealth and dress of a newly acquainted colleague would have no bearing at all on the dress and job opportunities of her colleague. Whereas Person 1 and Person 2 are connected in DAG [], Person 1 and Person 3 are not because their relationship is irrelevant to the causal system under investigation. Person 2 and Person 3 do not affect each other since they have no relationship at all.</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
+<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="observed-data-1" class="level3" data-number="D.2.1"><h3 data-number="D.2.1" class="anchored" data-anchor-id="observed-data-1">
 <span class="header-section-number">D.2.1</span> Observed data</h3>
 <section id="independence-assumptions-1" class="level4"><h4 class="anchored" data-anchor-id="independence-assumptions-1">Independence assumptions</h4>
 <section id="no-spillover-1" class="level5"><h5 class="anchored" data-anchor-id="no-spillover-1">No spillover</h5>
 <p>Just as under classical causal inference, network causal inference as we articulate here, assumes no spillover. See figure [] and equations []. It is not necessary to make this restriction to work with network data. Makofane (2021) makes the assumption that contemporaneous measures are arise from conditional Markov Random Field models. We will elaborate a framework (SSNAC-Extension, or SSNACX) at a later stage. In brief, the difference between this articulation and that will be in estimation.</p>
 </section><section id="network-interference" class="level5"><h5 class="anchored" data-anchor-id="network-interference">Network interference</h5>
 <div class="cell" data-layout-align="center">
-<details><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"network_interference"</span><span class="op">)</span>   <span class="op">|&gt;</span> <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"network_interference"</span><span class="op">)</span>   <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div id="fig-interference-dag" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="D__analysis_files/figure-html/fig-interference-dag-1.png" class="img-fluid figure-img" width="624"></p>
@@ -843,13 +870,14 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
 \end{aligned}
 \tag{D.5}\]</span></span></p>
 <p>Rather than asume that there is no interference, under network causal inference, we make the assumption that interference respects some mapping between individuals - a mapping given by a network or set of networks. This line of reasoning comes from Makofane dissertation. It was strongly influenced by Tchetgen Tchetgen. We follow a similar approach to <span class="citation" data-cites="aronow2017">(<a href="../10_references/10_references.html#ref-aronow2017" role="doc-biblioref">Aronow and Samii 2017</a>)</span> who termed this mapping, an “exposure mapping”.</p>
-<p>We mentioned that in our study sample, Person 1 and Person 2 are married to each other, and Person 1 and Person 3 are new colelagues. In the causal system connecting study participants wealth with their dress and their job opportunities, an argument could be made that Person 1’s wealth affects Person 2’s dress, since they pool their individually held wealth. It could also be argued that Person 1’s wealth affects Person 2’s job opportunities if wealth brings the married couple into contact with other couples who are connected to job markets. Finally, we could argue that Person 1’s dress affects Person 2’s job opportunities if some aspect of the reputation Person 2 enjoys in their job market derives from Person 1’s status in that market. The argument is symmetric, Person 2 could also potentially affect Person 1 in the same ways.</p>
-<p>What about the relationship between Person 1 and Person 3? How does that shape the measuresments of either person? We can imagine that the wealth and dress of a newly acquainted colleague would have no bearing at all on the dress and job opportunities of her colleague. Whereas Person 1 and Person 2 are connected in DAG [], Person 1 and Person 3 are not because their relationship is irrelevant to the causal system under investigation. Person 2 and Person 3 do not affect each other since they have no relationship at all.</p>
 </section></section><section id="homogeneity-assumptions" class="level4"><h4 class="anchored" data-anchor-id="homogeneity-assumptions">Homogeneity assumptions</h4>
 <p>Without loss of generality, we can re-write the functions <a href="#eq-networkinterference">Equation&nbsp;<span>D.5</span></a> so that they are similar in structure to each other. We define <span class="math inline">\(N_i\)</span> as the indices of all the nodes connected to node <span class="math inline">\(i\)</span>. Then <span class="math inline">\(\mathbf{L}_{N_i}\)</span> is the sub-vector of <span class="math inline">\(\mathbf{L}\)</span> containing the entries corresponding to the indices in <span class="math inline">\(N_i\)</span>. Similarly, we define <span class="math inline">\(A_{N_i}\)</span> as the sub-vector of <span class="math inline">\(A\)</span> corresponding to the indices in <span class="math inline">\(N_i\)</span>. Note that though they are represented as part of the structural equation model in <span class="quarto-unresolved-ref">?eq-networkinterference-homogenous</span>, these are deterministic functions, since they do not have an error term (<span class="math inline">\(U_*\)</span>) as an input.</p>
 <p>Once in this format, we make two homogeneity assumptions which reduce the complexity of the structural equation model.</p>
 <div class="cell" data-layout-align="center">
-<details><summary>Code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"homogenous_interference"</span><span class="op">)</span>            <span class="op">|&gt;</span> <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"homogenous_interference"</span><span class="op">)</span>            <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div id="fig-homogenous-dag" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="D__analysis_files/figure-html/fig-homogenous-dag-1.png" class="img-fluid figure-img" width="672"></p>
@@ -857,7 +885,6 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
 </div>
 </div>
 </div>
-<p>We define the following vectors:</p>
 <p><span class="math display">\[
 \begin{aligned}
 L_1 &amp;= f_{L_1}(U_{L_1}) \\
@@ -894,15 +921,19 @@ Y_3 &amp;= f_{Y}(U_{Y_3}, L_3,A_3,  g_{Y_2}(\mathbf{L}_{N_3}), h_{Y_2}(\mathbf{A
 \end{aligned}
 \]</span></p>
 <p>This simplifies the model, but still forces us to write the structural equations for each observation separately since each observation potentially has a set of unique exposure mappings.</p>
-</section><section id="homogenous-inteference" class="level5"><h5 class="anchored" data-anchor-id="homogenous-inteference">Homogenous inteference</h5>
-<p>We assume that the functions that map measures from connected individuals into the structural equation are identical across individuals. We also assume that the order of the entries does not matter in the the input for functions <span class="math inline">\(g_A\)</span>, <span class="math inline">\(g_Y\)</span>, and <span class="math inline">\(h_Y\)</span>. i.e.&nbsp;the functions are invariant under any permutation of the entries in the input vector. e.g.&nbsp;</p>
+</section><section id="homogenous-interference" class="level5"><h5 class="anchored" data-anchor-id="homogenous-interference">Homogenous interference</h5>
+<p><em>Equivalency</em>: We assume that the functions that map measures from connected individuals into the structural equation are identical across individuals.</p>
 <span class="math display">\[\begin{aligned}
 g_A = g_{L_1} &amp;= g_{L_2} = g_{L_3} \\
 h_Y = h_{A_1} &amp;= h_{A_2} = h_{A_3} \\
 g_Y = g_{L_1} &amp;= g_{L_2} = g_{L_3} \\
-
 \end{aligned}\]</span>
-<p>So we can re-write the structural equation model like this:</p>
+<p><em>Symmetry</em>: We also assume that the order of the entries does not matter in the the input for functions <span class="math inline">\(g_A\)</span>, <span class="math inline">\(g_Y\)</span>, and <span class="math inline">\(h_Y\)</span>. i.e.&nbsp;the functions are invariant under any permutation of the entries in the input vector. e.g.</p>
+<p><em>Boundedness</em>: we assume that node degree is bounded.</p>
+<p><span class="math display">\[
+g_A, h_Y, g_Y &lt; c \text{ for } c \in \mathbf{Z}
+\]</span></p>
+<p>We can re-write the structural equation model like this:</p>
 <p><span id="eq-causal-dang-homogenous"><span class="math display">\[
 \begin{aligned}
 L_i &amp;= f_{L}( U_{L_i} ) \\
@@ -911,19 +942,20 @@ Y_i &amp;= f_{Y}( U_{Y_i},  L_i,  g_{Y}(\textbf{L}_{N_i}),   A_i,  h_{Y}(\textbf
 \end{aligned}
 \tag{D.6}\]</span></span></p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
 <span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section></section></section><section id="counterfactual-data-1" class="level3" data-number="D.2.2"><h3 data-number="D.2.2" class="anchored" data-anchor-id="counterfactual-data-1">
 <span class="header-section-number">D.2.2</span> Counterfactual data</h3>
-<p>We write the counterfactual model</p>
+<p>Under network causal inference, we create a structural equation model fo the system under intervention. In teh network causal inference perspectively, it is possible for one observational unit’s treatment value to affect another unit’s outcome. Recall Person 1 and Person 2 are a married couple. In this perceptvie, setting Person 1;s dress would afect Person2’s job oppottunities and vice versa. For PErson 3, however, their job opportunities are only related to factoers related to them.</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_swig</span><span class="op">(</span><span class="st">"network_interference"</span><span class="op">)</span>      <span class="op">|&gt;</span> </span>
+<details><summary>Code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_swig</span><span class="op">(</span><span class="st">"network_interference"</span><span class="op">)</span>      <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="D__analysis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<p><img src="D__analysis_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p><span id="eq-network-interference-dang"><span class="math display">\[
@@ -947,21 +979,20 @@ Y_i^{(a_i,\textbf{a}_{N_i} )} &amp;= f_{Y}(U_{Y_i}, L_i,  a_i,  g_{Y}(\textbf{L}
 <p><span class="math display">\[
 \frac{1}{n}\sum_i E[Y_i(0, \textbf{ 1}) - Y_i(0, \textbf{0})]
 \]</span></p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
-<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section></section></section><section id="ssnac" class="level2" data-number="D.3"><h2 data-number="D.3" class="anchored" data-anchor-id="ssnac">
-<span class="header-section-number">D.3</span> SSNAC</h2>
+</section></section><section id="identification-and-estimation-1" class="level3" data-number="D.2.4"><h3 data-number="D.2.4" class="anchored" data-anchor-id="identification-and-estimation-1">
+<span class="header-section-number">D.2.4</span> Identification and estimation</h3>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
 <span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="observed-data-2" class="level3" data-number="D.3.1"><h3 data-number="D.3.1" class="anchored" data-anchor-id="observed-data-2">
-<span class="header-section-number">D.3.1</span> Observed data</h3>
-<section id="compact-graphic-representation" class="level4"><h4 class="anchored" data-anchor-id="compact-graphic-representation">Compact graphic representation</h4>
+</section></section><section id="ssnac" class="level2" data-number="D.3"><h2 data-number="D.3" class="anchored" data-anchor-id="ssnac">
+<span class="header-section-number">D.3</span> SSNAC</h2>
+<section id="compact-graphic-representation-causal-dang" class="level4"><h4 class="anchored" data-anchor-id="compact-graphic-representation-causal-dang">Compact graphic representation: Causal DANG</h4>
+<p>As we see in [FIG], using causal DAGs, we stretch the possibility of depicting a causal system including only three people. Trying to depict a system with four people, each wiht three measures, it woul dbe nearly impossible to see clearly which nodes are connected by which arrows. One of the major draws of causal DAG diagrams is that they allow epidemiologists to reason graphically about the structure of confounding or selection.</p>
+<p>We introduce the Causal Directed Acyclic Network Graph (causal DANG), which allows for the representation of complex systems. The causal DANG has precise statistical interpretation under the SSNAC framework. Consider figure [homogenous]. That figure shows us tow pieces of information: the structure of causation within individuals, and the structure of causaltion accross individuals. In the causal DANG, we show these pieces of information separately.</p>
+<p>The first aspect (structural part) of the causal DANG shows the causal structure within individuals. It is a DAG of vector-valued variables <span class="math inline">\(L\)</span>, <span class="math inline">\(A\)</span>, and <span class="math inline">\(Y\)</span>. This DAG has precise standad interpretation. It gives the conditional independencies accross these variables. This is an incomplete set of independencies, however, as the entries of these three vectors connect accros the vectors according to the network.</p>
+<p>The second aspect (network part) of the causal DANG shows the structure of the network or networks which encode the conditional independencies accross individuals.</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">structural_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  name  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"L"</span>, <span class="st">"A"</span>, <span class="st">"Y"</span><span class="op">)</span>,</span>
@@ -1014,6 +1045,9 @@ Y_i^{(a_i,\textbf{a}_{N_i} )} &amp;= f_{Y}(U_{Y_i}, L_i,  a_i,  g_{Y}(\textbf{L}
 </div>
 </div>
 </section><section id="multiple-scales-and-entities" class="level4"><h4 class="anchored" data-anchor-id="multiple-scales-and-entities">Multiple scales and entities</h4>
+<p>The causal DANG relaxes the assumption that all measures in the causal system can be grouped into non-overlapping sets (i.e.&nbsp;that all measures can be divvied by among study participants). In this framework, different types of entities, represented by vectors of differnt lengthes, can be depicted on the same DANG.</p>
+<p>For example, imagine conducting a flu vaccination drive in a system involving three neighborhoods (Neighborhood A-C) and five people (Person 1-5). The campaign is conducted at the level of the neighborhood. Each person who lives in or visits each neighborhood has a chance of receiving the campaign message, and each person has a chance of becoming vaccinated as a result. Persons 2, 3, 4, and 5 each lived in or visited Neighborhood C. Persons 3 and 1 visited or lived in Neighborhood B, and Persons 1 and 2 visited or lived in Neighborhood A.</p>
+<p>This system is encoded by causal DANG [XXX], which represents neighborhood level intervention status using a vector of length 3, person-level exposure to the intervention messging as a vector of length 5, and vaccination status as a vector of length 5 for the structural part. The network part of the causal DANG is given by the graph shown (inset) connecting persons with neighborhoods.</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">structural_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  name  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"C"</span>, <span class="st">"A"</span>, <span class="st">"Y"</span><span class="op">)</span>,</span>
@@ -1045,12 +1079,8 @@ Y_i^{(a_i,\textbf{a}_{N_i} )} &amp;= f_{Y}(U_{Y_i}, L_i,  a_i,  g_{Y}(\textbf{L}
 <span></span>
 <span><span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/tbl_graph.html">tbl_graph</a></span><span class="op">(</span>nodes <span class="op">=</span> <span class="va">structural_nodes</span>, edges <span class="op">=</span> <span class="va">structural_edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
-<span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span>,</span>
-<span>    legend.position <span class="op">=</span> <span class="st">"none"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span></span>
-<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <p><img src="D__analysis_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1058,20 +1088,26 @@ Y_i^{(a_i,\textbf{a}_{N_i} )} &amp;= f_{Y}(U_{Y_i}, L_i,  a_i,  g_{Y}(\textbf{L}
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/tbl_graph.html">tbl_graph</a></span><span class="op">(</span>nodes <span class="op">=</span> <span class="va">network_nodes</span>, edges <span class="op">=</span> <span class="va">network_edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span>, node_margin <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>  <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
-<span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span>,</span>
-<span>    legend.position <span class="op">=</span> <span class="st">"none"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span></span>
-<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <p><img src="D__analysis_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section><section id="repeated-observations" class="level4"><h4 class="anchored" data-anchor-id="repeated-observations">Repeated observations</h4>
-</section><section id="running-example-2" class="level4"><h4 class="anchored" data-anchor-id="running-example-2">Running example 2</h4>
+</section><section id="example-3-longitudinal-data-driven-vaccination-campaign" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="example-3-longitudinal-data-driven-vaccination-campaign">Example 3: Longitudinal Data-Driven Vaccination Campaign</h3>
+<p>Imagine a vaccination campaign conducted over three weeks in the city of Nowhereville. Five people live in the city of Nowhereville. They each live in a particular neighborhood, but visit other neighborhoods as well. You are interested in promoting flu vaccination, but want to make sure you understand the likely pattern of flu transmission based on where people live and visit.</p>
+<p>Person 1 lives in Neighborhood A and visit Neighborhood B. Person 2 lives in Neighborhood B, but vists Neighborhoods A and B. Person 3 lives in Neighborhood C and visits Neighborhood B. Persons 5 and 6 live in Neighborhood C and they do not visit any other neighborhoods.</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
+<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="observational-data" class="level3" data-number="D.3.1"><h3 data-number="D.3.1" class="anchored" data-anchor-id="observational-data">
+<span class="header-section-number">D.3.1</span> Observational data</h3>
+<p>We define <span class="math inline">\(\mathbf{V}_t\)</span> as a vector of length 5, whose entries indicate the vaccination status of Persons 1 to 5. <span class="math inline">\(\mathbf{M}_t\)</span> is a vector of length 5 whose entries indicate whether each individuals was exposed to vaccination campaign messaging. <span class="math inline">\(\mathbf{T}_t\)</span> is a vector of length 3 which indicates whether each neighrbood implemented the intervention at time <span class="math inline">\(t\)</span>. <span class="math inline">\(\mathbf{R}_t\)</span> is a vector of length3 which indicated the ranking of each neighborhood in terms of prioritization for vaccination.</p>
+<p>In this system, at the beginnig of each week, each neighborhood gets a priority ranking based on the prevalence of vaccination, among other factors. Based on that ranking, each neighborhood will either implement the invitation (if its ranking is high enough), or not. At the person level, each person has an indicator of whether they have been exposed to the messaging or not. If they have, and they have not yet vaccinated, they get another follow-up message. If they have been vaccinated, and have receive a message, they have vaccinated. no further messages are delivered to them. Finally, we have a measure indicating whether each individual was vaccinated or not. Once an individual is vaccinated, they remain vaccinated.</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"V0"</span>, label <span class="op">=</span> <span class="st">r"($V_{0}$)"</span>, x <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="fl">8</span>, node_type <span class="op">=</span> <span class="st">"Individual"</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"R1"</span>, label <span class="op">=</span> <span class="st">r"($R_{1}$)"</span>, x <span class="op">=</span> <span class="fl">2</span>, y <span class="op">=</span> <span class="fl">2</span>, node_type <span class="op">=</span> <span class="st">"Community"</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"T1"</span>, label <span class="op">=</span> <span class="st">r"($T_{1}$)"</span>, x <span class="op">=</span> <span class="fl">3</span>, y <span class="op">=</span> <span class="fl">4</span>, node_type <span class="op">=</span> <span class="st">"Community"</span><span class="op">)</span></span>
@@ -1124,13 +1160,14 @@ Y_i^{(a_i,\textbf{a}_{N_i} )} &amp;= f_{Y}(U_{Y_i}, L_i,  a_i,  g_{Y}(\textbf{L}
 <span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span>,</span>
 <span>    legend.position <span class="op">=</span> <span class="st">"none"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="D__analysis_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<p><img src="D__analysis_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">network_nodes_0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">network_nodes_0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"01"</span>, <span class="st">"02"</span>, <span class="st">"03"</span>, <span class="st">"04"</span>, <span class="st">"05"</span><span class="op">)</span>,</span>
 <span>  label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span><span class="op">)</span>,</span>
 <span>  x  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span> <span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>,</span>
@@ -1206,14 +1243,9 @@ Y_i^{(a_i,\textbf{a}_{N_i} )} &amp;= f_{Y}(U_{Y_i}, L_i,  a_i,  g_{Y}(\textbf{L}
 <span></span>
 <span><span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/tbl_graph.html">tbl_graph</a></span><span class="op">(</span>nodes <span class="op">=</span> <span class="va">network_nodes</span>, edges <span class="op">=</span> <span class="va">network_edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_swig</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, node_radius <span class="op">=</span> <span class="fl">0.1</span>, node_margin <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>  <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
-<span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span>,</span>
-<span>    legend.position <span class="op">=</span> <span class="st">"none"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<p><img src="D__analysis_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
-</div>
+<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p><span id="eq-repeated-observations"><span class="math display">\[
 \begin{aligned}
@@ -1234,15 +1266,15 @@ R_{4j} &amp;=  f_{R_4}(U_{R_{4j}}, \mathbf{V}_{1} ) \\
 \end{aligned}
 \tag{D.8}\]</span></span></p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
 <span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="counterfactual-data-2" class="level3" data-number="D.3.2"><h3 data-number="D.3.2" class="anchored" data-anchor-id="counterfactual-data-2">
+</section><section id="counterfactual-data-2" class="level3" data-number="D.3.2"><h3 data-number="D.3.2" class="anchored" data-anchor-id="counterfactual-data-2">
 <span class="header-section-number">D.3.2</span> Counterfactual data</h3>
 <section id="person-intervention" class="level4"><h4 class="anchored" data-anchor-id="person-intervention">Person intervention</h4>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"V0"</span>, label <span class="op">=</span> <span class="st">r"($V_{0}$)"</span>      , x <span class="op">=</span> <span class="fl">1</span> , y <span class="op">=</span> <span class="fl">8</span> , node_type <span class="op">=</span> <span class="st">"Individual"</span>, node_shape <span class="op">=</span> <span class="st">"covariate"</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"R1"</span>, label <span class="op">=</span> <span class="st">r"($R_{1}$)"</span>      , x <span class="op">=</span> <span class="fl">2</span> , y <span class="op">=</span> <span class="fl">2</span> , node_type <span class="op">=</span> <span class="st">"Community"</span>, node_shape <span class="op">=</span> <span class="st">"covariate"</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"T1"</span>, label <span class="op">=</span> <span class="st">r"($T_{1}$)"</span>      , x <span class="op">=</span> <span class="fl">3</span> , y <span class="op">=</span> <span class="fl">4</span> , node_type <span class="op">=</span> <span class="st">"Community"</span>, node_shape <span class="op">=</span> <span class="st">"covariate"</span><span class="op">)</span></span>
@@ -1294,9 +1326,10 @@ R_{4j} &amp;=  f_{R_4}(U_{R_{4j}}, \mathbf{V}_{1} ) \\
 <span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span>,</span>
 <span>    legend.position <span class="op">=</span> <span class="st">"none"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="D__analysis_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+<p><img src="D__analysis_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p><span id="eq-personintervention"><span class="math display">\[
@@ -1316,7 +1349,7 @@ R_{4j}^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)} &amp;=  f_{R_4}(U_{R_{4j}}, 
 \tag{D.9}\]</span></span></p>
 </section><section id="place-intervention" class="level4"><h4 class="anchored" data-anchor-id="place-intervention">Place intervention</h4>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"V0"</span>, label <span class="op">=</span> <span class="st">r"($V_{0}$)"</span>      , x <span class="op">=</span> <span class="fl">1</span> , y <span class="op">=</span> <span class="fl">8</span> , node_type <span class="op">=</span> <span class="st">"Individual"</span>, node_shape <span class="op">=</span> <span class="st">"covariate"</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"R1"</span>, label <span class="op">=</span> <span class="st">r"($R_{1}$)"</span>      , x <span class="op">=</span> <span class="fl">2</span> , y <span class="op">=</span> <span class="fl">2</span> , node_type <span class="op">=</span> <span class="st">"Community"</span>, node_shape <span class="op">=</span> <span class="st">"covariate"</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"T1"</span>, label <span class="op">=</span> <span class="st">r"($T_{1}$)"</span>      , x <span class="op">=</span> <span class="fl">3</span> , y <span class="op">=</span> <span class="fl">4</span> , node_type <span class="op">=</span> <span class="st">"Community"</span>, node_shape <span class="op">=</span> <span class="st">"preintervention"</span><span class="op">)</span></span>
@@ -1368,9 +1401,10 @@ R_{4j}^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)} &amp;=  f_{R_4}(U_{R_{4j}}, 
 <span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span>,</span>
 <span>    legend.position <span class="op">=</span> <span class="st">"none"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="D__analysis_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+<p><img src="D__analysis_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p><span id="eq-placeintervention-dang"><span class="math display">\[
@@ -1390,7 +1424,7 @@ R_{4j}^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)} &amp;=  f_{R_4}(U_{R_{4j}}, 
 \tag{D.10}\]</span></span></p>
 </section><section id="edge-interventions" class="level4"><h4 class="anchored" data-anchor-id="edge-interventions">Edge interventions</h4>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"V0"</span>, label <span class="op">=</span> <span class="st">r"($V_{0}$)"</span>      , x <span class="op">=</span> <span class="fl">1</span> , y <span class="op">=</span> <span class="fl">8</span> , node_type <span class="op">=</span> <span class="st">"Individual"</span>, node_shape <span class="op">=</span> <span class="st">"covariate"</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"R1"</span>, label <span class="op">=</span> <span class="st">r"($R_{1}^{(h)}$)"</span>      , x <span class="op">=</span> <span class="fl">2</span> , y <span class="op">=</span> <span class="fl">2</span> , node_type <span class="op">=</span> <span class="st">"Community"</span>, node_shape <span class="op">=</span> <span class="st">"covariate"</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"T1"</span>, label <span class="op">=</span> <span class="st">r"($T_{1}^{(h)}$)"</span>      , x <span class="op">=</span> <span class="fl">3</span> , y <span class="op">=</span> <span class="fl">4</span> , node_type <span class="op">=</span> <span class="st">"Community"</span>, node_shape <span class="op">=</span> <span class="st">"covariate"</span><span class="op">)</span></span>
@@ -1439,9 +1473,10 @@ R_{4j}^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)} &amp;=  f_{R_4}(U_{R_{4j}}, 
 <span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span>,</span>
 <span>    legend.position <span class="op">=</span> <span class="st">"none"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="D__analysis_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+<p><img src="D__analysis_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p><span id="eq-edge-intervention-dang"><span class="math display">\[
@@ -1476,7 +1511,65 @@ E[\mathbf{V}_{0}], E[\mathbf{V}_{1}^{(\mathbf{t}_{1})}], E[\mathbf{V}_{2}^{(\mat
 <p><span class="math display">\[
 E[\mathbf{V}_{0}], E[\mathbf{V}_{1}^{(h)}], E[\mathbf{V}_{2}^{(h)}], E[\mathbf{V}_{3}^{(h)}]
 \]</span></p>
-<p># #</p>
+</section></section></section><section id="outbreak-control-intervention" class="level2" data-number="D.4"><h2 data-number="D.4" class="anchored" data-anchor-id="outbreak-control-intervention">
+<span class="header-section-number">D.4</span> Outbreak control intervention</h2>
+<p>Consider a sequence of graphs <span class="math inline">\(G^{(k)}\)</span> for <span class="math inline">\(k \in \mathbb{N}_0\)</span> constructed so that</p>
+<p><span class="math display">\[
+G^{(0)}(N^{(0)}, \psi^{(0)}) = G(N, \psi).
+\]</span></p>
+<p>and so that given <span class="math inline">\(G^{(k)}\)</span>, we calculate <span class="math inline">\(G^{(k+1)}(N^{(k+1)}, \psi^{(k+1)})\)</span> by selecting a community district <span class="math inline">\(n^{(k+1)}\)</span> along with all participants connected with it</p>
+<p><span class="math display">\[
+H^{(k+1)} = \{s \in N^{(k)}_p : \psi^{(k)}(s,n^{(k+1)}) &gt; 0 \} \cup \{ n^{(k+1)} \}
+\]</span></p>
+<p>and removing them from the node set</p>
+<p><span class="math display">\[
+N^{(k+1)}   = N^{(k)} \backslash \ H^{(k+1)}    
+\]</span> The updated adjacency function <span class="math inline">\(\psi^{(k+1)}\)</span> preserves all the edges represented by <span class="math inline">\(\psi^{(k)}\)</span> for terminal nodes included in <span class="math inline">\(N^{(k+1)}\)</span>:</p>
+<p><span class="math display">\[
+\psi^{(k+1)}(a,b) = \psi^{(k)}(a,b),  \forall a,b \in  N^{(k+1)}
+\]</span></p>
+<p>Note: All measures defined in the previous sections can be calculated based on the updated graph <span class="math inline">\(G^{(k)}\)</span>. We indicate this case by adding a superscript with index number <span class="math inline">\(k\)</span> for the particular measure. e.g.&nbsp;We can define <span class="math inline">\(s_j^{(k)}|A\)</span> relative to graph <span class="math inline">\(G^{(k)}\)</span> just as <span class="math inline">\(s_j|A\)</span> is defined relative to graph <span class="math inline">\(G\)</span>.</p>
+<section id="intervention-strategies" class="level4"><h4 class="anchored" data-anchor-id="intervention-strategies">Intervention strategies</h4>
+<p>We examined two approaches for selecting a community district to immunize, corresponding to different intervention priorities. In the first, we select the next community district to immunize to maximize the number of people to be immunized. In the second, we select the next community district with the goal of minimizing the likelihood of contagion between community districts.</p>
+<section id="contact-neutralizing" class="level5"><h5 class="anchored" data-anchor-id="contact-neutralizing">Contact-neutralizing</h5>
+<p>In the contact-neutralizing strategy <span class="math inline">\(n^{(k+1)}\)</span> satisfies:</p>
+<p><span class="math display">\[
+r_{n^{(k+1)}} = \max_{j \in N_c^{(k)}}{r_j^{(k)}}
+\]</span></p>
+</section><section id="movement-neutralizing" class="level5"><h5 class="anchored" data-anchor-id="movement-neutralizing">Movement-neutralizing</h5>
+<p>In the movement-neutralizing strategy <span class="math inline">\(n^{(k+1)}\)</span> satisfies:</p>
+<p><span class="math display">\[
+s_{n^{(k+1)}} = \max_{j \in N_c^{(k)}}{s_j^{(k)}}
+\]</span></p>
+</section></section><section id="intervention-outcomes" class="level4"><h4 class="anchored" data-anchor-id="intervention-outcomes">Intervention outcomes</h4>
+<section id="spatial-efficiency" class="level5"><h5 class="anchored" data-anchor-id="spatial-efficiency">Spatial efficiency</h5>
+<p>Intervention coverage for community district <span class="math inline">\(n^{(k)}\)</span>, the <span class="math inline">\(k^{th}\)</span> community district to be immunized, is defined as:</p>
+<p><span class="math display">\[
+\frac{ r_{n^{(k)}}^{(k-1)}}{ |N_p|}
+\]</span></p>
+<p>The cumulative intervention coverage after immunizing <span class="math inline">\(k\)</span> community districts, therefore, is:</p>
+<p><span class="math display">\[
+\sum_{t = 1}^k{\frac{ r_{n^{(t)}}^{(t-1)}}{ |N_p|}}
+\]</span></p>
+</section><section id="social-network-impact" class="level5"><h5 class="anchored" data-anchor-id="social-network-impact">Social network impact</h5>
+<p>The cumulative social network impact of immunizing <span class="math inline">\(k\)</span> community districts is measured in terms of the size of the largest of the connected components <span class="math inline">\(C_t^{(k)}\)</span> of the <span class="math inline">\(G_p^{(k)}\)</span> network as a proportion of the total number of participants.</p>
+<p><span class="math display">\[
+\frac{\max_t{C^{(k)}_{t}}}{|N_p|}
+\]</span></p>
+</section></section></section><section id="statistical-inference" class="level2" data-number="D.5"><h2 data-number="D.5" class="anchored" data-anchor-id="statistical-inference">
+<span class="header-section-number">D.5</span> Statistical inference</h2>
+<p>To conduct the bootstrap, we start by forming a synthetic dataset <span class="math inline">\(N_p^*\)</span> of re-sampled individuals. To do this, we repeatedly sample a random individual <span class="math inline">\(t\)</span> from the set of people <span class="math inline">\(N_p\)</span> with replacement. Then we assign each sampled individual a new index using function <span class="math display">\[
+l: N \to N^*
+\]</span></p>
+<p>Using the sampled individuals and all the community districts, we form a new network</p>
+<p><span class="math display">\[
+G(N^*, \psi^*)
+\]</span></p>
+<p>where <span class="math inline">\(N^* = N_p^* \cup N_c\)</span>. In this graph, the adjacency function satisfies:</p>
+<p><span class="math display">\[
+\psi^*(a,b) = \psi(l^{-1}(a), b)
+\]</span> for <span class="math inline">\(a \in N_p^*\)</span> and <span class="math inline">\(b \in N_c\)</span>.</p>
+<p>In <span class="math inline">\(G(N^*, \psi^*)\)</span>, individuals are batched into equal groups. Each group represent a repetition of the bootstrap procedure. Then for a given statistic, statistical inference is implemented by calculating the statistic separately in each of these groups and treating the result as a random realization from the distribution of that particular statistic.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -1490,7 +1583,7 @@ Hernán, Miguel, and James M. Robins. 2018. <em>Causal inference</em>. Chapman &
 Robins, James. 1986. <span>“A New Approach to Causal Inference in Mortality Studies with a Sustained Exposure Period<span></span>application to Control of the Healthy Worker Survivor Effect.”</span> <em>Mathematical Modelling</em> 7 (9-12): 13931512.
 </div>
 </div>
-</section></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");

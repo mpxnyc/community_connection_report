@@ -15,8 +15,14 @@ targets::tar_source("../R_functions")
 
 make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE) |>
   dplyr::filter(!is.na(level)) |>
-  plot_radar_stratified2() |>
-  apply_style_radar_facet_plot()
+  plot_radar_stratified2() +
+      ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1)) +
+    ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1)) +
+    ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1)) +
+  theme_mpxnyc() +
+  scale_fill_mpxnyc()
+
+
 
 ```
 

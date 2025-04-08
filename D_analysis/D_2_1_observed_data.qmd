@@ -5,9 +5,7 @@ targets::tar_source("../R_functions")
 
 ```
 
-
 ### Observed data
-
 
 #### Independence assumptions
 
@@ -24,11 +22,13 @@ Just as under classical causal inference, network causal inference as we articul
 #| label: fig-interference-dag
 #| fig-cap: "Causal DANG with network interference"
 
-make_dag("network_interference")   |> plot_swig(node_radius = 0.2) + scale_fill_mpxnyc(option = "light")
+make_dag("network_interference")   |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc()
 
 
 ```
-
 
 $$
 \begin{aligned}
@@ -44,19 +44,13 @@ Y_3 &= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
 \end{aligned}
 $$ {#eq-networkinterference}
 
-Rather than asume that there is no interference, under network causal inference, we make the assumption that interference respects some mapping between individuals - a mapping given by a network or set of networks. This line of reasoning comes from Makofane dissertation. It was strongly influenced by Tchetgen Tchetgen. We follow a similar approach to [@aronow2017] who termed this mapping, an "exposure mapping". 
-
-We mentioned that in our study sample, Person 1 and Person 2 are married to each other, and Person 1 and Person 3 are new colelagues. In the causal system connecting study participants wealth with their dress and their job opportunities, an argument could be made that Person 1's wealth affects Person 2's dress, since they pool their individually held wealth. It could also be argued that Person 1's wealth affects Person 2's job opportunities if wealth brings the married couple into contact with other couples who are connected to job markets. Finally, we could argue that Person 1's dress affects Person 2's job opportunities if some aspect of the reputation Person 2 enjoys in their job market derives from Person 1's status in that market. The argument is symmetric, Person 2 could also potentially affect Person 1 in the same ways. 
-
-What about the relationship between Person 1 and Person 3? How does that shape the measuresments of either person? We can imagine that the wealth and dress of a newly acquainted colleague would have no bearing at all on the dress and job opportunities of her colleague. Whereas Person 1 and Person 2 are connected in DAG [], Person 1 and Person 3 are not because their relationship is irrelevant to the causal system under investigation. Person 2 and Person 3 do not affect each other since they have no relationship at all. 
+Rather than asume that there is no interference, under network causal inference, we make the assumption that interference respects some mapping between individuals - a mapping given by a network or set of networks. This line of reasoning comes from Makofane dissertation. It was strongly influenced by Tchetgen Tchetgen. We follow a similar approach to [@aronow2017] who termed this mapping, an "exposure mapping".
 
 #### Homogeneity assumptions
 
-Without loss of generality, we can re-write the functions @eq-networkinterference so that they are similar in structure to each other. We define $N_i$ as the indices of all the nodes connected to node $i$. Then $\mathbf{L}_{N_i}$ is the sub-vector of $\mathbf{L}$ containing the entries corresponding to the indices in $N_i$. Similarly, we define $A_{N_i}$ as the sub-vector of $A$ corresponding to the indices in $N_i$. Note that though they are represented as part of the structural equation model in @eq-networkinterference-homogenous, these are deterministic functions, since they do not have an error term ($U_*$) as an input. 
+Without loss of generality, we can re-write the functions @eq-networkinterference so that they are similar in structure to each other. We define $N_i$ as the indices of all the nodes connected to node $i$. Then $\mathbf{L}_{N_i}$ is the sub-vector of $\mathbf{L}$ containing the entries corresponding to the indices in $N_i$. Similarly, we define $A_{N_i}$ as the sub-vector of $A$ corresponding to the indices in $N_i$. Note that though they are represented as part of the structural equation model in @eq-networkinterference-homogenous, these are deterministic functions, since they do not have an error term ($U_*$) as an input.
 
 Once in this format, we make two homogeneity assumptions which reduce the complexity of the structural equation model.
-
-
 
 ```{r}
 #| fig-height: 8
@@ -66,15 +60,15 @@ Once in this format, we make two homogeneity assumptions which reduce the comple
 #| fig-cap: "Causal DANG with homogenous structure"
 
 
-make_dag("homogenous_interference")            |> plot_swig(node_radius = 0.2) + scale_fill_mpxnyc(option = "light")
+make_dag("homogenous_interference")            |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc()
+
 
 
 
 ```
-
-We define the following vectors:
-
-
 
 $$
 \begin{aligned}
@@ -88,7 +82,7 @@ Y_1 &= f_{Y_1}(U_{Y_1}, L_1, A_1, g_{Y_1}(\mathbf{L}_{N_1}), h_{Y_1}(\mathbf{A}_
 Y_2 &= f_{Y_2}(U_{Y_2}, L_2, A_2, g_{Y_2}(\mathbf{L}_{N_2}), h_{Y_2}(\mathbf{A}_{N_2})) \\
 Y_3 &= f_{Y_3}(U_{Y_3}, L_3,A_3,  g_{Y_2}(\mathbf{L}_{N_3}), h_{Y_2}(\mathbf{A}_{N_3})) \\
 \end{aligned}
-$$ 
+$$
 
 ##### Identical distribution
 
@@ -102,9 +96,7 @@ f_Y = f_{Y_1} &= f_{Y_2} = f_{Y_3} \\
 
 \end{aligned}
 ```
-
-
-This changes the structural equation model so that it looks like this: 
+This changes the structural equation model so that it looks like this:
 
 $$
 \begin{aligned}
@@ -120,24 +112,30 @@ Y_3 &= f_{Y}(U_{Y_3}, L_3,A_3,  g_{Y_2}(\mathbf{L}_{N_3}), h_{Y_2}(\mathbf{A}_{N
 \end{aligned}
 $$
 
-
 This simplifies the model, but still forces us to write the structural equations for each observation separately since each observation potentially has a set of unique exposure mappings.
 
-##### Homogenous inteference
+##### Homogenous interference
 
-We assume that the functions that map measures from connected individuals into the structural equation are identical across individuals. We also assume that the order of the entries does not matter in the the input for functions $g_A$, $g_Y$, and $h_Y$. i.e. the functions are invariant under any permutation of the entries in the input vector. e.g. 
-
+*Equivalency*: We assume that the functions that map measures from connected individuals into the structural equation are identical across individuals.
 
 ```{=tex}
 \begin{aligned}
 g_A = g_{L_1} &= g_{L_2} = g_{L_3} \\
 h_Y = h_{A_1} &= h_{A_2} = h_{A_3} \\
 g_Y = g_{L_1} &= g_{L_2} = g_{L_3} \\
-
 \end{aligned}
 ```
+*Symmetry*: We also assume that the order of the entries does not matter in the the input for functions $g_A$, $g_Y$, and $h_Y$. i.e. the functions are invariant under any permutation of the entries in the input vector. e.g.
 
-So we can re-write the structural equation model like this:
+
+
+*Boundedness*: we assume that node degree is bounded.
+
+$$
+g_A, h_Y, g_Y < c \text{ for } c \in \mathbf{Z}
+$$
+
+We can re-write the structural equation model like this:
 
 $$
 \begin{aligned}
@@ -146,6 +144,3 @@ A_i &= f_{A}( U_{A_i}, L_i, g_{A}(\textbf{L}_{N_i}) ) \\
 Y_i &= f_{Y}( U_{Y_i},  L_i,  g_{Y}(\textbf{L}_{N_i}),   A_i,  h_{Y}(\textbf{L}_{N_i}, \textbf{A}_{N_i} ) ) \\
 \end{aligned}
 $$ {#eq-causal-dang-homogenous}
-
-
-

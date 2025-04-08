@@ -342,8 +342,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_table_freq3</span><span class="op">(</span><span class="va">placeType</span>, <span class="va">placeSex</span>, <span class="va">distanceFromHome</span>, person_analysis <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">level</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">plot_radar_stratified2</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">apply_style_radar_facet_plot</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">plot_radar_stratified2</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.25</span>, <span class="fl">0.50</span>, <span class="fl">1</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.8</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.25</span>, <span class="fl">0.50</span>, <span class="fl">1</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.8</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.25</span>, <span class="fl">0.50</span>, <span class="fl">1</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.8</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div id="fig-places-distance-sexcontact" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="3_2_results_contact_venues_files/figure-html/fig-places-distance-sexcontact-1.png" class="img-fluid figure-img" width="864"></p>
@@ -369,23 +373,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details><div class="cell-output-display">
 <div id="tbl-places-descriptives" class="anchored">
 
-<div id="tkzffqoqkl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tkzffqoqkl table {
+<div id="nnggoegpva" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nnggoegpva table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tkzffqoqkl thead, #tkzffqoqkl tbody, #tkzffqoqkl tfoot, #tkzffqoqkl tr, #tkzffqoqkl td, #tkzffqoqkl th {
+#nnggoegpva thead, #nnggoegpva tbody, #nnggoegpva tfoot, #nnggoegpva tr, #nnggoegpva td, #nnggoegpva th {
   border-style: none;
 }
 
-#tkzffqoqkl p {
+#nnggoegpva p {
   margin: 0;
   padding: 0;
 }
 
-#tkzffqoqkl .gt_table {
+#nnggoegpva .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -411,12 +415,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#tkzffqoqkl .gt_caption {
+#nnggoegpva .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tkzffqoqkl .gt_title {
+#nnggoegpva .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -428,7 +432,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#tkzffqoqkl .gt_subtitle {
+#nnggoegpva .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -440,7 +444,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#tkzffqoqkl .gt_heading {
+#nnggoegpva .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -452,13 +456,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#tkzffqoqkl .gt_bottom_border {
+#nnggoegpva .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tkzffqoqkl .gt_col_headings {
+#nnggoegpva .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -473,7 +477,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#tkzffqoqkl .gt_col_heading {
+#nnggoegpva .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -493,7 +497,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#tkzffqoqkl .gt_column_spanner_outer {
+#nnggoegpva .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -505,15 +509,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#tkzffqoqkl .gt_column_spanner_outer:first-child {
+#nnggoegpva .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tkzffqoqkl .gt_column_spanner_outer:last-child {
+#nnggoegpva .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tkzffqoqkl .gt_column_spanner {
+#nnggoegpva .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -525,11 +529,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#tkzffqoqkl .gt_spanner_row {
+#nnggoegpva .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tkzffqoqkl .gt_group_heading {
+#nnggoegpva .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -555,7 +559,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#tkzffqoqkl .gt_empty_group_heading {
+#nnggoegpva .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -570,15 +574,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#tkzffqoqkl .gt_from_md > :first-child {
+#nnggoegpva .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tkzffqoqkl .gt_from_md > :last-child {
+#nnggoegpva .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tkzffqoqkl .gt_row {
+#nnggoegpva .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -597,7 +601,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#tkzffqoqkl .gt_stub {
+#nnggoegpva .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -610,7 +614,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#tkzffqoqkl .gt_stub_row_group {
+#nnggoegpva .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -624,15 +628,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#tkzffqoqkl .gt_row_group_first td {
+#nnggoegpva .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tkzffqoqkl .gt_row_group_first th {
+#nnggoegpva .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tkzffqoqkl .gt_summary_row {
+#nnggoegpva .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -642,16 +646,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#tkzffqoqkl .gt_first_summary_row {
+#nnggoegpva .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tkzffqoqkl .gt_first_summary_row.thick {
+#nnggoegpva .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tkzffqoqkl .gt_last_summary_row {
+#nnggoegpva .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -661,7 +665,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#tkzffqoqkl .gt_grand_summary_row {
+#nnggoegpva .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -671,7 +675,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#tkzffqoqkl .gt_first_grand_summary_row {
+#nnggoegpva .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -681,7 +685,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#tkzffqoqkl .gt_last_grand_summary_row_top {
+#nnggoegpva .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -691,11 +695,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#tkzffqoqkl .gt_striped {
+#nnggoegpva .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tkzffqoqkl .gt_table_body {
+#nnggoegpva .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -704,7 +708,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#tkzffqoqkl .gt_footnotes {
+#nnggoegpva .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -718,7 +722,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#tkzffqoqkl .gt_footnote {
+#nnggoegpva .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -727,7 +731,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#tkzffqoqkl .gt_sourcenotes {
+#nnggoegpva .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -741,7 +745,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#tkzffqoqkl .gt_sourcenote {
+#nnggoegpva .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -749,63 +753,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#tkzffqoqkl .gt_left {
+#nnggoegpva .gt_left {
   text-align: left;
 }
 
-#tkzffqoqkl .gt_center {
+#nnggoegpva .gt_center {
   text-align: center;
 }
 
-#tkzffqoqkl .gt_right {
+#nnggoegpva .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tkzffqoqkl .gt_font_normal {
+#nnggoegpva .gt_font_normal {
   font-weight: normal;
 }
 
-#tkzffqoqkl .gt_font_bold {
+#nnggoegpva .gt_font_bold {
   font-weight: bold;
 }
 
-#tkzffqoqkl .gt_font_italic {
+#nnggoegpva .gt_font_italic {
   font-style: italic;
 }
 
-#tkzffqoqkl .gt_super {
+#nnggoegpva .gt_super {
   font-size: 65%;
 }
 
-#tkzffqoqkl .gt_footnote_marks {
+#nnggoegpva .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tkzffqoqkl .gt_asterisk {
+#nnggoegpva .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tkzffqoqkl .gt_indent_1 {
+#nnggoegpva .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tkzffqoqkl .gt_indent_2 {
+#nnggoegpva .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tkzffqoqkl .gt_indent_3 {
+#nnggoegpva .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tkzffqoqkl .gt_indent_4 {
+#nnggoegpva .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tkzffqoqkl .gt_indent_5 {
+#nnggoegpva .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

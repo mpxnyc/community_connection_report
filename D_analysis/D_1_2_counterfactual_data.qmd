@@ -8,7 +8,15 @@ targets::tar_source("../R_functions")
 
 ### Counterfactual data
 
-To investigate causal estimands, we have to know the possible interventions of interest. We are setting $\textbf{A}=\textbf{a}$.
+In the last section, we modelled the causal system we think is underway in shaping the welath, dress, and job opportunities among the three people in the study. We say how different the modl of the system is based on the framework we adopt. We looked at the framework we call classic causal inference, a framework named network causal inference, the framework we introduce - SSNAC. 
+
+Epidemiologists approach the task of modelling causal systems not just to understand their correlatin structure, but to understand what would happen if a certain intervention were conducted to manipulate a part of hte causal system. Whereas in observational data, we did not concern ourelves with interventinos, just getting an accurate cusal model, now we tend to the taks of asking what woul dhappen if we manipulated some variables shown in the causal DANG. Particularly, we busy ourslevews with the taks of understanding what would happen to the other variables int he causal DANG, and how best to use data we can collect to inform our guess of what would happen. 
+
+We define a counterfactual outcomes $Y_1^{(a_1)}$, $Y_2^{(a_2)}$, and $Y_3^{(a_3)}$, which represent the level of job opportunities, Persons 1, 2, and 3, would have if we set their dress to level $a_1$, $a_2$, and $a_3$, respectively. This system is shown on a Single World Intervention Graph (SWIG).
+
+A SWIG represents a structural equation model where some of the equations are superceded by the value assigned by the expriementer. For "treamtnet" variables, the diagram separates the value of the variable in the observational setting, to the value that will be used by susbequent equations, which is set by the experimenter. 
+
+Note that bcause of the assumption of no interference and no spillover, each counterfactual outcome is a function only of the treatment value of the same individual. 
 
 ```{r}
 #| fig-height: 8
@@ -16,7 +24,8 @@ To investigate causal estimands, we have to know the possible interventions of i
 #| 
 make_swig("independence")      |> 
   plot_swig(node_radius = 0.2) + 
-  scale_fill_mpxnyc(option = "light")
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc()
 
 ```
 
