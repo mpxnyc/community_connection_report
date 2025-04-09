@@ -650,6 +650,7 @@ div.csl-indent {
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p><br></p>
 <p>To do: 1.fix DANG and SWING 2. Fill out structural equations for SNACC 3. Type up written draft</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
@@ -1272,7 +1273,13 @@ R_{4j} &amp;=  f_{R_4}(U_{R_{4j}}, \mathbf{V}_{1} ) \\
 </div>
 </section><section id="counterfactual-data-2" class="level3" data-number="D.3.2"><h3 data-number="D.3.2" class="anchored" data-anchor-id="counterfactual-data-2">
 <span class="header-section-number">D.3.2</span> Counterfactual data</h3>
+<p>Assuming that the public health system usually works in the way described in the observed data section, we can imagine different combinations of intervention and outcome. We could ask what would happen if we intervened to set exposure to the campaign message at the individual level (for example, by randomly selecting participants to directly contact), or we could ask what would happen if we intervened to conduct the intervention in some communities but not others. These would both be node-level interventions. For each of these questions, we could focus either on person-level outcomes like vaccination status or community-level outcomes like vaccination prevalence. Finally, we could ask what would happen if we intervened to change the relationship between to nodes in the DANG. By asking, for instance, what would happen if the city department of health changed how it ranked neighborhoods for priority. We discuss each of these three intervention scenarios in more detail below.</p>
 <section id="person-intervention" class="level4"><h4 class="anchored" data-anchor-id="person-intervention">Person intervention</h4>
+<p>Say we decided to conduct an person-level intervention where participants were randomly selected to recieve a coampaign message at time 1, time 2, and time 3. We represent the intervention in the causal DANG shown in [DANG]. We show that we intend to intervene to set <span class="math inline">\(\mathbf{M}_1\)</span>, <span class="math inline">\(\mathbf{M}_2\)</span>, and <span class="math inline">\(\mathbf{M}_3\)</span> by splitting each of those nodes. We define counterfactual variables using the system of equations that define the model as shown in [DDD]. Note that only variables downstream of each given intervention variable are affected by the value of that variable. i.e.,</p>
+<p><span class="math display">\[
+\mathbf{V}_1^{(m_1, m_2)} = \mathbf{V}_1^{(m_1)} \text{ for all } \mathbf{m}_2 \in R^5
+\]</span> since the value of <span class="math inline">\(\mathbf{V}_1\)</span> is determined at time 1 before <span class="math inline">\(\mathbf{m}_2\)</span> can be set at time 2.</p>
+<p>At time 1, time 2, and time 3, we would intervene by setting <span class="math inline">\(\mathbf{M}_1\)</span> to <span class="math inline">\(\mathbf{m}_1\)</span>, <span class="math inline">\(\mathbf{M}_2\)</span> to <span class="math inline">\(\mathbf{m}_2\)</span>, and <span class="math inline">\(\mathbf{M}_3\)</span> to <span class="math inline">\(\mathbf{m}_3\)</span>, respectively. Depending on our research goals, we could choose to focus on person-level outcomes such as counterfactual vaccination status <span class="math inline">\(\mathbf{V}_1^{(m_1)}\)</span>, <span class="math inline">\(\mathbf{V}_1^{(m_2)}\)</span>, <span class="math inline">\(\mathbf{V}_1^{(m_3)}\)</span> by calculating a statistic using these. Alternatively, we could choose to focus on community-level outcomes <span class="math inline">\(\mathbf{R}_2^{(\mathbf{m}_1)}\)</span>, and <span class="math inline">\(\mathbf{R}_3^{(\mathbf{m}_1, \mathbf{m}_2)}\)</span>, <span class="math inline">\(\mathbf{R}_4^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)}\)</span> whic are counterfactual community rankings.</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"V0"</span>, label <span class="op">=</span> <span class="st">r"($V_{0}$)"</span>      , x <span class="op">=</span> <span class="fl">1</span> , y <span class="op">=</span> <span class="fl">8</span> , node_type <span class="op">=</span> <span class="st">"Individual"</span>, node_shape <span class="op">=</span> <span class="st">"covariate"</span><span class="op">)</span></span>
@@ -1348,6 +1355,8 @@ R_{4j}^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)} &amp;=  f_{R_4}(U_{R_{4j}}, 
 \end{aligned}
 \tag{D.9}\]</span></span></p>
 </section><section id="place-intervention" class="level4"><h4 class="anchored" data-anchor-id="place-intervention">Place intervention</h4>
+<p>Alternatively, say we were interested in a community-level intervention such as the vaccination messaging campaign we diescribed above. In particular, say we want to understand the impact of a vaccination campaign conducted over three time periods. This would be done by setting <span class="math inline">\(\mathbf{T}_1\)</span> to <span class="math inline">\(\mathbf{t}_1\)</span>, <span class="math inline">\(\mathbf{T}_2\)</span> to <span class="math inline">\(\mathbf{t}_2\)</span>, and <span class="math inline">\(\mathbf{T}_3\)</span> to <span class="math inline">\(\mathbf{t}_3\)</span>. (We indicate this in the DANG by splitting the relevant nodes).</p>
+<p>Again, depending on our goals, we could choose to focus on person-level outcomes such as counterfactual vaccination status <span class="math inline">\(\mathbf{V}_1^{(m_1)}\)</span>, <span class="math inline">\(\mathbf{V}_1^{(m_2)}\)</span>, <span class="math inline">\(\mathbf{V}_1^{(m_3)}\)</span>. We could alternatively choose to focus on community-level outcomes <span class="math inline">\(\mathbf{R}_2^{(\mathbf{m}_1)}\)</span>, and <span class="math inline">\(\mathbf{R}_3^{(\mathbf{m}_1, \mathbf{m}_2)}\)</span>, <span class="math inline">\(\mathbf{R}_4^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)}\)</span> whic are counterfactual community rankings.</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"V0"</span>, label <span class="op">=</span> <span class="st">r"($V_{0}$)"</span>      , x <span class="op">=</span> <span class="fl">1</span> , y <span class="op">=</span> <span class="fl">8</span> , node_type <span class="op">=</span> <span class="st">"Individual"</span>, node_shape <span class="op">=</span> <span class="st">"covariate"</span><span class="op">)</span></span>
@@ -1423,6 +1432,8 @@ R_{4j}^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)} &amp;=  f_{R_4}(U_{R_{4j}}, 
 \end{aligned}
 \tag{D.10}\]</span></span></p>
 </section><section id="edge-interventions" class="level4"><h4 class="anchored" data-anchor-id="edge-interventions">Edge interventions</h4>
+<p>Finally, our intervention of interest, might not be about setting the value of any particular variable, but setting a policy or a process that produces some variable of interest. [UPDATE EQUATIONS]. This woudld be done by changing the function which produces that variable. In the diagram and the equations, we show an intervention which replaces the functions [XXX[]] with <span class="math inline">\(h\)</span>. Every variable that is downstream of the first time a variable is created using <span class="math inline">\(h\)</span> is marked with a superscript <span class="math inline">\((h)\)</span> to show that it is partially determined by that function.</p>
+<p>As usual, we can decide whether we want to focus on person or commuinty level (or combination) outcomes as the overall quantity of interest. In addition to the outcome variables we can now ask what the impact of taking policy <span class="math inline">\((h)\)</span> would be on the decision whether or not to vaccinate a neighborhood (<span class="math inline">\(T\)</span>) as well as the exposure of particular participants to campaign messages <span class="math inline">\(M\)</span>.</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"V0"</span>, label <span class="op">=</span> <span class="st">r"($V_{0}$)"</span>      , x <span class="op">=</span> <span class="fl">1</span> , y <span class="op">=</span> <span class="fl">8</span> , node_type <span class="op">=</span> <span class="st">"Individual"</span>, node_shape <span class="op">=</span> <span class="st">"covariate"</span><span class="op">)</span></span>
@@ -1501,15 +1512,47 @@ R_{4j}^{(h)} &amp;=  f_{R_4}(U_{R_{4j}}, \mathbf{V}_{1}^{(h)} ) \\
 <span class="header-section-number">D.3.3</span> Causal estimands</h3>
 <section id="person-effect-on-places" class="level4"><h4 class="anchored" data-anchor-id="person-effect-on-places">Person effect on places</h4>
 <p><span class="math display">\[
-E[\mathbf{R}_{1}], E[\mathbf{R}_{2}^{(\mathbf{m}_1)}], E[\mathbf{R}_{3}^{(\mathbf{m}_1, \mathbf{m}_2)}], E[\mathbf{R}_{4}^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)}]
+E \begin{bmatrix}
+R_{11} &amp; R_{12} &amp; R_{13}\\
+R_{21}^{(\mathbf{m}_1)} &amp; R_{22}^{(\mathbf{m}_1)} &amp;   R_{23}^{(\mathbf{m}_1)} \\
+R_{31}^{(\mathbf{m}_1, \mathbf{m}_2)} &amp; R_{32}^{(\mathbf{m}_1, \mathbf{m}_2)} &amp; R_{33}^{(\mathbf{m}_1, \mathbf{m}_2)}\\
+R_{41}^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)} &amp; R_{42}^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)} &amp; R_{43}^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)}
+\end{bmatrix} \times
+\begin{bmatrix}
+1 \\
+1 \\
+1 \\
+\end{bmatrix}
 \]</span></p>
 </section><section id="place-effect-on-people" class="level4"><h4 class="anchored" data-anchor-id="place-effect-on-people">Place effect on people</h4>
 <p><span class="math display">\[
-E[\mathbf{V}_{0}], E[\mathbf{V}_{1}^{(\mathbf{t}_{1})}], E[\mathbf{V}_{2}^{(\mathbf{t}_{1}, \mathbf{t}_{2})}], E[\mathbf{V}_{3}^{(\mathbf{t}_{1}, \mathbf{t}_{2}, \mathbf{t}_{3})}]
+E \begin{bmatrix}
+V_{11} &amp; V_{12} &amp; V_{13} &amp; V_{14} &amp; V_{15}\\
+V_{21}^{(\mathbf{t}_1)} &amp; V_{22}^{(\mathbf{t}_1)} &amp; V_{23}^{(\mathbf{t}_1)} &amp; V_{24}^{(\mathbf{t}_1)} &amp; V_{25}^{(\mathbf{t}_1)} \\
+V_{31}^{(\mathbf{m}_1, \mathbf{m}_2)} &amp; V_{32}^{(\mathbf{m}_1, \mathbf{m}_2)} &amp;  V_{33}^{(\mathbf{m}_1, \mathbf{m}_2)} &amp;  V_{34}^{(\mathbf{m}_1, \mathbf{m}_2)} &amp;  V_{35}^{(\mathbf{m}_1, \mathbf{m}_2)}\\
+R_{41}^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)} &amp; R_{42}^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)} &amp; R_{43}^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)} &amp; R_{44}^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)} &amp; R_{45}^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)}
+\end{bmatrix} \times
+\begin{bmatrix}
+1 \\
+1 \\
+1 \\
+1 \\
+1
+\end{bmatrix}
 \]</span></p>
-</section><section id="program-effect-on-people-and-places" class="level4"><h4 class="anchored" data-anchor-id="program-effect-on-people-and-places">Program effect on people and places</h4>
+</section><section id="program-effect-on-places" class="level4"><h4 class="anchored" data-anchor-id="program-effect-on-places">Program effect on places</h4>
 <p><span class="math display">\[
-E[\mathbf{V}_{0}], E[\mathbf{V}_{1}^{(h)}], E[\mathbf{V}_{2}^{(h)}], E[\mathbf{V}_{3}^{(h)}]
+E \begin{bmatrix}
+R_{11} &amp; R_{12} &amp; R_{13}\\
+R_{21}^{(h)} &amp; R_{22}^{(h)} &amp;   R_{23}^{(h)} \\
+R_{31}^{(h)} &amp; R_{32}^{(h))} &amp; R_{33}^{(h)}\\
+R_{41}^{(h)} &amp; R_{42}^{(h)} &amp; R_{43}^{(h)}
+\end{bmatrix} \times
+\begin{bmatrix}
+1 \\
+1 \\
+1 \\
+\end{bmatrix}
 \]</span></p>
 </section></section></section><section id="outbreak-control-intervention" class="level2" data-number="D.4"><h2 data-number="D.4" class="anchored" data-anchor-id="outbreak-control-intervention">
 <span class="header-section-number">D.4</span> Outbreak control intervention</h2>
