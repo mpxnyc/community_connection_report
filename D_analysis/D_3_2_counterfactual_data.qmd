@@ -9,9 +9,21 @@ targets::tar_source("../R_functions")
 
 ### Counterfactual data
 
+Assuming that the public health system usually works in the way described in the observed data section, we can imagine different combinations of intervention and outcome. We could ask what would happen if we intervened to set exposure to the campaign message at the individual level (for example, by randomly selecting participants to directly contact), or we could ask what would happen if we intervened to conduct the intervention in some communities but not others. These would both be node-level interventions. For each of these questions, we could focus either on person-level outcomes like vaccination status or community-level outcomes like vaccination prevalence. Finally, we could ask what would happen if we intervened to change the relationship between to nodes in the DANG. By asking, for instance, what would happen if the city department of health changed how it ranked neighborhoods for priority. We discuss each of these three intervention scenarios in more detail below.
 
 
 #### Person intervention
+
+Say we decided to conduct an person-level intervention where participants were randomly selected to recieve a coampaign message at time 1, time 2, and time 3. We represent the intervention in the causal DANG shown in [DANG]. We show that we intend to intervene to set $\mathbf{M}_1$, $\mathbf{M}_2$, and $\mathbf{M}_3$ by splitting each of those nodes. We define counterfactual variables using the system of equations that define the model as shown in [DDD]. Note that only variables downstream of each given intervention variable are affected by the value of that variable. i.e., 
+
+$$
+\mathbf{V}_1^{(m_1, m_2)} = \mathbf{V}_1^{(m_1)} \text{ for all } \mathbf{m}_2 \in R^5
+$$
+since the value of $\mathbf{V}_1$ is determined at time 1 before $\mathbf{m}_2$ can be set at time 2. 
+
+At time 1, time 2, and time 3, we would intervene by setting $\mathbf{M}_1$ to $\mathbf{m}_1$, $\mathbf{M}_2$ to $\mathbf{m}_2$, and  $\mathbf{M}_3$ to $\mathbf{m}_3$, respectively. Depending on our research goals, we could choose to focus on person-level outcomes such as counterfactual vaccination status $\mathbf{V}_1^{(m_1)}$, $\mathbf{V}_1^{(m_2)}$, $\mathbf{V}_1^{(m_3)}$ by calculating a statistic using these. Alternatively, we could choose to focus on community-level outcomes $\mathbf{R}_2^{(\mathbf{m}_1)}$, and $\mathbf{R}_3^{(\mathbf{m}_1, \mathbf{m}_2)}$, $\mathbf{R}_4^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)}$ whic are counterfactual community rankings.
+
+
 
 ```{r}
 
@@ -105,6 +117,10 @@ $$ {#eq-personintervention}
 
 #### Place intervention
 
+Alternatively, say we were interested in a community-level intervention such as the vaccination messaging campaign we diescribed above. In particular, say we want to understand the impact of a vaccination campaign conducted over three time periods. This would be done by setting $\mathbf{T}_1$ to $\mathbf{t}_1$, $\mathbf{T}_2$ to $\mathbf{t}_2$, and  $\mathbf{T}_3$ to $\mathbf{t}_3$. (We indicate this in the DANG by splitting the relevant nodes).
+
+Again, depending on our goals, we could choose to focus on person-level outcomes such as counterfactual vaccination status $\mathbf{V}_1^{(m_1)}$, $\mathbf{V}_1^{(m_2)}$, $\mathbf{V}_1^{(m_3)}$. We could alternatively choose to focus on community-level outcomes $\mathbf{R}_2^{(\mathbf{m}_1)}$, and $\mathbf{R}_3^{(\mathbf{m}_1, \mathbf{m}_2)}$, $\mathbf{R}_4^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)}$ whic are counterfactual community rankings.
+
 ```{r}
 
 
@@ -191,7 +207,10 @@ $$ {#eq-placeintervention-dang}
 
 #### Edge interventions
 
+Finally, our intervention of interest, might not be about setting the value of any particular variable, but setting a policy or a process that produces some variable of interest. [UPDATE EQUATIONS]. This woudld be done by changing the function which produces that variable. In the diagram and the equations, we show an intervention which replaces the functions [XXX[]] with $h$. Every variable that is downstream of the first time a variable is created using $h$ is marked with a superscript $(h)$ to show that it is partially determined by that function. 
 
+As usual, we can decide whether we want to focus on person or commuinty level (or combination) outcomes as the overall quantity of interest. In addition to the outcome variables we can now ask what the impact of taking policy $(h)$ would be on the decision whether or not to vaccinate a neighborhood ($T$) as well as the exposure of particular participants to campaign messages $M$. 
+ 
 ```{r}
 
 
