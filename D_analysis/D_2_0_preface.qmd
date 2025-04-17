@@ -7,6 +7,108 @@ targets::tar_source("../R_functions")
 
 ### Example 2: Marriage, Wealth, Dress, Jobs {.unnumbered}
 
-We mentioned that in our study sample, Person 1 and Person 2 are married to each other, and Person 1 and Person 3 are new colelagues. In the causal system connecting study participants wealth with their dress and their job opportunities, an argument could be made that Person 1's wealth affects Person 2's dress, since they pool their individually held wealth. It could also be argued that Person 1's wealth affects Person 2's job opportunities if wealth brings the married couple into contact with other couples who are connected to job markets. Finally, we could argue that Person 1's dress affects Person 2's job opportunities if some aspect of the reputation Person 2 enjoys in their job market derives from Person 1's status in that market. The argument is symmetric, Person 2 could also potentially affect Person 1 in the same ways. 
+We mentioned that in our study sample, Person 1 and Person 2 are married to each other, and Person 1 and Person 3 are new colleagues. In the causal system connecting their job status, dress and job opportunities, an argument could be made that Person 1's wealth affects Person 2's dress, since they pool their individually held wealth as a married couple. It could also be argued that Person 1's job status affects Person 2's job opportunities if having a job brings the married couple into contact with other couples who are connected to job markets. Finally, we could argue that Person 1's dress affects Person 2's job opportunities if some aspect of the reputation Person 2 enjoys among potential colleagues derives from Person 1's current job in that market. Symmetrically, Person 2's current job could also potentially affect Person 1 job opportunities.
 
-What about the relationship between Person 1 and Person 3? How does that shape the measuresments of either person? We can imagine that the wealth and dress of a newly acquainted colleague would have no bearing at all on the dress and job opportunities of her colleague. Whereas Person 1 and Person 2 are connected in DAG [], Person 1 and Person 3 are not because their relationship is irrelevant to the causal system under investigation. Person 2 and Person 3 do not affect each other since they have no relationship at all. 
+But what about the relationship between Person 1 and Person 3? How does that shape the measurements of either person? We can imagine that the wealth and dress of a newly acquainted colleague would not affect the dress and job opportunities of her colleague. Whereas Person 1 and Person 2 are connected in @fig-homogenous-dag, Person 1 and Person 3 are not because their relationship is irrelevant to the causal system under investigation. Person 2 and Person 3 do not affect each other since they have no relationship at all.
+
+### Assumptions
+
+#### Independence assumptions
+
+##### No spillover
+
+Just as under classical causal inference, network causal inference as we articulate here, assumes no spillover. See @fig-homogenous-dag and equations @eq-causal-dang-homogenous. (Note that it is not strictly necessary to make this restriction to work with network data at all. Makofane [-@makofane2021] makes the assumption that contemporaneous measures arise from a conditional Markov random field models. This complicates estimation in a way that is beyond the scope of this study. We will elaborate a framework (SSNAC-Extension, or SSNACX) at a later stage.
+
+##### Network interference
+
+```{r}
+#| fig-height: 6
+#| fig-width: 6.5
+#| fig-align: center
+#| label: fig-interference-dag
+#| fig-cap: "Causal DANG with network interference"
+
+make_dag("network_interference")   |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc()
+
+
+```
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}) \\
+L_3 &= f_{L_3}(U_{L_3} ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, L_2) \\
+A_2 &= f_{A_2}(U_{A_2}, L_1, L_2) \\
+A_3 &= f_{A_3}(U_{A_3}, L_3) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, A_1, A_2) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, A_1, A_2) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
+\end{aligned}
+$$ {#eq-networkinterference}
+
+Rather than assume that there is no interference, under network causal inference, we make the assumption that interference respects some mapping between individuals - a mapping given by a network or set of networks. We follow a similar approach to [@aronow2017].
+
+#### Homogeneity assumptions
+
+##### Identical distribution
+
+As in the case of classical causal inference, we assume that the structual equations that produce each individual's observations are identical accross individuals. i.e. we assume:
+
+```{=tex}
+\begin{aligned}
+f_A = f_{A_1} &= f_{A_2} = f_{A_3} \\
+f_L = f_{L_1} &= f_{L_2} = f_{L_3} \\
+f_Y = f_{Y_1} &= f_{Y_2} = f_{Y_3} \\
+
+\end{aligned}
+```
+##### Homogenous interference
+
+*Separability*
+
+We assume that in each structural equation, each covariate contributes to the exposure mapping in two parts: i) the covariate level for the individual and ii) a covariate level of the ego-network of that individual.
+
+Define $\mathscr{N_i}$ as the indices of all the nodes connected to node $i$. Then $\mathbf{L}_{\mathscr{N}_i}$ is the sub-vector of $\mathbf{L}$ containing the entries corresponding to the indices in $\mathscr{N}_i$. Similarly, we define $A_{\mathscr{N}_i}$ as the sub-vector of $A$ corresponding to the indices in $\mathscr{N}_i$.
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}) \\
+L_3 &= f_{L_3}(U_{L_3} ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, g_{A_1}(\mathbf{L}_{\mathscr{N}_1})) \\
+A_2 &= f_{A_2}(U_{A_2}, L_2, g_{A_2}(\mathbf{L}_{\mathscr{N}_2})) \\
+A_3 &= f_{A_3}(U_{A_3}, L_3, g_{A_3}(\mathbf{L}_{\mathscr{N}_3})) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, A_1, g_{Y_1}(\mathbf{L}_{\mathscr{N}_1}), h_{Y_1}(\mathbf{A}_{\mathscr{N}_1})) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_2, A_2, g_{Y_2}(\mathbf{L}_{\mathscr{N}_2}), h_{Y_2}(\mathbf{A}_{\mathscr{N}_2})) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_3,A_3,  g_{Y_2}(\mathbf{L}_{\mathscr{N}_3}), h_{Y_2}(\mathbf{A}_{\mathscr{N}_3})) \\
+\end{aligned}
+$$
+
+This simplifies the model, but still forces us to write the structural equations for each observation separately since each observation potentially has a set of unique exposure mappings.
+
+*Equivalency*
+
+We assume that exposure mappings $g_A$, $h_y$, and $g_Y$ are identical across individuals.
+
+```{=tex}
+\begin{aligned}
+g_A = g_{L_1} &= g_{L_2} = g_{L_3} \\
+h_Y = h_{A_1} &= h_{A_2} = h_{A_3} \\
+g_Y = g_{L_1} &= g_{L_2} = g_{L_3} \\
+\end{aligned}
+```
+*Symmetry*
+
+We also assume that the order of the entries does not matter in the the input for functions $g_A$, $g_Y$, and $h_Y$. i.e. the functions are invariant under any permutation of the entries in the input vector.
+
+*Boundedness*
+
+We assume that exposure mappings are bounded above.
+
+$$
+g_A, h_Y, g_Y < c \text{ for } c \in \mathbf{Z}
+$$

@@ -1,11 +1,24 @@
 
+### Example 3: Longitudinal Data-Driven Vaccination Campaign {.unnumbered}
+
+You are a public health officer at the department of health in Nowhereville, and are planning to conduct and assess a three week flu vaccination campaign. None of the townspeople have been vaccinated against flu.
+
+In the city of Nowhereville there is a population of 5 residents. The city is divided into three neighborhoods. Each resident has a primary home in one of the neighborhoods, but might visit other residents in another. Person 1 lives in Neighborhood A and visit Neighborhood B. Person 2 lives in Neighborhood B, but vists Neighborhoods A and B. Person 3 lives in Neighborhood C and visits Neighborhood B. Persons 5 and 6 live in Neighborhood C and they do not visit any other neighborhoods.
+
+The city of Nowhereville has a very structured approach to vaccination campaigns. At the beginning of each week, each neighborhood gets a risk rating based on the prevalence of vaccination among its residents and visitors. Based on that rating, each neighborhood decides whether to conduct a local vaccination drive or not. Vaccination drives are done in the same way regardless of neighborhood - visitors and residents are offered immediate vaccination at a nearby mobile van through a pop-up message on the local dating app. Not everyone will receive the messages because some will not open the app during the period of the campaign. Those who do will have the choice of getting vaccinated or not. Each person can only get vaccinated once. 
 
 
-#### Compact graphic representation: Causal DANG
+
+### Assumptions
+
+#### Introducing the Causal DANG and SWING {.unnumbered}
 
 As we see in [FIG], using causal DAGs, we stretch the possibility of depicting a causal system including only three people. Trying to depict a system with four people, each wiht three measures, it woul dbe nearly impossible to see clearly which nodes are connected by which arrows. One of the major draws of causal DAG diagrams is that they allow epidemiologists to reason graphically about the structure of confounding or selection. 
 
 We introduce the Causal Directed Acyclic Network Graph (causal DANG), which allows for the representation of complex systems. The causal DANG has precise statistical interpretation under the SSNAC framework. Consider figure [homogenous]. That figure shows us tow pieces of information: the structure of causation within individuals, and the structure of causaltion accross individuals. In the causal DANG, we show these pieces of information separately. 
+
+
+#### Compact graphic representation
 
 The first aspect (structural part) of the causal DANG shows the causal structure within individuals. It is a DAG of vector-valued variables $L$, $A$, and $Y$. This DAG has precise standad interpretation. It gives the conditional independencies accross these variables. This is an incomplete set of independencies, however, as the entries of these three vectors connect accros the vectors according to the network. 
 
@@ -63,13 +76,16 @@ tidygraph::tbl_graph(nodes = network_nodes, edges = network_edges) |>
 
 ```
 
-#### Multiple scales and entities
+#### Integrated view of multiple entitiy types
+
+[Notice in network causal inference section that we specified $g(\mathbf{L}_{\mathscr{N}_i})$ we did not specify the dimension of $\mathbf{L}$ it was implied that it is the same as the dimension of the outcome vector $\mathbf{Y}$. 
 
 The causal DANG relaxes the assumption that all measures in the causal system can be grouped into non-overlapping sets (i.e. that all measures can be divvied by among study participants). In this framework, different types of entities, represented by vectors of differnt lengthes, can be depicted on the same DANG. 
 
 For example, imagine conducting a flu vaccination drive in a system involving three neighborhoods (Neighborhood A-C) and five people (Person 1-5). The campaign is conducted at the level of the neighborhood. Each person who lives in or visits each neighborhood has a chance of receiving the campaign message, and each person has a chance of becoming vaccinated as a result. Persons 2, 3, 4, and 5 each lived in or visited Neighborhood C. Persons 3 and 1 visited or lived in Neighborhood B, and Persons 1 and 2 visited or lived in Neighborhood A.
 
 This system is encoded by causal DANG [XXX], which represents neighborhood level intervention status using a vector of length 3, person-level exposure to the intervention messging as a vector of length 5, and vaccination status as a vector of length 5 for the structural part. The network part of the causal DANG is given by the graph shown (inset) connecting persons with neighborhoods. 
+
 
 ```{r}
 
@@ -122,12 +138,6 @@ tidygraph::tbl_graph(nodes = network_nodes, edges = network_edges) |>
 
 ```
 
-
-### Example 3: Longitudinal Data-Driven Vaccination Campaign {.unnumbered}
-
-Imagine a vaccination campaign conducted over three weeks in the city of Nowhereville. Five people live in the city of Nowhereville. They each live in a particular neighborhood, but visit other neighborhoods as well. You are interested in promoting flu vaccination, but want to make sure you understand the likely pattern of flu transmission based on where people live and visit. 
-
-Person 1 lives in Neighborhood A and visit Neighborhood B. Person 2 lives in Neighborhood B, but vists Neighborhoods A and B. Person 3 lives in Neighborhood C and visits Neighborhood B. Persons 5 and 6 live in Neighborhood C and they do not visit any other neighborhoods.
 
 
 

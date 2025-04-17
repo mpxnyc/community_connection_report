@@ -1,19 +1,18 @@
 ### Causal estimands
 
-#### Average Total Effect
+We are interested in whether changing someone's dress would change their level of job opportunities. To determine the answer, we will compare the average counterfactual outcome of job opportunities for formal dress to the average counterfactual outcome of job opportunities for non-formal dress. i.e. We will make the following comparison.
 
 $$ 
-\frac{1}{n}\sum_i E[Y_i(1, \textbf{ 1}) - Y_i(0, \textbf{0})]
+\frac{1}{n}\sum_i E[Y_i(1, \textbf{ 1}) - Y_i(0, \textbf{0}) | \mathbf{L}]
 $$
 
-#### Average Direct Effect
+It is possible to decompose this average causal effect into a portion attributable to direct (within individual) causal pathways:
 
 $$ 
-\frac{1}{n}\sum_i E[Y_i(1, \textbf{ 1}) - Y_i(0, \textbf{1})]
+\frac{1}{n}\sum_i E[Y_i(1, \textbf{ 0}) - Y_i(0, \textbf{0}) | \mathbf{L}]
 $$
-
-#### Average Spillover Effect
+as well as a portion attributable to spillover (cross-individual) causal pathways:
 
 $$ 
-\frac{1}{n}\sum_i E[Y_i(0, \textbf{ 1}) - Y_i(0, \textbf{0})]
+\frac{1}{n}\sum_i E[Y_i(1, \textbf{ 1}) - Y_i(1, \textbf{0}) | \mathbf{L}]
 $$

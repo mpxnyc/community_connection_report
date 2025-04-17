@@ -1,4 +1,3 @@
-
 ```{r}
 
 # Access custom defined functions
@@ -6,118 +5,13 @@ targets::tar_source("../R_functions")
 
 ```
 
-
 ### Counterfactual data
 
 Assuming that the public health system usually works in the way described in the observed data section, we can imagine different combinations of intervention and outcome. We could ask what would happen if we intervened to set exposure to the campaign message at the individual level (for example, by randomly selecting participants to directly contact), or we could ask what would happen if we intervened to conduct the intervention in some communities but not others. These would both be node-level interventions. For each of these questions, we could focus either on person-level outcomes like vaccination status or community-level outcomes like vaccination prevalence. Finally, we could ask what would happen if we intervened to change the relationship between to nodes in the DANG. By asking, for instance, what would happen if the city department of health changed how it ranked neighborhoods for priority. We discuss each of these three intervention scenarios in more detail below.
 
-
-#### Person intervention
-
-Say we decided to conduct an person-level intervention where participants were randomly selected to recieve a coampaign message at time 1, time 2, and time 3. We represent the intervention in the causal DANG shown in [DANG]. We show that we intend to intervene to set $\mathbf{M}_1$, $\mathbf{M}_2$, and $\mathbf{M}_3$ by splitting each of those nodes. We define counterfactual variables using the system of equations that define the model as shown in [DDD]. Note that only variables downstream of each given intervention variable are affected by the value of that variable. i.e., 
-
-$$
-\mathbf{V}_1^{(m_1, m_2)} = \mathbf{V}_1^{(m_1)} \text{ for all } \mathbf{m}_2 \in R^5
-$$
-since the value of $\mathbf{V}_1$ is determined at time 1 before $\mathbf{m}_2$ can be set at time 2. 
-
-At time 1, time 2, and time 3, we would intervene by setting $\mathbf{M}_1$ to $\mathbf{m}_1$, $\mathbf{M}_2$ to $\mathbf{m}_2$, and  $\mathbf{M}_3$ to $\mathbf{m}_3$, respectively. Depending on our research goals, we could choose to focus on person-level outcomes such as counterfactual vaccination status $\mathbf{V}_1^{(m_1)}$, $\mathbf{V}_1^{(m_2)}$, $\mathbf{V}_1^{(m_3)}$ by calculating a statistic using these. Alternatively, we could choose to focus on community-level outcomes $\mathbf{R}_2^{(\mathbf{m}_1)}$, and $\mathbf{R}_3^{(\mathbf{m}_1, \mathbf{m}_2)}$, $\mathbf{R}_4^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)}$ whic are counterfactual community rankings.
-
-
-
-```{r}
-
-
-list_nodes <- list()
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V0", label = r"($V_{0}$)"      , x = 1 , y = 8 , node_type = "Individual", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R1", label = r"($R_{1}$)"      , x = 2 , y = 2 , node_type = "Community", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T1", label = r"($T_{1}$)"      , x = 3 , y = 4 , node_type = "Community", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M1", label = r"($M_{1}$)"      , x = 4 , y = 6 , node_type = "Individual", node_shape = "preintervention")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "m1", label = r"($m_{1}$)"      , x = 4 , y = 6 , node_type = "intervention", node_shape = "intervention")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V1", label = r"($V_{1}^{(m_1)}$)"      , x = 5 , y = 8 , node_type = "Individual", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R2", label = r"($R_{2}^{(m_1)}$)" , x = 6 , y = 2 , node_type = "Community", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T2", label = r"($T_{2}^{(m_1)}$)"      , x = 7 , y = 4 , node_type = "Community", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M2", label = r"($M_{2}$)"      , x = 8 , y = 6 , node_type = "Individual", node_shape = "preintervention")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "m2", label = r"($m_{2}$)"      , x = 8 , y = 6 , node_type = "intervention", node_shape = "intervention")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V2", label = r"($V_{2}^{(m_1, m_2)}$)"      , x = 9 , y = 8 , node_type = "Individual", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R3", label = r"($R_{3}^{(m_1, m_2)}$)" , x = 10 , y = 2, node_type = "Community", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T3", label = r"($T_{3}^{(m_1, m_2)}$)"      , x = 11 , y = 4, node_type = "Community", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M3", label = r"($M_{3}$)"      , x = 12 , y = 6, node_type = "Individual", node_shape = "preintervention")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "m3", label = r"($m_{3}$)"      , x = 12 , y = 6, node_type = "intervention", node_shape = "intervention")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V3", label = r"($V_{3}^{(m_1, m_2, m_3)}$)"      , x = 13 , y = 8, node_type = "Individual", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R4", label = r"($R_{4}^{(m_1, m_2, m_3)}$)" , x = 14 , y = 2, node_type = "Community", node_shape = "covariate")
-
-list_edges <- list()
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "R1")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "R1", to = "T1")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "T1", to = "M1")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "m1", to = "V1")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "R2", to = "T2")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "T2", to = "M2")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "m2", to = "V2")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "R3", to = "T3")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "T3", to = "M3")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "M3", to = "V3")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "R2")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "R3")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "m1", to = "M2")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "m2", to = "M3")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "M2")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "M3")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V3", to = "R4")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "V1")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "V2")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "V3")
-
-
-structural_nodes <- list_nodes |> dplyr::bind_rows() |> dplyr::mutate(label = latex2exp::TeX(label, output = "character", bold = TRUE))
-structural_edges <- list_edges |> dplyr::bind_rows()
-
-
-tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges) |>
-  plot_swig(node_radius = 0.5, nudge_intervention_labels = 0.3) +
-  ggplot2::theme(
-    plot.margin = ggplot2::margin(10, 10, 10, 10),
-    legend.position = "none"
-  ) +
-  scale_fill_mpxnyc(option = "light") +
-  theme_mpxnyc()
-
-
-
-```
-
-
-
-
-
-
-$$
-\begin{aligned}
-V_{0i} &=  f_{V_0}(U_{V_{0i}}) \\
-V_{1i}^{(m_{1i})} &=  f_{V_1}(U_{V_{1i}}, V_{0i}, m_{1i}) \\
-V_{2i}^{(m_{1i}, m_{2i})} &=  f_{V_2}(U_{V_{1i}}, V_{1i}^{(m_{1i})}, m_{2i}) \\
-V_{3i}^{(m_{1i}, m_{2i}, m_{3i})} &=  f_{V_3}(U_{V_{3i}}, V_{2i}^{(m_{1i}, m_{2i})}, m_{3i}) \\
-R_{1j} &=  f_{R_1}(U_{R_{1j}}, \mathbf{V}_{0}) \\
-T_{1j} &=  f_{T_1}(U_{T_{1j}}, R_{1j}) \\
-R_{2j}^{(\mathbf{m}_1)} &=  f_{R_2}(U_{R_{2j}}, \mathbf{V}_{1}^{(\mathbf{m}_1)} ) \\
-T_{2j}^{(\mathbf{m}_1)} &=  f_{T_2}(U_{T_{2j}}, R_{2j}^{(\mathbf{m}_1)}) \\
-R_{3j}^{(\mathbf{m}_1, \mathbf{m}_2)} &=  f_{R_3}(U_{R_{3j}}, \mathbf{V}_{2}^{(\mathbf{m}_1, \mathbf{m}_2)} ) \\
-T_{3j}^{(\mathbf{m}_1, \mathbf{m}_2)} &=  f_{T_3}(U_{T_{3i}}, R_{3j}^{(\mathbf{m}_1, \mathbf{m}_2)}) \\
-R_{4j}^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)} &=  f_{R_4}(U_{R_{4j}}, \mathbf{V}_{1}^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)})  \\
-\end{aligned}
-$$ {#eq-personintervention}
-
-
-
-
-
-
-
-
 #### Place intervention
 
-Alternatively, say we were interested in a community-level intervention such as the vaccination messaging campaign we diescribed above. In particular, say we want to understand the impact of a vaccination campaign conducted over three time periods. This would be done by setting $\mathbf{T}_1$ to $\mathbf{t}_1$, $\mathbf{T}_2$ to $\mathbf{t}_2$, and  $\mathbf{T}_3$ to $\mathbf{t}_3$. (We indicate this in the DANG by splitting the relevant nodes).
+Alternatively, say we were interested in a community-level intervention such as the vaccination messaging campaign we diescribed above. In particular, say we want to understand the impact of a vaccination campaign conducted over three time periods. This would be done by setting $\mathbf{T}_1$ to $\mathbf{t}_1$, $\mathbf{T}_2$ to $\mathbf{t}_2$, and $\mathbf{T}_3$ to $\mathbf{t}_3$. (We indicate this in the DANG by splitting the relevant nodes).
 
 Again, depending on our goals, we could choose to focus on person-level outcomes such as counterfactual vaccination status $\mathbf{V}_1^{(m_1)}$, $\mathbf{V}_1^{(m_2)}$, $\mathbf{V}_1^{(m_3)}$. We could alternatively choose to focus on community-level outcomes $\mathbf{R}_2^{(\mathbf{m}_1)}$, and $\mathbf{R}_3^{(\mathbf{m}_1, \mathbf{m}_2)}$, $\mathbf{R}_4^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)}$ whic are counterfactual community rankings.
 
@@ -125,6 +19,7 @@ Again, depending on our goals, we could choose to focus on person-level outcomes
 
 
 list_nodes <- list()
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M0", label = r"($M_{0}$)", x = -1, y = 6, node_type = "Individual", node_shape = "covariate")
 list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V0", label = r"($V_{0}$)"      , x = 1 , y = 8 , node_type = "Individual", node_shape = "covariate")
 list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R1", label = r"($R_{1}$)"      , x = 2 , y = 2 , node_type = "Community", node_shape = "covariate")
 list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T1", label = r"($T_{1}$)"      , x = 3 , y = 4 , node_type = "Community", node_shape = "preintervention")
@@ -141,10 +36,11 @@ list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T3", label = r"($T_{3
 list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "t3", label = r"($t_{3}$)"      , x = 11 , y = 4, node_type = "intervention", node_shape = "intervention")
 list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M3", label = r"($M_{3}^{(t_1, t_2, t_3)}$)"      , x = 12 , y = 6, node_type = "Individual", node_shape = "covariate")
 list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V3", label = r"($V_{3}^{(t_1, t_2, t_3)}$)"      , x = 13 , y = 8, node_type = "Individual", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R4", label = r"($R_{4}^{(t_1, t_2, t_3)}$)" , x = 14 , y = 2, node_type = "Community", node_shape = "covariate")
 
 list_edges <- list()
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M0", to = "M1")
 list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "R1")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "M1")
 list_edges[[length(list_edges) + 1]] <- data.frame(from = "R1", to = "T1")
 list_edges[[length(list_edges) + 1]] <- data.frame(from = "t1", to = "M1")
 list_edges[[length(list_edges) + 1]] <- data.frame(from = "M1", to = "V1")
@@ -160,7 +56,6 @@ list_edges[[length(list_edges) + 1]] <- data.frame(from = "M1", to = "M2")
 list_edges[[length(list_edges) + 1]] <- data.frame(from = "M2", to = "M3")
 list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "M2")
 list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "M3")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V3", to = "R4")
 list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "V1")
 list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "V2")
 list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "V3")
@@ -172,126 +67,26 @@ structural_edges <- list_edges |> dplyr::bind_rows()
 
 tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges) |>
   plot_swig(node_radius = 0.5, nudge_intervention_labels = 0.2) +
-  ggplot2::theme(
-    plot.margin = ggplot2::margin(10, 10, 10, 10),
-    legend.position = "none"
-  ) +
   scale_fill_mpxnyc(option = "light") +
-  theme_mpxnyc() 
+  theme_mpxnyc_large()
 
 
 
 ```
 
-
-
-
-
 $$
 \begin{aligned}
+M_{0i} &=  f_{M_0}(U_{M_{0i}}) \\
 V_{0i} &=  f_{V_0}(U_{V_{0i}}) \\
-M_{1i}^{(t_{1i})} &=  f_{M_1}(U_{M_{1i}}, \mathbf{t}_{1N_i}) \\
-V_{1i}^{(t_{1i})} &=  f_{V_1}(U_{V_{1i}}, V_{0i}, t_{1i}) \\
-M_{2i}^{(t_{1i}, t_{2i})} &=  f_{M_2}(U_{M_{2i}}, V_{1i}^{(t_{1i})}, M_{1i}^{(t_{1i})}, \mathbf{t}_{2N_i}) \\
-V_{2i}^{(t_{1i}, t_{2i})} &=  f_{V_2}(U_{V_{1i}}, V_{1i}^{(t_{1i})}, t_{2i}) \\
-M_{3i}^{(t_{1i}, t_{2i}, t_{3i})} &=  f_{M_3}(U_{M_{3i}},V_{2i}^{(t_{1i}, t_{2i})}, M_{2i}^{(t_{1i}, t_{2i})}, \mathbf{t}_{3N_i}) \\
-V_{3i}^{(t_{1i}, t_{2i}, t_{3i})} &=  f_{V_3}(U_{V_{3i}}, V_{2i}^{(t_{1i}, t_{2i})}, t_{3i}) \\
-R_{1j} &=  f_{R_1}(U_{R_{1j}}, \mathbf{V}_{0}) \\
-R_{2j}^{(\mathbf{t}_1)} &=  f_{R_2}(U_{R_{2j}}, \mathbf{V}_{1}^{(\mathbf{t}_1)} ) \\
-R_{3j}^{(\mathbf{t}_1, \mathbf{t}_2)} &=  f_{R_3}(U_{R_{3j}}, \mathbf{V}_{2}^{(\mathbf{t}_1, \mathbf{t}_2)} ) \\
-R_{4j}^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)} &=  f_{R_4}(U_{R_{4j}}, \mathbf{V}_{1}^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)})  \\
+R_{sj}^{(\bar{\mathbf{t}})} &=  f_{R}(U_{R_{sj}}, \mathbf{V}_{s-1}^{(\bar{\mathbf{t}})}) \\
+T_{sj}^{(\bar{\mathbf{t}})} &=  f_{T}(U_{T_{sj}}, R_{s,j}^{(\bar{\mathbf{t}})}) \\
+M_{si}^{(\bar{\mathbf{t}})} &=  f_{M} (U_{M_{\{si\}}} , V_{\{s-1,i\}}^{(\bar{\mathbf{t}})}, M_{\{s-1,i\}}^{(\bar{\mathbf{t}})}, \mathbf{T}_{\{s,N_i\}}^{(\bar{\mathbf{t}})})\\
+V_{si}^{(\bar{\mathbf{t}})} &=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}^{(\bar{\mathbf{t}})}, V_{\{s-1,i\}}^{(\bar{\mathbf{t}})}) \\
 \end{aligned}
 $$ {#eq-placeintervention-dang}
 
 
 
-#### Edge interventions
-
-Finally, our intervention of interest, might not be about setting the value of any particular variable, but setting a policy or a process that produces some variable of interest. [UPDATE EQUATIONS]. This woudld be done by changing the function which produces that variable. In the diagram and the equations, we show an intervention which replaces the functions [XXX[]] with $h$. Every variable that is downstream of the first time a variable is created using $h$ is marked with a superscript $(h)$ to show that it is partially determined by that function. 
-
-As usual, we can decide whether we want to focus on person or commuinty level (or combination) outcomes as the overall quantity of interest. In addition to the outcome variables we can now ask what the impact of taking policy $(h)$ would be on the decision whether or not to vaccinate a neighborhood ($T$) as well as the exposure of particular participants to campaign messages $M$. 
- 
-```{r}
-
-
-list_nodes <- list()
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V0", label = r"($V_{0}$)"      , x = 1 , y = 8 , node_type = "Individual", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R1", label = r"($R_{1}^{(h)}$)"      , x = 2 , y = 2 , node_type = "Community", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T1", label = r"($T_{1}^{(h)}$)"      , x = 3 , y = 4 , node_type = "Community", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M1", label = r"($M_{1}^{(h)}$)"      , x = 4 , y = 6 , node_type = "Individual", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V1", label = r"($V_{1}^{(h)}$)"      , x = 5 , y = 8 , node_type = "Individual", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R2", label = r"($R_{2}^{(h)}$)" , x = 6 , y = 2 , node_type = "Community", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T2", label = r"($T_{2}^{(h)}$)"      , x = 7 , y = 4 , node_type = "Community", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M2", label = r"($M_{2}^{(h)}$)"      , x = 8 , y = 6 , node_type = "Individual", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V2", label = r"($V_{2}^{(h)}$)"      , x = 9 , y = 8 , node_type = "Individual", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R3", label = r"($R_{3}^{(h)}$)" , x = 10 , y = 2, node_type = "Community", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T3", label = r"($T_{3}^{(h)}$)"      , x = 11 , y = 4, node_type = "Community", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M3", label = r"($M_{3}^{(h)}$)"      , x = 12 , y = 6, node_type = "Individual", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V3", label = r"($V_{3}^{(h)}$)"      , x = 13 , y = 8, node_type = "Individual", node_shape = "covariate")
-list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R4", label = r"($R_{4}^{(h)}$)" , x = 14 , y = 2, node_type = "Community", node_shape = "covariate")
-
-list_edges <- list()
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "R1", edge_label = r"($h$)")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "R1", to = "T1", edge_label = r"()")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "T1", to = "M1", edge_label = r"()")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "M1", to = "V1", edge_label = r"()")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "R2", to = "T2", edge_label = r"()")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "T2", to = "M2", edge_label = r"()")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "M2", to = "V2", edge_label = r"()")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "R3", to = "T3", edge_label = r"()")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "T3", to = "M3", edge_label = r"()")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "M3", to = "V3", edge_label = r"()")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "R2", edge_label = r"($h$)")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "R3", edge_label = r"($h$)")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "M1", to = "M2", edge_label = r"()")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "M2", to = "M3", edge_label = r"()")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "M2", edge_label = r"()")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "M3", edge_label = r"()")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V3", to = "R4", edge_label = r"()")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "V1", edge_label = r"()")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "V2", edge_label = r"()")
-list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "V3", edge_label = r"()")
-
-
-structural_nodes <- list_nodes |> dplyr::bind_rows() |> dplyr::mutate(label = latex2exp::TeX(label, output = "character", bold = TRUE))
-structural_edges <- list_edges |> dplyr::bind_rows() 
-
-
-tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges) |>
-  plot_swig(node_radius = 0.5, nudge_intervention_labels = 0.2) +
-  ggplot2::theme(
-    plot.margin = ggplot2::margin(10, 10, 10, 10),
-    legend.position = "none"
-  ) +
-  scale_fill_mpxnyc(option = "light") +
-  theme_mpxnyc()
-
-
-
-```
-
-
-
-
-
-$$
-\begin{aligned}
-V_{0i} &=  f_{V_0}(U_{V_{0i}}) \\
-M_{1i}^{(h)} &=  f_{M_1}(U_{M_{1i}}, \mathbf{T}_{1N_i}^{(h)}) \\
-V_{1i}^{(h)} &=  f_{V_1}(U_{V_{1i}}, V_{0i}^{(h)}, M_{1i}^{(h)}) \\
-M_{2i}^{(h)} &=  f_{M_2}(U_{M_{2i}}, V_{1i}^{(h)}, M_{1i}^{(h)}, \mathbf{T}_{2N_i}^{(h)}) \\
-V_{2i}^{(h)} &=  f_{V_2}(U_{V_{1i}}, V_{1i}^{(h)}, M_{2i}^{(h)}) \\
-M_{3i}^{(h)} &=  f_{M_3}(U_{M_{3i}}, V_{2i}^{(h)}, M_{2i}^{(h)}, \mathbf{T}_{3N_i}^{(h)}) \\
-V_{3i}^{(h)} &=  f_{V_3}(U_{V_{3i}}, V_{1i}^{(h)}, M_{3i}^{(h)}) \\
-R_{1j}^{(h)} &=  f_{R_1}(U_{R_{1j}}, \mathbf{V}_{0}^{(h)}) \\
-T_{1j}^{(h)} &=  f_{T_1}(U_{T_{1j}}, R_{1j}^{(h)}) \\
-R_{2j}^{(h)} &=  f_{R_2}(U_{R_{2j}}, \mathbf{V}_{1}^{(h)} ) \\
-T_{2j}^{(h)} &=  f_{T_2}(U_{T_{2j}}, R_{2j}^{(h)}) \\
-R_{3j}^{(h)} &=  f_{R_3}(U_{R_{3i}}, \mathbf{V}_{2}^{(h)} ) \\
-T_{3j}^{(h)} &=  f_{T_3}(U_{T_{3i}}, R_{3i}^{(h)}) \\
-R_{4j}^{(h)} &=  f_{R_4}(U_{R_{4j}}, \mathbf{V}_{1}^{(h)} ) \\
-\end{aligned}
-$$ {#eq-edge-intervention-dang}
 
 
 

@@ -325,3 +325,101 @@ In addition there is an endless potential for constructing causal queries that f
 
 It is crucial in a SSNAC to be clear about the theory that allows the researcher to depict the situation under study as a person-place network, and that will be used to interpret any results obtained. In particular, it is important to clearly state the research question under investigation before defining nodes and edges. For instance, if we were studying the spread of gossip, we might decide that the only edges which are important for transmission of gossip are friend ties and resident ties. In this case, we would be asserting a theory of causation which states that in this setting, people do not gossip with their neighbors, but do gossip with their friends and with their household members. This is different from the theory under use in an infectious disease investigation in the same setting. In this case, assuming that friends, neighbors, and household members all spend time in confined spaces, all the edges are important to account for in analyzing the transmission of airborne disease.
 
+
+
+# hypothetical intervention
+
+
+
+
+## Orphan
+We examined two approaches for selecting a community district to immunize, corresponding to different intervention priorities. In the first, we select the next community district to immunize to maximize the number of people to be immunized. In the second, we select the next community district with the goal of minimizing the likelihood of contagion between community districts.
+
+Consider a sequence of node sets 
+
+$$
+N^{(k+1)}_\text{susc} = \begin{cases} N &\text{ if } k = 0 \\  \{s : \psi(s,m) = 0, s \in  N^{(k)}_\text{susc}, s \neq m\}  & otherwise \end{cases}
+$$
+where $m \in  N^{(k-1)}_\text{susc} \cap N_c$ is the $k$th community district to be vaccinated.
+
+$$
+h(V_{(k-1)}) =  \mathbf{R}_k 
+$$
+
+with entries
+
+
+
+under the contact neutralizing strategy and 
+
+$$
+R_{kj} = \text{ deg}_{G_c}(j|1 -\mathbf{V}_{(k-1)}) 
+$$
+under the movement neutralizing strategy
+
+
+##### Contact-neutralizing
+
+In the contact-neutralizing strategy $n^{(k+1)}$ satisfies:
+
+$$
+r_{n^{(k+1)}} = \max_{j \in N_c^{(k)}}{r_j^{(k)}}
+$$
+
+##### Movement-neutralizing
+
+In the movement-neutralizing strategy $n^{(k+1)}$ satisfies:
+
+$$
+s_{n^{(k+1)}} = \max_{j \in N_c^{(k)}}{s_j^{(k)}}
+$$
+
+
+
+
+
+
+
+
+
+
+and so that given $G^{(k)}$, we calculate $G^{(k+1)}(N^{(k+1)}, \psi^{(k+1)})$ by selecting a community district $n^{(k+1)}$ along with all participants connected with it
+
+$$
+H^{(k+1)} = \{s \in N^{(k)}_p : \psi^{(k)}(s,n^{(k+1)}) > 0 \} \cup \{ n^{(k+1)} \}
+$$
+
+and removing them from the node set
+
+$$
+N^{(k+1)}   = N^{(k)} \backslash \ H^{(k+1)}    
+$$ The updated adjacency function $\psi^{(k+1)}$ preserves all the edges represented by $\psi^{(k)}$ for terminal nodes included in $N^{(k+1)}$:
+
+$$
+\psi^{(k+1)}(a,b) = \psi^{(k)}(a,b),  \forall a,b \in  N^{(k+1)}
+$$
+
+Note: All measures defined in the previous sections can be calculated based on the updated graph $G^{(k)}$. We indicate this case by adding a superscript with index number $k$ for the particular measure. e.g. We can define $s_j^{(k)}|A$ relative to graph $G^{(k)}$ just as $s_j|A$ is defined relative to graph $G$.
+
+#### Intervention strategies
+
+We examined two approaches for selecting a community district to immunize, corresponding to different intervention priorities. In the first, we select the next community district to immunize to maximize the number of people to be immunized. In the second, we select the next community district with the goal of minimizing the likelihood of contagion between community districts.
+
+##### Contact-neutralizing
+
+In the contact-neutralizing strategy $n^{(k+1)}$ satisfies:
+
+$$
+r_{n^{(k+1)}} = \max_{j \in N_c^{(k)}}{r_j^{(k)}}
+$$
+
+##### Movement-neutralizing
+
+In the movement-neutralizing strategy $n^{(k+1)}$ satisfies:
+
+$$
+s_{n^{(k+1)}} = \max_{j \in N_c^{(k)}}{s_j^{(k)}}
+$$
+
+
+
