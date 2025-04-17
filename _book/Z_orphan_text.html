@@ -88,7 +88,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script async="" src="https://hypothes.is/embed.js"></script>
+}</script><script async="" src="https://hypothes.is/embed.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
 <body class="nav-sidebar floating">
 
@@ -288,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./A_introduction/A__introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Social &amp; Spatial Context</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -300,13 +300,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./C_measures/C__measures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Measures</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Network Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./D_analysis/D__analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Causal analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Causal interpretation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -359,6 +359,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <a href="#theory-1" id="toc-theory-1" class="nav-link" data-scroll-target="#theory-1"><span class="header-section-number">F.5</span> Theory</a>
   <ul class="collapse">
 <li><a href="#old-structures-in-sociology-1" id="toc-old-structures-in-sociology-1" class="nav-link" data-scroll-target="#old-structures-in-sociology-1"><span class="header-section-number">F.5.1</span> Old structures in sociology</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#hypothetical-intervention" id="toc-hypothetical-intervention" class="nav-link" data-scroll-target="#hypothetical-intervention"><span class="header-section-number">G</span> hypothetical intervention</a>
+  <ul class="collapse">
+<li><a href="#orphan" id="toc-orphan" class="nav-link" data-scroll-target="#orphan"><span class="header-section-number">G.1</span> Orphan</a></li>
   </ul>
 </li>
   </ul></nav>
@@ -647,9 +653,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="old-structures-in-sociology-1" class="level3" data-number="F.5.1"><h3 data-number="F.5.1" class="anchored" data-anchor-id="old-structures-in-sociology-1">
 <span class="header-section-number">F.5.1</span> Old structures in sociology</h3>
 <p>It is crucial in a SSNAC to be clear about the theory that allows the researcher to depict the situation under study as a person-place network, and that will be used to interpret any results obtained. In particular, it is important to clearly state the research question under investigation before defining nodes and edges. For instance, if we were studying the spread of gossip, we might decide that the only edges which are important for transmission of gossip are friend ties and resident ties. In this case, we would be asserting a theory of causation which states that in this setting, people do not gossip with their neighbors, but do gossip with their friends and with their household members. This is different from the theory under use in an infectious disease investigation in the same setting. In this case, assuming that friends, neighbors, and household members all spend time in confined spaces, all the edges are important to account for in analyzing the transmission of airborne disease.</p>
+</section></section><section id="hypothetical-intervention" class="level1" data-number="G"><h1 data-number="G">
+<span class="header-section-number">G</span> hypothetical intervention</h1>
+<section id="orphan" class="level2" data-number="G.1"><h2 data-number="G.1" class="anchored" data-anchor-id="orphan">
+<span class="header-section-number">G.1</span> Orphan</h2>
+<p>We examined two approaches for selecting a community district to immunize, corresponding to different intervention priorities. In the first, we select the next community district to immunize to maximize the number of people to be immunized. In the second, we select the next community district with the goal of minimizing the likelihood of contagion between community districts.</p>
+<p>Consider a sequence of node sets</p>
+<p><span class="math display">\[
+N^{(k+1)}_\text{susc} = \begin{cases} N &amp;\text{ if } k = 0 \\  \{s : \psi(s,m) = 0, s \in  N^{(k)}_\text{susc}, s \neq m\}  &amp; otherwise \end{cases}
+\]</span> where <span class="math inline">\(m \in N^{(k-1)}_\text{susc} \cap N_c\)</span> is the <span class="math inline">\(k\)</span>th community district to be vaccinated.</p>
+<p><span class="math display">\[
+h(V_{(k-1)}) =  \mathbf{R}_k
+\]</span></p>
+<p>with entries</p>
+<p>under the contact neutralizing strategy and</p>
+<p><span class="math display">\[
+R_{kj} = \text{ deg}_{G_c}(j|1 -\mathbf{V}_{(k-1)})
+\]</span> under the movement neutralizing strategy</p>
+<section id="contact-neutralizing" class="level5"><h5 class="anchored" data-anchor-id="contact-neutralizing">Contact-neutralizing</h5>
+<p>In the contact-neutralizing strategy <span class="math inline">\(n^{(k+1)}\)</span> satisfies:</p>
+<p><span class="math display">\[
+r_{n^{(k+1)}} = \max_{j \in N_c^{(k)}}{r_j^{(k)}}
+\]</span></p>
+</section><section id="movement-neutralizing" class="level5"><h5 class="anchored" data-anchor-id="movement-neutralizing">Movement-neutralizing</h5>
+<p>In the movement-neutralizing strategy <span class="math inline">\(n^{(k+1)}\)</span> satisfies:</p>
+<p><span class="math display">\[
+s_{n^{(k+1)}} = \max_{j \in N_c^{(k)}}{s_j^{(k)}}
+\]</span></p>
+<p>and so that given <span class="math inline">\(G^{(k)}\)</span>, we calculate <span class="math inline">\(G^{(k+1)}(N^{(k+1)}, \psi^{(k+1)})\)</span> by selecting a community district <span class="math inline">\(n^{(k+1)}\)</span> along with all participants connected with it</p>
+<p><span class="math display">\[
+H^{(k+1)} = \{s \in N^{(k)}_p : \psi^{(k)}(s,n^{(k+1)}) &gt; 0 \} \cup \{ n^{(k+1)} \}
+\]</span></p>
+<p>and removing them from the node set</p>
+<p><span class="math display">\[
+N^{(k+1)}   = N^{(k)} \backslash \ H^{(k+1)}    
+\]</span> The updated adjacency function <span class="math inline">\(\psi^{(k+1)}\)</span> preserves all the edges represented by <span class="math inline">\(\psi^{(k)}\)</span> for terminal nodes included in <span class="math inline">\(N^{(k+1)}\)</span>:</p>
+<p><span class="math display">\[
+\psi^{(k+1)}(a,b) = \psi^{(k)}(a,b),  \forall a,b \in  N^{(k+1)}
+\]</span></p>
+<p>Note: All measures defined in the previous sections can be calculated based on the updated graph <span class="math inline">\(G^{(k)}\)</span>. We indicate this case by adding a superscript with index number <span class="math inline">\(k\)</span> for the particular measure. e.g.&nbsp;We can define <span class="math inline">\(s_j^{(k)}|A\)</span> relative to graph <span class="math inline">\(G^{(k)}\)</span> just as <span class="math inline">\(s_j|A\)</span> is defined relative to graph <span class="math inline">\(G\)</span>.</p>
+</section><section id="intervention-strategies" class="level4"><h4 class="anchored" data-anchor-id="intervention-strategies">Intervention strategies</h4>
+<p>We examined two approaches for selecting a community district to immunize, corresponding to different intervention priorities. In the first, we select the next community district to immunize to maximize the number of people to be immunized. In the second, we select the next community district with the goal of minimizing the likelihood of contagion between community districts.</p>
+<section id="contact-neutralizing-1" class="level5"><h5 class="anchored" data-anchor-id="contact-neutralizing-1">Contact-neutralizing</h5>
+<p>In the contact-neutralizing strategy <span class="math inline">\(n^{(k+1)}\)</span> satisfies:</p>
+<p><span class="math display">\[
+r_{n^{(k+1)}} = \max_{j \in N_c^{(k)}}{r_j^{(k)}}
+\]</span></p>
+</section><section id="movement-neutralizing-1" class="level5"><h5 class="anchored" data-anchor-id="movement-neutralizing-1">Movement-neutralizing</h5>
+<p>In the movement-neutralizing strategy <span class="math inline">\(n^{(k+1)}\)</span> satisfies:</p>
+<p><span class="math display">\[
+s_{n^{(k+1)}} = \max_{j \in N_c^{(k)}}{s_j^{(k)}}
+\]</span></p>
 
 
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");

@@ -1,69 +1,129 @@
 ## Outbreak control intervention
 
-Consider a sequence of graphs $G^{(k)}$ for $k \in \mathbb{N}_0$ constructed so that
+
+### Example 4: Outbreak control model using MPX NYC data {.unnumbered}
+
+Finally, our intervention of interest, might not be about setting the value of any particular variable, but setting a policy or a process that produces some variable of interest. \[UPDATE EQUATIONS\]. This woudld be done by changing the function which produces that variable. In the diagram and the equations, we show an intervention which replaces the functions \[XXX\[\]\] with $h$. Every variable that is downstream of the first time a variable is created using $h$ is marked with a superscript $(h)$ to show that it is partially determined by that function.
+
+As usual, we can decide whether we want to focus on person or commuinty level (or combination) outcomes as the overall quantity of interest. In addition to the outcome variables we can now ask what the impact of taking policy $(h)$ would be on the decision whether or not to vaccinate a neighborhood ($T$) as well as the exposure of particular participants to campaign messages $M$.
+
+
+
+
+### Counterfactual data
+
+```{r}
+
+
+list_nodes <- list()
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M0", label = r"($M_{0}$)", x = -1, y = 6, node_type = "Individual", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V0", label = r"($V_{0}$)"      , x = 1 , y = 8 , node_type = "Individual", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R1", label = r"($R_{1}^{(h)}$)"      , x = 2 , y = 2 , node_type = "Community", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T1", label = r"($T_{1}^{(h)}$)"      , x = 3 , y = 4 , node_type = "Community", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M1", label = r"($M_{1}^{(h)}$)"      , x = 4 , y = 6 , node_type = "Individual", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V1", label = r"($V_{1}^{(h)}$)"      , x = 5 , y = 8 , node_type = "Individual", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R2", label = r"($R_{2}^{(h)}$)" , x = 6 , y = 2 , node_type = "Community", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T2", label = r"($T_{2}^{(h)}$)"      , x = 7 , y = 4 , node_type = "Community", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M2", label = r"($M_{2}^{(h)}$)"      , x = 8 , y = 6 , node_type = "Individual", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V2", label = r"($V_{2}^{(h)}$)"      , x = 9 , y = 8 , node_type = "Individual", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R3", label = r"($R_{3}^{(h)}$)" , x = 10 , y = 2, node_type = "Community", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T3", label = r"($T_{3}^{(h)}$)"      , x = 11 , y = 4, node_type = "Community", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M3", label = r"($M_{3}^{(h)}$)"      , x = 12 , y = 6, node_type = "Individual", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V3", label = r"($V_{3}^{(h)}$)"      , x = 13 , y = 8, node_type = "Individual", node_shape = "covariate")
+
+list_edges <- list()
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M0", to = "M1", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "R1", edge_label = r"($h$)")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "M1", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "R1", to = "T1", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "T1", to = "M1", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M1", to = "V1", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "R2", to = "T2", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "T2", to = "M2", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M2", to = "V2", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "R3", to = "T3", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "T3", to = "M3", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M3", to = "V3", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "R2", edge_label = r"($h$)")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "R3", edge_label = r"($h$)")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M1", to = "M2", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M2", to = "M3", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "M2", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "M3", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "V1", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "V2", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "V3", edge_label = r"()")
+
+
+structural_nodes <- list_nodes |> dplyr::bind_rows() |> dplyr::mutate(label = latex2exp::TeX(label, output = "character", bold = TRUE))
+structural_edges <- list_edges |> dplyr::bind_rows() 
+
+
+tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges) |>
+  plot_swig(node_radius = 0.5, nudge_intervention_labels = 0.2) +
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc_large()
+
+
+
+```
+
+
 
 $$
-G^{(0)}(N^{(0)}, \psi^{(0)}) = G(N, \psi).
-$$
+\begin{aligned}
+M_{0i} &=  0 \\
+V_{0i} &=  0 \\
+R_{sj}^{(h)} &=  h(\mathbf{V}_{s-1}) \\
+T_{sj}^{(h)} &=  \begin{cases} 1 & R_{sj} = max_k R_{kj} \\ 0 & otherwise \end{cases} \\
+M_{si}^{(h)} &=  \begin{cases} 1 & T_{sN_i} \neq \mathbf{0}  \\ 0 & otherwise \end{cases} \\
+V_{si}^{(h)} &=  \begin{cases} 1 & M_{si} = 1 \text{ or } V_{s-1,i} = 1\\ 0 & otherwise \end{cases} \\
+\end{aligned}
+$$ {#eq-edge-intervention-dang}
 
-and so that given $G^{(k)}$, we calculate $G^{(k+1)}(N^{(k+1)}, \psi^{(k+1)})$ by selecting a community district $n^{(k+1)}$ along with all participants connected with it
 
-$$
-H^{(k+1)} = \{s \in N^{(k)}_p : \psi^{(k)}(s,n^{(k+1)}) > 0 \} \cup \{ n^{(k+1)} \}
-$$
-
-and removing them from the node set
-
-$$
-N^{(k+1)}   = N^{(k)} \backslash \ H^{(k+1)}    
-$$ The updated adjacency function $\psi^{(k+1)}$ preserves all the edges represented by $\psi^{(k)}$ for terminal nodes included in $N^{(k+1)}$:
+We define function $h$ as a vector-valued function whose length is equal to the number of community districts. $h(V_{(s-1)})$, the rating for community district $j$ has entries $h_j$ such that:
 
 $$
-\psi^{(k+1)}(a,b) = \psi^{(k)}(a,b),  \forall a,b \in  N^{(k+1)}
+h_{sj} =  \sum_{ i \in N_p} (1 -V_{(s-1), i}) \times \begin{cases}
+              \phi(i, j)                                &  \text{contact-neutralizing appoach}\\
+             \sum_{ k \in N_c} \phi(i, j)\phi(i, k)     &  \text{movement-neutralizing approach}
+        \end{cases}
 $$
 
-Note: All measures defined in the previous sections can be calculated based on the updated graph $G^{(k)}$. We indicate this case by adding a superscript with index number $k$ for the particular measure. e.g. We can define $s_j^{(k)}|A$ relative to graph $G^{(k)}$ just as $s_j|A$ is defined relative to graph $G$.
 
-#### Intervention strategies
 
-We examined two approaches for selecting a community district to immunize, corresponding to different intervention priorities. In the first, we select the next community district to immunize to maximize the number of people to be immunized. In the second, we select the next community district with the goal of minimizing the likelihood of contagion between community districts.
 
-##### Contact-neutralizing
-
-In the contact-neutralizing strategy $n^{(k+1)}$ satisfies:
-
-$$
-r_{n^{(k+1)}} = \max_{j \in N_c^{(k)}}{r_j^{(k)}}
-$$
-
-##### Movement-neutralizing
-
-In the movement-neutralizing strategy $n^{(k+1)}$ satisfies:
-
-$$
-s_{n^{(k+1)}} = \max_{j \in N_c^{(k)}}{s_j^{(k)}}
-$$
-
-#### Intervention outcomes
+### Causal estimands
 
 ##### Spatial efficiency
 
-Intervention coverage for community district $n^{(k)}$, the $k^{th}$ community district to be immunized, is defined as:
+Intervention coverage for the $s^{th}$ community district to be immunized, is defined as:
 
 $$
-\frac{ r_{n^{(k)}}^{(k-1)}}{ |N_p|}
+C_s = \frac{1}{|N_p|}\sum_i V_{si}^{(h)} 
 $$
 
-The cumulative intervention coverage after immunizing $k$ community districts, therefore, is:
+The cumulative intervention coverage after immunizing $s$ community districts, therefore, is:
 
 $$ 
-\sum_{t = 1}^k{\frac{ r_{n^{(t)}}^{(t-1)}}{ |N_p|}}
+\bar{C_s} = \sum_{v = 1}^s{C_v }
 $$
 
 ##### Social network impact
 
-The cumulative social network impact of immunizing $k$ community districts is measured in terms of the size of the largest of the connected components $C_t^{(k)}$ of the $G_p^{(k)}$ network as a proportion of the total number of participants.
+Define graph $G^{s}(N, \phi^s)$ such that 
 
 $$
-\frac{\max_t{C^{(k)}_{t}}}{|N_p|}
+\phi_s(i, j) = \phi(i, j) \times (1 -V_{(s-1), i})
 $$
+
+The cumulative social network impact of immunizing $s$ community districts is measured in terms of the size of the largest of the connected components $LCC^{(s)}$ of the $G^{s}(N, \phi^s)$ network as a proportion of the total number of participants.
+
+$$
+\frac{LCC_s}{|N_p|}
+$$
+
+
+
+### Estimation

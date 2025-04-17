@@ -8,12 +8,17 @@ targets::tar_source("../R_functions")
 
 ### Counterfactual data
 
+We define a counterfactual outcomes $Y_1^{(a_1, a_2)}$, $Y_2^{(a_2, a_1)}$, and $Y_3^{(a_3)}$, which represent the level of job opportunities, Persons 1, 2, and 3, would have if we set their dress to level $a_1$, $a_2$, and $a_3$, respectively. Then the model for counterfactual variable is given by @eq-network-interference-swing. 
 
-Under network causal inference, we create a structural equation model fo the system under intervention. In teh network causal inference perspectively, it is possible for one observational unit's treatment value to affect another unit's outcome. Recall Person 1 and Person 2 are a married couple. In this perceptvie, setting Person 1;s dress would afect Person2's job oppottunities and vice versa. For PErson 3, however, their job opportunities are only related to factoers related to them. 
+It is represented using a Single World Intervention Graph (SWIG) in @fig-network-interference-swing. A SWIG represents a structural equation model where some of the equations are superseded by the value assigned by the experimenter. For "treatment" variables, the diagram separates the value of the variable in the observational setting, to the value that will be used by subsequent equations, which is set by the experimenter. 
+
+Note that because of the assumption of network interference, the counterfactual outcome for Person 1 is a function of Person 2's treatment value, and vice versa. 
 
 ```{r}
 #| fig-height: 8
+#| label: fig-network-interference-swing
 #| fig-width: 7
+#| fig-cap: "SWING with network interference"
 make_swig("network_interference")      |> 
   plot_swig(node_radius = 0.2) + 
   scale_fill_mpxnyc(option = "light") +
@@ -27,5 +32,5 @@ L_i &= f_{L}(  U_{L_i}  ) \\
 A_i &= f_{A}( U_{A_i}, L_i, g_{A}(\textbf{L}_{N_i}) ) \\
 Y_i^{(a_i,\textbf{a}_{N_i} )} &= f_{Y}(U_{Y_i}, L_i,  a_i,  g_{Y}(\textbf{L}_{N_i}),      h_{Y}(\textbf{a}_{N_i})         ) \\
 \end{aligned} 
-$$ {#eq-network-interference-dang}
+$$ {#eq-network-interference-swing}
 
