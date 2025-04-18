@@ -390,11 +390,9 @@ div.csl-indent {
 <li><a href="#application-outbreak-control-model-using-mpx-nyc-data" id="toc-application-outbreak-control-model-using-mpx-nyc-data" class="nav-link" data-scroll-target="#application-outbreak-control-model-using-mpx-nyc-data">Application: Outbreak control model using MPX NYC data</a></li>
   <li><a href="#model-3" id="toc-model-3" class="nav-link" data-scroll-target="#model-3"><span class="header-section-number">C.4.1</span> Model</a></li>
   <li><a href="#estimands" id="toc-estimands" class="nav-link" data-scroll-target="#estimands"><span class="header-section-number">C.4.2</span> Estimands</a></li>
-  <li><a href="#estimation" id="toc-estimation" class="nav-link" data-scroll-target="#estimation"><span class="header-section-number">C.4.3</span> Estimation</a></li>
   </ul>
 </li>
   <li><a href="#towards-ssnacx" id="toc-towards-ssnacx" class="nav-link" data-scroll-target="#towards-ssnacx"><span class="header-section-number">C.5</span> Towards SSNACX</a></li>
-  <li><a href="#statistical-inference" id="toc-statistical-inference" class="nav-link" data-scroll-target="#statistical-inference"><span class="header-section-number">C.6</span> Statistical inference</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -799,7 +797,7 @@ Y_i^{(a_i,\textbf{a}_{\mathscr{N}_i} )} &amp;= f_{Y}(U_{Y_i}, L_i,  a_i,  g_{Y}(
 <p>It is possible to decompose this average causal effect into a portion attributable to direct (within individual) causal pathways. This tells us, on average, to what extent one’s own dress affects one own’s job opportunities.</p>
 <p><span class="math display">\[
 \frac{1}{n}\sum_i E[Y_i(1, \textbf{ 0}) - Y_i(0, \textbf{0}) | \mathbf{L}]
-\]</span> We can calculat the portion of the average total effect attributable to spillover (cross-individual) causal pathways. This tells us, on average, to what extent one’s spouse’s dress affects one’s job opportunities.</p>
+\]</span> We can calculate the portion of the average total effect attributable to spillover (cross-individual) causal pathways. This tells us, on average, to what extent one’s spouse’s dress affects one’s job opportunities.</p>
 <p><span class="math display">\[
 \frac{1}{n}\sum_i E[Y_i(1, \textbf{ 1}) - Y_i(1, \textbf{0}) | \mathbf{L}]
 \]</span></p>
@@ -820,8 +818,8 @@ E[Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})} | \mathbf{L}]
 \end{align}
 \]</span></p>
 <p>In the first line, we use the fact that <span class="math inline">\(Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})}\)</span> is independent of <span class="math inline">\(L_j\)</span> for <span class="math inline">\(j \not \in \mathscr{N}_i\)</span> once we condition for <span class="math inline">\(L_i\)</span> and <span class="math inline">\(g(\mathbf{L}_{\mathscr{N}_i})\)</span> - the network exposure value for person <span class="math inline">\(i\)</span> with respect to <span class="math inline">\(\mathbf{L}\)</span>.</p>
-<p>In the second line, we use the fact that <span class="math inline">\(Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})}\)</span> is independent of <span class="math inline">\(A\)</span> after adjusting for <span class="math inline">\(L\)</span>, since <span class="math inline">\(\mathbf{a}\)</span> is a constant of the experimenters choosing.</p>
-<p>We replace <span class="math inline">\(Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})}\)</span> with its structural equation <a href="#fig-homogenous-interference-swig">Figure&nbsp;<span>C.7</span></a>, noting that this is equal to the observed value <span class="math inline">\(Y_i\)</span> for people <span class="math inline">\(i\)</span> whose treatment (<span class="math inline">\(A_i\)</span>) network treatment value (<span class="math inline">\(h_Y(\textbf{A}_{\mathscr{N}_i})\)</span>) is consistent with the value of <span class="math inline">\(\mathbf{a}\)</span> set by the experimenter. This last fact is given by <a href="#eq-homogenous-dag">Equation&nbsp;<span>C.6</span></a>.</p>
+<p>In the second line, we use the fact that <span class="math inline">\(Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})}\)</span> is independent of <span class="math inline">\(\mathbf{a}\)</span> after adjusting for <span class="math inline">\(L\)</span>, since <span class="math inline">\(\mathbf{a}\)</span> is a constant of the experimenters choosing.</p>
+<p>We replace <span class="math inline">\(Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})}\)</span> with its structural equation <a href="#fig-homogenous-interference-swig">Figure&nbsp;<span>C.7</span></a>, noting that this is equal to the observed value <span class="math inline">\(Y_i\)</span> for people <span class="math inline">\(i\)</span> whose treatment value (<span class="math inline">\(A_i\)</span>) and network exposure value (<span class="math inline">\(h_Y(\textbf{A}_{\mathscr{N}_i})\)</span>) is consistent with the value of <span class="math inline">\(\mathbf{a}\)</span> set by the experimenter. This last fact is given by <a href="#eq-homogenous-dag">Equation&nbsp;<span>C.6</span></a>.</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -837,17 +835,17 @@ E[Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})} | \mathbf{L}]
 </details>
 </div>
 <section id="example-3-longitudinal-data-driven-vaccination-campaign" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="example-3-longitudinal-data-driven-vaccination-campaign">Example 3: Longitudinal Data-Driven Vaccination Campaign</h3>
-<p>You are a public health officer at the department of health in Nowhereville, and are planning to conduct and assess a three week flu vaccination campaign. None of the townspeople have been vaccinated against flu.</p>
-<p>In the city of Nowhereville there is a population of 5 residents. The city is divided into three neighborhoods. Each resident has a primary home in one of the neighborhoods, but might visit other residents in another. Person 1 lives in Neighborhood A and visit Neighborhood B. Person 2 lives in Neighborhood B, but vists Neighborhoods A and B. Person 3 lives in Neighborhood C and visits Neighborhood B. Persons 5 and 6 live in Neighborhood C and they do not visit any other neighborhoods.</p>
+<p>You are a public health officer at the department of health in Nowhereville, and are planning to conduct and assess a three week flu vaccination campaign. None of the townspeople have been vaccinated against flu. There is a population of 5 residents in the city, and they each live in one of three neighborhoods. In addition, residents visit their friends home’s in other neighborhoods.</p>
+<p>Person 1 lives in Neighborhood A and visits Neighborhood B. Person 2 lives in Neighborhood B, but visits Neighborhoods A and B. Person 3 lives in Neighborhood C and visits Neighborhood B. Persons 5 and 6 live in Neighborhood C and they do not visit any other neighborhoods.</p>
 <p>The city of Nowhereville has a very structured approach to vaccination campaigns. At the beginning of each week, each neighborhood gets a risk rating based on the prevalence of vaccination among its residents and visitors. Based on that rating, each neighborhood decides whether to conduct a local vaccination drive or not. Vaccination drives are done in the same way regardless of neighborhood - visitors and residents are offered immediate vaccination at a nearby mobile van through a pop-up message on the local dating app. Not everyone will receive the messages because some will not open the app during the period of the campaign. Those who do will have the choice of getting vaccinated or not. Each person can only get vaccinated once.</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section><section id="new-tools-from-the-ssnac-framework" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="new-tools-from-the-ssnac-framework">New tools from the SSNAC framework</h3>
-<p>As we see in <a href="#fig-homogenous-dag">Figure&nbsp;<span>C.6</span></a>, causal DAGs become visually cluttered, and therefore unwieldy, quickly once we start depicting causal systems with multiple observational units. If we added a fourth observational unit to <a href="#fig-homogenous-dag">Figure&nbsp;<span>C.6</span></a>, it would be nearly impossible to see which arrow connects which variables. This is an important limitation because one of the most useful things about causal DAGs is that they allow the epidemiologist to reason graphically about the structure of confounding and selection.</p>
+<p>As we see in <a href="#fig-homogenous-dag">Figure&nbsp;<span>C.6</span></a>, causal DAGs become quickly visually cluttered, and therefore unwieldy, once we start depicting causal systems with multiple observational units. If we added a fourth observational unit to <a href="#fig-homogenous-dag">Figure&nbsp;<span>C.6</span></a>, it would be nearly impossible to see which arrow connects which nodes This is an important limitation because one of the most useful things about causal DAGs is that they allow the observational epidemiologist to reason graphically about the structure of confounding and selection.</p>
 <section id="introducing-the-causal-directed-acyclic-network-graph-dang" class="level4"><h4 class="anchored" data-anchor-id="introducing-the-causal-directed-acyclic-network-graph-dang">Introducing the Causal Directed Acyclic Network Graph (DANG)</h4>
-<p>We introduce the Causal Directed Acyclic Network Graph (causal DANG) - a simple extension of the DAG that allows for the representation of complex systems. Like the causal DAG, the causal DANG encodes the structure of a non-parametric structural equation model. DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former us called the “structural part” of the DANG and the latter called the “relational part” of the DANG.</p>
+<p>We introduce the causal Directed Acyclic Network Graph (causal DANG) - a simple extension of the DAG that allows for the representation of complex causal systems. Like the causal DAG, the causal DANG encodes a non-parametric structural equation model. DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is called the “structural part” of the DANG and the latter is called the “relational part”.</p>
 <p>We represent the structural model defined by <a href="#eq-homogenous-dag">Equation&nbsp;<span>C.6</span></a> shown in <a href="#fig-homogenous-dag">Figure&nbsp;<span>C.6</span></a>. The first aspect (structural part) of the causal DANG shows the causal structure within individuals. It is a DAG of vector-valued variables <span class="math inline">\(\mathbf{L}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{Y}\)</span> of length equal to the number of people in the sample. This DAG has standard interpretation under d-separation rules. It gives the conditional independencies across these vector-valued random variables. This is an incomplete set of independencies, however, since some of the entries in <span class="math inline">\(\mathbf{A}\)</span> are independent of a given entry in <span class="math inline">\(\mathbf{L}\)</span>, and others are correlated. The second part of the causal DANG (relational part) of the causal DANG shows which pairs of individuals have correlated measures and which do not.</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">structural_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
@@ -971,7 +969,7 @@ E[Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})} | \mathbf{L}]
 </div>
 </div>
 </section><section id="introducing-the-single-world-intervention-network-graph-swing" class="level4"><h4 class="anchored" data-anchor-id="introducing-the-single-world-intervention-network-graph-swing">Introducing the Single World Intervention Network Graph (SWING)</h4>
-<p>Similarly, the causal SWING has two parts - a structural part and a relational part. Like with the causal DANG, the causal SWING represents vector-valued random variables (rather than scalars) as nodes. Like the causal SWIG, it shows the counterfactual distribution of the variables in the model under an intervention setting <span class="math inline">\(\mathbf{A}\)</span> at the value <span class="math inline">\(\mathbf{a}\)</span>.</p>
+<p>The SWING has two parts - a structural part and a relational part. Like the causal DANG, the SWING represents vector-valued random variables (rather than scalars) as nodes. Like the SWIG, it shows the counterfactual distribution of the variables in the model under an intervention setting <span class="math inline">\(\mathbf{A}\)</span> at the value <span class="math inline">\(\mathbf{a}\)</span> by splitting the <span class="math inline">\(\mathbf{A}\)</span> node.</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">structural_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  name  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"T"</span>, <span class="st">"t"</span>, <span class="st">"A"</span>, <span class="st">"Y"</span><span class="op">)</span>,</span>
@@ -1032,52 +1030,18 @@ E[Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})} | \mathbf{L}]
 <p>We make the assumption that interference respects the mapping given by the relational part of a causal DANG.</p>
 </section></section><section id="homogeneity-assumptions-1" class="level4"><h4 class="anchored" data-anchor-id="homogeneity-assumptions-1">Homogeneity assumptions</h4>
 <section id="identical-distribution-2" class="level5"><h5 class="anchored" data-anchor-id="identical-distribution-2">Identical distribution</h5>
-<p>As in the case of classical causal inference, we assume that the structural equations that produce each observatoinal unit’s measures are identical across observational units i.e.&nbsp;we assume:</p>
-<span class="math display">\[\begin{aligned}
-f_A = f_{A_1} &amp;= f_{A_2} = f_{A_3} \\
-f_L = f_{L_1} &amp;= f_{L_2} = f_{L_3} \\
-f_Y = f_{Y_1} &amp;= f_{Y_2} = f_{Y_3} \\
-
-\end{aligned}\]</span>
+<p>We assume that the structural equations that produce each observational unit’s measures are identical across observational units.</p>
 </section><section id="homogenous-interference-1" class="level5"><h5 class="anchored" data-anchor-id="homogenous-interference-1">Homogenous interference</h5>
 <p><em>Separability</em></p>
-<p>We assume that in each structural equation, each covariate contributes to the exposure mapping in two parts: i) the covariate level for the individual and ii) a covariate level of the ego-network of that individual.</p>
-<p>Define <span class="math inline">\(\mathscr{N_i}\)</span> as the indices of all the nodes connected to node <span class="math inline">\(i\)</span>. Then <span class="math inline">\(\mathbf{L}_{\mathscr{N}_i}\)</span> is the sub-vector of <span class="math inline">\(\mathbf{L}\)</span> containing the entries corresponding to the indices in <span class="math inline">\(\mathscr{N}_i\)</span>. Similarly, we define <span class="math inline">\(A_{\mathscr{N}_i}\)</span> as the sub-vector of <span class="math inline">\(A\)</span> corresponding to the indices in <span class="math inline">\(\mathscr{N}_i\)</span>.</p>
-<p>Functions <span class="math inline">\(g_{A_i}\)</span>, <span class="math inline">\(g_{Y_i}\)</span>, and <span class="math inline">\(h_{Y_i}\)</span> are exposure mappings - functions that summarize covariate values for observational unit <span class="math inline">\(i\)</span>t. They map vectors of any length to the real line.</p>
-<p><span class="math display">\[
-g: \bigcup_{k = 0}^{\infty}{\mathbb{R}^k}  \rightarrow  \mathbb{R}
-\]</span></p>
-<p><span class="math inline">\(\mathbb{R}^0\)</span> is defined as a set that has only one element - the empty vector (<span class="math inline">\(\mathbb{R}^0 = \{[]\}\)</span>). This represents the situation where observational unit <span class="math inline">\(i\)</span> is not related to any other observational unit in the sample.</p>
-<p><span class="math display">\[
-\begin{aligned}
-L_1 &amp;= f_{L_1}(U_{L_1}) \\
-L_2 &amp;= f_{L_2}(U_{L_2}) \\
-L_3 &amp;= f_{L_3}(U_{L_3} ) \\
-A_1 &amp;= f_{A_1}(U_{A_1}, L_1, g_{A_1}(\mathbf{L}_{\mathscr{N}_1})) \\
-A_2 &amp;= f_{A_2}(U_{A_2}, L_2, g_{A_2}(\mathbf{L}_{\mathscr{N}_2})) \\
-A_3 &amp;= f_{A_3}(U_{A_3}, L_3, g_{A_3}(\mathbf{L}_{\mathscr{N}_3})) \\
-Y_1 &amp;= f_{Y_1}(U_{Y_1}, L_1, A_1, g_{Y_1}(\mathbf{L}_{\mathscr{N}_1}), h_{Y_1}(\mathbf{A}_{\mathscr{N}_1})) \\
-Y_2 &amp;= f_{Y_2}(U_{Y_2}, L_2, A_2, g_{Y_2}(\mathbf{L}_{\mathscr{N}_2}), h_{Y_2}(\mathbf{A}_{\mathscr{N}_2})) \\
-Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_3,A_3,  g_{Y_2}(\mathbf{L}_{\mathscr{N}_3}), h_{Y_2}(\mathbf{A}_{\mathscr{N}_3})) \\
-\end{aligned}
-\]</span></p>
-<p>This simplifies the model, but still forces us to write the structural equations for each observation separately since each observation potentially has a set of unique exposure mappings.</p>
+<p>We assume that in each structural equation, each covariate contributes to the exposure mapping in two parts: i) the covariate level for the observational unit and ii) a summary of the covariate levels of members of the the ego-network of that unit given by exposure mappings.</p>
 <p><em>Equivalency</em></p>
-<p>We assume that exposure mappings <span class="math inline">\(g_A\)</span>, <span class="math inline">\(h_y\)</span>, and <span class="math inline">\(g_Y\)</span> are identical across individuals.</p>
-<span class="math display">\[\begin{aligned}
-g_L = g_{L_1} &amp;= g_{L_2} = g_{L_3} \\
-h_A = h_{A_1} &amp;= h_{A_2} = h_{A_3} \\
-g_Y = g_{L_1} &amp;= g_{L_2} = g_{L_3} \\
-\end{aligned}\]</span>
+<p>We assume that exposure mappings are identical across observational units.</p>
 <p><em>Symmetry</em></p>
-<p>We also assume that the order of the entries does not matter in the the input for functions <span class="math inline">\(g_A\)</span>, <span class="math inline">\(g_Y\)</span>, and <span class="math inline">\(h_Y\)</span>. i.e.&nbsp;the functions are invariant under any permutation of the entries in the input vector.</p>
+<p>We also assume that the order of the entries does not matter in the the input for exposure mappings. i.e.&nbsp;the mappings are invariant under any permutation of the entries in the input vector.</p>
 <p><em>Boundedness</em></p>
 <p>We assume that exposure mappings are bounded above.</p>
-<p><span class="math display">\[
-g_A, h_Y, g_Y &lt; c \text{ for } c \in \mathbf{Z}
-\]</span></p>
-<p><em>(time homogeneity)</em></p>
-<p>In applications with repeated measures, if the structure of the causal DANG allows, we can make the assumption that the structural equations are identical accross time. We apply this assumption in the example 3 below.</p>
+<p><em>Time homogeneity (optional)</em></p>
+<p>In applications with repeated measures, if the structure of the causal DANG allows, we can make the assumption that the structural equations are identical across time. We apply this assumption in the example 3 below.</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -1085,7 +1049,7 @@ g_A, h_Y, g_Y &lt; c \text{ for } c \in \mathbf{Z}
 </section></section></section><section id="model-2" class="level3" data-number="C.3.2"><h3 data-number="C.3.2" class="anchored" data-anchor-id="model-2">
 <span class="header-section-number">C.3.2</span> Model</h3>
 <section id="observational-data" class="level4"><h4 class="anchored" data-anchor-id="observational-data">Observational data</h4>
-<p>The causal DANG shown in <a href="#fig-repeated-observations-dang">Figure&nbsp;<span>C.9</span></a> represents the three week campaign mentioned in Example 3. Let <span class="math inline">\(\mathbf{T}_s\)</span> be a <span class="math inline">\(3\times1\)</span> vector whose entries <span class="math inline">\(T_{sj}\)</span> are 1 if neighborhood <span class="math inline">\(j\)</span> is to be vaccinated at time <span class="math inline">\(s\)</span> and <span class="math inline">\(0\)</span> otherwise. <span class="math inline">\(\mathbf{M}_s\)</span> is a <span class="math inline">\(5\times1\)</span> vector whose entries <span class="math inline">\(M_{si}\)</span> indicate whether the <span class="math inline">\(i^{\text{th}}\)</span> person received a message at time <span class="math inline">\(s\)</span> or not. <span class="math inline">\(\mathbf{V}_s\)</span> is a <span class="math inline">\(5\times1\)</span> vector whose entries <span class="math inline">\(V_{si}\)</span> show whether participant <span class="math inline">\(i\)</span> is vaccinated or not at time <span class="math inline">\(s\)</span>. Finally, <span class="math inline">\(\mathbf{R}_s\)</span> is a <span class="math inline">\(3\times1\)</span> vector whose entries <span class="math inline">\(R_{si}\)</span> shows the risk rating of neighborhood <span class="math inline">\(j\)</span> at the beginning of time <span class="math inline">\(s\)</span>. <span class="quarto-unresolved-ref">?eq-repeated-observations</span> specifies this model for Person <span class="math inline">\(i\)</span> and neighborhood <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span>:</p>
+<p>The causal DANG shown in <a href="#fig-repeated-observations-dang">Figure&nbsp;<span>C.9</span></a> represents the three week campaign mentioned in Example 3. Let <span class="math inline">\(\mathbf{T}_s\)</span> be a <span class="math inline">\(3\times1\)</span> vector whose entries <span class="math inline">\(T_{sj}\)</span> are 1 if neighborhood <span class="math inline">\(j\)</span> is to be vaccinated at time <span class="math inline">\(s\)</span> and <span class="math inline">\(0\)</span> otherwise. <span class="math inline">\(\mathbf{M}_s\)</span> is a <span class="math inline">\(5\times1\)</span> vector whose entries <span class="math inline">\(M_{si}\)</span> indicate whether the <span class="math inline">\(i^{\text{th}}\)</span> person received a campaign message at time <span class="math inline">\(s\)</span> or not. <span class="math inline">\(\mathbf{V}_s\)</span> is a <span class="math inline">\(5\times1\)</span> vector whose entries <span class="math inline">\(V_{si}\)</span> show whether participant <span class="math inline">\(i\)</span> is vaccinated or not at time <span class="math inline">\(s\)</span>. Finally, <span class="math inline">\(\mathbf{R}_s\)</span> is a <span class="math inline">\(3\times1\)</span> vector whose entries <span class="math inline">\(R_{si}\)</span> shows the risk rating of neighborhood <span class="math inline">\(j\)</span> at the beginning of time <span class="math inline">\(s\)</span>. <a href="#eq-placeintervention-dang">Equation&nbsp;<span>C.8</span></a> specifies this model for Person <span class="math inline">\(i\)</span> and neighborhood <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span>:</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"M0"</span>, label <span class="op">=</span> <span class="st">r"($M_{0}$)"</span>, x <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, y <span class="op">=</span> <span class="fl">6</span>, node_type <span class="op">=</span> <span class="st">"Individual"</span><span class="op">)</span></span>
@@ -1146,10 +1110,19 @@ g_A, h_Y, g_Y &lt; c \text{ for } c \in \mathbf{Z}
 </div>
 </div>
 </div>
+<p><span id="eq-placeintervention-dang"><span class="math display">\[
+\begin{aligned}
+M_{0i} &amp;=  f_{M_0}(U_{M_{0i}}) \\
+V_{0i} &amp;=  f_{V_0}(U_{V_{0i}}) \\
+R_{sj} &amp;=  f_{R}(U_{R_{sj}}, \mathbf{V}_{s-1}) \\
+T_{sj} &amp;=  f_{T}(U_{T_{sj}}, R_{s,j}) \\
+M_{si} &amp;=  f_{M} (U_{M_{\{si\}}} , V_{\{s-1,i\}}, M_{\{s-1,i\}}, \mathbf{T}_{\{s,\mathscr{N}_i\}})\\
+V_{si} &amp;=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}, V_{\{s-1,i\}}) \\
+\end{aligned}
+\tag{C.8}\]</span></span></p>
 </section><section id="counterfactual-data-2" class="level4"><h4 class="anchored" data-anchor-id="counterfactual-data-2">Counterfactual data</h4>
 <p>Based on the causal DANG, we can imagine different combinations of intervention and outcome to investigate in the public health system of Nowhereville. We could ask what would happen if we intervened to set exposure to the campaign message <span class="math inline">\(\mathbf{M}\)</span> at the individual level (for example, by randomly selecting participants to directly send pop-up messages to), or we could ask what would happen if we intervened to conduct the intervention in some communities but not others. These would both be node-level interventions. For each of these questions, we could focus either on person-level outcomes like vaccination status <span class="math inline">\(\mathbf{V}\)</span> or community-level outcomes like vaccination prevalence. Finally, we could ask what would happen if we intervened to change the relationship between to nodes in the DANG by asking, for instance, what would happen if Nowhereville changed how it rated neighborhoods <span class="math inline">\(\mathbf{R\)</span>. We focus here on a neighborhood messaging intervention described in Example 3.</p>
-</section><section id="place-intervention" class="level4"><h4 class="anchored" data-anchor-id="place-intervention">Place intervention</h4>
-<p>Say we want to understand the impact of a vaccination campaign conducted over three weeks on vaccination status. This would be done by setting <span class="math inline">\(\mathbf{T}_1\)</span> to <span class="math inline">\(\mathbf{t}_1\)</span>, <span class="math inline">\(\mathbf{T}_2\)</span> to <span class="math inline">\(\mathbf{t}_2\)</span>, and <span class="math inline">\(\mathbf{T}_3\)</span> to <span class="math inline">\(\mathbf{t}_3\)</span> and noting the resulting counterfactual vaccination status at the end of week 1 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1)}\)</span>), week 2 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2)}\)</span>), and week 3 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)}\)</span>). This counterfactual model is defined <a href="#eq-placeintervention-swing">Equation&nbsp;<span>C.8</span></a> as shown in shown in <a href="#fig-placeintervention-swing">Figure&nbsp;<span>C.10</span></a></p>
+<p>Say we want to understand the impact of a vaccination campaign conducted over three weeks on vaccination status. This would be done by setting <span class="math inline">\(\mathbf{T}_1\)</span> to <span class="math inline">\(\mathbf{t}_1\)</span>, <span class="math inline">\(\mathbf{T}_2\)</span> to <span class="math inline">\(\mathbf{t}_2\)</span>, and <span class="math inline">\(\mathbf{T}_3\)</span> to <span class="math inline">\(\mathbf{t}_3\)</span> and noting the resulting counterfactual vaccination status at the end of week 1 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1)}\)</span>), week 2 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2)}\)</span>), and week 3 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)}\)</span>). This counterfactual model is defined <a href="#eq-placeintervention-swing">Equation&nbsp;<span>C.9</span></a> as shown in shown in <a href="#fig-placeintervention-swing">Figure&nbsp;<span>C.10</span></a></p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list_nodes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">list_nodes</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">list_nodes</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"M0"</span>, label <span class="op">=</span> <span class="st">r"($M_{0}$)"</span>, x <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, y <span class="op">=</span> <span class="fl">6</span>, node_type <span class="op">=</span> <span class="st">"Individual"</span>, node_shape <span class="op">=</span> <span class="st">"covariate"</span><span class="op">)</span></span>
@@ -1215,10 +1188,10 @@ M_{0i} &amp;=  f_{M_0}(U_{M_{0i}}) \\
 V_{0i} &amp;=  f_{V_0}(U_{V_{0i}}) \\
 R_{sj}^{(\bar{\mathbf{t}})} &amp;=  f_{R}(U_{R_{sj}}, \mathbf{V}_{s-1}^{(\bar{\mathbf{t}})}) \\
 T_{sj}^{(\bar{\mathbf{t}})} &amp;=  f_{T}(U_{T_{sj}}, R_{s,j}^{(\bar{\mathbf{t}})}) \\
-M_{si}^{(\bar{\mathbf{t}})} &amp;=  f_{M} (U_{M_{\{si\}}} , V_{\{s-1,i\}}^{(\bar{\mathbf{t}})}, M_{\{s-1,i\}}^{(\bar{\mathbf{t}})}, \mathbf{T}_{\{s,N_i\}}^{(\bar{\mathbf{t}})})\\
+M_{si}^{(\bar{\mathbf{t}})} &amp;=  f_{M} (U_{M_{\{si\}}} , V_{\{s-1,i\}}^{(\bar{\mathbf{t}})}, M_{\{s-1,i\}}^{(\bar{\mathbf{t}})}, \mathbf{t}_{\{s, \mathscr{N}_i\}})\\
 V_{si}^{(\bar{\mathbf{t}})} &amp;=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}^{(\bar{\mathbf{t}})}, V_{\{s-1,i\}}^{(\bar{\mathbf{t}})}) \\
 \end{aligned}
-\tag{C.8}\]</span></span></p>
+\tag{C.9}\]</span></span></p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -1250,9 +1223,8 @@ E[\sum_{i=1}^5 V_{si}^{(\bar{\mathbf{t}})}]
 </section></section><section id="outbreak-control-intervention" class="level2" data-number="C.4"><h2 data-number="C.4" class="anchored" data-anchor-id="outbreak-control-intervention">
 <span class="header-section-number">C.4</span> Outbreak control intervention</h2>
 <section id="application-outbreak-control-model-using-mpx-nyc-data" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="application-outbreak-control-model-using-mpx-nyc-data">Application: Outbreak control model using MPX NYC data</h3>
-<p>Finally, under the SSNAC framework, our intervention of interest might not be about setting the value of any particular variable, but setting a policy or a process that produces some variable of interest. This woudld be done by changing the structural equation which produces that variable. In the diagram <a href="#fig-edge-intervention-swing">Figure&nbsp;<span>C.11</span></a> and the equations <a href="#eq-edge-intervention-swing">Equation&nbsp;<span>C.9</span></a>, we show an intervention which replaces the function for the risk rating for each neighborhood (<span class="math inline">\(\mathbf{R}\)</span>) with the function <span class="math inline">\(h\)</span>. Every variable that is downstream of the first variable created using <span class="math inline">\(h\)</span> is marked with a superscript <span class="math inline">\((h)\)</span> to show that it is partially determined by that function.</p>
-<p>As usual, we can decide whether we want to focus on person or neighborhood-level outcomes as the overall quantity of interest. In addition to the outcome variables we can now ask what the impact of taking policy <span class="math inline">\((h)\)</span> would be on the decision whether or not to vaccinate a neighborhood (<span class="math inline">\(T\)</span>) as well as the exposure of particular participants to campaign messages <span class="math inline">\(M\)</span>.</p>
-<p>Our interest in the MPX NYC project, however, was initially to provide evidence to inform a targeted vaccination campaign, so vaccination <span class="math inline">\(\mathbf{V}^{(h)}\)</span> is the outcome of interest.</p>
+<p>Finally, under the SSNAC framework, our intervention of interest might not be about setting the value of any particular variable, but setting a policy or a process that produces some outcome of interest. This woudld be done by changing the structural equation which produces that variable. In the diagram <a href="#fig-edge-intervention-swing">Figure&nbsp;<span>C.11</span></a> and the equations <a href="#eq-edge-intervention-swing">Equation&nbsp;<span>C.10</span></a>, we show an intervention which replaces the function for the risk rating for each neighborhood (<span class="math inline">\(\mathbf{R}\)</span>) with the function <span class="math inline">\(h\)</span>. Every variable that is downstream of the first variable created using <span class="math inline">\(h\)</span> is marked with a superscript <span class="math inline">\((h)\)</span> to show that it is partially determined by that function.</p>
+<p>As usual, we can decide whether we want to focus on person or neighborhood-level outcomes as the overall quantity of interest. In addition to the outcome variables we can now ask what the impact of taking policy <span class="math inline">\(h\)</span> would be on the decision whether or not to vaccinate a neighborhood <span class="math inline">\(j\)</span> (<span class="math inline">\(T_j\)</span>) as well as the exposure of participant <span class="math inline">\(i\)</span> to campaign messages (<span class="math inline">\(M_i\)</span>). Our interest in the MPX NYC project, however, was initially to provide evidence to inform a targeted vaccination campaign, so vaccination <span class="math inline">\(\mathbf{V}^{(h)}\)</span> is the outcome of interest.</p>
 </section><section id="model-3" class="level3" data-number="C.4.1"><h3 data-number="C.4.1" class="anchored" data-anchor-id="model-3">
 <span class="header-section-number">C.4.1</span> Model</h3>
 <div class="cell">
@@ -1320,13 +1292,14 @@ T_{sj}^{(h)} &amp;=  \begin{cases} 1 &amp; R_{sj} = max_k R_{kj} \\ 0 &amp; othe
 M_{si}^{(h)} &amp;=  \begin{cases} 1 &amp; T_{sN_i} \neq \mathbf{0}  \\ 0 &amp; otherwise \end{cases} \\
 V_{si}^{(h)} &amp;=  \begin{cases} 1 &amp; M_{si} = 1 \text{ or } V_{s-1,i} = 1\\ 0 &amp; otherwise \end{cases} \\
 \end{aligned}
-\tag{C.9}\]</span></span></p>
-<p>We define function <span class="math inline">\(h\)</span> as a vector-valued function whose length is equal to the number of community districts. <span class="math inline">\(h(V_{(s-1)})\)</span>, the rating for community district <span class="math inline">\(j\)</span> has entries <span class="math inline">\(h_j\)</span> such that:</p>
+\tag{C.10}\]</span></span></p>
+<p>We define function <span class="math inline">\(h\)</span> as a vector-valued function whose length is equal to the number of community districts. <span class="math inline">\(h(V_{(s-1)})\)</span>. We define function <span class="math inline">\(h^1\)</span> as the risk rating function for a contact-neutralizing approach, and <span class="math inline">\(h^1\)</span> as the risk rating function for a movement-neutralizing approach. Whereas the contact-neutralizing approach ranks community districts by how many individuals are connected to them, the movement-neutralizing appraoch ranks community districts by how centrally they are connected to other community districts through the exchange of people.</p>
+<p>_{ k N_c} (i, j)(i, k)</p>
 <p><span class="math display">\[
-h_{sj} =  \sum_{ i \in N_p} (1 -V_{(s-1), i}) \times \begin{cases}
-              \phi(i, j)                                &amp;  \text{contact-neutralizing appoach}\\
-             \sum_{ k \in N_c} \phi(i, j)\phi(i, k)     &amp;  \text{movement-neutralizing approach}
-        \end{cases}
+\begin{align}
+h_{sj}^1 &amp;=  \sum_{ i \in N_p} (1 -V_{(s-1), i}) \times \phi(i, j)       \\
+h_{sj}^2 &amp;=  \sum_{ i \in N_p} (1 -V_{(s-1), i}) \times \phi(i, j) \sum_{ k \in N_c} \phi(i, k)
+\end{align}
 \]</span></p>
 </section><section id="estimands" class="level3" data-number="C.4.2"><h3 data-number="C.4.2" class="anchored" data-anchor-id="estimands">
 <span class="header-section-number">C.4.2</span> Estimands</h3>
@@ -1348,25 +1321,11 @@ C_s = \frac{1}{|N_p|}\sum_i V_{si}^{(h)}
 <p><span class="math display">\[
 \frac{LCC_s}{|N_p|}
 \]</span></p>
-</section></section><section id="estimation" class="level3" data-number="C.4.3"><h3 data-number="C.4.3" class="anchored" data-anchor-id="estimation">
-<span class="header-section-number">C.4.3</span> Estimation</h3>
-<p>To conduct the bootstrap, we start by forming a synthetic dataset <span class="math inline">\(N_p^*\)</span> of re-sampled individuals. To do this, we repeatedly sample a random individual <span class="math inline">\(t\)</span> from the set of people <span class="math inline">\(N_p\)</span> with replacement. Then we assign each sampled individual a new index using function <span class="math display">\[
-l: N \to N^*
-\]</span></p>
-<p>Using the sampled individuals and all the community districts, we form a new network</p>
-<p><span class="math display">\[
-G(N^*, \psi^*)
-\]</span></p>
-<p>where <span class="math inline">\(N^* = N_p^* \cup N_c\)</span>. In this graph, the adjacency function satisfies:</p>
-<p><span class="math display">\[
-\psi^*(a,b) = \psi(l^{-1}(a), b)
-\]</span> for <span class="math inline">\(a \in N_p^*\)</span> and <span class="math inline">\(b \in N_c\)</span>.</p>
-<p>In <span class="math inline">\(G(N^*, \psi^*)\)</span>, individuals are batched into equal groups. Each group represent a repetition of the bootstrap procedure. Then for a given statistic, statistical inference is implemented by calculating the statistic separately in each of these groups and treating the result as a random realization from the distribution of that particular statistic.</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="towards-ssnacx" class="level2" data-number="C.5"><h2 data-number="C.5" class="anchored" data-anchor-id="towards-ssnacx">
+</section></section></section><section id="towards-ssnacx" class="level2" data-number="C.5"><h2 data-number="C.5" class="anchored" data-anchor-id="towards-ssnacx">
 <span class="header-section-number">C.5</span> Towards SSNACX</h2>
 <ul>
 <li><p>We made the assumption of no spillover in defining the SSNAC. In this section, we discuss this assumption, how to detect its violation, and what to do if there is evidence for its violation.</p></li>
@@ -1374,24 +1333,6 @@ G(N^*, \psi^*)
 <li><p>As Makofane did <span class="citation" data-cites="makofane2021">(<a href="../10_references/10_references.html#ref-makofane2021" role="doc-biblioref">2021</a>)</span>, one can test for this violation using linear models.</p></li>
 <li><p>If you detect spillover, you need to do the coding estimator described in <span class="citation" data-cites="tchetgentchetgen2020">(<a href="../10_references/10_references.html#ref-tchetgentchetgen2020" role="doc-biblioref">Tchetgen Tchetgen, Fulcher, and Shpitser 2020</a>)</span> which involves thinning the dataset.</p></li>
 </ul>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section><section id="statistical-inference" class="level2" data-number="C.6"><h2 data-number="C.6" class="anchored" data-anchor-id="statistical-inference">
-<span class="header-section-number">C.6</span> Statistical inference</h2>
-<p>To conduct the bootstrap, we start by forming a synthetic dataset <span class="math inline">\(N_p^*\)</span> of re-sampled individuals. To do this, we repeatedly sample a random individual <span class="math inline">\(t\)</span> from the set of people <span class="math inline">\(N_p\)</span> with replacement. Then we assign each sampled individual a new index using function <span class="math display">\[
-l: N \to N^*
-\]</span></p>
-<p>Using the sampled individuals and all the community districts, we form a new network</p>
-<p><span class="math display">\[
-G(N^*, \psi^*)
-\]</span></p>
-<p>where <span class="math inline">\(N^* = N_p^* \cup N_c\)</span>. In this graph, the adjacency function satisfies:</p>
-<p><span class="math display">\[
-\psi^*(a,b) = \psi(l^{-1}(a), b)
-\]</span> for <span class="math inline">\(a \in N_p^*\)</span> and <span class="math inline">\(b \in N_c\)</span>.</p>
-<p>In <span class="math inline">\(G(N^*, \psi^*)\)</span>, individuals are batched into equal groups. Each group represent a repetition of the bootstrap procedure. Then for a given statistic, statistical inference is implemented by calculating the statistic separately in each of these groups and treating the result as a random realization from the distribution of that particular statistic.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
