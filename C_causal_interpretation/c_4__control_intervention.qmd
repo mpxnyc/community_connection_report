@@ -1,0 +1,155 @@
+
+```{r}
+targets::tar_source("R_functions")
+```
+
+## Outbreak control intervention
+
+
+### Application: Outbreak control model using MPX NYC data {.unnumbered}
+
+Finally, under the SSNAC framework, our intervention of interest might not be about setting the value of any particular variable, but setting a policy or a process that produces some variable of interest. This woudld be done by changing the structural equation which produces that variable. In the diagram @fig-edge-intervention-swing and the equations @eq-edge-intervention-swing, we show an intervention which replaces the function for the risk rating for each neighborhood ($\mathbf{R}$) with the function $h$. Every variable that is downstream of the first variable created using $h$ is marked with a superscript $(h)$ to show that it is partially determined by that function.
+
+As usual, we can decide whether we want to focus on person or neighborhood-level outcomes as the overall quantity of interest. In addition to the outcome variables we can now ask what the impact of taking policy $(h)$ would be on the decision whether or not to vaccinate a neighborhood ($T$) as well as the exposure of particular participants to campaign messages $M$. 
+
+Our interest in the MPX NYC project, however, was initially to provide evidence to inform a targeted vaccination campaign, so vaccination $\mathbf{V}^{(h)}$ is the outcome of interest.
+
+
+
+
+### Model
+
+```{r}
+#| label: fig-edge-intervention-swing
+#| fig-cap: "SWING for Week 1-3 for MPX NYC Application of SSNAC framework"
+list_nodes <- list()
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M0", label = r"($M_{0}$)", x = -1, y = 6, node_type = "Individual", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V0", label = r"($V_{0}$)"      , x = 1 , y = 8 , node_type = "Individual", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R1", label = r"($R_{1}^{(h)}$)"      , x = 2 , y = 2 , node_type = "Community", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T1", label = r"($T_{1}^{(h)}$)"      , x = 3 , y = 4 , node_type = "Community", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M1", label = r"($M_{1}^{(h)}$)"      , x = 4 , y = 6 , node_type = "Individual", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V1", label = r"($V_{1}^{(h)}$)"      , x = 5 , y = 8 , node_type = "Individual", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R2", label = r"($R_{2}^{(h)}$)" , x = 6 , y = 2 , node_type = "Community", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T2", label = r"($T_{2}^{(h)}$)"      , x = 7 , y = 4 , node_type = "Community", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M2", label = r"($M_{2}^{(h)}$)"      , x = 8 , y = 6 , node_type = "Individual", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V2", label = r"($V_{2}^{(h)}$)"      , x = 9 , y = 8 , node_type = "Individual", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R3", label = r"($R_{3}^{(h)}$)" , x = 10 , y = 2, node_type = "Community", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T3", label = r"($T_{3}^{(h)}$)"      , x = 11 , y = 4, node_type = "Community", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M3", label = r"($M_{3}^{(h)}$)"      , x = 12 , y = 6, node_type = "Individual", node_shape = "covariate")
+list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V3", label = r"($V_{3}^{(h)}$)"      , x = 13 , y = 8, node_type = "Individual", node_shape = "covariate")
+
+list_edges <- list()
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M0", to = "M1", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "R1", edge_label = r"($h$)")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "M1", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "R1", to = "T1", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "T1", to = "M1", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M1", to = "V1", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "R2", to = "T2", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "T2", to = "M2", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M2", to = "V2", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "R3", to = "T3", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "T3", to = "M3", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M3", to = "V3", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "R2", edge_label = r"($h$)")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "R3", edge_label = r"($h$)")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M1", to = "M2", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "M2", to = "M3", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "M2", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "M3", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "V1", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "V2", edge_label = r"()")
+list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "V3", edge_label = r"()")
+
+
+structural_nodes <- list_nodes |> dplyr::bind_rows() |> dplyr::mutate(label = latex2exp::TeX(label, output = "character", bold = TRUE))
+structural_edges <- list_edges |> dplyr::bind_rows() 
+
+
+tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges) |>
+  plot_swig(node_radius = 0.5, nudge_intervention_labels = 0.2) +
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc_large()
+
+
+
+```
+
+
+
+$$
+\begin{aligned}
+M_{0i} &=  0 \\
+V_{0i} &=  0 \\
+R_{sj}^{(h)} &=  h(\mathbf{V}_{s-1}) \\
+T_{sj}^{(h)} &=  \begin{cases} 1 & R_{sj} = max_k R_{kj} \\ 0 & otherwise \end{cases} \\
+M_{si}^{(h)} &=  \begin{cases} 1 & T_{sN_i} \neq \mathbf{0}  \\ 0 & otherwise \end{cases} \\
+V_{si}^{(h)} &=  \begin{cases} 1 & M_{si} = 1 \text{ or } V_{s-1,i} = 1\\ 0 & otherwise \end{cases} \\
+\end{aligned}
+$$ {#eq-edge-intervention-swing}
+
+
+We define function $h$ as a vector-valued function whose length is equal to the number of community districts. $h(V_{(s-1)})$, the rating for community district $j$ has entries $h_j$ such that:
+
+$$
+h_{sj} =  \sum_{ i \in N_p} (1 -V_{(s-1), i}) \times \begin{cases}
+              \phi(i, j)                                &  \text{contact-neutralizing appoach}\\
+             \sum_{ k \in N_c} \phi(i, j)\phi(i, k)     &  \text{movement-neutralizing approach}
+        \end{cases}
+$$
+
+
+
+
+### Estimands
+
+##### Spatial efficiency
+
+Intervention coverage for the $s^{th}$ community district to be immunized, is defined as:
+
+$$
+C_s = \frac{1}{|N_p|}\sum_i V_{si}^{(h)} 
+$$
+
+The cumulative intervention coverage after immunizing $s$ community districts, therefore, is:
+
+$$ 
+\bar{C_s} = \sum_{v = 1}^s{C_v }
+$$
+
+##### Social network impact
+
+Define graph $G^{s}(N, \phi^s)$ such that 
+
+$$
+\phi_s(i, j) = \phi(i, j) \times (1 -V_{(s-1), i})
+$$
+
+The cumulative social network impact of immunizing $s$ community districts is measured in terms of the size of the largest of the connected components $LCC^{(s)}$ of the $G^{s}(N, \phi^s)$ network as a proportion of the total number of participants.
+
+$$
+\frac{LCC_s}{|N_p|}
+$$
+
+
+
+### Estimation
+
+To conduct the bootstrap, we start by forming a synthetic dataset $N_p^*$ of re-sampled individuals. To do this, we repeatedly sample a random individual $t$ from the set of people $N_p$ with replacement. Then we assign each sampled individual a new index using function $$
+l: N \to N^*
+$$
+
+Using the sampled individuals and all the community districts, we form a new network
+
+$$
+G(N^*, \psi^*)
+$$
+
+where $N^* = N_p^* \cup N_c$. In this graph, the adjacency function satisfies:
+
+$$
+\psi^*(a,b) = \psi(l^{-1}(a), b)
+$$ for $a \in N_p^*$ and $b \in N_c$.
+
+In $G(N^*, \psi^*)$, individuals are batched into equal groups. Each group represent a repetition of the bootstrap procedure. Then for a given statistic, statistical inference is implemented by calculating the statistic separately in each of these groups and treating the result as a random realization from the distribution of that particular statistic.
+

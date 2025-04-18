@@ -1,0 +1,71 @@
+
+```{r}
+targets::tar_source("R_functions")
+```
+
+
+### Model
+
+#### Observed data
+
+@fig-homogenous-dag and @eq-homogenous-dag show the resulting non-parametric structural equation model for our data, if we analyse it under network causal inference. Because of the assumption of identical distributions, we can represent the model using three equations rather than 9. We retain the person subscript on the random variables in @eq-homogenous-dag and we keep all 9 nodes in the DAG on @fig-homogenous-dag and add six additional nodes to represent network exposures with respect to $\mathbf{A}$ and $\mathbf{L}$. This is to clarify that though our model is for one person, it represents a system that relates all the people in the sample with each other. Again, our original purpose was to infer something about causality in the context of the given population of three people.
+
+```{r}
+#| fig-height: 8
+#| fig-width: 7
+#| fig-align: center
+#| label: fig-homogenous-dag
+#| fig-cap: "Causal DAG with homogenous structure"
+
+
+make_dag("homogenous_interference")            |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc()
+
+
+
+
+```
+
+We can re-write the structural equation model like this:
+
+$$
+\begin{aligned}
+L_i &= f_{L}( U_{L_i} ) \\
+A_i &= f_{A}( U_{A_i}, L_i, g_{A}(\textbf{L}_{N_i}) ) \\
+Y_i &= f_{Y}( U_{Y_i},  L_i,  g_{Y}(\textbf{L}_{N_i}),   A_i,  h_{Y}( \textbf{A}_{N_i} ) ) \\
+\end{aligned}
+$$ {#eq-homogenous-dag}
+
+
+
+
+#### Counterfactual data
+
+We define a counterfactual outcomes $Y_1^{(a_1, \mathbf{a}_{\mathscr{N}_1})}$, $Y_2^{(a_2, \mathbf{a}_{\mathscr{N}_2})}$, and $Y_3^{(a_3, \mathbf{a}_{\mathscr{N}_3)}}$, which represent the level of job opportunities, Persons 1, 2, and 3, would have if we set their dress to level $a_1$, $a_2$, and $a_3$, respectively. Then the model for counterfactual variable is given by @eq-network-interference-swig. 
+
+It is represented using a Single World Intervention Graph (SWIG) in @fig-network-interference-swing. A SWIG represents a structural equation model where some of the equations are superseded by the value assigned by the experimenter. For "treatment" variables, the diagram separates the value of the variable in the observational setting, to the value that will be used by subsequent equations, which is set by the experimenter. 
+
+Note that because of the assumption of network interference, the counterfactual outcome for Person 1 is a function of Person 2's treatment value, and vice versa. 
+
+```{r}
+#| fig-height: 8
+#| label: fig-network-interference-swing
+#| fig-width: 7
+#| fig-cap: "SWIG with network interference"
+make_swig("homogenous_interference")      |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc()
+
+```
+
+$$
+\begin{aligned}
+L_i &= f_{L}(  U_{L_i}  ) \\
+A_i &= f_{A}( U_{A_i}, L_i, g_{A}(\textbf{L}_{N_i}) ) \\
+Y_i^{(a_i,\textbf{a}_{N_i} )} &= f_{Y}(U_{Y_i}, L_i,  a_i,  g_{Y}(\textbf{L}_{N_i}),      h_{Y}(\textbf{a}_{N_i})         ) \\
+\end{aligned} 
+$$ {#eq-network-interference-swig}
+
