@@ -1,0 +1,196 @@
+
+```{r}
+targets::tar_source("R_functions")
+```
+
+
+
+### New tools from the SSNAC framework {.unnumbered}
+
+As we see in @fig-homogenous-dag, causal DAGs become visually cluttered, and therefore unwieldy, quickly once we start depicting causal systems with multiple observational units. If we added a fourth observational unit to @fig-homogenous-dag, it would be nearly impossible to see which arrow connects which variables. This is an important limitation because one of the most useful things about causal DAGs is that they allow the epidemiologist to reason graphically about the structure of confounding and selection.
+
+#### Introducing the Causal Directed Acyclic Network Graph (DANG)
+
+We introduce the Causal Directed Acyclic Network Graph (causal DANG) - a simple extension of the DAG that allows for the representation of complex systems. Like the causal DAG, the causal DANG encodes the structure of a non-parametric structural equation model. DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former us called the "structural part" of the DANG and the latter called the "relational part" of the DANG.
+
+We represent the structural model defined by @eq-homogenous-dag shown in @fig-homogenous-dag. The first aspect (structural part) of the causal DANG shows the causal structure within individuals. It is a DAG of vector-valued variables $\mathbf{L}$, $\mathbf{A}$, and $\mathbf{Y}$ of length equal to the number of people in the sample. This DAG has standard interpretation under d-separation rules. It gives the conditional independencies across these vector-valued random variables. This is an incomplete set of independencies, however, since some of the entries in $\mathbf{A}$ are independent of a given entry in $\mathbf{L}$, and others are correlated. The second part of the causal DANG (relational part) of the causal DANG shows which pairs of individuals have correlated measures and which do not. 
+
+
+```{r }
+#| fig-height: 8
+#| fig-width: 5
+
+structural_nodes <- data.frame(
+  name  = c("L", "A", "Y"),
+  label = c(r"($L_{3 \times 1}$)", r"($A_{3 \times 1})", r"($Y_{3 \times 1}$)") |> latex2exp::TeX(output = "character", bold = TRUE),
+  x = c(1, 2, 3),
+  y = c(2, 1, 1),
+  node_type = "person",
+  node_shape = "covariate"
+) 
+
+structural_edges <- data.frame(
+  from = c("L", "A", "L"),
+  to   = c("A", "Y", "Y")
+)
+
+network_nodes <- data.frame(
+  name  = c("1", "2", "3"),
+  label = c("1", "2", "3"),
+  x  = c( 1, 1, 2),
+  y = c(1, 2, 1),
+  node_type = c("Person", "Person", "Person"),
+  node_shape = "covariate"
+)
+
+network_edges <- data.frame(
+  from = c("1"),
+  to   = c("2")
+)
+
+structural <- tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges) |>
+              plot_swig(node_radius = 0.2) +
+              ggplot2::theme(
+                plot.margin = ggplot2::margin(10, 10, 10, 10),
+                legend.position = "none"
+              ) +
+              scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc()+
+  ggplot2::ggtitle("Structural Part") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+relational <- tidygraph::tbl_graph(nodes = network_nodes, edges = network_edges) |>
+  plot_swig(0, 0, node_radius = 0.2)  +
+  ggplot2::theme(
+    plot.margin = ggplot2::margin(10, 10, 10, 10),
+    legend.position = "none"
+  ) +
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc() +
+  ggplot2::ggtitle("Relational Part") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+cowplot::plot_grid(structural, relational, ncol = 1)
+
+```
+
+
+
+The causal DANG relaxes the assumption that all measures in the causal system can be grouped into non-overlapping sets (i.e. that each measure can be attributed to an individual in the sample). In this framework, different types of entities, represented by vectors of different lengths, can be depicted on the same DANG. 
+
+The causal DANG shown in @fig-example-dang-structural represents the first week of the campaign mentioned in Example 3. Let $\mathbf{T}$ be a $3\times1$ vector whose entries $T_j$ are 1 if neighborhood $j$ is to be vaccinated and $0$ otherwise. $\mathbf{M}$ is a $5\times1$ vector whose entries $M_i$ indicate whether the $i^{\text{th}}$ person received a message or not. $\mathbf{V}$ is a $5\times1$ vector whose entries $V_i$ show whether participant $i$ is vaccinated or not. 
+
+```{r}
+#| fig-height: 6
+#| fig-width: 8
+#| fig-align: center
+#| label: fig-example-dang-structural
+#| fig-cap: "Causal DANG for Week 1 in Example 3"
+
+structural_nodes <- data.frame(
+  name  = c("C", "A", "Y"),
+  label = c(r"($T_{3 \times 1}$)", r"($M_{5 \times 1})", r"($V_{5 \times 1}$)") |> latex2exp::TeX(output = "character", bold = TRUE),
+  x = c(1, 2, 3),
+  y = c(1, 1, 1),
+  node_type = c("Neighborhood", "Individual", "Individual"),
+  node_shape = "covariate"
+) 
+
+structural_edges <- data.frame(
+  from = c("C", "A"),
+  to   = c("A", "Y")
+)
+
+network_nodes <- data.frame(
+  name = c("A", "B", "C", "1", "2", "3", "4", "5"),
+  label = c("A", "B", "C", "1", "2", "3", "4", "5"),
+  y  = c( 1, 1, 1, 2, 2, 2, 2, 2),
+  x =  c(1, 2, 3, 1, 2, 3, 4, 5),
+  node_type = c(rep("Community", 3), rep("Individual", 5)),
+  node_shape = "covariate"
+)
+
+network_edges <- data.frame(
+  from = c("C", "C", "C", "C", "A", "A", "B", "B"),
+  to =   c("2", "3", "4", "5", "1", "2", "1", "3")
+)
+
+structural <- tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges) |>
+                    plot_swig(node_radius = 0.15) +
+                    scale_fill_mpxnyc(option = "light") +
+                    theme_mpxnyc() +
+  ggplot2::ggtitle("Structural Part") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+
+relational <- tidygraph::tbl_graph(nodes = network_nodes, edges = network_edges) |>
+                    plot_swig(node_radius = 0.2, node_margin = 0)  +
+                    scale_fill_mpxnyc(option = "light") +
+  ggplot2::theme(legend.position = "right")
+
+legend <- cowplot::get_legend(relational) 
+
+
+relational <- relational + 
+                  theme_mpxnyc() +
+  ggplot2::ggtitle("Relational Part") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+   
+
+
+
+left_side <- cowplot::plot_grid(structural, relational, ncol=1, rel_heights = c(3,3))
+
+cowplot::plot_grid(left_side, legend, nrow = 1, rel_widths = c(4,1))
+```
+
+#### Introducing the Single World Intervention Network Graph (SWING)
+
+Similarly, the causal SWING has two parts - a structural part and a relational part. Like with the causal DANG, the causal SWING represents vector-valued random variables (rather than scalars) as nodes. Like the causal SWIG, it shows the counterfactual distribution of the variables in the model under an intervention setting $\mathbf{A}$ at the value $\mathbf{a}$.
+
+```{r}
+
+structural_nodes <- data.frame(
+  name  = c("T", "t", "A", "Y"),
+  label = c(r"($T$)", r"($t$)", r"($M)", r"($V$)") |> latex2exp::TeX(output = "character", bold = TRUE),
+  x = c(1, 1, 2, 3),
+  y = c(1, 1, 1, 1),
+  node_type = c("Neighborhoo", "Neighborhood", "Individual", "Individual"),
+  node_shape = c("preintervention", "intervention" ,"covariate", "covariate")
+) 
+
+structural_edges <- data.frame(
+  from = c("t", "A"),
+  to   = c("A", "Y")
+)
+
+
+structural <- tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges) |>
+                    plot_swig(node_radius = 0.15) +
+                    scale_fill_mpxnyc(option = "light") +
+                    theme_mpxnyc() +
+  ggplot2::ggtitle("Structural Part") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+
+relational <- tidygraph::tbl_graph(nodes = network_nodes, edges = network_edges) |>
+                    plot_swig(node_radius = 0.2, node_margin = 0)  +
+                    scale_fill_mpxnyc(option = "light") +
+  ggplot2::theme(legend.position = "right")
+
+legend <- cowplot::get_legend(relational) 
+
+
+relational <- relational + 
+                  theme_mpxnyc() +
+  ggplot2::ggtitle("Relational Part") +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+   
+
+
+
+left_side <- cowplot::plot_grid(structural, relational, ncol=1, rel_heights = c(3,3))
+
+cowplot::plot_grid(left_side, legend, nrow = 1, rel_widths = c(4,1))
+
+```
