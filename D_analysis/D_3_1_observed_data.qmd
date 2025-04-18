@@ -7,16 +7,19 @@ targets::tar_source("../R_functions")
 
 
 
+### Model
+#### Observational data
 
-### Observational data
+The causal DANG shown in @fig-repeated-observations-dang represents the three week campaign mentioned in Example 3. Let $\mathbf{T}_s$ be a $3\times1$ vector whose entries $T_{sj}$ are 1 if neighborhood $j$ is to be vaccinated at time $s$ and $0$ otherwise. $\mathbf{M}_s$ is a $5\times1$ vector whose entries $M_{si}$ indicate whether the $i^{\text{th}}$ person received a message at time $s$ or not. $\mathbf{V}_s$ is a $5\times1$ vector whose entries $V_{si}$ show whether participant $i$ is vaccinated or not at time $s$. Finally, $\mathbf{R}_s$ is a $3\times1$ vector whose entries $R_{si}$ shows the risk rating of neighborhood $j$ at the beginning of time $s$. @eq-repeated-observations specifies this model for Person $i$ and neighborhood $j$ at time $s$:
 
-We define $\mathbf{V}_t$ as a vector of length 5, whose entries indicate the vaccination status of Persons 1 to 5. $\mathbf{M}_t$ is a vector of length 5 whose entries indicate whether each individuals was exposed to vaccination campaign messaging. $\mathbf{T}_t$ is a vector of length 3 which indicates whether each neighrbood implemented the intervention at time $t$. $\mathbf{R}_t$ is a vector of length3 which indicated the ranking of each neighborhood in terms of prioritization for vaccination. 
+
 
 
 ```{r}
 #| fig-width: 8
 #| fig-height: 5
-
+#| label: fig-repeated-observations-dang
+#| fig-cap: "Causal DANG for Week 1-3 in Example 3"
 list_nodes <- list()
 list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M0", label = r"($M_{0}$)", x = -1, y = 6, node_type = "Individual")
 list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V0", label = r"($V_{0}$)", x = 1, y = 8, node_type = "Individual")
@@ -75,91 +78,11 @@ tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges) |>
 
 ```
 
-```{r eval=FALSE}
-
-
-network_nodes_0 <- data.frame(
-  name = c("01", "02", "03", "04", "05"),
-  label = c("1", "2", "3", "4", "5"),
-  x  = c( 0,0,0,0,0),
-  y =  c(1,2,3,4,5),
-  node_type = rep("Individual", 5),
-  node_shape = "covariate"
-)
-
-network_nodes_1 <- data.frame(
-  name = c("1A", "1B", "1C", "2A", "2B", "2C", "31", "32", "33", "34", "35", "41", "42", "43", "44", "45"),
-  label = c("A", "B", "C", "A", "B", "C", "1", "2", "3", "4", "5", "1", "2", "3", "4", "5"),
-  x  = c( 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4),
-  y =  c(1.5,2.5,3.5,1.5,2.5,3.5,1.5,2.25,3,3.75,4.5, 1,2,3,4,5),
-  node_type = c( rep("Community", 3), rep("Community", 3), rep("Individual", 5), rep("Individual", 5)),
-  node_shape = "covariate"
-)
-
-network_nodes_2 <- data.frame(
-  name = c("5A", "5B", "5C", "6A", "6B", "6C", "71", "72", "73", "74", "75", "81", "82", "83", "84", "85"),
-  label = c("A", "B", "C", "A", "B", "C", "1", "2", "3", "4", "5", "1", "2", "3", "4", "5"),
-  x  = 4 + c( 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4),
-  y =  c(1.5,2.5,3.5,1.5,2.5,3.5,1.5,2.25,3,3.75,4.5, 1,2,3,4,5),
-  node_type = c( rep("Community", 3), rep("Community", 3), rep("Individual", 5), rep("Individual", 5)),
-  node_shape = "covariate"
-)
-
-network_nodes_3 <- data.frame(
-  name = c("9A", "9B", "9C", "10A", "10B", "10C", "111", "112", "113", "114", "115", "121", "122", "123", "124", "125"),
-  label = c("A", "B", "C", "A", "B", "C", "1", "2", "3", "4", "5", "1", "2", "3", "4", "5"),
-  x  = 8 + c( 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4),
-  y =  c(1.5,2.5,3.5,1.5,2.5,3.5,1.5,2.25,3,3.75,4.5, 1,2,3,4,5),
-  node_type = c( rep("Community", 3), rep("Community", 3), rep("Individual", 5), rep("Individual", 5)),
-  node_shape = "covariate"
-)
-
-network_nodes_4 <- data.frame(
-  name = c("13A", "13B", "13C"),
-  label = c("A", "B", "C"),
-  x  = 12 + c( 1, 1, 1),
-  y =  c(1.5,2.5,3.5),
-  node_type = c( rep("Community", 3)),
-  node_shape = "covariate"
-)
-
-
-network_edges_1 <- data.frame(
-  from = c("35", "34", "33","32",  "33", "32", "31", "32", "31", "2A", "2B", "2C", "41", "42", "43", "44", "45"),
-  to =   c("2C", "2C", "2C", "2C",  "2B", "2B", "2B", "2A", "2A", "1A", "1B", "1C", "31", "32", "33", "34", "35")
-)
-
-network_edges_2 <- data.frame(
-  from = c("01", "02", "03", "04", "05"),
-  to   = c("1A", "1A", "1A", "1A", "1A")
-)
-
-network_edges_3 <- data.frame(
-  from = c("01", "02", "03", "04", "05"),
-  to   = c("1B", "1B", "1B", "1B", "1B")
-)
-
-network_edges_4 <- data.frame(
-  from = c("01", "02", "03", "04", "05"),
-  to   = c("1C", "1C", "1C", "1C", "1C")
-)
-
-network_edges_5 <- data.frame(
-  from = c("41", "42", "43", "44", "45"),
-  to   = c("01", "02", "03", "04", "05")
-)
-
-network_nodes <- network_nodes_0 |> rbind(network_nodes_1) |> rbind(network_nodes_2) |> rbind(network_nodes_3) |> rbind(network_nodes_4)
-network_edges <- network_edges_1 |> rbind(network_edges_2) |> rbind(network_edges_3) |> rbind(network_edges_4) |> rbind(network_edges_5)
-
-tidygraph::tbl_graph(nodes = network_nodes, edges = network_edges) |>
-  plot_swig(0, 0, node_radius = 0.1, node_margin = 0)  +
-  scale_fill_mpxnyc(option = "light") 
-```
 
 
 
-At time $s$:
+
+
 
 $$
 \begin{aligned}
