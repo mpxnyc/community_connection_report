@@ -1,0 +1,32 @@
+
+```{r}
+targets::tar_source("R_functions")
+```
+
+
+#### Observed data
+
+@fig-independence-dag and @eq-independence-dag show the resulting non-parametric structural equation model for our data, if we analyse it under classic causal inference. As a consequence of the assumptions stated in @sec-assumptions-classic, we can represent the model using three equations rather than 9. We retain the person subscript on the random variables in @fig-independence-dag and we keep all 9 nodes in the DAG on @eq-independence-dag. This is to remind us that though our model is for one person, our purpose was always to infer something about the population of three people.
+
+```{r}
+#| fig-height: 6
+#| fig-width: 6.5
+#| fig-align: center
+#| label: fig-independence-dag
+#| fig-cap: "Causal DAG with no interference or spillover"
+
+make_dag("independence") |> plot_swig(node_radius = 0.2) + scale_fill_mpxnyc(option = "light") + theme_mpxnyc()
+
+
+```
+
+
+$$
+\begin{aligned}
+L_i &= f_{L}( U_{L_i}) \\
+A_i &= f_{A}( U_{A_i}, L_i) \\
+Y_i &= f_{Y}( U_{Y_i}, L_i, A_i) \\
+\end{aligned}
+$$ {#eq-independence-dag}
+
+
