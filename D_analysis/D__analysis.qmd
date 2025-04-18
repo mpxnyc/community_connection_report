@@ -1,4 +1,5 @@
-# Causal interpretation
+# Causal interpretation {#sec-appendix-causal}
+
 
 
 ```{r}
@@ -7,7 +8,6 @@
 targets::tar_source("../R_functions")
 
 ```
-
 
 
 
@@ -31,9 +31,9 @@ make_swig <- function(graph_type){
   graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "LNet1", label = r"($L_{N_1}$)"       , x = 2, y = 1.5, homogenous = TRUE , node_shape = "covariate")))
   graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "LNet2", label = r"($L_{N_2}$)"       , x = 2, y = 3,   homogenous = TRUE , node_shape = "covariate")))
   graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "LNet3", label = r"($L_{N_3}$)"       , x = 2, y = 4.5, homogenous = TRUE , node_shape = "covariate")))
-  graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "ANet1", label = r"($A_{N_1}$)"       , x = 4, y = 1.5, homogenous = TRUE , node_shape = "covariate")))
-  graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "ANet2", label = r"($A_{N_2} $)"      , x = 4, y = 3,   homogenous = TRUE , node_shape = "covariate")))
-  graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "ANet3", label = r"($A_{N_1} $)"      , x = 4, y = 4.5, homogenous = TRUE , node_shape = "covariate")))
+  graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "ANet1", label = r"($a_{N_1}$)"       , x = 4, y = 1.5, homogenous = TRUE , node_shape = "covariate")))
+  graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "ANet2", label = r"($a_{N_2} $)"      , x = 4, y = 3,   homogenous = TRUE , node_shape = "covariate")))
+  graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "ANet3", label = r"($a_{N_3} $)"      , x = 4, y = 4.5, homogenous = TRUE , node_shape = "covariate")))
   
   if (graph_type == "independence"){
       graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y1", label = r"($Y_1^{(a_1)}$)"   , x = 5, y = 1,   homogenous = FALSE, node_shape = "covariate")))
@@ -45,6 +45,12 @@ make_swig <- function(graph_type){
       graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y1", label = r"($Y_1^{(a_1, a_2)}$)"   , x = 5, y = 1,   homogenous = FALSE, node_shape = "covariate")))
       graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y2", label = r"($Y_2^{(a_1, a_2)}$)"   , x = 5, y = 3,   homogenous = FALSE, node_shape = "covariate")))
       graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y3", label = r"($Y_3^{(a_3)}$)"        , x = 5, y = 5,   homogenous = FALSE, node_shape = "covariate")))
+    }
+  
+      if (graph_type == "homogenous_interference"){
+      graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y1", label = r"($Y_1^{(a_1, a_{N_1})}$)"   , x = 5, y = 1,   homogenous = FALSE, node_shape = "covariate")))
+      graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y2", label = r"($Y_2^{(a_2, a_{N_2})}$)"   , x = 5, y = 3,   homogenous = FALSE, node_shape = "covariate")))
+      graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y3", label = r"($Y_3^{(a_3, a_{N_3})}$)"        , x = 5, y = 5,   homogenous = FALSE, node_shape = "covariate")))
   }
   
     
@@ -193,6 +199,7 @@ tidygraph::tbl_graph(nodes = graph_nodes, edges = graph_edges)
 
 
 
+
 ```{r plotswig}
 plot_swig <- function(data, arrow_length_head = 0.2, arrow_length_tail = 0.05, edge_width = 0.2, node_radius = 0.3, node_margin = 0.4, nudge_intervention_labels = 0.1){
   
@@ -276,6 +283,10 @@ plot_swig <- function(data, arrow_length_head = 0.2, arrow_length_tail = 0.05, e
     ggplot2::coord_fixed()
 }
 
+
+
+
+
 ```
 
 
@@ -287,7 +298,5 @@ plot_swig <- function(data, arrow_length_head = 0.2, arrow_length_tail = 0.05, e
 {{< include D_2__network_causal_inference.qmd >}}
 {{< include D_3__ssnac.qmd >}}
 {{< include D_4_outbreak_control_intervention.qmd >}} 
-
-{{< include D_5_statistical_inference.qmd >}}
 {{< include D_6_ssnacx.qmd >}}
 

@@ -17,7 +17,11 @@ But what about the relationship between Person 1 and Person 3? How does that sha
 
 ##### No spillover
 
-Just as under classical causal inference, network causal inference as we articulate here, assumes no spillover. See @fig-homogenous-dag and equations @eq-causal-dang-homogenous. (Note that it is not strictly necessary to make this restriction to work with network data at all. Makofane [-@makofane2021] makes the assumption that contemporaneous measures arise from a conditional Markov random field models. This complicates estimation in a way that is beyond the scope of this study. We will elaborate a framework (SSNAC-Extension, or SSNACX) at a later stage.
+Under network causal inference, we make the assumption of no spillover - that measurements taken across participants at the same time (e.g. $L_1$, $L_2$, and $L_3$) are independent of each other given all prior measures. 
+
+This is shown in @fig-no-spillover-dag, as the removal of arrows that connected the $L_i$'s, $A_i$'s and $Y_i$'s. In @eq-no-spillover-dag, the $L_i$'s are not functions of each other, the $A_i$'s are not functions of each other, and the $Y_i$'s are not functions of each other. This implies that given all the measurements taken prior to a set of contemporaneous measures, the contemporaneous measures are independent.
+
+(Note that it is not strictly necessary to make the no-spillover restriction to work with network data at all. Makofane [-@makofane2021] makes the assumption that contemporaneous measures arise from a conditional Markov random field. This complicates estimation in a way that is beyond the scope of this study. We will elaborate a framework (SSNAC-Extension, or SSNACX) at a later stage.)
 
 ##### Network interference
 
@@ -26,7 +30,7 @@ Just as under classical causal inference, network causal inference as we articul
 #| fig-width: 6.5
 #| fig-align: center
 #| label: fig-interference-dag
-#| fig-cap: "Causal DANG with network interference"
+#| fig-cap: "Causal DAG with network interference"
 
 make_dag("network_interference")   |> 
   plot_swig(node_radius = 0.2) + 
@@ -50,7 +54,7 @@ Y_3 &= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
 \end{aligned}
 $$ {#eq-networkinterference}
 
-Rather than assume that there is no interference, under network causal inference, we make the assumption that interference respects some mapping between individuals - a mapping given by a network or set of networks. We follow a similar approach to [@aronow2017].
+Rather than assume that there is no interference, under network causal inference, we make the assumption that interference respects some mapping between individuals - a mapping given by a network or set of networks. We follow a similar approach to Aronow and Samii [-@aronow2017].
 
 #### Homogeneity assumptions
 
@@ -96,8 +100,8 @@ We assume that exposure mappings $g_A$, $h_y$, and $g_Y$ are identical across in
 
 ```{=tex}
 \begin{aligned}
-g_A = g_{L_1} &= g_{L_2} = g_{L_3} \\
-h_Y = h_{A_1} &= h_{A_2} = h_{A_3} \\
+g_L = g_{L_1} &= g_{L_2} = g_{L_3} \\
+h_A = h_{A_1} &= h_{A_2} = h_{A_3} \\
 g_Y = g_{L_1} &= g_{L_2} = g_{L_3} \\
 \end{aligned}
 ```

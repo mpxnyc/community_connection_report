@@ -1,20 +1,22 @@
 ## Outbreak control intervention
 
 
-### Example 4: Outbreak control model using MPX NYC data {.unnumbered}
+### Application: Outbreak control model using MPX NYC data {.unnumbered}
 
-Finally, our intervention of interest, might not be about setting the value of any particular variable, but setting a policy or a process that produces some variable of interest. \[UPDATE EQUATIONS\]. This woudld be done by changing the function which produces that variable. In the diagram and the equations, we show an intervention which replaces the functions \[XXX\[\]\] with $h$. Every variable that is downstream of the first time a variable is created using $h$ is marked with a superscript $(h)$ to show that it is partially determined by that function.
+Finally, under the SSNAC framework, our intervention of interest might not be about setting the value of any particular variable, but setting a policy or a process that produces some variable of interest. This woudld be done by changing the structural equation which produces that variable. In the diagram @fig-edge-intervention-swing and the equations @eq-edge-intervention-swing, we show an intervention which replaces the function for the risk rating for each neighborhood ($\mathbf{R}$) with the function $h$. Every variable that is downstream of the first variable created using $h$ is marked with a superscript $(h)$ to show that it is partially determined by that function.
 
-As usual, we can decide whether we want to focus on person or commuinty level (or combination) outcomes as the overall quantity of interest. In addition to the outcome variables we can now ask what the impact of taking policy $(h)$ would be on the decision whether or not to vaccinate a neighborhood ($T$) as well as the exposure of particular participants to campaign messages $M$.
+As usual, we can decide whether we want to focus on person or neighborhood-level outcomes as the overall quantity of interest. In addition to the outcome variables we can now ask what the impact of taking policy $(h)$ would be on the decision whether or not to vaccinate a neighborhood ($T$) as well as the exposure of particular participants to campaign messages $M$. 
+
+Our interest in the MPX NYC project, however, was initially to provide evidence to inform a targeted vaccination campaign, so vaccination $\mathbf{V}^{(h)}$ is the outcome of interest.
 
 
 
 
-### Counterfactual data
+### Model
 
 ```{r}
-
-
+#| label: fig-edge-intervention-swing
+#| fig-cap: "SWING for Week 1-3 for MPX NYC Application of SSNAC framework"
 list_nodes <- list()
 list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M0", label = r"($M_{0}$)", x = -1, y = 6, node_type = "Individual", node_shape = "covariate")
 list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V0", label = r"($V_{0}$)"      , x = 1 , y = 8 , node_type = "Individual", node_shape = "covariate")
@@ -79,7 +81,7 @@ T_{sj}^{(h)} &=  \begin{cases} 1 & R_{sj} = max_k R_{kj} \\ 0 & otherwise \end{c
 M_{si}^{(h)} &=  \begin{cases} 1 & T_{sN_i} \neq \mathbf{0}  \\ 0 & otherwise \end{cases} \\
 V_{si}^{(h)} &=  \begin{cases} 1 & M_{si} = 1 \text{ or } V_{s-1,i} = 1\\ 0 & otherwise \end{cases} \\
 \end{aligned}
-$$ {#eq-edge-intervention-dang}
+$$ {#eq-edge-intervention-swing}
 
 
 We define function $h$ as a vector-valued function whose length is equal to the number of community districts. $h(V_{(s-1)})$, the rating for community district $j$ has entries $h_j$ such that:
@@ -94,7 +96,7 @@ $$
 
 
 
-### Causal estimands
+### Estimands
 
 ##### Spatial efficiency
 
@@ -127,3 +129,22 @@ $$
 
 
 ### Estimation
+
+To conduct the bootstrap, we start by forming a synthetic dataset $N_p^*$ of re-sampled individuals. To do this, we repeatedly sample a random individual $t$ from the set of people $N_p$ with replacement. Then we assign each sampled individual a new index using function $$
+l: N \to N^*
+$$
+
+Using the sampled individuals and all the community districts, we form a new network
+
+$$
+G(N^*, \psi^*)
+$$
+
+where $N^* = N_p^* \cup N_c$. In this graph, the adjacency function satisfies:
+
+$$
+\psi^*(a,b) = \psi(l^{-1}(a), b)
+$$ for $a \in N_p^*$ and $b \in N_c$.
+
+In $G(N^*, \psi^*)$, individuals are batched into equal groups. Each group represent a repetition of the bootstrap procedure. Then for a given statistic, statistical inference is implemented by calculating the statistic separately in each of these groups and treating the result as a random realization from the distribution of that particular statistic.
+

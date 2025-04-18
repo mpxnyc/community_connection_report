@@ -150,7 +150,7 @@ theme_mpxnyc_text <- function(base_size = 11,
       plot.title       = ggplot2::element_text(hjust = 0.5, margin = ggplot2::margin(0, 0, 1, 0, "mm")),
       plot.subtitle    = ggplot2::element_text(hjust = 0.5, margin = ggplot2::margin(0, 0, 15, 0, "mm")),
       plot.background  = ggplot2::element_rect(fill = "white", color = "white"),
-      panel.background = ggplot2::element_blank(fill = "white", color = "white")
+      panel.background = ggplot2::element_rect(fill = "white", color = "white")
     )
   
 }

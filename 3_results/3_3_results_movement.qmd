@@ -1,6 +1,6 @@
 
 
-# Movement & mixing {#sec-movement}
+# Movement {#sec-movement}
 
 
 ```{r}
@@ -63,90 +63,7 @@ The dots on the diagonal line from top left to bottom right, show prominently, i
 
 
 
-## Mixing
 
-### Race-gender
-
-```{r}
-#| fig-cap: !expr 'get_figure_details("fig-demogroup-mixing")'
-#| label: fig-demogroup-mixing
-#| fig-width: 9
-#| fig-height: 9
-
-
-
-
-mixing_demo_group_panel <- make_table_mixing_2(demo_group) |>
-  dplyr::filter(ego_level != "Another Demographic") |>
-  dplyr::filter(alter_level != "Another Demographic") |>
-  plot_matrix_mixing() +
-  scale_fill_mpxnyc_gradient() +
-  scale_color_mpxnyc_gradient() +
-  theme_mpxnyc_text()
-
-
-mixing_demo_group_panel
-
-
-```
-
-
-
-
-@fig-subgroup-mixing quantifies the degree to which individuals with characteristics shown on the left live or play in an overlapping set of community districts with individuals whose characteristics are shown at the top. Overall, MPX NYC participants showed spatial homophily - the spatial selection coefficient from a given group to the same group was positive for all levels of race-gender, sexual orientation, and age. In addition, black cisgender men and non-binary persons tended to visit or live in different neighborhoods than white cisgender men. Non-binary persons also showed a preference for community districts in which transgender men live. Gay identified participants preferred to live and play in community districts where bisexual, straight and queer identified participants did not live. Similarly, those groups selected against community districts in which gay identified individuals live or play.
-
-
-### Sexual orientation
-
-```{r }
-#| fig-cap: !expr 'get_figure_details("fig-sexorientation-mixing")'
-#| label: fig-sexorientation-mixing
-#| fig-width: 6
-#| fig-height: 5
-#| 
-mixing_sexOrientation_panel <- make_table_mixing_2(sexOrientation) |>
-                                      plot_matrix_mixing() +
-  theme_mpxnyc() +
-  scale_fill_mpxnyc_gradient() +
-  scale_color_mpxnyc_gradient() +
-  theme_mpxnyc_text()
-
-
-mixing_sexOrientation_panel
-
-
-```
-
-### Age
-
-```{r}
-#| fig-cap: !expr 'get_figure_details("fig-age-mixing")'
-#| label: fig-age-mixing
-#| fig-width: 6
-#| fig-height: 6
-mixing_age_panel                 <- make_table_mixing_2(age) |>
-                                      plot_matrix_mixing() +
-                                      theme_mpxnyc()  +
-                                      scale_fill_mpxnyc_gradient() +
-                                      scale_color_mpxnyc_gradient() +
-                                      theme_mpxnyc_text()
-
-mixing_age_panel
-```
-
-
-
-```{r }
-#| fig-cap: !expr 'get_figure_details("fig-subgroup-mixing")'
-#| label: fig-subgroup-mixing
-#| fig-width: 12
-#| fig-height: 17
-#| 
-
-mixing_bottom_panel              <- cowplot::plot_grid(mixing_sexOrientation_panel, mixing_age_panel, nrow = 1)
-cowplot::plot_grid(mixing_demo_group_panel, mixing_bottom_panel, ncol=1, rel_heights = c(2,1.1)) 
-
-```
 
 ```{r}
 #| fig-width: 2

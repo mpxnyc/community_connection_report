@@ -5,18 +5,17 @@ targets::tar_source("../R_functions")
 
 ```
 
-### Counterfactual data
+#### Counterfactual data
 
-Assuming that the public health system usually works in the way described in the observed data section, we can imagine different combinations of intervention and outcome. We could ask what would happen if we intervened to set exposure to the campaign message at the individual level (for example, by randomly selecting participants to directly contact), or we could ask what would happen if we intervened to conduct the intervention in some communities but not others. These would both be node-level interventions. For each of these questions, we could focus either on person-level outcomes like vaccination status or community-level outcomes like vaccination prevalence. Finally, we could ask what would happen if we intervened to change the relationship between to nodes in the DANG. By asking, for instance, what would happen if the city department of health changed how it ranked neighborhoods for priority. We discuss each of these three intervention scenarios in more detail below.
+Based on the causal DANG, we can imagine different combinations of intervention and outcome to investigate in the public health system of Nowhereville. We could ask what would happen if we intervened to set exposure to the campaign message $\mathbf{M}$ at the individual level (for example, by randomly selecting participants to directly send pop-up messages to), or we could ask what would happen if we intervened to conduct the intervention in some communities but not others. These would both be node-level interventions. For each of these questions, we could focus either on person-level outcomes like vaccination status $\mathbf{V}$ or community-level outcomes like vaccination prevalence. Finally, we could ask what would happen if we intervened to change the relationship between to nodes in the DANG by asking, for instance, what would happen if Nowhereville changed how it rated neighborhoods $\mathbf{R$. We focus here on a neighborhood messaging intervention described in Example 3.
 
 #### Place intervention
 
-Alternatively, say we were interested in a community-level intervention such as the vaccination messaging campaign we diescribed above. In particular, say we want to understand the impact of a vaccination campaign conducted over three time periods. This would be done by setting $\mathbf{T}_1$ to $\mathbf{t}_1$, $\mathbf{T}_2$ to $\mathbf{t}_2$, and $\mathbf{T}_3$ to $\mathbf{t}_3$. (We indicate this in the DANG by splitting the relevant nodes).
-
-Again, depending on our goals, we could choose to focus on person-level outcomes such as counterfactual vaccination status $\mathbf{V}_1^{(m_1)}$, $\mathbf{V}_1^{(m_2)}$, $\mathbf{V}_1^{(m_3)}$. We could alternatively choose to focus on community-level outcomes $\mathbf{R}_2^{(\mathbf{m}_1)}$, and $\mathbf{R}_3^{(\mathbf{m}_1, \mathbf{m}_2)}$, $\mathbf{R}_4^{(\mathbf{m}_1, \mathbf{m}_2, \mathbf{m}_3)}$ whic are counterfactual community rankings.
+Say we want to understand the impact of a vaccination campaign conducted over three weeks on vaccination status. This would be done by setting $\mathbf{T}_1$ to $\mathbf{t}_1$, $\mathbf{T}_2$ to $\mathbf{t}_2$, and $\mathbf{T}_3$ to $\mathbf{t}_3$ and noting the resulting counterfactual vaccination status at the end of week 1 ($\mathbf{V}_1^{(\mathbf{t}_1)}$), week 2 ($\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2)}$), and week 3 ($\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)}$). This counterfactual model is defined @eq-placeintervention-swing as shown in shown in @fig-placeintervention-swing
 
 ```{r}
-
+#| label: fig-placeintervention-swing
+#| fig-cap: "SWING for Week 1-3 Example 3"
 
 list_nodes <- list()
 list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M0", label = r"($M_{0}$)", x = -1, y = 6, node_type = "Individual", node_shape = "covariate")
@@ -83,7 +82,7 @@ T_{sj}^{(\bar{\mathbf{t}})} &=  f_{T}(U_{T_{sj}}, R_{s,j}^{(\bar{\mathbf{t}})}) 
 M_{si}^{(\bar{\mathbf{t}})} &=  f_{M} (U_{M_{\{si\}}} , V_{\{s-1,i\}}^{(\bar{\mathbf{t}})}, M_{\{s-1,i\}}^{(\bar{\mathbf{t}})}, \mathbf{T}_{\{s,N_i\}}^{(\bar{\mathbf{t}})})\\
 V_{si}^{(\bar{\mathbf{t}})} &=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}^{(\bar{\mathbf{t}})}, V_{\{s-1,i\}}^{(\bar{\mathbf{t}})}) \\
 \end{aligned}
-$$ {#eq-placeintervention-dang}
+$$ {#eq-placeintervention-swing}
 
 
 
