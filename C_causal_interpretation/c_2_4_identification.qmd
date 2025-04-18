@@ -5,7 +5,7 @@ targets::tar_source("R_functions")
 
 ### Identification
 
-To estimate the causal estimands using observed data, it is sufficient to identify the quantity $E[Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})} | \mathbf{L}]$ as below:
+To estimate the causal estimands using observed data, it is sufficient to estimate the quantity below:
 
 $$
 \begin{align}
@@ -17,4 +17,8 @@ $$
 \end{align}
 $$
 
-In the first line, we use the fact that, as can be shown in the SWING using d-separation rules, $Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})}$ is independent of $L_j$ for $j \not \in \mathscr{N}_i$ once we condition for $L_i$ and the network exposure value for person $i$ with respect to $\mathbf{L}$. In the second line, we use the fact that $Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})}$ is independent of $A$ after ajusting for $L$. We replace $Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})}$ with its structural equation @eq-network-interference-swing, noting that this is equal to the observed value $Y_i$ for people $i$ whose treatment ($A_i$) network treatment value ($h_Y(\textbf{A}_{\mathscr{N}_i})$) is consistent with the value of $\mathbf{a}$ set by the experimenter 
+In the first line, we use the fact that $Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})}$ is independent of $L_j$ for $j \not \in \mathscr{N}_i$ once we condition for $L_i$ and $g(\mathbf{L}_{\mathscr{N}_i})$ - the network exposure value for person $i$ with respect to $\mathbf{L}$. 
+
+In the second line, we use the fact that $Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})}$ is independent of $\mathbf{a}$ after adjusting for $L$, since $\mathbf{a}$ is a constant of the experimenters choosing. 
+
+We replace $Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})}$ with its structural equation @fig-homogenous-interference-swig, noting that this is equal to the observed value $Y_i$ for people $i$ whose treatment value ($A_i$) and network exposure value ($h_Y(\textbf{A}_{\mathscr{N}_i})$) is consistent with the value of $\mathbf{a}$ set by the experimenter. This last fact is given by @eq-homogenous-dag.

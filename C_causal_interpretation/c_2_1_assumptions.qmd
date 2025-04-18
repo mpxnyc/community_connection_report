@@ -11,7 +11,7 @@ targets::tar_source("R_functions")
 
 Under network causal inference, we make the assumption of no spillover - that measurements taken across participants at the same time (e.g. $L_1$, $L_2$, and $L_3$) are independent of each other given all prior measures. 
 
-This is shown in @fig-no-spillover-dag, as the removal of arrows that connected the $L_i$'s, $A_i$'s and $Y_i$'s. In @eq-no-spillover-dag, the $L_i$'s are not functions of each other, the $A_i$'s are not functions of each other, and the $Y_i$'s are not functions of each other. This implies that given all the measurements taken prior to a set of contemporaneous measures, the contemporaneous measures are independent.
+This is shown in @fig-interference-dag, as the removal of arrows that connected the $L_i$'s, $A_i$'s and $Y_i$'s. In @eq-interference-dag, the $L_i$'s are not functions of each other, the $A_i$'s are not functions of each other, and the $Y_i$'s are not functions of each other. This implies that given all the measurements taken prior to a set of contemporaneous measures, the contemporaneous measures are independent.
 
 (Note that it is not strictly necessary to make the no-spillover restriction to work with network data at all. Makofane [-@makofane2021] makes the assumption that contemporaneous measures arise from a conditional Markov random field. This complicates estimation in a way that is beyond the scope of this study. We will elaborate a framework (SSNAC-Extension, or SSNACX) at a later stage.)
 
@@ -44,7 +44,7 @@ Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, A_1, A_2) \\
 Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, A_1, A_2) \\
 Y_3 &= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
 \end{aligned}
-$$ {#eq-networkinterference}
+$$ {#eq-interference-dag}
 
 Rather than assume that there is no interference, under network causal inference, we make the assumption that interference respects some mapping between individuals - a mapping given by a network or set of networks. We follow a similar approach to Aronow and Samii [-@aronow2017].
 
@@ -68,7 +68,18 @@ f_Y = f_{Y_1} &= f_{Y_2} = f_{Y_3} \\
 
 We assume that in each structural equation, each covariate contributes to the exposure mapping in two parts: i) the covariate level for the individual and ii) a covariate level of the ego-network of that individual.
 
-Define $\mathscr{N_i}$ as the indices of all the nodes connected to node $i$. Then $\mathbf{L}_{\mathscr{N}_i}$ is the sub-vector of $\mathbf{L}$ containing the entries corresponding to the indices in $\mathscr{N}_i$. Similarly, we define $A_{\mathscr{N}_i}$ as the sub-vector of $A$ corresponding to the indices in $\mathscr{N}_i$.
+Define $\mathscr{N_i}$ as the indices of all the nodes connected to node $i$. Then $\mathbf{L}_{\mathscr{N}_i}$ is the sub-vector of $\mathbf{L}$ containing the entries corresponding to the indices in $\mathscr{N}_i$. Similarly, we define $A_{\mathscr{N}_i}$ as the sub-vector of $A$ corresponding to the indices in $\mathscr{N}_i$. 
+
+Functions $g_{A_i}$, $g_{Y_i}$, and $h_{Y_i}$ are exposure mappings - functions that summarize covariate values for observational unit $i$t. They map vectors of any length to the real line. 
+
+$$
+g: \bigcup_{k = 0}^{\infty}{\mathbb{R}^k}  \rightarrow  \mathbb{R}
+$$
+
+$\mathbb{R}^0$ is defined as a set that has only one element - the empty vector ($\mathbb{R}^0 = \{[]\}$). This represents the situation where observational unit $i$ is not related to any other observational unit in the sample. 
+
+Re-writing the model in terms of the network exposure values with respect to $\mathbf{L}$ and $\mathbf{A}$, but still forces us to write the structural equations for each observation separately since each observation potentially has a set of unique exposure mappings.
+
 
 $$
 \begin{aligned}
@@ -84,7 +95,6 @@ Y_3 &= f_{Y_3}(U_{Y_3}, L_3,A_3,  g_{Y_2}(\mathbf{L}_{\mathscr{N}_3}), h_{Y_2}(\
 \end{aligned}
 $$
 
-This simplifies the model, but still forces us to write the structural equations for each observation separately since each observation potentially has a set of unique exposure mappings.
 
 *Equivalency*
 
