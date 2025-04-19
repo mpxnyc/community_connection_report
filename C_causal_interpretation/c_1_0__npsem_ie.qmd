@@ -5,17 +5,19 @@ targets::tar_source("R_functions")
 
 ### NPSEM-IE {.unnumbered}
 
-A non-parametric structural equation model is a system of equations which relates all the entries in a given vector-valued random variable with each other. It does so without specifying parametric functions for each equation in the system.
+Before we continue with the example, we give a brief overview of non-parametric structural equation models with independent errors (NPSEM-IE). A NPSEM-IE is a system of equations which relates all the entries in a given vector-valued random variable with each other. It does so without specifying parametric functions for each equation in the system.
 
-An example of such a model is shown by @eq-fullly-connected-dag. In this set of equations, values that are produced by equations higher up in the list are the arguments of equations lower down on the list. The functions $f_*$ are deterministic functions whose form we do not necessarily know. The arguments $U_*$ represent error terms - random variables which are independent of each other within and across observational units.
+An example of such a model is shown by @eq-fullly-connected-dag. In this set of equations, values that are produced by equations higher up in the list are the inputs of equations lower down on the list. The functions $f_*$ are deterministic, though their form is not necessarily known. The arguments $U_*$ represent error terms - random variables which are independent of each other within and across observational units.
 
-Whereas parametric models, for instance, a linear regression model with normally distributed errors, are characterized by their probability density functions, non-parametric models of this type are usually characterized by their conditional independencies. i.e. for a realization $[X_1, X_2, X_3, X_4, X_5]$ of some statistical model $F$, an example of conditional independency could be:
+Whereas parametric models, for instance, a linear regression model with normally distributed errors, are characterized by their probability density functions, non-parametric models of this type are usually characterized by their conditional independencies. An example of a conditional independence statement would be: 
+
+*for a realization $[X_1, X_2, X_3, X_4, X_5]$ of some statistical model $F$*, 
 
 $$
 X_1 \perp X_3 | X_2, X_4
 $$
 
-Non-parametric structural equation models are usually represented using the Directed Acyclic Graph (DAG), which show the relationships between the structural equations in the model. The DAG shown in @fig-fullly-connected-dag, for instance, represents the model defined by @eq-fullly-connected-dag. DAGs encode the conditional independencies that characterize non-parametric structural equation models. Using a DAG and a set of rules called D-separation [@hernán2021], it is possible to read the minimum set of conditional independencies that imply all the conditional independencies that characterize the model.
+Non-parametric structural equation models are usually represented using the Directed Acyclic Graph (DAG), which show the relationships between the structural equations in the model. The DAG shown in @fig-fullly-connected-dag, for instance, represents the model defined by @eq-fullly-connected-dag. DAGs encode the conditional independencies that characterize non-parametric structural equation models. Using a DAG and a set of rules called d-separation [@hernán2021], it is possible to read the minimum set of conditional independencies that imply all the conditional independencies that characterize the model.
 
 Conditional indpendencies are indicated by missing edges in the DAG. If we made no assumptions at all about the causal process in Example 1 except the time-ordering of measurements, we could represent our data using @eq-fullly-connected-dag. Since there are no missing edges between nodes in the @fig-fullly-connected-dag, the structural equation model represents any possible joint distribution between the variables in the DAG - there are no conditional independencies.
 

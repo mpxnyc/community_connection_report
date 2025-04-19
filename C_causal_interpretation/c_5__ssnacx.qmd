@@ -1,3 +1,8 @@
+---
+editor: 
+  markdown: 
+    wrap: 72
+---
 
 ```{r}
 targets::tar_source("R_functions")
@@ -5,10 +10,55 @@ targets::tar_source("R_functions")
 
 ## Towards SSNACX {#sec-ssnacx}
 
--   We made the assumption of no spillover in defining the SSNAC. In this section, we discuss this assumption, how to detect its violation, and what to do if there is evidence for its violation.
+### Summary
 
--   Under the null hypothesis of no spillover, a model which includes a network outcome mapping as a predictor to the main outcome is correct.
+SSNAC is a causal inference framework which offers:
 
--   As Makofane did [-@makofane2021], one can test for this violation using linear models.
+-   DANG
 
--   If you detect spillover, you need to do the coding estimator described in [@tchetgentchetgen2020] which involves thinning the dataset.
+    -   representation of networked causal system statistical model for
+        observed data
+
+-   SWING
+
+    -   representation of an intervention on a networked causal system
+        statistical model for counterfactual data
+
+-   Causal Model Assumptions
+
+    -   Independence Assumptions
+
+        -   No Spillover
+
+        -   Networked interference
+
+    -   Homogeneity Assumptions
+
+        -   Homogenous interference
+
+            -   Separability
+
+            -   Equivalency
+
+            -   Symmetry
+
+            -   Boundedness
+
+        -   Identical distribution
+
+### Comments and extensions
+
+-   We made the assumption of no spillover in defining the SSNAC. In
+    this section, we discuss this assumption, how to detect its
+    violation, and what to do if there is evidence for its violation.
+
+-   Under the null hypothesis of no spillover, a model which includes a
+    network outcome mapping as a predictor to the main outcome is
+    correct.
+
+-   As Makofane did [-@makofane2021], one can test for this violation
+    using linear models.
+
+-   If you detect spillover, you need to do the coding estimator
+    described in [@tchetgentchetgen2020] which involves thinning the
+    dataset.

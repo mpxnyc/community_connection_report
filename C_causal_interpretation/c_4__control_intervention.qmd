@@ -88,11 +88,13 @@ $$ {#eq-edge-intervention-swing}
 
 We define function $h$ as a vector-valued function whose length is equal to the number of community districts. $h(V_{(s-1)})$. We define function $h^1$ as the risk rating function for a contact-neutralizing approach, and $h^1$ as the risk rating function for a movement-neutralizing approach. Whereas the contact-neutralizing approach ranks community districts by how many individuals are connected to them, the movement-neutralizing appraoch ranks community districts by how centrally they are connected to other community districts through the exchange of people. 
 
+Define $\phi(i, j)$ as an adjacency function - an indicator function that equals to $1$ if Person $i$ lives in or visits neighborhood $j$ and $0$ otherwise. Let $\mathscr{N}_P$ be the indicies of all person nodes and $\mathscr{N}_N$ be a set of indicies for neighborhood nodes. 
+
 
 $$
 \begin{align}
-h_{sj}^1 &=  \sum_{ i \in N_p} (1 -V_{(s-1), i}) \times \phi(i, j)       \\
-h_{sj}^2 &=  \sum_{ i \in N_p} (1 -V_{(s-1), i}) \times \phi(i, j) \sum_{ k \in N_c} \phi(i, k) 
+h_{sj}^1 &=  \sum_{ i \in \mathscr{N}_P} (1 -V_{(s-1), i}) \times \phi(i, j)       \\
+h_{sj}^2 &=  \sum_{ i \in \mathscr{N}_P} (1 -V_{(s-1), i}) \times \phi(i, j) \sum_{ k \in \mathscr{N}_N} \phi(i, k) 
 \end{align}
 $$
 
@@ -117,7 +119,7 @@ $$
 
 ##### Social network impact
 
-Define graph $G^{s}(N, \phi^s)$ such that 
+Define graph $G^{s}(N, \phi_s)$ such that 
 
 $$
 \phi_s(i, j) = \phi(i, j) \times (1 -V_{(s-1), i})

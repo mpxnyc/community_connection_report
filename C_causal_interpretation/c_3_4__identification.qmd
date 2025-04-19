@@ -1,12 +1,10 @@
-
 ```{r}
 targets::tar_source("R_functions")
 ```
 
-### Identification 
+### Identification
 
-We can estimate the outcome of interest (the causal estimand) using the inverse probability of treatment weights, noting that the treatment in this case is the network exposure value $g(t_{\bar{s},N_i})$ for $\mathbf{T}$. 
-
+Because we have time-varying confounding (individual vaccination status is both a confounder and a mediator of the relationship between neighborhood intervention status and vaccination status, and it is a mediator in the same relationship), we cannot identify our estimated using conditional expectations of the observed outcome $V_{si}$. We can estimate the outcome of interest (the causal estimand) using the inverse probability of treatment weights, noting that the treatment in this case is the network exposure value $g(t_{\bar{s},N_i})$ for $\mathbf{T}$. See Aronow and Samii [-@aronow2017].
 
 $$
 \sum V_{si}^{(\bar{\mathbf{t}})} =  \sum \frac{V_{si} \mathbf{1}_{g(T_{\bar{s},N_i}) = g(t_{\bar{s},N_i}) } }{\prod_{q=1}^s P[g(\mathbf{T}_{q,N_i}) = g(\mathbf{t}_{q,N_i}) | \mathbf{R}_{\bar{q}N_i}]}
