@@ -55,9 +55,9 @@ As in the case of classical causal inference, we assume that the structual equat
 
 ```{=tex}
 \begin{aligned}
-f_A = f_{A_1} &= f_{A_2} = f_{A_3} \\
-f_L = f_{L_1} &= f_{L_2} = f_{L_3} \\
-f_Y = f_{Y_1} &= f_{Y_2} = f_{Y_3} \\
+f_A = f_{A_i}  \\
+f_L = f_{L_i} \\
+f_Y = f_{Y_i}  \\
 
 \end{aligned}
 ```
@@ -65,19 +65,15 @@ f_Y = f_{Y_1} &= f_{Y_2} = f_{Y_3} \\
 
 *Separability*
 
-We assume that in each structural equation, each covariate contributes to the exposure mapping in two parts: i) the covariate level for the individual and ii) a summary of the covariate level of the ego-network of that individual.
+Define $\mathscr{N_i}$ as the indices of all the observational units connected to unit $i$. Then $\mathbf{L}_{\mathscr{N}_i}$ is the sub-vector of $\mathbf{L}$ containing the entries corresponding to the indices in $\mathscr{N}_i$. Similarly, we define $A_{\mathscr{N}_i}$ as the sub-vector of $A$ corresponding to the indices in $\mathscr{N}_i$.
 
-Define $\mathscr{N_i}$ as the indices of all the nodes connected to node $i$. Then $\mathbf{L}_{\mathscr{N}_i}$ is the sub-vector of $\mathbf{L}$ containing the entries corresponding to the indices in $\mathscr{N}_i$. Similarly, we define $A_{\mathscr{N}_i}$ as the sub-vector of $A$ corresponding to the indices in $\mathscr{N}_i$.
-
-Functions $g_{A_i}$, $g_{Y_i}$, and $h_{Y_i}$ are network exposure mappings with respect to $\mathbf{L}$ and $\mathbf{A}$. These functions summarize covariate values for observational unit $i$t. They map vectors of any length to the real line. The value of a network exposure mapping is termed the network exposure value.
+Define $g_{A_i}$, $h_{Y_i}$, and $g_{Y_i}$ as network exposure mappings for $A_i$ with respect to $\mathbf{L}$, for $Y_i$ with respect to $\mathbf{A}$, and for $Y_i$ with respect to $\mathbf{L}$. These functions map vectors of length $0$ to $n$ to the real line (where $n$ is the number of observational units). The value of the network exposure function,$g_{A_i}(\mathbf{L}_{\mathscr{N}_i})$, for instance, is called the network exposure value.
 
 $$
-g: \bigcup_{k = 0}^{\infty}{\mathbb{R}^k}  \rightarrow  \mathbb{R}
+g_*: \{[]\} \cup \{\bigcup_{k = 1}^{n}{\mathbb{R}^k} \} \rightarrow  \mathbb{R}
 $$
 
-where $\mathbb{R}^0$ is defined as a set that has only one element - the empty vector ($\mathbb{R}^0 = \{[]\}$).
-
-Re-writing the model in terms of the network exposure values with respect to $\mathbf{L}$ and $\mathbf{A}$ simplifies it, but still forces us to write the structural equations for each observation separately. This is because each observation potentially has a set of unique exposure mappings.
+Re-writing the model in terms of the network exposure values simplifies it, but still forces us to write the structural equations for each observation separately. This is because each observation potentially has a set of unique exposure mappings.
 
 $$
 \begin{aligned}
@@ -99,9 +95,9 @@ We assume that exposure mappings $g_A$, $h_y$, and $g_Y$ are identical across in
 
 ```{=tex}
 \begin{aligned}
-g_L = g_{L_1} &= g_{L_2} = g_{L_3} \\
-h_A = h_{A_1} &= h_{A_2} = h_{A_3} \\
-g_Y = g_{Y_1} &= g_{Y_2} = g_{Y_3} \\
+g_L = g_{L_i}  \\
+h_A = h_{A_i}  \\
+g_Y = g_{Y_i} \\
 \end{aligned}
 ```
 *Symmetry*
@@ -110,8 +106,8 @@ We also assume that the order of the entries does not matter in the input for fu
 
 *Boundedness*
 
-Finally, we assume that exposure mappings are bounded above.
+Finally, we assume that exposure mappings are bounded.
 
 $$
-g_A, h_Y, g_Y < c \text{ for } c \in \mathbf{Z}
+|g_A|, |h_Y|, |g_Y| < c \text{ for } c \in \mathbf{R}
 $$
