@@ -1,4 +1,3 @@
-
 ```{r}
 targets::tar_source("R_functions")
 ```
@@ -9,16 +8,16 @@ To estimate the causal estimands using observed data, it is sufficient to estima
 
 $$
 \begin{align}
- E[Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})} | \mathbf{L}]  
-        &=  E[Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})}   &| L_i , g(\mathbf{L}_{\mathscr{N}_i})] \phantom{, A_i = a_i, h_Y(\textbf{A}_{\mathscr{N}_i}) = h_Y(\textbf{a}_{\mathscr{N}_i})} \\ 
-        &=  E[Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})}   &| L_i , g(\mathbf{L}_{\mathscr{N}_i}), A_i = a_i, h_Y(\textbf{A}_{\mathscr{N}_i}) = h_Y(\textbf{a}_{\mathscr{N}_i})] \\
+ E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} | \mathbf{L}]  
+        &=  E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}   &| L_i , g(\mathbf{L}_{\mathscr{N}_i})] \phantom{, A_i = a_i, h_Y(\textbf{A}_{\mathscr{N}_i}) = h_Y(\textbf{a}_{\mathscr{N}_i})} \\ 
+        &=  E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}   &| L_i , g(\mathbf{L}_{\mathscr{N}_i}), A_i = a_i, h_Y(\textbf{A}_{\mathscr{N}_i}) = h_Y(\textbf{a}_{\mathscr{N}_i})] \\
         &=   E[f_{Y}(...)                             &| L_i , g(\mathbf{L}_{\mathscr{N}_i}), A_i = a_i, h_Y(\textbf{A}_{\mathscr{N}_i}) = h_Y(\textbf{a}_{\mathscr{N}_i})] \\ 
         &=   E[Y_i                                    &| L_i , g(\mathbf{L}_{\mathscr{N}_i}), A_i = a_i, h_Y(\textbf{A}_{\mathscr{N}_i}) = h_Y(\textbf{a}_{\mathscr{N}_i})] 
 \end{align}
 $$
 
-In the first line, we use the fact that $Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})}$ is independent of $L_j$ for $j \not \in \mathscr{N}_i$ once we condition for $L_i$ and $g(\mathbf{L}_{\mathscr{N}_i})$ - the network exposure value for person $i$ with respect to $\mathbf{L}$. 
+-   In the first line, we use the fact that $Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}$ is independent of $L_j$ for $j \not \in \mathscr{N}_i$ once we condition for $L_i$ and $g(\mathbf{L}_{\mathscr{N}_i})$ - the network exposure value for person $i$ with respect to $\mathbf{L}$.
 
-In the second line, we use the fact that $Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})}$ is independent of $\mathbf{a}$ after adjusting for $L$, since $\mathbf{a}$ is a constant of the experimenters choosing. 
+-   In the second line, we use the fact that $Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}$ is independent of $\mathbf{a}$ after adjusting for $L$, since $\mathbf{a}$ is a constant of the experimenters choosing.
 
-We replace $Y_i^{(a, \mathbf{a}_{\mathscr{N}_i})}$ with its structural equation @fig-homogenous-interference-swig, noting that this is equal to the observed value $Y_i$ for people $i$ whose treatment value ($A_i$) and network exposure value ($h_Y(\textbf{A}_{\mathscr{N}_i})$) is consistent with the value of $\mathbf{a}$ set by the experimenter. This last fact is given by @eq-homogenous-dag.
+-   We replace $Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}$ with its structural equation @fig-homogenous-interference-swig, noting that this is equal to the observed value $Y_i$ for people $i$ whose treatment value $A_i$ and network exposure value $h_Y(\textbf{A}_{\mathscr{N}_i})$ is consistent with the value of $\mathbf{a}$ set by the experimenter.
