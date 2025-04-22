@@ -15,29 +15,29 @@ Under classic causal inference, we make the assumption of no spillover - that me
 
 
 $$
-\begin{align}
+\begin{aligned}
 L_1 \perp L_2 \\
 L_2 \perp L_3 \\
 L_1 \perp L_3 
-\end{align}
+\end{aligned}
 $$
 
 
 $$
-\begin{align}
+\begin{aligned}
 A_1 \perp A_2 | L_1, L_2, L_3\\
 A_2 \perp A_3 | L_1, L_2, L_3 \\
 A_1 \perp A_3 | L_1, L_2, L_3 
-\end{align}
+\end{aligned}
 $$
 
 
 $$
-\begin{align}
+\begin{aligned}
 Y_1 \perp Y_2 | L_1, L_2, L_3, A_1, A_2, A_3\\
 Y_2 \perp Y_3 | L_1, L_2, L_3, A_1, A_2, A_3 \\
 Y_1 \perp Y_3 | L_1, L_2, L_3, A_1, A_2, A_3 
-\end{align}
+\end{aligned}
 $$
 
 This is shown in @fig-no-spillover-dag, as the removal of arrows that connected the $L_i$'s, $A_i$'s and $Y_i$'s. In @eq-no-spillover-dag, the $L_i$'s are not functions of each other, the $A_i$'s are not functions of each other, and the $Y_i$'s are not functions of each other. This implies that given all the measurements taken prior to a set of contemporaneous measures, the contemporaneous measures are independent. This follows from the independence of the error terms $U_{L_i}$, the error terms $U_{A_i}$, and the terms $U_{Y_i}$ across observations $i$.
@@ -98,10 +98,10 @@ $$
 
 Finally, we see above that the functions that generate observations $L_i$ are similar in structure to each other, as are the the functions that generate $A_i$'s and $Y_i$s. We make the homogeneity assumption that the functions are identical to each other. 
 
-```{=tex}
+$$
 \begin{aligned}
  f_L &= f_{L_1} = f_{L_2} = f_{L_3} \\
  f_A &= f_{A_1} = f_{A_2} = f_{A_3} \\
  f_Y &= f_{Y_1} = f_{Y_2} = f_{Y_3}  \\
 \end{aligned}
-```
+$$

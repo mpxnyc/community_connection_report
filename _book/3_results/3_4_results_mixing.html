@@ -17,40 +17,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -310,18 +276,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Causal interpretation</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../E_conclusion/E__conclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">SSNAC (conclusion)</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Z_orphan_text.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Orphan text</span></span></a>
-  </div>
-</li>
       </ul>
 </li>
     </ul>
@@ -338,28 +292,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title">
+<main class="content" id="quarto-document-content"><header id="title-block-header"><h1 class="title display-7">
 <span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mixing</span>
-</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+</h1>
 
-</header><div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
-<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<section id="race-gender" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="race-gender">Race-gender</h3>
+</header><section id="race-gender" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="race-gender">Race-gender</h3>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mixing_demo_group_panel</span> <span class="op">&lt;-</span> <span class="fu">make_table_mixing_2</span><span class="op">(</span><span class="va">demo_group</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">ego_level</span> <span class="op">!=</span> <span class="st">"Another Demographic"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">alter_level</span> <span class="op">!=</span> <span class="st">"Another Demographic"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">plot_matrix_mixing</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_fill_mpxnyc_gradient</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_color_mpxnyc_gradient</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc_text</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="va">mixing_demo_group_panel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<div class="cell-output-display">
 <div id="fig-demogroup-mixing" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="3_4_results_mixing_files/figure-html/fig-demogroup-mixing-1.png" class="img-fluid figure-img" width="864"></p>
 <figcaption class="figure-caption">Figure&nbsp;10.1: Social mixing matrices for MPX NYC participants by race-gende</figcaption></figure>
@@ -369,16 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="quarto-unresolved-ref">?fig-subgroup-mixing</span> quantifies the degree to which individuals with characteristics shown on the left live or play in an overlapping set of community districts with individuals whose characteristics are shown at the top. Overall, MPX NYC participants showed spatial homophily - the spatial selection coefficient from a given group to the same group was positive for all levels of race-gender, sexual orientation, and age. In addition, black cisgender men and non-binary persons tended to visit or live in different neighborhoods than white cisgender men. Non-binary persons also showed a preference for community districts in which transgender men live. Gay identified participants preferred to live and play in community districts where bisexual, straight and queer identified participants did not live. Similarly, those groups selected against community districts in which gay identified individuals live or play.</p>
 </section><section id="sexual-orientation" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="sexual-orientation">Sexual orientation</h3>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mixing_sexOrientation_panel</span> <span class="op">&lt;-</span> <span class="fu">make_table_mixing_2</span><span class="op">(</span><span class="va">sexOrientation</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">plot_matrix_mixing</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_fill_mpxnyc_gradient</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_color_mpxnyc_gradient</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc_text</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="va">mixing_sexOrientation_panel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<div class="cell-output-display">
 <div id="fig-sexorientation-mixing" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="3_4_results_mixing_files/figure-html/fig-sexorientation-mixing-1.png" class="img-fluid figure-img" width="576"></p>
 <figcaption class="figure-caption">Figure&nbsp;10.2: Social mixing matrix for MPX NYC participants by sexual orientation</figcaption></figure>
@@ -387,25 +317,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section><section id="age" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="age">Age</h3>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mixing_age_panel</span>                 <span class="op">&lt;-</span> <span class="fu">make_table_mixing_2</span><span class="op">(</span><span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                      <span class="fu">plot_matrix_mixing</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                      <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span>  <span class="op">+</span></span>
-<span>                                      <span class="fu">scale_fill_mpxnyc_gradient</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                      <span class="fu">scale_color_mpxnyc_gradient</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                      <span class="fu">theme_mpxnyc_text</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">mixing_age_panel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<div class="cell-output-display">
 <div id="fig-age-mixing" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="3_4_results_mixing_files/figure-html/fig-age-mixing-1.png" class="img-fluid figure-img" width="576"></p>
 <figcaption class="figure-caption">Figure&nbsp;10.3: Social mixing matrix for MPX NYC participants by age</figcaption></figure>
 </div>
 </div>
-</div>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mixing_bottom_panel</span>              <span class="op">&lt;-</span> <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">mixing_sexOrientation_panel</span>, <span class="va">mixing_age_panel</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">mixing_demo_group_panel</span>, <span class="va">mixing_bottom_panel</span>, ncol<span class="op">=</span><span class="fl">1</span>, rel_heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1.1</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 
 

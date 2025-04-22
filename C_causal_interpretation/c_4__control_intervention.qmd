@@ -8,7 +8,7 @@ targets::tar_source("R_functions")
 
 ### Application: Outbreak control model using MPX NYC data {.unnumbered}
 
-Finally, under the SSNAC framework, our intervention of interest might not be about setting the value of any particular variable, but setting a policy or a process that produces some outcome of interest. This woudld be done by changing the structural equation which produces that variable. In the diagram @fig-edge-intervention-swing and the equations @eq-edge-intervention-swing, we show an intervention which replaces the function for the risk rating for each neighborhood ($\mathbf{R}$) with the function $h$. Every variable that is downstream of the first variable created using $h$ is marked with a superscript $(h)$ to show that it is partially determined by that function.
+Under the SSNAC framework, our intervention of interest might not be about setting the value of any particular variable, but setting a policy or a process that produces some outcome of interest. This woudld be done by changing the structural equation which produces that variable. In the diagram @fig-edge-intervention-swing and the equations @eq-edge-intervention-swing, we show an intervention which replaces the function for the risk rating for each neighborhood ($\mathbf{R}$) with the function $h$. Every variable that is downstream of the first variable created using $h$ is marked with a superscript $(h)$ to show that it is partially determined by that function.
 
 As usual, we can decide whether we want to focus on person or neighborhood-level outcomes as the overall quantity of interest. In addition to the outcome variables we can now ask what the impact of taking policy $h$ would be on the decision whether or not to vaccinate a neighborhood $j$ ($T_j$) as well as the exposure of participant $i$ to campaign messages ($M_i$). Our interest in the MPX NYC project, however, was initially to provide evidence to inform a targeted vaccination campaign, so vaccination $\mathbf{V}^{(h)}$ is the outcome of interest.
 
@@ -92,10 +92,10 @@ Define $\phi(i, j)$ as an adjacency function - an indicator function that equals
 
 
 $$
-\begin{align}
+\begin{aligned}
 h_{sj}^1 &=  \sum_{ i \in \mathscr{N}_P} (1 -V_{(s-1), i}) \times \phi(i, j)       \\
 h_{sj}^2 &=  \sum_{ i \in \mathscr{N}_P} (1 -V_{(s-1), i}) \times \phi(i, j) \sum_{ k \in \mathscr{N}_N} \phi(i, k) 
-\end{align}
+\end{aligned}
 $$
 
 
@@ -131,3 +131,6 @@ $$
 \frac{LCC_s}{|N_p|}
 $$
 
+### Estimation
+
+[Estimation strategy]
