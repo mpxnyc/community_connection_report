@@ -16,9 +16,9 @@ We introduce the causal Directed Acyclic Network Graph (causal DANG) - a simple 
 
 *Compact graphic representation*
 
-DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is called the "structural part" of the DANG and the latter is called the "relational part".
+DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the "structural part" of the DANG and the latter the "relational part".
 
-We represent the structural model defined by @eq-homogenous-dag shown in @fig-homogenous-dag. The first aspect (structural part) of the causal DANG shows the causal structure within individuals. It is a DAG of vector-valued variables $\mathbf{L}$, $\mathbf{A}$, and $\mathbf{Y}$ of length equal to the number of people in the sample. This DAG has standard interpretation under d-separation rules. It gives the conditional independencies across these vector-valued random variables. This is an incomplete set of independencies, however, since some of the entries in $\mathbf{A}$ are independent of a given entry in $\mathbf{L}$, and others are correlated. The second part of the causal DANG (relational part) of the causal DANG shows which pairs of individuals have correlated measures and which do not. 
+We represent the structural model defined by @eq-homogenous-dag shown in @fig-homogenous-dag. The first aspect (structural part) of the causal DANG shows the causal structure within individuals. It is a DAG of vector-valued variables $\mathbf{L}$, $\mathbf{A}$, and $\mathbf{Y}$ of length equal to the number of people in the sample. This DAG has standard interpretation under d-separation rules. It gives the conditional independencies across these vector-valued random variables. This is an incomplete set of independencies, however, since some of the entries in $\mathbf{A}$ are independent of a given entry in $\mathbf{L}$, and others are correlated. The second part of the causal DANG (relational part) shows which pairs of individuals have correlated measures and which do not. 
 
 
 ```{r }
@@ -84,7 +84,7 @@ cowplot::plot_grid(structural, relational, ncol = 1)
 
 The causal DANG relaxes the assumption that all measures in the causal system can be grouped into non-overlapping sets (i.e. that each measure can be attributed to an individual in the sample). In this framework, different types of entities, represented by vectors of different lengths, can be depicted on the same DANG. 
 
-The causal DANG shown in @fig-example-dang-structural represents the first week of the campaign mentioned in Example 3. Let $\mathbf{T}$ be a $3\times1$ vector whose entries $T_j$ are 1 if neighborhood $j$ is to be vaccinated and $0$ otherwise. $\mathbf{M}$ is a $5\times1$ vector whose entries $M_i$ indicate whether the $i^{\text{th}}$ person received a message or not. $\mathbf{V}$ is a $5\times1$ vector whose entries $V_i$ show whether participant $i$ is vaccinated or not. 
+The causal DANG shown in @fig-example-dang-structural represents the first week of the campaign mentioned in Example 3. Let $\mathbf{T}$ be a $3\times1$ vector whose entries $T_j$ are 1 if neighborhood $j$ is to be vaccinated and $0$ otherwise. $\mathbf{M}$ is a $5\times1$ vector whose entries $M_i$ indicate whether the $i^{\text{th}}$ person received a vaccination campaign message or not. $\mathbf{V}$ is a $5\times1$ vector whose entries $V_i$ show whether participant $i$ is vaccinated or not. 
 
 ```{r}
 #| fig-height: 6
@@ -154,7 +154,7 @@ cowplot::plot_grid(left_side, legend, nrow = 1, rel_widths = c(4,1))
 
 We introduce the Single World Intervention Network Graph (SWING) - a simple extension of the SWIG that allows for the representation of the counterfactual outcomes of interventions in complex causal systems. 
 
-The SWING has two parts - a structural part and a relational part. Like the causal DANG, the SWING represents vector-valued random variables (rather than scalars) as nodes. Like the SWIG, it shows the counterfactual distribution of the variables in the model under an intervention setting $\mathbf{T}$ at the value $\mathbf{t}$ by splitting the $\mathbf{T}$ node.
+The SWING has two parts - a structural part and a relational part. Like the causal DANG, the SWING represents vector-valued random variables (rather than scalars) as nodes. Like the SWIG, the SWING splits the $\mathbf{T}$ node. This graph shows the counterfactual distribution of the variables in the model under an intervention setting $\mathbf{T}$ to the value $\mathbf{t}$.
 
 ```{r}
 

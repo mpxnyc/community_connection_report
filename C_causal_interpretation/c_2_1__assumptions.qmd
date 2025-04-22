@@ -45,27 +45,27 @@ Y_3 &= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
 \end{aligned}
 $$ {#eq-interference-dag}
 
-Under network causal inference, we make the assumption that interference respects some mapping between individuals - a mapping given by a network or set of networks. In @fig-interference-dag, Based on their relationships with one another, Person 1's measures are connected with Person 2's, and neither are connected with person 3. See Aronow and Samii [-@aronow2017].
+Under network causal inference, we make the assumption that interference respects some mapping between individuals - a mapping given by a network or set of networks. In @fig-interference-dag, Based on their relationships with one another, *Person 1*'s measures are connected with *Person 2*'s, and neither are connected with P*erson 3*. See Aronow and Samii [-@aronow2017].
 
 #### Homogeneity assumptions
 
 ##### Identical distribution
 
-As in the case of classical causal inference, we assume that the structual equations that produce each individual's observations are identical accross individuals. i.e. we assume:
+As in the case of classical causal inference, we assume that the structual equations that produce each individual's observations are identical across individuals. i.e. we assume that for every individual $i$:
 
-```{=tex}
+$$
 \begin{aligned}
 f_A = f_{A_i}  \\
 f_L = f_{L_i} \\
 f_Y = f_{Y_i}  \\
-
 \end{aligned}
-```
+$$
+
 ##### Homogenous interference
 
 *Separability*
 
-Define $\mathscr{N_i}$ as the indices of all the observational units connected to unit $i$. Then $\mathbf{L}_{\mathscr{N}_i}$ is the sub-vector of $\mathbf{L}$ containing the entries corresponding to the indices in $\mathscr{N}_i$. Similarly, we define $A_{\mathscr{N}_i}$ as the sub-vector of $A$ corresponding to the indices in $\mathscr{N}_i$.
+Define $\mathscr{N_i}$ as the indices of all the observational units connected to unit $i$. Then $\mathbf{L}_{\mathscr{N}_i}$ is the sub-vector of $\mathbf{L}$ containing the entries corresponding to the indices in $\mathscr{N}_i$. Similarly, we define $\mathbf{A}_{\mathscr{N}_i}$ as the sub-vector of $A$ corresponding to the indices in $\mathscr{N}_i$.
 
 Define $g_{A_i}$, $h_{Y_i}$, and $g_{Y_i}$ as network exposure mappings for $A_i$ with respect to $\mathbf{L}$, for $Y_i$ with respect to $\mathbf{A}$, and for $Y_i$ with respect to $\mathbf{L}$. These functions map vectors of length $0$ to $n$ to the real line (where $n$ is the number of observational units). The value of the network exposure function,$g_{A_i}(\mathbf{L}_{\mathscr{N}_i})$, for instance, is called the network exposure value.
 
@@ -73,7 +73,7 @@ $$
 g_*: \{[]\} \cup \{\bigcup_{k = 1}^{n}{\mathbb{R}^k} \} \rightarrow  \mathbb{R}
 $$
 
-Re-writing the model in terms of the network exposure values simplifies it, but still forces us to write the structural equations for each observation separately. This is because each observation potentially has a set of unique exposure mappings.
+We assume that the structural equation model can be written in terms of network exposure values along with node attribute values. Re-writing the model in terms of the network exposure values simplifies it, but still forces us to write the structural equations for each observation separately. This is because each observation potentially has a set of unique exposure mappings.
 
 $$
 \begin{aligned}
@@ -91,18 +91,19 @@ $$
 
 *Equivalency*
 
-We assume that exposure mappings $g_A$, $h_y$, and $g_Y$ are identical across individuals.
+We assume that exposure mappings $g_A$, $h_y$, and $g_Y$ are identical across individuals. i.e. for each individual $i$:
 
-```{=tex}
+$$
 \begin{aligned}
 g_L = g_{L_i}  \\
 h_A = h_{A_i}  \\
 g_Y = g_{Y_i} \\
 \end{aligned}
-```
+$$
+
 *Symmetry*
 
-We also assume that the order of the entries does not matter in the input for functions $g_A$, $g_Y$, and $h_Y$. i.e. the functions are invariant under any permutation of the entries in the input vector.
+We assume that the order of the entries does not matter in the input for functions $g_A$, $g_Y$, and $h_Y$. i.e. the functions are invariant under any permutation of the entries in the input vector.
 
 *Boundedness*
 

@@ -17,40 +17,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -310,18 +276,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Causal interpretation</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../E_conclusion/E__conclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">SSNAC (conclusion)</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Z_orphan_text.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Orphan text</span></span></a>
-  </div>
-</li>
       </ul>
 </li>
     </ul>
@@ -337,57 +291,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="sec-intervention" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Outbreak control</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header"><h1 class="title display-7"><span id="sec-intervention" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Outbreak control</span></span></h1>
 
 </header><div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
-<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">map_plot_1</span>                 <span class="op">&lt;-</span> <span class="fu">make_table_coverage</span><span class="op">(</span></span>
-<span>                                                  intervention_priority <span class="op">=</span> <span class="st">"contact"</span>, </span>
-<span>                                                  intervention_stratification <span class="op">=</span> <span class="st">"overall"</span></span>
-<span>                                                  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                  <span class="fu">plot_coverage_map</span><span class="op">(</span><span class="op">)</span>  <span class="op">+</span></span>
-<span>                                  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span> </span>
-<span></span>
-<span></span>
-<span></span>
-<span><span class="va">map_plot_2</span>                 <span class="op">&lt;-</span> <span class="fu">make_table_coverage</span><span class="op">(</span></span>
-<span>                                                  intervention_priority <span class="op">=</span> <span class="st">"movement"</span>, </span>
-<span>                                                  intervention_stratification <span class="op">=</span> <span class="st">"overall"</span></span>
-<span>                                                  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                  <span class="fu">plot_coverage_map</span><span class="op">(</span><span class="op">)</span>  <span class="op">+</span></span>
-<span>                                  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">bar_plot_1</span>                 <span class="op">&lt;-</span> <span class="fu">make_table_coverage</span><span class="op">(</span></span>
-<span>                                                  intervention_priority <span class="op">=</span> <span class="st">"contact"</span>, </span>
-<span>                                                  intervention_stratification <span class="op">=</span> <span class="st">"overall"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">!=</span> <span class="st">"Group C"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                  <span class="fu">plot_coverage_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">bar_plot_2</span>                 <span class="op">&lt;-</span> <span class="fu">make_table_coverage</span><span class="op">(</span></span>
-<span>                                                  intervention_priority <span class="op">=</span> <span class="st">"movement"</span>, </span>
-<span>                                                  intervention_stratification <span class="op">=</span> <span class="st">"overall"</span></span>
-<span>                                                  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">!=</span> <span class="st">"Group C"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                                  <span class="fu">plot_coverage_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span>  </span>
-<span><span class="va">finished_plot_map</span>          <span class="op">&lt;-</span> <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">map_plot_1</span>, <span class="va">map_plot_2</span><span class="op">)</span></span>
-<span><span class="va">finished_plot_bar</span>          <span class="op">&lt;-</span> <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">bar_plot_1</span>, <span class="va">bar_plot_2</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span></span>
-<span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">finished_plot_map</span>, <span class="va">finished_plot_bar</span>, ncol<span class="op">=</span><span class="fl">1</span>, rel_heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<div class="cell-output-display">
 <div id="fig-hiimpact-communities" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="3_5_results_hypothetical_intervention_files/figure-html/fig-hiimpact-communities-1.png" class="img-fluid figure-img" width="960"></p>
 <figcaption class="figure-caption">Figure&nbsp;11.1: High-coverage community districts: contact vs movement-neutralizing strategy</figcaption></figure>
@@ -403,13 +310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">11.2</span> Spatial network impact</h2>
 <p><a href="#fig-netimpact">Figure&nbsp;<span>11.2</span></a> shows that nearly 100% of individuals are included in the largest connected component before any intervention. For the movement-neutralizing strategy, the proportion of the population included in the largest connected component declines more sharply than for the contact-neutralizing strategy as more community districts are immunized. In the contact-neutralizing strategy, the overall proportion of unvaccinated individuals declines more sharply than in the movement-neutralizing strategy. There is not a noticeable difference between the two strategies for the first 10 community districts to be immunized - differences between the two strategies start emerging once 10 community districts are immunized.</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_table_centrality</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">plot_centrality_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span><span class="st">"Proportion of participants"</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span><span class="st">"Intervention order"</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">40</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">40</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<div class="cell-output-display">
 <div id="fig-netimpact" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="3_5_results_hypothetical_intervention_files/figure-html/fig-netimpact-1.png" class="img-fluid figure-img" width="768"></p>
 <figcaption class="figure-caption">Figure&nbsp;11.2: Network impact</figcaption></figure>
@@ -417,8 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plot_icon</span><span class="op">(</span>icon_name <span class="op">=</span> <span class="st">"unicorn"</span>, color <span class="op">=</span> <span class="st">"light_pink"</span>, shape <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="3_5_results_hypothetical_intervention_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="192"></p>
 </figure>
