@@ -1,0 +1,34 @@
+
+```{r}
+targets::tar_source("R_functions")
+```
+
+#### Spatial mixing matrix
+
+The MPX NYC participant network can also be used to analyze the pattern of connection across different demographic groups. We did this using the spatial mixing coefficient, which we motivate and define below.
+
+Say there are three types of retired university professors in Boston - A) those who choose to live and socialize in neighborhoods with universities (where they can meet old colleagues and students); B) those who choose to live and socialize away from former colleagues and students; and C) those who choose neighborhoods without regard for university life. And say the proportion of people who are under 25 years of age in Boston is $20\%$ and that the majority of this group are college students. People who are under 25 years of age would be over-represented in neighborhoods with college campuses and residences, and under-represented in those without.
+
+To understand what kind of retired professor a particular person is, you could ask her of all the peopple she encountered in the past 12 months, what proportion were under $25$. If she is of type C, we would expect her answer to be about $20\%$. If she avoids universities (i.e. is of type B), the proportion would be lower than $20\%$ and if she seeks them out (i.e. type A), her answer would be greater than $20\%$.
+
+In the motivating example, we were soliciting the retired professor's preference for the subgroup: under 25. We were then mentally comparing it with the prevalence of that subgroup ($20\%$). The spatial mixing coefficient makes this comparison by dividing preference by prevalence and subtracting 1. It is zero when contact venues and residences for a given subgroup are distributed in space independently of another; positive if members of the former subgroup tend to share community districts with those of the latter; and negative if they tend to not share community districts.
+
+The spatial mixing coefficient is related to notions in social network analysis and compartmental infectious disease modelling. The coefficient of a given sub-group for that same subgroup indicates homophily when it is positive, random mixing when it is zero, and heterophily when it is negative. It goes further by showing, in the case of heterophily, which subgroups members of the focal subgroup tend to be connected with. This is useful in early outbreak investigations as it allows the analyst to understand the potential path of a new pathogen across the population of interest. e.g. where there is strong homophily in the a network like the MPX NYC participant network, a new pathogen will tend to stay within the subgroup it first affected. If there is strong heterophily, on the other hand, the pathogen will tend to disseminate across groups favored by the first subgroup it affected.
+
+We define preference of group A for group B ($\Phi(A,B)$) as the average proportion of alters from group B among egos from group A.
+
+$$
+\Phi(A,B) = \frac{1}{|A|}\sum_{i \in A}{\frac{ R_i | B}{R_i}}
+$$
+
+To understand whether preference of a specific group by another group is higher or lower than we would expect if ego's chose alters randomly, we compare preference for B to the prevalence of group B:
+
+$$
+ \frac{|B|}{|N_p|}
+$$
+
+The spatial mixing coefficient is the ratio of preference to prevalence minus one:
+
+$$
+\phi(A,B) = \frac{|N_p|}{|B|} \Phi(A,B) - 1
+$$

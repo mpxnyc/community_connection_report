@@ -1,0 +1,52 @@
+
+```{r}
+targets::tar_source("R_functions")
+```
+
+### Place graph
+
+The MPX NYC community district network has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a contact venue or residence in both community districts. The weight is the count of participants which are shared by the two community districts. @fig-data-places shows the community district network derived from the MPX NYC spatial participant data network shown in @fig-data. @tbl-example-place-nodes shows list the nodes of the former network, and @tbl-example-place-edges shows the edges.
+
+```{r}
+#| fig-cap: !expr 'get_figure_details("fig-example-community")'
+#| label: fig-example-community
+#| fig-width: 9
+#| fig-height: 7
+
+make_example_network_data("places") |>
+  plot_example_network(targets::tar_read(config_list))  +
+  theme_mpxnyc()
+
+```
+
+
+```{r}
+#| label: tbl-example-place-nodes
+#| layout-ncol: 2
+#| tbl-cap:
+#|  - "Place nodes"
+#|  - "Place edges"
+
+
+make_example_network_data("places") |>
+  data.frame() |>
+  dplyr::transmute(name = label, type = ifelse(type, "person", "community_district")) |>
+  gt::gt()
+
+make_example_network_data("places") |>
+  dplyr::mutate(name = label, type, age) |>
+  tidygraph::activate(edges) |>
+  dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
+  data.frame() |>
+  dplyr::arrange(from, to) |>
+  dplyr::transmute(from = from_name, to = to_name, weight) |>
+  gt::gt()
+
+
+```
+
+
+
+
+
+

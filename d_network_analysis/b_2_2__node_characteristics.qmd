@@ -1,0 +1,58 @@
+
+```{r}
+targets::tar_source("R_functions")
+```
+
+### Node characteristics
+
+#### Participant social reach
+
+
+Participant social reach is defined as weighted node degree in the MPX NYC participant network. For participant $i \in N_p$
+
+$$
+R_i = \sum_{j \in N_p}{\psi_p (i,j)}
+$$
+
+$$
+R_i | A= \sum_{j \in N_p}{\psi_p (i,j)I_{x \in A}(x = j) }
+$$
+
+where the indicator function $I_{x \in A}(x)$ equals $1$ when $x\in A$ and $0$ otherwise.
+
+#### Participant spatial reach
+
+Participant spatial reach is defined as the number of connections the focal participant has with community districts. It is defined as the weighted node degree in the MPX NYC spatial participant network. For $i \in N_p$
+
+$$
+S_i = \sum_{j \in N_c}{\psi (i,j)}
+$$
+
+$$
+S_i|A = \sum_{j \in N_c}{\psi (i,j)I_{x \in A}(x = j)}
+$$
+
+##### Community district social reach
+
+Community district social reach is defined as the number of connections the focal community district has with participants. It is defined as the weighted node degree in the MPX NYC spatial participant network. For $j \in N_c$:
+
+$$
+r_j = \sum_{i \in N_p}{\psi (i, j)}
+$$
+
+$$
+r_j|A = \sum_{i \in N_p}{\psi (i, j)I_{x \in A}(x = i)}
+$$
+
+##### Community district spatial reach
+
+
+Community district spatial reach is defined as the weighted node degree in the MPX NYC community district network. For $j \in N_c$
+
+$$
+s_j = \sum_{i \in N_c}{\psi_c (i,j)}
+$$
+
+$$
+s_j|A = \sum_{i \in N_c}{\psi_c (i,j)I_{x \in A}(x = i)}
+$$
