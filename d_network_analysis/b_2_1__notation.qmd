@@ -1,0 +1,31 @@
+
+```{r}
+targets::tar_source("R_functions")
+```
+
+### Notation
+
+Define $\psi(i,j)$ as the adjacency function for the person-place graph. For person $i$ and community $j$: 
+
+$$
+\psi(i,j) = \begin{cases} 1 &i\sim j \\ 0 &\text{otherwise} \end{cases}
+$$
+
+
+Define $\psi_P(i,k)$ as the adjacency functon for the person graph. For persons $i$ and $k$:
+
+
+$$
+\psi_P(i,k) = \sum_{j \in N_C}{\psi(i,j) \psi(k,j)}
+$$
+
+
+
+Define $\psi_C(j,l)$ as the adjacency functon for the place graph. For places $j$ and $l$:
+
+
+$$
+\psi_C(j,l) = \sum_{i \in N_P}{\psi(i,j) \psi(i,l)}
+$$
+
+
