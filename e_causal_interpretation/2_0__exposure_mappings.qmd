@@ -1,0 +1,69 @@
+```{r}
+targets::tar_source("R_functions")
+```
+
+### Exposure mappings {.unnumbered}
+
+In this section we give four definitions which are needed for the homogeneity assumptions of the Network Causal Inference model. Following @aronow2017, we use the language of exposure mappings to express homogeneity assumptions of the structural equation model. Say we have a given measure $\mathbf{Y}$ whose entries are contemporaneous dichotomous measurements taken on $n$ individuals. Say $\mathbf{Y}$ is part of an NPSEM which also includes dichotomous measures $\mathbf{X}_1$, $\mathbf{X}_2$, ..., $\mathbf{X}_k$ which were taken on all individuals prior to $\mathbf{Y}$. 
+
+Define $\mathscr{N_i}$ as the indices of all the observational units connected to unit $i$. Then the exposure mapping for $Y_i$ as a function $g: \mathscr{M}_{n \times (k+1)}\rightarrow R$ such that:
+
+$$
+Y_i = g(\mathbf{X}_1,  \mathbf{X}_2, ..., \mathbf{X}_k, U_{Y_i})
+$$
+
+#### Definition 1: Separability
+
+We say an exposure mapping is separable if $g$ can be written as follows:
+
+$$
+Y_i = g(X_{1i}, X_{2i}, ..., X_{ki}, g_{1i}(\mathbf{X}_{1}, \mathscr{N}_i),  g_{2i}(\mathbf{X}_{2}, \mathscr{N}_i), ..., g_{ki}(\mathbf{X}_{k}, \mathscr{N}_i), U_{Y_i})
+$$
+where 
+$$
+g_{ki}: \mathbf{R}^n \times \Gamma \rightarrow \mathbf{R}
+$$ 
+
+
+
+and $\Gamma$ is the set of all alter sets $\mathscr{N}_i$. 
+
+$$
+\Gamma = \{\mathscr{N}_i \}_i
+$$
+
+
+#### Definition 2: Equivalency
+
+We say an exposure mapping $g_{ti}$ is equivalent if for any individuals $i,j$ with $i \neq j$:
+
+$$
+g_{ti} = g_{tj} = g_t
+$$
+
+In this case, we call $g_t$ the network exposure mapping for $\mathbf{Y}$ with respect to $\mathbf{X}_t$ and we call $g_t(\mathbf{X}_{t\mathscr{N}_i})$ the network exposure value.
+
+
+
+#### Definition 3: Symmetry
+
+We say a network exposure mapping $g_{t}$ is symmetric if for $\mathbf{X} \ \neq \mathbf{X}'$:
+
+$$
+\mathbf{X}_{\mathscr{N}_i} = \mathbf{M} \mathbf{X'}_{\mathscr{N}_i}\implies g_{t}(\mathbf{X}, \mathscr{N}_i) = g_{t}(\mathbf{X'}, \mathscr{N}_i) 
+$$
+
+For $|\mathscr{N}_i| \times |\mathscr{N}_i|$ permutation matrix $\mathbf{M}$ (square matrix whose row and column margins all equal 1). 
+
+i.e. the only entries in $\mathbf{X}$ which affect the value of $g_{ti}(\mathbf{X}, \mathscr{N}_i)$ are entries related to individuals $j \in \mathscr{N}_i$. The order of the entries does not matter.
+
+#### Definition 4: Boundedness
+
+We say that a network exposure mapping $g_t$ is bounded if all possible network exposure values are contained by a finite set $\mathbf{D}$:
+
+$$
+g_t(\mathbf{X}_t, \mathscr{N}_i) \in \mathbf{D} 
+$$
+
+
+Boundedness can obtain as a result of restrictions on the underliying network $\mathscr{N}_i$ or on the functional form of $g_t$. The former situation would arise if node degree is bounded. The latter can occur when we are modelling a network exposure which has a ceiling effect in its dose-response curve. 

@@ -2,7 +2,10 @@
 targets::tar_source("R_functions")
 ```
 
-In this appendix we contextualize the main analysis in the MPX NYC project using a framework we name Social and Spatial Network Analysis with Causal interpretation (SNACC). The SSNAC framework can be used to guide the collection, management, analysis, and causal interpretation of network data. It offers guidance on conceptualizing and organizing spatial and social data as networks (@sec-appendix-introduction) and provides tools for descriptive and causal analysis (@sec-appendix-descriptive).
+
+
+
+In this appendix we contextualize the main analysis in the MPX NYC project using a framework we name Social and Spatial Network Analysis with Causal interpretation (SNACC). The SSNAC framework can be used to guide the collection, management, analysis, and causal interpretation of network data. It offers guidance on conceptualizing and organizing spatial and social data as networks (@sec-appendix-social-spatial) and provides tools for descriptive and causal analysis (@sec-appendix-network-analysis).
 
 In this section we elaborate the "causal interpretation" aspect of SSNAC. We define SSNAC as a set of straight-forward extensions of the currently dominant framework for conducting causal inference with observational data in epidemiology. We begin by giving an overview of the dominant approach, which we will call "classic causal inference". We extend this system to situations where data are characterized by interdependence of observational units rather than independence, naming this system "network causal inference". Finally, we accommodate social and spatial data simultaneously in the SSNAC framework. In each case, we describe the assumptions and implications of each system, illustrating with worked examples.
 
@@ -20,6 +23,7 @@ A strong assumption made almost universally by practitioners of classic causal i
 
 The choice of adopting the independence assumption or not has profound implications for how we think about our inferential goals. In the frequentist tradition of statistics, the engine of uncertainty is repetition. We imagine that an experiment could be repeated over and over again and we summarize its behavior across those imagined repetitions. We do not often consider what exactly we mean by experiment and by repetition, though we make this distinction each time we decide how to analyse repeated-measures data.
 
+
 An example to clarify: Consider a situation with two people, Jose and Thabo, who each toss the same coin once at time 1 and again at time 2. There are several ways of parsing this situation into "experiment" and "repetition". We could say that we are conducting:
 
 -   one experiment called "coin toss" and repeating it four times
@@ -30,9 +34,13 @@ An example to clarify: Consider a situation with two people, Jose and Thabo, who
 
 -   four experiments called "Thabo tosses a coin at time 1", "Thabo tosses a coin at time 2", "Tumi tosses a coin at time 1", and "Tumi tosses a coin at time 2 and not repeating any of them.
 
-The choice between these interpretations turns on the experimenters prior beliefs about coin tossing: Does the likelihood of a head or tail change over time? Does it change based on the person tossing the coin? And does the result of one person's coin toss affect the result of another's? This kind of consideration is at the core statistical modelling, particularly when analyzing longitudinal data.
+The choice between these interpretations turns on the experimenters prior beliefs about coin tossing: Does the likelihood of a head or tail change over time? Does it change based on the person tossing the coin? This kind of consideration is at the core statistical modelling, particularly when analyzing longitudinal data. 
 
-Yet, in practice, the modelling decision to categorize people or groups of people as independent of each other is so well-entrenched that it is often represented as a minimum condition of doing any valid causal quantitative research. Unlike coins, however, there is a mountain of evidence and experience showing that interdependence is the rule rather than the exception as far as people are concerned.
+One consideration researchers do not often make is whether one person's coin toss is correlated with the other's. Consider the experiment "Thabo tosses a coin, then Tumi tosses a coin, then Thabo tossess a con, then Tumi tosses a coin". Whereas in the above listing, by virture of calling them separate experiments, we implicitly assumed that each coin toss was self-contained, in this latest iteration, we  accommodate the possibility that the result of Thabo's coin toss affects the result of Tumi's. 
+
+We can quantitatively assess this possibility by repeating this sequence of coin tosses over and over, using that data to calculate a correlation coefficient between the outcomes of Thabo and Tumi's coin tosses. Without stating the experiment as this sequence, we have no framework with which to ask whether the Thabo and Tumi's coin tosses are related.
+
+In epidemiologic practice, the modelling decision to categorize people or groups of people as independent of each other is so well-entrenched that it is often represented as a minimum condition of doing any valid causal quantitative research. Unlike coins, however, there is a mountain of evidence and experience showing that interdependence is the rule rather than the exception as far as people are concerned.
 
 Our goal in this appendix and project is to offer alternative ideas and tools for causal inference that allow us to learn from interdependence rather than avoid it in pursuit of clear causal reasoning. We can have both clear reasoning, and an understanding enriched by the analysis of interdependence.
 
@@ -41,3 +49,4 @@ In crude terms, our approach involves moving from a framework where, as a rule, 
 Briefly, we can avail ourselves of asymptotic theory by making the assumption of no-spillover between observations, which is a weaker version of the independence between observational units assumption. No spillover means that one person's outcome can not directly affect another person's outcome. We further assume that the causal relationships between and within individuals are homogeneous in some way, allowing our estimates to benefit from having more observational units, even if they collectively comprise one realization of the statistical model. Under some reasonable assumptions, asymptotic theory can be used to improve estimates in a growing vector of inter-related observations, whereas it is usually applied to a growing collection of vectors of equal length. In the network causal inference and SSNAC section, we construct the boundedness restriction in the definitions of these models which help to limit how quickly the number of potential outcomes to estimate grows in relation to the number of observational units.
 
 In the sections that follow, we describe classic causal inference, network causal inference, and the SSNAC framework, each time discussing the assumptions, causal model, causal estimands, and illustrating a causal identification strategy for the framework. Finally, we describe the MPX NYC outbreak response analysis presented in the main report using the SSNAC framework and end with a brief summary of the appendix.
+

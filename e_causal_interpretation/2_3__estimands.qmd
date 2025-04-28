@@ -1,0 +1,24 @@
+
+```{r}
+targets::tar_source("R_functions")
+```
+
+### Estimates
+#### Causal estimands
+
+We are interested in whether on average, in our population of three people, changing someone's dress would change their level of job offers To determine the answer, we will compare the average counterfactual outcome of job opportunities if everyone wore formal dress to the average counterfactual outcome of job opportunities if everyone wore non-formal dress. i.e. We will make the following comparison.
+
+$$ 
+\frac{1}{n}\sum_i E[Y_i^{(a = 1, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 1})} - Y_i^{(a = 0, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 0})}]
+$$
+
+It is possible to decompose this average causal effect into a portion attributable to direct (within individual) causal pathways. This tells us, on average, to what extent one's own dress affects one own's job opportunities. 
+
+$$ 
+\frac{1}{n}\sum_i E[Y_i^{(a = 1, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 0})} - Y_i^{(a = 0, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 0})}]
+$$
+We can calculate the portion of the average total effect attributable to spillover (cross-individual) causal pathways. This tells us, on average, to what extent one's spouse's dress affects one's job opportunities. 
+
+$$ 
+\frac{1}{n}\sum_i E[Y_i^{(a = 1, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 1})} - Y_i^{(a = 1, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 0})}]
+$$

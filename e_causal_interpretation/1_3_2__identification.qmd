@@ -1,0 +1,54 @@
+```{r}
+targets::tar_source("R_functions")
+```
+
+#### Identification
+
+Once we have specified the hypothetical quantities from our thought experiment, we "identify" them, meaning write them in terms of the observed rather than counterfactual distribution: 
+
+$$
+\begin{aligned}
+E \left[ \frac{1}{n} \sum_i Y_i^{(a=1)} - Y_i^{(a=0)} \right] &= E \left[ \frac{1}{n} \sum_i E[Y_i^{(a=1)} - Y_i^{(a=0)} | L_i] \right] \\
+\end{aligned}
+$$
+
+It is enough to identify the inner expectation:
+
+$$
+\begin{aligned}
+ E[ Y_i^{(a)} | L_i = l_i ]   &=  E[  Y_i^{(a)} | L_i = l_i , A_i = a ]   \\
+                                &=  E[ f_{Y}(U_{Y_i} , l_i, a) | L_i = l_i , A_i = a ]   \\
+                                &=  E[ Y_i | L_i = l_i, A_i = a, ]   \\
+\end{aligned}
+$$
+
+-   In the first line, we use the fact that since it is constant, the value of dress set by the experimenter $a$ is independent of the observed value of dress $A_i$ for each person $i$.
+
+
+
+-   In the second line, we use the no spillover and no interference assumptions - person $i$'s values (including counterfactual values) are independent of any measures not taken on person $i$.
+
+-   In the third line we substitute $Y_i^{(a)}$ for the structural equation that produces that variable, according to the model in @eq-independence-swig.
+
+-   In the fourth line, we substitute the structural equation for the observed value $Y_i$ according to the model in @eq-independence-dag.
+
+(Note that the function $f_y$ in @eq-independence-swig is identical to the function $f_y$ in @eq-independence-dag. The error term for person $i$, $U_{Y_i}$ has the same value in both the counterfactual and observational models, as does the value of $l_i$. As a result, $f_{Y}(U_{Y_i} , l_i, a)$ is equal to the observed value as well as the counterfactual value for participants $i$ if $A_i = a$)
+
+
+#### Estimation
+
+The functional we have to estimate from data is the following. 
+
+$$
+E[ \frac{1}{n} \sum_i{E[ Y_i | L_i , A_i = a ]}  ] 
+$$
+
+We can evaluate the inner expectation (with respect to $Y_i$) by taking averages across sub groups in the study dataset. Then we have a function of random vector $\mathbf{L}$ to evaluate in the outer expectation. 
+
+
+
+
+
+$$
+\frac{\sum_i E[ Y_i | L_i = l_i, A_i = a ]I_{\{ x = a\}}(a_i)}{\sum_i I_{\{ x = a\}}(a_i) }
+$$
