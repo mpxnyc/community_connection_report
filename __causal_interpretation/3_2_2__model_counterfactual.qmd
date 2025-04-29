@@ -6,7 +6,9 @@ targets::tar_source("R_functions")
 
 #### Counterfactual data
 
-Say we want to understand the impact of a vaccination campaign conducted over three weeks on vaccination status. This would be done by setting $\mathbf{T}_1 = [T_{11}, T_{12}, T_{13}]$ to $\mathbf{t}_1 = [t_{11}, t_{12}, t_{13}]$, $\mathbf{T}_2$ to $\mathbf{t}_2$, and $\mathbf{T}_3$ to $\mathbf{t}_3$ and noting the resulting counterfactual vaccination status at the end of week 1 ($\mathbf{V}_1^{(\mathbf{t}_1)}$), week 2 ($\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2)}$), and week 3 ($\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)}$). This counterfactual model is defined @eq-placeintervention-swing as shown in shown in @fig-placeintervention-swing. Define $\bar{\mathbf{t}}$ as "the history of $\bar{\mathbf{t}}$". i.e. at time 1, $\bar{\mathbf{t}} =\mathbf{t}_1$. At time 2,   $\bar{\mathbf{t}} = [\mathbf{t}_1, \mathbf{t}_2]$, etc.
+Say we want to understand the impact of a vaccination campaign conducted over three weeks on vaccination status. This would be done by setting $\mathbf{T}_1$ to $\mathbf{t}_1$, $\mathbf{T}_2$ to $\mathbf{t}_2$, and $\mathbf{T}_3$ to $\mathbf{t}_3$ and noting the resulting counterfactual vaccination status at the end of week 1 ($\mathbf{V}_1^{(\mathbf{t}_1)}$), week 2 ($\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2)}$), and week 3 ($\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)}$). This counterfactual model is defined @eq-placeintervention-swing as shown in shown in @fig-placeintervention-swing. 
+
+
 
 ```{r}
 #| label: fig-placeintervention-swing
@@ -79,8 +81,7 @@ V_{si}^{(\bar{\mathbf{t}})} &=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}^{(\bar{\mathbf{
 \end{aligned}
 $$ {#eq-placeintervention-swing}
 
-
-
+where $\bar{\mathbf{t}}$ is defined as "the history of $\mathbf{t}$". i.e. at time 1, $\bar{\mathbf{t}} =\mathbf{t}_1$. At time 2,   $\bar{\mathbf{t}} = [\mathbf{t}_1, \mathbf{t}_2]$, etc.
 
 
 

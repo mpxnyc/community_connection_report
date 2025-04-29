@@ -4,14 +4,15 @@ targets::tar_source("R_functions")
 
 #### Identification
 
-Because we have time-varying confounding (individual vaccination status is both a confounder and a mediator of the relationship between neighborhood intervention status and vaccination status, and it is a mediator in the same relationship), we cannot identify our estimands using conditional expectations of the observed outcome $V_{si}$. Define $\mathbf{R}_{\bar{s}N_i}$ as the "history of $\mathbf{R}_{sN_i}$". e.g.
+Because individual vaccination status is both a confounder and a mediator of the relationship between neighborhood intervention status and vaccination status, we cannot identify our estimands using conditional expectations of the observed data. We must use a marginal structural model. See Aronow and Samii [-@aronow2017]. 
+
+We can estimate the outcome of interest using the inverse probability of treatment weights, noting that the treatment in this case is the network exposure value $g(t_{\bar{s},N_i})$ for $\mathbf{T}$.
+
+$$
+V_{si}^{(\bar{\mathbf{t}})} =  \frac{V_{si} \mathbf{1}_{x = g(t_{\bar{s},N_i}) }(g(T_{\bar{s},N_i})) }{\prod_{q=1}^s P[g(\mathbf{T}_{q,N_i}) = g(\mathbf{t}_{q,N_i}) | \mathbf{R}_{\bar{q}N_i}]}
+$$
+where $\mathbf{R}_{\bar{s}N_i}$ is the "history of $\mathbf{R}_{sN_i}$". e.g.
 
 $$
 \mathbf{R}_{\bar{3}N_i} = [\mathbf{R}_{1N_i}, \mathbf{R}_{2N_i}, \mathbf{R}_{3N_i}]
-$$
-
-We can estimate the outcome of interest using the inverse probability of treatment weights, noting that the treatment in this case is the network exposure value $g(t_{\bar{s},N_i})$ for $\mathbf{T}$. See Aronow and Samii [-@aronow2017]. 
-
-$$
-V_{si}^{(\bar{\mathbf{t}})} =  \frac{V_{si} \mathbf{1}_{g(T_{\bar{s},N_i}) = g(t_{\bar{s},N_i}) } }{\prod_{q=1}^s P[g(\mathbf{T}_{q,N_i}) = g(\mathbf{t}_{q,N_i}) | \mathbf{R}_{\bar{q}N_i}]}
 $$

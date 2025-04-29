@@ -5,3 +5,10 @@ targets::tar_source("R_functions")
 
 #### Movement matrix
 
+Define $d^H(i)$ as the home district of person $i$. The movement coefficient $m(k,l)$ is defined as the count of connections by individuals $i$ who live in home community district $k$ with community districts $l$.
+
+$$
+m(k,l) = \sum_{i \in \mathscr{N}_P} \sum_{j \in \mathscr{N}_C} \psi_C (d^H(i),j)I_{d^H(x)=k}(i)I_{x=l}(j)
+$$
+
+The movement matrix is a square matrix whose $ij^{th}$ entry is $m(i,j)$.

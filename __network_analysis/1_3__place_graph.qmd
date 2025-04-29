@@ -5,10 +5,10 @@ targets::tar_source("R_functions")
 
 ### Place graph
 
-The MPX NYC community district network has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a contact venue or residence in both community districts. The weight is the count of participants which are shared by the two community districts. @fig-data-places shows the community district network derived from the MPX NYC spatial participant data network shown in @fig-data. @tbl-example-place-nodes shows list the nodes of the former network, and @tbl-example-place-edges shows the edges.
+The MPX NYC community district network has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a contact venue or residence in both community districts. The weight is the count of participants which are shared by the two community districts. @fig-example-community shows the community district network derived from the MPX NYC spatial participant data network shown in @fig-example-participant-place. @tbl-example-place-nodes (a) shows list the nodes of the former network, and @tbl-example-place-nodes (b) shows the edges.
 
 ```{r}
-#| fig-cap: !expr 'get_figure_details("fig-example-community")'
+#| fig-cap: Sample place network visualization
 #| label: fig-example-community
 #| fig-width: 9
 #| fig-height: 7
@@ -21,16 +21,17 @@ make_example_network_data("places") |>
 
 
 ```{r}
+#| tbl-cap: Sample place network data
 #| label: tbl-example-place-nodes
 #| layout-ncol: 2
-#| tbl-cap:
-#|  - "Place nodes"
-#|  - "Place edges"
+#| tbl-subcap:
+#|  - "Nodes"
+#|  - "Edges"
 
 
 make_example_network_data("places") |>
   data.frame() |>
-  dplyr::transmute(name = label, type = ifelse(type, "person", "community_district")) |>
+  dplyr::transmute(Name = label, Type = ifelse(type, "Person", "Community District")) |>
   gt::gt()
 
 make_example_network_data("places") |>
@@ -39,7 +40,7 @@ make_example_network_data("places") |>
   dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
   data.frame() |>
   dplyr::arrange(from, to) |>
-  dplyr::transmute(from = from_name, to = to_name, weight) |>
+  dplyr::transmute(From = from_name, To = to_name, Weight = weight) |>
   gt::gt()
 
 

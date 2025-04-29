@@ -10,7 +10,7 @@ suppressMessages({
 list( 
   targets::tar_target(
                         name = config_json_filepath,
-                        command = "__config.json",
+                        command = "_config.json",
                         format = "file"
                       ),
   
