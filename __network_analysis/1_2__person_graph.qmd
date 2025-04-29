@@ -5,10 +5,10 @@ targets::tar_source("R_functions")
 
 ### Person graph
 
-The MPX NYC participant network has participants as nodes. A pair of nodes is connected by a weighted edge if each of the individuals represented by the nodes has at least one contact venue or residence in the same, shared community district. The weight of the edge is given by the count of community districts the pair of nodes have in common. By definition, an edge of weight $0$ is equivalent to the absence of an edge. @tbl-example-participant-nodes shows the nodes of the participant network shown in @fig-data-people and @tbl-example-participant-edges show the edges.
+The MPX NYC participant network has participants as nodes. A pair of nodes is connected by a weighted edge if each of the individuals represented by the nodes has at least one contact venue or residence in the same, shared community district. The weight of the edge is given by the count of community districts the pair of nodes have in common. By definition, an edge of weight $0$ is equivalent to the absence of an edge. @tbl-example-participant-nodes shows the nodes of the participant network shown in @tbl-example-participant-nodes (a) and @tbl-example-participant-nodes (b) show the edges.
 
 ```{r}
-#| fig-cap: !expr 'get_figure_details("fig-example-participant")'
+#| fig-cap: Sample person-person network visualizatoin
 #| label: fig-example-participant
 #| fig-width: 9
 #| fig-height: 5
@@ -26,13 +26,14 @@ make_example_network_data("people") |>
 ```{r}
 #| label: tbl-example-participant-nodes
 #| layout-ncol: 2
-#| tbl-cap:  
-#| - "Person nodes"
-#| - "Person edges"
+#| tbl-cap: Sample person-person network data
+#| tbl-subcap:  
+#| - "Nodes"
+#| - "Edges"
 
 make_example_network_data("people") |>
   data.frame() |>
-  dplyr::transmute(name = label, type = ifelse(type, "person", "community_district")) |>
+  dplyr::transmute(Name = label, Type = ifelse(type, "Person", "Community District")) |>
   gt::gt()
 
 make_example_network_data("people") |>
@@ -41,7 +42,7 @@ make_example_network_data("people") |>
   dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
   data.frame() |>
   dplyr::arrange(from, to) |>
-  dplyr::transmute(from = from_name, to = to_name, weight) |>
+  dplyr::transmute(From = from_name, To = to_name, Weight = weight) |>
   gt::gt()
 
 ```

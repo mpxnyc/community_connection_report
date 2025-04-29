@@ -7,8 +7,13 @@ make_example_network_data <- function(type = "bipartite"){
     ),
     type = c(rep(TRUE, 8), rep(FALSE, 5)),
     label = c(c(1:8, "A", "B", "C", "D", "E")),
-    age = c(rep("18-25", 4), rep("26-50", 4), rep(NA, 5))
+    age = c(rep("18-25", 4), rep("26-50", 4), rep("-", 5))
   )
+  
+  labelled::var_label(example_nodes$name)  <- "Name"
+  labelled::var_label(example_nodes$type)  <- "Type"
+  labelled::var_label(example_nodes$label) <- "Label"
+  labelled::var_label(example_nodes$age)   <- "Age"
   
   example_edges <- data.frame(
     from = c(
@@ -26,7 +31,10 @@ make_example_network_data <- function(type = "bipartite"){
       "Person 6",
       "Person 7",
       "Person 8",
-      "Person 3"
+      "Person 3",
+      "Person 6",
+      "Person 8",
+      "Person 2"
     ),
     to   = c(
       "Community a", 
@@ -43,29 +51,40 @@ make_example_network_data <- function(type = "bipartite"){
       "Community e",
       "Community c",
       "Community c",
-      "Community e"
+      "Community e",
+      "Community d",
+      "Community d",
+      "Community b"
     ),
     relation = c(
       "HOME",
       "GSEX",
       "PHYS",
       "HOME",
+      "PHYS",
       "HOME",
       "HOME",
-      "HOME",
-      "HOME",
+      "GSEX",
       "PHYS",
       "GSEX",
       "GSEX",
       "PHYS",
       "HOME",
       "GSEX",
-      "PHYS"
+      "PHYS",
+      "HOME",
+      "HOME",
+      "HOME"
     ),
     weight = 1
     
   )
   
+  labelled::var_label(example_edges$from)  <- "From"
+  labelled::var_label(example_edges$to)  <- "To"
+  labelled::var_label(example_edges$relation) <- "Relation"
+  labelled::var_label(example_edges$weight) <- "Weight"
+
   
   result   <- tidygraph::tbl_graph(
     nodes = example_nodes, 
@@ -96,6 +115,8 @@ make_example_network_data <- function(type = "bipartite"){
       tidygraph::activate(nodes)
   }
   
+  
+
   
   
   
