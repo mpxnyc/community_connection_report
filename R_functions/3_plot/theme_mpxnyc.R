@@ -109,15 +109,16 @@ theme_mpxnyc_large <- function(base_size = 11,
   ) +
     ggplot2::theme(
       axis.ticks             = ggplot2::element_blank(), 
+      axis.text              = ggplot2::element_text(),
+      axis.text.x            = ggplot2::element_text(angle = 90),
       legend.background      = ggplot2::element_blank(), 
       legend.key             = ggplot2::element_blank(), 
       panel.background       = ggplot2::element_rect(fill = "white", color = "white"),
       panel.border           = ggplot2::element_blank(), 
-      panel.grid             = ggplot2::element_blank(), 
+      panel.grid             = ggplot2::element_line(color = "grey"), 
       plot.margin            = ggplot2::margin(0, 0, 0, 0),
       strip.background       = ggplot2::element_blank(), 
       plot.background        = ggplot2::element_rect(fill = "white", color = "white"),
-      axis.text              = ggplot2::element_blank(),
       axis.title             = ggplot2::element_blank(),
       legend.position        = "bottom", 
       complete               = TRUE,
@@ -141,15 +142,19 @@ theme_mpxnyc_text <- function(base_size = 11,
     base_rect_size = base_rect_size
   ) +
     ggplot2::theme(
-      axis.text        = ggplot2::element_text(),
+      axis.text.y = ggplot2::element_text(size = 13, hjust = 0.5, angle = 45),
+      axis.text.x = ggplot2::element_text(size = 13, hjust = 0.5, vjust = 0.5, angle = 45),
       axis.title       = ggplot2::element_blank(),
-      legend.position  = "bottom",
+      legend.position  = "none",
       panel.margin     = ggplot2::margin(1,1,1,1, "cm"),
       plot.caption     = ggplot2::element_text( hjust = 0.5),
       plot.title       = ggplot2::element_text(hjust = 0.5, margin = ggplot2::margin(0, 0, 1, 0, "mm")),
       plot.subtitle    = ggplot2::element_text(hjust = 0.5, margin = ggplot2::margin(0, 0, 15, 0, "mm")),
       plot.background  = ggplot2::element_rect(fill = "white", color = "white"),
-      panel.background = ggplot2::element_rect(fill = "white", color = "white")
+      panel.background = ggplot2::element_rect(fill = "white", color = "white"),
+      panel.border     = ggplot2::element_rect(color = "white"),
+      axis.line = ggplot2::element_line(color = "white"),
+      axis.ticks = ggplot2::element_line(color = "white")
     )
-  
+
 }

@@ -11,11 +11,13 @@ targets::tar_source("../R_functions")
 ```
 
 
+
 ```{r }
 #| fig-cap: !expr 'get_figure_details("fig-communities-movement")'
 #| label: fig-communities-movement
-#| fig-width: 10
-#| fig-height: 10
+#| fig-width: 12
+#| fig-height: 12
+
 
 
 make_table_movement_travel() |>
@@ -23,7 +25,7 @@ make_table_movement_travel() |>
   theme_mpxnyc() +
   scale_fill_mpxnyc() +
   scale_color_mpxnyc() +
-  theme_mpxnyc_text()
+  theme_mpxnyc_large()
 
 
 ```
@@ -41,16 +43,19 @@ make_table_movement_travel() |>
 ```{r }
 #| fig-cap: !expr 'get_figure_details("fig-communities-bar")'
 #| label: fig-communities-bar
-#| fig-width: 10
-#| fig-height: 7
+#| fig-width: 5
+#| fig-height: 8
 
 
 make_table_home_vs_place_dbn() |>
   plot_home_vs_residence_dbn_bar() +
   theme_mpxnyc() +
-  theme_mpxnyc_text() +
+  theme_mpxnyc_large() +
   scale_fill_mpxnyc(option = "dark") +
-  ggplot2::scale_alpha_manual(values = c("highlight" = 1, "lowlight" = 0.5))
+  ggplot2::scale_alpha_manual(values = c("highlight" = 1, "lowlight" = 0.5)) +
+  ggplot2::scale_y_continuous(labels = scales::percent_format(scale = 100)) +
+  ggplot2::coord_flip()
+
 
   
 
