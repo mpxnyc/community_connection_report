@@ -3,6 +3,7 @@
 # Movement {#sec-movement}
 
 
+
 ```{r}
 # Access custom defined functions
 targets::tar_source("../R_functions")
@@ -10,62 +11,85 @@ targets::tar_source("../R_functions")
 
 ```
 
+## Spatial patterns
+
+
+@fig-communities-movement maps each contact venue's community district (x-axis) against the participant's home community district (y-axis). The size of the dot is proportional to the total count of contact venues with the given home and contact venue community district. The color of the dot represents the borough of the contact venue.
+
+The dots on the diagonal line from top left to bottom right, show prominently, indicating that a sizeable proportion of movement happens within community districts. The figure also shows four prominent clusters - the cluster at the top left (in pink) shows significant movement between home and contact venues within Brooklyn and the cluster towards the middle of the plot (in purple) shows significant movement within Manhattan. The clusters at the top center and bottom left show significant movement from Brooklyn to Manhattan and from Manhattan to Brooklyn, respectively.
+
 
 
 ```{r }
 #| fig-cap: !expr 'get_figure_details("fig-communities-movement")'
 #| label: fig-communities-movement
-#| fig-width: 12
-#| fig-height: 12
+#| fig-width: 9
+#| fig-height: 11
+
 
 
 
 make_table_movement_travel() |>
   plot_matrix_movement() +
   theme_mpxnyc() +
-  scale_fill_mpxnyc() +
-  scale_color_mpxnyc() +
-  theme_mpxnyc_large()
+  scale_fill_mpxnyc(name = "From Borough", option = "dark") +
+  scale_color_mpxnyc(name = "To Borough", option = "dark") +
+  ggplot2::scale_size_continuous(name = "Count") +
+  theme_mpxnyc_large() +
+  ggplot2::theme(
+    panel.grid = ggplot2::element_blank(),
+    axis.text = ggplot2::element_text(size = 9),
+    legend.direction = "vertical",
+    legend.box.margin = ggplot2::unit(30, "pt")
+  )
 
 
 ```
 
-## Movement between home to contact venues
-
-### Spatial patterns
 
 
+
+
+## Spatial concentration
 
 @fig-communities-bar shows the difference betweeen the proportion of primary residences in each community district and the proprotion of contact venues in each community district. It shows that within Brooklyn, Manhattan, and Queens, there is a small set of community districts which tend to be markedly over-represented among contact venues compared to their share of primary residences. These are BK01, MN05, and QN05, respectively.
 
-### Spatial concentration
 
 ```{r }
 #| fig-cap: !expr 'get_figure_details("fig-communities-bar")'
 #| label: fig-communities-bar
-#| fig-width: 5
+#| fig-width: 8
 #| fig-height: 8
+
+
+
+
+
 
 
 make_table_home_vs_place_dbn() |>
   plot_home_vs_residence_dbn_bar() +
   theme_mpxnyc() +
   theme_mpxnyc_large() +
-  scale_fill_mpxnyc(option = "dark") +
-  ggplot2::scale_alpha_manual(values = c("highlight" = 1, "lowlight" = 0.5)) +
+  scale_fill_mpxnyc(name = "Borough", option = "dark") +
+  ggplot2::scale_alpha_manual(values = c("highlight" = 1, "lowlight" = 0.5), guide="none") +
   ggplot2::scale_y_continuous(labels = scales::percent_format(scale = 100)) +
-  ggplot2::coord_flip()
+  ggplot2::coord_flip() +
+  ggplot2::theme(
+    axis.text = ggplot2::element_text(size = 8),
+    axis.text.x = ggplot2::element_text(angle = 0, size = 10),
+    panel.grid = ggplot2::element_blank(),
+    panel.grid.major.x = ggplot2::element_line(size = 0.2, color = "darkgrey"),
+    panel.grid.minor.x = ggplot2::element_line(size = 0.2, color = "darkgrey"),
+    legend.margin = ggplot2::margin(40, 40, 40, 40),
+    legend.position = "right"
+  )
 
 
   
 
   
 ```
-
-@fig-communities-movement maps each contact venue's community district (x-axis) against the participant's home community district (y-axis). The size of the dot is proportional to the total count of contact venues with the given home and contact venue community district. The color of the dot represents the borough of the contact venue.
-
-The dots on the diagonal line from top left to bottom right, show prominently, indicating that a sizeable proportion of movement happens within community districts. The figure also shows four prominent clusters - the cluster at the top left (in pink) shows significant movement between home and contact venues within Brooklyn and the cluster towards the middle of the plot (in purple) shows significant movement within Manhattan. The clusters at the top center and bottom left show significant movement from Brooklyn to Manhattan and from Manhattan to Brooklyn, respectively.
-
 
 
 

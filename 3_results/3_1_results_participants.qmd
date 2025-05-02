@@ -9,32 +9,49 @@ targets::tar_source("../R_functions")
 ```
 
 
+
 ```{r }
 #| fig-cap: !expr 'get_figure_details("fig-sexorientation-racegender")'
 #| label: fig-sexorientation-racegender
 #| fig-width: 9
-#| fig-height: 15
+#| fig-height: 13
+
+
 
 make_table_freq2(sexOrientation, demo_group) |>
   plot_radar_grid() +
   ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.5, 1)) +
   theme_mpxnyc() +
-  scale_fill_mpxnyc()
+  scale_fill_mpxnyc(name = "") +
+    ggplot2::theme(axis.text = ggplot2::element_blank(), 
+                 legend.position = "bottom",
+                 strip.text = ggplot2::element_text(size = 15, margin = ggplot2::margin(0,0,0,0)),
+                 panel.grid = ggplot2::element_blank(),
+                  panel.spacing = ggplot2::unit(0, "pt"),
+                 panel.spacing.y = ggplot2::unit(10, "pt"),
+                 legend.text = ggplot2::element_text(size = 12),
+                 legend.margin = ggplot2::margin(40,10,10,10)
+                 ) 
+
 
 
 ```
 
+Participants who reported recent physical or sexual contact in a group setting (group contact) were slightly younger than those who did not. They were more likely to identify as gay and less likely to identify as straight. Surprisingly, they were less likely to have been recruited through a Grindr advertisement and more likely to have been recruited before the first Grindr pop-up advertisement on 30 August 2022.
+
+These participants did not differ from the rest in terms of HIV status or HIV viral suppression, but they were more likely to have at least one STI symptom, and showed higher utilization of PrEP, mpox testing, and mpox vaccine. They were more closely connected with the queer and trans community, reporting more contact with friends, more physical contact partners and more sexual contact partners. They spent more time travelling to hookups than participants who had not had recent contact in a group setting.
 
 
-
-The MPX NYC survey was open from 30 August to 15 November, 2022, but recruited $70\%$ participants in two 48 hour periods: half were recruited from 30 to 31 Aug, and another 20% from 10 to 11 September (see @fig-people-descriptives). Over these periods, the MPX NYC recruitment advertisements were shown to users of Grindr in New York City upon logging on to the app.
+## Demographics
 
 MPX NYC participants are demographically diverse. Over 50% of participants were between the ages of 18-34 at the time of the survey. Two fifths were white cisgender men, about 15% were latinx cisgender men, and 10% were black cisgender men. About 5% of participants were transgender (with slightly over half being transgender men). Non-binary individuals comprised 7% of participants. Two-thirds of participants identified as gay, 14% as bisexual, and 12% as queer. Just under half of participants resided in the borough of Manhattan, and one third in Brooklyn.
 
-In terms of health status and health services, one in ten participants reported living with HIV - the overwhelming majority were virally suppressed. In addition, about 16% reported at least one STI symptom. Two out of five participants were on PrEP at the time they took the survey. Two-thirds had received the MPOX vaccine, though only 8% had received MPOX testing.
+This diversity of subgroups implies different strategies for communication, and possibly different health interventions. For instance, the sexual orientation of participants differed markedly by gender (see @fig-sexorientation-racegender). The vast majority of cisgender men identified as gay, with some identifying as bisexual. Transgender men, on the other hand, were most likely to identify as queer, followed by bisexual or gay. Transgender women tended to identify as straight, bisexual, or other sexual orientations. Cisgender women participants tended to be straight, followed by bisexual, followed by queer. For non-binary people, most identified as queer, followed by gay and bisexual.
+
+
 
 ```{r}
-#| tbl-cap: !expr 'get_table_details("tbl-people-descriptives")'
+#| tbl-cap: Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks
 #| label: tbl-people-descriptives
 
 
@@ -43,8 +60,7 @@ targets::tar_read(data_bipartite_graph_collected) |>
   data.frame() |>
   dplyr::filter(type) |>
   dplyr::select(
-    "age", "race", "genderId", "demo_group", "sexOrientation", "borough" , "channel", "groupSex","countFriendsCut", "countPhysicalCut", 
-    "hivStatus", "hivSuppressed", "num_symptomsCut", "hivPrep", "monkeypoxTest", "countSexCut", "travelTimeCut", "createdAtCut", "monkeypoxVaccine"
+    "age", "race", "genderId", "sexOrientation", "groupSex"
   ) |>
 gtsummary::tbl_summary(by = groupSex) |>
   gtsummary::add_overall(last = TRUE) |>
@@ -58,16 +74,77 @@ gtsummary::tbl_summary(by = groupSex) |>
 
 ```
 
-This diversity of subgroups implies different strategies for communication, and possibly different health interventions. For instance, the sexual orientation of participants differed markedly by gender (see @fig-sexorientation-racegender). The vast majority of cisgender men identified as gay, with some identifying as bisexual. Transgender men, on the other hand, were most likely to identify as queer, followed by bisexual or gay. Transgender women tended to identify as straight, bisexual, or other sexual orientations. Cisgender women participants tended to be straight, followed by bisexual, followed by queer. For non-binary people, most identified as queer, followed by gay and bisexual.
 
 
-MPX NYC participants were deeply connected to queer and trans communities in New York City. About two-thirds reported being in recent (preceding 4 weeks) contact with 1 - 10 queer or trans friends. Only 20% reported not being in contact. About half of the participants had between 1 and 3 recent serial sex partnerships with one fifth reporting four or more partners. About one third of participants reported spending 16-30 minutes when traveling to a hookup while a third spent more than 30 minutes. Almost one in four participants reported having recent physical (non-sexual) contact with 2 or more individuals at the same time, and one third reported having had no contact. \[DOUBLE CHECK\]
+## Connection
+
+MPX NYC participants were deeply connected to queer and trans communities in New York City. About two-thirds reported being in recent (preceding 4 weeks) contact with 1 - 10 queer or trans friends. Only 20% reported not being in contact. About half of the participants had between 1 and 3 recent serial sex partnerships with one fifth reporting four or more partners. About one third of participants reported spending 16-30 minutes when traveling to a hookup while a third spent more than 30 minutes. Almost one in four participants reported having recent physical (non-sexual) contact with 2 or more individuals at the same time, and one third reported having had no contact. 
 
 Among all MPX NYC participants, 40% (530) reported reported having had sex or physical contact with two or more people at the same time. These participants identified $604$ venues at which they had contact. These contact venues are examined in the next section.
 
-Participants who reported recent physical or sexual contact in a group setting (group contact) were slightly younger than those who did not. They were more likely to identify as gay and less likely to identify as straight. Surprisingly, they were less likely to have been recruited through a Grindr advertisement and more likely to have been recruited before the first Grindr pop-up advertisement on 30 August 2022.
 
-These participants did not differ from the rest in terms of HIV status or HIV viral suppression, but they were more likely to have at least one STI symptom, and showed higher utilization of PrEP, mpox testing, and mpox vaccine. They were more closely connected with the queer and trans community, reporting more contact with friends, more physical contact partners and more sexual contact partners. They spent more time travelling to hookups than participants who had not had recent contact in a group setting.
+
+```{r}
+#| tbl-cap: Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks
+
+
+
+targets::tar_read(data_bipartite_graph_collected) |>
+  tidygraph::activate(nodes)|>
+  data.frame() |>
+  dplyr::filter(type) |>
+  dplyr::select(
+ "groupSex","countFriendsCut", "countPhysicalCut", "countSexCut", "travelTimeCut"
+  ) |>
+gtsummary::tbl_summary(by = groupSex) |>
+  gtsummary::add_overall(last = TRUE) |>
+    gtsummary::modify_spanning_header(c("stat_1", "stat_2", "stat_0") ~ "**Physical or sexual contact in group setting in past 4 weeks**") |>
+  gtsummary::add_p() |>
+  gtsummary::modify_header(label ~ "**Variable**") |>
+  gtsummary::bold_labels() |>
+    gtsummary::as_gt() |>
+  gt::tab_source_note(gt::md("*Data source: MPX NYC 2022*")) 
+
+
+```
+
+## Health
+
+In terms of health status and health services, one in ten participants reported living with HIV - the overwhelming majority were virally suppressed. In addition, about 16% reported at least one STI symptom. Two out of five participants were on PrEP at the time they took the survey. Two-thirds had received the MPOX vaccine, though only 8% had received MPOX testing.
+
+
+```{r}
+#| tbl-cap: Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks
+
+
+targets::tar_read(data_bipartite_graph_collected) |>
+  tidygraph::activate(nodes)|>
+  data.frame() |>
+  dplyr::filter(type) |>
+  dplyr::select(
+    "hivStatus", "hivSuppressed", "num_symptomsCut", "hivPrep", "monkeypoxTest", "monkeypoxVaccine", "groupSex"
+  ) |>
+gtsummary::tbl_summary(by = groupSex) |>
+  gtsummary::add_overall(last = TRUE) |>
+    gtsummary::modify_spanning_header(c("stat_1", "stat_2", "stat_0") ~ "**Physical or sexual contact in group setting in past 4 weeks**") |>
+  gtsummary::add_p() |>
+  gtsummary::modify_header(label ~ "**Variable**") |>
+  gtsummary::bold_labels() |>
+    gtsummary::as_gt() |>
+  gt::tab_source_note(gt::md("*Data source: MPX NYC 2022*")) 
+
+
+```
+
+
+
+
+
+
+
+
+
+
 
 
 ```{r}
@@ -79,3 +156,36 @@ These participants did not differ from the rest in terms of HIV status or HIV vi
 plot_icon(icon_name = "peach", color = "light_green", shape = 8)
 
 ```
+
+## Recruitment
+
+The MPX NYC survey was open from 30 August to 15 November, 2022, but recruited $70\%$ participants in two 48 hour periods: half were recruited from 30 to 31 Aug, and another 20% from 10 to 11 September (see @fig-people-descriptives). Over these periods, the MPX NYC recruitment advertisements were shown to users of Grindr in New York City upon logging on to the app.
+
+
+```{r}
+#| tbl-cap: Participants in MPX NYC Study by Sex / Physical Contact in Congregate Setting in past 4 weeks
+
+
+
+targets::tar_read(data_bipartite_graph_collected) |>
+  tidygraph::activate(nodes)|>
+  data.frame() |>
+  dplyr::filter(type) |>
+  dplyr::select(
+  "borough" , "channel", "groupSex", "createdAtCut"
+  ) |>
+gtsummary::tbl_summary(by = groupSex) |>
+  gtsummary::add_overall(last = TRUE) |>
+    gtsummary::modify_spanning_header(c("stat_1", "stat_2", "stat_0") ~ "**Physical or sexual contact in group setting in past 4 weeks**") |>
+  gtsummary::add_p() |>
+  gtsummary::modify_header(label ~ "**Variable**") |>
+  gtsummary::bold_labels() |>
+    gtsummary::as_gt() |>
+  gt::tab_source_note(gt::md("*Data source: MPX NYC 2022*")) 
+
+
+```
+
+
+
+
