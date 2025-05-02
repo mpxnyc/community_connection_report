@@ -8,7 +8,7 @@ targets::tar_source("../R_functions")
 ```
 
 
-### Race-gender {.unnumbered}
+## Race and gender modality 
 
 ```{r}
 #| fig-cap: !expr 'get_figure_details("fig-demogroup-mixing")'
@@ -44,20 +44,24 @@ mixing_demo_group_panel
 @fig-subgroup-mixing quantifies the degree to which individuals with characteristics shown on the left live or play in an overlapping set of community districts with individuals whose characteristics are shown at the top. Overall, MPX NYC participants showed spatial homophily - the spatial selection coefficient from a given group to the same group was positive for all levels of race-gender, sexual orientation, and age. In addition, black cisgender men and non-binary persons tended to visit or live in different neighborhoods than white cisgender men. Non-binary persons also showed a preference for community districts in which transgender men live. Gay identified participants preferred to live and play in community districts where bisexual, straight and queer identified participants did not live. Similarly, those groups selected against community districts in which gay identified individuals live or play.
 
 
-### Sexual orientation {.unnumbered}
+## Sexual orientation 
 
 ```{r }
 #| fig-cap: !expr 'get_figure_details("fig-sexorientation-mixing")'
 #| label: fig-sexorientation-mixing
-#| fig-width: 6
-#| fig-height: 5
+#| fig-width: 10
+#| fig-height: 10
 #| 
 mixing_sexOrientation_panel <- make_table_mixing_2(sexOrientation) |>
                                       plot_matrix_mixing() +
   theme_mpxnyc() +
   scale_fill_mpxnyc_gradient() +
   scale_color_mpxnyc_gradient() +
-  theme_mpxnyc_text()
+  theme_mpxnyc_text() + 
+ggplot2::theme(
+plot.margin = ggplot2::unit(10*c(10,10,10,10), "pt")
+
+)
 
 
 mixing_sexOrientation_panel
@@ -65,19 +69,23 @@ mixing_sexOrientation_panel
 
 ```
 
-### Age {.unnumbered}
+## Age
 
 ```{r}
 #| fig-cap: !expr 'get_figure_details("fig-age-mixing")'
 #| label: fig-age-mixing
-#| fig-width: 6
-#| fig-height: 6
+#| fig-width: 9
+#| fig-height: 9
 mixing_age_panel                 <- make_table_mixing_2(age) |>
                                       plot_matrix_mixing() +
                                       theme_mpxnyc()  +
                                       scale_fill_mpxnyc_gradient() +
                                       scale_color_mpxnyc_gradient() +
-                                      theme_mpxnyc_text()
+                                      theme_mpxnyc_text() +
+  ggplot2::theme(
+    
+plot.margin = ggplot2::unit(10*c(10,10,10,10), "pt")
+  )
 
 mixing_age_panel
 ```

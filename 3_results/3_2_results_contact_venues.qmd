@@ -7,20 +7,54 @@
 targets::tar_source("../R_functions")
 ```
 
+
+
+
+
+
 ```{r}
 #| fig-cap: !expr 'get_figure_details("fig-places-distance-sexcontact")'
 #| label: fig-places-distance-sexcontact
-#| fig-width: 9
-#| fig-height: 9
+#| fig-width: 7
+#| fig-height: 8
 
-make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE) |>
+
+
+
+make_table_freq3(placeType, distanceFromHome, placeSex, person_analysis = FALSE) |>
+  dplyr::mutate(proportion = ifelse(stratum_b == "Did not have sex", -proportion, proportion)) |>
+  dplyr::mutate(y_placement = ifelse(proportion> 0 , proportion + 0.1, proportion - 0.08)) |>
   dplyr::filter(!is.na(level)) |>
   plot_radar_stratified2() +
-      ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1)) +
-    ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1)) +
-    ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.8, 1)) +
-  theme_mpxnyc() +
-  scale_fill_mpxnyc()
+  ggplot2::scale_x_discrete(position = "top") +
+      ggplot2::scale_y_continuous(labels = function(x) scales::percent(abs(x))) +
+  theme_mpxnyc_large() +
+  scale_fill_mpxnyc(name = "")  +
+  ggplot2::theme(axis.text = ggplot2::element_blank(), 
+                 legend.position = "bottom",
+                 legend.box.margin = ggplot2::margin(40, 40, 40, 40),
+                 strip.text = ggplot2::element_text(size = 13, margin = ggplot2::margin(40,40,40,40)),
+                 strip.text.y.left = ggplot2::element_text(angle = 0),
+                 panel.grid = ggplot2::element_blank(),
+                 panel.grid.major.x = ggplot2::element_line(size = 0.2, color = "darkgrey"),
+                  panel.spacing.y = ggplot2::unit(40, "pt"),
+                 panel.spacing.x = ggplot2::unit(40, "pt"),
+                 legend.margin = ggplot2::margin(10,10,10,10),
+                 #axis.text = ggplot2::element_text(color = "black", size = 10, margin = ggplot2::margin(10, 60, 10, 60)),
+                 axis.text.x = ggplot2::element_text(angle = 0, size = 8)
+                 ) +
+  ggplot2::coord_flip() 
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -34,9 +34,9 @@ mpxnyc_dark <- function(n){
   c("#F73C95",
     "#009BE8", 
     "#5D207A", 
-    "#7F3F98", 
+    "#EA773D",  
     "#459B0E", 
-    "#844D28")[1:n]
+    "#FFCD2E")[1:n]
 }
 
 mpxnyc_colors <- function(option){
