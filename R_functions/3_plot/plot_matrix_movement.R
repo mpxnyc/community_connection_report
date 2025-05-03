@@ -26,7 +26,8 @@ plot_matrix_movement    <- function(data){
     dplyr::rename(to = from2)
   
   ggplot2::ggplot() +
-    ggplot2::geom_tile(ggplot2::aes(y = from, x = to, fill = from_borough), alpha = 0.2, data = name_table, color = "white", size = 0.5) +
-    #ggplot2::geom_point(ggplot2::aes(y = from, x = to, col = to_borough, size = 12), alpha = 0.2) +
-    ggplot2::geom_point(ggplot2::aes(y = from, x = to, col = to_borough, size = weight), data = data) 
+    ggplot2::geom_tile(ggplot2::aes(y = from, x = to, fill = from_borough), data = name_table, size = 0.2) +
+    ggplot2::geom_tile(ggplot2::aes(y = from, x = to, col = from_borough), alpha = 0.9, data = name_table, fill = "white", size = 0.2) +
+    ggplot2::geom_point(ggplot2::aes(y = from, x = to, col = to_borough, size = weight), data = data)
+  
 }

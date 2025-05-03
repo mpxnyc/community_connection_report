@@ -18,63 +18,63 @@ targets::tar_source("../R_functions")
 #| fig-width: 7
 #| fig-height: 10
 
-map_plot_1                 <- make_table_coverage(
+data_1                     <- make_table_coverage(
                                                   intervention_priority = "contact", 
                                                   intervention_stratification = "overall"
                                                   ) |>
-                                  plot_coverage_map()  +
-                                  scale_fill_mpxnyc(name = "", na.translate = FALSE, option = "light") +
-  theme_mpxnyc()  +
-  ggplot2::theme(plot.margin = ggplot2::unit(c(10,0,0,0), "pt"),
-                 plot.title = ggplot2::element_text(size = 14, hjust = 0.5, margin = ggplot2::margin(0,0,40,0, "pt"))) +
-  ggplot2::ggtitle("Contact\nneutralizing \napproach")
+                                  dplyr::mutate(stratum = "contact")
 
-
-
-map_plot_2                 <- make_table_coverage(
+data_2                     <- make_table_coverage(
                                                   intervention_priority = "movement", 
                                                   intervention_stratification = "overall"
                                                   ) |>
-                                  plot_coverage_map()  +
-                                  scale_fill_mpxnyc( option = "light") +
-  theme_mpxnyc() +
-  ggplot2::theme(plot.margin = ggplot2::unit(c(10,0,0,0), "pt"),
-                 plot.title = ggplot2::element_text(size = 14, hjust = 0.5, margin = ggplot2::margin(0,0,40,0, "pt"))) +
-  ggplot2::ggtitle("Movement\nneutralizing\napproach")
-
-bar_plot_1                 <- make_table_coverage(
-                                                  intervention_priority = "contact", 
-                                                  intervention_stratification = "overall") |>
-                                  dplyr::filter(group != "Group C") |>
-                                  plot_coverage_bar() +
-                                  scale_fill_mpxnyc(option = "light") +
-                                  theme_mpxnyc() +
-  ggplot2::theme(
-    plot.margin = ggplot2::unit(c(0,10,10,10), "pt"),
-                 axis.text.x = ggplot2::element_text(angle = 90, size = 9, hjust = 0.5, vjust = 0.5)
-    )
-
-bar_plot_2                 <- make_table_coverage(
-                                                  intervention_priority = "movement", 
-                                                  intervention_stratification = "overall"
-                                                  ) |>
-                                  dplyr::filter(group != "Group C") |>
-                                  plot_coverage_bar() +
-                                  scale_fill_mpxnyc(option = "light") +
-                                  theme_mpxnyc() +
-  ggplot2::theme(plot.margin = ggplot2::unit(c(0,10,10,10), "pt"),
-                 axis.text.x = ggplot2::element_text(angle = 90, size = 9, hjust = 0.5, vjust = 0.5))
-
-  
-finished_plot_map          <- cowplot::plot_grid(map_plot_1, map_plot_2)
-finished_plot_bar          <- cowplot::plot_grid(bar_plot_1, bar_plot_2)
-
-legend <- cowplot::get_legend(map_plot_1 + ggplot2::theme(legend.position = "right", legend.direction="horizontal"))
-
-main_plot <- cowplot::plot_grid(finished_plot_map, finished_plot_bar, ncol=1, rel_heights = c(4,1))
+                                  dplyr::mutate(stratum = "movement")
 
 
-cowplot::plot_grid(main_plot, legend, ncol=1, rel_heights = c(6,1))
+data                       <- data_1 |>
+                                  rbind(data_2)
+
+
+
+
+```
+
+
+
+
+
+```{r}
+#| fig-cap: !expr 'get_figure_details("fig-hiimpact-communities")'
+#| label: 'fig-hiimpact-communities-map'
+#| fig-width: 9
+#| fig-height: 9
+#| 
+data |>
+                plot_coverage_map()  +
+                scale_fill_mpxnyc(name = "", na.translate = FALSE, option = "light") +
+                theme_mpxnyc_blank() +
+                ggplot2::theme(
+                              legend.position = "bottom"
+                              )
+
+```
+
+
+
+```{r}
+#| fig-cap: !expr 'get_figure_details("fig-hiimpact-communities")'
+#| label: 'fig-hiimpact-communities-bar'
+#| fig-width: 9
+#| fig-height: 7
+#| 
+data |> dplyr::filter(group != "Group C") |> 
+                plot_coverage_bar() +
+                scale_fill_mpxnyc(name = "", na.translate = FALSE, option = "light")  +
+                theme_mpxnyc_blank() +
+                ggplot2::theme(
+                              legend.position = "bottom"
+                              )
+
 ```
 
 ## Spatial efficiency
@@ -95,23 +95,16 @@ Under the movement-neutralizing strategy, it would take six community districts 
 ```{r }
 #| fig-cap: !expr 'get_figure_details("fig-netimpact")'
 #| label: fig-netimpact
-#| fig-width: 8
+#| fig-width: 9
 #| fig-height: 6.5
 
 make_table_centrality() |>
   plot_centrality_bar() +
-    ggplot2::scale_y_continuous("Proportion of participants", limits = c(0, 1), labels = scales::percent) +
-    ggplot2::scale_x_continuous("Intervention order", limits = c(0, 40), breaks = c(0, 10, 20, 30, 40)) +
-  scale_fill_mpxnyc(name = "") +
-  theme_mpxnyc() +
-  ggplot2::theme(
-    legend.position = "bottom",
-    axis.text = ggplot2::element_text(),
-    strip.text = ggplot2::element_text(size = 14, margin = ggplot2::margin(10,10,30,10)),
-    legend.text = ggplot2::element_text(size = 12),
-    plot.margin = ggplot2::unit(c(0,0,0,0), "pt"),
-    legend.box.margin = ggplot2::unit(c(30, 30,30,30), "pt")
-  )
+  scale_fill_mpxnyc(name = "", option = "light") +
+  theme_mpxnyc_netimpact() +
+  ggplot2::scale_y_continuous("Proportion of participants", limits = c(0, 1), labels = scales::percent) +
+  ggplot2::scale_x_continuous("Intervention order", limits = c(0, 40), breaks = c(0, 10, 20, 30, 40)) 
+  
 
 
 ```

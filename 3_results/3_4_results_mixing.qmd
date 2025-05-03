@@ -17,17 +17,16 @@ targets::tar_source("../R_functions")
 #| fig-height: 9
 
 
-mixing_demo_group_panel <- make_table_mixing_2(demo_group) |>
+make_table_mixing_2(demo_group) |>
   dplyr::filter(ego_level != "Another Demographic") |>
   dplyr::filter(alter_level != "Another Demographic") |>
   plot_matrix_mixing() +
   scale_fill_mpxnyc_gradient() +
   scale_color_mpxnyc_gradient() +
-  theme_mpxnyc_text()
+  theme_mpxnyc_mixing()
 
 
 
-mixing_demo_group_panel
 
 
 
@@ -49,22 +48,18 @@ mixing_demo_group_panel
 ```{r }
 #| fig-cap: !expr 'get_figure_details("fig-sexorientation-mixing")'
 #| label: fig-sexorientation-mixing
-#| fig-width: 10
-#| fig-height: 10
-#| 
-mixing_sexOrientation_panel <- make_table_mixing_2(sexOrientation) |>
-                                      plot_matrix_mixing() +
-  theme_mpxnyc() +
+#| fig-width: 9
+#| fig-height: 9
+
+
+make_table_mixing_2(sexOrientation) |>
+  plot_matrix_mixing() +
   scale_fill_mpxnyc_gradient() +
   scale_color_mpxnyc_gradient() +
-  theme_mpxnyc_text() + 
-ggplot2::theme(
-plot.margin = ggplot2::unit(10*c(10,10,10,10), "pt")
-
-)
-
-
-mixing_sexOrientation_panel
+  theme_mpxnyc_mixing() +
+  ggplot2::theme(
+    plot.margin = ggplot2::unit(10*c(10,10,10,10), "pt")
+    )
 
 
 ```
@@ -76,18 +71,17 @@ mixing_sexOrientation_panel
 #| label: fig-age-mixing
 #| fig-width: 9
 #| fig-height: 9
-mixing_age_panel                 <- make_table_mixing_2(age) |>
-                                      plot_matrix_mixing() +
-                                      theme_mpxnyc()  +
-                                      scale_fill_mpxnyc_gradient() +
-                                      scale_color_mpxnyc_gradient() +
-                                      theme_mpxnyc_text() +
+
+make_table_mixing_2(age) |>
+  plot_matrix_mixing() +
+  scale_fill_mpxnyc_gradient() +
+  scale_color_mpxnyc_gradient() +
+  theme_mpxnyc_mixing() +
   ggplot2::theme(
-    
-plot.margin = ggplot2::unit(10*c(10,10,10,10), "pt")
+    plot.margin = ggplot2::unit(10*c(10,10,10,10), "pt")
   )
 
-mixing_age_panel
+
 ```
 
 
