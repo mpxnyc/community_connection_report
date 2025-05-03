@@ -22,13 +22,13 @@ data_1                     <- make_table_coverage(
                                                   intervention_priority = "contact", 
                                                   intervention_stratification = "overall"
                                                   ) |>
-                                  dplyr::mutate(stratum = "contact")
+                                  dplyr::mutate(stratum = "Contact\nneutralizing\napproach")
 
 data_2                     <- make_table_coverage(
                                                   intervention_priority = "movement", 
                                                   intervention_stratification = "overall"
                                                   ) |>
-                                  dplyr::mutate(stratum = "movement")
+                                  dplyr::mutate(stratum = "Movement\nneutralizing\napproach")
 
 
 data                       <- data_1 |>
@@ -102,12 +102,16 @@ make_table_centrality() |>
   plot_centrality_bar() +
   scale_fill_mpxnyc(name = "", option = "light") +
   theme_mpxnyc_netimpact() +
-  ggplot2::scale_y_continuous("Proportion of participants", limits = c(0, 1), labels = scales::percent) +
+  ggplot2::scale_y_continuous("Proportion of participants", limits = c(-0.2, 1), labels = scales::percent) +
   ggplot2::scale_x_continuous("Intervention order", limits = c(0, 40), breaks = c(0, 10, 20, 30, 40)) 
   
 
 
 ```
+
+
+
+
 
 ```{r}
 #| fig-width: 2

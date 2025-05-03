@@ -79,7 +79,6 @@ theme_mpxnyc_netimpact <- function(...){
     ggplot2::theme(
       legend.position = "bottom",
       axis.text = ggplot2::element_text(),
-      strip.text = ggplot2::element_text(size = 14, margin = ggplot2::margin(10,10,30,10)),
       legend.text = ggplot2::element_text(size = 12),
       plot.margin = ggplot2::unit(c(0,0,0,0), "pt"),
       legend.box.margin = ggplot2::unit(c(30, 30,30,30), "pt")
