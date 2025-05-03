@@ -24,7 +24,10 @@ The dots on the diagonal line from top left to bottom right, show prominently, i
 #| fig-cap: !expr 'get_figure_details("fig-communities-movement")'
 #| label: fig-communities-movement
 #| fig-width: 9
-#| fig-height: 11
+#| fig-height: 11.5
+
+
+
 
 
 
@@ -35,13 +38,8 @@ make_table_movement_travel() |>
   scale_fill_mpxnyc(name = "From Borough", option = "dark") +
   scale_color_mpxnyc(name = "To Borough", option = "dark") +
   ggplot2::scale_size_continuous(name = "Count") +
-  theme_mpxnyc_large() +
-  ggplot2::theme(
-    panel.grid = ggplot2::element_blank(),
-    axis.text = ggplot2::element_text(size = 9),
-    legend.direction = "vertical",
-    legend.box.margin = ggplot2::unit(30, "pt")
-  )
+  theme_mpxnyc_matrix_movement() 
+
 
 
 ```
@@ -69,21 +67,11 @@ make_table_movement_travel() |>
 
 make_table_home_vs_place_dbn() |>
   plot_home_vs_residence_dbn_bar() +
-  theme_mpxnyc() +
-  theme_mpxnyc_large() +
+  theme_mpxnyc_home_vs_place() +
   scale_fill_mpxnyc(name = "Borough", option = "dark") +
   ggplot2::scale_alpha_manual(values = c("highlight" = 1, "lowlight" = 0.5), guide="none") +
   ggplot2::scale_y_continuous(labels = scales::percent_format(scale = 100)) +
-  ggplot2::coord_flip() +
-  ggplot2::theme(
-    axis.text = ggplot2::element_text(size = 8),
-    axis.text.x = ggplot2::element_text(angle = 0, size = 10),
-    panel.grid = ggplot2::element_blank(),
-    panel.grid.major.x = ggplot2::element_line(size = 0.2, color = "darkgrey"),
-    panel.grid.minor.x = ggplot2::element_line(size = 0.2, color = "darkgrey"),
-    legend.margin = ggplot2::margin(40, 40, 40, 40),
-    legend.position = "right"
-  )
+  ggplot2::coord_flip() 
 
 
   

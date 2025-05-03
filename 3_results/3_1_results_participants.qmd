@@ -13,25 +13,16 @@ targets::tar_source("../R_functions")
 ```{r }
 #| fig-cap: !expr 'get_figure_details("fig-sexorientation-racegender")'
 #| label: fig-sexorientation-racegender
-#| fig-width: 9
-#| fig-height: 13
+#| fig-width: 8
+#| fig-height: 16
 
 
 
 make_table_freq2(sexOrientation, demo_group) |>
   plot_radar_grid() +
+  theme_mpxnyc_radar_people() +
   ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.5, 1)) +
-  theme_mpxnyc() +
-  scale_fill_mpxnyc(name = "") +
-    ggplot2::theme(axis.text = ggplot2::element_blank(), 
-                 legend.position = "bottom",
-                 strip.text = ggplot2::element_text(size = 15, margin = ggplot2::margin(0,0,0,0)),
-                 panel.grid = ggplot2::element_blank(),
-                  panel.spacing = ggplot2::unit(0, "pt"),
-                 panel.spacing.y = ggplot2::unit(10, "pt"),
-                 legend.text = ggplot2::element_text(size = 12),
-                 legend.margin = ggplot2::margin(40,10,10,10)
-                 ) 
+  scale_fill_mpxnyc(name = "") 
 
 
 
