@@ -12,14 +12,12 @@ targets::tar_source("../R_functions")
 
 ```{r}
 #| fig-cap: !expr 'get_figure_details("fig-demogroup-mixing")'
-#| label: fig-demogroup-mixing
+#| label: fig-racegender-mixing-matrix
 #| fig-width: 9
 #| fig-height: 9
 
 
-make_table_mixing_2(demo_group) |>
-  dplyr::filter(ego_level != "Another Demographic") |>
-  dplyr::filter(alter_level != "Another Demographic") |>
+make_plotdata_racegender_mixing_matrix() |>
   plot_matrix_mixing() +
   scale_fill_mpxnyc_gradient() +
   scale_color_mpxnyc_gradient() +
@@ -47,12 +45,12 @@ make_table_mixing_2(demo_group) |>
 
 ```{r }
 #| fig-cap: !expr 'get_figure_details("fig-sexorientation-mixing")'
-#| label: fig-sexorientation-mixing
+#| label: fig-sexorientation-mixing-matrix
 #| fig-width: 9
 #| fig-height: 9
 
 
-make_table_mixing_2(sexOrientation) |>
+make_plotdata_sexorientation_mixing_matrix() |>
   plot_matrix_mixing() +
   scale_fill_mpxnyc_gradient() +
   scale_color_mpxnyc_gradient() +
@@ -68,11 +66,11 @@ make_table_mixing_2(sexOrientation) |>
 
 ```{r}
 #| fig-cap: !expr 'get_figure_details("fig-age-mixing")'
-#| label: fig-age-mixing
+#| label: fig-age-mixing-matrix
 #| fig-width: 9
 #| fig-height: 9
 
-make_table_mixing_2(age) |>
+make_plotdata_age_mixing_matrix() |>
   plot_matrix_mixing() +
   scale_fill_mpxnyc_gradient() +
   scale_color_mpxnyc_gradient() +
@@ -86,14 +84,3 @@ make_table_mixing_2(age) |>
 
 
 
-```{r eval=FALSE}
-#| fig-cap: !expr 'get_figure_details("fig-subgroup-mixing")'
-#| label: fig-subgroup-mixing
-#| fig-width: 12
-#| fig-height: 17
-#| 
-
-mixing_bottom_panel              <- cowplot::plot_grid(mixing_sexOrientation_panel, mixing_age_panel, nrow = 1)
-cowplot::plot_grid(mixing_demo_group_panel, mixing_bottom_panel, ncol=1, rel_heights = c(2,1.1)) 
-
-```

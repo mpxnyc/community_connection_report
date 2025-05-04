@@ -17,6 +17,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -294,12 +328,22 @@ ul.task-list li input[type="checkbox"] {
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header"><h1 class="title display-7"><span id="sec-participants" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">People</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="sec-participants" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">People</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
 
 </header><div class="cell">
-<div class="cell-output-display">
-<div id="fig-sexorientation-racegender" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="3_1_results_participants_files/figure-html/fig-sexorientation-racegender-1.png" class="img-fluid figure-img" width="768"></p>
+<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Access custom defined functions</span></span>
+<span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_source.html">tar_source</a></span><span class="op">(</span><span class="st">"../R_functions"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_plotdata_racegender_radar_grid</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">plot_radar_grid</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.25</span>, <span class="fl">0.50</span>, <span class="fl">1</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>name <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc_radar_people</span><span class="op">(</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="fig-racegender-radar-grid" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="3_1_results_participants_files/figure-html/fig-racegender-radar-grid-1.png" class="img-fluid figure-img" width="768"></p>
 <figcaption class="figure-caption">Figure&nbsp;7.1: Sexual orientation of MPX NYC participants by race and gender</figcaption></figure>
 </div>
 </div>
@@ -309,28 +353,43 @@ ul.task-list li input[type="checkbox"] {
 <section id="demographics" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="demographics">
 <span class="header-section-number">7.1</span> Demographics</h2>
 <p>MPX NYC participants are demographically diverse. Over 50% of participants were between the ages of 18-34 at the time of the survey. Two fifths were white cisgender men, about 15% were latinx cisgender men, and 10% were black cisgender men. About 5% of participants were transgender (with slightly over half being transgender men). Non-binary individuals comprised 7% of participants. Two-thirds of participants identified as gay, 14% as bisexual, and 12% as queer. Just under half of participants resided in the borough of Manhattan, and one third in Brooklyn.</p>
-<p>This diversity of subgroups implies different strategies for communication, and possibly different health interventions. For instance, the sexual orientation of participants differed markedly by gender (see <a href="#fig-sexorientation-racegender">Figure&nbsp;<span>7.1</span></a>). The vast majority of cisgender men identified as gay, with some identifying as bisexual. Transgender men, on the other hand, were most likely to identify as queer, followed by bisexual or gay. Transgender women tended to identify as straight, bisexual, or other sexual orientations. Cisgender women participants tended to be straight, followed by bisexual, followed by queer. For non-binary people, most identified as queer, followed by gay and bisexual.</p>
+<p>This diversity of subgroups implies different strategies for communication, and possibly different health interventions. For instance, the sexual orientation of participants differed markedly by gender (see <a href="#fig-racegender-radar-grid">Figure&nbsp;<span>7.1</span></a>). The vast majority of cisgender men identified as gay, with some identifying as bisexual. Transgender men, on the other hand, were most likely to identify as queer, followed by bisexual or gay. Transgender women tended to identify as straight, bisexual, or other sexual orientations. Cisgender women participants tended to be straight, followed by bisexual, followed by queer. For non-binary people, most identified as queer, followed by gay and bisexual.</p>
 <div class="cell">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">data_bipartite_graph_collected</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span><span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span></span>
+<span>    <span class="st">"age"</span>, <span class="st">"race"</span>, <span class="st">"genderId"</span>, <span class="st">"sexOrientation"</span>, <span class="st">"groupSex"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">groupSex</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_overall.html">add_overall</a></span><span class="op">(</span>last <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify.html">modify_spanning_header</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stat_1"</span>, <span class="st">"stat_2"</span>, <span class="st">"stat_0"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"**Physical or sexual contact in group setting in past 4 weeks**"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_p.html">add_p</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify.html">modify_header</a></span><span class="op">(</span><span class="va">label</span> <span class="op">~</span> <span class="st">"**Variable**"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html">bold_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/as_gt.html">as_gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html">tab_source_note</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html">md</a></span><span class="op">(</span><span class="st">"*Data source: MPX NYC 2022*"</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div id="tbl-people-descriptives" class="anchored">
 
-<div id="abiqwlfput" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#abiqwlfput table {
+<div id="mszmpqctwi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mszmpqctwi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#abiqwlfput thead, #abiqwlfput tbody, #abiqwlfput tfoot, #abiqwlfput tr, #abiqwlfput td, #abiqwlfput th {
+#mszmpqctwi thead, #mszmpqctwi tbody, #mszmpqctwi tfoot, #mszmpqctwi tr, #mszmpqctwi td, #mszmpqctwi th {
   border-style: none;
 }
 
-#abiqwlfput p {
+#mszmpqctwi p {
   margin: 0;
   padding: 0;
 }
 
-#abiqwlfput .gt_table {
+#mszmpqctwi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -356,12 +415,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#abiqwlfput .gt_caption {
+#mszmpqctwi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#abiqwlfput .gt_title {
+#mszmpqctwi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -373,7 +432,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#abiqwlfput .gt_subtitle {
+#mszmpqctwi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -385,7 +444,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#abiqwlfput .gt_heading {
+#mszmpqctwi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -397,13 +456,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#abiqwlfput .gt_bottom_border {
+#mszmpqctwi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#abiqwlfput .gt_col_headings {
+#mszmpqctwi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -418,7 +477,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#abiqwlfput .gt_col_heading {
+#mszmpqctwi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -438,7 +497,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#abiqwlfput .gt_column_spanner_outer {
+#mszmpqctwi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -450,15 +509,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#abiqwlfput .gt_column_spanner_outer:first-child {
+#mszmpqctwi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#abiqwlfput .gt_column_spanner_outer:last-child {
+#mszmpqctwi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#abiqwlfput .gt_column_spanner {
+#mszmpqctwi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -470,11 +529,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#abiqwlfput .gt_spanner_row {
+#mszmpqctwi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#abiqwlfput .gt_group_heading {
+#mszmpqctwi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -500,7 +559,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#abiqwlfput .gt_empty_group_heading {
+#mszmpqctwi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -515,15 +574,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#abiqwlfput .gt_from_md > :first-child {
+#mszmpqctwi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#abiqwlfput .gt_from_md > :last-child {
+#mszmpqctwi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#abiqwlfput .gt_row {
+#mszmpqctwi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -542,7 +601,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#abiqwlfput .gt_stub {
+#mszmpqctwi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -555,7 +614,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#abiqwlfput .gt_stub_row_group {
+#mszmpqctwi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -569,15 +628,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#abiqwlfput .gt_row_group_first td {
+#mszmpqctwi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#abiqwlfput .gt_row_group_first th {
+#mszmpqctwi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#abiqwlfput .gt_summary_row {
+#mszmpqctwi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -587,16 +646,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#abiqwlfput .gt_first_summary_row {
+#mszmpqctwi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#abiqwlfput .gt_first_summary_row.thick {
+#mszmpqctwi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#abiqwlfput .gt_last_summary_row {
+#mszmpqctwi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -606,7 +665,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#abiqwlfput .gt_grand_summary_row {
+#mszmpqctwi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -616,7 +675,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#abiqwlfput .gt_first_grand_summary_row {
+#mszmpqctwi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -626,7 +685,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#abiqwlfput .gt_last_grand_summary_row_top {
+#mszmpqctwi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -636,11 +695,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#abiqwlfput .gt_striped {
+#mszmpqctwi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#abiqwlfput .gt_table_body {
+#mszmpqctwi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -649,7 +708,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#abiqwlfput .gt_footnotes {
+#mszmpqctwi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -663,7 +722,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#abiqwlfput .gt_footnote {
+#mszmpqctwi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -672,7 +731,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#abiqwlfput .gt_sourcenotes {
+#mszmpqctwi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -686,7 +745,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#abiqwlfput .gt_sourcenote {
+#mszmpqctwi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -694,63 +753,63 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#abiqwlfput .gt_left {
+#mszmpqctwi .gt_left {
   text-align: left;
 }
 
-#abiqwlfput .gt_center {
+#mszmpqctwi .gt_center {
   text-align: center;
 }
 
-#abiqwlfput .gt_right {
+#mszmpqctwi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#abiqwlfput .gt_font_normal {
+#mszmpqctwi .gt_font_normal {
   font-weight: normal;
 }
 
-#abiqwlfput .gt_font_bold {
+#mszmpqctwi .gt_font_bold {
   font-weight: bold;
 }
 
-#abiqwlfput .gt_font_italic {
+#mszmpqctwi .gt_font_italic {
   font-style: italic;
 }
 
-#abiqwlfput .gt_super {
+#mszmpqctwi .gt_super {
   font-size: 65%;
 }
 
-#abiqwlfput .gt_footnote_marks {
+#mszmpqctwi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#abiqwlfput .gt_asterisk {
+#mszmpqctwi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#abiqwlfput .gt_indent_1 {
+#mszmpqctwi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#abiqwlfput .gt_indent_2 {
+#mszmpqctwi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#abiqwlfput .gt_indent_3 {
+#mszmpqctwi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#abiqwlfput .gt_indent_4 {
+#mszmpqctwi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#abiqwlfput .gt_indent_5 {
+#mszmpqctwi .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1006,25 +1065,40 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 <p>MPX NYC participants were deeply connected to queer and trans communities in New York City. About two-thirds reported being in recent (preceding 4 weeks) contact with 1 - 10 queer or trans friends. Only 20% reported not being in contact. About half of the participants had between 1 and 3 recent serial sex partnerships with one fifth reporting four or more partners. About one third of participants reported spending 16-30 minutes when traveling to a hookup while a third spent more than 30 minutes. Almost one in four participants reported having recent physical (non-sexual) contact with 2 or more individuals at the same time, and one third reported having had no contact.</p>
 <p>Among all MPX NYC participants, 40% (530) reported reported having had sex or physical contact with two or more people at the same time. These participants identified <span class="math inline">\(604\)</span> venues at which they had contact. These contact venues are examined in the next section.</p>
 <div class="cell">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">data_bipartite_graph_collected</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span><span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span></span>
+<span> <span class="st">"groupSex"</span>,<span class="st">"countFriendsCut"</span>, <span class="st">"countPhysicalCut"</span>, <span class="st">"countSexCut"</span>, <span class="st">"travelTimeCut"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">groupSex</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_overall.html">add_overall</a></span><span class="op">(</span>last <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify.html">modify_spanning_header</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stat_1"</span>, <span class="st">"stat_2"</span>, <span class="st">"stat_0"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"**Physical or sexual contact in group setting in past 4 weeks**"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_p.html">add_p</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify.html">modify_header</a></span><span class="op">(</span><span class="va">label</span> <span class="op">~</span> <span class="st">"**Variable**"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html">bold_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/as_gt.html">as_gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html">tab_source_note</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html">md</a></span><span class="op">(</span><span class="st">"*Data source: MPX NYC 2022*"</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 
-<div id="clvkycijfp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#clvkycijfp table {
+<div id="lstnjfagek" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lstnjfagek table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#clvkycijfp thead, #clvkycijfp tbody, #clvkycijfp tfoot, #clvkycijfp tr, #clvkycijfp td, #clvkycijfp th {
+#lstnjfagek thead, #lstnjfagek tbody, #lstnjfagek tfoot, #lstnjfagek tr, #lstnjfagek td, #lstnjfagek th {
   border-style: none;
 }
 
-#clvkycijfp p {
+#lstnjfagek p {
   margin: 0;
   padding: 0;
 }
 
-#clvkycijfp .gt_table {
+#lstnjfagek .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1050,12 +1124,12 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-left-color: #D3D3D3;
 }
 
-#clvkycijfp .gt_caption {
+#lstnjfagek .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#clvkycijfp .gt_title {
+#lstnjfagek .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1067,7 +1141,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-width: 0;
 }
 
-#clvkycijfp .gt_subtitle {
+#lstnjfagek .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1079,7 +1153,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-width: 0;
 }
 
-#clvkycijfp .gt_heading {
+#lstnjfagek .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1091,13 +1165,13 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#clvkycijfp .gt_bottom_border {
+#lstnjfagek .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#clvkycijfp .gt_col_headings {
+#lstnjfagek .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1112,7 +1186,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#clvkycijfp .gt_col_heading {
+#lstnjfagek .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1132,7 +1206,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#clvkycijfp .gt_column_spanner_outer {
+#lstnjfagek .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1144,15 +1218,15 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 4px;
 }
 
-#clvkycijfp .gt_column_spanner_outer:first-child {
+#lstnjfagek .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#clvkycijfp .gt_column_spanner_outer:last-child {
+#lstnjfagek .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#clvkycijfp .gt_column_spanner {
+#lstnjfagek .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1164,11 +1238,11 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   width: 100%;
 }
 
-#clvkycijfp .gt_spanner_row {
+#lstnjfagek .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#clvkycijfp .gt_group_heading {
+#lstnjfagek .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1194,7 +1268,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   text-align: left;
 }
 
-#clvkycijfp .gt_empty_group_heading {
+#lstnjfagek .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1209,15 +1283,15 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: middle;
 }
 
-#clvkycijfp .gt_from_md > :first-child {
+#lstnjfagek .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#clvkycijfp .gt_from_md > :last-child {
+#lstnjfagek .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#clvkycijfp .gt_row {
+#lstnjfagek .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1236,7 +1310,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#clvkycijfp .gt_stub {
+#lstnjfagek .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1249,7 +1323,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#clvkycijfp .gt_stub_row_group {
+#lstnjfagek .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1263,15 +1337,15 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: top;
 }
 
-#clvkycijfp .gt_row_group_first td {
+#lstnjfagek .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#clvkycijfp .gt_row_group_first th {
+#lstnjfagek .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#clvkycijfp .gt_summary_row {
+#lstnjfagek .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1281,16 +1355,16 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#clvkycijfp .gt_first_summary_row {
+#lstnjfagek .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#clvkycijfp .gt_first_summary_row.thick {
+#lstnjfagek .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#clvkycijfp .gt_last_summary_row {
+#lstnjfagek .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1300,7 +1374,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#clvkycijfp .gt_grand_summary_row {
+#lstnjfagek .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1310,7 +1384,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#clvkycijfp .gt_first_grand_summary_row {
+#lstnjfagek .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1320,7 +1394,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-color: #D3D3D3;
 }
 
-#clvkycijfp .gt_last_grand_summary_row_top {
+#lstnjfagek .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1330,11 +1404,11 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#clvkycijfp .gt_striped {
+#lstnjfagek .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#clvkycijfp .gt_table_body {
+#lstnjfagek .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1343,7 +1417,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#clvkycijfp .gt_footnotes {
+#lstnjfagek .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1357,7 +1431,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#clvkycijfp .gt_footnote {
+#lstnjfagek .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1366,7 +1440,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#clvkycijfp .gt_sourcenotes {
+#lstnjfagek .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1380,7 +1454,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#clvkycijfp .gt_sourcenote {
+#lstnjfagek .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1388,63 +1462,63 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#clvkycijfp .gt_left {
+#lstnjfagek .gt_left {
   text-align: left;
 }
 
-#clvkycijfp .gt_center {
+#lstnjfagek .gt_center {
   text-align: center;
 }
 
-#clvkycijfp .gt_right {
+#lstnjfagek .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#clvkycijfp .gt_font_normal {
+#lstnjfagek .gt_font_normal {
   font-weight: normal;
 }
 
-#clvkycijfp .gt_font_bold {
+#lstnjfagek .gt_font_bold {
   font-weight: bold;
 }
 
-#clvkycijfp .gt_font_italic {
+#lstnjfagek .gt_font_italic {
   font-style: italic;
 }
 
-#clvkycijfp .gt_super {
+#lstnjfagek .gt_super {
   font-size: 65%;
 }
 
-#clvkycijfp .gt_footnote_marks {
+#lstnjfagek .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#clvkycijfp .gt_asterisk {
+#lstnjfagek .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#clvkycijfp .gt_indent_1 {
+#lstnjfagek .gt_indent_1 {
   text-indent: 5px;
 }
 
-#clvkycijfp .gt_indent_2 {
+#lstnjfagek .gt_indent_2 {
   text-indent: 10px;
 }
 
-#clvkycijfp .gt_indent_3 {
+#lstnjfagek .gt_indent_3 {
   text-indent: 15px;
 }
 
-#clvkycijfp .gt_indent_4 {
+#lstnjfagek .gt_indent_4 {
   text-indent: 20px;
 }
 
-#clvkycijfp .gt_indent_5 {
+#lstnjfagek .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1677,25 +1751,40 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 <span class="header-section-number">7.3</span> Health</h2>
 <p>In terms of health status and health services, one in ten participants reported living with HIV - the overwhelming majority were virally suppressed. In addition, about 16% reported at least one STI symptom. Two out of five participants were on PrEP at the time they took the survey. Two-thirds had received the MPOX vaccine, though only 8% had received MPOX testing.</p>
 <div class="cell">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">data_bipartite_graph_collected</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span><span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span></span>
+<span>    <span class="st">"hivStatus"</span>, <span class="st">"hivSuppressed"</span>, <span class="st">"num_symptomsCut"</span>, <span class="st">"hivPrep"</span>, <span class="st">"monkeypoxTest"</span>, <span class="st">"monkeypoxVaccine"</span>, <span class="st">"groupSex"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">groupSex</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_overall.html">add_overall</a></span><span class="op">(</span>last <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify.html">modify_spanning_header</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stat_1"</span>, <span class="st">"stat_2"</span>, <span class="st">"stat_0"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"**Physical or sexual contact in group setting in past 4 weeks**"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_p.html">add_p</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify.html">modify_header</a></span><span class="op">(</span><span class="va">label</span> <span class="op">~</span> <span class="st">"**Variable**"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html">bold_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/as_gt.html">as_gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html">tab_source_note</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html">md</a></span><span class="op">(</span><span class="st">"*Data source: MPX NYC 2022*"</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 
-<div id="denvnkzihy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#denvnkzihy table {
+<div id="qedeyaofat" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qedeyaofat table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#denvnkzihy thead, #denvnkzihy tbody, #denvnkzihy tfoot, #denvnkzihy tr, #denvnkzihy td, #denvnkzihy th {
+#qedeyaofat thead, #qedeyaofat tbody, #qedeyaofat tfoot, #qedeyaofat tr, #qedeyaofat td, #qedeyaofat th {
   border-style: none;
 }
 
-#denvnkzihy p {
+#qedeyaofat p {
   margin: 0;
   padding: 0;
 }
 
-#denvnkzihy .gt_table {
+#qedeyaofat .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1721,12 +1810,12 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-left-color: #D3D3D3;
 }
 
-#denvnkzihy .gt_caption {
+#qedeyaofat .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#denvnkzihy .gt_title {
+#qedeyaofat .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1738,7 +1827,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-width: 0;
 }
 
-#denvnkzihy .gt_subtitle {
+#qedeyaofat .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1750,7 +1839,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-width: 0;
 }
 
-#denvnkzihy .gt_heading {
+#qedeyaofat .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1762,13 +1851,13 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#denvnkzihy .gt_bottom_border {
+#qedeyaofat .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#denvnkzihy .gt_col_headings {
+#qedeyaofat .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1783,7 +1872,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#denvnkzihy .gt_col_heading {
+#qedeyaofat .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1803,7 +1892,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#denvnkzihy .gt_column_spanner_outer {
+#qedeyaofat .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1815,15 +1904,15 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 4px;
 }
 
-#denvnkzihy .gt_column_spanner_outer:first-child {
+#qedeyaofat .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#denvnkzihy .gt_column_spanner_outer:last-child {
+#qedeyaofat .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#denvnkzihy .gt_column_spanner {
+#qedeyaofat .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1835,11 +1924,11 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   width: 100%;
 }
 
-#denvnkzihy .gt_spanner_row {
+#qedeyaofat .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#denvnkzihy .gt_group_heading {
+#qedeyaofat .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1865,7 +1954,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   text-align: left;
 }
 
-#denvnkzihy .gt_empty_group_heading {
+#qedeyaofat .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1880,15 +1969,15 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: middle;
 }
 
-#denvnkzihy .gt_from_md > :first-child {
+#qedeyaofat .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#denvnkzihy .gt_from_md > :last-child {
+#qedeyaofat .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#denvnkzihy .gt_row {
+#qedeyaofat .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1907,7 +1996,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#denvnkzihy .gt_stub {
+#qedeyaofat .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1920,7 +2009,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#denvnkzihy .gt_stub_row_group {
+#qedeyaofat .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1934,15 +2023,15 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: top;
 }
 
-#denvnkzihy .gt_row_group_first td {
+#qedeyaofat .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#denvnkzihy .gt_row_group_first th {
+#qedeyaofat .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#denvnkzihy .gt_summary_row {
+#qedeyaofat .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1952,16 +2041,16 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#denvnkzihy .gt_first_summary_row {
+#qedeyaofat .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#denvnkzihy .gt_first_summary_row.thick {
+#qedeyaofat .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#denvnkzihy .gt_last_summary_row {
+#qedeyaofat .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1971,7 +2060,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#denvnkzihy .gt_grand_summary_row {
+#qedeyaofat .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1981,7 +2070,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#denvnkzihy .gt_first_grand_summary_row {
+#qedeyaofat .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1991,7 +2080,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-color: #D3D3D3;
 }
 
-#denvnkzihy .gt_last_grand_summary_row_top {
+#qedeyaofat .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2001,11 +2090,11 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#denvnkzihy .gt_striped {
+#qedeyaofat .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#denvnkzihy .gt_table_body {
+#qedeyaofat .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2014,7 +2103,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#denvnkzihy .gt_footnotes {
+#qedeyaofat .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2028,7 +2117,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#denvnkzihy .gt_footnote {
+#qedeyaofat .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2037,7 +2126,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#denvnkzihy .gt_sourcenotes {
+#qedeyaofat .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2051,7 +2140,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#denvnkzihy .gt_sourcenote {
+#qedeyaofat .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2059,63 +2148,63 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#denvnkzihy .gt_left {
+#qedeyaofat .gt_left {
   text-align: left;
 }
 
-#denvnkzihy .gt_center {
+#qedeyaofat .gt_center {
   text-align: center;
 }
 
-#denvnkzihy .gt_right {
+#qedeyaofat .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#denvnkzihy .gt_font_normal {
+#qedeyaofat .gt_font_normal {
   font-weight: normal;
 }
 
-#denvnkzihy .gt_font_bold {
+#qedeyaofat .gt_font_bold {
   font-weight: bold;
 }
 
-#denvnkzihy .gt_font_italic {
+#qedeyaofat .gt_font_italic {
   font-style: italic;
 }
 
-#denvnkzihy .gt_super {
+#qedeyaofat .gt_super {
   font-size: 65%;
 }
 
-#denvnkzihy .gt_footnote_marks {
+#qedeyaofat .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#denvnkzihy .gt_asterisk {
+#qedeyaofat .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#denvnkzihy .gt_indent_1 {
+#qedeyaofat .gt_indent_1 {
   text-indent: 5px;
 }
 
-#denvnkzihy .gt_indent_2 {
+#qedeyaofat .gt_indent_2 {
   text-indent: 10px;
 }
 
-#denvnkzihy .gt_indent_3 {
+#qedeyaofat .gt_indent_3 {
   text-indent: 15px;
 }
 
-#denvnkzihy .gt_indent_4 {
+#qedeyaofat .gt_indent_4 {
   text-indent: 20px;
 }
 
-#denvnkzihy .gt_indent_5 {
+#qedeyaofat .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2303,7 +2392,8 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plot_icon</span><span class="op">(</span>icon_name <span class="op">=</span> <span class="st">"peach"</span>, color <span class="op">=</span> <span class="st">"light_green"</span>, shape <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="3_1_results_participants_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="192"></p>
 </figure>
@@ -2314,25 +2404,40 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 <span class="header-section-number">7.4</span> Recruitment</h2>
 <p>The MPX NYC survey was open from 30 August to 15 November, 2022, but recruited <span class="math inline">\(70\%\)</span> participants in two 48 hour periods: half were recruited from 30 to 31 Aug, and another 20% from 10 to 11 September (see <span class="quarto-unresolved-ref">?fig-people-descriptives</span>). Over these periods, the MPX NYC recruitment advertisements were shown to users of Grindr in New York City upon logging on to the app.</p>
 <div class="cell">
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">data_bipartite_graph_collected</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span><span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span></span>
+<span>  <span class="st">"borough"</span> , <span class="st">"channel"</span>, <span class="st">"groupSex"</span>, <span class="st">"createdAtCut"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">groupSex</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_overall.html">add_overall</a></span><span class="op">(</span>last <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify.html">modify_spanning_header</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stat_1"</span>, <span class="st">"stat_2"</span>, <span class="st">"stat_0"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"**Physical or sexual contact in group setting in past 4 weeks**"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_p.html">add_p</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify.html">modify_header</a></span><span class="op">(</span><span class="va">label</span> <span class="op">~</span> <span class="st">"**Variable**"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/bold_italicize_labels_levels.html">bold_labels</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/as_gt.html">as_gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html">tab_source_note</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html">md</a></span><span class="op">(</span><span class="st">"*Data source: MPX NYC 2022*"</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 
-<div id="qfmmtrjkph" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qfmmtrjkph table {
+<div id="yqvlhiarkw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yqvlhiarkw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qfmmtrjkph thead, #qfmmtrjkph tbody, #qfmmtrjkph tfoot, #qfmmtrjkph tr, #qfmmtrjkph td, #qfmmtrjkph th {
+#yqvlhiarkw thead, #yqvlhiarkw tbody, #yqvlhiarkw tfoot, #yqvlhiarkw tr, #yqvlhiarkw td, #yqvlhiarkw th {
   border-style: none;
 }
 
-#qfmmtrjkph p {
+#yqvlhiarkw p {
   margin: 0;
   padding: 0;
 }
 
-#qfmmtrjkph .gt_table {
+#yqvlhiarkw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2358,12 +2463,12 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-left-color: #D3D3D3;
 }
 
-#qfmmtrjkph .gt_caption {
+#yqvlhiarkw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qfmmtrjkph .gt_title {
+#yqvlhiarkw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2375,7 +2480,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-width: 0;
 }
 
-#qfmmtrjkph .gt_subtitle {
+#yqvlhiarkw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2387,7 +2492,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-width: 0;
 }
 
-#qfmmtrjkph .gt_heading {
+#yqvlhiarkw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2399,13 +2504,13 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#qfmmtrjkph .gt_bottom_border {
+#yqvlhiarkw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qfmmtrjkph .gt_col_headings {
+#yqvlhiarkw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2420,7 +2525,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#qfmmtrjkph .gt_col_heading {
+#yqvlhiarkw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2440,7 +2545,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#qfmmtrjkph .gt_column_spanner_outer {
+#yqvlhiarkw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2452,15 +2557,15 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 4px;
 }
 
-#qfmmtrjkph .gt_column_spanner_outer:first-child {
+#yqvlhiarkw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qfmmtrjkph .gt_column_spanner_outer:last-child {
+#yqvlhiarkw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qfmmtrjkph .gt_column_spanner {
+#yqvlhiarkw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2472,11 +2577,11 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   width: 100%;
 }
 
-#qfmmtrjkph .gt_spanner_row {
+#yqvlhiarkw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qfmmtrjkph .gt_group_heading {
+#yqvlhiarkw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2502,7 +2607,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   text-align: left;
 }
 
-#qfmmtrjkph .gt_empty_group_heading {
+#yqvlhiarkw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2517,15 +2622,15 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: middle;
 }
 
-#qfmmtrjkph .gt_from_md > :first-child {
+#yqvlhiarkw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qfmmtrjkph .gt_from_md > :last-child {
+#yqvlhiarkw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qfmmtrjkph .gt_row {
+#yqvlhiarkw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2544,7 +2649,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   overflow-x: hidden;
 }
 
-#qfmmtrjkph .gt_stub {
+#yqvlhiarkw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2557,7 +2662,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#qfmmtrjkph .gt_stub_row_group {
+#yqvlhiarkw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2571,15 +2676,15 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   vertical-align: top;
 }
 
-#qfmmtrjkph .gt_row_group_first td {
+#yqvlhiarkw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qfmmtrjkph .gt_row_group_first th {
+#yqvlhiarkw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qfmmtrjkph .gt_summary_row {
+#yqvlhiarkw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2589,16 +2694,16 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#qfmmtrjkph .gt_first_summary_row {
+#yqvlhiarkw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qfmmtrjkph .gt_first_summary_row.thick {
+#yqvlhiarkw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qfmmtrjkph .gt_last_summary_row {
+#yqvlhiarkw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2608,7 +2713,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#qfmmtrjkph .gt_grand_summary_row {
+#yqvlhiarkw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2618,7 +2723,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#qfmmtrjkph .gt_first_grand_summary_row {
+#yqvlhiarkw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2628,7 +2733,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-top-color: #D3D3D3;
 }
 
-#qfmmtrjkph .gt_last_grand_summary_row_top {
+#yqvlhiarkw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2638,11 +2743,11 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#qfmmtrjkph .gt_striped {
+#yqvlhiarkw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qfmmtrjkph .gt_table_body {
+#yqvlhiarkw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2651,7 +2756,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-bottom-color: #D3D3D3;
 }
 
-#qfmmtrjkph .gt_footnotes {
+#yqvlhiarkw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2665,7 +2770,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#qfmmtrjkph .gt_footnote {
+#yqvlhiarkw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2674,7 +2779,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#qfmmtrjkph .gt_sourcenotes {
+#yqvlhiarkw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2688,7 +2793,7 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   border-right-color: #D3D3D3;
 }
 
-#qfmmtrjkph .gt_sourcenote {
+#yqvlhiarkw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2696,63 +2801,63 @@ N = 1,304<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
   padding-right: 5px;
 }
 
-#qfmmtrjkph .gt_left {
+#yqvlhiarkw .gt_left {
   text-align: left;
 }
 
-#qfmmtrjkph .gt_center {
+#yqvlhiarkw .gt_center {
   text-align: center;
 }
 
-#qfmmtrjkph .gt_right {
+#yqvlhiarkw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qfmmtrjkph .gt_font_normal {
+#yqvlhiarkw .gt_font_normal {
   font-weight: normal;
 }
 
-#qfmmtrjkph .gt_font_bold {
+#yqvlhiarkw .gt_font_bold {
   font-weight: bold;
 }
 
-#qfmmtrjkph .gt_font_italic {
+#yqvlhiarkw .gt_font_italic {
   font-style: italic;
 }
 
-#qfmmtrjkph .gt_super {
+#yqvlhiarkw .gt_super {
   font-size: 65%;
 }
 
-#qfmmtrjkph .gt_footnote_marks {
+#yqvlhiarkw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qfmmtrjkph .gt_asterisk {
+#yqvlhiarkw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qfmmtrjkph .gt_indent_1 {
+#yqvlhiarkw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qfmmtrjkph .gt_indent_2 {
+#yqvlhiarkw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qfmmtrjkph .gt_indent_3 {
+#yqvlhiarkw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qfmmtrjkph .gt_indent_4 {
+#yqvlhiarkw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qfmmtrjkph .gt_indent_5 {
+#yqvlhiarkw .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

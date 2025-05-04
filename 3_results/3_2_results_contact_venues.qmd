@@ -14,22 +14,20 @@ targets::tar_source("../R_functions")
 
 ```{r}
 #| fig-cap: !expr 'get_figure_details("fig-places-distance-sexcontact")'
-#| label: fig-places-distance-sexcontact
+#| label: fig-placetype-bar-grid
 #| fig-width: 8
 #| fig-height: 9
 
 
 
-make_table_freq3(placeType, distanceFromHome, placeSex, person_analysis = FALSE) |>
-  dplyr::mutate(proportion = ifelse(stratum_b == "Did not have sex", -proportion, proportion)) |>
-  dplyr::mutate(y_placement = ifelse(proportion> 0 , proportion + 0.1, proportion - 0.08)) |>
-  dplyr::filter(!is.na(level)) |>
+make_plotdata_placetype_bar_grid() |>
   plot_radar_stratified2() +
+  ggplot2::coord_flip()  +
   ggplot2::scale_x_discrete(position = "top") +
   ggplot2::scale_y_continuous(labels = function(x) scales::percent(abs(x))) +
-  theme_mpxnyc_radar_places() +
-  scale_fill_mpxnyc(name = "")  +
-  ggplot2::coord_flip() 
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_places() 
+
 
 
 
@@ -72,7 +70,7 @@ targets::tar_read(data_bipartite_graph_collected) |>
 
 ```
 
-Contact venues at which participants had sexual contact (rather than non-sexual physical contact) were overwhelmingly private residences whereas contact venues at which they had non-sexual physical contact were mostly dance parties (see @fig-places-distance-sexcontact). The closer to home a location was, the more likely it was to be a private residence and the more likely it was the site of sexual contact. By contrast, the further from home a contact venue was, the more likely it was to be a dance party.
+Contact venues at which participants had sexual contact (rather than non-sexual physical contact) were overwhelmingly private residences whereas contact venues at which they had non-sexual physical contact were mostly dance parties (see @fig-placetype-bar-grid). The closer to home a location was, the more likely it was to be a private residence and the more likely it was the site of sexual contact. By contrast, the further from home a contact venue was, the more likely it was to be a dance party.
 
 
 
