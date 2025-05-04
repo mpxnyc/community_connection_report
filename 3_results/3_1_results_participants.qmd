@@ -12,17 +12,18 @@ targets::tar_source("../R_functions")
 
 ```{r }
 #| fig-cap: !expr 'get_figure_details("fig-sexorientation-racegender")'
-#| label: fig-sexorientation-racegender
+#| label: fig-racegender-radar-grid
 #| fig-width: 8
 #| fig-height: 16
 
 
 
-make_table_freq2(sexOrientation, demo_group) |>
+make_plotdata_racegender_radar_grid() |>
   plot_radar_grid() +
-  theme_mpxnyc_radar_people() +
   ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.5, 1)) +
-  scale_fill_mpxnyc(name = "") 
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people() 
+
 
 
 
@@ -37,7 +38,7 @@ These participants did not differ from the rest in terms of HIV status or HIV vi
 
 MPX NYC participants are demographically diverse. Over 50% of participants were between the ages of 18-34 at the time of the survey. Two fifths were white cisgender men, about 15% were latinx cisgender men, and 10% were black cisgender men. About 5% of participants were transgender (with slightly over half being transgender men). Non-binary individuals comprised 7% of participants. Two-thirds of participants identified as gay, 14% as bisexual, and 12% as queer. Just under half of participants resided in the borough of Manhattan, and one third in Brooklyn.
 
-This diversity of subgroups implies different strategies for communication, and possibly different health interventions. For instance, the sexual orientation of participants differed markedly by gender (see @fig-sexorientation-racegender). The vast majority of cisgender men identified as gay, with some identifying as bisexual. Transgender men, on the other hand, were most likely to identify as queer, followed by bisexual or gay. Transgender women tended to identify as straight, bisexual, or other sexual orientations. Cisgender women participants tended to be straight, followed by bisexual, followed by queer. For non-binary people, most identified as queer, followed by gay and bisexual.
+This diversity of subgroups implies different strategies for communication, and possibly different health interventions. For instance, the sexual orientation of participants differed markedly by gender (see @fig-racegender-radar-grid). The vast majority of cisgender men identified as gay, with some identifying as bisexual. Transgender men, on the other hand, were most likely to identify as queer, followed by bisexual or gay. Transgender women tended to identify as straight, bisexual, or other sexual orientations. Cisgender women participants tended to be straight, followed by bisexual, followed by queer. For non-binary people, most identified as queer, followed by gay and bisexual.
 
 
 
@@ -72,6 +73,7 @@ gtsummary::tbl_summary(by = groupSex) |>
 MPX NYC participants were deeply connected to queer and trans communities in New York City. About two-thirds reported being in recent (preceding 4 weeks) contact with 1 - 10 queer or trans friends. Only 20% reported not being in contact. About half of the participants had between 1 and 3 recent serial sex partnerships with one fifth reporting four or more partners. About one third of participants reported spending 16-30 minutes when traveling to a hookup while a third spent more than 30 minutes. Almost one in four participants reported having recent physical (non-sexual) contact with 2 or more individuals at the same time, and one third reported having had no contact. 
 
 Among all MPX NYC participants, 40% (530) reported reported having had sex or physical contact with two or more people at the same time. These participants identified $604$ venues at which they had contact. These contact venues are examined in the next section.
+
 
 
 

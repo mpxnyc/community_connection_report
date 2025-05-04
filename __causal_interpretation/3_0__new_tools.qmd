@@ -64,7 +64,7 @@ structural <- tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_
                 legend.position = "none"
               ) +
               scale_fill_mpxnyc(option = "light") +
-  theme_mpxnyc()+
+  theme_mpxnyc_blank()+
   ggplot2::ggtitle("Structural Part") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
@@ -75,7 +75,7 @@ relational <- tidygraph::tbl_graph(nodes = network_nodes, edges = network_edges)
     legend.position = "none"
   ) +
   scale_fill_mpxnyc(option = "light") +
-  theme_mpxnyc() +
+  theme_mpxnyc_blank() +
   ggplot2::ggtitle("Relational Part") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
@@ -127,7 +127,7 @@ network_edges <- data.frame(
 structural <- tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges) |>
                     plot_swig(node_radius = 0.15) +
                     scale_fill_mpxnyc(option = "light") +
-                    theme_mpxnyc() +
+                    theme_mpxnyc_blank() +
   ggplot2::ggtitle("Structural Part") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
@@ -141,7 +141,7 @@ legend <- cowplot::get_legend(relational)
 
 
 relational <- relational + 
-                  theme_mpxnyc() +
+                  theme_mpxnyc_blank() +
   ggplot2::ggtitle("Relational Part") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
    
@@ -184,7 +184,7 @@ structural_edges <- data.frame(
 structural <- tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges) |>
                     plot_swig(node_radius = 0.15) +
                     scale_fill_mpxnyc(option = "light") +
-                    theme_mpxnyc() +
+                    theme_mpxnyc_blank() +
   ggplot2::ggtitle("Structural Part") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
@@ -198,7 +198,7 @@ legend <- cowplot::get_legend(relational)
 
 
 relational <- relational + 
-                  theme_mpxnyc() +
+                  theme_mpxnyc_blank() +
   ggplot2::ggtitle("Relational Part") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
    
