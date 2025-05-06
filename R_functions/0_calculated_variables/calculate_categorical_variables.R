@@ -18,7 +18,6 @@ calculate_categorical_variables <- function(data, config_list){
     labels         <- eligible_variables[[i]][["response_options"]]  |> unlist()
 
     data[,name]     <- factor(data[, name] , levels, labels) |> labelled::set_variable_labels(var_label)
-    #data[,name]     <-  data[,name] 
     
   }
   

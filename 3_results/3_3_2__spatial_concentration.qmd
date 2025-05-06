@@ -1,0 +1,29 @@
+## Spatial concentration
+
+@fig-spatial-concentration-bar shows the difference betweeen the proportion of primary residences in each community district and the proprotion of contact venues in each community district. It shows that within Brooklyn, Manhattan, and Queens, there is a small set of community districts which tend to be markedly over-represented among contact venues compared to their share of primary residences. These are BK01, MN05, and QN05, respectively.
+
+
+```{r }
+#| fig-cap: !expr 'get_figure_details("fig-communities-bar")'
+#| label: fig-spatial-concentration-bar
+#| fig-width: 8
+#| fig-height: 8
+
+
+
+
+
+
+make_plotdata_spatial_concentration_bar() |>
+  plot_home_vs_residence_dbn_bar() +
+  ggplot2::coord_flip() +
+  scale_fill_mpxnyc(name = "Borough", option = "dark") +
+  ggplot2::scale_alpha_manual(values = c("highlight" = 1, "lowlight" = 0.5), guide="none") +
+  ggplot2::scale_y_continuous(labels = scales::percent_format(scale = 100)) +
+  theme_mpxnyc_home_vs_place() 
+
+
+  
+
+  
+```
