@@ -1,0 +1,59 @@
+
+
+# Places {#sec-venues}
+
+```{r include=FALSE}
+# Access custom defined functions
+targets::tar_source("../R_functions")
+```
+
+
+
+
+
+```{r}
+#| fig-cap: !expr 'get_figure_details("fig-places-distance-sexcontact")'
+#| label: fig-placetype-bar-grid
+#| fig-width: 8
+#| fig-height: 9
+
+
+
+make_plotdata_placetype_bar_grid() |>
+  plot_radar_stratified2() +
+  ggplot2::coord_flip()  +
+  ggplot2::scale_x_discrete(position = "top") +
+  ggplot2::scale_y_continuous(labels = function(x) scales::percent(abs(x))) +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_places() 
+
+
+```
+
+
+
+Of the $604$ locations at which participant had physical or sexual contact in a group setting (contact venues), about two out of five were private residences, and about a quarter were dance parties. More than half of the contact venues were in Manhattan, while less than a third were in the Brooklyn. A quarter of all contact venues were in the same community as the participant's residence, a third were in a different borough, and the remainder were in the same borough as home, but a different community district.
+
+```{r}
+#| tbl-cap: !expr 'get_table_details("tbl-places-descriptives")'
+#| label: tbl-places-descriptives
+
+make_tabledata_places() |>
+        draw_table_by_placeSex()
+
+```
+
+Contact venues at which participants had sexual contact (rather than non-sexual physical contact) were overwhelmingly private residences whereas contact venues at which they had non-sexual physical contact were mostly dance parties (see @fig-placetype-bar-grid). The closer to home a location was, the more likely it was to be a private residence and the more likely it was the site of sexual contact. By contrast, the further from home a contact venue was, the more likely it was to be a dance party.
+
+
+
+```{r}
+#| fig-width: 2
+#| fig-height: 2
+#| fig-align: center
+
+
+plot_icon(icon_name = "taco", color = "dark_green", shape = 4)
+
+
+```
