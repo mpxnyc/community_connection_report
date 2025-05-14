@@ -308,7 +308,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../E_marketing_comm/E__marketing_comm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Marketing &amp; communication</span></span></a>
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Study recruitment</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../F_community_engagement/F__community_engagement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Community engagement</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../H_project_management/H__project_management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Project management</span></span></a>
   </div>
 </li>
       </ul>
@@ -347,8 +359,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">B.1</span> Data</h2>
 <section id="person-place-graph" class="level3" data-number="B.1.1"><h3 data-number="B.1.1" class="anchored" data-anchor-id="person-place-graph">
 <span class="header-section-number">B.1.1</span> Person-place graph</h3>
-<p>The MPX NYC spatial participant data network is a network object that contains all collected data. In this network, nodes comprise of community districts and survey participants. Edges can only exist between a person and a communtiy district - they indicate that the person either lives in or has a contact place in that community district. In <a href="#fig-example-participant-place">Figure&nbsp;<span>B.1</span></a>, participant nodes are blue and community district nodes are pink. <a href="#tbl-example-bipartite-nodes-edges">Table&nbsp;<span>B.1</span></a> (a) shows the node and <a href="#tbl-example-bipartite-nodes-edges">Table&nbsp;<span>B.1</span></a> (b) the edges of the network.</p>
-<div class="cell">
+<p>The MPX NYC spatial participant data network is a network object that contains all collected data. In this network, nodes comprise of community districts and survey participants. Edges can only exist between a person and a communtiy district - they indicate that the person either lives in or has a contact place in that community district. In <a href="#fig-example-participant-place">Figure&nbsp;<span class="quarto-unresolved-ref">fig-example-participant-place</span></a>, participant nodes are blue and community district nodes are pink. <a href="#tbl-example-bipartite-nodes-edges">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-bipartite-nodes-edges</span></a> (a) shows the node and <a href="#tbl-example-bipartite-nodes-edges">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-bipartite-nodes-edges</span></a> (b) the edges of the network.</p>
+<div class="cell" data-hash="B__ssnac2_network_analysis_cache/html/fig-example-participant-place_811b8e70d63adb133af0517ce2568a74">
 <details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"bipartite"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_example_network</span><span class="op">(</span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html">coord_cartesian</a></span><span class="op">(</span>xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.2</span>,<span class="fl">1.2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -376,30 +388,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>From <span class="op">=</span> <span class="va">from_name</span>, To <span class="op">=</span> <span class="va">to_name</span>, Relation <span class="op">=</span> <span class="va">relation</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-example-bipartite-nodes-edges" class="cell tbl-parent quarto-layout-panel anchored">
+</details><div id="tbl-example-bipartite-nodes-edges" class="cell tbl-parent quarto-layout-panel anchored" data-hash="B__ssnac2_network_analysis_cache/html/tbl-example-bipartite-nodes-edges_a7f5c9663f8f522086e7836384aa747f">
 <div class="panel-caption table-caption">
 <p>Table&nbsp;B.1: Sample person-place network data</p>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div id="tbl-example-bipartite-nodes-edges-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-bipartite-nodes-edges" style="flex-basis: 50.0%;justify-content: center;">
 
-<div id="jiuesghzbd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jiuesghzbd table {
+<div id="qanmiihpgm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qanmiihpgm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jiuesghzbd thead, #jiuesghzbd tbody, #jiuesghzbd tfoot, #jiuesghzbd tr, #jiuesghzbd td, #jiuesghzbd th {
+#qanmiihpgm thead, #qanmiihpgm tbody, #qanmiihpgm tfoot, #qanmiihpgm tr, #qanmiihpgm td, #qanmiihpgm th {
   border-style: none;
 }
 
-#jiuesghzbd p {
+#qanmiihpgm p {
   margin: 0;
   padding: 0;
 }
 
-#jiuesghzbd .gt_table {
+#qanmiihpgm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -425,12 +437,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#jiuesghzbd .gt_caption {
+#qanmiihpgm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jiuesghzbd .gt_title {
+#qanmiihpgm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -442,7 +454,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#jiuesghzbd .gt_subtitle {
+#qanmiihpgm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -454,7 +466,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#jiuesghzbd .gt_heading {
+#qanmiihpgm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -466,13 +478,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#jiuesghzbd .gt_bottom_border {
+#qanmiihpgm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jiuesghzbd .gt_col_headings {
+#qanmiihpgm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -487,7 +499,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#jiuesghzbd .gt_col_heading {
+#qanmiihpgm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -507,7 +519,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#jiuesghzbd .gt_column_spanner_outer {
+#qanmiihpgm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -519,15 +531,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#jiuesghzbd .gt_column_spanner_outer:first-child {
+#qanmiihpgm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jiuesghzbd .gt_column_spanner_outer:last-child {
+#qanmiihpgm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jiuesghzbd .gt_column_spanner {
+#qanmiihpgm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -539,11 +551,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#jiuesghzbd .gt_spanner_row {
+#qanmiihpgm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jiuesghzbd .gt_group_heading {
+#qanmiihpgm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -569,7 +581,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#jiuesghzbd .gt_empty_group_heading {
+#qanmiihpgm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -584,15 +596,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#jiuesghzbd .gt_from_md > :first-child {
+#qanmiihpgm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jiuesghzbd .gt_from_md > :last-child {
+#qanmiihpgm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jiuesghzbd .gt_row {
+#qanmiihpgm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -611,7 +623,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#jiuesghzbd .gt_stub {
+#qanmiihpgm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -624,7 +636,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jiuesghzbd .gt_stub_row_group {
+#qanmiihpgm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -638,15 +650,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#jiuesghzbd .gt_row_group_first td {
+#qanmiihpgm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jiuesghzbd .gt_row_group_first th {
+#qanmiihpgm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jiuesghzbd .gt_summary_row {
+#qanmiihpgm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -656,16 +668,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jiuesghzbd .gt_first_summary_row {
+#qanmiihpgm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jiuesghzbd .gt_first_summary_row.thick {
+#qanmiihpgm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jiuesghzbd .gt_last_summary_row {
+#qanmiihpgm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -675,7 +687,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#jiuesghzbd .gt_grand_summary_row {
+#qanmiihpgm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -685,7 +697,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jiuesghzbd .gt_first_grand_summary_row {
+#qanmiihpgm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -695,7 +707,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#jiuesghzbd .gt_last_grand_summary_row_top {
+#qanmiihpgm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -705,11 +717,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#jiuesghzbd .gt_striped {
+#qanmiihpgm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jiuesghzbd .gt_table_body {
+#qanmiihpgm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -718,7 +730,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#jiuesghzbd .gt_footnotes {
+#qanmiihpgm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -732,7 +744,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#jiuesghzbd .gt_footnote {
+#qanmiihpgm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -741,7 +753,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jiuesghzbd .gt_sourcenotes {
+#qanmiihpgm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -755,7 +767,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#jiuesghzbd .gt_sourcenote {
+#qanmiihpgm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -763,63 +775,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jiuesghzbd .gt_left {
+#qanmiihpgm .gt_left {
   text-align: left;
 }
 
-#jiuesghzbd .gt_center {
+#qanmiihpgm .gt_center {
   text-align: center;
 }
 
-#jiuesghzbd .gt_right {
+#qanmiihpgm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jiuesghzbd .gt_font_normal {
+#qanmiihpgm .gt_font_normal {
   font-weight: normal;
 }
 
-#jiuesghzbd .gt_font_bold {
+#qanmiihpgm .gt_font_bold {
   font-weight: bold;
 }
 
-#jiuesghzbd .gt_font_italic {
+#qanmiihpgm .gt_font_italic {
   font-style: italic;
 }
 
-#jiuesghzbd .gt_super {
+#qanmiihpgm .gt_super {
   font-size: 65%;
 }
 
-#jiuesghzbd .gt_footnote_marks {
+#qanmiihpgm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jiuesghzbd .gt_asterisk {
+#qanmiihpgm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jiuesghzbd .gt_indent_1 {
+#qanmiihpgm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jiuesghzbd .gt_indent_2 {
+#qanmiihpgm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jiuesghzbd .gt_indent_3 {
+#qanmiihpgm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jiuesghzbd .gt_indent_4 {
+#qanmiihpgm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jiuesghzbd .gt_indent_5 {
+#qanmiihpgm .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -902,23 +914,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="tbl-example-bipartite-nodes-edges-2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-bipartite-nodes-edges" style="flex-basis: 50.0%;justify-content: center;">
 
-<div id="ncjqfvwrct" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ncjqfvwrct table {
+<div id="jwhfwbzqvd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jwhfwbzqvd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ncjqfvwrct thead, #ncjqfvwrct tbody, #ncjqfvwrct tfoot, #ncjqfvwrct tr, #ncjqfvwrct td, #ncjqfvwrct th {
+#jwhfwbzqvd thead, #jwhfwbzqvd tbody, #jwhfwbzqvd tfoot, #jwhfwbzqvd tr, #jwhfwbzqvd td, #jwhfwbzqvd th {
   border-style: none;
 }
 
-#ncjqfvwrct p {
+#jwhfwbzqvd p {
   margin: 0;
   padding: 0;
 }
 
-#ncjqfvwrct .gt_table {
+#jwhfwbzqvd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -944,12 +956,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#ncjqfvwrct .gt_caption {
+#jwhfwbzqvd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ncjqfvwrct .gt_title {
+#jwhfwbzqvd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -961,7 +973,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#ncjqfvwrct .gt_subtitle {
+#jwhfwbzqvd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -973,7 +985,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#ncjqfvwrct .gt_heading {
+#jwhfwbzqvd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -985,13 +997,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ncjqfvwrct .gt_bottom_border {
+#jwhfwbzqvd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ncjqfvwrct .gt_col_headings {
+#jwhfwbzqvd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1006,7 +1018,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ncjqfvwrct .gt_col_heading {
+#jwhfwbzqvd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1026,7 +1038,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ncjqfvwrct .gt_column_spanner_outer {
+#jwhfwbzqvd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1038,15 +1050,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#ncjqfvwrct .gt_column_spanner_outer:first-child {
+#jwhfwbzqvd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ncjqfvwrct .gt_column_spanner_outer:last-child {
+#jwhfwbzqvd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ncjqfvwrct .gt_column_spanner {
+#jwhfwbzqvd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1058,11 +1070,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#ncjqfvwrct .gt_spanner_row {
+#jwhfwbzqvd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ncjqfvwrct .gt_group_heading {
+#jwhfwbzqvd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1088,7 +1100,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#ncjqfvwrct .gt_empty_group_heading {
+#jwhfwbzqvd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1103,15 +1115,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#ncjqfvwrct .gt_from_md > :first-child {
+#jwhfwbzqvd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ncjqfvwrct .gt_from_md > :last-child {
+#jwhfwbzqvd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ncjqfvwrct .gt_row {
+#jwhfwbzqvd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1130,7 +1142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ncjqfvwrct .gt_stub {
+#jwhfwbzqvd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1143,7 +1155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ncjqfvwrct .gt_stub_row_group {
+#jwhfwbzqvd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1157,15 +1169,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#ncjqfvwrct .gt_row_group_first td {
+#jwhfwbzqvd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ncjqfvwrct .gt_row_group_first th {
+#jwhfwbzqvd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ncjqfvwrct .gt_summary_row {
+#jwhfwbzqvd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1175,16 +1187,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ncjqfvwrct .gt_first_summary_row {
+#jwhfwbzqvd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ncjqfvwrct .gt_first_summary_row.thick {
+#jwhfwbzqvd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ncjqfvwrct .gt_last_summary_row {
+#jwhfwbzqvd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1194,7 +1206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ncjqfvwrct .gt_grand_summary_row {
+#jwhfwbzqvd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1204,7 +1216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ncjqfvwrct .gt_first_grand_summary_row {
+#jwhfwbzqvd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1214,7 +1226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#ncjqfvwrct .gt_last_grand_summary_row_top {
+#jwhfwbzqvd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1224,11 +1236,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ncjqfvwrct .gt_striped {
+#jwhfwbzqvd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ncjqfvwrct .gt_table_body {
+#jwhfwbzqvd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1237,7 +1249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ncjqfvwrct .gt_footnotes {
+#jwhfwbzqvd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1251,7 +1263,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ncjqfvwrct .gt_footnote {
+#jwhfwbzqvd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1260,7 +1272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ncjqfvwrct .gt_sourcenotes {
+#jwhfwbzqvd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1274,7 +1286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ncjqfvwrct .gt_sourcenote {
+#jwhfwbzqvd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1282,63 +1294,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ncjqfvwrct .gt_left {
+#jwhfwbzqvd .gt_left {
   text-align: left;
 }
 
-#ncjqfvwrct .gt_center {
+#jwhfwbzqvd .gt_center {
   text-align: center;
 }
 
-#ncjqfvwrct .gt_right {
+#jwhfwbzqvd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ncjqfvwrct .gt_font_normal {
+#jwhfwbzqvd .gt_font_normal {
   font-weight: normal;
 }
 
-#ncjqfvwrct .gt_font_bold {
+#jwhfwbzqvd .gt_font_bold {
   font-weight: bold;
 }
 
-#ncjqfvwrct .gt_font_italic {
+#jwhfwbzqvd .gt_font_italic {
   font-style: italic;
 }
 
-#ncjqfvwrct .gt_super {
+#jwhfwbzqvd .gt_super {
   font-size: 65%;
 }
 
-#ncjqfvwrct .gt_footnote_marks {
+#jwhfwbzqvd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ncjqfvwrct .gt_asterisk {
+#jwhfwbzqvd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ncjqfvwrct .gt_indent_1 {
+#jwhfwbzqvd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ncjqfvwrct .gt_indent_2 {
+#jwhfwbzqvd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ncjqfvwrct .gt_indent_3 {
+#jwhfwbzqvd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ncjqfvwrct .gt_indent_4 {
+#jwhfwbzqvd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ncjqfvwrct .gt_indent_5 {
+#jwhfwbzqvd .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1449,8 +1461,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section><section id="person-graph" class="level3" data-number="B.1.2"><h3 data-number="B.1.2" class="anchored" data-anchor-id="person-graph">
 <span class="header-section-number">B.1.2</span> Person graph</h3>
-<p>The MPX NYC participant network has participants as nodes. A pair of nodes is connected by a weighted edge if each of the individuals represented by the nodes has at least one contact venue or residence in the same, shared community district. The weight of the edge is given by the count of community districts the pair of nodes have in common. By definition, an edge of weight <span class="math inline">\(0\)</span> is equivalent to the absence of an edge. <a href="#tbl-example-participant-nodes">Table&nbsp;<span>B.2</span></a> shows the nodes of the participant network shown in <a href="#tbl-example-participant-nodes">Table&nbsp;<span>B.2</span></a> (a) and <a href="#tbl-example-participant-nodes">Table&nbsp;<span>B.2</span></a> (b) show the edges.</p>
-<div class="cell">
+<p>The MPX NYC participant network has participants as nodes. A pair of nodes is connected by a weighted edge if each of the individuals represented by the nodes has at least one contact venue or residence in the same, shared community district. The weight of the edge is given by the count of community districts the pair of nodes have in common. By definition, an edge of weight <span class="math inline">\(0\)</span> is equivalent to the absence of an edge. <a href="#tbl-example-participant-nodes">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-participant-nodes</span></a> shows the nodes of the participant network shown in <a href="#tbl-example-participant-nodes">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-participant-nodes</span></a> (a) and <a href="#tbl-example-participant-nodes">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-participant-nodes</span></a> (b) show the edges.</p>
+<div class="cell" data-hash="B__ssnac2_network_analysis_cache/html/fig-example-participant_93bbb445deb362988f3655f3eb3e2816">
 <details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"people"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_example_network</span><span class="op">(</span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1474,30 +1486,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>From <span class="op">=</span> <span class="va">from_name</span>, To <span class="op">=</span> <span class="va">to_name</span>, Weight <span class="op">=</span> <span class="va">weight</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-example-participant-nodes" class="cell tbl-parent quarto-layout-panel anchored">
+</details><div id="tbl-example-participant-nodes" class="cell tbl-parent quarto-layout-panel anchored" data-hash="B__ssnac2_network_analysis_cache/html/tbl-example-participant-nodes_1a6718d0be0b28c1dd73bdea89640fbd">
 <div class="panel-caption table-caption">
 <p>Table&nbsp;B.2: Sample person-person network data</p>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div id="tbl-example-participant-nodes-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-participant-nodes" style="flex-basis: 50.0%;justify-content: center;">
 
-<div id="wypbqbyoqh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wypbqbyoqh table {
+<div id="kjmzqmztlt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kjmzqmztlt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wypbqbyoqh thead, #wypbqbyoqh tbody, #wypbqbyoqh tfoot, #wypbqbyoqh tr, #wypbqbyoqh td, #wypbqbyoqh th {
+#kjmzqmztlt thead, #kjmzqmztlt tbody, #kjmzqmztlt tfoot, #kjmzqmztlt tr, #kjmzqmztlt td, #kjmzqmztlt th {
   border-style: none;
 }
 
-#wypbqbyoqh p {
+#kjmzqmztlt p {
   margin: 0;
   padding: 0;
 }
 
-#wypbqbyoqh .gt_table {
+#kjmzqmztlt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1523,12 +1535,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#wypbqbyoqh .gt_caption {
+#kjmzqmztlt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wypbqbyoqh .gt_title {
+#kjmzqmztlt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1540,7 +1552,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#wypbqbyoqh .gt_subtitle {
+#kjmzqmztlt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1552,7 +1564,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#wypbqbyoqh .gt_heading {
+#kjmzqmztlt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1564,13 +1576,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#wypbqbyoqh .gt_bottom_border {
+#kjmzqmztlt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wypbqbyoqh .gt_col_headings {
+#kjmzqmztlt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1585,7 +1597,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#wypbqbyoqh .gt_col_heading {
+#kjmzqmztlt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1605,7 +1617,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#wypbqbyoqh .gt_column_spanner_outer {
+#kjmzqmztlt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1617,15 +1629,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#wypbqbyoqh .gt_column_spanner_outer:first-child {
+#kjmzqmztlt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wypbqbyoqh .gt_column_spanner_outer:last-child {
+#kjmzqmztlt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wypbqbyoqh .gt_column_spanner {
+#kjmzqmztlt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1637,11 +1649,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#wypbqbyoqh .gt_spanner_row {
+#kjmzqmztlt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wypbqbyoqh .gt_group_heading {
+#kjmzqmztlt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1667,7 +1679,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#wypbqbyoqh .gt_empty_group_heading {
+#kjmzqmztlt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1682,15 +1694,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#wypbqbyoqh .gt_from_md > :first-child {
+#kjmzqmztlt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wypbqbyoqh .gt_from_md > :last-child {
+#kjmzqmztlt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wypbqbyoqh .gt_row {
+#kjmzqmztlt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1709,7 +1721,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#wypbqbyoqh .gt_stub {
+#kjmzqmztlt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1722,7 +1734,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#wypbqbyoqh .gt_stub_row_group {
+#kjmzqmztlt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1736,15 +1748,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#wypbqbyoqh .gt_row_group_first td {
+#kjmzqmztlt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wypbqbyoqh .gt_row_group_first th {
+#kjmzqmztlt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wypbqbyoqh .gt_summary_row {
+#kjmzqmztlt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1754,16 +1766,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#wypbqbyoqh .gt_first_summary_row {
+#kjmzqmztlt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wypbqbyoqh .gt_first_summary_row.thick {
+#kjmzqmztlt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wypbqbyoqh .gt_last_summary_row {
+#kjmzqmztlt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1773,7 +1785,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#wypbqbyoqh .gt_grand_summary_row {
+#kjmzqmztlt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1783,7 +1795,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#wypbqbyoqh .gt_first_grand_summary_row {
+#kjmzqmztlt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1793,7 +1805,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#wypbqbyoqh .gt_last_grand_summary_row_top {
+#kjmzqmztlt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1803,11 +1815,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#wypbqbyoqh .gt_striped {
+#kjmzqmztlt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wypbqbyoqh .gt_table_body {
+#kjmzqmztlt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1816,7 +1828,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#wypbqbyoqh .gt_footnotes {
+#kjmzqmztlt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1830,7 +1842,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#wypbqbyoqh .gt_footnote {
+#kjmzqmztlt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1839,7 +1851,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#wypbqbyoqh .gt_sourcenotes {
+#kjmzqmztlt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1853,7 +1865,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#wypbqbyoqh .gt_sourcenote {
+#kjmzqmztlt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1861,63 +1873,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#wypbqbyoqh .gt_left {
+#kjmzqmztlt .gt_left {
   text-align: left;
 }
 
-#wypbqbyoqh .gt_center {
+#kjmzqmztlt .gt_center {
   text-align: center;
 }
 
-#wypbqbyoqh .gt_right {
+#kjmzqmztlt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wypbqbyoqh .gt_font_normal {
+#kjmzqmztlt .gt_font_normal {
   font-weight: normal;
 }
 
-#wypbqbyoqh .gt_font_bold {
+#kjmzqmztlt .gt_font_bold {
   font-weight: bold;
 }
 
-#wypbqbyoqh .gt_font_italic {
+#kjmzqmztlt .gt_font_italic {
   font-style: italic;
 }
 
-#wypbqbyoqh .gt_super {
+#kjmzqmztlt .gt_super {
   font-size: 65%;
 }
 
-#wypbqbyoqh .gt_footnote_marks {
+#kjmzqmztlt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wypbqbyoqh .gt_asterisk {
+#kjmzqmztlt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wypbqbyoqh .gt_indent_1 {
+#kjmzqmztlt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wypbqbyoqh .gt_indent_2 {
+#kjmzqmztlt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wypbqbyoqh .gt_indent_3 {
+#kjmzqmztlt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wypbqbyoqh .gt_indent_4 {
+#kjmzqmztlt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wypbqbyoqh .gt_indent_5 {
+#kjmzqmztlt .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1966,23 +1978,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="tbl-example-participant-nodes-2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-participant-nodes" style="flex-basis: 50.0%;justify-content: center;">
 
-<div id="wfogtcmkxp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wfogtcmkxp table {
+<div id="gizkvytejd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gizkvytejd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wfogtcmkxp thead, #wfogtcmkxp tbody, #wfogtcmkxp tfoot, #wfogtcmkxp tr, #wfogtcmkxp td, #wfogtcmkxp th {
+#gizkvytejd thead, #gizkvytejd tbody, #gizkvytejd tfoot, #gizkvytejd tr, #gizkvytejd td, #gizkvytejd th {
   border-style: none;
 }
 
-#wfogtcmkxp p {
+#gizkvytejd p {
   margin: 0;
   padding: 0;
 }
 
-#wfogtcmkxp .gt_table {
+#gizkvytejd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2008,12 +2020,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#wfogtcmkxp .gt_caption {
+#gizkvytejd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wfogtcmkxp .gt_title {
+#gizkvytejd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2025,7 +2037,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#wfogtcmkxp .gt_subtitle {
+#gizkvytejd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2037,7 +2049,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#wfogtcmkxp .gt_heading {
+#gizkvytejd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2049,13 +2061,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#wfogtcmkxp .gt_bottom_border {
+#gizkvytejd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wfogtcmkxp .gt_col_headings {
+#gizkvytejd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2070,7 +2082,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#wfogtcmkxp .gt_col_heading {
+#gizkvytejd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2090,7 +2102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#wfogtcmkxp .gt_column_spanner_outer {
+#gizkvytejd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2102,15 +2114,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#wfogtcmkxp .gt_column_spanner_outer:first-child {
+#gizkvytejd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wfogtcmkxp .gt_column_spanner_outer:last-child {
+#gizkvytejd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wfogtcmkxp .gt_column_spanner {
+#gizkvytejd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2122,11 +2134,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#wfogtcmkxp .gt_spanner_row {
+#gizkvytejd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wfogtcmkxp .gt_group_heading {
+#gizkvytejd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2152,7 +2164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#wfogtcmkxp .gt_empty_group_heading {
+#gizkvytejd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2167,15 +2179,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#wfogtcmkxp .gt_from_md > :first-child {
+#gizkvytejd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wfogtcmkxp .gt_from_md > :last-child {
+#gizkvytejd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wfogtcmkxp .gt_row {
+#gizkvytejd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2194,7 +2206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#wfogtcmkxp .gt_stub {
+#gizkvytejd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2207,7 +2219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#wfogtcmkxp .gt_stub_row_group {
+#gizkvytejd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2221,15 +2233,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#wfogtcmkxp .gt_row_group_first td {
+#gizkvytejd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wfogtcmkxp .gt_row_group_first th {
+#gizkvytejd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wfogtcmkxp .gt_summary_row {
+#gizkvytejd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2239,16 +2251,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#wfogtcmkxp .gt_first_summary_row {
+#gizkvytejd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wfogtcmkxp .gt_first_summary_row.thick {
+#gizkvytejd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wfogtcmkxp .gt_last_summary_row {
+#gizkvytejd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2258,7 +2270,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#wfogtcmkxp .gt_grand_summary_row {
+#gizkvytejd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2268,7 +2280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#wfogtcmkxp .gt_first_grand_summary_row {
+#gizkvytejd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2278,7 +2290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#wfogtcmkxp .gt_last_grand_summary_row_top {
+#gizkvytejd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2288,11 +2300,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#wfogtcmkxp .gt_striped {
+#gizkvytejd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wfogtcmkxp .gt_table_body {
+#gizkvytejd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2301,7 +2313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#wfogtcmkxp .gt_footnotes {
+#gizkvytejd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2315,7 +2327,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#wfogtcmkxp .gt_footnote {
+#gizkvytejd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2324,7 +2336,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#wfogtcmkxp .gt_sourcenotes {
+#gizkvytejd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2338,7 +2350,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#wfogtcmkxp .gt_sourcenote {
+#gizkvytejd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2346,63 +2358,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#wfogtcmkxp .gt_left {
+#gizkvytejd .gt_left {
   text-align: left;
 }
 
-#wfogtcmkxp .gt_center {
+#gizkvytejd .gt_center {
   text-align: center;
 }
 
-#wfogtcmkxp .gt_right {
+#gizkvytejd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wfogtcmkxp .gt_font_normal {
+#gizkvytejd .gt_font_normal {
   font-weight: normal;
 }
 
-#wfogtcmkxp .gt_font_bold {
+#gizkvytejd .gt_font_bold {
   font-weight: bold;
 }
 
-#wfogtcmkxp .gt_font_italic {
+#gizkvytejd .gt_font_italic {
   font-style: italic;
 }
 
-#wfogtcmkxp .gt_super {
+#gizkvytejd .gt_super {
   font-size: 65%;
 }
 
-#wfogtcmkxp .gt_footnote_marks {
+#gizkvytejd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wfogtcmkxp .gt_asterisk {
+#gizkvytejd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wfogtcmkxp .gt_indent_1 {
+#gizkvytejd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wfogtcmkxp .gt_indent_2 {
+#gizkvytejd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wfogtcmkxp .gt_indent_3 {
+#gizkvytejd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wfogtcmkxp .gt_indent_4 {
+#gizkvytejd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wfogtcmkxp .gt_indent_5 {
+#gizkvytejd .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2493,8 +2505,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section><section id="place-graph" class="level3" data-number="B.1.3"><h3 data-number="B.1.3" class="anchored" data-anchor-id="place-graph">
 <span class="header-section-number">B.1.3</span> Place graph</h3>
-<p>The MPX NYC community district network has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a contact venue or residence in both community districts. The weight is the count of participants which are shared by the two community districts. <a href="#fig-example-community">Figure&nbsp;<span>B.3</span></a> shows the community district network derived from the MPX NYC spatial participant data network shown in <a href="#fig-example-participant-place">Figure&nbsp;<span>B.1</span></a>. <a href="#tbl-example-place-nodes">Table&nbsp;<span>B.3</span></a> (a) shows list the nodes of the former network, and <a href="#tbl-example-place-nodes">Table&nbsp;<span>B.3</span></a> (b) shows the edges.</p>
-<div class="cell">
+<p>The MPX NYC community district network has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a contact venue or residence in both community districts. The weight is the count of participants which are shared by the two community districts. <a href="#fig-example-community">Figure&nbsp;<span class="quarto-unresolved-ref">fig-example-community</span></a> shows the community district network derived from the MPX NYC spatial participant data network shown in <a href="#fig-example-participant-place">Figure&nbsp;<span class="quarto-unresolved-ref">fig-example-participant-place</span></a>. <a href="#tbl-example-place-nodes">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-place-nodes</span></a> (a) shows list the nodes of the former network, and <a href="#tbl-example-place-nodes">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-place-nodes</span></a> (b) shows the edges.</p>
+<div class="cell" data-hash="B__ssnac2_network_analysis_cache/html/fig-example-community_6ef45e573a76ebcbc56e5b03a6156815">
 <details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"places"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_example_network</span><span class="op">(</span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">)</span>  <span class="op">+</span></span>
 <span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2518,30 +2530,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>From <span class="op">=</span> <span class="va">from_name</span>, To <span class="op">=</span> <span class="va">to_name</span>, Weight <span class="op">=</span> <span class="va">weight</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-example-place-nodes" class="cell tbl-parent quarto-layout-panel anchored">
+</details><div id="tbl-example-place-nodes" class="cell tbl-parent quarto-layout-panel anchored" data-hash="B__ssnac2_network_analysis_cache/html/tbl-example-place-nodes_f609f9cb90955271dc9dffa6721d0f23">
 <div class="panel-caption table-caption">
 <p>Table&nbsp;B.3: Sample place network data</p>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div id="tbl-example-place-nodes-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-place-nodes" style="flex-basis: 50.0%;justify-content: center;">
 
-<div id="ocopcygrnl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ocopcygrnl table {
+<div id="jyqcvixbpb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jyqcvixbpb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ocopcygrnl thead, #ocopcygrnl tbody, #ocopcygrnl tfoot, #ocopcygrnl tr, #ocopcygrnl td, #ocopcygrnl th {
+#jyqcvixbpb thead, #jyqcvixbpb tbody, #jyqcvixbpb tfoot, #jyqcvixbpb tr, #jyqcvixbpb td, #jyqcvixbpb th {
   border-style: none;
 }
 
-#ocopcygrnl p {
+#jyqcvixbpb p {
   margin: 0;
   padding: 0;
 }
 
-#ocopcygrnl .gt_table {
+#jyqcvixbpb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2567,12 +2579,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#ocopcygrnl .gt_caption {
+#jyqcvixbpb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ocopcygrnl .gt_title {
+#jyqcvixbpb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2584,7 +2596,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#ocopcygrnl .gt_subtitle {
+#jyqcvixbpb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2596,7 +2608,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#ocopcygrnl .gt_heading {
+#jyqcvixbpb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2608,13 +2620,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ocopcygrnl .gt_bottom_border {
+#jyqcvixbpb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ocopcygrnl .gt_col_headings {
+#jyqcvixbpb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2629,7 +2641,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ocopcygrnl .gt_col_heading {
+#jyqcvixbpb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2649,7 +2661,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ocopcygrnl .gt_column_spanner_outer {
+#jyqcvixbpb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2661,15 +2673,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#ocopcygrnl .gt_column_spanner_outer:first-child {
+#jyqcvixbpb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ocopcygrnl .gt_column_spanner_outer:last-child {
+#jyqcvixbpb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ocopcygrnl .gt_column_spanner {
+#jyqcvixbpb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2681,11 +2693,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#ocopcygrnl .gt_spanner_row {
+#jyqcvixbpb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ocopcygrnl .gt_group_heading {
+#jyqcvixbpb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2711,7 +2723,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#ocopcygrnl .gt_empty_group_heading {
+#jyqcvixbpb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2726,15 +2738,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#ocopcygrnl .gt_from_md > :first-child {
+#jyqcvixbpb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ocopcygrnl .gt_from_md > :last-child {
+#jyqcvixbpb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ocopcygrnl .gt_row {
+#jyqcvixbpb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2753,7 +2765,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ocopcygrnl .gt_stub {
+#jyqcvixbpb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2766,7 +2778,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ocopcygrnl .gt_stub_row_group {
+#jyqcvixbpb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2780,15 +2792,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#ocopcygrnl .gt_row_group_first td {
+#jyqcvixbpb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ocopcygrnl .gt_row_group_first th {
+#jyqcvixbpb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ocopcygrnl .gt_summary_row {
+#jyqcvixbpb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2798,16 +2810,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ocopcygrnl .gt_first_summary_row {
+#jyqcvixbpb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ocopcygrnl .gt_first_summary_row.thick {
+#jyqcvixbpb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ocopcygrnl .gt_last_summary_row {
+#jyqcvixbpb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2817,7 +2829,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ocopcygrnl .gt_grand_summary_row {
+#jyqcvixbpb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2827,7 +2839,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ocopcygrnl .gt_first_grand_summary_row {
+#jyqcvixbpb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2837,7 +2849,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#ocopcygrnl .gt_last_grand_summary_row_top {
+#jyqcvixbpb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2847,11 +2859,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ocopcygrnl .gt_striped {
+#jyqcvixbpb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ocopcygrnl .gt_table_body {
+#jyqcvixbpb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2860,7 +2872,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ocopcygrnl .gt_footnotes {
+#jyqcvixbpb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2874,7 +2886,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ocopcygrnl .gt_footnote {
+#jyqcvixbpb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2883,7 +2895,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ocopcygrnl .gt_sourcenotes {
+#jyqcvixbpb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2897,7 +2909,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ocopcygrnl .gt_sourcenote {
+#jyqcvixbpb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2905,63 +2917,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ocopcygrnl .gt_left {
+#jyqcvixbpb .gt_left {
   text-align: left;
 }
 
-#ocopcygrnl .gt_center {
+#jyqcvixbpb .gt_center {
   text-align: center;
 }
 
-#ocopcygrnl .gt_right {
+#jyqcvixbpb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ocopcygrnl .gt_font_normal {
+#jyqcvixbpb .gt_font_normal {
   font-weight: normal;
 }
 
-#ocopcygrnl .gt_font_bold {
+#jyqcvixbpb .gt_font_bold {
   font-weight: bold;
 }
 
-#ocopcygrnl .gt_font_italic {
+#jyqcvixbpb .gt_font_italic {
   font-style: italic;
 }
 
-#ocopcygrnl .gt_super {
+#jyqcvixbpb .gt_super {
   font-size: 65%;
 }
 
-#ocopcygrnl .gt_footnote_marks {
+#jyqcvixbpb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ocopcygrnl .gt_asterisk {
+#jyqcvixbpb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ocopcygrnl .gt_indent_1 {
+#jyqcvixbpb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ocopcygrnl .gt_indent_2 {
+#jyqcvixbpb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ocopcygrnl .gt_indent_3 {
+#jyqcvixbpb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ocopcygrnl .gt_indent_4 {
+#jyqcvixbpb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ocopcygrnl .gt_indent_5 {
+#jyqcvixbpb .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2998,23 +3010,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="tbl-example-place-nodes-2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-place-nodes" style="flex-basis: 50.0%;justify-content: center;">
 
-<div id="nohaejiztp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nohaejiztp table {
+<div id="gcvnpsqllg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gcvnpsqllg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nohaejiztp thead, #nohaejiztp tbody, #nohaejiztp tfoot, #nohaejiztp tr, #nohaejiztp td, #nohaejiztp th {
+#gcvnpsqllg thead, #gcvnpsqllg tbody, #gcvnpsqllg tfoot, #gcvnpsqllg tr, #gcvnpsqllg td, #gcvnpsqllg th {
   border-style: none;
 }
 
-#nohaejiztp p {
+#gcvnpsqllg p {
   margin: 0;
   padding: 0;
 }
 
-#nohaejiztp .gt_table {
+#gcvnpsqllg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3040,12 +3052,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#nohaejiztp .gt_caption {
+#gcvnpsqllg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nohaejiztp .gt_title {
+#gcvnpsqllg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3057,7 +3069,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#nohaejiztp .gt_subtitle {
+#gcvnpsqllg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3069,7 +3081,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#nohaejiztp .gt_heading {
+#gcvnpsqllg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3081,13 +3093,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#nohaejiztp .gt_bottom_border {
+#gcvnpsqllg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nohaejiztp .gt_col_headings {
+#gcvnpsqllg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3102,7 +3114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#nohaejiztp .gt_col_heading {
+#gcvnpsqllg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3122,7 +3134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#nohaejiztp .gt_column_spanner_outer {
+#gcvnpsqllg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3134,15 +3146,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#nohaejiztp .gt_column_spanner_outer:first-child {
+#gcvnpsqllg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nohaejiztp .gt_column_spanner_outer:last-child {
+#gcvnpsqllg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nohaejiztp .gt_column_spanner {
+#gcvnpsqllg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3154,11 +3166,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#nohaejiztp .gt_spanner_row {
+#gcvnpsqllg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nohaejiztp .gt_group_heading {
+#gcvnpsqllg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3184,7 +3196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#nohaejiztp .gt_empty_group_heading {
+#gcvnpsqllg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3199,15 +3211,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#nohaejiztp .gt_from_md > :first-child {
+#gcvnpsqllg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nohaejiztp .gt_from_md > :last-child {
+#gcvnpsqllg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nohaejiztp .gt_row {
+#gcvnpsqllg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3226,7 +3238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#nohaejiztp .gt_stub {
+#gcvnpsqllg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3239,7 +3251,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#nohaejiztp .gt_stub_row_group {
+#gcvnpsqllg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3253,15 +3265,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#nohaejiztp .gt_row_group_first td {
+#gcvnpsqllg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nohaejiztp .gt_row_group_first th {
+#gcvnpsqllg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nohaejiztp .gt_summary_row {
+#gcvnpsqllg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3271,16 +3283,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#nohaejiztp .gt_first_summary_row {
+#gcvnpsqllg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nohaejiztp .gt_first_summary_row.thick {
+#gcvnpsqllg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nohaejiztp .gt_last_summary_row {
+#gcvnpsqllg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3290,7 +3302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#nohaejiztp .gt_grand_summary_row {
+#gcvnpsqllg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3300,7 +3312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#nohaejiztp .gt_first_grand_summary_row {
+#gcvnpsqllg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3310,7 +3322,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#nohaejiztp .gt_last_grand_summary_row_top {
+#gcvnpsqllg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3320,11 +3332,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#nohaejiztp .gt_striped {
+#gcvnpsqllg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nohaejiztp .gt_table_body {
+#gcvnpsqllg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3333,7 +3345,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#nohaejiztp .gt_footnotes {
+#gcvnpsqllg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3347,7 +3359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#nohaejiztp .gt_footnote {
+#gcvnpsqllg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3356,7 +3368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#nohaejiztp .gt_sourcenotes {
+#gcvnpsqllg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3370,7 +3382,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#nohaejiztp .gt_sourcenote {
+#gcvnpsqllg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3378,63 +3390,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#nohaejiztp .gt_left {
+#gcvnpsqllg .gt_left {
   text-align: left;
 }
 
-#nohaejiztp .gt_center {
+#gcvnpsqllg .gt_center {
   text-align: center;
 }
 
-#nohaejiztp .gt_right {
+#gcvnpsqllg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nohaejiztp .gt_font_normal {
+#gcvnpsqllg .gt_font_normal {
   font-weight: normal;
 }
 
-#nohaejiztp .gt_font_bold {
+#gcvnpsqllg .gt_font_bold {
   font-weight: bold;
 }
 
-#nohaejiztp .gt_font_italic {
+#gcvnpsqllg .gt_font_italic {
   font-style: italic;
 }
 
-#nohaejiztp .gt_super {
+#gcvnpsqllg .gt_super {
   font-size: 65%;
 }
 
-#nohaejiztp .gt_footnote_marks {
+#gcvnpsqllg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nohaejiztp .gt_asterisk {
+#gcvnpsqllg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nohaejiztp .gt_indent_1 {
+#gcvnpsqllg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nohaejiztp .gt_indent_2 {
+#gcvnpsqllg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nohaejiztp .gt_indent_3 {
+#gcvnpsqllg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nohaejiztp .gt_indent_4 {
+#gcvnpsqllg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nohaejiztp .gt_indent_5 {
+#gcvnpsqllg .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
