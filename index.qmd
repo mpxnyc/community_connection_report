@@ -1,12 +1,19 @@
+```{r update_mpxnyc_package}
+pat  <- tidyjson::read_json("_config.json")[["..JSON"]][[1]][["settings"]][["github-token"]] # update packages
+remotes::install_github("KeletsoMakofane/mpxnyc", auth_token = pat)
+```
+
+```{r other_packages}
+#install.packages(c("labelled", "tidygraph", "dplyr", "here", "ggimage", "rsvg", "ggraph", "ggplot2", "gt", "gtsummary", "latex2exp"))
+
+```
+
 ```{r process_data}
 targets::tar_source("R_functions") # Access custom defined functions
 targets::tar_make(reporter = "silent") # Run data pipeline
 ```
 
-```{r update_mpxnyc_package}
-pat  <- tidyjson::read_json("_config.json")[["..JSON"]][[1]][["settings"]][["github-token"]] # update packages
-remotes::install_github("KeletsoMakofane/mpxnyc", auth_token = pat)
-```
+
 
 ::: {#date}
 May 2024, New York City
