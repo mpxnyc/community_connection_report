@@ -1,7 +1,7 @@
-plot_ssnac_example <- function(){
+plot_ssnac_example <- function(data){
   
   
-  example_snacc_graph <- data_snac_example()
+  example_snacc_graph <- data 
   
   coords <- data.frame(
     x = c(1, 1, 2, 2.5, 2.5, 3, 3.5, 3.5, 4, 4, 2, 2, 3, 3),

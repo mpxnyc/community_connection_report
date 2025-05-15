@@ -323,6 +323,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Project management</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../6_results_appendix/6_results_appendix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">Supplementary results</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
     </ul>
@@ -346,7 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Keletso Makofane, PhD</p>
 <p>RESPND-MI Collaboration</p>
 </div>
-<p>To motivate the Social and Spatial Network Analysis with Causal interpretation (SSNAC) framework, we consider a study investigating the risk of acquiring a cold among individuals (pictured as dots in physical space in each frame of <a href="#fig-context">Figure&nbsp;<span class="quarto-unresolved-ref">fig-context</span></a>) in a setting where there is one known infected person. The simplest approach would be to assign average risk of acquiring a cold to each individuals. The problem with this strategy, though, would be that not all individuals have the same risk once we know who the infected person is. Those who are more likely to interact closely with them have higher risk, but not all people are equally likely to interact.</p>
+<p>To motivate the Social and Spatial Network Analysis with Causal interpretation (SSNAC) framework, we consider a study investigating the risk of acquiring a cold among individuals (pictured as dots in physical space in each frame of <a href="#fig-context">Figure&nbsp;<span>A.1</span></a>) in a setting where there is one known infected person. The simplest approach would be to assign average risk of acquiring a cold to each individuals. The problem with this strategy, though, would be that not all individuals have the same risk once we know who the infected person is. Those who are more likely to interact closely with them have higher risk, but not all people are equally likely to interact.</p>
 <div>
 <details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plot_context_figure</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell quarto-layout-panel">
@@ -376,10 +382,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>an understanding of which ties are relevant to the causal question under investigation</p></li>
 </ul></section><section id="the-data-are-a-network" class="level2" data-number="A.2"><h2 data-number="A.2" class="anchored" data-anchor-id="the-data-are-a-network">
 <span class="header-section-number">A.2</span> The data are a network</h2>
-<p>The central data structure in a SSNAC is the person-place graph. <a href="#fig-ssnac">Figure&nbsp;<span class="quarto-unresolved-ref">fig-ssnac</span></a> depicts the rightmost frame of <a href="#fig-context">Figure&nbsp;<span class="quarto-unresolved-ref">fig-context</span></a> by showing spatial units as nodes in a network, connecting adjacent spatial units with a network edge, and connecting individuals with the households they belong to. To show the flexibility of this data object, we added an additional type of relationship an individual can have with a household - that of an employee.</p>
-<p>The majority of study data are stored as node or edge attributes. For instance, person nodes might have attributes like age and race whereas place nodes could have attributes like density or surface area. An edge linking a person to a place might have an attribute conveying how the person relates to the place. For instance in <a href="#fig-ssnac">Figure&nbsp;<span class="quarto-unresolved-ref">fig-ssnac</span></a>, some edges indicate residence, some indicate next</p>
+<p>The central data structure in a SSNAC is the person-place graph. <a href="#fig-ssnac">Figure&nbsp;<span>A.2</span></a> depicts the rightmost frame of <a href="#fig-context">Figure&nbsp;<span>A.1</span></a> by showing spatial units as nodes in a network, connecting adjacent spatial units with a network edge, and connecting individuals with the households they belong to. To show the flexibility of this data object, we added an additional type of relationship an individual can have with a household - that of an employee.</p>
+<p>The majority of study data are stored as node or edge attributes. For instance, person nodes might have attributes like age and race whereas place nodes could have attributes like density or surface area. An edge linking a person to a place might have an attribute conveying how the person relates to the place. For instance in <a href="#fig-ssnac">Figure&nbsp;<span>A.2</span></a>, some edges indicate residence, some indicate next</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plot_ssnac_example</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">data_snac_example</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">plot_ssnac_example</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">style_ssnac_example</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
