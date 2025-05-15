@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>host or travel? - Appendix B — SSNAC II: Network analysis</title>
+
+
+<title>Appendix B — SSNAC II: Network analysis – host or travel?</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -30,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -53,6 +56,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -70,13 +74,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -85,31 +96,77 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script async="" src="https://hypothes.is/embed.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+}</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
+
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../A_ssnac1_social_spatial_context/A__ssnac1_social_spatial_context.html">Appendices</a></li><li class="breadcrumb-item"><a href="../B_ssnac2_network_analysis/B__ssnac2_network_analysis.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">SSNAC II: Network analysis</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../A_ssnac1_social_spatial_context/A__ssnac1_social_spatial_context.html">Appendices</a></li><li class="breadcrumb-item"><a href="../B_ssnac2_network_analysis/B__ssnac2_network_analysis.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">SSNAC II: Network analysis</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
-      <img src="../_const/images/image_mpxnyc.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
+      <img src="../_const/images/image_mpxnyc.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../"></a> 
     </div>
@@ -121,7 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome to MPX NYC</span></a>
@@ -129,14 +186,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Background</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../1_introduction/1_1__intro_outbreak_to_epidemic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Outbreak to epidemic</span></span></a>
@@ -155,17 +212,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Methods</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../2_methods/2_2_methods_data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data collection</span></span></a>
@@ -184,17 +241,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">Results</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../3_results/3_1__results_participants.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">People</span></span></a>
@@ -225,17 +282,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Conclusion</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../4_discussion/4_discussion.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Discussion</span></span></a>
@@ -248,17 +305,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">Endnotes</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../6_endnotes/6_1__references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">References</span></span></a>
@@ -271,17 +328,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../A_ssnac1_social_spatial_context/A__ssnac1_social_spatial_context.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">SSNAC I: Social &amp; spatial</span></span></a>
@@ -324,94 +381,111 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li>
-<a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data"><span class="header-section-number">B.1</span> Data</a>
+  <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data"><span class="header-section-number">B.1</span> Data</a>
   <ul class="collapse">
-<li><a href="#person-place-graph" id="toc-person-place-graph" class="nav-link" data-scroll-target="#person-place-graph"><span class="header-section-number">B.1.1</span> Person-place graph</a></li>
+  <li><a href="#person-place-graph" id="toc-person-place-graph" class="nav-link" data-scroll-target="#person-place-graph"><span class="header-section-number">B.1.1</span> Person-place graph</a></li>
   <li><a href="#person-graph" id="toc-person-graph" class="nav-link" data-scroll-target="#person-graph"><span class="header-section-number">B.1.2</span> Person graph</a></li>
   <li><a href="#place-graph" id="toc-place-graph" class="nav-link" data-scroll-target="#place-graph"><span class="header-section-number">B.1.3</span> Place graph</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#measures" id="toc-measures" class="nav-link" data-scroll-target="#measures"><span class="header-section-number">B.2</span> Measures</a>
+  </ul></li>
+  <li><a href="#measures" id="toc-measures" class="nav-link" data-scroll-target="#measures"><span class="header-section-number">B.2</span> Measures</a>
   <ul class="collapse">
-<li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation"><span class="header-section-number">B.2.1</span> Notation</a></li>
+  <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation"><span class="header-section-number">B.2.1</span> Notation</a></li>
   <li><a href="#node-characteristics" id="toc-node-characteristics" class="nav-link" data-scroll-target="#node-characteristics"><span class="header-section-number">B.2.2</span> Node characteristics</a></li>
   <li><a href="#network-characteristics" id="toc-network-characteristics" class="nav-link" data-scroll-target="#network-characteristics"><span class="header-section-number">B.2.3</span> Network characteristics</a></li>
+  </ul></li>
   </ul>
-</li>
-  </ul></nav>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="sec-appendix-network-analysis" class="quarto-section-identifier">Appendix B — SSNAC II: Network analysis</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+<main class="content" id="quarto-document-content">
 
-</header><p>In this appendix we describe the main data objects of the MPX NYC study - the Person-place graph, the Person graph and the Place graph. We define measures used to analyze these graphs.</p>
-<section id="data" class="level2" data-number="B.1"><h2 data-number="B.1" class="anchored" data-anchor-id="data">
-<span class="header-section-number">B.1</span> Data</h2>
-<section id="person-place-graph" class="level3" data-number="B.1.1"><h3 data-number="B.1.1" class="anchored" data-anchor-id="person-place-graph">
-<span class="header-section-number">B.1.1</span> Person-place graph</h3>
-<p>The MPX NYC spatial participant data network is a network object that contains all collected data. In this network, nodes comprise of community districts and survey participants. Edges can only exist between a person and a communtiy district - they indicate that the person either lives in or has a contact place in that community district. In <a href="#fig-example-participant-place">Figure&nbsp;<span class="quarto-unresolved-ref">fig-example-participant-place</span></a>, participant nodes are blue and community district nodes are pink. <a href="#tbl-example-bipartite-nodes-edges">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-bipartite-nodes-edges</span></a> (a) shows the node and <a href="#tbl-example-bipartite-nodes-edges">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-bipartite-nodes-edges</span></a> (b) the edges of the network.</p>
-<div class="cell" data-hash="B__ssnac2_network_analysis_cache/html/fig-example-participant-place_811b8e70d63adb133af0517ce2568a74">
-<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"bipartite"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">plot_example_network</span><span class="op">(</span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html">coord_cartesian</a></span><span class="op">(</span>xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.2</span>,<span class="fl">1.2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
-<span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div id="fig-example-participant-place" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="B__ssnac2_network_analysis_files/figure-html/fig-example-participant-place-1.png" class="img-fluid figure-img" width="864"></p>
-<figcaption class="figure-caption">Figure&nbsp;B.1: Sample person-place network visualization</figcaption></figure>
-</div>
-</div>
-</div>
-<div>
-<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>name <span class="op">=</span><span class="va">label</span>, <span class="va">age</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span>, <span class="st">"Person"</span>, <span class="st">"Community District"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, <span class="va">type</span>, <span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>from_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">from</span><span class="op">]</span>, to_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">to</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>From <span class="op">=</span> <span class="va">from_name</span>, To <span class="op">=</span> <span class="va">to_name</span>, Relation <span class="op">=</span> <span class="va">relation</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-example-bipartite-nodes-edges" class="cell tbl-parent quarto-layout-panel anchored" data-hash="B__ssnac2_network_analysis_cache/html/tbl-example-bipartite-nodes-edges_a7f5c9663f8f522086e7836384aa747f">
-<div class="panel-caption table-caption">
-<p>Table&nbsp;B.1: Sample person-place network data</p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div id="tbl-example-bipartite-nodes-edges-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-bipartite-nodes-edges" style="flex-basis: 50.0%;justify-content: center;">
+<header id="title-block-header">
+<div class="quarto-title-block d-none d-lg-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../A_ssnac1_social_spatial_context/A__ssnac1_social_spatial_context.html">Appendices</a></li><li class="breadcrumb-item"><a href="../B_ssnac2_network_analysis/B__ssnac2_network_analysis.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">SSNAC II: Network analysis</span></a></li></ol></nav><div><h1 class="title"><span id="sec-appendix-network-analysis" class="quarto-section-identifier">Appendix B — SSNAC II: Network analysis</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
 
-<div id="qanmiihpgm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qanmiihpgm table {
+</header>
+
+
+<p>In this appendix we describe the main data objects of the MPX NYC study - the Person-place graph, the Person graph and the Place graph. We define measures used to analyze these graphs.</p>
+<section id="data" class="level2" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="data"><span class="header-section-number">B.1</span> Data</h2>
+<section id="person-place-graph" class="level3" data-number="B.1.1">
+<h3 data-number="B.1.1" class="anchored" data-anchor-id="person-place-graph"><span class="header-section-number">B.1.1</span> Person-place graph</h3>
+<p>The MPX NYC spatial participant data network is a network object that contains all collected data. In this network, nodes comprise of community districts and survey participants. Edges can only exist between a person and a communtiy district - they indicate that the person either lives in or has a contact place in that community district. In <a href="#fig-example-participant-place" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-example-participant-place</span></a>, participant nodes are blue and community district nodes are pink. <a href="#tbl-example-bipartite-nodes-edges" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-bipartite-nodes-edges</span></a> (a) shows the node and <a href="#tbl-example-bipartite-nodes-edges" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-bipartite-nodes-edges</span></a> (b) the edges of the network.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"bipartite"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_example_network</span>(targets<span class="sc">::</span><span class="fu">tar_read</span>(config_list)) <span class="sc">+</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_cartesian</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">3</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.2</span>,<span class="fl">1.2</span>)) <span class="sc">+</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> ggplot2<span class="sc">::</span><span class="fu">margin</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-example-participant-place" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-example-participant-place-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="B__ssnac2_network_analysis_files/figure-html/fig-example-participant-place-1.png" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-participant-place-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;B.1: Sample person-place network visualization
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">transmute</span>(<span class="at">name =</span>label, age, <span class="at">type =</span> <span class="fu">ifelse</span>(type, <span class="st">"Person"</span>, <span class="st">"Community District"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">name =</span> label, type, age) <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  tidygraph<span class="sc">::</span><span class="fu">activate</span>(edges) <span class="sc">|&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">from_name =</span> tidygraph<span class="sc">::</span><span class="fu">.N</span>()<span class="sc">$</span>name[from], <span class="at">to_name =</span> tidygraph<span class="sc">::</span><span class="fu">.N</span>()<span class="sc">$</span>name[to]) <span class="sc">|&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(from, to) <span class="sc">|&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">transmute</span>(<span class="at">From =</span> from_name, <span class="at">To =</span> to_name, <span class="at">Relation =</span> relation) <span class="sc">|&gt;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-example-bipartite-nodes-edges" class="quarto-layout-panel anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-example-bipartite-nodes-edges-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;B.1: Sample person-place network data
+</figcaption>
+<div aria-describedby="tbl-example-bipartite-nodes-edges-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-example-bipartite-nodes-edges" style="flex-basis: 50.0%;justify-content: center;">
+<div id="uoruabjltz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uoruabjltz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qanmiihpgm thead, #qanmiihpgm tbody, #qanmiihpgm tfoot, #qanmiihpgm tr, #qanmiihpgm td, #qanmiihpgm th {
+#uoruabjltz thead, #uoruabjltz tbody, #uoruabjltz tfoot, #uoruabjltz tr, #uoruabjltz td, #uoruabjltz th {
   border-style: none;
 }
 
-#qanmiihpgm p {
+#uoruabjltz p {
   margin: 0;
   padding: 0;
 }
 
-#qanmiihpgm .gt_table {
+#uoruabjltz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -437,12 +511,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#qanmiihpgm .gt_caption {
+#uoruabjltz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qanmiihpgm .gt_title {
+#uoruabjltz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -454,7 +528,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#qanmiihpgm .gt_subtitle {
+#uoruabjltz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -466,7 +540,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#qanmiihpgm .gt_heading {
+#uoruabjltz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -478,13 +552,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#qanmiihpgm .gt_bottom_border {
+#uoruabjltz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qanmiihpgm .gt_col_headings {
+#uoruabjltz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -499,7 +573,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#qanmiihpgm .gt_col_heading {
+#uoruabjltz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -519,7 +593,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#qanmiihpgm .gt_column_spanner_outer {
+#uoruabjltz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -531,15 +605,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#qanmiihpgm .gt_column_spanner_outer:first-child {
+#uoruabjltz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qanmiihpgm .gt_column_spanner_outer:last-child {
+#uoruabjltz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qanmiihpgm .gt_column_spanner {
+#uoruabjltz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -551,11 +625,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#qanmiihpgm .gt_spanner_row {
+#uoruabjltz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qanmiihpgm .gt_group_heading {
+#uoruabjltz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -581,7 +655,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#qanmiihpgm .gt_empty_group_heading {
+#uoruabjltz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -596,15 +670,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#qanmiihpgm .gt_from_md > :first-child {
+#uoruabjltz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qanmiihpgm .gt_from_md > :last-child {
+#uoruabjltz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qanmiihpgm .gt_row {
+#uoruabjltz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -623,7 +697,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#qanmiihpgm .gt_stub {
+#uoruabjltz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -636,7 +710,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#qanmiihpgm .gt_stub_row_group {
+#uoruabjltz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -650,15 +724,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#qanmiihpgm .gt_row_group_first td {
+#uoruabjltz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qanmiihpgm .gt_row_group_first th {
+#uoruabjltz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qanmiihpgm .gt_summary_row {
+#uoruabjltz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -668,16 +742,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#qanmiihpgm .gt_first_summary_row {
+#uoruabjltz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qanmiihpgm .gt_first_summary_row.thick {
+#uoruabjltz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qanmiihpgm .gt_last_summary_row {
+#uoruabjltz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -687,7 +761,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#qanmiihpgm .gt_grand_summary_row {
+#uoruabjltz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -697,7 +771,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#qanmiihpgm .gt_first_grand_summary_row {
+#uoruabjltz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -707,7 +781,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#qanmiihpgm .gt_last_grand_summary_row_top {
+#uoruabjltz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -717,11 +791,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#qanmiihpgm .gt_striped {
+#uoruabjltz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qanmiihpgm .gt_table_body {
+#uoruabjltz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -730,7 +804,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#qanmiihpgm .gt_footnotes {
+#uoruabjltz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -744,7 +818,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#qanmiihpgm .gt_footnote {
+#uoruabjltz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -753,7 +827,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#qanmiihpgm .gt_sourcenotes {
+#uoruabjltz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -767,7 +841,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#qanmiihpgm .gt_sourcenote {
+#uoruabjltz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -775,162 +849,182 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#qanmiihpgm .gt_left {
+#uoruabjltz .gt_left {
   text-align: left;
 }
 
-#qanmiihpgm .gt_center {
+#uoruabjltz .gt_center {
   text-align: center;
 }
 
-#qanmiihpgm .gt_right {
+#uoruabjltz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qanmiihpgm .gt_font_normal {
+#uoruabjltz .gt_font_normal {
   font-weight: normal;
 }
 
-#qanmiihpgm .gt_font_bold {
+#uoruabjltz .gt_font_bold {
   font-weight: bold;
 }
 
-#qanmiihpgm .gt_font_italic {
+#uoruabjltz .gt_font_italic {
   font-style: italic;
 }
 
-#qanmiihpgm .gt_super {
+#uoruabjltz .gt_super {
   font-size: 65%;
 }
 
-#qanmiihpgm .gt_footnote_marks {
+#uoruabjltz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qanmiihpgm .gt_asterisk {
+#uoruabjltz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qanmiihpgm .gt_indent_1 {
+#uoruabjltz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qanmiihpgm .gt_indent_2 {
+#uoruabjltz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qanmiihpgm .gt_indent_3 {
+#uoruabjltz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qanmiihpgm .gt_indent_4 {
+#uoruabjltz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qanmiihpgm .gt_indent_5 {
+#uoruabjltz .gt_indent_5 {
   text-indent: 25px;
 }
+
+#uoruabjltz .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#uoruabjltz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<caption>(a) <p>Nodes</p> </caption>
-  <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Label">Label</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Age">Age</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Type">Type</th>
-    </tr></thead>
+
+<div id="tbl-example-bipartite-nodes-edges-1" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-example-bipartite-nodes-edges-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Nodes
+</figcaption>
+<div aria-describedby="tbl-example-bipartite-nodes-edges-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="tbl-example-bipartite-nodes-edges-1" class="gt_table do-not-create-environment caption-top table" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="name" class="gt_col_heading gt_columns_bottom_border gt_left" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">Label</th>
+<th id="age" class="gt_col_heading gt_columns_bottom_border gt_right" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">Age</th>
+<th id="type" class="gt_col_heading gt_columns_bottom_border gt_left" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">Type</th>
+</tr>
+</thead>
 <tbody class="gt_table_body">
-<tr>
-<td headers="name" class="gt_row gt_left">1</td>
-<td headers="age" class="gt_row gt_right">18-25</td>
-<td headers="type" class="gt_row gt_left">Person</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">1</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">18-25</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Person</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">2</td>
-<td headers="age" class="gt_row gt_right">18-25</td>
-<td headers="type" class="gt_row gt_left">Person</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">2</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">18-25</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Person</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">3</td>
-<td headers="age" class="gt_row gt_right">18-25</td>
-<td headers="type" class="gt_row gt_left">Person</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">3</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">18-25</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Person</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">4</td>
-<td headers="age" class="gt_row gt_right">18-25</td>
-<td headers="type" class="gt_row gt_left">Person</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">4</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">18-25</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Person</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">5</td>
-<td headers="age" class="gt_row gt_right">26-50</td>
-<td headers="type" class="gt_row gt_left">Person</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">5</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">26-50</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Person</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">6</td>
-<td headers="age" class="gt_row gt_right">26-50</td>
-<td headers="type" class="gt_row gt_left">Person</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">6</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">26-50</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Person</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">7</td>
-<td headers="age" class="gt_row gt_right">26-50</td>
-<td headers="type" class="gt_row gt_left">Person</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">7</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">26-50</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Person</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">8</td>
-<td headers="age" class="gt_row gt_right">26-50</td>
-<td headers="type" class="gt_row gt_left">Person</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">8</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">26-50</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Person</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">A</td>
-<td headers="age" class="gt_row gt_right">-</td>
-<td headers="type" class="gt_row gt_left">Community District</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">A</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">-</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Community District</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">B</td>
-<td headers="age" class="gt_row gt_right">-</td>
-<td headers="type" class="gt_row gt_left">Community District</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">B</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">-</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Community District</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">C</td>
-<td headers="age" class="gt_row gt_right">-</td>
-<td headers="type" class="gt_row gt_left">Community District</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">C</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">-</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Community District</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">D</td>
-<td headers="age" class="gt_row gt_right">-</td>
-<td headers="type" class="gt_row gt_left">Community District</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">D</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">-</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Community District</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">E</td>
-<td headers="age" class="gt_row gt_right">-</td>
-<td headers="type" class="gt_row gt_left">Community District</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">E</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">-</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Community District</td>
 </tr>
 </tbody>
 </table>
 </div>
+</figure>
 </div>
-<div id="tbl-example-bipartite-nodes-edges-2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-bipartite-nodes-edges" style="flex-basis: 50.0%;justify-content: center;">
 
-<div id="jwhfwbzqvd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jwhfwbzqvd table {
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-example-bipartite-nodes-edges" style="flex-basis: 50.0%;justify-content: center;">
+<div id="tbfbqlezzy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tbfbqlezzy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jwhfwbzqvd thead, #jwhfwbzqvd tbody, #jwhfwbzqvd tfoot, #jwhfwbzqvd tr, #jwhfwbzqvd td, #jwhfwbzqvd th {
+#tbfbqlezzy thead, #tbfbqlezzy tbody, #tbfbqlezzy tfoot, #tbfbqlezzy tr, #tbfbqlezzy td, #tbfbqlezzy th {
   border-style: none;
 }
 
-#jwhfwbzqvd p {
+#tbfbqlezzy p {
   margin: 0;
   padding: 0;
 }
 
-#jwhfwbzqvd .gt_table {
+#tbfbqlezzy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -956,12 +1050,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#jwhfwbzqvd .gt_caption {
+#tbfbqlezzy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jwhfwbzqvd .gt_title {
+#tbfbqlezzy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -973,7 +1067,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#jwhfwbzqvd .gt_subtitle {
+#tbfbqlezzy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -985,7 +1079,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#jwhfwbzqvd .gt_heading {
+#tbfbqlezzy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -997,13 +1091,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#jwhfwbzqvd .gt_bottom_border {
+#tbfbqlezzy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jwhfwbzqvd .gt_col_headings {
+#tbfbqlezzy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1018,7 +1112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#jwhfwbzqvd .gt_col_heading {
+#tbfbqlezzy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1038,7 +1132,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#jwhfwbzqvd .gt_column_spanner_outer {
+#tbfbqlezzy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1050,15 +1144,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#jwhfwbzqvd .gt_column_spanner_outer:first-child {
+#tbfbqlezzy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jwhfwbzqvd .gt_column_spanner_outer:last-child {
+#tbfbqlezzy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jwhfwbzqvd .gt_column_spanner {
+#tbfbqlezzy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1070,11 +1164,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#jwhfwbzqvd .gt_spanner_row {
+#tbfbqlezzy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jwhfwbzqvd .gt_group_heading {
+#tbfbqlezzy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1100,7 +1194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#jwhfwbzqvd .gt_empty_group_heading {
+#tbfbqlezzy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1115,15 +1209,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#jwhfwbzqvd .gt_from_md > :first-child {
+#tbfbqlezzy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jwhfwbzqvd .gt_from_md > :last-child {
+#tbfbqlezzy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jwhfwbzqvd .gt_row {
+#tbfbqlezzy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1142,7 +1236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#jwhfwbzqvd .gt_stub {
+#tbfbqlezzy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1155,7 +1249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jwhfwbzqvd .gt_stub_row_group {
+#tbfbqlezzy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1169,15 +1263,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#jwhfwbzqvd .gt_row_group_first td {
+#tbfbqlezzy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jwhfwbzqvd .gt_row_group_first th {
+#tbfbqlezzy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jwhfwbzqvd .gt_summary_row {
+#tbfbqlezzy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1187,16 +1281,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jwhfwbzqvd .gt_first_summary_row {
+#tbfbqlezzy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jwhfwbzqvd .gt_first_summary_row.thick {
+#tbfbqlezzy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jwhfwbzqvd .gt_last_summary_row {
+#tbfbqlezzy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1206,7 +1300,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#jwhfwbzqvd .gt_grand_summary_row {
+#tbfbqlezzy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1216,7 +1310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jwhfwbzqvd .gt_first_grand_summary_row {
+#tbfbqlezzy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1226,7 +1320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#jwhfwbzqvd .gt_last_grand_summary_row_top {
+#tbfbqlezzy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1236,11 +1330,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#jwhfwbzqvd .gt_striped {
+#tbfbqlezzy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jwhfwbzqvd .gt_table_body {
+#tbfbqlezzy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1249,7 +1343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#jwhfwbzqvd .gt_footnotes {
+#tbfbqlezzy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1263,7 +1357,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#jwhfwbzqvd .gt_footnote {
+#tbfbqlezzy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1272,7 +1366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jwhfwbzqvd .gt_sourcenotes {
+#tbfbqlezzy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1286,7 +1380,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#jwhfwbzqvd .gt_sourcenote {
+#tbfbqlezzy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1294,222 +1388,257 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jwhfwbzqvd .gt_left {
+#tbfbqlezzy .gt_left {
   text-align: left;
 }
 
-#jwhfwbzqvd .gt_center {
+#tbfbqlezzy .gt_center {
   text-align: center;
 }
 
-#jwhfwbzqvd .gt_right {
+#tbfbqlezzy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jwhfwbzqvd .gt_font_normal {
+#tbfbqlezzy .gt_font_normal {
   font-weight: normal;
 }
 
-#jwhfwbzqvd .gt_font_bold {
+#tbfbqlezzy .gt_font_bold {
   font-weight: bold;
 }
 
-#jwhfwbzqvd .gt_font_italic {
+#tbfbqlezzy .gt_font_italic {
   font-style: italic;
 }
 
-#jwhfwbzqvd .gt_super {
+#tbfbqlezzy .gt_super {
   font-size: 65%;
 }
 
-#jwhfwbzqvd .gt_footnote_marks {
+#tbfbqlezzy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jwhfwbzqvd .gt_asterisk {
+#tbfbqlezzy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jwhfwbzqvd .gt_indent_1 {
+#tbfbqlezzy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jwhfwbzqvd .gt_indent_2 {
+#tbfbqlezzy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jwhfwbzqvd .gt_indent_3 {
+#tbfbqlezzy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jwhfwbzqvd .gt_indent_4 {
+#tbfbqlezzy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jwhfwbzqvd .gt_indent_5 {
+#tbfbqlezzy .gt_indent_5 {
   text-indent: 25px;
 }
+
+#tbfbqlezzy .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#tbfbqlezzy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<caption>(b) <p>Edges</p> </caption>
-  <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="From">From</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="To">To</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Relation">Relation</th>
-    </tr></thead>
+
+<div id="tbl-example-bipartite-nodes-edges-2" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-example-bipartite-nodes-edges-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Edges
+</figcaption>
+<div aria-describedby="tbl-example-bipartite-nodes-edges-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="tbl-example-bipartite-nodes-edges-2" class="gt_table do-not-create-environment caption-top table" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="From" class="gt_col_heading gt_columns_bottom_border gt_right" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">From</th>
+<th id="To" class="gt_col_heading gt_columns_bottom_border gt_left" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">To</th>
+<th id="Relation" class="gt_col_heading gt_columns_bottom_border gt_left" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">Relation</th>
+</tr>
+</thead>
 <tbody class="gt_table_body">
-<tr>
-<td headers="From" class="gt_row gt_right">1</td>
-<td headers="To" class="gt_row gt_left">A</td>
-<td headers="Relation" class="gt_row gt_left">HOME</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">1</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">A</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">HOME</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">2</td>
-<td headers="To" class="gt_row gt_left">A</td>
-<td headers="Relation" class="gt_row gt_left">GSEX</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">2</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">A</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">GSEX</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">2</td>
-<td headers="To" class="gt_row gt_left">B</td>
-<td headers="Relation" class="gt_row gt_left">HOME</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">2</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">B</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">HOME</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">3</td>
-<td headers="To" class="gt_row gt_left">A</td>
-<td headers="Relation" class="gt_row gt_left">PHYS</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">3</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">A</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">PHYS</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">3</td>
-<td headers="To" class="gt_row gt_left">B</td>
-<td headers="Relation" class="gt_row gt_left">HOME</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">3</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">B</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">HOME</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">3</td>
-<td headers="To" class="gt_row gt_left">E</td>
-<td headers="Relation" class="gt_row gt_left">GSEX</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">3</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">E</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">GSEX</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">3</td>
-<td headers="To" class="gt_row gt_left">E</td>
-<td headers="Relation" class="gt_row gt_left">PHYS</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">3</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">E</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">PHYS</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">4</td>
-<td headers="To" class="gt_row gt_left">B</td>
-<td headers="Relation" class="gt_row gt_left">PHYS</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">4</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">B</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">PHYS</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">4</td>
-<td headers="To" class="gt_row gt_left">C</td>
-<td headers="Relation" class="gt_row gt_left">HOME</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">4</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">C</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">HOME</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">4</td>
-<td headers="To" class="gt_row gt_left">D</td>
-<td headers="Relation" class="gt_row gt_left">GSEX</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">4</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">D</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">GSEX</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">4</td>
-<td headers="To" class="gt_row gt_left">E</td>
-<td headers="Relation" class="gt_row gt_left">GSEX</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">4</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">E</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">GSEX</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">5</td>
-<td headers="To" class="gt_row gt_left">C</td>
-<td headers="Relation" class="gt_row gt_left">HOME</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">5</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">C</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">HOME</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">6</td>
-<td headers="To" class="gt_row gt_left">D</td>
-<td headers="Relation" class="gt_row gt_left">PHYS</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">6</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">D</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">PHYS</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">6</td>
-<td headers="To" class="gt_row gt_left">D</td>
-<td headers="Relation" class="gt_row gt_left">HOME</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">6</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">D</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">HOME</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">6</td>
-<td headers="To" class="gt_row gt_left">E</td>
-<td headers="Relation" class="gt_row gt_left">PHYS</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">6</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">E</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">PHYS</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">7</td>
-<td headers="To" class="gt_row gt_left">C</td>
-<td headers="Relation" class="gt_row gt_left">HOME</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">7</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">C</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">HOME</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">8</td>
-<td headers="To" class="gt_row gt_left">C</td>
-<td headers="Relation" class="gt_row gt_left">GSEX</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">8</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">C</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">GSEX</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">8</td>
-<td headers="To" class="gt_row gt_left">D</td>
-<td headers="Relation" class="gt_row gt_left">HOME</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">8</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">D</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">HOME</td>
 </tr>
 </tbody>
 </table>
 </div>
+</figure>
 </div>
-</div>
-</div>
-</div>
-</section><section id="person-graph" class="level3" data-number="B.1.2"><h3 data-number="B.1.2" class="anchored" data-anchor-id="person-graph">
-<span class="header-section-number">B.1.2</span> Person graph</h3>
-<p>The MPX NYC participant network has participants as nodes. A pair of nodes is connected by a weighted edge if each of the individuals represented by the nodes has at least one contact venue or residence in the same, shared community district. The weight of the edge is given by the count of community districts the pair of nodes have in common. By definition, an edge of weight <span class="math inline">\(0\)</span> is equivalent to the absence of an edge. <a href="#tbl-example-participant-nodes">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-participant-nodes</span></a> shows the nodes of the participant network shown in <a href="#tbl-example-participant-nodes">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-participant-nodes</span></a> (a) and <a href="#tbl-example-participant-nodes">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-participant-nodes</span></a> (b) show the edges.</p>
-<div class="cell" data-hash="B__ssnac2_network_analysis_cache/html/fig-example-participant_93bbb445deb362988f3655f3eb3e2816">
-<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"people"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">plot_example_network</span><span class="op">(</span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div id="fig-example-participant" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="B__ssnac2_network_analysis_files/figure-html/fig-example-participant-1.png" class="img-fluid figure-img" width="864"></p>
-<figcaption class="figure-caption">Figure&nbsp;B.2: Sample person-person network visualizatoin</figcaption></figure>
-</div>
-</div>
-</div>
-<div>
-<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"people"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>Name <span class="op">=</span> <span class="va">label</span>, Type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span>, <span class="st">"Person"</span>, <span class="st">"Community District"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"people"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, <span class="va">type</span>, <span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>from_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">from</span><span class="op">]</span>, to_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">to</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>From <span class="op">=</span> <span class="va">from_name</span>, To <span class="op">=</span> <span class="va">to_name</span>, Weight <span class="op">=</span> <span class="va">weight</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-example-participant-nodes" class="cell tbl-parent quarto-layout-panel anchored" data-hash="B__ssnac2_network_analysis_cache/html/tbl-example-participant-nodes_1a6718d0be0b28c1dd73bdea89640fbd">
-<div class="panel-caption table-caption">
-<p>Table&nbsp;B.2: Sample person-person network data</p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div id="tbl-example-participant-nodes-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-participant-nodes" style="flex-basis: 50.0%;justify-content: center;">
 
-<div id="kjmzqmztlt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kjmzqmztlt table {
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</section>
+<section id="person-graph" class="level3" data-number="B.1.2">
+<h3 data-number="B.1.2" class="anchored" data-anchor-id="person-graph"><span class="header-section-number">B.1.2</span> Person graph</h3>
+<p>The MPX NYC participant network has participants as nodes. A pair of nodes is connected by a weighted edge if each of the individuals represented by the nodes has at least one contact venue or residence in the same, shared community district. The weight of the edge is given by the count of community districts the pair of nodes have in common. By definition, an edge of weight <span class="math inline">\(0\)</span> is equivalent to the absence of an edge. <a href="#tbl-example-participant-nodes" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-participant-nodes</span></a> shows the nodes of the participant network shown in <a href="#tbl-example-participant-nodes" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-participant-nodes</span></a> (a) and <a href="#tbl-example-participant-nodes" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-participant-nodes</span></a> (b) show the edges.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"people"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_example_network</span>(targets<span class="sc">::</span><span class="fu">tar_read</span>(config_list)) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-example-participant" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-example-participant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="B__ssnac2_network_analysis_files/figure-html/fig-example-participant-1.png" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-participant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;B.2: Sample person-person network visualizatoin
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"people"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">transmute</span>(<span class="at">Name =</span> label, <span class="at">Type =</span> <span class="fu">ifelse</span>(type, <span class="st">"Person"</span>, <span class="st">"Community District"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"people"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">name =</span> label, type, age) <span class="sc">|&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  tidygraph<span class="sc">::</span><span class="fu">activate</span>(edges) <span class="sc">|&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">from_name =</span> tidygraph<span class="sc">::</span><span class="fu">.N</span>()<span class="sc">$</span>name[from], <span class="at">to_name =</span> tidygraph<span class="sc">::</span><span class="fu">.N</span>()<span class="sc">$</span>name[to]) <span class="sc">|&gt;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(from, to) <span class="sc">|&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">transmute</span>(<span class="at">From =</span> from_name, <span class="at">To =</span> to_name, <span class="at">Weight =</span> weight) <span class="sc">|&gt;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-example-participant-nodes" class="quarto-layout-panel anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-example-participant-nodes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;B.2: Sample person-person network data
+</figcaption>
+<div aria-describedby="tbl-example-participant-nodes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-example-participant-nodes" style="flex-basis: 50.0%;justify-content: center;">
+<div id="yfeirgnwzx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yfeirgnwzx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kjmzqmztlt thead, #kjmzqmztlt tbody, #kjmzqmztlt tfoot, #kjmzqmztlt tr, #kjmzqmztlt td, #kjmzqmztlt th {
+#yfeirgnwzx thead, #yfeirgnwzx tbody, #yfeirgnwzx tfoot, #yfeirgnwzx tr, #yfeirgnwzx td, #yfeirgnwzx th {
   border-style: none;
 }
 
-#kjmzqmztlt p {
+#yfeirgnwzx p {
   margin: 0;
   padding: 0;
 }
 
-#kjmzqmztlt .gt_table {
+#yfeirgnwzx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1535,12 +1664,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#kjmzqmztlt .gt_caption {
+#yfeirgnwzx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kjmzqmztlt .gt_title {
+#yfeirgnwzx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1552,7 +1681,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#kjmzqmztlt .gt_subtitle {
+#yfeirgnwzx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1564,7 +1693,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#kjmzqmztlt .gt_heading {
+#yfeirgnwzx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1576,13 +1705,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#kjmzqmztlt .gt_bottom_border {
+#yfeirgnwzx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kjmzqmztlt .gt_col_headings {
+#yfeirgnwzx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1597,7 +1726,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#kjmzqmztlt .gt_col_heading {
+#yfeirgnwzx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1617,7 +1746,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#kjmzqmztlt .gt_column_spanner_outer {
+#yfeirgnwzx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1629,15 +1758,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#kjmzqmztlt .gt_column_spanner_outer:first-child {
+#yfeirgnwzx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kjmzqmztlt .gt_column_spanner_outer:last-child {
+#yfeirgnwzx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kjmzqmztlt .gt_column_spanner {
+#yfeirgnwzx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1649,11 +1778,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#kjmzqmztlt .gt_spanner_row {
+#yfeirgnwzx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kjmzqmztlt .gt_group_heading {
+#yfeirgnwzx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1679,7 +1808,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#kjmzqmztlt .gt_empty_group_heading {
+#yfeirgnwzx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1694,15 +1823,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#kjmzqmztlt .gt_from_md > :first-child {
+#yfeirgnwzx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kjmzqmztlt .gt_from_md > :last-child {
+#yfeirgnwzx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kjmzqmztlt .gt_row {
+#yfeirgnwzx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1721,7 +1850,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#kjmzqmztlt .gt_stub {
+#yfeirgnwzx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1734,7 +1863,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#kjmzqmztlt .gt_stub_row_group {
+#yfeirgnwzx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1748,15 +1877,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#kjmzqmztlt .gt_row_group_first td {
+#yfeirgnwzx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kjmzqmztlt .gt_row_group_first th {
+#yfeirgnwzx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kjmzqmztlt .gt_summary_row {
+#yfeirgnwzx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1766,16 +1895,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#kjmzqmztlt .gt_first_summary_row {
+#yfeirgnwzx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kjmzqmztlt .gt_first_summary_row.thick {
+#yfeirgnwzx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kjmzqmztlt .gt_last_summary_row {
+#yfeirgnwzx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1785,7 +1914,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#kjmzqmztlt .gt_grand_summary_row {
+#yfeirgnwzx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1795,7 +1924,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#kjmzqmztlt .gt_first_grand_summary_row {
+#yfeirgnwzx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1805,7 +1934,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#kjmzqmztlt .gt_last_grand_summary_row_top {
+#yfeirgnwzx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1815,11 +1944,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#kjmzqmztlt .gt_striped {
+#yfeirgnwzx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kjmzqmztlt .gt_table_body {
+#yfeirgnwzx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1828,7 +1957,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#kjmzqmztlt .gt_footnotes {
+#yfeirgnwzx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1842,7 +1971,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#kjmzqmztlt .gt_footnote {
+#yfeirgnwzx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1851,7 +1980,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#kjmzqmztlt .gt_sourcenotes {
+#yfeirgnwzx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1865,7 +1994,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#kjmzqmztlt .gt_sourcenote {
+#yfeirgnwzx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1873,128 +2002,148 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#kjmzqmztlt .gt_left {
+#yfeirgnwzx .gt_left {
   text-align: left;
 }
 
-#kjmzqmztlt .gt_center {
+#yfeirgnwzx .gt_center {
   text-align: center;
 }
 
-#kjmzqmztlt .gt_right {
+#yfeirgnwzx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kjmzqmztlt .gt_font_normal {
+#yfeirgnwzx .gt_font_normal {
   font-weight: normal;
 }
 
-#kjmzqmztlt .gt_font_bold {
+#yfeirgnwzx .gt_font_bold {
   font-weight: bold;
 }
 
-#kjmzqmztlt .gt_font_italic {
+#yfeirgnwzx .gt_font_italic {
   font-style: italic;
 }
 
-#kjmzqmztlt .gt_super {
+#yfeirgnwzx .gt_super {
   font-size: 65%;
 }
 
-#kjmzqmztlt .gt_footnote_marks {
+#yfeirgnwzx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kjmzqmztlt .gt_asterisk {
+#yfeirgnwzx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kjmzqmztlt .gt_indent_1 {
+#yfeirgnwzx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kjmzqmztlt .gt_indent_2 {
+#yfeirgnwzx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kjmzqmztlt .gt_indent_3 {
+#yfeirgnwzx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kjmzqmztlt .gt_indent_4 {
+#yfeirgnwzx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kjmzqmztlt .gt_indent_5 {
+#yfeirgnwzx .gt_indent_5 {
   text-indent: 25px;
 }
+
+#yfeirgnwzx .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#yfeirgnwzx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<caption>(a) <p>Nodes</p> </caption>
-  <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Name">Name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Type">Type</th>
-    </tr></thead>
+
+<div id="tbl-example-participant-nodes-1" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-example-participant-nodes-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Nodes
+</figcaption>
+<div aria-describedby="tbl-example-participant-nodes-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="tbl-example-participant-nodes-1" class="gt_table do-not-create-environment caption-top table" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="Name" class="gt_col_heading gt_columns_bottom_border gt_right" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">Name</th>
+<th id="Type" class="gt_col_heading gt_columns_bottom_border gt_left" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">Type</th>
+</tr>
+</thead>
 <tbody class="gt_table_body">
-<tr>
-<td headers="Name" class="gt_row gt_right">1</td>
-<td headers="Type" class="gt_row gt_left">Person</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="Name">1</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Type">Person</td>
 </tr>
-<tr>
-<td headers="Name" class="gt_row gt_right">2</td>
-<td headers="Type" class="gt_row gt_left">Person</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="Name">2</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Type">Person</td>
 </tr>
-<tr>
-<td headers="Name" class="gt_row gt_right">3</td>
-<td headers="Type" class="gt_row gt_left">Person</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="Name">3</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Type">Person</td>
 </tr>
-<tr>
-<td headers="Name" class="gt_row gt_right">4</td>
-<td headers="Type" class="gt_row gt_left">Person</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="Name">4</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Type">Person</td>
 </tr>
-<tr>
-<td headers="Name" class="gt_row gt_right">5</td>
-<td headers="Type" class="gt_row gt_left">Person</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="Name">5</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Type">Person</td>
 </tr>
-<tr>
-<td headers="Name" class="gt_row gt_right">6</td>
-<td headers="Type" class="gt_row gt_left">Person</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="Name">6</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Type">Person</td>
 </tr>
-<tr>
-<td headers="Name" class="gt_row gt_right">7</td>
-<td headers="Type" class="gt_row gt_left">Person</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="Name">7</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Type">Person</td>
 </tr>
-<tr>
-<td headers="Name" class="gt_row gt_right">8</td>
-<td headers="Type" class="gt_row gt_left">Person</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="Name">8</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Type">Person</td>
 </tr>
 </tbody>
 </table>
 </div>
+</figure>
 </div>
-<div id="tbl-example-participant-nodes-2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-participant-nodes" style="flex-basis: 50.0%;justify-content: center;">
 
-<div id="gizkvytejd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gizkvytejd table {
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-example-participant-nodes" style="flex-basis: 50.0%;justify-content: center;">
+<div id="lhjawcmkeu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lhjawcmkeu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gizkvytejd thead, #gizkvytejd tbody, #gizkvytejd tfoot, #gizkvytejd tr, #gizkvytejd td, #gizkvytejd th {
+#lhjawcmkeu thead, #lhjawcmkeu tbody, #lhjawcmkeu tfoot, #lhjawcmkeu tr, #lhjawcmkeu td, #lhjawcmkeu th {
   border-style: none;
 }
 
-#gizkvytejd p {
+#lhjawcmkeu p {
   margin: 0;
   padding: 0;
 }
 
-#gizkvytejd .gt_table {
+#lhjawcmkeu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2020,12 +2169,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#gizkvytejd .gt_caption {
+#lhjawcmkeu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gizkvytejd .gt_title {
+#lhjawcmkeu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2037,7 +2186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#gizkvytejd .gt_subtitle {
+#lhjawcmkeu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2049,7 +2198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#gizkvytejd .gt_heading {
+#lhjawcmkeu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2061,13 +2210,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#gizkvytejd .gt_bottom_border {
+#lhjawcmkeu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gizkvytejd .gt_col_headings {
+#lhjawcmkeu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2082,7 +2231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#gizkvytejd .gt_col_heading {
+#lhjawcmkeu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2102,7 +2251,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#gizkvytejd .gt_column_spanner_outer {
+#lhjawcmkeu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2114,15 +2263,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#gizkvytejd .gt_column_spanner_outer:first-child {
+#lhjawcmkeu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gizkvytejd .gt_column_spanner_outer:last-child {
+#lhjawcmkeu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gizkvytejd .gt_column_spanner {
+#lhjawcmkeu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2134,11 +2283,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#gizkvytejd .gt_spanner_row {
+#lhjawcmkeu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gizkvytejd .gt_group_heading {
+#lhjawcmkeu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2164,7 +2313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#gizkvytejd .gt_empty_group_heading {
+#lhjawcmkeu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2179,15 +2328,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#gizkvytejd .gt_from_md > :first-child {
+#lhjawcmkeu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gizkvytejd .gt_from_md > :last-child {
+#lhjawcmkeu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gizkvytejd .gt_row {
+#lhjawcmkeu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2206,7 +2355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#gizkvytejd .gt_stub {
+#lhjawcmkeu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2219,7 +2368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#gizkvytejd .gt_stub_row_group {
+#lhjawcmkeu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2233,15 +2382,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#gizkvytejd .gt_row_group_first td {
+#lhjawcmkeu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gizkvytejd .gt_row_group_first th {
+#lhjawcmkeu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gizkvytejd .gt_summary_row {
+#lhjawcmkeu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2251,16 +2400,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#gizkvytejd .gt_first_summary_row {
+#lhjawcmkeu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gizkvytejd .gt_first_summary_row.thick {
+#lhjawcmkeu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gizkvytejd .gt_last_summary_row {
+#lhjawcmkeu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2270,7 +2419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#gizkvytejd .gt_grand_summary_row {
+#lhjawcmkeu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2280,7 +2429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#gizkvytejd .gt_first_grand_summary_row {
+#lhjawcmkeu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2290,7 +2439,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#gizkvytejd .gt_last_grand_summary_row_top {
+#lhjawcmkeu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2300,11 +2449,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#gizkvytejd .gt_striped {
+#lhjawcmkeu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gizkvytejd .gt_table_body {
+#lhjawcmkeu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2313,7 +2462,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#gizkvytejd .gt_footnotes {
+#lhjawcmkeu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2327,7 +2476,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#gizkvytejd .gt_footnote {
+#lhjawcmkeu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2336,7 +2485,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#gizkvytejd .gt_sourcenotes {
+#lhjawcmkeu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2350,7 +2499,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#gizkvytejd .gt_sourcenote {
+#lhjawcmkeu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2358,202 +2507,237 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#gizkvytejd .gt_left {
+#lhjawcmkeu .gt_left {
   text-align: left;
 }
 
-#gizkvytejd .gt_center {
+#lhjawcmkeu .gt_center {
   text-align: center;
 }
 
-#gizkvytejd .gt_right {
+#lhjawcmkeu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gizkvytejd .gt_font_normal {
+#lhjawcmkeu .gt_font_normal {
   font-weight: normal;
 }
 
-#gizkvytejd .gt_font_bold {
+#lhjawcmkeu .gt_font_bold {
   font-weight: bold;
 }
 
-#gizkvytejd .gt_font_italic {
+#lhjawcmkeu .gt_font_italic {
   font-style: italic;
 }
 
-#gizkvytejd .gt_super {
+#lhjawcmkeu .gt_super {
   font-size: 65%;
 }
 
-#gizkvytejd .gt_footnote_marks {
+#lhjawcmkeu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gizkvytejd .gt_asterisk {
+#lhjawcmkeu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gizkvytejd .gt_indent_1 {
+#lhjawcmkeu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gizkvytejd .gt_indent_2 {
+#lhjawcmkeu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gizkvytejd .gt_indent_3 {
+#lhjawcmkeu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gizkvytejd .gt_indent_4 {
+#lhjawcmkeu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gizkvytejd .gt_indent_5 {
+#lhjawcmkeu .gt_indent_5 {
   text-indent: 25px;
 }
+
+#lhjawcmkeu .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#lhjawcmkeu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<caption>(b) <p>Edges</p> </caption>
-  <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="From">From</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="To">To</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Weight">Weight</th>
-    </tr></thead>
+
+<div id="tbl-example-participant-nodes-2" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-example-participant-nodes-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Edges
+</figcaption>
+<div aria-describedby="tbl-example-participant-nodes-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="tbl-example-participant-nodes-2" class="gt_table do-not-create-environment caption-top table" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="From" class="gt_col_heading gt_columns_bottom_border gt_right" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">From</th>
+<th id="To" class="gt_col_heading gt_columns_bottom_border gt_right" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">To</th>
+<th id="Weight" class="gt_col_heading gt_columns_bottom_border gt_right" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">Weight</th>
+</tr>
+</thead>
 <tbody class="gt_table_body">
-<tr>
-<td headers="From" class="gt_row gt_right">1</td>
-<td headers="To" class="gt_row gt_right">2</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">1</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="To">2</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">1</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">1</td>
-<td headers="To" class="gt_row gt_right">3</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">1</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="To">3</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">1</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">2</td>
-<td headers="To" class="gt_row gt_right">3</td>
-<td headers="Weight" class="gt_row gt_right">2</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">2</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="To">3</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">2</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">2</td>
-<td headers="To" class="gt_row gt_right">4</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">2</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="To">4</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">1</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">3</td>
-<td headers="To" class="gt_row gt_right">4</td>
-<td headers="Weight" class="gt_row gt_right">3</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">3</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="To">4</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">3</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">3</td>
-<td headers="To" class="gt_row gt_right">6</td>
-<td headers="Weight" class="gt_row gt_right">2</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">3</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="To">6</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">2</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">4</td>
-<td headers="To" class="gt_row gt_right">5</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">4</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="To">5</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">1</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">4</td>
-<td headers="To" class="gt_row gt_right">6</td>
-<td headers="Weight" class="gt_row gt_right">3</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">4</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="To">6</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">3</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">4</td>
-<td headers="To" class="gt_row gt_right">7</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">4</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="To">7</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">1</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">4</td>
-<td headers="To" class="gt_row gt_right">8</td>
-<td headers="Weight" class="gt_row gt_right">2</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">4</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="To">8</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">2</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">5</td>
-<td headers="To" class="gt_row gt_right">7</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">5</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="To">7</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">1</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">5</td>
-<td headers="To" class="gt_row gt_right">8</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">5</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="To">8</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">1</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">6</td>
-<td headers="To" class="gt_row gt_right">8</td>
-<td headers="Weight" class="gt_row gt_right">2</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">6</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="To">8</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">2</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">7</td>
-<td headers="To" class="gt_row gt_right">8</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">7</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="To">8</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">1</td>
 </tr>
 </tbody>
 </table>
 </div>
+</figure>
 </div>
-</div>
-</div>
-</div>
-</section><section id="place-graph" class="level3" data-number="B.1.3"><h3 data-number="B.1.3" class="anchored" data-anchor-id="place-graph">
-<span class="header-section-number">B.1.3</span> Place graph</h3>
-<p>The MPX NYC community district network has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a contact venue or residence in both community districts. The weight is the count of participants which are shared by the two community districts. <a href="#fig-example-community">Figure&nbsp;<span class="quarto-unresolved-ref">fig-example-community</span></a> shows the community district network derived from the MPX NYC spatial participant data network shown in <a href="#fig-example-participant-place">Figure&nbsp;<span class="quarto-unresolved-ref">fig-example-participant-place</span></a>. <a href="#tbl-example-place-nodes">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-place-nodes</span></a> (a) shows list the nodes of the former network, and <a href="#tbl-example-place-nodes">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-place-nodes</span></a> (b) shows the edges.</p>
-<div class="cell" data-hash="B__ssnac2_network_analysis_cache/html/fig-example-community_6ef45e573a76ebcbc56e5b03a6156815">
-<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"places"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">plot_example_network</span><span class="op">(</span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">)</span>  <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div id="fig-example-community" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="B__ssnac2_network_analysis_files/figure-html/fig-example-community-1.png" class="img-fluid figure-img" width="864"></p>
-<figcaption class="figure-caption">Figure&nbsp;B.3: Sample place network visualization</figcaption></figure>
-</div>
-</div>
-</div>
-<div>
-<details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"places"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>Name <span class="op">=</span> <span class="va">label</span>, Type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span>, <span class="st">"Person"</span>, <span class="st">"Community District"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"places"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, <span class="va">type</span>, <span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>from_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">from</span><span class="op">]</span>, to_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">to</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>From <span class="op">=</span> <span class="va">from_name</span>, To <span class="op">=</span> <span class="va">to_name</span>, Weight <span class="op">=</span> <span class="va">weight</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-example-place-nodes" class="cell tbl-parent quarto-layout-panel anchored" data-hash="B__ssnac2_network_analysis_cache/html/tbl-example-place-nodes_f609f9cb90955271dc9dffa6721d0f23">
-<div class="panel-caption table-caption">
-<p>Table&nbsp;B.3: Sample place network data</p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div id="tbl-example-place-nodes-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-place-nodes" style="flex-basis: 50.0%;justify-content: center;">
 
-<div id="jyqcvixbpb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jyqcvixbpb table {
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</section>
+<section id="place-graph" class="level3" data-number="B.1.3">
+<h3 data-number="B.1.3" class="anchored" data-anchor-id="place-graph"><span class="header-section-number">B.1.3</span> Place graph</h3>
+<p>The MPX NYC community district network has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a contact venue or residence in both community districts. The weight is the count of participants which are shared by the two community districts. <a href="#fig-example-community" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-example-community</span></a> shows the community district network derived from the MPX NYC spatial participant data network shown in <a href="#fig-example-participant-place" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-example-participant-place</span></a>. <a href="#tbl-example-place-nodes" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-place-nodes</span></a> (a) shows list the nodes of the former network, and <a href="#tbl-example-place-nodes" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-example-place-nodes</span></a> (b) shows the edges.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"places"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_example_network</span>(targets<span class="sc">::</span><span class="fu">tar_read</span>(config_list))  <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-example-community" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-example-community-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="B__ssnac2_network_analysis_files/figure-html/fig-example-community-1.png" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-community-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;B.3: Sample place network visualization
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"places"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">transmute</span>(<span class="at">Name =</span> label, <span class="at">Type =</span> <span class="fu">ifelse</span>(type, <span class="st">"Person"</span>, <span class="st">"Community District"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"places"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">name =</span> label, type, age) <span class="sc">|&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  tidygraph<span class="sc">::</span><span class="fu">activate</span>(edges) <span class="sc">|&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">from_name =</span> tidygraph<span class="sc">::</span><span class="fu">.N</span>()<span class="sc">$</span>name[from], <span class="at">to_name =</span> tidygraph<span class="sc">::</span><span class="fu">.N</span>()<span class="sc">$</span>name[to]) <span class="sc">|&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(from, to) <span class="sc">|&gt;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">transmute</span>(<span class="at">From =</span> from_name, <span class="at">To =</span> to_name, <span class="at">Weight =</span> weight) <span class="sc">|&gt;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-example-place-nodes" class="quarto-layout-panel anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-example-place-nodes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;B.3: Sample place network data
+</figcaption>
+<div aria-describedby="tbl-example-place-nodes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-example-place-nodes" style="flex-basis: 50.0%;justify-content: center;">
+<div id="xmazyxyhfn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xmazyxyhfn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jyqcvixbpb thead, #jyqcvixbpb tbody, #jyqcvixbpb tfoot, #jyqcvixbpb tr, #jyqcvixbpb td, #jyqcvixbpb th {
+#xmazyxyhfn thead, #xmazyxyhfn tbody, #xmazyxyhfn tfoot, #xmazyxyhfn tr, #xmazyxyhfn td, #xmazyxyhfn th {
   border-style: none;
 }
 
-#jyqcvixbpb p {
+#xmazyxyhfn p {
   margin: 0;
   padding: 0;
 }
 
-#jyqcvixbpb .gt_table {
+#xmazyxyhfn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2579,12 +2763,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#jyqcvixbpb .gt_caption {
+#xmazyxyhfn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jyqcvixbpb .gt_title {
+#xmazyxyhfn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2596,7 +2780,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#jyqcvixbpb .gt_subtitle {
+#xmazyxyhfn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2608,7 +2792,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#jyqcvixbpb .gt_heading {
+#xmazyxyhfn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2620,13 +2804,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#jyqcvixbpb .gt_bottom_border {
+#xmazyxyhfn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jyqcvixbpb .gt_col_headings {
+#xmazyxyhfn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2641,7 +2825,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#jyqcvixbpb .gt_col_heading {
+#xmazyxyhfn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2661,7 +2845,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#jyqcvixbpb .gt_column_spanner_outer {
+#xmazyxyhfn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2673,15 +2857,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#jyqcvixbpb .gt_column_spanner_outer:first-child {
+#xmazyxyhfn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jyqcvixbpb .gt_column_spanner_outer:last-child {
+#xmazyxyhfn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jyqcvixbpb .gt_column_spanner {
+#xmazyxyhfn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2693,11 +2877,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#jyqcvixbpb .gt_spanner_row {
+#xmazyxyhfn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jyqcvixbpb .gt_group_heading {
+#xmazyxyhfn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2723,7 +2907,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#jyqcvixbpb .gt_empty_group_heading {
+#xmazyxyhfn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2738,15 +2922,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#jyqcvixbpb .gt_from_md > :first-child {
+#xmazyxyhfn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jyqcvixbpb .gt_from_md > :last-child {
+#xmazyxyhfn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jyqcvixbpb .gt_row {
+#xmazyxyhfn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2765,7 +2949,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#jyqcvixbpb .gt_stub {
+#xmazyxyhfn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2778,7 +2962,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jyqcvixbpb .gt_stub_row_group {
+#xmazyxyhfn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2792,15 +2976,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#jyqcvixbpb .gt_row_group_first td {
+#xmazyxyhfn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jyqcvixbpb .gt_row_group_first th {
+#xmazyxyhfn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jyqcvixbpb .gt_summary_row {
+#xmazyxyhfn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2810,16 +2994,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jyqcvixbpb .gt_first_summary_row {
+#xmazyxyhfn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jyqcvixbpb .gt_first_summary_row.thick {
+#xmazyxyhfn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jyqcvixbpb .gt_last_summary_row {
+#xmazyxyhfn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2829,7 +3013,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#jyqcvixbpb .gt_grand_summary_row {
+#xmazyxyhfn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2839,7 +3023,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jyqcvixbpb .gt_first_grand_summary_row {
+#xmazyxyhfn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2849,7 +3033,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#jyqcvixbpb .gt_last_grand_summary_row_top {
+#xmazyxyhfn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2859,11 +3043,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#jyqcvixbpb .gt_striped {
+#xmazyxyhfn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jyqcvixbpb .gt_table_body {
+#xmazyxyhfn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2872,7 +3056,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#jyqcvixbpb .gt_footnotes {
+#xmazyxyhfn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2886,7 +3070,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#jyqcvixbpb .gt_footnote {
+#xmazyxyhfn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2895,7 +3079,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jyqcvixbpb .gt_sourcenotes {
+#xmazyxyhfn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2909,7 +3093,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#jyqcvixbpb .gt_sourcenote {
+#xmazyxyhfn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2917,116 +3101,136 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jyqcvixbpb .gt_left {
+#xmazyxyhfn .gt_left {
   text-align: left;
 }
 
-#jyqcvixbpb .gt_center {
+#xmazyxyhfn .gt_center {
   text-align: center;
 }
 
-#jyqcvixbpb .gt_right {
+#xmazyxyhfn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jyqcvixbpb .gt_font_normal {
+#xmazyxyhfn .gt_font_normal {
   font-weight: normal;
 }
 
-#jyqcvixbpb .gt_font_bold {
+#xmazyxyhfn .gt_font_bold {
   font-weight: bold;
 }
 
-#jyqcvixbpb .gt_font_italic {
+#xmazyxyhfn .gt_font_italic {
   font-style: italic;
 }
 
-#jyqcvixbpb .gt_super {
+#xmazyxyhfn .gt_super {
   font-size: 65%;
 }
 
-#jyqcvixbpb .gt_footnote_marks {
+#xmazyxyhfn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jyqcvixbpb .gt_asterisk {
+#xmazyxyhfn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jyqcvixbpb .gt_indent_1 {
+#xmazyxyhfn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jyqcvixbpb .gt_indent_2 {
+#xmazyxyhfn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jyqcvixbpb .gt_indent_3 {
+#xmazyxyhfn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jyqcvixbpb .gt_indent_4 {
+#xmazyxyhfn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jyqcvixbpb .gt_indent_5 {
+#xmazyxyhfn .gt_indent_5 {
   text-indent: 25px;
 }
+
+#xmazyxyhfn .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#xmazyxyhfn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<caption>(a) <p>Nodes</p> </caption>
-  <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Name">Name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Type">Type</th>
-    </tr></thead>
+
+<div id="tbl-example-place-nodes-1" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-example-place-nodes-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Nodes
+</figcaption>
+<div aria-describedby="tbl-example-place-nodes-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="tbl-example-place-nodes-1" class="gt_table do-not-create-environment caption-top table" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="Name" class="gt_col_heading gt_columns_bottom_border gt_left" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">Name</th>
+<th id="Type" class="gt_col_heading gt_columns_bottom_border gt_left" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">Type</th>
+</tr>
+</thead>
 <tbody class="gt_table_body">
-<tr>
-<td headers="Name" class="gt_row gt_left">A</td>
-<td headers="Type" class="gt_row gt_left">Community District</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="Name">A</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Type">Community District</td>
 </tr>
-<tr>
-<td headers="Name" class="gt_row gt_left">B</td>
-<td headers="Type" class="gt_row gt_left">Community District</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="Name">B</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Type">Community District</td>
 </tr>
-<tr>
-<td headers="Name" class="gt_row gt_left">C</td>
-<td headers="Type" class="gt_row gt_left">Community District</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="Name">C</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Type">Community District</td>
 </tr>
-<tr>
-<td headers="Name" class="gt_row gt_left">D</td>
-<td headers="Type" class="gt_row gt_left">Community District</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="Name">D</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Type">Community District</td>
 </tr>
-<tr>
-<td headers="Name" class="gt_row gt_left">E</td>
-<td headers="Type" class="gt_row gt_left">Community District</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="Name">E</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Type">Community District</td>
 </tr>
 </tbody>
 </table>
 </div>
+</figure>
 </div>
-<div id="tbl-example-place-nodes-2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-place-nodes" style="flex-basis: 50.0%;justify-content: center;">
 
-<div id="gcvnpsqllg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gcvnpsqllg table {
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-example-place-nodes" style="flex-basis: 50.0%;justify-content: center;">
+<div id="ygypisfunp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ygypisfunp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gcvnpsqllg thead, #gcvnpsqllg tbody, #gcvnpsqllg tfoot, #gcvnpsqllg tr, #gcvnpsqllg td, #gcvnpsqllg th {
+#ygypisfunp thead, #ygypisfunp tbody, #ygypisfunp tfoot, #ygypisfunp tr, #ygypisfunp td, #ygypisfunp th {
   border-style: none;
 }
 
-#gcvnpsqllg p {
+#ygypisfunp p {
   margin: 0;
   padding: 0;
 }
 
-#gcvnpsqllg .gt_table {
+#ygypisfunp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3052,12 +3256,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#gcvnpsqllg .gt_caption {
+#ygypisfunp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gcvnpsqllg .gt_title {
+#ygypisfunp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3069,7 +3273,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#gcvnpsqllg .gt_subtitle {
+#ygypisfunp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3081,7 +3285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#gcvnpsqllg .gt_heading {
+#ygypisfunp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3093,13 +3297,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#gcvnpsqllg .gt_bottom_border {
+#ygypisfunp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gcvnpsqllg .gt_col_headings {
+#ygypisfunp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3114,7 +3318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#gcvnpsqllg .gt_col_heading {
+#ygypisfunp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3134,7 +3338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#gcvnpsqllg .gt_column_spanner_outer {
+#ygypisfunp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3146,15 +3350,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#gcvnpsqllg .gt_column_spanner_outer:first-child {
+#ygypisfunp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gcvnpsqllg .gt_column_spanner_outer:last-child {
+#ygypisfunp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gcvnpsqllg .gt_column_spanner {
+#ygypisfunp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3166,11 +3370,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#gcvnpsqllg .gt_spanner_row {
+#ygypisfunp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gcvnpsqllg .gt_group_heading {
+#ygypisfunp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3196,7 +3400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#gcvnpsqllg .gt_empty_group_heading {
+#ygypisfunp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3211,15 +3415,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#gcvnpsqllg .gt_from_md > :first-child {
+#ygypisfunp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gcvnpsqllg .gt_from_md > :last-child {
+#ygypisfunp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gcvnpsqllg .gt_row {
+#ygypisfunp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3238,7 +3442,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#gcvnpsqllg .gt_stub {
+#ygypisfunp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3251,7 +3455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#gcvnpsqllg .gt_stub_row_group {
+#ygypisfunp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3265,15 +3469,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#gcvnpsqllg .gt_row_group_first td {
+#ygypisfunp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gcvnpsqllg .gt_row_group_first th {
+#ygypisfunp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gcvnpsqllg .gt_summary_row {
+#ygypisfunp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3283,16 +3487,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#gcvnpsqllg .gt_first_summary_row {
+#ygypisfunp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gcvnpsqllg .gt_first_summary_row.thick {
+#ygypisfunp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gcvnpsqllg .gt_last_summary_row {
+#ygypisfunp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3302,7 +3506,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#gcvnpsqllg .gt_grand_summary_row {
+#ygypisfunp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3312,7 +3516,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#gcvnpsqllg .gt_first_grand_summary_row {
+#ygypisfunp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3322,7 +3526,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#gcvnpsqllg .gt_last_grand_summary_row_top {
+#ygypisfunp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3332,11 +3536,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#gcvnpsqllg .gt_striped {
+#ygypisfunp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gcvnpsqllg .gt_table_body {
+#ygypisfunp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3345,7 +3549,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#gcvnpsqllg .gt_footnotes {
+#ygypisfunp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3359,7 +3563,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#gcvnpsqllg .gt_footnote {
+#ygypisfunp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3368,7 +3572,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#gcvnpsqllg .gt_sourcenotes {
+#ygypisfunp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3382,7 +3586,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#gcvnpsqllg .gt_sourcenote {
+#ygypisfunp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3390,128 +3594,152 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#gcvnpsqllg .gt_left {
+#ygypisfunp .gt_left {
   text-align: left;
 }
 
-#gcvnpsqllg .gt_center {
+#ygypisfunp .gt_center {
   text-align: center;
 }
 
-#gcvnpsqllg .gt_right {
+#ygypisfunp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gcvnpsqllg .gt_font_normal {
+#ygypisfunp .gt_font_normal {
   font-weight: normal;
 }
 
-#gcvnpsqllg .gt_font_bold {
+#ygypisfunp .gt_font_bold {
   font-weight: bold;
 }
 
-#gcvnpsqllg .gt_font_italic {
+#ygypisfunp .gt_font_italic {
   font-style: italic;
 }
 
-#gcvnpsqllg .gt_super {
+#ygypisfunp .gt_super {
   font-size: 65%;
 }
 
-#gcvnpsqllg .gt_footnote_marks {
+#ygypisfunp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gcvnpsqllg .gt_asterisk {
+#ygypisfunp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gcvnpsqllg .gt_indent_1 {
+#ygypisfunp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gcvnpsqllg .gt_indent_2 {
+#ygypisfunp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gcvnpsqllg .gt_indent_3 {
+#ygypisfunp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gcvnpsqllg .gt_indent_4 {
+#ygypisfunp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gcvnpsqllg .gt_indent_5 {
+#ygypisfunp .gt_indent_5 {
   text-indent: 25px;
 }
+
+#ygypisfunp .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ygypisfunp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<caption>(b) <p>Edges</p> </caption>
-  <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="From">From</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="To">To</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Weight">Weight</th>
-    </tr></thead>
+
+<div id="tbl-example-place-nodes-2" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-example-place-nodes-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Edges
+</figcaption>
+<div aria-describedby="tbl-example-place-nodes-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="tbl-example-place-nodes-2" class="gt_table do-not-create-environment caption-top table" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="From" class="gt_col_heading gt_columns_bottom_border gt_left" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">From</th>
+<th id="To" class="gt_col_heading gt_columns_bottom_border gt_left" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">To</th>
+<th id="Weight" class="gt_col_heading gt_columns_bottom_border gt_right" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">Weight</th>
+</tr>
+</thead>
 <tbody class="gt_table_body">
-<tr>
-<td headers="From" class="gt_row gt_left">A</td>
-<td headers="To" class="gt_row gt_left">B</td>
-<td headers="Weight" class="gt_row gt_right">2</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="From">A</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">B</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">2</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_left">A</td>
-<td headers="To" class="gt_row gt_left">E</td>
-<td headers="Weight" class="gt_row gt_right">2</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="From">A</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">E</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">2</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_left">B</td>
-<td headers="To" class="gt_row gt_left">C</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="From">B</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">C</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">1</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_left">B</td>
-<td headers="To" class="gt_row gt_left">D</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="From">B</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">D</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">1</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_left">B</td>
-<td headers="To" class="gt_row gt_left">E</td>
-<td headers="Weight" class="gt_row gt_right">3</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="From">B</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">E</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">3</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_left">C</td>
-<td headers="To" class="gt_row gt_left">D</td>
-<td headers="Weight" class="gt_row gt_right">2</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="From">C</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">D</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">2</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_left">C</td>
-<td headers="To" class="gt_row gt_left">E</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="From">C</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">E</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">1</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_left">D</td>
-<td headers="To" class="gt_row gt_left">E</td>
-<td headers="Weight" class="gt_row gt_right">3</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="From">D</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">E</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="Weight">3</td>
 </tr>
 </tbody>
 </table>
 </div>
+</figure>
+</div>
+
 </div>
 </div>
 </div>
 </div>
-</section></section><section id="measures" class="level2" data-number="B.2"><h2 data-number="B.2" class="anchored" data-anchor-id="measures">
-<span class="header-section-number">B.2</span> Measures</h2>
+</figure>
+</div>
+</section>
+</section>
+<section id="measures" class="level2" data-number="B.2">
+<h2 data-number="B.2" class="anchored" data-anchor-id="measures"><span class="header-section-number">B.2</span> Measures</h2>
 <p>In this section, we describe network measures that are both useful statistics to interpret in describing MPX NYC data and useful intermediate steps in other measures we constructed.</p>
 <p>We defined four measures related to node degree which offer a useful interpretation of MPX NYC data: participant social reach (<span class="math inline">\(R_i\)</span>), participant spatial reach (<span class="math inline">\(S_i\)</span>), community district social reach (<span class="math inline">\(r_j\)</span>), and community district spatial reach (<span class="math inline">\(s_j\)</span>). For each of these, we developed a measure for which we count only the connections to nodes which are included in some defined subset <span class="math inline">\(A \subset N\)</span> of nodes. We thus define conditional participant social reach (<span class="math inline">\(R_i|A\)</span>), conditional participant spatial reach (<span class="math inline">\(S_i|A\)</span>), conditional community district social reach (<span class="math inline">\(r_j|A\)</span>), and conditional community district spatial reach (<span class="math inline">\(s_j|A\)</span>).</p>
 <p>We further defined two measures which summarize the pattern of connection across the people and places in the MPX NYC dataset. The first, the spatial mixing coefficient, can be used to analyze the pattern of connection across different demographic groups. The second, proportion in largest connected component, can be used to analyze the overall connectedness of the MPX NYC Person-Place graph and related graphs.</p>
-<section id="notation" class="level3" data-number="B.2.1"><h3 data-number="B.2.1" class="anchored" data-anchor-id="notation">
-<span class="header-section-number">B.2.1</span> Notation</h3>
+<section id="notation" class="level3" data-number="B.2.1">
+<h3 data-number="B.2.1" class="anchored" data-anchor-id="notation"><span class="header-section-number">B.2.1</span> Notation</h3>
 <p>Define <span class="math inline">\(\psi(i,j)\)</span> as the adjacency function for the person-place graph. For person <span class="math inline">\(i\)</span> and community <span class="math inline">\(j\)</span>:</p>
 <p><span class="math display">\[
 \psi(i,j) = \begin{cases} 1 &amp;i\sim j \\ 0 &amp;\text{otherwise} \end{cases}
@@ -3524,9 +3752,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="math display">\[
 \psi_C(j,l) = \sum_{i \in N_P}{\psi(i,j) \psi(i,l)}
 \]</span></p>
-</section><section id="node-characteristics" class="level3" data-number="B.2.2"><h3 data-number="B.2.2" class="anchored" data-anchor-id="node-characteristics">
-<span class="header-section-number">B.2.2</span> Node characteristics</h3>
-<section id="participant-social-reach" class="level4"><h4 class="anchored" data-anchor-id="participant-social-reach">Participant social reach</h4>
+</section>
+<section id="node-characteristics" class="level3" data-number="B.2.2">
+<h3 data-number="B.2.2" class="anchored" data-anchor-id="node-characteristics"><span class="header-section-number">B.2.2</span> Node characteristics</h3>
+<section id="participant-social-reach" class="level4">
+<h4 class="anchored" data-anchor-id="participant-social-reach">Participant social reach</h4>
 <p>Participant social reach is defined as weighted node degree in the MPX NYC participant network. For participant <span class="math inline">\(i \in N_p\)</span></p>
 <p><span class="math display">\[
 R_i = \sum_{j \in N_p}{\psi_p (i,j)}
@@ -3535,7 +3765,9 @@ R_i = \sum_{j \in N_p}{\psi_p (i,j)}
 R_i | A= \sum_{j \in N_p}{\psi_p (i,j)I_{x \in A}(x = j) }
 \]</span></p>
 <p>where the indicator function <span class="math inline">\(I_{x \in A}(x)\)</span> equals <span class="math inline">\(1\)</span> when <span class="math inline">\(x\in A\)</span> and <span class="math inline">\(0\)</span> otherwise.</p>
-</section><section id="participant-spatial-reach" class="level4"><h4 class="anchored" data-anchor-id="participant-spatial-reach">Participant spatial reach</h4>
+</section>
+<section id="participant-spatial-reach" class="level4">
+<h4 class="anchored" data-anchor-id="participant-spatial-reach">Participant spatial reach</h4>
 <p>Participant spatial reach is defined as the number of connections the focal participant has with community districts. It is defined as the weighted node degree in the MPX NYC spatial participant network. For <span class="math inline">\(i \in N_p\)</span></p>
 <p><span class="math display">\[
 S_i = \sum_{j \in N_c}{\psi (i,j)}
@@ -3543,7 +3775,8 @@ S_i = \sum_{j \in N_c}{\psi (i,j)}
 <p><span class="math display">\[
 S_i|A = \sum_{j \in N_c}{\psi (i,j)I_{x \in A}(x = j)}
 \]</span></p>
-<section id="community-district-social-reach" class="level5"><h5 class="anchored" data-anchor-id="community-district-social-reach">Community district social reach</h5>
+<section id="community-district-social-reach" class="level5">
+<h5 class="anchored" data-anchor-id="community-district-social-reach">Community district social reach</h5>
 <p>Community district social reach is defined as the number of connections the focal community district has with participants. It is defined as the weighted node degree in the MPX NYC spatial participant network. For <span class="math inline">\(j \in N_c\)</span>:</p>
 <p><span class="math display">\[
 r_j = \sum_{i \in N_p}{\psi (i, j)}
@@ -3551,7 +3784,9 @@ r_j = \sum_{i \in N_p}{\psi (i, j)}
 <p><span class="math display">\[
 r_j|A = \sum_{i \in N_p}{\psi (i, j)I_{x \in A}(x = i)}
 \]</span></p>
-</section><section id="community-district-spatial-reach" class="level5"><h5 class="anchored" data-anchor-id="community-district-spatial-reach">Community district spatial reach</h5>
+</section>
+<section id="community-district-spatial-reach" class="level5">
+<h5 class="anchored" data-anchor-id="community-district-spatial-reach">Community district spatial reach</h5>
 <p>Community district spatial reach is defined as the weighted node degree in the MPX NYC community district network. For <span class="math inline">\(j \in N_c\)</span></p>
 <p><span class="math display">\[
 s_j = \sum_{i \in N_c}{\psi_c (i,j)}
@@ -3559,21 +3794,29 @@ s_j = \sum_{i \in N_c}{\psi_c (i,j)}
 <p><span class="math display">\[
 s_j|A = \sum_{i \in N_c}{\psi_c (i,j)I_{x \in A}(x = i)}
 \]</span></p>
-</section></section></section><section id="network-characteristics" class="level3" data-number="B.2.3"><h3 data-number="B.2.3" class="anchored" data-anchor-id="network-characteristics">
-<span class="header-section-number">B.2.3</span> Network characteristics</h3>
-<section id="movement-matrix" class="level4"><h4 class="anchored" data-anchor-id="movement-matrix">Movement matrix</h4>
+</section>
+</section>
+</section>
+<section id="network-characteristics" class="level3" data-number="B.2.3">
+<h3 data-number="B.2.3" class="anchored" data-anchor-id="network-characteristics"><span class="header-section-number">B.2.3</span> Network characteristics</h3>
+<section id="movement-matrix" class="level4">
+<h4 class="anchored" data-anchor-id="movement-matrix">Movement matrix</h4>
 <p>Define <span class="math inline">\(d^H(i)\)</span> as the home district of person <span class="math inline">\(i\)</span>. The movement coefficient <span class="math inline">\(m(k,l)\)</span> is defined as the count of connections by individuals <span class="math inline">\(i\)</span> who live in home community district <span class="math inline">\(k\)</span> with community districts <span class="math inline">\(l\)</span>.</p>
 <p><span class="math display">\[
 m(k,l) = \sum_{i \in \mathscr{N}_P} \sum_{j \in \mathscr{N}_C} \psi_C (d^H(i),j)I_{d^H(x)=k}(i)I_{x=l}(j)
 \]</span></p>
 <p>The movement matrix is a square matrix whose <span class="math inline">\(ij^{th}\)</span> entry is <span class="math inline">\(m(i,j)\)</span>.</p>
-</section><section id="spatial-concentration-chart" class="level4"><h4 class="anchored" data-anchor-id="spatial-concentration-chart">Spatial concentration chart</h4>
+</section>
+<section id="spatial-concentration-chart" class="level4">
+<h4 class="anchored" data-anchor-id="spatial-concentration-chart">Spatial concentration chart</h4>
 <p>The spatial concentration proportion <span class="math inline">\(c(k)\)</span> quantifies the degree to which a community district is over-represented among destination community districts compared to home districts in the movement matrix. It is the difference of the margins of the movement matrix. For community district k</p>
 <p><span class="math display">\[
 c(k) = \frac{\sum_l{m(l,k) - m(k,l)}}{\sum_{i,j}{m(i,j)}}
 \]</span></p>
 <p>The spatial concentration chart plots teh spatial concentration proprotion for each community district.</p>
-</section><section id="spatial-mixing-matrix" class="level4"><h4 class="anchored" data-anchor-id="spatial-mixing-matrix">Spatial mixing matrix</h4>
+</section>
+<section id="spatial-mixing-matrix" class="level4">
+<h4 class="anchored" data-anchor-id="spatial-mixing-matrix">Spatial mixing matrix</h4>
 <p>The MPX NYC participant network can also be used to analyze the pattern of connection across different demographic groups. We did this using the spatial mixing coefficient, which we motivate and define below.</p>
 <p>Say there are three types of retired university professors in Boston - A) those who choose to live and socialize in neighborhoods with universities (where they can meet old colleagues and students); B) those who choose to live and socialize away from former colleagues and students; and C) those who choose neighborhoods without regard for university life. And say the proportion of people who are under 25 years of age in Boston is <span class="math inline">\(20\%\)</span> and that the majority of this group are college students. People who are under 25 years of age would be over-represented in neighborhoods with college campuses and residences, and under-represented in those without.</p>
 <p>To understand what kind of retired professor a particular person is, you could ask her of all the peopple she encountered in the past 12 months, what proportion were under <span class="math inline">\(25\)</span>. If she is of type C, we would expect her answer to be about <span class="math inline">\(20\%\)</span>. If she avoids universities (i.e.&nbsp;is of type B), the proportion would be lower than <span class="math inline">\(20\%\)</span> and if she seeks them out (i.e.&nbsp;type A), her answer would be greater than <span class="math inline">\(20\%\)</span>.</p>
@@ -3591,7 +3834,9 @@ c(k) = \frac{\sum_l{m(l,k) - m(k,l)}}{\sum_{i,j}{m(i,j)}}
 <p><span class="math display">\[
 \phi(A,B) = \frac{|N_p|}{|B|} \Phi(A,B) - 1
 \]</span></p>
-</section><section id="proportion-in-largest-connected-component" class="level4"><h4 class="anchored" data-anchor-id="proportion-in-largest-connected-component">Proportion in largest connected component</h4>
+</section>
+<section id="proportion-in-largest-connected-component" class="level4">
+<h4 class="anchored" data-anchor-id="proportion-in-largest-connected-component">Proportion in largest connected component</h4>
 <p>In a given network, a connected component is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties.</p>
 <p>In the MPX NYC participant network, it is possible to uniquely partition the node set <span class="math inline">\(N_p\)</span> into connected components. This follows from the facts that connected components form non-overlapping subsets of <span class="math inline">\(N_p\)</span> and that it is possible to write <span class="math inline">\(N_p\)</span> as a union of subsets <span class="math inline">\(C_k\)</span> which are each connected components.</p>
 <p><span class="math display">\[
@@ -3603,7 +3848,12 @@ N = \bigcup_{k = 1}^{K}{C_k}
 \]</span></p>
 
 
-</section></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -3638,18 +3888,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -3681,7 +3920,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -3733,10 +3994,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -3746,8 +4024,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -3759,7 +4046,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -3803,6 +4213,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -3828,6 +4239,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -3886,35 +4323,42 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../A_ssnac1_social_spatial_context/A__ssnac1_social_spatial_context.html" class="pagination-link">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../A_ssnac1_social_spatial_context/A__ssnac1_social_spatial_context.html" class="pagination-link" aria-label="SSNAC I: Social &amp; spatial">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">SSNAC I: Social &amp; spatial</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../C_sscan3_causal_interpretation/C__sscan3_causal_interpretation.html" class="pagination-link">
+      <a href="../C_sscan3_causal_interpretation/C__sscan3_causal_interpretation.html" class="pagination-link" aria-label="SSNAC III: Causal interpretation">
         <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">SSNAC III: Causal interpretation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">Copyright 2025, MPX NYC</div>   
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2025, MPX NYC</p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-<li class="nav-item compact">
+    <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/">
       <i class="bi bi-github" role="img">
 </i> 
     </a>
   </li>  
 </ul>
-</div>
+    </div>
   </div>
 </footer>
+
+
 
 
 </body></html>

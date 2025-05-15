@@ -40,18 +40,38 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\usepackage{soul}
+\ifLuaTeX
+  \usepackage{luacolor}
+  \usepackage[soul]{lua-ul}
+\else
+  \usepackage{soul}
+  
+\fi
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \setcounter{secnumdepth}{5}
 % Make \paragraph and \subparagraph free-standing
+\makeatletter
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
   \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
+\makeatother
 
 \usepackage{color}
 \usepackage{fancyvrb}
@@ -71,7 +91,7 @@
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
 \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
@@ -81,7 +101,7 @@
 \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
 \newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
 \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
@@ -118,28 +138,38 @@
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
 \newlength{\csllabelwidth}
 \setlength{\csllabelwidth}{3em}
-\newlength{\cslentryspacingunit} % times entry-spacing
-\setlength{\cslentryspacingunit}{\parskip}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
   % turn on hanging indent if param 1 is 1
   \ifodd #1
-  \let\oldpar\par
-  \def\par{\hangindent=\cslhangindent\oldpar}
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
   \fi
   % set entry spacing
-  \setlength{\parskip}{#2\cslentryspacingunit}
- }%
- {}
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
 \usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 \usepackage{booktabs}
@@ -147,9 +177,9 @@
 \usepackage{longtable}
 \usepackage{colortbl}
 \usepackage{array}
+\usepackage{anyfontsize}
+\usepackage{multirow}
 \KOMAoption{captions}{tableheading}
-\makeatletter
-\makeatother
 \makeatletter
 \@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
 \makeatother
@@ -189,23 +219,17 @@
 \newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
 \makeatother
 \makeatletter
+\makeatother
+\makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
-\makeatletter
-\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
-\makeatother
-\makeatletter
-\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
-\makeatother
-\makeatletter
-\makeatother
-\makeatletter
-\makeatother
+
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
+
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
@@ -216,6 +240,7 @@
   citecolor={Blue},
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
+
 
 \title{host or travel?}
 \usepackage{etoolbox}
@@ -230,7 +255,6 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, frame hidden, sharp corners, interior hidden, breakable, borderline west={3pt}{0pt}{shadecolor}, enhanced]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -238,20 +262,13 @@
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
+
 \bookmarksetup{startatroot}
 
-\hypertarget{welcome-to-mpx-nyc}{%
-\chapter*{Welcome to MPX NYC}\label{welcome-to-mpx-nyc}}
+\chapter*{Welcome to MPX NYC}\label{welcome-to-mpx-nyc}
 \addcontentsline{toc}{chapter}{Welcome to MPX NYC}
 
 \markboth{Welcome to MPX NYC}{Welcome to MPX NYC}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{targets}\SpecialCharTok{::}\FunctionTok{tar\_source}\NormalTok{(}\StringTok{"R\_functions"}\NormalTok{) }\CommentTok{\# Access custom defined functions}
-\NormalTok{targets}\SpecialCharTok{::}\FunctionTok{tar\_make}\NormalTok{(}\AttributeTok{reporter =} \StringTok{"silent"}\NormalTok{) }\CommentTok{\# Run data pipeline}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -260,7 +277,20 @@
 \end{Highlighting}
 \end{Shaded}
 
-\leavevmode\vadjust pre{\hypertarget{date}{}}%
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#install.packages(c("labelled", "tidygraph", "dplyr", "here", "ggimage", "rsvg", "ggraph", "ggplot2", "gt", "gtsummary", "latex2exp"))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{targets}\SpecialCharTok{::}\FunctionTok{tar\_source}\NormalTok{(}\StringTok{"R\_functions"}\NormalTok{) }\CommentTok{\# Access custom defined functions}
+\NormalTok{targets}\SpecialCharTok{::}\FunctionTok{tar\_make}\NormalTok{(}\AttributeTok{reporter =} \StringTok{"silent"}\NormalTok{) }\CommentTok{\# Run data pipeline}
+\end{Highlighting}
+\end{Shaded}
+
+\phantomsection\label{date}
 May 2024, New York City
 
 \begin{Shaded}
@@ -269,13 +299,9 @@ May 2024, New York City
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[H]
-
-{\centering \includegraphics{index_files/figure-pdf/unnamed-chunk-1-1.pdf}
-
-}
-
-\end{figure}
+\begin{center}
+\includegraphics{index_files/figure-pdf/unnamed-chunk-1-1.pdf}
+\end{center}
 
 Welcome to the MPX NYC Study on the social and sexual connections of
 LGBTQ New Yorkers. Through this website we report data we collected
@@ -284,12 +310,12 @@ mpox outbreak occurred. Since then, as MPOX shifted from an outbreak to
 an epidemic, we have taken the time to develop cutting-edge
 epidemiologic methods to analyze and interpret these data.
 
-\leavevmode\vadjust pre{\hypertarget{acknowledgements}{}}%
+\phantomsection\label{acknowledgements}
 \textbf{THIS REPORT} \ul{Lead author}: Keletso Makofane. \ul{Editor}:
 Nick Diamond. \ul{Co-authors}: Jennifer Barnes-Balenciaga, Elle Lett,
 Nguyen Tran.
 
-\leavevmode\vadjust pre{\hypertarget{acknowledgements}{}}%
+\phantomsection\label{acknowledgements}
 \textbf{RESPND-MI} \ul{Principal investigator}: Keletso Makofane, MPH,
 PhD. \ul{Co-investigators}: Jennifer Barnes-Balenciaga, Nicholas
 Diamond, MPH, Elle Lett, PhD, MA, MBiostat, Cody Nolan, MD, Martez
@@ -313,7 +339,7 @@ Grindr; Hub for Health Intervention, UCLA Luskin School of Public
 Affairs. \ul{Administration}: Christian Urrutia (prep4all); James
 Krellenstein (prep4all);
 
-\leavevmode\vadjust pre{\hypertarget{acknowledgements}{}}%
+\phantomsection\label{acknowledgements}
 \textbf{OPEN SCIENCE} All the code we developed as part of this project
 (including the code for this website) is publicly available. Our hope is
 that alliances of LGBTQ activists and researchers will use these methods
@@ -328,8 +354,7 @@ academics, and community leaders.
 
 \part{Background}
 
-\hypertarget{outbreak-to-epidemic}{%
-\chapter{Outbreak to epidemic}\label{outbreak-to-epidemic}}
+\chapter{Outbreak to epidemic}\label{outbreak-to-epidemic}
 
 When we started, MPOX testing was not at all available. Our goal was to
 estimate the proportion of community members who experienced mpox-like
@@ -337,8 +362,7 @@ symptoms. We also wanted to understand the structure of social and
 sexual networks that connect our community so that we could understand
 how to most effectively distribute limited MPOX vaccine doses.
 
-\hypertarget{rapid-outbreak}{%
-\section{Rapid outbreak}\label{rapid-outbreak}}
+\section{Rapid outbreak}\label{rapid-outbreak}
 
 Mpox cases in the United States (U.S.) were first detected in May 2022
 and rapidly escalated. Initial clusters were associated with large
@@ -348,8 +372,7 @@ available for minoritized ethno-racial and transgender communities. Over
 time, new data indicated that Black, Latinx, and transgender communities
 were also disproportionately affected (Blackburn et al. 2022).
 
-\hypertarget{slow-responses}{%
-\section{Slow responses}\label{slow-responses}}
+\section{Slow responses}\label{slow-responses}
 
 Despite early warnings from activists about the lack of testing capacity
 in the U.S., responses from city, state, and federal governments were
@@ -369,8 +392,7 @@ emergency and it took New York City x months to do the same. By the end
 of July 2022, there were over 10,000 cases of MPOX reported (Minhaj et
 al. 2022).
 
-\hypertarget{broken-surveillance}{%
-\section{Broken surveillance}\label{broken-surveillance}}
+\section{Broken surveillance}\label{broken-surveillance}
 
 Systems for understanding the scale and epidemic dynamics of an outbreak
 of a new infection like MPOX were fatally flawed. In particular,
@@ -433,8 +455,7 @@ The local department of health approves the test and doctor collects
   difficult to order a test, or saying that a test is not indicated
 \end{itemize}
 
-\hypertarget{our-response}{%
-\chapter{Our response}\label{our-response}}
+\chapter{Our response}\label{our-response}
 
 We organized the RESPND-MI study team into three working groups,
 inviting community members to join regardless of academic credentials:
@@ -442,8 +463,7 @@ the administration group, the technical group, and the external affairs
 group. Community partners joined as co-investigators and participated in
 all collective decision-making.
 
-\hypertarget{administration}{%
-\section{Administration}\label{administration}}
+\section{Administration}\label{administration}
 
 \begin{itemize}
 \item
@@ -458,8 +478,7 @@ all collective decision-making.
   Transactions
 \end{itemize}
 
-\hypertarget{technical}{%
-\section{Technical}\label{technical}}
+\section{Technical}\label{technical}
 
 \begin{itemize}
 \tightlist
@@ -473,8 +492,7 @@ all collective decision-making.
   Translation
 \end{itemize}
 
-\hypertarget{external-affairs}{%
-\section{External affairs}\label{external-affairs}}
+\section{External affairs}\label{external-affairs}
 
 \begin{itemize}
 \tightlist
@@ -490,8 +508,7 @@ all collective decision-making.
   Coordination mechanism
 \end{itemize}
 
-\hypertarget{sec-introduction}{%
-\chapter{Related research}\label{sec-introduction}}
+\chapter{Related research}\label{sec-introduction}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -506,33 +523,29 @@ all collective decision-making.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[H]
-
-{\centering \includegraphics{1_introduction/1_3__intro_related_research_files/figure-pdf/unnamed-chunk-2-1.pdf}
-
-}
-
-\end{figure}
+\begin{center}
+\includegraphics{1_introduction/1_3__intro_related_research_files/figure-pdf/unnamed-chunk-2-1.pdf}
+\end{center}
 
 \part{Methods}
 
-\hypertarget{sec-data}{%
-\chapter{Data collection}\label{sec-data}}
+\chapter{Data collection}\label{sec-data}
 
-\hypertarget{mpx-nyc-person-place-network-mapper}{%
 \section{MPX NYC Person-Place Network
-Mapper}\label{mpx-nyc-person-place-network-mapper}}
+Mapper}\label{mpx-nyc-person-place-network-mapper}
 
 \begin{figure}
 
-{\centering \includegraphics{2_methods/../_const/images/image_app_graphic.png}
+\centering{
+
+\includegraphics{2_methods/../_const/images/image_app_graphic.png}
 
 }
 
 \caption{\label{fig-mapinputformat}Map input question format developed
 for MPX NYC}
 
-\end{figure}
+\end{figure}%
 
 Data were collected using a custom designed survey instrument we call
 the MPX NYC Person-Place Network Mapper. The Person-Place Network Map
@@ -551,19 +564,20 @@ tracts are non-overlapping spatial units that partition the United
 States into areas ranging from \(2500\) to \(8000\) in population size
 (US Census 2022).
 
-\hypertarget{mpx-nyc-marketing-and-communication}{%
 \section{MPX NYC marketing and
-communication}\label{mpx-nyc-marketing-and-communication}}
+communication}\label{mpx-nyc-marketing-and-communication}
 
 \begin{figure}
 
-{\centering \includegraphics{2_methods/../_const/images/image_campaign_graphic.png}
+\centering{
+
+\includegraphics{2_methods/../_const/images/image_campaign_graphic.png}
 
 }
 
 \caption{\label{fig-options}Options for visual identity of MPX NYC''}
 
-\end{figure}
+\end{figure}%
 
 We invested in a bilingual, culturally competent communication campaign
 in collaboration with a marketing agency. As a starting point, the
@@ -573,17 +587,15 @@ LGBT social media influencers as a communication channel. Participants
 were recruited via paid and donated advertising placed through Grindr,
 Twitter, Instagram, and outdoor electronic billboards.
 
-\hypertarget{consent-and-ethical-approval}{%
 \section{Consent and ethical
-approval}\label{consent-and-ethical-approval}}
+approval}\label{consent-and-ethical-approval}
 
 Prospective participants read and responded to a consent statement
 before being able to take the survey. The study, including marketing
 materials and software, was reviewed and approved by the T.H. Chan
 School of Public Health Institutional Review Board (IRB22-0761).
 
-\hypertarget{participants-and-setting}{%
-\section{Participants and setting}\label{participants-and-setting}}
+\section{Participants and setting}\label{participants-and-setting}
 
 Potential participants were included in the study if they consented to
 participate, were over 18 years of age, identified as transgender, gay,
@@ -592,8 +604,7 @@ City in the four weeks preceding their participation. Potential
 participants were excluded if they were younger than 18 years of age or
 they withdrew consent.
 
-\hypertarget{translation}{%
-\section{Translation}\label{translation}}
+\section{Translation}\label{translation}
 
 All study materials were professionally translated from English to
 Spanish. The translation was reviewed by six professionals in
@@ -605,16 +616,11 @@ health-related fields whose primary language is Spanish.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[H]
+\begin{center}
+\includegraphics{2_methods/2_2_methods_data_files/figure-pdf/unnamed-chunk-2-1.pdf}
+\end{center}
 
-{\centering \includegraphics{2_methods/2_2_methods_data_files/figure-pdf/unnamed-chunk-2-1.pdf}
-
-}
-
-\end{figure}
-
-\hypertarget{sec-measures}{%
-\chapter{Measures}\label{sec-measures}}
+\chapter{Measures}\label{sec-measures}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -630,17 +636,18 @@ health-related fields whose primary language is Spanish.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{2_methods/2_3_methods_measures_files/figure-pdf/fig-example-bipartite-1.pdf}
+\centering{
+
+\includegraphics{2_methods/2_3_methods_measures_files/figure-pdf/fig-example-bipartite-1.pdf}
 
 }
 
 \caption{\label{fig-example-bipartite}Sample person-place network}
 
-\end{figure}
+\end{figure}%
 
-\hypertarget{data-mpx-nyc-participant-community-network}{%
 \section{Data: MPX NYC participant-community
-network}\label{data-mpx-nyc-participant-community-network}}
+network}\label{data-mpx-nyc-participant-community-network}
 
 The MPX NYC participant community network is a network with community
 districts and individuals as nodes, and ties between pairs consisting of
@@ -655,9 +662,8 @@ district. This relation can be residence or group contact. Related to
 this network are the community district network and participant network,
 described below.
 
-\hypertarget{mpx-nyc-community-district-network}{%
 \subsection{MPX NYC community district
-network}\label{mpx-nyc-community-district-network}}
+network}\label{mpx-nyc-community-district-network}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -668,13 +674,15 @@ network}\label{mpx-nyc-community-district-network}}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{2_methods/2_3_methods_measures_files/figure-pdf/fig-example-community-1.pdf}
+\centering{
+
+\includegraphics{2_methods/2_3_methods_measures_files/figure-pdf/fig-example-community-1.pdf}
 
 }
 
 \caption{\label{fig-example-community}Sample place-place network}
 
-\end{figure}
+\end{figure}%
 
 The MPX NYC community district network is a network with community
 districts as nodes. A weighted tie between two nodes indicates that the
@@ -684,9 +692,8 @@ given by the count of such individuals. Of interest is the influence
 each community district has in city-wide outbreak dynamics. It is
 measured using community district social and spatial reach.
 
-\hypertarget{mpx-nyc-participant-network}{%
 \subsection{MPX NYC participant
-network}\label{mpx-nyc-participant-network}}
+network}\label{mpx-nyc-participant-network}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -698,13 +705,15 @@ network}\label{mpx-nyc-participant-network}}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{2_methods/2_3_methods_measures_files/figure-pdf/fig-example-participant-1.pdf}
+\centering{
+
+\includegraphics{2_methods/2_3_methods_measures_files/figure-pdf/fig-example-participant-1.pdf}
 
 }
 
 \caption{\label{fig-example-participant}Sample person-person network}
 
-\end{figure}
+\end{figure}%
 
 We examined the patterning of shared physical context among participants
 using the MPX NYC participant network. In this network, survey
@@ -715,11 +724,9 @@ by the count of community districts the pair share. Of interest are the
 overall connectedness of the network and the pattern of connection
 across different subgroups.
 
-\hypertarget{node-characteristics}{%
-\section{Node characteristics}\label{node-characteristics}}
+\section{Node characteristics}\label{node-characteristics}
 
-\hypertarget{individual-measures}{%
-\subsection{Individual measures}\label{individual-measures}}
+\subsection{Individual measures}\label{individual-measures}
 
 We measured participant demographics age, race, sex assigned at birth,
 gender identity, sexual orientation, and community district of
@@ -731,8 +738,7 @@ of recent individual physical (non-sexual) contacts, count of recent
 important social contacts, and any recent physical or sexual contact in
 a group setting.
 
-\hypertarget{gender-modality}{%
-\subsubsection{Gender modality}\label{gender-modality}}
+\subsubsection{Gender modality}\label{gender-modality}
 
 Gender modality was measured using a two-step approach: first, we
 solicited the participant's current gender (man, woman, trans man, trans
@@ -768,10 +774,15 @@ other). We then constructed a gender modality variable as follows:
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{tbl-gendermodality}{}
-\begin{longtable}{ll}
-\caption{\label{tbl-gendermodality}\_construction of gender modality variable }\tabularnewline
+\begin{table}
 
+\caption{\label{tbl-gendermodality}\_construction of gender modality
+variable}
+
+\centering{
+
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll}
 \toprule
 Level & Condition \\ 
 \midrule\addlinespace[2.5pt]
@@ -784,10 +795,13 @@ Transgender woman & gender is 'trans woman' and sex is any value \\
 Non-binary & gender is 'non-binary' and sex is any value \\ 
 Another demographic & gender is 'other' and sex is any value \\ 
 \bottomrule
-\end{longtable}
+\end{tabular*}
 
-\hypertarget{race-gender}{%
-\subsubsection{Race-gender}\label{race-gender}}
+}
+
+\end{table}%
+
+\subsubsection{Race-gender}\label{race-gender}
 
 We created a Race-gender variable which is a categorical variable with
 levels identical to the gender modality with one modification: instead
@@ -796,20 +810,17 @@ white cisgender men, Latinx cisgender men, Black cisgender men, and
 under the category Other cisgender men, we grouped Asian, Pacific
 Islander and other cisgender men.
 
-\hypertarget{community-district-measures}{%
 \subsection{Community district
-measures}\label{community-district-measures}}
+measures}\label{community-district-measures}
 
-\hypertarget{social-reach}{%
-\subsubsection{Social reach}\label{social-reach}}
+\subsubsection{Social reach}\label{social-reach}
 
 For a given community district, social reach is defined as the sum of
 edge weights for edges connecting that community district to individuals
 (in the MPX NYC spatial participant network). It quantifies the volume
 or level of contact in the community district.
 
-\hypertarget{spatial-reach}{%
-\subsubsection{Spatial reach}\label{spatial-reach}}
+\subsubsection{Spatial reach}\label{spatial-reach}
 
 For a given community district spatial reach is defined as the sum of
 edge weights for edges connecting that community district to others (in
@@ -817,19 +828,16 @@ the MPX NYC community district network. It quantifies the volume or
 level of exchange of individuals between a particular community district
 and others.
 
-\hypertarget{edge-characteristics}{%
-\section{Edge characteristics}\label{edge-characteristics}}
+\section{Edge characteristics}\label{edge-characteristics}
 
-\hypertarget{residence-edges}{%
-\subsection{Residence edges}\label{residence-edges}}
+\subsection{Residence edges}\label{residence-edges}
 
 All participants were asked the location of their residence through the
 Person-Place Network Map question. Each participant's residences is
 represented as an edge between the participant and the community
 district containing their residence.
 
-\hypertarget{contact-venue-edges}{%
-\subsection{Contact venue edges}\label{contact-venue-edges}}
+\subsection{Contact venue edges}\label{contact-venue-edges}
 
 Participants who indicated recent physical or sexual contact in a group
 setting were asked for the locations of each of the places where the
@@ -837,21 +845,18 @@ contact happened. We call these contact places. They are each
 represented as an edge between the participant and the community
 district containing the contact place.
 
-\hypertarget{venue-type}{%
-\subsubsection{Venue type}\label{venue-type}}
+\subsubsection{Venue type}\label{venue-type}
 
 Participants were asked the type of venue each contact place was (dance
 party, sex party, darkroom, sport game, concert, theatre/show, private
 residence, sex club, bathhouse, park, something else).
 
-\hypertarget{sexual-contact}{%
-\subsubsection{Sexual contact}\label{sexual-contact}}
+\subsubsection{Sexual contact}\label{sexual-contact}
 
 Participants were also asked if they had sexual contact at each contact
 place.
 
-\hypertarget{distance-from-home}{%
-\subsubsection{Distance from home}\label{distance-from-home}}
+\subsubsection{Distance from home}\label{distance-from-home}
 
 We constructed an approximate measure of the distance between residence
 and contact venue by categorizing venues into those that are in the same
@@ -859,12 +864,10 @@ community district as the residence; in a different community district
 but the same borough; or in a different borough. We refer to this
 measure as distance from home.
 
-\hypertarget{network-characteristics}{%
-\section{Network characteristics}\label{network-characteristics}}
+\section{Network characteristics}\label{network-characteristics}
 
-\hypertarget{size-of-largest-connected-component}{%
 \subsubsection{Size of largest connected
-component}\label{size-of-largest-connected-component}}
+component}\label{size-of-largest-connected-component}
 
 We measure connectedness using the proportion of nodes in the largest
 connected component (LCC) of the MPX NYC participant network. In a
@@ -876,8 +879,7 @@ path from one node to another over existing network ties. We consider a
 network with a larger LCC to be better connected than a network with a
 smaller LCC.
 
-\hypertarget{spatial-mixing-ratio}{%
-\subsubsection{Spatial mixing ratio}\label{spatial-mixing-ratio}}
+\subsubsection{Spatial mixing ratio}\label{spatial-mixing-ratio}
 
 We measure patterns of mixing between a pair of distict subgroups of
 participants using the spatial mixing ratio. It is a positive real
@@ -896,19 +898,13 @@ the total sum weights.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[H]
+\begin{center}
+\includegraphics{2_methods/2_3_methods_measures_files/figure-pdf/unnamed-chunk-6-1.pdf}
+\end{center}
 
-{\centering \includegraphics{2_methods/2_3_methods_measures_files/figure-pdf/unnamed-chunk-6-1.pdf}
+\chapter{Statistical Analysis}\label{sec-analysis}
 
-}
-
-\end{figure}
-
-\hypertarget{sec-analysis}{%
-\chapter{Statistical Analysis}\label{sec-analysis}}
-
-\hypertarget{descriptive-statistics}{%
-\section{Descriptive statistics}\label{descriptive-statistics}}
+\section{Descriptive statistics}\label{descriptive-statistics}
 
 We tabulated participant characteristics against group contact, and
 visualized the distribution of sexual orientation categories across
@@ -937,9 +933,7 @@ immunize the population represented by the MPX NYC participants against
 a novel pathogen. We examine the impact of two different intervention
 strategies on two population outcome measures of interest
 
-\hypertarget{outbreak-control-strategies}{%
-\section{Outbreak control
-strategies}\label{outbreak-control-strategies}}
+\section{Outbreak control strategies}\label{outbreak-control-strategies}
 
 In this hypothetical intervention, community districts are ordered by
 priority and are immunized one at a time, beginning with the highest
@@ -951,9 +945,8 @@ assume that everyone can only be immunized once. We assessed two
 strategies for prioritizing community districts: the
 contact-neutralizing strategy and the movement-neutralizing strategy.
 
-\hypertarget{contact-neutralizing-strategy}{%
 \subsection{Contact neutralizing
-strategy}\label{contact-neutralizing-strategy}}
+strategy}\label{contact-neutralizing-strategy}
 
 In the contact-neutralizing strategy, we rank districts according to the
 number of contact venues and residences they contain (counting only the
@@ -962,9 +955,8 @@ yet immunized). This strategy prioritizes community districts with a
 high amount of sexual or physical contact for immunization. It attempts
 to immunize as many people in as few community districts as possible.
 
-\hypertarget{movement-neutralizing-strategy}{%
 \subsection{Movement neutralizing
-strategy}\label{movement-neutralizing-strategy}}
+strategy}\label{movement-neutralizing-strategy}
 
 In the movement-neutralizing strategy, we rank community districts by
 their spatial centrality. This strategy prioritizes community districts
@@ -973,16 +965,14 @@ immunization. It attempts to immunize the community districts that are
 potential hubs for the dissemination of the pathogen across the city
 early to geographically contain the outbreak.
 
-\hypertarget{outbreak-control-outcomes}{%
-\section{Outbreak control outcomes}\label{outbreak-control-outcomes}}
+\section{Outbreak control outcomes}\label{outbreak-control-outcomes}
 
 For each community district immunized, we updated the MPX NYC
 participant network by removing nodes that represent immunized
 individuals. We then calculated the two outcomes each time: spatial
 efficiency, and spatial network impact.
 
-\hypertarget{spatial-efficiency}{%
-\subsection{Spatial efficiency}\label{spatial-efficiency}}
+\subsection{Spatial efficiency}\label{spatial-efficiency}
 
 Spatial efficiency is defined as the total count of immunized
 individuals divided by the count of immunized community districts. To
@@ -991,8 +981,7 @@ strategies, we visualized the number of community districts it would
 take to immunize 33\% of the population, and 66\% of the population
 respectively.
 
-\hypertarget{spatial-network-impact}{%
-\subsection{Spatial network impact}\label{spatial-network-impact}}
+\subsection{Spatial network impact}\label{spatial-network-impact}
 
 Spatial network impact is defined as the proportion of individuals
 included in the largest connected component of the MPX NYC participant
@@ -1002,8 +991,7 @@ immunized, we plotted the proportions of individuals who are immunized,
 unimmunized and in the largest connected component, and unimmunized but
 outside of the largest connected component, respectively.
 
-\hypertarget{statistical-inference}{%
-\section{Statistical inference}\label{statistical-inference}}
+\section{Statistical inference}\label{statistical-inference}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1012,7 +1000,7 @@ outside of the largest connected component, respectively.
 \end{Shaded}
 
 We used the bootstrap to estimate confidence intervals, resampling
-participants 2000 times with replacement.
+participants 20 times with replacement.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1020,18 +1008,13 @@ participants 2000 times with replacement.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[H]
-
-{\centering \includegraphics{2_methods/2_4_methods_statistical_analysis_files/figure-pdf/unnamed-chunk-3-1.pdf}
-
-}
-
-\end{figure}
+\begin{center}
+\includegraphics{2_methods/2_4_methods_statistical_analysis_files/figure-pdf/unnamed-chunk-3-1.pdf}
+\end{center}
 
 \part{Results}
 
-\hypertarget{sec-participants}{%
-\chapter{People}\label{sec-participants}}
+\chapter{People}\label{sec-participants}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1045,14 +1028,16 @@ participants 2000 times with replacement.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{3_results/3_1__results_participants_files/figure-pdf/fig-racegender-radar-grid-1.pdf}
+\centering{
+
+\includegraphics{3_results/3_1__results_participants_files/figure-pdf/fig-racegender-radar-grid-1.pdf}
 
 }
 
 \caption{\label{fig-racegender-radar-grid}Sexual orientation of MPX NYC
 participants by race and gender}
 
-\end{figure}
+\end{figure}%
 
 Participants who reported recent physical or sexual contact in a group
 setting (group contact) were slightly younger than those who did not.
@@ -1070,8 +1055,7 @@ partners and more sexual contact partners. They spent more time
 travelling to hookups than participants who had not had recent contact
 in a group setting.
 
-\hypertarget{demographics}{%
-\section{Demographics}\label{demographics}}
+\section{Demographics}\label{demographics}
 
 MPX NYC participants are demographically diverse (see
 Table~\ref{tbl-demographics} and
@@ -1104,56 +1088,58 @@ and bisexual.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{tbl-demographics}{}
-\setlength{\LTpost}{0mm}
-\begin{longtable}{lcccc}
-\caption{\label{tbl-demographics}Participants in MPX NYC Study by Sex / Physical Contact in Congregate
-Setting in past 4 weeks }\tabularnewline
+\begin{table}
 
+\caption{\label{tbl-demographics}Participants in MPX NYC Study by Sex /
+Physical Contact in Congregate Setting in past 4 weeks}
+
+\centering{
+
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
 \toprule
  & \multicolumn{3}{c}{\textbf{Physical or sexual contact in group setting in past 4 weeks}} &  \\ 
 \cmidrule(lr){2-4}
-\textbf{Variable} & \textbf{Yes}\\
-N = 530\textsuperscript{\textit{1}} & \textbf{No}\\
-N = 774\textsuperscript{\textit{1}} & \textbf{Overall}\\
-N = 1,304\textsuperscript{\textit{1}} & \textbf{p-value}\textsuperscript{\textit{2}} \\ 
+\textbf{Variable} & \textbf{Yes}  N = 530\textsuperscript{\textit{1}} & \textbf{No}  N = 774\textsuperscript{\textit{1}} & \textbf{Overall}  N = 1,304\textsuperscript{\textit{1}} & \textbf{p-value} \\ 
 \midrule\addlinespace[2.5pt]
-\textbf{Age} &  &  &  & <.001 \\ 
+{\bfseries Age} &  &  &  &  \\ 
     18-24 & 92 (17\%) & 103 (13\%) & 195 (15\%) &  \\ 
     25-34 & 234 (44\%) & 304 (39\%) & 538 (41\%) &  \\ 
     35-44 & 135 (25\%) & 190 (25\%) & 325 (25\%) &  \\ 
     45-54 & 48 (9.1\%) & 97 (13\%) & 145 (11\%) &  \\ 
     55+ & 21 (4.0\%) & 80 (10\%) & 101 (7.7\%) &  \\ 
-\textbf{Race} &  &  &  & 0.4 \\ 
+{\bfseries Race} &  &  &  &  \\ 
     Another Group & 19 (3.6\%) & 40 (5.2\%) & 59 (4.5\%) &  \\ 
     Asian & 32 (6.0\%) & 52 (6.7\%) & 84 (6.4\%) &  \\ 
     Black & 60 (11\%) & 96 (12\%) & 156 (12\%) &  \\ 
     Latinx & 103 (19\%) & 128 (17\%) & 231 (18\%) &  \\ 
     Multi Racial & 37 (7.0\%) & 42 (5.4\%) & 79 (6.1\%) &  \\ 
     White & 279 (53\%) & 416 (54\%) & 695 (53\%) &  \\ 
-\textbf{Gender identity} &  &  &  & 0.3 \\ 
+{\bfseries Gender identity} &  &  &  &  \\ 
     Cisgender Man & 427 (81\%) & 630 (81\%) & 1,057 (81\%) &  \\ 
     Non Binary & 39 (7.4\%) & 57 (7.4\%) & 96 (7.4\%) &  \\ 
     Transgender Man & 17 (3.2\%) & 17 (2.2\%) & 34 (2.6\%) &  \\ 
     Transgender Woman & 14 (2.6\%) & 15 (1.9\%) & 29 (2.2\%) &  \\ 
     Cisgender Woman & 19 (3.6\%) & 43 (5.6\%) & 62 (4.8\%) &  \\ 
     Another Demographic & 14 (2.6\%) & 12 (1.6\%) & 26 (2.0\%) &  \\ 
-\textbf{Sexual orientation} &  &  &  & 0.010 \\ 
+{\bfseries Sexual orientation} &  &  &  &  \\ 
     Gay & 362 (68\%) & 498 (64\%) & 860 (66\%) &  \\ 
     Bisexual & 67 (13\%) & 119 (15\%) & 186 (14\%) &  \\ 
     Straight & 14 (2.6\%) & 50 (6.5\%) & 64 (4.9\%) &  \\ 
     Queer & 71 (13\%) & 88 (11\%) & 159 (12\%) &  \\ 
     Something Else & 16 (3.0\%) & 19 (2.5\%) & 35 (2.7\%) &  \\ 
 \bottomrule
-\end{longtable}
+\end{tabular*}
 \begin{minipage}{\linewidth}
 \textsuperscript{\textit{1}}n (\%)\\
-\textsuperscript{\textit{2}}Pearson's Chi-squared test\\
 \emph{Data source: MPX NYC 2022}\\
 \end{minipage}
 
-\hypertarget{connection}{%
-\section{Connection}\label{connection}}
+}
+
+\end{table}%
+
+\section{Connection}\label{connection}
 
 MPX NYC participants were deeply connected to queer and trans
 communities in New York City (see Table~\ref{tbl-connection}). About
@@ -1179,55 +1165,57 @@ contact venues are examined in the next section.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{tbl-connection}{}
-\setlength{\LTpost}{0mm}
-\begin{longtable}{lcccc}
-\caption{\label{tbl-connection}Participants in MPX NYC Study by Sex / Physical Contact in Congregate
-Setting in past 4 weeks }\tabularnewline
+\begin{table}
 
+\caption{\label{tbl-connection}Participants in MPX NYC Study by Sex /
+Physical Contact in Congregate Setting in past 4 weeks}
+
+\centering{
+
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
 \toprule
  & \multicolumn{3}{c}{\textbf{Physical or sexual contact in group setting in past 4 weeks}} &  \\ 
 \cmidrule(lr){2-4}
-\textbf{Variable} & \textbf{Yes}\\
-N = 530\textsuperscript{\textit{1}} & \textbf{No}\\
-N = 774\textsuperscript{\textit{1}} & \textbf{Overall}\\
-N = 1,304\textsuperscript{\textit{1}} & \textbf{p-value}\textsuperscript{\textit{2}} \\ 
+\textbf{Variable} & \textbf{Yes}  N = 530\textsuperscript{\textit{1}} & \textbf{No}  N = 774\textsuperscript{\textit{1}} & \textbf{Overall}  N = 1,304\textsuperscript{\textit{1}} & \textbf{p-value} \\ 
 \midrule\addlinespace[2.5pt]
-\textbf{Recent important social contacts} &  &  &  & <.001 \\ 
+{\bfseries Recent important social contacts} &  &  &  &  \\ 
     0 & 64 (12\%) & 155 (20\%) & 219 (17\%) &  \\ 
     1-5 & 206 (39\%) & 333 (43\%) & 539 (41\%) &  \\ 
     6-10 & 136 (26\%) & 167 (22\%) & 303 (23\%) &  \\ 
     11-15 & 49 (9.2\%) & 41 (5.3\%) & 90 (6.9\%) &  \\ 
     16+ & 75 (14\%) & 78 (10\%) & 153 (12\%) &  \\ 
-\textbf{Recent physical contacts} &  &  &  & <.001 \\ 
+{\bfseries Recent physical contacts} &  &  &  &  \\ 
     0 & 98 (18\%) & 301 (39\%) & 399 (31\%) &  \\ 
     1 & 68 (13\%) & 191 (25\%) & 259 (20\%) &  \\ 
     2 & 66 (12\%) & 105 (14\%) & 171 (13\%) &  \\ 
     3 & 46 (8.7\%) & 64 (8.3\%) & 110 (8.4\%) &  \\ 
     4 & 47 (8.9\%) & 32 (4.1\%) & 79 (6.1\%) &  \\ 
     5+ & 205 (39\%) & 81 (10\%) & 286 (22\%) &  \\ 
-\textbf{Recent individual sex contacts} &  &  &  & <.001 \\ 
+{\bfseries Recent individual sex contacts} &  &  &  &  \\ 
     0 & 48 (9.1\%) & 272 (35\%) & 320 (25\%) &  \\ 
     1 & 86 (16\%) & 258 (33\%) & 344 (26\%) &  \\ 
     2 & 96 (18\%) & 110 (14\%) & 206 (16\%) &  \\ 
     3 & 82 (15\%) & 62 (8.0\%) & 144 (11\%) &  \\ 
     4 & 62 (12\%) & 29 (3.7\%) & 91 (7.0\%) &  \\ 
     5+ & 156 (29\%) & 43 (5.6\%) & 199 (15\%) &  \\ 
-\textbf{Hookup travel time} &  &  &  & <.001 \\ 
+{\bfseries Hookup travel time} &  &  &  &  \\ 
     0-15 min & 121 (23\%) & 262 (34\%) & 383 (29\%) &  \\ 
     16-30 min & 221 (42\%) & 270 (35\%) & 491 (38\%) &  \\ 
     31-45 min & 71 (13\%) & 88 (11\%) & 159 (12\%) &  \\ 
     45+ min & 117 (22\%) & 154 (20\%) & 271 (21\%) &  \\ 
 \bottomrule
-\end{longtable}
+\end{tabular*}
 \begin{minipage}{\linewidth}
 \textsuperscript{\textit{1}}n (\%)\\
-\textsuperscript{\textit{2}}Pearson's Chi-squared test\\
 \emph{Data source: MPX NYC 2022}\\
 \end{minipage}
 
-\hypertarget{health}{%
-\section{Health}\label{health}}
+}
+
+\end{table}%
+
+\section{Health}\label{health}
 
 In terms of health status and health services, one in ten participants
 reported living with HIV - the overwhelming majority were virally
@@ -1243,43 +1231,45 @@ vaccine, though only 8\% had received MPOX testing.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{tbl-health}{}
-\setlength{\LTpost}{0mm}
-\begin{longtable}{lcccc}
-\caption{\label{tbl-health}Participants in MPX NYC Study by Sex / Physical Contact in Congregate
-Setting in past 4 weeks }\tabularnewline
+\begin{table}
 
+\caption{\label{tbl-health}Participants in MPX NYC Study by Sex /
+Physical Contact in Congregate Setting in past 4 weeks}
+
+\centering{
+
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
 \toprule
  & \multicolumn{3}{c}{\textbf{Physical or sexual contact in group setting in past 4 weeks}} &  \\ 
 \cmidrule(lr){2-4}
-\textbf{Variable} & \textbf{Yes}\\
-N = 530\textsuperscript{\textit{1}} & \textbf{No}\\
-N = 774\textsuperscript{\textit{1}} & \textbf{Overall}\\
-N = 1,304\textsuperscript{\textit{1}} & \textbf{p-value}\textsuperscript{\textit{2}} \\ 
+\textbf{Variable} & \textbf{Yes}  N = 530\textsuperscript{\textit{1}} & \textbf{No}  N = 774\textsuperscript{\textit{1}} & \textbf{Overall}  N = 1,304\textsuperscript{\textit{1}} & \textbf{p-value} \\ 
 \midrule\addlinespace[2.5pt]
-\textbf{HIV status} &  &  &  & 0.072 \\ 
+{\bfseries HIV status} &  &  &  &  \\ 
     Living with HIV & 60 (11\%) & 81 (10\%) & 141 (11\%) &  \\ 
     Not living with HIV & 447 (84\%) & 676 (87\%) & 1,123 (86\%) &  \\ 
     Unsure & 23 (4.3\%) & 17 (2.2\%) & 40 (3.1\%) &  \\ 
-\textbf{HIV supressed} &  &  &  & 0.15 \\ 
+{\bfseries HIV supressed} &  &  &  &  \\ 
     Yes & 54 (90\%) & 78 (95\%) & 132 (93\%) &  \\ 
     No & 3 (5.0\%) & 4 (4.9\%) & 7 (4.9\%) &  \\ 
     Unsure & 3 (5.0\%) & 0 (0\%) & 3 (2.1\%) &  \\ 
     Unknown & 470 & 692 & 1,162 &  \\ 
-\textbf{Any STI symptoms} & 118 (22\%) & 93 (12\%) & 211 (16\%) & <.001 \\ 
-\textbf{PrEP user} & 252 (48\%) & 253 (33\%) & 505 (39\%) & <.001 \\ 
-\textbf{MPOX tested} & 58 (11\%) & 47 (6.1\%) & 105 (8.1\%) & 0.001 \\ 
-\textbf{MPOX vaccinated} & 409 (77\%) & 461 (60\%) & 870 (67\%) & <.001 \\ 
+{\bfseries Any STI symptoms} & 118 (22\%) & 93 (12\%) & 211 (16\%) &  \\ 
+{\bfseries PrEP user} & 252 (48\%) & 253 (33\%) & 505 (39\%) &  \\ 
+{\bfseries MPOX tested} & 58 (11\%) & 47 (6.1\%) & 105 (8.1\%) &  \\ 
+{\bfseries MPOX vaccinated} & 409 (77\%) & 461 (60\%) & 870 (67\%) &  \\ 
 \bottomrule
-\end{longtable}
+\end{tabular*}
 \begin{minipage}{\linewidth}
 \textsuperscript{\textit{1}}n (\%)\\
-\textsuperscript{\textit{2}}Pearson's Chi-squared test; Fisher's exact test\\
 \emph{Data source: MPX NYC 2022}\\
 \end{minipage}
 
-\hypertarget{study-recruitment}{%
-\section{Study recruitment}\label{study-recruitment}}
+}
+
+\end{table}%
+
+\section{Study recruitment}\label{study-recruitment}
 
 The MPX NYC survey was open from 30 August to 15 November, 2022, but
 recruited \(70\%\) participants in two 48 hour periods: half were
@@ -1295,44 +1285,47 @@ City upon logging on to the app.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{tbl-recruitment}{}
-\setlength{\LTpost}{0mm}
-\begin{longtable}{lcccc}
-\caption{\label{tbl-recruitment}Participants in MPX NYC Study by Sex / Physical Contact in Congregate
-Setting in past 4 weeks }\tabularnewline
+\begin{table}
 
+\caption{\label{tbl-recruitment}Participants in MPX NYC Study by Sex /
+Physical Contact in Congregate Setting in past 4 weeks}
+
+\centering{
+
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
 \toprule
  & \multicolumn{3}{c}{\textbf{Physical or sexual contact in group setting in past 4 weeks}} &  \\ 
 \cmidrule(lr){2-4}
-\textbf{Variable} & \textbf{Yes}\\
-N = 530\textsuperscript{\textit{1}} & \textbf{No}\\
-N = 774\textsuperscript{\textit{1}} & \textbf{Overall}\\
-N = 1,304\textsuperscript{\textit{1}} & \textbf{p-value}\textsuperscript{\textit{2}} \\ 
+\textbf{Variable} & \textbf{Yes}  N = 530\textsuperscript{\textit{1}} & \textbf{No}  N = 774\textsuperscript{\textit{1}} & \textbf{Overall}  N = 1,304\textsuperscript{\textit{1}} & \textbf{p-value} \\ 
 \midrule\addlinespace[2.5pt]
-\textbf{Home borough} &  &  &  & 0.019 \\ 
+{\bfseries Home borough} &  &  &  &  \\ 
     Bronx & 31 (5.8\%) & 66 (8.5\%) & 97 (7.4\%) &  \\ 
     Brooklyn & 176 (33\%) & 258 (33\%) & 434 (33\%) &  \\ 
     Manhattan & 259 (49\%) & 320 (41\%) & 579 (44\%) &  \\ 
     Queens & 58 (11\%) & 119 (15\%) & 177 (14\%) &  \\ 
     Staten Island & 6 (1.1\%) & 11 (1.4\%) & 17 (1.3\%) &  \\ 
-\textbf{Recruitment channel} &  &  &  & 0.002 \\ 
+{\bfseries Recruitment channel} &  &  &  &  \\ 
     Grindr & 262 (49\%) & 444 (57\%) & 706 (54\%) &  \\ 
     Partner toolkit & 60 (11\%) & 82 (11\%) & 142 (11\%) &  \\ 
     Instagram & 47 (8.9\%) & 65 (8.4\%) & 112 (8.6\%) &  \\ 
     Twitter & 19 (3.6\%) & 43 (5.6\%) & 62 (4.8\%) &  \\ 
     Unknown & 142 (27\%) & 140 (18\%) & 282 (22\%) &  \\ 
-\textbf{Survey date} &  &  &  & 0.041 \\ 
+{\bfseries Survey date} &  &  &  &  \\ 
     30-31 Aug 2022 & 239 (45\%) & 372 (48\%) & 611 (47\%) &  \\ 
     01-10 Sep 2022 & 110 (21\%) & 118 (15\%) & 228 (17\%) &  \\ 
     10-11 Sep 2022 & 98 (18\%) & 171 (22\%) & 269 (21\%) &  \\ 
     12 Sep - 31 Nov 2022 & 83 (16\%) & 113 (15\%) & 196 (15\%) &  \\ 
 \bottomrule
-\end{longtable}
+\end{tabular*}
 \begin{minipage}{\linewidth}
 \textsuperscript{\textit{1}}n (\%)\\
-\textsuperscript{\textit{2}}Pearson's Chi-squared test\\
 \emph{Data source: MPX NYC 2022}\\
 \end{minipage}
+
+}
+
+\end{table}%
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1340,16 +1333,11 @@ N = 1,304\textsuperscript{\textit{1}} & \textbf{p-value}\textsuperscript{\textit
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[H]
+\begin{center}
+\includegraphics{3_results/3_1__results_participants_files/figure-pdf/unnamed-chunk-7-1.pdf}
+\end{center}
 
-{\centering \includegraphics{3_results/3_1__results_participants_files/figure-pdf/unnamed-chunk-7-1.pdf}
-
-}
-
-\end{figure}
-
-\hypertarget{sec-venues}{%
-\chapter{Places}\label{sec-venues}}
+\chapter{Places}\label{sec-venues}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1365,14 +1353,16 @@ N = 1,304\textsuperscript{\textit{1}} & \textbf{p-value}\textsuperscript{\textit
 
 \begin{figure}[H]
 
-{\centering \includegraphics{3_results/3_2__results_contact_venues_files/figure-pdf/fig-placetype-bar-grid-1.pdf}
+\centering{
+
+\includegraphics{3_results/3_2__results_contact_venues_files/figure-pdf/fig-placetype-bar-grid-1.pdf}
 
 }
 
 \caption{\label{fig-placetype-bar-grid}MPX NYC contact venue type by
 distance from home and sexual contact}
 
-\end{figure}
+\end{figure}%
 
 Of the \(604\) locations at which participant had physical or sexual
 contact in a group setting (contact venues), about two out of five were
@@ -1390,43 +1380,47 @@ different community district.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{tbl-places-descriptives}{}
-\setlength{\LTpost}{0mm}
-\begin{longtable}{lcccc}
-\caption{\label{tbl-places-descriptives}Contact venue by venue and contact type }\tabularnewline
+\begin{table}
 
+\caption{\label{tbl-places-descriptives}Contact venue by venue and
+contact type}
+
+\centering{
+
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc}
 \toprule
  & \multicolumn{3}{c}{\textbf{Physical or sexual contact in group setting in past 4 weeks}} &  \\ 
 \cmidrule(lr){2-4}
-\textbf{Variable} & \textbf{Did not have sex}\\
-N = 264\textsuperscript{\textit{1}} & \textbf{Had sex}\\
-N = 352\textsuperscript{\textit{1}} & \textbf{Overall}\\
-N = 616\textsuperscript{\textit{1}} & \textbf{p-value}\textsuperscript{\textit{2}} \\ 
+\textbf{Variable} & \textbf{Did not have sex}  N = 264\textsuperscript{\textit{1}} & \textbf{Had sex}  N = 352\textsuperscript{\textit{1}} & \textbf{Overall}  N = 616\textsuperscript{\textit{1}} & \textbf{p-value} \\ 
 \midrule\addlinespace[2.5pt]
-\textbf{Place type} &  &  &  & <.001 \\ 
+{\bfseries Place type} &  &  &  &  \\ 
     Concert/Theatre/Show & 63 (24\%) & 4 (1.1\%) & 67 (11\%) &  \\ 
     Dance Party & 110 (42\%) & 33 (9.4\%) & 143 (23\%) &  \\ 
     Dark Room/Sex Party & 10 (3.8\%) & 52 (15\%) & 62 (10\%) &  \\ 
     Private Residence & 28 (11\%) & 222 (63\%) & 250 (41\%) &  \\ 
     Something Else & 40 (15\%) & 40 (11\%) & 80 (13\%) &  \\ 
     Sport Game & 13 (4.9\%) & 1 (0.3\%) & 14 (2.3\%) &  \\ 
-\textbf{Place borough} &  &  &  & 0.3 \\ 
+{\bfseries Place borough} &  &  &  &  \\ 
     Bronx & 6 (2.3\%) & 18 (5.1\%) & 24 (3.9\%) &  \\ 
     Brooklyn & 84 (32\%) & 96 (27\%) & 180 (29\%) &  \\ 
     Manhattan & 144 (55\%) & 188 (53\%) & 332 (54\%) &  \\ 
     Queens & 29 (11\%) & 48 (14\%) & 77 (13\%) &  \\ 
     Staten Island & 1 (0.4\%) & 2 (0.6\%) & 3 (0.5\%) &  \\ 
-\textbf{Distance from home} &  &  &  & <.001 \\ 
+{\bfseries Distance from home} &  &  &  &  \\ 
     Same Community District & 42 (16\%) & 144 (41\%) & 186 (30\%) &  \\ 
     Same Borough & 116 (44\%) & 114 (32\%) & 230 (37\%) &  \\ 
     Different Borough & 106 (40\%) & 94 (27\%) & 200 (32\%) &  \\ 
 \bottomrule
-\end{longtable}
+\end{tabular*}
 \begin{minipage}{\linewidth}
 \textsuperscript{\textit{1}}n (\%)\\
-\textsuperscript{\textit{2}}Pearson's Chi-squared test; Fisher's exact test\\
 \emph{Data source: MPX NYC 2022}\\
 \end{minipage}
+
+}
+
+\end{table}%
 
 Contact venues at which participants had sexual contact (rather than
 non-sexual physical contact) were overwhelmingly private residences
@@ -1443,16 +1437,11 @@ was to be a dance party.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[H]
+\begin{center}
+\includegraphics{3_results/3_2__results_contact_venues_files/figure-pdf/unnamed-chunk-4-1.pdf}
+\end{center}
 
-{\centering \includegraphics{3_results/3_2__results_contact_venues_files/figure-pdf/unnamed-chunk-4-1.pdf}
-
-}
-
-\end{figure}
-
-\hypertarget{sec-movement}{%
-\chapter{Movement}\label{sec-movement}}
+\chapter{Movement}\label{sec-movement}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1461,8 +1450,7 @@ was to be a dance party.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{spatial-patterns}{%
-\section{Spatial patterns}\label{spatial-patterns}}
+\section{Spatial patterns}\label{spatial-patterns}
 
 Figure~\ref{fig-movement-matrix} maps each contact venue's community
 district (x-axis) against the participant's home community district
@@ -1494,7 +1482,9 @@ Brooklyn, respectively.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{3_results/3_3__results_movement_files/figure-pdf/fig-movement-matrix-1.pdf}
+\centering{
+
+\includegraphics{3_results/3_3__results_movement_files/figure-pdf/fig-movement-matrix-1.pdf}
 
 }
 
@@ -1506,10 +1496,9 @@ count of contact venues with the given home and contact venue community
 district. The color of the dot represents the borough of the contact
 venue.}
 
-\end{figure}
+\end{figure}%
 
-\hypertarget{spatial-concentration}{%
-\section{Spatial concentration}\label{spatial-concentration}}
+\section{Spatial concentration}\label{spatial-concentration}
 
 Figure~\ref{fig-spatial-concentration-bar} shows the difference betweeen
 the proportion of primary residences in each community district and the
@@ -1533,7 +1522,9 @@ BK01, MN05, and QN05, respectively.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{3_results/3_3__results_movement_files/figure-pdf/fig-spatial-concentration-bar-1.pdf}
+\centering{
+
+\includegraphics{3_results/3_3__results_movement_files/figure-pdf/fig-spatial-concentration-bar-1.pdf}
 
 }
 
@@ -1542,7 +1533,7 @@ home and contact venues by MPX NYC participant. The figure shows each
 community districts over-representation among contact venues compared to
 residences}
 
-\end{figure}
+\end{figure}%
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1550,16 +1541,11 @@ residences}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[H]
+\begin{center}
+\includegraphics{3_results/3_3__results_movement_files/figure-pdf/unnamed-chunk-4-1.pdf}
+\end{center}
 
-{\centering \includegraphics{3_results/3_3__results_movement_files/figure-pdf/unnamed-chunk-4-1.pdf}
-
-}
-
-\end{figure}
-
-\hypertarget{mixing}{%
-\chapter{Mixing}\label{mixing}}
+\chapter{Mixing}\label{mixing}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1584,8 +1570,7 @@ community districts where bisexual, straight and queer identified
 participants did not live. Similarly, those groups selected against
 community districts in which gay identified individuals live or play.
 
-\hypertarget{race-and-gender}{%
-\section{Race and gender}\label{race-and-gender}}
+\section{Race and gender}\label{race-and-gender}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1599,17 +1584,18 @@ community districts in which gay identified individuals live or play.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{3_results/3_4__results_mixing_files/figure-pdf/fig-racegender-mixing-matrix-1.pdf}
+\centering{
+
+\includegraphics{3_results/3_4__results_mixing_files/figure-pdf/fig-racegender-mixing-matrix-1.pdf}
 
 }
 
 \caption{\label{fig-racegender-mixing-matrix}Social mixing matrices for
 MPX NYC participants by race-gende}
 
-\end{figure}
+\end{figure}%
 
-\hypertarget{sexual-orientation}{%
-\section{Sexual orientation}\label{sexual-orientation}}
+\section{Sexual orientation}\label{sexual-orientation}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1626,17 +1612,18 @@ MPX NYC participants by race-gende}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{3_results/3_4__results_mixing_files/figure-pdf/fig-sexorientation-mixing-matrix-1.pdf}
+\centering{
+
+\includegraphics{3_results/3_4__results_mixing_files/figure-pdf/fig-sexorientation-mixing-matrix-1.pdf}
 
 }
 
 \caption{\label{fig-sexorientation-mixing-matrix}Social mixing matrix
 for MPX NYC participants by sexual orientation}
 
-\end{figure}
+\end{figure}%
 
-\hypertarget{age}{%
-\section{Age}\label{age}}
+\section{Age}\label{age}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1653,14 +1640,16 @@ for MPX NYC participants by sexual orientation}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{3_results/3_4__results_mixing_files/figure-pdf/fig-age-mixing-matrix-1.pdf}
+\centering{
+
+\includegraphics{3_results/3_4__results_mixing_files/figure-pdf/fig-age-mixing-matrix-1.pdf}
 
 }
 
 \caption{\label{fig-age-mixing-matrix}Social mixing matrix for MPX NYC
 participants by age}
 
-\end{figure}
+\end{figure}%
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1668,16 +1657,11 @@ participants by age}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[H]
+\begin{center}
+\includegraphics{3_results/3_4__results_mixing_files/figure-pdf/unnamed-chunk-5-1.pdf}
+\end{center}
 
-{\centering \includegraphics{3_results/3_4__results_mixing_files/figure-pdf/unnamed-chunk-5-1.pdf}
-
-}
-
-\end{figure}
-
-\hypertarget{sec-intervention}{%
-\chapter{Outbreak control}\label{sec-intervention}}
+\chapter{Outbreak control}\label{sec-intervention}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1698,17 +1682,18 @@ participants by age}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{3_results/3_5__results_outbreak_control_files/figure-pdf/fig-hiimpact-communities-map-1.pdf}
+\centering{
+
+\includegraphics{3_results/3_5__results_outbreak_control_files/figure-pdf/fig-hiimpact-communities-map-1.pdf}
 
 }
 
 \caption{\label{fig-hiimpact-communities-map}High-coverage community
 districts: contact vs movement-neutralizing strategy}
 
-\end{figure}
+\end{figure}%
 
-\hypertarget{spatial-efficiency-1}{%
-\section{Spatial efficiency}\label{spatial-efficiency-1}}
+\section{Spatial efficiency}\label{spatial-efficiency-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1722,14 +1707,16 @@ districts: contact vs movement-neutralizing strategy}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{3_results/3_5__results_outbreak_control_files/figure-pdf/fig-hiimpact-communities-bar-1.pdf}
+\centering{
+
+\includegraphics{3_results/3_5__results_outbreak_control_files/figure-pdf/fig-hiimpact-communities-bar-1.pdf}
 
 }
 
 \caption{\label{fig-hiimpact-communities-bar}High-coverage community
 districts: contact vs movement-neutralizing strategy}
 
-\end{figure}
+\end{figure}%
 
 Figure~\ref{fig-hiimpact-communities-bar} and
 Figure~\ref{fig-hiimpact-communities-map} show which community districts
@@ -1750,8 +1737,7 @@ and BK03. It would take 16 community districts to reach 66\% of the
 population. The additional community districts would be: MN64, MN10,
 QN01, BK08, MN09, QN05, BK09, MN11, BK14, and BK07.
 
-\hypertarget{network-impact}{%
-\section{Network impact}\label{network-impact}}
+\section{Network impact}\label{network-impact}
 
 Figure~\ref{fig-netimpact} shows that nearly 100\% of individuals are
 included in the largest connected component before any intervention. For
@@ -1778,13 +1764,15 @@ immunized - differences between the two strategies start emerging once
 
 \begin{figure}[H]
 
-{\centering \includegraphics{3_results/3_5__results_outbreak_control_files/figure-pdf/fig-netimpact-1.pdf}
+\centering{
+
+\includegraphics{3_results/3_5__results_outbreak_control_files/figure-pdf/fig-netimpact-1.pdf}
 
 }
 
 \caption{\label{fig-netimpact}Network impact}
 
-\end{figure}
+\end{figure}%
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1792,26 +1780,19 @@ immunized - differences between the two strategies start emerging once
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[H]
-
-{\centering \includegraphics{3_results/3_5__results_outbreak_control_files/figure-pdf/unnamed-chunk-5-1.pdf}
-
-}
-
-\end{figure}
+\begin{center}
+\includegraphics{3_results/3_5__results_outbreak_control_files/figure-pdf/unnamed-chunk-5-1.pdf}
+\end{center}
 
 \part{Conclusion}
 
-\hypertarget{sec-discussion}{%
-\chapter{Discussion}\label{sec-discussion}}
+\chapter{Discussion}\label{sec-discussion}
 
-\hypertarget{sec-recommendations}{%
-\chapter{Recommendations}\label{sec-recommendations}}
+\chapter{Recommendations}\label{sec-recommendations}
 
 \part{Endnotes}
 
-\hypertarget{references}{%
-\chapter{References}\label{references}}
+\chapter{References}\label{references}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1819,19 +1800,19 @@ immunized - differences between the two strategies start emerging once
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{refs}{}
+\phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
-\leavevmode\vadjust pre{\hypertarget{ref-annagracelee}{}}%
+\bibitem[\citeproctext]{ref-annagracelee}
 Anna Grace Lee. n.d. {``Will the Specter of Monkeypox Affect Pride
 Weekend in New York?''} \emph{New York Times}.
 \url{https://www.nytimes.com/2022/06/25/style/monkeypox-nyc-pride.html}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-aronow2017}{}}%
+\bibitem[\citeproctext]{ref-aronow2017}
 Aronow, Peter M, and Cyrus Samii. 2017. {``Estimating Average Causal
 Effects Under General Interference, with Application to a Social Network
 Experiment.''}
 
-\leavevmode\vadjust pre{\hypertarget{ref-blackburn2022}{}}%
+\bibitem[\citeproctext]{ref-blackburn2022}
 Blackburn, Dawn, Nicole M. Roth, Jeremy A. W. Gold, Leah Zilversmit Pao,
 Evelyn Olansky, Elizabeth A. Torrone, R. Paul McClung, et al. 2022.
 {``Epidemiologic and Clinical Features of Mpox in Transgender and
@@ -1839,27 +1820,27 @@ Gender-Diverse Adults - United States, May-November 2022.''} \emph{MMWR.
 Morbidity and mortality weekly report} 71 (5152): 1605--9.
 \url{https://doi.org/10.15585/mmwr.mm715152a1}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-fcc2022}{}}%
+\bibitem[\citeproctext]{ref-fcc2022}
 FCC. 2022. {``Federal Communications Commission API.''}
 \url{https://www.fcc.gov/reports-research/developers/api-terms-service}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-formonk2022}{}}%
+\bibitem[\citeproctext]{ref-formonk2022}
 {``For Monkeypox Patients, Excruciating Symptoms and a Struggle for
 Care.''} 2022. \emph{New York Times}, July.
 \url{https://www.nytimes.com/2022/07/18/nyregion/new-york-monkeypox-vaccine.html}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-hernuxe1n2018}{}}%
+\bibitem[\citeproctext]{ref-hernuxe1n2018}
 Hernán, Miguel, and James M. Robins. 2018. \emph{Causal inference}.
 Chapman \& Hall/CRC monographs on statistics \& applied probability.
 Chapman \& Hall/CRC.
 
-\leavevmode\vadjust pre{\hypertarget{ref-krellenstein2023}{}}%
+\bibitem[\citeproctext]{ref-krellenstein2023}
 Krellenstein, James, Joseph Osmunson, and Keletso Makofane. 2023. {``To
 Fight Monkeypox, Remember the Lessons of h.i.v.''} \emph{New York
 Times}, March.
 \url{https://www.nytimes.com/2022/05/29/opinion/monkeypox-covid-and-hiv.html}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-kyaw2022}{}}%
+\bibitem[\citeproctext]{ref-kyaw2022}
 Kyaw, Nang Thu Thu, Naama Kipperman, Karen A. Alroy, Jennifer
 Baumgartner, Addie Crawley, Eric Peterson, Amara Ross, et al. 2022.
 {``Notes from the Field: Clinical and Epidemiologic Characteristics of
@@ -1867,40 +1848,39 @@ Mpox Cases from the Initial Phase of the Outbreak - New York City, May
 19-July 15, 2022.''} \emph{MMWR. Morbidity and mortality weekly report}
 71 (5152): 1631--33. \url{https://doi.org/10.15585/mmwr.mm715152a3}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-minhaj2022}{}}%
+\bibitem[\citeproctext]{ref-minhaj2022}
 Minhaj, Faisal S, Yasmin P Ogale, Florence Whitehill, Jordan Schultz,
 Mary Foote, Whitni Davidson, Christine M Hughes, et al. 2022.
 {``Monkeypox Outbreak{\textemdash}nine States, May 2022.''}
 \emph{Morbidity and Mortality Weekly Report} 71 (23): 764.
 
-\leavevmode\vadjust pre{\hypertarget{ref-neo4j2024}{}}%
+\bibitem[\citeproctext]{ref-neo4j2024}
 Neo4j. 2024. {``Neo4j Documentation.''}
-\url{https://neo4j.com/docs/?utm_source=Google\&utm_medium=PaidSearch\&utm_campaign=Evergreen\&utm_content=AMS-Search-SEMCE-DSA-None-SEM-SEM-NonABM\&utm_term=\&utm_adgroup=DSA\&gad_source=1\&gbraid=0AAAAADk9OYpn-veLtg3MSa3HV-mXEgnRC\&gclid=Cj0KCQjwlvW2BhDyARIsADnIe-KKo4LZmo02jxyexPVweelrw_q-AwBtFSFPqVlfJ5YjiNyd1w7txfUaAk62EALw_wcB}.
+\url{https://neo4j.com/docs/?utm_source=Google&utm_medium=PaidSearch&utm_campaign=Evergreen&utm_content=AMS-Search-SEMCE-DSA-None-SEM-SEM-NonABM&utm_term=&utm_adgroup=DSA&gad_source=1&gbraid=0AAAAADk9OYpn-veLtg3MSa3HV-mXEgnRC&gclid=Cj0KCQjwlvW2BhDyARIsADnIe-KKo4LZmo02jxyexPVweelrw_q-AwBtFSFPqVlfJ5YjiNyd1w7txfUaAk62EALw_wcB}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-robins1986}{}}%
+\bibitem[\citeproctext]{ref-robins1986}
 Robins, James. 1986. {``A New Approach to Causal Inference in Mortality
 Studies with a Sustained Exposure Period{\textemdash}application to
 Control of the Healthy Worker Survivor Effect.''} \emph{Mathematical
 Modelling} 7 (9-12): 13931512.
 
-\leavevmode\vadjust pre{\hypertarget{ref-roth2023}{}}%
+\bibitem[\citeproctext]{ref-roth2023}
 Roth, Grant, Jennifer Barnes-Balenciaga, Joseph Osmundson, Martez DR
 Smith, Nguyen K Tran, Nicholas Diamond, and Keletso Makofane. 2023.
 {``Global North Learning from Global South: A Community-Led Response to
 Mpox in New York City.''} \emph{PLOS Global Public Health} 3 (6):
 e0002042.
 
-\leavevmode\vadjust pre{\hypertarget{ref-uscensus2022}{}}%
+\bibitem[\citeproctext]{ref-uscensus2022}
 US Census. 2022. {``Census Tracts.''}
 \url{https://www2.census.gov/geo/pdfs/education/CensusTracts.pdf}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-vercel2024}{}}%
+\bibitem[\citeproctext]{ref-vercel2024}
 Vercel. 2024. {``NextJS Documentation.''} \url{https://nextjs.org/docs}.
 
 \end{CSLReferences}
 
-\hypertarget{about-us}{%
-\chapter{About us}\label{about-us}}
+\chapter{About us}\label{about-us}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1919,10 +1899,9 @@ individuals in New York City.
 \addcontentsline{toc}{part}{Appendices}
 \appendix
 
-\hypertarget{sec-appendix-social-spatial}{%
-\chapter{SSNAC I: Social \& spatial}\label{sec-appendix-social-spatial}}
+\chapter{SSNAC I: Social \& spatial}\label{sec-appendix-social-spatial}
 
-\leavevmode\vadjust pre{\hypertarget{authors}{}}%
+\phantomsection\label{authors}
 Keletso Makofane, PhD
 
 RESPND-MI Collaboration
@@ -2054,11 +2033,11 @@ people are equally likely to interact.
 
 \begin{figure}
 
-\begin{minipage}[t]{\linewidth}
+\begin{minipage}{\linewidth}
 
-{\centering 
+\begin{figure}[H]
 
-\raisebox{-\height}{
+\centering{
 
 \includegraphics{A_ssnac1_social_spatial_context/A__ssnac1_social_spatial_context_files/figure-pdf/fig-context-1.pdf}
 
@@ -2067,11 +2046,11 @@ people are equally likely to interact.
 \caption{\label{fig-context}Approaches to incorporating context in
 studies of individual health}
 
-}
+\end{figure}%
 
 \end{minipage}%
 
-\end{figure}
+\end{figure}%
 
 A social network analysis would gain a more granular understanding of
 risk by assigning people who are connected to other people a higher risk
@@ -2097,8 +2076,7 @@ and social network data, assigning risk so that the risk of acquiring
 the cold is a function of the household the individual belongs to, the
 neighboring household, and the social network connections.
 
-\hypertarget{ssnac-components}{%
-\section{SSNAC components}\label{ssnac-components}}
+\section{SSNAC components}\label{ssnac-components}
 
 The SSNAC framework is an approach to collecting, analyzing and
 interpreting data which explicitly accounts for relationships among
@@ -2129,8 +2107,7 @@ explicitly state:
   under investigation
 \end{itemize}
 
-\hypertarget{the-data-are-a-network}{%
-\section{The data are a network}\label{the-data-are-a-network}}
+\section{The data are a network}\label{the-data-are-a-network}
 
 The central data structure in a SSNAC is the person-place graph.
 Figure~\ref{fig-ssnac} depicts the rightmost frame of
@@ -2157,17 +2134,18 @@ some edges indicate residence, some indicate next
 
 \begin{figure}[H]
 
-{\centering \includegraphics{A_ssnac1_social_spatial_context/A__ssnac1_social_spatial_context_files/figure-pdf/fig-ssnac-1.pdf}
+\centering{
+
+\includegraphics{A_ssnac1_social_spatial_context/A__ssnac1_social_spatial_context_files/figure-pdf/fig-ssnac-1.pdf}
 
 }
 
 \caption{\label{fig-ssnac}SSNAC Person-place graph}
 
-\end{figure}
+\end{figure}%
 
-\hypertarget{the-network-is-a-causal-structure}{%
 \section{The network is a causal
-structure}\label{the-network-is-a-causal-structure}}
+structure}\label{the-network-is-a-causal-structure}
 
 The Person-place graph is a starting point for constructing a causal
 model, but it is not sufficient. Depending on the causal question, some
@@ -2188,9 +2166,8 @@ graph altogether.
 
 We explore this in the Analysis appendix.
 
-\hypertarget{new-causal-structures-open-new-causal-enquiries}{%
 \section{New causal structures open new causal
-enquiries}\label{new-causal-structures-open-new-causal-enquiries}}
+enquiries}\label{new-causal-structures-open-new-causal-enquiries}
 
 There are four types of causal queries that focus on node-level outcomes
 in the SNACC framework.
@@ -2224,19 +2201,16 @@ characteristics for any single node, but rather are characteristics that
 emerge as a result of the pattern of interactions among nodes. For
 examples, see the section on social causal inference.
 
-\hypertarget{sec-appendix-network-analysis}{%
 \chapter{SSNAC II: Network
-analysis}\label{sec-appendix-network-analysis}}
+analysis}\label{sec-appendix-network-analysis}
 
 In this appendix we describe the main data objects of the MPX NYC study
 - the Person-place graph, the Person graph and the Place graph. We
 define measures used to analyze these graphs.
 
-\hypertarget{data}{%
-\section{Data}\label{data}}
+\section{Data}\label{data}
 
-\hypertarget{person-place-graph}{%
-\subsection{Person-place graph}\label{person-place-graph}}
+\subsection{Person-place graph}\label{person-place-graph}
 
 The MPX NYC spatial participant data network is a network object that
 contains all collected data. In this network, nodes comprise of
@@ -2263,14 +2237,16 @@ network.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{B_ssnac2_network_analysis/B__ssnac2_network_analysis_files/figure-pdf/fig-example-participant-place-1.pdf}
+\centering{
+
+\includegraphics{B_ssnac2_network_analysis/B__ssnac2_network_analysis_files/figure-pdf/fig-example-participant-place-1.pdf}
 
 }
 
 \caption{\label{fig-example-participant-place}Sample person-place
 network visualization}
 
-\end{figure}
+\end{figure}%
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2292,14 +2268,12 @@ network visualization}
 \begin{table}
 
 \caption{\label{tbl-example-bipartite-nodes-edges}Sample person-place
-network data}\begin{minipage}[t]{0.50\linewidth}
-\subcaption{\label{tbl-example-bipartite-nodes-edges-1}Nodes }
+network data}
 
-{\centering 
+\begin{minipage}{0.50\linewidth}
 
-\begin{longtable}{lrl}
-\tabularnewline
-
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrl}
 \toprule
 Label & Age & Type \\ 
 \midrule\addlinespace[2.5pt]
@@ -2317,20 +2291,14 @@ C & - & Community District \\
 D & - & Community District \\ 
 E & - & Community District \\ 
 \bottomrule
-\end{longtable}
-
-}
+\end{tabular*}
 
 \end{minipage}%
 %
-\begin{minipage}[t]{0.50\linewidth}
-\subcaption{\label{tbl-example-bipartite-nodes-edges-2}Edges }
+\begin{minipage}{0.50\linewidth}
 
-{\centering 
-
-\begin{longtable}{rll}
-\tabularnewline
-
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}rll}
 \toprule
 From & To & Relation \\ 
 \midrule\addlinespace[2.5pt]
@@ -2353,16 +2321,13 @@ From & To & Relation \\
 8 & C & GSEX \\ 
 8 & D & HOME \\ 
 \bottomrule
-\end{longtable}
-
-}
+\end{tabular*}
 
 \end{minipage}%
 
-\end{table}
+\end{table}%
 
-\hypertarget{person-graph}{%
-\subsection{Person graph}\label{person-graph}}
+\subsection{Person graph}\label{person-graph}
 
 The MPX NYC participant network has participants as nodes. A pair of
 nodes is connected by a weighted edge if each of the individuals
@@ -2384,14 +2349,16 @@ participant network shown in Table~\ref{tbl-example-participant-nodes}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{B_ssnac2_network_analysis/B__ssnac2_network_analysis_files/figure-pdf/fig-example-participant-1.pdf}
+\centering{
+
+\includegraphics{B_ssnac2_network_analysis/B__ssnac2_network_analysis_files/figure-pdf/fig-example-participant-1.pdf}
 
 }
 
 \caption{\label{fig-example-participant}Sample person-person network
 visualizatoin}
 
-\end{figure}
+\end{figure}%
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2413,14 +2380,12 @@ visualizatoin}
 \begin{table}
 
 \caption{\label{tbl-example-participant-nodes}Sample person-person
-network data}\begin{minipage}[t]{0.50\linewidth}
-\subcaption{\label{tbl-example-participant-nodes-1}Nodes }
+network data}
 
-{\centering 
+\begin{minipage}{0.50\linewidth}
 
-\begin{longtable}{rl}
-\tabularnewline
-
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}rl}
 \toprule
 Name & Type \\ 
 \midrule\addlinespace[2.5pt]
@@ -2433,20 +2398,14 @@ Name & Type \\
 7 & Person \\ 
 8 & Person \\ 
 \bottomrule
-\end{longtable}
-
-}
+\end{tabular*}
 
 \end{minipage}%
 %
-\begin{minipage}[t]{0.50\linewidth}
-\subcaption{\label{tbl-example-participant-nodes-2}Edges }
+\begin{minipage}{0.50\linewidth}
 
-{\centering 
-
-\begin{longtable}{rrr}
-\tabularnewline
-
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}rrr}
 \toprule
 From & To & Weight \\ 
 \midrule\addlinespace[2.5pt]
@@ -2465,16 +2424,13 @@ From & To & Weight \\
 6 & 8 & 2 \\ 
 7 & 8 & 1 \\ 
 \bottomrule
-\end{longtable}
-
-}
+\end{tabular*}
 
 \end{minipage}%
 
-\end{table}
+\end{table}%
 
-\hypertarget{place-graph}{%
-\subsection{Place graph}\label{place-graph}}
+\subsection{Place graph}\label{place-graph}
 
 The MPX NYC community district network has community districts as nodes.
 A pair of community districts is connected by a weighted edge when at
@@ -2498,14 +2454,16 @@ edges.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{B_ssnac2_network_analysis/B__ssnac2_network_analysis_files/figure-pdf/fig-example-community-1.pdf}
+\centering{
+
+\includegraphics{B_ssnac2_network_analysis/B__ssnac2_network_analysis_files/figure-pdf/fig-example-community-1.pdf}
 
 }
 
 \caption{\label{fig-example-community}Sample place network
 visualization}
 
-\end{figure}
+\end{figure}%
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2526,15 +2484,12 @@ visualization}
 
 \begin{table}
 
-\caption{\label{tbl-example-place-nodes}Sample place network
-data}\begin{minipage}[t]{0.50\linewidth}
-\subcaption{\label{tbl-example-place-nodes-1}Nodes }
+\caption{\label{tbl-example-place-nodes}Sample place network data}
 
-{\centering 
+\begin{minipage}{0.50\linewidth}
 
-\begin{longtable}{ll}
-\tabularnewline
-
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}ll}
 \toprule
 Name & Type \\ 
 \midrule\addlinespace[2.5pt]
@@ -2544,20 +2499,14 @@ C & Community District \\
 D & Community District \\ 
 E & Community District \\ 
 \bottomrule
-\end{longtable}
-
-}
+\end{tabular*}
 
 \end{minipage}%
 %
-\begin{minipage}[t]{0.50\linewidth}
-\subcaption{\label{tbl-example-place-nodes-2}Edges }
+\begin{minipage}{0.50\linewidth}
 
-{\centering 
-
-\begin{longtable}{llr}
-\tabularnewline
-
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}llr}
 \toprule
 From & To & Weight \\ 
 \midrule\addlinespace[2.5pt]
@@ -2570,16 +2519,13 @@ C & D & 2 \\
 C & E & 1 \\ 
 D & E & 3 \\ 
 \bottomrule
-\end{longtable}
-
-}
+\end{tabular*}
 
 \end{minipage}%
 
-\end{table}
+\end{table}%
 
-\hypertarget{measures}{%
-\section{Measures}\label{measures}}
+\section{Measures}\label{measures}
 
 In this section, we describe network measures that are both useful
 statistics to interpret in describing MPX NYC data and useful
@@ -2604,8 +2550,7 @@ proportion in largest connected component, can be used to analyze the
 overall connectedness of the MPX NYC Person-Place graph and related
 graphs.
 
-\hypertarget{notation}{%
-\subsection{Notation}\label{notation}}
+\subsection{Notation}\label{notation}
 
 Define \(\psi(i,j)\) as the adjacency function for the person-place
 graph. For person \(i\) and community \(j\):
@@ -2628,12 +2573,9 @@ places \(j\) and \(l\):
 \psi_C(j,l) = \sum_{i \in N_P}{\psi(i,j) \psi(i,l)}
 \]
 
-\hypertarget{node-characteristics-1}{%
-\subsection{Node characteristics}\label{node-characteristics-1}}
+\subsection{Node characteristics}\label{node-characteristics-1}
 
-\hypertarget{participant-social-reach}{%
-\subsubsection{Participant social
-reach}\label{participant-social-reach}}
+\subsubsection{Participant social reach}\label{participant-social-reach}
 
 Participant social reach is defined as weighted node degree in the MPX
 NYC participant network. For participant \(i \in N_p\)
@@ -2649,9 +2591,8 @@ R_i | A= \sum_{j \in N_p}{\psi_p (i,j)I_{x \in A}(x = j) }
 where the indicator function \(I_{x \in A}(x)\) equals \(1\) when
 \(x\in A\) and \(0\) otherwise.
 
-\hypertarget{participant-spatial-reach}{%
 \subsubsection{Participant spatial
-reach}\label{participant-spatial-reach}}
+reach}\label{participant-spatial-reach}
 
 Participant spatial reach is defined as the number of connections the
 focal participant has with community districts. It is defined as the
@@ -2666,9 +2607,8 @@ S_i = \sum_{j \in N_c}{\psi (i,j)}
 S_i|A = \sum_{j \in N_c}{\psi (i,j)I_{x \in A}(x = j)}
 \]
 
-\hypertarget{community-district-social-reach}{%
 \paragraph{Community district social
-reach}\label{community-district-social-reach}}
+reach}\label{community-district-social-reach}
 
 Community district social reach is defined as the number of connections
 the focal community district has with participants. It is defined as the
@@ -2683,9 +2623,8 @@ r_j = \sum_{i \in N_p}{\psi (i, j)}
 r_j|A = \sum_{i \in N_p}{\psi (i, j)I_{x \in A}(x = i)}
 \]
 
-\hypertarget{community-district-spatial-reach}{%
 \paragraph{Community district spatial
-reach}\label{community-district-spatial-reach}}
+reach}\label{community-district-spatial-reach}
 
 Community district spatial reach is defined as the weighted node degree
 in the MPX NYC community district network. For \(j \in N_c\)
@@ -2698,11 +2637,9 @@ s_j = \sum_{i \in N_c}{\psi_c (i,j)}
 s_j|A = \sum_{i \in N_c}{\psi_c (i,j)I_{x \in A}(x = i)}
 \]
 
-\hypertarget{network-characteristics-1}{%
-\subsection{Network characteristics}\label{network-characteristics-1}}
+\subsection{Network characteristics}\label{network-characteristics-1}
 
-\hypertarget{movement-matrix}{%
-\subsubsection{Movement matrix}\label{movement-matrix}}
+\subsubsection{Movement matrix}\label{movement-matrix}
 
 Define \(d^H(i)\) as the home district of person \(i\). The movement
 coefficient \(m(k,l)\) is defined as the count of connections by
@@ -2716,9 +2653,8 @@ m(k,l) = \sum_{i \in \mathscr{N}_P} \sum_{j \in \mathscr{N}_C} \psi_C (d^H(i),j)
 The movement matrix is a square matrix whose \(ij^{th}\) entry is
 \(m(i,j)\).
 
-\hypertarget{spatial-concentration-chart}{%
 \subsubsection{Spatial concentration
-chart}\label{spatial-concentration-chart}}
+chart}\label{spatial-concentration-chart}
 
 The spatial concentration proportion \(c(k)\) quantifies the degree to
 which a community district is over-represented among destination
@@ -2733,8 +2669,7 @@ c(k) = \frac{\sum_l{m(l,k) - m(k,l)}}{\sum_{i,j}{m(i,j)}}
 The spatial concentration chart plots teh spatial concentration
 proprotion for each community district.
 
-\hypertarget{spatial-mixing-matrix}{%
-\subsubsection{Spatial mixing matrix}\label{spatial-mixing-matrix}}
+\subsubsection{Spatial mixing matrix}\label{spatial-mixing-matrix}
 
 The MPX NYC participant network can also be used to analyze the pattern
 of connection across different demographic groups. We did this using the
@@ -2804,9 +2739,8 @@ minus one:
 \phi(A,B) = \frac{|N_p|}{|B|} \Phi(A,B) - 1
 \]
 
-\hypertarget{proportion-in-largest-connected-component}{%
 \subsubsection{Proportion in largest connected
-component}\label{proportion-in-largest-connected-component}}
+component}\label{proportion-in-largest-connected-component}
 
 In a given network, a connected component is a subset of nodes such that
 each node in the subset is reachable from any other node in the subset,
@@ -2830,11 +2764,10 @@ We define the proportion in the largest connected component as:
 \theta_p = \frac{\max_k{|C_k|}}{|N_p|}
 \]
 
-\hypertarget{ssnac-iii-causal-interpretation}{%
 \chapter{SSNAC III: Causal
-interpretation}\label{ssnac-iii-causal-interpretation}}
+interpretation}\label{ssnac-iii-causal-interpretation}
 
-\leavevmode\vadjust pre{\hypertarget{authors}{}}%
+\phantomsection\label{authors}
 Keletso Makofane, PhD
 
 RESPND-MI Collaboration
@@ -3001,11 +2934,9 @@ causal identification strategy for the framework. Finally, we describe
 the MPX NYC outbreak response analysis presented in the main report
 using the SSNAC framework.
 
-\hypertarget{sec-classic-causal-inference}{%
-\section{Classic causal inference}\label{sec-classic-causal-inference}}
+\section{Classic causal inference}\label{sec-classic-causal-inference}
 
-\hypertarget{example-1-dress-and-jobs}{%
-\subsection*{Example 1: Dress and Jobs}\label{example-1-dress-and-jobs}}
+\subsection*{Example 1: Dress and Jobs}\label{example-1-dress-and-jobs}
 \addcontentsline{toc}{subsection}{Example 1: Dress and Jobs}
 
 We are interested in settling an argument among friends about the
@@ -3037,8 +2968,7 @@ non-parametric structural equation model with independent errors
 counterfactual variables and directed acyclic graphs (DAGs) to reason
 about causality.
 
-\hypertarget{npsem-ie}{%
-\subsection*{NPSEM-IE}\label{npsem-ie}}
+\subsection*{NPSEM-IE}\label{npsem-ie}
 \addcontentsline{toc}{subsection}{NPSEM-IE}
 
 An NPSEM-IE is a system of equations which relates all the entries in a
@@ -3102,15 +3032,17 @@ independencies.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-fullly-connected-dag-1.pdf}
+\centering{
+
+\includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-fullly-connected-dag-1.pdf}
 
 }
 
 \caption{\label{fig-fullly-connected-dag}Fully connected causal DAG}
 
-\end{figure}
+\end{figure}%
 
-\begin{equation}\protect\hypertarget{eq-fullly-connected-dag}{}{
+\begin{equation}\phantomsection\label{eq-fullly-connected-dag}{
 \begin{aligned}
 L_1 &= f_{L_1}(U_{L_1}) \\
 L_2 &= f_{L_2}(U_{L_2}, L_1) \\
@@ -3122,7 +3054,7 @@ Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
 Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1) \\
 Y_3 &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
 \end{aligned}
-}\label{eq-fullly-connected-dag}\end{equation}
+}\end{equation}
 
 But the most flexible model is not the most useful one. To fully
 characterize this system using observed data, we would need to estimate
@@ -3157,8 +3089,7 @@ arguments from the functions in Equation~\ref{eq-fullly-connected-dag}),
 or assuming that some of the functions in the system are similar to each
 other in some way.
 
-\hypertarget{sec-assumptions-classic}{%
-\subsection{Assumptions}\label{sec-assumptions-classic}}
+\subsection{Assumptions}\label{sec-assumptions-classic}
 
 Under classic causal inference, we assume that observations are
 independent and identically distributed. We review these assumptions,
@@ -3168,11 +3099,9 @@ assumptions up into \emph{independence assumptions} (assumptions that
 delete arrows from the DAG) and \emph{homogeneity assumptions}
 (assumptions that simplify the system of structural equations).
 
-\hypertarget{independence}{%
-\subsubsection{Independence}\label{independence}}
+\subsubsection{Independence}\label{independence}
 
-\hypertarget{no-spillover}{%
-\paragraph{No spillover}\label{no-spillover}}
+\paragraph{No spillover}\label{no-spillover}
 
 Under classic causal inference, we make the assumption of no spillover -
 that measurements taken across participants at the same time
@@ -3224,15 +3153,17 @@ independence of the error terms \(U_{L_i}\), the error terms
 
 \begin{figure}[H]
 
-{\centering \includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-no-spillover-dag-1.pdf}
+\centering{
+
+\includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-no-spillover-dag-1.pdf}
 
 }
 
 \caption{\label{fig-no-spillover-dag}Causal DAG with no spillover}
 
-\end{figure}
+\end{figure}%
 
-\begin{equation}\protect\hypertarget{eq-no-spillover-dag}{}{
+\begin{equation}\phantomsection\label{eq-no-spillover-dag}{
 \begin{aligned}
 L_1 &= f_{L_1}(U_{L_1}) \\
 L_2 &= f_{L_2}(U_{L_2}) \\
@@ -3244,10 +3175,9 @@ Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
 Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3) \\
 Y_3 &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3) \\
 \end{aligned}
-}\label{eq-no-spillover-dag}\end{equation}
+}\end{equation}
 
-\hypertarget{no-interference}{%
-\paragraph{No interference}\label{no-interference}}
+\paragraph{No interference}\label{no-interference}
 
 Classic causal inference makes the assumption of no interference.
 i.e.~We assume that measurements made across participants, but not at
@@ -3273,11 +3203,9 @@ Y_3 &= f_{Y_3}( U_{Y_3}, L_3, A_3 ) \\
 \end{aligned}
 \]
 
-\hypertarget{homogeneity}{%
-\subsubsection{Homogeneity}\label{homogeneity}}
+\subsubsection{Homogeneity}\label{homogeneity}
 
-\hypertarget{identical-distribution}{%
-\paragraph{Identical distribution}\label{identical-distribution}}
+\paragraph{Identical distribution}\label{identical-distribution}
 
 Finally, we see above that the functions that generate observations
 \(L_i\) are similar in structure to each other, as are the the functions
@@ -3292,11 +3220,9 @@ that the functions are identical to each other.
 \end{aligned}
 \]
 
-\hypertarget{identification}{%
-\subsubsection{Identification}\label{identification}}
+\subsubsection{Identification}\label{identification}
 
-\hypertarget{positivity}{%
-\paragraph{Positivity}\label{positivity}}
+\paragraph{Positivity}\label{positivity}
 
 We assume that for all \(i\)
 
@@ -3304,11 +3230,9 @@ We assume that for all \(i\)
 0 < P[A_i =1 | L_i] < 1
 \]
 
-\hypertarget{model}{%
-\subsection{Model}\label{model}}
+\subsection{Model}\label{model}
 
-\hypertarget{observed-data}{%
-\subsubsection{Observed data}\label{observed-data}}
+\subsubsection{Observed data}\label{observed-data}
 
 The homogeneity and indepdndence assumptions allow us to re-write the
 structural equation model dropping the person subscript from the
@@ -3341,25 +3265,26 @@ the sample of three people.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-independence-dag-1.pdf}
+\centering{
+
+\includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-independence-dag-1.pdf}
 
 }
 
 \caption{\label{fig-independence-dag}Causal DAG with no interference or
 spillover}
 
-\end{figure}
+\end{figure}%
 
-\begin{equation}\protect\hypertarget{eq-independence-dag}{}{
+\begin{equation}\phantomsection\label{eq-independence-dag}{
 \begin{aligned}
 L_i &= f_{L}( U_{L_i}) \\
 A_i &= f_{A}( U_{A_i}, L_i) \\
 Y_i &= f_{Y}( U_{Y_i}, L_i, A_i) \\
 \end{aligned}
-}\label{eq-independence-dag}\end{equation}
+}\end{equation}
 
-\hypertarget{counterfactual-data}{%
-\subsubsection{Counterfactual data}\label{counterfactual-data}}
+\subsubsection{Counterfactual data}\label{counterfactual-data}
 
 We define counterfactual outcomes \(Y_1^{(a_1)}\), \(Y_2^{(a_2)}\), and
 \(Y_3^{(a_3)}\), which represent the level of job opportunities,
@@ -3392,28 +3317,28 @@ the same individual.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-independence-swig-1.pdf}
+\centering{
+
+\includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-independence-swig-1.pdf}
 
 }
 
 \caption{\label{fig-independence-swig}SWIG with no interference or
 spillover}
 
-\end{figure}
+\end{figure}%
 
-\begin{equation}\protect\hypertarget{eq-independence-swig}{}{
+\begin{equation}\phantomsection\label{eq-independence-swig}{
 \begin{aligned}
 L_i &= f_{L}( U_{L_i}                       ) \\
 A_i &= f_{A}( U_{A_i}, L_i) \\
 Y_i^{(a_i)} &= f_{Y}(U_{Y_i} , L_i, a_i) \\
 \end{aligned}
-}\label{eq-independence-swig}\end{equation}
+}\end{equation}
 
-\hypertarget{estimates}{%
-\subsection{Estimates}\label{estimates}}
+\subsection{Estimates}\label{estimates}
 
-\hypertarget{estimands}{%
-\subsubsection{Estimands}\label{estimands}}
+\subsubsection{Estimands}\label{estimands}
 
 We are interested in whether changing how formally someone dresses would
 change their level of job offers, on average, in our population. To
@@ -3428,8 +3353,7 @@ E \left[ \frac{1}{n} \sum_i Y_i^{(a=1)} - Y_i^{(a=0)} \right]
 \end{aligned}
 \]
 
-\hypertarget{identification-1}{%
-\subsubsection{Identification}\label{identification-1}}
+\subsubsection{Identification}\label{identification-1}
 
 Once we have specified the hypothetical quantities from our thought
 experiment, we ``identify'' them, meaning write them in terms of the
@@ -3492,11 +3416,9 @@ expectation.
 \frac{\sum_i E[ Y_i | L_i = l_i, A_i = a ]I_{\{ x = a\}}(a_i)}{\sum_i I_{\{ x = a\}}(a_i) }
 \]
 
-\hypertarget{discussion}{%
-\subsection{Discussion}\label{discussion}}
+\subsection{Discussion}\label{discussion}
 
-\hypertarget{consistency}{%
-\subsubsection{Consistency}\label{consistency}}
+\subsubsection{Consistency}\label{consistency}
 
 \begin{itemize}
 \tightlist
@@ -3511,8 +3433,7 @@ expectation.
   in the identification strategy above
 \end{itemize}
 
-\hypertarget{positivity-1}{%
-\subsubsection{Positivity}\label{positivity-1}}
+\subsubsection{Positivity}\label{positivity-1}
 
 \begin{itemize}
 \tightlist
@@ -3521,8 +3442,7 @@ expectation.
   non-zero chance of developing the outcome
 \end{itemize}
 
-\hypertarget{exchangeability}{%
-\subsubsection{Exchangeability}\label{exchangeability}}
+\subsubsection{Exchangeability}\label{exchangeability}
 
 \begin{itemize}
 \tightlist
@@ -3530,8 +3450,7 @@ expectation.
   We have not misspecified the DAG
 \end{itemize}
 
-\hypertarget{reflection-questions}{%
-\subsection*{Reflection questions}\label{reflection-questions}}
+\subsection*{Reflection questions}\label{reflection-questions}
 \addcontentsline{toc}{subsection}{Reflection questions}
 
 Using the structural equations:
@@ -3555,12 +3474,10 @@ Using the structural equations:
   How is the SUTVA or consistency assumption encoded in this model?
 \end{enumerate}
 
-\hypertarget{sec-network-causal-inference}{%
-\section{Network causal inference}\label{sec-network-causal-inference}}
+\section{Network causal inference}\label{sec-network-causal-inference}
 
-\hypertarget{example-2-marriage-dress-and-jobs}{%
 \subsection*{Example 2: Marriage, Dress, and
-Jobs}\label{example-2-marriage-dress-and-jobs}}
+Jobs}\label{example-2-marriage-dress-and-jobs}
 \addcontentsline{toc}{subsection}{Example 2: Marriage, Dress, and Jobs}
 
 We mentioned that in our study sample that \emph{Person 1} and
@@ -3596,8 +3513,7 @@ define the network causal inference approach to causal analysis. Loosely
 following Aronow and Samii (2017), we use the idea of exposure mappings
 to express these assumptions.
 
-\hypertarget{graphs}{%
-\subsection*{Graphs}\label{graphs}}
+\subsection*{Graphs}\label{graphs}
 \addcontentsline{toc}{subsection}{Graphs}
 
 We define graph \(\mathscr{G}(\mathscr{N}, \sim)\) as an ordered pair
@@ -3612,8 +3528,7 @@ nodes \(i\) is connected to. Define \(\mathbf{X}_{\mathscr{N_i}}\) as
 the sub-vector of \(\mathbf{X}\) which contains entries related to
 person \(i\)'s network exposure units.
 
-\hypertarget{exposure-mappings}{%
-\subsection*{Exposure mappings}\label{exposure-mappings}}
+\subsection*{Exposure mappings}\label{exposure-mappings}
 \addcontentsline{toc}{subsection}{Exposure mappings}
 
 Say we have a non-parametric structural equation model of
@@ -3633,8 +3548,7 @@ such that
 Y_i = f_{Y_i}(g_i(\mathbf{X}_1,  ..., \mathbf{X}_k, i), U_{Y_i})
 \]
 
-\hypertarget{definition-1-loyalty}{%
-\subsubsection{Definition 1: Loyalty}\label{definition-1-loyalty}}
+\subsubsection{Definition 1: Loyalty}\label{definition-1-loyalty}
 
 We say an exposure mapping \(g_{i}\) is loyal to graph \(\mathscr{G}\)
 if for any \(\mathbf{X},\mathbf{X}' \in \mathbf{R}^n\)
@@ -3647,9 +3561,8 @@ g_{i}(\mathbf{X}, i) = g_{i}(\mathbf{X'}, i)
 \end{equation}
 \]
 
-\hypertarget{definition-2-separability}{%
 \subsubsection{Definition 2:
-Separability}\label{definition-2-separability}}
+Separability}\label{definition-2-separability}
 
 We say exposure mapping \(g_i\) is separable if it can be re-written as
 the vector-valued function
@@ -3666,8 +3579,7 @@ g_{ki}(\mathbf{X}_{k},  i)
 Where for \(g_{0i}\) is a vector-valued function of \(X_{ti}\) for
 \(t \in [1,k]\) and each \(g_{ti}\) is a real-valued function.
 
-\hypertarget{definition-3-symmetry}{%
-\subsubsection{Definition 3: Symmetry}\label{definition-3-symmetry}}
+\subsubsection{Definition 3: Symmetry}\label{definition-3-symmetry}
 
 For some \(t \in [1,K]\) and \(i \in \mathscr{N}\), we say \(g_{ti}\) is
 symmetric with respect to graph \(\mathscr{G}\) if for any
@@ -3688,9 +3600,8 @@ a ``network exposure mapping for \(Y_i\) with respect to
 \(\mathbf{X}_t\) in \(\mathscr{G}\)''. The value of the function is
 called the ``network exposure value\ldots{}''
 
-\hypertarget{definition-4-positional-invariance}{%
 \subsubsection{Definition 4: Positional
-invariance}\label{definition-4-positional-invariance}}
+invariance}\label{definition-4-positional-invariance}
 
 We say an network exposure mapping \(g_{ti}\) is invariant to its
 position in the network if
@@ -3699,9 +3610,8 @@ position in the network if
 g_{ti} = g_{tj} = g_t \text{ for all } i,j \in \mathscr{N} 
 \]
 
-\hypertarget{definition-5-boundedness}{%
 \subsubsection{Definition 5:
-Boundedness}\label{definition-5-boundedness}}
+Boundedness}\label{definition-5-boundedness}
 
 We say that a network exposure mapping \(g_{ti}\) is bounded if all
 possible network exposure values are contained by a finite set
@@ -3713,8 +3623,7 @@ g_{ti}(\mathbf{X}_t, i) \in \mathbf{D}
 
 and \(|\mathbf{D}| < c\) for some constant \(c\).
 
-\hypertarget{comments}{%
-\subsubsection{Comments}\label{comments}}
+\subsubsection{Comments}\label{comments}
 
 These definitions will be used in the next section to develop a model
 for inference under causal interference. The first assumption can be
@@ -3771,15 +3680,11 @@ Finally, we should note that under classical causal inference
 trivially loyal to the empty graph, so the network exposure mappings are
 trivially separable, positionally invariant, and bounded.
 
-\hypertarget{assumptions}{%
-\subsection{Assumptions}\label{assumptions}}
+\subsection{Assumptions}\label{assumptions}
 
-\hypertarget{independence-assumptions}{%
-\subsubsection{Independence
-assumptions}\label{independence-assumptions}}
+\subsubsection{Independence assumptions}\label{independence-assumptions}
 
-\hypertarget{no-spillover-1}{%
-\paragraph{No spillover}\label{no-spillover-1}}
+\paragraph{No spillover}\label{no-spillover-1}
 
 Under network causal inference, we make the assumption of no spillover -
 that measurements taken across participants at the same time
@@ -3795,8 +3700,7 @@ each other, the \(A_i\)'s are not functions of each other, and the
 the measurements taken prior to a set of contemporaneous measures, the
 contemporaneous measures are independent.
 
-\hypertarget{network-interference}{%
-\paragraph{Network interference}\label{network-interference}}
+\paragraph{Network interference}\label{network-interference}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3809,16 +3713,18 @@ contemporaneous measures are independent.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-interference-dag-1.pdf}
+\centering{
+
+\includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-interference-dag-1.pdf}
 
 }
 
 \caption{\label{fig-interference-dag}Causal DAG with network
 interference}
 
-\end{figure}
+\end{figure}%
 
-\begin{equation}\protect\hypertarget{eq-interference-dag}{}{
+\begin{equation}\phantomsection\label{eq-interference-dag}{
 \begin{aligned}
 L_1 &= f_{L_1}(U_{L_1}) \\
 L_2 &= f_{L_2}(U_{L_2}) \\
@@ -3830,7 +3736,7 @@ Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, A_1, A_2) \\
 Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, A_1, A_2) \\
 Y_3 &= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
 \end{aligned}
-}\label{eq-interference-dag}\end{equation}
+}\end{equation}
 
 Under network causal inference, we make the assumption that interference
 respects some mapping between individuals - a mapping given by a graph.
@@ -3849,14 +3755,11 @@ this example
 \mathscr{G}(\{\text{Person 1, Person 2, Person 3}\}, \{\text{Person 1} \sim \text{Person 2}\})
 \]
 
-\hypertarget{homogeneity-assumptions}{%
-\subsubsection{Homogeneity assumptions}\label{homogeneity-assumptions}}
+\subsubsection{Homogeneity assumptions}\label{homogeneity-assumptions}
 
-\hypertarget{homogenous-interference}{%
-\paragraph{Homogenous interference}\label{homogenous-interference}}
+\paragraph{Homogenous interference}\label{homogenous-interference}
 
-\hypertarget{separability}{%
-\subparagraph{Separability}\label{separability}}
+\subparagraph{Separability}\label{separability}
 
 We assume that the exposure mapping for each variable in the structural
 model is separable. i.e.~We define \(g_{A_i}\), \(h_{Y_i}\), and
@@ -3879,8 +3782,7 @@ Y_3 &= f_{Y_3}(U_{Y_3}, L_3,A_3,  g_{Y_2}(\mathbf{L}, \{\} ), h_{Y_2}(\mathbf{A}
 \end{aligned}
 \]
 
-\hypertarget{positional-invariance}{%
-\subparagraph{Positional invariance}\label{positional-invariance}}
+\subparagraph{Positional invariance}\label{positional-invariance}
 
 We assume that the value of a network exposure mapping is invariant to
 its position in the network. This allows us to drop the person subscript
@@ -3900,8 +3802,7 @@ Y_3 &= f_{Y_3}(U_{Y_3}, L_3, A_3, g_{Y}(\mathbf{L}, \{\} ), h_{Y}(\mathbf{A}, \{
 \end{aligned}
 \]
 
-\hypertarget{symmetry}{%
-\subparagraph{Symmetry}\label{symmetry}}
+\subparagraph{Symmetry}\label{symmetry}
 
 Since \emph{Person 1} and \emph{Person 2} each have one network exposure
 unit each, and since \emph{Person 3} does not have any network exposure
@@ -3910,8 +3811,7 @@ example. It would be that the order of entries related to network
 exposure units does not matter for calculating the network exposure
 value. Permuting those entries does not change that value.
 
-\hypertarget{boundedness}{%
-\subparagraph{Boundedness}\label{boundedness}}
+\subparagraph{Boundedness}\label{boundedness}
 
 If we assume that the only relevant relationships for the causal
 structure related to employment, formal dress, and job offers are
@@ -3919,8 +3819,7 @@ marriages, the assumption of boundedness holds. Each node in this graph
 will have either a single network exposure unit, or none at all, even if
 the graph grows arbitrarily large.
 
-\hypertarget{identical-distribution-1}{%
-\paragraph{Identical distribution}\label{identical-distribution-1}}
+\paragraph{Identical distribution}\label{identical-distribution-1}
 
 We assume that the structural equations that produce indivdual measures
 are identical accross individuals. Hence we can drop the person
@@ -3940,11 +3839,9 @@ Y_3 &= f_{Y}(U_{Y_3}, L_3, A_3, g_{Y}(\mathbf{L}, \{\} ), h_{Y}(\mathbf{A}, \{\}
 \end{aligned}
 \]
 
-\hypertarget{identification-2}{%
-\subsubsection{Identification}\label{identification-2}}
+\subsubsection{Identification}\label{identification-2}
 
-\hypertarget{positivity-2}{%
-\paragraph{Positivity}\label{positivity-2}}
+\paragraph{Positivity}\label{positivity-2}
 
 We assume that for all \(i\)
 
@@ -3952,11 +3849,9 @@ We assume that for all \(i\)
 0 < P[A_i =1 | L_i,g_{A}(\mathbf{L}) ] < 1
 \]
 
-\hypertarget{model-1}{%
-\subsection{Model}\label{model-1}}
+\subsection{Model}\label{model-1}
 
-\hypertarget{observed-data-1}{%
-\subsubsection{Observed data}\label{observed-data-1}}
+\subsubsection{Observed data}\label{observed-data-1}
 
 Figure~\ref{fig-homogenous-dag} and Equation~\ref{eq-homogenous-dag}
 show the resulting non-parametric structural equation model for our
@@ -3984,26 +3879,27 @@ infer something about causality in the context of a given population.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-homogenous-dag-1.pdf}
+\centering{
+
+\includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-homogenous-dag-1.pdf}
 
 }
 
 \caption{\label{fig-homogenous-dag}Causal DAG with homogenous structure}
 
-\end{figure}
+\end{figure}%
 
 We can re-write the structural equation model like this:
 
-\begin{equation}\protect\hypertarget{eq-homogenous-dag}{}{
+\begin{equation}\phantomsection\label{eq-homogenous-dag}{
 \begin{aligned}
 L_i &= f_{L}( U_{L_i} ) \\
 A_i &= f_{A}( U_{A_i}, L_i, g_{A}(\textbf{L}_{N_i}) ) \\
 Y_i &= f_{Y}( U_{Y_i},  L_i,  g_{Y}(\textbf{L}_{N_i}),   A_i,  h_{Y}( \textbf{A}_{N_i} ) ) \\
 \end{aligned}
-}\label{eq-homogenous-dag}\end{equation}
+}\end{equation}
 
-\hypertarget{counterfactual-data-1}{%
-\subsubsection{Counterfactual data}\label{counterfactual-data-1}}
+\subsubsection{Counterfactual data}\label{counterfactual-data-1}
 
 We define counterfactual outcomes
 \(Y_1^{(a_1, \mathbf{a}_{\mathscr{N}_1})}\),
@@ -4035,28 +3931,28 @@ Example 2.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-homogenous-interference-swig-1.pdf}
+\centering{
+
+\includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-homogenous-interference-swig-1.pdf}
 
 }
 
 \caption{\label{fig-homogenous-interference-swig}SWIG with network
 interference}
 
-\end{figure}
+\end{figure}%
 
-\begin{equation}\protect\hypertarget{eq-homogenous-interference-swig}{}{
+\begin{equation}\phantomsection\label{eq-homogenous-interference-swig}{
 \begin{aligned}
 L_i &= f_{L}(  U_{L_i}  ) \\
 A_i &= f_{A}( U_{A_i}, L_i, g_{A}(\textbf{L}_{\mathscr{N}_i}) ) \\
 Y_i^{(a_i,\textbf{a}_{\mathscr{N}_i} )} &= f_{Y}(U_{Y_i}, L_i,  a_i,  g_{Y}(\textbf{L}_{\mathscr{N}_i}),      h_{Y}(\textbf{a}_{\mathscr{N}_i})         ) \\
 \end{aligned} 
-}\label{eq-homogenous-interference-swig}\end{equation}
+}\end{equation}
 
-\hypertarget{estimates-1}{%
-\subsection{Estimates}\label{estimates-1}}
+\subsection{Estimates}\label{estimates-1}
 
-\hypertarget{causal-estimands}{%
-\subsubsection{Causal estimands}\label{causal-estimands}}
+\subsubsection{Causal estimands}\label{causal-estimands}
 
 We are interested in whether on average, in our population of three
 people, changing someone's dress would change their level of job offers
@@ -4085,8 +3981,7 @@ opportunities.
 \frac{1}{n}\sum_i E[Y_i^{(a = 1, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 1})} - Y_i^{(a = 1, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 0})}]
 \]
 
-\hypertarget{identification-3}{%
-\subsubsection{Identification}\label{identification-3}}
+\subsubsection{Identification}\label{identification-3}
 
 \[
 \begin{aligned}
@@ -4136,8 +4031,7 @@ E[ \frac{1}{n} \sum_i  E[Y_i |  L_i , g(\mathbf{L}_{\mathscr{N}_i}), A_i = a_i, 
 \frac{\sum_i  E[Y_i |  L_i , g(\mathbf{L}_{\mathscr{N}_i}), A_i = a_i, h_Y(\textbf{A}_{\mathscr{N}_i}) = h_Y(\textbf{a}_{\mathscr{N}_i}) ] I_{\{ x = a\}}(a_i) I_{\{ h_Y (x) = h_Y (\mathbf{a})\}}(a_{\mathscr{N}_i})}{\sum_i I_{\{ x = a\}}(a_i) I_{\{ h_Y (x) = h_Y (\mathbf{a})\}}(a_{\mathscr{N}_i})} 
 \]
 
-\hypertarget{reflection-questions-1}{%
-\subsection*{Reflection questions}\label{reflection-questions-1}}
+\subsection*{Reflection questions}\label{reflection-questions-1}
 \addcontentsline{toc}{subsection}{Reflection questions}
 
 \begin{enumerate}
@@ -4153,12 +4047,10 @@ E[ \frac{1}{n} \sum_i  E[Y_i |  L_i , g(\mathbf{L}_{\mathscr{N}_i}), A_i = a_i, 
   Write an example of a network exposure mapping that is not seperable.
 \end{enumerate}
 
-\hypertarget{sec-ssnac}{%
-\section{SSNAC}\label{sec-ssnac}}
+\section{SSNAC}\label{sec-ssnac}
 
-\hypertarget{example-3-longitudinal-data-driven-vaccination-campaign}{%
 \subsection*{Example 3: Longitudinal Data-Driven Vaccination
-Campaign}\label{example-3-longitudinal-data-driven-vaccination-campaign}}
+Campaign}\label{example-3-longitudinal-data-driven-vaccination-campaign}
 \addcontentsline{toc}{subsection}{Example 3: Longitudinal Data-Driven
 Vaccination Campaign}
 
@@ -4188,9 +4080,8 @@ because some will not open the app during the period of the campaign.
 Those who do will have the choice of getting vaccinated or not. Each
 person can only get vaccinated once.
 
-\hypertarget{new-tools-from-the-ssnac-framework}{%
 \subsection*{New tools from the SSNAC
-framework}\label{new-tools-from-the-ssnac-framework}}
+framework}\label{new-tools-from-the-ssnac-framework}
 \addcontentsline{toc}{subsection}{New tools from the SSNAC framework}
 
 As we see in Figure~\ref{fig-homogenous-dag}, causal DAGs become quickly
@@ -4202,9 +4093,8 @@ important limitation because one of the most useful things about causal
 DAGs is that they allow the observational epidemiologist to reason
 graphically about the structure of confounding and selection.
 
-\hypertarget{introducing-the-causal-directed-acyclic-network-graph-dang}{%
 \subsubsection{Introducing the Causal Directed Acyclic Network Graph
-(DANG)}\label{introducing-the-causal-directed-acyclic-network-graph-dang}}
+(DANG)}\label{introducing-the-causal-directed-acyclic-network-graph-dang}
 
 We introduce the causal Directed Acyclic Network Graph (causal DANG) - a
 simple extension of the DAG that allows for the representation of
@@ -4272,13 +4162,15 @@ instructions to draw the DAG in Figure~\ref{fig-interference-dag}:
 
 \begin{figure}[H]
 
-{\centering \includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-causal-dang-instructions-1.pdf}
+\centering{
+
+\includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-causal-dang-instructions-1.pdf}
 
 }
 
 \caption{\label{fig-causal-dang-instructions}Causal DANG}
 
-\end{figure}
+\end{figure}%
 
 \emph{Multiple entity types}
 
@@ -4327,18 +4219,19 @@ message or not. \(\mathbf{V}\) is a \(5\times1\) vector whose entries
 
 \begin{figure}[H]
 
-{\centering \includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-example-dang-structural-1.pdf}
+\centering{
+
+\includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-example-dang-structural-1.pdf}
 
 }
 
 \caption{\label{fig-example-dang-structural}Causal DANG for Week 1 in
 Example 3}
 
-\end{figure}
+\end{figure}%
 
-\hypertarget{introducing-the-single-world-intervention-network-graph-swing}{%
 \subsubsection{Introducing the Single World Intervention Network Graph
-(SWING)}\label{introducing-the-single-world-intervention-network-graph-swing}}
+(SWING)}\label{introducing-the-single-world-intervention-network-graph-swing}
 
 We introduce the Single World Intervention Network Graph (SWING) - a
 simple extension of the SWIG that allows for the representation of the
@@ -4383,24 +4276,24 @@ distribution of the variables in the model under an intervention setting
 
 \begin{figure}[H]
 
-{\centering \includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-example-swig-structural-1.pdf}
+\centering{
+
+\includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-example-swig-structural-1.pdf}
 
 }
 
 \caption{\label{fig-example-swig-structural}SWING for Week 1 in Example
 3}
 
-\end{figure}
+\end{figure}%
 
-\hypertarget{assumptions-1}{%
-\subsection{Assumptions}\label{assumptions-1}}
+\subsection{Assumptions}\label{assumptions-1}
 
 See Section~\ref{sec-network-causal-inference} for a fuller description
 of the below assumptions.
 
-\hypertarget{independence-assumptions-1}{%
 \subsubsection{Independence
-assumptions}\label{independence-assumptions-1}}
+assumptions}\label{independence-assumptions-1}
 
 Under the SSNAC framework, we make the assumption of \emph{no
 spillover}: contemporaneous measurements on observational units of a
@@ -4412,9 +4305,7 @@ given by the relational part of a causal DANG. i.e.~The exposure mapping
 for each equation in the structural equation model is loyal to the graph
 that comprises the relational part of the SWING.
 
-\hypertarget{homogeneity-assumptions-1}{%
-\subsubsection{Homogeneity
-assumptions}\label{homogeneity-assumptions-1}}
+\subsubsection{Homogeneity assumptions}\label{homogeneity-assumptions-1}
 
 We make the \emph{Identical distribution} assumption: the structural
 equations that produce each observational unit's measures are identical
@@ -4427,11 +4318,9 @@ framework allows for the assumption of \emph{time homogeneity}: the
 structural equations are identical across time. We apply this assumption
 in Example 3 below.
 
-\hypertarget{model-2}{%
-\subsection{Model}\label{model-2}}
+\subsection{Model}\label{model-2}
 
-\hypertarget{observational-data}{%
-\subsubsection{Observational data}\label{observational-data}}
+\subsubsection{Observational data}\label{observational-data}
 
 The causal DANG shown in Figure~\ref{fig-repeated-observations-dang}
 represents the three week campaign mentioned in Example 3 (we omit the
@@ -4459,16 +4348,18 @@ Equation~\ref{eq-placeintervention-dang} specifies this model for
 
 \begin{figure}[H]
 
-{\centering \includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-repeated-observations-dang-1.pdf}
+\centering{
+
+\includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-repeated-observations-dang-1.pdf}
 
 }
 
 \caption{\label{fig-repeated-observations-dang}Causal DANG for Week 1-3
 in Example 3}
 
-\end{figure}
+\end{figure}%
 
-\begin{equation}\protect\hypertarget{eq-placeintervention-dang}{}{
+\begin{equation}\phantomsection\label{eq-placeintervention-dang}{
 \begin{aligned}
 M_{0i} &=  f_{M_0}(U_{M_{0i}}) \\
 V_{0i} &=  f_{V_0}(U_{V_{0i}}) \\
@@ -4477,7 +4368,7 @@ T_{sj} &=  f_{T}(U_{T_{sj}}, R_{s,j}) \\
 M_{si} &=  f_{M} (U_{M_{\{si\}}} , V_{\{s-1,i\}}, M_{\{s-1,i\}}, \mathbf{T}_{\{s,\mathscr{N}_i\}})\\
 V_{si} &=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}, V_{\{s-1,i\}}) \\
 \end{aligned}
-}\label{eq-placeintervention-dang}\end{equation}
+}\end{equation}
 
 According to Equation~\ref{eq-placeintervention-dang}, \(R_{sj}\), the
 risk rating for \emph{Neighborhood} \(j\) at time \(s\), is a function
@@ -4495,8 +4386,7 @@ The vaccination status of individual \(i\) at time \(s\) is a function
 of whether or not they received a campaign message at time \(s\) and
 whether or not they were vaccinated at time \(s-1\).
 
-\hypertarget{counterfactual-data-2}{%
-\subsubsection{Counterfactual data}\label{counterfactual-data-2}}
+\subsubsection{Counterfactual data}\label{counterfactual-data-2}
 
 Say we want to understand the impact of a vaccination campaign conducted
 over three weeks on vaccination status. This would be done by setting
@@ -4521,16 +4411,18 @@ Figure~\ref{fig-placeintervention-swing}.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-placeintervention-swing-1.pdf}
+\centering{
+
+\includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-placeintervention-swing-1.pdf}
 
 }
 
 \caption{\label{fig-placeintervention-swing}SWING for Week 1-3 Example
 3}
 
-\end{figure}
+\end{figure}%
 
-\begin{equation}\protect\hypertarget{eq-placeintervention-swing}{}{
+\begin{equation}\phantomsection\label{eq-placeintervention-swing}{
 \begin{aligned}
 M_{0i} &=  f_{M_0}(U_{M_{0i}}) \\
 V_{0i} &=  f_{V_0}(U_{V_{0i}}) \\
@@ -4539,17 +4431,15 @@ T_{sj}^{(\bar{\mathbf{t}})} &=  f_{T}(U_{T_{sj}}, R_{s,j}^{(\bar{\mathbf{t}})}) 
 M_{si}^{(\bar{\mathbf{t}})} &=  f_{M} (U_{M_{\{si\}}} , V_{\{s-1,i\}}^{(\bar{\mathbf{t}})}, M_{\{s-1,i\}}^{(\bar{\mathbf{t}})}, \mathbf{t}_{\{s, \mathscr{N}_i\}})\\
 V_{si}^{(\bar{\mathbf{t}})} &=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}^{(\bar{\mathbf{t}})}, V_{\{s-1,i\}}^{(\bar{\mathbf{t}})}) \\
 \end{aligned}
-}\label{eq-placeintervention-swing}\end{equation}
+}\end{equation}
 
 where \(\bar{\mathbf{t}}\) is defined as ``the history of
 \(\mathbf{t}\)''. i.e.~at time 1, \(\bar{\mathbf{t}} =\mathbf{t}_1\). At
 time 2, \(\bar{\mathbf{t}} = [\mathbf{t}_1, \mathbf{t}_2]\), etc.
 
-\hypertarget{estimates-2}{%
-\subsection{Estimates}\label{estimates-2}}
+\subsection{Estimates}\label{estimates-2}
 
-\hypertarget{causal-estimands-1}{%
-\subsubsection{Causal estimands}\label{causal-estimands-1}}
+\subsubsection{Causal estimands}\label{causal-estimands-1}
 
 We are interested in vaccine coverage throughout the three week
 campaign. For a given week \(s\), this is the sum of the vaccine status
@@ -4559,8 +4449,7 @@ outcome \(\mathbf{V}\) across individuals.
 E[\sum_{i=1}^5 V_{si}^{(\bar{\mathbf{t}})}] 
 \]
 
-\hypertarget{identification-4}{%
-\subsubsection{Identification}\label{identification-4}}
+\subsubsection{Identification}\label{identification-4}
 
 Because individual vaccination status is both a confounder and a
 mediator of the relationship between neighborhood intervention status
@@ -4581,8 +4470,7 @@ V_{si}^{(\bar{\mathbf{t}})} =  \frac{V_{si} \mathbf{1}_{x = g(t_{\bar{s},N_i}) }
 \mathbf{R}_{\bar{3}N_i} = [\mathbf{R}_{1N_i}, \mathbf{R}_{2N_i}, \mathbf{R}_{3N_i}]
 \]
 
-\hypertarget{reflection-questions-2}{%
-\subsection*{Reflection questions}\label{reflection-questions-2}}
+\subsection*{Reflection questions}\label{reflection-questions-2}
 \addcontentsline{toc}{subsection}{Reflection questions}
 
 \begin{enumerate}
@@ -4597,8 +4485,7 @@ V_{si}^{(\bar{\mathbf{t}})} =  \frac{V_{si} \mathbf{1}_{x = g(t_{\bar{s},N_i}) }
   What is the difference between a SWIG and a SWING?
 \end{enumerate}
 
-\hypertarget{sec-control-intervention}{%
-\section{Outbreak control intervention}\label{sec-control-intervention}}
+\section{Outbreak control intervention}\label{sec-control-intervention}
 
 We used data from the MPX NYC study to assess the effectiveness of two
 approaches to conducting mass vaccination campaigns quickly. MPX NYC is
@@ -4609,9 +4496,8 @@ contact in a congregate setting. Spatial coordinates were converted into
 community district identifiers. Community districts spatially partition
 the city of New York.
 
-\hypertarget{application-outbreak-control-model-using-mpx-nyc-data}{%
 \subsection*{Application: Outbreak control model using MPX NYC
-data}\label{application-outbreak-control-model-using-mpx-nyc-data}}
+data}\label{application-outbreak-control-model-using-mpx-nyc-data}
 \addcontentsline{toc}{subsection}{Application: Outbreak control model
 using MPX NYC data}
 
@@ -4647,8 +4533,7 @@ approach ranks community districts by how centrally they are connected
 to other community districts through the mutual connection with certain
 individuals.
 
-\hypertarget{assumptions-2}{%
-\subsection{Assumptions}\label{assumptions-2}}
+\subsection{Assumptions}\label{assumptions-2}
 
 We make the simplifying assumption that only one neighborhood is
 vaccinated at a time - the top-ranked one. We make the further
@@ -4658,8 +4543,7 @@ campaign message when a community district is vaccinated, and that every
 person who receives a campaign message gets vaccinated. Once an
 individual is vaccinated, they remain vaccinated.
 
-\hypertarget{model-3}{%
-\subsection{Model}\label{model-3}}
+\subsection{Model}\label{model-3}
 
 According to the model specified by structural equations
 \ref{eq-edge-intervention-swing}, no individual \(i\) has been
@@ -4686,16 +4570,18 @@ risk rating is given by the function \(h\).
 
 \begin{figure}[H]
 
-{\centering \includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-edge-intervention-swing-1.pdf}
+\centering{
+
+\includegraphics{C_sscan3_causal_interpretation/C__sscan3_causal_interpretation_files/figure-pdf/fig-edge-intervention-swing-1.pdf}
 
 }
 
 \caption{\label{fig-edge-intervention-swing}SWING for Week 1-3 for MPX
 NYC Application of SSNAC framework}
 
-\end{figure}
+\end{figure}%
 
-\begin{equation}\protect\hypertarget{eq-edge-intervention-swing}{}{
+\begin{equation}\phantomsection\label{eq-edge-intervention-swing}{
 \begin{aligned}
 M_{0i} &=  0 \\
 V_{0i} &=  0 \\
@@ -4704,7 +4590,7 @@ T_{sj}^{(h)} &=  \begin{cases} 1 & R_{sj}^{(h)} = max_k R_{sk}^{(h)} \\ 0 & \tex
 M_{si}^{(h)} &=  \begin{cases} 1 & \mathbf{T}_{s\mathscr{N}_i}^{(h)} \neq \mathbf{0}  \\ 0 & \text{otherwise} \end{cases} \\
 V_{si}^{(h)} &=  \begin{cases} 1 & M_{si}^{(h)} = 1 \text{ or } V_{s-1,i}^{(h)} = 1\\ 0 & \text{otherwise} \end{cases} \\
 \end{aligned}
-}\label{eq-edge-intervention-swing}\end{equation}
+}\end{equation}
 
 Define \(\psi(i, j)\) as an adjacency function - an indicator function
 that equals to \(1\) if Person \(i\) lives in or visits neighborhood
@@ -4722,11 +4608,9 @@ and under the movement-neutralizing approach
 h_{sj}(\mathbf{V}_{s-1}) =   \sum_{ i \in \mathscr{N}_P} (1 -V_{(s-1), i}) \times \psi(i, j) \sum_{ k \in \mathscr{N}_N} \psi(i, k) 
 \]
 
-\hypertarget{estimands-1}{%
-\subsection{Estimands}\label{estimands-1}}
+\subsection{Estimands}\label{estimands-1}
 
-\hypertarget{spatial-efficiency-2}{%
-\paragraph{Spatial efficiency}\label{spatial-efficiency-2}}
+\paragraph{Spatial efficiency}\label{spatial-efficiency-2}
 
 Intervention coverage for the \(s^{th}\) community district to be
 immunized, is defined
@@ -4742,8 +4626,7 @@ districts is therefore
 \bar{C_s}^{(h)} = \sum_{v = 1}^s{C_v }^{(h)}
 \]
 
-\hypertarget{social-network-impact}{%
-\paragraph{Social network impact}\label{social-network-impact}}
+\paragraph{Social network impact}\label{social-network-impact}
 
 Define graph \(G^{s}(N, \psi_s)\) such that
 
@@ -4760,25 +4643,22 @@ as a proportion of the total number of participants.
 \frac{LCC_s}{|N_p|}
 \]
 
-\hypertarget{estimation}{%
-\subsection{Estimation}\label{estimation}}
+\subsection{Estimation}\label{estimation}
 
 We simulated the intervention outlined above using MPX NYC data by
 calculating the \(G^{s}(N, \psi_s)\) where \(s\) ranges from \(1\) to
 the total number of community districts. We measured the uncertainty of
 our estimates by re-sampling study participants with replacement.
 
-\hypertarget{sec-data}{%
-\chapter{Survey instrument}\label{sec-data}}
+\chapter{Survey instrument}\label{sec-data}
 
-\leavevmode\vadjust pre{\hypertarget{authors}{}}%
+\phantomsection\label{authors}
 Keletso Makofane, PhD
 
 RESPND-MI Collaboration
 
-\hypertarget{mpx-nyc-person-place-network-mapper-1}{%
 \section{MPX NYC Person-Place Network
-Mapper}\label{mpx-nyc-person-place-network-mapper-1}}
+Mapper}\label{mpx-nyc-person-place-network-mapper-1}
 
 We designed, tested and implemented a survey tool we call the MPX NYC
 Person-Place Network Mapper. We named it this because the data collected
@@ -4810,9 +4690,8 @@ examples, it becomes easier to narrow down the identity of participants
 using the location and the particiapnts' characteristics as recorded in
 survey data.
 
-\hypertarget{mpx-nyc-person-place-network-map}{%
 \subsection{MPX NYC Person-Place Network
-Map}\label{mpx-nyc-person-place-network-map}}
+Map}\label{mpx-nyc-person-place-network-map}
 
 Though the investigator team doubted that participants would remember
 addresses or zip codes of places they visited, we thought that they
@@ -4822,14 +4701,16 @@ so we used the Google maps interface and API.
 
 \begin{figure}
 
-{\centering \includegraphics{D_survey_instrument/../_const/images/image_app_graphic.png}
+\centering{
+
+\includegraphics{D_survey_instrument/../_const/images/image_app_graphic.png}
 
 }
 
 \caption{\label{fig-mapinputformat}Map input question format developed
 for MPX NYC}
 
-\end{figure}
+\end{figure}%
 
 The MPX NYC Person-Place Network Map question displays a map with
 detailed geographic information including place names, roads, and
@@ -4852,9 +4733,8 @@ location. In our study, participants were asked if they had sexual
 contact at the location and to select the type of location it is from a
 closed list of options.
 
-\hypertarget{coarsening-to-census-tract}{%
 \subsection{Coarsening to census
-tract}\label{coarsening-to-census-tract}}
+tract}\label{coarsening-to-census-tract}
 
 To ensure participant anonymity, the survey tool coarsens spatial data
 to the census tract level before sending them to the study database.
@@ -4867,8 +4747,7 @@ are transformed to census tract identifiers by truncating the last X
 digits. {[}CITATION{]} It is only after spatial data are transformed
 that they are transmitted to the study database (backend).
 
-\hypertarget{development}{%
-\subsection{Development}\label{development}}
+\subsection{Development}\label{development}
 
 The front end of the MPX NYC Person-Place Network Mapper was developed
 as a single-page web application using the React/NextJS framework
@@ -4878,8 +4757,7 @@ with the Network Map question format, the instrument allows the use of
 standard survey question formats (multiple choice, single choice, text
 field etc.).
 
-\hypertarget{testing}{%
-\subsection{Testing}\label{testing}}
+\subsection{Testing}\label{testing}
 
 The MPC NYC Person-Place Network Mapper underwent two rounds of user
 testing. About 10 people participated each time, returning feedback via
@@ -4891,35 +4769,31 @@ an informal feedback questionnaire and via email.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[H]
+\begin{center}
+\includegraphics{D_survey_instrument/D__survey_instrument_files/figure-pdf/unnamed-chunk-2-1.pdf}
+\end{center}
 
-{\centering \includegraphics{D_survey_instrument/D__survey_instrument_files/figure-pdf/unnamed-chunk-2-1.pdf}
+\chapter{Study recruitment}\label{sec-data}
 
-}
-
-\end{figure}
-
-\hypertarget{sec-data}{%
-\chapter{Study recruitment}\label{sec-data}}
-
-\leavevmode\vadjust pre{\hypertarget{authors}{}}%
+\phantomsection\label{authors}
 Keletso Makofane, PhD
 
 RESPND-MI Collaboration
 
-\hypertarget{mpx-nyc-marketing-and-communication-1}{%
 \section{MPX NYC marketing and
-communication}\label{mpx-nyc-marketing-and-communication-1}}
+communication}\label{mpx-nyc-marketing-and-communication-1}
 
 \begin{figure}
 
-{\centering \includegraphics{E_marketing_comm/../_const/images/image_campaign_graphic.png}
+\centering{
+
+\includegraphics{E_marketing_comm/../_const/images/image_campaign_graphic.png}
 
 }
 
 \caption{\label{fig-options}Options for visual identity of MPX NYC''}
 
-\end{figure}
+\end{figure}%
 
 To maximize the speed of recruitment, we invested in a bilingual,
 culturally competent communication campaign in collaboration with a
@@ -4931,7 +4805,7 @@ playfully uses emojis that have sexual connotations in queer and trans
 communities, and that integrates LGBT social media influencers as a
 communication channel.
 
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics{E_marketing_comm/../_const/images/image_creative_requirements.png}
 
@@ -4939,7 +4813,7 @@ communication channel.
 
 \caption{Requirements for MPX NYC Study}
 
-\end{figure}
+\end{figure}%
 
 Two campaign names and four marketing concepts (see
 Figure~\ref{fig-options}) were developed by the marketing agency and
@@ -4957,8 +4831,7 @@ social media accounts.
 Participants were recruited via paid and donated advertising placed
 through Grindr, Twitter, Instagram, and outdoor electronic billboards.
 
-\hypertarget{contracts-and-fundraising}{%
-\section{Contracts and fundraising}\label{contracts-and-fundraising}}
+\section{Contracts and fundraising}\label{contracts-and-fundraising}
 
 Asked for low medium high packaged
 
@@ -4973,19 +4846,13 @@ Sequenced fundraising to meet the timing goals.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}[H]
+\begin{center}
+\includegraphics{E_marketing_comm/E__marketing_comm_files/figure-pdf/unnamed-chunk-2-1.pdf}
+\end{center}
 
-{\centering \includegraphics{E_marketing_comm/E__marketing_comm_files/figure-pdf/unnamed-chunk-2-1.pdf}
+\chapter{Community engagement}\label{community-engagement}
 
-}
-
-\end{figure}
-
-\hypertarget{community-engagement}{%
-\chapter{Community engagement}\label{community-engagement}}
-
-\hypertarget{respnd-mi-community-forum}{%
-\section{RESPND-MI Community forum}\label{respnd-mi-community-forum}}
+\section{RESPND-MI Community forum}\label{respnd-mi-community-forum}
 
 Starting in May 2022, we prepared a study about sexual activity and mpox
 symptoms among those most vulnerable to mpox. To promote consultation
@@ -5028,20 +4895,16 @@ that criticism to join the study team. Over time, we attempted to
 continually improve gender related language and iconography in the
 project through discussion among investigators.
 
-\hypertarget{presentations-and-workshops}{%
-\section{Presentations and
-workshops}\label{presentations-and-workshops}}
+\section{Presentations and workshops}\label{presentations-and-workshops}
 
 Workshops with Martez and Jennifer AIDS Conference Abstracts Academic
 talks WHO Talk
 
-\hypertarget{expert-consultations}{%
-\section{Expert consultations}\label{expert-consultations}}
+\section{Expert consultations}\label{expert-consultations}
 
 People who discussed study design
 
-\hypertarget{project-management}{%
-\chapter{Project management}\label{project-management}}
+\chapter{Project management}\label{project-management}
 
 Goals:
 
@@ -5149,6 +5012,7 @@ Roles:
     liase between translator and investigator team
   \end{itemize}
 \end{itemize}
+
 
 
 
