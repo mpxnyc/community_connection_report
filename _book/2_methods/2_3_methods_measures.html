@@ -360,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="sec-measures" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Measures</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
 
-</header><div class="cell" data-layout-align="center" data-hash="2_3_methods_measures_cache/html/fig-example-bipartite_d7fd8a2c6b8fb2e8e1e455ebd717b2fe">
+</header><div class="cell" data-layout-align="center">
 <details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"bipartite"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_example_network</span><span class="op">(</span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html">coord_cartesian</a></span><span class="op">(</span>xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.2</span>,<span class="fl">1.2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -381,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>A tie indicates that the individual as some relation with the community district. This relation can be residence or group contact. Related to this network are the community district network and participant network, described below.</p>
 <section id="mpx-nyc-community-district-network" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="mpx-nyc-community-district-network">
 <span class="header-section-number">5.1.1</span> MPX NYC community district network</h3>
-<div class="cell" data-layout-align="center" data-hash="2_3_methods_measures_cache/html/fig-example-community_e8cfc5d647d96ad8e072bf64bb3fcc39">
+<div class="cell" data-layout-align="center">
 <details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu">plot_example_network</span><span class="op">(</span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"places"</span><span class="op">)</span>, <span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">)</span>  <span class="op">+</span></span>
 <span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
@@ -394,7 +394,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The MPX NYC community district network is a network with community districts as nodes. A weighted tie between two nodes indicates that the two community districts both have at least one MPX NYX participant who has a residence or community district in both places. The weight is given by the count of such individuals. Of interest is the influence each community district has in city-wide outbreak dynamics. It is measured using community district social and spatial reach.</p>
 </section><section id="mpx-nyc-participant-network" class="level3" data-number="5.1.2"><h3 data-number="5.1.2" class="anchored" data-anchor-id="mpx-nyc-participant-network">
 <span class="header-section-number">5.1.2</span> MPX NYC participant network</h3>
-<div class="cell" data-layout-align="center" data-hash="2_3_methods_measures_cache/html/fig-example-participant_50147e3a72fb82be867205081636abdf">
+<div class="cell" data-layout-align="center">
 <details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"people"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_example_network</span><span class="op">(</span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -413,7 +413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We measured participant demographics age, race, sex assigned at birth, gender identity, sexual orientation, and community district of residence; health-related questions on HIV status, viral suppression, STI-related symptoms, PrEP use, and mpox vaccination status; and questions related to social and sexual connection with queer and transgender communities: count of recent individual sex contacts, count of recent individual physical (non-sexual) contacts, count of recent important social contacts, and any recent physical or sexual contact in a group setting.</p>
 <section id="gender-modality" class="level4"><h4 class="anchored" data-anchor-id="gender-modality">Gender modality</h4>
 <p>Gender modality was measured using a two-step approach: first, we solicited the participant’s current gender (man, woman, trans man, trans woman, non-binary, other), and then sex assigned at birth (male, female, other). We then constructed a gender modality variable as follows:</p>
-<div class="cell" data-hash="2_3_methods_measures_cache/html/tbl-gendermodality_0aa2ab7cefcabde7de08c44eaf5a2210">
+<div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  Level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>              <span class="st">"Cisgender man"</span>, </span>
@@ -441,23 +441,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details><div class="cell-output-display">
 <div id="tbl-gendermodality" class="anchored">
 
-<div id="vicksrgmri" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vicksrgmri table {
+<div id="ggsgjrnwdx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ggsgjrnwdx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vicksrgmri thead, #vicksrgmri tbody, #vicksrgmri tfoot, #vicksrgmri tr, #vicksrgmri td, #vicksrgmri th {
+#ggsgjrnwdx thead, #ggsgjrnwdx tbody, #ggsgjrnwdx tfoot, #ggsgjrnwdx tr, #ggsgjrnwdx td, #ggsgjrnwdx th {
   border-style: none;
 }
 
-#vicksrgmri p {
+#ggsgjrnwdx p {
   margin: 0;
   padding: 0;
 }
 
-#vicksrgmri .gt_table {
+#ggsgjrnwdx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -483,12 +483,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#vicksrgmri .gt_caption {
+#ggsgjrnwdx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vicksrgmri .gt_title {
+#ggsgjrnwdx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -500,7 +500,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#vicksrgmri .gt_subtitle {
+#ggsgjrnwdx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -512,7 +512,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#vicksrgmri .gt_heading {
+#ggsgjrnwdx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -524,13 +524,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#vicksrgmri .gt_bottom_border {
+#ggsgjrnwdx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vicksrgmri .gt_col_headings {
+#ggsgjrnwdx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -545,7 +545,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#vicksrgmri .gt_col_heading {
+#ggsgjrnwdx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -565,7 +565,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#vicksrgmri .gt_column_spanner_outer {
+#ggsgjrnwdx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -577,15 +577,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#vicksrgmri .gt_column_spanner_outer:first-child {
+#ggsgjrnwdx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vicksrgmri .gt_column_spanner_outer:last-child {
+#ggsgjrnwdx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vicksrgmri .gt_column_spanner {
+#ggsgjrnwdx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -597,11 +597,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#vicksrgmri .gt_spanner_row {
+#ggsgjrnwdx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vicksrgmri .gt_group_heading {
+#ggsgjrnwdx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -627,7 +627,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#vicksrgmri .gt_empty_group_heading {
+#ggsgjrnwdx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -642,15 +642,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#vicksrgmri .gt_from_md > :first-child {
+#ggsgjrnwdx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vicksrgmri .gt_from_md > :last-child {
+#ggsgjrnwdx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vicksrgmri .gt_row {
+#ggsgjrnwdx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -669,7 +669,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#vicksrgmri .gt_stub {
+#ggsgjrnwdx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -682,7 +682,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#vicksrgmri .gt_stub_row_group {
+#ggsgjrnwdx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -696,15 +696,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#vicksrgmri .gt_row_group_first td {
+#ggsgjrnwdx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vicksrgmri .gt_row_group_first th {
+#ggsgjrnwdx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vicksrgmri .gt_summary_row {
+#ggsgjrnwdx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -714,16 +714,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#vicksrgmri .gt_first_summary_row {
+#ggsgjrnwdx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vicksrgmri .gt_first_summary_row.thick {
+#ggsgjrnwdx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vicksrgmri .gt_last_summary_row {
+#ggsgjrnwdx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -733,7 +733,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#vicksrgmri .gt_grand_summary_row {
+#ggsgjrnwdx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -743,7 +743,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#vicksrgmri .gt_first_grand_summary_row {
+#ggsgjrnwdx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -753,7 +753,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#vicksrgmri .gt_last_grand_summary_row_top {
+#ggsgjrnwdx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -763,11 +763,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#vicksrgmri .gt_striped {
+#ggsgjrnwdx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vicksrgmri .gt_table_body {
+#ggsgjrnwdx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -776,7 +776,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#vicksrgmri .gt_footnotes {
+#ggsgjrnwdx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -790,7 +790,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#vicksrgmri .gt_footnote {
+#ggsgjrnwdx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -799,7 +799,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#vicksrgmri .gt_sourcenotes {
+#ggsgjrnwdx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -813,7 +813,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#vicksrgmri .gt_sourcenote {
+#ggsgjrnwdx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -821,63 +821,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#vicksrgmri .gt_left {
+#ggsgjrnwdx .gt_left {
   text-align: left;
 }
 
-#vicksrgmri .gt_center {
+#ggsgjrnwdx .gt_center {
   text-align: center;
 }
 
-#vicksrgmri .gt_right {
+#ggsgjrnwdx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vicksrgmri .gt_font_normal {
+#ggsgjrnwdx .gt_font_normal {
   font-weight: normal;
 }
 
-#vicksrgmri .gt_font_bold {
+#ggsgjrnwdx .gt_font_bold {
   font-weight: bold;
 }
 
-#vicksrgmri .gt_font_italic {
+#ggsgjrnwdx .gt_font_italic {
   font-style: italic;
 }
 
-#vicksrgmri .gt_super {
+#ggsgjrnwdx .gt_super {
   font-size: 65%;
 }
 
-#vicksrgmri .gt_footnote_marks {
+#ggsgjrnwdx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vicksrgmri .gt_asterisk {
+#ggsgjrnwdx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vicksrgmri .gt_indent_1 {
+#ggsgjrnwdx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vicksrgmri .gt_indent_2 {
+#ggsgjrnwdx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vicksrgmri .gt_indent_3 {
+#ggsgjrnwdx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vicksrgmri .gt_indent_4 {
+#ggsgjrnwdx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vicksrgmri .gt_indent_5 {
+#ggsgjrnwdx .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -954,7 +954,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We measure connectedness using the proportion of nodes in the largest connected component (LCC) of the MPX NYC participant network. In a network, a connected component is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By “reachable”, we mean possible to reach by tracing a path from one node to another over existing network ties. We consider a network with a larger LCC to be better connected than a network with a smaller LCC.</p>
 </section><section id="spatial-mixing-ratio" class="level4"><h4 class="anchored" data-anchor-id="spatial-mixing-ratio">Spatial mixing ratio</h4>
 <p>We measure patterns of mixing between a pair of distict subgroups of participants using the spatial mixing ratio. It is a positive real number which is greater than 1 if individuals in the first subgroup tend to live and play in community districts that individuals in the second subgroup do. It is defined as the average (calculated across individuals) spatial preference of the first group for the second group, divided by the prevalence of the second group. For a given individual, spatial preference for a given group is defined as the sum of the weights of the edges connecting to nodes of the second group, divided by the total sum weights.</p>
-<div class="cell" data-layout-align="center" data-hash="2_3_methods_measures_cache/html/unnamed-chunk-6_b4bf138dcdfcb760342417892304a213">
+<div class="cell" data-layout-align="center">
 <details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plot_icon</span><span class="op">(</span>icon_name <span class="op">=</span> <span class="st">"devil"</span>, color <span class="op">=</span> <span class="st">"dark_orange"</span>, shape <span class="op">=</span> <span class="fl">16</span>, alpha <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">

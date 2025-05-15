@@ -348,116 +348,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>To motivate the Social and Spatial Network Analysis with Causal interpretation (SSNAC) framework, we consider a study investigating the risk of acquiring a cold among individuals (pictured as dots in physical space in each frame of <a href="#fig-context">Figure&nbsp;<span class="quarto-unresolved-ref">fig-context</span></a>) in a setting where there is one known infected person. The simplest approach would be to assign average risk of acquiring a cold to each individuals. The problem with this strategy, though, would be that not all individuals have the same risk once we know who the infected person is. Those who are more likely to interact closely with them have higher risk, but not all people are equally likely to interact.</p>
 <div>
-<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mpxnyc_colors</span>            <span class="op">&lt;-</span> <span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"content"</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"colors"</span><span class="op">]</span><span class="op">]</span></span>
-<span></span>
-<span><span class="va">example_context_graph_base</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">title</span> <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">x_coords</span>                 <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">3.5</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">4</span><span class="op">)</span></span>
-<span><span class="va">y_coords</span>                 <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3.5</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">3.5</span>, <span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span></span>
-<span><span class="va">coords</span>                   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x_coords</span>, y <span class="op">=</span> <span class="va">y_coords</span><span class="op">)</span> </span>
-<span></span>
-<span><span class="va">nodes</span>                    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"node"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">edges</span>                    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
-<span>                                        from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"node_1"</span>, <span class="st">"node_4"</span>, <span class="st">"node_3"</span>, <span class="st">"node_5"</span><span class="op">)</span>,</span>
-<span>                                        to   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"node_2"</span>, <span class="st">"node_10"</span>, <span class="st">"node_6"</span>, <span class="st">"node_8"</span><span class="op">)</span></span>
-<span>                                      <span class="op">)</span></span>
-<span></span>
-<span><span class="va">example_context_graph</span>    <span class="op">&lt;-</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/tbl_graph.html">tbl_graph</a></span><span class="op">(</span>nodes <span class="op">=</span> <span class="va">nodes</span>, edges <span class="op">=</span> <span class="va">edges</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="va">example_context_graph</span>, <span class="va">coords</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  </span>
-<span>                                <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">xlim</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="va">title</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">20</span>, color <span class="op">=</span> <span class="st">"darkgrey"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span> </span>
-<span></span>
-<span></span>
-<span><span class="va">example_context_graph_outline</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">plot</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">plot</span> <span class="op">+</span></span>
-<span>                                </span>
-<span>                                <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_linerange</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">0.5</span>, xmin <span class="op">=</span> <span class="fl">0.5</span>, xmax <span class="op">=</span> <span class="fl">4.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_linerange</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">4.5</span>, xmin <span class="op">=</span> <span class="fl">0.5</span>, xmax <span class="op">=</span> <span class="fl">4.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_linerange</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0.5</span>, ymin <span class="op">=</span> <span class="fl">0.5</span>, ymax <span class="op">=</span> <span class="fl">4.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_linerange</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">4.5</span>, ymin <span class="op">=</span> <span class="fl">0.5</span>, ymax <span class="op">=</span> <span class="fl">4.5</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span></span>
-<span><span class="va">example_context_graph_inner_division</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">plot</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">plot</span>   <span class="op">+</span></span>
-<span>                                </span>
-<span>                                <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_linerange</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">2.5</span>, xmin <span class="op">=</span> <span class="fl">0.5</span>, xmax <span class="op">=</span> <span class="fl">4.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_linerange</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2.5</span>, ymin <span class="op">=</span> <span class="fl">0.5</span>, ymax <span class="op">=</span> <span class="fl">4.5</span><span class="op">)</span> </span>
-<span><span class="op">}</span></span>
-<span></span>
-<span></span>
-<span><span class="va">example_context_graph_inner_gates</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">plot</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">plot</span> <span class="op">+</span></span>
-<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_linerange</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1.5</span>, xmin <span class="op">=</span> <span class="fl">0.6</span>, xmax <span class="op">=</span> <span class="fl">4.4</span>, size <span class="op">=</span> <span class="fl">10</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_linerange</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">3.5</span>, xmin <span class="op">=</span> <span class="fl">0.6</span>, xmax <span class="op">=</span> <span class="fl">4.4</span>, size <span class="op">=</span> <span class="fl">10</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_linerange</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1.5</span>, ymin <span class="op">=</span> <span class="fl">0.6</span>, ymax <span class="op">=</span> <span class="fl">4.4</span>, size <span class="op">=</span> <span class="fl">10</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                                <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_linerange</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">3.6</span>, ymin <span class="op">=</span> <span class="fl">0.6</span>, ymax <span class="op">=</span> <span class="fl">4.4</span>, size <span class="op">=</span> <span class="fl">10</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="va">example_context_graph_nodes</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">plot</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">plot</span> <span class="op">+</span></span>
-<span>    <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_circle.html">geom_node_circle</a></span><span class="op">(</span></span>
-<span>                                                          <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>r <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>, </span>
-<span>                                                          fill <span class="op">=</span> <span class="st">"white"</span>, </span>
-<span>                                                          color <span class="op">=</span> <span class="va">mpxnyc_colors</span><span class="op">$</span><span class="va">dark_pink</span></span>
-<span>                                                          <span class="op">)</span> </span>
-<span><span class="op">}</span></span>
-<span></span>
-<span>         </span>
-<span><span class="va">example_context_graph_edges</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">plot</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">plot</span> <span class="op">+</span></span>
-<span>                                    </span>
-<span>                                <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="op">}</span>                       </span>
-<span>                                  </span>
-<span>                                </span>
-<span>  </span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span><span class="va">contextless</span> <span class="op">&lt;-</span> <span class="fu">example_context_graph_base</span><span class="op">(</span><span class="st">"Contextless"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_outline</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_nodes</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">social_context</span> <span class="op">&lt;-</span> <span class="fu">example_context_graph_base</span><span class="op">(</span><span class="st">"Social context"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_outline</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_edges</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_nodes</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="va">ecological_context</span> <span class="op">&lt;-</span> <span class="fu">example_context_graph_base</span><span class="op">(</span><span class="st">"Ecological context"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_outline</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_inner_division</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_nodes</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">spatial_context</span> <span class="op">&lt;-</span> <span class="fu">example_context_graph_base</span><span class="op">(</span><span class="st">"Spatial context"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_outline</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_inner_division</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_inner_gates</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_nodes</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">ssnac_context</span>  <span class="op">&lt;-</span> <span class="fu">example_context_graph_base</span><span class="op">(</span><span class="st">"SSNAC"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_outline</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_inner_division</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_inner_gates</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_edges</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                      <span class="fu">example_context_graph_nodes</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">contextless</span>, <span class="va">social_context</span>, <span class="va">ecological_context</span>, <span class="va">spatial_context</span>, <span class="va">ssnac_context</span><span class="op">)</span>  <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell quarto-layout-panel" data-hash="A__ssnac1_social_spatial_context_cache/html/fig-context_e948cdc340f0b7c6a98995db72d1926c">
+<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plot_context_figure</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <div id="fig-context" class="quarto-figure quarto-figure-center anchored">
@@ -486,7 +378,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="header-section-number">A.2</span> The data are a network</h2>
 <p>The central data structure in a SSNAC is the person-place graph. <a href="#fig-ssnac">Figure&nbsp;<span class="quarto-unresolved-ref">fig-ssnac</span></a> depicts the rightmost frame of <a href="#fig-context">Figure&nbsp;<span class="quarto-unresolved-ref">fig-context</span></a> by showing spatial units as nodes in a network, connecting adjacent spatial units with a network edge, and connecting individuals with the households they belong to. To show the flexibility of this data object, we added an additional type of relationship an individual can have with a household - that of an employee.</p>
 <p>The majority of study data are stored as node or edge attributes. For instance, person nodes might have attributes like age and race whereas place nodes could have attributes like density or surface area. An edge linking a person to a place might have an attribute conveying how the person relates to the place. For instance in <a href="#fig-ssnac">Figure&nbsp;<span class="quarto-unresolved-ref">fig-ssnac</span></a>, some edges indicate residence, some indicate next</p>
-<div class="cell" data-hash="A__ssnac1_social_spatial_context_cache/html/fig-ssnac_874133edbef64acebb6a6836084ca114">
+<div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plot_ssnac_example</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">style_ssnac_example</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
