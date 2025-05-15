@@ -230,7 +230,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, boxrule=0pt, sharp corners, borderline west={3pt}{0pt}{shadecolor}, enhanced, frame hidden, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, interior hidden, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, breakable, sharp corners, enhanced]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -1017,7 +1017,7 @@ outside of the largest connected component, respectively.
 \end{Shaded}
 
 We used the bootstrap to estimate confidence intervals, resampling
-participants 20 times with replacement.
+participants 4 times with replacement.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1489,7 +1489,6 @@ Brooklyn, respectively.
 \begin{Highlighting}[]
 \FunctionTok{make\_plotdata\_movement\_matrix}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{plot\_matrix\_movement}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{theme\_mpxnyc\_blank}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"From Borough"}\NormalTok{, }\AttributeTok{option =} \StringTok{"dark"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_color\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"To Borough"}\NormalTok{, }\AttributeTok{option =} \StringTok{"dark"}\NormalTok{) }\SpecialCharTok{+}
 \NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_size\_continuous}\NormalTok{(}\AttributeTok{name =} \StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+}
@@ -1945,115 +1944,7 @@ people are equally likely to interact.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mpxnyc\_colors            }\OtherTok{\textless{}{-}}\NormalTok{ targets}\SpecialCharTok{::}\FunctionTok{tar\_read}\NormalTok{(config\_list)[[}\DecValTok{1}\NormalTok{]][[}\StringTok{"content"}\NormalTok{]][[}\StringTok{"colors"}\NormalTok{]]}
-
-\NormalTok{example\_context\_graph\_base }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{title =} \StringTok{""}\NormalTok{)\{}
-\NormalTok{  x\_coords                 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\FloatTok{3.5}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{)}
-\NormalTok{y\_coords                 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\FloatTok{3.5}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\FloatTok{3.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)}
-
-
-
-\NormalTok{coords                   }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x\_coords, }\AttributeTok{y =}\NormalTok{ y\_coords) }
-
-\NormalTok{nodes                    }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{name =} \FunctionTok{paste}\NormalTok{(}\StringTok{"node"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\AttributeTok{sep =} \StringTok{"\_"}\NormalTok{))}
-\NormalTok{edges                    }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
-                                        \AttributeTok{from =} \FunctionTok{c}\NormalTok{(}\StringTok{"node\_1"}\NormalTok{, }\StringTok{"node\_4"}\NormalTok{, }\StringTok{"node\_3"}\NormalTok{, }\StringTok{"node\_5"}\NormalTok{),}
-                                        \AttributeTok{to   =} \FunctionTok{c}\NormalTok{(}\StringTok{"node\_2"}\NormalTok{, }\StringTok{"node\_10"}\NormalTok{, }\StringTok{"node\_6"}\NormalTok{, }\StringTok{"node\_8"}\NormalTok{)}
-\NormalTok{                                      )}
-
-\NormalTok{example\_context\_graph    }\OtherTok{\textless{}{-}}\NormalTok{ tidygraph}\SpecialCharTok{::}\FunctionTok{tbl\_graph}\NormalTok{(}\AttributeTok{nodes =}\NormalTok{ nodes, }\AttributeTok{edges =}\NormalTok{ edges)}
-
-\NormalTok{ggraph}\SpecialCharTok{::}\FunctionTok{ggraph}\NormalTok{(example\_context\_graph, coords) }\SpecialCharTok{+}
-  
-\NormalTok{                                ggplot2}\SpecialCharTok{::}\FunctionTok{ylim}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{5}\NormalTok{) }\SpecialCharTok{+}
-\NormalTok{                                ggplot2}\SpecialCharTok{::}\FunctionTok{xlim}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{5}\NormalTok{) }\SpecialCharTok{+}
-\NormalTok{                                ggplot2}\SpecialCharTok{::}\FunctionTok{theme\_void}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{                                ggplot2}\SpecialCharTok{::}\FunctionTok{coord\_fixed}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{ggtitle}\NormalTok{(title) }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{size =} \DecValTok{20}\NormalTok{, }\AttributeTok{color =} \StringTok{"darkgrey"}\NormalTok{))}
-\NormalTok{\} }
-
-
-\NormalTok{example\_context\_graph\_outline }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(plot)\{}
-\NormalTok{  plot }\SpecialCharTok{+}
-                                
-\NormalTok{                                ggplot2}\SpecialCharTok{::}\FunctionTok{geom\_linerange}\NormalTok{(}\AttributeTok{y =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{xmin =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{xmax =} \FloatTok{4.5}\NormalTok{) }\SpecialCharTok{+}
-\NormalTok{                                ggplot2}\SpecialCharTok{::}\FunctionTok{geom\_linerange}\NormalTok{(}\AttributeTok{y =} \FloatTok{4.5}\NormalTok{, }\AttributeTok{xmin =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{xmax =} \FloatTok{4.5}\NormalTok{) }\SpecialCharTok{+}
-\NormalTok{                                ggplot2}\SpecialCharTok{::}\FunctionTok{geom\_linerange}\NormalTok{(}\AttributeTok{x =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{ymin =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{ymax =} \FloatTok{4.5}\NormalTok{) }\SpecialCharTok{+}
-\NormalTok{                                ggplot2}\SpecialCharTok{::}\FunctionTok{geom\_linerange}\NormalTok{(}\AttributeTok{x =} \FloatTok{4.5}\NormalTok{, }\AttributeTok{ymin =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{ymax =} \FloatTok{4.5}\NormalTok{)}
-\NormalTok{\}}
-
-
-\NormalTok{example\_context\_graph\_inner\_division }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(plot)\{}
-\NormalTok{  plot   }\SpecialCharTok{+}
-                                
-\NormalTok{                                ggplot2}\SpecialCharTok{::}\FunctionTok{geom\_linerange}\NormalTok{(}\AttributeTok{y =} \FloatTok{2.5}\NormalTok{, }\AttributeTok{xmin =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{xmax =} \FloatTok{4.5}\NormalTok{) }\SpecialCharTok{+}
-\NormalTok{                                ggplot2}\SpecialCharTok{::}\FunctionTok{geom\_linerange}\NormalTok{(}\AttributeTok{x =} \FloatTok{2.5}\NormalTok{, }\AttributeTok{ymin =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{ymax =} \FloatTok{4.5}\NormalTok{) }
-\NormalTok{\}}
-
-
-\NormalTok{example\_context\_graph\_inner\_gates }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(plot)\{}
-\NormalTok{  plot }\SpecialCharTok{+}
-\NormalTok{    ggplot2}\SpecialCharTok{::}\FunctionTok{geom\_linerange}\NormalTok{(}\AttributeTok{y =} \FloatTok{1.5}\NormalTok{, }\AttributeTok{xmin =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{xmax =} \FloatTok{4.4}\NormalTok{, }\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{) }\SpecialCharTok{+}
-\NormalTok{                                ggplot2}\SpecialCharTok{::}\FunctionTok{geom\_linerange}\NormalTok{(}\AttributeTok{y =} \FloatTok{3.5}\NormalTok{, }\AttributeTok{xmin =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{xmax =} \FloatTok{4.4}\NormalTok{, }\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{) }\SpecialCharTok{+}
-\NormalTok{                                ggplot2}\SpecialCharTok{::}\FunctionTok{geom\_linerange}\NormalTok{(}\AttributeTok{x =} \FloatTok{1.5}\NormalTok{, }\AttributeTok{ymin =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{ymax =} \FloatTok{4.4}\NormalTok{, }\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{) }\SpecialCharTok{+}
-\NormalTok{                                ggplot2}\SpecialCharTok{::}\FunctionTok{geom\_linerange}\NormalTok{(}\AttributeTok{x =} \FloatTok{3.6}\NormalTok{, }\AttributeTok{ymin =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{ymax =} \FloatTok{4.4}\NormalTok{, }\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{)}
-\NormalTok{\}}
-
-\NormalTok{example\_context\_graph\_nodes }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(plot)\{}
-\NormalTok{  plot }\SpecialCharTok{+}
-\NormalTok{    ggraph}\SpecialCharTok{::}\FunctionTok{geom\_node\_circle}\NormalTok{(}
-\NormalTok{                                                          ggplot2}\SpecialCharTok{::}\FunctionTok{aes}\NormalTok{(}\AttributeTok{r =} \FloatTok{0.1}\NormalTok{), }
-                                                          \AttributeTok{fill =} \StringTok{"white"}\NormalTok{, }
-                                                          \AttributeTok{color =}\NormalTok{ mpxnyc\_colors}\SpecialCharTok{$}\NormalTok{dark\_pink}
-\NormalTok{                                                          ) }
-\NormalTok{\}}
-
-         
-\NormalTok{example\_context\_graph\_edges }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(plot)\{}
-\NormalTok{  plot }\SpecialCharTok{+}
-                                    
-\NormalTok{                                ggraph}\SpecialCharTok{::}\FunctionTok{geom\_edge\_link}\NormalTok{()}
-\NormalTok{\}                       }
-                                  
-                                
-  
-
-
-
-
-
-\NormalTok{contextless }\OtherTok{\textless{}{-}} \FunctionTok{example\_context\_graph\_base}\NormalTok{(}\StringTok{"Contextless"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_outline}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_nodes}\NormalTok{()}
-
-\NormalTok{social\_context }\OtherTok{\textless{}{-}} \FunctionTok{example\_context\_graph\_base}\NormalTok{(}\StringTok{"Social context"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_outline}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_edges}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_nodes}\NormalTok{()}
-
-
-\NormalTok{ecological\_context }\OtherTok{\textless{}{-}} \FunctionTok{example\_context\_graph\_base}\NormalTok{(}\StringTok{"Ecological context"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_outline}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_inner\_division}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_nodes}\NormalTok{()}
-
-\NormalTok{spatial\_context }\OtherTok{\textless{}{-}} \FunctionTok{example\_context\_graph\_base}\NormalTok{(}\StringTok{"Spatial context"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_outline}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_inner\_division}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_inner\_gates}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_nodes}\NormalTok{()}
-
-\NormalTok{ssnac\_context  }\OtherTok{\textless{}{-}} \FunctionTok{example\_context\_graph\_base}\NormalTok{(}\StringTok{"SSNAC"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_outline}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_inner\_division}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_inner\_gates}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_edges}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
-                      \FunctionTok{example\_context\_graph\_nodes}\NormalTok{()}
-
-
-\NormalTok{cowplot}\SpecialCharTok{::}\FunctionTok{plot\_grid}\NormalTok{(contextless, social\_context, ecological\_context, spatial\_context, ssnac\_context)  }\SpecialCharTok{+}
-  \FunctionTok{theme\_mpxnyc\_blank}\NormalTok{()}
+\FunctionTok{plot\_context\_figure}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
