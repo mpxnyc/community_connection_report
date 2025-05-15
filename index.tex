@@ -230,7 +230,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, breakable, interior hidden, enhanced, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, frame hidden, sharp corners, interior hidden, breakable, borderline west={3pt}{0pt}{shadecolor}, enhanced]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -250,6 +250,13 @@
 \begin{Highlighting}[]
 \NormalTok{targets}\SpecialCharTok{::}\FunctionTok{tar\_source}\NormalTok{(}\StringTok{"R\_functions"}\NormalTok{) }\CommentTok{\# Access custom defined functions}
 \NormalTok{targets}\SpecialCharTok{::}\FunctionTok{tar\_make}\NormalTok{(}\AttributeTok{reporter =} \StringTok{"silent"}\NormalTok{) }\CommentTok{\# Run data pipeline}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pat  }\OtherTok{\textless{}{-}}\NormalTok{ tidyjson}\SpecialCharTok{::}\FunctionTok{read\_json}\NormalTok{(}\StringTok{"\_config.json"}\NormalTok{)[[}\StringTok{"..JSON"}\NormalTok{]][[}\DecValTok{1}\NormalTok{]][[}\StringTok{"settings"}\NormalTok{]][[}\StringTok{"github{-}token"}\NormalTok{]] }\CommentTok{\# update packages}
+\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"KeletsoMakofane/mpxnyc"}\NormalTok{, }\AttributeTok{auth\_token =}\NormalTok{ pat)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3285,6 +3292,18 @@ that the functions are identical to each other.
 \end{aligned}
 \]
 
+\hypertarget{identification}{%
+\subsubsection{Identification}\label{identification}}
+
+\hypertarget{positivity}{%
+\paragraph{Positivity}\label{positivity}}
+
+We assume that for all \(i\)
+
+\[
+0 < P[A_i =1 | L_i] < 1
+\]
+
 \hypertarget{model}{%
 \subsection{Model}\label{model}}
 
@@ -3409,8 +3428,8 @@ E \left[ \frac{1}{n} \sum_i Y_i^{(a=1)} - Y_i^{(a=0)} \right]
 \end{aligned}
 \]
 
-\hypertarget{identification}{%
-\subsubsection{Identification}\label{identification}}
+\hypertarget{identification-1}{%
+\subsubsection{Identification}\label{identification-1}}
 
 Once we have specified the hypothetical quantities from our thought
 experiment, we ``identify'' them, meaning write them in terms of the
@@ -3492,8 +3511,8 @@ expectation.
   in the identification strategy above
 \end{itemize}
 
-\hypertarget{positivity}{%
-\subsubsection{Positivity}\label{positivity}}
+\hypertarget{positivity-1}{%
+\subsubsection{Positivity}\label{positivity-1}}
 
 \begin{itemize}
 \tightlist
@@ -3650,8 +3669,8 @@ Where for \(g_{0i}\) is a vector-valued function of \(X_{ti}\) for
 \hypertarget{definition-3-symmetry}{%
 \subsubsection{Definition 3: Symmetry}\label{definition-3-symmetry}}
 
-We say a separable exposure mapping \(g_{i}\) is symmetric with respect
-to graph \(\mathscr{G}\) if for any
+For some \(t \in [1,K]\) and \(i \in \mathscr{N}\), we say \(g_{ti}\) is
+symmetric with respect to graph \(\mathscr{G}\) if for any
 \(\mathbf{X},\mathbf{X}' \in \mathbf{R}^n\) and permutation matrix
 \(\mathbf{M}\) (conformable square matrix whose row and column margins
 all equal 1):
@@ -3664,45 +3683,93 @@ g_{ti}(\mathbf{X}, i) = g_{ti}(\mathbf{X'}, i)
 \end{equation}
 \]
 
-for \(t \in [1,k]\)
+If \(g_{ti}\) is symmetric with respect to \(\mathscr{G}\) we say it is
+a ``network exposure mapping for \(Y_i\) with respect to
+\(\mathbf{X}_t\) in \(\mathscr{G}\)''. The value of the function is
+called the ``network exposure value\ldots{}''
 
 \hypertarget{definition-4-positional-invariance}{%
 \subsubsection{Definition 4: Positional
 invariance}\label{definition-4-positional-invariance}}
 
-We say an exposure mapping \(g_i\) is invariant to its position in the
-network if for \(i,j \in \mathscr{N}\) and \(t \in [1,k]\)
+We say an network exposure mapping \(g_{ti}\) is invariant to its
+position in the network if
 
 \[
-g_{ti} = g_{tj} = g_t
+g_{ti} = g_{tj} = g_t \text{ for all } i,j \in \mathscr{N} 
 \]
 
 \hypertarget{definition-5-boundedness}{%
 \subsubsection{Definition 5:
 Boundedness}\label{definition-5-boundedness}}
 
-We say that an exposure mapping \(g_i\) is bounded if all possible
-network exposure values are contained by a finite set \(\mathbf{D}\)
-which does not depend on the size of the graph \(n\). i.e.~for
-\(t \in [1,k]\):
+We say that a network exposure mapping \(g_{ti}\) is bounded if all
+possible network exposure values are contained by a finite set
+\(\mathbf{D}\)
 
 \[
 g_{ti}(\mathbf{X}_t, i) \in \mathbf{D} 
 \]
 
+and \(|\mathbf{D}| < c\) for some constant \(c\).
+
 \hypertarget{comments}{%
 \subsubsection{Comments}\label{comments}}
 
-Note that under classical causal inference \(g_t = c \in \mathbf{R}\)
-for \(t \in [1,k]\). Classic causal inference models are trivially
-loyal, separable, positionally invariant, symmetric, and bounded with
-respect to the empty graph. Under network causal inference, boundedness
-can obtain as a result of restrictions on the underlying network, on the
-functional form of \(g_t\), or on the average of the entries of
-\(\mathbf{X}_t\). The first situation would arise if node degree is
-bounded, the second when we are modelling a network exposure which has a
-ceiling effect in its dose-response curve, and the third when we are
-considering a rare exposure.
+These definitions will be used in the next section to develop a model
+for inference under causal interference. The first assumption can be
+stated in graphic terms - it implies certain conditional independencies
+that can be encoded in a DAG by the removal and addition of arrows
+between nodes. The DAG in question would represent all the observational
+units rather than one (a typical) observation unit.
+
+The following four assumptions are crucial to define here because they
+are not possible to encode in the aforementioned DAG. We will use these
+to impose homogeneity restrictions on the DAG that enable us to apply
+statistical inference methods that are usually thought to require
+independence of observations. We will make a weaker assumption - that of
+``no spillover'', impose homogeneity restrictions, and apply familiar
+methods such as generalized linear models to reason about network
+phenomena.
+
+It is useful to point out that the symmetry of a network exposure
+mapping \(g_{ti}\) implies that the only thing that matters for the
+contribution of alters to \(Y_i\) is the count of alters for which
+\(X_t = 1\). The positional invariance of \(g_{ti}\) means that what
+ever the function is that relates these counts to the outcome \(Y_i\) is
+the same across observational units. Boundedness limits the number of
+distinct values that \(g_{ti}\) can take because each distinct value
+constitutes a treatment level whose counterfactual we have to model. As
+we will see, the assumption of boundedness limits the number of
+counterfactuals.
+
+Under network causal inference, boundedness can obtain in three
+different ways. First, it could be as a result of restrictions on the
+structure of the underlying network. It could be the case that in the
+network of interest, there is an upper bound on node degree. For
+example, if the only relationships of interest between individual
+participants were marriages, each node would have a degree of either 0
+or 1, meaning the count of alters \(X_{tj} = 1, j \in N_i\) is either
+zero or one. The second way boundedness might obtain is via restrictions
+of the value of \(\mathbf{X}_t\). It might be the case, for instance,
+that the count of \(i\)'s for which \(X_{ti}=1\) is very low, then on
+average, the count of alters for which \(X_{tj} = 1, j \in N_i\) will
+also be low. Finally, boundedness could obtain as a result of the
+functional form of \(g_t\) itself.
+
+This might happen if \(g_t\) models a network exposure which has a
+ceiling effect in its dose-response curve with the outcome of interest
+\(Y_i\). For example, if \(X_t\) indicates ownership of a car, and
+\(\mathscr{G}\) encodes close friendships, \(g_t\) would be a network
+exposure mapping which tells us how each additional friend who has a car
+shifts the outcome of interest. For most applications, its likely that
+beyond some number of friends (say 5) who have a car, an additional
+friend who gets a car will not change the outcome under investigation.
+
+Finally, we should note that under classical causal inference
+\(g_t = c \in \mathbf{R}\) for \(t \in [1,k]\). Exposure models are
+trivially loyal to the empty graph, so the network exposure mappings are
+trivially separable, positionally invariant, and bounded.
 
 \hypertarget{assumptions}{%
 \subsection{Assumptions}\label{assumptions}}
@@ -3873,6 +3940,18 @@ Y_3 &= f_{Y}(U_{Y_3}, L_3, A_3, g_{Y}(\mathbf{L}, \{\} ), h_{Y}(\mathbf{A}, \{\}
 \end{aligned}
 \]
 
+\hypertarget{identification-2}{%
+\subsubsection{Identification}\label{identification-2}}
+
+\hypertarget{positivity-2}{%
+\paragraph{Positivity}\label{positivity-2}}
+
+We assume that for all \(i\)
+
+\[
+0 < P[A_i =1 | L_i,g_{A}(\mathbf{L}) ] < 1
+\]
+
 \hypertarget{model-1}{%
 \subsection{Model}\label{model-1}}
 
@@ -4006,8 +4085,8 @@ opportunities.
 \frac{1}{n}\sum_i E[Y_i^{(a = 1, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 1})} - Y_i^{(a = 1, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 0})}]
 \]
 
-\hypertarget{identification-1}{%
-\subsubsection{Identification}\label{identification-1}}
+\hypertarget{identification-3}{%
+\subsubsection{Identification}\label{identification-3}}
 
 \[
 \begin{aligned}
@@ -4480,8 +4559,8 @@ outcome \(\mathbf{V}\) across individuals.
 E[\sum_{i=1}^5 V_{si}^{(\bar{\mathbf{t}})}] 
 \]
 
-\hypertarget{identification-2}{%
-\subsubsection{Identification}\label{identification-2}}
+\hypertarget{identification-4}{%
+\subsubsection{Identification}\label{identification-4}}
 
 Because individual vaccination status is both a confounder and a
 mediator of the relationship between neighborhood intervention status
