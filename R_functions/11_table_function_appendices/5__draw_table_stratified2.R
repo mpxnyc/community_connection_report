@@ -21,7 +21,11 @@ draw_table_stratified2 <- function(table){
     gt::cols_align(
       align = "center",
       columns = N
+    ) |>
+    gt::tab_options(
+      table.font.size = 12
     )
+
   
   
 }

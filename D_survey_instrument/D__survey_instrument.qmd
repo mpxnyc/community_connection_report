@@ -1,11 +1,11 @@
 
-
 ```{r  include=FALSE}
 targets::tar_source("../R_functions")
 
 ```
 
 # Survey instrument {#sec-data}
+
 
 ::: {#authors}
 Keletso Makofane, PhD
@@ -46,6 +46,40 @@ The front end of the MPX NYC Person-Place Network Mapper was developed as a sing
 The MPC NYC Person-Place Network Mapper underwent two rounds of user testing. About 10 people participated each time, returning feedback via an informal feedback questionnaire and via email.
 
 
+
+
+## Study questionnaire {#sec-appendixquestionnaire}
+
+
+
+::: {.card}
+
+`r targets::tar_read(config_list)[[1]][["variables"]][[3]]["label"]`
+
+`r targets::tar_read(config_list)[[1]][["variables"]][[3]][["question"]]`
+
+`r paste(targets::tar_read(config_list)[[1]][["variables"]][[3]][["response_options"]], collapse = "; ")`
+
+:::
+
+
+```{r, output='asis'}
+targets::tar_read(config_list)[[1]][["variables"]] |>
+  purrr::map(
+    function(x) return(paste0(
+                              "::: {.card}\n\n", 
+                              x[["label"]], 
+                              "\n\n",
+                               x[["question"]],
+                              "\n\n",
+                              paste(x[["response_options"]], collapse = "; "),
+                              "\n\n:::"
+                              ))
+  ) |>
+  paste(collapse = "\n\n") |>
+  cat()
+
+```
 
 ```{r}
 #| fig-width: 2
