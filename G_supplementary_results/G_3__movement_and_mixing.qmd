@@ -1,0 +1,140 @@
+
+
+## Movement and spatial mixing 
+
+### Movement from home to contact venue community district  {.unnumbered}
+
+```{r plot_matrix_movement_travel}
+#| fig-width: 12
+#| fig-height: 12
+
+
+
+mpxnyc_colors <- mpxnyc::mpxnyc_colors
+attach(mpxnyc_colors)
+targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
+
+
+  make_table_movement_travel() |>
+    plot_matrix_movement() +
+    scale_fill_mpxnyc(name = "From Borough", option = "dark") +
+    scale_color_mpxnyc(name = "To Borough", option = "dark") +
+    ggplot2::scale_size_continuous(name = "Count") +
+    theme_mpxnyc_matrix_movement() 
+  
+  
+
+```
+
+
+### Spatial mixing coefficient by age  {.unnumbered}
+
+::: {.panel-tabset}
+
+#### Plot
+
+```{r plot_matrix_mixing_age}
+#| fig-width: 10
+#| fig-height: 10
+
+
+make_table_mixing_2(age) |>
+  plot_matrix_mixing() +
+  theme_mpxnyc_mixing() +
+    scale_fill_mpxnyc_gradient() 
+
+
+```
+
+#### Data
+
+```{r table_matrix_mixing_age}
+#| fig-width: 10
+#| fig-height: 10
+
+
+make_table_mixing_2(age) |>
+ draw_table_matrix_mixing()  
+
+
+
+```
+
+:::
+
+### Spatial mixing coefficient by race-Gender  {.unnumbered}
+
+::: {.panel-tabset}
+
+#### Plot
+
+```{r plot_matrix_mixing_demo_group}
+#| fig-width: 15
+#| fig-height: 15
+
+
+make_table_mixing_2(demo_group) |>
+  plot_matrix_mixing()   +
+  theme_mpxnyc_mixing() +
+    scale_fill_mpxnyc_gradient() 
+
+
+
+```
+
+#### Data
+
+```{r table_matrix_mixing_demo_group}
+#| fig-width: 10
+#| fig-height: 10
+
+
+make_table_mixing_2(demo_group) |>
+ draw_table_matrix_mixing()  
+
+
+
+```
+
+:::
+
+### Spatial mixing coefficient by sexual orientation  {.unnumbered}
+
+::: {.panel-tabset}
+
+#### Plot
+
+```{r plot_matrix_mixing_sexorientation}
+#| fig-width: 10
+#| fig-height: 10
+
+
+make_table_mixing_2(sexOrientation) |>
+  plot_matrix_mixing()   +
+  theme_mpxnyc_mixing() +
+    scale_fill_mpxnyc_gradient() 
+
+
+
+```
+
+#### Data
+
+```{r table_matrix_mixing_sexorientation}
+#| fig-width: 10
+#| fig-height: 10
+
+
+make_table_mixing_2(sexOrientation) |>
+ draw_table_matrix_mixing()  
+
+
+
+```
+
+:::
+
+
+
+
+

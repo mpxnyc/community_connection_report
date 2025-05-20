@@ -1,4 +1,7 @@
 
+```{r include=FALSE}
+targets::tar_source("../R_functions")
+```
 
 ## People
 
@@ -138,115 +141,107 @@ captions_and_titles <- function(figure_name){
 ```
 
 
-### Race and gender 
-::: {.panel-tabset}
+### Race and gender {.unnumbered}
 
-#### Plot
-
-```{r plot_bar_demogroup}
-#| fig-height: 7
-#| fig-width: 8
-#| column: body
-
-make_table_freq1(demo_group) %>%    
-  filter(!is.na(level)) %>%
-  plot_bar() 
-
-```
-
-####  Data
 
 ```{r table_bar_demogroup}
-#| fig-height: 8
-#| fig-width: 8
-#| column: body
+#| column: margin
+#| tbl-cap: First
+#| label: tbl-first-e
 
 draw_table_1(demo_group, "Race-Gender")
 
 ```
 
-:::
-
-
-### Age
-::: {.panel-tabset}
-
-#### Plot
-
-```{r plot_bar_age}
-#| column: body
-#| fig-height: 7
+```{r plot_bar_demogroup}
+#| fig-height: 5
 #| fig-width: 8
+#| column: body
 
-  make_table_freq1(age) %>%
-          plot_bar()
-
-
+make_table_freq1(demo_group) |>  
+  dplyr::filter(!is.na(level)) |>
+  plot_bar() +
+  theme_mpxnyc_bar() +
+  ggplot2::scale_y_continuous("MPX NYC sample proportion", labels = scales::percent) +
+  scale_fill_mpxnyc(name = "Race / gender") 
 
 ```
 
-#### Data
+
+
+
+
+
+
+### Age {.unnumbered}
+
 
 ```{r table_bar_age}
-#| column: body
+#| column: margin
 draw_table_1(age, "Age")
 
 ```
-:::
 
-
-### Recruitment Channel 
-
-::: {.panel-tabset}
-
-
-#### Plot
-
-```{r plot_bar_channel}
-#| fig-height: 8
-#| fig-width: 8
+```{r plot_bar_age}
 #| column: body
+#| fig-height: 5
+#| fig-width: 8
 
+  make_table_freq1(age) %>%
+          plot_bar() +
+  theme_mpxnyc_bar() +
+  ggplot2::scale_y_continuous("MPX NYC sample proportion", labels = scales::percent) +
+  scale_fill_mpxnyc(name = "Age group")
 
-make_table_freq1(channel) %>%
-  plot_bar() 
 
 
 ```
 
 
-#### Data
+
+
+
+
+
+### Recruitment Channel  {.unnumbered}
+
 
 ```{r table_bar_channel}
-#| column: body
+#| column: margin
 
 draw_table_1(channel, "Channel")
 
 
 ```
 
-:::
 
 
-
-
-### Gender identity
-
-::: {.panel-tabset}
-
-#### Plot
-```{r plot_bar_gender}
+```{r plot_bar_channel}
+#| fig-height: 5
+#| fig-width: 8
 #| column: body
-#| fig-height: 8
-#| fig-width: 7
 
-make_table_freq1(genderId) %>%  
-  plot_bar()
- 
+
+make_table_freq1(channel) %>%
+  plot_bar()  +
+  theme_mpxnyc_bar() +
+  ggplot2::scale_y_continuous("MPX NYC sample proportion", labels = scales::percent) +
+  scale_fill_mpxnyc(name = "Recruitment\nchannel")
+
+
 ```
 
 
-#### Data
+
+
+
+
+
+
+
+
+
+### Gender identity {.unnumbered}
 
 ```{r table_bar_gender}
 #| column: margin
@@ -257,27 +252,31 @@ draw_table_1(genderId, "Gender")
  
 ```
 
-:::
 
-
-
-### Race 
-
-::: {.panel-tabset}
-
-#### Plot
-```{r plot_bar_race}
-#| fig-height: 7
-#| fig-width: 7
+```{r plot_bar_gender}
 #| column: body
+#| fig-height: 5
+#| fig-width: 7
 
-make_table_freq1(race) %>%
-  plot_bar() 
-  
+make_table_freq1(genderId) %>%  
+  plot_bar() +
+  theme_mpxnyc_bar() +
+  ggplot2::scale_y_continuous("MPX NYC sample proportion", labels = scales::percent) +
+  scale_fill_mpxnyc(name = "Gender\nmodality")
+ 
 ```
 
 
-#### Data
+
+
+
+
+
+
+
+
+### Race  {.unnumbered}
+
 
 ```{r table_bar_race}
 #| column: margin
@@ -287,30 +286,30 @@ draw_table_1(race, "Race")
   
 ```
 
-:::
 
-
-
-
-### Sexual Orientation 
-
-::: {.panel-tabset}
-
-#### Plot
-
-```{r plot_bar_sexorientation}
-#| fig-height: 7
+```{r plot_bar_race}
+#| fig-height: 5
 #| fig-width: 7
 #| column: body
 
-
-make_table_freq1(sexOrientation) %>%    
-  plot_bar()
-
-
+make_table_freq1(race) %>%
+  plot_bar()  +
+  theme_mpxnyc_bar() +
+  ggplot2::scale_y_continuous("MPX NYC sample proportion", labels = scales::percent) +
+  scale_fill_mpxnyc(name = "Race")
+  
 ```
 
-#### Data
+
+
+
+
+
+
+
+
+
+### Sexual Orientation  {.unnumbered}
 
 ```{r draw_table_sexorientation}
 #| column: margin
@@ -320,129 +319,169 @@ draw_table_1(sexOrientation, "Sexual Orientation")
 ```
 
 
-:::
 
-
-
-
-### Sexual orientation by race and gender
-
-::: {.panel-tabset}
-
-#### Plot
-
-```{r plot_radar_grid_sexOrientation_demo_group}
+```{r plot_bar_sexorientation}
+#| fig-height: 5
 #| fig-width: 7
-#| fig-height: 10
 #| column: body
 
 
-
-make_table_freq2(sexOrientation, demo_group) %>%
-  plot_radar_grid() 
-```
-
-#### Data
-
-```{r draw_radar_grid_sexOrientation_demo_group}
-#| column: body
-
-draw_table_2(sexOrientation, demo_group, "Sexual Orientation by Race-Gender") 
-
-```
-
-
-
-:::
-
-
-
-###  MPOX vaccination status by race and gender 
-
-
-::: {.panel-tabset}
-
-#### Plot
-
-```{r plot_radar_grid_monkeypoxVaccine_demo_group}
-#| fig-width: 7
-#| fig-height: 10
-#| column: body
-
-make_table_freq2(monkeypoxVaccine, demo_group) %>%
-  plot_radar_grid()
-```
- 
-#### Data
-
-```{r table_radar_grid_monkeypoxVaccine_demo_group}
-#| column: body
-
-draw_table_2(monkeypoxVaccine, demo_group, "Mpox Vax Status by Race-Gender") 
+make_table_freq1(sexOrientation) %>%    
+  plot_bar() +
+  theme_mpxnyc_bar() +
+  ggplot2::scale_y_continuous("MPX NYC sample proportion", labels = scales::percent) +
+  scale_fill_mpxnyc(name = "Sexual\norientation")
 
 
 ```
 
-:::
-
-
-### HIV and PrEP status by race and gender
-
-::: {.panel-tabset}
-
-
-#### Plot
-
-```{r plot_radar_grid_hivPrep_demo_group}
-#| fig-width: 10
-#| fig-height: 10
-
-make_table_freq2(hivPrep, demo_group) %>%
-  plot_radar_grid()
-
-```
-
-#### Data
-
-```{r table_radar_grid_hivPrep_demo_group}
-#| fig-width: 10
-#| fig-height: 10
-
-draw_table_2(hivPrep, demo_group, "HIV and PrEP Status by Race-Gender") 
-
-```
-
-
-:::
 
 
 
-### Sexual or physical contact with more than two other people at the same time 
 
-::: {.panel-tabset}
 
-#### Plot
 
-```{r plot_bar_groupsex}
-#| fig-width: 7
-#| fig-height: 7
-#| 
 
-make_table_freq1(groupSex) %>%  
-  plot_bar() 
 
-```
 
-#### Data
+
+### Sexual or physical contact with more than two other people at the same time  {.unnumbered}
 
 ```{r table_bar_groupsex}
 #| fig-width: 7
 #| fig-height: 7
-#| 
+#| column: margin
 
 draw_table_1(groupSex, "Group Sex / Contact past 4 weeks") 
 
 
 ```
 
-:::
+
+
+
+
+```{r plot_bar_groupsex}
+#| fig-width: 7
+#| fig-height: 5
+#| column: body
+
+make_table_freq1(groupSex) %>%  
+  plot_bar()  +
+  theme_mpxnyc_bar() +
+  ggplot2::scale_y_continuous("MPX NYC sample proportion", labels = scales::percent) +
+  scale_fill_mpxnyc(name = "Group contact")
+
+```
+
+
+
+
+
+### Sexual orientation by race and gender {.unnumbered}
+
+
+
+```{r draw_radar_grid_sexOrientation_demo_group}
+#| column: margin
+
+draw_table_2(sexOrientation, demo_group, "Sexual Orientation by Race-Gender") 
+
+```
+
+```{r plot_radar_grid_sexOrientation_demo_group}
+#| fig-width: 8
+#| fig-height: 12
+#| column: body
+
+
+
+make_table_freq2(sexOrientation, demo_group) %>%
+  plot_radar_grid()   +
+  ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.5, 1)) +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people() 
+
+```
+
+
+
+
+
+
+
+
+
+
+
+###  MPOX vaccination status by race and gender  {.unnumbered}
+
+
+
+
+```{r table_radar_grid_monkeypoxVaccine_demo_group}
+#| column: margin
+
+draw_table_2(monkeypoxVaccine, demo_group, "Mpox Vax Status by Race-Gender") 
+
+
+```
+
+```{r plot_radar_grid_monkeypoxVaccine_demo_group}
+#| fig-width: 8
+#| fig-height: 12
+#| column: body
+
+make_table_freq2(monkeypoxVaccine, demo_group) |>
+  plot_radar_grid()  +
+  ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.5, 1)) +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people() 
+
+
+```
+ 
+
+
+
+
+
+
+
+### HIV and PrEP status by race and gender {.unnumbered}
+
+
+
+```{r table_radar_grid_hivPrep_demo_group}
+#| fig-width: 10
+#| fig-height: 10
+#| column: margin
+
+draw_table_2(hivPrep, demo_group, "HIV and PrEP Status by Race-Gender") 
+
+```
+
+
+```{r plot_radar_grid_hivPrep_demo_group}
+#| fig-width: 8
+#| fig-height: 12
+#| column: body
+
+make_table_freq2(hivPrep, demo_group) %>%
+  plot_radar_grid()  +
+  ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.5, 1)) +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people() 
+
+
+```
+
+
+
+
+
+
+
+
+
+

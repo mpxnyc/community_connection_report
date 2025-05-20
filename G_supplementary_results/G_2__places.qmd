@@ -1,0 +1,130 @@
+
+## Places
+
+### Type of venue for contact vs. type of contact  {.unnumbered}
+
+
+```{r table_radar_facet_placetype_placesex}
+#| column: margin
+
+make_table_freq2(placeType, placeSex, person_analysis = FALSE) |>
+        draw_table_stratified()
+
+
+```
+
+
+```{r plot_radar_facet_placetype_placesex}
+#| fig-width: 9
+#| fig-height: 8
+#| 
+
+
+mpxnyc_colors <- mpxnyc::mpxnyc_colors
+attach(mpxnyc_colors)
+targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
+
+
+make_table_freq2(placeType, placeSex, person_analysis = FALSE) |>
+  dplyr::filter(!is.na(level)) |>
+  plot_radar_stratified() +
+  ggplot2::coord_radial()  +
+  ggplot2::scale_x_discrete(position = "top") +
+  ggplot2::scale_y_continuous(labels = function(x) scales::percent(abs(x))) +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_places() 
+
+```
+
+
+
+
+
+
+
+###  Type of venue for contact vs. distance from home  {.unnumbered}
+
+
+
+```{r table_radar_facet_placetype_distancefromhome}
+#| column: margin
+
+
+
+
+
+make_table_freq2(placeType, distanceFromHome, person_analysis = FALSE) |>
+          draw_table_stratified()
+
+
+
+```
+
+```{r plot_radar_facet_placetype_distancefromhome}
+
+
+
+
+
+make_table_freq2(placeType, distanceFromHome, person_analysis = FALSE) |>
+  plot_radar_stratified() +
+  ggplot2::coord_radial()  +
+  ggplot2::scale_x_discrete(position = "top") +
+  ggplot2::scale_y_continuous(labels = function(x) scales::percent(abs(x))) +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_places() 
+
+
+
+```
+
+
+
+
+
+
+
+
+
+### Place type vs. Distance from home vs. Sex contact  {.unnumbered}
+
+```{r table_radar_facet_placetype_placesex_distancefromhome}
+#| fig-width: 11
+#| fig-height: 10
+#| column: margin
+
+
+  make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE) |>
+    draw_table_stratified2()
+
+```
+
+
+
+```{r plot_radar_facet_placetype_placesex_distancefromhome}
+#| fig-width: 11
+#| fig-height: 10
+#| 
+
+
+  make_table_freq3( placeType, distanceFromHome, placeSex, person_analysis = FALSE) |>
+    dplyr::filter(!is.na(level)) |>
+  plot_radar_stratified2()  +
+  ggplot2::coord_radial()  +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_places() +
+ ggplot2::theme(
+   axis.text.x = ggplot2::element_blank()
+   ) +
+    ggplot2::ylim(c(-0.2, 1))
+
+
+```
+
+
+
+
+
+
+
+

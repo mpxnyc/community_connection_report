@@ -338,14 +338,8 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../H_project_management/H__project_management.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Project management</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../6_results_appendix/6_results_appendix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">Supplementary results</span></span></a>
+  <a href="../G_supplementary_results/G__supplementary_results.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Supplementary results</span></span></a>
   </div>
 </li>
       </ul>
@@ -367,6 +361,7 @@ div.csl-indent {
   <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing"><span class="header-section-number">D.1.4</span> Testing</a></li>
   </ul>
 </li>
+  <li><a href="#sec-appendixquestionnaire" id="toc-sec-appendixquestionnaire" class="nav-link" data-scroll-target="#sec-appendixquestionnaire"><span class="header-section-number">D.2</span> Study questionnaire</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -400,11 +395,148 @@ div.csl-indent {
 </section><section id="testing" class="level3" data-number="D.1.4"><h3 data-number="D.1.4" class="anchored" data-anchor-id="testing">
 <span class="header-section-number">D.1.4</span> Testing</h3>
 <p>The MPC NYC Person-Place Network Mapper underwent two rounds of user testing. About 10 people participated each time, returning feedback via an informal feedback questionnaire and via email.</p>
+</section></section><section id="sec-appendixquestionnaire" class="level2" data-number="D.2"><h2 data-number="D.2" class="anchored" data-anchor-id="sec-appendixquestionnaire">
+<span class="header-section-number">D.2</span> Study questionnaire</h2>
+<div class="card">
+<p>Participant question</p>
+<p>What question do you wish we had asked in the survey?</p>
+</div>
+<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/targets/man/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"variables"</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span></span>
+<span>    <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span></span>
+<span>                              <span class="st">"::: {.card}\n\n"</span>, </span>
+<span>                              <span class="va">x</span><span class="op">[[</span><span class="st">"label"</span><span class="op">]</span><span class="op">]</span>, </span>
+<span>                              <span class="st">"\n\n"</span>,</span>
+<span>                               <span class="va">x</span><span class="op">[[</span><span class="st">"question"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>                              <span class="st">"\n\n"</span>,</span>
+<span>                              <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">x</span><span class="op">[[</span><span class="st">"response_options"</span><span class="op">]</span><span class="op">]</span>, collapse <span class="op">=</span> <span class="st">"; "</span><span class="op">)</span>,</span>
+<span>                              <span class="st">"\n\n:::"</span></span>
+<span>                              <span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span>collapse <span class="op">=</span> <span class="st">"\n\n"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="card">
+<p>Home census tract</p>
+<p>Where in the city do you live? Tap on the map to show your home.</p>
+</div>
+<div class="card">
+<p>Age</p>
+<p>How old are you?</p>
+<p>&lt;18; 18-24; 25-34; 35-44; 45-54; 55+; 55+</p>
+</div>
+<div class="card">
+<p>Participant question</p>
+<p>What question do you wish we had asked in the survey?</p>
+</div>
+<div class="card">
+<p>Assigned sex</p>
+<p>What is your sex assigned at birth?</p>
+<p>Male; Female; Other</p>
+</div>
+<div class="card">
+<p>Recruitment channel</p>
+<p>Recruitment channel</p>
+<p>Grindr; Partner toolkit; Instagram; Twitter; Unknown</p>
+</div>
+<div class="card">
+<p>Recent important social contacts</p>
+<p>How many queer and trans friends do you have who are important to you for any reason? Count only those you have been in touch with over the past 4 weeks.</p>
+</div>
+<div class="card">
+<p>Recent physical contacts</p>
+<p>How many individuals have you had prolonged physical contact (but no sexual contact) with in the past 4 weeks, excluding group settings?</p>
+</div>
+<div class="card">
+<p>Recent individual sex contacts</p>
+<p>How many individuals have you had sex with in the past 4 weeks, excluding group sex partners?</p>
+</div>
+<div class="card">
+<p>Recent covid diagnosis</p>
+<p>In the past 4 weeks, did you test positive for COVID-19?</p>
+<p>Yes; No; Did not test</p>
+</div>
+<div class="card">
+<p>Survey date</p>
+<p>Survey date</p>
+</div>
+<div class="card">
+<p>Current gender</p>
+<p>What is your gender identity?</p>
+<p>Man; Woman; Trans man; Trans woman; Non-binary; Other</p>
+</div>
+<div class="card">
+<p>Group contact</p>
+<p>Over the past 4 weeks, have you had sex with two or more people at the same time or had close physical contact with multiple people at the same time? (like at a party, sport game, concert, show)</p>
+<p>Yes; No</p>
+</div>
+<div class="card">
+<p>PrEP user</p>
+<p>Are you on PrEP?</p>
+<p>Yes; No</p>
+</div>
+<div class="card">
+<p>HIV status</p>
+<p>What is your HIV status?</p>
+<p>Living with HIV; Not living with HIV; Unsure</p>
+</div>
+<div class="card">
+<p>HIV supressed</p>
+<p>Have you been told that your viral load is suppressed or undetectable?</p>
+<p>Yes; No; Unsure</p>
+</div>
+<div class="card">
+<p>Monkeypox care</p>
+<p>Did you receive care by a medical provider for your symptoms?</p>
+<p>Yes; No</p>
+</div>
+<div class="card">
+<p>Mpox testing</p>
+<p>In the past 4 weeks, did you receive testing for mpox?</p>
+<p>Yes; No</p>
+</div>
+<div class="card">
+<p>Mpox vaccine</p>
+<p>Have you received at least 1 dose of the monkeypox vaccine?</p>
+<p>Yes; No; Unsure</p>
+</div>
+<div class="card">
+<p>Sexual orientation</p>
+<p>What is your sexual orientation?</p>
+<p>Gay; Bisexual; Straight; Queer; Something Else</p>
+</div>
+<div class="card">
+<p>Gender identity</p>
+<p>Gender identity</p>
+<p>Cisgender Man; Non Binary; Transgender Man; Transgender Woman; Cisgender Woman; Another Demographic; Another Demographic</p>
+</div>
+<div class="card">
+<p>Race</p>
+<p>Race</p>
+<p>White; Latinx; Black; Asian; Multi Racial; Another Group</p>
+</div>
+<div class="card">
+<p>Hookup travel time</p>
+<p>By the way, how long are you willing to travel to hook up?</p>
+</div>
+<div class="card">
+<p>Number of symptoms (calculated)</p>
+<p>Number of symptoms (calculated)</p>
+</div>
+<div class="card">
+<p>Place type</p>
+<p>What kind of place is this?</p>
+<p>Concert/Theatre/Show; Concert/Theatre/Show; Dark Room/Sex Party; Dark Room/Sex Party; Dance Party; Sport Game; Private Residence; Something Else</p>
+</div>
+<div class="card">
+<p>Sexual contact at place</p>
+<p>Did you have sexual contact while at this venue?</p>
+<p>Did not have sex; Had sex; Did not have sex</p>
+</div>
 <div class="cell" data-layout-align="center">
-<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plot_icon</span><span class="op">(</span>icon_name <span class="op">=</span> <span class="st">"devil"</span>, color <span class="op">=</span> <span class="st">"dark_orange"</span>, shape <span class="op">=</span> <span class="fl">16</span>, alpha <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plot_icon</span><span class="op">(</span>icon_name <span class="op">=</span> <span class="st">"devil"</span>, color <span class="op">=</span> <span class="st">"dark_orange"</span>, shape <span class="op">=</span> <span class="fl">16</span>, alpha <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="D__survey_instrument_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="192"></p>
+<figure class="figure"><p><img src="D__survey_instrument_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="192"></p>
 </figure>
 </div>
 </div>
@@ -425,7 +557,7 @@ US Census. 2022. <span>“Census Tracts.”</span> <a href="https://www2.census.
 Vercel. 2024. <span>“NextJS Documentation.”</span> <a href="https://nextjs.org/docs">https://nextjs.org/docs</a>.
 </div>
 </div>
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
