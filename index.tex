@@ -236,7 +236,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, sharp corners, frame hidden, interior hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, boxrule=0pt]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, enhanced, borderline west={3pt}{0pt}{shadecolor}, frame hidden, boxrule=0pt, breakable, sharp corners]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -1365,12 +1365,12 @@ N = 1,304\textsuperscript{\textit{1}} & \textbf{p-value}\textsuperscript{\textit
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{make\_plotdata\_placetype\_bar\_grid}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
-  \FunctionTok{plot\_radar\_stratified2}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{plot\_bar\_stratified}\NormalTok{() }\SpecialCharTok{+}
 \NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{coord\_flip}\NormalTok{()  }\SpecialCharTok{+}
 \NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{position =} \StringTok{"top"}\NormalTok{) }\SpecialCharTok{+}
 \NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{labels =} \ControlFlowTok{function}\NormalTok{(x) scales}\SpecialCharTok{::}\FunctionTok{percent}\NormalTok{(}\FunctionTok{abs}\NormalTok{(x))) }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme\_mpxnyc\_radar\_places}\NormalTok{() }
+  \FunctionTok{theme\_mpxnyc\_bar\_places}\NormalTok{() }
 \end{Highlighting}
 \end{Shaded}
 
@@ -4788,6 +4788,175 @@ The MPC NYC Person-Place Network Mapper underwent two rounds of user
 testing. About 10 people participated each time, returning feedback via
 an informal feedback questionnaire and via email.
 
+\hypertarget{sec-appendixquestionnaire}{%
+\section{Study questionnaire}\label{sec-appendixquestionnaire}}
+
+Participant question
+
+What question do you wish we had asked in the survey?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{targets}\SpecialCharTok{::}\FunctionTok{tar\_read}\NormalTok{(config\_list)[[}\DecValTok{1}\NormalTok{]][[}\StringTok{"variables"}\NormalTok{]] }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  purrr}\SpecialCharTok{::}\FunctionTok{map}\NormalTok{(}
+    \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{return}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}
+                              \StringTok{"::: \{.card\}}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{, }
+\NormalTok{                              x[[}\StringTok{"label"}\NormalTok{]], }
+                              \StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{,}
+\NormalTok{                               x[[}\StringTok{"question"}\NormalTok{]],}
+                              \StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{,}
+                              \FunctionTok{paste}\NormalTok{(x[[}\StringTok{"response\_options"}\NormalTok{]], }\AttributeTok{collapse =} \StringTok{"; "}\NormalTok{),}
+                              \StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{:::"}
+\NormalTok{                              ))}
+\NormalTok{  ) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{paste}\NormalTok{(}\AttributeTok{collapse =} \StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{cat}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Home census tract
+
+Where in the city do you live? Tap on the map to show your home.
+
+Age
+
+How old are you?
+
+\textless18; 18-24; 25-34; 35-44; 45-54; 55+; 55+
+
+Participant question
+
+What question do you wish we had asked in the survey?
+
+Assigned sex
+
+What is your sex assigned at birth?
+
+Male; Female; Other
+
+Recruitment channel
+
+Recruitment channel
+
+Grindr; Partner toolkit; Instagram; Twitter; Unknown
+
+Recent important social contacts
+
+How many queer and trans friends do you have who are important to you
+for any reason? Count only those you have been in touch with over the
+past 4 weeks.
+
+Recent physical contacts
+
+How many individuals have you had prolonged physical contact (but no
+sexual contact) with in the past 4 weeks, excluding group settings?
+
+Recent individual sex contacts
+
+How many individuals have you had sex with in the past 4 weeks,
+excluding group sex partners?
+
+Recent covid diagnosis
+
+In the past 4 weeks, did you test positive for COVID-19?
+
+Yes; No; Did not test
+
+Survey date
+
+Survey date
+
+Current gender
+
+What is your gender identity?
+
+Man; Woman; Trans man; Trans woman; Non-binary; Other
+
+Group contact
+
+Over the past 4 weeks, have you had sex with two or more people at the
+same time or had close physical contact with multiple people at the same
+time? (like at a party, sport game, concert, show)
+
+Yes; No
+
+PrEP user
+
+Are you on PrEP?
+
+Yes; No
+
+HIV status
+
+What is your HIV status?
+
+Living with HIV; Not living with HIV; Unsure
+
+HIV supressed
+
+Have you been told that your viral load is suppressed or undetectable?
+
+Yes; No; Unsure
+
+Monkeypox care
+
+Did you receive care by a medical provider for your symptoms?
+
+Yes; No
+
+Mpox testing
+
+In the past 4 weeks, did you receive testing for mpox?
+
+Yes; No
+
+Mpox vaccine
+
+Have you received at least 1 dose of the monkeypox vaccine?
+
+Yes; No; Unsure
+
+Sexual orientation
+
+What is your sexual orientation?
+
+Gay; Bisexual; Straight; Queer; Something Else
+
+Gender identity
+
+Gender identity
+
+Cisgender Man; Non Binary; Transgender Man; Transgender Woman; Cisgender
+Woman; Another Demographic; Another Demographic
+
+Race
+
+Race
+
+White; Latinx; Black; Asian; Multi Racial; Another Group
+
+Hookup travel time
+
+By the way, how long are you willing to travel to hook up?
+
+Number of symptoms (calculated)
+
+Number of symptoms (calculated)
+
+Place type
+
+What kind of place is this?
+
+Concert/Theatre/Show; Concert/Theatre/Show; Dark Room/Sex Party; Dark
+Room/Sex Party; Dance Party; Sport Game; Private Residence; Something
+Else
+
+Sexual contact at place
+
+Did you have sexual contact while at this venue?
+
+Did not have sex; Had sex; Did not have sex
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{plot\_icon}\NormalTok{(}\AttributeTok{icon\_name =} \StringTok{"devil"}\NormalTok{, }\AttributeTok{color =} \StringTok{"dark\_orange"}\NormalTok{, }\AttributeTok{shape =} \DecValTok{16}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.1}\NormalTok{)}
@@ -4796,7 +4965,7 @@ an informal feedback questionnaire and via email.
 
 \begin{figure}[H]
 
-{\centering \includegraphics{D_survey_instrument/D__survey_instrument_files/figure-pdf/unnamed-chunk-2-1.pdf}
+{\centering \includegraphics{D_survey_instrument/D__survey_instrument_files/figure-pdf/unnamed-chunk-3-1.pdf}
 
 }
 
@@ -4943,261 +5112,20 @@ talks WHO Talk
 
 People who discussed study design
 
-\hypertarget{project-management}{%
-\chapter{Project management}\label{project-management}}
-
-Goals:
-
-\begin{itemize}
-\item
-  joy, not stress
-\item
-  low stakes failure
-\item
-  redundancy
-\item
-  democracy
-\end{itemize}
-
-Approach:
-
-\begin{itemize}
-\item
-  Elaborate well-structured task list by team
-\item
-  Assign tasks to indiviuals
-\item
-  Empower individuals to mark tasks as done or pending
-\item
-  Empower individuals to re-assign tasks
-\item
-  Devolve responsibilities, setting clear expectatios
-\end{itemize}
-
-Roles:
-
-\begin{itemize}
-\item
-  Principal investigator
-
-  \begin{itemize}
-  \item
-    Partnerships
-  \item
-    Fundraising
-  \item
-    Drafting study protocol
-  \item
-    Ethical review of protocol
-  \item
-    Quality check
-  \end{itemize}
-\item
-  Research coordinator
-
-  \begin{itemize}
-  \item
-    Schedule group meetings
-  \item
-    Draft technical documents
-  \item
-    Research
-  \item
-    Bookkeeping
-  \end{itemize}
-\item
-  Communications lead
-
-  \begin{itemize}
-  \item
-    Newsletter
-  \item
-    Website
-  \item
-    Attencance lists
-  \item
-    Press
-  \end{itemize}
-\item
-  Questionnaire lead
-
-  \begin{itemize}
-  \item
-    coordinate development of questionnaire
-  \item
-    integrate feedback from stakeholders
-  \item
-    Seek guidance from technical expertw
-  \item
-    Work with translation lead
-  \end{itemize}
-\item
-  Web development lead
-
-  \begin{itemize}
-  \item
-    develop technical specs for web tool
-  \item
-    Oversee contract with external web developer
-  \end{itemize}
-\item
-  Translation lead
-
-  \begin{itemize}
-  \item
-    oversee contracts with professional translators
-  \item
-    quality check translation
-  \item
-    liase between translator and investigator team
-  \end{itemize}
-\end{itemize}
-
 \hypertarget{sec-appendixresults}{%
 \chapter{Supplementary results}\label{sec-appendixresults}}
 
 \hypertarget{people}{%
 \section{People}\label{people}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{targets}\SpecialCharTok{::}\FunctionTok{tar\_source}\NormalTok{(}\AttributeTok{files =} \StringTok{"/Users/keletso/Documents/\_gitrepos/mpxnyc\_data\_analysis/R\_functions"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{captions\_and\_titles }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(figure\_name)\{}
-  
-   
-  
-\NormalTok{    list\_captions\_and\_titles }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"common\_caption"}\NormalTok{]] }\OtherTok{\textless{}{-}} \StringTok{"Data source: MPX NYC Survey (restricted to 1,304 residents of New York City). www.mpxresponse.org"}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_group\_sex"}\NormalTok{]]                          }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_group\_sex"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]               }\OtherTok{\textless{}{-}} \StringTok{"Figure 1. Social or sexual contact in group setting over prior four weeks"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_group\_sex"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]            }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov. 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_group\_sex"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]             }\OtherTok{\textless{}{-}} \StringTok{"Participants were asked whether they \textquotesingle{}had sex with two or more people at the same time or had close, physical contact with multiple people at the same time (e.g. at a party, sport game, concert, show)\textquotesingle{} over the prior four weeks. About two fifths responded yes."}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_placetype\_placesex"}\NormalTok{]]                       }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_placetype\_placesex"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]            }\OtherTok{\textless{}{-}} \StringTok{"Figure 2. Type of venue for contact vs. type of contact"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_placetype\_placesex"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]         }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov. 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_placetype\_placesex"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]          }\OtherTok{\textless{}{-}} \StringTok{"We asked participants to show the location of their home and the locations of places where they had close, physical contact in a group setting. For each place, they indicated what kind of venue it was and whether they had sexual contact there. Among places where participants did not have sex, most were public settings. By contrast, the majority of places for sexual contact were private residences."}
-    
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_placetype\_distance"}\NormalTok{]]                         }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_placetype\_distance"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]              }\OtherTok{\textless{}{-}} \StringTok{"Figure 3. Type of venue for contact vs. distance from home"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_placetype\_distance"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]           }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_placetype\_distance"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]            }\OtherTok{\textless{}{-}} \StringTok{"We asked participants to show the location of their home and the locations of places where they had close, physical contact in a group setting. For each place, they indicated what kind of venue it was and whether they had sexual contact there. The further away from home a place was, the less likely it was to be a private residence and the more likely it was to be a dance party."}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_placetype\_sex\_distance"}\NormalTok{]]                }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_placetype\_sex\_distance"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]     }\OtherTok{\textless{}{-}} \StringTok{"Figure 4. Type of venue for contact vs. type of contact and distance from home"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_placetype\_sex\_distance"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]  }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov. 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_placetype\_sex\_distance"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]   }\OtherTok{\textless{}{-}} \StringTok{"We asked participants to show the location of their home and the locations of places where they had close, physical contact in a group setting. For each place, they indicated what kind of venue it was and whether they had sexual contact there. Among places for sexual contact, the further away from home a place was, the less likely it was to be a private residence. At each distance, however, private residencs were the predominant venue for sexual contact."}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"map\_coverage"}\NormalTok{]]                          }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"map\_coverage"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]               }\OtherTok{\textless{}{-}} \StringTok{"Figure 5. Large number of individuals reachable in limited geographic area"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"map\_coverage"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]            }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov. 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"map\_coverage"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]             }\OtherTok{\textless{}{-}} \StringTok{"It may be possible to mount geographically targeted interventions that have impact across New York City. We ranked community districts in terms of the number of participants who reside or reported close, physical contact in them. The top five community districts (which comprise Group A) together account for about one third of participants. The next eight community districts (Group B) account for another third of participants."}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"matrix\_places"}\NormalTok{]]                      }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"matrix\_places"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]           }\OtherTok{\textless{}{-}} \StringTok{"Figure 6. Movement between community districts in New York City"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"matrix\_places"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]        }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov. 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"matrix\_places"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]         }\OtherTok{\textless{}{-}} \StringTok{"We asked participants to show the location of their home and the locations of places where they had close, physical contact in a group setting. The axis on the left shows the home community district of each participant, and the top axis shows the destination community. The size of each circle is proportional to the number of respondents with a home in the community on the left who had contact in a community showed at the top."}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"networkcoverage"}\NormalTok{]]                         }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"networkcoverage"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]              }\OtherTok{\textless{}{-}} \StringTok{"Figure 7. Community districts densely connected"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"networkcoverage"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]           }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov. 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"networkcoverage"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]            }\OtherTok{\textless{}{-}} \StringTok{"We asked participants to show the location of their home and the locations of places where they had close, physical contact in a group setting. We constructed a network where nodes are community districts. A tie between a given pair of nodes indicates that at least one study participant was present in both community districts. The thickness of the tie is proportional to the number of study participants who have been present in both community districts."}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_demo\_group"}\NormalTok{]]                 }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_demo\_group"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]      }\OtherTok{\textless{}{-}} \StringTok{"Figure 8. Race and gender of participants"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_demo\_group"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]   }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov. 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_demo\_group"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]    }\OtherTok{\textless{}{-}} \StringTok{""}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_age"}\NormalTok{]]                 }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_age"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]      }\OtherTok{\textless{}{-}} \StringTok{"Figure 9. Age of participants"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_age"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]   }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov. 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_age"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]    }\OtherTok{\textless{}{-}} \StringTok{""}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_channel"}\NormalTok{]]                 }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_channel"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]      }\OtherTok{\textless{}{-}} \StringTok{"Figure 10. Study recruitment channel"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_channel"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]   }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov. 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_channel"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]    }\OtherTok{\textless{}{-}} \StringTok{""}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_gender"}\NormalTok{]]                 }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_gender"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]      }\OtherTok{\textless{}{-}} \StringTok{"Figure 11. Gender identity of participants"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_gender"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]   }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov. 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_gender"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]    }\OtherTok{\textless{}{-}} \StringTok{""}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_race"}\NormalTok{]]                 }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_race"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]      }\OtherTok{\textless{}{-}} \StringTok{"Figure 12. Race of participants"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_race"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]   }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov. 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_race"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]    }\OtherTok{\textless{}{-}} \StringTok{""}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_sex\_orientation"}\NormalTok{]]                 }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_sex\_orientation"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]      }\OtherTok{\textless{}{-}} \StringTok{"Figure 13. Sexual orientation of participants"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_sex\_orientation"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]   }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov. 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"bar\_sex\_orientation"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]    }\OtherTok{\textless{}{-}} \StringTok{""}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"demogroupa"}\NormalTok{]]                 }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"demogroupa"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]      }\OtherTok{\textless{}{-}} \StringTok{"Figure 14a. Demographic characteristics of participants"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"demogroupa"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]   }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov. 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"demogroupa"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]    }\OtherTok{\textless{}{-}} \StringTok{""}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"demogroupb"}\NormalTok{]]                 }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"demogroupb"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]      }\OtherTok{\textless{}{-}} \StringTok{"Figure 14b. Demographic characteristics of participants"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"demogroupb"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]   }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov. 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"demogroupb"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]    }\OtherTok{\textless{}{-}} \StringTok{""}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_sexOrientation\_demo\_group"}\NormalTok{]]                         }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_sexOrientation\_demo\_group"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]              }\OtherTok{\textless{}{-}} \StringTok{"Sexual Orientation by Race{-}Gender"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_sexOrientation\_demo\_group"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]           }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_sexOrientation\_demo\_group"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]            }\OtherTok{\textless{}{-}} \StringTok{""}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_hivPrep\_demo\_group"}\NormalTok{]]                         }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_hivPrep\_demo\_group"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]              }\OtherTok{\textless{}{-}} \StringTok{"HIV/PreP Status by Race{-}Gender"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_hivPrep\_demo\_group"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]           }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_hivPrep\_demo\_group"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]            }\OtherTok{\textless{}{-}} \StringTok{""}
-    
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_monkeypoxVaccine\_demo\_group"}\NormalTok{]]                         }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_monkeypoxVaccine\_demo\_group"}\NormalTok{]][[}\StringTok{"title"}\NormalTok{]]              }\OtherTok{\textless{}{-}} \StringTok{"MPOX Vaccination Status by Race{-}Gender"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_monkeypoxVaccine\_demo\_group"}\NormalTok{]][[}\StringTok{"subtitle"}\NormalTok{]]           }\OtherTok{\textless{}{-}} \StringTok{"New York, United States, Aug. {-} Nov 2022"}
-\NormalTok{    list\_captions\_and\_titles[[}\StringTok{"radar\_monkeypoxVaccine\_demo\_group"}\NormalTok{]][[}\StringTok{"caption"}\NormalTok{]]            }\OtherTok{\textless{}{-}} \StringTok{""}
-    
-    
-    
-\NormalTok{    list\_captions\_and\_titles[[figure\_name]]}
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{race-and-gender-1}{%
-\subsection{Race and gender}\label{race-and-gender-1}}
-
-\subsubsection{Plot}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{make\_table\_freq1}\NormalTok{(demo\_group) }\SpecialCharTok{\%\textgreater{}\%}    
-  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(level)) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{plot\_bar}\NormalTok{() }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{6_results_appendix/6_results_appendix_files/figure-pdf/plot_bar_demogroup-1.pdf}
-
-}
-
-\end{figure}
-
-\subsubsection{Data}
+\subsection*{Race and gender}\label{race-and-gender-1}}
+\addcontentsline{toc}{subsection}{Race and gender}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{draw\_table\_1}\NormalTok{(demo\_group, }\StringTok{"Race{-}Gender"}\NormalTok{)}
+\FunctionTok{prepare\_table\_1}\NormalTok{(demo\_group) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{draw\_table\_1}\NormalTok{(}\StringTok{"Race{-}Gender"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5221,31 +5149,33 @@ White cisgender man & 552 & 42\% (40-44) \\
 \bottomrule
 \end{longtable*}
 
-\hypertarget{age-1}{%
-\subsection{Age}\label{age-1}}
-
-\subsubsection{Plot}
-
 \begin{Shaded}
 \begin{Highlighting}[]
-  \FunctionTok{make\_table\_freq1}\NormalTok{(age) }\SpecialCharTok{\%\textgreater{}\%}
-          \FunctionTok{plot\_bar}\NormalTok{()}
+\FunctionTok{make\_table\_freq1}\NormalTok{(demo\_group) }\SpecialCharTok{|\textgreater{}}  
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(level)) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{plot\_bar}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_mpxnyc\_bar}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"MPX NYC sample proportion"}\NormalTok{, }\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"Race / gender"}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{6_results_appendix/6_results_appendix_files/figure-pdf/plot_bar_age-1.pdf}
+{\centering \includegraphics{G_supplementary_results/G__supplementary_results_files/figure-pdf/plot_bar_demogroup-1.pdf}
 
 }
 
 \end{figure}
 
-\subsubsection{Data}
+\hypertarget{age-1}{%
+\subsection*{Age}\label{age-1}}
+\addcontentsline{toc}{subsection}{Age}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{draw\_table\_1}\NormalTok{(age, }\StringTok{"Age"}\NormalTok{)}
+\FunctionTok{prepare\_table\_1}\NormalTok{(age) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{draw\_table\_1}\NormalTok{(}\StringTok{"Age"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5265,31 +5195,32 @@ White cisgender man & 552 & 42\% (40-44) \\
 \bottomrule
 \end{longtable*}
 
-\hypertarget{recruitment-channel}{%
-\subsection{Recruitment Channel}\label{recruitment-channel}}
-
-\subsubsection{Plot}
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{make\_table\_freq1}\NormalTok{(channel) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{plot\_bar}\NormalTok{() }
+  \FunctionTok{make\_table\_freq1}\NormalTok{(age) }\SpecialCharTok{|\textgreater{}}
+          \FunctionTok{plot\_bar}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_mpxnyc\_bar}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"MPX NYC sample proportion"}\NormalTok{, }\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"Age group"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{6_results_appendix/6_results_appendix_files/figure-pdf/plot_bar_channel-1.pdf}
+{\centering \includegraphics{G_supplementary_results/G__supplementary_results_files/figure-pdf/plot_bar_age-1.pdf}
 
 }
 
 \end{figure}
 
-\subsubsection{Data}
+\hypertarget{recruitment-channel}{%
+\subsection*{Recruitment Channel}\label{recruitment-channel}}
+\addcontentsline{toc}{subsection}{Recruitment Channel}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{draw\_table\_1}\NormalTok{(channel, }\StringTok{"Channel"}\NormalTok{)}
+\FunctionTok{prepare\_table\_1}\NormalTok{(channel) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{draw\_table\_1}\NormalTok{(}\StringTok{"Channel"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5309,31 +5240,32 @@ Unknown & 282 & 22\% (20-24) \\
 \bottomrule
 \end{longtable*}
 
-\hypertarget{gender-identity}{%
-\subsection{Gender identity}\label{gender-identity}}
-
-\subsubsection{Plot}
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{make\_table\_freq1}\NormalTok{(genderId) }\SpecialCharTok{\%\textgreater{}\%}  
-  \FunctionTok{plot\_bar}\NormalTok{()}
+\FunctionTok{make\_table\_freq1}\NormalTok{(channel) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{plot\_bar}\NormalTok{()  }\SpecialCharTok{+}
+  \FunctionTok{theme\_mpxnyc\_bar}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"MPX NYC sample proportion"}\NormalTok{, }\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"Recruitment}\SpecialCharTok{\textbackslash{}n}\StringTok{channel"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{6_results_appendix/6_results_appendix_files/figure-pdf/plot_bar_gender-1.pdf}
+{\centering \includegraphics{G_supplementary_results/G__supplementary_results_files/figure-pdf/plot_bar_channel-1.pdf}
 
 }
 
 \end{figure}
 
-\subsubsection{Data}
+\hypertarget{gender-identity}{%
+\subsection*{Gender identity}\label{gender-identity}}
+\addcontentsline{toc}{subsection}{Gender identity}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{draw\_table\_1}\NormalTok{(genderId, }\StringTok{"Gender"}\NormalTok{)}
+\FunctionTok{prepare\_table\_1}\NormalTok{(genderId) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{draw\_table\_1}\NormalTok{(}\StringTok{"Gender"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5354,31 +5286,32 @@ Transgender Woman & 29 & 2\% (2-2) \\
 \bottomrule
 \end{longtable*}
 
-\hypertarget{race}{%
-\subsection{Race}\label{race}}
-
-\subsubsection{Plot}
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{make\_table\_freq1}\NormalTok{(race) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{plot\_bar}\NormalTok{() }
+\FunctionTok{make\_table\_freq1}\NormalTok{(genderId) }\SpecialCharTok{|\textgreater{}}  
+  \FunctionTok{plot\_bar}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_mpxnyc\_bar}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"MPX NYC sample proportion"}\NormalTok{, }\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"Gender}\SpecialCharTok{\textbackslash{}n}\StringTok{modality"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{6_results_appendix/6_results_appendix_files/figure-pdf/plot_bar_race-1.pdf}
+{\centering \includegraphics{G_supplementary_results/G__supplementary_results_files/figure-pdf/plot_bar_gender-1.pdf}
 
 }
 
 \end{figure}
 
-\subsubsection{Data}
+\hypertarget{race}{%
+\subsection*{Race}\label{race}}
+\addcontentsline{toc}{subsection}{Race}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{draw\_table\_1}\NormalTok{(race, }\StringTok{"Race"}\NormalTok{)}
+\FunctionTok{prepare\_table\_1}\NormalTok{(race) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{draw\_table\_1}\NormalTok{(}\StringTok{"Race"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5399,31 +5332,32 @@ White & 695 & 53\% (51-55) \\
 \bottomrule
 \end{longtable*}
 
-\hypertarget{sexual-orientation-1}{%
-\subsection{Sexual Orientation}\label{sexual-orientation-1}}
-
-\subsubsection{Plot}
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{make\_table\_freq1}\NormalTok{(sexOrientation) }\SpecialCharTok{\%\textgreater{}\%}    
-  \FunctionTok{plot\_bar}\NormalTok{()}
+\FunctionTok{make\_table\_freq1}\NormalTok{(race) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{plot\_bar}\NormalTok{()  }\SpecialCharTok{+}
+  \FunctionTok{theme\_mpxnyc\_bar}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"MPX NYC sample proportion"}\NormalTok{, }\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"Race"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{6_results_appendix/6_results_appendix_files/figure-pdf/plot_bar_sexorientation-1.pdf}
+{\centering \includegraphics{G_supplementary_results/G__supplementary_results_files/figure-pdf/plot_bar_race-1.pdf}
 
 }
 
 \end{figure}
 
-\subsubsection{Data}
+\hypertarget{sexual-orientation-1}{%
+\subsection*{Sexual Orientation}\label{sexual-orientation-1}}
+\addcontentsline{toc}{subsection}{Sexual Orientation}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{draw\_table\_1}\NormalTok{(sexOrientation, }\StringTok{"Sexual Orientation"}\NormalTok{)}
+\FunctionTok{prepare\_table\_1}\NormalTok{(sexOrientation) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{draw\_table\_1}\NormalTok{(}\StringTok{"Sexual Orientation"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5443,32 +5377,78 @@ Straight & 64 & 5\% (4-6) \\
 \bottomrule
 \end{longtable*}
 
-\hypertarget{sexual-orientation-by-race-and-gender}{%
-\subsection{Sexual orientation by race and
-gender}\label{sexual-orientation-by-race-and-gender}}
-
-\subsubsection{Plot}
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{make\_table\_freq2}\NormalTok{(sexOrientation, demo\_group) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{plot\_radar\_grid}\NormalTok{() }
+\FunctionTok{make\_table\_freq1}\NormalTok{(sexOrientation) }\SpecialCharTok{|\textgreater{}}    
+  \FunctionTok{plot\_bar}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_mpxnyc\_bar}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"MPX NYC sample proportion"}\NormalTok{, }\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"Sexual}\SpecialCharTok{\textbackslash{}n}\StringTok{orientation"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{6_results_appendix/6_results_appendix_files/figure-pdf/plot_radar_grid_sexOrientation_demo_group-1.pdf}
+{\centering \includegraphics{G_supplementary_results/G__supplementary_results_files/figure-pdf/plot_bar_sexorientation-1.pdf}
 
 }
 
 \end{figure}
 
-\subsubsection{Data}
+\hypertarget{sexual-or-physical-contact-with-more-than-two-other-people-at-the-same-time}{%
+\subsection*{Sexual or physical contact with more than two other people
+at the same
+time}\label{sexual-or-physical-contact-with-more-than-two-other-people-at-the-same-time}}
+\addcontentsline{toc}{subsection}{Sexual or physical contact with more
+than two other people at the same time}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{draw\_table\_2}\NormalTok{(sexOrientation, demo\_group, }\StringTok{"Sexual Orientation by Race{-}Gender"}\NormalTok{) }
+\FunctionTok{prepare\_table\_1}\NormalTok{(groupSex) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{draw\_table\_1}\NormalTok{(}\StringTok{"Group Sex / Contact past 4 weeks"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable*}{lcc}
+\caption*{
+{\large Group Sex / Contact past 4 weeks} \\ 
+{\small (MPX NYC, 2022)}
+} \\ 
+\toprule
+ & N & \% (CI) \\ 
+\midrule\addlinespace[2.5pt]
+No & 774 & 59\% (59-62) \\ 
+Yes & 530 & 41\% (38-41) \\ 
+\bottomrule
+\end{longtable*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{make\_table\_freq1}\NormalTok{(groupSex) }\SpecialCharTok{|\textgreater{}}  
+  \FunctionTok{plot\_bar}\NormalTok{()  }\SpecialCharTok{+}
+  \FunctionTok{theme\_mpxnyc\_bar}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"MPX NYC sample proportion"}\NormalTok{, }\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"Group contact"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{G_supplementary_results/G__supplementary_results_files/figure-pdf/plot_bar_groupsex-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{sexual-orientation-by-race-and-gender}{%
+\subsection*{Sexual orientation by race and
+gender}\label{sexual-orientation-by-race-and-gender}}
+\addcontentsline{toc}{subsection}{Sexual orientation by race and gender}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{prepare\_table\_2}\NormalTok{(sexOrientation, demo\_group) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{draw\_table\_2}\NormalTok{(}\StringTok{"Sexual Orientation by Race{-}Gender"}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -5551,32 +5531,34 @@ Straight & 12 & 2\% (2-3) \\
 \bottomrule
 \end{longtable*}
 
-\hypertarget{mpox-vaccination-status-by-race-and-gender}{%
-\subsection{MPOX vaccination status by race and
-gender}\label{mpox-vaccination-status-by-race-and-gender}}
-
-\subsubsection{Plot}
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{make\_table\_freq2}\NormalTok{(monkeypoxVaccine, demo\_group) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{plot\_radar\_grid}\NormalTok{()}
+\FunctionTok{make\_table\_freq2}\NormalTok{(sexOrientation, demo\_group) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{plot\_radar\_grid}\NormalTok{()   }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.50}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_mpxnyc\_radar\_people}\NormalTok{() }
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{6_results_appendix/6_results_appendix_files/figure-pdf/plot_radar_grid_monkeypoxVaccine_demo_group-1.pdf}
+{\centering \includegraphics{G_supplementary_results/G__supplementary_results_files/figure-pdf/plot_radar_grid_sexOrientation_demo_group-1.pdf}
 
 }
 
 \end{figure}
 
-\subsubsection{Data}
+\hypertarget{mpox-vaccination-status-by-race-and-gender}{%
+\subsection*{MPOX vaccination status by race and
+gender}\label{mpox-vaccination-status-by-race-and-gender}}
+\addcontentsline{toc}{subsection}{MPOX vaccination status by race and
+gender}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{draw\_table\_2}\NormalTok{(monkeypoxVaccine, demo\_group, }\StringTok{"Mpox Vax Status by Race{-}Gender"}\NormalTok{) }
+\FunctionTok{prepare\_table\_2}\NormalTok{(monkeypoxVaccine, demo\_group) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{draw\_table\_2}\NormalTok{( }\StringTok{"Mpox Vax Status by Race{-}Gender"}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -5641,32 +5623,34 @@ Yes & 420 & 76\% (73-76) \\
 \bottomrule
 \end{longtable*}
 
-\hypertarget{hiv-and-prep-status-by-race-and-gender}{%
-\subsection{HIV and PrEP status by race and
-gender}\label{hiv-and-prep-status-by-race-and-gender}}
-
-\subsubsection{Plot}
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{make\_table\_freq2}\NormalTok{(hivPrep, demo\_group) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{plot\_radar\_grid}\NormalTok{()}
+\FunctionTok{make\_table\_freq2}\NormalTok{(monkeypoxVaccine, demo\_group) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{plot\_radar\_grid}\NormalTok{()  }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.50}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_mpxnyc\_radar\_people}\NormalTok{() }
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{6_results_appendix/6_results_appendix_files/figure-pdf/plot_radar_grid_hivPrep_demo_group-1.pdf}
+{\centering \includegraphics{G_supplementary_results/G__supplementary_results_files/figure-pdf/plot_radar_grid_monkeypoxVaccine_demo_group-1.pdf}
 
 }
 
 \end{figure}
 
-\subsubsection{Data}
+\hypertarget{hiv-and-prep-status-by-race-and-gender}{%
+\subsection*{HIV and PrEP status by race and
+gender}\label{hiv-and-prep-status-by-race-and-gender}}
+\addcontentsline{toc}{subsection}{HIV and PrEP status by race and
+gender}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{draw\_table\_2}\NormalTok{(hivPrep, demo\_group, }\StringTok{"HIV and PrEP Status by Race{-}Gender"}\NormalTok{) }
+\FunctionTok{prepare\_table\_2}\NormalTok{(hivPrep, demo\_group) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{draw\_table\_2}\NormalTok{(}\StringTok{"HIV and PrEP Status by Race{-}Gender"}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -5724,57 +5708,67 @@ Yes & 263 & 52\% (46-50) \\
 \bottomrule
 \end{longtable*}
 
-\hypertarget{sexual-or-physical-contact-with-more-than-two-other-people-at-the-same-time}{%
-\subsection{Sexual or physical contact with more than two other people
-at the same
-time}\label{sexual-or-physical-contact-with-more-than-two-other-people-at-the-same-time}}
-
-\subsubsection{Plot}
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{make\_table\_freq1}\NormalTok{(groupSex) }\SpecialCharTok{\%\textgreater{}\%}  
-  \FunctionTok{plot\_bar}\NormalTok{() }
+\FunctionTok{make\_table\_freq2}\NormalTok{(hivPrep, demo\_group) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{plot\_radar\_grid}\NormalTok{()  }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.50}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_mpxnyc\_radar\_people}\NormalTok{() }
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{6_results_appendix/6_results_appendix_files/figure-pdf/plot_bar_groupsex-1.pdf}
+{\centering \includegraphics{G_supplementary_results/G__supplementary_results_files/figure-pdf/plot_radar_grid_hivPrep_demo_group-1.pdf}
 
 }
 
 \end{figure}
 
-\subsubsection{Data}
+\hypertarget{places}{%
+\section{Places}\label{places}}
+
+\hypertarget{type-of-venue-for-contact-vs.-type-of-contact}{%
+\subsection*{Type of venue for contact vs.~type of
+contact}\label{type-of-venue-for-contact-vs.-type-of-contact}}
+\addcontentsline{toc}{subsection}{Type of venue for contact vs.~type of
+contact}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{draw\_table\_1}\NormalTok{(groupSex, }\StringTok{"Group Sex / Contact past 4 weeks"}\NormalTok{) }
+\FunctionTok{prepare\_table\_2}\NormalTok{(placeType, placeSex, }\AttributeTok{person\_analysis =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{draw\_table\_2}\NormalTok{(}\StringTok{"Venue type vs. sexual contact"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{longtable*}{lcc}
 \caption*{
-{\large Group Sex / Contact past 4 weeks} \\ 
+{\large Venue type vs. sexual contact} \\ 
 {\small (MPX NYC, 2022)}
 } \\ 
 \toprule
  & N & \% (CI) \\ 
 \midrule\addlinespace[2.5pt]
-No & 774 & 59\% (59-62) \\ 
-Yes & 530 & 41\% (38-41) \\ 
+\multicolumn{3}{l}{Did not have sex} \\ 
+\midrule\addlinespace[2.5pt]
+Concert/Theatre/Show & 63 & 24\% (20-28) \\ 
+Dance Party & 110 & 42\% (35-49) \\ 
+Dark Room/Sex Party & 10 & 4\% (3-6) \\ 
+Private Residence & 28 & 11\% (10-15) \\ 
+Something Else & 40 & 15\% (10-20) \\ 
+Sport Game & 13 & 5\% (3-7) \\ 
+\midrule\addlinespace[2.5pt]
+\multicolumn{3}{l}{Had sex} \\ 
+\midrule\addlinespace[2.5pt]
+Concert/Theatre/Show & 4 & 1\% (1-2) \\ 
+Dance Party & 33 & 9\% (8-12) \\ 
+Dark Room/Sex Party & 52 & 15\% (11-17) \\ 
+Private Residence & 222 & 63\% (61-65) \\ 
+Something Else & 40 & 11\% (10-15) \\ 
+Sport Game & 1 & 0\% (0-1) \\ 
 \bottomrule
 \end{longtable*}
-
-\hypertarget{places}{%
-\section{Places}\label{places}}
-
-\hypertarget{type-of-venue-for-contact-vs.-type-of-contact}{%
-\subsection{Type of venue for contact vs.~type of
-contact}\label{type-of-venue-for-contact-vs.-type-of-contact}}
-
-\subsubsection{Plot}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5785,133 +5779,221 @@ contact}\label{type-of-venue-for-contact-vs.-type-of-contact}}
 
 \FunctionTok{make\_table\_freq2}\NormalTok{(placeType, placeSex, }\AttributeTok{person\_analysis =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
 \NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(level)) }\SpecialCharTok{|\textgreater{}}
-  \FunctionTok{plot\_radar\_stratified}\NormalTok{() }
+  \FunctionTok{plot\_radar\_stratified}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{coord\_radial}\NormalTok{()  }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{position =} \StringTok{"top"}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{labels =} \ControlFlowTok{function}\NormalTok{(x) scales}\SpecialCharTok{::}\FunctionTok{percent}\NormalTok{(}\FunctionTok{abs}\NormalTok{(x))) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_mpxnyc\_radar\_places}\NormalTok{() }
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{6_results_appendix/6_results_appendix_files/figure-pdf/plot_radar_facet_placetype_placesex-1.pdf}
+{\centering \includegraphics{G_supplementary_results/G__supplementary_results_files/figure-pdf/plot_radar_facet_placetype_placesex-1.pdf}
 
 }
 
 \end{figure}
-
-\subsubsection{Data}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{make\_table\_freq2}\NormalTok{(placeType, placeSex, }\AttributeTok{person\_analysis =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
-        \FunctionTok{draw\_table\_stratified}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{longtable*}{lcc}
-\toprule
-Group & N & \% (95\% CI) \\ 
-\midrule\addlinespace[2.5pt]
-\multicolumn{3}{l}{Did not have sex} \\ 
-\midrule\addlinespace[2.5pt]
-Concert/Theatre/Show & 63 & 24 (20 to 28) \\ 
-Dance Party & 110 & 42 (34 to 50) \\ 
-Dark Room/Sex Party & 10 & 4 (2 to 6) \\ 
-Private Residence & 28 & 10 (10 to 14) \\ 
-Something Else & 40 & 16 (10 to 20) \\ 
-Sport Game & 13 & 4 (4 to 8) \\ 
-\midrule\addlinespace[2.5pt]
-\multicolumn{3}{l}{Had sex} \\ 
-\midrule\addlinespace[2.5pt]
-Concert/Theatre/Show & 4 & 2 (0 to 2) \\ 
-Dance Party & 33 & 10 (8 to 12) \\ 
-Dark Room/Sex Party & 52 & 14 (10 to 16) \\ 
-Private Residence & 222 & 64 (60 to 64) \\ 
-Something Else & 40 & 12 (10 to 14) \\ 
-Sport Game & 1 & 0 (0 to 0) \\ 
-\bottomrule
-\end{longtable*}
 
 \hypertarget{type-of-venue-for-contact-vs.-distance-from-home}{%
-\subsection{Type of venue for contact vs.~distance from
+\subsection*{Type of venue for contact vs.~distance from
 home}\label{type-of-venue-for-contact-vs.-distance-from-home}}
-
-\subsubsection{Plot}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{make\_table\_freq2}\NormalTok{(placeType, distanceFromHome, }\AttributeTok{person\_analysis =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
-  \FunctionTok{plot\_radar\_stratified}\NormalTok{() }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}[H]
-
-{\centering \includegraphics{6_results_appendix/6_results_appendix_files/figure-pdf/plot_radar_facet_placetype_distancefromhome-1.pdf}
-
-}
-
-\end{figure}
-
-\subsubsection{Data}
+\addcontentsline{toc}{subsection}{Type of venue for contact vs.~distance
+from home}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{make\_table\_freq2}\NormalTok{(placeType, distanceFromHome, }\AttributeTok{person\_analysis =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
-          \FunctionTok{draw\_table\_stratified}\NormalTok{()}
+\FunctionTok{prepare\_table\_2}\NormalTok{(placeType, distanceFromHome, }\AttributeTok{person\_analysis =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{draw\_table\_2}\NormalTok{(}\StringTok{"Venue type vs. distance from home"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{longtable*}{lcc}
+\caption*{
+{\large Venue type vs. distance from home} \\ 
+{\small (MPX NYC, 2022)}
+} \\ 
 \toprule
-Group & N & \% (95\% CI) \\ 
+ & N & \% (CI) \\ 
 \midrule\addlinespace[2.5pt]
 \multicolumn{3}{l}{Different Borough} \\ 
 \midrule\addlinespace[2.5pt]
-Concert/Theatre/Show & 26 & 12 (10 to 16) \\ 
-Dance Party & 64 & 32 (28 to 36) \\ 
-Dark Room/Sex Party & 29 & 14 (12 to 22) \\ 
-Private Residence & 47 & 24 (16 to 28) \\ 
-Something Else & 25 & 12 (10 to 16) \\ 
-Sport Game & 9 & 4 (4 to 8) \\ 
+Concert/Theatre/Show & 26 & 13\% (10-15) \\ 
+Dance Party & 64 & 32\% (28-37) \\ 
+Dark Room/Sex Party & 29 & 14\% (12-21) \\ 
+Private Residence & 47 & 23\% (16-28) \\ 
+Something Else & 25 & 12\% (10-15) \\ 
+Sport Game & 9 & 4\% (3-7) \\ 
 \midrule\addlinespace[2.5pt]
 \multicolumn{3}{l}{Same Borough} \\ 
 \midrule\addlinespace[2.5pt]
-Concert/Theatre/Show & 36 & 16 (10 to 20) \\ 
-Dance Party & 56 & 24 (22 to 30) \\ 
-Dark Room/Sex Party & 22 & 10 (6 to 10) \\ 
-Private Residence & 73 & 32 (30 to 38) \\ 
-Something Else & 39 & 16 (14 to 20) \\ 
-Sport Game & 4 & 2 (0 to 2) \\ 
+Concert/Theatre/Show & 36 & 16\% (11-20) \\ 
+Dance Party & 56 & 24\% (21-31) \\ 
+Dark Room/Sex Party & 22 & 10\% (6-9) \\ 
+Private Residence & 73 & 32\% (30-38) \\ 
+Something Else & 39 & 17\% (13-20) \\ 
+Sport Game & 4 & 2\% (1-3) \\ 
 \midrule\addlinespace[2.5pt]
 \multicolumn{3}{l}{Same Community District} \\ 
 \midrule\addlinespace[2.5pt]
-Concert/Theatre/Show & 5 & 2 (2 to 6) \\ 
-Dance Party & 23 & 12 (8 to 16) \\ 
-Dark Room/Sex Party & 11 & 6 (4 to 8) \\ 
-Private Residence & 130 & 70 (68 to 76) \\ 
-Something Else & 16 & 8 (6 to 10) \\ 
-Sport Game & 1 & 0 (0 to 0) \\ 
+Concert/Theatre/Show & 5 & 3\% (1-5) \\ 
+Dance Party & 23 & 12\% (8-17) \\ 
+Dark Room/Sex Party & 11 & 6\% (4-7) \\ 
+Private Residence & 130 & 70\% (68-76) \\ 
+Something Else & 16 & 9\% (6-10) \\ 
+Sport Game & 1 & 1\% (1-1) \\ 
 \bottomrule
 \end{longtable*}
 
-\hypertarget{place-type-vs.-distance-from-home-vs.-sex-contact}{%
-\subsection{Place type vs.~Distance from home vs.~Sex
-contact}\label{place-type-vs.-distance-from-home-vs.-sex-contact}}
-
-\subsubsection{Plot}
-
 \begin{Shaded}
 \begin{Highlighting}[]
-  \FunctionTok{make\_table\_freq3}\NormalTok{(placeType, placeSex, distanceFromHome, }\AttributeTok{person\_analysis =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
-\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(level)) }\SpecialCharTok{|\textgreater{}}
-  \FunctionTok{plot\_radar\_stratified2}\NormalTok{() }
+\FunctionTok{make\_table\_freq2}\NormalTok{(placeType, distanceFromHome, }\AttributeTok{person\_analysis =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{plot\_radar\_stratified}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{coord\_radial}\NormalTok{()  }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{position =} \StringTok{"top"}\NormalTok{) }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{labels =} \ControlFlowTok{function}\NormalTok{(x) scales}\SpecialCharTok{::}\FunctionTok{percent}\NormalTok{(}\FunctionTok{abs}\NormalTok{(x))) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_mpxnyc\_radar\_places}\NormalTok{() }
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}[H]
 
-{\centering \includegraphics{6_results_appendix/6_results_appendix_files/figure-pdf/plot_radar_facet_placetype_placesex_distancefromhome-1.pdf}
+{\centering \includegraphics{G_supplementary_results/G__supplementary_results_files/figure-pdf/plot_radar_facet_placetype_distancefromhome-1.pdf}
 
 }
+
+\end{figure}
+
+\hypertarget{place-type-vs.-distance-from-home-vs.-sex-contact}{%
+\subsection*{Place type vs.~Distance from home vs.~Sex
+contact}\label{place-type-vs.-distance-from-home-vs.-sex-contact}}
+\addcontentsline{toc}{subsection}{Place type vs.~Distance from home
+vs.~Sex contact}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{prepare\_table\_3}\NormalTok{( placeType, distanceFromHome, placeSex, }\AttributeTok{person\_analysis =} \ConstantTok{FALSE}\NormalTok{)  }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{draw\_table\_3}\NormalTok{(}\StringTok{"Venue type by home distance and sexual contact"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable*}{lcc}
+\caption*{
+{\large Venue type by home distance and sexual contact} \\ 
+{\small (MPX NYC, 2022)}
+} \\ 
+\toprule
+ & N & \% (CI) \\ 
+\midrule\addlinespace[2.5pt]
+\multicolumn{3}{l}{Different Borough - Did not have sex} \\ 
+\midrule\addlinespace[2.5pt]
+Concert/Theatre/Show & 23 & 22\% (18-22) \\ 
+Dance Party & 50 & 47\% (41-52) \\ 
+Dark Room/Sex Party & 4 & 4\% (4-10) \\ 
+Private Residence & 8 & 8\% (5-12) \\ 
+Something Else & 13 & 12\% (8-15) \\ 
+Sport Game & 8 & 8\% (6-13) \\ 
+\midrule\addlinespace[2.5pt]
+\multicolumn{3}{l}{Different Borough - Had sex} \\ 
+\midrule\addlinespace[2.5pt]
+Concert/Theatre/Show & 3 & 3\% (1-6) \\ 
+Dance Party & 14 & 15\% (12-21) \\ 
+Dark Room/Sex Party & 25 & 27\% (20-36) \\ 
+Private Residence & 39 & 41\% (29-45) \\ 
+Something Else & 12 & 13\% (9-21) \\ 
+Sport Game & 1 & 1\% (1-3) \\ 
+\midrule\addlinespace[2.5pt]
+\multicolumn{3}{l}{Same Borough - Did not have sex} \\ 
+\midrule\addlinespace[2.5pt]
+Concert/Theatre/Show & 35 & 30\% (20-36) \\ 
+Dance Party & 43 & 37\% (29-47) \\ 
+Dark Room/Sex Party & 3 & 3\% (1-4) \\ 
+Private Residence & 10 & 9\% (7-14) \\ 
+Something Else & 21 & 18\% (11-25) \\ 
+Sport Game & 4 & 3\% (2-5) \\ 
+\midrule\addlinespace[2.5pt]
+\multicolumn{3}{l}{Same Borough - Had sex} \\ 
+\midrule\addlinespace[2.5pt]
+Concert/Theatre/Show & 1 & 1\% (1-3) \\ 
+Dance Party & 13 & 11\% (8-16) \\ 
+Dark Room/Sex Party & 19 & 17\% (9-15) \\ 
+Private Residence & 63 & 55\% (53-61) \\ 
+Something Else & 18 & 16\% (13-18) \\ 
+\midrule\addlinespace[2.5pt]
+\multicolumn{3}{l}{Same Community District - Did not have sex} \\ 
+\midrule\addlinespace[2.5pt]
+Concert/Theatre/Show & 5 & 12\% (6-24) \\ 
+Dance Party & 17 & 40\% (27-57) \\ 
+Dark Room/Sex Party & 3 & 7\% (2-12) \\ 
+Private Residence & 10 & 24\% (19-40) \\ 
+Something Else & 6 & 14\% (7-17) \\ 
+Sport Game & 1 & 2\% (2-3) \\ 
+\midrule\addlinespace[2.5pt]
+\multicolumn{3}{l}{Same Community District - Had sex} \\ 
+\midrule\addlinespace[2.5pt]
+Dance Party & 6 & 4\% (2-5) \\ 
+Dark Room/Sex Party & 8 & 6\% (4-8) \\ 
+Private Residence & 120 & 83\% (82-87) \\ 
+Something Else & 10 & 7\% (4-11) \\ 
+\bottomrule
+\end{longtable*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{make\_table\_freq3}\NormalTok{( placeType, distanceFromHome, placeSex, }\AttributeTok{person\_analysis =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(level)) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{plot\_radar\_stratified2}\NormalTok{()  }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{coord\_radial}\NormalTok{()  }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_mpxnyc\_radar\_places}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{theme}\NormalTok{(}
+   \AttributeTok{axis.text.x =}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{element\_blank}\NormalTok{()}
+\NormalTok{   ) }\SpecialCharTok{+}
+\NormalTok{    ggplot2}\SpecialCharTok{::}\FunctionTok{ylim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.2}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{G_supplementary_results/G__supplementary_results_files/figure-pdf/plot_radar_facet_placetype_placesex_distancefromhome-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{spatial-mixing}{%
+\section{Spatial mixing}\label{spatial-mixing}}
+
+\hypertarget{spatial-mixing-coefficient-by-age}{%
+\subsection*{Spatial mixing coefficient by
+age}\label{spatial-mixing-coefficient-by-age}}
+\addcontentsline{toc}{subsection}{Spatial mixing coefficient by age}
+
+\subsubsection{Plot}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{make\_plotdata\_age\_mixing\_matrix}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{plot\_matrix\_mixing}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_mpxnyc\_gradient}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_mpxnyc\_gradient}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_mpxnyc\_mixing}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{plot.margin =}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{unit}\NormalTok{(}\DecValTok{10}\SpecialCharTok{*}\FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{), }\StringTok{"pt"}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{G_supplementary_results/G__supplementary_results_files/figure-pdf/fig-age-mixing-matrix-app-1.pdf}
+
+}
+
+\caption{\label{fig-age-mixing-matrix-app}Social mixing matrix for MPX
+NYC participants by age}
 
 \end{figure}
 
@@ -5919,65 +6001,251 @@ contact}\label{place-type-vs.-distance-from-home-vs.-sex-contact}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-  \FunctionTok{make\_table\_freq3}\NormalTok{(placeType, placeSex, distanceFromHome, }\AttributeTok{person\_analysis =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
-    \FunctionTok{draw\_table\_stratified2}\NormalTok{()}
+\FunctionTok{make\_table\_mixing\_2}\NormalTok{(age) }\SpecialCharTok{|\textgreater{}}
+ \FunctionTok{draw\_table\_matrix\_mixing}\NormalTok{(}\StringTok{"Age"}\NormalTok{)  }
 \end{Highlighting}
 \end{Shaded}
 
-\begin{longtable*}{lcc}
+\begin{longtable*}{ccc}
+\caption*{
+{\large Age} \\ 
+{\small (MPX NYC, 2022)}
+} \\ 
 \toprule
-Group & N & \% (95\% CI) \\ 
+Ego group & Alter group & Coef (CI) \\ 
 \midrule\addlinespace[2.5pt]
-\multicolumn{3}{l}{Did not have sex - Different Borough} \\ 
+18-24 & 18-24 & 37\% (25 to 48)  \\ 
+18-24 & 25-34 & -4\% (-6 to 1)  \\ 
+18-24 & 35-44 & -3\% (-5 to -2)  \\ 
+18-24 & 45-54 & -11\% (-18 to -4)  \\ 
+18-24 & 55+ & -27\% (-35 to -19)  \\ 
+25-34 & 18-24 & -3\% (-6 to 2)  \\ 
+25-34 & 25-34 & 11\% (9 to 15)  \\ 
+25-34 & 35-44 & -3\% (-6 to -1)  \\ 
+25-34 & 45-54 & -12\% (-15 to -6)  \\ 
+25-34 & 55+ & -26\% (-34 to -20)  \\ 
+35-44 & 18-24 & -3\% (-7 to 4)  \\ 
+35-44 & 25-34 & -1\% (-5 to 2)  \\ 
+35-44 & 35-44 & 15\% (9 to 19)  \\ 
+35-44 & 45-54 & -12\% (-15 to -7)  \\ 
+35-44 & 55+ & -20\% (-27 to -11)  \\ 
+45-54 & 18-24 & 3\% (-7 to 11)  \\ 
+45-54 & 25-34 & -3\% (-6 to 4)  \\ 
+45-54 & 35-44 & -5\% (-10 to -1)  \\ 
+45-54 & 45-54 & 30\% (16 to 44)  \\ 
+45-54 & 55+ & -17\% (-23 to -11)  \\ 
+55+ & 18-24 & -2\% (-9 to 17)  \\ 
+55+ & 25-34 & -6\% (-11 to -1)  \\ 
+55+ & 35-44 & -2\% (-8 to 2)  \\ 
+55+ & 45-54 & -5\% (-14 to 2)  \\ 
+55+ & 55+ & 49\% (26 to 66)  \\ 
+\bottomrule
+\end{longtable*}
+
+\hypertarget{spatial-mixing-coefficient-by-race-gender}{%
+\subsection*{Spatial mixing coefficient by
+race-Gender}\label{spatial-mixing-coefficient-by-race-gender}}
+\addcontentsline{toc}{subsection}{Spatial mixing coefficient by
+race-Gender}
+
+\subsubsection{Plot}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{make\_plotdata\_racegender\_mixing\_matrix}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{plot\_matrix\_mixing}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_mpxnyc\_gradient}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_mpxnyc\_gradient}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_mpxnyc\_mixing}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{G_supplementary_results/G__supplementary_results_files/figure-pdf/fig-racegender-mixing-matrix-app-1.pdf}
+
+}
+
+\caption{\label{fig-racegender-mixing-matrix-app}Social mixing matrices
+for MPX NYC participants by race-gende}
+
+\end{figure}
+
+\subsubsection{Data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{make\_table\_mixing\_2}\NormalTok{(demo\_group) }\SpecialCharTok{|\textgreater{}}
+ \FunctionTok{draw\_table\_matrix\_mixing}\NormalTok{(}\StringTok{"Race{-}gender"}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable*}{ccc}
+\caption*{
+{\large Race-gender} \\ 
+{\small (MPX NYC, 2022)}
+} \\ 
+\toprule
+Ego group & Alter group & Coef (CI) \\ 
 \midrule\addlinespace[2.5pt]
-Concert/Theatre/Show & 23 & 22 (18 to 22) \\ 
-Dance Party & 50 & 48 (42 to 52) \\ 
-Dark Room/Sex Party & 4 & 4 (4 to 10) \\ 
-Private Residence & 8 & 8 (4 to 12) \\ 
-Something Else & 13 & 12 (8 to 16) \\ 
-Sport Game & 8 & 8 (6 to 12) \\ 
+White cisgender man & White cisgender man & 12\% (7 to 17)  \\ 
+White cisgender man & Latinx cisgender man & -12\% (-19 to -3)  \\ 
+White cisgender man & Black cisgender man & -24\% (-29 to -18)  \\ 
+White cisgender man & Transgender man & 7\% (-6 to 16)  \\ 
+White cisgender man & Transgender woman & -19\% (-36 to -6)  \\ 
+White cisgender man & Non binary & -4\% (-10 to 4)  \\ 
+White cisgender man & Cisgender woman & -14\% (-20 to -4)  \\ 
+White cisgender man & Other cisgender man & -2\% (-5 to 3)  \\ 
+White cisgender man & Another demographic & 29\% (-15 to 69)  \\ 
+Latinx cisgender man & White cisgender man & -16\% (-22 to -11)  \\ 
+Latinx cisgender man & Latinx cisgender man & 45\% (39 to 63)  \\ 
+Latinx cisgender man & Black cisgender man & 2\% (-5 to 13)  \\ 
+Latinx cisgender man & Transgender man & 14\% (2 to 37)  \\ 
+Latinx cisgender man & Transgender woman & -22\% (-43 to -2)  \\ 
+Latinx cisgender man & Non binary & -4\% (-14 to 3)  \\ 
+Latinx cisgender man & Cisgender woman & -13\% (-28 to -1)  \\ 
+Latinx cisgender man & Other cisgender man & -2\% (-12 to 2)  \\ 
+Latinx cisgender man & Another demographic & 31\% (0 to 74)  \\ 
+Black cisgender man & White cisgender man & -25\% (-28 to -22)  \\ 
+Black cisgender man & Latinx cisgender man & 10\% (-8 to 19)  \\ 
+Black cisgender man & Black cisgender man & 95\% (64 to 143)  \\ 
+Black cisgender man & Transgender man & -25\% (-44 to -1)  \\ 
+Black cisgender man & Transgender woman & 1\% (-22 to 41)  \\ 
+Black cisgender man & Non binary & -12\% (-31 to 3)  \\ 
+Black cisgender man & Cisgender woman & 11\% (-19 to 29)  \\ 
+Black cisgender man & Other cisgender man & -5\% (-16 to 4)  \\ 
+Black cisgender man & Another demographic & 33\% (18 to 63)  \\ 
+Transgender man & White cisgender man & -11\% (-19 to 0)  \\ 
+Transgender man & Latinx cisgender man & 0\% (-14 to 12)  \\ 
+Transgender man & Black cisgender man & -20\% (-40 to 11)  \\ 
+Transgender man & Transgender man & 215\% (72 to 363)  \\ 
+Transgender man & Transgender woman & -8\% (-32 to 33)  \\ 
+Transgender man & Non binary & 61\% (26 to 129)  \\ 
+Transgender man & Cisgender woman & -30\% (-62 to -9)  \\ 
+Transgender man & Other cisgender man & -14\% (-28 to 6)  \\ 
+Transgender man & Another demographic & 13\% (-37 to 49)  \\ 
+Transgender woman & White cisgender man & -13\% (-26 to 1)  \\ 
+Transgender woman & Latinx cisgender man & -12\% (-30 to 17)  \\ 
+Transgender woman & Black cisgender man & 12\% (-17 to 56)  \\ 
+Transgender woman & Transgender man & -5\% (-34 to 39)  \\ 
+Transgender woman & Transgender woman & 131\% (-30 to 332)  \\ 
+Transgender woman & Non binary & 22\% (1 to 48)  \\ 
+Transgender woman & Cisgender woman & -5\% (-35 to 59)  \\ 
+Transgender woman & Other cisgender man & 9\% (-24 to 31)  \\ 
+Transgender woman & Another demographic & 59\% (-44 to 121)  \\ 
+Non binary & White cisgender man & -9\% (-14 to -1)  \\ 
+Non binary & Latinx cisgender man & -8\% (-21 to 0)  \\ 
+Non binary & Black cisgender man & -16\% (-30 to -1)  \\ 
+Non binary & Transgender man & 56\% (21 to 103)  \\ 
+Non binary & Transgender woman & 12\% (-12 to 38)  \\ 
+Non binary & Non binary & 66\% (35 to 106)  \\ 
+Non binary & Cisgender woman & -19\% (-28 to -4)  \\ 
+Non binary & Other cisgender man & 5\% (-7 to 19)  \\ 
+Non binary & Another demographic & 22\% (-20 to 69)  \\ 
+Cisgender woman & White cisgender man & -5\% (-10 to -1)  \\ 
+Cisgender woman & Latinx cisgender man & 3\% (-8 to 15)  \\ 
+Cisgender woman & Black cisgender man & 3\% (-8 to 22)  \\ 
+Cisgender woman & Transgender man & -15\% (-51 to 12)  \\ 
+Cisgender woman & Transgender woman & -19\% (-50 to 51)  \\ 
+Cisgender woman & Non binary & -13\% (-22 to 9)  \\ 
+Cisgender woman & Cisgender woman & 85\% (45 to 117)  \\ 
+Cisgender woman & Other cisgender man & -17\% (-26 to -3)  \\ 
+Cisgender woman & Another demographic & 52\% (-13 to 94)  \\ 
+Other cisgender man & White cisgender man & -6\% (-11 to 1)  \\ 
+Other cisgender man & Latinx cisgender man & -4\% (-10 to 0)  \\ 
+Other cisgender man & Black cisgender man & -5\% (-9 to 0)  \\ 
+Other cisgender man & Transgender man & 10\% (-8 to 27)  \\ 
+Other cisgender man & Transgender woman & -13\% (-35 to 8)  \\ 
+Other cisgender man & Non binary & 0\% (-10 to 10)  \\ 
+Other cisgender man & Cisgender woman & -23\% (-29 to -12)  \\ 
+Other cisgender man & Other cisgender man & 32\% (20 to 43)  \\ 
+Other cisgender man & Another demographic & 20\% (-11 to 47)  \\ 
+Another demographic & White cisgender man & 0\% (-22 to 17)  \\ 
+Another demographic & Latinx cisgender man & -6\% (-18 to 8)  \\ 
+Another demographic & Black cisgender man & -6\% (-35 to 20)  \\ 
+Another demographic & Transgender man & -3\% (-36 to 17)  \\ 
+Another demographic & Transgender woman & -25\% (-55 to 5)  \\ 
+Another demographic & Non binary & -13\% (-43 to 15)  \\ 
+Another demographic & Cisgender woman & -14\% (-45 to 8)  \\ 
+Another demographic & Other cisgender man & -1\% (-21 to 21)  \\ 
+Another demographic & Another demographic & 175\% (33 to 511)  \\ 
+\bottomrule
+\end{longtable*}
+
+\hypertarget{spatial-mixing-coefficient-by-sexual-orientation}{%
+\subsection*{Spatial mixing coefficient by sexual
+orientation}\label{spatial-mixing-coefficient-by-sexual-orientation}}
+\addcontentsline{toc}{subsection}{Spatial mixing coefficient by sexual
+orientation}
+
+\subsubsection{Plot}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{make\_plotdata\_sexorientation\_mixing\_matrix}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{plot\_matrix\_mixing}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_mpxnyc\_gradient}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_mpxnyc\_gradient}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_mpxnyc\_mixing}\NormalTok{() }\SpecialCharTok{+}
+\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{plot.margin =}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{unit}\NormalTok{(}\DecValTok{10}\SpecialCharTok{*}\FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{), }\StringTok{"pt"}\NormalTok{)}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{G_supplementary_results/G__supplementary_results_files/figure-pdf/fig-sexorientation-mixing-matrix-app-1.pdf}
+
+}
+
+\caption{\label{fig-sexorientation-mixing-matrix-app}Social mixing
+matrix for MPX NYC participants by sexual orientation}
+
+\end{figure}
+
+\subsubsection{Data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{make\_table\_mixing\_2}\NormalTok{(sexOrientation) }\SpecialCharTok{|\textgreater{}}
+ \FunctionTok{draw\_table\_matrix\_mixing}\NormalTok{(}\StringTok{"Sexual orientation"}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable*}{ccc}
+\caption*{
+{\large Sexual orientation} \\ 
+{\small (MPX NYC, 2022)}
+} \\ 
+\toprule
+Ego group & Alter group & Coef (CI) \\ 
 \midrule\addlinespace[2.5pt]
-\multicolumn{3}{l}{Did not have sex - Same Borough} \\ 
-\midrule\addlinespace[2.5pt]
-Concert/Theatre/Show & 35 & 30 (20 to 36) \\ 
-Dance Party & 43 & 38 (30 to 48) \\ 
-Dark Room/Sex Party & 3 & 2 (2 to 4) \\ 
-Private Residence & 10 & 8 (8 to 14) \\ 
-Something Else & 21 & 18 (10 to 24) \\ 
-Sport Game & 4 & 4 (2 to 6) \\ 
-\midrule\addlinespace[2.5pt]
-\multicolumn{3}{l}{Did not have sex - Same Community District} \\ 
-\midrule\addlinespace[2.5pt]
-Concert/Theatre/Show & 5 & 12 (6 to 24) \\ 
-Dance Party & 17 & 40 (28 to 56) \\ 
-Dark Room/Sex Party & 3 & 8 (2 to 12) \\ 
-Private Residence & 10 & 24 (18 to 40) \\ 
-Something Else & 6 & 14 (8 to 16) \\ 
-Sport Game & 1 & 2 (2 to 2) \\ 
-\midrule\addlinespace[2.5pt]
-\multicolumn{3}{l}{Had sex - Different Borough} \\ 
-\midrule\addlinespace[2.5pt]
-Concert/Theatre/Show & 3 & 4 (0 to 6) \\ 
-Dance Party & 14 & 14 (12 to 22) \\ 
-Dark Room/Sex Party & 25 & 26 (20 to 36) \\ 
-Private Residence & 39 & 42 (28 to 44) \\ 
-Something Else & 12 & 12 (8 to 22) \\ 
-Sport Game & 1 & 2 (0 to 4) \\ 
-\midrule\addlinespace[2.5pt]
-\multicolumn{3}{l}{Had sex - Same Borough} \\ 
-\midrule\addlinespace[2.5pt]
-Concert/Theatre/Show & 1 & 0 (0 to 2) \\ 
-Dance Party & 13 & 12 (8 to 16) \\ 
-Dark Room/Sex Party & 19 & 16 (8 to 16) \\ 
-Private Residence & 63 & 56 (52 to 62) \\ 
-Something Else & 18 & 16 (14 to 18) \\ 
-\midrule\addlinespace[2.5pt]
-\multicolumn{3}{l}{Had sex - Same Community District} \\ 
-\midrule\addlinespace[2.5pt]
-Dance Party & 6 & 4 (2 to 4) \\ 
-Dark Room/Sex Party & 8 & 6 (4 to 8) \\ 
-Private Residence & 120 & 84 (82 to 86) \\ 
-Something Else & 10 & 6 (4 to 10) \\ 
+Gay & Gay & 3\% (1 to 5)  \\ 
+Gay & Bisexual & -9\% (-12 to -4)  \\ 
+Gay & Straight & -18\% (-24 to -9)  \\ 
+Gay & Queer & 5\% (-1 to 10)  \\ 
+Gay & Something Else & -20\% (-31 to -13)  \\ 
+Bisexual & Gay & -5\% (-11 to -2)  \\ 
+Bisexual & Bisexual & 21\% (14 to 35)  \\ 
+Bisexual & Straight & 5\% (-7 to 23)  \\ 
+Bisexual & Queer & 4\% (-5 to 13)  \\ 
+Bisexual & Something Else & -7\% (-24 to 7)  \\ 
+Straight & Gay & -8\% (-14 to -4)  \\ 
+Straight & Bisexual & 3\% (-8 to 20)  \\ 
+Straight & Straight & 119\% (59 to 187)  \\ 
+Straight & Queer & -5\% (-16 to 1)  \\ 
+Straight & Something Else & -18\% (-39 to 8)  \\ 
+Queer & Gay & -2\% (-5 to 0)  \\ 
+Queer & Bisexual & -10\% (-15 to -2)  \\ 
+Queer & Straight & -19\% (-29 to -11)  \\ 
+Queer & Queer & 37\% (29 to 45)  \\ 
+Queer & Something Else & -38\% (-49 to -32)  \\ 
+Something Else & Gay & -12\% (-22 to -2)  \\ 
+Something Else & Bisexual & 9\% (-12 to 27)  \\ 
+Something Else & Straight & -15\% (-34 to 10)  \\ 
+Something Else & Queer & -12\% (-24 to 0)  \\ 
+Something Else & Something Else & 294\% (154 to 528)  \\ 
 \bottomrule
 \end{longtable*}
 
