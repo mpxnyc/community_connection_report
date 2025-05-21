@@ -11,9 +11,10 @@
 
 make_plotdata_spatial_concentration_bar() |>
   plot_home_vs_residence_dbn_bar() +
-  ggplot2::coord_flip() +
+  scale_alpha_mpxnyc() +
   scale_fill_mpxnyc(name = "Borough", option = "dark") +
-  ggplot2::scale_alpha_manual(values = c("highlight" = 1, "lowlight" = 0.5), guide="none") +
-  ggplot2::scale_y_continuous(labels = scales::percent_format(scale = 100)) +
+  scale_axis_mpxnyc() +
   theme_mpxnyc_home_vs_place() 
+
+
 ```

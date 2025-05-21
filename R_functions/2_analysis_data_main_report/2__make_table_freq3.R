@@ -86,7 +86,8 @@ make_table_freq3                <- function(variable = overall, stratum_variable
       strata_a = stratum_variable_a_name,
       strata_b = stratum_variable_b_name) |>
     dplyr::ungroup() |>
-    {function(x) dplyr::select(x, variable, strata_a, strata_b, names(x))}() 
+    {function(x) dplyr::select(x, variable, strata_a, strata_b, names(x))}() |>
+    dplyr::filter(!is.na(level))
   
 }
 

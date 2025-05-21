@@ -6,14 +6,14 @@
 ```{r }
 #| fig-cap: !expr 'get_figure_details("fig-netimpact")'
 #| label: fig-netimpact
-#| fig-width: 9
-#| fig-height: 6.5
+#| fig-width: 8
+#| fig-height: 9
 
 make_plotdata_net_impact_profile() |>
   plot_centrality_bar() +
   scale_fill_mpxnyc(name = "", option = "light") +
-  ggplot2::scale_y_continuous("Proportion of participants", limits = c(-0.2, 1), labels = scales::percent) +
-  ggplot2::scale_x_continuous("Intervention order", limits = c(0, 40), breaks = c(0, 10, 20, 30, 40)) +
+  scale_axis_mpxnyc() +
+  scale_x_continuous_mpxnyc() +
   theme_mpxnyc_netimpact() 
   
 

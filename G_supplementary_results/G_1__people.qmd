@@ -26,10 +26,9 @@ prepare_table_1(demo_group) |>
 #| column: body
 
 make_table_freq1(demo_group) |>  
-  dplyr::filter(!is.na(level)) |>
   plot_bar() +
   theme_mpxnyc_bar() +
-  ggplot2::scale_y_continuous("MPX NYC sample proportion", labels = scales::percent) +
+  scale_axis_mpxnyc() +
   scale_fill_mpxnyc(name = "Race / gender") 
 
 ```
@@ -57,10 +56,10 @@ prepare_table_1(age) |>
 #| fig-width: 8
 
   make_table_freq1(age) |>
-          plot_bar() +
-  theme_mpxnyc_bar() +
-  ggplot2::scale_y_continuous("MPX NYC sample proportion", labels = scales::percent) +
-  scale_fill_mpxnyc(name = "Age group")
+    plot_bar() +
+    theme_mpxnyc_bar() +
+    scale_axis_mpxnyc() +
+    scale_fill_mpxnyc(name = "Age group")
 
 
 
@@ -95,7 +94,7 @@ prepare_table_1(channel) |>
 make_table_freq1(channel) |>
   plot_bar()  +
   theme_mpxnyc_bar() +
-  ggplot2::scale_y_continuous("MPX NYC sample proportion", labels = scales::percent) +
+  scale_axis_mpxnyc() +
   scale_fill_mpxnyc(name = "Recruitment\nchannel")
 
 
@@ -132,7 +131,7 @@ prepare_table_1(genderId) |>
 make_table_freq1(genderId) |>  
   plot_bar() +
   theme_mpxnyc_bar() +
-  ggplot2::scale_y_continuous("MPX NYC sample proportion", labels = scales::percent) +
+  scale_axis_mpxnyc("MPX NYC sample proportion") +
   scale_fill_mpxnyc(name = "Gender\nmodality")
  
 ```
@@ -167,7 +166,7 @@ prepare_table_1(race) |>
 make_table_freq1(race) |>
   plot_bar()  +
   theme_mpxnyc_bar() +
-  ggplot2::scale_y_continuous("MPX NYC sample proportion", labels = scales::percent) +
+  scale_axis_mpxnyc() +
   scale_fill_mpxnyc(name = "Race")
   
 ```
@@ -202,7 +201,7 @@ prepare_table_1(sexOrientation) |>
 make_table_freq1(sexOrientation) |>    
   plot_bar() +
   theme_mpxnyc_bar() +
-  ggplot2::scale_y_continuous("MPX NYC sample proportion", labels = scales::percent) +
+  scale_axis_mpxnyc() +
   scale_fill_mpxnyc(name = "Sexual\norientation")
 
 
@@ -243,7 +242,7 @@ prepare_table_1(groupSex) |>
 make_table_freq1(groupSex) |>  
   plot_bar()  +
   theme_mpxnyc_bar() +
-  ggplot2::scale_y_continuous("MPX NYC sample proportion", labels = scales::percent) +
+  scale_axis_mpxnyc() +
   scale_fill_mpxnyc(name = "Group contact")
 
 ```
@@ -271,11 +270,13 @@ prepare_table_2(sexOrientation, demo_group) |>
 
 
 
+
 make_table_freq2(sexOrientation, demo_group) |>
   plot_radar_grid()   +
-  ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.5, 1)) +
+  scale_radial_mpxnyc() +
   scale_fill_mpxnyc(name = "") +
   theme_mpxnyc_radar_people() 
+
 
 ```
 
@@ -310,7 +311,7 @@ prepare_table_2(monkeypoxVaccine, demo_group) |>
 
 make_table_freq2(monkeypoxVaccine, demo_group) |>
   plot_radar_grid()  +
-  ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.5, 1)) +
+  scale_radial_mpxnyc() +
   scale_fill_mpxnyc(name = "") +
   theme_mpxnyc_radar_people() 
 
@@ -346,7 +347,7 @@ prepare_table_2(hivPrep, demo_group) |>
 
 make_table_freq2(hivPrep, demo_group) |>
   plot_radar_grid()  +
-  ggplot2::scale_y_continuous(breaks = c(0,0.25, 0.50, 1), limits = c(-0.5, 1)) +
+  scale_radial_mpxnyc() +
   scale_fill_mpxnyc(name = "") +
   theme_mpxnyc_radar_people() 
 
