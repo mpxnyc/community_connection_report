@@ -18,23 +18,12 @@ prepare_table_2(placeType, placeSex, person_analysis = FALSE) |>
 ```{r plot_radar_facet_placetype_placesex}
 #| fig-width: 8
 #| fig-height: 6
-#| 
-
-
-mpxnyc_colors <- mpxnyc::mpxnyc_colors
-attach(mpxnyc_colors)
-targets::tar_source(files = "/Users/keletso/Documents/_gitrepos/mpxnyc_data_analysis/R_functions")
-
 
 make_table_freq2(placeType, placeSex, person_analysis = FALSE) |>
-  dplyr::filter(!is.na(level)) |>
   plot_radar_stratified() +
-  ggplot2::coord_radial()  +
-  ggplot2::scale_x_discrete(position = "top") +
-  ggplot2::scale_y_continuous(labels = function(x) scales::percent(abs(x))) +
+  scale_radial_mpxnyc() +
   scale_fill_mpxnyc(name = "") +
   theme_mpxnyc_radar_places() 
-
 ```
 
 
@@ -43,22 +32,15 @@ make_table_freq2(placeType, placeSex, person_analysis = FALSE) |>
 
 
 
-###  Type of venue for contact vs. distance from home  {.unnumbered}
+### Type of venue for contact vs. distance from home  {.unnumbered}
 
 
 
 ```{r table_radar_facet_placetype_distancefromhome}
 #| column: margin
 
-
-
 prepare_table_2(placeType, distanceFromHome, person_analysis = FALSE) |>
   draw_table_2("Venue type vs. distance from home")
-
-
-
-
-
 ```
 
 ```{r plot_radar_facet_placetype_distancefromhome}
@@ -69,10 +51,8 @@ prepare_table_2(placeType, distanceFromHome, person_analysis = FALSE) |>
 
 make_table_freq2(placeType, distanceFromHome, person_analysis = FALSE) |>
   plot_radar_stratified() +
-  ggplot2::coord_radial()  +
-  ggplot2::scale_x_discrete(position = "top") +
-  ggplot2::scale_y_continuous(labels = function(x) scales::percent(abs(x))) +
   scale_fill_mpxnyc(name = "") +
+  scale_radial_mpxnyc() +
   theme_mpxnyc_radar_places() 
 
 
@@ -104,20 +84,13 @@ prepare_table_3( placeType, distanceFromHome, placeSex, person_analysis = FALSE)
 ```{r plot_radar_facet_placetype_placesex_distancefromhome}
 #| fig-width: 8
 #| fig-height: 12
-#| 
 
 
   make_table_freq3( placeType, distanceFromHome, placeSex, person_analysis = FALSE) |>
-    dplyr::filter(!is.na(level)) |>
-  plot_radar_stratified2()  +
-  ggplot2::coord_radial()  +
-  scale_fill_mpxnyc(name = "") +
-  theme_mpxnyc_radar_places() +
- ggplot2::theme(
-   axis.text.x = ggplot2::element_blank()
-   ) +
-    ggplot2::ylim(c(-0.2, 1))
-
+    plot_radar_stratified2()  +
+    scale_fill_mpxnyc(name = "") +
+    scale_radial_mpxnyc() +
+    theme_mpxnyc_radar_places() 
 
 ```
 

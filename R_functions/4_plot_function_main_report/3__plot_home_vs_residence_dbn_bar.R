@@ -8,6 +8,7 @@ plot_home_vs_residence_dbn_bar <- function(data){
       width = 1,
       color = "white",
       position = "dodge"
-    ) 
+    ) +
+    ggplot2::coord_flip() 
   
 }

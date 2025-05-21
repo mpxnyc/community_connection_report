@@ -236,7 +236,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, enhanced, borderline west={3pt}{0pt}{shadecolor}, frame hidden, boxrule=0pt, breakable, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, boxrule=0pt, sharp corners, frame hidden, enhanced, borderline west={3pt}{0pt}{shadecolor}, interior hidden]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -1048,8 +1048,8 @@ participants 7 times with replacement.
 \begin{Highlighting}[]
 \FunctionTok{make\_plotdata\_racegender\_radar\_grid}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{plot\_radar\_grid}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.50}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_radial\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{theme\_mpxnyc\_radar\_people}\NormalTok{() }
 \end{Highlighting}
 \end{Shaded}
@@ -1365,10 +1365,8 @@ N = 1,304\textsuperscript{\textit{1}} & \textbf{p-value}\textsuperscript{\textit
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{make\_plotdata\_placetype\_bar\_grid}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
-  \FunctionTok{plot\_bar\_stratified}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{coord\_flip}\NormalTok{()  }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{position =} \StringTok{"top"}\NormalTok{) }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{labels =} \ControlFlowTok{function}\NormalTok{(x) scales}\SpecialCharTok{::}\FunctionTok{percent}\NormalTok{(}\FunctionTok{abs}\NormalTok{(x))) }\SpecialCharTok{+}
+  \FunctionTok{plot\_bar\_stratified2}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_axis\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{theme\_mpxnyc\_bar\_places}\NormalTok{() }
 \end{Highlighting}
@@ -1536,7 +1534,7 @@ BK01, MN05, and QN05, respectively.
 \NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"Borough"}\NormalTok{, }\AttributeTok{option =} \StringTok{"dark"}\NormalTok{) }\SpecialCharTok{+}
 \NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_alpha\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"highlight"} \OtherTok{=} \DecValTok{1}\NormalTok{, }\StringTok{"lowlight"} \OtherTok{=} \FloatTok{0.5}\NormalTok{), }\AttributeTok{guide=}\StringTok{"none"}\NormalTok{) }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\FunctionTok{percent\_format}\NormalTok{(}\AttributeTok{scale =} \DecValTok{100}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_axis\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{theme\_mpxnyc\_home\_vs\_place}\NormalTok{() }
 \end{Highlighting}
 \end{Shaded}
@@ -1614,7 +1612,7 @@ community districts in which gay identified individuals live or play.
 }
 
 \caption{\label{fig-racegender-mixing-matrix}Social mixing matrices for
-MPX NYC participants by race-gende}
+MPX NYC participants by race-gender}
 
 \end{figure}
 
@@ -1627,10 +1625,9 @@ MPX NYC participants by race-gende}
   \FunctionTok{plot\_matrix\_mixing}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc\_gradient}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_color\_mpxnyc\_gradient}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{theme\_mpxnyc\_mixing}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{theme}\NormalTok{(}
+  \FunctionTok{theme\_mpxnyc\_mixing}\NormalTok{(}
     \AttributeTok{plot.margin =}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{unit}\NormalTok{(}\DecValTok{10}\SpecialCharTok{*}\FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{), }\StringTok{"pt"}\NormalTok{)}
-\NormalTok{    )}
+\NormalTok{    ) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -1654,10 +1651,9 @@ for MPX NYC participants by sexual orientation}
   \FunctionTok{plot\_matrix\_mixing}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc\_gradient}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_color\_mpxnyc\_gradient}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{theme\_mpxnyc\_mixing}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{theme}\NormalTok{(}
+  \FunctionTok{theme\_mpxnyc\_mixing}\NormalTok{(}
     \AttributeTok{plot.margin =}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{unit}\NormalTok{(}\DecValTok{10}\SpecialCharTok{*}\FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{), }\StringTok{"pt"}\NormalTok{)}
-\NormalTok{  )}
+\NormalTok{    ) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -1725,6 +1721,7 @@ districts: contact vs movement-neutralizing strategy}
 \FunctionTok{make\_plotdata\_coverage\_approach\_bar}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{plot\_coverage\_bar}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{, }\AttributeTok{na.translate =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{option =} \StringTok{"light"}\NormalTok{)  }\SpecialCharTok{+}
+  \FunctionTok{scale\_axis\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{theme\_mpxnyc\_blank}\NormalTok{() }\SpecialCharTok{+}
 \NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{) }
 \end{Highlighting}
@@ -1780,7 +1777,7 @@ immunized - differences between the two strategies start emerging once
 \FunctionTok{make\_plotdata\_net\_impact\_profile}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{plot\_centrality\_bar}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{, }\AttributeTok{option =} \StringTok{"light"}\NormalTok{) }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"Proportion of participants"}\NormalTok{, }\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.2}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}
+  \FunctionTok{scale\_axis\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
 \NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_x\_continuous}\NormalTok{(}\StringTok{"Intervention order"}\NormalTok{, }\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{40}\NormalTok{), }\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{)) }\SpecialCharTok{+}
   \FunctionTok{theme\_mpxnyc\_netimpact}\NormalTok{() }
 \end{Highlighting}
@@ -3546,7 +3543,7 @@ if for any \(\mathbf{X},\mathbf{X}' \in \mathbf{R}^n\)
 \begin{equation}
 \mathbf{X}_{\mathscr{N}_i} = \mathbf{X'}_{\mathscr{N}_i} \text{ and } X_i = X'_i\\
 \implies \\
-g_{i}(\mathbf{X}, i) = g_{i}(\mathbf{X'}, i) 
+g_{i}(...,\mathbf{X}, ..., i) = g_{i}(..., \mathbf{X'}, ..., i) 
 \end{equation}
 \]
 
@@ -3566,8 +3563,16 @@ g_{ki}(\mathbf{X}_{k},  i)
 \end{pmatrix}
 \]
 
-Where for \(g_{0i}\) is a vector-valued function of \(X_{ti}\) for
-\(t \in [1,k]\) and each \(g_{ti}\) is a real-valued function.
+Where for \(g_{0i}\) is a vector-valued function and each \(g_{ti}\) is
+a scalar-valued function.
+
+\[
+g_{0i}: \{0,1\}^{n\times k} \times\mathscr{N} \rightarrow \mathbf{R}^{k}
+\]
+
+\[
+g_{ti}: \{0,1\}^{n} \times\mathscr{N} \rightarrow \mathbf{R}
+\]
 
 \hypertarget{definition-3-symmetry}{%
 \subsubsection{Definition 3: Symmetry}\label{definition-3-symmetry}}
@@ -5152,10 +5157,9 @@ White cisgender man & 552 & 42\% (40-44) \\
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{make\_table\_freq1}\NormalTok{(demo\_group) }\SpecialCharTok{|\textgreater{}}  
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(level)) }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{plot\_bar}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{theme\_mpxnyc\_bar}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"MPX NYC sample proportion"}\NormalTok{, }\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}
+  \FunctionTok{scale\_axis\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"Race / gender"}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
@@ -5198,10 +5202,10 @@ White cisgender man & 552 & 42\% (40-44) \\
 \begin{Shaded}
 \begin{Highlighting}[]
   \FunctionTok{make\_table\_freq1}\NormalTok{(age) }\SpecialCharTok{|\textgreater{}}
-          \FunctionTok{plot\_bar}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{theme\_mpxnyc\_bar}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"MPX NYC sample proportion"}\NormalTok{, }\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}
-  \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"Age group"}\NormalTok{)}
+    \FunctionTok{plot\_bar}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{theme\_mpxnyc\_bar}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{scale\_axis\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"Age group"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5245,7 +5249,7 @@ Unknown & 282 & 22\% (20-24) \\
 \FunctionTok{make\_table\_freq1}\NormalTok{(channel) }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{plot\_bar}\NormalTok{()  }\SpecialCharTok{+}
   \FunctionTok{theme\_mpxnyc\_bar}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"MPX NYC sample proportion"}\NormalTok{, }\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}
+  \FunctionTok{scale\_axis\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"Recruitment}\SpecialCharTok{\textbackslash{}n}\StringTok{channel"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -5291,7 +5295,7 @@ Transgender Woman & 29 & 2\% (2-2) \\
 \FunctionTok{make\_table\_freq1}\NormalTok{(genderId) }\SpecialCharTok{|\textgreater{}}  
   \FunctionTok{plot\_bar}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{theme\_mpxnyc\_bar}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"MPX NYC sample proportion"}\NormalTok{, }\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}
+  \FunctionTok{scale\_axis\_mpxnyc}\NormalTok{(}\StringTok{"MPX NYC sample proportion"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"Gender}\SpecialCharTok{\textbackslash{}n}\StringTok{modality"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -5337,7 +5341,7 @@ White & 695 & 53\% (51-55) \\
 \FunctionTok{make\_table\_freq1}\NormalTok{(race) }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{plot\_bar}\NormalTok{()  }\SpecialCharTok{+}
   \FunctionTok{theme\_mpxnyc\_bar}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"MPX NYC sample proportion"}\NormalTok{, }\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}
+  \FunctionTok{scale\_axis\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"Race"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -5382,7 +5386,7 @@ Straight & 64 & 5\% (4-6) \\
 \FunctionTok{make\_table\_freq1}\NormalTok{(sexOrientation) }\SpecialCharTok{|\textgreater{}}    
   \FunctionTok{plot\_bar}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{theme\_mpxnyc\_bar}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"MPX NYC sample proportion"}\NormalTok{, }\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}
+  \FunctionTok{scale\_axis\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"Sexual}\SpecialCharTok{\textbackslash{}n}\StringTok{orientation"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -5427,7 +5431,7 @@ Yes & 530 & 41\% (38-41) \\
 \FunctionTok{make\_table\_freq1}\NormalTok{(groupSex) }\SpecialCharTok{|\textgreater{}}  
   \FunctionTok{plot\_bar}\NormalTok{()  }\SpecialCharTok{+}
   \FunctionTok{theme\_mpxnyc\_bar}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"MPX NYC sample proportion"}\NormalTok{, }\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+}
+  \FunctionTok{scale\_axis\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{"Group contact"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -5535,7 +5539,7 @@ Straight & 12 & 2\% (2-3) \\
 \begin{Highlighting}[]
 \FunctionTok{make\_table\_freq2}\NormalTok{(sexOrientation, demo\_group) }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{plot\_radar\_grid}\NormalTok{()   }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.50}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_radial\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{theme\_mpxnyc\_radar\_people}\NormalTok{() }
 \end{Highlighting}
@@ -5627,7 +5631,7 @@ Yes & 420 & 76\% (73-76) \\
 \begin{Highlighting}[]
 \FunctionTok{make\_table\_freq2}\NormalTok{(monkeypoxVaccine, demo\_group) }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{plot\_radar\_grid}\NormalTok{()  }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.50}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_radial\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{theme\_mpxnyc\_radar\_people}\NormalTok{() }
 \end{Highlighting}
@@ -5712,7 +5716,7 @@ Yes & 263 & 52\% (46-50) \\
 \begin{Highlighting}[]
 \FunctionTok{make\_table\_freq2}\NormalTok{(hivPrep, demo\_group) }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{plot\_radar\_grid}\NormalTok{()  }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.50}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_radial\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{theme\_mpxnyc\_radar\_people}\NormalTok{() }
 \end{Highlighting}
@@ -5772,17 +5776,9 @@ Sport Game & 1 & 0\% (0-1) \\
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mpxnyc\_colors }\OtherTok{\textless{}{-}}\NormalTok{ mpxnyc}\SpecialCharTok{::}\NormalTok{mpxnyc\_colors}
-\FunctionTok{attach}\NormalTok{(mpxnyc\_colors)}
-\NormalTok{targets}\SpecialCharTok{::}\FunctionTok{tar\_source}\NormalTok{(}\AttributeTok{files =} \StringTok{"/Users/keletso/Documents/\_gitrepos/mpxnyc\_data\_analysis/R\_functions"}\NormalTok{)}
-
-
 \FunctionTok{make\_table\_freq2}\NormalTok{(placeType, placeSex, }\AttributeTok{person\_analysis =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(level)) }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{plot\_radar\_stratified}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{coord\_radial}\NormalTok{()  }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{position =} \StringTok{"top"}\NormalTok{) }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{labels =} \ControlFlowTok{function}\NormalTok{(x) scales}\SpecialCharTok{::}\FunctionTok{percent}\NormalTok{(}\FunctionTok{abs}\NormalTok{(x))) }\SpecialCharTok{+}
+  \FunctionTok{scale\_radial\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{theme\_mpxnyc\_radar\_places}\NormalTok{() }
 \end{Highlighting}
@@ -5850,10 +5846,8 @@ Sport Game & 1 & 1\% (1-1) \\
 \begin{Highlighting}[]
 \FunctionTok{make\_table\_freq2}\NormalTok{(placeType, distanceFromHome, }\AttributeTok{person\_analysis =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
   \FunctionTok{plot\_radar\_stratified}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{coord\_radial}\NormalTok{()  }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{position =} \StringTok{"top"}\NormalTok{) }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{labels =} \ControlFlowTok{function}\NormalTok{(x) scales}\SpecialCharTok{::}\FunctionTok{percent}\NormalTok{(}\FunctionTok{abs}\NormalTok{(x))) }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_radial\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{theme\_mpxnyc\_radar\_places}\NormalTok{() }
 \end{Highlighting}
 \end{Shaded}
@@ -5943,15 +5937,10 @@ Something Else & 10 & 7\% (4-11) \\
 \begin{Shaded}
 \begin{Highlighting}[]
   \FunctionTok{make\_table\_freq3}\NormalTok{( placeType, distanceFromHome, placeSex, }\AttributeTok{person\_analysis =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
-\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(level)) }\SpecialCharTok{|\textgreater{}}
-  \FunctionTok{plot\_radar\_stratified2}\NormalTok{()  }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{coord\_radial}\NormalTok{()  }\SpecialCharTok{+}
-  \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{theme\_mpxnyc\_radar\_places}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{theme}\NormalTok{(}
-   \AttributeTok{axis.text.x =}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{element\_blank}\NormalTok{()}
-\NormalTok{   ) }\SpecialCharTok{+}
-\NormalTok{    ggplot2}\SpecialCharTok{::}\FunctionTok{ylim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.2}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+    \FunctionTok{plot\_radar\_stratified2}\NormalTok{()  }\SpecialCharTok{+}
+    \FunctionTok{scale\_fill\_mpxnyc}\NormalTok{(}\AttributeTok{name =} \StringTok{""}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{scale\_radial\_mpxnyc}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{theme\_mpxnyc\_radar\_places}\NormalTok{() }
 \end{Highlighting}
 \end{Shaded}
 
@@ -5971,7 +5960,7 @@ Something Else & 10 & 7\% (4-11) \\
 age}\label{spatial-mixing-coefficient-by-age}}
 \addcontentsline{toc}{subsection}{Spatial mixing coefficient by age}
 
-\subsubsection{Plot}
+\subsubsection{Show plot}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5979,10 +5968,7 @@ age}\label{spatial-mixing-coefficient-by-age}}
   \FunctionTok{plot\_matrix\_mixing}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc\_gradient}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_color\_mpxnyc\_gradient}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{theme\_mpxnyc\_mixing}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{theme}\NormalTok{(}
-    \AttributeTok{plot.margin =}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{unit}\NormalTok{(}\DecValTok{10}\SpecialCharTok{*}\FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{), }\StringTok{"pt"}\NormalTok{)}
-\NormalTok{  )}
+  \FunctionTok{theme\_mpxnyc\_mixing}\NormalTok{(}\AttributeTok{plot.margin =}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{unit}\NormalTok{(}\DecValTok{10}\SpecialCharTok{*}\FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{), }\StringTok{"pt"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5997,7 +5983,7 @@ NYC participants by age}
 
 \end{figure}
 
-\subsubsection{Data}
+\subsubsection{Show data}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6048,7 +6034,7 @@ race-Gender}\label{spatial-mixing-coefficient-by-race-gender}}
 \addcontentsline{toc}{subsection}{Spatial mixing coefficient by
 race-Gender}
 
-\subsubsection{Plot}
+\subsubsection{Show plot}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6067,11 +6053,11 @@ race-Gender}
 }
 
 \caption{\label{fig-racegender-mixing-matrix-app}Social mixing matrices
-for MPX NYC participants by race-gende}
+for MPX NYC participants by race-gender}
 
 \end{figure}
 
-\subsubsection{Data}
+\subsubsection{Show data}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6178,7 +6164,7 @@ orientation}\label{spatial-mixing-coefficient-by-sexual-orientation}}
 \addcontentsline{toc}{subsection}{Spatial mixing coefficient by sexual
 orientation}
 
-\subsubsection{Plot}
+\subsubsection{Show plot}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6186,10 +6172,7 @@ orientation}
   \FunctionTok{plot\_matrix\_mixing}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_mpxnyc\_gradient}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{scale\_color\_mpxnyc\_gradient}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{theme\_mpxnyc\_mixing}\NormalTok{() }\SpecialCharTok{+}
-\NormalTok{  ggplot2}\SpecialCharTok{::}\FunctionTok{theme}\NormalTok{(}
-    \AttributeTok{plot.margin =}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{unit}\NormalTok{(}\DecValTok{10}\SpecialCharTok{*}\FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{), }\StringTok{"pt"}\NormalTok{)}
-\NormalTok{    )}
+  \FunctionTok{theme\_mpxnyc\_mixing}\NormalTok{(}\AttributeTok{plot.margin =}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{unit}\NormalTok{(}\DecValTok{10}\SpecialCharTok{*}\FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{), }\StringTok{"pt"}\NormalTok{)) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -6204,7 +6187,7 @@ matrix for MPX NYC participants by sexual orientation}
 
 \end{figure}
 
-\subsubsection{Data}
+\subsubsection{Show data}
 
 \begin{Shaded}
 \begin{Highlighting}[]
