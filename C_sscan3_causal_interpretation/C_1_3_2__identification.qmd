@@ -5,7 +5,20 @@
 Once we have specified the hypothetical quantities from our thought experiment, we "identify" them, meaning write them in terms of the observed rather than counterfactual data. It is sufficient to identify the quantity:
 
 $$
-E \left[ \frac{1}{n} \sum_i E[Y_i^{(a)} | L_i] \right] \\
+\begin{aligned}
+E \left[ \frac{1}{n} \sum_i E[Y_i^{(a)}] \right]
+\end{aligned}
+$$
+which can be re-written:
+
+$$
+\begin{aligned}
+E \left[ \frac{1}{n} \sum_i E[Y_i^{(a)}] \right]    &= E \left[ \frac{1}{n} \sum_i E[Y_i^{(a)} | L_i] \right] \\
+                                                    &= E \left[ \frac{1}{n} \sum_i E[f_{Y}(U_{Y_i} , L_i, a) | L_i] \right] \\
+                                                    &= E \left[ \frac{1}{n} \sum_i E[f_{Y}(U_{Y_i} , L_i, a) | L_i, A_i] \\
+                                                    &= E \left[ \frac{1}{n} \sum_i E[f_{Y}(U_{Y_i} , L_i, a) | L_i, A_i=a] \\
+                                                    &= E \left[ \frac{1}{n} \sum_i E[f_{Y}(Y_i | L_i, A_i=a] \\
+\end{aligned}
 $$
 
 
