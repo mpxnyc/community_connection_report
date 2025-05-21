@@ -7,16 +7,17 @@
 ```{r table_radar_facet_placetype_placesex}
 #| column: margin
 
-make_table_freq2(placeType, placeSex, person_analysis = FALSE) |>
-        draw_table_stratified()
 
+
+prepare_table_2(placeType, placeSex, person_analysis = FALSE) |>
+  draw_table_2("Venue type vs. sexual contact")
 
 ```
 
 
 ```{r plot_radar_facet_placetype_placesex}
-#| fig-width: 9
-#| fig-height: 8
+#| fig-width: 8
+#| fig-height: 6
 #| 
 
 
@@ -51,18 +52,18 @@ make_table_freq2(placeType, placeSex, person_analysis = FALSE) |>
 
 
 
+prepare_table_2(placeType, distanceFromHome, person_analysis = FALSE) |>
+  draw_table_2("Venue type vs. distance from home")
 
 
-make_table_freq2(placeType, distanceFromHome, person_analysis = FALSE) |>
-          draw_table_stratified()
 
 
 
 ```
 
 ```{r plot_radar_facet_placetype_distancefromhome}
-
-
+#| fig-width: 8
+#| fig-height: 6
 
 
 
@@ -89,21 +90,20 @@ make_table_freq2(placeType, distanceFromHome, person_analysis = FALSE) |>
 ### Place type vs. Distance from home vs. Sex contact  {.unnumbered}
 
 ```{r table_radar_facet_placetype_placesex_distancefromhome}
-#| fig-width: 11
-#| fig-height: 10
 #| column: margin
 
+prepare_table_3( placeType, distanceFromHome, placeSex, person_analysis = FALSE)  |>
+  draw_table_3("Venue type by home distance and sexual contact")
 
-  make_table_freq3(placeType, placeSex, distanceFromHome, person_analysis = FALSE) |>
-    draw_table_stratified2()
+
 
 ```
 
 
 
 ```{r plot_radar_facet_placetype_placesex_distancefromhome}
-#| fig-width: 11
-#| fig-height: 10
+#| fig-width: 8
+#| fig-height: 12
 #| 
 
 
