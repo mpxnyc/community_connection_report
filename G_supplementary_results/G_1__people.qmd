@@ -7,17 +7,14 @@ targets::tar_source("../R_functions")
 
 
 
-
 ### Race and gender {.unnumbered}
 
 
 ```{r table_bar_demogroup}
 #| column: margin
 
-
-prepare_table_1(demo_group) |>
+make_table_freq1(demo_group) |>
   draw_table_1("Race-Gender")
-
 ```
 
 ```{r plot_bar_demogroup}
@@ -30,7 +27,6 @@ make_table_freq1(demo_group) |>
   theme_mpxnyc_bar() +
   scale_axis_mpxnyc() +
   scale_fill_mpxnyc(name = "Race / gender") 
-
 ```
 
 
@@ -45,9 +41,8 @@ make_table_freq1(demo_group) |>
 ```{r table_bar_age}
 #| column: margin
 
-prepare_table_1(age) |>
+make_table_freq1(age) |>
   draw_table_1("Age")
-
 ```
 
 ```{r plot_bar_age}
@@ -60,9 +55,6 @@ prepare_table_1(age) |>
     theme_mpxnyc_bar() +
     scale_axis_mpxnyc() +
     scale_fill_mpxnyc(name = "Age group")
-
-
-
 ```
 
 
@@ -77,10 +69,8 @@ prepare_table_1(age) |>
 ```{r table_bar_channel}
 #| column: margin
 
-prepare_table_1(channel) |>
+make_table_freq1(channel) |>
   draw_table_1("Channel")
-
-
 ```
 
 
@@ -90,14 +80,11 @@ prepare_table_1(channel) |>
 #| fig-width: 8
 #| column: body
 
-
 make_table_freq1(channel) |>
   plot_bar()  +
   theme_mpxnyc_bar() +
   scale_axis_mpxnyc() +
   scale_fill_mpxnyc(name = "Recruitment\nchannel")
-
-
 ```
 
 
@@ -116,10 +103,8 @@ make_table_freq1(channel) |>
 #| column: margin
 
 
-prepare_table_1(genderId) |>
+make_table_freq1(genderId) |>
   draw_table_1("Gender")
-
- 
 ```
 
 
@@ -133,7 +118,6 @@ make_table_freq1(genderId) |>
   theme_mpxnyc_bar() +
   scale_axis_mpxnyc("MPX NYC sample proportion") +
   scale_fill_mpxnyc(name = "Gender\nmodality")
- 
 ```
 
 
@@ -151,10 +135,8 @@ make_table_freq1(genderId) |>
 ```{r table_bar_race}
 #| column: margin
 
-prepare_table_1(race) |>
+make_table_freq1(race) |>
   draw_table_1("Race")
-
-  
 ```
 
 
@@ -168,7 +150,6 @@ make_table_freq1(race) |>
   theme_mpxnyc_bar() +
   scale_axis_mpxnyc() +
   scale_fill_mpxnyc(name = "Race")
-  
 ```
 
 
@@ -185,9 +166,8 @@ make_table_freq1(race) |>
 ```{r draw_table_sexorientation}
 #| column: margin
 
-prepare_table_1(sexOrientation) |>
+make_table_freq1(sexOrientation) |>
   draw_table_1("Sexual Orientation")
-
 ```
 
 
@@ -203,8 +183,6 @@ make_table_freq1(sexOrientation) |>
   theme_mpxnyc_bar() +
   scale_axis_mpxnyc() +
   scale_fill_mpxnyc(name = "Sexual\norientation")
-
-
 ```
 
 
@@ -224,10 +202,8 @@ make_table_freq1(sexOrientation) |>
 #| fig-height: 7
 #| column: margin
 
-prepare_table_1(groupSex) |> 
+make_table_freq1(groupSex) |> 
   draw_table_1("Group Sex / Contact past 4 weeks") 
-
-
 ```
 
 
@@ -244,7 +220,6 @@ make_table_freq1(groupSex) |>
   theme_mpxnyc_bar() +
   scale_axis_mpxnyc() +
   scale_fill_mpxnyc(name = "Group contact")
-
 ```
 
 
@@ -258,9 +233,8 @@ make_table_freq1(groupSex) |>
 ```{r draw_radar_grid_sexOrientation_demo_group}
 #| column: margin
 
-prepare_table_2(sexOrientation, demo_group) |>
+make_table_freq2(sexOrientation, demo_group)  |>
   draw_table_2("Sexual Orientation by Race-Gender") 
-
 ```
 
 ```{r plot_radar_grid_sexOrientation_demo_group}
@@ -268,16 +242,11 @@ prepare_table_2(sexOrientation, demo_group) |>
 #| fig-height: 12
 #| column: body
 
-
-
-
 make_table_freq2(sexOrientation, demo_group) |>
   plot_radar_grid()   +
   scale_radial_mpxnyc() +
   scale_fill_mpxnyc(name = "") +
   theme_mpxnyc_radar_people() 
-
-
 ```
 
 
@@ -298,10 +267,8 @@ make_table_freq2(sexOrientation, demo_group) |>
 ```{r table_radar_grid_monkeypoxVaccine_demo_group}
 #| column: margin
 
-prepare_table_2(monkeypoxVaccine, demo_group) |>
+make_table_freq2(monkeypoxVaccine, demo_group) |>
   draw_table_2( "Mpox Vax Status by Race-Gender") 
-
-
 ```
 
 ```{r plot_radar_grid_monkeypoxVaccine_demo_group}
@@ -314,8 +281,6 @@ make_table_freq2(monkeypoxVaccine, demo_group) |>
   scale_radial_mpxnyc() +
   scale_fill_mpxnyc(name = "") +
   theme_mpxnyc_radar_people() 
-
-
 ```
  
 
@@ -334,9 +299,8 @@ make_table_freq2(monkeypoxVaccine, demo_group) |>
 #| fig-height: 10
 #| column: margin
 
-prepare_table_2(hivPrep, demo_group) |>
+make_table_freq2(hivPrep, demo_group) |>
   draw_table_2("HIV and PrEP Status by Race-Gender") 
-
 ```
 
 
@@ -350,8 +314,6 @@ make_table_freq2(hivPrep, demo_group) |>
   scale_radial_mpxnyc() +
   scale_fill_mpxnyc(name = "") +
   theme_mpxnyc_radar_people() 
-
-
 ```
 
 

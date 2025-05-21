@@ -9,7 +9,7 @@
 
 
 
-prepare_table_2(placeType, placeSex, person_analysis = FALSE) |>
+make_table_freq2(placeType, placeSex, person_analysis = FALSE) |>
   draw_table_2("Venue type vs. sexual contact")
 
 ```
@@ -39,7 +39,7 @@ make_table_freq2(placeType, placeSex, person_analysis = FALSE) |>
 ```{r table_radar_facet_placetype_distancefromhome}
 #| column: margin
 
-prepare_table_2(placeType, distanceFromHome, person_analysis = FALSE) |>
+make_table_freq2(placeType, distanceFromHome, person_analysis = FALSE) |>
   draw_table_2("Venue type vs. distance from home")
 ```
 
@@ -72,7 +72,7 @@ make_table_freq2(placeType, distanceFromHome, person_analysis = FALSE) |>
 ```{r table_radar_facet_placetype_placesex_distancefromhome}
 #| column: margin
 
-prepare_table_3( placeType, distanceFromHome, placeSex, person_analysis = FALSE)  |>
+make_table_freq3( placeType, distanceFromHome, placeSex, person_analysis = FALSE)  |>
   draw_table_3("Venue type by home distance and sexual contact")
 
 
@@ -85,12 +85,11 @@ prepare_table_3( placeType, distanceFromHome, placeSex, person_analysis = FALSE)
 #| fig-width: 8
 #| fig-height: 12
 
-
-  make_table_freq3( placeType, distanceFromHome, placeSex, person_analysis = FALSE) |>
-    plot_radar_stratified2()  +
-    scale_fill_mpxnyc(name = "") +
-    scale_radial_mpxnyc() +
-    theme_mpxnyc_radar_places() 
+make_table_freq3( placeType, distanceFromHome, placeSex, person_analysis = FALSE) |>
+  plot_radar_stratified2()  +
+  scale_fill_mpxnyc(name = "") +
+  scale_radial_mpxnyc() +
+  theme_mpxnyc_radar_places() 
 
 ```
 

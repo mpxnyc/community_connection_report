@@ -2,6 +2,7 @@
 
 ### Exposure mappings {.unnumbered}
 
+We define graph $\mathscr{G}(\mathscr{N}, \sim)$ as an ordered pair whose first entry is a set $\mathscr{N}$ containing nodes, and second entry a relation $\sim$ which indicates edges between nodes ($i \sim j$ means "$i$ is connected to $j$ in $\mathscr{G}$", for instance). There are $n = |\mathscr{N}|$ nodes, which each represent individuals in the study sample. We further define $\mathscr{N_i} = \{j \in \mathscr{N}: i \sim j\}$ as the "network exposure units" for person $i$. The  set contains the names of all the nodes $i$ is connected to. Define $\mathbf{X}_{\mathscr{N_i}}$ as the sub-vector of $\mathbf{X}$ which contains entries related to person $i$'s network exposure units. 
 
 Say we have a non-parametric structural equation model of $n$-dimensional random vectors $\mathbf{X}_t \in \{0,1\}^n$, $t \in [1,k]$, which precede random vector $\mathbf{Y}$. $f_{Y_i}$ is the structural equation for $Y_i$, and $U_{Y_i}$ the error term for that equation. We define the "exposure mapping for $Y_i$" as the function 
 
@@ -104,7 +105,15 @@ These definitions will be used in the next section to develop a model for infere
 
 The following four assumptions are crucial to define here because they are not possible to encode in the aforementioned DAG. We will use these to impose homogeneity restrictions on the DAG that enable us to apply statistical inference methods that are usually thought to require independence of observations. We will make a weaker assumption - that of "no spillover", impose homogeneity restrictions, and apply familiar methods such as generalized linear models to reason about network phenomena. 
 
-It is useful to point out that the symmetry of a network exposure mapping $g_{ti}$ implies that the only thing that matters for the contribution of alters to $Y_i$ is the count of alters for which $X_t = 1$. The positional invariance of $g_{ti}$ means that what ever the function is that relates these counts to the outcome $Y_i$ is the same across observational units. Boundedness limits the number of distinct values that $g_{ti}$ can take because each distinct value constitutes a treatment level whose counterfactual we have to model. As we will see, the assumption of boundedness limits the number of counterfactuals. 
+It is useful to point out that the symmetry (with respect to $\mathscr{G}$) of a network exposure mapping $g_{ti}$ implies that the only thing that matters for the contribution of alters to $Y_i$ is the count of alters for which $X_t = 1$. If an exposure mapping is loyal to graph $\mathscr{G}$, symmetry with respect to graph $\mathscr{G}$ implies that 
+
+$$
+g_{0i}(\mathbf{X}_{1}, ..., \mathbf{X}_{k},  i)
+$$
+
+is a function of the $i^{th}$ entries of each of the vectors $\mathbf{X}_{1}, ..., \mathbf{X}_{k}$.
+
+The positional invariance of $g_{ti}$ means that what ever the function is that relates these counts to the outcome $Y_i$ is the same across observational units. Boundedness limits the number of distinct values that $g_{ti}$ can take because each distinct value constitutes a treatment level whose counterfactual we have to model. As we will see, the assumption of boundedness limits the number of counterfactuals. 
 
 Under network causal inference, boundedness can obtain in three different ways. First, it could be as a result of restrictions on the structure of the underlying network. It could be the case that in the network of interest, there is an upper bound on node degree. For example, if the only relationships of interest between individual participants were marriages, each node would have a degree of either 0 or 1, meaning the count of alters $X_{tj} = 1, j \in N_i$ is either zero or one. The second way boundedness might obtain is via restrictions of the value of $\mathbf{X}_t$. It might be the case, for instance, that the count of $i$'s for which $X_{ti}=1$ is very low, then on average, the count of alters for which $X_{tj} = 1, j \in N_i$ will also be low. Finally, boundedness could obtain as a result of the functional form of $g_t$ itself. 
 
