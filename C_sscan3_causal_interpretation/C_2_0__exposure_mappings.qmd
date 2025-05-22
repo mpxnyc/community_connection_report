@@ -22,19 +22,38 @@ $$
 
 #### Definition 1: Loyalty
 
-We say an exposure mapping $g_{i}$ is loyal to graph $\mathscr{G}$ if for any $\mathbf{X},\mathbf{X}' \in \mathbf{R}^n$
+We say an exposure mapping $g_{i}$ is loyal to graph $\mathscr{G}$ if for any $t \in [1,K]$ and any $\mathbf{X}_t,\mathbf{X}'_t \in \mathbf{R}^n$
 
 
 $$
 \begin{equation}
-\mathbf{X}_{\mathscr{N}_i} = \mathbf{X'}_{\mathscr{N}_i} \text{ and } X_i = X'_i\\
+\mathbf{X}_{t\mathscr{N}_i} = \mathbf{X'}_{t\mathscr{N}_i} \text{ and } X_{ti} = X'_{ti}\\
 \implies \\
-g_{i}(...,\mathbf{X}, ..., i) = g_{i}(..., \mathbf{X'}, ..., i) 
+g_{i}(...,\mathbf{X}_t, ..., i) = g_{i}(..., \mathbf{X'}_t, ..., i) 
 \end{equation}
 $$
 
 
+
 #### Definition 2: Separability
+
+
+::: {.aside}
+In a **separable exposure mapping**: 
+
+
+1. If component function $g_{ti}$ is symmetric with respect to $\mathscr{G}$, it is a function only of values of $X_{tj}$ for $j \in \mathscr{N}_i$.
+
+2. The assumption of boundedness can obtain in three different ways. First, it could be as a result of restrictions on the structure of the underlying network. It could be the case that in the network of interest, there is an upper bound on node degree. For example, if the only relationships of interest between individual participants were marriages, each node would have a degree of either 0 or 1, meaning the count of alters $X_{tj} = 1, j \in N_i$ is either zero or one. The second way boundedness might obtain is via restrictions of the value of $\mathbf{X}_t$. It might be the case, for instance, that the count of $i$'s for which $X_{ti}=1$ is very low, then on average, the count of alters for which $X_{tj} = 1, j \in N_i$ will also be low. Finally, boundedness could obtain as a result of the functional form of $g_t$ itself. This might happen if $g_t$ models a network exposure which has a ceiling effect in its dose-response curve with the outcome of interest $Y_i$. For example, if $X_t$ indicates ownership of a car, and $\mathscr{G}$ encodes close friendships, $g_t$ would be a network exposure mapping which tells us how each additional friend who has a car shifts the outcome of interest. For most applications, its likely that beyond some number of friends (say 5) who have a car, an additional friend who gets a car will not change the outcome under investigation. 
+
+3. Under classical causal inference $g_t = c \in \mathbf{R}$ for $t \in [1,k]$. Exposure models are trivially loyal to the empty graph, so the exposure  mappings are trivially separable and bounded, and their component functions are trivially symmetric and positionally invariant. 
+
+:::
+
+
+
+
+
 
 We say exposure mapping $g_i$ is separable if it can be re-written as the vector-valued function
 
@@ -47,20 +66,24 @@ g_{ki}(\mathbf{X}_{k},  i)
 \end{pmatrix}
 $$
 
-Where for $g_{0i}$ is a vector-valued function and each $g_{ti}$ is a scalar-valued function.
+Where $g_{0i}$ is a $k-$dimensional vector 
 
 $$
-g_{0i}: \{0,1\}^{n\times k} \times\mathscr{N} \rightarrow \mathbf{R}^{k}
+g_{0i}(\mathbf{X}_{1}, ..., \mathbf{X}_{k},  i) = \begin{pmatrix} X_{1i} \\ ... \\ X_{ki} \end{pmatrix}
 $$
+
+and each $g_{ti}$ ($t \in [1,K]$) is a scalar-valued function. 
+
 
 $$
 g_{ti}: \{0,1\}^{n} \times\mathscr{N} \rightarrow \mathbf{R}
 $$
 
+For each $t \in [1,K]$ we call $g_{ti}$ the component function for $\mathbf{X}_t$ in exposure mapping $g_i$.
 
 #### Definition 3: Symmetry
 
-For some $t \in [1,K]$ and $i \in \mathscr{N}$, we say $g_{ti}$ is symmetric with respect to graph $\mathscr{G}$ if for any $\mathbf{X},\mathbf{X}' \in \mathbf{R}^n$ and permutation matrix $\mathbf{M}$ (conformable square matrix whose row and column margins all equal 1):
+Define permutation matrix $\mathbf{M}$ as a square matrix whose row and column margins all equal 1, and whose entries $M_{ij} \in \{0,1\}$. We say component function $g_{ti}$ is symmetric with respect to graph $\mathscr{G}$ if for any $\mathbf{X},\mathbf{X}' \in \mathbf{R}^n$ and conformable permutation matrix $\mathbf{M}$:
 
 
 $$
@@ -71,13 +94,13 @@ g_{ti}(\mathbf{X}, i) = g_{ti}(\mathbf{X'}, i)
 \end{equation}
 $$
 
-If $g_{ti}$ is symmetric with respect to $\mathscr{G}$ we say it is a "network exposure mapping for $Y_i$ with respect to $\mathbf{X}_t$ in $\mathscr{G}$". The value of the function is called the "network exposure value..."
+If $g_{ti}$ is symmetric with respect to $\mathscr{G}$ we say it is a "network exposure mapping for $Y_i$ with respect to $\mathbf{X}_t$ in $\mathscr{G}$". The value of the function is called the "network exposure value for $Y_i$ with respect to $\mathbf{X}_t$ in $\mathscr{G}$"
 
 
 
 #### Definition 4: Positional invariance 
 
-We say an network exposure mapping $g_{ti}$ is invariant to its position in the network if  
+We say component function $g_{ti}$ is invariant to its position in the network if  
 
 $$
 g_{ti} = g_{tj} = g_t \text{ for all } i,j \in \mathscr{N} 
@@ -90,33 +113,11 @@ $$
 
 #### Definition 5: Boundedness
 
-We say that a network exposure mapping $g_{ti}$ is bounded if all possible network exposure values are contained by a finite set $\mathbf{D}$ 
+We say that an exposure mapping $g_{i}$ is bounded if all possible exposure values are contained by a finite set $\mathbf{D}$ 
 
 $$
-g_{ti}(\mathbf{X}_t, i) \in \mathbf{D} 
+g_i(\mathbf{X}_{1}, ..., \mathbf{X}_{k}, i)  \in \mathbf{D} 
 $$
 
-and $|\mathbf{D}| < c$ for some constant $c$.
+and $|\mathbf{D}| < c$ for some constant $c$, where $c$ is not a function of the number of interconnected units in graph $\mathscr{G}$.
 
-
-#### Comments
-
-These definitions will be used in the next section to develop a model for inference under causal interference. The first assumption can be stated in graphic terms - it implies certain conditional independencies that can be encoded in a DAG by the removal and addition of arrows between nodes. The DAG in question would represent all the observational units rather than one (a typical) observation unit. 
-
-The following four assumptions are crucial to define here because they are not possible to encode in the aforementioned DAG. We will use these to impose homogeneity restrictions on the DAG that enable us to apply statistical inference methods that are usually thought to require independence of observations. We will make a weaker assumption - that of "no spillover", impose homogeneity restrictions, and apply familiar methods such as generalized linear models to reason about network phenomena. 
-
-It is useful to point out that the symmetry (with respect to $\mathscr{G}$) of a network exposure mapping $g_{ti}$ implies that the only thing that matters for the contribution of alters to $Y_i$ is the count of alters for which $X_t = 1$. If an exposure mapping is loyal to graph $\mathscr{G}$, symmetry with respect to graph $\mathscr{G}$ implies that 
-
-$$
-g_{0i}(\mathbf{X}_{1}, ..., \mathbf{X}_{k},  i)
-$$
-
-is a function of the $i^{th}$ entries of each of the vectors $\mathbf{X}_{1}, ..., \mathbf{X}_{k}$.
-
-The positional invariance of $g_{ti}$ means that what ever the function is that relates these counts to the outcome $Y_i$ is the same across observational units. Boundedness limits the number of distinct values that $g_{ti}$ can take because each distinct value constitutes a treatment level whose counterfactual we have to model. As we will see, the assumption of boundedness limits the number of counterfactuals. 
-
-Under network causal inference, boundedness can obtain in three different ways. First, it could be as a result of restrictions on the structure of the underlying network. It could be the case that in the network of interest, there is an upper bound on node degree. For example, if the only relationships of interest between individual participants were marriages, each node would have a degree of either 0 or 1, meaning the count of alters $X_{tj} = 1, j \in N_i$ is either zero or one. The second way boundedness might obtain is via restrictions of the value of $\mathbf{X}_t$. It might be the case, for instance, that the count of $i$'s for which $X_{ti}=1$ is very low, then on average, the count of alters for which $X_{tj} = 1, j \in N_i$ will also be low. Finally, boundedness could obtain as a result of the functional form of $g_t$ itself. 
-
-This might happen if $g_t$ models a network exposure which has a ceiling effect in its dose-response curve with the outcome of interest $Y_i$. For example, if $X_t$ indicates ownership of a car, and $\mathscr{G}$ encodes close friendships, $g_t$ would be a network exposure mapping which tells us how each additional friend who has a car shifts the outcome of interest. For most applications, its likely that beyond some number of friends (say 5) who have a car, an additional friend who gets a car will not change the outcome under investigation. 
-
-Finally, we should note that under classical causal inference $g_t = c \in \mathbf{R}$ for $t \in [1,k]$. Exposure models are trivially loyal to the empty graph, so the network exposure mappings are trivially separable, positionally invariant, and bounded. 

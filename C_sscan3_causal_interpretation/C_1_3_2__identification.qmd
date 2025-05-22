@@ -1,59 +1,31 @@
-
-
-#### Identification
+### Identification
 
 Once we have specified the hypothetical quantities from our thought experiment, we "identify" them, meaning write them in terms of the observed rather than counterfactual data. It is sufficient to identify the quantity:
 
 $$
 \begin{aligned}
-E \left[ \frac{1}{n} \sum_i E[Y_i^{(a)}] \right]
+ \frac{1}{n} \sum_i E[Y_i^{(a)}] 
 \end{aligned}
-$$
-which can be re-written:
+$$ which can be re-written:
 
 $$
 \begin{aligned}
-E \left[ \frac{1}{n} \sum_i E[Y_i^{(a)}] \right]    &= E \left[ \frac{1}{n} \sum_i E[Y_i^{(a)} | L_i] \right] \\
+ \frac{1}{n} \sum_i E[Y_i^{(a)}]                    &= E \left[ \frac{1}{n} \sum_i E[Y_i^{(a)} | L_i] \right] \\
                                                     &= E \left[ \frac{1}{n} \sum_i E[f_{Y}(U_{Y_i} , L_i, a) | L_i] \right] \\
-                                                    &= E \left[ \frac{1}{n} \sum_i E[f_{Y}(U_{Y_i} , L_i, a) | L_i, A_i] \\
-                                                    &= E \left[ \frac{1}{n} \sum_i E[f_{Y}(U_{Y_i} , L_i, a) | L_i, A_i=a] \\
-                                                    &= E \left[ \frac{1}{n} \sum_i E[f_{Y}(Y_i | L_i, A_i=a] \\
+                                                    &= E \left[ \frac{1}{n} \sum_i E[f_{Y}(U_{Y_i} , L_i, a) | L_i , A_i] \right] \\
+                                                    &= E \left[ \frac{1}{n} \sum_i E[f_{Y}(U_{Y_i} , L_i, a) | L_i , A_i = a] \right] \\
+                                                    &= E \left[ \frac{1}{n} \sum_i E[Y_i | L_i , A_i = a] \right] \\
 \end{aligned}
 $$
 
+::: aside
+-   In the first line, we use the law of iterated expectations
 
+-   In the second line, we use the definition for counterfactual outcome $Y_i^{(a)}$ as specified in @eq-independence-swig
 
+-   In the third line, we use the fact that when $L_i$ is fixed, $f_{Y}(U_{Y_i} , L_i, a)$ is a function of random variable $U_{Y_i}$ and $A_i$ is a function of $U_{A_i}$. Since $U_{Y_i}$ and $U_{A_i}$ are independent by definition of the NPSEM-IE, $f_{Y}(U_{Y_i} , L_i, a) \perp A_i | L_i$.
 
-The inner expectation can be re-written as follows: 
+-   In the fourth line we consider the expected value of $f_{Y}(U_{Y_i} , L_i, a)$ when $A_i = a$, in particular 
 
-$$
-\begin{aligned}
- E[ Y_i^{(a)} | L_i  ]   &=  E[  Y_i^{(a)} | L_i  , A_i = a ]   \\
-                                &=  E[ f_{Y}(U_{Y_i} , l_i, a) | L_i  , A_i = a ]   \\
-                                &=  E[ Y_i | L_i , A_i = a, ]   \\
-\end{aligned}
-$$
-
--   In the first line, we use the fact that since it is constant, the value of dress set by the experimenter $a$ is independent of the observed value of dress $A_i$ for each person $i$.
-
-
-
--   In the second line, we use the no spillover and no interference assumptions - person $i$'s values (including counterfactual values) are independent of any measures not taken on person $i$.
-
--   In the third line we substitute $Y_i^{(a)}$ for the structural equation that produces that variable, according to the model in @eq-independence-swig.
-
--   In the fourth line, we substitute the structural equation for the observed value $Y_i$ according to the model in @eq-independence-dag.
-
-(Note that the function $f_y$ in @eq-independence-swig is identical to the function $f_y$ in @eq-independence-dag. The error term for person $i$, $U_{Y_i}$ has the same value in both the counterfactual and observational models, as does the value of $l_i$. As a result, $f_{Y}(U_{Y_i} , l_i, a)$ is equal to the observed value as well as the counterfactual value for participants $i$ if $A_i = a$).
-
-The functional we have to estimate from data is the following. 
-
-$$
-E[ \frac{1}{n} \sum_i{E[ Y_i | L_i , A_i = a ]}  ] 
-$$
-
-
-
-
-
-
+-   In the fifth line, we use the definition for observed value $Y_i$ according as specified in @eq-independence-dag.
+:::
