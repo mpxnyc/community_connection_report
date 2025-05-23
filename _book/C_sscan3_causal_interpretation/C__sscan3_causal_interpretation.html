@@ -367,7 +367,8 @@ div.csl-indent {
   <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model"><span class="header-section-number">C.1.2</span> Model</a></li>
   <li><a href="#estimands" id="toc-estimands" class="nav-link" data-scroll-target="#estimands"><span class="header-section-number">C.1.3</span> Estimands</a></li>
   <li><a href="#identification-1" id="toc-identification-1" class="nav-link" data-scroll-target="#identification-1"><span class="header-section-number">C.1.4</span> Identification</a></li>
-  <li><a href="#assumptions-revisited" id="toc-assumptions-revisited" class="nav-link" data-scroll-target="#assumptions-revisited"><span class="header-section-number">C.1.5</span> Assumptions, revisited</a></li>
+  <li><a href="#estimation" id="toc-estimation" class="nav-link" data-scroll-target="#estimation"><span class="header-section-number">C.1.5</span> Estimation</a></li>
+  <li><a href="#assumptions-revisited" id="toc-assumptions-revisited" class="nav-link" data-scroll-target="#assumptions-revisited"><span class="header-section-number">C.1.6</span> Assumptions, revisited</a></li>
   <li><a href="#reflection-questions" id="toc-reflection-questions" class="nav-link" data-scroll-target="#reflection-questions">Reflection questions</a></li>
   </ul>
 </li>
@@ -381,6 +382,7 @@ div.csl-indent {
   <li><a href="#model-1" id="toc-model-1" class="nav-link" data-scroll-target="#model-1"><span class="header-section-number">C.2.2</span> Model</a></li>
   <li><a href="#estimands-1" id="toc-estimands-1" class="nav-link" data-scroll-target="#estimands-1"><span class="header-section-number">C.2.3</span> Estimands</a></li>
   <li><a href="#identification-3" id="toc-identification-3" class="nav-link" data-scroll-target="#identification-3"><span class="header-section-number">C.2.4</span> Identification</a></li>
+  <li><a href="#estimation-1" id="toc-estimation-1" class="nav-link" data-scroll-target="#estimation-1"><span class="header-section-number">C.2.5</span> Estimation</a></li>
   <li><a href="#reflection-questions-1" id="toc-reflection-questions-1" class="nav-link" data-scroll-target="#reflection-questions-1">Reflection questions</a></li>
   </ul>
 </li>
@@ -402,7 +404,7 @@ div.csl-indent {
   <li><a href="#assumptions-2" id="toc-assumptions-2" class="nav-link" data-scroll-target="#assumptions-2"><span class="header-section-number">C.4.1</span> Assumptions</a></li>
   <li><a href="#model-3" id="toc-model-3" class="nav-link" data-scroll-target="#model-3"><span class="header-section-number">C.4.2</span> Model</a></li>
   <li><a href="#estimands-2" id="toc-estimands-2" class="nav-link" data-scroll-target="#estimands-2"><span class="header-section-number">C.4.3</span> Estimands</a></li>
-  <li><a href="#estimation" id="toc-estimation" class="nav-link" data-scroll-target="#estimation"><span class="header-section-number">C.4.4</span> Estimation</a></li>
+  <li><a href="#estimation-2" id="toc-estimation-2" class="nav-link" data-scroll-target="#estimation-2"><span class="header-section-number">C.4.4</span> Estimation</a></li>
   </ul>
 </li>
   </ul></nav>
@@ -653,9 +655,12 @@ E \left[ \frac{1}{n} \sum_i Y_i^{(a=1)} - Y_i^{(a=0)} \right]
                                                     &amp;= E \left[ \frac{1}{n} \sum_i E[Y_i | L_i , A_i = a] \right] \\
 \end{aligned}
 \]</span></p>
-</section><section id="assumptions-revisited" class="level3" data-number="C.1.5"><h3 data-number="C.1.5" class="anchored" data-anchor-id="assumptions-revisited">
-<span class="header-section-number">C.1.5</span> Assumptions, revisited</h3>
-<p>Typically, there are three assumptions whihc are usually said to be necessary conditions for valid causal inferences: conditional exchangeability,</p>
+</section><section id="estimation" class="level3" data-number="C.1.5"><h3 data-number="C.1.5" class="anchored" data-anchor-id="estimation">
+<span class="header-section-number">C.1.5</span> Estimation</h3>
+<p>We can estimate <span class="math inline">\(E[Y_i | L_i = l, A_i = a]\)</span> non-parametrically by calculating the average of observations <span class="math inline">\(Y_i\)</span> for which <span class="math inline">\(L_i = l\)</span> and <span class="math inline">\(A_i = a\)</span>. These estimates improve as <span class="math inline">\(n \rightarrow \infty\)</span>.</p>
+</section><section id="assumptions-revisited" class="level3" data-number="C.1.6"><h3 data-number="C.1.6" class="anchored" data-anchor-id="assumptions-revisited">
+<span class="header-section-number">C.1.6</span> Assumptions, revisited</h3>
+<p>Typically, there are three assumptions which are usually stated as necessary conditions for valid causal inferences: conditional exchangeability,</p>
 <p><span class="math display">\[
 Y_i^{(a)} \perp A_i | L_i
 \]</span> consistency,</p>
@@ -851,7 +856,7 @@ Y_3 &amp;= f_{Y}(U_{Y_3}, L_3,A_3,  g_{Y}(\mathbf{L}, 3), h_{Y}(\mathbf{A}, 3)) 
 <section id="positivity-1" class="level5"><h5 class="anchored" data-anchor-id="positivity-1">Positivity</h5>
 <p>We assume that for all <span class="math inline">\(i\)</span></p>
 <p><span class="math display">\[
-0 &lt; P[A_i = a_i,  h_Y (\mathbf{A}, i) =  h(\mathbf{a}, i)| L_i,g_{A}(\mathbf{L}, i) ] &lt; 1
+0 &lt; P[A_i = a_i,  h_Y (\mathbf{A}, i) =  h_Y(\mathbf{a}, i)| L_i,g_{A}(\mathbf{L}, i) ] &lt; 1
 \]</span> for all <span class="math inline">\(\mathbf{a} \in \{0,1\}^n\)</span></p>
 </section></section></section><section id="model-1" class="level3" data-number="C.2.2"><h3 data-number="C.2.2" class="anchored" data-anchor-id="model-1">
 <span class="header-section-number">C.2.2</span> Model</h3>
@@ -883,7 +888,7 @@ Y_i &amp;= f_{Y}( U_{Y_i},  L_i,  g_{Y}(\textbf{L}, i),   A_i,  h_{Y}( \textbf{A
 <p>Note that because of the assumption of network interference, the counterfactual outcome for <em>Person 1</em> is a function of <em>Person 2</em>’s treatment value, and vice versa. The counterfactual outcome for <em>Person 3</em>, on the other hand, is a function of <em>Person 3</em>’s treatment (<span class="math inline">\(a_3\)</span>) alone. This is because <span class="math inline">\(\mathscr{N}_1 = \{2\}\)</span>, <span class="math inline">\(\mathscr{N}_2 = \{1\}\)</span>, and <span class="math inline">\(\mathscr{N}_3 = \{\}\)</span>, according to Example 2.</p>
 <p>To ensure that counterfactual outcomes are well-defined for all experimental units, we make the assumption of positivity:</p>
 <p><span class="math display">\[
-0 &lt; P[A_i = a_i,  h_Y (\mathbf{A}, i) =  h(\mathbf{a}, i)| L_i,g_{A}(\mathbf{L}, i) ] &lt; 1
+0 &lt; P[A_i = a_i,  h_Y (\mathbf{A}, i) =  h_Y(\mathbf{a}, i)| L_i,g_{A}(\mathbf{L}, i) ] &lt; 1
 \]</span> for all <span class="math inline">\(\mathbf{a} \in \{0,1\}^n\)</span></p>
 <div class="cell" data-hash="C__sscan3_causal_interpretation_cache/html/fig-homogenous-interference-swig_1bda0e9a9380a2fd61ab2a5d7ba68790">
 <details><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_swig</span><span class="op">(</span><span class="st">"homogenous_interference"</span><span class="op">)</span>      <span class="op">|&gt;</span> </span>
@@ -935,16 +940,20 @@ E \left[ \frac{1}{n} \sum_i Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}  \right] &am
 <p><strong>C</strong>. In the final line, we use the definition of observed variable <span class="math inline">\(Y_i\)</span> given in <a href="#eq-homogenous-dag">Equation&nbsp;<span>C.6</span></a>.</p>
 </div></div><p><span class="math display">\[
 \begin{aligned}
-E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} | \mathbf{L}] &amp;=  E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}  | L_i , g(\mathbf{L}, i)] \phantom{, A_i = a_i, h_Y(\textbf{A}_{\mathscr{N}_i}) = h_Y(\textbf{a}_{\mathscr{N}_i})} \\
-&amp;=  E[f_{Y}(U_{Y_i}, L_i,  a_i,  g_{Y}(\textbf{L}, i),      h_{Y}(\textbf{a}, i)         )   | L_i , g(\mathbf{L}, i)] \phantom{, A_i = a_i, h_Y(\textbf{A}_{\mathscr{N}_i}) = h_Y(\textbf{a}_{\mathscr{N}_i})} \\
-        &amp;=  E[f_{Y}(...)   | L_i , g(\mathbf{L}, i), A_i = a_i, h_Y(\textbf{A}, i) = h_Y(\textbf{a}, i)] \\
-        &amp;=   E[Y_i                                      | L_i , g(\mathbf{L}, i), A_i = a_i, h_Y(\textbf{A}, i) = h_Y(\textbf{a}, i)] \\
+E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} | \mathbf{L}]
+&amp;=  E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}                                  | L_i , g_Y(\mathbf{L}, i)]  \\
+&amp;=  E[f_{Y}(U_{Y_i}, L_i,  a_i, g_{Y}(\textbf{L}, i),  h_{Y}(\textbf{a}, i))   | L_i , g_Y(\mathbf{L}, i)]  \\
+&amp;=  E[f_{Y}(...)                                                               | L_i , g_Y(\mathbf{L}, i), A_i = a_i, h_Y(\textbf{A}, i) = h_Y(\textbf{a}, i)] \\
+&amp;=  E[Y_i                                                                      | L_i , g_Y(\mathbf{L}, i), A_i = a_i, h_Y(\textbf{A}, i) = h_Y(\textbf{a}, i)] \\
 \end{aligned}
 \]</span></p>
 <p>We are left with this functional</p>
 <p><span class="math display">\[
-E[ \frac{1}{n} \sum_i  E[Y_i |  L_i , g(\mathbf{L}, i), A_i = a_i, h_Y(\textbf{A}, i) = h_Y(\textbf{a}, i) ]]
+E[ \frac{1}{n} \sum_i  E[Y_i |  L_i , g_Y(\mathbf{L}, i), A_i = a_i, h_Y(\textbf{A}, i) = h_Y(\textbf{a}, i) ]]
 \]</span></p>
+</section><section id="estimation-1" class="level3" data-number="C.2.5"><h3 data-number="C.2.5" class="anchored" data-anchor-id="estimation-1">
+<span class="header-section-number">C.2.5</span> Estimation</h3>
+<p>We can estimate <span class="math inline">\(E[Y_i | L_i = l , g_Y(\mathbf{L}, i) = l', A_i = a, h_Y(\textbf{A}, i) = a' ]\)</span> non-parametrically by calculating the average of observations <span class="math inline">\(Y_i\)</span> for which <span class="math inline">\(L_i = l\)</span>, <span class="math inline">\(A_i = a\)</span>, <span class="math inline">\(g_Y(\mathbf{L}, i) = l'\)</span>, and <span class="math inline">\(h_Y(\textbf{A}, i) = a'\)</span>. The assumption of boundedness guarantees that as <span class="math inline">\(n \rightarrow \infty\)</span>, we will get better estimates for each cell rather than a proliferation of cells to estimate.</p>
 </section><section id="reflection-questions-1" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="reflection-questions-1">Reflection questions</h3>
 <ol type="1">
 <li><p>Compare and contrast the assumptions made in <a href="#sec-classic-causal-inference"><span>Section&nbsp;C.1</span></a> with those in <a href="#sec-network-causal-inference"><span>Section&nbsp;C.2</span></a>.</p></li>
@@ -1204,7 +1213,7 @@ C_s^{(h)} = \frac{1}{|\mathscr{N}_p|}\sum_i V_{si}^{(h)}
 <p><span class="math display">\[
 \frac{LCC_s}{|N_p|}
 \]</span></p>
-</section></section><section id="estimation" class="level3" data-number="C.4.4"><h3 data-number="C.4.4" class="anchored" data-anchor-id="estimation">
+</section></section><section id="estimation-2" class="level3" data-number="C.4.4"><h3 data-number="C.4.4" class="anchored" data-anchor-id="estimation-2">
 <span class="header-section-number">C.4.4</span> Estimation</h3>
 <p>We simulated the intervention outlined above using MPX NYC data by calculating the <span class="math inline">\(G^{s}(N, \psi_s)\)</span> where <span class="math inline">\(s\)</span> ranges from <span class="math inline">\(1\)</span> to the total number of community districts. We measured the uncertainty of our estimates by re-sampling study participants with replacement.</p>
 

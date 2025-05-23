@@ -26,15 +26,21 @@ Then we can evaluate the inner expectation as follows:
 
 $$
 \begin{aligned}
- E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} | \mathbf{L}] &=  E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}  | L_i , g(\mathbf{L}, i)] \phantom{, A_i = a_i, h_Y(\textbf{A}_{\mathscr{N}_i}) = h_Y(\textbf{a}_{\mathscr{N}_i})} \\
- &=  E[f_{Y}(U_{Y_i}, L_i,  a_i,  g_{Y}(\textbf{L}, i),      h_{Y}(\textbf{a}, i)         )   | L_i , g(\mathbf{L}, i)] \phantom{, A_i = a_i, h_Y(\textbf{A}_{\mathscr{N}_i}) = h_Y(\textbf{a}_{\mathscr{N}_i})} \\ 
-        &=  E[f_{Y}(...)   | L_i , g(\mathbf{L}, i), A_i = a_i, h_Y(\textbf{A}, i) = h_Y(\textbf{a}, i)] \\
-        &=   E[Y_i                                      | L_i , g(\mathbf{L}, i), A_i = a_i, h_Y(\textbf{A}, i) = h_Y(\textbf{a}, i)] \\
+ E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} | \mathbf{L}] 
+ &=  E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}                                  | L_i , g_Y(\mathbf{L}, i)]  \\
+ &=  E[f_{Y}(U_{Y_i}, L_i,  a_i, g_{Y}(\textbf{L}, i),  h_{Y}(\textbf{a}, i))   | L_i , g_Y(\mathbf{L}, i)]  \\ 
+ &=  E[f_{Y}(...)                                                               | L_i , g_Y(\mathbf{L}, i), A_i = a_i, h_Y(\textbf{A}, i) = h_Y(\textbf{a}, i)] \\
+ &=  E[Y_i                                                                      | L_i , g_Y(\mathbf{L}, i), A_i = a_i, h_Y(\textbf{A}, i) = h_Y(\textbf{a}, i)] \\
 \end{aligned}
 $$
 
 We are left with this functional
 
 $$
-E[ \frac{1}{n} \sum_i  E[Y_i |  L_i , g(\mathbf{L}, i), A_i = a_i, h_Y(\textbf{A}, i) = h_Y(\textbf{a}, i) ]]
+E[ \frac{1}{n} \sum_i  E[Y_i |  L_i , g_Y(\mathbf{L}, i), A_i = a_i, h_Y(\textbf{A}, i) = h_Y(\textbf{a}, i) ]]
 $$
+
+### Estimation
+
+We can estimate $E[Y_i |  L_i = l , g_Y(\mathbf{L}, i) = l', A_i = a, h_Y(\textbf{A}, i) = a' ]$ non-parametrically by calculating the average of observations $Y_i$ for which $L_i = l$, $A_i = a$, $g_Y(\mathbf{L}, i) = l'$, and $h_Y(\textbf{A}, i) = a'$. The assumption of boundedness guarantees that as $n \rightarrow \infty$, we will get better estimates for each cell rather than a proliferation of cells to estimate. 
+
