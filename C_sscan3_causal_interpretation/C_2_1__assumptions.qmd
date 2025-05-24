@@ -39,12 +39,17 @@ Y_3 &= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
 \end{aligned}
 $$ {#eq-interference-dag}
 
-Under network causal inference, we make the assumption that interference respects some mapping between individuals - a mapping given by a graph. In @fig-interference-dag, based on their relationships with one another, *Person 1*'s measures are connected with *Person 2*'s, and neither are connected with *Person 3*.  
+Under network causal inference, we make the assumption that interference respects some mapping between individuals - a mapping given by a graph. In @fig-interference-dag, based on their relationships with one another, *Person 1*'s measures are connected with *Person 2*'s, and neither are connected with *Person 3*'s.  
 
-Saying a structural equation model or a DAG shows network interference is equivalent to saying the exposure mapping for each variable in the DAG is loyal to graph $\mathscr{G}$ which encodes the causally relevant relationships between observational units in the sample. In this example 
+Saying a structural equation model or a DAG shows network interference is equivalent to saying the exposure mapping for each variable in the DAG is loyal to data graph $\mathscr{G}$ which encodes the causally relevant relationships between observational units in the sample. In our example 
 
 $$
-\mathscr{G}(\{\text{1,2,3}\}, \{\text{1} \sim \text{2}\}, \{\mathbf{Y}, \mathbf{A}, \mathbf{L}\})
+\mathscr{G}(\{\text{1,2,3}\}, \{\text{1} \sim \text{2}\}, 
+                  \{
+                      \begin{bmatrix} Y_1 \\ Y_2 \\ Y_3 \end{bmatrix}, 
+                      \begin{bmatrix} L_1 \\ L_2 \\ L_3 \end{bmatrix},
+                      \begin{bmatrix} A_1 \\ A_2 \\ A_3 \end{bmatrix}
+                      \})
 $$
 
 #### Homogeneity assumptions
@@ -90,7 +95,7 @@ $$
 
 ###### Symmetry 
 
-Since *Person 1* and *Person 2* each have one network exposure unit each, and since *Person 3* does not have any network exposure units, the assumption of symmetry does not make a difference in this example. It would be that the order of entries related to network exposure units does not matter for calculating the network exposure value. Permuting those entries does not change that value. 
+Since *Person 1* and *Person 2* each have one network exposure unit, and since *Person 3* does not have any network exposure units, the assumption of symmetry does not make a difference in this example. It would be that the order of entries related to network exposure units does not matter for calculating the network exposure value. Permuting those entries does not change that value. 
 
 
 
@@ -116,15 +121,6 @@ Y_3 &= f_{Y}(U_{Y_3}, L_3,A_3,  g_{Y}(\mathbf{L}, 3), h_{Y}(\mathbf{A}, 3)) \\
 \end{aligned}
 $$
 
-#### Identification
 
-##### Positivity
-
-We assume that for all $i$
-
-$$
-0 < P[A_i = a_i,  h_Y (\mathbf{A}, i) =  h_Y(\mathbf{a}, i)| L_i,g_{A}(\mathbf{L}, i) ] < 1
-$$
-for all $\mathbf{a} \in \{0,1\}^n$
 
 
