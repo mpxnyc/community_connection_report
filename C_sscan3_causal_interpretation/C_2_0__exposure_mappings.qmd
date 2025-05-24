@@ -1,8 +1,7 @@
 
 
 ### Exposure mappings {.unnumbered}
-
-Say we have a non-parametric structural equation model defined on data graph $\mathscr{G}(\mathscr{N}, \sim, \Lambda)$ with outcome measure $\mathbf{Y}$ preceded by exposure variables $\mathbf{X}_t$. $f_{Y_i}$ is the structural equation for $Y_i$, and $U_{Y_i}$ the error term for that equation. We define the "exposure mapping for $Y_i$" as the function 
+Loosely following @aronow2017, we use the idea of exposure mappings to express the model assumptions we will need in subsequent sections. Say we have a non-parametric structural equation model defined on data graph $\mathscr{G}(\mathscr{N}, \sim, \Lambda)$ with outcome measure $\mathbf{Y}$ preceded by exposure variables $\mathbf{X}_t$. $f_{Y_i}$ is the structural equation for $Y_i$, and $U_{Y_i}$ the error term for that equation. We define the "exposure mapping for $Y_i$" as the function 
 
 $$
 g_i: (\{0,1\}^{n})^K\times\mathscr{N} \rightarrow \mathbf{R}^{2K}
@@ -41,7 +40,7 @@ We say that an exposure mapping $g_{i}$ is bounded if all possible exposure valu
 
 **A**. It could be as a result of restrictions on the structure of the data graph. It could be the case that in the network of interest, there is an upper bound on node degree. For example, if the only relationships of interest between individual participants were marriages, each node would have a degree of either 0 or 1, meaning the count of alters with $X_{tj} = 1, j \in \mathscr{N}_i$ is either zero or one. 
 
-**B**. It might obtain is via restrictions of the value of $\mathbf{X}_t$ itself. It might be the case, for instance, that the count of $i$'s for which $X_{ti}=1$ is very low, then on average, the count of alters for which $X_{tj} = 1, j \in N_i$ will also be low. 
+**B**. It might obtain via restrictions of the value of $\mathbf{X}_t$ itself. It might be the case, for instance, that the count of $i$'s for which $X_{ti}=1$ is very low so that on average, the count of alters for which $X_{tj} = 1, j \in N_i$ will also be low. 
 
 **C**. Finally, boundedness could obtain as a result of the functional form of $g_t$ itself. This might happen if $g_t$ models a network exposure which has a ceiling effect in its dose-response curve with the outcome of interest. For example, if $X_t$ indicates ownership of a car, and $\mathscr{G}$ encodes close friendships, $g_t$ would be a network exposure mapping which tells us how each additional friend who has a car shifts the outcome of interest. For most health applications, its likely that beyond some number of friends (say 10) who have a car, an additional friend who gets a car will not change the outcome.
 :::

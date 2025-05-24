@@ -366,7 +366,7 @@ div.csl-indent {
   <li><a href="#sec-assumptions-classic" id="toc-sec-assumptions-classic" class="nav-link" data-scroll-target="#sec-assumptions-classic"><span class="header-section-number">C.1.1</span> Assumptions</a></li>
   <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model"><span class="header-section-number">C.1.2</span> Model</a></li>
   <li><a href="#estimands" id="toc-estimands" class="nav-link" data-scroll-target="#estimands"><span class="header-section-number">C.1.3</span> Estimands</a></li>
-  <li><a href="#identification-1" id="toc-identification-1" class="nav-link" data-scroll-target="#identification-1"><span class="header-section-number">C.1.4</span> Identification</a></li>
+  <li><a href="#identification" id="toc-identification" class="nav-link" data-scroll-target="#identification"><span class="header-section-number">C.1.4</span> Identification</a></li>
   <li><a href="#estimation" id="toc-estimation" class="nav-link" data-scroll-target="#estimation"><span class="header-section-number">C.1.5</span> Estimation</a></li>
   <li><a href="#assumptions-revisited" id="toc-assumptions-revisited" class="nav-link" data-scroll-target="#assumptions-revisited"><span class="header-section-number">C.1.6</span> Assumptions, revisited</a></li>
   <li><a href="#reflection-questions" id="toc-reflection-questions" class="nav-link" data-scroll-target="#reflection-questions">Reflection questions</a></li>
@@ -381,7 +381,7 @@ div.csl-indent {
   <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">C.2.1</span> Assumptions</a></li>
   <li><a href="#model-1" id="toc-model-1" class="nav-link" data-scroll-target="#model-1"><span class="header-section-number">C.2.2</span> Model</a></li>
   <li><a href="#estimands-1" id="toc-estimands-1" class="nav-link" data-scroll-target="#estimands-1"><span class="header-section-number">C.2.3</span> Estimands</a></li>
-  <li><a href="#identification-3" id="toc-identification-3" class="nav-link" data-scroll-target="#identification-3"><span class="header-section-number">C.2.4</span> Identification</a></li>
+  <li><a href="#identification-1" id="toc-identification-1" class="nav-link" data-scroll-target="#identification-1"><span class="header-section-number">C.2.4</span> Identification</a></li>
   <li><a href="#estimation-1" id="toc-estimation-1" class="nav-link" data-scroll-target="#estimation-1"><span class="header-section-number">C.2.5</span> Estimation</a></li>
   <li><a href="#reflection-questions-1" id="toc-reflection-questions-1" class="nav-link" data-scroll-target="#reflection-questions-1">Reflection questions</a></li>
   </ul>
@@ -407,6 +407,7 @@ div.csl-indent {
   <li><a href="#estimation-2" id="toc-estimation-2" class="nav-link" data-scroll-target="#estimation-2"><span class="header-section-number">C.4.4</span> Estimation</a></li>
   </ul>
 </li>
+  <li><a href="#ssnacx---extensions-of-the-ssnac-framework" id="toc-ssnacx---extensions-of-the-ssnac-framework" class="nav-link" data-scroll-target="#ssnacx---extensions-of-the-ssnac-framework"><span class="header-section-number">C.5</span> SSNACX - Extensions of the SSNAC framework</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -569,17 +570,11 @@ f_A &amp;= f_{A_1} = f_{A_2} = f_{A_3} \\
 f_Y &amp;= f_{Y_1} = f_{Y_2} = f_{Y_3}  \\
 \end{aligned}
 \]</span></p>
-</section></section><section id="identification" class="level4"><h4 class="anchored" data-anchor-id="identification">Identification</h4>
-<section id="positivity" class="level5"><h5 class="anchored" data-anchor-id="positivity">Positivity</h5>
-<p>We assume that for all <span class="math inline">\(i\)</span></p>
-<p><span class="math display">\[
-0 &lt; P[A_i =1 | L_i] &lt; 1
-\]</span></p>
 </section></section></section><section id="model" class="level3" data-number="C.1.2"><h3 data-number="C.1.2" class="anchored" data-anchor-id="model">
 <span class="header-section-number">C.1.2</span> Model</h3>
 <section id="observed-data" class="level4"><h4 class="anchored" data-anchor-id="observed-data">Observed data</h4>
 <p>The homogeneity and indepdndence assumptions allow us to re-write the structural equation model dropping the person subscript from the equations. The model simplifies into one for three measures each taken on one person, rather than a model for 9 measures taken on 3 people. Since the measures on each person are identically distributed, this model can be used three times to separately generate the measures for <em>Person 1</em>, <em>Person 2</em>, and <em>Person 3</em>. By contrast, the original model produced measures for all three people at one go.</p>
-<p><a href="#fig-independence-dag">Figure&nbsp;<span>C.3</span></a> and <a href="#eq-independence-dag">Equation&nbsp;<span>C.3</span></a> show the resulting non-parametric structural equation model for our data, if we analyse it under classic causal inference. As a consequence of the assumptions stated in <a href="#sec-assumptions-classic"><span>Section&nbsp;C.1.1</span></a>, we can represent the model using three equations rather than 9. We retain the person subscript on the random variables in <a href="#fig-independence-dag">Figure&nbsp;<span>C.3</span></a> and we keep all 9 nodes in the DAG on <a href="#eq-independence-dag">Equation&nbsp;<span>C.3</span></a>. This is to remind us that though our model is for one person, our purpose was always to infer something about the sample of three people.</p>
+<p><a href="#fig-independence-dag">Figure&nbsp;<span>C.3</span></a> and <a href="#eq-independence-dag">Equation&nbsp;<span>C.3</span></a> show the resulting non-parametric structural equation model for our data, if we analyse it under classic causal inference. As a consequence of the assumptions stated in <a href="#sec-assumptions-classic"><span>Section&nbsp;C.1.1</span></a>, we can represent the model using three equations rather than 9. We retain the person subscript on the random variables in <a href="#eq-independence-dag">Equation&nbsp;<span>C.3</span></a> and we keep all 9 nodes in the DAG on <a href="#fig-independence-dag">Figure&nbsp;<span>C.3</span></a>. This is to remind us that though our model is for one person, our purpose was always to infer something about the sample of three people.</p>
 <div class="cell" data-layout-align="center" data-hash="C__sscan3_causal_interpretation_cache/html/fig-independence-dag_204f3e84e373be16321a3fb16872de30">
 <details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"independence"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -635,9 +630,9 @@ Y_i^{(a_i)} &amp;= f_{Y}(U_{Y_i} , L_i, a_i) \\
 E \left[ \frac{1}{n} \sum_i Y_i^{(a=1)} - Y_i^{(a=0)} \right]
 \end{aligned}
 \]</span></p>
-</section><section id="identification-1" class="level3 page-columns page-full" data-number="C.1.4"><h3 data-number="C.1.4" class="anchored" data-anchor-id="identification-1">
+</section><section id="identification" class="level3 page-columns page-full" data-number="C.1.4"><h3 data-number="C.1.4" class="anchored" data-anchor-id="identification">
 <span class="header-section-number">C.1.4</span> Identification</h3>
-<p>Once we have specified the hypothetical quantities from our thought experiment, we “identify” them, meaning write them in terms of the observed rather than counterfactual data. It is sufficient to identify the quantity:</p>
+<p>Once we have specified the hypothetical quantities from our thought experiment, we “identify” them, meaning write them in terms of the observed rather than counterfactual model. It is sufficient to identify the quantity:</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong>Notes on identification</strong></p>
@@ -648,11 +643,11 @@ E \left[ \frac{1}{n} \sum_i Y_i^{(a=1)} - Y_i^{(a=0)} \right]
 <p><strong>E</strong>. In the fifth line, we use the definition for observed value <span class="math inline">\(Y_i\)</span> according as specified in <a href="#eq-independence-dag">Equation&nbsp;<span>C.3</span></a>.</p>
 </div></div><p><span class="math display">\[
 \begin{aligned}
-\frac{1}{n} \sum_i E[Y_i^{(a)}]                    &amp;= E \left[ \frac{1}{n} \sum_i E[Y_i^{(a)} | L_i] \right] \\
-                                                    &amp;= E \left[ \frac{1}{n} \sum_i E[f_{Y}(U_{Y_i} , L_i, a) | L_i] \right] \\
-                                                    &amp;= E \left[ \frac{1}{n} \sum_i E[f_{Y}(U_{Y_i} , L_i, a) | L_i , A_i] \right] \\
-                                                    &amp;= E \left[ \frac{1}{n} \sum_i E[f_{Y}(U_{Y_i} , L_i, a) | L_i , A_i = a] \right] \\
-                                                    &amp;= E \left[ \frac{1}{n} \sum_i E[Y_i | L_i , A_i = a] \right] \\
+E[Y_i^{(a)}]                    &amp;= E \left[ E[Y_i^{(a)} | L_i] \right] \\
+                                &amp;= E \left[ E[f_{Y}(U_{Y_i} , L_i, a) | L_i] \right] \\
+                                &amp;= E \left[ E[f_{Y}(U_{Y_i} , L_i, a) | L_i , A_i] \right] \\
+                                &amp;= E \left[ E[f_{Y}(U_{Y_i} , L_i, a) | L_i , A_i = a] \right] \\
+                                &amp;= E \left[ E[Y_i | L_i , A_i = a] \right] \\
 \end{aligned}
 \]</span></p>
 </section><section id="estimation" class="level3" data-number="C.1.5"><h3 data-number="C.1.5" class="anchored" data-anchor-id="estimation">
@@ -670,7 +665,7 @@ E[Y_i^{(a)} | L_i = l_i, A_i = a] =  E[Y_i | L_i = l_i, A_i = a]
 <p><span class="math display">\[
 0 &lt; E[A_i | L_i] &lt; 1
 \]</span></p>
-<p>Conditional exchangeability is a consequence of the independence of errors in the NPSEM-IE (See notes on identification assumptions above). Consistency is a consequence of the fact that a) the structural equations for the observed model are identical with the equations for the counterfactual model, b) the error terms for each individual <span class="math inline">\(i\)</span> are equal when they appear in the counterfactual model as they are in the observed model. i.e.&nbsp;<span class="math inline">\(U_{Y_i}\)</span> has the same value in <a href="#eq-independence-swig">Equation&nbsp;<span>C.4</span></a> as it does in <a href="#eq-independence-dag">Equation&nbsp;<span>C.3</span></a>. Unlike the first two, the assumption of positivity is not given by the definition of the NPSEM. We make it in defining the structural equation models for counterfactual variables (<a href="#eq-independence-swig">Equation&nbsp;<span>C.4</span></a>).</p>
+<p>Conditional exchangeability is a consequence of the independence of errors in the NPSEM-IE (see notes on identification assumptions above). Consistency is a consequence of the fact that a) the structural equations for the observed model are identical with the equations for the counterfactual model, b) the error terms for each individual <span class="math inline">\(i\)</span> in the counterfactual model are equal to the error terms in the observed model. i.e.&nbsp;<span class="math inline">\(U_{Y_i}\)</span> has the same value in <a href="#eq-independence-swig">Equation&nbsp;<span>C.4</span></a> as it does in <a href="#eq-independence-dag">Equation&nbsp;<span>C.3</span></a>. Unlike the first two, the assumption of positivity is not given by the definition of the NPSEM. We make it in defining the structural equation models for counterfactual variables (<a href="#eq-independence-swig">Equation&nbsp;<span>C.4</span></a>).</p>
 </section><section id="reflection-questions" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="reflection-questions">Reflection questions</h3>
 <p>Using the structural equations:</p>
 <ol type="1">
@@ -678,14 +673,14 @@ E[Y_i^{(a)} | L_i = l_i, A_i = a] =  E[Y_i | L_i = l_i, A_i = a]
 <li><p>Show that independence holds in <a href="#eq-independence-dag">Equation&nbsp;<span>C.3</span></a>.</p></li>
 <li><p>Show that the causal estimand in <a href="#sec-classic-causal-inference"><span>Section&nbsp;C.1</span></a> is equivalent to the usual definition of average causal effect (ACE)</p></li>
 <li><p>Show that the causal estimate in <a href="#sec-classic-causal-inference"><span>Section&nbsp;C.1</span></a> is equivalent to the usual definition of the g-formula.</p></li>
-<li><p>How is the SUTVA or consistency assumption encoded in this model?</p></li>
+<li><p>How is the SUTVA assumption encoded in this model?</p></li>
 </ol></section></section><section id="sec-network-causal-inference" class="level2 page-columns page-full" data-number="C.2"><h2 data-number="C.2" class="anchored" data-anchor-id="sec-network-causal-inference">
 <span class="header-section-number">C.2</span> Network causal inference</h2>
 <section id="example-2-marriage-dress-and-jobs" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="example-2-marriage-dress-and-jobs">Example 2: Marriage, Dress, and Jobs</h3>
-<p>We mentioned that in our study sample that <em>Person 1</em> and <em>Person 2</em> are married to each other, and <em>Person 1</em> and <em>Person 3</em> are new colleagues. In the causal system connecting their job status, dress and job offers, an argument could be made that <em>Person 1</em>’s job status affects <em>Person 2</em>’s dress, since they pool their salaries as a married couple. It could also be argued that <em>Person 1</em>’s job status affects <em>Person 2</em>’s job opportunities if having a job brings the married couple into contact with other married couples who are connected to job markets.</p>
-<p>Finally, we could argue that <em>Person 1</em>’s dress affects <em>Person 2</em>’s job opportunities if some aspect of the reputation <em>Person 2</em> enjoys among potential colleagues derives from <em>Person 1</em>’s current job in that market. Symmetrically, <em>Person 2</em>’s current job could also potentially affect <em>Person 1’s</em> job opportunities.</p>
+<p>We mentioned that in our study sample <em>Person 1</em> and <em>Person 2</em> are married to each other, and <em>Person 1</em> and <em>Person 3</em> are new colleagues. In the causal system connecting their job status, dress and job offers, an argument could be made that <em>Person 1</em>’s job status affects <em>Person 2</em>’s dress, since they pool their salaries as a married couple. It could also be argued that <em>Person 1</em>’s job status affects <em>Person 2</em>’s job opportunities if having a job brings the married couple into contact with other married couples who are connected to job markets.</p>
+<p>Finally, we could argue that <em>Person 1</em>’s dress affects <em>Person 2</em>’s job opportunities if some aspect of the reputation <em>Person 2</em> enjoys among potential colleagues derives from their spouse’s appearance. Symmetrically, <em>Person 2</em>’s measures could influence <em>Person 1</em>’s.</p>
 <p>But what about the relationship between <em>Person 1</em> and <em>Person 3</em>? How does that shape the measurements of either person? We can imagine that the dress of a newly acquainted colleague would not affect the dress and job opportunities of her colleague. Whereas <em>Person 1</em> and <em>Person 2</em> are causally related, <em>Person 1</em> and <em>Person 3</em> are not; their relationship is irrelevant to the causal system under investigation. <em>Person 2</em> and <em>Person 3</em> do not affect each other since they have no relationship at all.</p>
-<p>Before specifying a model that can accommodate the interdependence between <em>Person’s 1</em> and <em>2</em>, we outline some definitions which we will need for the independence and homogeneity assumptions that define the network causal inference approach to causal analysis. Loosely following <span class="citation" data-cites="aronow2017">Aronow and Samii (<a href="../6_endnotes/6_1__references.html#ref-aronow2017" role="doc-biblioref">2017</a>)</span>, we use the idea of exposure mappings to express these assumptions.</p>
+<p>Before specifying a model that can accommodate the interdependence between persons <em>1</em> and <em>2</em>, we outline some definitions which we will need to describe the network causal inference model. Before that, we will briefly a new structure - the data graph - which we will also need for the network model.</p>
 </section><section id="data-graphs" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="data-graphs">Data graphs</h3>
 <p>We define the data graph <span class="math inline">\(\mathscr{G}(\mathscr{N}, \sim, \Lambda)\)</span> as an ordered triple whose first entry is a set containing <span class="math inline">\(n=|\mathscr{N}|\)</span> nodes. Each of these represent an observational unit in the study. The second entry is a relation <span class="math inline">\(\sim\)</span> which indicates edges between nodes. For instance, <span class="math inline">\(i \sim j\)</span> means “<span class="math inline">\(i\)</span> is connected to <span class="math inline">\(j\)</span> in data graph <span class="math inline">\(\mathscr{G}\)</span>”. The final entry</p>
 <p><span class="math display">\[
@@ -695,7 +690,7 @@ E[Y_i^{(a)} | L_i = l_i, A_i = a] =  E[Y_i | L_i = l_i, A_i = a]
 <p>Some notation we will need: <span class="math inline">\(X_i\)</span> is the <span class="math inline">\(i^{th}\)</span> entry of vector <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{X}_{\mathscr{N_i}}\)</span> is the sub-vector of <span class="math inline">\(\mathbf{X}\)</span> which contains entries related to person <span class="math inline">\(i\)</span>’s network exposure units. Where the original vector already has a subscript, we append onto that subscript <span class="math inline">\(i\)</span> and <span class="math inline">\(\mathscr{N_i}\)</span>, respectively. For instance, <span class="math inline">\(X_{ti}\)</span> is the <span class="math inline">\(i^{th}\)</span> entry of <span class="math inline">\(\mathbf{X}_t\)</span> and <span class="math inline">\(\mathbf{X}_{t\mathscr{N_i}}\)</span> is the sub-vector relating to node <span class="math inline">\(i\)</span>’s network exposure units.</p>
 <p>Finally, we will use an object called the permutation matrix <span class="math inline">\(\mathbf{M}\)</span>, which is as a square matrix whose row and column margins all equal 1, and whose entries are either zero or one. Pre-multiplying a vector <span class="math inline">\(\mathbf{X}\)</span> with a conformable permutation matrix <span class="math inline">\(\mathbf{M}\)</span>, permutes the order of the entries in the vector <span class="math inline">\(\mathbf{X}\)</span>.</p>
 </section><section id="exposure-mappings" class="level3 unnumbered page-columns page-full"><h3 class="unnumbered anchored" data-anchor-id="exposure-mappings">Exposure mappings</h3>
-<p>Say we have a non-parametric structural equation model defined on data graph <span class="math inline">\(\mathscr{G}(\mathscr{N}, \sim, \Lambda)\)</span> with outcome measure <span class="math inline">\(\mathbf{Y}\)</span> preceded by exposure variables <span class="math inline">\(\mathbf{X}_t\)</span>. <span class="math inline">\(f_{Y_i}\)</span> is the structural equation for <span class="math inline">\(Y_i\)</span>, and <span class="math inline">\(U_{Y_i}\)</span> the error term for that equation. We define the “exposure mapping for <span class="math inline">\(Y_i\)</span>” as the function</p>
+<p>Loosely following <span class="citation" data-cites="aronow2017">Aronow and Samii (<a href="../6_endnotes/6_1__references.html#ref-aronow2017" role="doc-biblioref">2017</a>)</span>, we use the idea of exposure mappings to express the model assumptions we will need in subsequent sections. Say we have a non-parametric structural equation model defined on data graph <span class="math inline">\(\mathscr{G}(\mathscr{N}, \sim, \Lambda)\)</span> with outcome measure <span class="math inline">\(\mathbf{Y}\)</span> preceded by exposure variables <span class="math inline">\(\mathbf{X}_t\)</span>. <span class="math inline">\(f_{Y_i}\)</span> is the structural equation for <span class="math inline">\(Y_i\)</span>, and <span class="math inline">\(U_{Y_i}\)</span> the error term for that equation. We define the “exposure mapping for <span class="math inline">\(Y_i\)</span>” as the function</p>
 <p><span class="math display">\[
 g_i: (\{0,1\}^{n})^K\times\mathscr{N} \rightarrow \mathbf{R}^{2K}
 \]</span></p>
@@ -718,7 +713,7 @@ g_{i}(...,\mathbf{X}_t, ..., i) = g_{i}(..., \mathbf{X'}_t, ..., i)
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong>Note on boundedness</strong> The assumption of boundedness can obtain in three different ways.</p>
 <p><strong>A</strong>. It could be as a result of restrictions on the structure of the data graph. It could be the case that in the network of interest, there is an upper bound on node degree. For example, if the only relationships of interest between individual participants were marriages, each node would have a degree of either 0 or 1, meaning the count of alters with <span class="math inline">\(X_{tj} = 1, j \in \mathscr{N}_i\)</span> is either zero or one.</p>
-<p><strong>B</strong>. It might obtain is via restrictions of the value of <span class="math inline">\(\mathbf{X}_t\)</span> itself. It might be the case, for instance, that the count of <span class="math inline">\(i\)</span>’s for which <span class="math inline">\(X_{ti}=1\)</span> is very low, then on average, the count of alters for which <span class="math inline">\(X_{tj} = 1, j \in N_i\)</span> will also be low.</p>
+<p><strong>B</strong>. It might obtain via restrictions of the value of <span class="math inline">\(\mathbf{X}_t\)</span> itself. It might be the case, for instance, that the count of <span class="math inline">\(i\)</span>’s for which <span class="math inline">\(X_{ti}=1\)</span> is very low so that on average, the count of alters for which <span class="math inline">\(X_{tj} = 1, j \in N_i\)</span> will also be low.</p>
 <p><strong>C</strong>. Finally, boundedness could obtain as a result of the functional form of <span class="math inline">\(g_t\)</span> itself. This might happen if <span class="math inline">\(g_t\)</span> models a network exposure which has a ceiling effect in its dose-response curve with the outcome of interest. For example, if <span class="math inline">\(X_t\)</span> indicates ownership of a car, and <span class="math inline">\(\mathscr{G}\)</span> encodes close friendships, <span class="math inline">\(g_t\)</span> would be a network exposure mapping which tells us how each additional friend who has a car shifts the outcome of interest. For most health applications, its likely that beyond some number of friends (say 10) who have a car, an additional friend who gets a car will not change the outcome.</p>
 </div></div><p><span class="math display">\[
 g_i(\mathbf{X}_{1}, ..., \mathbf{X}_{k}, i)  \in \mathbf{D}
@@ -796,10 +791,15 @@ Y_2 &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, A_1, A_2) \\
 Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
 \end{aligned}
 \tag{C.5}\]</span></span></p>
-<p>Under network causal inference, we make the assumption that interference respects some mapping between individuals - a mapping given by a graph. In <a href="#fig-interference-dag">Figure&nbsp;<span>C.5</span></a>, based on their relationships with one another, <em>Person 1</em>’s measures are connected with <em>Person 2</em>’s, and neither are connected with <em>Person 3</em>.</p>
-<p>Saying a structural equation model or a DAG shows network interference is equivalent to saying the exposure mapping for each variable in the DAG is loyal to graph <span class="math inline">\(\mathscr{G}\)</span> which encodes the causally relevant relationships between observational units in the sample. In this example</p>
+<p>Under network causal inference, we make the assumption that interference respects some mapping between individuals - a mapping given by a graph. In <a href="#fig-interference-dag">Figure&nbsp;<span>C.5</span></a>, based on their relationships with one another, <em>Person 1</em>’s measures are connected with <em>Person 2</em>’s, and neither are connected with <em>Person 3</em>’s.</p>
+<p>Saying a structural equation model or a DAG shows network interference is equivalent to saying the exposure mapping for each variable in the DAG is loyal to data graph <span class="math inline">\(\mathscr{G}\)</span> which encodes the causally relevant relationships between observational units in the sample. In our example</p>
 <p><span class="math display">\[
-\mathscr{G}(\{\text{1,2,3}\}, \{\text{1} \sim \text{2}\}, \{\mathbf{Y}, \mathbf{A}, \mathbf{L}\})
+\mathscr{G}(\{\text{1,2,3}\}, \{\text{1} \sim \text{2}\},
+                  \{
+                      \begin{bmatrix} Y_1 \\ Y_2 \\ Y_3 \end{bmatrix},
+                      \begin{bmatrix} L_1 \\ L_2 \\ L_3 \end{bmatrix},
+                      \begin{bmatrix} A_1 \\ A_2 \\ A_3 \end{bmatrix}
+                      \})
 \]</span></p>
 </section></section><section id="homogeneity-assumptions" class="level4"><h4 class="anchored" data-anchor-id="homogeneity-assumptions">Homogeneity assumptions</h4>
 <section id="homogenous-interference" class="level5"><h5 class="anchored" data-anchor-id="homogenous-interference">Homogenous interference</h5>
@@ -834,7 +834,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_3,A_3,  g_{Y}(\mathbf{L}, 3), h_{Y}(\mathbf{A}, 3)
 \end{aligned}
 \]</span></p>
 </section><section id="symmetry" class="level6"><h6 class="anchored" data-anchor-id="symmetry">Symmetry</h6>
-<p>Since <em>Person 1</em> and <em>Person 2</em> each have one network exposure unit each, and since <em>Person 3</em> does not have any network exposure units, the assumption of symmetry does not make a difference in this example. It would be that the order of entries related to network exposure units does not matter for calculating the network exposure value. Permuting those entries does not change that value.</p>
+<p>Since <em>Person 1</em> and <em>Person 2</em> each have one network exposure unit, and since <em>Person 3</em> does not have any network exposure units, the assumption of symmetry does not make a difference in this example. It would be that the order of entries related to network exposure units does not matter for calculating the network exposure value. Permuting those entries does not change that value.</p>
 </section><section id="boundedness" class="level6"><h6 class="anchored" data-anchor-id="boundedness">Boundedness</h6>
 <p>If we assume that the only relevant relationships for the causal structure related to employment, formal dress, and job offers are marriages, the assumption of boundedness holds. Each node in this graph will have either a single network exposure unit, or none at all, even if the graph grows arbitrarily large.</p>
 </section></section><section id="identical-distribution-1" class="level5"><h5 class="anchored" data-anchor-id="identical-distribution-1">Identical distribution</h5>
@@ -852,17 +852,11 @@ Y_2 &amp;= f_{Y}(U_{Y_2}, L_2, A_2, g_{Y}(\mathbf{L}, 2), h_{Y}(\mathbf{A}, 2)) 
 Y_3 &amp;= f_{Y}(U_{Y_3}, L_3,A_3,  g_{Y}(\mathbf{L}, 3), h_{Y}(\mathbf{A}, 3)) \\
 \end{aligned}
 \]</span></p>
-</section></section><section id="identification-2" class="level4"><h4 class="anchored" data-anchor-id="identification-2">Identification</h4>
-<section id="positivity-1" class="level5"><h5 class="anchored" data-anchor-id="positivity-1">Positivity</h5>
-<p>We assume that for all <span class="math inline">\(i\)</span></p>
-<p><span class="math display">\[
-0 &lt; P[A_i = a_i,  h_Y (\mathbf{A}, i) =  h_Y(\mathbf{a}, i)| L_i,g_{A}(\mathbf{L}, i) ] &lt; 1
-\]</span> for all <span class="math inline">\(\mathbf{a} \in \{0,1\}^n\)</span></p>
 </section></section></section><section id="model-1" class="level3" data-number="C.2.2"><h3 data-number="C.2.2" class="anchored" data-anchor-id="model-1">
 <span class="header-section-number">C.2.2</span> Model</h3>
 <section id="observed-data-1" class="level4"><h4 class="anchored" data-anchor-id="observed-data-1">Observed data</h4>
 <p><a href="#fig-homogenous-dag">Figure&nbsp;<span>C.6</span></a> and <a href="#eq-homogenous-dag">Equation&nbsp;<span>C.6</span></a> show the resulting non-parametric structural equation model for our data, if we analyse it under network causal inference. Because of the assumption of identical distributions, we can represent the model using three equations rather than 9. We retain the person subscript on the random variables in <a href="#eq-homogenous-dag">Equation&nbsp;<span>C.6</span></a> and we keep all 9 nodes in the DAG on <a href="#fig-homogenous-dag">Figure&nbsp;<span>C.6</span></a> and add six additional nodes to represent network exposure values with respect to <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{L}\)</span>.</p>
-<p>We draw the DAG like this to clarify that though our model is for one person, it represents a part of a system that relates all the people in the sample with each other. Our original purpose, after all, was to infer something about causality in the context of a given population.</p>
+<p>We draw the DAG like this to clarify that though our model is for one person, it represents a part of a system that relates all the people in the sample with each other. Our original purpose, after all, was to infer something about the sample, not any one individual in it.</p>
 <div class="cell" data-layout-align="center" data-hash="C__sscan3_causal_interpretation_cache/html/fig-homogenous-dag_f6bd719e08394cb8383d8b6862845247">
 <details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"homogenous_interference"</span><span class="op">)</span>            <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -879,7 +873,7 @@ Y_3 &amp;= f_{Y}(U_{Y_3}, L_3,A_3,  g_{Y}(\mathbf{L}, 3), h_{Y}(\mathbf{A}, 3)) 
 <p><span id="eq-homogenous-dag"><span class="math display">\[
 \begin{aligned}
 L_i &amp;= f_{L}( U_{L_i} ) \\
-A_i &amp;= f_{A}( U_{A_i}, L_i, g_{A}(\textbf{L, i}) ) \\
+A_i &amp;= f_{A}( U_{A_i}, L_i, g_{A}(\textbf{L}, i) ) \\
 Y_i &amp;= f_{Y}( U_{Y_i},  L_i,  g_{Y}(\textbf{L}, i),   A_i,  h_{Y}( \textbf{A}, i ) ) \\
 \end{aligned}
 \tag{C.6}\]</span></span></p>
@@ -922,7 +916,7 @@ Y_i^{(a_i,\textbf{a}_{\mathscr{N}_i} )} &amp;= f_{Y}(U_{Y_i}, L_i,  a_i,  g_{Y}(
 <p><span class="math display">\[
 \frac{1}{n}\sum_i E[Y_i^{(a = 1, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 1})} - Y_i^{(a = 1, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 0})}]
 \]</span></p>
-</section><section id="identification-3" class="level3 page-columns page-full" data-number="C.2.4"><h3 data-number="C.2.4" class="anchored" data-anchor-id="identification-3">
+</section><section id="identification-1" class="level3 page-columns page-full" data-number="C.2.4"><h3 data-number="C.2.4" class="anchored" data-anchor-id="identification-1">
 <span class="header-section-number">C.2.4</span> Identification</h3>
 <p>We can start by using the law of iterated expectations.</p>
 <p><span class="math display">\[
@@ -1135,7 +1129,7 @@ V_{si}^{(\bar{\mathbf{t}})} &amp;=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}^{(\bar{\mat
 <p><span class="math display">\[
 E[\sum_{i=1}^5 V_{si}^{(\bar{\mathbf{t}})}]
 \]</span></p>
-</section><section id="identification-4" class="level4"><h4 class="anchored" data-anchor-id="identification-4">Identification</h4>
+</section><section id="identification-2" class="level4"><h4 class="anchored" data-anchor-id="identification-2">Identification</h4>
 <p>Because individual vaccination status is both a confounder and a mediator of the relationship between neighborhood intervention status and vaccination status, we cannot identify our estimands using conditional expectations of the observed data. We must use a marginal structural model. See Aronow and Samii <span class="citation" data-cites="aronow2017">(<a href="../6_endnotes/6_1__references.html#ref-aronow2017" role="doc-biblioref">2017</a>)</span>.</p>
 <p>We can estimate the outcome of interest using the inverse probability of treatment weights, noting that the treatment in this case is the network exposure value <span class="math inline">\(g(t_{\bar{s},N_i})\)</span> for <span class="math inline">\(\mathbf{T}\)</span>.</p>
 <p><span class="math display">\[
@@ -1216,6 +1210,10 @@ C_s^{(h)} = \frac{1}{|\mathscr{N}_p|}\sum_i V_{si}^{(h)}
 </section></section><section id="estimation-2" class="level3" data-number="C.4.4"><h3 data-number="C.4.4" class="anchored" data-anchor-id="estimation-2">
 <span class="header-section-number">C.4.4</span> Estimation</h3>
 <p>We simulated the intervention outlined above using MPX NYC data by calculating the <span class="math inline">\(G^{s}(N, \psi_s)\)</span> where <span class="math inline">\(s\)</span> ranges from <span class="math inline">\(1\)</span> to the total number of community districts. We measured the uncertainty of our estimates by re-sampling study participants with replacement.</p>
+</section></section><section id="ssnacx---extensions-of-the-ssnac-framework" class="level2" data-number="C.5"><h2 data-number="C.5" class="anchored" data-anchor-id="ssnacx---extensions-of-the-ssnac-framework">
+<span class="header-section-number">C.5</span> SSNACX - Extensions of the SSNAC framework</h2>
+<p>Spillover</p>
+<p>Time-varying data graphs</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -1229,7 +1227,7 @@ Hernán, Miguel, and James M. Robins. 2018. <em>Causal inference</em>. Chapman &
 Robins, James. 1986. <span>“A New Approach to Causal Inference in Mortality Studies with a Sustained Exposure Period<span></span>application to Control of the Healthy Worker Survivor Effect.”</span> <em>Mathematical Modelling</em> 7 (9-12): 13931512.
 </div>
 </div>
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
