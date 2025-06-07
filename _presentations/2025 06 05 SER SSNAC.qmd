@@ -1,0 +1,481 @@
+---
+title: "SSNAC"
+subtitle: "Social and Spatial Network Analysis with Causal interpretation"
+format:
+  revealjs: 
+    slide-number: true
+    chalkboard: 
+      buttons: true
+    css: custom_theme.css
+---
+
+```{r include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+# SSNAC is an approach to...
+
+
+## ...integrating social and spatial context
+
+```{r}
+#| layout-nrow: 1
+#| fig-height: 5
+#| fig-width: 8
+#| fig-cap: Approaches to incorporating context in studies of individual health
+#| label: fig-context
+
+
+
+
+plot_context_figure()
+
+
+
+```
+
+## ...conceptualizing data
+
+```{r}
+#| label: fig-ssnac
+#| fig-cap: Data graph
+
+data_snac_example() |>
+plot_ssnac_example() |>
+  style_ssnac_example() +
+  theme_mpxnyc_blank(legend.position = "right") 
+
+
+```
+
+## ...collecting data
+
+![Map input question format developed for MPX NYC](images/image_app_graphic.png){#fig-mapinputformat}
+
+## ...describing social and spatial relations
+
+```{r}
+#| fig-cap: !expr 'get_figure_details("fig-demogroup-mixing")'
+#| label: fig-racegender-mixing-matrix
+#| fig-width: 9
+#| fig-height: 9
+
+make_plotdata_racegender_mixing_matrix() |>
+  plot_matrix_mixing() +
+  scale_fill_mpxnyc_gradient() +
+  scale_color_mpxnyc_gradient() +
+  theme_mpxnyc_mixing()
+```
+
+## ...inferring causality
+
+**Example**
+
+We are investigating the relationship between dressing in formal wear, wealth, and job offers. 
+
+We recruit three people, *Person 1*, *Person 2*, and *Person 3*. *Person 1* and *Person 2* are married to each other. *Person 1* and *Person 3* are newly acquainted colleagues. 
+
+# Classic causal inference
+
+## Assumptions
+
+### 0. No assumptions
+
+```{r }
+#| fig-height: 6
+#| fig-width: 6
+#| fig-align: center
+#| label: fig-fullly-connected-dag
+#| fig-cap: "Fully connected causal DAG"
+
+make_dag("fully_connected")         |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc_blank()
+
+```
+
+## Assumptions
+
+### 1. No spillover
+
+```{r}
+#| fig-height: 6
+#| fig-width: 6.5
+#| fig-align: center
+#| label: fig-no-spillover-dag
+#| fig-cap: "Causal DAG with no spillover"
+
+
+make_dag("full_interference")      |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(labels = c("h"), option = "light") +
+  theme_mpxnyc_blank()
+
+
+```
+
+## Assumptions
+
+### 2. No interference
+
+```{r}
+#| fig-height: 6
+#| fig-width: 6.5
+#| fig-align: center
+#| label: fig-independence-dag
+#| fig-cap: "Causal DAG with no interference or spillover"
+
+make_dag("independence") |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") + 
+  theme_mpxnyc_blank()
+
+
+```
+
+## Assumptions
+
+### 3. Identical distribution
+
+```{r}
+#| fig-height: 6
+#| fig-width: 6.5
+#| fig-align: center
+#| label: fig-independence-dag-1
+#| fig-cap: "Causal DAG with no interference or spillover"
+
+make_dag("independence") |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") + 
+  theme_mpxnyc_blank()
+
+
+```
+
+$$
+\begin{aligned}
+L_i &= f_{L}( U_{L_i}) \\
+A_i &= f_{A}( U_{A_i}, L_i) \\
+Y_i &= f_{Y}( U_{Y_i}, L_i, A_i) \\
+\end{aligned}
+$$ {#eq-independence-dag}
+
+# Network causal inference
+
+## Assumptions
+
+### 0. No assumptions
+
+```{r }
+#| fig-height: 6
+#| fig-width: 6
+#| fig-align: center
+#| label: fig-fullly-connected-dag-2
+#| fig-cap: "Fully connected causal DAG"
+
+make_dag("fully_connected")         |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc_blank()
+
+```
+
+## Assumptions
+
+### 1. No spillover
+
+```{r}
+#| fig-height: 6
+#| fig-width: 6.5
+#| fig-align: center
+#| label: fig-no-spillover-dag-2
+#| fig-cap: "Causal DAG with no spillover"
+
+
+make_dag("full_interference")      |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(labels = c("h"), option = "light") +
+  theme_mpxnyc_blank()
+
+
+```
+
+## Assumptions
+
+### 2. Homogenous network interference
+
+```{r}
+#| fig-height: 6
+#| fig-width: 6.5
+#| fig-align: center
+#| label: fig-interference-dag
+#| fig-cap: "Causal DAG with network interference"
+
+make_dag("network_interference")   |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc_blank()
+
+
+```
+
+
+## 2. Homogenous network interference
+
+### a. Loyalty
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}) \\
+L_3 &= f_{L_3}(U_{L_3} ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, L_2) \\
+A_2 &= f_{A_2}(U_{A_2}, L_1, L_2) \\
+A_3 &= f_{A_3}(U_{A_3}, L_3) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, A_1, A_2) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, A_1, A_2) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
+\end{aligned}
+$$ {#eq-interference-dag}
+
+
+## 2. Homogenous network interference
+### b. Separability
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}) \\
+L_3 &= f_{L_3}(U_{L_3} ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, g_{A_1}(\mathbf{L}, 1)) \\
+A_2 &= f_{A_2}(U_{A_2}, L_2, g_{A_2}(\mathbf{L}, 2)) \\
+A_3 &= f_{A_3}(U_{A_3}, L_3, g_{A_3}(\mathbf{L}, 3)) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, A_1, g_{Y_1}(\mathbf{L}, 1), h_{Y_1}(\mathbf{A}, 1)) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_2, A_2, g_{Y_2}(\mathbf{L}, 2), h_{Y_2}(\mathbf{A}, 2)) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_3,A_3,  g_{Y_2}(\mathbf{L}, 3), h_{Y_2}(\mathbf{A}, 3)) \\
+\end{aligned}
+$$
+
+## 2. Homogenous network interference
+
+### c. Positional invariance
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}) \\
+L_3 &= f_{L_3}(U_{L_3} ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, g_{A}(\mathbf{L}, 1)) \\
+A_2 &= f_{A_2}(U_{A_2}, L_2, g_{A}(\mathbf{L}, 2)) \\
+A_3 &= f_{A_3}(U_{A_3}, L_3, g_{A}(\mathbf{L}, 3)) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, A_1, g_{Y}(\mathbf{L}, 1), h_{Y}(\mathbf{A}, 1)) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_2, A_2, g_{Y}(\mathbf{L}, 2), h_{Y}(\mathbf{A}, 2)) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_3,A_3,  g_{Y}(\mathbf{L}, 3), h_{Y}(\mathbf{A}, 3)) \\
+\end{aligned}
+$$
+
+## 2. Homogenous network interference
+
+### d. Symmetry
+
+For permutation matrix $\mathbf{M} \in \{0,1\}^{n\times n}$, $\mathbf{X}, \mathbf{X}' \in \{0,1\}^n$, alter set $\mathscr{N}_i$ (indices of nodes connected to $i$)
+
+$$
+\begin{equation}
+\mathbf{X}_{\mathscr{N}_i} = \mathbf{M} \mathbf{X'}_{\mathscr{N}_i}  \\
+\implies \\
+g_{ti}(\mathbf{X}, i) = g_{ti}(\mathbf{X'}, i) 
+\end{equation}
+$$
+
+where $\mathbf{X}_{\mathscr{N}_i}$ is the subvector of $\mathbf{X}$ containing entries related to indices contained by $\mathscr{N}_i$.
+
+
+
+## 2. Homogenous network interference
+
+### e. Boundedness
+
+We say that an exposure mapping $g_{i}$ is bounded if all possible exposure values are contained by a finite set $\mathbf{D}$
+
+
+## 3. Identical distribution
+
+```{r}
+#| fig-height: 8
+#| fig-width: 7
+#| fig-align: center
+#| label: fig-homogenous-dag
+#| fig-cap: "Causal DAG with homogenous structure"
+
+
+make_dag("homogenous_interference")            |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc_blank()
+
+
+```
+
+$$
+\begin{aligned}
+L_i &= f_{L}( U_{L_i} ) \\
+A_i &= f_{A}( U_{A_i}, L_i, g_{A}(\textbf{L}, i) ) \\
+Y_i &= f_{Y}( U_{Y_i},  L_i,  g_{Y}(\textbf{L}, i),   A_i,  h_{Y}( \textbf{A}, i ) ) \\
+\end{aligned}
+$$ {#eq-homogenous-dag}
+
+# SSNAC
+
+## Compact structure
+
+### Directed Acyclic Graph (DAG)
+
+```{r}
+#| fig-height: 8
+#| fig-width: 7
+#| fig-align: center
+#| label: fig-homogenous-dag-2
+#| fig-cap: "Causal DAG with homogenous structure"
+
+
+make_dag("homogenous_interference")            |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc_blank()
+
+
+```
+
+## Compact structure
+
+### Directed Acyclic Network Graph (DANG)
+
+```{r}
+#| fig-height: 8
+#| fig-width: 5
+#| label: fig-causal-dang-instructions
+#| fig-cap: Causal DANG
+
+structural <- example_dang_1_structural() |>
+                    plot_swig(node_radius = 0.2) +
+                    scale_fill_mpxnyc(option = "light") +
+                    theme_mpxnyc_blank()+
+                    ggplot2::ggtitle("Structural Part") 
+
+relational <- example_dang_1_relational() |>
+                    plot_swig(0, 0, node_radius = 0.2)  +
+                    scale_fill_mpxnyc(name = "Entity type", option = "light") +
+                    theme_mpxnyc_blank() +
+                    ggplot2::ggtitle("Relational Part") 
+
+cowplot::plot_grid(structural, relational, ncol = 1)
+
+```
+
+## Flexible structure
+
+### DANG
+
+```{r}
+#| fig-height: 6
+#| fig-width: 8
+#| fig-align: center
+#| label: fig-example-dang-structural
+#| fig-cap: "Causal DANG for Week 1 in Example 3"
+
+
+structural  <- example_dang_2_structural() |>
+                    plot_swig(node_radius = 0.15) +
+                    scale_fill_mpxnyc(option = "light") +
+                    theme_mpxnyc_blank() +
+                    ggplot2::ggtitle("Structural Part")
+
+
+relational  <- example_dang_2_relational() |>
+                    plot_swig(node_radius = 0.2, node_margin = 0)  +
+                    scale_fill_mpxnyc(name = "Entity type", option = "light") +
+                    theme_mpxnyc_blank() +
+                    ggplot2::ggtitle("Relational Part") 
+
+figure   <- cowplot::plot_grid(structural, relational, ncol=1, rel_heights = c(3,3))
+
+
+
+legend_pre  <- relational + ggplot2::theme(legend.position = "right")
+
+legend      <- cowplot::get_legend(legend_pre) 
+ 
+   
+cowplot::plot_grid(figure, legend, nrow = 1, rel_widths = c(4,1))
+```
+
+## Flexible structure
+
+### Single World Intervention Network Graph (SWING)
+
+```{r}
+#| fig-height: 6
+#| fig-width: 8
+#| fig-align: center
+#| label: fig-example-swig-structural
+#| fig-cap: "SWING for Week 1 in Example 3"
+#| 
+
+
+structural  <- example_swing_structural() |>
+                    plot_swig(node_radius = 0.15) +
+                    scale_fill_mpxnyc(option = "light") +
+                    theme_mpxnyc_blank() +
+                    ggplot2::ggtitle("Structural Part") 
+
+
+relational  <- example_swing_relational() |>
+                    plot_swig(node_radius = 0.2, node_margin = 0)  +
+                    scale_fill_mpxnyc(name = "Entity type", option = "light") +
+                    ggplot2::theme(legend.position = "right") +
+                    theme_mpxnyc_blank() +
+                    ggplot2::ggtitle("Relational Part")
+
+
+legend_pre  <- relational +
+                    ggplot2::theme(legend.position = "right")
+legend      <- cowplot::get_legend(legend_pre) 
+
+
+
+figure   <- cowplot::plot_grid(structural, relational, ncol=1, rel_heights = c(3,3))
+
+cowplot::plot_grid(figure, legend, nrow = 1, rel_widths = c(4,1))
+
+```
+
+# Example: Vaccination campaign
+
+## Dynamic regime SWING
+
+```{r}
+#| label: fig-edge-intervention-swing
+#| fig-cap: "SWING for Week 1-3 for MPX NYC Application of SSNAC framework"
+
+hypothetical_intervention_swing() |>
+  plot_swig(node_radius = 0.5, nudge_intervention_labels = 0.2) +
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc_blank()
+
+
+```
+
+
+## Structural equations
+$$
+\begin{aligned}
+M_{0i} &=  0 \\
+V_{0i} &=  0 \\
+R_{sj}^{(h)} &=  h(\mathbf{V}_{s-1}) \\
+T_{sj}^{(h)} &=  \begin{cases} 1 & R_{sj}^{(h)} = max_k R_{sk}^{(h)} \\ 0 & \text{otherwise} \end{cases} \\
+M_{si}^{(h)} &=  \begin{cases} 1 & \mathbf{T}_{s\mathscr{N}_i}^{(h)} \neq \mathbf{0}  \\ 0 & \text{otherwise} \end{cases} \\
+V_{si}^{(h)} &=  \begin{cases} 1 & M_{si}^{(h)} = 1 \text{ or } V_{s-1,i}^{(h)} = 1\\ 0 & \text{otherwise} \end{cases} \\
+\end{aligned}
+$$ {#eq-edge-intervention-swing}
