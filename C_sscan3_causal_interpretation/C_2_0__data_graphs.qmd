@@ -1,15 +1,21 @@
 
 ### Data graphs {.unnumbered}
 
-We define the data graph $\mathscr{G}(\mathscr{N}, \sim, \Lambda)$ as an ordered triple whose first entry is a set containing $n=|\mathscr{N}|$ nodes. Each of these represent an observational unit in the study. The second entry is a relation $\sim$ which indicates edges between nodes. For instance, $i \sim j$ means "$i$ is connected to $j$ in data graph $\mathscr{G}$". The final entry
+We define the data graph $\mathscr{G}(\mathscr{N}, \psi, \Lambda)$ as an ordered triple whose first entry is a set containing $n$ nodes, each representing an observational unit in the study. The second entry is an adjacency function $\psi(i,j) \in \mathbf{R}^+$ which gives the weight between nodes $i$ and $j$. Weights are positive real numbers when the nodes are connected in $\mathscr{G}$ and zero otherwise. The third entry $\mathbf{\Lambda} = \mathbf{\Lambda}_N \cup \mathbf{\Lambda}_E$ is the data associated with the graph. 
 
+The node data $\mathbf{\Lambda}_N$ is a set of $K+1$ vectors of length $n$. For each of these, the $i^{th}$ entry is a dichotomous variable relating to node $i$.
 
 $$
-\mathbf{\Lambda} = \{ \mathbf{Y} \} \cup \{\mathbf{X}_t : t \in [1,K]\}
+\mathbf{\Lambda}_N = \{ \mathbf{Y}  \} \cup \{\mathbf{X}_t: t \in [1,K]\}
 $$
 
-is a set of $K+1$ vectors of length $n$. For each of these, the $i^{th}$ entry is a dichotomous variable relating to node $i$. Finally, we define $\mathscr{N_i} = \{j \in \mathscr{N}: i \sim j\}$ as the "network exposure units" for node $i$. 
+The edge data $\mathbf{\Lambda}_E$ is a set of $Q$ vectors $\mathbf{Z}_t$ of length $m$. Each entry in each of these is associated with a distinct edge.
 
-Some notation we will need: $X_i$ is the $i^{th}$ entry of vector $\mathbf{X}$ and $\mathbf{X}_{\mathscr{N_i}}$ is the sub-vector of $\mathbf{X}$ which contains entries related to person $i$'s network exposure units. Where the original vector already has a subscript, we append onto that subscript $i$ and $\mathscr{N_i}$, respectively. For instance, $X_{ti}$ is the $i^{th}$ entry of $\mathbf{X}_t$ and $\mathbf{X}_{t\mathscr{N_i}}$ is the sub-vector relating to node $i$'s network exposure units. 
+$$
+\mathbf{\Lambda}_E =  \{\mathbf{Z}_t  : t \in [1,Q]\}
+$$
 
-Finally, we will use an object called the permutation matrix $\mathbf{M}$, which is as a square matrix whose row and column margins all equal 1, and whose entries are either zero or one. Pre-multiplying a vector $\mathbf{X}$ with a conformable permutation matrix $\mathbf{M}$, permutes the order of the entries in the vector $\mathbf{X}$.
+
+Some further notation we will need: $\mathscr{N_i} = \{j \in \mathscr{N}: \psi(i, j) > 0\}$ is the "network exposure units" for node $i$. $X_i$ is the $i^{th}$ entry of vector $\mathbf{X}$ and $\mathbf{X}_{\mathscr{N_i}}$ is the sub-vector of $\mathbf{X}$ which contains entries related to person $i$'s network exposure units. Where the original vector already has a subscript, we append onto that subscript $i$ and $\mathscr{N_i}$, respectively. For instance, $X_{ti}$ is the $i^{th}$ entry of $\mathbf{X}_t$ and $\mathbf{X}_{t\mathscr{N_i}}$ is the sub-vector relating to node $i$'s network exposure units. 
+
+Finally, we will need to use the permutation matrix in a definition below.  A permutation matrix $\mathbf{M}$ is as a square matrix whose row and column margins all equal 1, and whose entries are either zero or one. Pre-multiplying the a vector $\mathbf{X}$ with a conformable permutation matrix $\mathbf{M}$, permutes the order of the entries in the vector $\mathbf{X}$ without changing their values.

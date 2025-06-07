@@ -4,16 +4,6 @@
 ```{r}
 
 
-mpxnyc::neighborhood_sf_obj |>
-  dplyr::left_join(make_table_data_residence(), by = "neighborhood") |>
-  dplyr::mutate(count = ifelse(is.na(count), 0, count)) |>
-  dplyr::mutate(count_cat = cut(count, c(-1,0,1,2,3,4,5,29,34,76))) |>
-  dplyr::arrange(-count) |>
-  ggplot2::ggplot() +
-  ggplot2::geom_sf(ggplot2::aes(fill = count_cat, color = count_cat), linewidth = 1) +
-  ggplot2::geom_sf(data = mpxnyc::community_sf_obj, fill = NA, linewidth = 0.5, color = "pink") +
-  ggplot2::scale_fill_brewer() +
-  ggplot2::scale_color_brewer() +
-  theme_mpxnyc_blank(plot.background = ggplot2::element_rect(fill = "white"))
+
 
 ```

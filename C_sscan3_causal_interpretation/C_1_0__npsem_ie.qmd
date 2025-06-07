@@ -1,19 +1,16 @@
-
-
 ### NPSEM-IE {.unnumbered}
-
 
 An NPSEM-IE is a system of equations which relates all the entries in a given vector-valued random variable with each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown by @eq-fullly-connected-dag. In this set of equations, values that are produced by equations higher up in the list are the inputs of equations lower down on the list. The functions $f_*$ are deterministic, though their form is not necessarily known. The arguments $U_*$ represent error terms - random variables which are independent of each other within and across observational units.
 
-Whereas parametric models, for instance, a linear regression model with normally distributed errors, are characterized by their probability density functions, non-parametric models of this type are usually characterized by their conditional independencies. An example of a conditional independence statement would be: 
+Whereas parametric models, for instance, a linear regression model with normally distributed errors, are characterized by their probability density functions, non-parametric models of this type are usually characterized by their conditional independencies. An example of a conditional independence statement would be:
 
-*for a realization $[X_1, X_2, X_3, X_4, X_5]$ of statistical model $F$*, 
+*for a realization* $[X_1, X_2, X_3, X_4, X_5]$ of statistical model $F$,
 
 $$
 X_1 \perp X_3 | X_2, X_4
 $$
 
-which reads: "*random variables $X_1$ and $X_3$ are independent conditional on random variables $X_2$ and $X_4$*".
+which reads: "*random variables* $X_1$ and $X_3$ are independent conditional on random variables $X_2$ and $X_4$".
 
 Non-parametric structural equation models are usually represented using the Directed Acyclic Graph (DAG), which is a schematic representation of the structural equations in the model. The DAG shown in @fig-fullly-connected-dag, for instance, represents the model defined by @eq-fullly-connected-dag. The arrow pointing from $L_1$ to $L_3$, for instance, indicates that $L_1$ is an input in the structural equation for $L_3$.
 
@@ -51,9 +48,8 @@ $$ {#eq-fullly-connected-dag}
 
 But the most flexible model is not the most useful one. To fully characterize this system using observed data, we would need to estimate 9 functions using one observation of the 9-dimensional joint distribution that gave rise to the participants' observations. Recruiting an additional person to the study would not ease this problem; it would add three new equations to the model and we would end up with a similar problem than the one we began with. We would have to estimate 12 functions using one observation of a 12-dimensional joint distribution.
 
-Epidemiologists take several approaches to to simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function. These assumptions are called model restrictions because they restrict the number of possible distributions that could be represented by the model. 
+Epidemiologists take several approaches to to simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function. These assumptions are called model restrictions because they restrict the number of possible distributions that could be represented by the model.
 
-For instance, if we add the restriction to the model shown above that all the measures are independent (or equivalently, that the DAG has no arrows), the resulting model would not be able to represent data from a causal system where some of the measures are correlated. By adding the restriction of independence, we would be eliminating the correlated data distribution from consideration as a possibility for how the data we are modelling are truly distributed. 
+For instance, if we add the restriction to the model shown above that all the measures are independent (or equivalently, that the DAG has no arrows), the resulting model would not be able to represent data from a causal system where some of the measures are correlated. By adding the restriction of independence, we would be eliminating the correlated data distribution from consideration as a possibility for how the data we are modelling are truly distributed.
 
-In the next few sections, we will discuss the restrictions made under classic causal inference, network causal inference, and the SSNAC framework. In each case, simplifying the system of equations equates to deleting some of the arrows in the DAG shown in @fig-fullly-connected-dag (or equivalently, deleting some arguments from the functions in @eq-fullly-connected-dag), or assuming that some of the functions in the system are similar to each other in some way.
 

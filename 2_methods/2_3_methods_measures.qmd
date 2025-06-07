@@ -26,7 +26,7 @@ make_example_network_data("bipartite") |>
 
 The MPX NYC participant community network is a network with community districts and individuals as nodes, and ties between pairs consisting of one individual and one community district. While spatial data were collected using census tract identifiers, the unit of spatial analysis is the community district. Community districts are spatial units that divide New York City into regions which are nested by the five boroughs of New York City, and which in turn nest census tracts.
 
-A tie indicates that the individual as some relation with the community district. This relation can be residence or group contact. Related to this network are the community district network and participant network, described below.
+A tie indicates that the individual as some relation with the community district. This relation can be because of a residence or attended gathering in that community district. Related to this network are the community district network and participant network, described below.
 
 ### MPX NYC community district network
 
@@ -44,7 +44,7 @@ A tie indicates that the individual as some relation with the community district
 
 ```
 
-The MPX NYC community district network is a network with community districts as nodes. A weighted tie between two nodes indicates that the two community districts both have at least one MPX NYX participant who has a residence or community district in both places. The weight is given by the count of such individuals. Of interest is the influence each community district has in city-wide outbreak dynamics. It is measured using community district social and spatial reach.
+The MPX NYC community district network is a network with community districts as nodes. A weighted tie between two nodes indicates that the two community districts both have at least one MPX NYX participant who had a residence or gathering in both places. The weight is given by the count of such individuals. Of interest is the influence each community district has in city-wide outbreak dynamics. It is measured using community district social and spatial reach.
 
 ### MPX NYC participant network
 
@@ -61,7 +61,7 @@ make_example_network_data("people") |>
 
 ```
 
-We examined the patterning of shared physical context among participants using the MPX NYC participant network. In this network, survey participants are represented as nodes. A weighted edge indicates that the individuals represented by the nodes have at least one residence or contact venue in a common community district. The edge weight is given by the count of community districts the pair share. Of interest are the overall connectedness of the network and the pattern of connection across different subgroups.
+We examined the patterning of shared physical context among participants using the MPX NYC participant network. In this network, survey participants are represented as nodes. A weighted edge indicates that the individuals represented by the nodes have at least one residence or gathering in a common community district. The edge weight is given by the count of community districts the pair share. Of interest are the overall connectedness of the network and the pattern of connection across different subgroups.
 
 ## Node characteristics
 
@@ -127,21 +127,21 @@ For a given community district spatial reach is defined as the sum of edge weigh
 
 All participants were asked the location of their residence through the Person-Place Network Map question. Each participant's residences is represented as an edge between the participant and the community district containing their residence.
 
-### Contact venue edges
+### Gathering edges
 
-Participants who indicated recent physical or sexual contact in a group setting were asked for the locations of each of the places where the contact happened. We call these contact places. They are each represented as an edge between the participant and the community district containing the contact place.
+Participants who indicated recent physical or sexual contact at a gathering were asked for the locations of each of gatherings where the contact happened. They are each represented as an edge between the participant and the community district containing the gathering.
 
-#### Venue type
+#### Event type
 
-Participants were asked the type of venue each contact place was (dance party, sex party, darkroom, sport game, concert, theatre/show, private residence, sex club, bathhouse, park, something else).
+Participants were asked the type of event each gathering was (dance party, sex party, darkroom, sport game, concert, theatre/show, private residence, sex club, bathhouse, park, something else).
 
 #### Sexual contact
 
-Participants were also asked if they had sexual contact at each contact place.
+Participants were also asked if they had sexual contact at each gathering.
 
 #### Distance from home
 
-We constructed an approximate measure of the distance between residence and contact venue by categorizing venues into those that are in the same community district as the residence; in a different community district but the same borough; or in a different borough. We refer to this measure as distance from home.
+We constructed an approximate measure of the distance between residence and gathering by categorizing gatherings into those that are in the same community district as the residence; in a different community district but the same borough; or in a different borough. We refer to this measure as distance from home.
 
 ## Network characteristics
 
