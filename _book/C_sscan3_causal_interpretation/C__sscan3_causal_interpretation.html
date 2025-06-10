@@ -228,7 +228,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../3_results/3_3__results_movement.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Movement</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Journeys</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -240,7 +240,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../3_results/3_5__results_outbreak_control.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">*Outbreak control</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">*Outbreaks</span></span></a>
   </div>
 </li>
       </ul>
@@ -374,7 +374,7 @@ div.csl-indent {
   </ul>
 </li>
   <li>
-<a href="#sec-network-causal-inference" id="toc-sec-network-causal-inference" class="nav-link" data-scroll-target="#sec-network-causal-inference"><span class="header-section-number">C.2</span> Network causal inference</a>
+<a href="#sec-network-causal-inference" id="toc-sec-network-causal-inference" class="nav-link" data-scroll-target="#sec-network-causal-inference"><span class="header-section-number">C.2</span> Social Network Analysis with Causal interpretation</a>
   <ul class="collapse">
 <li><a href="#example-2-marriage-dress-and-jobs" id="toc-example-2-marriage-dress-and-jobs" class="nav-link" data-scroll-target="#example-2-marriage-dress-and-jobs">Example 2: Marriage, Dress, and Jobs</a></li>
   <li><a href="#data-graphs" id="toc-data-graphs" class="nav-link" data-scroll-target="#data-graphs">Data graphs</a></li>
@@ -388,7 +388,7 @@ div.csl-indent {
   </ul>
 </li>
   <li>
-<a href="#sec-ssnac" id="toc-sec-ssnac" class="nav-link" data-scroll-target="#sec-ssnac"><span class="header-section-number">C.3</span> SSNAC</a>
+<a href="#sec-ssnac" id="toc-sec-ssnac" class="nav-link" data-scroll-target="#sec-ssnac"><span class="header-section-number">C.3</span> Social and Spatial Network Analysis with Causal interpretation</a>
   <ul class="collapse">
 <li><a href="#example-3-longitudinal-data-driven-vaccination-campaign" id="toc-example-3-longitudinal-data-driven-vaccination-campaign" class="nav-link" data-scroll-target="#example-3-longitudinal-data-driven-vaccination-campaign">Example 3: Longitudinal Data-Driven Vaccination Campaign</a></li>
   <li><a href="#new-tools-from-the-ssnac-framework" id="toc-new-tools-from-the-ssnac-framework" class="nav-link" data-scroll-target="#new-tools-from-the-ssnac-framework">New tools from the SSNAC framework</a></li>
@@ -494,9 +494,9 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
 <p>D-separation is a set of rules for translating DAGs into (conditional) independence statements involving the variables represented on the DAG. If two variables are “d-separated” in the DAG, then they are (conditionally) independent of one another.</p>
 <section id="paths" class="level4"><h4 class="anchored" data-anchor-id="paths">Paths</h4>
 <p>A path linking two nodes (say <em>Node A</em> and <em>Node B</em>) in a DAG is a sequence of nodes that start with <em>A</em> and ends with <em>B</em> where each successive node in the sequence is connected to the former and the subsequent nodes in the DAG. Two nodes are d-separated if all the paths linking them are closed or if there is no path that links them.</p>
-<p>A path of length one (an edge connecting two nodes) is open by definition. A path of length two or more can be analyzed in terms of its consecutive sub-sequences of three, which we call triangles. A path is open if all the triangles in that path are open. We can therefore check whether any path is closed or open by examining the triangles.</p>
+<p>A path of length one (an edge connecting two nodes) is open by definition. A path of length two or more can be analyzed in terms of its consecutive sub-sequences of length three, which we call triangles. A path is open if all the triangles in that path are open. We can therefore check whether any path is closed or open by examining the triangles.</p>
 </section><section id="triangles" class="level4"><h4 class="anchored" data-anchor-id="triangles">Triangles</h4>
-<p>A path in a DAG can be analyzed in terms of three types of triangle - the fork, the spoon, and the chopstick, which we describe below. When we do not condition for any variable in the triangle, we call it the “canonical triangle”. When we condition by the intermediate variable in a the triangle, we call it the “conditional triangle”. We indicate stratification (or conditioning) using a box around the node.</p>
+<p>A path in a DAG can be analyzed in terms of three types of triangle - the fork, the spoon, and the chopstick, which we describe below. When we do not condition on the intermediate variable in the triangle, we call these the “canonical fork”, “canonical spoon”, and “canonical chopstick”, respectively. When we do condition by the intermediate variable we say “conditional fork”, “conditional spoon”, and “conditional chopstick”.</p>
 <section id="fork" class="level5"><h5 class="anchored" data-anchor-id="fork">Fork</h5>
 <p>In the sub-graph shown below, B is a cause of A and also a cause of C. By definition, a canonical fork is open and a conditional fork is closed.</p>
 <div class="cell" data-layout-align="center" data-hash="C__sscan3_causal_interpretation_cache/html/fork_cf1a5e177bce27118d69f8947e3049cf">
@@ -1280,7 +1280,7 @@ E[Y_i^{(a)} | L_i = l_i, A_i = a] =  E[Y_i | L_i = l_i, A_i = a]
 <li><p>Show that the causal estimate in <a href="#sec-classic-causal-inference"><span>Section&nbsp;C.1</span></a> is equivalent to the usual definition of the g-formula.</p></li>
 <li><p>How is the SUTVA assumption encoded in this model?</p></li>
 </ol></section></section><section id="sec-network-causal-inference" class="level2 page-columns page-full" data-number="C.2"><h2 data-number="C.2" class="anchored" data-anchor-id="sec-network-causal-inference">
-<span class="header-section-number">C.2</span> Network causal inference</h2>
+<span class="header-section-number">C.2</span> Social Network Analysis with Causal interpretation</h2>
 <section id="example-2-marriage-dress-and-jobs" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="example-2-marriage-dress-and-jobs">Example 2: Marriage, Dress, and Jobs</h3>
 <p>We mentioned that in our study sample <em>Person 1</em> and <em>Person 2</em> are married to each other, and <em>Person 1</em> and <em>Person 3</em> are new colleagues. In the causal system connecting their job status, dress and job offers, an argument could be made that <em>Person 1</em>’s job status affects <em>Person 2</em>’s dress, since they pool their salaries as a married couple. It could also be argued that <em>Person 1</em>’s job status affects <em>Person 2</em>’s job opportunities if having a job brings the married couple into contact with other married couples who are connected to job markets.</p>
 <p>Finally, we could argue that <em>Person 1</em>’s dress affects <em>Person 2</em>’s job opportunities if some aspect of the reputation <em>Person 2</em> enjoys among potential colleagues derives from their spouse’s appearance. Symmetrically, <em>Person 2</em>’s measures could influence <em>Person 1</em>’s.</p>
@@ -1297,6 +1297,7 @@ E[Y_i^{(a)} | L_i = l_i, A_i = a] =  E[Y_i | L_i = l_i, A_i = a]
 \mathbf{\Lambda}_E =  \{\mathbf{Z}_t  : t \in [1,Q]\}
 \]</span></p>
 <p>Some further notation we will need: <span class="math inline">\(\mathscr{N_i} = \{j \in \mathscr{N}: \psi(i, j) &gt; 0\}\)</span> is the “network exposure units” for node <span class="math inline">\(i\)</span>. <span class="math inline">\(X_i\)</span> is the <span class="math inline">\(i^{th}\)</span> entry of vector <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{X}_{\mathscr{N_i}}\)</span> is the sub-vector of <span class="math inline">\(\mathbf{X}\)</span> which contains entries related to person <span class="math inline">\(i\)</span>’s network exposure units. Where the original vector already has a subscript, we append onto that subscript <span class="math inline">\(i\)</span> and <span class="math inline">\(\mathscr{N_i}\)</span>, respectively. For instance, <span class="math inline">\(X_{ti}\)</span> is the <span class="math inline">\(i^{th}\)</span> entry of <span class="math inline">\(\mathbf{X}_t\)</span> and <span class="math inline">\(\mathbf{X}_{t\mathscr{N_i}}\)</span> is the sub-vector relating to node <span class="math inline">\(i\)</span>’s network exposure units.</p>
+<p><span class="math inline">\(\mathbf{I}_{\mathscr{W}_i}\)</span> is the “network weights matrix” for node <span class="math inline">\(i \in \mathscr{N}\)</span>. It is a square matrix with <span class="math inline">\(\psi(i,j)\)</span> in the <span class="math inline">\(j^{th}\)</span> entry of the main diagonal and 0 in other entries. The matrix is of dimension <span class="math inline">\(|\mathscr{N}_i| \times | \mathscr{N}_i|\)</span>.</p>
 <p>Finally, we will need to use the permutation matrix in a definition below. A permutation matrix <span class="math inline">\(\mathbf{M}\)</span> is as a square matrix whose row and column margins all equal 1, and whose entries are either zero or one. Pre-multiplying the a vector <span class="math inline">\(\mathbf{X}\)</span> with a conformable permutation matrix <span class="math inline">\(\mathbf{M}\)</span>, permutes the order of the entries in the vector <span class="math inline">\(\mathbf{X}\)</span> without changing their values.</p>
 </section><section id="exposure-mappings" class="level3 unnumbered page-columns page-full"><h3 class="unnumbered anchored" data-anchor-id="exposure-mappings">Exposure mappings</h3>
 <p>Loosely following <span class="citation" data-cites="aronow2017">Aronow and Samii (<a href="../6_endnotes/6_1__references.html#ref-aronow2017" role="doc-biblioref">2017</a>)</span>, we use the idea of exposure mappings to express the model assumptions we will need in subsequent sections. Say we have a non-parametric structural equation model defined on data graph <span class="math inline">\(\mathscr{G}(\mathscr{N}, \sim, \Lambda)\)</span> with outcome measure <span class="math inline">\(\mathbf{Y}\)</span> preceded by exposure variables <span class="math inline">\(\mathbf{X}_t\)</span>. <span class="math inline">\(f_{Y_i}\)</span> is the structural equation for <span class="math inline">\(Y_i\)</span>, and <span class="math inline">\(U_{Y_i}\)</span> the error term for that equation. We define the “exposure mapping for <span class="math inline">\(Y_i\)</span>” as the function</p>
@@ -1348,15 +1349,15 @@ g_{ti}: \{0,1\}^{n} \times\mathscr{N} \rightarrow \mathbf{R}
 \]</span></p>
 <p>We call <span class="math inline">\(g_{ti}\)</span> (<span class="math inline">\(t&gt;0\)</span>) the component function for <span class="math inline">\(\mathbf{X}_t\)</span> in exposure mapping <span class="math inline">\(g_i\)</span>.</p>
 </section><section id="definition-4-symmetry" class="level4 page-columns page-full"><h4 class="anchored" data-anchor-id="definition-4-symmetry">Definition 4: Symmetry</h4>
-<p>We say component function <span class="math inline">\(g_{ti}\)</span> is symmetric with respect to data graph <span class="math inline">\(\mathscr{G}\)</span> if for any <span class="math inline">\(\mathbf{X},\mathbf{X}' \in \mathbf{R}^n\)</span> and conformable permutation matrix <span class="math inline">\(\mathbf{M}\)</span>:</p>
+<p>We say component function <span class="math inline">\(g_{ti}\)</span> is symmetric with respect to data graph <span class="math inline">\(\mathscr{G}\)</span> if for any <span class="math inline">\(i,j \in \mathscr{N}\)</span>, <span class="math inline">\(\mathbf{X},\mathbf{X}' \in \mathbf{R}^n\)</span> and conformable permutation matrix <span class="math inline">\(\mathbf{M}\)</span>:</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong>Note on symmetry</strong> In a separable exposure mapping, if component function <span class="math inline">\(g_{ti}\)</span> is symmetric with respect to <span class="math inline">\(\mathscr{G}\)</span>, it is a function only of values <span class="math inline">\(X_{tj}\)</span> for <span class="math inline">\(j \in \mathscr{N}_i\)</span>.</p>
 </div></div><p><span class="math display">\[
 \begin{equation}
-\mathbf{X}_{\mathscr{N}_i} = \mathbf{M} \mathbf{X'}_{\mathscr{N}_i}  \\
+\mathbf{X}_{\mathscr{N}_i} = \mathbf{M} \mathbf{X'}_{\mathscr{N}_j} \text{ and } \mathbf{I}_{\mathscr{W}_i} =  \mathbf{M} \mathbf{I}_{\mathscr{W}_j}\\
 \implies \\
-g_{ti}(\mathbf{X}, i) = g_{ti}(\mathbf{X'}, i)
+g_{ti}(\mathbf{X}, i) = g_{ti}(\mathbf{X'}, j)
 \end{equation}
 \]</span></p>
 <p>If <span class="math inline">\(g_{ti}\)</span> is symmetric with respect to <span class="math inline">\(\mathscr{G}\)</span> we say it is a “network exposure mapping for <span class="math inline">\(Y_i\)</span> with respect to <span class="math inline">\(\mathbf{X}_t\)</span> in <span class="math inline">\(\mathscr{G}\)</span>”. The value of the function is called the “network exposure value for <span class="math inline">\(Y_i\)</span> with respect to <span class="math inline">\(\mathbf{X}_t\)</span> in <span class="math inline">\(\mathscr{G}\)</span>”</p>
@@ -1563,7 +1564,7 @@ E[ \frac{1}{n} \sum_i  E[Y_i |  L_i , g_Y(\mathbf{L}, i), A_i = a_i, h_Y(\textbf
 <li><p>How does the assumption of boundedness guarantee that as <span class="math inline">\(n \rightarrow \infty\)</span>, we will get better estimates of the average counterfactual values rather than a proliferation of counterfactual values to estimate?</p></li>
 <li><p>Write an example of a network exposure mapping that is not separable.</p></li>
 </ol></section></section><section id="sec-ssnac" class="level2" data-number="C.3"><h2 data-number="C.3" class="anchored" data-anchor-id="sec-ssnac">
-<span class="header-section-number">C.3</span> SSNAC</h2>
+<span class="header-section-number">C.3</span> Social and Spatial Network Analysis with Causal interpretation</h2>
 <section id="example-3-longitudinal-data-driven-vaccination-campaign" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="example-3-longitudinal-data-driven-vaccination-campaign">Example 3: Longitudinal Data-Driven Vaccination Campaign</h3>
 <p>You are a public health officer at the department of health in Nowhereville, and are planning to conduct and assess a three week flu vaccination campaign. None of the townspeople have been vaccinated against flu. There is a population of 5 residents in the city, and they each live in one of three neighborhoods. In addition, residents visit their friends’ homes in other neighborhoods.</p>
 <p><em>Person 1</em> lives in <em>Neighborhood A</em> and visits <em>Neighborhood B</em>. <em>Person 2</em> lives in <em>Neighborhood B</em>, but visits <em>Neighborhoods A</em> and <em>B</em>. <em>Person 3</em> lives in <em>Neighborhood C</em> and visits <em>Neighborhood B</em>. <em>Persons 5</em> and <em>6</em> live in <em>Neighborhood C</em> and they do not visit any other neighborhoods.</p>

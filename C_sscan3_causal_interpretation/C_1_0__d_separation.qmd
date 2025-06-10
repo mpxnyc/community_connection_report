@@ -6,11 +6,11 @@ D-separation is a set of rules for translating DAGs into (conditional) independe
 
 A path linking two nodes (say *Node A* and *Node B*) in a DAG is a sequence of nodes that start with *A* and ends with *B* where each successive node in the sequence is connected to the former and the subsequent nodes in the DAG. Two nodes are d-separated if all the paths linking them are closed or if there is no path that links them.
 
-A path of length one (an edge connecting two nodes) is open by definition. A path of length two or more can be analyzed in terms of its consecutive sub-sequences of three, which we call triangles. A path is open if all the triangles in that path are open. We can therefore check whether any path is closed or open by examining the triangles.
+A path of length one (an edge connecting two nodes) is open by definition. A path of length two or more can be analyzed in terms of its consecutive sub-sequences of length three, which we call triangles. A path is open if all the triangles in that path are open. We can therefore check whether any path is closed or open by examining the triangles.
 
 #### Triangles
 
-A path in a DAG can be analyzed in terms of three types of triangle - the fork, the spoon, and the chopstick, which we describe below. When we do not condition for any variable in the triangle, we call it the "canonical triangle". When we condition by the intermediate variable in a the triangle, we call it the "conditional triangle". We indicate stratification (or conditioning) using a box around the node. 
+A path in a DAG can be analyzed in terms of three types of triangle - the fork, the spoon, and the chopstick, which we describe below. When we do not condition on the intermediate variable in the triangle, we call these the "canonical fork", "canonical spoon", and "canonical chopstick", respectively. When we do condition by the intermediate variable we say "conditional fork", "conditional spoon", and "conditional chopstick". 
 
 ##### Fork
 
