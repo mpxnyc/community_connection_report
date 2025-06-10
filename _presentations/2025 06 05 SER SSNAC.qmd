@@ -1,5 +1,6 @@
 ---
-title: Social and spatial network analysis with causal interpretation
+title: "SSNAC: DANGs and SWINGs" 
+subtitle: Social and spatial network analysis with causal interpretation
 author: Keletso Makofane, MPH, PhD
 institute: CTRL+F Consulting Group
 format: 
@@ -16,30 +17,104 @@ format:
 targets::tar_source("../R_functions")
 ```
 
-# SSNAC is an approach to...
-
-## ...integrating social and spatial context
+## 
 
 ```{r}
-#| fig-height: 5
-#| fig-width: 8
-#| fig-cap: Approaches to incorporating context in studies of individual health
-#| label: fig-context
+#| label: fig-edge-intervention-swing-0
+#| fig-cap: "Dynamic regime SWING for vaccination campaign"
 
-
-
-
-plot_context_figure()
-
+hypothetical_intervention_swing() |>
+  plot_swig(node_radius = 0.5, nudge_intervention_labels = 0.2) +
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc_blank()
 
 
 ```
 
-## ...conceptualizing data
+# SSNAC is a way of conceptualizing study data
+
+## Social and spatial context
+
+```{r}
+
+#| fig-cap: Approaches to incorporating context in studies of individual health
+#| label: fig-context-1
+
+
+example_context_graph_base("") |>
+    example_context_graph_outline() |>
+    example_context_graph_nodes()
+
+```
+
+## Social and spatial context
+
+```{r}
+
+#| fig-cap: Approaches to incorporating context in studies of individual health
+#| label: fig-context-2
+
+
+example_context_graph_base("") |>
+    example_context_graph_outline() |>
+    example_context_graph_edges() |>
+    example_context_graph_nodes()
+
+```
+
+## Social and spatial context
+
+```{r}
+
+#| fig-cap: Approaches to incorporating context in studies of individual health
+#| label: fig-context-3
+
+
+example_context_graph_base("") |>
+    example_context_graph_outline() |>
+    example_context_graph_inner_division() |>
+    example_context_graph_nodes()
+
+```
+
+## Social and spatial context
+
+```{r}
+
+#| fig-cap: Approaches to incorporating context in studies of individual health
+#| label: fig-context-4
+
+
+example_context_graph_base("") |>
+    example_context_graph_outline() |>
+    example_context_graph_inner_division() |>
+    example_context_graph_inner_gates() |>
+    example_context_graph_nodes()
+
+```
+
+## Social and spatial context
+
+```{r}
+
+#| fig-cap: Approaches to incorporating context in studies of individual health
+#| label: fig-context-5
+
+
+example_context_graph_base("") |>
+    example_context_graph_outline() |>
+    example_context_graph_inner_division() |>
+    example_context_graph_inner_gates() |>
+    example_context_graph_edges() |>
+    example_context_graph_nodes()
+
+```
+
+## From data tables to data graphs
 
 ```{r}
 #| label: fig-ssnac
-#| fig-cap: Data graph
+#| fig-cap: SSNAC data graph encoding people, places, and spatial and social connections
 
 data_snac_example() |>
 plot_ssnac_example() |>
@@ -49,7 +124,7 @@ plot_ssnac_example() |>
 
 ```
 
-# ...reasoning about causality
+# SSNAC is a way to reason causally in a system characterized by complex patterns of interdependence among observations
 
 ## 
 
@@ -59,11 +134,13 @@ We are investigating the relationship between dressing in formal wear, wealth, a
 
 We recruit three people, *Person 1*, *Person 2*, and *Person 3*. *Person 1* and *Person 2* are married to each other. *Person 1* and *Person 3* are newly acquainted colleagues.
 
-## 
+## Non-parametric structural equation model
+
+### with independent errors
 
 ```{r }
 #| label: fig-fullly-connected-dag
-#| fig-cap: "Fully connected causal DAG"
+#| fig-cap: "Fully connected causal directed acyclic graph (DAG)"
 
 make_dag("fully_connected")         |> 
   plot_swig(node_radius = 0.2) + 
@@ -72,7 +149,9 @@ make_dag("fully_connected")         |>
 
 ```
 
-## 
+## NPSEM-IE
+
+### Structural equations
 
 $$
 \begin{aligned}
@@ -109,6 +188,24 @@ make_dag("full_interference")      |>
 
 ## Model assumptions under classic causal inference
 
+### Independence I: No spillover
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}) \\
+L_3 &= f_{L_3}(U_{L_3} ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
+A_2 &= f_{A_2}(U_{A_2}, L_1, L_2, L_3) \\
+A_3 &= f_{A_3}(U_{A_3}, L_1, L_2, L_3) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3) \\
+\end{aligned}
+$$ {#eq-no-spillover-dag}
+
+## Model assumptions under classic causal inference
+
 ### Independence II: No interference
 
 ```{r}
@@ -122,6 +219,24 @@ make_dag("independence") |>
 
 
 ```
+
+## Model assumptions under classic causal inference
+
+### Independence II: No interference
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}( U_{L_1}) \\
+L_2 &= f_{L_2}( U_{L_2}) \\
+L_3 &= f_{L_3}( U_{L_3}) \\
+A_1 &= f_{A_1}( U_{A_1}, L_1) \\
+A_2 &= f_{A_2}( U_{A_2}, L_2) \\
+A_3 &= f_{A_3}( U_{A_3}, L_3) \\
+Y_1 &= f_{Y_1}( U_{Y_1}, L_1, A_1 ) \\
+Y_2 &= f_{Y_2}( U_{Y_2}, L_2, A_2 ) \\
+Y_3 &= f_{Y_3}( U_{Y_3}, L_3, A_3 ) \\
+\end{aligned}
+$$
 
 ## Model assumptions under classic causal inference
 
@@ -139,6 +254,10 @@ make_dag("independence") |>
 
 ```
 
+## Model assumptions under classic causal inference
+
+### Homogeneity I: Identical distributions
+
 $$
 \begin{aligned}
 L_i &= f_{L}( U_{L_i}) \\
@@ -147,9 +266,14 @@ Y_i &= f_{Y}( U_{Y_i}, L_i, A_i) \\
 \end{aligned}
 $$ {#eq-independence-dag}
 
-# Model assumptions under SNACC
+# Model assumptions under SSNAC
 
-## Model assumptions under SNACC
+###### Citations:
+- Aronow, Peter M, and Cyrus Samii. (2017). “Estimating Average Causal Effects Under General Interference, with Application to a Social Network Experiment.” 
+
+- Makofane, K., Tchetgen Tchetgen, E. J., Bassett, M. T., Berkman, L. F. (Accepted 2023. in press?). Networked wealth and mortality in the Agincourt Health and Demographic Surveillance System 2009 – 2018. American Journal of Epidemiology
+
+## Model assumptions under SSNAC
 
 ### Independence I: No spillover
 
@@ -166,7 +290,7 @@ make_dag("full_interference")      |>
 
 ```
 
-## Model assumptions under SNACC
+## Model assumptions under SSNAC
 
 ### Independence II: Networked interference
 
@@ -182,7 +306,25 @@ make_dag("network_interference")   |>
 
 ```
 
-## Model assumptions under SNACC
+## Model assumptions under SSNAC
+
+### Independence II: Networked interference
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}) \\
+L_3 &= f_{L_3}(U_{L_3} ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, L_2) \\
+A_2 &= f_{A_2}(U_{A_2}, L_1, L_2) \\
+A_3 &= f_{A_3}(U_{A_3}, L_3) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, A_1, A_2) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, A_1, A_2) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
+\end{aligned}
+$$ {#eq-interference-dag}
+
+## Model assumptions under SSNAC
 
 ### Homogeneity I: Separability
 
@@ -200,29 +342,29 @@ Y_3 &= f_{Y_3}(U_{Y_3}, L_3,A_3,  g_{Y_2}(\mathbf{L}, 3), h_{Y_2}(\mathbf{A}, 3)
 \end{aligned}
 $$
 
-for symmetric and bounded $g_{A_*}$, $g_{Y_*}$, and $h_{Y_*}$.
+for symmetric and bounded $g_{A_*}$, $g_{Y_*}$, and $h_{Y_*}$ 
 
-## Model assumptions under SNACC
+
+
+
+
+## Model assumptions under SSNAC
 
 ### Homogeneity I: Separability
 
 #### a. Symmetry
 
-For permutation matrix $\mathbf{M} \in \{0,1\}^{n\times n}$, $\mathbf{X}, \mathbf{X}' \in \{0,1\}^n$, alter set $\mathscr{N}_i$ (indices of nodes connected to $i$)
+We say component function $g_{ti}$ is symmetric with respect to data graph $\mathscr{G}$ if for any $i,j \in \mathscr{N}$, $\mathbf{X},\mathbf{X}' \in \mathbf{R}^n$ and conformable permutation matrix $\mathbf{M}$:
 
 $$
-\begin{aligned}
-\mathbf{X}_{\mathscr{N}_i} = \mathbf{M} \mathbf{X'}_{\mathscr{N}_i}  \\
-\implies \\
-g_{ti}(\mathbf{X}, i) = g_{ti}(\mathbf{X'}, i) 
-\end{aligned}
-$$ where $\mathbf{X}_{\mathscr{N}_i}$ is the subvector of $\mathbf{X}$ containing entries related to indices contained by $\mathscr{N}_i$.
+\mathbf{X}_{\mathscr{N}_i} = \mathbf{M} \mathbf{X'}_{\mathscr{N}_j}  \implies  g_{ti}(\mathbf{X}, i) = g_{ti}(\mathbf{X'}, j) 
+$$
 
 #### b. Boundedness
 
 We say that an exposure mapping $g_{i}$ is bounded if all possible exposure values are contained by a finite set $\mathbf{D}$
 
-## Model assumptions under SNACC
+## Model assumptions under SSNAC
 
 ### Homogeneity I: Separability
 
@@ -239,7 +381,7 @@ make_dag("homogenous_interference")            |>
 
 ```
 
-## Model assumptions under SNACC
+## Model assumptions under SSNAC
 
 ### Homogeneity II: Positional invariance
 
@@ -257,7 +399,7 @@ Y_3 &= f_{Y_3}(U_{Y_3}, L_3,A_3,  g_{Y}(\mathbf{L}, 3), h_{Y}(\mathbf{A}, 3)) \\
 \end{aligned}
 $$
 
-## Model assumptions under SNACC
+## Model assumptions under SSNAC
 
 ### Homogeneity III: Identical distributions
 
@@ -272,6 +414,18 @@ A_3 &= f_{A}(U_{A_3}, L_3, g_{A}(\mathbf{L}, 3)) \\
 Y_1 &= f_{Y}(U_{Y_1}, L_1, A_1, g_{Y}(\mathbf{L}, 1), h_{Y}(\mathbf{A}, 1)) \\
 Y_2 &= f_{Y}(U_{Y_2}, L_2, A_2, g_{Y}(\mathbf{L}, 2), h_{Y}(\mathbf{A}, 2)) \\
 Y_3 &= f_{Y}(U_{Y_3}, L_3,A_3,  g_{Y}(\mathbf{L}, 3), h_{Y}(\mathbf{A}, 3)) \\
+\end{aligned}
+$$
+
+## Model assumptions under SSNAC
+
+### Homogeneity III: Identical distributions
+
+$$
+\begin{aligned}
+L_i &= f_{L}(U_{L_i}) \\
+A_i &= f_{A}(U_{A_i}, L_i, g_{A}(\mathbf{L}, i)) \\
+Y_i &= f_{Y}(U_{Y_i}, L_i, A_i, g_{Y}(\mathbf{L}, i), h_{Y}(\mathbf{A}, i)) \\
 \end{aligned}
 $$
 
@@ -314,10 +468,6 @@ cowplot::plot_grid(structural, relational, ncol = 1)
 
 ```
 
-
-
-
-
 # Integrating space - data-driven vaccination campaign
 
 ## Integrating space
@@ -326,7 +476,7 @@ cowplot::plot_grid(structural, relational, ncol = 1)
 
 ```{r}
 #| label: fig-example-dang-structural
-#| fig-cap: "Causal DANG for Week 1 in Example 3"
+#| fig-cap: "Causal DANG for neighborhood-level vaccination campaign"
 
 
 structural  <- example_dang_2_structural() |>
@@ -354,18 +504,16 @@ legend      <- cowplot::get_legend(legend_pre)
 cowplot::plot_grid(figure, legend, nrow = 1, rel_widths = c(4,1))
 ```
 
-
 # Introducing the Single World Intervention Network Graph (SWING)
 
 ## Introducing the SWIG
-
 
 ```{r}
 #| fig-height: 6
 #| fig-width: 8
 #| fig-align: center
 #| label: fig-example-swig-structural
-#| fig-cap: "SWING for Week 1 in Example 3"
+#| fig-cap: "SWING for neighborhood-level vaccination campaign"
 #| 
 
 
@@ -399,15 +547,17 @@ cowplot::plot_grid(figure, legend, nrow = 1, rel_widths = c(4,1))
 # Responding to an outbreak of infectious disease: a dynamic-regime SSNAC analysis of MPX NYC data
 
 ## MPX NYC
+
 ### Novel anonymous data collection tool
 
 ![Map input question format developed for MPX NYC](images/image_app_graphic.png){#fig-mapinputformat}
 
 ## MPX NYC
-### Novel tools for descriptive analysis
+
+### Novel tools for analyzing interaction in place
 
 ```{r}
-#| fig-cap: !expr 'get_figure_details("fig-age-mixing")'
+#| fig-cap: Spatial mixing coefficient by age group
 #| label: fig-age-mixing-matrix
 
 
@@ -421,12 +571,12 @@ make_plotdata_age_mixing_matrix() |>
   ggplot2::coord_fixed()
 ```
 
-
 ## MPX NYC
+
 ### Novel dataset for social and spatial analysis
 
 ```{r}
-#| fig-cap: !expr 'get_figure_details("fig-example-bipartite")'
+#| fig-cap: Sample MPX NYC data graph
 #| label: fig-example-bipartite
 #| fig-align: center
 
@@ -439,11 +589,13 @@ make_example_network_data("bipartite") |>
   )
 ```
 
-## Dynamic regime SWING
+## MPX NYC
+
+### Model outbreak response: contact- or movement-neutralizing?
 
 ```{r}
 #| label: fig-edge-intervention-swing
-#| fig-cap: "SWING for Week 1-3 for MPX NYC Application of SSNAC framework"
+#| fig-cap: "Dynamic regime SWING for vaccination campaign"
 
 hypothetical_intervention_swing() |>
   plot_swig(node_radius = 0.5, nudge_intervention_labels = 0.2) +
@@ -453,7 +605,9 @@ hypothetical_intervention_swing() |>
 
 ```
 
-## Structural equations
+## MPX NYC
+
+### Model outbreak response: contact- or movement-neutralizing?
 
 $$
 \begin{aligned}
@@ -466,10 +620,12 @@ V_{si}^{(h)} &=  \begin{cases} 1 & M_{si}^{(h)} = 1 \text{ or } V_{s-1,i}^{(h)} 
 \end{aligned}
 $$ {#eq-edge-intervention-swing}
 
-## Results
+## MPX NYC
+
+### Model outbreak response: contact- or movement-neutralizing?
 
 ```{r}
-#| fig-cap: !expr 'get_figure_details("fig-hiimpact-communities")'
+#| fig-cap: "Priority community districts vs. coverage"
 #| label: 'fig-hiimpact-communities-bar'
 
 make_plotdata_coverage_approach_bar() |>
@@ -480,10 +636,12 @@ make_plotdata_coverage_approach_bar() |>
 
 ```
 
-## Results
+## MPX NYC
+
+### Model outbreak response: contact- or movement-neutralizing?
 
 ```{r}
-#| fig-cap: !expr 'get_figure_details("fig-hiimpact-communities")'
+#| fig-cap: "Priority community districts"
 #| label: fig-hiimpact-communities-map
 
 
@@ -493,18 +651,25 @@ make_plotdata_coverage_approach_choro() |>
                 theme_mpxnyc_blank(legend.position = "bottom") 
 ```
 
-## Results
+## MPX NYC
+
+### Model outbreak response: contact- or movement-neutralizing?
 
 ```{r }
-#| fig-cap: !expr 'get_figure_details("fig-netimpact")'
+#| fig-cap: "Impact on potential contact network"
 #| label: fig-netimpact
 
 make_plotdata_net_impact_profile() |>
   plot_centrality_bar() +
   scale_fill_mpxnyc(name = "", option = "light") +
   scale_axis_mpxnyc() +
-  scale_x_continuous_mpxnyc() +
-  theme_mpxnyc_netimpact() 
+  scale_x_continuous_mpxnyc("Number of community districts vaccinated") +
+  theme_mpxnyc_netimpact(
+    axis.text = ggplot2::element_text(),
+    axis.title = ggplot2::element_text(margin = ggplot2::margin(50,50,50,50))
+  ) 
   
 
 ```
+
+# MPX NYC main report coming soon!
