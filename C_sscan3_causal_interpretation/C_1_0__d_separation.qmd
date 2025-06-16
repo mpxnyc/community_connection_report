@@ -1,27 +1,46 @@
-### D-separation {.unnumbered}
+### DAGs and d-separation {.unnumbered}
 
-D-separation is a set of rules for translating DAGs into (conditional) independence statements involving the variables represented on the DAG. If two variables are "d-separated" in the DAG, then they are (conditionally) independent of one another.
+A directed acyclic graph (DAG) is an acyclic graph whose nodes represent the entries of a vector-valued random variable. Directed edges represent statistical relationships among those entries. DAGs can be used to characterize probability distributions by the conditional independencies among these entries. They graphically encode the minimal set of conditional independencies that imply all the conditional independencies of the probability distribution. Using a DAG and a set of rules called d-separation, it is possible to recover the minimal set of conditional independencies that characterize the distribution it represents.
 
-#### Paths
+Conditional indpendencies are indicated by missing edges in the DAG. If we made no assumptions at all about the causal process in Example 1 except the time-ordering of measurements, we could represent our data using @fig-fullly-connected-dag. Since there are no missing edges between nodes in the DAG, it represents any possible joint distribution between the variables shown in the DAG -- there are no conditional independencies.
 
-A path linking two nodes (say *Node A* and *Node B*) in a DAG is a sequence of nodes that start with *A* and ends with *B* where each successive node in the sequence is connected to the former and the subsequent nodes in the DAG. Two nodes are d-separated if all the paths linking them are closed or if there is no path that links them.
+```{r }
+#| fig-height: 6
+#| fig-width: 6
+#| fig-align: center
+#| label: fig-fullly-connected-dag
+#| fig-cap: "Fully connected causal DAG"
 
-A path of length one (an edge connecting two nodes) is open by definition. A path of length two or more can be analyzed in terms of its consecutive sub-sequences of length three, which we call triangles. A path is open if all the triangles in that path are open. We can therefore check whether any path is closed or open by examining the triangles.
+make_dag("fully_connected")         |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc_blank()
 
-#### Triangles
+```
 
-A path in a DAG can be analyzed in terms of three types of triangle - the fork, the spoon, and the chopstick, which we describe below. When we do not condition on the intermediate variable in the triangle, we call these the "canonical fork", "canonical spoon", and "canonical chopstick", respectively. When we do condition by the intermediate variable we say "conditional fork", "conditional spoon", and "conditional chopstick". 
 
-##### Fork
 
-In the sub-graph shown below, B is a cause of A and also a cause of C. By definition, a canonical fork is open and a conditional fork is closed. 
+D-separation is a set of rules for translating DAGs into conditional independence statements involving the variables represented on the DAG. If two variables are "d-separated" in the DAG, then they are independent. If they are are "conditionally d-separated", they are d-separated once we condition for a set of variables we will call the "adjustment set". 
+
+A pair of nodes is d-separated if all the paths linking them are closed or if there is no path that links them.
+
+**PATHS**
+
+A path is a sequence of nodes that starts with a given origin node and ends with a terminal node. Adjacent entries in the sequence are connected in the DAG. A path of length one is open by definition. A path of length two or more is open if all its triangles are open.
+
+**TRIANGLES**
+
+A triangle is a sub-sequence of a path which contains three consecutive entries from the path. There are three types the fork, the spoon, and the chopstick, which we describe below. When we do not condition on the apex variable in the triangle, we call these the "canonical fork", "canonical spoon", and "canonical chopstick", respectively. When we do condition by the apex variable we say "conditional fork", "conditional spoon", and "conditional chopstick". 
+
+*Fork (common cause)* 
+
+We define the triangle shown below as a fork. In this fork, B is a cause of A and also a cause of C. By definition, a canonical fork is open and a conditional fork is closed. The apex variable of a fork is commonly referred to as a "confounder" in causal inference literature. 
 
 
 ```{r fork}
 #| fig-height: 2.5
 #| fig-width: 2.5
 #| fig-align: center
-#| fig-cap: "Cannonical fork (common cause)"
 #| 
 make_dag_subgraph <- function(graph_type_input = "fork"){
   
@@ -87,16 +106,15 @@ make_dag_subgraph("fork") |>
 ```
 
 
-##### Spoon
+*Spoon (common effect)*
 
-In the sub-graph shown below, A is a cause of B and C is also a cause of B. By definition, a canonical spoon is closed and a conditional spoon is open. Spoons are commonly referred to as "colliders" in causal inference literature. 
+We define the triangle shown below as a spoon In this spoon, A is a cause of B and C is also a cause of B. By definition, a canonical spoon is closed and a conditional spoon is open. The apex variable of a spoon is commonly referred to as a "collider" in causal inference literature. 
 
 
 ```{r spoon}
 #| fig-height: 2.5
 #| fig-width: 2.5
 #| fig-align: center
-#| fig-cap: "Cannonical spoon (common effect)"
 
 make_dag_subgraph("spoon") |>
   plot_swig(node_radius = 0.2)  +
@@ -107,9 +125,10 @@ make_dag_subgraph("spoon") |>
 
 
 
-##### Chopstick
+*Chopstick (mediator)* 
 
-In the sub-graph shown below, A causes B and B causes C. By definition, a canonical chopstic is open and a conditional chopstick is closed. 
+We define the triangle shown below as a chopstick. In this chopstick, A causes B and B causes C. By definition, a canonical chopstick is open and a conditional chopstick is closed. The apex variable of a chopstick is commonly referred to as a "mediator" in causal inference literature.
+
 
 
 
@@ -117,7 +136,6 @@ In the sub-graph shown below, A causes B and B causes C. By definition, a canoni
 #| fig-height: 2.5
 #| fig-width: 3.5
 #| fig-align: center
-#| fig-cap: "Cannonical chopstick (mediator)"
 #| 
 make_dag_subgraph("chopstick") |>
   plot_swig(node_radius = 0.2)  +
@@ -127,33 +145,33 @@ make_dag_subgraph("chopstick") |>
 
 
 
-##### Rules
+**RULES**
 
-To summarize, canonical forks and chopsticks are open and conditional forks and chopsticks are closed. By contrast, canonical spoons are closed and conditional spoons are open. A path is open if it is of length one or if all the triangles in the path are open. If at least one triangle in the path is closed, the path is closed. Two nodes in a DAG are d-separated if all the paths between them are closed. Two variables in the NPSEM-IE represented by the DAG are (conditionally) independent if they are (conditionally) d-separated. 
+To summarize, canonical forks and chopsticks are open and conditional forks and chopsticks are closed. By contrast, canonical spoons are closed and conditional spoons are open. A path is open if it is of length one or if all the triangles in the path are open. If at least one triangle in the path is closed, the path is closed. Two nodes in a DAG are conditionally d-separated if all the paths between them are closed after conditioning on the adjustment set. Two variables shown on the DAG are conditionally independent if they are conditionally d-separated. 
 
 ```{r}
 
 data.frame(
                             triangle    = c("Fork", "Spoon", "Chopstick"),
                             description = c(
-                                            "Intermediate node is a common cause",
-                                            "Intermediate node is a common effect",
-                                            "Intermediate node is a mediator"
+                                            "Apex is a common cause",
+                                            "Apex is a common effect",
+                                            "Apex is a mediator"
                                           ),
                             canonical  = c(
-                                          "not d-separated",
-                                          "d-separated",
-                                          "not d-separated"
+                                          "Not d-separated",
+                                          "D-separated",
+                                          "Not d-separated"
                                           ),
                             conditional = c(
-                                          "d-separated",
-                                          "not d-separated",
-                                          "d-separated"
+                                          "D-separated",
+                                          "Not d-separated",
+                                          "D-separated"
                                           )
                           ) |>
                     gt::gt()  |>
   gt::cols_label(
-      triangle = "Type",
+      triangle = "Triangle",
       canonical = "Canonical",
       conditional = "Conditional",
       description = "Description"

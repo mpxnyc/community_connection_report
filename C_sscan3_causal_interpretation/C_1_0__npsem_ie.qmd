@@ -1,36 +1,12 @@
-### NPSEM-IE {.unnumbered}
+### Structural equation models {.unnumbered}
 
-An NPSEM-IE is a system of equations which relates all the entries in a given vector-valued random variable with each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown by @eq-fullly-connected-dag. In this set of equations, values that are produced by equations higher up in the list are the inputs of equations lower down on the list. The functions $f_*$ are deterministic, though their form is not necessarily known. The arguments $U_*$ represent error terms - random variables which are independent of each other within and across observational units.
+A non-parametric structural equation model with independent errors is a system of equations that relates all the entries in a given vector-valued random variable to each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown by @eq-fullly-connected-dag. In this set of equations, values that are produced by equations higher up in the list serve as inputs to equations lower down on the list. The functions $f_*$ are deterministic, though their form is not necessarily known. The arguments $U_*$ represent error terms -- random variables that are independent of each other within and across observational units.
 
-Whereas parametric models, for instance, a linear regression model with normally distributed errors, are characterized by their probability density functions, non-parametric models of this type are usually characterized by their conditional independencies. An example of a conditional independence statement would be:
+NPSEMs are used to represent two types of distributions in causal inference: the probability distribution of observed data, and the hypothetical (counterfactual) probability distribution of the data if the experiment had manipulated one or more variables in the model. The former distribution is modeled using the observed data model and the latter is modeled using the counterfactual data model. @eq-fullly-connected-dag shows the observed model for our example, and @eq-fullly-connected-swig shows the counterfactual model under an intervention setting $A_1$ to $a_1$, $A_2$ to $a_2$, and $A_3$ to $a_3$. Notice how in @eq-fullly-connected-swig, the values set under the intervention supercede the values that would have been generated had the experimenter not intervened. The former values are used in subsequent equations in the model whereas the latter values are not. 
 
-*for a realization* $[X_1, X_2, X_3, X_4, X_5]$ of statistical model $F$,
 
-$$
-X_1 \perp X_3 | X_2, X_4
-$$
 
-which reads: "*random variables* $X_1$ and $X_3$ are independent conditional on random variables $X_2$ and $X_4$".
-
-Non-parametric structural equation models are usually represented using the Directed Acyclic Graph (DAG), which is a schematic representation of the structural equations in the model. The DAG shown in @fig-fullly-connected-dag, for instance, represents the model defined by @eq-fullly-connected-dag. The arrow pointing from $L_1$ to $L_3$, for instance, indicates that $L_1$ is an input in the structural equation for $L_3$.
-
-DAGs graphically encode the conditional independencies that characterize non-parametric structural equation models. Using a DAG and a set of rules called d-separation, it is possible to read from the DAG the set of conditional independencies that imply all the conditional independencies that characterize the model.
-
-Conditional indpendencies are indicated by missing edges in the DAG. If we made no assumptions at all about the causal process in Example 1 except the time-ordering of measurements, we could represent our data using @eq-fullly-connected-dag. Since there are no missing edges between nodes in the @fig-fullly-connected-dag, the structural equation model represents any possible joint distribution between the variables in the DAG - there are no conditional independencies.
-
-```{r }
-#| fig-height: 6
-#| fig-width: 6
-#| fig-align: center
-#| label: fig-fullly-connected-dag
-#| fig-cap: "Fully connected causal DAG"
-
-make_dag("fully_connected")         |> 
-  plot_swig(node_radius = 0.2) + 
-  scale_fill_mpxnyc(option = "light") +
-  theme_mpxnyc_blank()
-
-```
+**Observed data model**
 
 $$
 \begin{aligned}
@@ -46,10 +22,48 @@ Y_3 &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
 \end{aligned}
 $$ {#eq-fullly-connected-dag}
 
-But the most flexible model is not the most useful one. To fully characterize this system using observed data, we would need to estimate 9 functions using one observation of the 9-dimensional joint distribution that gave rise to the participants' observations. Recruiting an additional person to the study would not ease this problem; it would add three new equations to the model and we would end up with a similar problem than the one we began with. We would have to estimate 12 functions using one observation of a 12-dimensional joint distribution.
 
-Epidemiologists take several approaches to to simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function. These assumptions are called model restrictions because they restrict the number of possible distributions that could be represented by the model.
+**Counterfactual data model**
 
-For instance, if we add the restriction to the model shown above that all the measures are independent (or equivalently, that the DAG has no arrows), the resulting model would not be able to represent data from a causal system where some of the measures are correlated. By adding the restriction of independence, we would be eliminating the correlated data distribution from consideration as a possibility for how the data we are modelling are truly distributed.
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}, L_1) \\
+L_3 &= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
+A_2^{(a_1)} &= f_{A_2}(U_{A_2}, L_1, L_2, L_3, a_1) \\
+A_3^{(a_1, a_2)} &= f_{A_3}(U_{A_3}, L_1, L_2, L_3, a_1, a_2) \\
+Y_1^{(a_1, a_2, a_3)} &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, a_1, a_2, a_3) \\
+Y_2^{(a_1, a_2, a_3)} &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}) \\
+Y_3^{(a_1, a_2, a_3)} &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}, Y_2^{(a_1, a_2, a_3)}   ) \\
+\end{aligned}
+$$ {#eq-fullly-connected-swig}
+
+
+```{r }
+#| fig-align: center
+#| label: fig-fullly-connected-swig
+#| fig-cap: "Fully connected SWIG"
+
+make_swig("full_interference")      |> 
+    plot_swig(node_radius = 0.2) + 
+    scale_fill_mpxnyc(option = "light") +
+    theme_mpxnyc_blank()
+
+```
+
+
+### Model restrictions {.unnumbered}
+
+Whereas parametric models are characterized by their probability density functions, non-parametric models of this type are usually characterized by their conditional independencies. These can be represented using DAGs, as we described in the previous section. DAGs take on another meaning when used with NPSEMs -- a DAG is a schematic representation of the structural equations in an NPSEM below. The DAG shown in @fig-fullly-connected-dag, for instance, represents the model specified by @eq-fullly-connected-dag. 
+
+
+To fully characterize the NPSEM specified in @eq-fullly-connected-dag using observed data, we would need to estimate 9 functions using one observation of the 9-dimensional joint distribution that gave rise to the participants' observations. Recruiting an additional person to the study would not ease this problem; it would add three new equations to the model and we would end up with a similar problem than the one we began with. We would have to estimate 12 functions using one observation of a 12-dimensional joint distribution.
+
+In practice, we simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function. These assumptions are called model restrictions because they restrict the set of distributions that could possibly be represented by the NPSEM.
+
+For instance, if we add the restriction that all the measures are independent (or equivalently, that the DAG has no arrows), the resulting model would not be able to represent data from a causal system where some of the measures are correlated. By adding the restriction of independence, we would be eliminating the correlated data distribution from consideration as a possibility for how the data we are modelling are truly distributed. 
+
 
 
