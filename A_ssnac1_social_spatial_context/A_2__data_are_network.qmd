@@ -1,21 +1,20 @@
 
 
 
-## The data are a network
+### The data are a network {.unnumbered}
 
-The central data structure in a SSNAC is the person-place graph. @fig-ssnac depicts the rightmost frame of @fig-context by showing spatial units as nodes in a network, connecting adjacent spatial units with a network edge, and connecting individuals with the households they belong to. To show the flexibility of this data object, we added an additional type of relationship an individual can have with a household - that of an employee.
-
-The majority of study data are stored as node or edge attributes. For instance, person nodes might have attributes like age and race whereas place nodes could have attributes like density or surface area. An edge linking a person to a place might have an attribute conveying how the person relates to the place. For instance in @fig-ssnac, some edges indicate residence, some indicate next
+The central data structure in a SSNAC is the data graph. @fig-ssnac depicts the final frame of @fig-context, showing households as nodes in a network, connecting neihgboring households with a network edge, and connecting individuals with the households they belong to. In a data graph, study data are stored as node or edge attributes. Person nodes might have attributes like age and race whereas place nodes could have attributes like density or surface area. An edge linking a person to a place might have an attribute conveying how the person relates to the place (e.g. home or work) and an edge linking a person to a person might have attributes related to the type of relationship (e.g. friend, sex partner), etc. 
 
 
 ```{r}
 #| label: fig-ssnac
-#| fig-cap: SSNAC Person-place graph
+#| fig-cap: SSNAC data graph encoding people, places, and spatial and social connections
+#| fig-width: 8
 
 data_snac_example() |>
-plot_ssnac_example() |>
+  plot_ssnac_example() |>
   style_ssnac_example() +
-  theme_mpxnyc_blank()
+  theme_mpxnyc_blank(legend.position = "bottom") 
 
 
 ```
