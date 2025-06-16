@@ -339,10 +339,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#ssnac-components" id="toc-ssnac-components" class="nav-link active" data-scroll-target="#ssnac-components"><span class="header-section-number">A.1</span> SSNAC components</a></li>
-  <li><a href="#the-data-are-a-network" id="toc-the-data-are-a-network" class="nav-link" data-scroll-target="#the-data-are-a-network"><span class="header-section-number">A.2</span> The data are a network</a></li>
-  <li><a href="#the-network-is-a-causal-structure" id="toc-the-network-is-a-causal-structure" class="nav-link" data-scroll-target="#the-network-is-a-causal-structure"><span class="header-section-number">A.3</span> The network is a causal structure</a></li>
-  <li><a href="#new-causal-structures-open-new-causal-enquiries" id="toc-new-causal-structures-open-new-causal-enquiries" class="nav-link" data-scroll-target="#new-causal-structures-open-new-causal-enquiries"><span class="header-section-number">A.4</span> New causal structures open new causal enquiries</a></li>
+<li><a href="#integrating-context" id="toc-integrating-context" class="nav-link active" data-scroll-target="#integrating-context">Integrating context</a></li>
+  <li>
+<a href="#social-and-spatial-analysis-with-causal-interpretation-ssnac" id="toc-social-and-spatial-analysis-with-causal-interpretation-ssnac" class="nav-link" data-scroll-target="#social-and-spatial-analysis-with-causal-interpretation-ssnac">Social and spatial analysis with causal interpretation (SSNAC)</a>
+  <ul class="collapse">
+<li><a href="#the-data-are-a-network" id="toc-the-data-are-a-network" class="nav-link" data-scroll-target="#the-data-are-a-network">The data are a network</a></li>
+  <li><a href="#the-network-is-a-causal-structure" id="toc-the-network-is-a-causal-structure" class="nav-link" data-scroll-target="#the-network-is-a-causal-structure">The network is a causal structure</a></li>
+  <li><a href="#new-causal-structures-open-new-causal-enquiries" id="toc-new-causal-structures-open-new-causal-enquiries" class="nav-link" data-scroll-target="#new-causal-structures-open-new-causal-enquiries">New causal structures open new causal enquiries</a></li>
+  </ul>
+</li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -352,7 +357,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Keletso Makofane, PhD</p>
 <p>RESPND-MI Collaboration</p>
 </div>
-<p>To motivate the Social and Spatial Network Analysis with Causal interpretation (SSNAC) framework, we consider a study investigating the risk of acquiring a cold among individuals (pictured as dots in physical space in each frame of <a href="#fig-context">Figure&nbsp;<span>A.1</span></a>) in a setting where there is one known infected person. The simplest approach would be to assign average risk of acquiring a cold to each individuals. The problem with this strategy, though, would be that not all individuals have the same risk once we know who the infected person is. Those who are more likely to interact closely with them have higher risk, but not all people are equally likely to interact.</p>
+<section id="integrating-context" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="integrating-context">Integrating context</h2>
+<p>To motivate the Social and Spatial Network Analysis with Causal interpretation (SSNAC) framework, we consider a study investigating the risk of acquiring a cold among individuals (pictured as dots in physical space in each frame of <a href="#fig-context">Figure&nbsp;<span>A.1</span></a>) in a setting where there is only one infected person. Since colds are transmitted through close contact among infected and susceptible people, we can conceptualize the risk of an individual as a characteristic of the physical context they share with other (possibly infected) people.</p>
+<p>The simplest approach (first frame, <a href="#fig-context">Figure&nbsp;<span>A.1</span></a>) would be to assign the average risk of acquiring a cold to each individual based on knowledge about the total number of susceptible people, and the number of infected people. The problem with this strategy, though, would be that those who are more likely to interact closely with the infected person have higher risk, and not all people are equally likely to interact.</p>
 <div>
 <details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plot_context_figure</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell quarto-layout-panel" data-hash="A__ssnac1_social_spatial_context_cache/html/fig-context_bb1d4e8cd918ce23d72f67ec93397420">
@@ -366,54 +373,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>A social network analysis would gain a more granular understanding of risk by assigning people who are connected to other people a higher risk of acquiring the cold than those who have no relationships. In addition, different connected components of the network could be assigned differnet levels of risk.</p>
-<p>An ecologic approach would be to divide up the area into households and assign a different level of risk based on the household (third panel from left). If we knew who has a cold, we could assign people in the same household higher risk for acquiring the cold than others. This anlysis, however, would ignore the fact that households are not equally connected.</p>
-<p>A spatial analysis would enhance this analysis by enriching household data with a spatial weights matrix indicating which pairs of households are neighrbors (second panel from right). Then the risk of aquiring a cold in a given household would be a function of the risk of aquiring a cold among individuals in neighboring households.</p>
-<p>An SSNAC analysis (rightmost panel) would take advantage of both spatial and social network data, assigning risk so that the risk of acquiring the cold is a function of the household the individual belongs to, the neighboring household, and the social network connections.</p>
-<section id="ssnac-components" class="level2" data-number="A.1"><h2 data-number="A.1" class="anchored" data-anchor-id="ssnac-components">
-<span class="header-section-number">A.1</span> SSNAC components</h2>
-<p>The SSNAC framework is an approach to collecting, analyzing and interpreting data which explicitly accounts for relationships among people, the places they physical places they interact in or co-inhabit.</p>
-<p>It is applicable in two situations: when investigators want to describe the patterns in the relations among people, places, and across people and places; or when investigators are interested in inferring causality in the context of the system formed by people and places.</p>
-<p>For the descriptive interest, it is necessary to have data on individuals, the physical spatial units they co-inhabit, relationships among individuals (network data), as well as the relationships among spatial units (spatial weights matrix).</p>
-<p>For the causal interest, it is necessary for the investigator should have the data mentioned above, as well as a theory or set of theories about the causal process under investigation. These theories must explicitly state:</p>
+<p>We could improve on this analysis using a <strong>social network analysis</strong> (second frame, <a href="#fig-context">Figure&nbsp;<span>A.1</span></a>). In this approach, we would use knowledge about relationships to gain a more granular understanding of risk. We could assume, for instance, that people who are in relationships that cause them to physically interact have higher risk than those who are not in such relationships. We could further assign different levels of risk to different connected components of the network. In <a href="#fig-context">Figure&nbsp;<span>A.1</span></a>, relationships are shown using lines connecting the dots.</p>
+<p>An <strong>ecologic</strong> <strong>analysis</strong> (third frame, <a href="#fig-context">Figure&nbsp;<span>A.1</span></a>) would use knowledge about patterns of interaction in space to group people into categories. We could divide people into households, for instance. Assuming that people physically interact with household members significantly more than they do with non-members, households could be assigned differing levels of risk. In <a href="#fig-context">Figure&nbsp;<span>A.1</span></a>, households are marked using a fence surrounding each household.</p>
+<p>A <strong>spatial analysis</strong> (fourth frame, <a href="#fig-context">Figure&nbsp;<span>A.1</span></a>) would also use knowledge about patterns of interaction in space to group people into categories. Unlike in the ecologic approach, in a spatial analysis we assume that some pairs of categories influence each other as a result of their adjacency in physical space. We could assume, for example, that neighboring households influence each other’s risk since their members interact. In <a href="#fig-context">Figure&nbsp;<span>A.1</span></a>, adjacency is shown as a gap in the boundary separating households.</p>
+<p>A <strong>SSNAC analysis</strong> (final frame, <a href="#fig-context">Figure&nbsp;<span>A.1</span></a>) would integrate knowledge about patterns of interaction between individuals, within spatial units, and across spatial units to gain a granular understanding of risk. We could assume that the risk of acquiring a cold is a function of i. interactions with one’s own household members, ii. interactions with members of neighboring households, iii. interactions in personal relationships within and across households.</p>
+</section><section id="social-and-spatial-analysis-with-causal-interpretation-ssnac" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="social-and-spatial-analysis-with-causal-interpretation-ssnac">Social and spatial analysis with causal interpretation (SSNAC)</h2>
+<p>The SSNAC framework is an approach to collecting, analyzing and interpreting data which explicitly accounts for causal relations among people, among places, and across people and places. It is applicable in two situations: when investigators want to describe patterns in how people interact with each other and/or with shared spaces; or when investigators are interested in understanding or intervening on the causal system formed by these components.</p>
+<p>For the descriptive interest, it is necessary to have data on individuals and spatial units they co-inhabit. For richer analyses, data on relationships among individuals and on relationships between spatial units could be incorporated. For the causal interest, it is necessary for investigators to additionally have a theory or set of theories about the causal process under investigation. At minimum, theory should clarify:</p>
 <ul>
 <li><p>the meaning of nodes (which entities they represent)</p></li>
-<li><p>the meaning of ties (how they relate the entities they link)</p></li>
-<li><p>an understanding of which ties are relevant to the causal question under investigation</p></li>
-</ul></section><section id="the-data-are-a-network" class="level2" data-number="A.2"><h2 data-number="A.2" class="anchored" data-anchor-id="the-data-are-a-network">
-<span class="header-section-number">A.2</span> The data are a network</h2>
-<p>The central data structure in a SSNAC is the person-place graph. <a href="#fig-ssnac">Figure&nbsp;<span>A.2</span></a> depicts the rightmost frame of <a href="#fig-context">Figure&nbsp;<span>A.1</span></a> by showing spatial units as nodes in a network, connecting adjacent spatial units with a network edge, and connecting individuals with the households they belong to. To show the flexibility of this data object, we added an additional type of relationship an individual can have with a household - that of an employee.</p>
-<p>The majority of study data are stored as node or edge attributes. For instance, person nodes might have attributes like age and race whereas place nodes could have attributes like density or surface area. An edge linking a person to a place might have an attribute conveying how the person relates to the place. For instance in <a href="#fig-ssnac">Figure&nbsp;<span>A.2</span></a>, some edges indicate residence, some indicate next</p>
-<div class="cell" data-hash="A__ssnac1_social_spatial_context_cache/html/fig-ssnac_dc0443a2ce6a764fcacd591bcc434d85">
+<li><p>the meaning of ties (how they relate entities)</p></li>
+<li><p>an account of the causal processes that causally link nodes</p></li>
+</ul>
+<section id="the-data-are-a-network" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="the-data-are-a-network">The data are a network</h3>
+<p>The central data structure in a SSNAC is the data graph. <a href="#fig-ssnac">Figure&nbsp;<span>A.2</span></a> depicts the final frame of <a href="#fig-context">Figure&nbsp;<span>A.1</span></a>, showing households as nodes in a network, connecting neihgboring households with a network edge, and connecting individuals with the households they belong to. In a data graph, study data are stored as node or edge attributes. Person nodes might have attributes like age and race whereas place nodes could have attributes like density or surface area. An edge linking a person to a place might have an attribute conveying how the person relates to the place (e.g.&nbsp;home or work) and an edge linking a person to a person might have attributes related to the type of relationship (e.g.&nbsp;friend, sex partner), etc.</p>
+<div class="cell" data-hash="A__ssnac1_social_spatial_context_cache/html/fig-ssnac_9f89dfce2e68bc699aee7b51dd6cfc6c">
 <details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">data_snac_example</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span><span class="fu">plot_ssnac_example</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">plot_ssnac_example</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">style_ssnac_example</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div id="fig-ssnac" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="A__ssnac1_social_spatial_context_files/figure-html/fig-ssnac-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;A.2: SSNAC Person-place graph</figcaption></figure>
+<figure class="figure"><p><img src="A__ssnac1_social_spatial_context_files/figure-html/fig-ssnac-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption class="figure-caption">Figure&nbsp;A.2: SSNAC data graph encoding people, places, and spatial and social connections</figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="the-network-is-a-causal-structure" class="level2" data-number="A.3"><h2 data-number="A.3" class="anchored" data-anchor-id="the-network-is-a-causal-structure">
-<span class="header-section-number">A.3</span> The network is a causal structure</h2>
-<p>The Person-place graph is a starting point for constructing a causal model, but it is not sufficient. Depending on the causal question, some edges in this graph are relevant and some are not. For example, if we were interested in a rumor network, we might decide to depict only people and not places in the causal graph. We might also choose to ignore the neighbor edges and focus only on the friend and employee ones, if it is the case that rumours are transmitted within households and across friendships but not to neighbors.</p>
-<p>If we were interested in an infectious disease, and in the study setting, there is a stay-at-home order so that friends do not meet, but neighbors possibly meet, then we might keep the neighbor ties and drop the friend and employee ties. In either case, it is necessary to make changes to the Person-place network through network operations like ignoring or adding ties, or even grouping nodes to form a different graph altogether.</p>
-<p>We explore this in the Analysis appendix.</p>
-</section><section id="new-causal-structures-open-new-causal-enquiries" class="level2" data-number="A.4"><h2 data-number="A.4" class="anchored" data-anchor-id="new-causal-structures-open-new-causal-enquiries">
-<span class="header-section-number">A.4</span> New causal structures open new causal enquiries</h2>
-<p>There are four types of causal queries that focus on node-level outcomes in the SNACC framework.</p>
-<ul>
-<li><p>Person-To-Place: Evaluating the causal impact of a person-level intervention on place-level outcomes for some defined set of people and some defined set of places. e.g.&nbsp;What is the impact of vaccinating college-aged adults in New York City on mpox incidence in Union Square (a favourite hangout spot for college students)</p></li>
-<li><p>Person-to-Person: Evaluating the impact of a person-level intervention on person-level outcomes for some defined sets of people. e.g.&nbsp;How does vaccinating all cisgender white men in New York City affect mpox incidence among Black and Latinx cisgender black men in New York City?</p></li>
-<li><p>Place-to-Place: Evaluating the impact of a place-level intervention on place-level outcomes for some defined sets of places. e.g How does vaccinating Manhattan affect mpox incidence in Brooklyn?</p></li>
-<li><p>Place-to-Person: Evaluating the impact of a place-level intervention on person-level outcomes for some defined set of people and some defined set of places. e.g.&nbsp;How does vaccinating Harlem affect mpox incidence among cisgender black men in New York City</p></li>
-</ul>
-<p>In addition there is an endless potential for constructing causal queries that focus on characteristics that cannot be represented as node characteristics for any single node, but rather are characteristics that emerge as a result of the pattern of interactions among nodes. For examples, see the section on social causal inference.</p>
+</section><section id="the-network-is-a-causal-structure" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="the-network-is-a-causal-structure">The network is a causal structure</h3>
+<p>The data graph is a starting point for constructing a causal model, but it is not sufficient. Depending on the causal question, some edges in this graph are relevant and some are not. For example, if we were interested in a rumor network, we might decide to depict only people and not places in the causal graph. We might also choose to ignore the neighbor relation and focus only on the friend and resident relations if it is the case that rumors are transmitted within households and across friendships but not to neighbors.</p>
+<p>If we were interested in COVID during a stay-at-home order, by contrast, we might keep the neighbor and resident edges and drop the friend edges. In either case, it is necessary to make changes to the data graph so that the definitions for nodes and edges are compatible with the theory guiding the analysis.</p>
+</section><section id="new-causal-structures-open-new-causal-enquiries" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="new-causal-structures-open-new-causal-enquiries">New causal structures open new causal enquiries</h3>
+<p>The SSNAC framework opens up the potential to investigate causal queries that more closely resemble the program decisions that public health leaders have to make when faced with health challenges. The four standard SSNAC causal queries focus on node-level outcomes in the SNACC framework.</p>
+<p><strong>Person-to-place intervention</strong>: Evaluating the causal impact of a person-level intervention on place-level outcomes for some defined set of people and some defined set of places. e.g.&nbsp;What is the impact of vaccinating college-aged adults in New York City on mpox incidence in Washington Square (a favorite hangout spot for NYU students)?</p>
+<p><strong>Person-to-person intervention</strong>: Evaluating the impact of a person-level intervention on person-level outcomes for some defined sets of people. e.g.&nbsp;How does vaccinating all cisgender white men in New York City affect mpox incidence among Black and Latinx cisgender black men in New York City?</p>
+<p><strong>Place-to-place intervention</strong>: Evaluating the impact of a place-level intervention on place-level outcomes for some defined sets of places. e.g How does vaccinating Manhattan affect mpox incidence in Brooklyn?</p>
+<p><strong>Place-to-person intervention</strong>: Evaluating the impact of a place-level intervention on person-level outcomes for some defined set of people and some defined set of places. e.g.&nbsp;How does vaccinating Harlem affect mpox incidence among cisgender black men in New York City</p>
+<p>In addition there is an endless potential for constructing causal queries that focus on characteristics that cannot be represented as node characteristics for any single node, but rather are characteristics that emerge as a result of the pattern of interactions among nodes. We investigate such a query in <a href="../C_sscan3_causal_interpretation/C__sscan3_causal_interpretation.html"><span>Appendix&nbsp;C</span></a>.</p>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");

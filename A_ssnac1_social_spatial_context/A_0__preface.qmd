@@ -1,11 +1,12 @@
-
-
 ```{r include=FALSE}
 targets::tar_source("../R_functions")
 ```
 
-To motivate the Social and Spatial Network Analysis with Causal interpretation (SSNAC) framework, we consider a study investigating the risk of acquiring a cold among individuals (pictured as dots in physical space in each frame of @fig-context) in a setting where there is one known infected person. The simplest approach would be to assign average risk of acquiring a cold to each individuals. The problem with this strategy, though, would be that not all individuals have the same risk once we know who the infected person is. Those who are more likely to interact closely with them have higher risk, but not all people are equally likely to interact.
+## Integrating context  {.unnumbered}
 
+To motivate the Social and Spatial Network Analysis with Causal interpretation (SSNAC) framework, we consider a study investigating the risk of acquiring a cold among individuals (pictured as dots in physical space in each frame of @fig-context) in a setting where there is only one infected person. Since colds are transmitted through close contact among infected and susceptible people, we can conceptualize the risk of an individual as a characteristic of the physical context they share with other (possibly infected) people.
+
+The simplest approach (first frame, @fig-context) would be to assign the average risk of acquiring a cold to each individual based on knowledge about the total number of susceptible people, and the number of infected people. The problem with this strategy, though, would be that those who are more likely to interact closely with the infected person have higher risk, and not all people are equally likely to interact.
 
 ```{r}
 #| layout-nrow: 1
@@ -23,13 +24,10 @@ plot_context_figure()
 
 ```
 
+We could improve on this analysis using a **social network analysis** (second frame, @fig-context). In this approach, we would use knowledge about relationships to gain a more granular understanding of risk. We could assume, for instance, that people who are in relationships that cause them to physically interact have higher risk than those who are not in such relationships. We could further assign different levels of risk to different connected components of the network. In @fig-context, relationships are shown using lines connecting the dots.
 
+An **ecologic** **analysis** (third frame, @fig-context) would use knowledge about patterns of interaction in space to group people into categories. We could divide people into households, for instance. Assuming that people physically interact with household members significantly more than they do with non-members, households could be assigned differing levels of risk. In @fig-context, households are marked using a fence surrounding each household.
 
-A social network analysis would gain a more granular understanding of risk by assigning people who are connected to other people a higher risk of acquiring the cold than those who have no relationships. In addition, different connected components of the network could be assigned differnet levels of risk.
+A **spatial analysis** (fourth frame, @fig-context) would also use knowledge about patterns of interaction in space to group people into categories. Unlike in the ecologic approach, in a spatial analysis we assume that some pairs of categories influence each other as a result of their adjacency in physical space. We could assume, for example, that neighboring households influence each other's risk since their members interact. In @fig-context, adjacency is shown as a gap in the boundary separating households.
 
-An ecologic approach would be to divide up the area into households and assign a different level of risk based on the household (third panel from left). If we knew who has a cold, we could assign people in the same household higher risk for acquiring the cold than others. This anlysis, however, would ignore the fact that households are not equally connected.
-
-A spatial analysis would enhance this analysis by enriching household data with a spatial weights matrix indicating which pairs of households are neighrbors (second panel from right). Then the risk of aquiring a cold in a given household would be a function of the risk of aquiring a cold among individuals in neighboring households.
-
-An SSNAC analysis (rightmost panel) would take advantage of both spatial and social network data, assigning risk so that the risk of acquiring the cold is a function of the household the individual belongs to, the neighboring household, and the social network connections.
-
+A **SSNAC analysis** (final frame, @fig-context) would integrate knowledge about patterns of interaction between individuals, within spatial units, and across spatial units to gain a granular understanding of risk. We could assume that the risk of acquiring a cold is a function of i. interactions with one's own household members, ii. interactions with members of neighboring households, iii. interactions in personal relationships within and across households.
