@@ -1,130 +1,109 @@
 
 
-### Exposure mappings {.unnumbered}
-Loosely following @aronow2017, we use the idea of exposure mappings to express the model assumptions for SSNAC. Say we have a non-parametric structural equation model defined on data graph $\mathscr{G}(\mathscr{N}, \psi, \Lambda)$ with outcome measure $\mathbf{Y}$ preceded by exposure variables $\mathbf{X}_t$. $f_{Y_i}$ is the structural equation for $Y_i$, and $U_{Y_i}$ the error term for that equation. We define the "exposure mapping for $Y_i$" as the function 
+### Causal interference and exposure mappings {.unnumbered}
+
+Say we have a non-parametric structural equation model with outcome measure $\mathbf{Y}$ preceded by exposure variables $\mathbf{X}_t$. $f_{Y_i}$ is the structural equation for $Y_i$, and $U_{Y_i}$ the error term for that equation. 
+
+
+##### Definition 1: Exposure mapping
+
+We define the "exposure mapping for $Y_i$" as the function 
 
 $$
-g_i: (\{0,1\}^{n})^K\times\mathscr{N} \rightarrow \mathbf{R}^{2K}
+g_i: \prod_{t=1}^K  \{0,1\}^{n} \rightarrow \mathbf{R}^{2K}
 $$ 
 
 such that
 
 $$
-Y_i = f_{Y_i}(g_i(\mathbf{X}_1,  ..., \mathbf{X}_K, i), U_{Y_i})
+Y_i = f_{Y_i}(g_i(\mathbf{X}_1,  ..., \mathbf{X}_K), U_{Y_i})
+$$
+
+
+##### Definition 2: Separability
+
+We say exposure mapping $g_i$ is separable if it can be re-written
+
+
+$$
+g_i(\mathbf{X}_{1}, ..., \mathbf{X}_{K}) = [X_{1i}, ..., X_{Ki},    g_{1i}(\mathbf{X}_{1}), ...,   g_{Ki}(\mathbf{X}_{K})]^T
 $$
 
 
 
+where
 
 
-#### Definition 1: Loyalty
+$$
+g_{ti}: \{0,1\}^{n}  \rightarrow \mathbf{R}
+$$
 
-We say an exposure mapping $g_{i}$ is loyal to data graph $\mathscr{G}$ if for any $\mathbf{X}_t,\mathbf{X}'_t \in \{0,1\}^n$
+We call the functions $g_{ti}$ component functions of exposure mapping $g_i$.
+
+
+
+
+##### Definition 3: Loyalty
+
+We say a component function $g_{ti}$  is loyal to graph $\mathscr{G}$ if for any $\mathbf{X}_t,\mathbf{X}'_t \in \{0,1\}^n$
 
 
 $$
 \begin{equation}
-(\mathbf{X}_{t\mathscr{N}_i} = \mathbf{X'}_{t\mathscr{N}_i}) \text{ and } (X_{ti} = X'_{ti}) 
+\mathbf{X}_{t\mathscr{N}_i} = \mathbf{X'}_{t\mathscr{N}_i}
 \implies 
-g_{i}(...,\mathbf{X}_t, ..., i) = g_{i}(..., \mathbf{X'}_t, ..., i) 
+g_{ti}(\mathbf{X}_t) = g_{ti}( \mathbf{X'}_t) 
 \end{equation}
 $$
 
 
-#### Definition 2: Boundedness
+##### Definition 4: Positional invariance
 
-We say that an exposure mapping $g_{i}$ is bounded if all possible exposure values are contained by a finite set $\mathbf{D}$ 
+We say component functions $g_{ti}$ are positionally invariant if for any $i,j \in \mathscr{N}$, $\mathbf{X},\mathbf{X}' \in \mathbf{R}^n$ and conformable permutation matrix $\mathbf{M}$:
 
-::: {.aside}
-**Note on boundedness** The assumption of boundedness can obtain in three different ways. 
-
-**A**. It could be as a result of restrictions on the structure of the data graph. It could be the case that in the network of interest, there is an upper bound on node degree. For example, if the only relationships of interest between individual participants were marriages, each node would have a degree of either 0 or 1, meaning the count of alters with $X_{tj} = 1, j \in \mathscr{N}_i$ is either zero or one. 
-
-**B**. It might obtain via restrictions of the value of $\mathbf{X}_t$ itself. It might be the case, for instance, that the count of $i$'s for which $X_{ti}=1$ is very low so that on average, the count of alters for which $X_{tj} = 1, j \in N_i$ will also be low. 
-
-**C**. Finally, boundedness could obtain as a result of the functional form of $g_t$ itself. This might happen if $g_t$ models a network exposure which has a ceiling effect in its dose-response curve with the outcome of interest. For example, if $X_t$ indicates ownership of a car, and $\mathscr{G}$ encodes close friendships, $g_t$ would be a network exposure mapping which tells us how each additional friend who has a car shifts the outcome of interest. For most health applications, its likely that beyond some number of friends (say 10) who have a car, an additional friend who gets a car will not change the outcome.
-:::
-
-
-
-
-
-$$
-g_i(\mathbf{X}_{1}, ..., \mathbf{X}_{k}, i)  \in \mathbf{D} 
-$$
-
-and $|\mathbf{D}| < c$ for some constant $c$, where $c$ is not a function of the number of interconnected units in graph $\mathscr{G}$.
-
-
-#### Definition 3: Separability
-
-
-
-
-
-
-
-We say exposure mapping $g_i$ is separable if it can be re-written as the vector-valued function
-
-$$
-g_i(\mathbf{X}_{1}, ..., \mathbf{X}_{K}, i) = \begin{pmatrix} 
-g_{0i}(\mathbf{X}_{1}, ..., \mathbf{X}_{K},  i)  \\ 
-g_{1i}(\mathbf{X}_{1},  i) \\
-... \\  
-g_{Ki}(\mathbf{X}_{K},  i) 
-\end{pmatrix}
-$$
-
-where $g_{0i}$ is $K-$dimensional vector 
-
-$$
-g_{0i}(\mathbf{X}_{1}, ..., \mathbf{X}_{K},  i) = \begin{pmatrix} X_{1i} \\ ... \\ X_{Ki} \end{pmatrix}
-$$
-
-and each $g_{ti}$ is a real-valued function
-
-
-$$
-g_{ti}: \{0,1\}^{n} \times\mathscr{N} \rightarrow \mathbf{R}
-$$
-
-We call $g_{ti}$ ($t>0$) the component function for $\mathbf{X}_t$ in exposure mapping $g_i$.
-
-#### Definition 4: Symmetry
-
-We say component function $g_{ti}$ is symmetric with respect to data graph $\mathscr{G}$ if for any $i,j \in \mathscr{N}$, $\mathbf{X},\mathbf{X}' \in \mathbf{R}^n$ and conformable permutation matrix $\mathbf{M}$:
-
-::: {.aside}
-**Note on symmetry**
-In a separable exposure mapping, if component function $g_{ti}$ is symmetric with respect to $\mathscr{G}$, it is a function only of values $X_{tj}$ for $j \in \mathscr{N}_i$.
-:::
 
 
 $$
 \begin{equation}
 \mathbf{X}_{\mathscr{N}_i} = \mathbf{M} \mathbf{X'}_{\mathscr{N}_j} \text{ and } \mathbf{W}_i =  \mathbf{M} \mathbf{W}_j\\
 \implies \\
-g_{ti}(\mathbf{X}, i) = g_{ti}(\mathbf{X'}, j) 
+g_{ti}(\mathbf{X}) = g_{tj}(\mathbf{X'}) 
 \end{equation}
 $$
 
-If $g_{ti}$ is symmetric with respect to $\mathscr{G}$ we say it is a "network exposure mapping for $Y_i$ with respect to $\mathbf{X}_t$ in $\mathscr{G}$". The value of the function is called the "network exposure value for $Y_i$ with respect to $\mathbf{X}_t$ in $\mathscr{G}$"
+where
+
+$$
+g_{ti}(\mathbf{X}) = g_{t}(\mathbf{X}, \mathbf{W}_i)
+$$
+
+If $g_{ti}$ is positionally invariant with respect to $\mathscr{G}$ we say it is a "network exposure mapping for $\mathbf{Y}$ with respect to $\mathbf{X}_t$ in $\mathscr{G}$". The value of the function is called the "network exposure value for $Y_i$ with respect to $\mathbf{X}_t$ in $\mathscr{G}$". Network exposure mappings can be expressed:
 
 
+##### Definition 5: Boundedness
 
-#### Definition 5: Positional invariance 
+We say that a network exposure mapping $g_{t}$ is bounded if all possible network exposure values are contained by a finite set $\mathbf{D}$ 
 
-We say component function $g_{ti}$ is invariant to its position in the network if 
 
-::: {.aside}
-**Note on classical causal inference**
-Under classical causal inference $g_t = c \in \mathbf{R}$ for $t \in [1,k]$. Exposure mappings are trivially loyal to the empty graph, so the exposure  mappings are trivially separable and bounded, and their component functions are trivially symmetric and positionally invariant. 
-:::
 
 
 $$
-g_{ti} = g_{tj} = g_t \text{ for all } i,j \in \mathscr{N} 
+g_t(\mathbf{X})  \in \mathbf{D} 
 $$
+
+and $|\mathbf{D}| < c$ for some constant $c$, where $c$ is not a function of the number of interconnected units in graph $\mathscr{G}$. 
+
+The assumption of boundedness can obtain in three different ways. It could be as a result of restrictions on the structure of the data graph. It could be the case that in the network of interest, there is an upper bound on node degree. For example, if the only relationships of interest between individual participants were marriages, each node would have a degree of either 0 or 1, meaning the count of alters with $X_{tj} = 1, j \in \mathscr{N}_i$ is either zero or one. 
+
+It might obtain via restrictions of the value of $\mathbf{X}_t$ itself. It might be the case, for instance, that the count of $i$'s for which $X_{ti}=1$ is very low so that on average, the count of alters for which $X_{tj} = 1, j \in N_i$ will also be low. 
+
+Finally, boundedness could obtain as a result of the functional form of $g_t$ itself. This might happen if $g_t$ models a network exposure which has a ceiling effect in its dose-response curve with the outcome of interest. For example, if $X_t$ indicates ownership of a car, and $\mathscr{G}$ encodes close friendships, $g_t$ would be a network exposure mapping which tells us how each additional friend who has a car shifts the outcome of interest. For most health applications, its likely that beyond some number of friends (say 10) who have a car, an additional friend who gets a car will not change the outcome.
+
+
+
+
+
+
 
 
 
