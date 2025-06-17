@@ -22,7 +22,7 @@ make_swig <- function(graph_type){
   if (graph_type == "independence"){
     graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y1", label = r"($Y_1^{(a_1)}$)"   , x = 5, y = 1,   homogenous = FALSE, node_shape = "covariate")))
     graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y2", label = r"($Y_2^{(a_2)}$)"   , x = 5, y = 3,   homogenous = FALSE, node_shape = "covariate")))
-    graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y3", label = r"($Y_3^{(a_3)}$)"        , x = 5, y = 5,   homogenous = FALSE, node_shape = "covariate")))
+    graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y3", label = r"($Y_3^{(a_3)}$)"   , x = 5, y = 5,   homogenous = FALSE, node_shape = "covariate")))
   }
   
   if (graph_type == "network_interference"){
@@ -34,13 +34,13 @@ make_swig <- function(graph_type){
   if (graph_type == "homogenous_interference"){
     graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y1", label = r"($Y_1^{(a_1, a_{N_1})}$)"   , x = 5, y = 1,   homogenous = FALSE, node_shape = "covariate")))
     graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y2", label = r"($Y_2^{(a_2, a_{N_2})}$)"   , x = 5, y = 3,   homogenous = FALSE, node_shape = "covariate")))
-    graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y3", label = r"($Y_3^{(a_3, a_{N_3})}$)"        , x = 5, y = 5,   homogenous = FALSE, node_shape = "covariate")))
+    graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y3", label = r"($Y_3^{(a_3, a_{N_3})}$)"   , x = 5, y = 5,   homogenous = FALSE, node_shape = "covariate")))
   }
   
-  if (graph_type == "full_interference"){
-    graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y1", label = r"($Y_1^{(a_1, a_2, a_3)}$)"  , x = 5, y = 1,   homogenous = FALSE, node_shape = "covariate")))
-    graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y2", label = r"($Y_2^{(a_1, a_2, a_3)}$)"   , x = 5, y = 3,   homogenous = FALSE, node_shape = "covariate")))
-    graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y3", label = r"($Y_3^{(a_1, a_2, a_3)}$)"         , x = 5, y = 5,   homogenous = FALSE, node_shape = "covariate")))
+  if (graph_type == "fully_connected"){
+    graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y1", label = r"($Y_1^{(a_1, a_2)}$)"   , x = 5, y = 1,   homogenous = FALSE, node_shape = "covariate")))
+    graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y2", label = r"($Y_2^{(a_1, a_2)}$)"   , x = 5, y = 3,   homogenous = FALSE, node_shape = "covariate")))
+    graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y3", label = r"($Y_3^{(a_3)}$)"        , x = 5, y = 5,   homogenous = FALSE, node_shape = "covariate")))
   }
   
   
@@ -75,9 +75,10 @@ make_swig <- function(graph_type){
     rbind(graph_edges_list[["network_interference"]] )
   
   graph_edges_list[["fully_connected"]] <- data.frame(
-    from                 = c("L1", "a1", "Y1", "L1", "a1", "Y1", "L2", "A2", "Y2"),
-    to                   = c("L2", "A2", "Y2", "L3", "A3", "Y3", "L3", "A3", "Y3")
-  )
+    from                 = c(),
+    to                   = c()
+  ) |>
+    rbind(graph_edges_list[["network_interference"]] )
   
   
   

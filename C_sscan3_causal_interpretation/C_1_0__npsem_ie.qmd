@@ -1,8 +1,6 @@
 ### Structural equation models {.unnumbered}
 
-A non-parametric structural equation model with independent errors is a system of equations that relates all the entries in a given vector-valued random variable to each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown by @eq-fullly-connected-dag. In this set of equations, values that are produced by equations higher up in the list serve as inputs to equations lower down on the list. The functions $f_*$ are deterministic, though their form is not necessarily known. The arguments $U_*$ represent error terms -- random variables that are independent of each other within and across observational units.
 
-NPSEMs are used to represent two types of distributions in causal inference: the probability distribution of observed data, and the hypothetical (counterfactual) probability distribution of the data if the experiment had manipulated one or more variables in the model. The former distribution is modeled using the observed data model and the latter is modeled using the counterfactual data model. @eq-fullly-connected-dag shows the observed model for our example, and @eq-fullly-connected-swig shows the counterfactual model under an intervention setting $A_1$ to $a_1$, $A_2$ to $a_2$, and $A_3$ to $a_3$. Notice how in @eq-fullly-connected-swig, the values set under the intervention supercede the values that would have been generated had the experimenter not intervened. The former values are used in subsequent equations in the model whereas the latter values are not. 
 
 
 
@@ -41,7 +39,7 @@ Y_3^{(a_1, a_2, a_3)} &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_
 $$ {#eq-fullly-connected-swig}
 
 
-```{r }
+```{r eval=FALSE}
 #| fig-align: center
 #| label: fig-fullly-connected-swig
 #| fig-cap: "Fully connected SWIG"
