@@ -1,12 +1,12 @@
 ### Assumptions
 
-#### Independence I: No spillover
+##### Independence I: No spillover
 
 Under network causal inference, we make the assumption of no spillover - that measurements taken across participants at the same time (e.g. $L_1$, $L_2$, and $L_3$) are independent of each other given all prior measures.
 
 This is shown in @fig-interference-dag, as the removal of arrows that connected the $L_i$'s, $A_i$'s and $Y_i$'s in @fig-fullly-connected-dag. In @eq-interference-dag, the $L_i$'s are not functions of each other, the $A_i$'s are not functions of each other, and the $Y_i$'s are not functions of each other. This implies that given all the measurements taken prior to a set of contemporaneous measures, the contemporaneous measures are independent.
 
-#### Independence II: Network interference
+##### Independence II: Network interference
 
 ```{r}
 #| fig-height: 6
@@ -50,9 +50,9 @@ $$
                       \})
 $$
 
-#### Homogeneity I: Relational homogeneity
+##### Homogeneity I: Relational homogeneity
 
-##### Separability
+###### Separability
 
 We assume that the exposure mapping for each variable in the structural model is separable. i.e. We define $g_{A_i}$, $h_{Y_i}$, and $g_{Y_i}$ as network exposure mappings for $A_i$ with respect to $\mathbf{L}$, for $Y_i$ with respect to $\mathbf{A}$, and for $Y_i$ with respect to $\mathbf{L}$. Seperability allows us to write the model as follows:
 
@@ -70,7 +70,7 @@ Y_3 &= f_{Y_3}(U_{Y_3}, L_3,A_3,  g_{Y_2}(\mathbf{L}, 3), h_{Y_2}(\mathbf{A}, 3)
 \end{aligned}
 $$
 
-##### Positional invariance
+###### Positional invariance
 
 
 We assume that the value of a network exposure mapping is invariant to its position in the network. This allows us to drop the person subscript on the network exposure mappings. 
@@ -90,7 +90,7 @@ Y_3 &= f_{Y_3}(U_{Y_3}, L_3,A_3,  g_{Y}(\mathbf{L}, 3), h_{Y}(\mathbf{A}, 3)) \\
 $$
 
 
-#### Homogeneity III: Structural homogeneity
+##### Homogeneity III: Structural homogeneity
 
 We assume that the structural equations that produce indivdual measures are identical accross individuals. Hence we can drop the person subscript from the structural equations. 
 
@@ -103,7 +103,7 @@ Y_i &= f_{Y}(U_{Y_i}, L_i, A_i, g_{Y}(\mathbf{L}, i), h_{Y}(\mathbf{A}, i)) \\
 $$
 
 
-#### Homogeneity IV: Boundedness
+##### Homogeneity IV: Boundedness
 
 If we assume that the only relevant relationships for the causal structure related to employment, formal dress, and job offers are marriages, the assumption of boundedness holds. Each node in this graph will have either a single network exposure unit, or none at all, even if the graph grows arbitrarily large. 
 
