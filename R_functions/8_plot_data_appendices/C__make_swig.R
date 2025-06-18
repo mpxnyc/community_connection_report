@@ -37,11 +37,18 @@ make_swig <- function(graph_type){
     graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y3", label = r"($Y_3^{(a_3, a_{N_3})}$)"   , x = 5, y = 5,   homogenous = FALSE, node_shape = "covariate")))
   }
   
-  if (graph_type == "fully_connected"){
+  if (graph_type == "full_interference"){
     graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y1", label = r"($Y_1^{(a_1, a_2)}$)"   , x = 5, y = 1,   homogenous = FALSE, node_shape = "covariate")))
     graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y2", label = r"($Y_2^{(a_1, a_2)}$)"   , x = 5, y = 3,   homogenous = FALSE, node_shape = "covariate")))
     graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y3", label = r"($Y_3^{(a_3)}$)"        , x = 5, y = 5,   homogenous = FALSE, node_shape = "covariate")))
   }
+  
+  if (graph_type == "fully_connected"){
+    graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y1", label = r"($Y_1^{(a_1, a_2)}$)"   , x = 5, y = 1,   homogenous = FALSE, node_shape = "covariate")))
+    graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y2", label = r"($Y_2^{(a_1, a_2)}$)"   , x = 5, y = 3,   homogenous = FALSE, node_shape = "covariate")))
+    graph_nodes_list <- append(graph_nodes_list, list(data.frame(name = "Y3", label = r"($Y_3^{(a_1, a_2, a_3)}$)"        , x = 5, y = 5,   homogenous = FALSE, node_shape = "covariate")))
+  }
+  
   
   
   
@@ -71,12 +78,11 @@ make_swig <- function(graph_type){
     from                 = c("L1", "L3", "L1", "L3", "a1", "a3", 
                              "L2", "L3", "L2", "L3", "a2", "a3"),
     to                   = c("A3", "A1", "Y3", "Y1", "Y3", "Y1",
-                             "A3", "A2", "Y3", "Y2", "Y3", "Y2")) |>
-    rbind(graph_edges_list[["network_interference"]] )
+                             "A3", "A2", "Y3", "Y2", "Y3", "Y2")) 
   
   graph_edges_list[["fully_connected"]] <- data.frame(
-    from                 = c(),
-    to                   = c()
+    from                 = c("L1", "L1", "L1", "L2", "L2", "L2", "a1", "a2", "Y1", "Y2", "L3", "L3", "L3", "L3", "A3", "A3", "A1", "A1", "A2"),
+    to                   = c("L3", "A3", "Y3", "L3", "A3", "Y3", "Y3", "Y3", "Y3", "Y3", "A2", "A1", "Y2", "Y1", "Y2", "Y1", "A2", "A3", "A3")
   ) |>
     rbind(graph_edges_list[["network_interference"]] )
   

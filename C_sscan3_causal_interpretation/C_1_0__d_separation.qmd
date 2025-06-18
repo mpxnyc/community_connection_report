@@ -2,62 +2,11 @@
 targets::tar_source("../R_functions")
 ```
 
-### Causal reasoning with DAGs and SWIGS {.unnumbered}
+### D-seperation {.unnumbered}
 
-NPSEMs are used to represent two types of distributions in causal inference: the probability distribution of observed data, and the hypothetical (counterfactual) probability distribution of the data if the experiment had manipulated one or more variables in the model. The former distribution is modeled using the observed data model and the latter is modeled using the counterfactual data model. @eq-fullly-connected-dag shows the observed model for our example, and @eq-fullly-connected-swig shows the counterfactual model under an intervention setting $A_1$ to $a_1$, $A_2$ to $a_2$, and $A_3$ to $a_3$. Notice how in @eq-fullly-connected-swig, the values set under the intervention supercede the values that would have been generated had the experimenter not intervened. The former values are used in subsequent equations in the model whereas the latter values are not. 
+**D-separation** is a set of rules for translating DAGs into conditional independence statements. A pair of nodes is d-separated if all the paths linking them are closed or if there is no path that links them. 
 
-
-#### Observed structural equation model
-
-
-*Structural equations*
-
-A non-parametric structural equation model with independent errors is a system of equations that relates all the entries in a given vector-valued random variable to each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown by @eq-fullly-connected-dag. In this set of equations, values that are produced by equations higher up in the list serve as inputs to equations lower down on the list. The functions $f_*$ are deterministic, though their form is not necessarily known. The arguments $U_*$ represent error terms -- random variables that are independent of each other within and across observational units.
-
-
-$$
-\begin{aligned}
-L_1 &= f_{L_1}(U_{L_1}) \\
-L_2 &= f_{L_2}(U_{L_2}, L_1) \\
-L_3 &= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
-A_1 &= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
-A_2 &= f_{A_2}(U_{A_2}, L_1, L_2, L_3, A_1) \\
-A_3 &= f_{A_3}(U_{A_3}, L_1, L_2, L_3, A_1, A_2) \\
-Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
-Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1) \\
-Y_3 &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
-\end{aligned}
-$$ 
-
-*Conditional independence*
-
-Conditional indpendencies are indicated by missing edges in the DAG. If we made no assumptions at all about the causal process in Example 1 except the time-ordering of measurements, we could represent our data using @fig-fullly-connected-dag. Since there are no missing edges between nodes in the DAG, it represents any possible joint distribution between the variables shown in the DAG -- there are no conditional independencies.
-
-
-*Directed acyclic graph*
-
-```{r }
-#| fig-height: 6
-#| fig-width: 6
-#| fig-align: center
-#| label: fig-fullly-connected-dag-90
-#| fig-cap: "Fully connected causal DAG"
-
-make_dag("fully_connected")         |> 
-  plot_swig(node_radius = 0.2) + 
-  scale_fill_mpxnyc(option = "light") +
-  theme_mpxnyc_blank()
-
-```
-
-A directed acyclic graph (DAG) is an acyclic graph whose nodes represent the entries of a vector-valued random variable. Directed edges represent statistical relationships among those entries. DAGs can be used to characterize probability distributions by the conditional independencies among these entries. They graphically encode the minimal set of conditional independencies that imply all the conditional independencies of the probability distribution. Using a DAG and a set of rules called d-separation, it is possible to recover the minimal set of conditional independencies that characterize the distribution it represents.
-
-
-*D-separation*
-
-D-separation is a set of rules for translating DAGs into conditional independence statements involving the variables represented on the DAG. A pair of nodes is d-separated if all the paths linking them are closed or if there is no path that links them.
-
-A path is a sequence of nodes that starts with a given origin node and ends with a terminal node. Adjacent entries in the sequence are connected in the DAG. A path of length one is open by definition. A path of length two or more is open if all its triangles are open.
+A **path** is a sequence of nodes that starts with a given origin node and ends with a terminal node. Consecutive entries in the sequence are connected in the DAG. A path of length one is open by definition. A path of length two or more is open if all its triangles are open.
 
 ```{r}
 #| fig-width: 9
@@ -81,16 +30,13 @@ cowplot::plot_grid(fig_fork, fig_spoon, fig_chopstick, rel_widths = c(1.5,1.5,2)
 
 ```
 
-A triangle is a sub-sequence of a path which contains three consecutive entries from the path. There are three types the fork, the spoon, and the chopstick, which we describe below. When we do not condition on the apex variable in the triangle, we call these the "canonical fork", "canonical spoon", and "canonical chopstick", respectively. When we do condition by the apex variable we say "conditional fork", "conditional spoon", and "conditional chopstick".
+A **triangle** is a sub-sequence of a path which contains three consecutive nodes from the path. A canonical triangle is one in which we do not condition on the apex node. A conditional triangle is one in which we do condition.
 
-A **fork** is a triangle whose apex variable has two outgoing edges. By definition, a canonical fork is open and a conditional fork is closed. The apex variable of a fork is commonly referred to as a "confounder" in causal inference literature.
+- A **fork** is a triangle whose apex variable has two outgoing edges. A canonical fork is open and a conditional fork is closed. The apex variable of a fork is commonly referred to as a "confounder".
 
-A **spoon** is a triangle whose apex variable has two incoming edges. By definition, a canonical spoon is closed and a conditional spoon is open The apex variable of a fork is commonly referred to as a "collider" in causal inference literature.
+ - A **spoon** is a triangle whose apex variable has two incoming edges. A canonical spoon is closed and a conditional spoon is open. The apex variable of a fork is commonly referred to as a "collider".
 
-A **chopstick** is a triangle whose apex variable has one incoming edge and one outgoing edge. By definition, a canonical chopstick is open and a conditional chopstick is closed. The apex variable of a chopstick is commonly referred to as a "mediator" in causal inference literature.
-
-
-
+- A **chopstick** is a triangle whose apex variable has one incoming edge and one outgoing edge. A canonical chopstick is open and a conditional chopstick is closed. The apex variable of a chopstick is commonly referred to as a "mediator".
 
 To summarize, canonical forks and chopsticks are open and conditional forks and chopsticks are closed. By contrast, canonical spoons are closed and conditional spoons are open. A path is open if it is of length one or if all the triangles in the path are open. If at least one triangle in the path is closed, the path is closed. Two nodes in a DAG are conditionally d-separated if all the paths between them are closed after conditioning on the adjustment set. Two variables shown on the DAG are conditionally independent if they are conditionally d-separated.
 
@@ -126,54 +72,3 @@ data.frame(
 
 
 ```
-
-
-#### Counterfactual structural equation model
-
-*Structural equations*
-
-$$
-\begin{aligned}
-L_1 &= f_{L_1}(U_{L_1}) \\
-L_2 &= f_{L_2}(U_{L_2}, L_1) \\
-L_3 &= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
-A_1 &= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
-A_2^{(a_1)} &= f_{A_2}(U_{A_2}, L_1, L_2, L_3, a_1) \\
-A_3^{(a_1, a_2)} &= f_{A_3}(U_{A_3}, L_1, L_2, L_3, a_1, a_2) \\
-Y_1^{(a_1, a_2, a_3)} &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, a_1, a_2, a_3) \\
-Y_2^{(a_1, a_2, a_3)} &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}) \\
-Y_3^{(a_1, a_2, a_3)} &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}, Y_2^{(a_1, a_2, a_3)}   ) \\
-\end{aligned}
-$$
-
-*Single world intervention graph*
-
-
-```{r }
-#| fig-height: 6
-#| fig-width: 6
-#| fig-align: center
-#| label: fig-fullly-connected-dag-91
-#| fig-cap: "Homogenous interference SWIG"
-
-make_swig("network_interference")      |> 
-  plot_swig(node_radius = 0.2) + 
-  scale_fill_mpxnyc(option = "light") +
-  theme_mpxnyc_blank()
-
-```
-
-
-#### Model restrictions
-
-Whereas parametric models are characterized by their probability density functions, non-parametric models of this type are usually characterized by their conditional independencies. These can be represented using DAGs, as we described in the previous section. DAGs take on another meaning when used with NPSEMs -- a DAG is a schematic representation of the structural equations in an NPSEM below. The DAG shown in @fig-fullly-connected-dag, for instance, represents the model specified by @eq-fullly-connected-dag. 
-
-
-To fully characterize the NPSEM specified in @eq-fullly-connected-dag using observed data, we would need to estimate 9 functions using one observation of the 9-dimensional joint distribution that gave rise to the participants' observations. Recruiting an additional person to the study would not ease this problem; it would add three new equations to the model and we would end up with a similar problem than the one we began with. We would have to estimate 12 functions using one observation of a 12-dimensional joint distribution.
-
-In practice, we simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function. These assumptions are called model restrictions because they restrict the set of distributions that could possibly be represented by the NPSEM.
-
-For instance, if we add the restriction that all the measures are independent (or equivalently, that the DAG has no arrows), the resulting model would not be able to represent data from a causal system where some of the measures are correlated. By adding the restriction of independence, we would be eliminating the correlated data distribution from consideration as a possibility for how the data we are modelling are truly distributed. 
-
-
-

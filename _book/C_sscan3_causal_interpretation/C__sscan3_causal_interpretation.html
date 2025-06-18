@@ -362,7 +362,8 @@ div.csl-indent {
 <a href="#sec-classic-causal-inference" id="toc-sec-classic-causal-inference" class="nav-link active" data-scroll-target="#sec-classic-causal-inference"><span class="header-section-number">C.1</span> Classic causal inference</a>
   <ul class="collapse">
 <li><a href="#example-1-dress-and-jobs" id="toc-example-1-dress-and-jobs" class="nav-link" data-scroll-target="#example-1-dress-and-jobs">Example 1: Dress and Jobs</a></li>
-  <li><a href="#causal-reasoning-with-dags-and-swigs" id="toc-causal-reasoning-with-dags-and-swigs" class="nav-link" data-scroll-target="#causal-reasoning-with-dags-and-swigs">Causal reasoning with DAGs and SWIGS</a></li>
+  <li><a href="#causal-reasoning-with-dags-and-swigs" id="toc-causal-reasoning-with-dags-and-swigs" class="nav-link" data-scroll-target="#causal-reasoning-with-dags-and-swigs">Causal reasoning with DAGs and SWIGs</a></li>
+  <li><a href="#d-seperation" id="toc-d-seperation" class="nav-link" data-scroll-target="#d-seperation">D-seperation</a></li>
   <li><a href="#sec-assumptions-classic" id="toc-sec-assumptions-classic" class="nav-link" data-scroll-target="#sec-assumptions-classic"><span class="header-section-number">C.1.1</span> Assumptions</a></li>
   <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model"><span class="header-section-number">C.1.2</span> Model</a></li>
   <li><a href="#estimands" id="toc-estimands" class="nav-link" data-scroll-target="#estimands"><span class="header-section-number">C.1.3</span> Estimands</a></li>
@@ -418,16 +419,17 @@ div.csl-indent {
 </div>
 <p>In this appendix we elaborate the “causal interpretation” aspect of the Social and Spatial Network Analysis with Causal interpretation (SNACC) framework. The SSNAC framework can be used to guide the collection, management, analysis, and causal interpretation of data. It offers guidance on conceptualizing and organizing spatial and social data as networks (<a href="../A_ssnac1_social_spatial_context/A__ssnac1_social_spatial_context.html"><span>Appendix&nbsp;A</span></a>) and provides tools for descriptive and causal analysis (<a href="../B_ssnac2_network_analysis/B__ssnac2_network_analysis.html"><span>Appendix&nbsp;B</span></a>).</p>
 <p>We define SSNAC as a set of straight-forward extensions of the currently dominant framework for conducting causal inference with observational data in epidemiology. We begin by giving an overview of the dominant approach, which we will call “classic causal inference”. We extend this system to situations where data are characterized by interdependence of observational units rather than independence, naming this system “social network analysis with causal interpretation”. Finally, we accommodate social and spatial data simultaneously in the SSNAC framework. In each case, we describe the assumptions and implications of each system, illustrating with worked examples.</p>
-<p>Classic causal inference, as elaborated by Robins <span class="citation" data-cites="robins1986">(<a href="../6_endnotes/6_1__references.html#ref-robins1986" role="doc-biblioref">1986</a>)</span>, Hernán and Robins <span class="citation" data-cites="hernán2018">(<a href="../6_endnotes/6_1__references.html#ref-hern%C3%A1n2018" role="doc-biblioref">2018</a>)</span>, and others helps us to sharpen epidemiologic reasoning by providing a template for conducting thought experiments about population health. Typically in these thought experiments, the researcher reasons about the likely effect of some hypothetical individual-level intervention on some hypothetical outcome in some hypothetical population. Through transparent statistical assumptions, the quantities of interest in the thought experiment are calculated as a function of observed or observable data.</p>
-<p>For instance, consider a hypothetical intervention where every person in the United States receives free, unlimited access to healthcare. Under classic causal inference, we can ask whether the prevalence of diabetes would change if we implemented the intervention. We can even ask about the extent of change and estimate that using data that have already been observed. The classic causal inference framework allows this by:</p>
+<p>Classic causal inference, as elaborated by Robins <span class="citation" data-cites="robins1986">(<a href="../6_endnotes/6_1__references.html#ref-robins1986" role="doc-biblioref">1986</a>)</span>, Hernán and Robins <span class="citation" data-cites="hernán2018">(<a href="../6_endnotes/6_1__references.html#ref-hern%C3%A1n2018" role="doc-biblioref">2018</a>)</span>, and others helps us to sharpen epidemiologic reasoning by providing a template for conducting thought experiments about population health. Typically, in these thought experiments the researcher reasons about the likely effect of some hypothetical intervention on some outcome in a defined population. They define a set of causal estimands - measures that quantify the impact of the intervention of the outcome, then through transparent statistical assumptions, express those estimands in terms of quantities we can calculate by studying the population. Finally, they estimate these quantities by collecting data.</p>
+<p>For instance, consider a hypothetical intervention where every person in the United States receives free, unlimited access to healthcare. Under classic causal inference, we can ask whether the prevalence of diabetes would change if we implemented such an intervention. We can even ask about the extent of change and estimate that using data that have already been observed. The classic causal inference framework allows this by:</p>
 <ul>
-<li><p>making causal assumptions about the relationship between healthcare access and diabetes prevalence</p></li>
-<li><p>mathematically stating the hypothetical quantities we are interested in</p></li>
-<li><p>estimating those quantities using data we have or can collect about access to healthcare, diabetes prevalence, and any factors that determine both access and prevalence</p></li>
+<li><p>making causal assumptions about the relationship between healthcare access, diabetes prevalence, and any factors that determine both access and prevalence</p></li>
+<li><p>mathematically stating the hypothetical quantities we are interested in and expressing them in terms of quantities we can estimate</p></li>
+<li><p>estimating those quantities using data we have or can collect</p></li>
 </ul>
-<p>A strong assumption made almost universally by practitioners of classic causal inference is that of independence between observational units or groups of observational units. In our opening example, this assumption holds that one person’s access to healthcare does not affect any other person’s diabetes status. It would imply that the diabetes status for a married man who does not know how to cook, for instance, would not at all be affected by improvements in health literacy experienced by his wife who cooks for the household. The assumption of independence runs counter to our intuitions about social life. Humans are networked - our lives are defined by our relationships with others.</p>
-<p>The choice of adopting the independence assumption or not has profound implications for how we think about our inferential goals. In the frequentist tradition of statistics, the engine of uncertainty is repetition. We imagine that an experiment could be repeated over and over again and we summarize its behavior across those imagined repetitions. We do not often consider what exactly we mean by experiment and by repetition, though we make this distinction each time we decide how to analyse repeated-measures data.</p>
-<p>An example to clarify: Consider a situation with two people, Tumi and Thabo, who each toss the same coin once at time 1 and again at time 2. There are several ways of parsing this situation into “experiment” and “repetition”. We could say that we are conducting:</p>
+<p><strong>Independence and homogeneity</strong></p>
+<p>A strong assumption made almost universally by practitioners of classic causal inference is that of independence between observational units or groups of observational units. This assumption is usually made with the goal of simplifying the mathematics involved in estimating quantities from data, but it often has profound implications for how we think about the causal process under study.</p>
+<p>In our opening example, the independence assumption holds that one person’s access to healthcare does not affect any other person’s diabetes status. It would imply that the diabetes status for a married man who does not know how to cook, for instance, would not at all be affected by improvements in health literacy experienced by his wife who cooks for the household. The assumption of independence runs counter to our intuitions about social life. Humans are networked - our lives are defined by our relationships with others.</p>
+<p>Along with the independence assumption, practitioners of classical causal inference also make assumptions about the homogeneity of the causal process under study. An example to clarify: Consider two people, Tumi and Thabo, who each toss the same coin once at time 1 and again at time 2. There are several ways of parsing this situation into “experiment” and “repetition”. We could say that we are conducting:</p>
 <ul>
 <li><p>one experiment called “coin toss” and repeating it four times</p></li>
 <li><p>two experiments called “Thabo tosses a coin” and “Tumi tosses a coin” and repeating each experiment twice</p></li>
@@ -435,26 +437,31 @@ div.csl-indent {
 <li><p>four experiments called “Thabo tosses a coin at time 1”, “Thabo tosses a coin at time 2”, “Tumi tosses a coin at time 1”, and “Tumi tosses a coin at time 2 and not repeating any of them.</p></li>
 </ul>
 <p>The choice between these interpretations turns on the experimenters prior beliefs about coin tossing: Does the likelihood of a head or tail change over time? Does it change based on the person tossing the coin? This kind of consideration is at the core statistical modelling, particularly when analyzing longitudinal data.</p>
-<p>One consideration researchers do not often make is whether one person’s coin toss is correlated with the other’s. Consider the experiment “Thabo tosses a coin, then Tumi tosses a coin, then Thabo tossess a con, then Tumi tosses a coin”. Whereas in the above listing, by virtue of calling them separate experiments, we implicitly assumed that each coin toss was self-contained, in this latest iteration, we accommodate the possibility that the result of Thabo’s coin toss affects the result of Tumi’s.</p>
-<p>We can quantitatively assess this possibility by repeating this sequence of coin tosses over and over, using that data to calculate a correlation coefficient between the outcomes of Thabo and Tumi’s coin tosses. Without stating the experiment as this sequence, we have no framework with which to ask whether Thabo and Tumi’s coin tosses are causally related, however.</p>
+<p><strong>Interdependence</strong></p>
+<p>One consideration researchers do not often make is whether one person’s coin toss is correlated with the other’s. Consider the experiment “Thabo tosses a coin, then Tumi tosses the coin, then Thabo tossess the coin, then Tumi tosses the coin”. Whereas in the above listing, by virtue of calling them separate experiments, we implicitly assumed that each coin toss was self-contained, in this latest iteration, we accommodate the possibility that the results of the coin tosses might be correlated.</p>
+<p>We can quantitatively assess this possibility by repeating this sequence of coin tosses over and over, using that data to calculate a correlation coefficient between the outcomes of Thabo and Tumi’s coin tosses. Without stating the experiment as this sequence, however, we have no framework with which to ask whether Thabo and Tumi’s coin tosses are causally related.</p>
 <p>In epidemiologic practice, the modelling decision to categorize people or groups of people as independent of each other is so well-entrenched that it is often presented as a necessary condition for doing valid causal quantitative research. Unlike it is with coins, however, with humans, there is a mountain of evidence and experience proving interdependence as the rule rather than the exception.</p>
-<p>Our goal in this appendix and project is to offer alternative ideas and tools for causal inference that allow researchers to learn from interdependence rather than avoid it in pursuit of clear causal reasoning. We can have both clear reasoning and an understanding enriched by the analysis of dependent happenings.</p>
-<p>In crude terms, our approach involves moving from a framework where, as a rule, we consider Thabo and Tumi’s coin tosses one experiment, rather than break it up into four. i.e.&nbsp;Rather than define a scalar random variable to represent a measure made on <span class="math inline">\(n\)</span> individuals, we will define a vector-valued random variable of length <span class="math inline">\(n\)</span> and assume that some of the entries in that random variable are correlated as a result of being part of the same causal structure. But why would a researcher want to do that when our tools for statistical modelling require as many repetitions as possible for valid inferences? How can we quantify uncertainty when we always have a sample size of 1?</p>
-<p>Briefly, we can avail ourselves of asymptotic theory by making the assumption of no-spillover between observations, which is a weaker version of the independence between observational units assumption. No spillover means that one person’s outcome can not directly affect another’s. We further assume that the causal relationships between and within individuals are homogeneous in some way, allowing our estimates to benefit from having more observational units, even if they collectively comprise one realization of the statistical model. Under some mild assumptions, asymptotic theory can be used to improve estimates in a growing vector of inter-related observations, whereas it is usually applied to a growing collection of vectors of equal length.</p>
-<p>In the sections that follow, we describe classic causal inference, social network analysis with causal interpretation, and the SSNAC framework, each time discussing the assumptions, causal model, causal estimands, and illustrating a causal identification strategy for the framework. Finally, we describe the MPX NYC outbreak response analysis presented in the main report using the SSNAC framework. First we fix some key ideas and notation.</p>
+<p><strong>Towards a causal inference of dependent happenings</strong></p>
+<p>Our goal in this appendix and project is to offer ideas and tools for causal inference that allow researchers to learn from interdependence rather than avoid it in pursuit of clear causal reasoning. We can have both clear reasoning and an understanding enriched by the analysis of dependent happenings.</p>
+<p>In crude terms, our approach involves moving to a framework where, as a rule, we consider Thabo and Tumi’s coin tosses one experiment, rather than break it up into four. i.e.&nbsp;Rather than define a scalar random variable to represent a measure made on <span class="math inline">\(n\)</span> individuals, we will define a vector-valued random variable of length <span class="math inline">\(n\)</span> and assume that some of the entries in that vector are correlated as a result of being part of the same causal structure.</p>
+<p>But why would a researcher want to do that when our tools for statistical modelling require as many repetitions as possible for valid inferences? How can we quantify uncertainty when we always have a sample size of 1? To answer the first question - we take this approach because it allows us to investigate and quantify causal interference. Regarding the second, we advocate a shift in perspective: we re-frame the task of statistical inference from that of learning from a growing collection of identically distributed random vectors, to that of learning from a growing random vector whose entries are related by a causal structure that is identical across groups of entries.</p>
+<p>We avail ourselves of asymptotic theory by making the assumption of no-spillover between observations, which is a weaker version of the independence between observational units assumption. We further assume that the causal relationships between and within individuals are homogeneous in some way, allowing our estimates to benefit from having more observational units, even if they collectively comprise one realization of the statistical model.</p>
+<p>In the sections that follow, we describe classic causal inference, social network analysis with causal interpretation, and the SSNAC framework, each time discussing the assumptions, causal model, causal estimands, and illustrating a causal identification strategy for the framework. Finally, we describe the MPX NYC outbreak response analysis presented in the main report using the SSNAC framework.</p>
 <section id="sec-classic-causal-inference" class="level2 page-columns page-full" data-number="C.1"><h2 data-number="C.1" class="anchored" data-anchor-id="sec-classic-causal-inference">
 <span class="header-section-number">C.1</span> Classic causal inference</h2>
 <section id="example-1-dress-and-jobs" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="example-1-dress-and-jobs">Example 1: Dress and Jobs</h3>
 <p>We are interested in settling an argument among friends about the relationship between dressing in formal wear and job offers. One friend thinks that dressing formally brings more job offers; everyone she knows who dresses formally has many more job offers than those who dress casually.</p>
 <p>The other friend thinks that what really brings job offers is currently having a job. In their reasoning, having a job causes people to dress formally and also causes people to receive job offers, but dressing formally does not in itself improve a person’s likelihood of receiving job offers. We conduct a study to investigate.</p>
-<p>We recruit three people, <em>Person 1</em>, <em>Person 2</em>, and <em>Person 3</em>. <em>Person 1</em> and <em>Person 2</em> are married to each other. <em>Person 1</em> and <em>Person 3</em> are newly acquainted colleagues. Say <em>Person 1</em> has job status <span class="math inline">\(L_1\)</span>, <em>Person 2</em> has job status <span class="math inline">\(L_2\)</span> and <em>Person 3</em> has job status <span class="math inline">\(L_3\)</span>. Each of these variables can only take on two values: “employed vs.&nbsp;unemployed”. Similarly we define <span class="math inline">\(A_i\)</span> as <em>Person <span class="math inline">\(i\)</span>’s</em> dress (formal vs.&nbsp;informal), and <span class="math inline">\(Y_i\)</span> as their job offers (many vs.&nbsp;few). The job status measurement (<span class="math inline">\(L_i\)</span>) precedes dress (<span class="math inline">\(A_i\)</span>) in time, and dress precedes job offers (<span class="math inline">\(Y_i\)</span>).</p>
-<p>In the next few sections, we will use this example to discuss model restrictions under classical causal inference.</p>
-</section><section id="causal-reasoning-with-dags-and-swigs" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="causal-reasoning-with-dags-and-swigs">Causal reasoning with DAGs and SWIGS</h3>
-<p>NPSEMs are used to represent two types of distributions in causal inference: the probability distribution of observed data, and the hypothetical (counterfactual) probability distribution of the data if the experiment had manipulated one or more variables in the model. The former distribution is modeled using the observed data model and the latter is modeled using the counterfactual data model. <span class="quarto-unresolved-ref">?eq-fullly-connected-dag</span> shows the observed model for our example, and <span class="quarto-unresolved-ref">?eq-fullly-connected-swig</span> shows the counterfactual model under an intervention setting <span class="math inline">\(A_1\)</span> to <span class="math inline">\(a_1\)</span>, <span class="math inline">\(A_2\)</span> to <span class="math inline">\(a_2\)</span>, and <span class="math inline">\(A_3\)</span> to <span class="math inline">\(a_3\)</span>. Notice how in <span class="quarto-unresolved-ref">?eq-fullly-connected-swig</span>, the values set under the intervention supercede the values that would have been generated had the experimenter not intervened. The former values are used in subsequent equations in the model whereas the latter values are not.</p>
-<section id="observed-structural-equation-model" class="level4"><h4 class="anchored" data-anchor-id="observed-structural-equation-model">Observed structural equation model</h4>
-<p><em>Structural equations</em></p>
-<p>A non-parametric structural equation model with independent errors is a system of equations that relates all the entries in a given vector-valued random variable to each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown by <span class="quarto-unresolved-ref">?eq-fullly-connected-dag</span>. In this set of equations, values that are produced by equations higher up in the list serve as inputs to equations lower down on the list. The functions <span class="math inline">\(f_*\)</span> are deterministic, though their form is not necessarily known. The arguments <span class="math inline">\(U_*\)</span> represent error terms – random variables that are independent of each other within and across observational units.</p>
-<p><span class="math display">\[
+<p>We recruit three people, <em>Person 1</em>, <em>Person 2</em>, and <em>Person 3</em>. <em>Person 1</em> and <em>Person 2</em> are married to each other. <em>Person 1</em> and <em>Person 3</em> are newly acquainted colleagues.</p>
+<p>Say <em>Person 1</em> has job status <span class="math inline">\(L_1\)</span>, <em>Person 2</em> has job status <span class="math inline">\(L_2\)</span> and <em>Person 3</em> has job status <span class="math inline">\(L_3\)</span>. Each of these variables can only take on two values: “employed vs.&nbsp;unemployed”. Similarly we define <span class="math inline">\(A_i\)</span> as <em>Person <span class="math inline">\(i\)</span>’s</em> dress (formal vs.&nbsp;informal), and <span class="math inline">\(Y_i\)</span> as their job offers (many vs.&nbsp;few). The job status measurement (<span class="math inline">\(L_i\)</span>) precedes dress (<span class="math inline">\(A_i\)</span>) in time, and dress precedes job offers (<span class="math inline">\(Y_i\)</span>).</p>
+<p>In the next few sections, we will use this example to describe the assumptions made under classical causal inference. First we give an overview of the ideas and tools we need to make that description: DAGs and SWIGs.</p>
+</section><section id="causal-reasoning-with-dags-and-swigs" class="level3 unnumbered page-columns page-full"><h3 class="unnumbered anchored" data-anchor-id="causal-reasoning-with-dags-and-swigs">Causal reasoning with DAGs and SWIGs</h3>
+<p>At its core, the system we use in epidemiology to reason about counterfactual quantities such as causal effects is a statistical model called the Finest Fully Randomized Causally Interpretable Structured Tree Graph (FFRCISTG). In this current section (<a href="#sec-classic-causal-inference"><span>Section&nbsp;C.1</span></a>) we describe the assumptions of the FFRCISTG model using language that will aid their extension in <a href="#sec-network-causal-inference"><span>Section&nbsp;C.2</span></a>. This note is a brief overview of the FFRCISTG.</p>
+<section id="finest-fully-randomized-causally-interpretable-structured-tree-graph-ffrcistg" class="level4 page-columns page-full"><h4 class="anchored" data-anchor-id="finest-fully-randomized-causally-interpretable-structured-tree-graph-ffrcistg">Finest, fully randomized, causally interpretable structured tree graph (FFRCISTG)</h4>
+<p>A FFRCISTG is a collection of non-parametric structural equation models which mimic the causal process that produced the variables under investigation. At the very least it is a collection of two NPSEMs – a model of the observed data (observed data model) and a model of what the data would be under some intervention (counterfactual data model). The most common type of intervention in this framework is one which sets the value of one or more variables in the system (the exposures) with the goal of influencing the value of some set of variables in the system (the outcomes). The counterfactual data model is used to calculate quantities like causal effects. The observed data model is used to express those quantities in terms of statistics that can be estimated</p>
+<p>A non-parametric structural equation model with independent errors is a system of equations that relates all the entries in a given vector-valued random variable to each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown by <a href="#eq-fullly-connected-dag">Equation&nbsp;<span>C.1</span></a>. In this set of equations, values that are produced by equations higher up in the list serve as inputs to equations lower down on the list. The functions <span class="math inline">\(f_*\)</span> are deterministic, though their form is not necessarily known. The arguments <span class="math inline">\(U_*\)</span> represent error terms – random variables that are independent of each other within and across observational units.</p>
+<p>Consider a FFRCISTG modelling an intervention where we set formal dress <span class="math inline">\(A_1\)</span> to <span class="math inline">\(a_1\)</span>, <span class="math inline">\(A_2\)</span> to <span class="math inline">\(a_2\)</span>, and <span class="math inline">\(A_3\)</span> to <span class="math inline">\(a_3\)</span>. The observed data model would be:</p>
+<p><span id="eq-fullly-connected-dag"><span class="math display">\[
 \begin{aligned}
 L_1 &amp;= f_{L_1}(U_{L_1}) \\
 L_2 &amp;= f_{L_2}(U_{L_2}, L_1) \\
@@ -466,28 +473,61 @@ Y_1 &amp;= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
 Y_2 &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1) \\
 Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
 \end{aligned}
-\]</span></p>
-<p><em>Conditional independence</em></p>
-<p>Conditional indpendencies are indicated by missing edges in the DAG. If we made no assumptions at all about the causal process in Example 1 except the time-ordering of measurements, we could represent our data using <span class="quarto-unresolved-ref">?fig-fullly-connected-dag</span>. Since there are no missing edges between nodes in the DAG, it represents any possible joint distribution between the variables shown in the DAG – there are no conditional independencies.</p>
-<p><em>Directed acyclic graph</em></p>
-<div class="cell" data-layout-align="center" data-hash="C__sscan3_causal_interpretation_cache/html/fig-fullly-connected-dag-90_ab66f466f3036d24aa5009d63c4cf793">
+\tag{C.1}\]</span></span></p>
+<p>The counterfactual data model would be:</p>
+<p><span id="eq-fullly-connected-swig"><span class="math display">\[
+\begin{aligned}
+L_1 &amp;= f_{L_1}(U_{L_1}) \\
+L_2 &amp;= f_{L_2}(U_{L_2}, L_1) \\
+L_3 &amp;= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
+A_1 &amp;= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
+A_2^{(a_1)} &amp;= f_{A_2}(U_{A_2}, L_1, L_2, L_3, a_1) \\
+A_3^{(a_1, a_2)} &amp;= f_{A_3}(U_{A_3}, L_1, L_2, L_3, a_1, a_2) \\
+Y_1^{(a_1, a_2, a_3)} &amp;= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, a_1, a_2, a_3) \\
+Y_2^{(a_1, a_2, a_3)} &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}) \\
+Y_3^{(a_1, a_2, a_3)} &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}, Y_2^{(a_1, a_2, a_3)}   ) \\
+\end{aligned}
+\tag{C.2}\]</span></span></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Notice how in <a href="#eq-fullly-connected-swig">Equation&nbsp;<span>C.2</span></a>, the values set under the intervention supercede the values that would have been generated had the experimenter not intervened. The former values are used in subsequent equations in the model whereas the latter values are not.</p>
+</div></div><p><em>Causal DAGs and SWIGS</em></p>
+<p>A causal directed acyclic graph (DAG) is a graph whose nodes represent the variables in an observational non-parametric structural equation model with independent errors. Directed edges point from the arguments to the result of each structural equation.</p>
+<div class="cell" data-layout-align="center" data-hash="C__sscan3_causal_interpretation_cache/html/fig-fullly-connected-dag_018defa6182e1e5b27695cc033cf2417">
 <details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"fully_connected"</span><span class="op">)</span>         <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<div id="fig-fullly-connected-dag-90" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="C__sscan3_causal_interpretation_files/figure-html/fig-fullly-connected-dag-90-1.png" class="img-fluid figure-img" width="576"></p>
+<div id="fig-fullly-connected-dag" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="C__sscan3_causal_interpretation_files/figure-html/fig-fullly-connected-dag-1.png" class="img-fluid figure-img" width="576"></p>
 <figcaption class="figure-caption">Figure&nbsp;C.1: Fully connected causal DAG</figcaption></figure>
 </div>
 </div>
 </div>
-<p>A directed acyclic graph (DAG) is an acyclic graph whose nodes represent the entries of a vector-valued random variable. Directed edges represent statistical relationships among those entries. DAGs can be used to characterize probability distributions by the conditional independencies among these entries. They graphically encode the minimal set of conditional independencies that imply all the conditional independencies of the probability distribution. Using a DAG and a set of rules called d-separation, it is possible to recover the minimal set of conditional independencies that characterize the distribution it represents.</p>
-<p><em>D-separation</em></p>
-<p>D-separation is a set of rules for translating DAGs into conditional independence statements involving the variables represented on the DAG. A pair of nodes is d-separated if all the paths linking them are closed or if there is no path that links them.</p>
-<p>A path is a sequence of nodes that starts with a given origin node and ends with a terminal node. Adjacent entries in the sequence are connected in the DAG. A path of length one is open by definition. A path of length two or more is open if all its triangles are open.</p>
-<div class="cell" data-hash="C__sscan3_causal_interpretation_cache/html/unnamed-chunk-4_0ef337f46a61339499a4e687b87d3c31">
-<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fig_fork</span> <span class="op">&lt;-</span> <span class="fu">make_dag_subgraph</span><span class="op">(</span><span class="st">"fork"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<p>A single world intervention graph (SWIG) is a graph whose nodes represent the variables in a counterfactual non-parametric structural equation model with independent errors. Directed edges point from the arguments to the result of each structural equation.</p>
+<div class="cell" data-layout-align="center" data-hash="C__sscan3_causal_interpretation_cache/html/fig-fullly-connected-swig_adb516b4a4fce208d4490bb27e9c6056">
+<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_swig</span><span class="op">(</span><span class="st">"fully_connected"</span><span class="op">)</span>      <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="fig-fullly-connected-swig" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="C__sscan3_causal_interpretation_files/figure-html/fig-fullly-connected-swig-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption class="figure-caption">Figure&nbsp;C.2: Fully connected SWIG</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="model-restrictions" class="level4"><h4 class="anchored" data-anchor-id="model-restrictions">Model restrictions</h4>
+<p>Whereas parametric models are characterized by their probability density functions, non-parametric models of this type are usually characterized by their conditional independencies. For instance, if we add the restriction that all the measures are independent (or equivalently, that the DAG has no arrows), the resulting model would not be able to represent data from a causal system where some of the measures are correlated. By adding the restriction of independence, we would be eliminating the correlated data distribution from consideration as a possibility for how the data we are modelling are truly distributed.</p>
+<p>It is possible to check whether two variables in a NPSEM are (conditionally) independent using the structural equations themselves by checking whether both variables are a function of the same error term <span class="math inline">\(U_*\)</span>. DAGs and SWIGs are useful because they simplify this task by encoding the statistical relationships through a set of graphical rules called d-separation. Two variables in an NPSEM are conditionally independent if they are d-separated in the causal DAG representing the NPSEM.</p>
+<p>Restrictions are crucial: to fully characterize the NPSEM specified in <a href="#eq-fullly-connected-dag">Equation&nbsp;<span>C.1</span></a> using observed data, we would need to estimate 9 functions using one observation of the 9-dimensional joint distribution that gave rise to the participants’ observations. Recruiting an additional person to the study would not ease this problem; it would add three new equations to the model and we would end up with a similar problem than the one we began with. We would have to estimate 12 functions using one observation of a 12-dimensional joint distribution.</p>
+<p>In practice, we simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function. These assumptions are called model restrictions because they restrict the set of distributions that could possibly be represented by the NPSEM.</p>
+</section></section><section id="d-seperation" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="d-seperation">D-seperation</h3>
+<p><strong>D-separation</strong> is a set of rules for translating DAGs into conditional independence statements. A pair of nodes is d-separated if all the paths linking them are closed or if there is no path that links them.</p>
+<p>A <strong>path</strong> is a sequence of nodes that starts with a given origin node and ends with a terminal node. Consecutive entries in the sequence are connected in the DAG. A path of length one is open by definition. A path of length two or more is open if all its triangles are open.</p>
+<div class="cell" data-hash="C__sscan3_causal_interpretation_cache/html/unnamed-chunk-6_36ee0526b0b4f936e060b3ea27b25720">
+<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fig_fork</span> <span class="op">&lt;-</span> <span class="fu">make_dag_subgraph</span><span class="op">(</span><span class="st">"fork"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>                  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>  <span class="op">+</span></span>
 <span>                  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>                  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span></span>
@@ -504,16 +544,18 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
 <span></span>
 <span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">fig_fork</span>, <span class="va">fig_spoon</span>, <span class="va">fig_chopstick</span>, rel_widths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.5</span>,<span class="fl">1.5</span>,<span class="fl">2</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="C__sscan3_causal_interpretation_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="864"></p>
+<p><img src="C__sscan3_causal_interpretation_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="864"></p>
 </div>
 </div>
-<p>A triangle is a sub-sequence of a path which contains three consecutive entries from the path. There are three types the fork, the spoon, and the chopstick, which we describe below. When we do not condition on the apex variable in the triangle, we call these the “canonical fork”, “canonical spoon”, and “canonical chopstick”, respectively. When we do condition by the apex variable we say “conditional fork”, “conditional spoon”, and “conditional chopstick”.</p>
-<p>A <strong>fork</strong> is a triangle whose apex variable has two outgoing edges. By definition, a canonical fork is open and a conditional fork is closed. The apex variable of a fork is commonly referred to as a “confounder” in causal inference literature.</p>
-<p>A <strong>spoon</strong> is a triangle whose apex variable has two incoming edges. By definition, a canonical spoon is closed and a conditional spoon is open The apex variable of a fork is commonly referred to as a “collider” in causal inference literature.</p>
-<p>A <strong>chopstick</strong> is a triangle whose apex variable has one incoming edge and one outgoing edge. By definition, a canonical chopstick is open and a conditional chopstick is closed. The apex variable of a chopstick is commonly referred to as a “mediator” in causal inference literature.</p>
+<p>A <strong>triangle</strong> is a sub-sequence of a path which contains three consecutive nodes from the path. A canonical triangle is one in which we do not condition on the apex node. A conditional triangle is one in which we do condition.</p>
+<ul>
+<li><p>A <strong>fork</strong> is a triangle whose apex variable has two outgoing edges. A canonical fork is open and a conditional fork is closed. The apex variable of a fork is commonly referred to as a “confounder”.</p></li>
+<li><p>A <strong>spoon</strong> is a triangle whose apex variable has two incoming edges. A canonical spoon is closed and a conditional spoon is open. The apex variable of a fork is commonly referred to as a “collider”.</p></li>
+<li><p>A <strong>chopstick</strong> is a triangle whose apex variable has one incoming edge and one outgoing edge. A canonical chopstick is open and a conditional chopstick is closed. The apex variable of a chopstick is commonly referred to as a “mediator”.</p></li>
+</ul>
 <p>To summarize, canonical forks and chopsticks are open and conditional forks and chopsticks are closed. By contrast, canonical spoons are closed and conditional spoons are open. A path is open if it is of length one or if all the triangles in the path are open. If at least one triangle in the path is closed, the path is closed. Two nodes in a DAG are conditionally d-separated if all the paths between them are closed after conditioning on the adjustment set. Two variables shown on the DAG are conditionally independent if they are conditionally d-separated.</p>
-<div class="cell" data-hash="C__sscan3_causal_interpretation_cache/html/unnamed-chunk-5_a752fc0c68ebb3e687767310b71ab3d4">
-<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<div class="cell" data-hash="C__sscan3_causal_interpretation_cache/html/unnamed-chunk-7_b28320347862ba53ba78536dfa0d961f">
+<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>                            triangle    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Fork"</span>, <span class="st">"Spoon"</span>, <span class="st">"Chopstick"</span><span class="op">)</span>,</span>
 <span>                            description <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>                                            <span class="st">"Apex is a common cause"</span>,</span>
@@ -540,23 +582,23 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
 <span>    <span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 
-<div id="oikqoulrsr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#oikqoulrsr table {
+<div id="ihrcdpcqoo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ihrcdpcqoo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#oikqoulrsr thead, #oikqoulrsr tbody, #oikqoulrsr tfoot, #oikqoulrsr tr, #oikqoulrsr td, #oikqoulrsr th {
+#ihrcdpcqoo thead, #ihrcdpcqoo tbody, #ihrcdpcqoo tfoot, #ihrcdpcqoo tr, #ihrcdpcqoo td, #ihrcdpcqoo th {
   border-style: none;
 }
 
-#oikqoulrsr p {
+#ihrcdpcqoo p {
   margin: 0;
   padding: 0;
 }
 
-#oikqoulrsr .gt_table {
+#ihrcdpcqoo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -582,12 +624,12 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   border-left-color: #D3D3D3;
 }
 
-#oikqoulrsr .gt_caption {
+#ihrcdpcqoo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#oikqoulrsr .gt_title {
+#ihrcdpcqoo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -599,7 +641,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   border-bottom-width: 0;
 }
 
-#oikqoulrsr .gt_subtitle {
+#ihrcdpcqoo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -611,7 +653,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   border-top-width: 0;
 }
 
-#oikqoulrsr .gt_heading {
+#ihrcdpcqoo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -623,13 +665,13 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   border-right-color: #D3D3D3;
 }
 
-#oikqoulrsr .gt_bottom_border {
+#ihrcdpcqoo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#oikqoulrsr .gt_col_headings {
+#ihrcdpcqoo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -644,7 +686,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   border-right-color: #D3D3D3;
 }
 
-#oikqoulrsr .gt_col_heading {
+#ihrcdpcqoo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -664,7 +706,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   overflow-x: hidden;
 }
 
-#oikqoulrsr .gt_column_spanner_outer {
+#ihrcdpcqoo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -676,15 +718,15 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   padding-right: 4px;
 }
 
-#oikqoulrsr .gt_column_spanner_outer:first-child {
+#ihrcdpcqoo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#oikqoulrsr .gt_column_spanner_outer:last-child {
+#ihrcdpcqoo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#oikqoulrsr .gt_column_spanner {
+#ihrcdpcqoo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -696,11 +738,11 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   width: 100%;
 }
 
-#oikqoulrsr .gt_spanner_row {
+#ihrcdpcqoo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#oikqoulrsr .gt_group_heading {
+#ihrcdpcqoo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -726,7 +768,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   text-align: left;
 }
 
-#oikqoulrsr .gt_empty_group_heading {
+#ihrcdpcqoo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -741,15 +783,15 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   vertical-align: middle;
 }
 
-#oikqoulrsr .gt_from_md > :first-child {
+#ihrcdpcqoo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#oikqoulrsr .gt_from_md > :last-child {
+#ihrcdpcqoo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#oikqoulrsr .gt_row {
+#ihrcdpcqoo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -768,7 +810,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   overflow-x: hidden;
 }
 
-#oikqoulrsr .gt_stub {
+#ihrcdpcqoo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -781,7 +823,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   padding-right: 5px;
 }
 
-#oikqoulrsr .gt_stub_row_group {
+#ihrcdpcqoo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -795,15 +837,15 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   vertical-align: top;
 }
 
-#oikqoulrsr .gt_row_group_first td {
+#ihrcdpcqoo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#oikqoulrsr .gt_row_group_first th {
+#ihrcdpcqoo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#oikqoulrsr .gt_summary_row {
+#ihrcdpcqoo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -813,16 +855,16 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   padding-right: 5px;
 }
 
-#oikqoulrsr .gt_first_summary_row {
+#ihrcdpcqoo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#oikqoulrsr .gt_first_summary_row.thick {
+#ihrcdpcqoo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#oikqoulrsr .gt_last_summary_row {
+#ihrcdpcqoo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -832,7 +874,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   border-bottom-color: #D3D3D3;
 }
 
-#oikqoulrsr .gt_grand_summary_row {
+#ihrcdpcqoo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -842,7 +884,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   padding-right: 5px;
 }
 
-#oikqoulrsr .gt_first_grand_summary_row {
+#ihrcdpcqoo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -852,7 +894,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   border-top-color: #D3D3D3;
 }
 
-#oikqoulrsr .gt_last_grand_summary_row_top {
+#ihrcdpcqoo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -862,11 +904,11 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   border-bottom-color: #D3D3D3;
 }
 
-#oikqoulrsr .gt_striped {
+#ihrcdpcqoo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#oikqoulrsr .gt_table_body {
+#ihrcdpcqoo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -875,7 +917,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   border-bottom-color: #D3D3D3;
 }
 
-#oikqoulrsr .gt_footnotes {
+#ihrcdpcqoo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -889,7 +931,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   border-right-color: #D3D3D3;
 }
 
-#oikqoulrsr .gt_footnote {
+#ihrcdpcqoo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -898,7 +940,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   padding-right: 5px;
 }
 
-#oikqoulrsr .gt_sourcenotes {
+#ihrcdpcqoo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -912,7 +954,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   border-right-color: #D3D3D3;
 }
 
-#oikqoulrsr .gt_sourcenote {
+#ihrcdpcqoo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -920,63 +962,63 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
   padding-right: 5px;
 }
 
-#oikqoulrsr .gt_left {
+#ihrcdpcqoo .gt_left {
   text-align: left;
 }
 
-#oikqoulrsr .gt_center {
+#ihrcdpcqoo .gt_center {
   text-align: center;
 }
 
-#oikqoulrsr .gt_right {
+#ihrcdpcqoo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#oikqoulrsr .gt_font_normal {
+#ihrcdpcqoo .gt_font_normal {
   font-weight: normal;
 }
 
-#oikqoulrsr .gt_font_bold {
+#ihrcdpcqoo .gt_font_bold {
   font-weight: bold;
 }
 
-#oikqoulrsr .gt_font_italic {
+#ihrcdpcqoo .gt_font_italic {
   font-style: italic;
 }
 
-#oikqoulrsr .gt_super {
+#ihrcdpcqoo .gt_super {
   font-size: 65%;
 }
 
-#oikqoulrsr .gt_footnote_marks {
+#ihrcdpcqoo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#oikqoulrsr .gt_asterisk {
+#ihrcdpcqoo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#oikqoulrsr .gt_indent_1 {
+#ihrcdpcqoo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#oikqoulrsr .gt_indent_2 {
+#ihrcdpcqoo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#oikqoulrsr .gt_indent_3 {
+#ihrcdpcqoo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#oikqoulrsr .gt_indent_4 {
+#ihrcdpcqoo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#oikqoulrsr .gt_indent_5 {
+#ihrcdpcqoo .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1011,40 +1053,7 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
 </div>
 </div>
 </div>
-</section><section id="counterfactual-structural-equation-model" class="level4"><h4 class="anchored" data-anchor-id="counterfactual-structural-equation-model">Counterfactual structural equation model</h4>
-<p><em>Structural equations</em></p>
-<p><span class="math display">\[
-\begin{aligned}
-L_1 &amp;= f_{L_1}(U_{L_1}) \\
-L_2 &amp;= f_{L_2}(U_{L_2}, L_1) \\
-L_3 &amp;= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
-A_1 &amp;= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
-A_2^{(a_1)} &amp;= f_{A_2}(U_{A_2}, L_1, L_2, L_3, a_1) \\
-A_3^{(a_1, a_2)} &amp;= f_{A_3}(U_{A_3}, L_1, L_2, L_3, a_1, a_2) \\
-Y_1^{(a_1, a_2, a_3)} &amp;= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, a_1, a_2, a_3) \\
-Y_2^{(a_1, a_2, a_3)} &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}) \\
-Y_3^{(a_1, a_2, a_3)} &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}, Y_2^{(a_1, a_2, a_3)}   ) \\
-\end{aligned}
-\]</span></p>
-<p><em>Single world intervention graph</em></p>
-<div class="cell" data-layout-align="center" data-hash="C__sscan3_causal_interpretation_cache/html/fig-fullly-connected-dag-91_d5c0f4ea06c76aa0059e5dfc05dad2c2">
-<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_swig</span><span class="op">(</span><span class="st">"network_interference"</span><span class="op">)</span>      <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div id="fig-fullly-connected-dag-91" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="C__sscan3_causal_interpretation_files/figure-html/fig-fullly-connected-dag-91-1.png" class="img-fluid figure-img" width="576"></p>
-<figcaption class="figure-caption">Figure&nbsp;C.2: Homogenous interference SWIG</figcaption></figure>
-</div>
-</div>
-</div>
-</section><section id="model-restrictions" class="level4"><h4 class="anchored" data-anchor-id="model-restrictions">Model restrictions</h4>
-<p>Whereas parametric models are characterized by their probability density functions, non-parametric models of this type are usually characterized by their conditional independencies. These can be represented using DAGs, as we described in the previous section. DAGs take on another meaning when used with NPSEMs – a DAG is a schematic representation of the structural equations in an NPSEM below. The DAG shown in <span class="quarto-unresolved-ref">?fig-fullly-connected-dag</span>, for instance, represents the model specified by <span class="quarto-unresolved-ref">?eq-fullly-connected-dag</span>.</p>
-<p>To fully characterize the NPSEM specified in <span class="quarto-unresolved-ref">?eq-fullly-connected-dag</span> using observed data, we would need to estimate 9 functions using one observation of the 9-dimensional joint distribution that gave rise to the participants’ observations. Recruiting an additional person to the study would not ease this problem; it would add three new equations to the model and we would end up with a similar problem than the one we began with. We would have to estimate 12 functions using one observation of a 12-dimensional joint distribution.</p>
-<p>In practice, we simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function. These assumptions are called model restrictions because they restrict the set of distributions that could possibly be represented by the NPSEM.</p>
-<p>For instance, if we add the restriction that all the measures are independent (or equivalently, that the DAG has no arrows), the resulting model would not be able to represent data from a causal system where some of the measures are correlated. By adding the restriction of independence, we would be eliminating the correlated data distribution from consideration as a possibility for how the data we are modelling are truly distributed.</p>
-</section></section><section id="sec-assumptions-classic" class="level3" data-number="C.1.1"><h3 data-number="C.1.1" class="anchored" data-anchor-id="sec-assumptions-classic">
+</section><section id="sec-assumptions-classic" class="level3" data-number="C.1.1"><h3 data-number="C.1.1" class="anchored" data-anchor-id="sec-assumptions-classic">
 <span class="header-section-number">C.1.1</span> Assumptions</h3>
 <p>Under classic causal inference, we assume that observations are independent and identically distributed. We review these assumptions, naming them slightly differently for the purpose of comparing them with the assumptions made in subsequent sections. In each case, we divide assumptions up into <em>independence assumptions</em> (assumptions that delete arrows from the DAG) and <em>homogeneity assumptions</em> (assumptions that simplify the system of structural equations).</p>
 <section id="independence-i-no-spillover" class="level4"><h4 class="anchored" data-anchor-id="independence-i-no-spillover">Independence I: No spillover</h4>
@@ -1070,7 +1079,7 @@ Y_2 \perp Y_3 | L_1, L_2, L_3, A_1, A_2, A_3 \\
 Y_1 \perp Y_3 | L_1, L_2, L_3, A_1, A_2, A_3
 \end{aligned}
 \]</span></p>
-<p>This is shown in <a href="#fig-no-spillover-dag">Figure&nbsp;<span>C.3</span></a>, as the removal of arrows that connected the <span class="math inline">\(L_i\)</span>’s, <span class="math inline">\(A_i\)</span>’s and <span class="math inline">\(Y_i\)</span>’s. In <a href="#eq-no-spillover-dag">Equation&nbsp;<span>C.1</span></a>, the <span class="math inline">\(L_i\)</span>’s are not functions of each other, the <span class="math inline">\(A_i\)</span>’s are not functions of each other, and the <span class="math inline">\(Y_i\)</span>’s are not functions of each other. i.e.&nbsp;Given all the measurements taken prior to a set of contemporaneous measures, the contemporaneous measures are independent. (This follows from the independence of the error terms <span class="math inline">\(U_{L_i}\)</span>, the error terms <span class="math inline">\(U_{A_i}\)</span>, and the error terms <span class="math inline">\(U_{Y_i}\)</span> across observations <span class="math inline">\(i\)</span>.)</p>
+<p>This is shown in <a href="#fig-no-spillover-dag">Figure&nbsp;<span>C.3</span></a>, as the removal of arrows that connected the <span class="math inline">\(L_i\)</span>’s, <span class="math inline">\(A_i\)</span>’s and <span class="math inline">\(Y_i\)</span>’s. In <a href="#eq-no-spillover-dag">Equation&nbsp;<span>C.3</span></a>, the <span class="math inline">\(L_i\)</span>’s are not functions of each other, the <span class="math inline">\(A_i\)</span>’s are not functions of each other, and the <span class="math inline">\(Y_i\)</span>’s are not functions of each other. i.e.&nbsp;Given all the measurements taken prior to a set of contemporaneous measures, the contemporaneous measures are independent. (This follows from the independence of the error terms <span class="math inline">\(U_{L_i}\)</span>, the error terms <span class="math inline">\(U_{A_i}\)</span>, and the error terms <span class="math inline">\(U_{Y_i}\)</span> across observations <span class="math inline">\(i\)</span>.)</p>
 <div class="cell" data-layout-align="center" data-hash="C__sscan3_causal_interpretation_cache/html/fig-no-spillover-dag_3750a656c41289dcf08b57647c86c1e8">
 <details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"full_interference"</span><span class="op">)</span>      <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -1095,7 +1104,7 @@ Y_1 &amp;= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
 Y_2 &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3) \\
 Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3) \\
 \end{aligned}
-\tag{C.1}\]</span></span></p>
+\tag{C.3}\]</span></span></p>
 </section><section id="independence-ii-no-interference" class="level4"><h4 class="anchored" data-anchor-id="independence-ii-no-interference">Independence II: No interference</h4>
 <p>Classic causal inference makes the assumption of no interference. i.e.&nbsp;We assume that measurements made across participants, but not at the same time are independent of each other. This is shown as the absence of arrows that point from the <span class="math inline">\(L_i\)</span>’s to <span class="math inline">\(A_j\)</span>’s, the <span class="math inline">\(L_i\)</span>’s to the <span class="math inline">\(Y_j\)</span>’s and the <span class="math inline">\(A_i\)</span>’s to the <span class="math inline">\(Y_j\)</span> for participants <span class="math inline">\(i\neq j\)</span> (see <a href="#fig-independence-dag">Figure&nbsp;<span>C.4</span></a>).</p>
 <p>This allows us to simplify the structural equation model so that each participant’s measures are a function of only measures taken on them.</p>
@@ -1125,7 +1134,7 @@ f_Y &amp;= f_{Y_1} = f_{Y_2} = f_{Y_3}  \\
 <span class="header-section-number">C.1.2</span> Model</h3>
 <section id="observed-data" class="level4"><h4 class="anchored" data-anchor-id="observed-data">Observed data</h4>
 <p>The homogeneity and indepdndence assumptions allow us to re-write the structural equation model dropping the person subscript from the equations. The model simplifies into one for three measures each taken on one person, rather than a model for 9 measures taken on 3 people. Since the measures on each person are identically distributed, this model can be used three times to separately generate the measures for <em>Person 1</em>, <em>Person 2</em>, and <em>Person 3</em>. By contrast, the original model produced measures for all three people at one go.</p>
-<p><a href="#fig-independence-dag">Figure&nbsp;<span>C.4</span></a> and <a href="#eq-independence-dag">Equation&nbsp;<span>C.2</span></a> show the resulting non-parametric structural equation model for our data, if we analyse it under classic causal inference. As a consequence of the assumptions stated in <a href="#sec-assumptions-classic"><span>Section&nbsp;C.1.1</span></a>, we can represent the model using three equations rather than 9. We retain the person subscript on the random variables in <a href="#eq-independence-dag">Equation&nbsp;<span>C.2</span></a> and we keep all 9 nodes in the DAG on <a href="#fig-independence-dag">Figure&nbsp;<span>C.4</span></a>. This is to remind us that though our model is for one person, our purpose was always to infer something about the sample of three people.</p>
+<p><a href="#fig-independence-dag">Figure&nbsp;<span>C.4</span></a> and <a href="#eq-independence-dag">Equation&nbsp;<span>C.4</span></a> show the resulting non-parametric structural equation model for our data, if we analyse it under classic causal inference. As a consequence of the assumptions stated in <a href="#sec-assumptions-classic"><span>Section&nbsp;C.1.1</span></a>, we can represent the model using three equations rather than 9. We retain the person subscript on the random variables in <a href="#eq-independence-dag">Equation&nbsp;<span>C.4</span></a> and we keep all 9 nodes in the DAG on <a href="#fig-independence-dag">Figure&nbsp;<span>C.4</span></a>. This is to remind us that though our model is for one person, our purpose was always to infer something about the sample of three people.</p>
 <div class="cell" data-layout-align="center" data-hash="C__sscan3_causal_interpretation_cache/html/fig-independence-dag_204f3e84e373be16321a3fb16872de30">
 <details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"independence"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -1144,9 +1153,9 @@ L_i &amp;= f_{L}( U_{L_i}) \\
 A_i &amp;= f_{A}( U_{A_i}, L_i) \\
 Y_i &amp;= f_{Y}( U_{Y_i}, L_i, A_i) \\
 \end{aligned}
-\tag{C.2}\]</span></span></p>
+\tag{C.4}\]</span></span></p>
 </section><section id="counterfactual-data" class="level4"><h4 class="anchored" data-anchor-id="counterfactual-data">Counterfactual data</h4>
-<p>We define counterfactual outcomes <span class="math inline">\(Y_1^{(a_1)}\)</span>, <span class="math inline">\(Y_2^{(a_2)}\)</span>, and <span class="math inline">\(Y_3^{(a_3)}\)</span>, which represent the level of job opportunities, <em>Persons 1</em>, <em>2</em>, and <em>3</em>, would have if we set their dress to level <span class="math inline">\(a_1\)</span>, <span class="math inline">\(a_2\)</span>, and <span class="math inline">\(a_3\)</span>, respectively. Then the model for counterfactual variables is given by <a href="#eq-independence-swig">Equation&nbsp;<span>C.3</span></a>.</p>
+<p>We define counterfactual outcomes <span class="math inline">\(Y_1^{(a_1)}\)</span>, <span class="math inline">\(Y_2^{(a_2)}\)</span>, and <span class="math inline">\(Y_3^{(a_3)}\)</span>, which represent the level of job opportunities, <em>Persons 1</em>, <em>2</em>, and <em>3</em>, would have if we set their dress to level <span class="math inline">\(a_1\)</span>, <span class="math inline">\(a_2\)</span>, and <span class="math inline">\(a_3\)</span>, respectively. Then the model for counterfactual variables is given by <a href="#eq-independence-swig">Equation&nbsp;<span>C.5</span></a>.</p>
 <p>It is represented using the Single World Intervention Graph (SWIG) pictured in <a href="#fig-independence-swig">Figure&nbsp;<span>C.5</span></a>. A SWIG represents a structural equation model where some of the equations are superseded by the value assigned by the experimenter. For so-called “treatment variables”, the diagram separates the value of the variable as it would have been observed with no intervention (<span class="math inline">\(A_i\)</span>) from the value that as it will be used in subsequent equations (<span class="math inline">\(a_i\)</span>) as a result of the experimenter’s intervention.</p>
 <p>Note that because of the assumption of no interference and no spillover, each counterfactual outcome is a function only of the treatment value of the same individual.</p>
 <p>To ensure that counterfactual outcomes are well-defined for all experimental units, we make the assumption of positivity:</p>
@@ -1172,7 +1181,7 @@ L_i &amp;= f_{L}( U_{L_i}                       ) \\
 A_i &amp;= f_{A}( U_{A_i}, L_i) \\
 Y_i^{(a_i)} &amp;= f_{Y}(U_{Y_i} , L_i, a_i) \\
 \end{aligned}
-\tag{C.3}\]</span></span></p>
+\tag{C.5}\]</span></span></p>
 </section></section><section id="estimands" class="level3" data-number="C.1.3"><h3 data-number="C.1.3" class="anchored" data-anchor-id="estimands">
 <span class="header-section-number">C.1.3</span> Estimands</h3>
 <p>We are interested in whether changing how formally someone dresses would change their level of job offers, on average, in our population. To determine the answer, we will compare the average counterfactual outcome of job opportunities for formal dress to the average counterfactual outcome of job opportunities for non-formal dress. i.e.&nbsp;We will make the following comparison.</p>
@@ -1188,10 +1197,10 @@ E \left[ \frac{1}{n} \sum_i Y_i^{(a=1)} - Y_i^{(a=0)} \right]
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong>Notes on identification</strong></p>
 <p><strong>A</strong>. In the first line, we use the law of iterated expectations.</p>
-<p><strong>B</strong>. In the second line, we use the definition for counterfactual outcome <span class="math inline">\(Y_i^{(a)}\)</span> as specified in <a href="#eq-independence-swig">Equation&nbsp;<span>C.3</span></a>.</p>
+<p><strong>B</strong>. In the second line, we use the definition for counterfactual outcome <span class="math inline">\(Y_i^{(a)}\)</span> as specified in <a href="#eq-independence-swig">Equation&nbsp;<span>C.5</span></a>.</p>
 <p><strong>C</strong>. In the third line, we use the fact that when <span class="math inline">\(L_i\)</span> is fixed, <span class="math inline">\(f_{Y}(U_{Y_i} , L_i, a)\)</span> is a function of random variable <span class="math inline">\(U_{Y_i}\)</span> and <span class="math inline">\(A_i\)</span> is a function of <span class="math inline">\(U_{A_i}\)</span>. Since <span class="math inline">\(U_{Y_i}\)</span> and <span class="math inline">\(U_{A_i}\)</span> are independent by definition of the NPSEM-IE, <span class="math inline">\(f_{Y}(U_{Y_i} , L_i, a) \perp A_i | L_i\)</span>.</p>
 <p><strong>D</strong>. In the fourth line we consider the expected value of <span class="math inline">\(f_{Y}(U_{Y_i} , L_i, a)\)</span> when <span class="math inline">\(A_i = a\)</span>, in particular</p>
-<p><strong>E</strong>. In the fifth line, we use the definition for observed value <span class="math inline">\(Y_i\)</span> according as specified in <a href="#eq-independence-dag">Equation&nbsp;<span>C.2</span></a>.</p>
+<p><strong>E</strong>. In the fifth line, we use the definition for observed value <span class="math inline">\(Y_i\)</span> according as specified in <a href="#eq-independence-dag">Equation&nbsp;<span>C.4</span></a>.</p>
 </div></div><p><span class="math display">\[
 \begin{aligned}
 E[Y_i^{(a)}]                    &amp;= E \left[ E[Y_i^{(a)} | L_i] \right] \\
@@ -1216,12 +1225,12 @@ E[Y_i^{(a)} | L_i = l_i, A_i = a] =  E[Y_i | L_i = l_i, A_i = a]
 <p><span class="math display">\[
 0 &lt; E[A_i | L_i] &lt; 1
 \]</span></p>
-<p>Conditional exchangeability is a consequence of the independence of errors in the NPSEM-IE (see notes on identification assumptions above). Consistency is a consequence of the fact that a) the structural equations for the observed model are identical with the equations for the counterfactual model, b) the error terms for each individual <span class="math inline">\(i\)</span> in the counterfactual model are equal to the error terms in the observed model. i.e.&nbsp;<span class="math inline">\(U_{Y_i}\)</span> has the same value in <a href="#eq-independence-swig">Equation&nbsp;<span>C.3</span></a> as it does in <a href="#eq-independence-dag">Equation&nbsp;<span>C.2</span></a>. Unlike the first two, the assumption of positivity is not given by the definition of the NPSEM. We make it in defining the structural equation models for counterfactual variables (<a href="#eq-independence-swig">Equation&nbsp;<span>C.3</span></a>).</p>
+<p>Conditional exchangeability is a consequence of the independence of errors in the NPSEM-IE (see notes on identification assumptions above). Consistency is a consequence of the fact that a) the structural equations for the observed model are identical with the equations for the counterfactual model, b) the error terms for each individual <span class="math inline">\(i\)</span> in the counterfactual model are equal to the error terms in the observed model. i.e.&nbsp;<span class="math inline">\(U_{Y_i}\)</span> has the same value in <a href="#eq-independence-swig">Equation&nbsp;<span>C.5</span></a> as it does in <a href="#eq-independence-dag">Equation&nbsp;<span>C.4</span></a>. Unlike the first two, the assumption of positivity is not given by the definition of the NPSEM. We make it in defining the structural equation models for counterfactual variables (<a href="#eq-independence-swig">Equation&nbsp;<span>C.5</span></a>).</p>
 </section><section id="reflection-questions" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="reflection-questions">Reflection questions</h3>
 <p>Using the structural equations:</p>
 <ol type="1">
-<li><p>Show that independence does not hold in the model defined by <span class="quarto-unresolved-ref">?eq-fullly-connected-dag</span>.</p></li>
-<li><p>Show that independence holds in <a href="#eq-independence-dag">Equation&nbsp;<span>C.2</span></a>.</p></li>
+<li><p>Show that independence does not hold in the model defined by <a href="#eq-fullly-connected-dag">Equation&nbsp;<span>C.1</span></a>.</p></li>
+<li><p>Show that independence holds in <a href="#eq-independence-dag">Equation&nbsp;<span>C.4</span></a>.</p></li>
 <li><p>Show that the causal estimand in <a href="#sec-classic-causal-inference"><span>Section&nbsp;C.1</span></a> is equivalent to the usual definition of average causal effect (ACE)</p></li>
 <li><p>Show that the causal estimate in <a href="#sec-classic-causal-inference"><span>Section&nbsp;C.1</span></a> is equivalent to the usual definition of the g-formula.</p></li>
 <li><p>How is the SUTVA assumption encoded in this model?</p></li>
@@ -1289,7 +1298,7 @@ g_t(\mathbf{X})  \in \mathbf{D}
 <span class="header-section-number">C.2.1</span> Assumptions</h3>
 <section id="independence-i-no-spillover-1" class="level4"><h4 class="anchored" data-anchor-id="independence-i-no-spillover-1">Independence I: No spillover</h4>
 <p>Under network causal inference, we make the assumption of no spillover - that measurements taken across participants at the same time (e.g.&nbsp;<span class="math inline">\(L_1\)</span>, <span class="math inline">\(L_2\)</span>, and <span class="math inline">\(L_3\)</span>) are independent of each other given all prior measures.</p>
-<p>This is shown in <a href="#fig-interference-dag">Figure&nbsp;<span>C.6</span></a>, as the removal of arrows that connected the <span class="math inline">\(L_i\)</span>’s, <span class="math inline">\(A_i\)</span>’s and <span class="math inline">\(Y_i\)</span>’s in <span class="quarto-unresolved-ref">?fig-fullly-connected-dag</span>. In <a href="#eq-interference-dag">Equation&nbsp;<span>C.4</span></a>, the <span class="math inline">\(L_i\)</span>’s are not functions of each other, the <span class="math inline">\(A_i\)</span>’s are not functions of each other, and the <span class="math inline">\(Y_i\)</span>’s are not functions of each other. This implies that given all the measurements taken prior to a set of contemporaneous measures, the contemporaneous measures are independent.</p>
+<p>This is shown in <a href="#fig-interference-dag">Figure&nbsp;<span>C.6</span></a>, as the removal of arrows that connected the <span class="math inline">\(L_i\)</span>’s, <span class="math inline">\(A_i\)</span>’s and <span class="math inline">\(Y_i\)</span>’s in <a href="#fig-fullly-connected-dag">Figure&nbsp;<span>C.1</span></a>. In <a href="#eq-interference-dag">Equation&nbsp;<span>C.6</span></a>, the <span class="math inline">\(L_i\)</span>’s are not functions of each other, the <span class="math inline">\(A_i\)</span>’s are not functions of each other, and the <span class="math inline">\(Y_i\)</span>’s are not functions of each other. This implies that given all the measurements taken prior to a set of contemporaneous measures, the contemporaneous measures are independent.</p>
 </section><section id="independence-ii-network-interference" class="level4"><h4 class="anchored" data-anchor-id="independence-ii-network-interference">Independence II: Network interference</h4>
 <div class="cell" data-layout-align="center" data-hash="C__sscan3_causal_interpretation_cache/html/fig-interference-dag_7e00476bb6d0387d367c6b6b76abb34e">
 <details><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"network_interference"</span><span class="op">)</span>   <span class="op">|&gt;</span> </span>
@@ -1315,7 +1324,7 @@ Y_1 &amp;= f_{Y_1}(U_{Y_1}, L_1, L_2, A_1, A_2) \\
 Y_2 &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, A_1, A_2) \\
 Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
 \end{aligned}
-\tag{C.4}\]</span></span></p>
+\tag{C.6}\]</span></span></p>
 <p>Under network causal inference, we make the assumption that interference respects some mapping between individuals - a mapping given by a graph. In <a href="#fig-interference-dag">Figure&nbsp;<span>C.6</span></a>, based on their relationships with one another, <em>Person 1</em>’s measures are connected with <em>Person 2</em>’s, and neither are connected with <em>Person 3</em>’s.</p>
 <p>Saying a structural equation model or a DAG shows network interference is equivalent to saying the exposure mapping for each variable in the DAG is loyal to data graph <span class="math inline">\(\mathscr{G}\)</span> which encodes the causally relevant relationships between observational units in the sample. In our example</p>
 <p><span class="math display">\[
@@ -1378,7 +1387,7 @@ h_{Y}(\mathbf{A}, i) &amp;\in \{0, 1\} \\
 </section></section><section id="model-1" class="level3" data-number="C.2.2"><h3 data-number="C.2.2" class="anchored" data-anchor-id="model-1">
 <span class="header-section-number">C.2.2</span> Model</h3>
 <section id="observed-data-1" class="level4"><h4 class="anchored" data-anchor-id="observed-data-1">Observed data</h4>
-<p><a href="#fig-homogenous-dag">Figure&nbsp;<span>C.7</span></a> and <a href="#eq-homogenous-dag">Equation&nbsp;<span>C.5</span></a> show the resulting non-parametric structural equation model for our data, if we analyse it under network causal inference. Because of the assumption of identical distributions, we can represent the model using three equations rather than 9. We retain the person subscript on the random variables in <a href="#eq-homogenous-dag">Equation&nbsp;<span>C.5</span></a> and we keep all 9 nodes in the DAG on <a href="#fig-homogenous-dag">Figure&nbsp;<span>C.7</span></a> and add six additional nodes to represent network exposure values with respect to <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{L}\)</span>.</p>
+<p><a href="#fig-homogenous-dag">Figure&nbsp;<span>C.7</span></a> and <a href="#eq-homogenous-dag">Equation&nbsp;<span>C.7</span></a> show the resulting non-parametric structural equation model for our data, if we analyse it under network causal inference. Because of the assumption of identical distributions, we can represent the model using three equations rather than 9. We retain the person subscript on the random variables in <a href="#eq-homogenous-dag">Equation&nbsp;<span>C.7</span></a> and we keep all 9 nodes in the DAG on <a href="#fig-homogenous-dag">Figure&nbsp;<span>C.7</span></a> and add six additional nodes to represent network exposure values with respect to <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{L}\)</span>.</p>
 <p>We draw the DAG like this to clarify that though our model is for one person, it represents a part of a system that relates all the people in the sample with each other. Our original purpose, after all, was to infer something about the sample, not any one individual in it.</p>
 <div class="cell" data-layout-align="center" data-hash="C__sscan3_causal_interpretation_cache/html/fig-homogenous-dag_f6bd719e08394cb8383d8b6862845247">
 <details><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"homogenous_interference"</span><span class="op">)</span>            <span class="op">|&gt;</span> </span>
@@ -1399,9 +1408,9 @@ L_i &amp;= f_{L}( U_{L_i} ) \\
 A_i &amp;= f_{A}( U_{A_i}, L_i, g_{A}(\textbf{L}, i) ) \\
 Y_i &amp;= f_{Y}( U_{Y_i},  L_i,  g_{Y}(\textbf{L}, i),   A_i,  h_{Y}( \textbf{A}, i ) ) \\
 \end{aligned}
-\tag{C.5}\]</span></span></p>
+\tag{C.7}\]</span></span></p>
 </section><section id="counterfactual-data-1" class="level4"><h4 class="anchored" data-anchor-id="counterfactual-data-1">Counterfactual data</h4>
-<p>We define counterfactual outcomes <span class="math inline">\(Y_1^{(a_1, \mathbf{a}_{\mathscr{N}_1})}\)</span>, <span class="math inline">\(Y_2^{(a_2, \mathbf{a}_{\mathscr{N}_2})}\)</span>, and <span class="math inline">\(Y_3^{(a_3, \mathbf{a}_{\mathscr{N}_3})}\)</span>, which represent the level of job opportunities, <em>Persons 1</em>, <em>2</em>, and <em>3</em>, would have if we set their dress to level <span class="math inline">\(a_1\)</span>, <span class="math inline">\(a_2\)</span>, and <span class="math inline">\(a_3\)</span>, respectively. Then the model for counterfactual variable is given by <a href="#eq-homogenous-interference-swig">Equation&nbsp;<span>C.6</span></a>. It is represented using a Single World Intervention Graph (SWIG) in <a href="#fig-homogenous-interference-swig">Figure&nbsp;<span>C.8</span></a>.</p>
+<p>We define counterfactual outcomes <span class="math inline">\(Y_1^{(a_1, \mathbf{a}_{\mathscr{N}_1})}\)</span>, <span class="math inline">\(Y_2^{(a_2, \mathbf{a}_{\mathscr{N}_2})}\)</span>, and <span class="math inline">\(Y_3^{(a_3, \mathbf{a}_{\mathscr{N}_3})}\)</span>, which represent the level of job opportunities, <em>Persons 1</em>, <em>2</em>, and <em>3</em>, would have if we set their dress to level <span class="math inline">\(a_1\)</span>, <span class="math inline">\(a_2\)</span>, and <span class="math inline">\(a_3\)</span>, respectively. Then the model for counterfactual variable is given by <a href="#eq-homogenous-interference-swig">Equation&nbsp;<span>C.8</span></a>. It is represented using a Single World Intervention Graph (SWIG) in <a href="#fig-homogenous-interference-swig">Figure&nbsp;<span>C.8</span></a>.</p>
 <p>Note that because of the assumption of network interference, the counterfactual outcome for <em>Person 1</em> is a function of <em>Person 2</em>’s treatment value, and vice versa. The counterfactual outcome for <em>Person 3</em>, on the other hand, is a function of <em>Person 3</em>’s treatment (<span class="math inline">\(a_3\)</span>) alone. This is because <span class="math inline">\(\mathscr{N}_1 = \{2\}\)</span>, <span class="math inline">\(\mathscr{N}_2 = \{1\}\)</span>, and <span class="math inline">\(\mathscr{N}_3 = \{\}\)</span>, according to Example 2.</p>
 <p>To ensure that counterfactual outcomes are well-defined for all experimental units, we make the assumption of positivity:</p>
 <p><span class="math display">\[
@@ -1425,7 +1434,7 @@ L_i &amp;= f_{L}(  U_{L_i}  ) \\
 A_i &amp;= f_{A}( U_{A_i}, L_i, g_{A}(\textbf{L}, i) ) \\
 Y_i^{(a_i,\textbf{a}_{\mathscr{N}_i} )} &amp;= f_{Y}(U_{Y_i}, L_i,  a_i,  g_{Y}(\textbf{L}, i),      h_{Y}(\textbf{a}, i)         ) \\
 \end{aligned}
-\tag{C.6}\]</span></span></p>
+\tag{C.8}\]</span></span></p>
 </section></section><section id="estimands-1" class="level3" data-number="C.2.3"><h3 data-number="C.2.3" class="anchored" data-anchor-id="estimands-1">
 <span class="header-section-number">C.2.3</span> Estimands</h3>
 <p>We are interested in whether on average, in our population of three people, changing someone’s dress would change their level of job offers. To determine the answer, we will compare the average counterfactual outcome of job opportunities if everyone wore formal dress to the average counterfactual outcome of job opportunities if everyone wore non-formal dress. i.e.&nbsp;We will make the following comparison.</p>
@@ -1452,9 +1461,9 @@ E \left[ \frac{1}{n} \sum_i Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}  \right] &am
 <div class="no-row-height column-margin column-container"><div class="">
 <p><strong>Notes on identification</strong></p>
 <p><strong>A</strong>. In the first line, we use the loyalty of the exposure mapping for <span class="math inline">\(Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}\)</span> to data graph <span class="math inline">\(\mathscr{G}\)</span> to simplify the conditioning statement.</p>
-<p><strong>A</strong>. In the second line we use the definition of counterfactual variable <span class="math inline">\(Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}\)</span> given in <a href="#eq-homogenous-dag">Equation&nbsp;<span>C.5</span></a>.</p>
+<p><strong>A</strong>. In the second line we use the definition of counterfactual variable <span class="math inline">\(Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}\)</span> given in <a href="#eq-homogenous-dag">Equation&nbsp;<span>C.7</span></a>.</p>
 <p><strong>B</strong>. In the third line, we use the fact that given fixed <span class="math inline">\(\mathbf{L}\)</span>, <span class="math inline">\(f_{Y}(U_{Y_i}, L_i, a_i, g_{Y}(\textbf{L}), h_{Y}(\textbf{a}))\)</span> is a function of random variable <span class="math inline">\(U_{Y_i}\)</span>. Since <span class="math inline">\(U_{Y_i}\)</span> is independent of <span class="math inline">\(U_{A_i}\)</span> as well as <span class="math inline">\(U_{A_j}\)</span> for <span class="math inline">\(j \in \mathscr{N}_i\)</span>, <span class="math inline">\(f_{Y}(...) \perp \mathbf{A} | \mathbf{L}\)</span>.</p>
-<p><strong>C</strong>. In the final line, we use the definition of observed variable <span class="math inline">\(Y_i\)</span> given in <a href="#eq-homogenous-dag">Equation&nbsp;<span>C.5</span></a>.</p>
+<p><strong>C</strong>. In the final line, we use the definition of observed variable <span class="math inline">\(Y_i\)</span> given in <a href="#eq-homogenous-dag">Equation&nbsp;<span>C.7</span></a>.</p>
 </div></div><p><span class="math display">\[
 \begin{aligned}
 E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} | \mathbf{L}]
@@ -1492,7 +1501,7 @@ E[ \frac{1}{n} \sum_i  E[Y_i |  L_i , g_Y(\mathbf{L}, i), A_i = a_i, h_Y(\textbf
 <p>We introduce the causal Directed Acyclic Network Graph (causal DANG) - a simple extension of the DAG that allows for the representation of complex causal systems. Like the causal DAG, the causal DANG encodes a non-parametric structural equation model.</p>
 <p><em>Compact graphic representation</em></p>
 <p>DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the “structural part” of the DANG and the latter the “relational part”.</p>
-<p>We represent the structural model defined by <a href="#eq-homogenous-dag">Equation&nbsp;<span>C.5</span></a> and shown in <a href="#fig-homogenous-dag">Figure&nbsp;<span>C.7</span></a>. The structural part of the causal DANG shows the causal structure within individuals. It is a DAG of vector-valued variables <span class="math inline">\(\mathbf{L}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{Y}\)</span> of length equal to the number of people in the sample. This DAG has standard interpretation under d-separation rules. It gives the conditional independencies across these vector-valued random variables. This is an incomplete set of independencies, however, since some of the entries in <span class="math inline">\(\mathbf{A}\)</span> are independent of a given entry in <span class="math inline">\(\mathbf{L}\)</span>, and others are correlated, for instance. The second part of the causal DANG (relational part) shows which pairs of observational units have correlated measures with each other. For instance, in <a href="#fig-causal-dang-instructions">Figure&nbsp;<span>C.9</span></a> we see that individuals 1 and 2 are related.</p>
+<p>We represent the structural model defined by <a href="#eq-homogenous-dag">Equation&nbsp;<span>C.7</span></a> and shown in <a href="#fig-homogenous-dag">Figure&nbsp;<span>C.7</span></a>. The structural part of the causal DANG shows the causal structure within individuals. It is a DAG of vector-valued variables <span class="math inline">\(\mathbf{L}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{Y}\)</span> of length equal to the number of people in the sample. This DAG has standard interpretation under d-separation rules. It gives the conditional independencies across these vector-valued random variables. This is an incomplete set of independencies, however, since some of the entries in <span class="math inline">\(\mathbf{A}\)</span> are independent of a given entry in <span class="math inline">\(\mathbf{L}\)</span>, and others are correlated, for instance. The second part of the causal DANG (relational part) shows which pairs of observational units have correlated measures with each other. For instance, in <a href="#fig-causal-dang-instructions">Figure&nbsp;<span>C.9</span></a> we see that individuals 1 and 2 are related.</p>
 <p>Causal DANGs give us instructions for constructing causal DAGs in the face of causal interference. For instance, according to the causal DANG shown in <a href="#fig-causal-dang-instructions">Figure&nbsp;<span>C.9</span></a>, follow these instructions to draw the DAG in <a href="#fig-interference-dag">Figure&nbsp;<span>C.6</span></a>:</p>
 <ul>
 <li><p>First represent all the entries of <span class="math inline">\(\mathbf{L}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{Y}\)</span>.</p></li>
@@ -1599,7 +1608,7 @@ E[ \frac{1}{n} \sum_i  E[Y_i |  L_i , g_Y(\mathbf{L}, i), A_i = a_i, h_Y(\textbf
 </section></section><section id="model-2" class="level3" data-number="C.3.2"><h3 data-number="C.3.2" class="anchored" data-anchor-id="model-2">
 <span class="header-section-number">C.3.2</span> Model</h3>
 <section id="observational-data" class="level4"><h4 class="anchored" data-anchor-id="observational-data">Observational data</h4>
-<p>The causal DANG shown in <a href="#fig-repeated-observations-dang">Figure&nbsp;<span>C.12</span></a> represents the three week campaign mentioned in Example 3 (we omit the relational part and show only the structural part). Let <span class="math inline">\(\mathbf{T}_s\)</span> be a <span class="math inline">\(3\times1\)</span> vector whose entries <span class="math inline">\(T_{sj}\)</span> are 1 if <em>Neighborhood</em> <span class="math inline">\(j\)</span> is to be vaccinated at time <span class="math inline">\(s\)</span> and <span class="math inline">\(0\)</span> otherwise. <span class="math inline">\(\mathbf{M}_s\)</span> is a <span class="math inline">\(5\times1\)</span> vector whose entries <span class="math inline">\(M_{si}\)</span> indicate whether the <span class="math inline">\(i^{\text{th}}\)</span> person received a campaign message at time <span class="math inline">\(s\)</span> or not. <span class="math inline">\(\mathbf{V}_s\)</span> is a <span class="math inline">\(5\times1\)</span> vector whose entries <span class="math inline">\(V_{si}\)</span> show whether participant <span class="math inline">\(i\)</span> is vaccinated or not at time <span class="math inline">\(s\)</span>. Finally, <span class="math inline">\(\mathbf{R}_s\)</span> is a <span class="math inline">\(3\times1\)</span> vector whose entries <span class="math inline">\(R_{si}\)</span> shows the risk rating of neighborhood <span class="math inline">\(j\)</span> at the beginning of time <span class="math inline">\(s\)</span>. <a href="#eq-placeintervention-dang">Equation&nbsp;<span>C.7</span></a> specifies this model for <em>Person</em> <span class="math inline">\(i\)</span> and <em>Neighborhood</em> <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span>:</p>
+<p>The causal DANG shown in <a href="#fig-repeated-observations-dang">Figure&nbsp;<span>C.12</span></a> represents the three week campaign mentioned in Example 3 (we omit the relational part and show only the structural part). Let <span class="math inline">\(\mathbf{T}_s\)</span> be a <span class="math inline">\(3\times1\)</span> vector whose entries <span class="math inline">\(T_{sj}\)</span> are 1 if <em>Neighborhood</em> <span class="math inline">\(j\)</span> is to be vaccinated at time <span class="math inline">\(s\)</span> and <span class="math inline">\(0\)</span> otherwise. <span class="math inline">\(\mathbf{M}_s\)</span> is a <span class="math inline">\(5\times1\)</span> vector whose entries <span class="math inline">\(M_{si}\)</span> indicate whether the <span class="math inline">\(i^{\text{th}}\)</span> person received a campaign message at time <span class="math inline">\(s\)</span> or not. <span class="math inline">\(\mathbf{V}_s\)</span> is a <span class="math inline">\(5\times1\)</span> vector whose entries <span class="math inline">\(V_{si}\)</span> show whether participant <span class="math inline">\(i\)</span> is vaccinated or not at time <span class="math inline">\(s\)</span>. Finally, <span class="math inline">\(\mathbf{R}_s\)</span> is a <span class="math inline">\(3\times1\)</span> vector whose entries <span class="math inline">\(R_{si}\)</span> shows the risk rating of neighborhood <span class="math inline">\(j\)</span> at the beginning of time <span class="math inline">\(s\)</span>. <a href="#eq-placeintervention-dang">Equation&nbsp;<span>C.9</span></a> specifies this model for <em>Person</em> <span class="math inline">\(i\)</span> and <em>Neighborhood</em> <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span>:</p>
 <div class="cell" data-hash="C__sscan3_causal_interpretation_cache/html/fig-repeated-observations-dang_7c73e017c02950c002ad79da310c82e9">
 <details><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">program_dang</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1621,11 +1630,11 @@ T_{sj} &amp;=  f_{T}(U_{T_{sj}}, R_{s,j}) \\
 M_{si} &amp;=  f_{M} (U_{M_{\{si\}}} , V_{\{s-1,i\}}, M_{\{s-1,i\}}, \mathbf{T}_{\{s,\mathscr{N}_i\}})\\
 V_{si} &amp;=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}, V_{\{s-1,i\}}) \\
 \end{aligned}
-\tag{C.7}\]</span></span></p>
-<p>According to <a href="#eq-placeintervention-dang">Equation&nbsp;<span>C.7</span></a>, <span class="math inline">\(R_{sj}\)</span>, the risk rating for <em>Neighborhood</em> <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span>, is a function of <span class="math inline">\(\mathbf{V}_{s-1}\)</span>, the vaccination status of every individual at time <span class="math inline">\(s-1\)</span>. <span class="math inline">\(T_{sj}\)</span> - an indicator for whether or not <em>Neighborhood</em> <span class="math inline">\(j\)</span> conducted a campaign at time <span class="math inline">\(s\)</span>, is a function of the risk rating for <em>Neighborhood</em> <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span>.</p>
+\tag{C.9}\]</span></span></p>
+<p>According to <a href="#eq-placeintervention-dang">Equation&nbsp;<span>C.9</span></a>, <span class="math inline">\(R_{sj}\)</span>, the risk rating for <em>Neighborhood</em> <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span>, is a function of <span class="math inline">\(\mathbf{V}_{s-1}\)</span>, the vaccination status of every individual at time <span class="math inline">\(s-1\)</span>. <span class="math inline">\(T_{sj}\)</span> - an indicator for whether or not <em>Neighborhood</em> <span class="math inline">\(j\)</span> conducted a campaign at time <span class="math inline">\(s\)</span>, is a function of the risk rating for <em>Neighborhood</em> <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span>.</p>
 <p><span class="math inline">\(M_{si}\)</span>, which indicates whether or not an <em>Person</em> <span class="math inline">\(i\)</span> received a campaign message at time <span class="math inline">\(s\)</span>, is a function of whether or not person <span class="math inline">\(i\)</span> was vaccinated at time <span class="math inline">\(s-1\)</span>, whether they received a campaign message at time <span class="math inline">\(s-1\)</span>, and whether or not one of the neighborhoods they live in or visit conducted a campaign at time <span class="math inline">\(s\)</span>. The vaccination status of individual <span class="math inline">\(i\)</span> at time <span class="math inline">\(s\)</span> is a function of whether or not they received a campaign message at time <span class="math inline">\(s\)</span> and whether or not they were vaccinated at time <span class="math inline">\(s-1\)</span>.</p>
 </section><section id="counterfactual-data-2" class="level4"><h4 class="anchored" data-anchor-id="counterfactual-data-2">Counterfactual data</h4>
-<p>Say we want to understand the impact of a vaccination campaign conducted over three weeks on vaccination status. This would be done by setting <span class="math inline">\(\mathbf{T}_1\)</span> to <span class="math inline">\(\mathbf{t}_1\)</span>, <span class="math inline">\(\mathbf{T}_2\)</span> to <span class="math inline">\(\mathbf{t}_2\)</span>, and <span class="math inline">\(\mathbf{T}_3\)</span> to <span class="math inline">\(\mathbf{t}_3\)</span> and noting the resulting counterfactual vaccination status at the end of week 1 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1)}\)</span>), week 2 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2)}\)</span>), and week 3 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)}\)</span>). This counterfactual model is defined <a href="#eq-placeintervention-swing">Equation&nbsp;<span>C.8</span></a> as shown in shown in <a href="#fig-placeintervention-swing">Figure&nbsp;<span>C.13</span></a>.</p>
+<p>Say we want to understand the impact of a vaccination campaign conducted over three weeks on vaccination status. This would be done by setting <span class="math inline">\(\mathbf{T}_1\)</span> to <span class="math inline">\(\mathbf{t}_1\)</span>, <span class="math inline">\(\mathbf{T}_2\)</span> to <span class="math inline">\(\mathbf{t}_2\)</span>, and <span class="math inline">\(\mathbf{T}_3\)</span> to <span class="math inline">\(\mathbf{t}_3\)</span> and noting the resulting counterfactual vaccination status at the end of week 1 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1)}\)</span>), week 2 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2)}\)</span>), and week 3 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)}\)</span>). This counterfactual model is defined <a href="#eq-placeintervention-swing">Equation&nbsp;<span>C.10</span></a> as shown in shown in <a href="#fig-placeintervention-swing">Figure&nbsp;<span>C.13</span></a>.</p>
 <div class="cell" data-hash="C__sscan3_causal_interpretation_cache/html/fig-placeintervention-swing_0def8aae9b703512d9a2798a29b5f9a8">
 <details><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">program_swing</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.5</span>, nudge_intervention_labels <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1647,7 +1656,7 @@ T_{sj}^{(\bar{\mathbf{t}})} &amp;=  f_{T}(U_{T_{sj}}, R_{s,j}^{(\bar{\mathbf{t}}
 M_{si}^{(\bar{\mathbf{t}})} &amp;=  f_{M} (U_{M_{\{si\}}} , V_{\{s-1,i\}}^{(\bar{\mathbf{t}})}, M_{\{s-1,i\}}^{(\bar{\mathbf{t}})}, \mathbf{t}_{\{s, \mathscr{N}_i\}})\\
 V_{si}^{(\bar{\mathbf{t}})} &amp;=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}^{(\bar{\mathbf{t}})}, V_{\{s-1,i\}}^{(\bar{\mathbf{t}})}) \\
 \end{aligned}
-\tag{C.8}\]</span></span></p>
+\tag{C.10}\]</span></span></p>
 <p>where <span class="math inline">\(\bar{\mathbf{t}}\)</span> is defined as “the history of <span class="math inline">\(\mathbf{t}\)</span>”. i.e.&nbsp;at time 1, <span class="math inline">\(\bar{\mathbf{t}} =\mathbf{t}_1\)</span>. At time 2, <span class="math inline">\(\bar{\mathbf{t}} = [\mathbf{t}_1, \mathbf{t}_2]\)</span>, etc.</p>
 </section></section><section id="estimates" class="level3" data-number="C.3.3"><h3 data-number="C.3.3" class="anchored" data-anchor-id="estimates">
 <span class="header-section-number">C.3.3</span> Estimates</h3>
@@ -1674,7 +1683,7 @@ V_{si}^{(\bar{\mathbf{t}})} =  \frac{V_{si} \mathbf{1}_{x = g(t_{\bar{s},N_i}) }
 <span class="header-section-number">C.4</span> Outbreak control intervention</h2>
 <p>We used data from the MPX NYC study to assess the effectiveness of two approaches to conducting mass vaccination campaigns quickly. MPX NYC is an online survey of about <span class="math inline">\(1300\)</span> individuals that was conducted in 2022 in New York City. Study participants were asked to indicate their home on a map, and were asked to indicate places they had had social contact in a congregate setting. Spatial coordinates were converted into community district identifiers. Community districts spatially partition the city of New York.</p>
 <section id="application-outbreak-control-model-using-mpx-nyc-data" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="application-outbreak-control-model-using-mpx-nyc-data">Application: Outbreak control model using MPX NYC data</h3>
-<p>Under the SSNAC framework, our intervention of interest might not be about setting the value of any particular variable, but setting a policy or a process that produces a set of variables in the causal model. This would be done by changing the structural equations which produce those variables. In the SWING shown in <a href="#fig-edge-intervention-swing">Figure&nbsp;<span>C.14</span></a> and <a href="#eq-edge-intervention-swing">Equation&nbsp;<span>C.9</span></a>, we show an intervention which replaces the function for the risk rating for each community (<span class="math inline">\(\mathbf{R}\)</span>) with the function <span class="math inline">\(h\)</span>. Every variable that is downstream of the first variable created using <span class="math inline">\(h\)</span> is marked with a superscript <span class="math inline">\((h)\)</span> to show that it is partially determined by that function.</p>
+<p>Under the SSNAC framework, our intervention of interest might not be about setting the value of any particular variable, but setting a policy or a process that produces a set of variables in the causal model. This would be done by changing the structural equations which produce those variables. In the SWING shown in <a href="#fig-edge-intervention-swing">Figure&nbsp;<span>C.14</span></a> and <a href="#eq-edge-intervention-swing">Equation&nbsp;<span>C.11</span></a>, we show an intervention which replaces the function for the risk rating for each community (<span class="math inline">\(\mathbf{R}\)</span>) with the function <span class="math inline">\(h\)</span>. Every variable that is downstream of the first variable created using <span class="math inline">\(h\)</span> is marked with a superscript <span class="math inline">\((h)\)</span> to show that it is partially determined by that function.</p>
 <p>We can now ask what the impact of taking policy <span class="math inline">\(h\)</span> would be on the decision whether or not to vaccinate a neighborhood <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span> (<span class="math inline">\(T_{js}\)</span>). We can also ask what the impact of the policy is on the the exposure of participant <span class="math inline">\(i\)</span> to the campaign message at time <span class="math inline">\(s\)</span> (<span class="math inline">\(M_{is}\)</span>).</p>
 <p>Our interest in the MPX NYC project, however, was initially to provide evidence to inform a targeted vaccination campaign, so the main outcomes of interest are the vaccination status of each individual <span class="math inline">\(i\)</span> at time <span class="math inline">\(s\)</span> (<span class="math inline">\(V^{(h)}_{is}\)</span>). We were interested in contrasting two approaches to assigning risk-ratings to community district: the contact-neutralizing approach, and the movement-neutralizing approach.</p>
 <p>Whereas the contact-neutralizing approach ranks community districts by how many individuals are connected to them, the movement-neutralizing approach ranks community districts by how centrally they are connected to other community districts through the exchange of individuals.</p>
@@ -1683,7 +1692,7 @@ V_{si}^{(\bar{\mathbf{t}})} =  \frac{V_{si} \mathbf{1}_{x = g(t_{\bar{s},N_i}) }
 <p>We make the simplifying assumption that only one neighborhood is vaccinated at a time - the top-ranked one. We make the further simplifying assumptions that every person associated with a community district (either through residence or social activity) receives the campaign message when a community district is vaccinated, and that every person who receives a campaign message gets vaccinated. Once an individual is vaccinated, they remain vaccinated.</p>
 </section><section id="model-3" class="level3" data-number="C.4.2"><h3 data-number="C.4.2" class="anchored" data-anchor-id="model-3">
 <span class="header-section-number">C.4.2</span> Model</h3>
-<p>According to the model specified by structural equations <a href="#eq-edge-intervention-swing"><span>C.9</span></a>, no individual <span class="math inline">\(i\)</span> has been vaccinated at time 0, and nobody receives the campaign message. The risk rating for community district <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span> is some function <span class="math inline">\(h\)</span> of the vaccination status at time <span class="math inline">\(s-1\)</span> for each individual who is connected to that community district. An intervention is conducted in community district <span class="math inline">\(j\)</span> as time <span class="math inline">\(s\)</span> if that community district has the highest risk rating. Each individual <span class="math inline">\(i\)</span> is said to have received the campaign message at time <span class="math inline">\(s\)</span> if the intervention was conducted in any of the community districts he is connected to. Finally, we consider individual <span class="math inline">\(i\)</span> vaccinated at time <span class="math inline">\(s\)</span> if they were vaccinated at time <span class="math inline">\(s-1\)</span> or if they received the campaign message in time <span class="math inline">\(s\)</span>. The risk rating is given by the function <span class="math inline">\(h\)</span>.</p>
+<p>According to the model specified by structural equations <a href="#eq-edge-intervention-swing"><span>C.11</span></a>, no individual <span class="math inline">\(i\)</span> has been vaccinated at time 0, and nobody receives the campaign message. The risk rating for community district <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span> is some function <span class="math inline">\(h\)</span> of the vaccination status at time <span class="math inline">\(s-1\)</span> for each individual who is connected to that community district. An intervention is conducted in community district <span class="math inline">\(j\)</span> as time <span class="math inline">\(s\)</span> if that community district has the highest risk rating. Each individual <span class="math inline">\(i\)</span> is said to have received the campaign message at time <span class="math inline">\(s\)</span> if the intervention was conducted in any of the community districts he is connected to. Finally, we consider individual <span class="math inline">\(i\)</span> vaccinated at time <span class="math inline">\(s\)</span> if they were vaccinated at time <span class="math inline">\(s-1\)</span> or if they received the campaign message in time <span class="math inline">\(s\)</span>. The risk rating is given by the function <span class="math inline">\(h\)</span>.</p>
 <div class="cell" data-hash="C__sscan3_causal_interpretation_cache/html/fig-edge-intervention-swing_6db5b035fcebc6e31bde1773b5873fc8">
 <details><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">hypothetical_intervention_swing</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.5</span>, nudge_intervention_labels <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1705,7 +1714,7 @@ T_{sj}^{(h)} &amp;=  \begin{cases} 1 &amp; R_{sj}^{(h)} = max_k R_{sk}^{(h)} \\ 
 M_{si}^{(h)} &amp;=  \begin{cases} 1 &amp; \mathbf{T}_{s\mathscr{N}_i}^{(h)} \neq \mathbf{0}  \\ 0 &amp; \text{otherwise} \end{cases} \\
 V_{si}^{(h)} &amp;=  \begin{cases} 1 &amp; M_{si}^{(h)} = 1 \text{ or } V_{s-1,i}^{(h)} = 1\\ 0 &amp; \text{otherwise} \end{cases} \\
 \end{aligned}
-\tag{C.9}\]</span></span></p>
+\tag{C.11}\]</span></span></p>
 <p>Define <span class="math inline">\(\psi(i, j)\)</span> as an adjacency function - an indicator function that equals to <span class="math inline">\(1\)</span> if Person <span class="math inline">\(i\)</span> lives in or visits neighborhood <span class="math inline">\(j\)</span> and <span class="math inline">\(0\)</span> otherwise. Let <span class="math inline">\(\mathscr{N}_P\)</span> be the indices of all person nodes and <span class="math inline">\(\mathscr{N}_N\)</span> be a set of indices for neighborhood nodes. Under the contact-neutralizing approach</p>
 <p><span class="math display">\[
 h_{sj}(\mathbf{V}_{s-1}) = \sum_{ i \in \mathscr{N}_P} (1 -V_{(s-1), i}) \times \psi(i, j)   
