@@ -13,13 +13,17 @@ For instance, consider a hypothetical intervention where every person in the Uni
 
 -   estimating those quantities using data we have or can collect 
 
-**Independence and homogeneity**
+**Independence**
 
 A strong assumption made almost universally by practitioners of classic causal inference is that of independence between observational units or groups of observational units. This assumption is usually made with the goal of simplifying the mathematics involved in estimating quantities from data, but it often has profound implications for how we think about the causal process under study.
 
-In our opening example, the independence assumption holds that one person's access to healthcare does not affect any other person's diabetes status. It would imply that the diabetes status for a married man who does not know how to cook, for instance, would not at all be affected by improvements in health literacy experienced by his wife who cooks for the household. The assumption of independence runs counter to our intuitions about social life. Humans are networked - our lives are defined by our relationships with others.
+In our opening example, the independence assumption holds that one person's access to healthcare does not affect any other person's diabetes status. It would imply that the diabetes status for a married man who does not know how to cook, for instance, would not at all be affected by improvements in health literacy experienced by his wife who cooks for the household. 
 
-Along with the independence assumption, practitioners of classical causal inference also make assumptions about the homogeneity of the causal process under study. An example to clarify: Consider two people, Tumi and Thabo, who each toss the same coin once at time 1 and again at time 2. There are several ways of parsing this situation into "experiment" and "repetition". We could say that we are conducting:
+The assumption of independence runs counter to our intuitions about social life. Humans are deeply networked - our lives are defined by our relationships with one another. 
+
+**Homogeneity**
+
+We also make assumptions about the sameness (or homogeneity) of our observations. Consider two people, Tumi and Thabo, who each toss the same coin once at time 1 and again at time 2. There are several ways of parsing this situation into "experiment" and "repetition". We could say that we are conducting:
 
 -   one experiment called "coin toss" and repeating it four times
 
@@ -33,7 +37,7 @@ The choice between these interpretations turns on the experimenters prior belief
 
 **Interdependence**
 
-One consideration researchers do not often make is whether one person's coin toss is correlated with the other's. Consider the experiment "Thabo tosses a coin, then Tumi tosses the coin, then Thabo tossess the coin, then Tumi tosses the coin". Whereas in the above listing, by virtue of calling them separate experiments, we implicitly assumed that each coin toss was self-contained, in this latest iteration, we  accommodate the possibility that the results of the coin tosses might be correlated. 
+A consideration researchers do not often make is whether one person's coin toss is correlated with the other's. Consider the experiment "Thabo tosses a coin, then Tumi tosses the coin, then Thabo tossess the coin, then Tumi tosses the coin". Whereas in the above listing, by virtue of calling them separate experiments, we implicitly assumed that each coin toss was self-contained, in this latest iteration, we  accommodate the possibility that the results of the coin tosses might be correlated. 
 
 We can quantitatively assess this possibility by repeating this sequence of coin tosses over and over, using that data to calculate a correlation coefficient between the outcomes of Thabo and Tumi's coin tosses. Without stating the experiment as this sequence, however, we have no framework with which to ask whether Thabo and Tumi's coin tosses are causally related.
 
@@ -46,9 +50,9 @@ Our goal in this appendix and project is to offer ideas and tools for causal inf
 
 In crude terms, our approach involves moving to a framework where, as a rule, we consider Thabo and Tumi's coin tosses one experiment, rather than break it up into four. i.e. Rather than define a scalar random variable to represent a measure made on $n$ individuals, we will define a vector-valued random variable of length $n$ and assume that some of the entries in that vector are correlated as a result of being part of the same causal structure. 
 
-But why would a researcher want to do that when our tools for statistical modelling require as many repetitions as possible for valid inferences? How can we quantify uncertainty when we always have a sample size of 1? To answer the first question - we take this approach because it allows us to investigate and quantify causal interference. Regarding the second, we advocate a shift in perspective: we re-frame the task of statistical inference from that of learning from a growing collection of identically distributed random vectors, to that of learning from a growing random vector whose entries are related by a causal structure that is identical across groups of entries. 
+But why do that when our tools for statistical modelling require as many repetitions as possible for valid inferences? How can we quantify uncertainty when we always have a sample size of 1? We take this approach because it allows us to investigate and quantify causal interference, rather than assuming it away. SSNAC advocates a shift in perspective: we re-frame the task of statistical inference from that of learning from a growing collection of identically distributed random vectors, to that of learning from a growing random vector whose entries are related by a causal structure that is homogeneous across groups of entries. 
 
-We avail ourselves of asymptotic theory by making the assumption of no-spillover between observations, which is a weaker version of the independence between observational units assumption. We further assume that the causal relationships between and within individuals are homogeneous in some way, allowing our estimates to benefit from having more observational units, even if they collectively comprise one realization of the statistical model. 
+We avail ourselves of asymptotic theory by making the assumption of no-spillover between observations, which is a weaker version of the independence between observational units assumption. We further assume that the causal relationships between and within individuals are homogeneous in some way, allowing our estimates to benefit from having more observational units, even if they collectively comprise one realization of the statistical model. We call causal relationships that play out within observational units "structural" relationships, and those that play out across units as "relational" relationships. 
 
 In the sections that follow, we describe classic causal inference, social network analysis with causal interpretation, and the SSNAC framework, each time discussing the assumptions, causal model, causal estimands, and illustrating a causal identification strategy for the framework. Finally, we describe the MPX NYC outbreak response analysis presented in the main report using the SSNAC framework. 
 
