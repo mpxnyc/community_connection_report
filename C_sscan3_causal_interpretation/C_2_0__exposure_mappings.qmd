@@ -1,51 +1,47 @@
 
 
-### Causal interference and exposure mappings {.unnumbered}
+### Modelling interference using exposure mappings {.unnumbered}
 
-Say we have a non-parametric structural equation model with outcome measure $\mathbf{Y}$ preceded by exposure variables $\mathbf{X}_t$. $f_{Y_i}$ is the structural equation for $Y_i$, and $U_{Y_i}$ the error term for that equation. 
-
-
-##### Definition 1: Exposure mapping
-
-We define the "exposure mapping for $Y_i$" as the function 
+Say we have a non-parametric structural equation model with measures $\mathbf{Y}, \mathbf{X}_t \in \{0,1\}^n$ with $t \in [1,K]$. $f_{Y_i}$ is the structural equation for $Y_i$, and $U_{Y_i}$ the error term for that equation. We define the graph $\mathscr{G}(\mathscr{N}, \psi)$ as an ordered pair whose first entry is a set containing $n$ nodes, each representing an observational unit in the study. The second entry is an adjacency function $\psi(i,j) \in \mathbf{R}^+_0$ which gives the weight between nodes $i$ and $j$. Weights are positive real numbers when the nodes are connected in $\mathscr{G}$ and zero otherwise. We further define the "network exposure units" for node $i$ as
 
 $$
-g_i: \prod_{t=1}^K  \{0,1\}^{n} \rightarrow \mathbf{R}^{2K}
+\mathscr{N_i} = \{j \in \mathscr{N}: \psi(i, j) > 0\}
 $$ 
 
-such that
+
+$\mathbf{W}_i$ is the "network weights" for node $i$. It is a vector of length $|\mathscr{N}_i|$ whose $j^{th}$ entry is $\psi(i,j)$. $X_i$ is the $i^{th}$ entry of vector $\mathbf{X}$ and $\mathbf{X}_{\mathscr{N_i}}$ is the sub-vector of $\mathbf{X}$ which contains entries related to person $i$'s network exposure units. Where the original vector already has a subscript, we append onto that subscript $i$ and $\mathscr{N_i}$, respectively. For instance, $X_{ti}$ is the $i^{th}$ entry of $\mathbf{X}_t$ and $\mathbf{X}_{t\mathscr{N_i}}$ is the sub-vector relating to node $i$'s network exposure units. $\mathbf{M}$ is a permutation matrix -- a square matrix whose row and column margins all equal 1, and whose entries are either zero or one. Pre-multiplying a vector with a conformable permutation matrix permutes the order of the entries in the vector.
+
+
+
+
+##### **Definition 1: Exposure mapping**
+
+We define the "exposure mapping for $Y_i$" as a function $g_i \in \mathbf{R}^{2K}$ such that:
 
 $$
 Y_i = f_{Y_i}(g_i(\mathbf{X}_1,  ..., \mathbf{X}_K), U_{Y_i})
 $$
 
 
-##### Definition 2: Separability
+##### **Definition 2: Separability**
 
-We say exposure mapping $g_i$ is separable if it can be re-written
-
-
-$$
-g_i(\mathbf{X}_{1}, ..., \mathbf{X}_{K}) = [X_{1i}, ..., X_{Ki},    g_{1i}(\mathbf{X}_{1}), ...,   g_{Ki}(\mathbf{X}_{K})]^T
-$$
-
-
-
-where
+We say exposure mapping $g_i$ is separable if
 
 
 $$
-g_{ti}: \{0,1\}^{n}  \rightarrow \mathbf{R}
+g_i(\mathbf{X}_{1}, ..., \mathbf{X}_{K}) = [g_0,    g_{1i}(\mathbf{X}_{1}), ...,   g_{Ki}(\mathbf{X}_{K})]^T
 $$
 
-We call the functions $g_{ti}$ component functions of exposure mapping $g_i$.
+
+
+where $g_0 = [X_{1i}, ..., X_{Ki}]^T$ and $g_{ti} \in \mathbf{R}$. We call the functions $g_{ti}$ component functions of exposure mapping $g_i$.
 
 
 
 
-##### Definition 3: Loyalty
+##### **Definition 3: Loyalty**
 
-We say a component function $g_{ti}$  is loyal to graph $\mathscr{G}$ if for any $\mathbf{X}_t,\mathbf{X}'_t \in \{0,1\}^n$
+We say a component function $g_{ti}$  is loyal to graph $\mathscr{G}$ if for $\mathbf{X}_t,\mathbf{X}'_t \in \{0,1\}^n$
 
 
 $$
@@ -57,30 +53,32 @@ g_{ti}(\mathbf{X}_t) = g_{ti}( \mathbf{X'}_t)
 $$
 
 
-##### Definition 4: Positional invariance
+##### **Definition 4a: Positional invariance**
 
-We say component functions $g_{ti}$ are positionally invariant if for any $i,j \in \mathscr{N}$, $\mathbf{X},\mathbf{X}' \in \mathbf{R}^n$ and conformable permutation matrix $\mathbf{M}$:
+We say component functions $g_{ti}$ are positionally invariant if for $i,j \in \mathscr{N}$, $\mathbf{X},\mathbf{X}' \in \mathbf{R}^n$ and conformable permutation matrix $\mathbf{M}$:
 
 
 
 $$
 \begin{equation}
-\mathbf{X}_{\mathscr{N}_i} = \mathbf{M} \mathbf{X'}_{\mathscr{N}_j} \text{ and } \mathbf{W}_i =  \mathbf{M} \mathbf{W}_j\\
+\mathbf{X}_{\mathscr{N}_i} = \mathbf{M} \mathbf{X'}_{\mathscr{N}_j} \text{ and } \mathbf{W}_{i\mathscr{N}_i} =  \mathbf{M} \mathbf{W}_{j\mathscr{N}_j}\\
 \implies \\
 g_{ti}(\mathbf{X}) = g_{tj}(\mathbf{X'}) 
 \end{equation}
 $$
 
-where
+
+ 
+
+##### **Definition 4b: Network exposure mapping**
+
+If functions $g_{ti}$ is positionally invariant with respect to $\mathscr{G}$ we say it is a "network exposure mapping for $\mathbf{Y}$ with respect to $\mathbf{X}_t$ in $\mathscr{G}$". The value of the function is called the "network exposure value for $Y_i$ with respect to $\mathbf{X}_t$ in $\mathscr{G}$". Furthermore,
 
 $$
 g_{ti}(\mathbf{X}) = g_{t}(\mathbf{X}, \mathbf{W}_i)
 $$
 
-If $g_{ti}$ is positionally invariant with respect to $\mathscr{G}$ we say it is a "network exposure mapping for $\mathbf{Y}$ with respect to $\mathbf{X}_t$ in $\mathscr{G}$". The value of the function is called the "network exposure value for $Y_i$ with respect to $\mathbf{X}_t$ in $\mathscr{G}$". Network exposure mappings can be expressed:
-
-
-##### Definition 5: Boundedness
+##### **Definition 5: Boundedness**
 
 We say that a network exposure mapping $g_{t}$ is bounded if all possible network exposure values are contained by a finite set $\mathbf{D}$ 
 

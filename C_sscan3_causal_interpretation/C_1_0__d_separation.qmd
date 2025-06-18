@@ -2,73 +2,19 @@
 targets::tar_source("../R_functions")
 ```
 
-### D-seperation {.unnumbered}
-
-**D-separation** is a set of rules for translating DAGs into conditional independence statements. A pair of nodes is d-separated if all the paths linking them are closed or if there is no path that links them. 
-
-A **path** is a sequence of nodes that starts with a given origin node and ends with a terminal node. Consecutive entries in the sequence are connected in the DAG. A path of length one is open by definition. A path of length two or more is open if all its triangles are open.
-
-```{r}
-#| fig-width: 9
-
-fig_fork <- make_dag_subgraph("fork") |>
-                  plot_swig(node_radius = 0.2)  +
-                  scale_fill_mpxnyc(option = "light") +
-                  theme_mpxnyc_blank()
-
-fig_spoon <- make_dag_subgraph("spoon") |>
-                  plot_swig(node_radius = 0.2)  +
-                  scale_fill_mpxnyc(option = "light") +
-                  theme_mpxnyc_blank()
-
-fig_chopstick <-  make_dag_subgraph("chopstick") |>
-                  plot_swig(node_radius = 0.2)  +
-                  scale_fill_mpxnyc(option = "light") +
-                  theme_mpxnyc_blank()
-
-cowplot::plot_grid(fig_fork, fig_spoon, fig_chopstick, rel_widths = c(1.5,1.5,2), nrow = 1)
-
-```
-
-A **triangle** is a sub-sequence of a path which contains three consecutive nodes from the path. A canonical triangle is one in which we do not condition on the apex node. A conditional triangle is one in which we do condition.
-
-- A **fork** is a triangle whose apex variable has two outgoing edges. A canonical fork is open and a conditional fork is closed. The apex variable of a fork is commonly referred to as a "confounder".
-
- - A **spoon** is a triangle whose apex variable has two incoming edges. A canonical spoon is closed and a conditional spoon is open. The apex variable of a fork is commonly referred to as a "collider".
-
-- A **chopstick** is a triangle whose apex variable has one incoming edge and one outgoing edge. A canonical chopstick is open and a conditional chopstick is closed. The apex variable of a chopstick is commonly referred to as a "mediator".
-
-To summarize, canonical forks and chopsticks are open and conditional forks and chopsticks are closed. By contrast, canonical spoons are closed and conditional spoons are open. A path is open if it is of length one or if all the triangles in the path are open. If at least one triangle in the path is closed, the path is closed. Two nodes in a DAG are conditionally d-separated if all the paths between them are closed after conditioning on the adjustment set. Two variables shown on the DAG are conditionally independent if they are conditionally d-separated.
-
-```{r}
-
-data.frame(
-                            triangle    = c("Fork", "Spoon", "Chopstick"),
-                            description = c(
-                                            "Apex is a common cause",
-                                            "Apex is a common effect",
-                                            "Apex is a mediator"
-                                          ),
-                            canonical  = c(
-                                          "Not d-separated",
-                                          "D-separated",
-                                          "Not d-separated"
-                                          ),
-                            conditional = c(
-                                          "D-separated",
-                                          "Not d-separated",
-                                          "D-separated"
-                                          )
-                          ) |>
-                    gt::gt()  |>
-  gt::cols_label(
-      triangle = "Triangle",
-      canonical = "Canonical",
-      conditional = "Conditional",
-      description = "Description"
-    ) 
 
 
 
+[^longnote]: **D-separation** is a set of rules for translating DAGs into conditional independence statements. A pair of nodes is d-separated if all the paths linking them are closed or if there is no path that links them. 
 
-```
+    A **path** is a sequence of nodes that starts with a given origin node and ends with a terminal node. Consecutive entries in the sequence are connected in the DAG. A path of length one is open by definition. A path of length two or more is open if all its triangles are open.
+
+    A **triangle** is a sub-sequence of a path which contains three consecutive nodes from the path. A canonical triangle is one in which we do not condition on the apex node. A conditional triangle is one in which we do condition.
+
+    A **fork** is a triangle whose apex variable has two outgoing edges. A canonical fork is open and a conditional fork is closed. The apex variable of a fork is commonly referred to as a "confounder".
+
+    A **spoon** is a triangle whose apex variable has two incoming edges. A canonical spoon is closed and a conditional spoon is open. The apex variable of a fork is commonly referred to as a "collider".
+
+    A **chopstick** is a triangle whose apex variable has one incoming edge and one outgoing edge. A canonical chopstick is open and a conditional chopstick is closed. The apex variable of a chopstick is commonly referred to as a "mediator".
+
+
