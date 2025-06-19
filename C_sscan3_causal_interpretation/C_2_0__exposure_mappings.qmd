@@ -2,14 +2,14 @@
 
 ### Modelling interference using exposure mappings {.unnumbered}
 
-Say we have a non-parametric structural equation model with measures $\mathbf{Y}, \mathbf{X}_t \in \{0,1\}^n$ with $t \in [1,K]$. $f_{Y_i}$ is the structural equation for $Y_i$, and $U_{Y_i}$ the error term for that equation. We define the graph $\mathscr{G}(\mathscr{N}, \psi)$ as an ordered pair whose first entry is a set containing $n$ nodes, each representing an observational unit in the study. The second entry is an adjacency function $\psi(i,j) \in \mathbf{R}^+_0$ which gives the weight between nodes $i$ and $j$. Weights are positive real numbers when the nodes are connected in $\mathscr{G}$ and zero otherwise. We further define the "network exposure units" for node $i$ as
+Say we have a non-parametric structural equation model with measures $\mathbf{Y}, \mathbf{X}_t \in \{0,1\}^n$ with $t \in [1,K]$. $f_{Y_i}$ is the structural equation for $Y_i$, and $U_{Y_i}$ the error term for that equation. We define the graph $\mathscr{G}(\mathscr{N}, \psi)$ as an ordered pair whose first entry is a set containing $n$ nodes, each representing an observational unit in the study. The second entry is an adjacency function $\psi(i,j)$ which gives the weight between nodes $i$ and $j$. Weights are positive real numbers when the nodes are connected in $\mathscr{G}$ and zero otherwise. We further define the "network exposure units" for node $i$ as
 
 $$
 \mathscr{N_i} = \{j \in \mathscr{N}: \psi(i, j) > 0\}
 $$ 
 
 
-$\mathbf{W}_i$ is the "network weights" for node $i$. It is a vector of length $|\mathscr{N}_i|$ whose $j^{th}$ entry is $\psi(i,j)$. $X_i$ is the $i^{th}$ entry of vector $\mathbf{X}$ and $\mathbf{X}_{\mathscr{N_i}}$ is the sub-vector of $\mathbf{X}$ which contains entries related to person $i$'s network exposure units. Where the original vector already has a subscript, we append onto that subscript $i$ and $\mathscr{N_i}$, respectively. For instance, $X_{ti}$ is the $i^{th}$ entry of $\mathbf{X}_t$ and $\mathbf{X}_{t\mathscr{N_i}}$ is the sub-vector relating to node $i$'s network exposure units. $\mathbf{M}$ is a permutation matrix -- a square matrix whose row and column margins all equal 1, and whose entries are either zero or one. Pre-multiplying a vector with a conformable permutation matrix permutes the order of the entries in the vector.
+$\Psi_i \in \mathbf{R}^n$ is a vector whose $j^{th}$ entry is $\psi(i,j)$. $X_i$ is the $i^{th}$ entry of vector $\mathbf{X}$ and $\mathbf{X}_{\mathscr{N_i}}$ is the sub-vector of $\mathbf{X}$ which contains entries related to person $i$'s network exposure units. Where the original vector already has a subscript, we append onto that subscript $i$ and $\mathscr{N_i}$, respectively. For instance, $X_{ti}$ is the $i^{th}$ entry of $\mathbf{X}_t$ and $\mathbf{X}_{t\mathscr{N_i}}$ is the sub-vector relating to node $i$'s network exposure units. $\mathbf{M}$ is a permutation matrix -- a square matrix whose row and column margins all equal 1, and whose entries are either zero or one. Pre-multiplying a vector with a conformable permutation matrix permutes the order of the entries in the vector.
 
 
 
@@ -61,7 +61,7 @@ We say component functions $g_{ti}$ are positionally invariant if for $i,j \in \
 
 $$
 \begin{equation}
-\mathbf{X}_{\mathscr{N}_i} = \mathbf{M} \mathbf{X'}_{\mathscr{N}_j} \text{ and } \mathbf{W}_{i\mathscr{N}_i} =  \mathbf{M} \mathbf{W}_{j\mathscr{N}_j}\\
+\mathbf{X}_{\mathscr{N}_i} = \mathbf{M} \mathbf{X'}_{\mathscr{N}_j} \text{ and } \Psi_{i\mathscr{N}_i} =  \mathbf{M} \Psi_{j\mathscr{N}_j}\\
 \implies \\
 g_{ti}(\mathbf{X}) = g_{tj}(\mathbf{X'}) 
 \end{equation}
@@ -75,18 +75,18 @@ $$
 If functions $g_{ti}$ is positionally invariant with respect to $\mathscr{G}$ we say it is a "network exposure mapping for $\mathbf{Y}$ with respect to $\mathbf{X}_t$ in $\mathscr{G}$". The value of the function is called the "network exposure value for $Y_i$ with respect to $\mathbf{X}_t$ in $\mathscr{G}$". Furthermore,
 
 $$
-g_{ti}(\mathbf{X}) = g_{t}(\mathbf{X}, \mathbf{W}_i)
+g_{ti}(\mathbf{X}) = g_{t}(\mathbf{X}, \Psi_i)
 $$
 
 ##### **Definition 5: Boundedness**
 
-We say that a network exposure mapping $g_{t}$ is bounded if all possible network exposure values are contained by a finite set $\mathbf{D}$ 
+We say that a network exposure mapping $g_{t}$ is bounded if for all $\mathbf{X}, \mathbf{W} \in \{0,1\}^n$ all possible network exposure values are contained by a finite set $\mathbf{D}$ 
 
 
 
 
 $$
-g_t(\mathbf{X})  \in \mathbf{D} 
+g_t(\mathbf{X}, \mathbf{W})  \in \mathbf{D} 
 $$
 
 and $|\mathbf{D}| < c$ for some constant $c$, where $c$ is not a function of the number of interconnected units in graph $\mathscr{G}$. 
