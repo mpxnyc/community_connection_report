@@ -10,15 +10,15 @@ We introduce the causal Directed Acyclic Network Graph (causal DANG) - a simple 
 
 *Compact graphic representation*
 
-DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the "structural part" of the DANG and the latter the "relational part".
+DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the "structural part" of the DANG and the latter the "relational part."
 
 We represent the structural model defined by @eq-homogenous-dag and shown in @fig-homogenous-dag. The structural part of the causal DANG shows the causal structure within individuals. It is a DAG of vector-valued variables $\mathbf{L}$, $\mathbf{A}$, and $\mathbf{Y}$ of length equal to the number of people in the sample. This DAG has standard interpretation under d-separation rules. It gives the conditional independencies across these vector-valued random variables. This is an incomplete set of independencies, however, since some of the entries in $\mathbf{A}$ are independent of a given entry in $\mathbf{L}$, and others are correlated, for instance. The second part of the causal DANG (relational part) shows which pairs of observational units have correlated measures with each other. For instance, in @fig-causal-dang-instructions we see that individuals 1 and 2 are related.
 
 Causal DANGs give us instructions for constructing causal DAGs in the face of causal interference. For instance, according to the causal DANG shown in @fig-causal-dang-instructions, follow these instructions to draw the DAG in @fig-interference-dag:
 
--   First represent all the entries of $\mathbf{L}$, $\mathbf{A}$, and $\mathbf{Y}$.
+-   First, represent all the entries of $\mathbf{L}$, $\mathbf{A}$, and $\mathbf{Y}$.
 
--   Then for each individual $i\in \{1,2,3\}$, connect $L_i$ to $A_i$, $L_i$ to $Y_i$, and $A_i$ to $Y_i$.
+-   Then, for each individual $i\in \{1,2,3\}$, connect $L_i$ to $A_i$, $L_i$ to $Y_i$, and $A_i$ to $Y_i$.
 
 -   Finally, for the connected pair $1\sim 2$, connect $L_1$ to $A_2$ and $L_2$ to $A_1$; connect $L_1$ to $Y_2$, and $L_2$ to $Y_1$, and connect $A_1$ to $Y_2$ and $A_2$ to $Y_1$.
 
@@ -87,7 +87,7 @@ cowplot::plot_grid(figure, legend, nrow = 1, rel_widths = c(4,1))
 
 We introduce the Single World Intervention Network Graph (SWING) - a simple extension of the SWIG that allows for the representation of the counterfactual outcomes of interventions in complex causal systems.
 
-The SWING has two parts - a structural part and a relational part. Like the causal DANG, the SWING represents vector-valued random variables (rather than scalars) as nodes. Like the SWIG, the SWING splits the nodes that are to be intervened upon by the experimenter. @fig-example-swig-structural shows the counterfactual distribution of the variables in the model under an intervention setting $\mathbf{T}$ to the value $\mathbf{t}$.
+The SWING has two parts: a structural part and a relational part. Like the causal DANG, the SWING represents vector-valued random variables (rather than scalars) as nodes. Like the SWIG, the SWING splits the nodes that are to be intervened upon by the experimenter. @fig-example-swig-structural shows the counterfactual distribution of the variables in the model under an intervention setting $\mathbf{T}$ to the value $\mathbf{t}$.
 
 ```{r}
 #| fig-height: 6

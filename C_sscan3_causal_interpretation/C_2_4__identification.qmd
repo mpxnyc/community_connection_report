@@ -1,6 +1,6 @@
 ### Identification
 
-We can start by using the law of iterated expectations.
+We can start by using the law of iterated expectations:
 
 $$
 \begin{aligned}
@@ -14,13 +14,13 @@ Then we can evaluate the inner expectation as follows:
 ::: aside
 **Notes on identification** 
 
-**A**. In the first line, we use the loyalty of the exposure mapping for $Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}$ to data graph $\mathscr{G}$ to simplify the conditioning statement.
+**A**. In the first line, we use the loyalty of the network exposure mapping for $Y_i^{(...)}$ with respect to $\mathbf{L}$ in $\mathscr{G}$ to simplify the conditioning statement.
 
-**A**. In the second line we use the definition of counterfactual variable $Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}$ given in @eq-homogenous-dag. 
+**B**. In the second line we use the definition of counterfactual variable $Y_i^{(..)}$ given in @eq-homogenous-interference-swig. 
 
-**B**. In the third line, we use the fact that given fixed $\mathbf{L}$, $f_{Y}(U_{Y_i}, L_i, a_i, g_{Y}(\textbf{L}), h_{Y}(\textbf{a}))$ is a function of random variable $U_{Y_i}$. Since $U_{Y_i}$ is independent of $U_{A_i}$ as well as $U_{A_j}$ for $j \in \mathscr{N}_i$, $f_{Y}(...) \perp \mathbf{A} | \mathbf{L}$. 
+**C**. In the third line, we use the fact that given fixed $\mathbf{L}$, $f_{Y}$ is a function of random variable $U_{Y_i}$. Since $U_{Y_i}$ is independent of $U_{A_i}$ as well as $U_{A_j}$ for $j \in \mathscr{N}_i$, $f_{Y}(...) \perp \mathbf{A} | \mathbf{L}$. 
 
-**C**. In the final line, we use the definition of observed variable $Y_i$ given in @eq-homogenous-dag.
+**D**. In the final line, we use the definition of observed variable $Y_i$ given in @eq-homogenous-dag.
 :::
 
 
@@ -34,7 +34,7 @@ $$
 \end{aligned}
 $$
 
-We are left with this functional
+We are left with this functional:
 
 $$
 E[ \frac{1}{n} \sum_i  E[Y_i |  L_i , g_Y(\mathbf{L}, \Psi_i), A_i = a_i, h_Y(\textbf{A}, \Psi_i) = h_Y(\textbf{a}, \Psi_i) ]]

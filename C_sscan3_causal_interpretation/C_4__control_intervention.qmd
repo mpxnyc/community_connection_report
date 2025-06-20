@@ -2,15 +2,15 @@
 
 ## Outbreak control intervention {#sec-control-intervention}
 
-We used data from the MPX NYC study to assess the effectiveness of two approaches to conducting mass vaccination campaigns quickly. MPX NYC is an online survey of about $1300$ individuals that was conducted in 2022 in New York City. Study participants were asked to indicate their home on a map, and were asked to indicate places they had had social contact in a congregate setting. Spatial coordinates were converted into community district identifiers. Community districts spatially partition the city of New York.
+We used data from RESPND-MI to assess the effectiveness of two approaches to conducting mass vaccination campaigns quickly. MPX NYC is an online survey of about 1300 individuals that was conducted in 2022 in New York City. Study participants were asked to indicate their home on a map and were asked to indicate places they had had social contact in a congregate setting. Spatial coordinates were converted into community district identifiers. Community districts spatially partition the city of New York.
 
-### Application: Outbreak control model using MPX NYC data {.unnumbered}
+### Application: Outbreak control model using RESPND-MI data {.unnumbered}
 
 Under the SSNAC framework, our intervention of interest might not be about setting the value of any particular variable, but setting a policy or a process that produces a set of variables in the causal model. This would be done by changing the structural equations which produce those variables. In the SWING shown in @fig-edge-intervention-swing and @eq-edge-intervention-swing, we show an intervention which replaces the function for the risk rating for each community ($\mathbf{R}$) with the function $h$. Every variable that is downstream of the first variable created using $h$ is marked with a superscript $(h)$ to show that it is partially determined by that function.
 
 We can now ask what the impact of taking policy $h$ would be on the decision whether or not to vaccinate a neighborhood $j$ at time $s$ ($T_{js}$). We can also ask what the impact of the policy is on the the exposure of participant $i$ to the campaign message at time $s$ ($M_{is}$). 
 
-Our interest in the MPX NYC project, however, was initially to provide evidence to inform a targeted vaccination campaign, so the main outcomes of interest are the vaccination status of each individual $i$ at time $s$ ($V^{(h)}_{is}$). We were interested in contrasting two approaches to assigning risk-ratings to community district: the contact-neutralizing approach, and the movement-neutralizing approach. 
+Our interest in RESPND-MI, however, was initially to provide evidence to inform a targeted vaccination campaign, so the main outcomes of interest are the vaccination status of each individual $i$ at time $s$ ($V^{(h)}_{is}$). We were interested in contrasting two approaches to assigning risk-ratings to community districts: the contact-neutralizing approach and the movement-neutralizing approach.
 
 Whereas the contact-neutralizing approach ranks community districts by how many individuals are connected to them, the movement-neutralizing approach ranks community districts by how centrally they are connected to other community districts through the exchange of individuals. 
 
@@ -27,7 +27,8 @@ According to the model specified by structural equations [-@eq-edge-intervention
 
 ```{r}
 #| label: fig-edge-intervention-swing
-#| fig-cap: "SWING for Week 1-3 for MPX NYC Application of SSNAC framework"
+#| fig-cap: "SWING for Week 1-3 in RESPND-MI Application of SSNAC framework"
+
 
 hypothetical_intervention_swing() |>
   plot_swig(node_radius = 0.5, nudge_intervention_labels = 0.2) +
@@ -51,13 +52,13 @@ V_{si}^{(h)} &=  \begin{cases} 1 & M_{si}^{(h)} = 1 \text{ or } V_{s-1,i}^{(h)} 
 $$ {#eq-edge-intervention-swing}
 
 
-Define $\psi(i, j)$ as an adjacency function - an indicator function that equals to $1$ if Person $i$ lives in or visits neighborhood $j$ and $0$ otherwise. Let $\mathscr{N}_P$ be the indices of all person nodes and $\mathscr{N}_N$ be a set of indices for neighborhood nodes. Under the contact-neutralizing approach
+Define $\psi(i, j)$ as an adjacency function - an indicator function that equals to $1$ if Person $i$ lives in or visits neighborhood $j$ and $0$ otherwise. Let $\mathscr{N}_P$ be the indices of all person nodes and $\mathscr{N}_N$ be a set of indices for neighborhood nodes. Under the contact-neutralizing approach:
 
 $$
 h_{sj}(\mathbf{V}_{s-1}) = \sum_{ i \in \mathscr{N}_P} (1 -V_{(s-1), i}) \times \psi(i, j)   
 $$
 
-and under the movement-neutralizing approach
+and under the movement-neutralizing approach:
 
 $$
 h_{sj}(\mathbf{V}_{s-1}) =   \sum_{ i \in \mathscr{N}_P} (1 -V_{(s-1), i}) \times \psi(i, j) \sum_{ k \in \mathscr{N}_N} \psi(i, k) 
@@ -67,13 +68,13 @@ $$
 
 ##### Spatial efficiency
 
-Intervention coverage for the $s^{th}$ community district to be immunized, is defined
+Intervention coverage for the $s^{th}$ community district to be immunized, is defined:
 
 $$
 C_s^{(h)} = \frac{1}{|\mathscr{N}_p|}\sum_i V_{si}^{(h)} 
 $$
 
-The cumulative intervention coverage after immunizing $s$ community districts is therefore
+The cumulative intervention coverage after immunizing $s$ community districts is therefore:
 
 $$ 
 \bar{C_s}^{(h)} = \sum_{v = 1}^s{C_v }^{(h)}
@@ -81,7 +82,7 @@ $$
 
 ##### Social network impact
 
-Define graph $G^{s}(N, \psi_s)$ such that 
+Define graph $G^{s}(N, \psi_s)$ such that:
 
 $$
 \psi_s(i, j) = \psi(i, j) \times (1 -V_{(s-1), i})
@@ -95,4 +96,4 @@ $$
 
 ### Estimation
 
-We simulated the intervention outlined above using MPX NYC data by calculating the $G^{s}(N, \psi_s)$ where $s$ ranges from $1$ to the total number of community districts. We measured the uncertainty of our estimates by re-sampling study participants with replacement.
+We simulated the intervention outlined above using RESPND-MI data by calculating the $G^{s}(N, \psi_s)$ where $s$ ranges from $1$ to the total number of community districts. We measured the uncertainty of our estimates by re-sampling study participants with replacement.
