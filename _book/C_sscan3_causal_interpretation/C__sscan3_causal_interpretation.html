@@ -216,7 +216,8 @@ div.csl-indent {
   <li><a href="#introducing-dangs-and-swings" id="toc-introducing-dangs-and-swings" class="nav-link" data-scroll-target="#introducing-dangs-and-swings">Introducing DANGs and SWINGs</a></li>
   <li><a href="#assumptions-1" id="toc-assumptions-1" class="nav-link" data-scroll-target="#assumptions-1"><span class="header-section-number">B.3.1</span> Assumptions</a></li>
   <li><a href="#model-2" id="toc-model-2" class="nav-link" data-scroll-target="#model-2"><span class="header-section-number">B.3.2</span> Model</a></li>
-  <li><a href="#estimates" id="toc-estimates" class="nav-link" data-scroll-target="#estimates"><span class="header-section-number">B.3.3</span> Estimates</a></li>
+  <li><a href="#estimands-2" id="toc-estimands-2" class="nav-link" data-scroll-target="#estimands-2"><span class="header-section-number">B.3.3</span> Estimands</a></li>
+  <li><a href="#identification-2" id="toc-identification-2" class="nav-link" data-scroll-target="#identification-2"><span class="header-section-number">B.3.4</span> Identification</a></li>
   </ul>
 </li>
   <li>
@@ -225,7 +226,7 @@ div.csl-indent {
 <li><a href="#application-outbreak-control-model-using-respnd-mi-data" id="toc-application-outbreak-control-model-using-respnd-mi-data" class="nav-link" data-scroll-target="#application-outbreak-control-model-using-respnd-mi-data">Application: Outbreak control model using RESPND-MI data</a></li>
   <li><a href="#assumptions-2" id="toc-assumptions-2" class="nav-link" data-scroll-target="#assumptions-2"><span class="header-section-number">B.4.1</span> Assumptions</a></li>
   <li><a href="#model-3" id="toc-model-3" class="nav-link" data-scroll-target="#model-3"><span class="header-section-number">B.4.2</span> Model</a></li>
-  <li><a href="#estimands-2" id="toc-estimands-2" class="nav-link" data-scroll-target="#estimands-2"><span class="header-section-number">B.4.3</span> Estimands</a></li>
+  <li><a href="#estimands-3" id="toc-estimands-3" class="nav-link" data-scroll-target="#estimands-3"><span class="header-section-number">B.4.3</span> Estimands</a></li>
   <li><a href="#estimation-2" id="toc-estimation-2" class="nav-link" data-scroll-target="#estimation-2"><span class="header-section-number">B.4.4</span> Estimation</a></li>
   </ul>
 </li>
@@ -951,14 +952,14 @@ V_{si}^{(\bar{\mathbf{t}})} &amp;=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}^{(\bar{\mat
 \end{aligned}
 \tag{B.10}\]</span></span></p>
 <p>where <span class="math inline">\(\bar{\mathbf{t}}\)</span> is defined as “the history of <span class="math inline">\(\mathbf{t}\)</span>”. i.e.&nbsp;at time 1, <span class="math inline">\(\bar{\mathbf{t}} =\mathbf{t}_1\)</span>. At time 2, <span class="math inline">\(\bar{\mathbf{t}} = [\mathbf{t}_1, \mathbf{t}_2]\)</span>, etc.</p>
-</section></section><section id="estimates" class="level3" data-number="B.3.3"><h3 data-number="B.3.3" class="anchored" data-anchor-id="estimates">
-<span class="header-section-number">B.3.3</span> Estimates</h3>
-<section id="causal-estimands" class="level4"><h4 class="anchored" data-anchor-id="causal-estimands">Causal estimands</h4>
+</section></section><section id="estimands-2" class="level3" data-number="B.3.3"><h3 data-number="B.3.3" class="anchored" data-anchor-id="estimands-2">
+<span class="header-section-number">B.3.3</span> Estimands</h3>
 <p>We are interested in vaccine coverage throughout the three week campaign. For a given week <span class="math inline">\(s\)</span>, this is the sum of the vaccine status outcome <span class="math inline">\(\mathbf{V}\)</span> across individuals.</p>
 <p><span class="math display">\[
 E[\sum_{i=1}^5 V_{si}^{(\bar{\mathbf{t}})}]
 \]</span></p>
-</section><section id="identification-2" class="level4"><h4 class="anchored" data-anchor-id="identification-2">Identification</h4>
+</section><section id="identification-2" class="level3" data-number="B.3.4"><h3 data-number="B.3.4" class="anchored" data-anchor-id="identification-2">
+<span class="header-section-number">B.3.4</span> Identification</h3>
 <p>Because individual vaccination status is both a confounder and a mediator of the relationship between neighborhood intervention status and vaccination status, we cannot identify our estimands using conditional expectations of the observed data. We must use a marginal structural model.</p>
 <p>We can estimate the outcome of interest using the inverse probability of treatment weights, noting that the treatment in this case is the network exposure value <span class="math inline">\(g(t_{\bar{s},N_i})\)</span> for <span class="math inline">\(\mathbf{T}\)</span>.</p>
 <p><span class="math display">\[
@@ -967,7 +968,7 @@ V_{si}^{(\bar{\mathbf{t}})} =  \frac{V_{si} \mathbf{1}_{x = g(t_{\bar{s},N_i}) }
 <p><span class="math display">\[
 \mathbf{R}_{\bar{3}N_i} = [\mathbf{R}_{1N_i}, \mathbf{R}_{2N_i}, \mathbf{R}_{3N_i}]
 \]</span></p>
-</section></section></section><section id="sec-control-intervention" class="level2" data-number="B.4"><h2 data-number="B.4" class="anchored" data-anchor-id="sec-control-intervention">
+</section></section><section id="sec-control-intervention" class="level2" data-number="B.4"><h2 data-number="B.4" class="anchored" data-anchor-id="sec-control-intervention">
 <span class="header-section-number">B.4</span> Outbreak control intervention</h2>
 <p>We used data from RESPND-MI to assess the effectiveness of two approaches to conducting mass vaccination campaigns quickly. MPX NYC is an online survey of about 1300 individuals that was conducted in 2022 in New York City. Study participants were asked to indicate their home on a map and were asked to indicate places they had had social contact in a congregate setting. Spatial coordinates were converted into community district identifiers. Community districts spatially partition the city of New York.</p>
 <section id="application-outbreak-control-model-using-respnd-mi-data" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="application-outbreak-control-model-using-respnd-mi-data">Application: Outbreak control model using RESPND-MI data</h3>
@@ -1011,7 +1012,7 @@ h_{sj}(\mathbf{V}_{s-1}) = \sum_{ i \in \mathscr{N}_P} (1 -V_{(s-1), i}) \times 
 <p><span class="math display">\[
 h_{sj}(\mathbf{V}_{s-1}) =   \sum_{ i \in \mathscr{N}_P} (1 -V_{(s-1), i}) \times \psi(i, j) \sum_{ k \in \mathscr{N}_N} \psi(i, k)
 \]</span></p>
-</section><section id="estimands-2" class="level3" data-number="B.4.3"><h3 data-number="B.4.3" class="anchored" data-anchor-id="estimands-2">
+</section><section id="estimands-3" class="level3" data-number="B.4.3"><h3 data-number="B.4.3" class="anchored" data-anchor-id="estimands-3">
 <span class="header-section-number">B.4.3</span> Estimands</h3>
 <section id="spatial-efficiency" class="level5"><h5 class="anchored" data-anchor-id="spatial-efficiency">Spatial efficiency</h5>
 <p>Intervention coverage for the <span class="math inline">\(s^{th}\)</span> community district to be immunized, is defined:</p>
