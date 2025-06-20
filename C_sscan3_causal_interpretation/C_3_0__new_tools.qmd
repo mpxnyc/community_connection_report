@@ -10,17 +10,11 @@ We introduce the causal Directed Acyclic Network Graph (causal DANG) - a simple 
 
 *Compact graphic representation*
 
-DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the "structural part" of the DANG and the latter the "relational part."
+DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the "structural part" of the DANG and the latter the "relational part." The relational part shows which pairs of observational units have correlated measures with each other. For instance, in @fig-causal-dang-instructions we see that individuals 1 and 2 are related.
 
-We represent the structural model defined by @eq-homogenous-dag and shown in @fig-homogenous-dag. The structural part of the causal DANG shows the causal structure within individuals. It is a DAG of vector-valued variables $\mathbf{L}$, $\mathbf{A}$, and $\mathbf{Y}$ of length equal to the number of people in the sample. This DAG has standard interpretation under d-separation rules. It gives the conditional independencies across these vector-valued random variables. This is an incomplete set of independencies, however, since some of the entries in $\mathbf{A}$ are independent of a given entry in $\mathbf{L}$, and others are correlated, for instance. The second part of the causal DANG (relational part) shows which pairs of observational units have correlated measures with each other. For instance, in @fig-causal-dang-instructions we see that individuals 1 and 2 are related.
+The structural part is a DAG of vector-valued variables $\mathbf{L}$, $\mathbf{A}$, and $\mathbf{Y}$ of length equal to the number of people in the sample. It has standard interpretation under d-separation rules. It gives the conditional independencies across these vector-valued random variables. 
 
-Causal DANGs give us instructions for constructing causal DAGs in the face of causal interference. For instance, according to the causal DANG shown in @fig-causal-dang-instructions, follow these instructions to draw the DAG in @fig-interference-dag:
 
--   First, represent all the entries of $\mathbf{L}$, $\mathbf{A}$, and $\mathbf{Y}$.
-
--   Then, for each individual $i\in \{1,2,3\}$, connect $L_i$ to $A_i$, $L_i$ to $Y_i$, and $A_i$ to $Y_i$.
-
--   Finally, for the connected pair $1\sim 2$, connect $L_1$ to $A_2$ and $L_2$ to $A_1$; connect $L_1$ to $Y_2$, and $L_2$ to $Y_1$, and connect $A_1$ to $Y_2$ and $A_2$ to $Y_1$.
 
 ```{r}
 #| fig-height: 8
