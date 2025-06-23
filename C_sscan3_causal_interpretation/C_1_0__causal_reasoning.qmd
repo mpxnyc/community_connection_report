@@ -112,6 +112,31 @@ A **path** is a sequence of nodes that starts with an origin node and ends with 
 
 A **triangle** is a sub-sequence of a path which contains three consecutive nodes from the path. A canonical triangle is one in which we do not condition on the apex node. A conditional triangle is one in which we do condition.
 
+```{r}
+#| fig-height: 3
+#| fig-width: 8
+#| fig-cap: "D-separation triangles: Fork (leftmost), spoon (center), chopstick (rightmost)"
+
+
+
+fork <- make_dag_subgraph("fork") |>
+            plot_swig() +
+            theme_mpxnyc_blank() +
+            scale_fill_mpxnyc(option = "light")
+
+spoon <- make_dag_subgraph("spoon") |>
+            plot_swig() +
+            theme_mpxnyc_blank() +
+            scale_fill_mpxnyc(option = "light") 
+
+chopstick <- make_dag_subgraph("chopstick") |>
+                plot_swig() +
+                theme_mpxnyc_blank() +
+                scale_fill_mpxnyc(option = "light") 
+
+cowplot::plot_grid(fork, spoon, chopstick, rel_widths = c(1,1,1.25), nrow = 1)
+```
+
 A **fork** is a triangle whose apex variable has two outgoing edges. A canonical fork is open and a conditional fork is closed. The apex variable of a fork is commonly referred to as a "confounder."
 
 A **spoon** is a triangle whose apex variable has two incoming edges. A canonical spoon is closed and a conditional spoon is open. The apex variable of a spoon is commonly referred to as a "collider."
