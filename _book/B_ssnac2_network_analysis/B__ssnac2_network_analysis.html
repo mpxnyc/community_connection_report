@@ -163,17 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li>
-<a href="#chapters" id="toc-chapters" class="nav-link active" data-scroll-target="#chapters">Chapters</a>
-  <ul class="collapse">
-<li>
-<a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">C.1</span> Data</a>
-  <ul class="collapse">
-<li><a href="#person-place-graph" id="toc-person-place-graph" class="nav-link" data-scroll-target="#person-place-graph"><span class="header-section-number">C.1.1</span> Person-place graph</a></li>
-  <li><a href="#person-graph" id="toc-person-graph" class="nav-link" data-scroll-target="#person-graph"><span class="header-section-number">C.1.2</span> Person graph</a></li>
-  <li><a href="#place-graph" id="toc-place-graph" class="nav-link" data-scroll-target="#place-graph"><span class="header-section-number">C.1.3</span> Place graph</a></li>
-  </ul>
-</li>
+<li><a href="#data-graph" id="toc-data-graph" class="nav-link active" data-scroll-target="#data-graph"><span class="header-section-number">C.1</span> Data graph</a></li>
   <li>
 <a href="#measures" id="toc-measures" class="nav-link" data-scroll-target="#measures"><span class="header-section-number">C.2</span> Measures</a>
   <ul class="collapse">
@@ -182,8 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#network-characteristics" id="toc-network-characteristics" class="nav-link" data-scroll-target="#network-characteristics"><span class="header-section-number">C.2.3</span> Network characteristics</a></li>
   </ul>
 </li>
-  </ul>
-</li>
+  <li><a href="#chapters" id="toc-chapters" class="nav-link" data-scroll-target="#chapters">Chapters</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -202,32 +191,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><u>Lead author</u>: Keletso Makofane, MPH, PhD. <u>Editor</u>: Nicholas Diamond, MPH. (Coming soon).</p>
 </div>
 <p>In this appendix we will describe the main data objects of the MPX NYC study – the Person-place graph, the Person graph and the Place graph – as well as the statistics we used to analyze them. Come back soon!</p>
-<section id="chapters" class="level1 unnumbered hidden"><h1 class="unnumbered hidden">Chapters</h1>
-<section id="data" class="level2" data-number="C.1"><h2 data-number="C.1" class="anchored" data-anchor-id="data">
-<span class="header-section-number">C.1</span> Data</h2>
-<section id="person-place-graph" class="level3" data-number="C.1.1"><h3 data-number="C.1.1" class="anchored" data-anchor-id="person-place-graph">
-<span class="header-section-number">C.1.1</span> Person-place graph</h3>
-<p>The MPX NYC spatial participant data network is a network object that contains all collected data. In this network, nodes comprise of community districts and survey participants. Edges can only exist between a person and a communtiy district - they indicate that the person either lives in or has a contact place in that community district. In <a href="#fig-example-participant-place">Figure&nbsp;<span>C.1</span></a>, participant nodes are blue and community district nodes are pink. <a href="#tbl-example-bipartite-nodes-edges">Table&nbsp;<span>C.1</span></a> (a) shows the node and <a href="#tbl-example-bipartite-nodes-edges">Table&nbsp;<span>C.1</span></a> (b) the edges of the network.</p>
-<div class="cell" data-hash="B__ssnac2_network_analysis_cache/html/fig-example-participant-place_811b8e70d63adb133af0517ce2568a74">
+<section id="data-graph" class="level2" data-number="C.1"><h2 data-number="C.1" class="anchored" data-anchor-id="data-graph">
+<span class="header-section-number">C.1</span> Data graph</h2>
+<div class="cell" data-hash="B__ssnac2_network_analysis_cache/html/fig-example-participant-place_3e245f9423bdcd9961610f8c2abacddf">
 <details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"bipartite"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">plot_example_network</span><span class="op">(</span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html">coord_cartesian</a></span><span class="op">(</span>xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.2</span>,<span class="fl">1.2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
-<span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">plot_example_bipartite_network</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_color_mpxnyc</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Node type"</span>, option <span class="op">=</span> <span class="st">"dark"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Node type"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_size_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Node type"</span>, values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">7</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span></span>
+<span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>,</span>
+<span>    legend.position <span class="op">=</span> <span class="st">"bottom"</span></span>
+<span>    <span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div id="fig-example-participant-place" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="B__ssnac2_network_analysis_files/figure-html/fig-example-participant-place-1.png" class="img-fluid figure-img" width="864"></p>
+<figure class="figure"><p><img src="B__ssnac2_network_analysis_files/figure-html/fig-example-participant-place-1.png" class="img-fluid figure-img" width="480"></p>
 <figcaption class="figure-caption">Figure&nbsp;C.1: Sample person-place network visualization</figcaption></figure>
 </div>
 </div>
 </div>
+<p>The MPX NYC spatial participant data network is a network object that contains all collected data. In this network, nodes comprise of community districts and survey participants. Edges can only exist between a person and a communtiy district - they indicate that the person either lives in or has a contact place in that community district. Define <span class="math inline">\(\psi(i,j)\)</span> as the adjacency function for the person-place graph. For person <span class="math inline">\(i\)</span> and community <span class="math inline">\(j\)</span>:</p>
+<p><span class="math display">\[
+\psi(i,j) = \begin{cases} 1 &amp;i\sim j \\ 0 &amp;\text{otherwise} \end{cases}
+\]</span></p>
+<p><a href="#tbl-example-bipartite-nodes-edges">Table&nbsp;<span>C.1</span></a> (a) shows the node and <a href="#tbl-example-bipartite-nodes-edges">Table&nbsp;<span>C.1</span></a> (b) the edges of the network.</p>
 <div>
 <details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>name <span class="op">=</span><span class="va">label</span>, <span class="va">age</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span>, <span class="st">"Person"</span>, <span class="st">"Community District"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>name <span class="op">=</span><span class="va">label</span>, <span class="va">age</span>, <span class="va">type</span> <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html">tab_options</a></span><span class="op">(</span>table.font.size <span class="op">=</span><span class="fl">12</span>, data_row.padding <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, <span class="va">type</span>, <span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -235,38 +228,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>From <span class="op">=</span> <span class="va">from_name</span>, To <span class="op">=</span> <span class="va">to_name</span>, Relation <span class="op">=</span> <span class="va">relation</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-example-bipartite-nodes-edges" class="cell tbl-parent quarto-layout-panel anchored" data-hash="B__ssnac2_network_analysis_cache/html/tbl-example-bipartite-nodes-edges_a7f5c9663f8f522086e7836384aa747f">
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html">tab_options</a></span><span class="op">(</span>table.font.size <span class="op">=</span><span class="fl">12</span>, data_row.padding <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div id="tbl-example-bipartite-nodes-edges" class="cell tbl-parent quarto-layout-panel anchored" data-hash="B__ssnac2_network_analysis_cache/html/tbl-example-bipartite-nodes-edges_94906fc83b0b8e89cf165cacca25c529">
 <div class="panel-caption table-caption">
 <p>Table&nbsp;C.1: Sample person-place network data</p>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div id="tbl-example-bipartite-nodes-edges-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-bipartite-nodes-edges" style="flex-basis: 50.0%;justify-content: center;">
 
-<div id="lhwdoqwoqg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lhwdoqwoqg table {
+<div id="ecoiyqdxii" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ecoiyqdxii table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lhwdoqwoqg thead, #lhwdoqwoqg tbody, #lhwdoqwoqg tfoot, #lhwdoqwoqg tr, #lhwdoqwoqg td, #lhwdoqwoqg th {
+#ecoiyqdxii thead, #ecoiyqdxii tbody, #ecoiyqdxii tfoot, #ecoiyqdxii tr, #ecoiyqdxii td, #ecoiyqdxii th {
   border-style: none;
 }
 
-#lhwdoqwoqg p {
+#ecoiyqdxii p {
   margin: 0;
   padding: 0;
 }
 
-#lhwdoqwoqg .gt_table {
+#ecoiyqdxii .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: normal;
   font-style: normal;
   background-color: #FFFFFF;
@@ -285,12 +279,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#lhwdoqwoqg .gt_caption {
+#ecoiyqdxii .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lhwdoqwoqg .gt_title {
+#ecoiyqdxii .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -302,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#lhwdoqwoqg .gt_subtitle {
+#ecoiyqdxii .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -314,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#lhwdoqwoqg .gt_heading {
+#ecoiyqdxii .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -326,13 +320,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lhwdoqwoqg .gt_bottom_border {
+#ecoiyqdxii .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lhwdoqwoqg .gt_col_headings {
+#ecoiyqdxii .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -347,7 +341,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lhwdoqwoqg .gt_col_heading {
+#ecoiyqdxii .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -367,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#lhwdoqwoqg .gt_column_spanner_outer {
+#ecoiyqdxii .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -379,15 +373,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#lhwdoqwoqg .gt_column_spanner_outer:first-child {
+#ecoiyqdxii .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lhwdoqwoqg .gt_column_spanner_outer:last-child {
+#ecoiyqdxii .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lhwdoqwoqg .gt_column_spanner {
+#ecoiyqdxii .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -399,11 +393,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#lhwdoqwoqg .gt_spanner_row {
+#ecoiyqdxii .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lhwdoqwoqg .gt_group_heading {
+#ecoiyqdxii .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -429,7 +423,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#lhwdoqwoqg .gt_empty_group_heading {
+#ecoiyqdxii .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -444,17 +438,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#lhwdoqwoqg .gt_from_md > :first-child {
+#ecoiyqdxii .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lhwdoqwoqg .gt_from_md > :last-child {
+#ecoiyqdxii .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lhwdoqwoqg .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
+#ecoiyqdxii .gt_row {
+  padding-top: 1px;
+  padding-bottom: 1px;
   padding-left: 5px;
   padding-right: 5px;
   margin: 10px;
@@ -471,7 +465,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#lhwdoqwoqg .gt_stub {
+#ecoiyqdxii .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -484,7 +478,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lhwdoqwoqg .gt_stub_row_group {
+#ecoiyqdxii .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -498,15 +492,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#lhwdoqwoqg .gt_row_group_first td {
+#ecoiyqdxii .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lhwdoqwoqg .gt_row_group_first th {
+#ecoiyqdxii .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lhwdoqwoqg .gt_summary_row {
+#ecoiyqdxii .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -516,16 +510,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lhwdoqwoqg .gt_first_summary_row {
+#ecoiyqdxii .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lhwdoqwoqg .gt_first_summary_row.thick {
+#ecoiyqdxii .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lhwdoqwoqg .gt_last_summary_row {
+#ecoiyqdxii .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -535,7 +529,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#lhwdoqwoqg .gt_grand_summary_row {
+#ecoiyqdxii .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -545,7 +539,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lhwdoqwoqg .gt_first_grand_summary_row {
+#ecoiyqdxii .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -555,7 +549,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#lhwdoqwoqg .gt_last_grand_summary_row_top {
+#ecoiyqdxii .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -565,11 +559,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#lhwdoqwoqg .gt_striped {
+#ecoiyqdxii .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lhwdoqwoqg .gt_table_body {
+#ecoiyqdxii .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -578,7 +572,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#lhwdoqwoqg .gt_footnotes {
+#ecoiyqdxii .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -592,7 +586,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lhwdoqwoqg .gt_footnote {
+#ecoiyqdxii .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -601,7 +595,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lhwdoqwoqg .gt_sourcenotes {
+#ecoiyqdxii .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -615,7 +609,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lhwdoqwoqg .gt_sourcenote {
+#ecoiyqdxii .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -623,63 +617,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lhwdoqwoqg .gt_left {
+#ecoiyqdxii .gt_left {
   text-align: left;
 }
 
-#lhwdoqwoqg .gt_center {
+#ecoiyqdxii .gt_center {
   text-align: center;
 }
 
-#lhwdoqwoqg .gt_right {
+#ecoiyqdxii .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lhwdoqwoqg .gt_font_normal {
+#ecoiyqdxii .gt_font_normal {
   font-weight: normal;
 }
 
-#lhwdoqwoqg .gt_font_bold {
+#ecoiyqdxii .gt_font_bold {
   font-weight: bold;
 }
 
-#lhwdoqwoqg .gt_font_italic {
+#ecoiyqdxii .gt_font_italic {
   font-style: italic;
 }
 
-#lhwdoqwoqg .gt_super {
+#ecoiyqdxii .gt_super {
   font-size: 65%;
 }
 
-#lhwdoqwoqg .gt_footnote_marks {
+#ecoiyqdxii .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lhwdoqwoqg .gt_asterisk {
+#ecoiyqdxii .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lhwdoqwoqg .gt_indent_1 {
+#ecoiyqdxii .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lhwdoqwoqg .gt_indent_2 {
+#ecoiyqdxii .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lhwdoqwoqg .gt_indent_3 {
+#ecoiyqdxii .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lhwdoqwoqg .gt_indent_4 {
+#ecoiyqdxii .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lhwdoqwoqg .gt_indent_5 {
+#ecoiyqdxii .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -688,7 +682,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Label">Label</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Age">Age</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Type">Type</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Node type">Node type</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
@@ -734,27 +728,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr>
 <td headers="name" class="gt_row gt_left">A</td>
 <td headers="age" class="gt_row gt_right">-</td>
-<td headers="type" class="gt_row gt_left">Community District</td>
+<td headers="type" class="gt_row gt_left">Place</td>
 </tr>
 <tr>
 <td headers="name" class="gt_row gt_left">B</td>
 <td headers="age" class="gt_row gt_right">-</td>
-<td headers="type" class="gt_row gt_left">Community District</td>
+<td headers="type" class="gt_row gt_left">Place</td>
 </tr>
 <tr>
 <td headers="name" class="gt_row gt_left">C</td>
 <td headers="age" class="gt_row gt_right">-</td>
-<td headers="type" class="gt_row gt_left">Community District</td>
+<td headers="type" class="gt_row gt_left">Place</td>
 </tr>
 <tr>
 <td headers="name" class="gt_row gt_left">D</td>
 <td headers="age" class="gt_row gt_right">-</td>
-<td headers="type" class="gt_row gt_left">Community District</td>
+<td headers="type" class="gt_row gt_left">Place</td>
 </tr>
 <tr>
 <td headers="name" class="gt_row gt_left">E</td>
 <td headers="age" class="gt_row gt_right">-</td>
-<td headers="type" class="gt_row gt_left">Community District</td>
+<td headers="type" class="gt_row gt_left">Place</td>
 </tr>
 </tbody>
 </table>
@@ -762,30 +756,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="tbl-example-bipartite-nodes-edges-2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-bipartite-nodes-edges" style="flex-basis: 50.0%;justify-content: center;">
 
-<div id="jsricmoqpl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jsricmoqpl table {
+<div id="phnbfxpqex" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#phnbfxpqex table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jsricmoqpl thead, #jsricmoqpl tbody, #jsricmoqpl tfoot, #jsricmoqpl tr, #jsricmoqpl td, #jsricmoqpl th {
+#phnbfxpqex thead, #phnbfxpqex tbody, #phnbfxpqex tfoot, #phnbfxpqex tr, #phnbfxpqex td, #phnbfxpqex th {
   border-style: none;
 }
 
-#jsricmoqpl p {
+#phnbfxpqex p {
   margin: 0;
   padding: 0;
 }
 
-#jsricmoqpl .gt_table {
+#phnbfxpqex .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: normal;
   font-style: normal;
   background-color: #FFFFFF;
@@ -804,12 +798,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#jsricmoqpl .gt_caption {
+#phnbfxpqex .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jsricmoqpl .gt_title {
+#phnbfxpqex .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -821,7 +815,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#jsricmoqpl .gt_subtitle {
+#phnbfxpqex .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -833,7 +827,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#jsricmoqpl .gt_heading {
+#phnbfxpqex .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -845,13 +839,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#jsricmoqpl .gt_bottom_border {
+#phnbfxpqex .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jsricmoqpl .gt_col_headings {
+#phnbfxpqex .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -866,7 +860,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#jsricmoqpl .gt_col_heading {
+#phnbfxpqex .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -886,7 +880,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#jsricmoqpl .gt_column_spanner_outer {
+#phnbfxpqex .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -898,15 +892,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#jsricmoqpl .gt_column_spanner_outer:first-child {
+#phnbfxpqex .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jsricmoqpl .gt_column_spanner_outer:last-child {
+#phnbfxpqex .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jsricmoqpl .gt_column_spanner {
+#phnbfxpqex .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -918,11 +912,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#jsricmoqpl .gt_spanner_row {
+#phnbfxpqex .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jsricmoqpl .gt_group_heading {
+#phnbfxpqex .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -948,7 +942,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#jsricmoqpl .gt_empty_group_heading {
+#phnbfxpqex .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -963,17 +957,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#jsricmoqpl .gt_from_md > :first-child {
+#phnbfxpqex .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jsricmoqpl .gt_from_md > :last-child {
+#phnbfxpqex .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jsricmoqpl .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
+#phnbfxpqex .gt_row {
+  padding-top: 1px;
+  padding-bottom: 1px;
   padding-left: 5px;
   padding-right: 5px;
   margin: 10px;
@@ -990,7 +984,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#jsricmoqpl .gt_stub {
+#phnbfxpqex .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1003,7 +997,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jsricmoqpl .gt_stub_row_group {
+#phnbfxpqex .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1017,15 +1011,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#jsricmoqpl .gt_row_group_first td {
+#phnbfxpqex .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jsricmoqpl .gt_row_group_first th {
+#phnbfxpqex .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jsricmoqpl .gt_summary_row {
+#phnbfxpqex .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1035,16 +1029,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jsricmoqpl .gt_first_summary_row {
+#phnbfxpqex .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jsricmoqpl .gt_first_summary_row.thick {
+#phnbfxpqex .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jsricmoqpl .gt_last_summary_row {
+#phnbfxpqex .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1054,7 +1048,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#jsricmoqpl .gt_grand_summary_row {
+#phnbfxpqex .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1064,7 +1058,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jsricmoqpl .gt_first_grand_summary_row {
+#phnbfxpqex .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1074,7 +1068,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#jsricmoqpl .gt_last_grand_summary_row_top {
+#phnbfxpqex .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1084,11 +1078,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#jsricmoqpl .gt_striped {
+#phnbfxpqex .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jsricmoqpl .gt_table_body {
+#phnbfxpqex .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1097,7 +1091,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#jsricmoqpl .gt_footnotes {
+#phnbfxpqex .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1111,7 +1105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#jsricmoqpl .gt_footnote {
+#phnbfxpqex .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1120,7 +1114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jsricmoqpl .gt_sourcenotes {
+#phnbfxpqex .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1134,7 +1128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#jsricmoqpl .gt_sourcenote {
+#phnbfxpqex .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1142,63 +1136,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#jsricmoqpl .gt_left {
+#phnbfxpqex .gt_left {
   text-align: left;
 }
 
-#jsricmoqpl .gt_center {
+#phnbfxpqex .gt_center {
   text-align: center;
 }
 
-#jsricmoqpl .gt_right {
+#phnbfxpqex .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jsricmoqpl .gt_font_normal {
+#phnbfxpqex .gt_font_normal {
   font-weight: normal;
 }
 
-#jsricmoqpl .gt_font_bold {
+#phnbfxpqex .gt_font_bold {
   font-weight: bold;
 }
 
-#jsricmoqpl .gt_font_italic {
+#phnbfxpqex .gt_font_italic {
   font-style: italic;
 }
 
-#jsricmoqpl .gt_super {
+#phnbfxpqex .gt_super {
   font-size: 65%;
 }
 
-#jsricmoqpl .gt_footnote_marks {
+#phnbfxpqex .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jsricmoqpl .gt_asterisk {
+#phnbfxpqex .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jsricmoqpl .gt_indent_1 {
+#phnbfxpqex .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jsricmoqpl .gt_indent_2 {
+#phnbfxpqex .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jsricmoqpl .gt_indent_3 {
+#phnbfxpqex .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jsricmoqpl .gt_indent_4 {
+#phnbfxpqex .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jsricmoqpl .gt_indent_5 {
+#phnbfxpqex .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1307,2071 +1301,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section><section id="person-graph" class="level3" data-number="C.1.2"><h3 data-number="C.1.2" class="anchored" data-anchor-id="person-graph">
-<span class="header-section-number">C.1.2</span> Person graph</h3>
-<p>The MPX NYC participant network has participants as nodes. A pair of nodes is connected by a weighted edge if each of the individuals represented by the nodes has at least one contact venue or residence in the same, shared community district. The weight of the edge is given by the count of community districts the pair of nodes have in common. By definition, an edge of weight <span class="math inline">\(0\)</span> is equivalent to the absence of an edge. <a href="#tbl-example-participant-nodes">Table&nbsp;<span>C.2</span></a> shows the nodes of the participant network shown in <a href="#tbl-example-participant-nodes">Table&nbsp;<span>C.2</span></a> (a) and <a href="#tbl-example-participant-nodes">Table&nbsp;<span>C.2</span></a> (b) show the edges.</p>
-<div class="cell" data-hash="B__ssnac2_network_analysis_cache/html/fig-example-participant_93bbb445deb362988f3655f3eb3e2816">
+<section id="person-person-graph" class="level5 unnumbered"><h5 class="unnumbered anchored" data-anchor-id="person-person-graph">Person-person graph</h5>
+<p>The MPX NYC participant network has participants as nodes. A pair of nodes is connected by a weighted edge if each of the individuals represented by the nodes has at least one contact venue or residence in the same, shared community district. The weight of the edge is given by the count of community districts the pair of nodes have in common. Define <span class="math inline">\(\psi_P(i,k)\)</span> as the adjacency functon for the person graph. For persons <span class="math inline">\(i\)</span> and <span class="math inline">\(k\)</span>:</p>
+<p><span class="math display">\[
+\psi_P(i,k) = \sum_{j \in N_C}{\psi(i,j) \psi(k,j)}
+\]</span></p>
+<div class="cell" data-hash="B__ssnac2_network_analysis_cache/html/fig-example-participant_14f374cdc547ebfb03843504181c0a70">
 <details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"people"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">plot_example_network</span><span class="op">(</span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">plot_example_projection_network</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_size_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Node type"</span>, values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_color_mpxnyc</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Node type"</span>, option <span class="op">=</span> <span class="st">"dark"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/scale_edge_width.html">scale_edge_width</a></span><span class="op">(</span><span class="op">)</span>  <span class="op">+</span></span>
+<span>  <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/scale_edge_width.html">scale_edge_width_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Weight"</span>, values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div id="fig-example-participant" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="B__ssnac2_network_analysis_files/figure-html/fig-example-participant-1.png" class="img-fluid figure-img" width="864"></p>
+<figure class="figure"><p><img src="B__ssnac2_network_analysis_files/figure-html/fig-example-participant-1.png" class="img-fluid figure-img" width="768"></p>
 <figcaption class="figure-caption">Figure&nbsp;C.2: Sample person-person network visualizatoin</figcaption></figure>
 </div>
 </div>
 </div>
-<div>
-<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"people"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>Name <span class="op">=</span> <span class="va">label</span>, Type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span>, <span class="st">"Person"</span>, <span class="st">"Community District"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"people"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, <span class="va">type</span>, <span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>from_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">from</span><span class="op">]</span>, to_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">to</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>From <span class="op">=</span> <span class="va">from_name</span>, To <span class="op">=</span> <span class="va">to_name</span>, Weight <span class="op">=</span> <span class="va">weight</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-example-participant-nodes" class="cell tbl-parent quarto-layout-panel anchored" data-hash="B__ssnac2_network_analysis_cache/html/tbl-example-participant-nodes_1a6718d0be0b28c1dd73bdea89640fbd">
-<div class="panel-caption table-caption">
-<p>Table&nbsp;C.2: Sample person-person network data</p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div id="tbl-example-participant-nodes-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-participant-nodes" style="flex-basis: 50.0%;justify-content: center;">
-
-<div id="accicpawpu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#accicpawpu table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#accicpawpu thead, #accicpawpu tbody, #accicpawpu tfoot, #accicpawpu tr, #accicpawpu td, #accicpawpu th {
-  border-style: none;
-}
-
-#accicpawpu p {
-  margin: 0;
-  padding: 0;
-}
-
-#accicpawpu .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#accicpawpu .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#accicpawpu .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#accicpawpu .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#accicpawpu .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#accicpawpu .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#accicpawpu .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#accicpawpu .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#accicpawpu .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#accicpawpu .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#accicpawpu .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#accicpawpu .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#accicpawpu .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#accicpawpu .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#accicpawpu .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#accicpawpu .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#accicpawpu .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#accicpawpu .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#accicpawpu .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#accicpawpu .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#accicpawpu .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#accicpawpu .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#accicpawpu .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#accicpawpu .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#accicpawpu .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#accicpawpu .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#accicpawpu .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#accicpawpu .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#accicpawpu .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#accicpawpu .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#accicpawpu .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#accicpawpu .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#accicpawpu .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#accicpawpu .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#accicpawpu .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#accicpawpu .gt_left {
-  text-align: left;
-}
-
-#accicpawpu .gt_center {
-  text-align: center;
-}
-
-#accicpawpu .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#accicpawpu .gt_font_normal {
-  font-weight: normal;
-}
-
-#accicpawpu .gt_font_bold {
-  font-weight: bold;
-}
-
-#accicpawpu .gt_font_italic {
-  font-style: italic;
-}
-
-#accicpawpu .gt_super {
-  font-size: 65%;
-}
-
-#accicpawpu .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#accicpawpu .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#accicpawpu .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#accicpawpu .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#accicpawpu .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#accicpawpu .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#accicpawpu .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<caption>(a) <p>Nodes</p> </caption>
-  <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Name">Name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Type">Type</th>
-    </tr></thead>
-<tbody class="gt_table_body">
-<tr>
-<td headers="Name" class="gt_row gt_right">1</td>
-<td headers="Type" class="gt_row gt_left">Person</td>
-</tr>
-<tr>
-<td headers="Name" class="gt_row gt_right">2</td>
-<td headers="Type" class="gt_row gt_left">Person</td>
-</tr>
-<tr>
-<td headers="Name" class="gt_row gt_right">3</td>
-<td headers="Type" class="gt_row gt_left">Person</td>
-</tr>
-<tr>
-<td headers="Name" class="gt_row gt_right">4</td>
-<td headers="Type" class="gt_row gt_left">Person</td>
-</tr>
-<tr>
-<td headers="Name" class="gt_row gt_right">5</td>
-<td headers="Type" class="gt_row gt_left">Person</td>
-</tr>
-<tr>
-<td headers="Name" class="gt_row gt_right">6</td>
-<td headers="Type" class="gt_row gt_left">Person</td>
-</tr>
-<tr>
-<td headers="Name" class="gt_row gt_right">7</td>
-<td headers="Type" class="gt_row gt_left">Person</td>
-</tr>
-<tr>
-<td headers="Name" class="gt_row gt_right">8</td>
-<td headers="Type" class="gt_row gt_left">Person</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="tbl-example-participant-nodes-2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-participant-nodes" style="flex-basis: 50.0%;justify-content: center;">
-
-<div id="fuvkerfvhe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fuvkerfvhe table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#fuvkerfvhe thead, #fuvkerfvhe tbody, #fuvkerfvhe tfoot, #fuvkerfvhe tr, #fuvkerfvhe td, #fuvkerfvhe th {
-  border-style: none;
-}
-
-#fuvkerfvhe p {
-  margin: 0;
-  padding: 0;
-}
-
-#fuvkerfvhe .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#fuvkerfvhe .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#fuvkerfvhe .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#fuvkerfvhe .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#fuvkerfvhe .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#fuvkerfvhe .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#fuvkerfvhe .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#fuvkerfvhe .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#fuvkerfvhe .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#fuvkerfvhe .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#fuvkerfvhe .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#fuvkerfvhe .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#fuvkerfvhe .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#fuvkerfvhe .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#fuvkerfvhe .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#fuvkerfvhe .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#fuvkerfvhe .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#fuvkerfvhe .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#fuvkerfvhe .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#fuvkerfvhe .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#fuvkerfvhe .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#fuvkerfvhe .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#fuvkerfvhe .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#fuvkerfvhe .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#fuvkerfvhe .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#fuvkerfvhe .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#fuvkerfvhe .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#fuvkerfvhe .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#fuvkerfvhe .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#fuvkerfvhe .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#fuvkerfvhe .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#fuvkerfvhe .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#fuvkerfvhe .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#fuvkerfvhe .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#fuvkerfvhe .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#fuvkerfvhe .gt_left {
-  text-align: left;
-}
-
-#fuvkerfvhe .gt_center {
-  text-align: center;
-}
-
-#fuvkerfvhe .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#fuvkerfvhe .gt_font_normal {
-  font-weight: normal;
-}
-
-#fuvkerfvhe .gt_font_bold {
-  font-weight: bold;
-}
-
-#fuvkerfvhe .gt_font_italic {
-  font-style: italic;
-}
-
-#fuvkerfvhe .gt_super {
-  font-size: 65%;
-}
-
-#fuvkerfvhe .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#fuvkerfvhe .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#fuvkerfvhe .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#fuvkerfvhe .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#fuvkerfvhe .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#fuvkerfvhe .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#fuvkerfvhe .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<caption>(b) <p>Edges</p> </caption>
-  <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="From">From</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="To">To</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Weight">Weight</th>
-    </tr></thead>
-<tbody class="gt_table_body">
-<tr>
-<td headers="From" class="gt_row gt_right">1</td>
-<td headers="To" class="gt_row gt_right">2</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_right">1</td>
-<td headers="To" class="gt_row gt_right">3</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_right">2</td>
-<td headers="To" class="gt_row gt_right">3</td>
-<td headers="Weight" class="gt_row gt_right">2</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_right">2</td>
-<td headers="To" class="gt_row gt_right">4</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_right">3</td>
-<td headers="To" class="gt_row gt_right">4</td>
-<td headers="Weight" class="gt_row gt_right">3</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_right">3</td>
-<td headers="To" class="gt_row gt_right">6</td>
-<td headers="Weight" class="gt_row gt_right">2</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_right">4</td>
-<td headers="To" class="gt_row gt_right">5</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_right">4</td>
-<td headers="To" class="gt_row gt_right">6</td>
-<td headers="Weight" class="gt_row gt_right">3</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_right">4</td>
-<td headers="To" class="gt_row gt_right">7</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_right">4</td>
-<td headers="To" class="gt_row gt_right">8</td>
-<td headers="Weight" class="gt_row gt_right">2</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_right">5</td>
-<td headers="To" class="gt_row gt_right">7</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_right">5</td>
-<td headers="To" class="gt_row gt_right">8</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_right">6</td>
-<td headers="To" class="gt_row gt_right">8</td>
-<td headers="Weight" class="gt_row gt_right">2</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_right">7</td>
-<td headers="To" class="gt_row gt_right">8</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section><section id="place-graph" class="level3" data-number="C.1.3"><h3 data-number="C.1.3" class="anchored" data-anchor-id="place-graph">
-<span class="header-section-number">C.1.3</span> Place graph</h3>
-<p>The MPX NYC community district network has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a contact venue or residence in both community districts. The weight is the count of participants which are shared by the two community districts. <a href="#fig-example-community">Figure&nbsp;<span>C.3</span></a> shows the community district network derived from the MPX NYC spatial participant data network shown in <a href="#fig-example-participant-place">Figure&nbsp;<span>C.1</span></a>. <a href="#tbl-example-place-nodes">Table&nbsp;<span>C.3</span></a> (a) shows list the nodes of the former network, and <a href="#tbl-example-place-nodes">Table&nbsp;<span>C.3</span></a> (b) shows the edges.</p>
-<div class="cell" data-hash="B__ssnac2_network_analysis_cache/html/fig-example-community_6ef45e573a76ebcbc56e5b03a6156815">
-<details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"places"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">plot_example_network</span><span class="op">(</span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">)</span>  <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="place-place-graph" class="level5 unnumbered"><h5 class="unnumbered anchored" data-anchor-id="place-place-graph">Place-place graph</h5>
+<p>The MPX NYC community district network has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a contact venue or residence in both community districts. The weight is the count of participants which are shared by the two community districts. Define <span class="math inline">\(\psi_C(j,l)\)</span> as the adjacency functon for the place graph. For places <span class="math inline">\(j\)</span> and <span class="math inline">\(l\)</span>:</p>
+<p><span class="math display">\[
+\psi_C(j,l) = \sum_{i \in N_P}{\psi(i,j) \psi(i,l)}
+\]</span></p>
+<div class="cell" data-hash="B__ssnac2_network_analysis_cache/html/fig-example-community_0855f7768fca098eeb96b2f116e6f548">
+<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"places"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">plot_example_projection_network</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_size_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Node type"</span>, values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_color_mpxnyc</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Node type"</span>, option <span class="op">=</span> <span class="st">"dark_blue"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggraph</span><span class="fu">::</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/scale_edge_width.html">scale_edge_width_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Weight"</span>, values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div id="fig-example-community" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="B__ssnac2_network_analysis_files/figure-html/fig-example-community-1.png" class="img-fluid figure-img" width="864"></p>
+<figure class="figure"><p><img src="B__ssnac2_network_analysis_files/figure-html/fig-example-community-1.png" class="img-fluid figure-img" width="768"></p>
 <figcaption class="figure-caption">Figure&nbsp;C.3: Sample place network visualization</figcaption></figure>
-</div>
-</div>
-</div>
-<div>
-<details><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"places"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>Name <span class="op">=</span> <span class="va">label</span>, Type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">type</span>, <span class="st">"Person"</span>, <span class="st">"Community District"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"places"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, <span class="va">type</span>, <span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>from_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">from</span><span class="op">]</span>, to_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">to</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>From <span class="op">=</span> <span class="va">from_name</span>, To <span class="op">=</span> <span class="va">to_name</span>, Weight <span class="op">=</span> <span class="va">weight</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-example-place-nodes" class="cell tbl-parent quarto-layout-panel anchored" data-hash="B__ssnac2_network_analysis_cache/html/tbl-example-place-nodes_f609f9cb90955271dc9dffa6721d0f23">
-<div class="panel-caption table-caption">
-<p>Table&nbsp;C.3: Sample place network data</p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div id="tbl-example-place-nodes-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-place-nodes" style="flex-basis: 50.0%;justify-content: center;">
-
-<div id="lirncrtnwc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lirncrtnwc table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#lirncrtnwc thead, #lirncrtnwc tbody, #lirncrtnwc tfoot, #lirncrtnwc tr, #lirncrtnwc td, #lirncrtnwc th {
-  border-style: none;
-}
-
-#lirncrtnwc p {
-  margin: 0;
-  padding: 0;
-}
-
-#lirncrtnwc .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#lirncrtnwc .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#lirncrtnwc .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#lirncrtnwc .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#lirncrtnwc .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#lirncrtnwc .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#lirncrtnwc .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#lirncrtnwc .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#lirncrtnwc .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#lirncrtnwc .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#lirncrtnwc .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#lirncrtnwc .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#lirncrtnwc .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#lirncrtnwc .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#lirncrtnwc .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#lirncrtnwc .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#lirncrtnwc .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#lirncrtnwc .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#lirncrtnwc .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lirncrtnwc .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#lirncrtnwc .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#lirncrtnwc .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#lirncrtnwc .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lirncrtnwc .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#lirncrtnwc .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#lirncrtnwc .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#lirncrtnwc .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lirncrtnwc .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#lirncrtnwc .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#lirncrtnwc .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#lirncrtnwc .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#lirncrtnwc .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#lirncrtnwc .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lirncrtnwc .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#lirncrtnwc .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#lirncrtnwc .gt_left {
-  text-align: left;
-}
-
-#lirncrtnwc .gt_center {
-  text-align: center;
-}
-
-#lirncrtnwc .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#lirncrtnwc .gt_font_normal {
-  font-weight: normal;
-}
-
-#lirncrtnwc .gt_font_bold {
-  font-weight: bold;
-}
-
-#lirncrtnwc .gt_font_italic {
-  font-style: italic;
-}
-
-#lirncrtnwc .gt_super {
-  font-size: 65%;
-}
-
-#lirncrtnwc .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#lirncrtnwc .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#lirncrtnwc .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#lirncrtnwc .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#lirncrtnwc .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#lirncrtnwc .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#lirncrtnwc .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<caption>(a) <p>Nodes</p> </caption>
-  <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Name">Name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Type">Type</th>
-    </tr></thead>
-<tbody class="gt_table_body">
-<tr>
-<td headers="Name" class="gt_row gt_left">A</td>
-<td headers="Type" class="gt_row gt_left">Community District</td>
-</tr>
-<tr>
-<td headers="Name" class="gt_row gt_left">B</td>
-<td headers="Type" class="gt_row gt_left">Community District</td>
-</tr>
-<tr>
-<td headers="Name" class="gt_row gt_left">C</td>
-<td headers="Type" class="gt_row gt_left">Community District</td>
-</tr>
-<tr>
-<td headers="Name" class="gt_row gt_left">D</td>
-<td headers="Type" class="gt_row gt_left">Community District</td>
-</tr>
-<tr>
-<td headers="Name" class="gt_row gt_left">E</td>
-<td headers="Type" class="gt_row gt_left">Community District</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="tbl-example-place-nodes-2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-place-nodes" style="flex-basis: 50.0%;justify-content: center;">
-
-<div id="rfhxrzqyek" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rfhxrzqyek table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#rfhxrzqyek thead, #rfhxrzqyek tbody, #rfhxrzqyek tfoot, #rfhxrzqyek tr, #rfhxrzqyek td, #rfhxrzqyek th {
-  border-style: none;
-}
-
-#rfhxrzqyek p {
-  margin: 0;
-  padding: 0;
-}
-
-#rfhxrzqyek .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#rfhxrzqyek .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#rfhxrzqyek .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#rfhxrzqyek .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#rfhxrzqyek .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#rfhxrzqyek .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#rfhxrzqyek .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#rfhxrzqyek .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#rfhxrzqyek .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#rfhxrzqyek .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#rfhxrzqyek .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#rfhxrzqyek .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#rfhxrzqyek .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#rfhxrzqyek .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#rfhxrzqyek .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#rfhxrzqyek .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#rfhxrzqyek .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#rfhxrzqyek .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#rfhxrzqyek .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#rfhxrzqyek .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#rfhxrzqyek .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#rfhxrzqyek .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#rfhxrzqyek .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#rfhxrzqyek .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#rfhxrzqyek .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#rfhxrzqyek .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#rfhxrzqyek .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#rfhxrzqyek .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#rfhxrzqyek .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#rfhxrzqyek .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#rfhxrzqyek .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#rfhxrzqyek .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#rfhxrzqyek .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#rfhxrzqyek .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#rfhxrzqyek .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#rfhxrzqyek .gt_left {
-  text-align: left;
-}
-
-#rfhxrzqyek .gt_center {
-  text-align: center;
-}
-
-#rfhxrzqyek .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#rfhxrzqyek .gt_font_normal {
-  font-weight: normal;
-}
-
-#rfhxrzqyek .gt_font_bold {
-  font-weight: bold;
-}
-
-#rfhxrzqyek .gt_font_italic {
-  font-style: italic;
-}
-
-#rfhxrzqyek .gt_super {
-  font-size: 65%;
-}
-
-#rfhxrzqyek .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#rfhxrzqyek .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#rfhxrzqyek .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#rfhxrzqyek .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#rfhxrzqyek .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#rfhxrzqyek .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#rfhxrzqyek .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<caption>(b) <p>Edges</p> </caption>
-  <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="From">From</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="To">To</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Weight">Weight</th>
-    </tr></thead>
-<tbody class="gt_table_body">
-<tr>
-<td headers="From" class="gt_row gt_left">A</td>
-<td headers="To" class="gt_row gt_left">B</td>
-<td headers="Weight" class="gt_row gt_right">2</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_left">A</td>
-<td headers="To" class="gt_row gt_left">E</td>
-<td headers="Weight" class="gt_row gt_right">2</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_left">B</td>
-<td headers="To" class="gt_row gt_left">C</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_left">B</td>
-<td headers="To" class="gt_row gt_left">D</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_left">B</td>
-<td headers="To" class="gt_row gt_left">E</td>
-<td headers="Weight" class="gt_row gt_right">3</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_left">C</td>
-<td headers="To" class="gt_row gt_left">D</td>
-<td headers="Weight" class="gt_row gt_right">2</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_left">C</td>
-<td headers="To" class="gt_row gt_left">E</td>
-<td headers="Weight" class="gt_row gt_right">1</td>
-</tr>
-<tr>
-<td headers="From" class="gt_row gt_left">D</td>
-<td headers="To" class="gt_row gt_left">E</td>
-<td headers="Weight" class="gt_row gt_right">3</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 </div>
 </div>
 </div>
 </section></section><section id="measures" class="level2" data-number="C.2"><h2 data-number="C.2" class="anchored" data-anchor-id="measures">
 <span class="header-section-number">C.2</span> Measures</h2>
-<p>In this section, we describe network measures that are both useful statistics to interpret in describing MPX NYC data and useful intermediate steps in other measures we constructed.</p>
 <p>We defined four measures related to node degree which offer a useful interpretation of MPX NYC data: participant social reach (<span class="math inline">\(R_i\)</span>), participant spatial reach (<span class="math inline">\(S_i\)</span>), community district social reach (<span class="math inline">\(r_j\)</span>), and community district spatial reach (<span class="math inline">\(s_j\)</span>). For each of these, we developed a measure for which we count only the connections to nodes which are included in some defined subset <span class="math inline">\(A\)</span> of nodes. We thus define conditional participant social reach (<span class="math inline">\(R_{i \rightarrow A}\)</span>), conditional participant spatial reach (<span class="math inline">\(S_{i \rightarrow A}\)</span>), conditional community district social reach (<span class="math inline">\(r_{j \rightarrow A}\)</span>), and conditional community district spatial reach (<span class="math inline">\(s_{j \rightarrow A}\)</span>).</p>
 <p>We further defined two measures which summarize the pattern of connection across the people and places in the MPX NYC dataset. The first, the spatial mixing coefficient, can be used to analyze the pattern of connection across different demographic groups. The second, proportion in largest connected component, can be used to analyze the overall connectedness of the MPX NYC Person-Place graph and related graphs.</p>
 <section id="notation" class="level3" data-number="C.2.1"><h3 data-number="C.2.1" class="anchored" data-anchor-id="notation">
 <span class="header-section-number">C.2.1</span> Notation</h3>
-<p>Define <span class="math inline">\(\psi(i,j)\)</span> as the adjacency function for the person-place graph. For person <span class="math inline">\(i\)</span> and community <span class="math inline">\(j\)</span>:</p>
-<p><span class="math display">\[
-\psi(i,j) = \begin{cases} 1 &amp;i\sim j \\ 0 &amp;\text{otherwise} \end{cases}
-\]</span></p>
-<p>Define <span class="math inline">\(\psi_P(i,k)\)</span> as the adjacency functon for the person graph. For persons <span class="math inline">\(i\)</span> and <span class="math inline">\(k\)</span>:</p>
-<p><span class="math display">\[
-\psi_P(i,k) = \sum_{j \in N_C}{\psi(i,j) \psi(k,j)}
-\]</span></p>
-<p>Define <span class="math inline">\(\psi_C(j,l)\)</span> as the adjacency functon for the place graph. For places <span class="math inline">\(j\)</span> and <span class="math inline">\(l\)</span>:</p>
-<p><span class="math display">\[
-\psi_C(j,l) = \sum_{i \in N_P}{\psi(i,j) \psi(i,l)}
-\]</span></p>
 </section><section id="node-characteristics" class="level3" data-number="C.2.2"><h3 data-number="C.2.2" class="anchored" data-anchor-id="node-characteristics">
 <span class="header-section-number">C.2.2</span> Node characteristics</h3>
 <section id="participant-social-reach" class="level4"><h4 class="anchored" data-anchor-id="participant-social-reach">Participant social reach</h4>
@@ -3449,9 +1423,10 @@ N = \bigcup_{k = 1}^{K}{C_k}
 <p><span class="math display">\[
 \theta_p = \frac{\max_k{|C_k|}}{|N_p|}
 \]</span></p>
+</section></section></section><section id="chapters" class="level1 unnumbered hidden"><h1 class="unnumbered hidden">Chapters</h1>
 
 
-</section></section></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
