@@ -11,7 +11,7 @@ make_example_network_data <- function(type = "bipartite"){
   )
   
   labelled::var_label(example_nodes$name)  <- "Name"
-  labelled::var_label(example_nodes$type)  <- "Type"
+  labelled::var_label(example_nodes$type)  <- "Node type"
   labelled::var_label(example_nodes$label) <- "Label"
   labelled::var_label(example_nodes$age)   <- "Age"
   
@@ -116,5 +116,23 @@ make_example_network_data <- function(type = "bipartite"){
   }
   
   
-  result
+  
+  node_data <- result |> 
+                  data.frame() |>
+                  tidygraph::mutate(type = ifelse(type, "Person", "Place"))
+  
+  edge_data <- result |>
+                  tidygraph::activate(edges) |>
+                  tidygraph::mutate(
+                    from_name = tidygraph::.N()$name[from],
+                    to_name   = tidygraph::.N()$name[to]
+                    ) |>
+                  data.frame() |>
+    tidygraph::select(-c(from, to)) |>
+    tidygraph::rename(from = from_name, to = to_name)
+  
+  labelled::var_label(node_data$type) <- "Node type"
+  
+  tidygraph::tbl_graph(nodes = node_data, edges = edge_data)
+    
 }
