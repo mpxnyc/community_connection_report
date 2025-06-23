@@ -39,8 +39,14 @@ mpxnyc_dark <- function(n){
     "#FFCD2E")[1:n]
 }
 
+mpxnyc_dark_blue <- function(n){
+  c("#009BE8")[1:n]
+}
+
+
 mpxnyc_colors <- function(option){
   if (option == "all")   return(mpxnyc_all)
   if (option == "light") return(mpxnyc_light)
   if (option == "dark")  return(mpxnyc_dark)
+  if (option == "dark_blue") return(mpxnyc_dark_blue)
 }
