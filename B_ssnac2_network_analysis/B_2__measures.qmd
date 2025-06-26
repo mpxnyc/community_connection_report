@@ -1,9 +1,35 @@
 
+## Adjacency functions
+
+An adjacency function is a function that takes the labels for two nodes, and returns a non-negative value based on whether the nodes are connected or not, or based on the weight of the connection between the nodes. (A weight of zero indicates no connection between the nodes). We use the adjacency functions for the graphs defined above to define useful statistics. 
+
+First, we define $\psi(i,j)$ as the adjacency function for the RESPND-MI/MPX NYC person-place graph. For person $i$ and community $j$:
+
+
+$$
+\psi(i,j) = \begin{cases} 1 &i\text{ connected to } j \\ 0 &\text{otherwise} \end{cases}
+$$
+
+Then $\psi_P(i,k)$, the adjacency function for the RESPND-MI/MPX NYC person graph is defined:
+
+
+$$
+\psi_P(i,k) = \sum_{j \in N_C}{\psi(i,j) \psi(k,j)}
+$$
+
+Finally, $\psi_C(j,l)$, the adjacency function for the RESPND-MI/MPX NYC place graph is defined:
+
+
+$$
+\psi_C(j,l) = \sum_{i \in N_P}{\psi(i,j) \psi(i,l)}
+$$
+
+
+
+
 
 ## Measures
 
-
-
-
 {{< include B_2_2__node_characteristics.qmd >}}
+
 {{< include B_2_3__network_characteristics.qmd >}}
