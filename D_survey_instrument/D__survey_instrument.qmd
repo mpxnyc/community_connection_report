@@ -1,13 +1,156 @@
-
 ```{r  include=FALSE}
 targets::tar_source("../R_functions")
 
 ```
 
-# SSNAC III: Measurement {#sec-data}
+# SSNAC III: Data {#sec-data}
 
+Visual campaign
 
+-   Campaign materials were developed by a marketing agency on a paid contract
 
+-   Campaign materials were translated into spanish
+
+-   The campaign materials in English and Spanish were reviewed by Harvard IRB
+
+Questionnaire
+
+-   The questionnaire was developed by a porous team led by two investigators, translated to Spanish by at least two fluent speaker who work professionally in Spanish.
+
+-   We iterated the questionnaire through
+
+    -   discussions among investigators
+
+    -   open calls for feedback among people in contact with the project
+
+    -   targeted requests for feedback among professional LGBT workers
+
+-   The questionnaire was translated into Spanish
+
+-   The questionnaire in English and Spanish was reviewed by Harvard IRB
+
+Link tracing
+
+-   We designed a system for anonymously building a referral network
+
+-   At the start of the survey, the participant is given an identifier image showing a unique combination of words and a QR code. They are prompted to save the image of their identifier card.
+
+-   Near the end of the survey, the participant is prompted to share the survey with friends with a share button on screen. The share button opens the participant's device's native share menu and allows them to edit and share a pre-written invitation to the survey with a unique URL.
+
+-   If a contact of the participant's uses the url, an edge will be added between their node and the original participant's node
+
+-   Say an new participant takes the survey and shares it with somebody who has already taken the survey (an old participant)
+
+-   The old participant would go to the url and be prompted to upload their identifier card or to enter the combination of words on the card in a text field. An edge would be added between the new and old participants' nodes in the graph database
+
+Person-place mapper
+
+-   Interface for survey users
+
+-   Interface for data consumers (mpxnyc package)
+
+-   
+
+Data flow
+
+-   Front end interface in Next.js hosted on Vercel
+
+    -   takex a JSON file for the content of questions, text prompts
+
+    -   parses URL for referrer identifier (if any), and survey language
+
+    -   requests a public identifier from the API - the API returns a new public identifier. a unique combination of words.
+
+    -   shows unique public identifier and a QR code of the public identifier to participant, prompting participant to save the image on their device
+
+    -   for person-place network mapper data, front end queries a government database to transform spatial coordinates into census tract identifiers
+
+    -   returns a JSON object using the API
+
+-   API on XYZ
+
+    -   receives request for an identifier
+
+        -    generates a public identifier (described above) paired with a private identifier in the form of uid.
+
+        -   Returns public identifer to front end
+
+        -   Saves public identifer / private identifer pair in an identifier table in a secure database, separate from study data base
+
+    -   receives study data from front end
+
+        -   transforms public identifier to private identifers by querying the identifier table
+
+        -   sends data to graph data base
+
+    -   receives confirmation of link
+
+        -   transforms public identifier to private identifers by querying the identifier table
+
+        -   send data on the new edge to graph data base
+
+-   graph data base
+
+    -   hosted on a cloud server platform
+
+    -   designed to represent survey data as one giant graph (see data graph)
+
+    -   uses a query language that uses the structure of the graph to simplify complex queries
+
+    -   use script or manual entry to declare node types, edge types, and node and edge attribute data
+
+```{=html}
+<!-- -->
+```
+-   Data wrangling
+
+    -   Create an R package to:
+
+        -   query the data-base and transform data into tables
+
+        -   make data available for analysis directly from server
+
+    -   Create markdown files to:
+
+        -   monitor data during collection
+
+        -   run basic descriptive statistics
+
+        -   create basic tables and images for brief reports and presentations
+
+        -   create scientific abstracts
+
+-   The data design was reviewed by Harvard IRB
+
+Rationale
+
+-   Single-page web app vs. off-the shelf software vs. proprietary application
+
+    -   prior experience in other projects
+
+    -   visually limiting
+
+    -   limiting in terms of interaction (for instance, when a particpant tried to move ahead without answering a question, they were encouraged by a dramatic meme of RuPaul asking them to answer the question). we wanted it to look and feel good.
+
+    -   Allowed us to do some technical innovation by iterating quickly with a group of people who are interested in making a good prouct
+
+-   Marketing agency vs. what most other researchers do
+
+    -   I wanted to address gay men in their native languages: beauty, and campness
+
+    -   We wanted to reach lots of people quickly and acknowledge that not only did we need help making beautiful things, we would need help conducting a strategic online campaign with a clear identity, catchy name, etc.
+
+-   Census tract vs. spatial coordinates
+
+Resulting data set
+
+-   an example of data graph reference to section 1
+
+-   visual with full data
+
+    -   add data tables for nodes and edges
+
+    -   assembly of node and edge data into visual using ggraph and tidygraph
 
 ```{r}
 #| fig-width: 2
@@ -19,24 +162,19 @@ plot_icon(icon_name = "taco", color = "dark_purple", shape = 0)
 
 ```
 
-
 ::: {#acknowledgements}
-[Acknowledgements]{.underline}: The survey instrument was designed by Keletso Makofane and coded by Keletso Makofane (front end) and Imran Ansari (back end). Sudipta Saha found the web service that allowed us to safely collect spatial data. Seema Kara wrote the initial technical specifications for the instrument. neo4j granted a concessionary licence for the graph database system we used for the back end. Pedro Carneiro and Nguyen Tran led the development of survey questions. Cody Nolan and Anton Antón Castellanos Usigli conducted translation from English to Spanish. Robert Pitts helped to design questions on suspected mpox symptoms. 
+[Acknowledgements]{.underline}: The survey instrument was designed by Keletso Makofane and coded by Keletso Makofane (front end) and Imran Ansari (back end). Sudipta Saha found the web service that allowed us to safely collect spatial data. Seema Kara wrote the initial technical specifications for the instrument. neo4j granted a concessionary licence for the graph database system we used for the back end. Pedro Carneiro and Nguyen Tran led the development of survey questions. Cody Nolan and Anton Antón Castellanos Usigli conducted translation from English to Spanish. Robert Pitts helped to design questions on suspected mpox symptoms.
 
 [Lead author]{.underline}: Keletso Makofane, MPH, PhD. [Editor]{.underline}: Nicholas Diamond, MPH. (Published: June 2025).
 :::
 
-In this appendix, we describe the process of designing and testing a novel survey questionnaire tool we call the MPX NYC person-place mapper. We show the questions participants were presented with in the survey. 
+In this appendix, we describe the process of designing and testing a novel survey questionnaire tool we call the MPX NYC person-place mapper. We show the questions participants were presented with in the survey.
 
+{{< include D_1__person_place_mapper.qmd >}}
 
-{{< include D_1__person_place_mapper.qmd >}} 
-
+```{=html}
 <!--
 
 {{< include D_2__questionnaire.qmd >}} 
 -->
-
-
-
-
-
+```
