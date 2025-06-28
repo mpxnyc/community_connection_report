@@ -2,8 +2,6 @@
 
 ##### Place graph {.unnumbered}
 
-The RESPND-MI/MPX NYC place graph has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a residence or attended a gathering in both community districts. The weight of the edge is the count of participants who are shared by the two community districts. 
-
 ```{r}
 #| fig-cap: Sample place network visualization
 #| label: fig-example-community
@@ -20,43 +18,17 @@ make_example_network_data("places") |>
 
 ```
 
+The RESPND-MI/MPX NYC place graph has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a residence or attended a gathering in both community districts. The weight of the edge is the count of participants who are shared by the two community districts. We define the place graph 
 
+$$
+\mathscr{G}(\mathscr{N}_C, \psi_C )
+$$
 
-```{r include=FALSE}
-#| tbl-cap: Sample place network data
-#| label: tbl-example-place-nodes
-#| layout-ncol: 2
-#| tbl-subcap:
-#|  - "Nodes"
-#|  - "Edges"
-
-
-make_example_network_data("places") |>
-  data.frame() |>
-  dplyr::transmute(Name = label, Type = ifelse(type, "Person", "Community District")) |>
-  gt::gt()
-
-make_example_network_data("places") |>
-  dplyr::mutate(name = label, type, age) |>
-  tidygraph::activate(edges) |>
-  dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
-  data.frame() |>
-  dplyr::arrange(from, to) |>
-  dplyr::transmute(From = from_name, To = to_name, Weight = weight) |>
-  gt::gt()
-
-
-```
-
-
-
-
-
-Finally, $\psi_C(j,l)$, the adjacency function for the RESPND-MI/MPX NYC place graph is defined:
+with node set $\mathscr{N}_C$ and adjacency function $\psi_C$:
 
 
 $$
-\psi_C(j,l) = \sum_{i \in N_P}{\psi(i,j) \psi(i,l)}
+\psi_C(j,l) = \sum_{i \in \mathscr{N}_P}{\psi(i,j) \psi(i,l)}
 $$
 
 

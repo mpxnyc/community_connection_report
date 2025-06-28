@@ -24,43 +24,24 @@ make_example_network_data("bipartite") |>
 ```
 
 
-The RESPND-MI/MPX NYC person-place graph is a data graph that contains all collected data. In this graph, there are two types of nodes: community districts and survey participants. Edges can only exist between a participant and a community district - they indicate that the person either lives in or attended a gathering in that community district. @tbl-example-bipartite-nodes-edges (a) shows the node and @tbl-example-bipartite-nodes-edges (b) the edges of the network.
-
-
-```{r}
-#| label: tbl-example-bipartite-nodes-edges
-#| layout-ncol: 2
-#| tbl-cap: "Sample person-place network data"
-#| tbl-subcap:
-#|  - "Nodes"
-#|  - "Edges"
-
-
-
-make_example_network_data() |>
-  data.frame() |>
-  dplyr::transmute(name =label, age, type ) |>
-  gt::gt() |>
-  gt::tab_options(table.font.size =12, data_row.padding = gt::px(1))
-
-
-make_example_network_data() |>
-  dplyr::mutate(name = label, type, age) |>
-  tidygraph::activate(edges) |>
-  dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
-  data.frame() |>
-  dplyr::arrange(from, to) |>
-  dplyr::transmute(From = from_name, To = to_name, Relation = relation) |>
-  gt::gt() |>
-  gt::tab_options(table.font.size =12, data_row.padding = gt::px(1))
-```
-
-
-An adjacency function is a function that takes the labels for two nodes, and returns a non-negative value based on whether the nodes are connected or not, or based on the weight of the connection between the nodes. (A weight of zero indicates no connection between the nodes). We use the adjacency functions for the graphs defined above to define useful statistics. 
-
-First, we define $\psi(i,j)$ as the adjacency function for the RESPND-MI/MPX NYC person-place graph. For person $i$ and community $j$:
+The RESPND-MI/MPX NYC person-place graph is a data graph that contains all collected data. We define the person-place graph as an ordered pair with the first entry a set of node labels $\mathscr{N}$, and an adjacency function $\psi$. There are two types of nodes: community districts $\mathscr{N}_C$ and survey participants $\mathscr{N}_P$. 
 
 
 $$
-\psi(i,j) = \begin{cases} 1 &i\text{ connected to } j \\ 0 &\text{otherwise} \end{cases}
+\mathscr{G}(\mathscr{N}, \psi)
+$$
+
+
+An adjacency function for this graph is a function that takes the label for a pair of nodes, and returns a value indicating the strength of the edge between those nodes. In unweighted networks, the strength of a tie is either zero, meaning the pair of nodes is not connected, or 1, meaning it is. Define $\psi(i,j)$ as the adjacency function for the RESPND-MI/MPX NYC person-place graph. Then for person $i$ and community $j$:
+
+
+$$
+\psi(i,j) = \text{count of gatherings/homes participant } i  \text{ has in community } j
+$$
+
+Edges can only exist between a participant and a community district - they indicate that the person either lives in or attended a gathering in that community district. i.e.: 
+
+
+$$
+i,j \in \mathscr{N}_P \text{ or } i,j \in \mathscr{N}_C \implies \psi(i,j) = 0
 $$
