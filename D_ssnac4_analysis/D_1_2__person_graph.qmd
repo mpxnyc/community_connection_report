@@ -2,17 +2,11 @@
 
 ##### Person graph {.unnumbered}
 
-The RESPND-MI/MPX NYC has study participants as nodes. A pair of nodes is connected by a weighted edge if each of the participants represented by the nodes share at least one community district in which they both had a gathering or residence. The weight of the edge is equal to the count of community districts the pair of nodes have in common. 
-
-
-
 ```{r}
 #| fig-cap: Sample person-person network visualizatoin
 #| label: fig-example-participant
 #| fig-width: 8
 #| fig-height: 4
-
-
 
 make_example_network_data("people") |>
   plot_example_projection_network() +
@@ -23,45 +17,19 @@ make_example_network_data("people") |>
   ggraph::scale_edge_width_manual(name = "Weight", values = c(1,2,3))
 
 
-
-
-
-
 ```
 
 
 
- 
-
-```{r  include=FALSE}
-#| label: tbl-example-participant-nodes
-#| layout-ncol: 2
-#| tbl-cap: Sample person-person network data
-#| tbl-subcap:  
-#| - "Nodes"
-#| - "Edges"
-
-make_example_network_data("people") |>
-  data.frame() |>
-  dplyr::transmute(Name = label, Type = type) |>
-  gt::gt()
-
-make_example_network_data("people") |>
-  dplyr::mutate(name = label, type, age) |>
-  tidygraph::activate(edges) |>
-  dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
-  data.frame() |>
-  dplyr::arrange(from, to) |>
-  dplyr::transmute(From = from_name, To = to_name, Weight = weight) |>
-  gt::gt()
-
-```
-
-
-Then $\psi_P(i,k)$, the adjacency function for the RESPND-MI/MPX NYC person graph is defined:
-
+The RESPND-MI/MPX NYC has study participants as nodes. A pair of nodes is connected by a weighted edge if each of the participants represented by the nodes share at least one community district in which they both had a gathering or residence. The weight of the edge is equal to the count of community districts the pair of nodes have in common. We define the person graph 
 
 $$
-\psi_P(i,k) = \sum_{j \in N_C}{\psi(i,j) \psi(k,j)}
+\mathscr{G}(\mathscr{N}_P, \psi_P )
+$$
+
+with node set $\mathscr{N}_P$ and adjacency function $\psi_P$:
+
+$$
+\psi_P(i,k) = \sum_{j \in \mathscr{N}_C}{\psi(i,j) \psi(k,j)}
 $$
 

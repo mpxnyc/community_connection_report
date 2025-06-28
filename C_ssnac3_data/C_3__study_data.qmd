@@ -1,0 +1,60 @@
+## Study data
+
+
+
+```{r}
+#| fig-cap: Sample person-place network visualization
+#| label: fig-example-participant-place
+#| fig-width: 8
+#| fig-height: 5
+
+
+make_example_network_data("bipartite") |>
+  plot_example_bipartite_network() +
+  scale_color_mpxnyc(name = "Node type", option = "dark") +
+  ggplot2::labs(fill = "Node type") +
+  ggplot2::scale_size_manual(name = "Node type", values = c(7,10)) +
+  theme_mpxnyc_blank(
+    plot.margin = ggplot2::margin(0,0,0,0),
+    legend.position = "bottom"
+    ) 
+
+
+
+```
+
+
+The RESPND-MI/MPX NYC person-place graph is a data graph that contains all collected data. In this graph, there are two types of nodes: community districts and survey participants. Edges can only exist between a participant and a community district - they indicate that the person either lives in or attended a gathering in that community district. @tbl-example-bipartite-nodes-edges (a) shows the node and @tbl-example-bipartite-nodes-edges (b) the edges of the network.
+
+
+```{r}
+#| label: tbl-example-bipartite-nodes-edges
+#| layout-ncol: 2
+#| tbl-cap: "Sample person-place network data"
+#| tbl-subcap:
+#|  - "Nodes"
+#|  - "Edges"
+
+
+
+make_example_network_data() |>
+  data.frame() |>
+  dplyr::transmute(name =label, age, type ) |>
+  gt::gt() |>
+  gt::tab_options(table.font.size =12, data_row.padding = gt::px(1))
+
+
+make_example_network_data() |>
+  dplyr::mutate(name = label, type, age) |>
+  tidygraph::activate(edges) |>
+  dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
+  data.frame() |>
+  dplyr::arrange(from, to) |>
+  dplyr::transmute(From = from_name, To = to_name, Relation = relation) |>
+  gt::gt() |>
+  gt::tab_options(table.font.size =12, data_row.padding = gt::px(1))
+```
+
+
+We designed, tested and implemented a survey tool we call the MPX NYC Person-Place Network Mapper. We named it this because the data collected through the instrument can be naturally organized into a bipartite network with nodes representing people and places, and edges representing relations between people and places. Organizing the data as a network allows the interpretation of network parameters such as node degree or connectedness as descriptors of the system connecting people to each other through the places they traverse within the city.
+
