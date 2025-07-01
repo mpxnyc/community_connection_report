@@ -215,7 +215,7 @@ cookieconsent.run({
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../G_supplementary_results/G__supplementary_results.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">MPX NYC III: More data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">MPX NYC III: Results</span></span></a>
   </div>
 </li>
       </ul>
@@ -228,16 +228,16 @@ cookieconsent.run({
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#data-collection" id="toc-data-collection" class="nav-link active" data-scroll-target="#data-collection"><span class="header-section-number">C.1</span> Data collection</a></li>
+<li><a href="#study-data" id="toc-study-data" class="nav-link active" data-scroll-target="#study-data"><span class="header-section-number">C.1</span> Study data</a></li>
   <li>
 <a href="#person-place-network-mapper" id="toc-person-place-network-mapper" class="nav-link" data-scroll-target="#person-place-network-mapper"><span class="header-section-number">C.2</span> Person place network mapper</a>
   <ul class="collapse">
-<li><a href="#link-tracing" id="toc-link-tracing" class="nav-link" data-scroll-target="#link-tracing"><span class="header-section-number">C.2.1</span> Link tracing</a></li>
-  <li><a href="#place-mapping" id="toc-place-mapping" class="nav-link" data-scroll-target="#place-mapping"><span class="header-section-number">C.2.2</span> Place mapping</a></li>
+<li><a href="#place-mapping" id="toc-place-mapping" class="nav-link" data-scroll-target="#place-mapping"><span class="header-section-number">C.2.1</span> Place mapping</a></li>
+  <li><a href="#link-tracing" id="toc-link-tracing" class="nav-link" data-scroll-target="#link-tracing"><span class="header-section-number">C.2.2</span> Link tracing</a></li>
   <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation"><span class="header-section-number">C.2.3</span> Implementation</a></li>
   </ul>
 </li>
-  <li><a href="#study-data" id="toc-study-data" class="nav-link" data-scroll-target="#study-data"><span class="header-section-number">C.3</span> Study data</a></li>
+  <li><a href="#data-collection" id="toc-data-collection" class="nav-link" data-scroll-target="#data-collection"><span class="header-section-number">C.3</span> Data collection</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -257,96 +257,8 @@ cookieconsent.run({
 <p><u>Lead author</u>: Keletso Makofane, MPH, PhD. <u>Editor</u>: Nicholas Diamond, MPH. (Published: June 2025).</p>
 </div>
 <p>In this appendix, we describe the process of designing and testing a novel survey questionnaire tool we call the MPX NYC person-place mapper. We show the questions participants were presented with in the survey.</p>
-<section id="data-collection" class="level2" data-number="C.1"><h2 data-number="C.1" class="anchored" data-anchor-id="data-collection">
-<span class="header-section-number">C.1</span> Data collection</h2>
-</section><section id="person-place-network-mapper" class="level2 page-columns page-full" data-number="C.2"><h2 data-number="C.2" class="anchored" data-anchor-id="person-place-network-mapper">
-<span class="header-section-number">C.2</span> Person place network mapper</h2>
-<p>We designed the tool to solve practical and ethical issues related to the collection of sensitive spatial data in the context of an annonymous survey. Practically, we were interested in collecting data on locations participants visited and possibly had group sex in, but understood that we would not collect useful data if we collected markers like address or sip code using usual survey methods. In addition, we had hypothesized that a sizable proportion of sexual contact in a group happens in private settings whose addresses and exact locations participants were likely to forget.</p>
-<p>Ethically, we were aimed to collect a data set that would limit the risk of identifying survey participants through the locations and other data disclosed through the survey. Collecting spatial coordinates would increase the risk of accidentally identifying people by, for instance, capturing the exact coordinate of a college dormitory as a participant’s residence, or capturing the exact coordinates of a federal government office as a venue for sexual contact in a group setting. In both these examples, it becomes easier to narrow down the identity of participants using the location and the particiapnts’ characteristics as recorded in survey data.</p>
-<section id="link-tracing" class="level3" data-number="C.2.1"><h3 data-number="C.2.1" class="anchored" data-anchor-id="link-tracing">
-<span class="header-section-number">C.2.1</span> Link tracing</h3>
-<p><img src="../_const/images/share_screen.png" class="img-fluid"></p>
-<p>We designed a system for anonymously building a referral network</p>
-<p>At the start of the survey, the participant is given an identifier image showing a unique combination of words and a QR code. They are prompted to save the image of their identifier card.</p>
-<p>Near the end of the survey, the participant is prompted to share the survey with friends with a share button on screen. The share button opens the participant’s device’s native share menu and allows them to edit and share a pre-written invitation to the survey with a unique URL.</p>
-<p>If a contact of the participant’s uses the url, an edge will be added between their node and the original participant’s node</p>
-<p>Say an new participant takes the survey and shares it with somebody who has already taken the survey (an old participant)</p>
-<p>The old participant would go to the url and be prompted to upload their identifier card or to enter the combination of words on the card in a text field. An edge would be added between the new and old participants’ nodes in the graph database</p>
-</section><section id="place-mapping" class="level3" data-number="C.2.2"><h3 data-number="C.2.2" class="anchored" data-anchor-id="place-mapping">
-<span class="header-section-number">C.2.2</span> Place mapping</h3>
-<p>Though the investigator team doubted that participants would remember addresses or zip codes of places they visited, we thought that they might remember landmarks, cross-streets, neighborhood names, subway stations names, and other markers New Yorkers use to navigate the city so we used the Google maps interface and API.</p>
-<div id="fig-mapinputformat" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="../_const/images/image_app_graphic.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;C.1: Map input question format developed for MPX NYC</figcaption></figure>
-</div>
-<p>The MPX NYC Person-Place Network Map question displays a map with detailed geographic information including place names, roads, and neighborhood names. It includes a search bar as well as other navigation tools usually found on a google maps display (see <a href="#fig-mapinputformat">Figure&nbsp;<span>C.1</span></a>).</p>
-<p>To collect anonymous information on locations, first the participant is prompted to identify places of a certain type by tapping on the map. For instance, the first Network Map question asks participants to identify their primary residence. Once they select one, they are able to move onto the next question.</p>
-<p>The Network Map also allows researchers to elicit a collection of locations. For instance, we ask participants to identify all the places they have had physical or sexual contact in a group setting. Each time the participant taps the map, a marker appears where they tapped, and a pop-up window asks questions about the most recently identified location. In our study, participants were asked if they had sexual contact at the location and to select the type of location it is from a closed list of options.</p>
-</section><section id="implementation" class="level3 page-columns page-full" data-number="C.2.3"><h3 data-number="C.2.3" class="anchored" data-anchor-id="implementation">
-<span class="header-section-number">C.2.3</span> Implementation</h3>
-<p>The front end of the MPX NYC Person-Place Network Mapper was developed as a single-page web application using the React/NextJS framework <span class="citation" data-cites="vercel2024">(<a href="#ref-vercel2024" role="doc-biblioref">Vercel 2024</a>)</span> with visual design based on the MPX NYC style guide. The back end was a custom-built neo4j graph database <span class="citation" data-cites="neo4j2024">(<a href="#ref-neo4j2024" role="doc-biblioref">Neo4j 2024</a>)</span>. Along with the Network Map question format, the instrument allows the use of standard survey question formats (multiple choice, single choice, text field etc.).</p>
-<div class="no-row-height column-margin column-container"><div id="ref-vercel2024" class="csl-entry" role="listitem">
-Vercel. 2024. <span>“NextJS Documentation.”</span> <a href="https://nextjs.org/docs">https://nextjs.org/docs</a>.
-</div><div id="ref-neo4j2024" class="csl-entry" role="listitem">
-Neo4j. 2024. <span>“Neo4j Documentation.”</span> <a href="https://neo4j.com/docs/?utm_source=Google&amp;utm_medium=PaidSearch&amp;utm_campaign=Evergreen&amp;utm_content=AMS-Search-SEMCE-DSA-None-SEM-SEM-NonABM&amp;utm_term=&amp;utm_adgroup=DSA&amp;gad_source=1&amp;gbraid=0AAAAADk9OYpn-veLtg3MSa3HV-mXEgnRC&amp;gclid=Cj0KCQjwlvW2BhDyARIsADnIe-KKo4LZmo02jxyexPVweelrw_q-AwBtFSFPqVlfJ5YjiNyd1w7txfUaAk62EALw_wcB">https://neo4j.com/docs/?utm_source=Google&amp;utm_medium=PaidSearch&amp;utm_campaign=Evergreen&amp;utm_content=AMS-Search-SEMCE-DSA-None-SEM-SEM-NonABM&amp;utm_term=&amp;utm_adgroup=DSA&amp;gad_source=1&amp;gbraid=0AAAAADk9OYpn-veLtg3MSa3HV-mXEgnRC&amp;gclid=Cj0KCQjwlvW2BhDyARIsADnIe-KKo4LZmo02jxyexPVweelrw_q-AwBtFSFPqVlfJ5YjiNyd1w7txfUaAk62EALw_wcB</a>.
-</div></div><p>The MPC NYC Person-Place Network Mapper underwent two rounds of user testing. About 10 people participated each time, returning feedback via an informal feedback questionnaire and via email.</p>
-<p>Data flow</p>
-<ul>
-<li>
-<p>Front end interface in Next.js hosted on Vercel</p>
-<ul>
-<li><p>takex a JSON file for the content of questions, text prompts</p></li>
-<li><p>parses URL for referrer identifier (if any), and survey language</p></li>
-<li><p>requests a public identifier from the API - the API returns a new public identifier. a unique combination of words.</p></li>
-<li><p>shows unique public identifier and a QR code of the public identifier to participant, prompting participant to save the image on their device</p></li>
-<li><p>for person-place network mapper data, front end queries a government database to transform spatial coordinates into census tract identifiers</p></li>
-<li><p>returns a JSON object using the API</p></li>
-</ul>
-</li>
-<li>
-<p>API on XYZ</p>
-<ul>
-<li>
-<p>receives request for an identifier</p>
-<ul>
-<li><p>generates a public identifier (described above) paired with a private identifier in the form of uid.</p></li>
-<li><p>Returns public identifer to front end</p></li>
-<li><p>Saves public identifer / private identifer pair in an identifier table in a secure database, separate from study data base</p></li>
-</ul>
-</li>
-<li>
-<p>receives study data from front end</p>
-<ul>
-<li><p>transforms public identifier to private identifers by querying the identifier table</p></li>
-<li><p>sends data to graph data base</p></li>
-</ul>
-</li>
-<li>
-<p>receives confirmation of link</p>
-<ul>
-<li><p>transforms public identifier to private identifers by querying the identifier table</p></li>
-<li><p>send data on the new edge to graph data base</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>graph data base</p>
-<ul>
-<li><p>hosted on a cloud server platform</p></li>
-<li><p>designed to represent survey data as one giant graph (see data graph)</p></li>
-<li><p>uses a query language that uses the structure of the graph to simplify complex queries</p></li>
-<li><p>use script or manual entry to declare node types, edge types, and node and edge attribute data</p></li>
-</ul>
-</li>
-</ul>
-<p>To ensure participant anonymity, the survey tool coarsens spatial data to the census tract level before sending them to the study database. Census tracts are non-overlapping spatial units that partition the United States into areas ranging from <span class="math inline">\(2500\)</span> to <span class="math inline">\(8000\)</span> in population size <span class="citation" data-cites="uscensus2022">(<a href="#ref-uscensus2022" role="doc-biblioref">US Census 2022</a>)</span>. This is done through The Federal Communications Commission API <span class="citation" data-cites="fcc2022">(<a href="#ref-fcc2022" role="doc-biblioref">FCC 2022</a>)</span> which receives longitude-latitude coordinates from the survey instrument, and returns census block identifiers, which are transformed to census tract identifiers by truncating the last X digits. [CITATION] It is only after spatial data are transformed that they are transmitted to the study database (backend).</p>
-<div class="no-row-height column-margin column-container"><div id="ref-uscensus2022" class="csl-entry" role="listitem">
-US Census. 2022. <span>“Census Tracts.”</span> <a href="https://www2.census.gov/geo/pdfs/education/CensusTracts.pdf">https://www2.census.gov/geo/pdfs/education/CensusTracts.pdf</a>.
-</div><div id="ref-fcc2022" class="csl-entry" role="listitem">
-FCC. 2022. <span>“Federal Communications Commission API.”</span> <a href="https://www.fcc.gov/reports-research/developers/api-terms-service">https://www.fcc.gov/reports-research/developers/api-terms-service</a>.
-</div></div></section></section><section id="study-data" class="level2" data-number="C.3"><h2 data-number="C.3" class="anchored" data-anchor-id="study-data">
-<span class="header-section-number">C.3</span> Study data</h2>
+<section id="study-data" class="level2" data-number="C.1"><h2 data-number="C.1" class="anchored" data-anchor-id="study-data">
+<span class="header-section-number">C.1</span> Study data</h2>
 <div class="cell" data-hash="C__ssnac3_data_cache/html/fig-example-participant-place_a2646291307bd62ce3a215d528a404fe">
 <details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"bipartite"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_example_bipartite_network</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -360,7 +272,7 @@ FCC. 2022. <span>“Federal Communications Commission API.”</span> <a href="ht
 </details><div class="cell-output-display">
 <div id="fig-example-participant-place" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="C__ssnac3_data_files/figure-html/fig-example-participant-place-1.png" class="img-fluid figure-img" width="768"></p>
-<figcaption class="figure-caption">Figure&nbsp;C.2: Sample person-place network visualization</figcaption></figure>
+<figcaption class="figure-caption">Figure&nbsp;C.1: Sample person-place network visualization</figcaption></figure>
 </div>
 </div>
 </div>
@@ -1451,7 +1363,96 @@ FCC. 2022. <span>“Federal Communications Commission API.”</span> <a href="ht
 </div>
 </div>
 </div>
-<p>We designed, tested and implemented a survey tool we call the MPX NYC Person-Place Network Mapper. We named it this because the data collected through the instrument can be naturally organized into a bipartite network with nodes representing people and places, and edges representing relations between people and places. Organizing the data as a network allows the interpretation of network parameters such as node degree or connectedness as descriptors of the system connecting people to each other through the places they traverse within the city.</p>
+</section><section id="person-place-network-mapper" class="level2 page-columns page-full" data-number="C.2"><h2 data-number="C.2" class="anchored" data-anchor-id="person-place-network-mapper">
+<span class="header-section-number">C.2</span> Person place network mapper</h2>
+<p>We designed, tested and implemented a survey tool we call the MPX NYC Person-place network mapper. We designed the tool to solve practical and ethical issues related to the collection of sensitive spatial data in the context of an annonymous survey. Practically, we were interested in collecting data on locations participants visited and possibly had group sex in, but understood that we would not collect useful data if we collected markers like address or zip code using usual survey methods. Ethically, we were aimed to collect a data set that would limit the risk of identifying survey participants through the locations and other data disclosed through the survey.</p>
+<section id="place-mapping" class="level3" data-number="C.2.1"><h3 data-number="C.2.1" class="anchored" data-anchor-id="place-mapping">
+<span class="header-section-number">C.2.1</span> Place mapping</h3>
+<p>Though the investigator team doubted that participants would remember addresses or zip codes of places they visited, we thought that they might remember landmarks, cross-streets, neighborhood names, subway stations names, and other markers New Yorkers use to navigate the city so we used the Google maps interface and API.</p>
+<div id="fig-mapinputformat" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="../_const/images/image_app_graphic.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;C.2: Map input question format developed for MPX NYC</figcaption></figure>
+</div>
+<p>The MPX NYC Person-Place Network Map question displays a map with detailed geographic information including place names, roads, and neighborhood names. It includes a search bar as well as other navigation tools usually found on a google maps display (see <a href="#fig-mapinputformat">Figure&nbsp;<span>C.2</span></a>).</p>
+<p>To collect anonymous information on locations, first the participant is prompted to identify places of a certain type by tapping on the map. For instance, the first Network Map question asks participants to identify their primary residence. Once they select one, they are able to move onto the next question.</p>
+<p>The Network Map also allows researchers to elicit a collection of locations. For instance, we ask participants to identify all the places they have had physical or sexual contact in a group setting. Each time the participant taps the map, a marker appears where they tapped, and a pop-up window asks questions about the most recently identified location. In our study, participants were asked if they had sexual contact at the location and to select the type of location it is from a closed list of options.</p>
+</section><section id="link-tracing" class="level3" data-number="C.2.2"><h3 data-number="C.2.2" class="anchored" data-anchor-id="link-tracing">
+<span class="header-section-number">C.2.2</span> Link tracing</h3>
+<p><img src="../_const/images/share_screen.png" class="img-fluid"></p>
+<p>We designed a system for anonymously building a referral network</p>
+<p>At the start of the survey, the participant is given an identifier image showing a unique combination of words and a QR code. They are prompted to save the image of their identifier card.</p>
+<p>Near the end of the survey, the participant is prompted to share the survey with friends with a share button on screen. The share button opens the participant’s device’s native share menu and allows them to edit and share a pre-written invitation to the survey with a unique URL.</p>
+<p>If a contact of the participant’s uses the url, an edge will be added between their node and the original participant’s node</p>
+<p>Say an new participant takes the survey and shares it with somebody who has already taken the survey (an old participant)</p>
+<p>The old participant would go to the url and be prompted to upload their identifier card or to enter the combination of words on the card in a text field. An edge would be added between the new and old participants’ nodes in the graph database</p>
+</section><section id="implementation" class="level3 page-columns page-full" data-number="C.2.3"><h3 data-number="C.2.3" class="anchored" data-anchor-id="implementation">
+<span class="header-section-number">C.2.3</span> Implementation</h3>
+<section id="rationale" class="level4"><h4 class="anchored" data-anchor-id="rationale">Rationale</h4>
+<p>Collecting spatial coordinates would increase the risk of accidentally identifying people by, for instance, capturing the exact coordinate of a college dormitory as a participant’s residence, or capturing the exact coordinates of a federal government office as a venue for sexual contact in a group setting. In both these examples, it becomes easier to narrow down the identity of participants using the location and the particiapnts’ characteristics as recorded in survey data.</p>
+</section><section id="continuation" class="level4 page-columns page-full"><h4 class="anchored" data-anchor-id="continuation">Continuation</h4>
+<p>The front end of the MPX NYC Person-Place Network Mapper was developed as a single-page web application using the React/NextJS framework <span class="citation" data-cites="vercel2024">(<a href="#ref-vercel2024" role="doc-biblioref">Vercel 2024</a>)</span> with visual design based on the MPX NYC style guide. The back end was a custom-built neo4j graph database <span class="citation" data-cites="neo4j2024">(<a href="#ref-neo4j2024" role="doc-biblioref">Neo4j 2024</a>)</span>. Along with the Network Map question format, the instrument allows the use of standard survey question formats (multiple choice, single choice, text field etc.).</p>
+<div class="no-row-height column-margin column-container"><div id="ref-vercel2024" class="csl-entry" role="listitem">
+Vercel. 2024. <span>“NextJS Documentation.”</span> <a href="https://nextjs.org/docs">https://nextjs.org/docs</a>.
+</div><div id="ref-neo4j2024" class="csl-entry" role="listitem">
+Neo4j. 2024. <span>“Neo4j Documentation.”</span> <a href="https://neo4j.com/docs/?utm_source=Google&amp;utm_medium=PaidSearch&amp;utm_campaign=Evergreen&amp;utm_content=AMS-Search-SEMCE-DSA-None-SEM-SEM-NonABM&amp;utm_term=&amp;utm_adgroup=DSA&amp;gad_source=1&amp;gbraid=0AAAAADk9OYpn-veLtg3MSa3HV-mXEgnRC&amp;gclid=Cj0KCQjwlvW2BhDyARIsADnIe-KKo4LZmo02jxyexPVweelrw_q-AwBtFSFPqVlfJ5YjiNyd1w7txfUaAk62EALw_wcB">https://neo4j.com/docs/?utm_source=Google&amp;utm_medium=PaidSearch&amp;utm_campaign=Evergreen&amp;utm_content=AMS-Search-SEMCE-DSA-None-SEM-SEM-NonABM&amp;utm_term=&amp;utm_adgroup=DSA&amp;gad_source=1&amp;gbraid=0AAAAADk9OYpn-veLtg3MSa3HV-mXEgnRC&amp;gclid=Cj0KCQjwlvW2BhDyARIsADnIe-KKo4LZmo02jxyexPVweelrw_q-AwBtFSFPqVlfJ5YjiNyd1w7txfUaAk62EALw_wcB</a>.
+</div></div><p>The MPC NYC Person-Place Network Mapper underwent two rounds of user testing. About 10 people participated each time, returning feedback via an informal feedback questionnaire and via email.</p>
+<p>Data flow</p>
+<ul>
+<li>
+<p>Front end interface in Next.js hosted on Vercel</p>
+<ul>
+<li><p>takex a JSON file for the content of questions, text prompts</p></li>
+<li><p>parses URL for referrer identifier (if any), and survey language</p></li>
+<li><p>requests a public identifier from the API - the API returns a new public identifier. a unique combination of words.</p></li>
+<li><p>shows unique public identifier and a QR code of the public identifier to participant, prompting participant to save the image on their device</p></li>
+<li><p>for person-place network mapper data, front end queries a government database to transform spatial coordinates into census tract identifiers</p></li>
+<li><p>returns a JSON object using the API</p></li>
+</ul>
+</li>
+<li>
+<p>API on XYZ</p>
+<ul>
+<li>
+<p>receives request for an identifier</p>
+<ul>
+<li><p>generates a public identifier (described above) paired with a private identifier in the form of uid.</p></li>
+<li><p>Returns public identifer to front end</p></li>
+<li><p>Saves public identifer / private identifer pair in an identifier table in a secure database, separate from study data base</p></li>
+</ul>
+</li>
+<li>
+<p>receives study data from front end</p>
+<ul>
+<li><p>transforms public identifier to private identifers by querying the identifier table</p></li>
+<li><p>sends data to graph data base</p></li>
+</ul>
+</li>
+<li>
+<p>receives confirmation of link</p>
+<ul>
+<li><p>transforms public identifier to private identifers by querying the identifier table</p></li>
+<li><p>send data on the new edge to graph data base</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>graph data base</p>
+<ul>
+<li><p>hosted on a cloud server platform</p></li>
+<li><p>designed to represent survey data as one giant graph (see data graph)</p></li>
+<li><p>uses a query language that uses the structure of the graph to simplify complex queries</p></li>
+<li><p>use script or manual entry to declare node types, edge types, and node and edge attribute data</p></li>
+</ul>
+</li>
+</ul>
+<p>To ensure participant anonymity, the survey tool coarsens spatial data to the census tract level before sending them to the study database. Census tracts are non-overlapping spatial units that partition the United States into areas ranging from <span class="math inline">\(2500\)</span> to <span class="math inline">\(8000\)</span> in population size <span class="citation" data-cites="uscensus2022">(<a href="#ref-uscensus2022" role="doc-biblioref">US Census 2022</a>)</span>. This is done through The Federal Communications Commission API <span class="citation" data-cites="fcc2022">(<a href="#ref-fcc2022" role="doc-biblioref">FCC 2022</a>)</span> which receives longitude-latitude coordinates from the survey instrument, and returns census block identifiers, which are transformed to census tract identifiers by truncating the last X digits. [CITATION] It is only after spatial data are transformed that they are transmitted to the study database (backend).</p>
+<div class="no-row-height column-margin column-container"><div id="ref-uscensus2022" class="csl-entry" role="listitem">
+US Census. 2022. <span>“Census Tracts.”</span> <a href="https://www2.census.gov/geo/pdfs/education/CensusTracts.pdf">https://www2.census.gov/geo/pdfs/education/CensusTracts.pdf</a>.
+</div><div id="ref-fcc2022" class="csl-entry" role="listitem">
+FCC. 2022. <span>“Federal Communications Commission API.”</span> <a href="https://www.fcc.gov/reports-research/developers/api-terms-service">https://www.fcc.gov/reports-research/developers/api-terms-service</a>.
+</div></div></section></section></section><section id="data-collection" class="level2" data-number="C.3"><h2 data-number="C.3" class="anchored" data-anchor-id="data-collection">
+<span class="header-section-number">C.3</span> Data collection</h2>
 
 
 
