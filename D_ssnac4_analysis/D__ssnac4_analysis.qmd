@@ -1,15 +1,137 @@
-
 ```{r include=FALSE}
 targets::tar_source("../R_functions")
 ```
 
-# SSNAC IV: Analysis {#sec-appendix-network-analysis}
+# SSNAC III: Description {#sec-appendix-network-analysis}
 
+## Data graphs
 
+### Person-place data graph 
 
+-   The RESPND-MI/MPX NYC person-place data graph contains all the data.
+    -   $\mathscr{G}(\mathscr{N}, \mathscr{E}, d(.))$
+    -   We define it as an ordered triple with the first entry a set of node labels $\mathscr{N}$, the second, a set of edges $\mathscr{E}$, and the third, a function associating each node with node attributes and each edge with edge attributes.
+-   There are two types of nodes: community districts $\mathscr{N}_C$ and survey participants $\mathscr{N}_P$.
+    -    $\mathscr{N} = \mathscr{N}_P \cup \mathscr{N}_C,\mathscr{N}_P \cap \mathscr{N}_C = \emptyset$
+-   Edges are given by
+    -    $\mathscr{E}=\{(x, a,b) : x \in \mathbf{Z}_+, a \in \mathscr{N}_P, b \in \mathscr{N}_C \text{ and } a \sim b\}$
+-   Node data
+    -   Definition: $d(\mathscr{N}) = \{\mathbf{v}_t \in (S_t)^{|\mathscr{N}|} : t \in [1:K], K \in \mathbf{Z}_+\}$
+    -   Attributes include
+        -   Type (Person; Place)
+        -   \[...person attributes like age, gender, sexual orientation\]
+        -   \[...place attributes like place_name\]
+-   Edge data
+    -   definition $d(\mathscr{E}) = \{\mathbf{v}_t \in (S_t)^{|\mathscr{E}|} : t \in [1:K], K \in \mathbf{Z}_+\}$
+    -   Attributes inlcude
+        -   relation type (home, low contact gathering, high contact gathering)
+-   Comments:
+    -   Person-place graph is bipartite graph
+        -   Edges can only exist between a participant and a community district - they indicate that the person either lives in or attended a gathering in that community district.
 
+        -   i.e.: $i,j \in \mathscr{N}_P \text{ or } i,j \in \mathscr{N}_C \implies \psi(i,j) = 0$
 
+### Useful sets
 
+-   Relations between person $a \in \mathscr{N}_P$ and place $c \in \mathscr{N}_C$:
+    -   $H(a, c) = \{(x, c) : (x, a, c) \in \mathscr{E},  x \in \mathbf{Z}_+\}$
+-   Places shared by persons $a,b \in \mathscr{N}_P$ :
+    -   $H_C(a, b) = \{(x, y, c) : (x, a, c), (y, b, c) \in \mathscr{E},  x,y \in \mathbf{Z}_+ \}$
+-   People shared by places $a,b \in \mathscr{N}$:
+    -   $H_P(a, b) = \{(x, y, p) : (x, p, a), (y, p, b) \in \mathscr{E},  x,y \in \mathbf{Z}_+ \}$
+
+### Person graph 
+
+-   The RESPND-MI/MPX NYC person data graph has study participants as nodes.
+    -   $\mathscr{G}_P(\mathscr{N}_P, \mathscr{E}_P)$
+-   A pair of nodes is connected by a weighted edge if each of the participants represented by the nodes share at least one community district in which they both had a gathering or residence.
+-   The weight of the edge is equal to the count of community districts the pair of nodes have in common.
+-   We define the person graph:
+    -   Edge weight between persons $a,b \in \mathscr{N}_P$: $w_P(a, b) = |H_C(a, b)|$
+    -   Edges: $\mathscr{E}_P = \{ (a,b) : a, b \in \mathscr{N}_P, w(a,b)>0\}$
+-   Comment: Person graph is bipartite projection of $\mathscr{G}$ onto person nodes $\mathscr{N}_P$
+
+### Place graph 
+
+-   The RESPND-MI/MPX NYC place graph has community districts as nodes.
+    -   $\mathscr{G}_C(\mathscr{N}_C, \mathscr{E}_C)$
+-   A pair of community districts is connected by a weighted edge when at least one participant has a residence or attended a gathering in both community districts.
+-   The weight of the edge is the count of participants who are shared by the two community districts.
+-   We define the place graph:
+    -   Edge weight between places $a,b \in \mathscr{N}_C$: $w_C(a, b) = |H_P(a, b)|$
+    -   Edges: $\mathscr{E}_C = \{ (a,b) : a, b \in \mathscr{N}_C, w(a,b)>0\}$
+-   Comment: Place graph is bipartite projection of $\mathscr{G}$ onto place nodes $\mathscr{N}_C$
+
+## Measures
+
+#### Adjacency functions
+
+-   An adjacency function for this graph is a function that takes the label for a pair of nodes, and returns a value indicating the strength of the edge between those nodes.
+-   Define $\psi(i,j)$ as the adjacency function for the RESPND-MI/MPX NYC person-place graph. Then for person $i$ and community $j$:
+    -   $\psi(i,j) = \text{count of gatherings/homes participant } i  \text{ has in community } j$
+-   Define $\psi_P(i,k)$ as adjacency function for place bipartite projection data graph
+    -   $\psi_P(i,k) = \sum_{j \in \mathscr{N}_C}{\psi(i,j) \psi(k,j)}$
+-   Define as adjacency function for person bipartite projection data graph
+    -   $\psi_C(j,l) = \sum_{i \in \mathscr{N}_P}{\psi(i,j) \psi(i,l)}$
+
+#### Local network attributes
+
+-   social reach for person $i$ to subset $A \subset \mathscr{N}_P$:
+    -   is the number of participant nodes in set $A \subset \mathscr{N}_P$ that node $i$ shares a community district with (either because both nodes have a residence or gathering in that community district).
+    -   $R_{i\rightarrow A} = \sum_{\begin{aligned} j &\in A \end{aligned}}{\psi_p (i,j)}$
+    -   By definition $R_{i\rightarrow A} = R_{i}$ when $A = \mathscr{N}_P$
+-   social catchment for place $j$ among subset $A$:
+    -   is defined as the number of connections the focal community district has with participants. This can be because partipants attended a gathering or have a residence in that community district. The measure is defined as the weighted node degree in the RESPND-MI/MPX NYC person-place graph.
+    -   $r_{j\rightarrow A} = \sum_{i \in A} {\psi (i, j)}$
+    -   By definition $r_{i\rightarrow A} = r_{i}$ when $A = \mathscr{N}_P$
+
+#### Global network attributes
+
+-   Spatial mixing coefficient
+    -   The **spatial mixing coefficient from A to B** quantifies the degree to which egos in group A preferentially live in or attend gatherings in community districts they are likely to encounter members of group B.
+    -   Definition:
+        -   We define **preference** of group A for group B (for $A, B \subset \mathscr{N}_p$) as the average proportion of alters from group B among egos from group
+
+            -   $\Phi(A,B) = \frac{1}{|A|}\sum_{i \in A}{\frac{ R_{i \rightarrow B}}{R_i}}
+                $
+
+        -   The **prevalence** of group B is the size of the group divided by the total number of participants.
+
+            -   $\frac{|B|}{|\mathscr{N}_p|}$
+
+        -   The **spatial mixing matrix** is the ratio of preference to prevalence minus one. It quantifies the degree to which egos in group A preferentially live in or attend gatherings in community districts they are likely to encounter members of group B.
+
+            -   $\phi(A,B) = \frac{|\mathscr{N}_p|}{|B|} \Phi(A,B) - 1$
+-   Proportion in largest connected component
+    -   In a given network, a connected component is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties. Say the size of the $k^{th}$ connected component is $C_k$. The proportion in the largest connected component is given by:
+
+        -   $\theta_p = \frac{\max_k{C_k}}{|\mathscr{N}_p|}$
+
+#### Dynamics on the place network
+
+-   Outings movement matrix
+    -   The **movement matrix** is a square matrix whose $kl^{th}$ entry, $m(k,l)$, is defined as the count of outings from home in community district $k$ to a gathering in community district $l$. Say $d^H(i)$ is the home community district of participant $i$. Then:
+
+        -   $m(k,l) = \sum_{\begin{aligned}i \in \mathscr{N}_P \\ d^H(i) = k \end{aligned}} \psi (i,l)$
+-   Spatial concentration plot
+    -   The **spatial concentration proportion** $c(k)$ quantifies the degree to which a community district is over-represented among destination community districts compared to home districts in the movement matrix. It is the difference of the margins of the movement matrix.
+
+        -   $c(k) = \frac{\sum_l{m(l,k)} - \sum_k{m(l,k)}}{\sum_{l,k}{m(l,k)}}$
+
+## Statistical inference
+
+-   Simulated person-place graph $\mathscr{G}^*(\mathscr{N}^*, \mathscr{E}^*)$
+    -   Nodes $\mathscr{N}^* = \mathscr{N}_P^* \cup \mathscr{N}_C^*$
+        -   Place nodes $\mathscr{N}_C^*$: $m$ copies of each element in $\mathscr{N}_C$
+        -   Person nodes $\mathscr{N}_P^*$: random sample of size $m \times |\mathscr{N}_P|$ from $\mathscr{N}_P$ drawn [with replacement]{.underline}
+        -   Since $\mathscr{N}^*$ is comprised of re-labelled elements of $\mathscr{N}$, $\exists \phi : \mathscr{N}^* \rightarrow \mathscr{N}$ such that $a \in \mathscr{N}^* \implies \phi(a) \in \mathscr{N}$ (node name mapping)
+    -   Edges
+        -   for $a, b \in \mathscr{N}^*$: $(\phi(a), \phi(b)) \in \mathscr{E} \implies (x, a, b) \in \mathscr{E}^*$ for some $x \in \mathbf{Z}_+$
+-   Remarks:
+    -   We can create simulated person graph and simulated place graph as bipartite projections of the simulated person-place graph since the latter is a bipartite graph
+    -   Statistical inference is conducted using the empirical distribution for each measure.
+        -   The empirical distribution is estimated by calculating each measures within strata defined by simulation repetition, and summarizing the sample distribution across repetitions
+    -   Simulation repetitions each comprise disjoint components of the simulted person-place graph
 
 ```{r}
 #| fig-width: 2
@@ -21,57 +143,28 @@ plot_icon(icon_name = "devil", color = "dark_orange", shape = 16, alpha = 0.1)
 
 ```
 
-
 ::: {#acknowledgements}
 [Acknowledgements]{.underline}: The analytic framework for this project developed over an extended period of time, beginning during my PhD dissertation (Harvard University, 2021, under the supervision of Lisa Berkman, Eric Tchetgen Tchetgen, and a former mentor I no longer contact). In particular, the analysis borrows from the central paper in my dissertation, which shows how the wealth of non-coresident extended family members is protective against mortality.... (Continued at bottom of page)
-
 
 [Lead author]{.underline}: Keletso Makofane, MPH, PhD. [Editor]{.underline}: Nicholas Diamond, MPH. (Published: June 2025).
 :::
 
-
-
-
-
-In this appendix we describe the main data objects of the MPX NYC study -- the Person-place graph, the Person graph and the Place graph -- as well as the statistics we used to analyze them. 
-
+In this appendix we describe the main data objects of the MPX NYC study -- the Person-place graph, the Person graph and the Place graph -- as well as the statistics we used to analyze them.
 
 {{< include D_1__data.qmd >}}
+
 {{< include D_2__measures.qmd >}}
-<!--
 
-
--->
-
-
-
-
-
-::: {#acknowledgements}
 [Acknowledgements]{.underline}: The analytic framework for this project developed over an extended period of time, beginning during my PhD dissertation (Harvard University, 2021, under the supervision of Lisa Berkman, Eric Tchetgen Tchetgen, and a former mentor I no longer contact). In particular, the analysis borrows from the central paper in my dissertation, which shows how the wealth of non-coresident extended family members is protective against mortality.
 
-This work was part of U.S. government-funded research conducted in South Africa through the HAALSA study, which has since been defunded by the Trump administration. It is path-breaking because it shows an approach to using a large scale (over 100,000 people observed over three decades) dataset as a family network. There are many more datasets that could be analyzed using these methods. Any investigator who ever hosted a study at the Agincourt surveillance site in the north-east of South Africa, for instance, can use these methods to interpret their own data in light of family networks. It has the potential to illustrate the value of deep collaboration between U.S. and South African researchers. It is also of pedagogical value. I wrote the appendices of my dissertation in the same style as these appendices -- with students and teachers of epidemiology in mind. 
+This work was part of U.S. government-funded research conducted in South Africa through the HAALSA study, which has since been defunded by the Trump administration. It is path-breaking because it shows an approach to using a large scale (over 100,000 people observed over three decades) dataset as a family network. There are many more datasets that could be analyzed using these methods. Any investigator who ever hosted a study at the Agincourt surveillance site in the north-east of South Africa, for instance, can use these methods to interpret their own data in light of family networks. It has the potential to illustrate the value of deep collaboration between U.S. and South African researchers. It is also of pedagogical value. I wrote the appendices of my dissertation in the same style as these appendices -- with students and teachers of epidemiology in mind.
 
 **Unfortunately, my PhD dissertation paper is a hostage of the American Journal of Epidemiology’s former editor-in-chief, Ichiro Kawachi, who is a colleague of my former mentor.**
 
-After taking some time away from work to recover from the social violence I experienced at the hands of my former mentor, I was surprised to find that the edits that had held up publication of my dissertation paper (with implications for my ability to get an academic job) were minor copy edits. The "technical review" itself, which is misleadingly labelled, was riddled with errors, by the admission of the handling editor. Many tedious things happened after that, but the result of them is that the editors of the American Journal of Epidemiology have the final version of my manuscript, which I copy edited myself after arranging for the journal to receive thousands of dollars in publication fees... after spending years conducting the research and months responding to peer review. I submitted the manuscript by email after the handling editor agreed to receive it by email. 
+After taking some time away from work to recover from the social violence I experienced at the hands of my former mentor, I was surprised to find that the edits that had held up publication of my dissertation paper (with implications for my ability to get an academic job) were minor copy edits. The "technical review" itself, which is misleadingly labelled, was riddled with errors, by the admission of the handling editor. Many tedious things happened after that, but the result of them is that the editors of the American Journal of Epidemiology have the final version of my manuscript, which I copy edited myself after arranging for the journal to receive thousands of dollars in publication fees... after spending years conducting the research and months responding to peer review. I submitted the manuscript by email after the handling editor agreed to receive it by email.
 
-Mysteriously, the manuscript remains unpublished. Ichiro Kawachi remains a member of the editorial board of the Journal. The Journal is associated with the Society of Epidemiologic Research, whose meetings were an important venue for the development of the SSNAC framework. 
+Mysteriously, the manuscript remains unpublished. Ichiro Kawachi remains a member of the editorial board of the Journal. The Journal is associated with the Society of Epidemiologic Research, whose meetings were an important venue for the development of the SSNAC framework.
 
 **For publication-ready copies of the paper referenced below, which was accepted on 19 October 2023, please contact the editorial board of the American Journal of Epidemiology directly. Please share your correspondence with members of the Society of Epidemiologic Research and any South African and U.S. researchers you think might have an interest in seeing the work in print.**
 
 > Makofane, K., Tchetgen Tchetgen, E. J., Bassett, M. T., Berkman, L. F. (Accepted 2023, final manuscript submitted January 2025). Networked wealth and mortality in the Agincourt Health and Demographic Surveillance System 2009 – 2018. *American Journal of Epidemiology*.
-:::
-
-
-
-
-
-
-
-
-
-
-
-
-

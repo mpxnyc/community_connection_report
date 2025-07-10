@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.6.42">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>community and connection - C - SSNAC III: Data</title>
+
+
+<title>C - SSNAC III: Data – community and connection</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -30,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -55,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -72,6 +76,7 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
+
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -88,16 +93,23 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-9007c0be9b1e702f95862b6b284a95cf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -106,17 +118,23 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-8EDGL4274R"></script><script type="text/plain" cookie-consent="tracking">
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-8EDGL4274R"></script>
+
+<script type="text/plain" cookie-consent="tracking">
 
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-8EDGL4274R', { 'anonymize_ip': true});
-</script><script type="text/javascript" charset="UTF-8">
+</script>
+
+<script type="text/javascript" charset="UTF-8">
 document.addEventListener('DOMContentLoaded', function () {
 cookieconsent.run({
   "notice_banner_type":"simple",
@@ -127,29 +145,77 @@ cookieconsent.run({
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
+  ,
+"language":"en"
   });
 });
-</script><script async="" src="https://hypothes.is/embed.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+</script> 
+  
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
+
 <body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../A_ssnac1_context/A__ssnac1_context.html">Appendices</a></li><li class="breadcrumb-item"><a href="../C_ssnac3_data/C__ssnac3_data.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">SSNAC III: Data</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../A_ssnac1_context/A__ssnac1_context.html">Appendices</a></li><li class="breadcrumb-item"><a href="../C_ssnac3_data/C__ssnac3_data.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">SSNAC III: Data</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
-      <img src="../_const/images/image_mpxnyc.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
+      <img src="../_const/images/image_mpxnyc.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../"></a> 
     </div>
@@ -161,7 +227,7 @@ cookieconsent.run({
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome to RESPND-MI</span></a>
@@ -169,14 +235,14 @@ cookieconsent.run({
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../A_ssnac1_context/A__ssnac1_context.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">SSNAC I: Context</span></span></a>
@@ -219,35 +285,46 @@ cookieconsent.run({
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#study-data" id="toc-study-data" class="nav-link active" data-scroll-target="#study-data"><span class="header-section-number">C.1</span> Study data</a></li>
-  <li>
-<a href="#person-place-network-mapper" id="toc-person-place-network-mapper" class="nav-link" data-scroll-target="#person-place-network-mapper"><span class="header-section-number">C.2</span> Person place network mapper</a>
+  <li><a href="#study-data" id="toc-study-data" class="nav-link active" data-scroll-target="#study-data"><span class="header-section-number">C.1</span> Study data</a></li>
+  <li><a href="#person-place-network-mapper" id="toc-person-place-network-mapper" class="nav-link" data-scroll-target="#person-place-network-mapper"><span class="header-section-number">C.2</span> Person place network mapper</a>
   <ul class="collapse">
-<li><a href="#place-mapping" id="toc-place-mapping" class="nav-link" data-scroll-target="#place-mapping"><span class="header-section-number">C.2.1</span> Place mapping</a></li>
+  <li><a href="#place-mapping" id="toc-place-mapping" class="nav-link" data-scroll-target="#place-mapping"><span class="header-section-number">C.2.1</span> Place mapping</a></li>
   <li><a href="#link-tracing" id="toc-link-tracing" class="nav-link" data-scroll-target="#link-tracing"><span class="header-section-number">C.2.2</span> Link tracing</a></li>
   <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation"><span class="header-section-number">C.2.3</span> Implementation</a></li>
-  </ul>
-</li>
+  </ul></li>
   <li><a href="#data-collection" id="toc-data-collection" class="nav-link" data-scroll-target="#data-collection"><span class="header-section-number">C.3</span> Data collection</a></li>
-  </ul></nav>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="sec-data" class="quarto-section-identifier">C - SSNAC III: Data</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../A_ssnac1_context/A__ssnac1_context.html">Appendices</a></li><li class="breadcrumb-item"><a href="../C_ssnac3_data/C__ssnac3_data.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">SSNAC III: Data</span></a></li></ol></nav><h1 class="title display-7"><span id="sec-data" class="quarto-section-identifier">C - SSNAC III: Data</span></h1></header>
 
-</header><div class="cell" data-layout-align="center" data-hash="C__ssnac3_data_cache/html/unnamed-chunk-2_f43944a2ac40a66277463e629411fa31">
-<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plot_icon</span><span class="op">(</span>icon_name <span class="op">=</span> <span class="st">"taco"</span>, color <span class="op">=</span> <span class="st">"dark_purple"</span>, shape <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<header id="title-block-header">
+<div class="quarto-title-block d-none d-lg-block"><div><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+
+</header>
+
+
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_icon</span>(<span class="at">icon_name =</span> <span class="st">"taco"</span>, <span class="at">color =</span> <span class="st">"dark_purple"</span>, <span class="at">shape =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="C__ssnac3_data_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="192"></p>
+<figure class="figure">
+<p><img src="C__ssnac3_data_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
 </figure>
 </div>
 </div>
@@ -257,65 +334,77 @@ cookieconsent.run({
 <p><u>Lead author</u>: Keletso Makofane, MPH, PhD. <u>Editor</u>: Nicholas Diamond, MPH. (Published: June 2025).</p>
 </div>
 <p>In this appendix, we describe the process of designing and testing a novel survey questionnaire tool we call the MPX NYC person-place mapper. We show the questions participants were presented with in the survey.</p>
-<section id="study-data" class="level2" data-number="C.1"><h2 data-number="C.1" class="anchored" data-anchor-id="study-data">
-<span class="header-section-number">C.1</span> Study data</h2>
-<div class="cell" data-hash="C__ssnac3_data_cache/html/fig-example-participant-place_a2646291307bd62ce3a215d528a404fe">
-<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"bipartite"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">plot_example_bipartite_network</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_color_mpxnyc</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Node type"</span>, option <span class="op">=</span> <span class="st">"dark"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Node type"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_size_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Node type"</span>, values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">7</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span></span>
-<span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>,</span>
-<span>    legend.position <span class="op">=</span> <span class="st">"bottom"</span></span>
-<span>    <span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div id="fig-example-participant-place" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="C__ssnac3_data_files/figure-html/fig-example-participant-place-1.png" class="img-fluid figure-img" width="768"></p>
-<figcaption class="figure-caption">Figure&nbsp;C.1: Sample person-place network visualization</figcaption></figure>
+<section id="study-data" class="level2" data-number="C.1">
+<h2 data-number="C.1" class="anchored" data-anchor-id="study-data"><span class="header-section-number">C.1</span> Study data</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"bipartite"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_example_bipartite_network</span>() <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">option =</span> <span class="st">"dark"</span>) <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Node type"</span>) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_size_manual</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> ggplot2<span class="sc">::</span><span class="fu">margin</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-example-participant-place" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-example-participant-place-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="C__ssnac3_data_files/figure-html/fig-example-participant-place-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-participant-place-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;C.1: Sample person-place network visualization
+</figcaption>
+</figure>
 </div>
 </div>
 </div>
-<p>The RESPND-MI/MPX NYC person-place graph is a data graph that contains all collected data. In this graph, there are two types of nodes: community districts and survey participants. Edges can only exist between a participant and a community district - they indicate that the person either lives in or attended a gathering in that community district. <a href="#tbl-example-bipartite-nodes-edges">Table&nbsp;<span>C.1</span></a> (a) shows the node and <a href="#tbl-example-bipartite-nodes-edges">Table&nbsp;<span>C.1</span></a> (b) the edges of the network.</p>
-<div>
-<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>name <span class="op">=</span><span class="va">label</span>, <span class="va">age</span>, <span class="va">type</span> <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html">tab_options</a></span><span class="op">(</span>table.font.size <span class="op">=</span><span class="fl">12</span>, data_row.padding <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">label</span>, <span class="va">type</span>, <span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>from_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">from</span><span class="op">]</span>, to_name <span class="op">=</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/context_accessors.html">.N</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="va">to</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">from</span>, <span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>From <span class="op">=</span> <span class="va">from_name</span>, To <span class="op">=</span> <span class="va">to_name</span>, Relation <span class="op">=</span> <span class="va">relation</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html">tab_options</a></span><span class="op">(</span>table.font.size <span class="op">=</span><span class="fl">12</span>, data_row.padding <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html">px</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-example-bipartite-nodes-edges" class="cell tbl-parent quarto-layout-panel anchored" data-hash="C__ssnac3_data_cache/html/tbl-example-bipartite-nodes-edges_e4f36a58fc34d1b3499178dc1af7fe75">
-<div class="panel-caption table-caption">
-<p>Table&nbsp;C.1: Sample person-place network data</p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div id="tbl-example-bipartite-nodes-edges-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-bipartite-nodes-edges" style="flex-basis: 50.0%;justify-content: center;">
-
-<div id="rfazcurvxd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rfazcurvxd table {
+<p>The RESPND-MI/MPX NYC person-place graph is a data graph that contains all collected data. In this graph, there are two types of nodes: community districts and survey participants. Edges can only exist between a participant and a community district - they indicate that the person either lives in or attended a gathering in that community district. <a href="#tbl-example-bipartite-nodes-edges" class="quarto-xref">Table&nbsp;<span>C.1</span></a> (a) shows the node and <a href="#tbl-example-bipartite-nodes-edges" class="quarto-xref">Table&nbsp;<span>C.1</span></a> (b) the edges of the network.</p>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">transmute</span>(<span class="at">name =</span>label, age, type ) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">tab_options</span>(<span class="at">table.font.size =</span><span class="dv">12</span>, <span class="at">data_row.padding =</span> gt<span class="sc">::</span><span class="fu">px</span>(<span class="dv">1</span>))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">name =</span> label, type, age) <span class="sc">|&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  tidygraph<span class="sc">::</span><span class="fu">activate</span>(edges) <span class="sc">|&gt;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">from_name =</span> tidygraph<span class="sc">::</span><span class="fu">.N</span>()<span class="sc">$</span>name[from], <span class="at">to_name =</span> tidygraph<span class="sc">::</span><span class="fu">.N</span>()<span class="sc">$</span>name[to]) <span class="sc">|&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(from, to) <span class="sc">|&gt;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">transmute</span>(<span class="at">From =</span> from_name, <span class="at">To =</span> to_name, <span class="at">Relation =</span> relation) <span class="sc">|&gt;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">tab_options</span>(<span class="at">table.font.size =</span><span class="dv">12</span>, <span class="at">data_row.padding =</span> gt<span class="sc">::</span><span class="fu">px</span>(<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-example-bipartite-nodes-edges" class="quarto-layout-panel anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-example-bipartite-nodes-edges-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;C.1: Sample person-place network data
+</figcaption>
+<div aria-describedby="tbl-example-bipartite-nodes-edges-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-example-bipartite-nodes-edges" style="flex-basis: 50.0%;justify-content: center;">
+<div id="thfduywutr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#thfduywutr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rfazcurvxd thead, #rfazcurvxd tbody, #rfazcurvxd tfoot, #rfazcurvxd tr, #rfazcurvxd td, #rfazcurvxd th {
+#thfduywutr thead, #thfduywutr tbody, #thfduywutr tfoot, #thfduywutr tr, #thfduywutr td, #thfduywutr th {
   border-style: none;
 }
 
-#rfazcurvxd p {
+#thfduywutr p {
   margin: 0;
   padding: 0;
 }
 
-#rfazcurvxd .gt_table {
+#thfduywutr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -341,12 +430,12 @@ cookieconsent.run({
   border-left-color: #D3D3D3;
 }
 
-#rfazcurvxd .gt_caption {
+#thfduywutr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rfazcurvxd .gt_title {
+#thfduywutr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -358,7 +447,7 @@ cookieconsent.run({
   border-bottom-width: 0;
 }
 
-#rfazcurvxd .gt_subtitle {
+#thfduywutr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -370,7 +459,7 @@ cookieconsent.run({
   border-top-width: 0;
 }
 
-#rfazcurvxd .gt_heading {
+#thfduywutr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -382,13 +471,13 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#rfazcurvxd .gt_bottom_border {
+#thfduywutr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rfazcurvxd .gt_col_headings {
+#thfduywutr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -403,7 +492,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#rfazcurvxd .gt_col_heading {
+#thfduywutr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -423,7 +512,7 @@ cookieconsent.run({
   overflow-x: hidden;
 }
 
-#rfazcurvxd .gt_column_spanner_outer {
+#thfduywutr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -435,15 +524,15 @@ cookieconsent.run({
   padding-right: 4px;
 }
 
-#rfazcurvxd .gt_column_spanner_outer:first-child {
+#thfduywutr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rfazcurvxd .gt_column_spanner_outer:last-child {
+#thfduywutr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rfazcurvxd .gt_column_spanner {
+#thfduywutr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -455,11 +544,11 @@ cookieconsent.run({
   width: 100%;
 }
 
-#rfazcurvxd .gt_spanner_row {
+#thfduywutr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rfazcurvxd .gt_group_heading {
+#thfduywutr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -485,7 +574,7 @@ cookieconsent.run({
   text-align: left;
 }
 
-#rfazcurvxd .gt_empty_group_heading {
+#thfduywutr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -500,15 +589,15 @@ cookieconsent.run({
   vertical-align: middle;
 }
 
-#rfazcurvxd .gt_from_md > :first-child {
+#thfduywutr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rfazcurvxd .gt_from_md > :last-child {
+#thfduywutr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rfazcurvxd .gt_row {
+#thfduywutr .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -527,7 +616,7 @@ cookieconsent.run({
   overflow-x: hidden;
 }
 
-#rfazcurvxd .gt_stub {
+#thfduywutr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -540,7 +629,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#rfazcurvxd .gt_stub_row_group {
+#thfduywutr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -554,15 +643,15 @@ cookieconsent.run({
   vertical-align: top;
 }
 
-#rfazcurvxd .gt_row_group_first td {
+#thfduywutr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rfazcurvxd .gt_row_group_first th {
+#thfduywutr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rfazcurvxd .gt_summary_row {
+#thfduywutr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -572,16 +661,16 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#rfazcurvxd .gt_first_summary_row {
+#thfduywutr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rfazcurvxd .gt_first_summary_row.thick {
+#thfduywutr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rfazcurvxd .gt_last_summary_row {
+#thfduywutr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -591,7 +680,7 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#rfazcurvxd .gt_grand_summary_row {
+#thfduywutr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -601,7 +690,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#rfazcurvxd .gt_first_grand_summary_row {
+#thfduywutr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -611,7 +700,7 @@ cookieconsent.run({
   border-top-color: #D3D3D3;
 }
 
-#rfazcurvxd .gt_last_grand_summary_row_top {
+#thfduywutr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -621,11 +710,11 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#rfazcurvxd .gt_striped {
+#thfduywutr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rfazcurvxd .gt_table_body {
+#thfduywutr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -634,7 +723,7 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#rfazcurvxd .gt_footnotes {
+#thfduywutr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -648,7 +737,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#rfazcurvxd .gt_footnote {
+#thfduywutr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -657,7 +746,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#rfazcurvxd .gt_sourcenotes {
+#thfduywutr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -671,7 +760,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#rfazcurvxd .gt_sourcenote {
+#thfduywutr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -679,162 +768,182 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#rfazcurvxd .gt_left {
+#thfduywutr .gt_left {
   text-align: left;
 }
 
-#rfazcurvxd .gt_center {
+#thfduywutr .gt_center {
   text-align: center;
 }
 
-#rfazcurvxd .gt_right {
+#thfduywutr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rfazcurvxd .gt_font_normal {
+#thfduywutr .gt_font_normal {
   font-weight: normal;
 }
 
-#rfazcurvxd .gt_font_bold {
+#thfduywutr .gt_font_bold {
   font-weight: bold;
 }
 
-#rfazcurvxd .gt_font_italic {
+#thfduywutr .gt_font_italic {
   font-style: italic;
 }
 
-#rfazcurvxd .gt_super {
+#thfduywutr .gt_super {
   font-size: 65%;
 }
 
-#rfazcurvxd .gt_footnote_marks {
+#thfduywutr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rfazcurvxd .gt_asterisk {
+#thfduywutr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rfazcurvxd .gt_indent_1 {
+#thfduywutr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rfazcurvxd .gt_indent_2 {
+#thfduywutr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rfazcurvxd .gt_indent_3 {
+#thfduywutr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rfazcurvxd .gt_indent_4 {
+#thfduywutr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rfazcurvxd .gt_indent_5 {
+#thfduywutr .gt_indent_5 {
   text-indent: 25px;
 }
+
+#thfduywutr .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#thfduywutr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<caption>(a) <p>Nodes</p> </caption>
-  <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Label">Label</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Age">Age</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Node type">Node type</th>
-    </tr></thead>
+
+<div id="tbl-example-bipartite-nodes-edges-1" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-disable-processing="false" data-quarto-bootstrap="false" data-quarto-postprocess="true">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-example-bipartite-nodes-edges-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Nodes
+</figcaption>
+<div aria-describedby="tbl-example-bipartite-nodes-edges-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="tbl-example-bipartite-nodes-edges-1" class="gt_table do-not-create-environment caption-top table" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="name" class="gt_col_heading gt_columns_bottom_border gt_left" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">Label</th>
+<th id="age" class="gt_col_heading gt_columns_bottom_border gt_right" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">Age</th>
+<th id="type" class="gt_col_heading gt_columns_bottom_border gt_left" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">Node type</th>
+</tr>
+</thead>
 <tbody class="gt_table_body">
-<tr>
-<td headers="name" class="gt_row gt_left">1</td>
-<td headers="age" class="gt_row gt_right">18-25</td>
-<td headers="type" class="gt_row gt_left">Person</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">1</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">18-25</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Person</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">2</td>
-<td headers="age" class="gt_row gt_right">18-25</td>
-<td headers="type" class="gt_row gt_left">Person</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">2</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">18-25</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Person</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">3</td>
-<td headers="age" class="gt_row gt_right">18-25</td>
-<td headers="type" class="gt_row gt_left">Person</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">3</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">18-25</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Person</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">4</td>
-<td headers="age" class="gt_row gt_right">18-25</td>
-<td headers="type" class="gt_row gt_left">Person</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">4</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">18-25</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Person</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">5</td>
-<td headers="age" class="gt_row gt_right">26-50</td>
-<td headers="type" class="gt_row gt_left">Person</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">5</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">26-50</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Person</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">6</td>
-<td headers="age" class="gt_row gt_right">26-50</td>
-<td headers="type" class="gt_row gt_left">Person</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">6</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">26-50</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Person</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">7</td>
-<td headers="age" class="gt_row gt_right">26-50</td>
-<td headers="type" class="gt_row gt_left">Person</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">7</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">26-50</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Person</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">8</td>
-<td headers="age" class="gt_row gt_right">26-50</td>
-<td headers="type" class="gt_row gt_left">Person</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">8</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">26-50</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Person</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">A</td>
-<td headers="age" class="gt_row gt_right">-</td>
-<td headers="type" class="gt_row gt_left">Place</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">A</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">-</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Place</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">B</td>
-<td headers="age" class="gt_row gt_right">-</td>
-<td headers="type" class="gt_row gt_left">Place</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">B</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">-</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Place</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">C</td>
-<td headers="age" class="gt_row gt_right">-</td>
-<td headers="type" class="gt_row gt_left">Place</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">C</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">-</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Place</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">D</td>
-<td headers="age" class="gt_row gt_right">-</td>
-<td headers="type" class="gt_row gt_left">Place</td>
+<tr class="even">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">D</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">-</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Place</td>
 </tr>
-<tr>
-<td headers="name" class="gt_row gt_left">E</td>
-<td headers="age" class="gt_row gt_right">-</td>
-<td headers="type" class="gt_row gt_left">Place</td>
+<tr class="odd">
+<td class="gt_row gt_left" style="text-align: left;" headers="name">E</td>
+<td class="gt_row gt_right" style="text-align: left;" headers="age">-</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="type">Place</td>
 </tr>
 </tbody>
 </table>
 </div>
+</figure>
 </div>
-<div id="tbl-example-bipartite-nodes-edges-2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-example-bipartite-nodes-edges" style="flex-basis: 50.0%;justify-content: center;">
 
-<div id="gorseasnfm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gorseasnfm table {
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-example-bipartite-nodes-edges" style="flex-basis: 50.0%;justify-content: center;">
+<div id="hqpajlrtqy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hqpajlrtqy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gorseasnfm thead, #gorseasnfm tbody, #gorseasnfm tfoot, #gorseasnfm tr, #gorseasnfm td, #gorseasnfm th {
+#hqpajlrtqy thead, #hqpajlrtqy tbody, #hqpajlrtqy tfoot, #hqpajlrtqy tr, #hqpajlrtqy td, #hqpajlrtqy th {
   border-style: none;
 }
 
-#gorseasnfm p {
+#hqpajlrtqy p {
   margin: 0;
   padding: 0;
 }
 
-#gorseasnfm .gt_table {
+#hqpajlrtqy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -860,12 +969,12 @@ cookieconsent.run({
   border-left-color: #D3D3D3;
 }
 
-#gorseasnfm .gt_caption {
+#hqpajlrtqy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gorseasnfm .gt_title {
+#hqpajlrtqy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -877,7 +986,7 @@ cookieconsent.run({
   border-bottom-width: 0;
 }
 
-#gorseasnfm .gt_subtitle {
+#hqpajlrtqy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -889,7 +998,7 @@ cookieconsent.run({
   border-top-width: 0;
 }
 
-#gorseasnfm .gt_heading {
+#hqpajlrtqy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -901,13 +1010,13 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#gorseasnfm .gt_bottom_border {
+#hqpajlrtqy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gorseasnfm .gt_col_headings {
+#hqpajlrtqy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -922,7 +1031,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#gorseasnfm .gt_col_heading {
+#hqpajlrtqy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -942,7 +1051,7 @@ cookieconsent.run({
   overflow-x: hidden;
 }
 
-#gorseasnfm .gt_column_spanner_outer {
+#hqpajlrtqy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -954,15 +1063,15 @@ cookieconsent.run({
   padding-right: 4px;
 }
 
-#gorseasnfm .gt_column_spanner_outer:first-child {
+#hqpajlrtqy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gorseasnfm .gt_column_spanner_outer:last-child {
+#hqpajlrtqy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gorseasnfm .gt_column_spanner {
+#hqpajlrtqy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -974,11 +1083,11 @@ cookieconsent.run({
   width: 100%;
 }
 
-#gorseasnfm .gt_spanner_row {
+#hqpajlrtqy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gorseasnfm .gt_group_heading {
+#hqpajlrtqy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1004,7 +1113,7 @@ cookieconsent.run({
   text-align: left;
 }
 
-#gorseasnfm .gt_empty_group_heading {
+#hqpajlrtqy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1019,15 +1128,15 @@ cookieconsent.run({
   vertical-align: middle;
 }
 
-#gorseasnfm .gt_from_md > :first-child {
+#hqpajlrtqy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gorseasnfm .gt_from_md > :last-child {
+#hqpajlrtqy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gorseasnfm .gt_row {
+#hqpajlrtqy .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1046,7 +1155,7 @@ cookieconsent.run({
   overflow-x: hidden;
 }
 
-#gorseasnfm .gt_stub {
+#hqpajlrtqy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1059,7 +1168,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#gorseasnfm .gt_stub_row_group {
+#hqpajlrtqy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1073,15 +1182,15 @@ cookieconsent.run({
   vertical-align: top;
 }
 
-#gorseasnfm .gt_row_group_first td {
+#hqpajlrtqy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gorseasnfm .gt_row_group_first th {
+#hqpajlrtqy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gorseasnfm .gt_summary_row {
+#hqpajlrtqy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1091,16 +1200,16 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#gorseasnfm .gt_first_summary_row {
+#hqpajlrtqy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gorseasnfm .gt_first_summary_row.thick {
+#hqpajlrtqy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gorseasnfm .gt_last_summary_row {
+#hqpajlrtqy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1110,7 +1219,7 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#gorseasnfm .gt_grand_summary_row {
+#hqpajlrtqy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1120,7 +1229,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#gorseasnfm .gt_first_grand_summary_row {
+#hqpajlrtqy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1130,7 +1239,7 @@ cookieconsent.run({
   border-top-color: #D3D3D3;
 }
 
-#gorseasnfm .gt_last_grand_summary_row_top {
+#hqpajlrtqy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1140,11 +1249,11 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#gorseasnfm .gt_striped {
+#hqpajlrtqy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gorseasnfm .gt_table_body {
+#hqpajlrtqy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1153,7 +1262,7 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#gorseasnfm .gt_footnotes {
+#hqpajlrtqy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1167,7 +1276,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#gorseasnfm .gt_footnote {
+#hqpajlrtqy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1176,7 +1285,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#gorseasnfm .gt_sourcenotes {
+#hqpajlrtqy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1190,7 +1299,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#gorseasnfm .gt_sourcenote {
+#hqpajlrtqy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1198,186 +1307,216 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#gorseasnfm .gt_left {
+#hqpajlrtqy .gt_left {
   text-align: left;
 }
 
-#gorseasnfm .gt_center {
+#hqpajlrtqy .gt_center {
   text-align: center;
 }
 
-#gorseasnfm .gt_right {
+#hqpajlrtqy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gorseasnfm .gt_font_normal {
+#hqpajlrtqy .gt_font_normal {
   font-weight: normal;
 }
 
-#gorseasnfm .gt_font_bold {
+#hqpajlrtqy .gt_font_bold {
   font-weight: bold;
 }
 
-#gorseasnfm .gt_font_italic {
+#hqpajlrtqy .gt_font_italic {
   font-style: italic;
 }
 
-#gorseasnfm .gt_super {
+#hqpajlrtqy .gt_super {
   font-size: 65%;
 }
 
-#gorseasnfm .gt_footnote_marks {
+#hqpajlrtqy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gorseasnfm .gt_asterisk {
+#hqpajlrtqy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gorseasnfm .gt_indent_1 {
+#hqpajlrtqy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gorseasnfm .gt_indent_2 {
+#hqpajlrtqy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gorseasnfm .gt_indent_3 {
+#hqpajlrtqy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gorseasnfm .gt_indent_4 {
+#hqpajlrtqy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gorseasnfm .gt_indent_5 {
+#hqpajlrtqy .gt_indent_5 {
   text-indent: 25px;
 }
+
+#hqpajlrtqy .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hqpajlrtqy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<caption>(b) <p>Edges</p> </caption>
-  <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="From">From</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="To">To</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Relation">Relation</th>
-    </tr></thead>
+
+<div id="tbl-example-bipartite-nodes-edges-2" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-disable-processing="false" data-quarto-bootstrap="false" data-quarto-postprocess="true">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-example-bipartite-nodes-edges-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Edges
+</figcaption>
+<div aria-describedby="tbl-example-bipartite-nodes-edges-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="tbl-example-bipartite-nodes-edges-2" class="gt_table do-not-create-environment caption-top table" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="From" class="gt_col_heading gt_columns_bottom_border gt_right" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">From</th>
+<th id="To" class="gt_col_heading gt_columns_bottom_border gt_left" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">To</th>
+<th id="Relation" class="gt_col_heading gt_columns_bottom_border gt_left" style="text-align: left;" data-quarto-table-cell-role="th" scope="col">Relation</th>
+</tr>
+</thead>
 <tbody class="gt_table_body">
-<tr>
-<td headers="From" class="gt_row gt_right">1</td>
-<td headers="To" class="gt_row gt_left">A</td>
-<td headers="Relation" class="gt_row gt_left">HOME</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">1</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">A</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">HOME</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">2</td>
-<td headers="To" class="gt_row gt_left">A</td>
-<td headers="Relation" class="gt_row gt_left">GSEX</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">2</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">A</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">GSEX</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">2</td>
-<td headers="To" class="gt_row gt_left">B</td>
-<td headers="Relation" class="gt_row gt_left">HOME</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">2</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">B</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">HOME</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">3</td>
-<td headers="To" class="gt_row gt_left">A</td>
-<td headers="Relation" class="gt_row gt_left">PHYS</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">3</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">A</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">PHYS</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">3</td>
-<td headers="To" class="gt_row gt_left">B</td>
-<td headers="Relation" class="gt_row gt_left">HOME</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">3</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">B</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">HOME</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">3</td>
-<td headers="To" class="gt_row gt_left">E</td>
-<td headers="Relation" class="gt_row gt_left">GSEX</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">3</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">E</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">GSEX</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">3</td>
-<td headers="To" class="gt_row gt_left">E</td>
-<td headers="Relation" class="gt_row gt_left">PHYS</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">3</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">E</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">PHYS</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">4</td>
-<td headers="To" class="gt_row gt_left">B</td>
-<td headers="Relation" class="gt_row gt_left">PHYS</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">4</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">B</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">PHYS</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">4</td>
-<td headers="To" class="gt_row gt_left">C</td>
-<td headers="Relation" class="gt_row gt_left">HOME</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">4</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">C</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">HOME</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">4</td>
-<td headers="To" class="gt_row gt_left">D</td>
-<td headers="Relation" class="gt_row gt_left">GSEX</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">4</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">D</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">GSEX</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">4</td>
-<td headers="To" class="gt_row gt_left">E</td>
-<td headers="Relation" class="gt_row gt_left">GSEX</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">4</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">E</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">GSEX</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">5</td>
-<td headers="To" class="gt_row gt_left">C</td>
-<td headers="Relation" class="gt_row gt_left">HOME</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">5</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">C</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">HOME</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">6</td>
-<td headers="To" class="gt_row gt_left">D</td>
-<td headers="Relation" class="gt_row gt_left">PHYS</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">6</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">D</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">PHYS</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">6</td>
-<td headers="To" class="gt_row gt_left">D</td>
-<td headers="Relation" class="gt_row gt_left">HOME</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">6</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">D</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">HOME</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">6</td>
-<td headers="To" class="gt_row gt_left">E</td>
-<td headers="Relation" class="gt_row gt_left">PHYS</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">6</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">E</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">PHYS</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">7</td>
-<td headers="To" class="gt_row gt_left">C</td>
-<td headers="Relation" class="gt_row gt_left">HOME</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">7</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">C</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">HOME</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">8</td>
-<td headers="To" class="gt_row gt_left">C</td>
-<td headers="Relation" class="gt_row gt_left">GSEX</td>
+<tr class="odd">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">8</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">C</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">GSEX</td>
 </tr>
-<tr>
-<td headers="From" class="gt_row gt_right">8</td>
-<td headers="To" class="gt_row gt_left">D</td>
-<td headers="Relation" class="gt_row gt_left">HOME</td>
+<tr class="even">
+<td class="gt_row gt_right" style="text-align: left;" headers="From">8</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="To">D</td>
+<td class="gt_row gt_left" style="text-align: left;" headers="Relation">HOME</td>
 </tr>
 </tbody>
 </table>
 </div>
+</figure>
+</div>
+
 </div>
 </div>
 </div>
 </div>
-</section><section id="person-place-network-mapper" class="level2 page-columns page-full" data-number="C.2"><h2 data-number="C.2" class="anchored" data-anchor-id="person-place-network-mapper">
-<span class="header-section-number">C.2</span> Person place network mapper</h2>
+</figure>
+</div>
+</section>
+<section id="person-place-network-mapper" class="level2 page-columns page-full" data-number="C.2">
+<h2 data-number="C.2" class="anchored" data-anchor-id="person-place-network-mapper"><span class="header-section-number">C.2</span> Person place network mapper</h2>
 <p>We designed, tested and implemented a survey tool we call the MPX NYC Person-place network mapper. We designed the tool to solve practical and ethical issues related to the collection of sensitive spatial data in the context of an annonymous survey. Practically, we were interested in collecting data on locations participants visited and possibly had group sex in, but understood that we would not collect useful data if we collected markers like address or zip code using usual survey methods. Ethically, we were aimed to collect a data set that would limit the risk of identifying survey participants through the locations and other data disclosed through the survey.</p>
-<section id="place-mapping" class="level3" data-number="C.2.1"><h3 data-number="C.2.1" class="anchored" data-anchor-id="place-mapping">
-<span class="header-section-number">C.2.1</span> Place mapping</h3>
+<section id="place-mapping" class="level3" data-number="C.2.1">
+<h3 data-number="C.2.1" class="anchored" data-anchor-id="place-mapping"><span class="header-section-number">C.2.1</span> Place mapping</h3>
 <p>Though the investigator team doubted that participants would remember addresses or zip codes of places they visited, we thought that they might remember landmarks, cross-streets, neighborhood names, subway stations names, and other markers New Yorkers use to navigate the city so we used the Google maps interface and API.</p>
-<div id="fig-mapinputformat" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="../_const/images/image_app_graphic.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;C.2: Map input question format developed for MPX NYC</figcaption></figure>
+<div id="fig-mapinputformat" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mapinputformat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../_const/images/image_app_graphic.png" class="img-fluid figure-img">
 </div>
-<p>The MPX NYC Person-Place Network Map question displays a map with detailed geographic information including place names, roads, and neighborhood names. It includes a search bar as well as other navigation tools usually found on a google maps display (see <a href="#fig-mapinputformat">Figure&nbsp;<span>C.2</span></a>).</p>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mapinputformat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;C.2: Map input question format developed for MPX NYC
+</figcaption>
+</figure>
+</div>
+<p>The MPX NYC Person-Place Network Map question displays a map with detailed geographic information including place names, roads, and neighborhood names. It includes a search bar as well as other navigation tools usually found on a google maps display (see <a href="#fig-mapinputformat" class="quarto-xref">Figure&nbsp;<span>C.2</span></a>).</p>
 <p>To collect anonymous information on locations, first the participant is prompted to identify places of a certain type by tapping on the map. For instance, the first Network Map question asks participants to identify their primary residence. Once they select one, they are able to move onto the next question.</p>
 <p>The Network Map also allows researchers to elicit a collection of locations. For instance, we ask participants to identify all the places they have had physical or sexual contact in a group setting. Each time the participant taps the map, a marker appears where they tapped, and a pop-up window asks questions about the most recently identified location. In our study, participants were asked if they had sexual contact at the location and to select the type of location it is from a closed list of options.</p>
-</section><section id="link-tracing" class="level3" data-number="C.2.2"><h3 data-number="C.2.2" class="anchored" data-anchor-id="link-tracing">
-<span class="header-section-number">C.2.2</span> Link tracing</h3>
+</section>
+<section id="link-tracing" class="level3" data-number="C.2.2">
+<h3 data-number="C.2.2" class="anchored" data-anchor-id="link-tracing"><span class="header-section-number">C.2.2</span> Link tracing</h3>
 <p><img src="../_const/images/share_screen.png" class="img-fluid"></p>
 <p>We designed a system for anonymously building a referral network</p>
 <p>At the start of the survey, the participant is given an identifier image showing a unique combination of words and a QR code. They are prompted to save the image of their identifier card.</p>
@@ -1385,11 +1524,15 @@ cookieconsent.run({
 <p>If a contact of the participant’s uses the url, an edge will be added between their node and the original participant’s node</p>
 <p>Say an new participant takes the survey and shares it with somebody who has already taken the survey (an old participant)</p>
 <p>The old participant would go to the url and be prompted to upload their identifier card or to enter the combination of words on the card in a text field. An edge would be added between the new and old participants’ nodes in the graph database</p>
-</section><section id="implementation" class="level3 page-columns page-full" data-number="C.2.3"><h3 data-number="C.2.3" class="anchored" data-anchor-id="implementation">
-<span class="header-section-number">C.2.3</span> Implementation</h3>
-<section id="rationale" class="level4"><h4 class="anchored" data-anchor-id="rationale">Rationale</h4>
+</section>
+<section id="implementation" class="level3 page-columns page-full" data-number="C.2.3">
+<h3 data-number="C.2.3" class="anchored" data-anchor-id="implementation"><span class="header-section-number">C.2.3</span> Implementation</h3>
+<section id="rationale" class="level4">
+<h4 class="anchored" data-anchor-id="rationale">Rationale</h4>
 <p>Collecting spatial coordinates would increase the risk of accidentally identifying people by, for instance, capturing the exact coordinate of a college dormitory as a participant’s residence, or capturing the exact coordinates of a federal government office as a venue for sexual contact in a group setting. In both these examples, it becomes easier to narrow down the identity of participants using the location and the particiapnts’ characteristics as recorded in survey data.</p>
-</section><section id="continuation" class="level4 page-columns page-full"><h4 class="anchored" data-anchor-id="continuation">Continuation</h4>
+</section>
+<section id="continuation" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="continuation">Continuation</h4>
 <p>The front end of the MPX NYC Person-Place Network Mapper was developed as a single-page web application using the React/NextJS framework <span class="citation" data-cites="vercel2024">(<a href="#ref-vercel2024" role="doc-biblioref">Vercel 2024</a>)</span> with visual design based on the MPX NYC style guide. The back end was a custom-built neo4j graph database <span class="citation" data-cites="neo4j2024">(<a href="#ref-neo4j2024" role="doc-biblioref">Neo4j 2024</a>)</span>. Along with the Network Map question format, the instrument allows the use of standard survey question formats (multiple choice, single choice, text field etc.).</p>
 <div class="no-row-height column-margin column-container"><div id="ref-vercel2024" class="csl-entry" role="listitem">
 Vercel. 2024. <span>“NextJS Documentation.”</span> <a href="https://nextjs.org/docs">https://nextjs.org/docs</a>.
@@ -1398,8 +1541,7 @@ Neo4j. 2024. <span>“Neo4j Documentation.”</span> <a href="https://neo4j.com/
 </div></div><p>The MPC NYC Person-Place Network Mapper underwent two rounds of user testing. About 10 people participated each time, returning feedback via an informal feedback questionnaire and via email.</p>
 <p>Data flow</p>
 <ul>
-<li>
-<p>Front end interface in Next.js hosted on Vercel</p>
+<li><p>Front end interface in Next.js hosted on Vercel</p>
 <ul>
 <li><p>takex a JSON file for the content of questions, text prompts</p></li>
 <li><p>parses URL for referrer identifier (if any), and survey language</p></li>
@@ -1407,56 +1549,51 @@ Neo4j. 2024. <span>“Neo4j Documentation.”</span> <a href="https://neo4j.com/
 <li><p>shows unique public identifier and a QR code of the public identifier to participant, prompting participant to save the image on their device</p></li>
 <li><p>for person-place network mapper data, front end queries a government database to transform spatial coordinates into census tract identifiers</p></li>
 <li><p>returns a JSON object using the API</p></li>
-</ul>
-</li>
-<li>
-<p>API on XYZ</p>
+</ul></li>
+<li><p>API on XYZ</p>
 <ul>
-<li>
-<p>receives request for an identifier</p>
+<li><p>receives request for an identifier</p>
 <ul>
 <li><p>generates a public identifier (described above) paired with a private identifier in the form of uid.</p></li>
 <li><p>Returns public identifer to front end</p></li>
 <li><p>Saves public identifer / private identifer pair in an identifier table in a secure database, separate from study data base</p></li>
-</ul>
-</li>
-<li>
-<p>receives study data from front end</p>
+</ul></li>
+<li><p>receives study data from front end</p>
 <ul>
 <li><p>transforms public identifier to private identifers by querying the identifier table</p></li>
 <li><p>sends data to graph data base</p></li>
-</ul>
-</li>
-<li>
-<p>receives confirmation of link</p>
+</ul></li>
+<li><p>receives confirmation of link</p>
 <ul>
 <li><p>transforms public identifier to private identifers by querying the identifier table</p></li>
 <li><p>send data on the new edge to graph data base</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>graph data base</p>
+</ul></li>
+</ul></li>
+<li><p>graph data base</p>
 <ul>
 <li><p>hosted on a cloud server platform</p></li>
 <li><p>designed to represent survey data as one giant graph (see data graph)</p></li>
 <li><p>uses a query language that uses the structure of the graph to simplify complex queries</p></li>
 <li><p>use script or manual entry to declare node types, edge types, and node and edge attribute data</p></li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p>To ensure participant anonymity, the survey tool coarsens spatial data to the census tract level before sending them to the study database. Census tracts are non-overlapping spatial units that partition the United States into areas ranging from <span class="math inline">\(2500\)</span> to <span class="math inline">\(8000\)</span> in population size <span class="citation" data-cites="uscensus2022">(<a href="#ref-uscensus2022" role="doc-biblioref">US Census 2022</a>)</span>. This is done through The Federal Communications Commission API <span class="citation" data-cites="fcc2022">(<a href="#ref-fcc2022" role="doc-biblioref">FCC 2022</a>)</span> which receives longitude-latitude coordinates from the survey instrument, and returns census block identifiers, which are transformed to census tract identifiers by truncating the last X digits. [CITATION] It is only after spatial data are transformed that they are transmitted to the study database (backend).</p>
 <div class="no-row-height column-margin column-container"><div id="ref-uscensus2022" class="csl-entry" role="listitem">
 US Census. 2022. <span>“Census Tracts.”</span> <a href="https://www2.census.gov/geo/pdfs/education/CensusTracts.pdf">https://www2.census.gov/geo/pdfs/education/CensusTracts.pdf</a>.
 </div><div id="ref-fcc2022" class="csl-entry" role="listitem">
 FCC. 2022. <span>“Federal Communications Commission API.”</span> <a href="https://www.fcc.gov/reports-research/developers/api-terms-service">https://www.fcc.gov/reports-research/developers/api-terms-service</a>.
-</div></div></section></section></section><section id="data-collection" class="level2" data-number="C.3"><h2 data-number="C.3" class="anchored" data-anchor-id="data-collection">
-<span class="header-section-number">C.3</span> Data collection</h2>
+</div></div></section>
+</section>
+</section>
+<section id="data-collection" class="level2" data-number="C.3">
+<h2 data-number="C.3" class="anchored" data-anchor-id="data-collection"><span class="header-section-number">C.3</span> Data collection</h2>
 
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1491,18 +1628,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1534,7 +1660,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -1586,10 +1732,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1599,8 +1762,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1612,7 +1784,129 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1656,6 +1950,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1681,6 +1976,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1739,33 +2060,42 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../B_ssnac2_causality/B__ssnac2_causality.html" class="pagination-link">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../B_ssnac2_causality/B__ssnac2_causality.html" class="pagination-link" aria-label="SSNAC II: Causality">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">SSNAC II: Causality</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../D_ssnac4_analysis/D__ssnac4_analysis.html" class="pagination-link">
+      <a href="../D_ssnac4_analysis/D__ssnac4_analysis.html" class="pagination-link" aria-label="SSNAC IV: Analysis">
         <span class="nav-page-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">SSNAC IV: Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">Copyright 2025, RESPND-MI</div>   
-    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2025, RESPND-MI</p>
+</div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-<li class="nav-item compact">
+    <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/">
       <i class="bi bi-github" role="img">
 </i> 
     </a>
   </li>  
 </ul>
-</div>
+    </div>
   </div>
 </footer>
+
+
 
 
 </body></html>
