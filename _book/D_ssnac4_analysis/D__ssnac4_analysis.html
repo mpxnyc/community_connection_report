@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0f5132b0fc47c15e8c5be647bdcf253e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-24524d205601227a8ae2d19371914209.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -429,19 +429,18 @@ window.Quarto = {
   <ul>
   <li><a href="#data-graphs" id="toc-data-graphs" class="nav-link active" data-scroll-target="#data-graphs"><span class="header-section-number">D.1</span> Data graphs</a>
   <ul class="collapse">
-  <li><a href="#person-place-data-graph" id="toc-person-place-data-graph" class="nav-link" data-scroll-target="#person-place-data-graph"><span class="header-section-number">D.1.1</span> Person-place data graph</a></li>
-  <li><a href="#useful-sets" id="toc-useful-sets" class="nav-link" data-scroll-target="#useful-sets"><span class="header-section-number">D.1.2</span> Useful sets</a></li>
-  <li><a href="#person-graph" id="toc-person-graph" class="nav-link" data-scroll-target="#person-graph"><span class="header-section-number">D.1.3</span> Person graph</a></li>
-  <li><a href="#place-graph" id="toc-place-graph" class="nav-link" data-scroll-target="#place-graph"><span class="header-section-number">D.1.4</span> Place graph</a></li>
+  <li><a href="#person-place-graph" id="toc-person-place-graph" class="nav-link" data-scroll-target="#person-place-graph"><span class="header-section-number">D.1.1</span> Person-place graph</a></li>
+  <li><a href="#person-graph" id="toc-person-graph" class="nav-link" data-scroll-target="#person-graph"><span class="header-section-number">D.1.2</span> Person graph</a></li>
+  <li><a href="#place-graph" id="toc-place-graph" class="nav-link" data-scroll-target="#place-graph"><span class="header-section-number">D.1.3</span> Place graph</a></li>
   </ul></li>
-  <li><a href="#measures" id="toc-measures" class="nav-link" data-scroll-target="#measures"><span class="header-section-number">D.2</span> Measures</a></li>
-  <li><a href="#statistical-inference" id="toc-statistical-inference" class="nav-link" data-scroll-target="#statistical-inference"><span class="header-section-number">D.3</span> Statistical inference</a></li>
-  <li><a href="#data-graphs-1" id="toc-data-graphs-1" class="nav-link" data-scroll-target="#data-graphs-1"><span class="header-section-number">D.4</span> Data graphs</a></li>
-  <li><a href="#measures-1" id="toc-measures-1" class="nav-link" data-scroll-target="#measures-1"><span class="header-section-number">D.5</span> Measures</a>
+  <li><a href="#measures" id="toc-measures" class="nav-link" data-scroll-target="#measures"><span class="header-section-number">D.2</span> Measures</a>
   <ul class="collapse">
-  <li><a href="#node-characteristics" id="toc-node-characteristics" class="nav-link" data-scroll-target="#node-characteristics"><span class="header-section-number">D.5.1</span> Node characteristics</a></li>
-  <li><a href="#network-characteristics" id="toc-network-characteristics" class="nav-link" data-scroll-target="#network-characteristics"><span class="header-section-number">D.5.2</span> Network characteristics</a></li>
+  <li><a href="#local-network-attributes" id="toc-local-network-attributes" class="nav-link" data-scroll-target="#local-network-attributes"><span class="header-section-number">D.2.1</span> Local network attributes</a></li>
+  <li><a href="#global-network-attributes" id="toc-global-network-attributes" class="nav-link" data-scroll-target="#global-network-attributes"><span class="header-section-number">D.2.2</span> Global network attributes</a></li>
+  <li><a href="#dynamics-on-the-network" id="toc-dynamics-on-the-network" class="nav-link" data-scroll-target="#dynamics-on-the-network"><span class="header-section-number">D.2.3</span> Dynamics on the network</a></li>
   </ul></li>
+  <li><a href="#statistical-inference" id="toc-statistical-inference" class="nav-link" data-scroll-target="#statistical-inference"><span class="header-section-number">D.3</span> Statistical inference</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   </ul>
 </nav>
     </div>
@@ -454,190 +453,195 @@ window.Quarto = {
 </header>
 
 
+<div id="leading">
+<p>We describe the main data objects of the MPX NYC study – the Person-place graph, the Person graph and the Place graph – as well as the statistics we used to analyze them.</p>
+</div>
+<div id="acknowledgements">
+<p><u>Lead author</u>: Keletso Makofane, MPH, PhD. <u>Editor</u>: Nicholas Diamond, MPH. (Published: June 2025).</p>
+<p><u>Acknowledgements</u>: The analytic framework for this project developed over an extended period of time, beginning during my PhD dissertation at Harvard University under the supervision of Lisa Berkman, Eric Tchetgen Tchetgen, and a former mentor). In particular, the analysis borrows from the central paper in my dissertation, which shows how the wealth of non-coresident extended family members is protective against mortality…(continued at bottom of page)</p>
+</div>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_icon</span>(<span class="at">icon_name =</span> <span class="st">"devil"</span>, <span class="at">color =</span> <span class="st">"light_purple"</span>, <span class="at">shape =</span> <span class="dv">16</span>, <span class="at">alpha =</span> <span class="dv">0</span>,  <span class="at">size =</span> <span class="dv">100</span>, <span class="at">image_size =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="D__ssnac4_analysis_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="288"></p>
+</figure>
+</div>
+</div>
+</div>
 <section id="data-graphs" class="level2" data-number="D.1">
 <h2 data-number="D.1" class="anchored" data-anchor-id="data-graphs"><span class="header-section-number">D.1</span> Data graphs</h2>
-<section id="person-place-data-graph" class="level3" data-number="D.1.1">
-<h3 data-number="D.1.1" class="anchored" data-anchor-id="person-place-data-graph"><span class="header-section-number">D.1.1</span> Person-place data graph</h3>
-<ul>
-<li>The RESPND-MI/MPX NYC person-place data graph contains all the data.
-<ul>
-<li><span class="math inline">\(\mathscr{G}(\mathscr{N}, \mathscr{E}, d(.))\)</span></li>
-<li>We define it as an ordered triple with the first entry a set of node labels <span class="math inline">\(\mathscr{N}\)</span>, the second, a set of edges <span class="math inline">\(\mathscr{E}\)</span>, and the third, a function associating each node with node attributes and each edge with edge attributes.</li>
-</ul></li>
-<li>There are two types of nodes: community districts <span class="math inline">\(\mathscr{N}_C\)</span> and survey participants <span class="math inline">\(\mathscr{N}_P\)</span>.
-<ul>
-<li><span class="math inline">\(\mathscr{N} = \mathscr{N}_P \cup \mathscr{N}_C,\mathscr{N}_P \cap \mathscr{N}_C = \emptyset\)</span></li>
-</ul></li>
-<li>Edges are given by
-<ul>
-<li><span class="math inline">\(\mathscr{E}=\{(x, a,b) : x \in \mathbf{Z}_+, a \in \mathscr{N}_P, b \in \mathscr{N}_C \text{ and } a \sim b\}\)</span></li>
-</ul></li>
-<li>Node data
-<ul>
-<li>Definition: <span class="math inline">\(d(\mathscr{N}) = \{\mathbf{v}_t \in (S_t)^{|\mathscr{N}|} : t \in [1:K], K \in \mathbf{Z}_+\}\)</span></li>
-<li>Attributes include
-<ul>
-<li>Type (Person; Place)</li>
-<li>[…person attributes like age, gender, sexual orientation]</li>
-<li>[…place attributes like place_name]</li>
-</ul></li>
-</ul></li>
-<li>Edge data
-<ul>
-<li>definition <span class="math inline">\(d(\mathscr{E}) = \{\mathbf{v}_t \in (S_t)^{|\mathscr{E}|} : t \in [1:K], K \in \mathbf{Z}_+\}\)</span></li>
-<li>Attributes inlcude
-<ul>
-<li>relation type (home, low contact gathering, high contact gathering)</li>
-</ul></li>
-</ul></li>
-<li>Comments:
-<ul>
-<li>Person-place graph is bipartite graph
-<ul>
-<li><p>Edges can only exist between a participant and a community district - they indicate that the person either lives in or attended a gathering in that community district.</p></li>
-<li><p>i.e.: <span class="math inline">\(i,j \in \mathscr{N}_P \text{ or } i,j \in \mathscr{N}_C \implies \psi(i,j) = 0\)</span></p></li>
-</ul></li>
-</ul></li>
-</ul>
+<section id="person-place-graph" class="level3" data-number="D.1.1">
+<h3 data-number="D.1.1" class="anchored" data-anchor-id="person-place-graph"><span class="header-section-number">D.1.1</span> Person-place graph</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"bipartite"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_example_bipartite_network</span>() <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">option =</span> <span class="st">"dark"</span>) <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Node type"</span>) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_size_manual</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> ggplot2<span class="sc">::</span><span class="fu">margin</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-example-participant-place-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-example-participant-place-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="D__ssnac4_analysis_files/figure-html/fig-example-participant-place-1-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-participant-place-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;D.1: Sample person-place network visualization
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The RESPND-MI/MPX NYC person-place data graph contains all study data. We define it as an ordered triple with the first entry a set of node labels <span class="math inline">\(\mathscr{N}\)</span>, the second, a set of edges <span class="math inline">\(\mathscr{E}\)</span>, and the third, a function associating each node with node attributes and each edge with edge attributes.</p>
+<p><span class="math display">\[
+\mathscr{G}(\mathscr{N}, \mathscr{E}, d(.))
+\]</span></p>
+<p>There are two non-overlapping types of nodes: community districts <span class="math inline">\(\mathscr{N}_C\)</span> and survey participants <span class="math inline">\(\mathscr{N}_P\)</span>. Together these two groups account for all the nodes in the study. <span class="math display">\[
+\mathscr{N} = \mathscr{N}_P \cup \mathscr{N}_C,\mathscr{N}_P \cap \mathscr{N}_C = \emptyset
+\]</span> Each edge encodes a relation between a person and a place. For instance, a participant might have the relation of “contains home” with a particular community district, and also have the relation of “contains gathering” with the same community district. It is possible for one person to have multiple relations with one place. The set of edges is given by <span class="math display">\[
+\mathscr{E}=\{(x, a,b) : x \in \mathbf{Z}_+, a \in \mathscr{N}_P, b \in \mathscr{N}_C \text{ and } a \sim b\}
+\]</span> The elements of this set are ordered triples whose entries are an integer-valued index, the origin node and the terminal node for each edge.</p>
+<p>Each node in the data graph is associated with attributes we collectively call the node data. The node data is a set of vectors of length equal to the number of nodes. Where <span class="math inline">\(S_t\)</span> is a set the contains all the possible values of the entries of the <span class="math inline">\(t^{th}\)</span> vector in the set.</p>
+<p><span class="math display">\[
+d(\mathscr{N}) = \{\mathbf{v}_t \in (S_t)^{|\mathscr{N}|} : t \in [1:K], K \in \mathbf{Z}_+\}
+\]</span></p>
+<p>Similarly, the edge data are a collection of vectors of length equal to the number of edges.</p>
+<p><span class="math display">\[
+d(\mathscr{E}) = \{\mathbf{v}_t \in (S_t)^{|\mathscr{E}|} : t \in [1:Q], Q \in \mathbf{Z}_+\}
+\]</span></p>
 </section>
-<section id="useful-sets" class="level3" data-number="D.1.2">
-<h3 data-number="D.1.2" class="anchored" data-anchor-id="useful-sets"><span class="header-section-number">D.1.2</span> Useful sets</h3>
-<ul>
-<li>Relations between person <span class="math inline">\(a \in \mathscr{N}_P\)</span> and place <span class="math inline">\(c \in \mathscr{N}_C\)</span>:
-<ul>
-<li><span class="math inline">\(H(a, c) = \{(x, c) : (x, a, c) \in \mathscr{E},  x \in \mathbf{Z}_+\}\)</span></li>
-</ul></li>
-<li>Places shared by persons <span class="math inline">\(a,b \in \mathscr{N}_P\)</span> :
-<ul>
-<li><span class="math inline">\(H_C(a, b) = \{(x, y, c) : (x, a, c), (y, b, c) \in \mathscr{E},  x,y \in \mathbf{Z}_+ \}\)</span></li>
-</ul></li>
-<li>People shared by places <span class="math inline">\(a,b \in \mathscr{N}\)</span>:
-<ul>
-<li><span class="math inline">\(H_P(a, b) = \{(x, y, p) : (x, p, a), (y, p, b) \in \mathscr{E},  x,y \in \mathbf{Z}_+ \}\)</span></li>
-</ul></li>
-</ul>
+<section id="person-graph" class="level3" data-number="D.1.2">
+<h3 data-number="D.1.2" class="anchored" data-anchor-id="person-graph"><span class="header-section-number">D.1.2</span> Person graph</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"people"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_example_projection_network</span>() <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_size_manual</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">7</span>)) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">option =</span> <span class="st">"dark"</span>) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  ggraph<span class="sc">::</span><span class="fu">scale_edge_width</span>()  <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  ggraph<span class="sc">::</span><span class="fu">scale_edge_width_manual</span>(<span class="at">name =</span> <span class="st">"Weight"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-example-participant-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-example-participant-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="D__ssnac4_analysis_files/figure-html/fig-example-participant-1-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-participant-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;D.2: Sample person-person network visualizatoin
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The RESPND-MI/MPX NYC person data graph has study participants as nodes.</p>
+<p><span class="math display">\[
+\mathscr{G}_P(\mathscr{N}_P, \mathscr{E}_P, d(.))
+\]</span> There is an edge between two participant nodes in the person graph if they are related to at least one common place in the person-place graph. Define <span class="math inline">\(H_C(a, b)\)</span> is the set of places shared by persons <span class="math inline">\(a,b \in \mathscr{N}_P\)</span></p>
+<p><span class="math display">\[
+H_C(a, b) = \{(x, y, c) : (x, a, c), (y, b, c) \in \mathscr{E},  x,y \in \mathbf{Z}_+ \}
+\]</span> Then the set of edges is given by:</p>
+<p><span class="math display">\[
+\mathscr{E}_P = \{ (a,b) : a, b \in \mathscr{N}_P, H_C(a, b) \neq \emptyset\}
+\]</span></p>
 </section>
-<section id="person-graph" class="level3" data-number="D.1.3">
-<h3 data-number="D.1.3" class="anchored" data-anchor-id="person-graph"><span class="header-section-number">D.1.3</span> Person graph</h3>
-<ul>
-<li>The RESPND-MI/MPX NYC person data graph has study participants as nodes.
-<ul>
-<li><span class="math inline">\(\mathscr{G}_P(\mathscr{N}_P, \mathscr{E}_P)\)</span></li>
-</ul></li>
-<li>A pair of nodes is connected by a weighted edge if each of the participants represented by the nodes share at least one community district in which they both had a gathering or residence.</li>
-<li>The weight of the edge is equal to the count of community districts the pair of nodes have in common.</li>
-<li>We define the person graph:
-<ul>
-<li>Edge weight between persons <span class="math inline">\(a,b \in \mathscr{N}_P\)</span>: <span class="math inline">\(w_P(a, b) = |H_C(a, b)|\)</span></li>
-<li>Edges: <span class="math inline">\(\mathscr{E}_P = \{ (a,b) : a, b \in \mathscr{N}_P, w(a,b)&gt;0\}\)</span></li>
-</ul></li>
-<li>Comment: Person graph is bipartite projection of <span class="math inline">\(\mathscr{G}\)</span> onto person nodes <span class="math inline">\(\mathscr{N}_P\)</span></li>
-</ul>
-</section>
-<section id="place-graph" class="level3" data-number="D.1.4">
-<h3 data-number="D.1.4" class="anchored" data-anchor-id="place-graph"><span class="header-section-number">D.1.4</span> Place graph</h3>
-<ul>
-<li>The RESPND-MI/MPX NYC place graph has community districts as nodes.
-<ul>
-<li><span class="math inline">\(\mathscr{G}_C(\mathscr{N}_C, \mathscr{E}_C)\)</span></li>
-</ul></li>
-<li>A pair of community districts is connected by a weighted edge when at least one participant has a residence or attended a gathering in both community districts.</li>
-<li>The weight of the edge is the count of participants who are shared by the two community districts.</li>
-<li>We define the place graph:
-<ul>
-<li>Edge weight between places <span class="math inline">\(a,b \in \mathscr{N}_C\)</span>: <span class="math inline">\(w_C(a, b) = |H_P(a, b)|\)</span></li>
-<li>Edges: <span class="math inline">\(\mathscr{E}_C = \{ (a,b) : a, b \in \mathscr{N}_C, w(a,b)&gt;0\}\)</span></li>
-</ul></li>
-<li>Comment: Place graph is bipartite projection of <span class="math inline">\(\mathscr{G}\)</span> onto place nodes <span class="math inline">\(\mathscr{N}_C\)</span></li>
-</ul>
+<section id="place-graph" class="level3" data-number="D.1.3">
+<h3 data-number="D.1.3" class="anchored" data-anchor-id="place-graph"><span class="header-section-number">D.1.3</span> Place graph</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"places"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_example_projection_network</span>() <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_size_manual</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">option =</span> <span class="st">"dark_blue"</span>) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  ggraph<span class="sc">::</span><span class="fu">scale_edge_width_manual</span>(<span class="at">name =</span> <span class="st">"Weight"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-example-community-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-example-community-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="D__ssnac4_analysis_files/figure-html/fig-example-community-1-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-community-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;D.3: Sample place network visualization
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The RESPND-MI/MPX NYC place graph has community districts as nodes.</p>
+<p><span class="math display">\[
+\mathscr{G}_C(\mathscr{N}_C, \mathscr{E}_C)
+\]</span> There is an edge between two place nodes in the person graph if they are related to at least one common person node in the person-place graph. Define <span class="math inline">\(H_P(a, b)\)</span> as the set of people shared by places <span class="math inline">\(a,b \in \mathscr{N}\)</span></p>
+<p><span class="math display">\[
+H_P(a, b) = \{(x, y, p) : (x, p, a), (y, p, b) \in \mathscr{E},  x,y \in \mathbf{Z}_+ \}
+\]</span></p>
+<p>Then the edge set is given by:</p>
+<p><span class="math display">\[
+\mathscr{E}_C = \{ (a,b) : a, b \in \mathscr{N}_C, H_P(a, b) \neq \emptyset\}
+\]</span></p>
 </section>
 </section>
 <section id="measures" class="level2" data-number="D.2">
 <h2 data-number="D.2" class="anchored" data-anchor-id="measures"><span class="header-section-number">D.2</span> Measures</h2>
-<section id="adjacency-functions" class="level4">
-<h4 class="anchored" data-anchor-id="adjacency-functions">Adjacency functions</h4>
-<ul>
-<li>An adjacency function for this graph is a function that takes the label for a pair of nodes, and returns a value indicating the strength of the edge between those nodes.</li>
-<li>Define <span class="math inline">\(\psi(i,j)\)</span> as the adjacency function for the RESPND-MI/MPX NYC person-place graph. Then for person <span class="math inline">\(i\)</span> and community <span class="math inline">\(j\)</span>:
-<ul>
-<li><span class="math inline">\(\psi(i,j) = \text{count of gatherings/homes participant } i  \text{ has in community } j\)</span></li>
-</ul></li>
-<li>Define <span class="math inline">\(\psi_P(i,k)\)</span> as adjacency function for place bipartite projection data graph
-<ul>
-<li><span class="math inline">\(\psi_P(i,k) = \sum_{j \in \mathscr{N}_C}{\psi(i,j) \psi(k,j)}\)</span></li>
-</ul></li>
-<li>Define as adjacency function for person bipartite projection data graph
-<ul>
-<li><span class="math inline">\(\psi_C(j,l) = \sum_{i \in \mathscr{N}_P}{\psi(i,j) \psi(i,l)}\)</span></li>
-</ul></li>
-</ul>
+<section id="local-network-attributes" class="level3" data-number="D.2.1">
+<h3 data-number="D.2.1" class="anchored" data-anchor-id="local-network-attributes"><span class="header-section-number">D.2.1</span> Local network attributes</h3>
+<p>Define <span class="math inline">\(\psi(i,j)\)</span> as the number of relations between person <span class="math inline">\(i\)</span> and place <span class="math inline">\(j\)</span> in the person-place graph</p>
+<p><strong>Spatial reach of person <span class="math inline">\(i\)</span></strong> is the number of relations person node <span class="math inline">\(i\)</span> has with place nodes in the person-place graph.<br>
+<span class="math display">\[
+R_{i}^C = \sum_{\begin{aligned} j &amp;\in \mathscr{N}_C \end{aligned}}{\psi (i,j)}
+\]</span></p>
+<p><strong>Social reach of person <span class="math inline">\(i\)</span> among subgroup <span class="math inline">\(A\)</span></strong> is the number of person nodes in set <span class="math inline">\(A \subset \mathscr{N}_P\)</span> that are connected to person node <span class="math inline">\(i\)</span> through shared places. i.e.&nbsp;either because both nodes have a residence or gathering in at least one common community district. <span class="math display">\[
+R_{i\rightarrow A}^P = \sum_{\begin{aligned} j &amp;\in A \end{aligned}}{\sum_{k \in \mathscr{N}_C}{\psi(i,k)\psi(j,k)} }
+\]</span> The social reach of person <span class="math inline">\(i\)</span> is defined as <span class="math inline">\(R_{i\rightarrow \mathscr{N}_P} = R_{i}\)</span></p>
+<p><strong>Social catchment of place <span class="math inline">\(j\)</span> among subgroup <span class="math inline">\(A\)</span></strong> is defined as the number of connections the focal community district has with participants who belong to subgroup <span class="math inline">\(A \subset \mathscr{N}_P\)</span> <span class="math display">\[
+r_{j\rightarrow A}^P = \sum_{i \in A} {\psi (i, j)}
+\]</span></p>
+<p><strong>Spatial catchment of place <span class="math inline">\(j\)</span> via subgroup <span class="math inline">\(A\)</span></strong> is defined as the strength of connection between place node <span class="math inline">\(j\)</span> and other place nodes in the graph. Strength of connection between two places <span class="math inline">\(j\)</span> and <span class="math inline">\(k\)</span> is defined as the number of relations place nodes <span class="math inline">\(j\)</span> and <span class="math inline">\(k\)</span> have with common person nodes which belong to subset <span class="math inline">\(A\)</span>.</p>
+<p>By definition <span class="math inline">\(r_{i\rightarrow A} = r_{i}\)</span> when <span class="math inline">\(A = \mathscr{N}_P\)</span> <span class="math display">\[
+r_{j\rightarrow A} = \sum_{i \in \mathscr{N}_C} \sum_{k \in A}{\psi(k,i)\psi(k,j)} \\
+\]</span></p>
 </section>
-<section id="local-network-attributes" class="level4">
-<h4 class="anchored" data-anchor-id="local-network-attributes">Local network attributes</h4>
-<ul>
-<li>social reach for person <span class="math inline">\(i\)</span> to subset <span class="math inline">\(A \subset \mathscr{N}_P\)</span>:
-<ul>
-<li>is the number of participant nodes in set <span class="math inline">\(A \subset \mathscr{N}_P\)</span> that node <span class="math inline">\(i\)</span> shares a community district with (either because both nodes have a residence or gathering in that community district).</li>
-<li><span class="math inline">\(R_{i\rightarrow A} = \sum_{\begin{aligned} j &amp;\in A \end{aligned}}{\psi_p (i,j)}\)</span></li>
-<li>By definition <span class="math inline">\(R_{i\rightarrow A} = R_{i}\)</span> when <span class="math inline">\(A = \mathscr{N}_P\)</span></li>
-</ul></li>
-<li>social catchment for place <span class="math inline">\(j\)</span> among subset <span class="math inline">\(A\)</span>:
-<ul>
-<li>is defined as the number of connections the focal community district has with participants. This can be because partipants attended a gathering or have a residence in that community district. The measure is defined as the weighted node degree in the RESPND-MI/MPX NYC person-place graph.</li>
-<li><span class="math inline">\(r_{j\rightarrow A} = \sum_{i \in A} {\psi (i, j)}\)</span></li>
-<li>By definition <span class="math inline">\(r_{i\rightarrow A} = r_{i}\)</span> when <span class="math inline">\(A = \mathscr{N}_P\)</span></li>
-</ul></li>
-</ul>
+<section id="global-network-attributes" class="level3" data-number="D.2.2">
+<h3 data-number="D.2.2" class="anchored" data-anchor-id="global-network-attributes"><span class="header-section-number">D.2.2</span> Global network attributes</h3>
+<p>We define <strong>preference</strong> of group A for group B (for <span class="math inline">\(A, B \subset \mathscr{N}_p\)</span>) as the average proportion of alters from group B among egos from group</p>
+<p><span class="math display">\[
+\Phi(A,B) = \frac{1}{|A|}\sum_{i \in A}{\frac{ R_{i \rightarrow B}}{R_i}}
+\]</span></p>
+<p>The <strong>prevalence</strong> of group B is the size of the group divided by the total number of participants.</p>
+<p><span class="math display">\[
+\frac{|B|}{|\mathscr{N}_p|}
+\]</span></p>
+<p>The <strong>spatial mixing coefficient from A to B</strong> quantifies the degree to which egos in group A preferentially live in or attend gatherings in community districts they are likely to encounter members of group B. It is defined as the ratio of preference to prevalence minus one.</p>
+<p><span class="math display">\[
+\phi(A,B) = \frac{|\mathscr{N}_p|}{|B|} \Phi(A,B) - 1
+\]</span></p>
+<p><strong>Proportion in largest connected component</strong>: In a given network, a connected component is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties. Say the size of the <span class="math inline">\(k^{th}\)</span> connected component is <span class="math inline">\(C_k\)</span>. The proportion in the largest connected component is given by: <span class="math display">\[
+\theta_p = \frac{\max_k{C_k}}{|\mathscr{N}_p|}
+\]</span></p>
 </section>
-<section id="global-network-attributes" class="level4">
-<h4 class="anchored" data-anchor-id="global-network-attributes">Global network attributes</h4>
-<ul>
-<li>Spatial mixing coefficient
-<ul>
-<li>The&nbsp;<strong>spatial mixing coefficient from A to B</strong> quantifies the degree to which egos in group A preferentially live in or attend gatherings in community districts they are likely to encounter members of group B.</li>
-<li>Definition:
-<ul>
-<li><p>We define <strong>preference</strong> of group A for group B (for <span class="math inline">\(A, B \subset \mathscr{N}_p\)</span>) as the average proportion of alters from group B among egos from group</p>
-<ul>
-<li><span class="math inline">\(\Phi(A,B) = \frac{1}{|A|}\sum_{i \in A}{\frac{ R_{i \rightarrow B}}{R_i}}\)</span></li>
-</ul></li>
-<li><p>The <strong>prevalence</strong> of group B is the size of the group divided by the total number of participants.</p>
-<ul>
-<li><span class="math inline">\(\frac{|B|}{|\mathscr{N}_p|}\)</span></li>
-</ul></li>
-<li><p>The <strong>spatial mixing matrix</strong> is the ratio of preference to prevalence minus one. It quantifies the degree to which egos in group A preferentially live in or attend gatherings in community districts they are likely to encounter members of group B.</p>
-<ul>
-<li><span class="math inline">\(\phi(A,B) = \frac{|\mathscr{N}_p|}{|B|} \Phi(A,B) - 1\)</span></li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li>Proportion in largest connected component
-<ul>
-<li><p>In a given network, a connected component is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties. Say the size of the <span class="math inline">\(k^{th}\)</span> connected component is <span class="math inline">\(C_k\)</span>. The proportion in the largest connected component is given by:</p>
-<ul>
-<li><span class="math inline">\(\theta_p = \frac{\max_k{C_k}}{|\mathscr{N}_p|}\)</span></li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="dynamics-on-the-place-network" class="level4">
-<h4 class="anchored" data-anchor-id="dynamics-on-the-place-network">Dynamics on the place network</h4>
-<ul>
-<li>Outings movement matrix
-<ul>
-<li><p>The <strong>movement matrix</strong> is a square matrix whose <span class="math inline">\(kl^{th}\)</span> entry, <span class="math inline">\(m(k,l)\)</span>, is defined as the count of outings from home in community district <span class="math inline">\(k\)</span> to a gathering in community district <span class="math inline">\(l\)</span>. Say <span class="math inline">\(d^H(i)\)</span> is the home community district of participant <span class="math inline">\(i\)</span>. Then:</p>
-<ul>
-<li><span class="math inline">\(m(k,l) = \sum_{\begin{aligned}i \in \mathscr{N}_P \\ d^H(i) = k \end{aligned}} \psi (i,l)\)</span></li>
-</ul></li>
-</ul></li>
-<li>Spatial concentration plot
-<ul>
-<li><p>The <strong>spatial concentration proportion</strong> <span class="math inline">\(c(k)\)</span> quantifies the degree to which a community district is over-represented among destination community districts compared to home districts in the movement matrix. It is the difference of the margins of the movement matrix.</p>
-<ul>
-<li><span class="math inline">\(c(k) = \frac{\sum_l{m(l,k)} - \sum_k{m(l,k)}}{\sum_{l,k}{m(l,k)}}\)</span></li>
-</ul></li>
-</ul></li>
-</ul>
+<section id="dynamics-on-the-network" class="level3" data-number="D.2.3">
+<h3 data-number="D.2.3" class="anchored" data-anchor-id="dynamics-on-the-network"><span class="header-section-number">D.2.3</span> Dynamics on the network</h3>
+<p>The <strong>movement matrix</strong> is a square matrix whose <span class="math inline">\(kl^{th}\)</span> entry, <span class="math inline">\(m(k,l)\)</span>, is defined as the count of outings from home in community district <span class="math inline">\(k\)</span> to a gathering in community district <span class="math inline">\(l\)</span>. Say <span class="math inline">\(d^H(i)\)</span> is the home community district of participant <span class="math inline">\(i\)</span>. <span class="math display">\[
+m(k,l) = \sum_{\begin{aligned}i \in \mathscr{N}_P \\ d^H(i) = k \end{aligned}} \psi (i,l)
+\]</span></p>
+<p>The <strong>spatial concentration proportion</strong> <span class="math inline">\(c(k)\)</span> quantifies the degree to which a community district is over-represented among destination community districts compared to home districts in the movement matrix. It is the difference of the margins of the movement matrix. <span class="math display">\[
+c(k) = \frac{\sum_l{m(l,k)} - \sum_k{m(l,k)}}{\sum_{l,k}{m(l,k)}}
+\]</span></p>
 </section>
 </section>
 <section id="statistical-inference" class="level2" data-number="D.3">
@@ -666,180 +670,11 @@ window.Quarto = {
 <li>Simulation repetitions each comprise disjoint components of the simulted person-place graph</li>
 </ul></li>
 </ul>
-<div class="cell" data-layout-align="center">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_icon</span>(<span class="at">icon_name =</span> <span class="st">"devil"</span>, <span class="at">color =</span> <span class="st">"dark_orange"</span>, <span class="at">shape =</span> <span class="dv">16</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="D__ssnac4_analysis_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
-</figure>
-</div>
-</div>
-</div>
+</section>
+<section id="section" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="section"></h2>
 <div id="acknowledgements">
-<p><u>Acknowledgements</u>: The analytic framework for this project developed over an extended period of time, beginning during my PhD dissertation (Harvard University, 2021, under the supervision of Lisa Berkman, Eric Tchetgen Tchetgen, and a former mentor I no longer contact). In particular, the analysis borrows from the central paper in my dissertation, which shows how the wealth of non-coresident extended family members is protective against mortality…. (Continued at bottom of page)</p>
-<p><u>Lead author</u>: Keletso Makofane, MPH, PhD. <u>Editor</u>: Nicholas Diamond, MPH. (Published: June 2025).</p>
-</div>
-<p>In this appendix we describe the main data objects of the MPX NYC study – the Person-place graph, the Person graph and the Place graph – as well as the statistics we used to analyze them.</p>
-</section>
-<section id="data-graphs-1" class="level2" data-number="D.4">
-<h2 data-number="D.4" class="anchored" data-anchor-id="data-graphs-1"><span class="header-section-number">D.4</span> Data graphs</h2>
-<section id="person-place-graph" class="level5 unnumbered">
-<h5 class="unnumbered anchored" data-anchor-id="person-place-graph">Person-place graph</h5>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"bipartite"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_example_bipartite_network</span>() <span class="sc">+</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">option =</span> <span class="st">"dark"</span>) <span class="sc">+</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Node type"</span>) <span class="sc">+</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_size_manual</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>(</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> ggplot2<span class="sc">::</span><span class="fu">margin</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>),</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="fig-example-participant-place" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-example-participant-place-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="D__ssnac4_analysis_files/figure-html/fig-example-participant-place-1.png" class="img-fluid figure-img" width="768">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-participant-place-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;D.1: Sample person-place network visualization
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>The RESPND-MI/MPX NYC person-place graph is a data graph that contains all collected data. We define the person-place graph as an ordered pair with the first entry a set of node labels <span class="math inline">\(\mathscr{N}\)</span>, and an adjacency function <span class="math inline">\(\psi\)</span>. There are two types of nodes: community districts <span class="math inline">\(\mathscr{N}_C\)</span> and survey participants <span class="math inline">\(\mathscr{N}_P\)</span>.</p>
-<p><span class="math display">\[
-\mathscr{G}(\mathscr{N}, \psi)
-\]</span></p>
-<p>An adjacency function for this graph is a function that takes the label for a pair of nodes, and returns a value indicating the strength of the edge between those nodes. In unweighted networks, the strength of a tie is either zero, meaning the pair of nodes is not connected, or 1, meaning it is. Define <span class="math inline">\(\psi(i,j)\)</span> as the adjacency function for the RESPND-MI/MPX NYC person-place graph. Then for person <span class="math inline">\(i\)</span> and community <span class="math inline">\(j\)</span>:</p>
-<p><span class="math display">\[
-\psi(i,j) = \text{count of gatherings/homes participant } i  \text{ has in community } j
-\]</span></p>
-<p>Edges can only exist between a participant and a community district - they indicate that the person either lives in or attended a gathering in that community district. i.e.:</p>
-<p><span class="math display">\[
-i,j \in \mathscr{N}_P \text{ or } i,j \in \mathscr{N}_C \implies \psi(i,j) = 0
-\]</span></p>
-</section>
-<section id="person-graph-1" class="level5 unnumbered">
-<h5 class="unnumbered anchored" data-anchor-id="person-graph-1">Person graph</h5>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"people"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_example_projection_network</span>() <span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_size_manual</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">7</span>)) <span class="sc">+</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">option =</span> <span class="st">"dark"</span>) <span class="sc">+</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  ggraph<span class="sc">::</span><span class="fu">scale_edge_width</span>()  <span class="sc">+</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  ggraph<span class="sc">::</span><span class="fu">scale_edge_width_manual</span>(<span class="at">name =</span> <span class="st">"Weight"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="fig-example-participant" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-example-participant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="D__ssnac4_analysis_files/figure-html/fig-example-participant-1.png" class="img-fluid figure-img" width="768">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-participant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;D.2: Sample person-person network visualizatoin
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>The RESPND-MI/MPX NYC has study participants as nodes. A pair of nodes is connected by a weighted edge if each of the participants represented by the nodes share at least one community district in which they both had a gathering or residence. The weight of the edge is equal to the count of community districts the pair of nodes have in common. We define the person graph</p>
-<p><span class="math display">\[
-\mathscr{G}(\mathscr{N}_P, \psi_P )
-\]</span></p>
-<p>with node set <span class="math inline">\(\mathscr{N}_P\)</span> and adjacency function <span class="math inline">\(\psi_P\)</span>:</p>
-<p><span class="math display">\[
-\psi_P(i,k) = \sum_{j \in \mathscr{N}_C}{\psi(i,j) \psi(k,j)}
-\]</span></p>
-</section>
-<section id="place-graph-1" class="level5 unnumbered">
-<h5 class="unnumbered anchored" data-anchor-id="place-graph-1">Place graph</h5>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"places"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_example_projection_network</span>() <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_size_manual</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">option =</span> <span class="st">"dark_blue"</span>) <span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  ggraph<span class="sc">::</span><span class="fu">scale_edge_width_manual</span>(<span class="at">name =</span> <span class="st">"Weight"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="fig-example-community" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-example-community-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="D__ssnac4_analysis_files/figure-html/fig-example-community-1.png" class="img-fluid figure-img" width="768">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-community-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;D.3: Sample place network visualization
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>The RESPND-MI/MPX NYC place graph has community districts as nodes. A pair of community districts is connected by a weighted edge when at least one participant has a residence or attended a gathering in both community districts. The weight of the edge is the count of participants who are shared by the two community districts. We define the place graph</p>
-<p><span class="math display">\[
-\mathscr{G}(\mathscr{N}_C, \psi_C )
-\]</span></p>
-<p>with node set <span class="math inline">\(\mathscr{N}_C\)</span> and adjacency function <span class="math inline">\(\psi_C\)</span>:</p>
-<p><span class="math display">\[
-\psi_C(j,l) = \sum_{i \in \mathscr{N}_P}{\psi(i,j) \psi(i,l)}
-\]</span></p>
-</section>
-</section>
-<section id="measures-1" class="level2" data-number="D.5">
-<h2 data-number="D.5" class="anchored" data-anchor-id="measures-1"><span class="header-section-number">D.5</span> Measures</h2>
-<section id="node-characteristics" class="level3" data-number="D.5.1">
-<h3 data-number="D.5.1" class="anchored" data-anchor-id="node-characteristics"><span class="header-section-number">D.5.1</span> Node characteristics</h3>
-<p><strong>Conditional participant social reach</strong> from <span class="math inline">\(i\)</span> to <span class="math inline">\(A\)</span> is the number of participant nodes in set <span class="math inline">\(A \subset \mathscr{N}_P\)</span> that node <span class="math inline">\(i\)</span> shares a community district with (either because both nodes have a residence or gathering in that community district). The measure is defined as weighted node degree in the RESPND-MI/MPX NYC person graph.</p>
-<p><span class="math display">\[
-R_{i\rightarrow A} = \sum_{\begin{aligned} j &amp;\in A \end{aligned}}{\psi_p (i,j)}
-\]</span></p>
-<p><strong>Conditional community district social reach</strong> from <span class="math inline">\(j\)</span> to A is defined as the number of connections the focal community district has with participants. This can be because partipants attended a gathering or have a residence in that community district. The measure is defined as the weighted node degree in the RESPND-MI/MPX NYC person-place graph.</p>
-<p><span class="math display">\[
-r_{j\rightarrow A} = \sum_{i \in A} {\psi (i, j)}
-\]</span></p>
-<p>When <span class="math inline">\(A=\mathscr{N}_p\)</span>, these measures are called <strong>participant social reach</strong> (<span class="math inline">\(R_i\)</span>), and <strong>community district social reach</strong> (<span class="math inline">\(r_j\)</span>), respectively.</p>
-</section>
-<section id="network-characteristics" class="level3" data-number="D.5.2">
-<h3 data-number="D.5.2" class="anchored" data-anchor-id="network-characteristics"><span class="header-section-number">D.5.2</span> Network characteristics</h3>
-<p>The <strong>movement matrix</strong> is a square matrix whose <span class="math inline">\(kl^{th}\)</span> entry, <span class="math inline">\(m(k,l)\)</span>, is defined as the count of outings from home in community district <span class="math inline">\(k\)</span> to a gathering in community district <span class="math inline">\(l\)</span>. Say <span class="math inline">\(d^H(i)\)</span> is the home community district of participant <span class="math inline">\(i\)</span>. Then:</p>
-<p><span class="math display">\[
-m(k,l) = \sum_{\begin{aligned}i \in \mathscr{N}_P \\ d^H(i) = k \end{aligned}} \psi (i,l)
-\]</span></p>
-<p>The <strong>spatial concentration proportion</strong> <span class="math inline">\(c(k)\)</span> quantifies the degree to which a community district is over-represented among destination community districts compared to home districts in the movement matrix. It is the difference of the margins of the movement matrix.</p>
-<p><span class="math display">\[
-c(k) = \frac{\sum_l{m(l,k)} - \sum_k{m(l,k)}}{\sum_{l,k}{m(l,k)}}
-\]</span></p>
-<p>We define <strong>preference</strong> of group A for group B (for <span class="math inline">\(A, B \subset \mathscr{N}_p\)</span>) as the average proportion of alters from group B among egos from group A.</p>
-<p><span class="math display">\[
-\Phi(A,B) = \frac{1}{|A|}\sum_{i \in A}{\frac{ R_{i \rightarrow B}}{R_i}}
-\]</span></p>
-<p>The <strong>prevalence</strong> of group B is the size of the group divided by the total number of participants.</p>
-<p><span class="math display">\[
-\frac{|B|}{|\mathscr{N}_p|}
-\]</span></p>
-<p>The <strong>spatial mixing matrix</strong> is the ratio of preference to prevalence minus one. It quantifies the degree to which egos in group A preferentially live in or attend gatherings in community districts they are likely to encounter members of group B.</p>
-<p><span class="math display">\[
-\phi(A,B) = \frac{|\mathscr{N}_p|}{|B|} \Phi(A,B) - 1
-\]</span></p>
-<p>We define the <strong>proportion in the largest connected component</strong> as follows:</p>
-<p>In a given network, a connected component is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By reachable, we mean possible to reach by tracing a path from one node to another over existing network ties. Say the size of the <span class="math inline">\(k^{th}\)</span> connected component is <span class="math inline">\(C_k\)</span>. The proportion in the largest connected component is given by:</p>
-<p><span class="math display">\[
-\theta_p = \frac{\max_k{C_k}}{|\mathscr{N}_p|}
-\]</span></p>
-<p><u>Acknowledgements</u>: The analytic framework for this project developed over an extended period of time, beginning during my PhD dissertation (Harvard University, 2021, under the supervision of Lisa Berkman, Eric Tchetgen Tchetgen, and a former mentor I no longer contact). In particular, the analysis borrows from the central paper in my dissertation, which shows how the wealth of non-coresident extended family members is protective against mortality.</p>
+<p><u>Acknowledgements</u>: The analytic framework for this project developed over an extended period of time, beginning during my PhD dissertation at Harvard University under the supervision of Lisa Berkman, Eric Tchetgen Tchetgen, and a former mentor). In particular, the analysis borrows from the central paper in my dissertation, which shows how the wealth of non-coresident extended family members is protective against mortality.</p>
 <p>This work was part of U.S. government-funded research conducted in South Africa through the HAALSA study, which has since been defunded by the Trump administration. It is path-breaking because it shows an approach to using a large scale (over 100,000 people observed over three decades) dataset as a family network. There are many more datasets that could be analyzed using these methods. Any investigator who ever hosted a study at the Agincourt surveillance site in the north-east of South Africa, for instance, can use these methods to interpret their own data in light of family networks. It has the potential to illustrate the value of deep collaboration between U.S. and South African researchers. It is also of pedagogical value. I wrote the appendices of my dissertation in the same style as these appendices – with students and teachers of epidemiology in mind.</p>
 <p><strong>Unfortunately, my PhD dissertation paper is a hostage of the American Journal of Epidemiology’s former editor-in-chief, Ichiro Kawachi, who is a colleague of my former mentor.</strong></p>
 <p>After taking some time away from work to recover from the social violence I experienced at the hands of my former mentor, I was surprised to find that the edits that had held up publication of my dissertation paper (with implications for my ability to get an academic job) were minor copy edits. The “technical review” itself, which is misleadingly labelled, was riddled with errors, by the admission of the handling editor. Many tedious things happened after that, but the result of them is that the editors of the American Journal of Epidemiology have the final version of my manuscript, which I copy edited myself after arranging for the journal to receive thousands of dollars in publication fees… after spending years conducting the research and months responding to peer review. I submitted the manuscript by email after the handling editor agreed to receive it by email.</p>
@@ -848,9 +683,9 @@ c(k) = \frac{\sum_l{m(l,k)} - \sum_k{m(l,k)}}{\sum_{l,k}{m(l,k)}}
 <blockquote class="blockquote">
 <p>Makofane, K., Tchetgen Tchetgen, E. J., Bassett, M. T., Berkman, L. F. (Accepted 2023, final manuscript submitted January 2025). Networked wealth and mortality in the Agincourt Health and Demographic Surveillance System 2009 – 2018. <em>American Journal of Epidemiology</em>.</p>
 </blockquote>
+</div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
