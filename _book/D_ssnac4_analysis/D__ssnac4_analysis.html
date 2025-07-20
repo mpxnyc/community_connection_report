@@ -430,8 +430,6 @@ window.Quarto = {
   <li><a href="#data-graphs" id="toc-data-graphs" class="nav-link active" data-scroll-target="#data-graphs"><span class="header-section-number">D.1</span> Data graphs</a>
   <ul class="collapse">
   <li><a href="#person-place-graph" id="toc-person-place-graph" class="nav-link" data-scroll-target="#person-place-graph"><span class="header-section-number">D.1.1</span> Person-place graph</a></li>
-  <li><a href="#person-graph" id="toc-person-graph" class="nav-link" data-scroll-target="#person-graph"><span class="header-section-number">D.1.2</span> Person graph</a></li>
-  <li><a href="#place-graph" id="toc-place-graph" class="nav-link" data-scroll-target="#place-graph"><span class="header-section-number">D.1.3</span> Place graph</a></li>
   </ul></li>
   <li><a href="#measures" id="toc-measures" class="nav-link" data-scroll-target="#measures"><span class="header-section-number">D.2</span> Measures</a>
   <ul class="collapse">
@@ -520,79 +518,9 @@ d(\mathscr{N}) = \{\mathbf{v}_t \in (S_t)^{|\mathscr{N}|} : t \in [1:K], K \in \
 <p><span class="math display">\[
 d(\mathscr{E}) = \{\mathbf{v}_t \in (S_t)^{|\mathscr{E}|} : t \in [1:Q], Q \in \mathbf{Z}_+\}
 \]</span></p>
-</section>
-<section id="person-graph" class="level3" data-number="D.1.2">
-<h3 data-number="D.1.2" class="anchored" data-anchor-id="person-graph"><span class="header-section-number">D.1.2</span> Person graph</h3>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"people"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_example_projection_network</span>() <span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_size_manual</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">7</span>)) <span class="sc">+</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">option =</span> <span class="st">"dark"</span>) <span class="sc">+</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  ggraph<span class="sc">::</span><span class="fu">scale_edge_width</span>()  <span class="sc">+</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  ggraph<span class="sc">::</span><span class="fu">scale_edge_width_manual</span>(<span class="at">name =</span> <span class="st">"Weight"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="fig-example-participant-1" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-example-participant-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="D__ssnac4_analysis_files/figure-html/fig-example-participant-1-1.png" class="img-fluid figure-img" width="768">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-participant-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;D.2: Sample person-person network visualizatoin
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>The RESPND-MI/MPX NYC person data graph has study participants as nodes.</p>
+<p>We define <span class="math inline">\(\psi(i,j)\)</span> as the number of relations between person <span class="math inline">\(i\)</span> and place <span class="math inline">\(j\)</span> in the person-place graph</p>
 <p><span class="math display">\[
-\mathscr{G}_P(\mathscr{N}_P, \mathscr{E}_P, d(.))
-\]</span> There is an edge between two participant nodes in the person graph if they are related to at least one common place in the person-place graph. Define <span class="math inline">\(H_C(a, b)\)</span> is the set of places shared by persons <span class="math inline">\(a,b \in \mathscr{N}_P\)</span></p>
-<p><span class="math display">\[
-H_C(a, b) = \{(x, y, c) : (x, a, c), (y, b, c) \in \mathscr{E},  x,y \in \mathbf{Z}_+ \}
-\]</span> Then the set of edges is given by:</p>
-<p><span class="math display">\[
-\mathscr{E}_P = \{ (a,b) : a, b \in \mathscr{N}_P, H_C(a, b) \neq \emptyset\}
-\]</span></p>
-</section>
-<section id="place-graph" class="level3" data-number="D.1.3">
-<h3 data-number="D.1.3" class="anchored" data-anchor-id="place-graph"><span class="header-section-number">D.1.3</span> Place graph</h3>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"places"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_example_projection_network</span>() <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_size_manual</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Node type"</span>, <span class="at">option =</span> <span class="st">"dark_blue"</span>) <span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  ggraph<span class="sc">::</span><span class="fu">scale_edge_width_manual</span>(<span class="at">name =</span> <span class="st">"Weight"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="fig-example-community-1" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-example-community-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="D__ssnac4_analysis_files/figure-html/fig-example-community-1-1.png" class="img-fluid figure-img" width="768">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-community-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;D.3: Sample place network visualization
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>The RESPND-MI/MPX NYC place graph has community districts as nodes.</p>
-<p><span class="math display">\[
-\mathscr{G}_C(\mathscr{N}_C, \mathscr{E}_C)
-\]</span> There is an edge between two place nodes in the person graph if they are related to at least one common person node in the person-place graph. Define <span class="math inline">\(H_P(a, b)\)</span> as the set of people shared by places <span class="math inline">\(a,b \in \mathscr{N}\)</span></p>
-<p><span class="math display">\[
-H_P(a, b) = \{(x, y, p) : (x, p, a), (y, p, b) \in \mathscr{E},  x,y \in \mathbf{Z}_+ \}
-\]</span></p>
-<p>Then the edge set is given by:</p>
-<p><span class="math display">\[
-\mathscr{E}_C = \{ (a,b) : a, b \in \mathscr{N}_C, H_P(a, b) \neq \emptyset\}
+\psi(i,j) = |\{(x,i,j) \in \mathscr{E}\} |
 \]</span></p>
 </section>
 </section>
@@ -600,21 +528,35 @@ H_P(a, b) = \{(x, y, p) : (x, p, a), (y, p, b) \in \mathscr{E},  x,y \in \mathbf
 <h2 data-number="D.2" class="anchored" data-anchor-id="measures"><span class="header-section-number">D.2</span> Measures</h2>
 <section id="local-network-attributes" class="level3" data-number="D.2.1">
 <h3 data-number="D.2.1" class="anchored" data-anchor-id="local-network-attributes"><span class="header-section-number">D.2.1</span> Local network attributes</h3>
-<p>Define <span class="math inline">\(\psi(i,j)\)</span> as the number of relations between person <span class="math inline">\(i\)</span> and place <span class="math inline">\(j\)</span> in the person-place graph</p>
-<p><strong>Spatial reach of person <span class="math inline">\(i\)</span></strong> is the number of relations person node <span class="math inline">\(i\)</span> has with place nodes in the person-place graph.<br>
+<section id="spatial-reach" class="level4">
+<h4 class="anchored" data-anchor-id="spatial-reach">Spatial reach</h4>
+<p><strong>Spatial reach of person</strong> <span class="math inline">\(i\)</span> is the number of relations person node <span class="math inline">\(i\)</span> has with place nodes in the person-place graph.<br>
 <span class="math display">\[
 R_{i}^C = \sum_{\begin{aligned} j &amp;\in \mathscr{N}_C \end{aligned}}{\psi (i,j)}
 \]</span></p>
-<p><strong>Social reach of person <span class="math inline">\(i\)</span> among subgroup <span class="math inline">\(A\)</span></strong> is the number of person nodes in set <span class="math inline">\(A \subset \mathscr{N}_P\)</span> that are connected to person node <span class="math inline">\(i\)</span> through shared places. i.e.&nbsp;either because both nodes have a residence or gathering in at least one common community district. <span class="math display">\[
+</section>
+<section id="social-reach" class="level4">
+<h4 class="anchored" data-anchor-id="social-reach">Social reach</h4>
+<p><strong>Social reach of person</strong> <span class="math inline">\(i\)</span> among subgroup <span class="math inline">\(A\)</span> is the number of person nodes in set <span class="math inline">\(A \subset \mathscr{N}_P\)</span> that are connected to person node <span class="math inline">\(i\)</span> through shared places. i.e.&nbsp;either because both nodes have a residence or gathering in at least one common community district. <span class="math display">\[
 R_{i\rightarrow A}^P = \sum_{\begin{aligned} j &amp;\in A \end{aligned}}{\sum_{k \in \mathscr{N}_C}{\psi(i,k)\psi(j,k)} }
-\]</span> The social reach of person <span class="math inline">\(i\)</span> is defined as <span class="math inline">\(R_{i\rightarrow \mathscr{N}_P} = R_{i}\)</span></p>
-<p><strong>Social catchment of place <span class="math inline">\(j\)</span> among subgroup <span class="math inline">\(A\)</span></strong> is defined as the number of connections the focal community district has with participants who belong to subgroup <span class="math inline">\(A \subset \mathscr{N}_P\)</span> <span class="math display">\[
+\]</span></p>
+<p>The <strong>social reach of person</strong> <span class="math inline">\(i\)</span> is defined as <span class="math inline">\(R_{i\rightarrow \mathscr{N}_P} = R_{i}\)</span></p>
+<p>The <strong>social reach of person</strong> <span class="math inline">\(i\)</span> is defined as <span class="math inline">\(R_{i\rightarrow \mathscr{N}_P} = R_{i}\)</span></p>
+</section>
+<section id="social-catchment" class="level4">
+<h4 class="anchored" data-anchor-id="social-catchment">Social catchment</h4>
+<p><strong>Social catchment of place</strong> <span class="math inline">\(j\)</span> among subgroup <span class="math inline">\(A\)</span> is defined as the number of connections the focal community district has with participants who belong to subgroup <span class="math inline">\(A \subset \mathscr{N}_P\)</span> <span class="math display">\[
 r_{j\rightarrow A}^P = \sum_{i \in A} {\psi (i, j)}
 \]</span></p>
-<p><strong>Spatial catchment of place <span class="math inline">\(j\)</span> via subgroup <span class="math inline">\(A\)</span></strong> is defined as the strength of connection between place node <span class="math inline">\(j\)</span> and other place nodes in the graph. Strength of connection between two places <span class="math inline">\(j\)</span> and <span class="math inline">\(k\)</span> is defined as the number of relations place nodes <span class="math inline">\(j\)</span> and <span class="math inline">\(k\)</span> have with common person nodes which belong to subset <span class="math inline">\(A\)</span>.</p>
-<p>By definition <span class="math inline">\(r_{i\rightarrow A} = r_{i}\)</span> when <span class="math inline">\(A = \mathscr{N}_P\)</span> <span class="math display">\[
+</section>
+<section id="spatial-catchment" class="level4">
+<h4 class="anchored" data-anchor-id="spatial-catchment">Spatial catchment</h4>
+<p><strong>Spatial catchment of place</strong> <span class="math inline">\(j\)</span> via subgroup <span class="math inline">\(A\)</span> is defined as the strength of connection between place node <span class="math inline">\(j\)</span> and other place nodes in the graph when we consider their shared relations with person nodes in subgroup <span class="math inline">\(A\)</span>. Strength of connection between two places <span class="math inline">\(j\)</span> and <span class="math inline">\(k\)</span> is defined as the number of relations place nodes <span class="math inline">\(j\)</span> and <span class="math inline">\(k\)</span> have with common person nodes which belong to subset <span class="math inline">\(A\)</span>.</p>
+<p>The <strong>spatial catchment of place</strong> <span class="math inline">\(j\)</span> is defined as <span class="math inline">\(r_{i\rightarrow \mathscr{N}_P} = r_{i}\)</span></p>
+<p><span class="math display">\[
 r_{j\rightarrow A} = \sum_{i \in \mathscr{N}_C} \sum_{k \in A}{\psi(k,i)\psi(k,j)} \\
 \]</span></p>
+</section>
 </section>
 <section id="global-network-attributes" class="level3" data-number="D.2.2">
 <h3 data-number="D.2.2" class="anchored" data-anchor-id="global-network-attributes"><span class="header-section-number">D.2.2</span> Global network attributes</h3>
@@ -647,6 +589,15 @@ c(k) = \frac{\sum_l{m(l,k)} - \sum_k{m(l,k)}}{\sum_{l,k}{m(l,k)}}
 <section id="statistical-inference" class="level2" data-number="D.3">
 <h2 data-number="D.3" class="anchored" data-anchor-id="statistical-inference"><span class="header-section-number">D.3</span> Statistical inference</h2>
 <ul>
+<li>we want a functional of node and edge universe data
+<ul>
+<li>But we have a function of node and edge sample data</li>
+</ul></li>
+<li>under what condition do we have unbiasedness?
+<ul>
+<li>random sample</li>
+<li>conditionally random sample</li>
+</ul></li>
 <li>Simulated person-place graph <span class="math inline">\(\mathscr{G}^*(\mathscr{N}^*, \mathscr{E}^*)\)</span>
 <ul>
 <li>Nodes <span class="math inline">\(\mathscr{N}^* = \mathscr{N}_P^* \cup \mathscr{N}_C^*\)</span>
@@ -673,7 +624,7 @@ c(k) = \frac{\sum_l{m(l,k)} - \sum_k{m(l,k)}}{\sum_{l,k}{m(l,k)}}
 </section>
 <section id="section" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="section"></h2>
-<div id="acknowledgements">
+<div>
 <p><u>Acknowledgements</u>: The analytic framework for this project developed over an extended period of time, beginning during my PhD dissertation at Harvard University under the supervision of Lisa Berkman, Eric Tchetgen Tchetgen, and a former mentor). In particular, the analysis borrows from the central paper in my dissertation, which shows how the wealth of non-coresident extended family members is protective against mortality.</p>
 <p>This work was part of U.S. government-funded research conducted in South Africa through the HAALSA study, which has since been defunded by the Trump administration. It is path-breaking because it shows an approach to using a large scale (over 100,000 people observed over three decades) dataset as a family network. There are many more datasets that could be analyzed using these methods. Any investigator who ever hosted a study at the Agincourt surveillance site in the north-east of South Africa, for instance, can use these methods to interpret their own data in light of family networks. It has the potential to illustrate the value of deep collaboration between U.S. and South African researchers. It is also of pedagogical value. I wrote the appendices of my dissertation in the same style as these appendices – with students and teachers of epidemiology in mind.</p>
 <p><strong>Unfortunately, my PhD dissertation paper is a hostage of the American Journal of Epidemiology’s former editor-in-chief, Ichiro Kawachi, who is a colleague of my former mentor.</strong></p>
