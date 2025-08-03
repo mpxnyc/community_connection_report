@@ -44,9 +44,19 @@ mpxnyc_dark_blue <- function(n){
 }
 
 
-mpxnyc_colors <- function(option){
-  if (option == "all")   return(mpxnyc_all)
-  if (option == "light") return(mpxnyc_light)
-  if (option == "dark")  return(mpxnyc_dark)
-  if (option == "dark_blue") return(mpxnyc_dark_blue)
+
+
+mpxnyc_colors <- function(option, values = NULL){
+  
+  if (!is.null(values)) {
+    mpxnyc_manual <- function(n){
+    values[1:n]
+    }
+  }
+  
+  if (option == "all")        return(mpxnyc_all)
+  if (option == "light")      return(mpxnyc_light)
+  if (option == "dark")       return(mpxnyc_dark)
+  if (option == "dark_blue")  return(mpxnyc_dark_blue)
+  if (option == "manual")     return(mpxnyc_manual)
 }

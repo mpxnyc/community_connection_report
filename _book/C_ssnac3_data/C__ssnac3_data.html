@@ -414,7 +414,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../D_ssnac4_analysis/D__ssnac4_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">SSNAC III: Description</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">SSNAC III: Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -447,14 +447,18 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#study-data" id="toc-study-data" class="nav-link active" data-scroll-target="#study-data"><span class="header-section-number">C.1</span> Study data</a></li>
-  <li><a href="#person-place-network-mapper" id="toc-person-place-network-mapper" class="nav-link" data-scroll-target="#person-place-network-mapper"><span class="header-section-number">C.2</span> Person place network mapper</a>
+  <li><a href="#data-graphs" id="toc-data-graphs" class="nav-link active" data-scroll-target="#data-graphs"><span class="header-section-number">C.1</span> Data graphs</a>
   <ul class="collapse">
-  <li><a href="#place-mapping" id="toc-place-mapping" class="nav-link" data-scroll-target="#place-mapping"><span class="header-section-number">C.2.1</span> Place mapping</a></li>
-  <li><a href="#link-tracing" id="toc-link-tracing" class="nav-link" data-scroll-target="#link-tracing"><span class="header-section-number">C.2.2</span> Link tracing</a></li>
-  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation"><span class="header-section-number">C.2.3</span> Implementation</a></li>
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><span class="header-section-number">C.1.1</span> Definition</a></li>
   </ul></li>
-  <li><a href="#data-collection" id="toc-data-collection" class="nav-link" data-scroll-target="#data-collection"><span class="header-section-number">C.3</span> Data collection</a></li>
+  <li><a href="#study-data" id="toc-study-data" class="nav-link" data-scroll-target="#study-data"><span class="header-section-number">C.2</span> Study data</a></li>
+  <li><a href="#person-place-network-mapper" id="toc-person-place-network-mapper" class="nav-link" data-scroll-target="#person-place-network-mapper"><span class="header-section-number">C.3</span> Person place network mapper</a>
+  <ul class="collapse">
+  <li><a href="#place-mapping" id="toc-place-mapping" class="nav-link" data-scroll-target="#place-mapping"><span class="header-section-number">C.3.1</span> Place mapping</a></li>
+  <li><a href="#link-tracing" id="toc-link-tracing" class="nav-link" data-scroll-target="#link-tracing"><span class="header-section-number">C.3.2</span> Link tracing</a></li>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation"><span class="header-section-number">C.3.3</span> Implementation</a></li>
+  </ul></li>
+  <li><a href="#data-collection" id="toc-data-collection" class="nav-link" data-scroll-target="#data-collection"><span class="header-section-number">C.4</span> Data collection</a></li>
   </ul>
 </nav>
     </div>
@@ -487,8 +491,45 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<section id="study-data" class="level2" data-number="C.1">
-<h2 data-number="C.1" class="anchored" data-anchor-id="study-data"><span class="header-section-number">C.1</span> Study data</h2>
+<section id="data-graphs" class="level2" data-number="C.1">
+<h2 data-number="C.1" class="anchored" data-anchor-id="data-graphs"><span class="header-section-number">C.1</span> Data graphs</h2>
+<p>Study data are represented using data graphs as edge and node characteristics. Individual characteristics such as age, gender, and HIV status are encoded as node characteristics. In addition, community district characteristics (e.g.&nbsp;surface area) are included as node characteristics in the data graph. The edges of a data graph encode information on the relationship between a given survey participant and community district.</p>
+<section id="definition" class="level3" data-number="C.1.1">
+<h3 data-number="C.1.1" class="anchored" data-anchor-id="definition"><span class="header-section-number">C.1.1</span> Definition</h3>
+<p>A data graph is defined as an ordered triple with the first entry a set of node labels <span class="math inline">\(\mathscr{N}\)</span>, the second, a set of edges <span class="math inline">\(\mathscr{E}\)</span>, and the third, a function associating each node with node attributes and each edge with edge attributes.</p>
+<p><span class="math display">\[
+\mathscr{G}(\mathscr{N}, \mathscr{E}, d(.))
+\]</span></p>
+<p>There are two classes of nodes: community districts <span class="math inline">\(\mathscr{N}_C\)</span> and survey participants <span class="math inline">\(\mathscr{N}_P\)</span>.</p>
+<p><span class="math display">\[
+\mathscr{N} = \mathscr{N}_P \cup \mathscr{N}_C,\mathscr{N}_P \cap \mathscr{N}_C = \emptyset
+\]</span></p>
+<section id="structural-data" class="level4">
+<h4 class="anchored" data-anchor-id="structural-data">Structural data</h4>
+<p>The node data <span class="math inline">\(d(\mathscr{N})\)</span> is a set of vectors of length equal to the number of nodes. For each <span class="math inline">\(t\)</span>, the entries of vector <span class="math inline">\(\mathbf{v}_t\)</span> take values contained by the set <span class="math inline">\(S_t\)</span>.</p>
+<p><span class="math display">\[
+d(\mathscr{N}) = \{\mathbf{v}_t \in (S_t)^{|\mathscr{N}|} : t \in [1:K], K \in \mathbf{Z}_+\}
+\]</span></p>
+<p>Similarly, the edge data are a collection of vectors of length equal to the number of edges.</p>
+<p><span class="math display">\[
+d(\mathscr{E}) = \{\mathbf{v}_t \in (S_t)^{|\mathscr{E}|} : t \in [1:Q], Q \in \mathbf{Z}_+\}
+\]</span></p>
+</section>
+<section id="relational-data" class="level4">
+<h4 class="anchored" data-anchor-id="relational-data">Relational data</h4>
+<p>An edge encodes a relation between a person and a place. It is possible for one person to have multiple relations with one place. Hence, each edge is associated with an integer-valued index:</p>
+<p><span class="math display">\[
+\mathscr{E}=\{(x, a,b) : x \in \mathbf{Z}_+, a \in \mathscr{N}_P, b \in \mathscr{N}_C \text{ and } a \sim b\}
+\]</span></p>
+<p>where the <span class="math inline">\(a\sim b\)</span> means “a is connected to b” in the data graph. The elements of this set are ordered triples whose entries are an integer-valued index, the origin node and the terminal node for each edge. The number of edges connecting person <span class="math inline">\(i\)</span> and place <span class="math inline">\(j\)</span> in the person-place graph is given by</p>
+<p><span class="math display">\[
+\psi(i,j) = |\{(x,i,j) \in \mathscr{E}\} |
+\]</span></p>
+</section>
+</section>
+</section>
+<section id="study-data" class="level2" data-number="C.2">
+<h2 data-number="C.2" class="anchored" data-anchor-id="study-data"><span class="header-section-number">C.2</span> Study data</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -991,7 +1032,7 @@ Table&nbsp;C.1: Sample person-place network data
 }
 </style>
 
-<div id="tbl-example-bipartite-nodes-edges-1" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div id="tbl-example-bipartite-nodes-edges-1" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-disable-processing="false" data-quarto-postprocess="true" data-quarto-bootstrap="false">
 <figure class="quarto-float quarto-subfloat-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-example-bipartite-nodes-edges-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Nodes
@@ -1530,7 +1571,7 @@ Table&nbsp;C.1: Sample person-place network data
 }
 </style>
 
-<div id="tbl-example-bipartite-nodes-edges-2" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div id="tbl-example-bipartite-nodes-edges-2" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-disable-processing="false" data-quarto-postprocess="true" data-quarto-bootstrap="false">
 <figure class="quarto-float quarto-subfloat-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-example-bipartite-nodes-edges-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Edges
@@ -1648,11 +1689,11 @@ Table&nbsp;C.1: Sample person-place network data
 </figure>
 </div>
 </section>
-<section id="person-place-network-mapper" class="level2 page-columns page-full" data-number="C.2">
-<h2 data-number="C.2" class="anchored" data-anchor-id="person-place-network-mapper"><span class="header-section-number">C.2</span> Person place network mapper</h2>
+<section id="person-place-network-mapper" class="level2 page-columns page-full" data-number="C.3">
+<h2 data-number="C.3" class="anchored" data-anchor-id="person-place-network-mapper"><span class="header-section-number">C.3</span> Person place network mapper</h2>
 <p>We designed, tested and implemented a survey tool we call the MPX NYC Person-place network mapper. We designed the tool to solve practical and ethical issues related to the collection of sensitive spatial data in the context of an annonymous survey. Practically, we were interested in collecting data on locations participants visited and possibly had group sex in, but understood that we would not collect useful data if we collected markers like address or zip code using usual survey methods. Ethically, we were aimed to collect a data set that would limit the risk of identifying survey participants through the locations and other data disclosed through the survey.</p>
-<section id="place-mapping" class="level3" data-number="C.2.1">
-<h3 data-number="C.2.1" class="anchored" data-anchor-id="place-mapping"><span class="header-section-number">C.2.1</span> Place mapping</h3>
+<section id="place-mapping" class="level3" data-number="C.3.1">
+<h3 data-number="C.3.1" class="anchored" data-anchor-id="place-mapping"><span class="header-section-number">C.3.1</span> Place mapping</h3>
 <p>Though the investigator team doubted that participants would remember addresses or zip codes of places they visited, we thought that they might remember landmarks, cross-streets, neighborhood names, subway stations names, and other markers New Yorkers use to navigate the city so we used the Google maps interface and API.</p>
 <div id="fig-mapinputformat" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1668,8 +1709,8 @@ Figure&nbsp;C.2: Map input question format developed for MPX NYC
 <p>To collect anonymous information on locations, first the participant is prompted to identify places of a certain type by tapping on the map. For instance, the first Network Map question asks participants to identify their primary residence. Once they select one, they are able to move onto the next question.</p>
 <p>The Network Map also allows researchers to elicit a collection of locations. For instance, we ask participants to identify all the places they have had physical or sexual contact in a group setting. Each time the participant taps the map, a marker appears where they tapped, and a pop-up window asks questions about the most recently identified location. In our study, participants were asked if they had sexual contact at the location and to select the type of location it is from a closed list of options.</p>
 </section>
-<section id="link-tracing" class="level3" data-number="C.2.2">
-<h3 data-number="C.2.2" class="anchored" data-anchor-id="link-tracing"><span class="header-section-number">C.2.2</span> Link tracing</h3>
+<section id="link-tracing" class="level3" data-number="C.3.2">
+<h3 data-number="C.3.2" class="anchored" data-anchor-id="link-tracing"><span class="header-section-number">C.3.2</span> Link tracing</h3>
 <p><img src="../_const/images/share_screen.png" class="img-fluid"></p>
 <p>We designed a system for anonymously building a referral network</p>
 <p>At the start of the survey, the participant is given an identifier image showing a unique combination of words and a QR code. They are prompted to save the image of their identifier card.</p>
@@ -1678,8 +1719,8 @@ Figure&nbsp;C.2: Map input question format developed for MPX NYC
 <p>Say an new participant takes the survey and shares it with somebody who has already taken the survey (an old participant)</p>
 <p>The old participant would go to the url and be prompted to upload their identifier card or to enter the combination of words on the card in a text field. An edge would be added between the new and old participants’ nodes in the graph database</p>
 </section>
-<section id="implementation" class="level3 page-columns page-full" data-number="C.2.3">
-<h3 data-number="C.2.3" class="anchored" data-anchor-id="implementation"><span class="header-section-number">C.2.3</span> Implementation</h3>
+<section id="implementation" class="level3 page-columns page-full" data-number="C.3.3">
+<h3 data-number="C.3.3" class="anchored" data-anchor-id="implementation"><span class="header-section-number">C.3.3</span> Implementation</h3>
 <section id="rationale" class="level4">
 <h4 class="anchored" data-anchor-id="rationale">Rationale</h4>
 <p>Collecting spatial coordinates would increase the risk of accidentally identifying people by, for instance, capturing the exact coordinate of a college dormitory as a participant’s residence, or capturing the exact coordinates of a federal government office as a venue for sexual contact in a group setting. In both these examples, it becomes easier to narrow down the identity of participants using the location and the particiapnts’ characteristics as recorded in survey data.</p>
@@ -1738,8 +1779,8 @@ FCC. 2022. <span>“Federal Communications Commission API.”</span> <a href="ht
 </div></div></section>
 </section>
 </section>
-<section id="data-collection" class="level2" data-number="C.3">
-<h2 data-number="C.3" class="anchored" data-anchor-id="data-collection"><span class="header-section-number">C.3</span> Data collection</h2>
+<section id="data-collection" class="level2" data-number="C.4">
+<h2 data-number="C.4" class="anchored" data-anchor-id="data-collection"><span class="header-section-number">C.4</span> Data collection</h2>
 
 
 
@@ -2221,8 +2262,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../D_ssnac4_analysis/D__ssnac4_analysis.html" class="pagination-link" aria-label="SSNAC III: Description">
-        <span class="nav-page-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">SSNAC III: Description</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../D_ssnac4_analysis/D__ssnac4_analysis.html" class="pagination-link" aria-label="SSNAC III: Analysis">
+        <span class="nav-page-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">SSNAC III: Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
