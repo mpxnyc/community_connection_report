@@ -1,3 +1,5 @@
-scale_color_mpxnyc <- function(...){
-  scale_fill_mpxnyc(..., aesthetics = "color")
+scale_color_mpxnyc <- function(..., values = NULL, option = "all"){
+  scale_fill_mpxnyc(..., aesthetics = "color", values = values, option = option)
 }
+
+

@@ -8,7 +8,7 @@ editor:
 targets::tar_source("../R_functions")
 ```
 
-# SSNAC III: Description {#sec-appendix-network-analysis}
+# SSNAC III: Analysis {#sec-appendix-network-analysis}
 
 ::: {#leading}
 We describe the main data objects of the MPX NYC study -- the
@@ -39,24 +39,30 @@ plot_icon(icon_name = "devil", color = "light_purple", shape = 16, alpha = 0,  s
 
 ```
 
-## Data graphs
 
-### Person-place graph
+
+## Preface
+
+The RESPND-MI/MPX NYC person-place data graph contains all study data,
+which are represented as node and edge characteristics. There are two
+types of nodes – community districts, and survey participants. Each edge
+in the graph connects one community district with one survey
+participant.
 
 ```{r}
 #| fig-cap: Sample person-place network visualization
 #| label: fig-example-participant-place-1
-#| fig-width: 8
-#| fig-height: 5
+#| fig-width: 6
+#| fig-height: 5.5
 
 
 make_example_network_data("bipartite") |>
-  plot_example_bipartite_network() +
+  plot_example_bipartite_network(label_size = 0) +
   scale_color_mpxnyc(name = "Node type", option = "dark") +
   ggplot2::labs(fill = "Node type") +
-  ggplot2::scale_size_manual(name = "Node type", values = c(7,10)) +
-  theme_mpxnyc_blank(
-    plot.margin = ggplot2::margin(0,0,0,0),
+  ggplot2::scale_size_manual(name = "Node type", values = c(7,12)) +
+  theme_mpxnyc_blank( 
+    plot.margin = ggplot2::margin(40,50,40,50),
     legend.position = "bottom"
     ) 
 
@@ -64,126 +70,209 @@ make_example_network_data("bipartite") |>
 
 ```
 
-The RESPND-MI/MPX NYC person-place data graph contains all study data.
-We define it as an ordered triple with the first entry a set of node
-labels $\mathscr{N}$, the second, a set of edges $\mathscr{E}$, and the
-third, a function associating each node with node attributes and each
-edge with edge attributes.
 
-$$
-\mathscr{G}(\mathscr{N}, \mathscr{E}, d(.))
-$$
 
-There are two non-overlapping types of nodes: community districts
-$\mathscr{N}_C$ and survey participants $\mathscr{N}_P$. Together these
-two groups account for all the nodes in the study. $$
-\mathscr{N} = \mathscr{N}_P \cup \mathscr{N}_C,\mathscr{N}_P \cap \mathscr{N}_C = \emptyset
-$$ Each edge encodes a relation between a person and a place. For
-instance, a participant might have the relation of "contains home" with
-a particular community district, and also have the relation of "contains
-gathering" with the same community district. It is possible for one
-person to have multiple relations with one place. The set of edges is
-given by $$
-\mathscr{E}=\{(x, a,b) : x \in \mathbf{Z}_+, a \in \mathscr{N}_P, b \in \mathscr{N}_C \text{ and } a \sim b\}
-$$ The elements of this set are ordered triples whose entries are an
-integer-valued index, the origin node and the terminal node for each
-edge.
 
-Each node in the data graph is associated with attributes we
-collectively call the node data. The node data is a set of vectors of
-length equal to the number of nodes. Where $S_t$ is a set the contains
-all the possible values of the entries of the $t^{th}$ vector in the
-set.
+@fig-example-participant-place-1 shows a simplified data graph.
+Community district nodes are shown in blue and survey participant nodes
+in pink. Each edge connects one community district with one survey
+participant. Three kinds of edges are shown – those that indicate either
+that the survey participant has a home in the community district, or
+that they attended a gathering sexual contact or attended a gathering
+without sexual contact in the community district. For instance,
+*Participant 3* has a home in *Community District B*, he attended a
+gathering with no sexual contact in *Community District A*, and he
+attended two gathering (one sexual and one non-sexual) in *Community
+District E*.
 
-$$
-d(\mathscr{N}) = \{\mathbf{v}_t \in (S_t)^{|\mathscr{N}|} : t \in [1:K], K \in \mathbf{Z}_+\}
-$$
 
-Similarly, the edge data are a collection of vectors of length equal to
-the number of edges.
+## Individual characteristics
 
-$$
-d(\mathscr{E}) = \{\mathbf{v}_t \in (S_t)^{|\mathscr{E}|} : t \in [1:Q], Q \in \mathbf{Z}_+\}
-$$
 
-We define $\psi(i,j)$ as the number of relations between person $i$ and
-place $j$ in the person-place graph
 
-$$
-\psi(i,j) = |\{(x,i,j) \in \mathscr{E}\} |
-$$
+## Local network structure
 
-## Measures
-
-### Local network attributes
-
-#### Spatial reach
+##### Spatial reach
 
 **Spatial reach of person** $i$ is the number of relations person node
-$i$ has with place nodes in the person-place graph.\
+$i$ has with place nodes in the person-place graph. Let $\psi(i,j)$ be the number of edges connecting person $i$ and place $j$ in the person-place graph. Then:
+
+
 $$
-R_{i}^C = \sum_{\begin{aligned} j &\in \mathscr{N}_C \end{aligned}}{\psi (i,j)}
+R_{i} = \sum_{\begin{aligned} j &\in \mathscr{N}_C \end{aligned}}{\psi (i,j)}
 $$
 
- 
 
-#### Social reach
-**Social reach of person** $i$ among subgroup $A$ is the number of
+
+```{r}
+#| fig-width: 8
+#| fig-height: 5
+
+
+make_reach_diagram_data <- function(
+                                    focal_node = "Person 6", 
+                                    intermediate_nodes = c(),
+                                    alter_nodes = c("Community d", "Community e")
+) {
+  make_example_network_data("bipartite") |>
+    tidygraph::mutate(type_color = ifelse(name == focal_node, "Focal node", ifelse(name %in% alter_nodes, "Reached nodes", ifelse(name %in% intermediate_nodes, "Intermediate nodes", NA)))) |>
+  tidygraph::activate(edges) |>
+  tidygraph::mutate(type_color = NA) 
+}
+
+plot_reach_diagram <- function(
+    reach_diagram_data,
+    base_color = grey(0.9,1), 
+    reached_color = "#009BE8", 
+    intermediate_color = "#C5EFFF",
+    focal_color = "black"
+    ){
+  
+  reach_diagram_data |>
+  ggraph::ggraph(layout = "kk") +
+  ggraph::geom_edge_fan(ggplot2::aes(color = type_color), show.legend = FALSE) +
+  ggraph::geom_node_point(ggplot2::aes( size = type), color = base_color) +
+  ggraph::geom_node_point(ggplot2::aes(color = type_color, size = type)) +
+  ggraph::geom_node_text(ggplot2::aes(label = label, size = type, filter = !is.na(type_color)), color = "white", show.legend = FALSE) +
+  ggplot2::scale_size_manual(name = "Size", values = c(7,12)) +
+scale_color_mpxnyc(name = "Color", option = "manual", na.value = base_color, values = c("Focal node" = focal_color, "Reached nodes" = reached_color, "Intermediate nodes" = intermediate_color), na.translate = FALSE) +
+  ggraph::scale_edge_color_manual(values = c("black"), na.value = base_color)
+}
+
+
+
+make_reach_diagram_data() |>
+  plot_reach_diagram() +
+  theme_mpxnyc_blank( 
+                      plot.margin     = ggplot2::margin(40,20,40,20),
+                      legend.position = "right"
+                      ) 
+
+```
+
+##### Social reach
+
+**Social reach of person $i$ among subgroup $A$** is the number of
 person nodes in set $A \subset \mathscr{N}_P$ that are connected to
 person node $i$ through shared places. i.e. either because both nodes
-have a residence or gathering in at least one common community district.
+have a residence or gathering in at least one common community district. **Social reach of person** $i$ is defined as $R_{i} = R_{i\rightarrow \mathscr{N}_P}$
+
+
 $$
-R_{i\rightarrow A}^P = \sum_{\begin{aligned} j &\in A \end{aligned}}{\sum_{k \in \mathscr{N}_C}{\psi(i,k)\psi(j,k)} }
-$$ 
-
-The **social reach of person** $i$ is defined as
-$R_{i\rightarrow \mathscr{N}_P} = R_{i}$
-
-
-
-The **social reach of person** $i$ is defined as
-$R_{i\rightarrow \mathscr{N}_P} = R_{i}$
-
-#### Social catchment
-
-**Social catchment of place** $j$ among subgroup $A$ is defined as the
-number of connections the focal community district has with participants
-who belong to subgroup $A \subset \mathscr{N}_P$ $$
-r_{j\rightarrow A}^P = \sum_{i \in A} {\psi (i, j)}
+R_{i\rightarrow A} = \sum_{\begin{aligned} j &\in A \end{aligned}}{\sum_{k \in \mathscr{N}_C}{\psi(i,k)\psi(j,k)} }
 $$
 
-#### Spatial catchment
 
-**Spatial catchment of place** $j$ via subgroup $A$ is defined as the
+
+
+```{r}
+#| fig-cap: Sample person-place network visualization
+#| label: fig-example-participant-place-10
+#| fig-width: 8
+#| fig-height: 5
+
+
+make_reach_diagram_data(
+                        alter_nodes = c("Person 8", "Person 4", "Person 3"), 
+                        intermediate_nodes = c("Community d", "Community e")
+                        ) |>
+  plot_reach_diagram(reached_color = "#F73C95", intermediate_color = "darkgrey") +
+  theme_mpxnyc_blank( 
+                      plot.margin     = ggplot2::margin(40,20,40,20),
+                      legend.position = "right"
+                      ) 
+
+
+
+
+```
+
+##### Social catchment
+
+**Social catchment of place $j$ among subgroup $A$** is defined as the number of connections the focal community district has with participants who belong to subgroup $A \subset \mathscr{N}_P$.
+**Social catchment of place $j$** is defined as $r_{j} = r_{j\rightarrow \mathscr{N}_P}$
+
+$$
+r_{j\rightarrow A} = \sum_{i \in A} {\psi (i, j)}
+$$
+```{r}
+#| fig-cap: Sample person-place network visualization
+#| label: fig-example-participant-place-3
+#| fig-width: 8
+#| fig-height: 5
+
+
+
+
+make_reach_diagram_data(focal_node = "Community c", alter_nodes = c("Person 8", "Person 4", "Person 7", "Person 5")) |>
+  plot_reach_diagram(reached_color = "#F73C95") +
+  theme_mpxnyc_blank( 
+                      plot.margin     = ggplot2::margin(40,20,40,20),
+                      legend.position = "right"
+                      ) 
+
+
+
+
+```
+
+
+
+
+
+##### Spatial catchment
+
+**Spatial catchment of place $j$ via subgroup $A$** is defined as the
 strength of connection between place node $j$ and other place nodes in
 the graph when we consider their shared relations with person nodes in
 subgroup $A$. Strength of connection between two places $j$ and $k$ is
 defined as the number of relations place nodes $j$ and $k$ have with
-common person nodes which belong to subset $A$.
-
-The **spatial catchment of place** $j$ is defined as
+common person nodes which belong to subset $A$. The **spatial catchment of place** $j$ is defined as
 $r_{i\rightarrow \mathscr{N}_P} = r_{i}$
+
+
 
 $$
 r_{j\rightarrow A} = \sum_{i \in \mathscr{N}_C} \sum_{k \in A}{\psi(k,i)\psi(k,j)} \\
 $$
 
-### Global network attributes
 
-We define **preference** of group A for group B (for
-$A, B \subset \mathscr{N}_p$) as the average proportion of alters from
-group B among egos from group
 
-$$
-\Phi(A,B) = \frac{1}{|A|}\sum_{i \in A}{\frac{ R_{i \rightarrow B}}{R_i}}
-$$
+```{r}
+#| fig-cap: Sample person-place network visualization
+#| label: fig-example-participant-place-4
+#| fig-width: 8
+#| fig-height: 5
 
-The **prevalence** of group B is the size of the group divided by the
-total number of participants.
 
-$$
-\frac{|B|}{|\mathscr{N}_p|}
-$$
+
+make_reach_diagram_data(
+  focal_node = "Community c", 
+  alter_nodes = c("Community d", "Community b", "Community e"),
+  intermediate_nodes = c("Person 8", "Person 4")
+  ) |> 
+  plot_reach_diagram(
+   intermediate_color = "darkgrey"
+  ) +
+  theme_mpxnyc_blank( 
+                      plot.margin     = ggplot2::margin(40,20,40,20),
+                      legend.position = "right"
+                      ) 
+
+
+
+
+```
+
+
+
+## Global network structure
+##### Spatial mixing
+
+
+
+
+
 
 The **spatial mixing coefficient from A to B** quantifies the degree to
 which egos in group A preferentially live in or attend gatherings in
@@ -191,8 +280,102 @@ community districts they are likely to encounter members of group B. It
 is defined as the ratio of preference to prevalence minus one.
 
 $$
-\phi(A,B) = \frac{|\mathscr{N}_p|}{|B|} \Phi(A,B) - 1
+P_{A \rightarrow B} = \frac{|\mathscr{N}_p|}{|A||B|} \sum_{i \in A} P_{i \rightarrow B} - 1
 $$
+
+We define **preference** of person $i$ for group \$ B
+\subset \mathscr{N}\_p\$) as the proportion of alters from group B among
+all alters
+
+$$
+P_{i \rightarrow B} = {\frac{ R_{i \rightarrow B}}{R_i}}
+$$
+
+```{r}
+#| fig-cap: Sample person-place network visualization
+#| label: fig-example-participant-place-5
+#| fig-width: 8
+#| fig-height: 5
+
+    base_color = "black"
+    reached_color = "#009BE8"
+    intermediate_color = "#C5EFFF"
+    focal_color = "black"
+
+unmixed <- make_reach_diagram_data(
+                  focal_node = "Community c", 
+                  alter_nodes = c("Community d", "Community b", "Community e"),
+                  intermediate_nodes = c("Person 8", "Person 4")
+                  ) |> 
+                  tidygraph::mutate(type_color = NA) |>
+                  tidygraph::activate(nodes) |>
+                  tidygraph::mutate(group = ifelse(runif(n = dplyr::n()) > 0.5, "Group A", "Group B")) |>
+                  tidygraph::mutate(group = ifelse(type == "Place", "Place", group)) |>
+                  ggraph::ggraph(layout = "kk") +
+      ggforce::geom_circle(ggplot2::aes(x0 = 0.5, y0 = 0, r = 2.3), data = data.frame(xmin = -3, xmax = 3, ymin = -1, ymax = 5), linewidth = 0, fill = "#FF99C5", alpha = 0.3) +
+                  ggraph::geom_edge_fan(ggplot2::aes(color = type_color), show.legend = FALSE) +
+                  ggraph::geom_node_point(ggplot2::aes( size = group), color = base_color) +
+                  ggraph::geom_node_point(ggplot2::aes(color = group, size = group)) +
+                  #ggraph::geom_node_text(ggplot2::aes(label = label, size = group, filter = !is.na(group)), color = "white", show.legend = FALSE) +
+                  ggplot2::scale_size_manual(name = "Size", values = c(7,7, 3)) +
+                scale_color_mpxnyc(name = "Color", option = "manual", na.value = base_color, values = c( "Group A" = "#F73C95",  "Group B" = "#009BE8", "Place" = "black"), na.translate = FALSE) +
+                  ggraph::scale_edge_color_manual(values = c("black"), na.value = base_color) +
+                  theme_mpxnyc_blank( 
+                                      ) +
+  ggplot2::coord_fixed()
+
+
+
+
+```
+
+```{r}
+#| fig-cap: Sample person-place network visualization
+#| label: fig-example-participant-place-6
+#| fig-width: 15
+#| fig-height: 9
+
+    base_color = "black"
+    reached_color = "#009BE8"
+    intermediate_color = "#C5EFFF"
+    focal_color = "black"
+
+    
+    group_affiliation <- data.frame(
+      name = c(paste("Person", 1:8)),
+      group = c("Group B", "Group B", "Group B", "Group B", "Group A", "Group A", "Group A", "Group A")
+    )
+    
+mixed <- make_reach_diagram_data(
+  focal_node = "Community c", 
+  alter_nodes = c("Community d", "Community b", "Community e"),
+  intermediate_nodes = c("Person 8", "Person 4")
+  ) |> 
+  tidygraph::mutate(type_color = NA) |>
+  tidygraph::activate(nodes) |>
+  tidygraph::left_join(group_affiliation) |>
+  tidygraph::mutate(group = ifelse(is.na(group), "Place", group)) |>
+  ggraph::ggraph(layout = "kk") +
+  ggforce::geom_circle(ggplot2::aes(x0 = 0.5, y0 = 0, r = 2.3), data = data.frame(xmin = -3, xmax = 3, ymin = -1, ymax = 5), linewidth = 0, fill = "#FF99C5", alpha = 0.3) +
+
+  ggraph::geom_edge_fan(ggplot2::aes(color = type_color), show.legend = FALSE) +
+  ggraph::geom_node_point(ggplot2::aes( size = group), color = base_color) +
+  ggraph::geom_node_point(ggplot2::aes(color = group, size = group)) +
+  #ggraph::geom_node_text(ggplot2::aes(label = label, size = group, filter = !is.na(group)), color = "white", show.legend = FALSE) +
+  ggplot2::scale_size_manual(name = "Size", values = c(7,7, 3)) +
+scale_color_mpxnyc(name = "Color", option = "manual", na.value = base_color, values = c( "Group A" = "#F73C95",  "Group B" = "#009BE8", "Place" = "black"), na.translate = FALSE) +
+  ggraph::scale_edge_color_manual(values = c("black"), na.value = base_color) +
+  theme_mpxnyc_blank( 
+                      ) +
+  ggplot2::coord_fixed()
+
+
+
+cowplot::plot_grid(mixed, unmixed, rel_widths = c(1,1), nrow = 1)
+
+```
+
+##### Social connectedness
 
 **Proportion in largest connected component**: In a given network, a
 connected component is a subset of nodes such that each node in the
@@ -205,7 +388,99 @@ connected component is given by: $$
 \theta_p = \frac{\max_k{C_k}}{|\mathscr{N}_p|}
 $$
 
-### Dynamics on the network
+```{r}
+#| fig-cap: Sample person-place network visualization
+#| label: fig-example-participant-place-20
+#| fig-width: 8
+#| fig-height: 3.5
+
+    base_color = "black"
+    reached_color = "#009BE8"
+    intermediate_color = "black"
+    focal_color = "black"
+
+connectedness_connected <- make_reach_diagram_data(
+  focal_node = "Community c", 
+  alter_nodes = c("Community d", "Community b", "Community e"),
+  intermediate_nodes = c("Person 8", "Person 4")
+  ) |> 
+  tidygraph::mutate(type_color = NA) |>
+  tidygraph::activate(nodes) |>
+  tidygraph::mutate(group = ifelse(runif(n = dplyr::n()) > 0.5, "Group A", "Group B")) |>
+  tidygraph::mutate(group = ifelse(type == "Place", "Place", group)) |>
+  ggraph::ggraph(layout = "kk") +
+    ggforce::geom_circle(ggplot2::aes(x0 = 0.5, y0 = 0, r = 2.3), data = data.frame(xmin = -3, xmax = 3, ymin = -1, ymax = 5), linewidth = 0, fill = "#C5EFFF") +
+  ggraph::geom_edge_fan(ggplot2::aes(color = type_color), show.legend = FALSE, edge_width = 1) +
+  ggraph::geom_node_point(ggplot2::aes( size = group), color = base_color) +
+  ggraph::geom_node_point(ggplot2::aes(color = group, size = group)) +
+  #ggraph::geom_node_text(ggplot2::aes(label = label, size = group, filter = !is.na(group)), color = "white", show.legend = FALSE) +
+  ggplot2::scale_size_manual(name = "Size", values = c(7,7, 12)) +
+scale_color_mpxnyc(name = "Color", option = "manual", na.value = base_color, values = c( "Group A" = "black",  "Group B" = "black", "Place" = "black"), na.translate = FALSE) +
+  ggraph::scale_edge_color_manual(values = c("black"), na.value = base_color) +
+  theme_mpxnyc_blank( 
+                      plot.margin     = ggplot2::margin(20,20,20,20)
+                      ) +
+  ggplot2::coord_fixed()
+
+
+
+
+```
+
+
+
+```{r}
+#| fig-cap: Sample person-place network visualization
+#| label: fig-example-participant-place-21
+#| fig-width: 15
+#| fig-height: 9
+
+    base_color = grey(0.9,1)
+     base_color = "black"
+    reached_color = "#009BE8"
+    intermediate_color = "#C5EFFF"
+    focal_color = "black"
+
+edge_hidden_data <- data.frame(
+  from = c(4,4,6, 2, 3, 6),
+  to = c(10, 13, 13, 10, 9, 12),
+  hidden = TRUE
+)
+    
+connectedness_disconnected <- make_reach_diagram_data(
+  focal_node = "Community c", 
+  alter_nodes = c("Community d", "Community b", "Community e"),
+  intermediate_nodes = c("Person 8", "Person 4")
+  ) |> 
+  tidygraph::mutate(type_color = NA) |>
+  tidygraph::left_join(edge_hidden_data) |>
+  tidygraph::mutate(hidden = ifelse(is.na(hidden), FALSE, hidden)) |>
+  tidygraph::activate(nodes) |>
+  tidygraph::mutate(group = ifelse(runif(n = dplyr::n()) > 0.5, "Group A", "Group B")) |>
+  tidygraph::mutate(group = ifelse(type == "Place", "Place", group)) |>
+  ggraph::ggraph(layout = "kk") +
+  ggforce::geom_circle(ggplot2::aes(x0 = 0.5, y0 = 0, r = 2.3), data = data.frame(xmin = -3, xmax = 3, ymin = -1, ymax = 5), linewidth = 0, fill = "#C5EFFF") +
+  ggplot2::coord_fixed() +
+  ggraph::geom_edge_fan(ggplot2::aes(color = type_color, filter = !hidden), show.legend = FALSE, edge_width = 1) +
+  ggraph::geom_node_point(ggplot2::aes( size = group), color = base_color) +
+  ggraph::geom_node_point(ggplot2::aes(color = group, size = group)) +
+  #ggraph::geom_node_text(ggplot2::aes(label = label, size = group, filter = !is.na(group)), color = "white", show.legend = FALSE) +
+  ggplot2::scale_size_manual(name = "Size", values = c(7,7, 12)) +
+scale_color_mpxnyc(name = "Color", option = "manual", na.value = base_color, values = c( "Group A" = "black",  "Group B" = "black", "Place" = "black"), na.translate = FALSE) +
+  ggraph::scale_edge_color_manual(values = c("black"), na.value = base_color)  +
+  theme_mpxnyc_blank( 
+                      plot.margin     = ggplot2::margin(20,20,20,20)
+                      ) 
+
+
+
+cowplot::plot_grid(connectedness_connected, connectedness_disconnected, rel_widths = c(1,1), nrow = 1)
+
+
+```
+
+## Dynamics on the network
+##### Movement
 
 The **movement matrix** is a square matrix whose $kl^{th}$ entry,
 $m(k,l)$, is defined as the count of outings from home in community
@@ -213,6 +488,8 @@ district $k$ to a gathering in community district $l$. Say $d^H(i)$ is
 the home community district of participant $i$. $$
 m(k,l) = \sum_{\begin{aligned}i \in \mathscr{N}_P \\ d^H(i) = k \end{aligned}} \psi (i,l)
 $$
+
+##### Spatial concentration
 
 The **spatial concentration proportion** $c(k)$ quantifies the degree to
 which a community district is over-represented among destination
@@ -223,6 +500,20 @@ $$
 
 ## Statistical inference
 
+-   The target of inference is the person-place population graph:
+    -   $\mathscr{G}^*(\mathscr{N}^*, \mathscr{E}^*, d(.))$
+-   Node set is
+    -   $\mathscr{N}^* = \mathscr{N}_P^* \cup \mathscr{N}_C$
+    -   $|\mathscr{N}_P^*| = n_P^* \rightarrow \infty$
+    -   $\mathscr{N}_C = n_C$
+-   Homogeneous ego networks
+    -   structural equation for adjacency graph is the same for each
+        node
+    -   gibbs sampler
+        -   f(adjacency \| other adjacencies, my data)
+        -   f(data \| adjacencies, data
+-   Edges are
+    -   only between places and people
 -   we want a functional of node and edge universe data
     -   But we have a function of node and edge sample data
 -   under what condition do we have unbiasedness?
@@ -259,7 +550,8 @@ $$
 
 ##  {.unnumbered}
 
-<div>
+
+::: {#acknowledgements}
 
 [Acknowledgements]{.underline}: The analytic framework for this project
 developed over an extended period of time, beginning during my PhD
@@ -318,4 +610,4 @@ in seeing the work in print.**
 > wealth and mortality in the Agincourt Health and Demographic
 > Surveillance System 2009 – 2018. *American Journal of Epidemiology*.
 
-</div>
+:::
