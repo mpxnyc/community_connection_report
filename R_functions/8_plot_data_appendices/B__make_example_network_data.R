@@ -7,13 +7,15 @@ make_example_network_data <- function(type = "bipartite"){
     ),
     type = c(rep(TRUE, 8), rep(FALSE, 5)),
     label = c(c(1:8, "A", "B", "C", "D", "E")),
-    age = c(rep("18-25", 4), rep("26-50", 4), rep("-", 5))
+    age = c(rep("18-25", 4), rep("26-50", 4), rep("-", 5)),
+    vax = c("Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", rep("-", 5))
   )
   
   labelled::var_label(example_nodes$name)  <- "Name"
   labelled::var_label(example_nodes$type)  <- "Node type"
   labelled::var_label(example_nodes$label) <- "Label"
   labelled::var_label(example_nodes$age)   <- "Age"
+  labelled::var_label(example_nodes$vax)   <- "Vax"
   
   example_edges <- data.frame(
     from = c(

@@ -14,6 +14,60 @@ targets::tar_source("../R_functions")
 We describe the main data objects of the MPX NYC study -- the
 Person-place graph, the Person graph and the Place graph -- as well as
 the statistics we used to analyze them.
+
+Notes: 
+
+- Add network FFRCISTG to a section called "Reasoning with DANGs and SWINGS". (mirror section in classical causal inference section)
+  - Introduce random graph $\mathbf{\Psi}_k$ along with $\mathbf{C}_k$
+  - Start here by generalizing NFFRCISTG to situations where not all common causese are represented on the DANG so there is no SWING. 
+- Move section on outbreak control to methods for MPX NYC
+- Neaten social network analysis so that it allows a time-varying graph
+
+- This is theory for a person-place graph:
+  - a bipartite graph whose two node classes are places and persons 
+    - "places" are a fixed, fully observed set of spatial units
+    - persons are a countable set of observational units - in our case survey participants.
+    - persons are "affiliated" with places. their affiliations are indicated using network ties in the person-place graph
+    - goal is:
+      - to model correlation between measures made on persons that is induced by joint affiliation with places
+      - to express target estimands in terms of model quantities 
+      - to specify estimators for those estimands based on sample data
+- Notation
+  - Node characteristics
+    - Person node vs place node
+    - $\mathbf{C}_k$ random vector
+    - $C_{k}(i)$ random scalar
+    - $\mathbf{c}_k$ vector realization
+    - $c_{k}(i)$ scalar realization
+  - Edge characteristics
+    - $\mathbf{D}_k$  $n \times n$ random matrix
+    - $D_{k}(i,j)$ $ij$th entry of random matrix
+    - $\mathbf{d}_k$  $n \times n$ matrix realization
+    - $d_{k}(i,j)$ scalar relization
+  - Edge existence
+    - $\mathbf{\Psi}_k$  $n \times n$ random matrix
+    - $\Psi_k(i,j)$  $n \times n$ random scalar
+    - $\mathbf{\psi}_k$ $n \times n$ matrix realization
+    - $\psi_k(i,j)$ $n \times n$ scalar realization
+    - $\Psi_k(i)$  $n \times 1$ random vector
+    - $\psi_k(i)$ $n \times 1$ vector realization  
+- Outline:
+  - Observational unit characteristics
+  - Local network characteristics
+  - Global network characteristics
+  - Global system dynamics
+  - Statistical inference
+    - Person-place system
+    - Main idea is:
+      - You have some observational nodes that are people
+      - You have some observational nodes are are places 
+      - People have affiliations with places
+        - Affiliations are unlimited
+        - If a place is a neighborhood, a person node could be affiliated to that place because they have a home there. They could additionally be affiliated to that place because they have attended a gathering there.
+        - If a place is a household, a person could be affiliated to the household because they work in the househodl or because they have a friend there, or because they live there. 
+      - There are quantitative data associated with the people, places and affiliations 
+
+
 :::
 
 ::: {#acknowledgements}
@@ -41,13 +95,49 @@ plot_icon(icon_name = "devil", color = "light_purple", shape = 16, alpha = 0,  s
 
 
 
-## Preface
+## Example: Rapid research response
 
-The RESPND-MI/MPX NYC person-place data graph contains all study data,
-which are represented as node and edge characteristics. There are two
-types of nodes – community districts, and survey participants. Each edge
-in the graph connects one community district with one survey
-participant.
+-   you are town epidemiologist live in a town of 8000 people who live and work across 5 communities within the town
+
+-   There is news of a novel human transmitted infection coming to the town
+
+-   You decide to map the spatial and sexual networks of the towns peopple to prepare for a response to the new infection
+
+- You take a random sample of 8 townspeople to conduct survey research.
+
+- Participants are selected independently of each other and all invited participants accepted the invitation
+
+
+
+
+```{r}
+#| label: tbl-example-bipartite-nodes-edges-2
+#| layout-ncol: 2
+#| tbl-cap: "Sample person-place network data"
+#| tbl-subcap:
+#|  - "Nodes"
+#|  - "Edges"
+
+make_example_network_data() |>
+  data.frame() |>
+  dplyr::select(-label) |>
+  dplyr::select(-type) |>
+  gt::gt() |>
+  gt::tab_options(table.font.size =12, data_row.padding = gt::px(1))
+
+
+make_example_network_data() |>
+  dplyr::mutate(name = label, type, age) |>
+  tidygraph::activate(edges) |>
+  dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
+  data.frame() |>
+  dplyr::arrange(from, to) |>
+  dplyr::transmute(From = from_name, To = to_name, Relation = relation) |>
+  gt::gt() |>
+  gt::tab_options(table.font.size =12, data_row.padding = gt::px(1))
+
+```
+
 
 ```{r}
 #| fig-cap: Sample person-place network visualization
@@ -70,9 +160,6 @@ make_example_network_data("bipartite") |>
 
 ```
 
-
-
-
 @fig-example-participant-place-1 shows a simplified data graph.
 Community district nodes are shown in blue and survey participant nodes
 in pink. Each edge connects one community district with one survey
@@ -86,23 +173,76 @@ attended two gathering (one sexual and one non-sexual) in *Community
 District E*.
 
 
+
 ## Individual characteristics
 
 
+We can examine patterns in the characteristics of participants. These include variables like age and vaccination status. They could also include relations indivdiuals have with places, as long as each person is assigned to one place. In our example, each participant has only one primary residence, and therefore is related to only one of the five communities in this city. 
 
-## Local network structure
+```{r}
+#| label: tbl-example-bipartite-nodes-edges-1
+#| layout-ncol: 2
+#| tbl-cap: "Sample person-place network data"
+#| tbl-subcap:
+#|  - "Nodes"
+#|  - "Edges"
+
+make_example_network_data() |>
+  data.frame() |>
+  dplyr::select(-label) |>
+  dplyr::filter(type == "Person") |>
+  dplyr::select(-type) |>
+  gt::gt() |>
+  gt::tab_options(table.font.size =12, data_row.padding = gt::px(1))
+
+
+make_example_network_data() |>
+  dplyr::mutate(name = label, type, age) |>
+  tidygraph::activate(edges) |>
+  dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
+  data.frame() |>
+  dplyr::arrange(from, to) |>
+  dplyr::transmute(From = from_name, To = to_name, Relation = relation) |>
+  dplyr::filter(Relation == "HOME") |>
+  gt::gt() |>
+  gt::tab_options(table.font.size =12, data_row.padding = gt::px(1))
+```
+
+
+```{r}
+#| layout-ncol: 3
+
+make_example_network_data() |>
+  dplyr::filter(type == "Person") |>
+  data.frame() |>
+  ggplot2::ggplot() +
+  ggplot2::geom_bar(ggplot2::aes(x = age))
+
+make_example_network_data() |>
+  dplyr::filter(type == "Person") |>
+  data.frame() |>
+  ggplot2::ggplot() +
+  ggplot2::geom_bar(ggplot2::aes(x = vax))
+
+make_example_network_data() |>
+  tidygraph::activate(edges) |>
+  dplyr::filter(relation == "HOME") |>
+  data.frame() |>
+  ggplot2::ggplot() +
+  ggplot2::geom_bar(ggplot2::aes(x = to))
+```
+
+
+
+## Local structure
+
+Examine patterns in the characteristics of the participant along with the places he is related to. We can also examine patterns in the characteristics of places in the context of the people those places are related to. In brief, examining local structure entails understanding how each node is related to the rest of the graph. We define spatial reach, social reach, spatial catchment, and social catchment. 
+
+
 
 ##### Spatial reach
 
-**Spatial reach of person** $i$ is the number of relations person node
-$i$ has with place nodes in the person-place graph. Let $\psi(i,j)$ be the number of edges connecting person $i$ and place $j$ in the person-place graph. Then:
-
-
-$$
-R_{i} = \sum_{\begin{aligned} j &\in \mathscr{N}_C \end{aligned}}{\psi (i,j)}
-$$
-
-
+Spatial reach is a person-node characteristic. It measures the number of relations to places the participant has. Note that we count relations and not places since one participant might have several relations with the same place.  
 
 ```{r}
 #| fig-width: 8
@@ -150,20 +290,22 @@ make_reach_diagram_data() |>
 
 ```
 
+
+
+
+
+**Spatial reach of person** $i$ is the number of relations person node
+$i$ has with place nodes in the person-place graph. Let $\psi(i,j)$ be
+the number of edges connecting person $i$ and place $j$ in the
+person-place graph. Then:
+
+$$
+R_{i} = \sum_{ j }{E[ \Psi (i,j)]}
+$$
+
 ##### Social reach
 
-**Social reach of person $i$ among subgroup $A$** is the number of
-person nodes in set $A \subset \mathscr{N}_P$ that are connected to
-person node $i$ through shared places. i.e. either because both nodes
-have a residence or gathering in at least one common community district. **Social reach of person** $i$ is defined as $R_{i} = R_{i\rightarrow \mathscr{N}_P}$
-
-
-$$
-R_{i\rightarrow A} = \sum_{\begin{aligned} j &\in A \end{aligned}}{\sum_{k \in \mathscr{N}_C}{\psi(i,k)\psi(j,k)} }
-$$
-
-
-
+Social reach is a person-node characteristic which measures the potential for interaction with other people through shared relations to places. It counts the number of minimal paths that link the focal node with other person nodes in the graph. Note that the number of paths that link two person nodes who are connected through a given place node is the product of the number of relations each person node has with the given place node.
 
 ```{r}
 #| fig-cap: Sample person-place network visualization
@@ -187,14 +329,23 @@ make_reach_diagram_data(
 
 ```
 
+
+
+**Social reach of person** $i$ among subgroup $A$ is the number of
+person nodes in set $A \subset \mathscr{N}_P$ that are connected to
+person node $i$ through shared places. i.e. either because both nodes
+have a residence or gathering in at least one common community district.
+**Social reach of person** $i$ is defined as
+$R_{i} = R_{i\rightarrow \mathscr{N}_P}$
+
+$$
+R_{i\rightarrow A} = \sum_{j}{\sum_{k }{ E[\Psi(i,j) {\Psi(k,j)} A_k]}}  
+$$
+
 ##### Social catchment
 
-**Social catchment of place $j$ among subgroup $A$** is defined as the number of connections the focal community district has with participants who belong to subgroup $A \subset \mathscr{N}_P$.
-**Social catchment of place $j$** is defined as $r_{j} = r_{j\rightarrow \mathscr{N}_P}$
+Social catchment is a place-node characteristic which measures the number of relations with person nodes. 
 
-$$
-r_{j\rightarrow A} = \sum_{i \in A} {\psi (i, j)}
-$$
 ```{r}
 #| fig-cap: Sample person-place network visualization
 #| label: fig-example-participant-place-3
@@ -216,26 +367,18 @@ make_reach_diagram_data(focal_node = "Community c", alter_nodes = c("Person 8", 
 
 ```
 
+**Social catchment of place** $j$ among subgroup $A$ is defined as the
+number of connections the focal community district has with participants
+who belong to subgroup $A \subset \mathscr{N}_P$. **Social catchment of
+place** $j$ is defined as $r_{j} = r_{j\rightarrow \mathscr{N}_P}$
 
-
-
+$$
+r_{j\rightarrow A} = \sum_{i } { E[\Psi (i, j) A_i]}
+$$
 
 ##### Spatial catchment
 
-**Spatial catchment of place $j$ via subgroup $A$** is defined as the
-strength of connection between place node $j$ and other place nodes in
-the graph when we consider their shared relations with person nodes in
-subgroup $A$. Strength of connection between two places $j$ and $k$ is
-defined as the number of relations place nodes $j$ and $k$ have with
-common person nodes which belong to subset $A$. The **spatial catchment of place** $j$ is defined as
-$r_{i\rightarrow \mathscr{N}_P} = r_{i}$
-
-
-
-$$
-r_{j\rightarrow A} = \sum_{i \in \mathscr{N}_C} \sum_{k \in A}{\psi(k,i)\psi(k,j)} \\
-$$
-
+Spatia catchment is a place-node characteristic which measures the mutual influence between spatial untis as a result of relations with shared person nodes. It counts the number of minimal paths that link the focal node with other place nodes in the graph. Note that the number of paths that link two place nodes who are connected through a given person node is the product of the number of relations each place node has with the given person node.
 
 
 ```{r}
@@ -264,63 +407,69 @@ make_reach_diagram_data(
 
 ```
 
+**Spatial catchment of place** $j$ via subgroup $A$ is defined as the
+strength of connection between place node $j$ and other place nodes in
+the graph when we consider their shared relations with person nodes in
+subgroup $A$. Strength of connection between two places $j$ and $k$ is
+defined as the number of relations place nodes $j$ and $k$ have with
+common person nodes which belong to subset $A$. The **spatial catchment
+of place** $j$ is defined as $r_{i\rightarrow \mathscr{N}_P} = r_{i}$
+
+$$
+r_{j\rightarrow A} = \sum_{i }\sum_{k }{E[ \Psi(i,j) \Psi(i,k)A_i]} \\
+$$
 
 
-## Global network structure
+## Global structure
+
+Measures of global structure quantify some aspect of the overall pattern of connection among the people and spaces connected by the data graph. 
+
+
+
 ##### Spatial mixing
 
-
-
-
-
-
-The **spatial mixing coefficient from A to B** quantifies the degree to
-which egos in group A preferentially live in or attend gatherings in
-community districts they are likely to encounter members of group B. It
-is defined as the ratio of preference to prevalence minus one.
-
-$$
-P_{A \rightarrow B} = \frac{|\mathscr{N}_p|}{|A||B|} \sum_{i \in A} P_{i \rightarrow B} - 1
-$$
-
-We define **preference** of person $i$ for group \$ B
-\subset \mathscr{N}\_p\$) as the proportion of alters from group B among
-all alters
-
-$$
-P_{i \rightarrow B} = {\frac{ R_{i \rightarrow B}}{R_i}}
-$$
+Spatial mixing is the extent to which person nodes with a given set of characteristics are connected to a common set of place nodes with person nodes with some other set of characteristics. 
 
 ```{r}
 #| fig-cap: Sample person-place network visualization
 #| label: fig-example-participant-place-5
-#| fig-width: 8
-#| fig-height: 5
+#| fig-width: 3
+#| fig-height: 3
 
     base_color = "black"
     reached_color = "#009BE8"
     intermediate_color = "#C5EFFF"
     focal_color = "black"
 
-unmixed <- make_reach_diagram_data(
-                  focal_node = "Community c", 
-                  alter_nodes = c("Community d", "Community b", "Community e"),
-                  intermediate_nodes = c("Person 8", "Person 4")
-                  ) |> 
-                  tidygraph::mutate(type_color = NA) |>
-                  tidygraph::activate(nodes) |>
-                  tidygraph::mutate(group = ifelse(runif(n = dplyr::n()) > 0.5, "Group A", "Group B")) |>
-                  tidygraph::mutate(group = ifelse(type == "Place", "Place", group)) |>
-                  ggraph::ggraph(layout = "kk") +
-      ggforce::geom_circle(ggplot2::aes(x0 = 0.5, y0 = 0, r = 2.3), data = data.frame(xmin = -3, xmax = 3, ymin = -1, ymax = 5), linewidth = 0, fill = "#FF99C5", alpha = 0.3) +
+        group_affiliation <- data.frame(
+      name = c(paste("Person", 1:8)),
+      group = c(
+                "Group B", 
+                "Group A", 
+                "Group A", 
+                "Group B", 
+                "Group A", 
+                "Group B", 
+                "Group B", 
+                "Group A"
+                )
+    )
+    
+unmixed <- make_reach_diagram_data() |> 
+  tidygraph::mutate(type_color = NA) |>
+  tidygraph::activate(nodes) |>
+  tidygraph::left_join(group_affiliation) |>
+  tidygraph::mutate(group = ifelse(type == "Place", "Place", group)) |>
+  ggraph::ggraph(layout = "kk") +
+    ggforce::geom_circle(ggplot2::aes(x0 = 0.5, y0 = 0, r = 2.3), data = data.frame(xmin = -3, xmax = 3, ymin = -1, ymax = 5), linewidth = 0, fill = "#FF99C5", alpha = 0.3) +
                   ggraph::geom_edge_fan(ggplot2::aes(color = type_color), show.legend = FALSE) +
                   ggraph::geom_node_point(ggplot2::aes( size = group), color = base_color) +
-                  ggraph::geom_node_point(ggplot2::aes(color = group, size = group)) +
-                  #ggraph::geom_node_text(ggplot2::aes(label = label, size = group, filter = !is.na(group)), color = "white", show.legend = FALSE) +
-                  ggplot2::scale_size_manual(name = "Size", values = c(7,7, 3)) +
-                scale_color_mpxnyc(name = "Color", option = "manual", na.value = base_color, values = c( "Group A" = "#F73C95",  "Group B" = "#009BE8", "Place" = "black"), na.translate = FALSE) +
+                  ggraph::geom_node_point(ggplot2::aes(color = age, size = group)) +
+                  ggraph::geom_node_text(ggplot2::aes(label = label, size = group, filter = type == "Place"), color = "#FF99C5", show.legend = FALSE) +
+                  ggplot2::scale_size_manual(name = "Size", values = c(7,7, 12), guide = "none") +
+                scale_color_mpxnyc( name = "Age", option = "manual", na.value = base_color, values = c( "18-25" = "#F73C95",  "26-50" = "#009BE8", "Place" = "black"), na.translate = FALSE) +
                   ggraph::scale_edge_color_manual(values = c("black"), na.value = base_color) +
-                  theme_mpxnyc_blank( 
+                  theme_mpxnyc_blank( legend.position = "bottom"
                                       ) +
   ggplot2::coord_fixed()
 
@@ -360,33 +509,42 @@ mixed <- make_reach_diagram_data(
 
   ggraph::geom_edge_fan(ggplot2::aes(color = type_color), show.legend = FALSE) +
   ggraph::geom_node_point(ggplot2::aes( size = group), color = base_color) +
-  ggraph::geom_node_point(ggplot2::aes(color = group, size = group)) +
-  #ggraph::geom_node_text(ggplot2::aes(label = label, size = group, filter = !is.na(group)), color = "white", show.legend = FALSE) +
-  ggplot2::scale_size_manual(name = "Size", values = c(7,7, 3)) +
-scale_color_mpxnyc(name = "Color", option = "manual", na.value = base_color, values = c( "Group A" = "#F73C95",  "Group B" = "#009BE8", "Place" = "black"), na.translate = FALSE) +
+  ggraph::geom_node_point(ggplot2::aes(color = vax, size = group)) +
+  ggraph::geom_node_text(ggplot2::aes(label = label, size = group, filter = type == "Place"), color = "#FF99C5", show.legend = FALSE) +
+  ggplot2::scale_size_manual(name = "Size", values = c(7,7, 12), guide = "none") +
+scale_color_mpxnyc(name = "Vax", option = "manual", na.value = base_color, values = c( "No" = "#F73C95",  "Yes" = "#009BE8", "Place" = "black"), na.translate = FALSE) +
   ggraph::scale_edge_color_manual(values = c("black"), na.value = base_color) +
-  theme_mpxnyc_blank( 
+  theme_mpxnyc_blank( legend.position = "bottom"
                       ) +
-  ggplot2::coord_fixed()
-
+  ggplot2::coord_fixed() 
 
 
 cowplot::plot_grid(mixed, unmixed, rel_widths = c(1,1), nrow = 1)
 
 ```
 
+We define **preference** of person $i$ for group \$ B
+\subset \mathscr{N}\_p\$) as the proportion of alters from group B among
+all alters
+
+$$
+P_{i \rightarrow B} = E[{\frac{ R_{i \rightarrow B}}{R_i}}]
+$$
+
+The **spatial mixing coefficient from A to B** quantifies the degree to
+which egos in group A preferentially live in or attend gatherings in
+community districts they are likely to encounter members of group B. It
+is defined as the ratio of preference to prevalence minus one.
+
+$$
+P_{A \rightarrow B} = \frac{n_p}{n_A n_B} \sum_{i } A_i {\frac{ R_{i \rightarrow B}}{R_i}} - 1
+$$
+
+
+
 ##### Social connectedness
 
-**Proportion in largest connected component**: In a given network, a
-connected component is a subset of nodes such that each node in the
-subset is reachable from any other node in the subset, and such that
-there are no nodes outside the subset which are reachable from a node
-inside it. By reachable, we mean possible to reach by tracing a path
-from one node to another over existing network ties. Say the size of the
-$k^{th}$ connected component is $C_k$. The proportion in the largest
-connected component is given by: $$
-\theta_p = \frac{\max_k{C_k}}{|\mathscr{N}_p|}
-$$
+Social connectedness is the extent to which all the person nodes are connected through a common set of space nodes. Equivalently, it is the extent to which space nodes are connected through a common set of person nodes. 
 
 ```{r}
 #| fig-cap: Sample person-place network visualization
@@ -413,7 +571,7 @@ connectedness_connected <- make_reach_diagram_data(
   ggraph::geom_edge_fan(ggplot2::aes(color = type_color), show.legend = FALSE, edge_width = 1) +
   ggraph::geom_node_point(ggplot2::aes( size = group), color = base_color) +
   ggraph::geom_node_point(ggplot2::aes(color = group, size = group)) +
-  #ggraph::geom_node_text(ggplot2::aes(label = label, size = group, filter = !is.na(group)), color = "white", show.legend = FALSE) +
+  ggraph::geom_node_text(ggplot2::aes(label = label, size = group,filter = type == "Place"), color = "#C5EFFF", show.legend = FALSE) +
   ggplot2::scale_size_manual(name = "Size", values = c(7,7, 12)) +
 scale_color_mpxnyc(name = "Color", option = "manual", na.value = base_color, values = c( "Group A" = "black",  "Group B" = "black", "Place" = "black"), na.translate = FALSE) +
   ggraph::scale_edge_color_manual(values = c("black"), na.value = base_color) +
@@ -426,8 +584,6 @@ scale_color_mpxnyc(name = "Color", option = "manual", na.value = base_color, val
 
 
 ```
-
-
 
 ```{r}
 #| fig-cap: Sample person-place network visualization
@@ -464,7 +620,7 @@ connectedness_disconnected <- make_reach_diagram_data(
   ggraph::geom_edge_fan(ggplot2::aes(color = type_color, filter = !hidden), show.legend = FALSE, edge_width = 1) +
   ggraph::geom_node_point(ggplot2::aes( size = group), color = base_color) +
   ggraph::geom_node_point(ggplot2::aes(color = group, size = group)) +
-  #ggraph::geom_node_text(ggplot2::aes(label = label, size = group, filter = !is.na(group)), color = "white", show.legend = FALSE) +
+  ggraph::geom_node_text(ggplot2::aes(label = label, size = group, filter = type == "Place"), color = "#C5EFFF", show.legend = FALSE) +
   ggplot2::scale_size_manual(name = "Size", values = c(7,7, 12)) +
 scale_color_mpxnyc(name = "Color", option = "manual", na.value = base_color, values = c( "Group A" = "black",  "Group B" = "black", "Place" = "black"), na.translate = FALSE) +
   ggraph::scale_edge_color_manual(values = c("black"), na.value = base_color)  +
@@ -479,77 +635,88 @@ cowplot::plot_grid(connectedness_connected, connectedness_disconnected, rel_widt
 
 ```
 
-## Dynamics on the network
-##### Movement
+**Proportion in largest connected component**: In a given network, a
+connected component is a subset of nodes such that each node in the
+subset is reachable from any other node in the subset, and such that
+there are no nodes outside the subset which are reachable from a node
+inside it. By reachable, we mean possible to reach by tracing a path
+from one node to another over existing network ties. Say the size of the
+$k^{th}$ connected component is $C_k$. The proportion in the largest
+connected component is given by:
+
+$$
+\pi_Q = E[\frac{\max_k{Q_k}}{n_P}]
+$$
+
+## Dynamics
+
+In studies which elicit participants' primary residence along with other places they are related to, it may be of interest to understand the pattern of movement from home to related places and back again. 
+
+##### Return journeys
 
 The **movement matrix** is a square matrix whose $kl^{th}$ entry,
 $m(k,l)$, is defined as the count of outings from home in community
 district $k$ to a gathering in community district $l$. Say $d^H(i)$ is
-the home community district of participant $i$. $$
-m(k,l) = \sum_{\begin{aligned}i \in \mathscr{N}_P \\ d^H(i) = k \end{aligned}} \psi (i,l)
+the home community district of participant $i$. 
+
+
+
+
 $$
+m(j,k) =E[ \sum_i D(i,j) \sum_{k }( \Psi(i,k) - D(i,k) )]
+$$
+
+
 
 ##### Spatial concentration
 
 The **spatial concentration proportion** $c(k)$ quantifies the degree to
 which a community district is over-represented among destination
 community districts compared to home districts in the movement matrix.
-It is the difference of the margins of the movement matrix. $$
-c(k) = \frac{\sum_l{m(l,k)} - \sum_k{m(l,k)}}{\sum_{l,k}{m(l,k)}}
+It is the difference of the margins of the movement matrix. 
+
+$$
+c(k) = E[\frac{\sum_l{m(l,k)} - \sum_k{m(l,k)}}{\sum_{l,k}{m(l,k)}}]
 $$
 
 ## Statistical inference
 
--   The target of inference is the person-place population graph:
-    -   $\mathscr{G}^*(\mathscr{N}^*, \mathscr{E}^*, d(.))$
--   Node set is
-    -   $\mathscr{N}^* = \mathscr{N}_P^* \cup \mathscr{N}_C$
-    -   $|\mathscr{N}_P^*| = n_P^* \rightarrow \infty$
-    -   $\mathscr{N}_C = n_C$
--   Homogeneous ego networks
-    -   structural equation for adjacency graph is the same for each
-        node
-    -   gibbs sampler
-        -   f(adjacency \| other adjacencies, my data)
-        -   f(data \| adjacencies, data
--   Edges are
-    -   only between places and people
--   we want a functional of node and edge universe data
-    -   But we have a function of node and edge sample data
--   under what condition do we have unbiasedness?
-    -   random sample
-    -   conditionally random sample
--   Simulated person-place graph
-    $\mathscr{G}^*(\mathscr{N}^*, \mathscr{E}^*)$
-    -   Nodes $\mathscr{N}^* = \mathscr{N}_P^* \cup \mathscr{N}_C^*$
-        -   Place nodes $\mathscr{N}_C^*$: $m$ copies of each element in
-            $\mathscr{N}_C$
-        -   Person nodes $\mathscr{N}_P^*$: random sample of size
-            $m \times |\mathscr{N}_P|$ from $\mathscr{N}_P$ drawn [with
-            replacement]{.underline}
-        -   Since $\mathscr{N}^*$ is comprised of re-labelled elements
-            of $\mathscr{N}$,
-            $\exists \phi : \mathscr{N}^* \rightarrow \mathscr{N}$ such
-            that $a \in \mathscr{N}^* \implies \phi(a) \in \mathscr{N}$
-            (node name mapping)
-    -   Edges
-        -   for $a, b \in \mathscr{N}^*$:
-            $(\phi(a), \phi(b)) \in \mathscr{E} \implies (x, a, b) \in \mathscr{E}^*$
-            for some $x \in \mathbf{Z}_+$
--   Remarks:
-    -   We can create simulated person graph and simulated place graph
-        as bipartite projections of the simulated person-place graph
-        since the latter is a bipartite graph
-    -   Statistical inference is conducted using the empirical
-        distribution for each measure.
-        -   The empirical distribution is estimated by calculating each
-            measures within strata defined by simulation repetition, and
-            summarizing the sample distribution across repetitions
-    -   Simulation repetitions each comprise disjoint components of the
-        simulted person-place graph
+- Data are a realization of law $C_t \in M_{n\times 1}$, $\Psi_t \in M_{n\times n}$, and $Q_t \in M_{n^2 \times 1}$ for $t \in [1,k]$, $k \in \mathbf{Z}$ and arbitrarily large $n \in \mathbf{Z}$
+
+  
+- We are interested in population quantities:
+
+  - Node characteristics $m(C, \theta)$ 
+  
+  - Edge characteristics $m(Q, \theta)$
+  
+  - Edge formation process $m(\Psi, \theta)$
+  
+  - Combinations of characteristics $m(C, Q, \Psi, \theta)$
+  
+- We estimate these based on a random sample of person nodes
+
+  - Node characteristics $m(\hat C, \theta)$ 
+  
+  - Edge characteristics $m(\hat Q, \theta)$
+  
+  - Edge formation process $m(\hat \Psi, \theta)$
+  
+  - Combinations of characteristics $m(\hat C, \hat Q, \hat \Psi, \theta)$
+
+- We estabilsh assumptions for:
+
+  - unbiasedness of estimators
+  
+  - efficiency bounds
+
+  
+- We use the bootstrap to estimate the standard error and use these to estimate confidence intervals
+
+
+  
 
 ##  {.unnumbered}
-
 
 ::: {#acknowledgements}
 
