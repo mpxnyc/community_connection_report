@@ -22,6 +22,11 @@ Notes:
   - Start here by generalizing NFFRCISTG to situations where not all common causese are represented on the DANG so there is no SWING. 
 - Move section on outbreak control to methods for MPX NYC
 - Neaten social network analysis so that it allows a time-varying graph
+- Rather than star with an idea of the sampling universe, we will define sample statistics that are substantively interpretable 
+- We will then extend our definitions of these to:
+  - Define a notion of the population parameter vs. the sample statistic
+  - Ask whether the sample statistics are unbiased with respect to the population parameters
+  - Ask how far the sample statistics are from the population parameter as a function of sample size?
 
 - This is theory for a person-place graph:
   - a bipartite graph whose two node classes are places and persons 
@@ -300,7 +305,7 @@ the number of edges connecting person $i$ and place $j$ in the
 person-place graph. Then:
 
 $$
-R_{i} = \sum_{ j }{E[ \Psi (i,j)]}
+R_{i} = \sum_{ j }{ \Psi (i,j)}
 $$
 
 ##### Social reach
@@ -339,7 +344,7 @@ have a residence or gathering in at least one common community district.
 $R_{i} = R_{i\rightarrow \mathscr{N}_P}$
 
 $$
-R_{i\rightarrow A} = \sum_{j}{\sum_{k }{ E[\Psi(i,j) {\Psi(k,j)} A_k]}}  
+R_{i\rightarrow A} = \sum_{j}{\sum_{k }{ \Psi(i,j) {\Psi(k,j)} A_k}}  
 $$
 
 ##### Social catchment
@@ -373,7 +378,7 @@ who belong to subgroup $A \subset \mathscr{N}_P$. **Social catchment of
 place** $j$ is defined as $r_{j} = r_{j\rightarrow \mathscr{N}_P}$
 
 $$
-r_{j\rightarrow A} = \sum_{i } { E[\Psi (i, j) A_i]}
+r_{j\rightarrow A} = \sum_{i } { \Psi (i, j) A_i}
 $$
 
 ##### Spatial catchment
@@ -416,7 +421,7 @@ common person nodes which belong to subset $A$. The **spatial catchment
 of place** $j$ is defined as $r_{i\rightarrow \mathscr{N}_P} = r_{i}$
 
 $$
-r_{j\rightarrow A} = \sum_{i }\sum_{k }{E[ \Psi(i,j) \Psi(i,k)A_i]} \\
+r_{j\rightarrow A} = \sum_{i }\sum_{k }{ \Psi(i,j) \Psi(i,k)A_i} \\
 $$
 
 
@@ -528,7 +533,12 @@ We define **preference** of person $i$ for group \$ B
 all alters
 
 $$
-P_{i \rightarrow B} = E[{\frac{ R_{i \rightarrow B}}{R_i}}]
+P_{A \rightarrow B} = \sum_i {\frac{ R_{i \rightarrow B}}{R_i}} 
+$$
+
+
+$$
+P_{A \rightarrow B} = \frac{1}{E[B_i]} \sum_i E[{\frac{ R_{i \rightarrow B}}{R_i}} |A_i = 1]
 $$
 
 The **spatial mixing coefficient from A to B** quantifies the degree to
@@ -645,7 +655,7 @@ $k^{th}$ connected component is $C_k$. The proportion in the largest
 connected component is given by:
 
 $$
-\pi_Q = E[\frac{\max_k{Q_k}}{n_P}]
+\pi_Q = \frac{\max_k{Q_k}}{n_P}
 $$
 
 ## Dynamics
@@ -663,7 +673,7 @@ the home community district of participant $i$.
 
 
 $$
-m(j,k) =E[ \sum_i D(i,j) \sum_{k }( \Psi(i,k) - D(i,k) )]
+m(j,k) = \sum_i D(i,j) \sum_{k }( \Psi(i,k) - D(i,k) )
 $$
 
 
@@ -676,13 +686,26 @@ community districts compared to home districts in the movement matrix.
 It is the difference of the margins of the movement matrix. 
 
 $$
-c(k) = E[\frac{\sum_l{m(l,k)} - \sum_k{m(l,k)}}{\sum_{l,k}{m(l,k)}}]
+c(k) = \frac{\sum_l{m(l,k)} - \sum_k{m(l,k)}}{\sum_{l,k}{m(l,k)}}
 $$
 
 ## Statistical inference
 
 - Data are a realization of law $C_t \in M_{n\times 1}$, $\Psi_t \in M_{n\times n}$, and $Q_t \in M_{n^2 \times 1}$ for $t \in [1,k]$, $k \in \mathbf{Z}$ and arbitrarily large $n \in \mathbf{Z}$
-
+- Goal is to infer population parameters using a sample.
+  - We begin by defining a variable $\mathbf{s} \in M_{n\times 1}$ such that $s_i$, the selection indicator for $i^{th}$ observational unit is one when that unit is included in the sample, and zero otherwise
+    - We make independence and homogeneity assumptions 
+    - We make assumptions about the determinants of $\mathbf{s}$
+  -  we only see this when $s_i = 1$: $C_{ti}$ 
+  - we only see this when $s_i = 1$ and $s_j = 1$ : $\Psi(i,j)$ 
+    
+- Queston for the researcher:
+  - Are there estimators that you want to prioritize showing? A class? A specific measure?
+  - Are you willing to read non-parametric efficiency theory to write this section?
+  - With that in mind, how much effort should you spend on the statistical inference section?
+  - What will the statistical inference section buy the reader?
+  - General enough to cover and extend dissertation household setup?
+  - Can i trust proportion of edge characteristic d?
   
 - We are interested in population quantities:
 
