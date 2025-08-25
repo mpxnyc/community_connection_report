@@ -548,17 +548,6 @@
     ]
   },
   {
-    "objectID": "B_ssnac2_causality/B__ssnac2_causality.html#sec-control-intervention",
-    "href": "B_ssnac2_causality/B__ssnac2_causality.html#sec-control-intervention",
-    "title": "B - SSNAC II: Causality",
-    "section": "B.5 Outbreak control intervention",
-    "text": "B.5 Outbreak control intervention\nWe used data from RESPND-MI to assess the effectiveness of two approaches to conducting mass vaccination campaigns quickly. MPX NYC is an online survey of about 1300 individuals that was conducted in 2022 in New York City. Study participants were asked to indicate their home on a map and were asked to indicate places they had had social contact in a congregate setting. Spatial coordinates were converted into community district identifiers. Community districts spatially partition the city of New York.\n\nApplication: Outbreak control model using RESPND-MI data\nUnder the SSNAC framework, our intervention of interest might not be about setting the value of any particular variable, but setting a policy or a process that produces a set of variables in the causal model. This would be done by changing the structural equations which produce those variables. In the SWING shown in Figure B.14 and Equation B.12, we show an intervention which replaces the function for the risk rating for each community (\\(\\mathbf{R}\\)) with the function \\(h\\). Every variable that is downstream of the first variable created using \\(h\\) is marked with a superscript \\((h)\\) to show that it is partially determined by that function.\nWe can now ask what the impact of taking policy \\(h\\) would be on the decision whether or not to vaccinate a neighborhood \\(j\\) at time \\(s\\) (\\(T_{js}\\)). We can also ask what the impact of the policy is on the the exposure of participant \\(i\\) to the campaign message at time \\(s\\) (\\(M_{is}\\)).\nOur interest in RESPND-MI, however, was initially to provide evidence to inform a targeted vaccination campaign, so the main outcomes of interest are the vaccination status of each individual \\(i\\) at time \\(s\\) (\\(V^{(h)}_{is}\\)). We were interested in contrasting two approaches to assigning risk-ratings to community districts: the contact-neutralizing approach and the movement-neutralizing approach.\nWhereas the contact-neutralizing approach ranks community districts by how many individuals are connected to them, the movement-neutralizing approach ranks community districts by how centrally they are connected to other community districts through the exchange of individuals.\n\n\nB.5.1 Assumptions\nWe make the simplifying assumption that only one neighborhood is vaccinated at a time - the top-ranked one. We make the further simplifying assumptions that every person associated with a community district (either through residence or social activity) receives the campaign message when a community district is vaccinated, and that every person who receives a campaign message gets vaccinated. Once an individual is vaccinated, they remain vaccinated.\n\n\nB.5.2 Model\nAccording to the model specified by structural equations B.12, no individual \\(i\\) has been vaccinated at time 0, and nobody receives the campaign message. The risk rating for community district \\(j\\) at time \\(s\\) is some function \\(h\\) of the vaccination status at time \\(s-1\\) for each individual who is connected to that community district. An intervention is conducted in community district \\(j\\) as time \\(s\\) if that community district has the highest risk rating. Each individual \\(i\\) is said to have received the campaign message at time \\(s\\) if the intervention was conducted in any of the community districts he is connected to. Finally, we consider individual \\(i\\) vaccinated at time \\(s\\) if they were vaccinated at time \\(s-1\\) or if they received the campaign message in time \\(s\\). The risk rating is given by the function \\(h\\).\n\n\nCode\nhypothetical_intervention_swing() |&gt;\n  plot_swig(node_radius = 0.5, nudge_intervention_labels = 0.2) +\n  scale_fill_mpxnyc(option = \"light\") +\n  theme_mpxnyc_blank()\n\n\n\n\n\n\n\n\nFigure B.14: SWING for Week 1-3 in RESPND-MI Application of SSNAC framework\n\n\n\n\n\n\\[\n\\begin{aligned}\nM_{0i} &=  0 \\\\\nV_{0i} &=  0 \\\\\nR_{sj}^{(h)} &=  h(\\mathbf{V}_{s-1}) \\\\\nT_{sj}^{(h)} &=  \\begin{cases} 1 & R_{sj}^{(h)} = max_k R_{sk}^{(h)} \\\\ 0 & \\text{otherwise} \\end{cases} \\\\\nM_{si}^{(h)} &=  \\begin{cases} 1 & \\mathbf{T}_{s\\mathscr{N}_i}^{(h)} \\neq \\mathbf{0}  \\\\ 0 & \\text{otherwise} \\end{cases} \\\\\nV_{si}^{(h)} &=  \\begin{cases} 1 & M_{si}^{(h)} = 1 \\text{ or } V_{s-1,i}^{(h)} = 1\\\\ 0 & \\text{otherwise} \\end{cases} \\\\\n\\end{aligned}\n\\tag{B.12}\\]\nDefine \\(\\psi(i, j)\\) as an adjacency function - an indicator function that equals to \\(1\\) if Person \\(i\\) lives in or visits neighborhood \\(j\\) and \\(0\\) otherwise. Let \\(\\mathscr{N}_P\\) be the indices of all person nodes and \\(\\mathscr{N}_N\\) be a set of indices for neighborhood nodes. Under the contact-neutralizing approach:\n\\[\nh_{sj}(\\mathbf{V}_{s-1}) = \\sum_{ i \\in \\mathscr{N}_P} (1 -V_{(s-1), i}) \\times \\psi(i, j)   \n\\]\nand under the movement-neutralizing approach:\n\\[\nh_{sj}(\\mathbf{V}_{s-1}) =   \\sum_{ i \\in \\mathscr{N}_P} (1 -V_{(s-1), i}) \\times \\psi(i, j) \\sum_{ k \\in \\mathscr{N}_N} \\psi(i, k)\n\\]\n\n\nB.5.3 Estimands\n\nSpatial efficiency\nIntervention coverage for the \\(s^{th}\\) community district to be immunized, is defined:\n\\[\nC_s^{(h)} = \\frac{1}{|\\mathscr{N}_p|}\\sum_i V_{si}^{(h)}\n\\]\nThe cumulative intervention coverage after immunizing \\(s\\) community districts is therefore:\n\\[\n\\bar{C_s}^{(h)} = \\sum_{v = 1}^s{C_v }^{(h)}\n\\]\n\n\nSocial network impact\nDefine graph \\(G^{s}(N, \\psi_s)\\) such that:\n\\[\n\\psi_s(i, j) = \\psi(i, j) \\times (1 -V_{(s-1), i})\n\\]\nThe cumulative social network impact of immunizing \\(s\\) community districts is measured in terms of the size of the largest of the connected components \\(LCC_{(s)}\\) of the \\(G^{s}(N, \\psi_s)\\) network as a proportion of the total number of participants.\n\\[\n\\frac{LCC_s}{|N_p|}\n\\]\n\n\n\nB.5.4 Estimation\nWe simulated the intervention outlined above using RESPND-MI data by calculating the \\(G^{s}(N, \\psi_s)\\) where \\(s\\) ranges from \\(1\\) to the total number of community districts. We measured the uncertainty of our estimates by re-sampling study participants with replacement.",
-    "crumbs": [
-      "Appendices",
-      "<span class='chapter-number'>B</span>  <span class='chapter-title'>SSNAC II: Causality</span>"
-    ]
-  },
-  {
     "objectID": "D_ssnac4_analysis/D__ssnac4_analysis.html",
     "href": "D_ssnac4_analysis/D__ssnac4_analysis.html",
     "title": "C - SSNAC III: Analysis",
@@ -798,61 +787,6 @@
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>G</span>  <span class='chapter-title'>MPX NYC III: Results</span>"
-    ]
-  },
-  {
-    "objectID": "D_ssnac4_analysis/D__ssnac4_analysis.html#return-journeys",
-    "href": "D_ssnac4_analysis/D__ssnac4_analysis.html#return-journeys",
-    "title": "C - SSNAC III: Analysis",
-    "section": "C.5 Return journeys",
-    "text": "C.5 Return journeys\n\nMovement\nThe movement matrix is a square matrix whose \\(kl^{th}\\) entry, \\(m(k,l)\\), is defined as the count of outings from home in community district \\(k\\) to a gathering in community district \\(l\\). Say \\(d^H(i)\\) is the home community district of participant \\(i\\). \\[\nm(k,l) = \\sum_{\\begin{aligned}i \\in \\mathscr{N}_P \\\\ d^H(i) = k \\end{aligned}} \\psi (i,l)\n\\]\n\n\nSpatial concentration\nThe spatial concentration proportion \\(c(k)\\) quantifies the degree to which a community district is over-represented among destination community districts compared to home districts in the movement matrix. It is the difference of the margins of the movement matrix. \\[\nc(k) = \\frac{\\sum_l{m(l,k)} - \\sum_k{m(l,k)}}{\\sum_{l,k}{m(l,k)}}\n\\]",
-    "crumbs": [
-      "Appendices",
-      "<span class='chapter-number'>C</span>  <span class='chapter-title'>SSNAC III: Analysis</span>"
-    ]
-  },
-  {
-    "objectID": "D_ssnac4_analysis/D__ssnac4_analysis.html#introducing-the-nffrcistg",
-    "href": "D_ssnac4_analysis/D__ssnac4_analysis.html#introducing-the-nffrcistg",
-    "title": "C - SSNAC III: Analysis",
-    "section": "C.7 Introducing the NFFRCISTG:",
-    "text": "C.7 Introducing the NFFRCISTG:\n\nThe target of inference is the person-place population graph:\n\n\\(\\mathscr{G}^*(\\mathscr{N}^*, \\mathscr{E}^*, d(.))\\)\n\nNode set is\n\n\\(\\mathscr{N}^* = \\mathscr{N}_P^* \\cup \\mathscr{N}_C\\)\n\\(|\\mathscr{N}_P^*| = n_P^* \\rightarrow \\infty\\)\n\\(\\mathscr{N}_C = n_C\\)\n\nHomogeneous ego networks\n\nstructural equation for adjacency graph is the same for each node\ngibbs sampler\n\nf(adjacency | other adjacencies, my data)\nf(data | adjacencies, data\n\n\nEdges are\n\nonly between places and people\n\nwe want a functional of node and edge universe data\n\nBut we have a function of node and edge sample data\n\nunder what condition do we have unbiasedness?\n\nrandom sample\nconditionally random sample\n\nSimulated person-place graph \\(\\mathscr{G}^*(\\mathscr{N}^*, \\mathscr{E}^*)\\)\n\nNodes \\(\\mathscr{N}^* = \\mathscr{N}_P^* \\cup \\mathscr{N}_C^*\\)\n\nPlace nodes \\(\\mathscr{N}_C^*\\): \\(m\\) copies of each element in \\(\\mathscr{N}_C\\)\nPerson nodes \\(\\mathscr{N}_P^*\\): random sample of size \\(m \\times |\\mathscr{N}_P|\\) from \\(\\mathscr{N}_P\\) drawn with replacement\nSince \\(\\mathscr{N}^*\\) is comprised of re-labelled elements of \\(\\mathscr{N}\\), \\(\\exists \\phi : \\mathscr{N}^* \\rightarrow \\mathscr{N}\\) such that \\(a \\in \\mathscr{N}^* \\implies \\phi(a) \\in \\mathscr{N}\\) (node name mapping)\n\nEdges\n\nfor \\(a, b \\in \\mathscr{N}^*\\): \\((\\phi(a), \\phi(b)) \\in \\mathscr{E} \\implies (x, a, b) \\in \\mathscr{E}^*\\) for some \\(x \\in \\mathbf{Z}_+\\)\n\n\nRemarks:\n\nWe can create simulated person graph and simulated place graph as bipartite projections of the simulated person-place graph since the latter is a bipartite graph\nStatistical inference is conducted using the empirical distribution for each measure.\n\nThe empirical distribution is estimated by calculating each measures within strata defined by simulation repetition, and summarizing the sample distribution across repetitions\n\nSimulation repetitions each comprise disjoint components of the simulted person-place graph",
-    "crumbs": [
-      "Appendices",
-      "<span class='chapter-number'>C</span>  <span class='chapter-title'>SSNAC III: Analysis</span>"
-    ]
-  },
-  {
-    "objectID": "D_ssnac4_analysis/D__ssnac4_analysis.html#dynamics-return-journeys",
-    "href": "D_ssnac4_analysis/D__ssnac4_analysis.html#dynamics-return-journeys",
-    "title": "C - SSNAC III: Analysis",
-    "section": "C.5 Dynamics: return journeys",
-    "text": "C.5 Dynamics: return journeys\nIn studies which elicit participants’ primary residence along with other places they are related to, it may be of interest to understand the pattern of movement from home to related places and back again.\n\nMovement\nThe movement matrix is a square matrix whose \\(kl^{th}\\) entry, \\(m(k,l)\\), is defined as the count of outings from home in community district \\(k\\) to a gathering in community district \\(l\\). Say \\(d^H(i)\\) is the home community district of participant \\(i\\). \\[\nm(k,l) = \\sum_{\\begin{aligned}i \\in \\mathscr{N}_P \\\\ d^H(i) = k \\end{aligned}} \\psi (i,l)\n\\]\n\n\nSpatial concentration\nThe spatial concentration proportion \\(c(k)\\) quantifies the degree to which a community district is over-represented among destination community districts compared to home districts in the movement matrix. It is the difference of the margins of the movement matrix. \\[\nc(k) = \\frac{\\sum_l{m(l,k)} - \\sum_k{m(l,k)}}{\\sum_{l,k}{m(l,k)}}\n\\]",
-    "crumbs": [
-      "Appendices",
-      "<span class='chapter-number'>C</span>  <span class='chapter-title'>SSNAC III: Analysis</span>"
-    ]
-  },
-  {
-    "objectID": "D_ssnac4_analysis/D__ssnac4_analysis.html#statistical-inference-1",
-    "href": "D_ssnac4_analysis/D__ssnac4_analysis.html#statistical-inference-1",
-    "title": "C - SSNAC III: Analysis",
-    "section": "C.7 Statistical inference",
-    "text": "C.7 Statistical inference\n\nData are a realization of law \\(C_t \\in M_{n\\times 1}\\), \\(\\Psi_t \\in M_{n\\times n}\\), and \\(Q_t \\in M_{n^2 \\times 1}\\) for \\(t \\in [1,k]\\), \\(k \\in \\mathbf{Z}\\) and arbitrarily large \\(n \\in \\mathbf{Z}\\)\nWe are interested in population quantities:\n\nNode characteristics \\(m(C, \\theta)\\)\nEdge characteristics \\(m(Q, \\theta)\\)\nEdge formation process \\(m(\\Psi, \\theta)\\)\nCombinations of characteristics \\(m(C, Q, \\Psi, \\theta)\\)\n\nWe estimate these based on a random sample of person nodes\n\nNode characteristics \\(m(\\hat C, \\theta)\\)\nEdge characteristics \\(m(\\hat Q, \\theta)\\)\nEdge formation process \\(m(\\hat \\Psi, \\theta)\\)\nCombinations of characteristics \\(m(\\hat C, \\hat Q, \\hat \\Psi, \\theta)\\)\n\nWe estabilsh assumptions for:\n\nunbiasedness of estimators\nefficiency bounds\n\nWe use the bootstrap to estimate the standard error and use these to estimate confidence intervals",
-    "crumbs": [
-      "Appendices",
-      "<span class='chapter-number'>C</span>  <span class='chapter-title'>SSNAC III: Analysis</span>"
-    ]
-  },
-  {
-    "objectID": "B_ssnac2_causality/B__ssnac2_causality.html#appendix",
-    "href": "B_ssnac2_causality/B__ssnac2_causality.html#appendix",
-    "title": "B - SSNAC II: Causality",
-    "section": "",
-    "text": "Acknowledgements: The statistical framework for SSNAC was first presented at the Society for Epidemiologic Research Meeting (Boston, June 2025) at a workshop titled “Single World Intervention Graphs (SWIGs) for the practicing epidemiologist” organized and taught by Aaron Sarvet (University of Massachusetts), Mats J. Stensrud (École polytechnique fédérale de Lausanne), and Kerollos Wanis (University of Texas), and also taught by Keletso Makofane (Ctrl+F), James M. Robins (Harvard University), and Thomas Richardson (University of Washington).\nLead author: Keletso Makofane, MPH, PhD. Editor: Nicholas Diamond, MPH. (Published: June 2025).",
-    "crumbs": [
-      "Appendices",
-      "<span class='chapter-number'>B</span>  <span class='chapter-title'>SSNAC II: Causality</span>"
     ]
   }
 ]
