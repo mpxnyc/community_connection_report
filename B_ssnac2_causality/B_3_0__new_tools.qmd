@@ -1,13 +1,13 @@
 
 
-### Causal reasoning with DANGs and SWINGs {.unnumbered}
+### Stochastic Network FFRCISTG model{.unnumbered}
 
 As we see in @fig-homogenous-dag, causal DAGs become quickly visually cluttered, and therefore unwieldy, once we start depicting causal systems with multiple observational units. If we added a fourth observational unit to @fig-homogenous-dag, it would be nearly impossible to see which arrow connects which nodes. This is an important limitation because one of the most useful things about causal DAGs is that they allow the observational epidemiologist to reason graphically about the structure of confounding and selection.
 
 
 
 
-##### Definition 7: Causal Directed Acyclic Network Graph (DANG)
+#### Introducing the Causal Directed Acyclic Network Graph (DANG)
 
 We introduce the causal Directed Acyclic Network Graph (causal DANG) - a simple extension of the DAG that allows for the representation of complex causal systems. Like the causal DAG, the causal DANG encodes a non-parametric structural equation model.
 
@@ -80,7 +80,18 @@ legend      <- cowplot::get_legend(legend_pre)
 cowplot::plot_grid(figure, legend, nrow = 1, rel_widths = c(4,1))
 ```
 
-##### Definition 8: Single World Intervention Network Graph (SWING)
+*Stochastic edges*
+
+
+Random edges 
+
+
+
+
+
+
+
+#### Introducing the Single World Intervention Network Graph (SWING)
 
 We introduce the Single World Intervention Network Graph (SWING) - a simple extension of the SWIG that allows for the representation of the counterfactual outcomes of interventions in complex causal systems.
 
@@ -122,17 +133,54 @@ cowplot::plot_grid(figure, legend, nrow = 1, rel_widths = c(4,1))
 
 ```
 
+#### Definitions
 
-##### Definition 9: Stochastic Network FFRCISTG model
+::: {#def-dang .theorem}
+# Causal Directed Acyclic Network Graph
+
+- A DANG is a DAG expressed in terms of the whole vector of observations
+- Associated with a graph
+- Interference according to the graph
+:::
+
+::: {#def-swing .theorem}
+# Single World Intervention Network Graph
+
+- A SWING is a DAG with node splitting
+- A SWING is a SWIG at the level of whole vector of observations
+:::
+
+
+
+::: {#def-snffrcistg}
+# Stochastic Network FFRCISTG model
 
 - The SNFFRCISTG is a generalization of a NFFRCISTG 
 - Expressed in terms of whole sample vector rather than observation scalar
+- Graph is stochastic with:
+  - Random nodes: a set of nodes, each representing an observational unit in a random sample
+  - Random edges: a set of edges, each representing a relation between a random node and fixed node 
+- Each node is associated with a data record
+- Eacch edge is associated with a data record
+:::
+
+
+::: {#def-snffrcistg}
+# Social and Spatial Stochastic Network FFRCISTG model
+
+- The SaSSNFFRCISTG is a submodel of a SNFFRCISTG 
 - Graph is stochastic and bipartite with:
   - Fixed nodes: a set of nodes representing a set of fixed and known entities
   - Random nodes: a set of nodes, each representing an observational unit in a random sample
   - Random edges: a set of edges, each representing a relation between a random node and fixed node 
 - Each node is associated with a data record
 - Eacch edge is associated with a data record
+:::
+
+
+
+
+
 
 $$
 \begin{aligned}
