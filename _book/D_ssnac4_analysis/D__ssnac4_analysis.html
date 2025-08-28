@@ -448,85 +448,92 @@ window.Quarto = {
 
 <div id="leading">
 <p>We describe the main data objects of the MPX NYC study – the Person-place graph, the Person graph and the Place graph – as well as the statistics we used to analyze them.</p>
-<p>Notes:</p>
+<p>Main idea is: - You have some observational nodes that are people - You have some observational nodes are are places - People have affiliations with places - Affiliations are unlimited - If a place is a neighborhood, a person node could be affiliated to that place because they have a home there. They could additionally be affiliated to that place because they have attended a gathering there. - If a place is a household, a person could be affiliated to the household because they work in the househodl or because they have a friend there, or because they live there. - There are quantitative data associated with the people, places and affiliations</p>
 <ul>
-<li>Add network FFRCISTG to a section called “Reasoning with DANGs and SWINGS”. (mirror section in classical causal inference section)
+<li>Outline of sections
 <ul>
-<li>Introduce random graph <span class="math inline">\(\mathbf{\Psi}_k\)</span> along with <span class="math inline">\(\mathbf{C}_k\)</span></li>
-<li>Start here by generalizing NFFRCISTG to situations where not all common causese are represented on the DANG so there is no SWING.</li>
+<li>Cleanup
+<ul>
+<li>Check abandoned texts</li>
+<li>Put outbreak control seciton in abandoned texts</li>
 </ul></li>
-<li>Move section on outbreak control to methods for MPX NYC</li>
-<li>Neaten social network analysis so that it allows a time-varying graph</li>
-<li>Rather than star with an idea of the sampling universe, we will define sample statistics that are substantively interpretable</li>
-<li>We will then extend our definitions of these to:
+<li>Example</li>
+<li>Data graph
 <ul>
-<li>Define a notion of the population parameter vs.&nbsp;the sample statistic</li>
-<li>Ask whether the sample statistics are unbiased with respect to the population parameters</li>
-<li>Ask how far the sample statistics are from the population parameter as a function of sample size?</li>
-</ul></li>
-<li>This is theory for a person-place graph:
-<ul>
-<li>a bipartite graph whose two node classes are places and persons
-<ul>
-<li>“places” are a fixed, fully observed set of spatial units</li>
-<li>persons are a countable set of observational units - in our case survey participants.</li>
-<li>persons are “affiliated” with places. their affiliations are indicated using network ties in the person-place graph</li>
-<li>goal is:
+<li>goals:
 <ul>
 <li>to model correlation between measures made on persons that is induced by joint affiliation with places</li>
 <li>to express target estimands in terms of model quantities</li>
 <li>to specify estimators for those estimands based on sample data</li>
 </ul></li>
-</ul></li>
-</ul></li>
-<li>Notation
+<li>definitions
 <ul>
+<li>person-place graph: a bipartite graph whose two node classes are places and persons
+<ul>
+<li>Nodes
+<ul>
+<li>places are a fixed, fully observed set of spatial units</li>
+<li>persons are a countable set of observational units</li>
+<li>each node is associated with node characteristics</li>
 <li>Node characteristics
 <ul>
-<li>Person node vs place node</li>
 <li><span class="math inline">\(\mathbf{C}_k\)</span> random vector</li>
 <li><span class="math inline">\(C_{k}(i)\)</span> random scalar</li>
 <li><span class="math inline">\(\mathbf{c}_k\)</span> vector realization</li>
 <li><span class="math inline">\(c_{k}(i)\)</span> scalar realization</li>
 </ul></li>
+</ul></li>
+<li>Edges
+<ul>
+<li>persons’ affiliations with places are indicated using edges</li>
+<li>each edge is associated with edge characteristics</li>
 <li>Edge characteristics
 <ul>
 <li><span class="math inline">\(\mathbf{D}_k\)</span> <span class="math inline">\(n \times n\)</span> random matrix</li>
 <li><span class="math inline">\(D_{k}(i,j)\)</span> <span class="math inline">\(ij\)</span>th entry of random matrix</li>
 <li><span class="math inline">\(\mathbf{d}_k\)</span> <span class="math inline">\(n \times n\)</span> matrix realization</li>
 <li><span class="math inline">\(d_{k}(i,j)\)</span> scalar relization</li>
+<li><span class="math inline">\(\mathbf{\Psi}_k\)</span> is a speical case of <span class="math inline">\(\mathbf{D}_k\)</span></li>
 </ul></li>
-<li>Edge existence
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Node characteristics
 <ul>
-<li><span class="math inline">\(\mathbf{\Psi}_k\)</span> <span class="math inline">\(n \times n\)</span> random matrix</li>
-<li><span class="math inline">\(\Psi_k(i,j)\)</span> <span class="math inline">\(n \times n\)</span> random scalar</li>
-<li><span class="math inline">\(\mathbf{\psi}_k\)</span> <span class="math inline">\(n \times n\)</span> matrix realization</li>
-<li><span class="math inline">\(\psi_k(i,j)\)</span> <span class="math inline">\(n \times n\)</span> scalar realization</li>
-<li><span class="math inline">\(\Psi_k(i)\)</span> <span class="math inline">\(n \times 1\)</span> random vector</li>
-<li><span class="math inline">\(\psi_k(i)\)</span> <span class="math inline">\(n \times 1\)</span> vector realization<br>
-</li>
+<li>Descriptive statistics</li>
 </ul></li>
-</ul></li>
-<li>Outline:
+<li>Edge characteristics
 <ul>
-<li>Observational unit characteristics</li>
-<li>Local network characteristics</li>
-<li>Global network characteristics</li>
-<li>Global system dynamics</li>
+<li>Descriptive statistics</li>
+</ul></li>
+<li>Local structure
+<ul>
+<li>Spatial reach</li>
+<li>Social reach</li>
+<li>Spatial catchment</li>
+<li>Social catchment</li>
+</ul></li>
+<li>Global structure
+<ul>
+<li>Spatial mixing</li>
+<li>Social connectedness</li>
+</ul></li>
+<li>Dynamics
+<ul>
+<li>Outings</li>
+<li>Spatial concentration</li>
+</ul></li>
 <li>Statistical inference
 <ul>
-<li>Person-place system</li>
-<li>Main idea is:
+<li>Rather than star with an idea of the sampling universe, we will define sample statistics that are substantively interpretable</li>
+<li>We will then extend our definitions of these to:
 <ul>
-<li>You have some observational nodes that are people</li>
-<li>You have some observational nodes are are places</li>
-<li>People have affiliations with places
-<ul>
-<li>Affiliations are unlimited</li>
-<li>If a place is a neighborhood, a person node could be affiliated to that place because they have a home there. They could additionally be affiliated to that place because they have attended a gathering there.</li>
-<li>If a place is a household, a person could be affiliated to the household because they work in the househodl or because they have a friend there, or because they live there.</li>
-</ul></li>
-<li>There are quantitative data associated with the people, places and affiliations</li>
+<li>Define a notion of the population parameter vs.&nbsp;the sample statistic<br>
+</li>
+<li>Ask whether the sample statistics are unbiased with respect to the population parameters<br>
+</li>
+<li>Ask how far the sample statistics are from the population parameter as a function of sample size?</li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -584,23 +591,23 @@ Table&nbsp;C.1: Sample person-place network data
 <div aria-describedby="tbl-example-bipartite-nodes-edges-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-example-bipartite-nodes-edges-2" style="flex-basis: 50.0%;justify-content: center;">
-<div id="tsqxivtaeq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tsqxivtaeq table {
+<div id="eyosemugee" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#eyosemugee table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tsqxivtaeq thead, #tsqxivtaeq tbody, #tsqxivtaeq tfoot, #tsqxivtaeq tr, #tsqxivtaeq td, #tsqxivtaeq th {
+#eyosemugee thead, #eyosemugee tbody, #eyosemugee tfoot, #eyosemugee tr, #eyosemugee td, #eyosemugee th {
   border-style: none;
 }
 
-#tsqxivtaeq p {
+#eyosemugee p {
   margin: 0;
   padding: 0;
 }
 
-#tsqxivtaeq .gt_table {
+#eyosemugee .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -626,12 +633,12 @@ Table&nbsp;C.1: Sample person-place network data
   border-left-color: #D3D3D3;
 }
 
-#tsqxivtaeq .gt_caption {
+#eyosemugee .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tsqxivtaeq .gt_title {
+#eyosemugee .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -643,7 +650,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-bottom-width: 0;
 }
 
-#tsqxivtaeq .gt_subtitle {
+#eyosemugee .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -655,7 +662,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-top-width: 0;
 }
 
-#tsqxivtaeq .gt_heading {
+#eyosemugee .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -667,13 +674,13 @@ Table&nbsp;C.1: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#tsqxivtaeq .gt_bottom_border {
+#eyosemugee .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tsqxivtaeq .gt_col_headings {
+#eyosemugee .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -688,7 +695,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#tsqxivtaeq .gt_col_heading {
+#eyosemugee .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -708,7 +715,7 @@ Table&nbsp;C.1: Sample person-place network data
   overflow-x: hidden;
 }
 
-#tsqxivtaeq .gt_column_spanner_outer {
+#eyosemugee .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -720,15 +727,15 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 4px;
 }
 
-#tsqxivtaeq .gt_column_spanner_outer:first-child {
+#eyosemugee .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tsqxivtaeq .gt_column_spanner_outer:last-child {
+#eyosemugee .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tsqxivtaeq .gt_column_spanner {
+#eyosemugee .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -740,11 +747,11 @@ Table&nbsp;C.1: Sample person-place network data
   width: 100%;
 }
 
-#tsqxivtaeq .gt_spanner_row {
+#eyosemugee .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tsqxivtaeq .gt_group_heading {
+#eyosemugee .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -770,7 +777,7 @@ Table&nbsp;C.1: Sample person-place network data
   text-align: left;
 }
 
-#tsqxivtaeq .gt_empty_group_heading {
+#eyosemugee .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -785,15 +792,15 @@ Table&nbsp;C.1: Sample person-place network data
   vertical-align: middle;
 }
 
-#tsqxivtaeq .gt_from_md > :first-child {
+#eyosemugee .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tsqxivtaeq .gt_from_md > :last-child {
+#eyosemugee .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tsqxivtaeq .gt_row {
+#eyosemugee .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -812,7 +819,7 @@ Table&nbsp;C.1: Sample person-place network data
   overflow-x: hidden;
 }
 
-#tsqxivtaeq .gt_stub {
+#eyosemugee .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -825,7 +832,7 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 5px;
 }
 
-#tsqxivtaeq .gt_stub_row_group {
+#eyosemugee .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -839,15 +846,15 @@ Table&nbsp;C.1: Sample person-place network data
   vertical-align: top;
 }
 
-#tsqxivtaeq .gt_row_group_first td {
+#eyosemugee .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tsqxivtaeq .gt_row_group_first th {
+#eyosemugee .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tsqxivtaeq .gt_summary_row {
+#eyosemugee .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -857,16 +864,16 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 5px;
 }
 
-#tsqxivtaeq .gt_first_summary_row {
+#eyosemugee .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tsqxivtaeq .gt_first_summary_row.thick {
+#eyosemugee .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tsqxivtaeq .gt_last_summary_row {
+#eyosemugee .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -876,7 +883,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#tsqxivtaeq .gt_grand_summary_row {
+#eyosemugee .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -886,7 +893,7 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 5px;
 }
 
-#tsqxivtaeq .gt_first_grand_summary_row {
+#eyosemugee .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -896,7 +903,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-top-color: #D3D3D3;
 }
 
-#tsqxivtaeq .gt_last_grand_summary_row_top {
+#eyosemugee .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -906,11 +913,11 @@ Table&nbsp;C.1: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#tsqxivtaeq .gt_striped {
+#eyosemugee .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tsqxivtaeq .gt_table_body {
+#eyosemugee .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -919,7 +926,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#tsqxivtaeq .gt_footnotes {
+#eyosemugee .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -933,7 +940,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#tsqxivtaeq .gt_footnote {
+#eyosemugee .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -942,7 +949,7 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 5px;
 }
 
-#tsqxivtaeq .gt_sourcenotes {
+#eyosemugee .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -956,7 +963,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#tsqxivtaeq .gt_sourcenote {
+#eyosemugee .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -964,77 +971,77 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 5px;
 }
 
-#tsqxivtaeq .gt_left {
+#eyosemugee .gt_left {
   text-align: left;
 }
 
-#tsqxivtaeq .gt_center {
+#eyosemugee .gt_center {
   text-align: center;
 }
 
-#tsqxivtaeq .gt_right {
+#eyosemugee .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tsqxivtaeq .gt_font_normal {
+#eyosemugee .gt_font_normal {
   font-weight: normal;
 }
 
-#tsqxivtaeq .gt_font_bold {
+#eyosemugee .gt_font_bold {
   font-weight: bold;
 }
 
-#tsqxivtaeq .gt_font_italic {
+#eyosemugee .gt_font_italic {
   font-style: italic;
 }
 
-#tsqxivtaeq .gt_super {
+#eyosemugee .gt_super {
   font-size: 65%;
 }
 
-#tsqxivtaeq .gt_footnote_marks {
+#eyosemugee .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tsqxivtaeq .gt_asterisk {
+#eyosemugee .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tsqxivtaeq .gt_indent_1 {
+#eyosemugee .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tsqxivtaeq .gt_indent_2 {
+#eyosemugee .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tsqxivtaeq .gt_indent_3 {
+#eyosemugee .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tsqxivtaeq .gt_indent_4 {
+#eyosemugee .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tsqxivtaeq .gt_indent_5 {
+#eyosemugee .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tsqxivtaeq .katex-display {
+#eyosemugee .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tsqxivtaeq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#eyosemugee div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<div id="tbl-example-bipartite-nodes-edges-2-1" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-bootstrap="false" data-quarto-postprocess="true" data-quarto-disable-processing="false">
+<div id="tbl-example-bipartite-nodes-edges-2-1" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <figure class="quarto-float quarto-subfloat-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-example-bipartite-nodes-edges-2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Nodes
@@ -1123,23 +1130,23 @@ Table&nbsp;C.1: Sample person-place network data
 </div>
 </div>
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-example-bipartite-nodes-edges-2" style="flex-basis: 50.0%;justify-content: center;">
-<div id="jqwsuvlbuw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jqwsuvlbuw table {
+<div id="jwwsgrkghh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jwwsgrkghh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jqwsuvlbuw thead, #jqwsuvlbuw tbody, #jqwsuvlbuw tfoot, #jqwsuvlbuw tr, #jqwsuvlbuw td, #jqwsuvlbuw th {
+#jwwsgrkghh thead, #jwwsgrkghh tbody, #jwwsgrkghh tfoot, #jwwsgrkghh tr, #jwwsgrkghh td, #jwwsgrkghh th {
   border-style: none;
 }
 
-#jqwsuvlbuw p {
+#jwwsgrkghh p {
   margin: 0;
   padding: 0;
 }
 
-#jqwsuvlbuw .gt_table {
+#jwwsgrkghh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1165,12 +1172,12 @@ Table&nbsp;C.1: Sample person-place network data
   border-left-color: #D3D3D3;
 }
 
-#jqwsuvlbuw .gt_caption {
+#jwwsgrkghh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jqwsuvlbuw .gt_title {
+#jwwsgrkghh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1182,7 +1189,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-bottom-width: 0;
 }
 
-#jqwsuvlbuw .gt_subtitle {
+#jwwsgrkghh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1194,7 +1201,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-top-width: 0;
 }
 
-#jqwsuvlbuw .gt_heading {
+#jwwsgrkghh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1206,13 +1213,13 @@ Table&nbsp;C.1: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#jqwsuvlbuw .gt_bottom_border {
+#jwwsgrkghh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jqwsuvlbuw .gt_col_headings {
+#jwwsgrkghh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1227,7 +1234,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#jqwsuvlbuw .gt_col_heading {
+#jwwsgrkghh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1247,7 +1254,7 @@ Table&nbsp;C.1: Sample person-place network data
   overflow-x: hidden;
 }
 
-#jqwsuvlbuw .gt_column_spanner_outer {
+#jwwsgrkghh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1259,15 +1266,15 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 4px;
 }
 
-#jqwsuvlbuw .gt_column_spanner_outer:first-child {
+#jwwsgrkghh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jqwsuvlbuw .gt_column_spanner_outer:last-child {
+#jwwsgrkghh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jqwsuvlbuw .gt_column_spanner {
+#jwwsgrkghh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1279,11 +1286,11 @@ Table&nbsp;C.1: Sample person-place network data
   width: 100%;
 }
 
-#jqwsuvlbuw .gt_spanner_row {
+#jwwsgrkghh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jqwsuvlbuw .gt_group_heading {
+#jwwsgrkghh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1309,7 +1316,7 @@ Table&nbsp;C.1: Sample person-place network data
   text-align: left;
 }
 
-#jqwsuvlbuw .gt_empty_group_heading {
+#jwwsgrkghh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1324,15 +1331,15 @@ Table&nbsp;C.1: Sample person-place network data
   vertical-align: middle;
 }
 
-#jqwsuvlbuw .gt_from_md > :first-child {
+#jwwsgrkghh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jqwsuvlbuw .gt_from_md > :last-child {
+#jwwsgrkghh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jqwsuvlbuw .gt_row {
+#jwwsgrkghh .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1351,7 +1358,7 @@ Table&nbsp;C.1: Sample person-place network data
   overflow-x: hidden;
 }
 
-#jqwsuvlbuw .gt_stub {
+#jwwsgrkghh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1364,7 +1371,7 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 5px;
 }
 
-#jqwsuvlbuw .gt_stub_row_group {
+#jwwsgrkghh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1378,15 +1385,15 @@ Table&nbsp;C.1: Sample person-place network data
   vertical-align: top;
 }
 
-#jqwsuvlbuw .gt_row_group_first td {
+#jwwsgrkghh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jqwsuvlbuw .gt_row_group_first th {
+#jwwsgrkghh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jqwsuvlbuw .gt_summary_row {
+#jwwsgrkghh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1396,16 +1403,16 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 5px;
 }
 
-#jqwsuvlbuw .gt_first_summary_row {
+#jwwsgrkghh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jqwsuvlbuw .gt_first_summary_row.thick {
+#jwwsgrkghh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jqwsuvlbuw .gt_last_summary_row {
+#jwwsgrkghh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1415,7 +1422,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#jqwsuvlbuw .gt_grand_summary_row {
+#jwwsgrkghh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1425,7 +1432,7 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 5px;
 }
 
-#jqwsuvlbuw .gt_first_grand_summary_row {
+#jwwsgrkghh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1435,7 +1442,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-top-color: #D3D3D3;
 }
 
-#jqwsuvlbuw .gt_last_grand_summary_row_top {
+#jwwsgrkghh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1445,11 +1452,11 @@ Table&nbsp;C.1: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#jqwsuvlbuw .gt_striped {
+#jwwsgrkghh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jqwsuvlbuw .gt_table_body {
+#jwwsgrkghh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1458,7 +1465,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#jqwsuvlbuw .gt_footnotes {
+#jwwsgrkghh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1472,7 +1479,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#jqwsuvlbuw .gt_footnote {
+#jwwsgrkghh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1481,7 +1488,7 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 5px;
 }
 
-#jqwsuvlbuw .gt_sourcenotes {
+#jwwsgrkghh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1495,7 +1502,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#jqwsuvlbuw .gt_sourcenote {
+#jwwsgrkghh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1503,77 +1510,77 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 5px;
 }
 
-#jqwsuvlbuw .gt_left {
+#jwwsgrkghh .gt_left {
   text-align: left;
 }
 
-#jqwsuvlbuw .gt_center {
+#jwwsgrkghh .gt_center {
   text-align: center;
 }
 
-#jqwsuvlbuw .gt_right {
+#jwwsgrkghh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jqwsuvlbuw .gt_font_normal {
+#jwwsgrkghh .gt_font_normal {
   font-weight: normal;
 }
 
-#jqwsuvlbuw .gt_font_bold {
+#jwwsgrkghh .gt_font_bold {
   font-weight: bold;
 }
 
-#jqwsuvlbuw .gt_font_italic {
+#jwwsgrkghh .gt_font_italic {
   font-style: italic;
 }
 
-#jqwsuvlbuw .gt_super {
+#jwwsgrkghh .gt_super {
   font-size: 65%;
 }
 
-#jqwsuvlbuw .gt_footnote_marks {
+#jwwsgrkghh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jqwsuvlbuw .gt_asterisk {
+#jwwsgrkghh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jqwsuvlbuw .gt_indent_1 {
+#jwwsgrkghh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jqwsuvlbuw .gt_indent_2 {
+#jwwsgrkghh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jqwsuvlbuw .gt_indent_3 {
+#jwwsgrkghh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jqwsuvlbuw .gt_indent_4 {
+#jwwsgrkghh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jqwsuvlbuw .gt_indent_5 {
+#jwwsgrkghh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#jqwsuvlbuw .katex-display {
+#jwwsgrkghh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#jqwsuvlbuw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jwwsgrkghh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<div id="tbl-example-bipartite-nodes-edges-2-2" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-bootstrap="false" data-quarto-postprocess="true" data-quarto-disable-processing="false">
+<div id="tbl-example-bipartite-nodes-edges-2-2" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <figure class="quarto-float quarto-subfloat-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-example-bipartite-nodes-edges-2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Edges
@@ -1749,23 +1756,23 @@ Table&nbsp;C.2: Sample person-place network data
 <div aria-describedby="tbl-example-bipartite-nodes-edges-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-example-bipartite-nodes-edges-1" style="flex-basis: 50.0%;justify-content: center;">
-<div id="tepbgslcyn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tepbgslcyn table {
+<div id="qcswgczwgl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qcswgczwgl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tepbgslcyn thead, #tepbgslcyn tbody, #tepbgslcyn tfoot, #tepbgslcyn tr, #tepbgslcyn td, #tepbgslcyn th {
+#qcswgczwgl thead, #qcswgczwgl tbody, #qcswgczwgl tfoot, #qcswgczwgl tr, #qcswgczwgl td, #qcswgczwgl th {
   border-style: none;
 }
 
-#tepbgslcyn p {
+#qcswgczwgl p {
   margin: 0;
   padding: 0;
 }
 
-#tepbgslcyn .gt_table {
+#qcswgczwgl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1791,12 +1798,12 @@ Table&nbsp;C.2: Sample person-place network data
   border-left-color: #D3D3D3;
 }
 
-#tepbgslcyn .gt_caption {
+#qcswgczwgl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tepbgslcyn .gt_title {
+#qcswgczwgl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1808,7 +1815,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-bottom-width: 0;
 }
 
-#tepbgslcyn .gt_subtitle {
+#qcswgczwgl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1820,7 +1827,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-top-width: 0;
 }
 
-#tepbgslcyn .gt_heading {
+#qcswgczwgl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1832,13 +1839,13 @@ Table&nbsp;C.2: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#tepbgslcyn .gt_bottom_border {
+#qcswgczwgl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tepbgslcyn .gt_col_headings {
+#qcswgczwgl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1853,7 +1860,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#tepbgslcyn .gt_col_heading {
+#qcswgczwgl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1873,7 +1880,7 @@ Table&nbsp;C.2: Sample person-place network data
   overflow-x: hidden;
 }
 
-#tepbgslcyn .gt_column_spanner_outer {
+#qcswgczwgl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1885,15 +1892,15 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 4px;
 }
 
-#tepbgslcyn .gt_column_spanner_outer:first-child {
+#qcswgczwgl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tepbgslcyn .gt_column_spanner_outer:last-child {
+#qcswgczwgl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tepbgslcyn .gt_column_spanner {
+#qcswgczwgl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1905,11 +1912,11 @@ Table&nbsp;C.2: Sample person-place network data
   width: 100%;
 }
 
-#tepbgslcyn .gt_spanner_row {
+#qcswgczwgl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tepbgslcyn .gt_group_heading {
+#qcswgczwgl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1935,7 +1942,7 @@ Table&nbsp;C.2: Sample person-place network data
   text-align: left;
 }
 
-#tepbgslcyn .gt_empty_group_heading {
+#qcswgczwgl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1950,15 +1957,15 @@ Table&nbsp;C.2: Sample person-place network data
   vertical-align: middle;
 }
 
-#tepbgslcyn .gt_from_md > :first-child {
+#qcswgczwgl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tepbgslcyn .gt_from_md > :last-child {
+#qcswgczwgl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tepbgslcyn .gt_row {
+#qcswgczwgl .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1977,7 +1984,7 @@ Table&nbsp;C.2: Sample person-place network data
   overflow-x: hidden;
 }
 
-#tepbgslcyn .gt_stub {
+#qcswgczwgl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1990,7 +1997,7 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 5px;
 }
 
-#tepbgslcyn .gt_stub_row_group {
+#qcswgczwgl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2004,15 +2011,15 @@ Table&nbsp;C.2: Sample person-place network data
   vertical-align: top;
 }
 
-#tepbgslcyn .gt_row_group_first td {
+#qcswgczwgl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tepbgslcyn .gt_row_group_first th {
+#qcswgczwgl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tepbgslcyn .gt_summary_row {
+#qcswgczwgl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2022,16 +2029,16 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 5px;
 }
 
-#tepbgslcyn .gt_first_summary_row {
+#qcswgczwgl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tepbgslcyn .gt_first_summary_row.thick {
+#qcswgczwgl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tepbgslcyn .gt_last_summary_row {
+#qcswgczwgl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2041,7 +2048,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#tepbgslcyn .gt_grand_summary_row {
+#qcswgczwgl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2051,7 +2058,7 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 5px;
 }
 
-#tepbgslcyn .gt_first_grand_summary_row {
+#qcswgczwgl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2061,7 +2068,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-top-color: #D3D3D3;
 }
 
-#tepbgslcyn .gt_last_grand_summary_row_top {
+#qcswgczwgl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2071,11 +2078,11 @@ Table&nbsp;C.2: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#tepbgslcyn .gt_striped {
+#qcswgczwgl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tepbgslcyn .gt_table_body {
+#qcswgczwgl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2084,7 +2091,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#tepbgslcyn .gt_footnotes {
+#qcswgczwgl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2098,7 +2105,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#tepbgslcyn .gt_footnote {
+#qcswgczwgl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2107,7 +2114,7 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 5px;
 }
 
-#tepbgslcyn .gt_sourcenotes {
+#qcswgczwgl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2121,7 +2128,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#tepbgslcyn .gt_sourcenote {
+#qcswgczwgl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2129,77 +2136,77 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 5px;
 }
 
-#tepbgslcyn .gt_left {
+#qcswgczwgl .gt_left {
   text-align: left;
 }
 
-#tepbgslcyn .gt_center {
+#qcswgczwgl .gt_center {
   text-align: center;
 }
 
-#tepbgslcyn .gt_right {
+#qcswgczwgl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tepbgslcyn .gt_font_normal {
+#qcswgczwgl .gt_font_normal {
   font-weight: normal;
 }
 
-#tepbgslcyn .gt_font_bold {
+#qcswgczwgl .gt_font_bold {
   font-weight: bold;
 }
 
-#tepbgslcyn .gt_font_italic {
+#qcswgczwgl .gt_font_italic {
   font-style: italic;
 }
 
-#tepbgslcyn .gt_super {
+#qcswgczwgl .gt_super {
   font-size: 65%;
 }
 
-#tepbgslcyn .gt_footnote_marks {
+#qcswgczwgl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tepbgslcyn .gt_asterisk {
+#qcswgczwgl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tepbgslcyn .gt_indent_1 {
+#qcswgczwgl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tepbgslcyn .gt_indent_2 {
+#qcswgczwgl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tepbgslcyn .gt_indent_3 {
+#qcswgczwgl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tepbgslcyn .gt_indent_4 {
+#qcswgczwgl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tepbgslcyn .gt_indent_5 {
+#qcswgczwgl .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tepbgslcyn .katex-display {
+#qcswgczwgl .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tepbgslcyn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qcswgczwgl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<div id="tbl-example-bipartite-nodes-edges-1-1" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-bootstrap="false" data-quarto-postprocess="true" data-quarto-disable-processing="false">
+<div id="tbl-example-bipartite-nodes-edges-1-1" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <figure class="quarto-float quarto-subfloat-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-example-bipartite-nodes-edges-1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Nodes
@@ -2263,23 +2270,23 @@ Table&nbsp;C.2: Sample person-place network data
 </div>
 </div>
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-example-bipartite-nodes-edges-1" style="flex-basis: 50.0%;justify-content: center;">
-<div id="vpggrffrrk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vpggrffrrk table {
+<div id="rbnhqeeeza" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rbnhqeeeza table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vpggrffrrk thead, #vpggrffrrk tbody, #vpggrffrrk tfoot, #vpggrffrrk tr, #vpggrffrrk td, #vpggrffrrk th {
+#rbnhqeeeza thead, #rbnhqeeeza tbody, #rbnhqeeeza tfoot, #rbnhqeeeza tr, #rbnhqeeeza td, #rbnhqeeeza th {
   border-style: none;
 }
 
-#vpggrffrrk p {
+#rbnhqeeeza p {
   margin: 0;
   padding: 0;
 }
 
-#vpggrffrrk .gt_table {
+#rbnhqeeeza .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2305,12 +2312,12 @@ Table&nbsp;C.2: Sample person-place network data
   border-left-color: #D3D3D3;
 }
 
-#vpggrffrrk .gt_caption {
+#rbnhqeeeza .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vpggrffrrk .gt_title {
+#rbnhqeeeza .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2322,7 +2329,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-bottom-width: 0;
 }
 
-#vpggrffrrk .gt_subtitle {
+#rbnhqeeeza .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2334,7 +2341,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-top-width: 0;
 }
 
-#vpggrffrrk .gt_heading {
+#rbnhqeeeza .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2346,13 +2353,13 @@ Table&nbsp;C.2: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#vpggrffrrk .gt_bottom_border {
+#rbnhqeeeza .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vpggrffrrk .gt_col_headings {
+#rbnhqeeeza .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2367,7 +2374,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#vpggrffrrk .gt_col_heading {
+#rbnhqeeeza .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2387,7 +2394,7 @@ Table&nbsp;C.2: Sample person-place network data
   overflow-x: hidden;
 }
 
-#vpggrffrrk .gt_column_spanner_outer {
+#rbnhqeeeza .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2399,15 +2406,15 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 4px;
 }
 
-#vpggrffrrk .gt_column_spanner_outer:first-child {
+#rbnhqeeeza .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vpggrffrrk .gt_column_spanner_outer:last-child {
+#rbnhqeeeza .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vpggrffrrk .gt_column_spanner {
+#rbnhqeeeza .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2419,11 +2426,11 @@ Table&nbsp;C.2: Sample person-place network data
   width: 100%;
 }
 
-#vpggrffrrk .gt_spanner_row {
+#rbnhqeeeza .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vpggrffrrk .gt_group_heading {
+#rbnhqeeeza .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2449,7 +2456,7 @@ Table&nbsp;C.2: Sample person-place network data
   text-align: left;
 }
 
-#vpggrffrrk .gt_empty_group_heading {
+#rbnhqeeeza .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2464,15 +2471,15 @@ Table&nbsp;C.2: Sample person-place network data
   vertical-align: middle;
 }
 
-#vpggrffrrk .gt_from_md > :first-child {
+#rbnhqeeeza .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vpggrffrrk .gt_from_md > :last-child {
+#rbnhqeeeza .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vpggrffrrk .gt_row {
+#rbnhqeeeza .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -2491,7 +2498,7 @@ Table&nbsp;C.2: Sample person-place network data
   overflow-x: hidden;
 }
 
-#vpggrffrrk .gt_stub {
+#rbnhqeeeza .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2504,7 +2511,7 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 5px;
 }
 
-#vpggrffrrk .gt_stub_row_group {
+#rbnhqeeeza .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2518,15 +2525,15 @@ Table&nbsp;C.2: Sample person-place network data
   vertical-align: top;
 }
 
-#vpggrffrrk .gt_row_group_first td {
+#rbnhqeeeza .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vpggrffrrk .gt_row_group_first th {
+#rbnhqeeeza .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vpggrffrrk .gt_summary_row {
+#rbnhqeeeza .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2536,16 +2543,16 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 5px;
 }
 
-#vpggrffrrk .gt_first_summary_row {
+#rbnhqeeeza .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vpggrffrrk .gt_first_summary_row.thick {
+#rbnhqeeeza .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vpggrffrrk .gt_last_summary_row {
+#rbnhqeeeza .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2555,7 +2562,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#vpggrffrrk .gt_grand_summary_row {
+#rbnhqeeeza .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2565,7 +2572,7 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 5px;
 }
 
-#vpggrffrrk .gt_first_grand_summary_row {
+#rbnhqeeeza .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2575,7 +2582,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-top-color: #D3D3D3;
 }
 
-#vpggrffrrk .gt_last_grand_summary_row_top {
+#rbnhqeeeza .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2585,11 +2592,11 @@ Table&nbsp;C.2: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#vpggrffrrk .gt_striped {
+#rbnhqeeeza .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vpggrffrrk .gt_table_body {
+#rbnhqeeeza .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2598,7 +2605,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#vpggrffrrk .gt_footnotes {
+#rbnhqeeeza .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2612,7 +2619,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#vpggrffrrk .gt_footnote {
+#rbnhqeeeza .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2621,7 +2628,7 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 5px;
 }
 
-#vpggrffrrk .gt_sourcenotes {
+#rbnhqeeeza .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2635,7 +2642,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#vpggrffrrk .gt_sourcenote {
+#rbnhqeeeza .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2643,77 +2650,77 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 5px;
 }
 
-#vpggrffrrk .gt_left {
+#rbnhqeeeza .gt_left {
   text-align: left;
 }
 
-#vpggrffrrk .gt_center {
+#rbnhqeeeza .gt_center {
   text-align: center;
 }
 
-#vpggrffrrk .gt_right {
+#rbnhqeeeza .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vpggrffrrk .gt_font_normal {
+#rbnhqeeeza .gt_font_normal {
   font-weight: normal;
 }
 
-#vpggrffrrk .gt_font_bold {
+#rbnhqeeeza .gt_font_bold {
   font-weight: bold;
 }
 
-#vpggrffrrk .gt_font_italic {
+#rbnhqeeeza .gt_font_italic {
   font-style: italic;
 }
 
-#vpggrffrrk .gt_super {
+#rbnhqeeeza .gt_super {
   font-size: 65%;
 }
 
-#vpggrffrrk .gt_footnote_marks {
+#rbnhqeeeza .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vpggrffrrk .gt_asterisk {
+#rbnhqeeeza .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vpggrffrrk .gt_indent_1 {
+#rbnhqeeeza .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vpggrffrrk .gt_indent_2 {
+#rbnhqeeeza .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vpggrffrrk .gt_indent_3 {
+#rbnhqeeeza .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vpggrffrrk .gt_indent_4 {
+#rbnhqeeeza .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vpggrffrrk .gt_indent_5 {
+#rbnhqeeeza .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vpggrffrrk .katex-display {
+#rbnhqeeeza .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vpggrffrrk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rbnhqeeeza div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<div id="tbl-example-bipartite-nodes-edges-1-2" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-bootstrap="false" data-quarto-postprocess="true" data-quarto-disable-processing="false">
+<div id="tbl-example-bipartite-nodes-edges-1-2" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <figure class="quarto-float quarto-subfloat-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-example-bipartite-nodes-edges-1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Edges
