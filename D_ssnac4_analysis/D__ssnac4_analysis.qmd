@@ -15,66 +15,63 @@ targets::tar_source("../R_functions")
 ::: {#leading}
 We describe the main data objects of the MPX NYC study -- the
 Person-place graph, the Person graph and the Place graph -- as well as
-the statistics we used to analyze them.
+the statistics we used to analyze them. 
 
-Notes: 
+Main idea is: - You have some observational nodes that are people - You have some observational nodes are are places  - People have affiliations with places - Affiliations are unlimited - If a place is a neighborhood, a person node could be affiliated to that place because they have a home there. They could additionally be affiliated to that place because they have attended a gathering there. - If a place is a household, a person could be affiliated to the household because they work in the househodl or because they have a friend there, or because they live there.  - There are quantitative data associated with the people, places and affiliations
 
-- Add network FFRCISTG to a section called "Reasoning with DANGs and SWINGS". (mirror section in classical causal inference section)
-  - Introduce random graph $\mathbf{\Psi}_k$ along with $\mathbf{C}_k$
-  - Start here by generalizing NFFRCISTG to situations where not all common causese are represented on the DANG so there is no SWING. 
-- Move section on outbreak control to methods for MPX NYC
-- Neaten social network analysis so that it allows a time-varying graph
-- Rather than star with an idea of the sampling universe, we will define sample statistics that are substantively interpretable 
-- We will then extend our definitions of these to:
-  - Define a notion of the population parameter vs. the sample statistic
-  - Ask whether the sample statistics are unbiased with respect to the population parameters
-  - Ask how far the sample statistics are from the population parameter as a function of sample size?
-
-- This is theory for a person-place graph:
-  - a bipartite graph whose two node classes are places and persons 
-    - "places" are a fixed, fully observed set of spatial units
-    - persons are a countable set of observational units - in our case survey participants.
-    - persons are "affiliated" with places. their affiliations are indicated using network ties in the person-place graph
-    - goal is:
+      
+- Outline of sections
+  - Cleanup
+    - Check abandoned texts
+    - Put outbreak control seciton in abandoned texts
+  - Example
+  - Data graph 
+    - goals:
       - to model correlation between measures made on persons that is induced by joint affiliation with places
       - to express target estimands in terms of model quantities 
       - to specify estimators for those estimands based on sample data
-- Notation
+    - definitions
+      - person-place graph: a bipartite graph whose two node classes are places and persons
+        - Nodes
+          - places are a fixed, fully observed set of spatial units
+          - persons are a countable set of observational units 
+          - each node is associated with node characteristics 
+          - Node characteristics
+            - $\mathbf{C}_k$ random vector
+            - $C_{k}(i)$ random scalar
+            - $\mathbf{c}_k$ vector realization
+            - $c_{k}(i)$ scalar realization
+        - Edges
+          - persons' affiliations with places are indicated using edges
+          - each edge is associated with edge characteristics
+          - Edge characteristics
+            - $\mathbf{D}_k$  $n \times n$ random matrix
+            - $D_{k}(i,j)$ $ij$th entry of random matrix
+            - $\mathbf{d}_k$  $n \times n$ matrix realization
+            - $d_{k}(i,j)$ scalar relization
+            - $\mathbf{\Psi}_k$  is a speical case of $\mathbf{D}_k$
   - Node characteristics
-    - Person node vs place node
-    - $\mathbf{C}_k$ random vector
-    - $C_{k}(i)$ random scalar
-    - $\mathbf{c}_k$ vector realization
-    - $c_{k}(i)$ scalar realization
+    - Descriptive statistics
   - Edge characteristics
-    - $\mathbf{D}_k$  $n \times n$ random matrix
-    - $D_{k}(i,j)$ $ij$th entry of random matrix
-    - $\mathbf{d}_k$  $n \times n$ matrix realization
-    - $d_{k}(i,j)$ scalar relization
-  - Edge existence
-    - $\mathbf{\Psi}_k$  $n \times n$ random matrix
-    - $\Psi_k(i,j)$  $n \times n$ random scalar
-    - $\mathbf{\psi}_k$ $n \times n$ matrix realization
-    - $\psi_k(i,j)$ $n \times n$ scalar realization
-    - $\Psi_k(i)$  $n \times 1$ random vector
-    - $\psi_k(i)$ $n \times 1$ vector realization  
-- Outline:
-  - Observational unit characteristics
-  - Local network characteristics
-  - Global network characteristics
-  - Global system dynamics
+    - Descriptive statistics
+  - Local structure
+    - Spatial reach
+    - Social reach
+    - Spatial catchment
+    - Social catchment
+  - Global structure
+    - Spatial mixing
+    - Social connectedness
+  - Dynamics
+    - Outings
+    - Spatial concentration
   - Statistical inference
-    - Person-place system
-    - Main idea is:
-      - You have some observational nodes that are people
-      - You have some observational nodes are are places 
-      - People have affiliations with places
-        - Affiliations are unlimited
-        - If a place is a neighborhood, a person node could be affiliated to that place because they have a home there. They could additionally be affiliated to that place because they have attended a gathering there.
-        - If a place is a household, a person could be affiliated to the household because they work in the househodl or because they have a friend there, or because they live there. 
-      - There are quantitative data associated with the people, places and affiliations 
-
-
+    - Rather than star with an idea of the sampling universe, we will define sample statistics that are substantively interpretable 
+    - We will then extend our definitions of these to:
+      - Define a notion of the population parameter vs. the sample statistic  
+      - Ask whether the sample statistics are unbiased with respect to the population parameters  
+      - Ask how far the sample statistics are from the population parameter as a function of sample size?
+      
 :::
 
 ::: {#acknowledgements}

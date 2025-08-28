@@ -9,7 +9,18 @@ As we see in @fig-homogenous-dag, causal DAGs become quickly visually cluttered,
 
 #### Introducing the Causal Directed Acyclic Network Graph (DANG)
 
+::: {#def-dang .theorem}
+# Causal Directed Acyclic Network Graph
+
+- A DANG is a DAG expressed in terms of the whole vector of observations
+- Associated with a graph
+- Interference according to the graph
+:::
+
+
 We introduce the causal Directed Acyclic Network Graph (causal DANG) - a simple extension of the DAG that allows for the representation of complex causal systems. Like the causal DAG, the causal DANG encodes a non-parametric structural equation model.
+
+
 
 *Compact graphic representation*
 
@@ -93,6 +104,14 @@ Random edges
 
 #### Introducing the Single World Intervention Network Graph (SWING)
 
+
+::: {#def-swing .theorem}
+# Single World Intervention Network Graph
+
+- A SWING is a DAG with node splitting
+- A SWING is a SWIG at the level of whole vector of observations
+:::
+
 We introduce the Single World Intervention Network Graph (SWING) - a simple extension of the SWIG that allows for the representation of the counterfactual outcomes of interventions in complex causal systems.
 
 The SWING has two parts: a structural part and a relational part. Like the causal DANG, the SWING represents vector-valued random variables (rather than scalars) as nodes. Like the SWIG, the SWING splits the nodes that are to be intervened upon by the experimenter. @fig-example-swig-structural shows the counterfactual distribution of the variables in the model under an intervention setting $\mathbf{T}$ to the value $\mathbf{t}$.
@@ -133,22 +152,8 @@ cowplot::plot_grid(figure, legend, nrow = 1, rel_widths = c(4,1))
 
 ```
 
-#### Definitions
+#### Incorporating networks 
 
-::: {#def-dang .theorem}
-# Causal Directed Acyclic Network Graph
-
-- A DANG is a DAG expressed in terms of the whole vector of observations
-- Associated with a graph
-- Interference according to the graph
-:::
-
-::: {#def-swing .theorem}
-# Single World Intervention Network Graph
-
-- A SWING is a DAG with node splitting
-- A SWING is a SWIG at the level of whole vector of observations
-:::
 
 
 

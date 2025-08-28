@@ -4,21 +4,22 @@
 To articulate homogeneity restrictions in the sections below, we draw on the work of @aronow2017 on exposure mappings.
 :::
 
-Say we have a NPSEM with $f_{Y_i}$ the structural equation for $Y_i$, and $U_{Y_i}$ the error term for that equation. Measures $\mathbf{X}_t \in \{0,1\}^n, t \in [1,K]$ precede $Y_i$. And say we have graph $\mathscr{G}_t(\mathscr{N}, \psi_t)$ with set $\mathscr{N}$ containing $n$ nodes, and adjacency function $\psi_t(i,j)$ which gives the weight between nodes $i$ and $j$. Weights are positive real numbers when nodes are connected in $\mathscr{G}_t$ and zero otherwise.
+Say we have a FFRCISTG with $f_{Y_i}$ the structural equation for $Y_i$, and $U_{Y_i}$ the error term for that equation. Measures $\mathbf{X}_t \in \{0,1\}^n, t \in [1,K]$ precede $Y_i$. And say we have graph $\mathscr{G}(\mathscr{N}, \psi)$ with set $\mathscr{N}$ containing $n$ nodes, and adjacency function $\psi(i,j)$ which gives the weight between nodes $i$ and $j$. Weights are positive real numbers when nodes are connected in $\mathscr{G}$ and zero otherwise.
 
 ::: {#def-network-exposure-units .theorem}
-
-Relative to graph $\mathscr{G}_t(\mathscr{N}, \psi_t)$, the "network exposure units" for node $i$ are given by:
+# Network exposure units
+The network exposure units for node $i$ in graph $\mathscr{G}(\mathscr{N}, \psi)$ are given by:
 
 $$
-\mathscr{N_i} = \{j \in \mathscr{N}: \psi_t(i, j) > 0\}
+\mathscr{N_i} = \{j \in \mathscr{N}: \psi(i, j) > 0\}
 $$
 
 :::
 
 
 ::: {#def-network-weights-vectors .theorem}
-Relative to graph $\mathscr{G}_t(\mathscr{N}, \psi_t)$, the "network weights vector" for node $i$ is defined:
+# Network weights vector
+The network weights vector for node $i$ in graph $\mathscr{G}(\mathscr{N}, \psi)$ is defined:
 
 $$
 \Psi_i = [\psi(i,1), \psi(i,2), ..., \psi(i,n) ]^T
@@ -60,7 +61,7 @@ where $g_0 = [X_{1i}, ..., X_{Ki}]^T$ and $g_{ti}() \in \mathbf{R}$. We call the
 ::: {#def-loyalty .theorem}
 ## Loyalty
 
-We say a component function $g_{ti}$ is loyal to graph $\mathscr{G}_t$ if for $\mathbf{X}_t,\mathbf{X}'_t \in \{0,1\}^n$
+We say a component function $g_{ti}$ is loyal to graph $\mathscr{G}$ if for $\mathbf{X},\mathbf{X}' \in \{0,1\}^n$
 
 :::: {.aside}
 **Some notation**: $X_i$ is the $i^{th}$ entry of vector $\mathbf{X}$ and $\mathbf{X}_{\mathscr{N_i}}$ is the sub-vector of $\mathbf{X}$ which contains entries related to person $i$'s network exposure units. Where the original vector already has a subscript, we append these symbols to that subscript. 
@@ -72,7 +73,7 @@ $$
 \begin{equation}
 \mathbf{X}_{t\mathscr{N}_i} = \mathbf{X'}_{t\mathscr{N}_i}
 \implies 
-g_{ti}(\mathbf{X}_t) = g_{ti}( \mathbf{X'}_t) 
+g_{ti}(\mathbf{X}) = g_{ti}( \mathbf{X'}) 
 \end{equation}
 $$
 :::
@@ -100,9 +101,9 @@ A **permutation matrix** is a square matrix whose row and column margins all equ
 
 
 ::: {#def-exposuremaping .theorem}
-# Network exposure mapping
+# Network exposure mapping/value
 
-If functions $g_{ti}$ are positionally invariant with respect to $\mathscr{G}$ we say $g_{ti}$ is a "network exposure mapping for $\mathbf{Y}$ with respect to $\mathbf{X}_t$ in $\mathscr{G}$". The value of the function is called the "network exposure value for $Y_i$ with respect to $\mathbf{X}_t$ in $\mathscr{G}$". Furthermore,
+If functions $g_{ti}$ are positionally invariant with respect to $\mathscr{G}$ we say $g_{ti}$ is a "network exposure mapping for $\mathbf{Y}$ with respect to $\mathbf{X}$ in $\mathscr{G}$". The value of the function is called the "network exposure value for $Y_i$ with respect to $\mathbf{X}$ in $\mathscr{G}$". Furthermore,
 
 $$
 g_{ti}(\mathbf{X}) = g_{t}(\mathbf{X}, \Psi_i)
@@ -121,9 +122,9 @@ We say that a network exposure mapping $g_{t}$ is bounded if for all $\mathbf{X}
 
 The assumption of **boundedness** can obtain in three different ways. It could be as a result of restrictions on the structure of the graph. For example, if the only relationships of interest between individual participants were marriages, each node would have a degree of either 0 or 1, meaning the count of alters with $X_{tj} = 1, j \in \mathscr{N}_i$ is either zero or one.
 
-It might obtain via restrictions on the value of $\mathbf{X}_t$ itself. It might be the case, for instance, that the count of $i$'s for which $X_{ti}=1$ is very low so that on average, the count of alters for which $X_{tj} = 1, j \in N_i$ will also be low.
+It might obtain via restrictions on the value of $\mathbf{X}$ itself. It might be the case, for instance, that the count of $i$'s for which $X_{ti}=1$ is very low so that on average, the count of alters for which $X_{tj} = 1, j \in N_i$ will also be low.
 
-Finally, boundedness could obtain as a result of the functional form of $g_t$ itself. This might happen if $g_t$ models a network exposure which has a ceiling effect in its dose-response curve with the outcome of interest. For example, if $X_t$ indicates ownership of a car, and $\mathscr{G}$ encodes close friendships, $g_t$ would be a network exposure mapping which tells us how each additional friend who has a car shifts the outcome of interest. For most health applications, its likely that beyond some number of friends who have a car, an additional friend who gets a car will not change the outcome.
+Finally, boundedness could obtain as a result of the functional form of $g$ itself. This might happen if $g$ models a network exposure which has a ceiling effect in its dose-response curve with the outcome of interest. For example, if $X$ indicates ownership of a car, and $\mathscr{G}$ encodes close friendships, $g$ would be a network exposure mapping which tells us how each additional friend who has a car shifts the outcome of interest. For most health applications, its likely that beyond some number of friends who have a car, an additional friend who gets a car will not change the outcome.
 
 ::::
 
