@@ -1,2 +1,17 @@
-##### Fully connected SWIG
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
 
+```{r }
+#| fig-height: 6
+#| fig-width: 6
+#| fig-align: center
+#| label: fig-fullly-connected-swig
+#| fig-cap: "Fully connected SWIG"
+
+make_swig("fully_connected")      |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc_blank()
+
+```

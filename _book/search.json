@@ -519,7 +519,7 @@
     "href": "B_ssnac2_causality/B__ssnac2_causality.html#classical-causal-inference",
     "title": "B - SSNAC II: Causality",
     "section": "B.2 Classical causal inference",
-    "text": "B.2 Classical causal inference\n\nB.2.1 Preface\n\n\nB.2.2 Example\n\n\nB.2.3 Intro to DAGs and SWIGs\n\nDAG\n\nFully connected causal DAG\n\n\nEquation: Fully connected causal DAG\n\n\n\nNPSEM-IE\n\n\nSWIG\n\nFully connected SWIG\n\n\nEquation: Fully connected SWIG\n\n\n\n\nB.2.4 Assumptions\n\nCausal DAG with no spillover\n\n\nEquation: No spillover DAG\n\n\n\nB.2.5 Structural equations\n\nObserved data model\n\nCausal DAG with no interference or spillover\n\n\nEquation: Independence DAG\n\n\n\nCounterfactual data model\n\nSWIG with no interference or spillover\n\n\nEquation: Independence SWIG\n\n\n\n\nB.2.6 Estimands\n\n\nB.2.7 Identification\n\n\nB.2.8 Definitions\n\nNPSEM-IE\n\n\nObservational unit\n\n\nNo spillover\n\n\nNo interference\n\n\nIdentical distributions\n\n\nFFRCISTG\n\n\n\nB.2.9 D-separation",
+    "text": "B.2 Classical causal inference\n\nB.2.1 Preface\n\n\nB.2.2 Example\n\n\nB.2.3 Intro to DAGs and SWIGs\n\nDAG\n\n\nCode\nmake_dag(\"fully_connected\")         |&gt; \n  plot_swig(node_radius = 0.2) + \n  scale_fill_mpxnyc(option = \"light\") +\n  theme_mpxnyc_blank()\n\n\n\n\n\n\n\n\nFigure B.1: Fully connected causal DAG\n\n\n\n\n\n\\[\n\\begin{aligned}\nL_1 &= f_{L_1}(U_{L_1}) \\\\\nL_2 &= f_{L_2}(U_{L_2}, L_1) \\\\\nL_3 &= f_{L_3}(U_{L_3}, L_1, L_2 ) \\\\\nA_1 &= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\\\\nA_2 &= f_{A_2}(U_{A_2}, L_1, L_2, L_3, A_1) \\\\\nA_3 &= f_{A_3}(U_{A_3}, L_1, L_2, L_3, A_1, A_2) \\\\\nY_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\\\\nY_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1) \\\\\nY_3 &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\\\\n\\end{aligned}\n\\tag{B.1}\\]\n\n\nNPSEM-IE\n\n\nSWIG\n\n\nCode\nmake_swig(\"fully_connected\")      |&gt; \n  plot_swig(node_radius = 0.2) + \n  scale_fill_mpxnyc(option = \"light\") +\n  theme_mpxnyc_blank()\n\n\n\n\n\n\n\n\nFigure B.2: Fully connected SWIG\n\n\n\n\n\n\\[\n\\begin{aligned}\nL_1 &= f_{L_1}(U_{L_1}) \\\\\nL_2 &= f_{L_2}(U_{L_2}, L_1) \\\\\nL_3 &= f_{L_3}(U_{L_3}, L_1, L_2 ) \\\\\nA_1 &= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\\\\nA_2^{(a_1)} &= f_{A_2}(U_{A_2}, L_1, L_2, L_3, a_1) \\\\\nA_3^{(a_1, a_2)} &= f_{A_3}(U_{A_3}, L_1, L_2, L_3, a_1, a_2) \\\\\nY_1^{(a_1, a_2, a_3)} &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, a_1, a_2, a_3) \\\\\nY_2^{(a_1, a_2, a_3)} &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}) \\\\\nY_3^{(a_1, a_2, a_3)} &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}, Y_2^{(a_1, a_2, a_3)}   ) \\\\\n\\end{aligned}\n\\tag{B.2}\\]\n\n\nCode\ntargets::tar_source(\"../R_functions\")\n\n\n\n\n\nB.2.4 Assumptions\n\nEquation: No spillover DAG\n\n\n\nB.2.5 Structural equations\n\n\nCode\ntargets::tar_source(\"../R_functions\")\n\n\n\n\nB.2.6 Observed data model\n\nEquation: Independence DAG\n\n\nCounterfactual data model\n\nEquation: Independence SWIG\n\n\nCode\ntargets::tar_source(\"../R_functions\")\n\n\n\n\n\n\nB.2.7 Estimands\n\n\nCode\ntargets::tar_source(\"../R_functions\")\n\n\n\n\nB.2.8 Identification\n\n\nB.2.9 Definitions\n\nNPSEM-IE\n\n\nObservational unit\n\n\nNo spillover\n\n\nNo interference\n\n\nIdentical distributions\n\n\nFFRCISTG\n\n\n\nB.2.10 D-separation\n\n\nCode\nfork &lt;- make_dag_subgraph(\"fork\") |&gt;\n  plot_swig() +\n  theme_mpxnyc_blank() +\n  scale_fill_mpxnyc(option = \"light\")\n\nspoon &lt;- make_dag_subgraph(\"spoon\") |&gt;\n  plot_swig() +\n  theme_mpxnyc_blank() +\n  scale_fill_mpxnyc(option = \"light\") \n\nchopstick &lt;- make_dag_subgraph(\"chopstick\") |&gt;\n  plot_swig() +\n  theme_mpxnyc_blank() +\n  scale_fill_mpxnyc(option = \"light\") \n\ncowplot::plot_grid(fork, spoon, chopstick, rel_widths = c(1,1,1.25), nrow = 1)\n\n\n\n\n\nD-separation triangles: Fork (leftmost), spoon (center), chopstick (rightmost)",
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>B</span>  <span class='chapter-title'>SSNAC II: Causality</span>"
@@ -838,7 +838,7 @@
     "href": "B_ssnac2_causality/B__ssnac2_causality.html#network-causal-inference",
     "title": "B - SSNAC II: Causality",
     "section": "B.3 Network causal inference",
-    "text": "B.3 Network causal inference\n\nB.3.1 Preface\n\n\nB.3.2 Example\n\n\nB.3.3 Assumptions\n\nCausal DAG with network interference\n\n\n\nB.3.4 Structural equations\n\nObserved data model\n\nCausal DAG with homogenous network interference\n\n\n\nCounterfactual data model\n\nSWIG with homogenous network interference\n\n\n\n\nB.3.5 Estimands\n\n\nB.3.6 Identification\n\n\nB.3.7 Definitions\n\nSeparability\n\n\nLoyalty\n\n\nPositional invariance\n\n\nBoundedness\n\n\nHomogenous network interference\n\n\nNFFRCISTG",
+    "text": "B.3 Network causal inference\n\nB.3.1 Preface\n\n\nB.3.2 Example\n\n\nB.3.3 Assumptions\n\n\nB.3.4 Structural equations\n\nObserved data model\n\n\nCounterfactual data model\n\n\n\nB.3.5 Estimands\n\n\nB.3.6 Identification\n\n\nB.3.7 Definitions\n\nSeparability\n\n\nLoyalty\n\n\nPositional invariance\n\n\nBoundedness\n\n\nHomogenous network interference\n\n\nNFFRCISTG",
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>B</span>  <span class='chapter-title'>SSNAC II: Causality</span>"
@@ -849,7 +849,40 @@
     "href": "B_ssnac2_causality/B__ssnac2_causality.html#social-and-spatial-causal-inference",
     "title": "B - SSNAC II: Causality",
     "section": "B.4 Social and spatial causal inference",
-    "text": "B.4 Social and spatial causal inference\n\nB.4.1 Preface\n\n\nB.4.2 Example\n\n\nB.4.3 Intro to DANGs and SWINGs\n\nCausal DANG\n\n\nCausal DANG for Week 1 in Example 3\n\n\nSWING for Week 1 in Example 3\n\n\n\nB.4.4 Assumptions\n\n\nB.4.5 Structural equations\n\nObserved data model\n\nCausal DANG for Week 1-3 in Example 3\n\n\n\nCounterfactual data model\n\nSWING for Week 1-3 in Example 3\n\n\n\n\nB.4.6 Estimands\n\n\nB.4.7 Definitions\n\nRandom graph\n\n\nBipartite graph\n\n\nSSNFFRCISTG",
+    "text": "B.4 Social and spatial causal inference\n\nB.4.1 Preface\n\n\nB.4.2 Example\n\n\nB.4.3 Intro to DANGs and SWINGs\n\n\nB.4.4 Assumptions\n\n\nB.4.5 Structural equations\n\nObserved data model\n\n\nCounterfactual data model\n\n\n\nB.4.6 Estimands\n\n\nB.4.7 Definitions\n\nRandom graph\n\n\nBipartite graph\n\n\nSSNFFRCISTG",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>SSNAC II: Causality</span>"
+    ]
+  },
+  {
+    "objectID": "B_ssnac2_causality/B__ssnac2_causality.html#assumptions",
+    "href": "B_ssnac2_causality/B__ssnac2_causality.html#assumptions",
+    "title": "B - SSNAC II: Causality",
+    "section": "B.3 Assumptions",
+    "text": "B.3 Assumptions\n\nEquation: No spillover DAG\n\n\nB.3.1 Structural equations\n\n\nCode\ntargets::tar_source(\"../R_functions\")\n\n\n\n\nB.3.2 Observed data model\n\nEquation: Independence DAG\n\n\nCounterfactual data model\n\nEquation: Independence SWIG\n\n\nCode\ntargets::tar_source(\"../R_functions\")",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>SSNAC II: Causality</span>"
+    ]
+  },
+  {
+    "objectID": "B_ssnac2_causality/B__ssnac2_causality.html#estimands",
+    "href": "B_ssnac2_causality/B__ssnac2_causality.html#estimands",
+    "title": "B - SSNAC II: Causality",
+    "section": "B.4 Estimands",
+    "text": "B.4 Estimands\n\n\nCode\ntargets::tar_source(\"../R_functions\")",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>SSNAC II: Causality</span>"
+    ]
+  },
+  {
+    "objectID": "B_ssnac2_causality/B__ssnac2_causality.html#identification",
+    "href": "B_ssnac2_causality/B__ssnac2_causality.html#identification",
+    "title": "B - SSNAC II: Causality",
+    "section": "B.5 Identification",
+    "text": "B.5 Identification\n\nB.5.1 Definitions\n\nNPSEM-IE\n\n\nObservational unit\n\n\nNo spillover\n\n\nNo interference\n\n\nIdentical distributions\n\n\nFFRCISTG\n\n\n\nB.5.2 D-separation\n{{&lt; include fig-d-separation.qmd&gt;}}",
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>B</span>  <span class='chapter-title'>SSNAC II: Causality</span>"
