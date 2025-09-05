@@ -1,2 +1,19 @@
-##### Fully connected causal DAG
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
 
+
+
+```{r }
+#| fig-height: 6
+#| fig-width: 6
+#| fig-align: center
+#| label: fig-fullly-connected-dag
+#| fig-cap: "Fully connected causal DAG"
+
+make_dag("fully_connected")         |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc_blank()
+
+```

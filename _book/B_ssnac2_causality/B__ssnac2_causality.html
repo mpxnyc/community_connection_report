@@ -455,10 +455,11 @@ window.Quarto = {
   <li><a href="#intro-to-dags-and-swigs" id="toc-intro-to-dags-and-swigs" class="nav-link" data-scroll-target="#intro-to-dags-and-swigs"><span class="header-section-number">B.2.3</span> Intro to DAGs and SWIGs</a></li>
   <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">B.2.4</span> Assumptions</a></li>
   <li><a href="#structural-equations" id="toc-structural-equations" class="nav-link" data-scroll-target="#structural-equations"><span class="header-section-number">B.2.5</span> Structural equations</a></li>
-  <li><a href="#estimands" id="toc-estimands" class="nav-link" data-scroll-target="#estimands"><span class="header-section-number">B.2.6</span> Estimands</a></li>
-  <li><a href="#identification" id="toc-identification" class="nav-link" data-scroll-target="#identification"><span class="header-section-number">B.2.7</span> Identification</a></li>
-  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">B.2.8</span> Definitions</a></li>
-  <li><a href="#d-separation" id="toc-d-separation" class="nav-link" data-scroll-target="#d-separation"><span class="header-section-number">B.2.9</span> D-separation</a></li>
+  <li><a href="#observed-data-model" id="toc-observed-data-model" class="nav-link" data-scroll-target="#observed-data-model"><span class="header-section-number">B.2.6</span> Observed data model</a></li>
+  <li><a href="#estimands" id="toc-estimands" class="nav-link" data-scroll-target="#estimands"><span class="header-section-number">B.2.7</span> Estimands</a></li>
+  <li><a href="#identification" id="toc-identification" class="nav-link" data-scroll-target="#identification"><span class="header-section-number">B.2.8</span> Identification</a></li>
+  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions"><span class="header-section-number">B.2.9</span> Definitions</a></li>
+  <li><a href="#d-separation" id="toc-d-separation" class="nav-link" data-scroll-target="#d-separation"><span class="header-section-number">B.2.10</span> D-separation</a></li>
   </ul></li>
   <li><a href="#network-causal-inference" id="toc-network-causal-inference" class="nav-link" data-scroll-target="#network-causal-inference"><span class="header-section-number">B.3</span> Network causal inference</a>
   <ul class="collapse">
@@ -566,64 +567,135 @@ Hernán, Miguel, and James M. Robins. 2021. <em>Causal inference</em>. Chapman &
 <h3 data-number="B.2.3" class="anchored" data-anchor-id="intro-to-dags-and-swigs"><span class="header-section-number">B.2.3</span> Intro to DAGs and SWIGs</h3>
 <section id="dag" class="level4">
 <h4 class="anchored" data-anchor-id="dag">DAG</h4>
-<section id="fully-connected-causal-dag" class="level5">
-<h5 class="anchored" data-anchor-id="fully-connected-causal-dag">Fully connected causal DAG</h5>
-</section>
-<section id="equation-fully-connected-causal-dag" class="level5">
-<h5 class="anchored" data-anchor-id="equation-fully-connected-causal-dag">Equation: Fully connected causal DAG</h5>
-</section>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_dag</span>(<span class="st">"fully_connected"</span>)         <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-fullly-connected-dag" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fullly-connected-dag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="B__ssnac2_causality_files/figure-html/fig-fullly-connected-dag-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fullly-connected-dag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;B.1: Fully connected causal DAG
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><span id="eq-fullly-connected-dag"><span class="math display">\[
+\begin{aligned}
+L_1 &amp;= f_{L_1}(U_{L_1}) \\
+L_2 &amp;= f_{L_2}(U_{L_2}, L_1) \\
+L_3 &amp;= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
+A_1 &amp;= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
+A_2 &amp;= f_{A_2}(U_{A_2}, L_1, L_2, L_3, A_1) \\
+A_3 &amp;= f_{A_3}(U_{A_3}, L_1, L_2, L_3, A_1, A_2) \\
+Y_1 &amp;= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
+Y_2 &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1) \\
+Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
+\end{aligned}
+\tag{B.1}\]</span></span></p>
 </section>
 <section id="npsem-ie" class="level4">
 <h4 class="anchored" data-anchor-id="npsem-ie">NPSEM-IE</h4>
 </section>
 <section id="swig" class="level4">
 <h4 class="anchored" data-anchor-id="swig">SWIG</h4>
-<section id="fully-connected-swig" class="level5">
-<h5 class="anchored" data-anchor-id="fully-connected-swig">Fully connected SWIG</h5>
-</section>
-<section id="equation-fully-connected-swig" class="level5">
-<h5 class="anchored" data-anchor-id="equation-fully-connected-swig">Equation: Fully connected SWIG</h5>
-</section>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_swig</span>(<span class="st">"fully_connected"</span>)      <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-fullly-connected-swig" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fullly-connected-swig-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="B__ssnac2_causality_files/figure-html/fig-fullly-connected-swig-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fullly-connected-swig-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;B.2: Fully connected SWIG
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><span id="eq-fullly-connected-swig"><span class="math display">\[
+\begin{aligned}
+L_1 &amp;= f_{L_1}(U_{L_1}) \\
+L_2 &amp;= f_{L_2}(U_{L_2}, L_1) \\
+L_3 &amp;= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
+A_1 &amp;= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
+A_2^{(a_1)} &amp;= f_{A_2}(U_{A_2}, L_1, L_2, L_3, a_1) \\
+A_3^{(a_1, a_2)} &amp;= f_{A_3}(U_{A_3}, L_1, L_2, L_3, a_1, a_2) \\
+Y_1^{(a_1, a_2, a_3)} &amp;= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, a_1, a_2, a_3) \\
+Y_2^{(a_1, a_2, a_3)} &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}) \\
+Y_3^{(a_1, a_2, a_3)} &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}, Y_2^{(a_1, a_2, a_3)}   ) \\
+\end{aligned}
+\tag{B.2}\]</span></span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_source</span>(<span class="st">"../R_functions"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
 </section>
 <section id="assumptions" class="level3" data-number="B.2.4">
 <h3 data-number="B.2.4" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">B.2.4</span> Assumptions</h3>
-<section id="causal-dag-with-no-spillover" class="level4">
-<h4 class="anchored" data-anchor-id="causal-dag-with-no-spillover">Causal DAG with no spillover</h4>
-</section>
 <section id="equation-no-spillover-dag" class="level4">
 <h4 class="anchored" data-anchor-id="equation-no-spillover-dag">Equation: No spillover DAG</h4>
 </section>
 </section>
 <section id="structural-equations" class="level3" data-number="B.2.5">
 <h3 data-number="B.2.5" class="anchored" data-anchor-id="structural-equations"><span class="header-section-number">B.2.5</span> Structural equations</h3>
-<section id="observed-data-model" class="level4">
-<h4 class="anchored" data-anchor-id="observed-data-model">Observed data model</h4>
-<section id="causal-dag-with-no-interference-or-spillover" class="level5">
-<h5 class="anchored" data-anchor-id="causal-dag-with-no-interference-or-spillover">Causal DAG with no interference or spillover</h5>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_source</span>(<span class="st">"../R_functions"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
+<section id="observed-data-model" class="level3" data-number="B.2.6">
+<h3 data-number="B.2.6" class="anchored" data-anchor-id="observed-data-model"><span class="header-section-number">B.2.6</span> Observed data model</h3>
 <section id="equation-independence-dag" class="level5">
 <h5 class="anchored" data-anchor-id="equation-independence-dag">Equation: Independence DAG</h5>
 </section>
-</section>
 <section id="counterfactual-data-model" class="level4">
 <h4 class="anchored" data-anchor-id="counterfactual-data-model">Counterfactual data model</h4>
-<section id="swig-with-no-interference-or-spillover" class="level5">
-<h5 class="anchored" data-anchor-id="swig-with-no-interference-or-spillover">SWIG with no interference or spillover</h5>
-</section>
 <section id="equation-independence-swig" class="level5">
 <h5 class="anchored" data-anchor-id="equation-independence-swig">Equation: Independence SWIG</h5>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_source</span>(<span class="st">"../R_functions"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
 </section>
 </section>
-<section id="estimands" class="level3" data-number="B.2.6">
-<h3 data-number="B.2.6" class="anchored" data-anchor-id="estimands"><span class="header-section-number">B.2.6</span> Estimands</h3>
+<section id="estimands" class="level3" data-number="B.2.7">
+<h3 data-number="B.2.7" class="anchored" data-anchor-id="estimands"><span class="header-section-number">B.2.7</span> Estimands</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_source</span>(<span class="st">"../R_functions"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
-<section id="identification" class="level3" data-number="B.2.7">
-<h3 data-number="B.2.7" class="anchored" data-anchor-id="identification"><span class="header-section-number">B.2.7</span> Identification</h3>
+<section id="identification" class="level3" data-number="B.2.8">
+<h3 data-number="B.2.8" class="anchored" data-anchor-id="identification"><span class="header-section-number">B.2.8</span> Identification</h3>
 </section>
-<section id="definitions" class="level3" data-number="B.2.8">
-<h3 data-number="B.2.8" class="anchored" data-anchor-id="definitions"><span class="header-section-number">B.2.8</span> Definitions</h3>
+<section id="definitions" class="level3" data-number="B.2.9">
+<h3 data-number="B.2.9" class="anchored" data-anchor-id="definitions"><span class="header-section-number">B.2.9</span> Definitions</h3>
 <section id="npsem-ie-1" class="level4">
 <h4 class="anchored" data-anchor-id="npsem-ie-1">NPSEM-IE</h4>
 </section>
@@ -643,8 +715,37 @@ Hernán, Miguel, and James M. Robins. 2021. <em>Causal inference</em>. Chapman &
 <h4 class="anchored" data-anchor-id="ffrcistg">FFRCISTG</h4>
 </section>
 </section>
-<section id="d-separation" class="level3" data-number="B.2.9">
-<h3 data-number="B.2.9" class="anchored" data-anchor-id="d-separation"><span class="header-section-number">B.2.9</span> D-separation</h3>
+<section id="d-separation" class="level3" data-number="B.2.10">
+<h3 data-number="B.2.10" class="anchored" data-anchor-id="d-separation"><span class="header-section-number">B.2.10</span> D-separation</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fork <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"fork"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>spoon <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"spoon"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>chopstick <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"chopstick"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(fork, spoon, chopstick, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.25</span>), <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>D-separation triangles: Fork (leftmost), spoon (center), chopstick (rightmost)</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="network-causal-inference" class="level2" data-number="B.3">
@@ -657,23 +758,14 @@ Hernán, Miguel, and James M. Robins. 2021. <em>Causal inference</em>. Chapman &
 </section>
 <section id="assumptions-1" class="level3" data-number="B.3.3">
 <h3 data-number="B.3.3" class="anchored" data-anchor-id="assumptions-1"><span class="header-section-number">B.3.3</span> Assumptions</h3>
-<section id="causal-dag-with-network-interference" class="level4">
-<h4 class="anchored" data-anchor-id="causal-dag-with-network-interference">Causal DAG with network interference</h4>
-</section>
 </section>
 <section id="structural-equations-1" class="level3" data-number="B.3.4">
 <h3 data-number="B.3.4" class="anchored" data-anchor-id="structural-equations-1"><span class="header-section-number">B.3.4</span> Structural equations</h3>
 <section id="observed-data-model-1" class="level4">
 <h4 class="anchored" data-anchor-id="observed-data-model-1">Observed data model</h4>
-<section id="causal-dag-with-homogenous-network-interference" class="level5">
-<h5 class="anchored" data-anchor-id="causal-dag-with-homogenous-network-interference">Causal DAG with homogenous network interference</h5>
-</section>
 </section>
 <section id="counterfactual-data-model-1" class="level4">
 <h4 class="anchored" data-anchor-id="counterfactual-data-model-1">Counterfactual data model</h4>
-<section id="swig-with-homogenous-network-interference" class="level5">
-<h5 class="anchored" data-anchor-id="swig-with-homogenous-network-interference">SWIG with homogenous network interference</h5>
-</section>
 </section>
 </section>
 <section id="estimands-1" class="level3" data-number="B.3.5">
@@ -714,15 +806,6 @@ Hernán, Miguel, and James M. Robins. 2021. <em>Causal inference</em>. Chapman &
 </section>
 <section id="intro-to-dangs-and-swings" class="level3" data-number="B.4.3">
 <h3 data-number="B.4.3" class="anchored" data-anchor-id="intro-to-dangs-and-swings"><span class="header-section-number">B.4.3</span> Intro to DANGs and SWINGs</h3>
-<section id="causal-dang" class="level4">
-<h4 class="anchored" data-anchor-id="causal-dang">Causal DANG</h4>
-</section>
-<section id="causal-dang-for-week-1-in-example-3" class="level4">
-<h4 class="anchored" data-anchor-id="causal-dang-for-week-1-in-example-3">Causal DANG for Week 1 in Example 3</h4>
-</section>
-<section id="swing-for-week-1-in-example-3" class="level4">
-<h4 class="anchored" data-anchor-id="swing-for-week-1-in-example-3">SWING for Week 1 in Example 3</h4>
-</section>
 </section>
 <section id="assumptions-2" class="level3" data-number="B.4.4">
 <h3 data-number="B.4.4" class="anchored" data-anchor-id="assumptions-2"><span class="header-section-number">B.4.4</span> Assumptions</h3>
@@ -731,15 +814,9 @@ Hernán, Miguel, and James M. Robins. 2021. <em>Causal inference</em>. Chapman &
 <h3 data-number="B.4.5" class="anchored" data-anchor-id="structural-equations-2"><span class="header-section-number">B.4.5</span> Structural equations</h3>
 <section id="observed-data-model-2" class="level4">
 <h4 class="anchored" data-anchor-id="observed-data-model-2">Observed data model</h4>
-<section id="causal-dang-for-week-1-3-in-example-3" class="level5">
-<h5 class="anchored" data-anchor-id="causal-dang-for-week-1-3-in-example-3">Causal DANG for Week 1-3 in Example 3</h5>
-</section>
 </section>
 <section id="counterfactual-data-model-2" class="level4">
 <h4 class="anchored" data-anchor-id="counterfactual-data-model-2">Counterfactual data model</h4>
-<section id="swing-for-week-1-3-in-example-3" class="level5">
-<h5 class="anchored" data-anchor-id="swing-for-week-1-3-in-example-3">SWING for Week 1-3 in Example 3</h5>
-</section>
 </section>
 </section>
 <section id="estimands-2" class="level3" data-number="B.4.6">
