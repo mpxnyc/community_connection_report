@@ -115,7 +115,7 @@ plot_icon(icon_name = "devil", color = "light_purple", shape = 16, alpha = 0,  s
 
 
 ```{r}
-#| label: tbl-example-bipartite-nodes-edges-2
+#| label: tbl-example-person-place-network
 #| layout-ncol: 2
 #| tbl-cap: "Sample person-place network data"
 #| tbl-subcap:
@@ -145,7 +145,7 @@ make_example_network_data() |>
 
 ```{r}
 #| fig-cap: Sample person-place network visualization
-#| label: fig-example-participant-place-1
+#| label: fig-example-person-place-network
 #| fig-width: 6
 #| fig-height: 5.5
 
@@ -164,7 +164,7 @@ make_example_network_data("bipartite") |>
 
 ```
 
-@fig-example-participant-place-1 shows a simplified data graph.
+@fig-example-person-place-network shows a simplified data graph.
 Community district nodes are shown in blue and survey participant nodes
 in pink. Each edge connects one community district with one survey
 participant. Three kinds of edges are shown – those that indicate either
@@ -184,7 +184,7 @@ District E*.
 We can examine patterns in the characteristics of participants. These include variables like age and vaccination status. They could also include relations indivdiuals have with places, as long as each person is assigned to one place. In our example, each participant has only one primary residence, and therefore is related to only one of the five communities in this city. 
 
 ```{r}
-#| label: tbl-example-bipartite-nodes-edges-1
+#| label: tbl-example-spatial-reach
 #| layout-ncol: 2
 #| tbl-cap: "Sample person-place network data"
 #| tbl-subcap:
@@ -213,28 +213,7 @@ make_example_network_data() |>
 ```
 
 
-```{r}
-#| layout-ncol: 3
 
-make_example_network_data() |>
-  dplyr::filter(type == "Person") |>
-  data.frame() |>
-  ggplot2::ggplot() +
-  ggplot2::geom_bar(ggplot2::aes(x = age))
-
-make_example_network_data() |>
-  dplyr::filter(type == "Person") |>
-  data.frame() |>
-  ggplot2::ggplot() +
-  ggplot2::geom_bar(ggplot2::aes(x = vax))
-
-make_example_network_data() |>
-  tidygraph::activate(edges) |>
-  dplyr::filter(relation == "HOME") |>
-  data.frame() |>
-  ggplot2::ggplot() +
-  ggplot2::geom_bar(ggplot2::aes(x = to))
-```
 
 
 
@@ -251,6 +230,7 @@ Spatial reach is a person-node characteristic. It measures the number of relatio
 ```{r}
 #| fig-width: 8
 #| fig-height: 5
+#| label: fig-example-spatial-reach
 
 
 make_reach_diagram_data <- function(
@@ -313,7 +293,7 @@ Social reach is a person-node characteristic which measures the potential for in
 
 ```{r}
 #| fig-cap: Sample person-place network visualization
-#| label: fig-example-participant-place-10
+#| label: fig-example-social-reach
 #| fig-width: 8
 #| fig-height: 5
 
@@ -352,7 +332,7 @@ Social catchment is a place-node characteristic which measures the number of rel
 
 ```{r}
 #| fig-cap: Sample person-place network visualization
-#| label: fig-example-participant-place-3
+#| label: fig-example-social-catchment
 #| fig-width: 8
 #| fig-height: 5
 
@@ -387,7 +367,7 @@ Spatia catchment is a place-node characteristic which measures the mutual influe
 
 ```{r}
 #| fig-cap: Sample person-place network visualization
-#| label: fig-example-participant-place-4
+#| label: fig-example-spatial-catchment
 #| fig-width: 8
 #| fig-height: 5
 
