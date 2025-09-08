@@ -794,23 +794,29 @@ Y_i^{(a_i)} &amp;= f_{Y}(U_{Y_i} , L_i, a_i) \\
 </section>
 <section id="definitions" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="definitions">Definitions</h3>
-<div id="def-npsem" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.1 (NPSEM-IE)</strong></span> &nbsp;</p>
+<div id="def-statistical-model" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition B.1 (Statistical model)</strong></span> A collection of statistical distributions for a given set of random variables. In most public health applications, the set of possible statistical distributions is parametrized by a vector of real numbers. For example, in a linear regression model with standard gaussian errors, the set of possible distributions contained in the model is fully characterized by the regression coefficients. In this appendix, we will parameterize models differently – we characterize them by the pairwise conditional indpendencies of the random variables in the model.</p>
 </div>
 <div id="def-observational-unit" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.2 (Observational unit)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Definition B.2 (Observational unit)</strong></span> An observational unit is a set of random variables in a model which are assumed to original from the same data source – usually an individual person in epidemiologic analysis. Observational units partition the larger set of random variables in the model (i.e.&nbsp;the union of all observations is the entire set of random variables)</p>
+</div>
+<div id="def-variable" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition B.3 (Variable)</strong></span> A vector of random variables whose entries each represent a random variable included in a different observational unit. It is assumed that these random variables represent an equivalent quantity accross observational units.</p>
+</div>
+<div id="def-npsem" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition B.4 (NPSEM-IE)</strong></span> A non-parametric structural equation model with independent errors is a statistical model where each random random variable in the model can be expressed as a deterministic function of the other variables in the model and an error term. These functions are called structural equations. By definition, the system of structural equations does not admit circular references. (i.e.&nbsp;a random variable cannot be a function of itself.) Error terms are independent across observations.</p>
 </div>
 <div id="def-no-spillover" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.3 (No spillover)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Definition B.5 (No spillover)</strong></span> In a NPSEM-IE for which the no spillover assumption holds, no variable in a given observational unit is a child of the equivalent random variable in another observational unit.</p>
 </div>
 <div id="def-no-interference" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.4 (No interference)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Definition B.6 (No interference)</strong></span> In an NPSEM-IE for which the no interference assumption holds, no variable in a given observation is a child of a non-equivalent variable in another observation.</p>
 </div>
 <div id="def-identical-distributions" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.5 (Identical distributions)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Definition B.7 (Identical distributions)</strong></span> In an NPSEM-IE for which the identical distributions assumption holds, equivalent random variables are produced by identical structural equations.</p>
 </div>
 <div id="def-ffrcistg" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.6 (FFRCISTG)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Definition B.8 (FFRCISTG)</strong></span> &nbsp;</p>
 </div>
 </section>
 </section>
@@ -906,23 +912,20 @@ Y_i &amp;= f_{Y}( U_{Y_i},  L_i,  g_{Y}(\textbf{L}, \Psi_i),   A_i,  h_{Y}( \tex
 <section id="definitions-1" class="level3 unnumbered page-columns page-full">
 <h3 class="unnumbered anchored" data-anchor-id="definitions-1">Definitions</h3>
 <div id="def-graph" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.7 (Graph)</strong></span> &nbsp;</p>
-</div>
-<div id="def-bipartite-graph" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.8 (Bipartite graph)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Definition B.9 (Graph)</strong></span> &nbsp;</p>
 </div>
 <div id="def-exposure-mapping" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.9 (Exposure mapping)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Definition B.10 (Exposure mapping)</strong></span> &nbsp;</p>
 </div>
 <div id="def-separability" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.10 (Separability)</strong></span> We say exposure mapping <span class="math inline">\(g_i\)</span> is separable if</p>
+<p><span class="theorem-title"><strong>Definition B.11 (Separability)</strong></span> We say exposure mapping <span class="math inline">\(g_i\)</span> is separable if</p>
 <p><span class="math display">\[
 g_i(\mathbf{X}_{1}, ..., \mathbf{X}_{K}) = [g_0,    g_{1i}(\mathbf{X}_{1}), ...,   g_{Ki}(\mathbf{X}_{K})]^T
 \]</span></p>
 <p>where <span class="math inline">\(g_0 = [X_{1i}, ..., X_{Ki}]^T\)</span> and <span class="math inline">\(g_{ti}() \in \mathbf{R}\)</span>. We call the functions <span class="math inline">\(g_{ti}\)</span> component functions of exposure mapping <span class="math inline">\(g_i\)</span>.</p>
 </div>
 <div id="def-loyalty" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.11 (Loyalty)</strong></span> We say a component function <span class="math inline">\(g_{ti}\)</span> is loyal to graph <span class="math inline">\(\mathscr{G}\)</span> if for <span class="math inline">\(\mathbf{X},\mathbf{X}' \in \{0,1\}^n\)</span></p>
+<p><span class="theorem-title"><strong>Definition B.12 (Loyalty)</strong></span> We say a component function <span class="math inline">\(g_{ti}\)</span> is loyal to graph <span class="math inline">\(\mathscr{G}\)</span> if for <span class="math inline">\(\mathbf{X},\mathbf{X}' \in \{0,1\}^n\)</span></p>
 <p><span class="math display">\[
 \begin{equation}
 \mathbf{X}_{t\mathscr{N}_i} = \mathbf{X'}_{t\mathscr{N}_i}
@@ -932,7 +935,7 @@ g_{ti}(\mathbf{X}) = g_{ti}( \mathbf{X'})
 \]</span></p>
 </div>
 <div id="def-positional-invariance" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.12 (Positional invariance)</strong></span> We say component functions <span class="math inline">\(g_{ti}\)</span> are positionally invariant if for <span class="math inline">\(i,j \in \mathscr{N}\)</span>, <span class="math inline">\(\mathbf{X},\mathbf{X}' \in \{0,1\}^n\)</span> and conformable permutation matrix <span class="math inline">\(\mathbf{M}\)</span>:</p>
+<p><span class="theorem-title"><strong>Definition B.13 (Positional invariance)</strong></span> We say component functions <span class="math inline">\(g_{ti}\)</span> are positionally invariant if for <span class="math inline">\(i,j \in \mathscr{N}\)</span>, <span class="math inline">\(\mathbf{X},\mathbf{X}' \in \{0,1\}^n\)</span> and conformable permutation matrix <span class="math inline">\(\mathbf{M}\)</span>:</p>
 <p><span class="math display">\[
 \begin{equation}
 \mathbf{X}_{\mathscr{N}_i} = \mathbf{M} \mathbf{X'}_{\mathscr{N}_j} \text{ and } \Psi_{i\mathscr{N}_i} =  \mathbf{M} \Psi_{j\mathscr{N}_j}\\
@@ -942,7 +945,7 @@ g_{ti}(\mathbf{X}) = g_{tj}(\mathbf{X'})
 \]</span></p>
 </div>
 <div id="def-boundedness" class="theorem definition page-columns page-full">
-<p><span class="theorem-title"><strong>Definition B.13 (Boundedness)</strong></span> We say that a network exposure mapping <span class="math inline">\(g_{t}\)</span> is bounded if for all <span class="math inline">\(\mathbf{X} \in \{0,1\}^n, \mathbf{W} \in \mathbf{R}^n_+\)</span> all possible network exposure values are contained by a finite set <span class="math inline">\(\mathbf{D}\)</span>. i.e.:</p>
+<p><span class="theorem-title"><strong>Definition B.14 (Boundedness)</strong></span> We say that a network exposure mapping <span class="math inline">\(g_{t}\)</span> is bounded if for all <span class="math inline">\(\mathbf{X} \in \{0,1\}^n, \mathbf{W} \in \mathbf{R}^n_+\)</span> all possible network exposure values are contained by a finite set <span class="math inline">\(\mathbf{D}\)</span>. i.e.:</p>
 
 <div class="no-row-height column-margin column-container"><div class="margin-aside">
 <p>See note on boundedness assumption, below.</p>
@@ -952,10 +955,10 @@ g_t(\mathbf{X}, \mathbf{W})  \in \mathbf{D}
 <p>with <span class="math inline">\(|\mathbf{D}| &lt; c \in \mathbf{R}\)</span> where <span class="math inline">\(c\)</span> is not a function of the number of interconnected units in graph <span class="math inline">\(\mathscr{G}\)</span>.</p>
 </div>
 <div id="def-homogenous-interference" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.14 (Homogenous network interference)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Definition B.15 (Homogenous network interference)</strong></span> &nbsp;</p>
 </div>
 <div id="def-nffrcistg" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.15 (Network FFRCISTG)</strong></span> A NFFRCISTG is a FFRCISTG associated with a graph. Each node in the graph represents an observational unit in the FFRCISTG. A network tie indicates a pair of observational units whose measures are causes of each other. All the structural equations in this model have exposure mappings which are separable with well-defined and bounded network exposure mappings and independent errors.</p>
+<p><span class="theorem-title"><strong>Definition B.16 (Network FFRCISTG)</strong></span> A NFFRCISTG is a FFRCISTG associated with a graph. Each node in the graph represents an observational unit in the FFRCISTG. A network tie indicates a pair of observational units whose measures are causes of each other. All the structural equations in this model have exposure mappings which are separable with well-defined and bounded network exposure mappings and independent errors.</p>
 </div>
 </section>
 </section>
@@ -1161,14 +1164,17 @@ V_{si} &amp;=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}, V_{\{s-1,i\}}) \\
 </section>
 <section id="definitions-2" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="definitions-2">Definitions</h3>
+<div id="def-bipartite-graph" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition B.17 (Bipartite graph)</strong></span> &nbsp;</p>
+</div>
 <div id="def-random-edges-graph" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.16 (Random edges graph)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Definition B.18 (Random edges graph)</strong></span> &nbsp;</p>
 </div>
 <div id="def-random-nodes-graph" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.17 (Random nodes bipartite graph)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Definition B.19 (Random nodes bipartite graph)</strong></span> &nbsp;</p>
 </div>
 <div id="def-snffrcistg" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.18 (Stochastic Network FFRCISTG model)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Definition B.20 (Stochastic Network FFRCISTG model)</strong></span> &nbsp;</p>
 <ul>
 <li>The SNFFRCISTG is a generalization of a NFFRCISTG</li>
 <li>Expressed in terms of whole sample vector rather than observation scalar</li>
@@ -1182,7 +1188,7 @@ V_{si} &amp;=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}, V_{\{s-1,i\}}) \\
 </ul>
 </div>
 <div id="def-snffrcistg" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.19 (Social and Spatial Stochastic Network FFRCISTG model)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Definition B.21 (Social and Spatial Stochastic Network FFRCISTG model)</strong></span> &nbsp;</p>
 <ul>
 <li>The SaSSNFFRCISTG is a submodel of a SNFFRCISTG</li>
 <li>Graph is stochastic and bipartite with:
