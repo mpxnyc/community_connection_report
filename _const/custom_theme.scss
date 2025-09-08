@@ -1,214 +1,80 @@
 /*-- scss:defaults --*/
-// quarto-scss-analysis-annotation { "origin": "cerulean (builtin theme)" }
-
-$theme: "cerulean" !default;
-
-//
-// Color system
-//
-
-$white:    #fff !default;
-$gray-100: #f8f9fa !default;
-$gray-200: #e9ecef !default;
-$gray-300: #dee2e6 !default;
-$gray-400: #ced4da !default;
-$gray-500: #adb5bd !default;
-$gray-600: #868e96 !default;
-$gray-700: #495057 !default;
-$gray-800: #343a40 !default;
-$gray-900: #212529 !default;
-$black:    #000 !default;
-
-$blue:    #033c73 !default;
-$indigo:  #7F3F98 !default;
-$purple:  #5D207A !default;
-$pink:    #F73C95 !default;
-$light-pink:    #FF99C5 !default;
-$red:     #c71c22 !default;
-$orange:  #EA773D !default;
-$yellow:  #FFAA7B !default;
-$green:   #459B0E !default;
-$teal:    #20c997 !default;
-$cyan:    #009BE8 !default;
-$light-blue: #C5EFFF;
-
-$primary:       $cyan !default;
-$secondary:     $gray-200 !default;
-$success:       $green !default;
-$info:          $blue !default;
-$warning:       $yellow !default;
-$danger:        $red !default;
-$light:         $gray-100 !default;
-$dark:          $gray-800 !default;
-
-$min-contrast-ratio:   2.75 !default;
-
-// Body
-
-$body-color:    $gray-700 !default;
-
+// Colors
+ $primary: #009BE8;  
+ $secondary: #e83e8c;
+ //$body-bg: #c71c22;
+ $link-color: $primary;
 // Fonts
+ $font-family-sans-serif: "Open Sans", sans-serif;
+ $font-family-monospace: "Source Code Pro", monospace;
 
-$headings-color:         $cyan !default;
 
-// Dropdowns
-
-$dropdown-link-color:           $body-color !default;
-$dropdown-link-hover-color:     $white !default;
-$dropdown-link-hover-bg:        $primary !default;
-
-// Navbar
-
-$navbar-dark-color:             rgba($white, .8) !default;
-$navbar-dark-hover-color:       $white !default;
-
+/*-- scss:mixins --*/
+// This is empty by default -- add your mixins here
 
 
 /*-- scss:rules --*/
 
-
-// Variables
-
-$text-shadow: 0 1px 0 rgba(0, 0, 0, .05) !default;
-
-// Mixins
-
-@mixin btn-shadow($color){
-  @include gradient-y-three-colors(tint-color($color, 16%), $color, 60%, shade-color($color, 6%));
-}
-
-// Navbar
-
-.navbar {
-  @each $color, $value in $theme-colors {
-    &.bg-#{$color} {
-      @include btn-shadow($value);
-    }
-  }
-}
-
-.navbar-brand,
-.nav-link {
-  text-shadow: $text-shadow;
-}
-
-// Buttons
-
-.btn {
-  text-shadow: $text-shadow;
-}
-
-.btn-secondary,
-.btn-outline-secondary {
-  color: $gray-700;
-}
-
-@each $color, $value in $theme-colors {
-  .btn-#{$color} {
-    @include btn-shadow($value);
-  }
-}
-
-// Typography
-
-.text-secondary {
-  color: $gray-500 !important;
-}
-
-.bg-primary,
-.bg-success,
-.bg-info,
-.bg-warning,
-.bg-danger,
-.bg-dark {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: $white;
-  }
-}
-
-// Navs
-
-.dropdown-menu {
-  .dropdown-header {
-    color: $gray-600;
-  }
-}
-
-// Indicators
-
-.badge {
-  &.bg-secondary,
-  &.bg-light {
-    color: $dark;
-  }
-}
-
-
-// quarto-scss-analysis-annotation { "origin": null }
 details>summary {
-  font-size: 0;
+    padding: 4px;
+    width: 100%;
+    background-color: #fffffff;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    font-size: 0;
 }
 
-.chapter-number {
-  color: $pink;
-  font-weight: bold;
+h1, .h1 {
+  padding-top: 50px;
+  padding-bottom: 0px;
+  font-weight: 500;
+  line-height: 5.5;
+  color: $primary;
+  text-align: center;
 }
 
-p {
-  margin: 20px 0px 20px 0px;
-  line-height: 1.75em;
+
+
+h2, .h2 {
+  font-weight: 500;
+  color: $primary;
+  text-align: left;
+  & .header-section-number {color: $secondary;}
+  padding-bottom: 30px;
+}
+
+h3, .h3 {
+  font-weight: 500;
+  color: #343a40;
+  text-align: left;
+  padding-bottom: 30px;
+  & .header-section-number {color: $primary;}
+}
+
+
+section.level2  {
+  margin-bottom: 300px;
+}
+
+section.level3  {
+  margin-bottom: 200px;
+}
+
+section.level4  {
+  margin-bottom: 100px;
+}
+
+.definition {
+    margin-bottom: 50px;
+    margin-top: 50px;
 }
 
 #acknowledgements {
   text-align: justify;
+  margin-top: 20px;
   font-size: 13px;
-  margin: 0px 0px 00px 0px;
-  line-height: 1.4em;
-    color: $gray-700;
-}
-
-#leading {
-  font-size: 25px;
-  margin: 0px 0px 80px 0px;
-  line-height: 1.4em;
-    color: $gray-500;
-}
-
-#date {
-  text-align: justify;
-  font-size: 13px;
-  margin: 0px 0px 0px 0px;
-  line-height: 1.4em;
-}
-
-
-
-
-
-
-section {
-    padding: 0px 0px 100px 0px;
-}
-
-
-h1 {
-  margin: 0px 0px 0px 0px;
-  border-bottom: 0px solid $pink;
-  padding: 100px 0px 50px 0px;
-}
-
-h2 {
-  margin: 0px 0px 0px 0px;
-  border-bottom: 0px solid $pink;
-}
-
-h3 {
-  margin: 20px 0px 0px 0px;
 }
 
 #quarto-code-tools-menu {
@@ -216,22 +82,4 @@ h3 {
   margin: 0px 40px 20px 40px;
   right: 0;
   bottom: 0;
-}
-
-#notes p {
-        font-size: 13px;
-}
-
-table.table {
-      margin-bottom: 60px;
-      line-height: 10px;
-      text-align: center;
-      font-size: 13px;
-}
-
-.table {
-      margin-bottom: 60px;
-        line-height: 10px;
-       text-align: center;
-       font-size: 13px;
 }
