@@ -3,7 +3,22 @@
 ::: {#def-graph .theorem}
 # Graph
 
-A graph is an ordered pair $\mathscr{G} = (\mathscr{N},E)$ where $\mathscr{N}$ is a set of nodes and edges $E \subseteq \mathscr{N} \times \mathscr{N}$ which link the nodes in  $\mathscr{N}$.
+Define graph $\mathscr{G}(\mathscr{N}, \psi)$ with set $\mathscr{N}$ containing $n$ nodes, and adjacency function $\psi(i,j)$ which gives the weight between nodes $i$ and $j$. Weights are positive real numbers when nodes are connected in $\mathscr{G}$ and zero otherwise.
+
+We define the "network exposure units" for node $i$ as
+
+$$
+\mathscr{N_i} = \{j \in \mathscr{N}: \psi(i, j) > 0\}
+$$
+
+the "network weights vector" for node $i$ as:
+
+$$
+\Psi_i = [\psi(i,1), \psi(i,2), ..., \psi(i,n) ]^T
+$$
+
+$X_i$ is the $i^{th}$ entry of vector $\mathbf{X}$ and $\mathbf{X}_{\mathscr{N_i}}$ is the sub-vector of $\mathbf{X}$ which contains entries related to person $i$'s network exposure units. Where the original vector already has a subscript, we append onto that subscript $i$ and $\mathscr{N_i}$, respectively. For instance, $X_{ti}$ is the $i^{th}$ entry of $\mathbf{X}_t$ and $\mathbf{X}_{t\mathscr{N_i}}$ is the sub-vector relating to node $i$'s network exposure units.
+.
 
 .
 
