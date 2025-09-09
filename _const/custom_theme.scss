@@ -1,19 +1,26 @@
 /*-- scss:defaults --*/
 // Colors
+ $leading-grey: #bdbdbd;
  $primary: #009BE8;  
  $secondary: #e83e8c;
  //$body-bg: #c71c22;
  $link-color: $primary;
 // Fonts
- $font-family-sans-serif: "Open Sans", sans-serif;
- $font-family-monospace: "Source Code Pro", monospace;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+ $font-family-sans-serif: "Montserrat", sans-serif;
+ $font-family-monospace: "Source Code Pro", monospace;
 
 /*-- scss:mixins --*/
 // This is empty by default -- add your mixins here
 
 
 /*-- scss:rules --*/
+
+p {
+  font-size: 16px;
+  line-height: 1.5; // Unitless value, relative to font-size
+}
 
 details>summary {
     padding: 4px;
@@ -54,17 +61,11 @@ h3, .h3 {
 }
 
 
-section.level2  {
-  margin-bottom: 300px;
-}
-
-section.level3  {
-  margin-bottom: 200px;
-}
-
-section.level4  {
+section  {
   margin-bottom: 100px;
 }
+
+
 
 .definition {
     margin-bottom: 50px;
@@ -74,7 +75,14 @@ section.level4  {
 #acknowledgements {
   text-align: justify;
   margin-top: 20px;
-  font-size: 13px;
+  & p {font-size: 11px;}
+}
+
+#leading {
+  margin-top: 25px;
+  font-weight: 500;
+  color: $leading-grey;
+  & p {font-size: 20px;}
 }
 
 #quarto-code-tools-menu {
