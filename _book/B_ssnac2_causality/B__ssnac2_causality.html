@@ -473,9 +473,9 @@ window.Quarto = {
   </ul></li>
   <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a>
   <ul class="collapse">
-  <li><a href="#a.-d-separation" id="toc-a.-d-separation" class="nav-link" data-scroll-target="#a.-d-separation">a. D-separation</a></li>
+  <li><a href="#a.-definitions" id="toc-a.-definitions" class="nav-link" data-scroll-target="#a.-definitions">a. Definitions</a></li>
   <li><a href="#b.-boundedness" id="toc-b.-boundedness" class="nav-link" data-scroll-target="#b.-boundedness">b. Boundedness</a></li>
-  <li><a href="#c.-definitions" id="toc-c.-definitions" class="nav-link" data-scroll-target="#c.-definitions">c.&nbsp;Definitions</a></li>
+  <li><a href="#c.-d-separation" id="toc-c.-d-separation" class="nav-link" data-scroll-target="#c.-d-separation">c.&nbsp;D-separation</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -955,62 +955,32 @@ E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} ]
 </section>
 <section id="intro-to-dangs-and-swings" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="intro-to-dangs-and-swings">Intro to DANGs and SWINGs</h3>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>structural <span class="ot">&lt;-</span> <span class="fu">example_dang_1_structural</span>() <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>()<span class="sc">+</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Structural Part"</span>) </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>relational <span class="ot">&lt;-</span> <span class="fu">example_dang_1_relational</span>() <span class="sc">|&gt;</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="at">node_radius =</span> <span class="fl">0.2</span>)  <span class="sc">+</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Entity type"</span>, <span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Relational Part"</span>) </span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(structural, relational, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="fig-causal-dang-instructions" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-causal-dang-instructions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="B__ssnac2_causality_files/figure-html/fig-causal-dang-instructions-1.png" class="img-fluid figure-img" width="480">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-causal-dang-instructions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;B.8: Causal DANG
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>structural  <span class="ot">&lt;-</span> <span class="fu">example_dang_2_structural</span>() <span class="sc">|&gt;</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Structural Part"</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>relational  <span class="ot">&lt;-</span> <span class="fu">example_dang_2_relational</span>() <span class="sc">|&gt;</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>, <span class="at">node_margin =</span> <span class="dv">0</span>)  <span class="sc">+</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Entity type"</span>, <span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Relational Part"</span>) </span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>figure   <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(structural, relational, <span class="at">ncol=</span><span class="dv">1</span>, <span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>))</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>legend_pre  <span class="ot">&lt;-</span> relational <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>legend      <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">get_legend</span>(legend_pre) </span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(figure, legend, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>structural  <span class="ot">&lt;-</span> <span class="fu">example_dang_2_structural</span>() <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Structural Part"</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>relational  <span class="ot">&lt;-</span> <span class="fu">example_dang_2_relational</span>() <span class="sc">|&gt;</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>, <span class="at">node_margin =</span> <span class="dv">0</span>)  <span class="sc">+</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Entity type"</span>, <span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Relational Part"</span>) </span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>figure   <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(structural, relational, <span class="at">ncol=</span><span class="dv">1</span>, <span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>))</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>legend_pre  <span class="ot">&lt;-</span> relational <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>legend      <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">get_legend</span>(legend_pre) </span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(figure, legend, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-example-dang-structural" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -1019,7 +989,7 @@ Figure&nbsp;B.8: Causal DANG
 <img src="B__ssnac2_causality_files/figure-html/fig-example-dang-structural-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-dang-structural-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;B.9: Causal DANG for Week 1 in Example 3
+Figure&nbsp;B.8: Causal DANG for Week 1 in Example 3
 </figcaption>
 </figure>
 </div>
@@ -1028,30 +998,30 @@ Figure&nbsp;B.9: Causal DANG for Week 1 in Example 3
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>structural  <span class="ot">&lt;-</span> <span class="fu">example_swing_structural</span>() <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Structural Part"</span>) </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>relational  <span class="ot">&lt;-</span> <span class="fu">example_swing_relational</span>() <span class="sc">|&gt;</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>, <span class="at">node_margin =</span> <span class="dv">0</span>)  <span class="sc">+</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Entity type"</span>, <span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Relational Part"</span>)</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>legend_pre  <span class="ot">&lt;-</span> relational <span class="sc">+</span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>legend      <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">get_legend</span>(legend_pre) </span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>figure   <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(structural, relational, <span class="at">ncol=</span><span class="dv">1</span>, <span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>))</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(figure, legend, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>structural  <span class="ot">&lt;-</span> <span class="fu">example_swing_structural</span>() <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Structural Part"</span>) </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>relational  <span class="ot">&lt;-</span> <span class="fu">example_swing_relational</span>() <span class="sc">|&gt;</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>, <span class="at">node_margin =</span> <span class="dv">0</span>)  <span class="sc">+</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Entity type"</span>, <span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Relational Part"</span>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>legend_pre  <span class="ot">&lt;-</span> relational <span class="sc">+</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>legend      <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">get_legend</span>(legend_pre) </span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>figure   <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(structural, relational, <span class="at">ncol=</span><span class="dv">1</span>, <span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>))</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(figure, legend, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-example-swig-structural" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -1060,7 +1030,7 @@ Figure&nbsp;B.9: Causal DANG for Week 1 in Example 3
 <img src="B__ssnac2_causality_files/figure-html/fig-example-swig-structural-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-swig-structural-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;B.10: SWING for Week 1 in Example 3
+Figure&nbsp;B.9: SWING for Week 1 in Example 3
 </figcaption>
 </figure>
 </div>
@@ -1077,10 +1047,10 @@ Figure&nbsp;B.10: SWING for Week 1 in Example 3
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">program_dang</span>() <span class="sc">|&gt;</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">program_dang</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-repeated-observations-dang" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1089,7 +1059,7 @@ Figure&nbsp;B.10: SWING for Week 1 in Example 3
 <img src="B__ssnac2_causality_files/figure-html/fig-repeated-observations-dang-1.png" class="img-fluid figure-img" width="768">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-repeated-observations-dang-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;B.11: Causal DANG for Week 1-3 in Example 3
+Figure&nbsp;B.10: Causal DANG for Week 1-3 in Example 3
 </figcaption>
 </figure>
 </div>
@@ -1113,10 +1083,10 @@ V_{si} &amp;=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}, V_{\{s-1,i\}}) \\
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">program_swing</span>() <span class="sc">|&gt;</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.5</span>, <span class="at">nudge_intervention_labels =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">program_swing</span>() <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.5</span>, <span class="at">nudge_intervention_labels =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-placeintervention-swing" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1125,7 +1095,7 @@ V_{si} &amp;=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}, V_{\{s-1,i\}}) \\
 <img src="B__ssnac2_causality_files/figure-html/fig-placeintervention-swing-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-placeintervention-swing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;B.12: SWING for Week 1-3 in Example 3
+Figure&nbsp;B.11: SWING for Week 1-3 in Example 3
 </figcaption>
 </figure>
 </div>
@@ -1153,12 +1123,12 @@ E[\sum_{i=1}^5 V_{si}^{(\bar{\mathbf{t}})}]
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_icon</span>(<span class="at">icon_name =</span> <span class="st">"droplets"</span>, <span class="at">color =</span> <span class="st">"dark_purple"</span>, <span class="at">shape =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_icon</span>(<span class="at">icon_name =</span> <span class="st">"droplets"</span>, <span class="at">color =</span> <span class="st">"dark_purple"</span>, <span class="at">shape =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
+<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
 </figure>
 </div>
 </div>
@@ -1167,81 +1137,8 @@ E[\sum_{i=1}^5 V_{si}^{(\bar{\mathbf{t}})}]
 </section>
 <section id="notes" class="level2 unnumbered page-columns page-full">
 <h2 class="unnumbered anchored" data-anchor-id="notes">Notes</h2>
-<section id="a.-d-separation" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="a.-d-separation">a. D-separation</h3>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fork <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"fork"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>spoon <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"spoon"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) </span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>chopstick <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"chopstick"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) </span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(fork, spoon, chopstick, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.25</span>), <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="768"></p>
-<figcaption>D-separation triangles: Fork (leftmost), spoon (center), chopstick (rightmost)</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>D-separation is a set of rules for translating DAGs into conditional independence statements. A pair of nodes is d-separated if all the paths linking them are closed or if there is no path that links them. A pair of nodes is conditionally d-separated if all the paths linking them are closed after conditioning on some set of nodes.</p>
-<p>A <strong>path</strong> is a sequence of nodes that starts with an origin node and ends with a terminal node. Consecutive entries in the sequence are connected in the DAG. A path of length one is open by definition. A path of length two or more is open if all its triangles are open.</p>
-<p>A <strong>triangle</strong> is a sub-sequence of a path which contains three consecutive nodes from the path. A canonical triangle is one in which we do not condition on the apex node. A conditional triangle is one in which we do condition.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fork <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"fork"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>spoon <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"spoon"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>            <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) </span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>chopstick <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"chopstick"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>                <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>                <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>                <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) </span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(fork, spoon, chopstick, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.25</span>), <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="768"></p>
-<figcaption>D-separation triangles: Fork (leftmost), spoon (center), chopstick (rightmost)</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>A <strong>fork</strong> is a triangle whose apex variable has two outgoing edges. A canonical fork is open and a conditional fork is closed. The apex variable of a fork is commonly referred to as a “confounder.”</p>
-<p>A <strong>spoon</strong> is a triangle whose apex variable has two incoming edges. A canonical spoon is closed and a conditional spoon is open. The apex variable of a spoon is commonly referred to as a “collider.”</p>
-<p>A <strong>chopstick</strong> is a triangle whose apex variable has one incoming edge and one outgoing edge. A canonical chopstick is open and a conditional chopstick is closed. The apex variable of a chopstick is commonly referred to as a “mediator.”</p>
-</section>
-<section id="b.-boundedness" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="b.-boundedness">b. Boundedness</h3>
-<p>The assumption of <strong>boundedness</strong> can obtain in three different ways. It could be as a result of restrictions on the structure of the graph. For example, if the only relationships of interest between individual participants were marriages, each node would have a degree of either 0 or 1, meaning the count of alters with <span class="math inline">\(X_{tj} = 1, j \in \mathscr{N}_i\)</span> is either zero or one.</p>
-<p>It might obtain via restrictions on the value of <span class="math inline">\(\mathbf{X}\)</span> itself. It might be the case, for instance, that the count of <span class="math inline">\(i\)</span>’s for which <span class="math inline">\(X_{ti}=1\)</span> is very low so that on average, the count of alters for which <span class="math inline">\(X_{tj} = 1, j \in N_i\)</span> will also be low.</p>
-<p>Finally, boundedness could obtain as a result of the functional form of <span class="math inline">\(g\)</span> itself. This might happen if <span class="math inline">\(g\)</span> models a network exposure which has a ceiling effect in its dose-response curve with the outcome of interest. For example, if <span class="math inline">\(X\)</span> indicates ownership of a car, and <span class="math inline">\(\mathscr{G}\)</span> encodes close friendships, <span class="math inline">\(g\)</span> would be a network exposure mapping which tells us how each additional friend who has a car shifts the outcome of interest. For most health applications, its likely that beyond some number of friends who have a car, an additional friend who gets a car will not change the outcome.</p>
-</section>
-<section id="c.-definitions" class="level3 unnumbered page-columns page-full">
-<h3 class="unnumbered anchored" data-anchor-id="c.-definitions">c.&nbsp;Definitions</h3>
+<section id="a.-definitions" class="level3 unnumbered page-columns page-full">
+<h3 class="unnumbered anchored" data-anchor-id="a.-definitions">a. Definitions</h3>
 <div id="def-statistical-model" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition B.1 (Statistical model)</strong></span> A statistical model is a collection of probability distributions on a set of random variables representing a scientific phenomenon or investigation. In parametric models, the distributions are typically described by a finite number of real values; in this appendix, the model is instead characterized by the conditional independencies among the variables.</p>
 </div>
@@ -1285,29 +1182,31 @@ g_i(\mathbf{X}_{1}, ..., \mathbf{X}_{K}) = [g_0,    g_{1i}(\mathbf{X}_{1}), ...,
 </div>
 <div id="def-graph" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition B.12 (Graph)</strong></span> Define graph <span class="math inline">\(\mathscr{G}(\mathscr{N}, \psi)\)</span> with set <span class="math inline">\(\mathscr{N}\)</span> containing <span class="math inline">\(n\)</span> nodes, and adjacency function <span class="math inline">\(\psi(i,j)\)</span> which gives the weight between nodes <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>. Weights are positive real numbers when nodes are connected in <span class="math inline">\(\mathscr{G}\)</span> and zero otherwise.</p>
-<p>We define the “network exposure units” for node <span class="math inline">\(i\)</span> as</p>
+</div>
+<div id="def-network-exposure-units" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition B.13 (Network exposure units)</strong></span> Given a graph <span class="math inline">\(\mathscr{G}(\mathscr{N}, \psi)\)</span>, we define the “network exposure units” for node <span class="math inline">\(i\)</span> as</p>
 <p><span class="math display">\[
 \mathscr{N_i} = \{j \in \mathscr{N}: \psi(i, j) &gt; 0\}
 \]</span></p>
-<p>the “network weights vector” for node <span class="math inline">\(i\)</span> as:</p>
+</div>
+<div id="def-network-weights-vector" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition B.14 (Network weights vector)</strong></span> Given a graph <span class="math inline">\(\mathscr{G}(\mathscr{N}, \psi)\)</span>, the “network weights vector” for node <span class="math inline">\(i\)</span> is defined:</p>
 <p><span class="math display">\[
 \Psi_i = [\psi(i,1), \psi(i,2), ..., \psi(i,n) ]^T
 \]</span></p>
-<p><span class="math inline">\(X_i\)</span> is the <span class="math inline">\(i^{th}\)</span> entry of vector <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{X}_{\mathscr{N_i}}\)</span> is the sub-vector of <span class="math inline">\(\mathbf{X}\)</span> which contains entries related to person <span class="math inline">\(i\)</span>’s network exposure units. Where the original vector already has a subscript, we append onto that subscript <span class="math inline">\(i\)</span> and <span class="math inline">\(\mathscr{N_i}\)</span>, respectively. For instance, <span class="math inline">\(X_{ti}\)</span> is the <span class="math inline">\(i^{th}\)</span> entry of <span class="math inline">\(\mathbf{X}_t\)</span> and <span class="math inline">\(\mathbf{X}_{t\mathscr{N_i}}\)</span> is the sub-vector relating to node <span class="math inline">\(i\)</span>’s network exposure units. .</p>
-<p>.</p>
 </div>
 <div id="def-loyalty" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.13 (Loyalty)</strong></span> We say a component function <span class="math inline">\(g_{ti}\)</span> is loyal to graph <span class="math inline">\(\mathscr{G}\)</span> if for <span class="math inline">\(\mathbf{X},\mathbf{X}' \in \{0,1\}^n\)</span></p>
+<p><span class="theorem-title"><strong>Definition B.15 (Loyalty)</strong></span> Define <span class="math inline">\(\mathbf{X}_{\mathscr{N_i}}\)</span> is the sub-vector of <span class="math inline">\(\mathbf{X}\)</span> which contains entries related to person <span class="math inline">\(i\)</span>’s network exposure units. We say a component function <span class="math inline">\(g_{ti}\)</span> is loyal to graph <span class="math inline">\(\mathscr{G}\)</span> if for <span class="math inline">\(\mathbf{X},\mathbf{X}' \in \{0,1\}^n\)</span></p>
 <p><span class="math display">\[
 \begin{equation}
-\mathbf{X}_{t\mathscr{N}_i} = \mathbf{X'}_{t\mathscr{N}_i}
+\mathbf{X}_{\mathscr{N}_i} = \mathbf{X'}_{\mathscr{N}_i}
 \implies
 g_{ti}(\mathbf{X}) = g_{ti}( \mathbf{X'})
 \end{equation}
 \]</span></p>
 </div>
 <div id="def-positional-invariance" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.14 (Positional invariance)</strong></span> We say component functions <span class="math inline">\(g_{ti}\)</span> are positionally invariant if for <span class="math inline">\(i,j \in \mathscr{N}\)</span>, <span class="math inline">\(\mathbf{X},\mathbf{X}' \in \{0,1\}^n\)</span> and conformable permutation matrix <span class="math inline">\(\mathbf{M}\)</span>:</p>
+<p><span class="theorem-title"><strong>Definition B.16 (Positional invariance)</strong></span> We say component functions <span class="math inline">\(g_{ti}\)</span> are positionally invariant if for <span class="math inline">\(i,j \in \mathscr{N}\)</span>, <span class="math inline">\(\mathbf{X},\mathbf{X}' \in \{0,1\}^n\)</span> and conformable permutation matrix <span class="math inline">\(\mathbf{M}\)</span>:</p>
 <p><span class="math display">\[
 \begin{equation}
 \mathbf{X}_{\mathscr{N}_i} = \mathbf{M} \mathbf{X'}_{\mathscr{N}_j} \text{ and } \Psi_{i\mathscr{N}_i} =  \mathbf{M} \Psi_{j\mathscr{N}_j}\\
@@ -1317,7 +1216,7 @@ g_{ti}(\mathbf{X}) = g_{tj}(\mathbf{X'})
 \]</span></p>
 </div>
 <div id="def-boundedness" class="theorem definition page-columns page-full">
-<p><span class="theorem-title"><strong>Definition B.15 (Boundedness)</strong></span> We say that a network exposure mapping <span class="math inline">\(g_{t}\)</span> is bounded if for all <span class="math inline">\(\mathbf{X} \in \{0,1\}^n, \mathbf{W} \in \mathbf{R}^n_+\)</span> all possible network exposure values are contained by a finite set <span class="math inline">\(\mathbf{D}\)</span>. i.e.:</p>
+<p><span class="theorem-title"><strong>Definition B.17 (Boundedness)</strong></span> We say that a network exposure mapping <span class="math inline">\(g_{t}\)</span> is bounded if for all <span class="math inline">\(\mathbf{X} \in \{0,1\}^n, \mathbf{W} \in \mathbf{R}^n_+\)</span> all possible network exposure values are contained by a finite set <span class="math inline">\(\mathbf{D}\)</span>. i.e.:</p>
 
 <div class="no-row-height column-margin column-container"><div class="margin-aside">
 <p>See note on boundedness assumption, below.</p>
@@ -1327,24 +1226,24 @@ g_t(\mathbf{X}, \mathbf{W})  \in \mathbf{D}
 <p>with <span class="math inline">\(|\mathbf{D}| &lt; c \in \mathbf{R}\)</span> where <span class="math inline">\(c\)</span> is not a function of the number of interconnected units in graph <span class="math inline">\(\mathscr{G}\)</span>.</p>
 </div>
 <div id="def-homogenous-interference" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.16 (Homogenous network interference)</strong></span> We say a NPSEM-IE shows homogeneous network interference with respect to graph <span class="math inline">\(\mathscr{G}\)</span> if all its structural equations are separable with bounded component functions loyal to <span class="math inline">\(\mathscr{G}\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition B.18 (Homogenous network interference)</strong></span> We say a NPSEM-IE shows homogeneous network interference with respect to graph <span class="math inline">\(\mathscr{G}\)</span> if all its structural equations are separable with bounded component functions loyal to <span class="math inline">\(\mathscr{G}\)</span>.</p>
 </div>
 <div id="def-nffrcistg" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.17 (Network FFRCISTG)</strong></span> A finest fully randomized causally interpretable structured tree graph (FFRCISTG) model is a a collection of NPSEM-IE models constructed for the purpose of reasoning quantitatively about the impact of a specified hypothetical intervention. One NPSEM-IE model represents data as they would be observed without intervention, and at least one other NPSEM-IE model represents data as they would be under a specified intervention.</p>
+<p><span class="theorem-title"><strong>Definition B.19 (Network FFRCISTG)</strong></span> A finest fully randomized causally interpretable structured tree graph (FFRCISTG) model is a a collection of NPSEM-IE models constructed for the purpose of reasoning quantitatively about the impact of a specified hypothetical intervention. One NPSEM-IE model represents data as they would be observed without intervention, and at least one other NPSEM-IE model represents data as they would be under a specified intervention.</p>
 <p>In a NFFRCISTG model, all the NPSEM-IE models show the no spillover, homogenous network interference, and identical distribution assumptions.</p>
 </div>
 <div id="def-bipartite-graph" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.18 (Bipartite graph)</strong></span> A is a graph <span class="math inline">\(G = (V, E)\)</span> such that its vertex set <span class="math inline">\(V\)</span> can be partitioned into two disjoint subsets <span class="math inline">\(V_1\)</span> and <span class="math inline">\(V_2\)</span>, with <span class="math inline">\(V = V_1 \cup V_2\)</span> and <span class="math inline">\(V_1 \cap V_2 = \varnothing\)</span>, so that every edge connects a vertex in <span class="math inline">\(V_1\)</span> to a vertex in <span class="math inline">\(V_2\)</span>. Formally, <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition B.20 (Bipartite graph)</strong></span> A is a graph <span class="math inline">\(G = (V, E)\)</span> such that its vertex set <span class="math inline">\(V\)</span> can be partitioned into two disjoint subsets <span class="math inline">\(V_1\)</span> and <span class="math inline">\(V_2\)</span>, with <span class="math inline">\(V = V_1 \cup V_2\)</span> and <span class="math inline">\(V_1 \cap V_2 = \varnothing\)</span>, so that every edge connects a vertex in <span class="math inline">\(V_1\)</span> to a vertex in <span class="math inline">\(V_2\)</span>. Formally, <span class="math display">\[
 E \subseteq V_1 \times V_2.
 \]</span> No edges exist between vertices within the same subset.</p>
 </div>
 <div id="def-random-nodes-graph" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.19 (Random nodes bipartite graph)</strong></span> A random graph is a type of graph that is fully or partially generated by some random process rather than being fixed in advance.</p>
+<p><span class="theorem-title"><strong>Definition B.21 (Random nodes bipartite graph)</strong></span> A random graph is a type of graph that is fully or partially generated by some random process rather than being fixed in advance.</p>
 <p>A random nodes bipartite graph is a bipartite graph with one class of nodes fixed while the other class of nodes is random. Edges connecting the two classes are also random in this graph model.</p>
 </div>
 <div id="def-snffrcistg" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.20 (Social and Spatial Network FFRCISTG model)</strong></span> A finest fully randomized causally interpretable structured tree graph (FFRCISTG) model is a a collection of NPSEM-IE models constructed for the purpose of reasoning quantitatively about the impact of a specified hypothetical intervention. One NPSEM-IE model represents data as they would be observed without intervention, and at least one other NPSEM-IE model represents data as they would be under a specified intervention.</p>
-<p>In a NFFRCISTG model, all the NPSEM-IE models show the no spillover, homogenous network interference, and identical distribution assumptions.</p>
+<p><span class="theorem-title"><strong>Definition B.22 (Social and Spatial Network FFRCISTG model)</strong></span> A social and spatial network finest fully randomized causally interpretable structured tree graph (SSNFFRCISTG) model is a a collection of NPSEM-IE models constructed for the purpose of reasoning quantitatively about the impact of a specified hypothetical intervention. One NPSEM-IE model represents data as they would be observed without intervention, and at least one other NPSEM-IE model represents data as they would be under a specified intervention.</p>
+<p>In a SSNFFRCISTG model, all the NPSEM-IE models show the no spillover, homogenous network interference with respect to a random graph <span class="math inline">\(\mathscr{H}(\mathscr{N}, \mathbf{F})\)</span>, and identical distribution assumptions.</p>
 <ul>
 <li>Graph is stochastic and bipartite with:
 <ul>
@@ -1352,10 +1251,81 @@ E \subseteq V_1 \times V_2.
 <li>Random nodes: a set of nodes, each representing an observational unit in a random sample</li>
 <li>Random edges: a set of edges, each representing a relation between a random node and fixed node</li>
 </ul></li>
-<li>Each node is associated with a data record</li>
-<li>Eacch edge is associated with a data record</li>
 </ul>
 </div>
+</section>
+<section id="b.-boundedness" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="b.-boundedness">b. Boundedness</h3>
+<p>The assumption of <strong>boundedness</strong> can obtain in three different ways. It could be as a result of restrictions on the structure of the graph. For example, if the only relationships of interest between individual participants were marriages, each node would have a degree of either 0 or 1, meaning the count of alters with <span class="math inline">\(X_{tj} = 1, j \in \mathscr{N}_i\)</span> is either zero or one.</p>
+<p>It might obtain via restrictions on the value of <span class="math inline">\(\mathbf{X}\)</span> itself. It might be the case, for instance, that the count of <span class="math inline">\(i\)</span>’s for which <span class="math inline">\(X_{ti}=1\)</span> is very low so that on average, the count of alters for which <span class="math inline">\(X_{tj} = 1, j \in N_i\)</span> will also be low.</p>
+<p>Finally, boundedness could obtain as a result of the functional form of <span class="math inline">\(g\)</span> itself. This might happen if <span class="math inline">\(g\)</span> models a network exposure which has a ceiling effect in its dose-response curve with the outcome of interest. For example, if <span class="math inline">\(X\)</span> indicates ownership of a car, and <span class="math inline">\(\mathscr{G}\)</span> encodes close friendships, <span class="math inline">\(g\)</span> would be a network exposure mapping which tells us how each additional friend who has a car shifts the outcome of interest. For most health applications, its likely that beyond some number of friends who have a car, an additional friend who gets a car will not change the outcome.</p>
+</section>
+<section id="c.-d-separation" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="c.-d-separation">c.&nbsp;D-separation</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>fork <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"fork"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>spoon <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"spoon"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) </span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>chopstick <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"chopstick"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) </span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(fork, spoon, chopstick, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.25</span>), <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>D-separation triangles: Fork (leftmost), spoon (center), chopstick (rightmost)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>D-separation is a set of rules for translating DAGs into conditional independence statements. A pair of nodes is d-separated if all the paths linking them are closed or if there is no path that links them. A pair of nodes is conditionally d-separated if all the paths linking them are closed after conditioning on some set of nodes.</p>
+<p>A <strong>path</strong> is a sequence of nodes that starts with an origin node and ends with a terminal node. Consecutive entries in the sequence are connected in the DAG. A path of length one is open by definition. A path of length two or more is open if all its triangles are open.</p>
+<p>A <strong>triangle</strong> is a sub-sequence of a path which contains three consecutive nodes from the path. A canonical triangle is one in which we do not condition on the apex node. A conditional triangle is one in which we do condition.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fork <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"fork"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>spoon <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"spoon"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>            <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) </span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>chopstick <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"chopstick"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>                <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>                <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>                <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) </span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(fork, spoon, chopstick, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.25</span>), <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>D-separation triangles: Fork (leftmost), spoon (center), chopstick (rightmost)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A <strong>fork</strong> is a triangle whose apex variable has two outgoing edges. A canonical fork is open and a conditional fork is closed. The apex variable of a fork is commonly referred to as a “confounder.”</p>
+<p>A <strong>spoon</strong> is a triangle whose apex variable has two incoming edges. A canonical spoon is closed and a conditional spoon is open. The apex variable of a spoon is commonly referred to as a “collider.”</p>
+<p>A <strong>chopstick</strong> is a triangle whose apex variable has one incoming edge and one outgoing edge. A canonical chopstick is open and a conditional chopstick is closed. The apex variable of a chopstick is commonly referred to as a “mediator.”</p>
 <div id="acknowledgements">
 <p><u>Acknowledgements</u>: The statistical framework for SSNAC was first presented at the Society for Epidemiologic Research Meeting (Boston, June 2025) at a workshop titled “Single World Intervention Graphs (SWIGs) for the practicing epidemiologist” organized and taught by Aaron Sarvet (University of Massachusetts), Mats J. Stensrud (École polytechnique fédérale de Lausanne), and Kerollos Wanis (University of Texas), and also taught by Keletso Makofane (Ctrl+F), James M. Robins (Harvard University), and Thomas Richardson (University of Washington).</p>
 <p><u>Lead author</u>: Keletso Makofane, MPH, PhD. <u>Editor</u>: Nicholas Diamond, MPH. (Published: June 2025).</p>
