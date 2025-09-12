@@ -1,0 +1,45 @@
+
+##### DAGs and SWIGs
+
+A causal directed acyclic graph (DAG) (@fig-fullly-connected-dag) is a graph whose nodes represent the variables in an observational non-parametric structural equation model with independent errors (@eq-fullly-connected-dag). Directed edges point from the arguments to the result of each structural equation. 
+
+
+
+
+```{r }
+#| fig-height: 6
+#| fig-width: 6
+#| fig-align: center
+#| label: fig-fullly-connected-dag
+#| fig-cap: "Fully connected causal DAG"
+
+make_dag("fully_connected")         |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc_blank()
+
+```
+
+A single world intervention graph (SWIG) (@fig-fullly-connected-swig) is a DAG whose nodes represent the variables in a counterfactual non-parametric structural equation model with independent errors (@eq-fullly-connected-swig). Directed edges point from the arguments to the result of each structural equation. 
+
+
+
+
+
+```{r }
+#| fig-height: 6
+#| fig-width: 6
+#| fig-align: center
+#| label: fig-fullly-connected-swig
+#| fig-cap: "Fully connected SWIG"
+
+make_swig("fully_connected")      |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  theme_mpxnyc_blank()
+
+```
+
+DAGs and SWIGs are useful because they encode statistical relationships among the variables in an NPSEM through a set of graphical rules called d-separation. Two variables in an NPSEM are (conditionally) independent if they are (conditionally) d-separated in the causal DAG representing the NPSEM.
+
+
