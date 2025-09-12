@@ -1,5 +1,19 @@
----
-title: "D_2__edge_characteristics"
-format: html
----
+## Edge characteristics
+
+```{r}
+#| label:  tbl-edges
+#| tbl-cap: "Sample person-place network data"
+#| tbl-subcap:
+#|  - "Nodes"
+#|  - "Edges"
+make_example_network_data() |>
+  dplyr::mutate(name = label, type, age) |>
+  tidygraph::activate(edges) |>
+  dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
+  data.frame() |>
+  dplyr::arrange(from, to) |>
+  dplyr::transmute(From = from_name, To = to_name, Relation = relation) |>
+  gt::gt() |>
+  gt::tab_options(table.font.size =12, data_row.padding = gt::px(1))
+```
 

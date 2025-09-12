@@ -1,5 +1,37 @@
----
-title: "D_3_2__spatial_reach"
-format: html
----
+```{r include=FALSE}
+targets::tar_source("../R_functions")
+```
 
+##### Spatial reach
+
+Spatial reach is a person-node characteristic. It measures the number of relations to places the participant has. Note that we count relations and not places since one participant might have several relations with the same place.  
+
+```{r}
+#| fig-width: 8
+#| fig-height: 5
+#| label: fig-example-spatial-reach
+
+
+
+
+make_reach_diagram_data() |>
+  plot_reach_diagram() +
+  theme_mpxnyc_blank( 
+                      plot.margin     = ggplot2::margin(40,20,40,20),
+                      legend.position = "right"
+                      ) 
+
+```
+
+
+
+
+
+Spatial reach of person $i$ is the number of relations person node
+$i$ has with place nodes in the person-place graph. Let $\psi(i,j)$ be
+the number of edges connecting person $i$ and place $j$ in the
+person-place graph. Then:
+
+$$
+R_{i} = \sum_{ j }{ \Psi (i,j)}
+$$

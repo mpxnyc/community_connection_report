@@ -1,5 +1,105 @@
----
-title: "D_4_2__social_connectedness"
-format: html
----
+##### Social connectedness
 
+Social connectedness is the extent to which all the person nodes are connected through a common set of space nodes. Equivalently, it is the extent to which space nodes are connected through a common set of person nodes. 
+
+```{r}
+#| fig-cap: Sample person-place network visualization
+#| label: fig-example-participant-place-20
+#| fig-width: 8
+#| fig-height: 3.5
+
+    base_color = "black"
+    reached_color = "#009BE8"
+    intermediate_color = "black"
+    focal_color = "black"
+
+connectedness_connected <- make_reach_diagram_data(
+  focal_node = "Community c", 
+  alter_nodes = c("Community d", "Community b", "Community e"),
+  intermediate_nodes = c("Person 8", "Person 4")
+  ) |> 
+  tidygraph::mutate(type_color = NA) |>
+  tidygraph::activate(nodes) |>
+  tidygraph::mutate(group = ifelse(runif(n = dplyr::n()) > 0.5, "Group A", "Group B")) |>
+  tidygraph::mutate(group = ifelse(type == "Place", "Place", group)) |>
+  ggraph::ggraph(layout = "kk") +
+    ggforce::geom_circle(ggplot2::aes(x0 = 0.5, y0 = 0, r = 2.3), data = data.frame(xmin = -3, xmax = 3, ymin = -1, ymax = 5), linewidth = 0, fill = "#C5EFFF") +
+  ggraph::geom_edge_fan(ggplot2::aes(color = type_color), show.legend = FALSE, edge_width = 1) +
+  ggraph::geom_node_point(ggplot2::aes( size = group), color = base_color) +
+  ggraph::geom_node_point(ggplot2::aes(color = group, size = group)) +
+  ggraph::geom_node_text(ggplot2::aes(label = label, size = group,filter = type == "Place"), color = "#C5EFFF", show.legend = FALSE) +
+  ggplot2::scale_size_manual(name = "Size", values = c(7,7, 12)) +
+scale_color_mpxnyc(name = "Color", option = "manual", na.value = base_color, values = c( "Group A" = "black",  "Group B" = "black", "Place" = "black"), na.translate = FALSE) +
+  ggraph::scale_edge_color_manual(values = c("black"), na.value = base_color) +
+  theme_mpxnyc_blank( 
+                      plot.margin     = ggplot2::margin(20,20,20,20)
+                      ) +
+  ggplot2::coord_fixed()
+
+
+
+
+```
+
+```{r}
+#| fig-cap: Sample person-place network visualization
+#| label: fig-example-participant-place-21
+#| fig-width: 15
+#| fig-height: 9
+
+    base_color = grey(0.9,1)
+     base_color = "black"
+    reached_color = "#009BE8"
+    intermediate_color = "#C5EFFF"
+    focal_color = "black"
+
+edge_hidden_data <- data.frame(
+  from = c(4,4,6, 2, 3, 6),
+  to = c(10, 13, 13, 10, 9, 12),
+  hidden = TRUE
+)
+    
+connectedness_disconnected <- make_reach_diagram_data(
+  focal_node = "Community c", 
+  alter_nodes = c("Community d", "Community b", "Community e"),
+  intermediate_nodes = c("Person 8", "Person 4")
+  ) |> 
+  tidygraph::mutate(type_color = NA) |>
+  tidygraph::left_join(edge_hidden_data) |>
+  tidygraph::mutate(hidden = ifelse(is.na(hidden), FALSE, hidden)) |>
+  tidygraph::activate(nodes) |>
+  tidygraph::mutate(group = ifelse(runif(n = dplyr::n()) > 0.5, "Group A", "Group B")) |>
+  tidygraph::mutate(group = ifelse(type == "Place", "Place", group)) |>
+  ggraph::ggraph(layout = "kk") +
+  ggforce::geom_circle(ggplot2::aes(x0 = 0.5, y0 = 0, r = 2.3), data = data.frame(xmin = -3, xmax = 3, ymin = -1, ymax = 5), linewidth = 0, fill = "#C5EFFF") +
+  ggplot2::coord_fixed() +
+  ggraph::geom_edge_fan(ggplot2::aes(color = type_color, filter = !hidden), show.legend = FALSE, edge_width = 1) +
+  ggraph::geom_node_point(ggplot2::aes( size = group), color = base_color) +
+  ggraph::geom_node_point(ggplot2::aes(color = group, size = group)) +
+  ggraph::geom_node_text(ggplot2::aes(label = label, size = group, filter = type == "Place"), color = "#C5EFFF", show.legend = FALSE) +
+  ggplot2::scale_size_manual(name = "Size", values = c(7,7, 12)) +
+scale_color_mpxnyc(name = "Color", option = "manual", na.value = base_color, values = c( "Group A" = "black",  "Group B" = "black", "Place" = "black"), na.translate = FALSE) +
+  ggraph::scale_edge_color_manual(values = c("black"), na.value = base_color)  +
+  theme_mpxnyc_blank( 
+                      plot.margin     = ggplot2::margin(20,20,20,20)
+                      ) 
+
+
+
+cowplot::plot_grid(connectedness_connected, connectedness_disconnected, rel_widths = c(1,1), nrow = 1)
+
+
+```
+
+Proportion in largest connected component: In a given network, a
+connected component is a subset of nodes such that each node in the
+subset is reachable from any other node in the subset, and such that
+there are no nodes outside the subset which are reachable from a node
+inside it. By reachable, we mean possible to reach by tracing a path
+from one node to another over existing network ties. Say the size of the
+$k^{th}$ connected component is $C_k$. The proportion in the largest
+connected component is given by:
+
+$$
+\pi_Q = E[\frac{\max_k{Q_k}}{n_P}]
+$$

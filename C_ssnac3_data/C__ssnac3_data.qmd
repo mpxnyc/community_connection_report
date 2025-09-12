@@ -10,6 +10,7 @@ targets::tar_source("../R_functions")
 
 
 
+
 ::: {#leading}
 In this appendix, we describe the process of designing and testing a novel survey questionnaire tool we call the MPX NYC person-place mapper. We show the questions participants were presented with in the survey.
 
@@ -34,73 +35,9 @@ In this appendix, we describe the process of designing and testing a novel surve
 plot_icon(icon_name = "taco", color = "light_purple", shape = 16, alpha = 0,  size = 100, image_size = 0.2)
 
 ```
-## Data graphs
-
-Study data are represented using data graphs as edge and node
-characteristics. Individual characteristics such as age, gender, and HIV
-status are encoded as node characteristics. In addition, community
-district characteristics (e.g. surface area) are included as node
-characteristics in the data graph. The edges of a data graph encode
-information on the relationship between a given survey participant and
-community district.
-
-### Definition
 
 
 
-A data graph is defined as an ordered triple with the first entry a set
-of node labels $\mathscr{N}$, the second, a set of edges $\mathscr{E}$,
-and the third, a function associating each node with node attributes and
-each edge with edge attributes.
-
-$$
-\mathscr{G}(\mathscr{N}, \mathscr{E}, d(.))
-$$
-
-There are two classes of nodes: community districts $\mathscr{N}_C$ and
-survey participants $\mathscr{N}_P$. 
-
-$$
-\mathscr{N} = \mathscr{N}_P \cup \mathscr{N}_C,\mathscr{N}_P \cap \mathscr{N}_C = \emptyset
-$$
-
-#### Structural data
-
-The node data $d(\mathscr{N})$ is a set of vectors of length equal to the number of nodes. For each $t$, the entries of vector $\mathbf{v}_t$ take values contained by the set $S_t$.
-
-$$
-d(\mathscr{N}) = \{\mathbf{v}_t \in (S_t)^{|\mathscr{N}|} : t \in [1:K], K \in \mathbf{Z}_+\}
-$$
-
-Similarly, the edge data are a collection of vectors of length equal to
-the number of edges.
-
-$$
-d(\mathscr{E}) = \{\mathbf{v}_t \in (S_t)^{|\mathscr{E}|} : t \in [1:Q], Q \in \mathbf{Z}_+\}
-$$
-
-
-
-
-#### Relational data 
-
-
-An edge encodes a relation between a person and a place. It is possible for one person to have multiple relations with one place. Hence, each edge is associated with an integer-valued index: 
-
-$$
-\mathscr{E}=\{(x, a,b) : x \in \mathbf{Z}_+, a \in \mathscr{N}_P, b \in \mathscr{N}_C \text{ and } a \sim b\}
-$$
-
-where the $a\sim b$ means "a is connected to b" in the data graph. The elements of this set are ordered triples whose entries are an integer-valued index, the origin node and the terminal node for each edge. The number of edges connecting person $i$ and place $j$ in the person-place graph is given by
-
-$$
-\psi(i,j) = |\{(x,i,j) \in \mathscr{E}\} |
-$$
-
-
-
-
-{{< include C_3__study_data.qmd >}}
 {{< include C_2__person_place_network_mapper.qmd >}}
 {{< include C_1__data_collection.qmd >}}
 
