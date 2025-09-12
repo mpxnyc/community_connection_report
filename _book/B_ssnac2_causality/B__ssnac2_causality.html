@@ -450,7 +450,7 @@ window.Quarto = {
   <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section"></a></li>
   <li><a href="#classical-causal-inference" id="toc-classical-causal-inference" class="nav-link" data-scroll-target="#classical-causal-inference"><span class="header-section-number">B.1</span> Classical causal inference</a>
   <ul class="collapse">
-  <li><a href="#intro-to-dags-and-swigs" id="toc-intro-to-dags-and-swigs" class="nav-link" data-scroll-target="#intro-to-dags-and-swigs">Intro to DAGs and SWIGs</a></li>
+  <li><a href="#causal-reasoning-with-dags-and-swigs" id="toc-causal-reasoning-with-dags-and-swigs" class="nav-link" data-scroll-target="#causal-reasoning-with-dags-and-swigs">Causal reasoning with DAGs and SWIGs</a></li>
   <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">B.1.1</span> Assumptions</a></li>
   <li><a href="#structural-equations" id="toc-structural-equations" class="nav-link" data-scroll-target="#structural-equations"><span class="header-section-number">B.1.2</span> Structural equations</a></li>
   <li><a href="#estimands" id="toc-estimands" class="nav-link" data-scroll-target="#estimands"><span class="header-section-number">B.1.3</span> Estimands</a></li>
@@ -570,8 +570,50 @@ Hernán, Miguel, and James M. Robins. 2021. <em>Causal inference</em>. Chapman &
 <p>Say <em>Person 1</em> has job status <span class="math inline">\(L_1\)</span>, <em>Person 2</em> has job status <span class="math inline">\(L_2\)</span> and <em>Person 3</em> has job status <span class="math inline">\(L_3\)</span>. Each of these variables can only take on two values: “employed vs.&nbsp;unemployed.” Similarly we define <span class="math inline">\(A_i\)</span> as <em>Person <span class="math inline">\(i\)</span>’s</em> dress (formal vs.&nbsp;informal), and <span class="math inline">\(Y_i\)</span> as their job offers (many vs.&nbsp;few). The job status measurement (<span class="math inline">\(L_i\)</span>) precedes dress (<span class="math inline">\(A_i\)</span>) in time, and dress precedes job offers (<span class="math inline">\(Y_i\)</span>).</p>
 <p>In the next few sections, we will use this example to describe the assumptions made under classical causal inference. First we give an overview of the ideas and tools we need to make that description: DAGs and SWIGs.</p>
 </section>
-<section id="intro-to-dags-and-swigs" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="intro-to-dags-and-swigs">Intro to DAGs and SWIGs</h3>
+<section id="causal-reasoning-with-dags-and-swigs" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="causal-reasoning-with-dags-and-swigs">Causal reasoning with DAGs and SWIGs</h3>
+<section id="the-ffrcistg-model" class="level5">
+<h5 class="anchored" data-anchor-id="the-ffrcistg-model">The FFRCISTG model</h5>
+<p>At its core, the system epidemiologists increasingly depend on for reasoning about abstract quantities such as causal effects is a statistical model called the Finest Fully Randomized Causally Interpretable Structured Tree Graph (FFRCISTG). A FFRCISTG is a collection of non-parametric structural equation models which mimic the causal process that produced the variables under investigation.</p>
+</section>
+<section id="npsem-ie" class="level5">
+<h5 class="anchored" data-anchor-id="npsem-ie">NPSEM-IE</h5>
+<p>A non-parametric structural equation model with independent errors (NPSEM-IE) is a system of equations that relates all the entries in a given vector-valued random variable to each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown by <a href="#eq-fullly-connected-dag" class="quarto-xref">Equation&nbsp;<span>B.1</span></a>. In this set of equations, values that are produced by equations higher up in the list serve as inputs to equations lower down on the list. The functions <span class="math inline">\(f_*\)</span> are deterministic. The arguments <span class="math inline">\(U_*\)</span> represent error terms – random variables that are independent of each other within and across observational units.</p>
+</section>
+<section id="observed-and-counterfactual-data" class="level5">
+<h5 class="anchored" data-anchor-id="observed-and-counterfactual-data">Observed and counterfactual data</h5>
+<p>At the very least it is a collection of two NPSEM-IEs: a model of the observed data (observed data model) and a model of what the data would be under some intervention (counterfactual data model). Consider a FFRCISTG modelling an intervention where we set formal dress <span class="math inline">\(A_1\)</span> to <span class="math inline">\(a_1\)</span>, <span class="math inline">\(A_2\)</span> to <span class="math inline">\(a_2\)</span>, and <span class="math inline">\(A_3\)</span> to <span class="math inline">\(a_3\)</span>. The observed data model would be:</p>
+<p><span id="eq-fullly-connected-dag"><span class="math display">\[
+\begin{aligned}
+L_1 &amp;= f_{L_1}(U_{L_1}) \\
+L_2 &amp;= f_{L_2}(U_{L_2}, L_1) \\
+L_3 &amp;= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
+A_1 &amp;= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
+A_2 &amp;= f_{A_2}(U_{A_2}, L_1, L_2, L_3, A_1) \\
+A_3 &amp;= f_{A_3}(U_{A_3}, L_1, L_2, L_3, A_1, A_2) \\
+Y_1 &amp;= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
+Y_2 &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1) \\
+Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
+\end{aligned}
+\tag{B.1}\]</span></span></p>
+<p>In the counterfactual data model (shown in <a href="#eq-fullly-connected-swig" class="quarto-xref">Equation&nbsp;<span>B.2</span></a> below), the values set by the investigator through intervention supercede the values that would have been generated had the experimenter not intervened. The experimenter-set values are used in subsequent equations in the model.</p>
+<p><span id="eq-fullly-connected-swig"><span class="math display">\[
+\begin{aligned}
+L_1 &amp;= f_{L_1}(U_{L_1}) \\
+L_2 &amp;= f_{L_2}(U_{L_2}, L_1) \\
+L_3 &amp;= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
+A_1 &amp;= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
+A_2^{(a_1)} &amp;= f_{A_2}(U_{A_2}, L_1, L_2, L_3, a_1) \\
+A_3^{(a_1, a_2)} &amp;= f_{A_3}(U_{A_3}, L_1, L_2, L_3, a_1, a_2) \\
+Y_1^{(a_1, a_2, a_3)} &amp;= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, a_1, a_2, a_3) \\
+Y_2^{(a_1, a_2, a_3)} &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}) \\
+Y_3^{(a_1, a_2, a_3)} &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}, Y_2^{(a_1, a_2, a_3)}   ) \\
+\end{aligned}
+\tag{B.2}\]</span></span></p>
+</section>
+<section id="dags-and-swigs" class="level5">
+<h5 class="anchored" data-anchor-id="dags-and-swigs">DAGs and SWIGs</h5>
+<p>A causal directed acyclic graph (DAG) (<a href="#fig-fullly-connected-dag" class="quarto-xref">Figure&nbsp;<span>B.1</span></a>) is a graph whose nodes represent the variables in an observational non-parametric structural equation model with independent errors (<a href="#eq-fullly-connected-dag" class="quarto-xref">Equation&nbsp;<span>B.1</span></a>). Directed edges point from the arguments to the result of each structural equation.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -593,37 +635,7 @@ Figure&nbsp;B.1: Fully connected causal DAG
 </div>
 </div>
 </div>
-<section id="observed-data" class="level5">
-<h5 class="anchored" data-anchor-id="observed-data">Observed data</h5>
-<p><span id="eq-fullly-connected-dag"><span class="math display">\[
-\begin{aligned}
-L_1 &amp;= f_{L_1}(U_{L_1}) \\
-L_2 &amp;= f_{L_2}(U_{L_2}, L_1) \\
-L_3 &amp;= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
-A_1 &amp;= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
-A_2 &amp;= f_{A_2}(U_{A_2}, L_1, L_2, L_3, A_1) \\
-A_3 &amp;= f_{A_3}(U_{A_3}, L_1, L_2, L_3, A_1, A_2) \\
-Y_1 &amp;= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
-Y_2 &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1) \\
-Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
-\end{aligned}
-\tag{B.1}\]</span></span></p>
-</section>
-<section id="counterfactual-data" class="level5">
-<h5 class="anchored" data-anchor-id="counterfactual-data">Counterfactual data</h5>
-<p><span id="eq-fullly-connected-swig"><span class="math display">\[
-\begin{aligned}
-L_1 &amp;= f_{L_1}(U_{L_1}) \\
-L_2 &amp;= f_{L_2}(U_{L_2}, L_1) \\
-L_3 &amp;= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
-A_1 &amp;= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
-A_2^{(a_1)} &amp;= f_{A_2}(U_{A_2}, L_1, L_2, L_3, a_1) \\
-A_3^{(a_1, a_2)} &amp;= f_{A_3}(U_{A_3}, L_1, L_2, L_3, a_1, a_2) \\
-Y_1^{(a_1, a_2, a_3)} &amp;= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, a_1, a_2, a_3) \\
-Y_2^{(a_1, a_2, a_3)} &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}) \\
-Y_3^{(a_1, a_2, a_3)} &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}, Y_2^{(a_1, a_2, a_3)}   ) \\
-\end{aligned}
-\tag{B.2}\]</span></span></p>
+<p>A single world intervention graph (SWIG) (<a href="#fig-fullly-connected-swig" class="quarto-xref">Figure&nbsp;<span>B.2</span></a>) is a DAG whose nodes represent the variables in a counterfactual non-parametric structural equation model with independent errors (<a href="#eq-fullly-connected-swig" class="quarto-xref">Equation&nbsp;<span>B.2</span></a>). Directed edges point from the arguments to the result of each structural equation.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -645,6 +657,14 @@ Figure&nbsp;B.2: Fully connected SWIG
 </div>
 </div>
 </div>
+<p>DAGs and SWIGs are useful because they encode statistical relationships among the variables in an NPSEM through a set of graphical rules called d-separation. Two variables in an NPSEM are (conditionally) independent if they are (conditionally) d-separated in the causal DAG representing the NPSEM.</p>
+</section>
+<section id="model-restrictions" class="level5">
+<h5 class="anchored" data-anchor-id="model-restrictions">Model restrictions</h5>
+<p>Whereas parametric models are characterized by their probability mass or density functions, non-parametric models of this type are usually characterized by model restrictions in the form of conditional independencies.</p>
+<p>Restrictions are crucial: to fully characterize the NPSEM specified in <a href="#eq-fullly-connected-dag" class="quarto-xref">Equation&nbsp;<span>B.1</span></a> using observed data, we would need to estimate nine functions using one observation of the nine-dimensional joint distribution that gave rise to the participants’ observations. Recruiting an additional person to the study would not ease this problem; it would add three new equations to the model and we would end up with a similar problem than the one we began with. We would have to estimate 12 functions using one observation of a 12-dimensional joint distribution.</p>
+<p>We can simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function. These assumptions are called model restrictions because they restrict the set of distributions that could possibly be represented by the NPSEM. For instance, if we add the restriction that all the measures are independent (or equivalently, that the DAG has no arrows), the resulting model would not be able to represent data from a causal system where some of the measures are correlated. By adding the restriction of independence, we would be eliminating the correlated data distribution from consideration as a possibility for how the data we are modelling are truly distributed.</p>
+<p>It is possible to deduce the conditional independence restrictions of an NPSEM using the structural equations themselves. For instance, we can check whether two variables are (conditionally) independent by checking whether both variables are a function of the same common error term <span class="math inline">\(U_*\)</span>. It turns out that queries like this are much simpler to deduce through a graphical representation of the NPSEM than through the NPSEM itself, however. Directed acyclic graphs allow the efficient communication of conditional independence assumptions that define NPSEMs.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -813,7 +833,7 @@ E[Y_i^{(a)}]                    &amp;= E \left[ E[Y_i^{(a)} | L_i] \right] \\
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
+<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
 </figure>
 </div>
 </div>
@@ -938,7 +958,7 @@ E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} ]
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
+<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
 </figure>
 </div>
 </div>
@@ -1128,7 +1148,7 @@ E[\sum_{i=1}^5 V_{si}^{(\bar{\mathbf{t}})}]
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
+<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
 </figure>
 </div>
 </div>
@@ -1285,7 +1305,7 @@ E \subseteq V_1 \times V_2.
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="768"></p>
+<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="768"></p>
 <figcaption>D-separation triangles: Fork (leftmost), spoon (center), chopstick (rightmost)</figcaption>
 </figure>
 </div>
@@ -1317,7 +1337,7 @@ E \subseteq V_1 \times V_2.
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="768"></p>
+<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="768"></p>
 <figcaption>D-separation triangles: Fork (leftmost), spoon (center), chopstick (rightmost)</figcaption>
 </figure>
 </div>
