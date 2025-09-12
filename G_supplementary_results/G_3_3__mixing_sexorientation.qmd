@@ -1,0 +1,41 @@
+### Spatial mixing coefficient by sexual orientation  {.unnumbered}
+
+::: {.panel-tabset}
+
+#### Show plot
+
+```{r }
+#| fig-cap: !expr 'get_figure_details("fig-sexorientation-mixing")'
+#| label: fig-sexorientation-mixing-matrix-app
+#| fig-width: 9
+#| fig-height: 9
+
+
+make_plotdata_sexorientation_mixing_matrix() |>
+  plot_matrix_mixing() +
+  scale_fill_mpxnyc_gradient() +
+  scale_color_mpxnyc_gradient() +
+  theme_mpxnyc_mixing(plot.margin = ggplot2::unit(10*c(10,10,10,10), "pt")) 
+
+```
+
+#### Show data
+
+```{r table_matrix_mixing_sexorientation}
+#| fig-width: 10
+#| fig-height: 10
+
+
+make_table_mixing_2(sexOrientation) |>
+ draw_table_matrix_mixing("Sexual orientation")  
+
+
+
+```
+
+:::
+
+
+
+
+
