@@ -1,0 +1,37 @@
+
+##### Observed and counterfactual data
+At the very least it is a collection of two NPSEM-IEs: a model of the observed data (observed data model) and a model of what the data would be under some intervention (counterfactual data model). Consider a FFRCISTG modelling an intervention where we set formal dress $A_1$ to $a_1$, $A_2$ to $a_2$, and $A_3$ to $a_3$. The observed data model would be:
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}, L_1) \\
+L_3 &= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
+A_2 &= f_{A_2}(U_{A_2}, L_1, L_2, L_3, A_1) \\
+A_3 &= f_{A_3}(U_{A_3}, L_1, L_2, L_3, A_1, A_2) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
+\end{aligned}
+$$ {#eq-fullly-connected-dag}
+
+In the counterfactual data model (shown in @eq-fullly-connected-swig below), the values set by the investigator through intervention supercede the values that would have been generated had the experimenter not intervened. The experimenter-set values are used in subsequent equations in the model. 
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}, L_1) \\
+L_3 &= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
+A_2^{(a_1)} &= f_{A_2}(U_{A_2}, L_1, L_2, L_3, a_1) \\
+A_3^{(a_1, a_2)} &= f_{A_3}(U_{A_3}, L_1, L_2, L_3, a_1, a_2) \\
+Y_1^{(a_1, a_2, a_3)} &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, a_1, a_2, a_3) \\
+Y_2^{(a_1, a_2, a_3)} &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}) \\
+Y_3^{(a_1, a_2, a_3)} &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}, Y_2^{(a_1, a_2, a_3)}   ) \\
+\end{aligned}
+$$ {#eq-fullly-connected-swig}
+
+
+
+ 

@@ -675,6 +675,32 @@ Figure&nbsp;B.2: Fully connected SWIG
 </section>
 <section id="assumptions" class="level3" data-number="B.1.1">
 <h3 data-number="B.1.1" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">B.1.1</span> Assumptions</h3>
+<p>Under classic causal inference, we assume that observations are independent and identically distributed. We review these assumptions, naming them slightly differently for the purpose of comparing them with the assumptions made in subsequent sections. In each case, we divide assumptions up into <em>independence assumptions</em> (those that delete arrows from the DAG) and <em>homogeneity assumptions</em> (those that simplify and equate the structural equations with each other).</p>
+<section id="independence-i-no-spillover" class="level5">
+<h5 class="anchored" data-anchor-id="independence-i-no-spillover">Independence I: No spillover</h5>
+<p>Under classic causal inference, we make the assumption of no spillover - that measurements taken across participants at the same time (e.g.&nbsp;<span class="math inline">\(L_1\)</span>, <span class="math inline">\(L_2\)</span>, and <span class="math inline">\(L_3\)</span>) are independent of each other given all prior measures. i.e.:</p>
+<p><span class="math display">\[
+\begin{aligned}
+L_1 \perp L_2 \\
+L_2 \perp L_3 \\
+L_1 \perp L_3
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+A_1 \perp A_2 | L_1, L_2, L_3\\
+A_2 \perp A_3 | L_1, L_2, L_3 \\
+A_1 \perp A_3 | L_1, L_2, L_3
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+Y_1 \perp Y_2 | L_1, L_2, L_3, A_1, A_2, A_3\\
+Y_2 \perp Y_3 | L_1, L_2, L_3, A_1, A_2, A_3 \\
+Y_1 \perp Y_3 | L_1, L_2, L_3, A_1, A_2, A_3
+\end{aligned}
+\]</span></p>
+<p>This is shown in <a href="#fig-no-spillover-dag" class="quarto-xref">Figure&nbsp;<span>B.3</span></a> as the removal of arrows that connected the <span class="math inline">\(L_i\)</span>’s, <span class="math inline">\(A_i\)</span>’s and <span class="math inline">\(Y_i\)</span>’s. In <a href="#eq-no-spillover-dag" class="quarto-xref">Equation&nbsp;<span>B.3</span></a>, the <span class="math inline">\(L_i\)</span>’s are not functions of each other, the <span class="math inline">\(A_i\)</span>’s are not functions of each other, and the <span class="math inline">\(Y_i\)</span>’s are not functions of each other. i.e.&nbsp;Given all the measurements taken prior to a set of contemporaneous measures, the contemporaneous measures are independent. This follows from the independence of the error terms <span class="math inline">\(U_{L_i}\)</span>, the error terms <span class="math inline">\(U_{A_i}\)</span>, and the error terms <span class="math inline">\(U_{Y_i}\)</span> across observations <span class="math inline">\(i\)</span>.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -709,6 +735,11 @@ Y_2 &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3) \\
 Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3) \\
 \end{aligned}
 \tag{B.3}\]</span></span></p>
+</section>
+<section id="independence-ii-no-interference" class="level5">
+<h5 class="anchored" data-anchor-id="independence-ii-no-interference">Independence II: No interference</h5>
+<p>Classic causal inference makes the assumption of no interference. i.e.&nbsp;We assume that measurements made across participants, but not at the same time, are independent of each other. This is shown as the absence of arrows that point from the <span class="math inline">\(L_i\)</span>’s to <span class="math inline">\(A_j\)</span>’s, the <span class="math inline">\(L_i\)</span>’s to the <span class="math inline">\(Y_j\)</span>’s and the <span class="math inline">\(A_i\)</span>’s to the <span class="math inline">\(Y_j\)</span> for participants <span class="math inline">\(i\neq j\)</span> (see <a href="#fig-independence-dag" class="quarto-xref">Figure&nbsp;<span>B.4</span></a>).</p>
+<p>This allows us to simplify the structural equation model so that each participant’s measures are a function of only measures taken on them.</p>
 <p><span id="eq-independence-dag-full"><span class="math display">\[
 \begin{aligned}
 L_1 &amp;= f_{L_1}(U_{L_1}) \\
@@ -723,6 +754,18 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
 \end{aligned}
 \tag{B.4}\]</span></span></p>
 </section>
+<section id="homogeneity-i-identical-distributions" class="level5">
+<h5 class="anchored" data-anchor-id="homogeneity-i-identical-distributions">Homogeneity I: Identical distributions</h5>
+<p>Finally, we see above that the functions that generate observations <span class="math inline">\(L_i\)</span> are similar in structure to each other, as are the the functions that generate <span class="math inline">\(A_i\)</span>’s and <span class="math inline">\(Y_i\)</span>s. We make the homogeneity assumption that the functions are identical to each other.</p>
+<p><span class="math display">\[
+\begin{aligned}
+f_L &amp;= f_{L_1} = f_{L_2} = f_{L_3} \\
+f_A &amp;= f_{A_1} = f_{A_2} = f_{A_3} \\
+f_Y &amp;= f_{Y_1} = f_{Y_2} = f_{Y_3}  \\
+\end{aligned}
+\]</span></p>
+</section>
+</section>
 <section id="structural-equations" class="level3" data-number="B.1.2">
 <h3 data-number="B.1.2" class="anchored" data-anchor-id="structural-equations"><span class="header-section-number">B.1.2</span> Structural equations</h3>
 <div class="cell">
@@ -733,6 +776,8 @@ Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
 </div>
 <section id="observed-data-model" class="level4">
 <h4 class="anchored" data-anchor-id="observed-data-model">Observed data model</h4>
+<p>The homogeneity and independence assumptions allow us to re-write the structural equation model dropping the person subscript from the equations. Since the measures on each person are identically distributed, this model can be used three times to separately generate the measures for <em>Person 1</em>, <em>Person 2</em>, and <em>Person 3</em>. By contrast, the original model produced measures for all three people at one go.</p>
+<p><a href="#fig-independence-dag" class="quarto-xref">Figure&nbsp;<span>B.4</span></a> and <a href="#eq-independence-dag" class="quarto-xref">Equation&nbsp;<span>B.5</span></a> show the resulting non-parametric structural equation model for our data if we analyse it under classic causal inference. As a consequence of the assumptions stated above, we can represent the model using three equations rather than nine. We retain the person subscript on the random variables in <a href="#eq-independence-dag" class="quarto-xref">Equation&nbsp;<span>B.5</span></a> and we keep all nine nodes in the DAG on <a href="#fig-independence-dag" class="quarto-xref">Figure&nbsp;<span>B.4</span></a>. This is to remind us that, though our model is for one person, our purpose was always to infer something about the sample of three people.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -764,6 +809,14 @@ Y_i &amp;= f_{Y}( U_{Y_i}, L_i, A_i) \\
 </section>
 <section id="counterfactual-data-model" class="level4">
 <h4 class="anchored" data-anchor-id="counterfactual-data-model">Counterfactual data model</h4>
+<p>We define counterfactual outcomes <span class="math inline">\(Y_1^{(a_1)}\)</span>, <span class="math inline">\(Y_2^{(a_2)}\)</span>, and <span class="math inline">\(Y_3^{(a_3)}\)</span> which represent the level of job opportunities, <em>Persons 1</em>, <em>2</em>, and <em>3</em>, would have if we set their dress to level <span class="math inline">\(a_1\)</span>, <span class="math inline">\(a_2\)</span>, and <span class="math inline">\(a_3\)</span>, respectively. Then the model for counterfactual variables is given by <a href="#eq-independence-swig" class="quarto-xref">Equation&nbsp;<span>B.6</span></a>.</p>
+<p>It is represented using the SWIG pictured in <a href="#fig-independence-swig" class="quarto-xref">Figure&nbsp;<span>B.5</span></a>. A SWIG represents a structural equation model where some of the equations are superseded by the value assigned by the experimenter. For so-called “treatment variables,” the diagram separates the value of the variable as it would have been observed with no intervention (<span class="math inline">\(A_i\)</span>) from the value that as it will be used in subsequent equations (<span class="math inline">\(a_i\)</span>) as a result of the experimenter’s intervention.</p>
+<p>Note that because of the assumption of no interference and no spillover, each counterfactual outcome is a function only of the treatment value of the same individual.</p>
+<p>To ensure that counterfactual outcomes are well-defined for all experimental units, we make the assumption of positivity:</p>
+<p><span class="math display">\[
+0 &lt; P[A_i = a | L_i] &lt; 1
+\]</span></p>
+<p>for <span class="math inline">\(a \in \{0,1\}\)</span></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -802,6 +855,7 @@ Y_i^{(a_i)} &amp;= f_{Y}(U_{Y_i} , L_i, a_i) \\
 </section>
 <section id="estimands" class="level3" data-number="B.1.3">
 <h3 data-number="B.1.3" class="anchored" data-anchor-id="estimands"><span class="header-section-number">B.1.3</span> Estimands</h3>
+<p>We are interested in whether changing how formally someone dresses would change their level of job offers, on average, in our population. To determine the answer, we will compare the average counterfactual outcome of job opportunities for formal dress to the average counterfactual outcome of job opportunities for non-formal dress. i.e.&nbsp;We will make the following comparison:</p>
 <p><span class="math display">\[
 \begin{aligned}
 E \left[ \frac{1}{n} \sum_i Y_i^{(a=1)} - Y_i^{(a=0)} \right]
@@ -816,6 +870,7 @@ E \left[ \frac{1}{n} \sum_i Y_i^{(a=1)} - Y_i^{(a=0)} \right]
 </section>
 <section id="identification" class="level3" data-number="B.1.4">
 <h3 data-number="B.1.4" class="anchored" data-anchor-id="identification"><span class="header-section-number">B.1.4</span> Identification</h3>
+<p>Once we have specified the hypothetical quantities from our thought experiment, we “identify” them, meaning write them in terms of the observed rather than counterfactual model. It is sufficient to identify the quantity:</p>
 <p><span class="math display">\[
 \begin{aligned}
 E[Y_i^{(a)}]                    &amp;= E \left[ E[Y_i^{(a)} | L_i] \right] \\
@@ -825,6 +880,7 @@ E[Y_i^{(a)}]                    &amp;= E \left[ E[Y_i^{(a)} | L_i] \right] \\
                                 &amp;= E \left[ E[Y_i | L_i , A_i = a] \right] \\
 \end{aligned}
 \]</span></p>
+<p>In the first line, we use the law of iterated expectations. In the second line, we use the definition for counterfactual outcome <span class="math inline">\(Y_i^{(a)}\)</span> as specified in <a href="#eq-independence-swig" class="quarto-xref">Equation&nbsp;<span>B.6</span></a>. In the third line, we use the fact that when <span class="math inline">\(L_i\)</span> is fixed, <span class="math inline">\(f_{Y}(U_{Y_i} , L_i, a)\)</span> is a function of random variable <span class="math inline">\(U_{Y_i}\)</span> and <span class="math inline">\(A_i\)</span> is a function of <span class="math inline">\(U_{A_i}\)</span>. Since <span class="math inline">\(U_{Y_i}\)</span> and <span class="math inline">\(U_{A_i}\)</span> are independent by definition of the NPSEM-IE, <span class="math inline">\(f_{Y}(U_{Y_i} , L_i, a) \perp A_i | L_i\)</span>. In the fourth line we consider the expected value of <span class="math inline">\(f_{Y}(U_{Y_i} , L_i, a)\)</span> when <span class="math inline">\(A_i = a\)</span>, in particular. In the fifth line, we use the definition for observed value <span class="math inline">\(Y_i\)</span> as specified in <a href="#eq-independence-dag" class="quarto-xref">Equation&nbsp;<span>B.5</span></a>.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
