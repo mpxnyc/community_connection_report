@@ -17,75 +17,11 @@ We describe the main data objects of the MPX NYC study -- the
 Person-place graph, the Person graph and the Place graph -- as well as
 the statistics we used to analyze them. 
 
-Main idea is: - You have some observational nodes that are people - You have some observational nodes are are places  - People have affiliations with places - Affiliations are unlimited - If a place is a neighborhood, a person node could be affiliated to that place because they have a home there. They could additionally be affiliated to that place because they have attended a gathering there. - If a place is a household, a person could be affiliated to the household because they work in the househodl or because they have a friend there, or because they live there.  - There are quantitative data associated with the people, places and affiliations
 
-      
-- Outline of sections
-  - Cleanup
-    - Check abandoned texts
-    - Put outbreak control seciton in abandoned texts
-  - Example
-  - Data graph 
-    - goals:
-      - to model correlation between measures made on persons that is induced by joint affiliation with places
-      - to express target estimands in terms of model quantities 
-      - to specify estimators for those estimands based on sample data
-    - definitions
-      - person-place graph: a bipartite graph whose two node classes are places and persons
-        - Nodes
-          - places are a fixed, fully observed set of spatial units
-          - persons are a countable set of observational units 
-          - each node is associated with node characteristics 
-          - Node characteristics
-            - $\mathbf{C}_k$ random vector
-            - $C_{k}(i)$ random scalar
-            - $\mathbf{c}_k$ vector realization
-            - $c_{k}(i)$ scalar realization
-        - Edges
-          - persons' affiliations with places are indicated using edges
-          - each edge is associated with edge characteristics
-          - Edge characteristics
-            - $\mathbf{D}_k$  $n \times n$ random matrix
-            - $D_{k}(i,j)$ $ij$th entry of random matrix
-            - $\mathbf{d}_k$  $n \times n$ matrix realization
-            - $d_{k}(i,j)$ scalar relization
-            - $\mathbf{\Psi}_k$  is a speical case of $\mathbf{D}_k$
-  - Node characteristics
-    - Descriptive statistics
-  - Edge characteristics
-    - Descriptive statistics
-  - Local structure
-    - Spatial reach
-    - Social reach
-    - Spatial catchment
-    - Social catchment
-  - Global structure
-    - Spatial mixing
-    - Social connectedness
-  - Dynamics
-    - Outings
-    - Spatial concentration
-  - Statistical inference
-    - Rather than star with an idea of the sampling universe, we will define sample statistics that are substantively interpretable 
-    - We will then extend our definitions of these to:
-      - Define a notion of the population parameter vs. the sample statistic  
-      - Ask whether the sample statistics are unbiased with respect to the population parameters  
-      - Ask how far the sample statistics are from the population parameter as a function of sample size?
+
       
 :::
 
-::: {#acknowledgements}
-[Lead author]{.underline}: Keletso Makofane, MPH, PhD.
-[Editor]{.underline}: Nicholas Diamond, MPH. (Published: June 2025).
-
-[Acknowledgements]{.underline}: The analytic framework for this project
-developed over an extended period of time, beginning during my PhD
-dissertation at Harvard University under the supervision of Lisa
-Berkman, Eric Tchetgen Tchetgen, and a former mentor). In particular,
-the analysis borrows from the central paper in my dissertation, which
-shows how the wealth of non-coresident extended family members is
-protective against mortality...(continued at bottom of page)
-:::
 
 ```{r}
 #| fig-width: 3
@@ -99,7 +35,7 @@ plot_icon(icon_name = "devil", color = "light_purple", shape = 16, alpha = 0,  s
 
 
 
-## Example: Rapid research response
+## Example: Rapid research response {.unnumbered}
 
 -   you are town epidemiologist live in a town of 8000 people who live and work across 5 communities within the town
 
@@ -113,34 +49,6 @@ plot_icon(icon_name = "devil", color = "light_purple", shape = 16, alpha = 0,  s
 
 
 
-
-```{r}
-#| label: tbl-example-person-place-network
-#| layout-ncol: 2
-#| tbl-cap: "Sample person-place network data"
-#| tbl-subcap:
-#|  - "Nodes"
-#|  - "Edges"
-
-make_example_network_data() |>
-  data.frame() |>
-  dplyr::select(-label) |>
-  dplyr::select(-type) |>
-  gt::gt() |>
-  gt::tab_options(table.font.size =12, data_row.padding = gt::px(1))
-
-
-make_example_network_data() |>
-  dplyr::mutate(name = label, type, age) |>
-  tidygraph::activate(edges) |>
-  dplyr::mutate(from_name = tidygraph::.N()$name[from], to_name = tidygraph::.N()$name[to]) |>
-  data.frame() |>
-  dplyr::arrange(from, to) |>
-  dplyr::transmute(From = from_name, To = to_name, Relation = relation) |>
-  gt::gt() |>
-  gt::tab_options(table.font.size =12, data_row.padding = gt::px(1))
-
-```
 
 
 ```{r}
@@ -178,14 +86,13 @@ District E*.
 
 
 
-## Individual characteristics
+## Node characteristics
 
 
 We can examine patterns in the characteristics of participants. These include variables like age and vaccination status. They could also include relations indivdiuals have with places, as long as each person is assigned to one place. In our example, each participant has only one primary residence, and therefore is related to only one of the five communities in this city. 
 
 ```{r}
-#| label: tbl-example-spatial-reach
-#| layout-ncol: 2
+#| label: tbl-nodes
 #| tbl-cap: "Sample person-place network data"
 #| tbl-subcap:
 #|  - "Nodes"
@@ -194,12 +101,23 @@ We can examine patterns in the characteristics of participants. These include va
 make_example_network_data() |>
   data.frame() |>
   dplyr::select(-label) |>
-  dplyr::filter(type == "Person") |>
   dplyr::select(-type) |>
   gt::gt() |>
   gt::tab_options(table.font.size =12, data_row.padding = gt::px(1))
 
 
+
+
+```
+
+## Edge characteristics
+
+```{r}
+#| label:  tbl-edges
+#| tbl-cap: "Sample person-place network data"
+#| tbl-subcap:
+#|  - "Nodes"
+#|  - "Edges"
 make_example_network_data() |>
   dplyr::mutate(name = label, type, age) |>
   tidygraph::activate(edges) |>
@@ -207,14 +125,9 @@ make_example_network_data() |>
   data.frame() |>
   dplyr::arrange(from, to) |>
   dplyr::transmute(From = from_name, To = to_name, Relation = relation) |>
-  dplyr::filter(Relation == "HOME") |>
   gt::gt() |>
   gt::tab_options(table.font.size =12, data_row.padding = gt::px(1))
 ```
-
-
-
-
 
 
 ## Local structure
@@ -674,6 +587,22 @@ $$
 
 ## Statistical inference
 
+Main idea is: 
+
+- You have some observational nodes that are people 
+
+- You have some observational nodes are are places  
+
+- People have affiliations with places 
+
+- Affiliations are unlimited 
+
+- If a place is a neighborhood, a person node could be affiliated to that place because they have a home there. They could additionally be affiliated to that place because they have attended a gathering there. 
+
+- If a place is a household, a person could be affiliated to the household because they work in the househodl or because they have a friend there, or because they live there.  
+
+- There are quantitative data associated with the people, places and affiliations
+
 - Data are a realization of law $C_t \in M_{n\times 1}$, $\Psi_t \in M_{n\times n}$, and $Q_t \in M_{n^2 \times 1}$ for $t \in [1,k]$, $k \in \mathbf{Z}$ and arbitrarily large $n \in \mathbf{Z}$
 - Goal is to infer population parameters using a sample.
   - We begin by defining a variable $\mathbf{s} \in M_{n\times 1}$ such that $s_i$, the selection indicator for $i^{th}$ observational unit is one when that unit is included in the sample, and zero otherwise
@@ -724,7 +653,11 @@ $$
 
 ##  {.unnumbered}
 
+
+
 ::: {#acknowledgements}
+[Lead author]{.underline}: Keletso Makofane, MPH, PhD.
+[Editor]{.underline}: Nicholas Diamond, MPH. (Published: June 2025).
 
 [Acknowledgements]{.underline}: The analytic framework for this project
 developed over an extended period of time, beginning during my PhD
@@ -732,55 +665,14 @@ dissertation at Harvard University under the supervision of Lisa
 Berkman, Eric Tchetgen Tchetgen, and a former mentor). In particular,
 the analysis borrows from the central paper in my dissertation, which
 shows how the wealth of non-coresident extended family members is
-protective against mortality.
-
-This work was part of U.S. government-funded research conducted in South
-Africa through the HAALSA study, which has since been defunded by the
-Trump administration. It is path-breaking because it shows an approach
-to using a large scale (over 100,000 people observed over three decades)
-dataset as a family network. There are many more datasets that could be
-analyzed using these methods. Any investigator who ever hosted a study
-at the Agincourt surveillance site in the north-east of South Africa,
-for instance, can use these methods to interpret their own data in light
-of family networks. It has the potential to illustrate the value of deep
-collaboration between U.S. and South African researchers. It is also of
-pedagogical value. I wrote the appendices of my dissertation in the same
-style as these appendices -- with students and teachers of epidemiology
-in mind.
-
-**Unfortunately, my PhD dissertation paper is a hostage of the American
-Journal of Epidemiology’s former editor-in-chief, Ichiro Kawachi, who is
-a colleague of my former mentor.**
-
-After taking some time away from work to recover from the social
-violence I experienced at the hands of my former mentor, I was surprised
-to find that the edits that had held up publication of my dissertation
-paper (with implications for my ability to get an academic job) were
-minor copy edits. The "technical review" itself, which is misleadingly
-labelled, was riddled with errors, by the admission of the handling
-editor. Many tedious things happened after that, but the result of them
-is that the editors of the American Journal of Epidemiology have the
-final version of my manuscript, which I copy edited myself after
-arranging for the journal to receive thousands of dollars in publication
-fees... after spending years conducting the research and months
-responding to peer review. I submitted the manuscript by email after the
-handling editor agreed to receive it by email.
-
-Mysteriously, the manuscript remains unpublished. Ichiro Kawachi remains
-a member of the editorial board of the Journal. The Journal is
-associated with the Society of Epidemiologic Research, whose meetings
-were an important venue for the development of the SSNAC framework.
-
-**For publication-ready copies of the paper referenced below, which was
+protective against mortality. For publication-ready copies of the paper referenced below, which was
 accepted on 19 October 2023, please contact the editorial board of the
-American Journal of Epidemiology directly. Please share your
-correspondence with members of the Society of Epidemiologic Research and
-any South African and U.S. researchers you think might have an interest
-in seeing the work in print.**
+American Journal of Epidemiology directly.
 
 > Makofane, K., Tchetgen Tchetgen, E. J., Bassett, M. T., Berkman, L. F.
 > (Accepted 2023, final manuscript submitted January 2025). Networked
 > wealth and mortality in the Agincourt Health and Demographic
 > Surveillance System 2009 – 2018. *American Journal of Epidemiology*.
-
 :::
+
+
