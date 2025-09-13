@@ -1,6 +1,223 @@
 
 ### a. Definitions {.unnumbered}
 
-{{< include B_d_1_1__definitions.qmd >}} 
-{{< include B_d_1_2__definitions.qmd >}} 
-{{< include B_d_1_3__definitions.qmd >}} 
+
+
+::: {#def-statistical-model .theorem}
+## Statistical model
+
+A *[statistical model](#def-statistical-model)* is a collection of probability distributions on a set of random variables.
+:::
+
+::: {#def-observational-unit .theorem}
+## Observational unit
+
+An *[observational unit](#def-observational-unit)* is a subset of the random variables in a [statistical model](#def-statistical-model) that originate from the same data source. The collection of observational units forms a partition of the full set of random variables.
+:::
+
+::: {#def-equivalence .theorem}
+## Equivalence
+
+Two random variables are *equivalent* if they belong to different [observational units](#def-observational-unit) but represent the same construct.
+:::
+
+::: {#def-npsem-ie .theorem}
+## NPSEM-IE
+
+A *[nonparametric structural equation model with independent errors (NPSEM-IE)](#def-npsem-ie)* specifies each random variable in a [statistical model](#def-statistical-model) as a deterministic function of a subset of other variables and an independent error. No variable is its own ancestor.
+:::
+
+::: {#def-parent-child .theorem}
+## Parent/child/ancestor/descendant
+
+In an [NPSEM-IE](#def-npsem-ie), if variable $X$ appears in the structural equation for $Y$, then $X$ is a *parent* of $Y$ and $Y$ is a *child* of $X$. An *ancestor* of a variable is any [parent](#def-parent-child), or parent of a parent, recursively; a *descendant* is defined analogously.
+:::
+
+::: {#def-no-spillover .theorem}
+## No spillover
+
+In an [NPSEM-IE](#def-npsem-ie), the *no spillover* assumption requires that no variable is a [parent](#def-parent-child) of an [equivalent](#def-equivalence) variable in another [observational unit](#def-observational-unit).
+:::
+
+::: {#def-no-interference .theorem}
+## No interference
+
+In an [NPSEM-IE](#def-npsem-ie), the *no interference* assumption requires that no variable is a [parent](#def-parent-child) of any non-[equivalent](#def-equivalence) variable in another [observational unit](#def-observational-unit).
+:::
+
+::: {#def-identical-distributions .theorem}
+## Identical distributions
+
+In an [NPSEM-IE](#def-npsem-ie), the *identical distributions* assumption requires that [equivalent](#def-equivalence) variables have equivalent sets of [parents](#def-parent-child) and identical functional relationships with those parents.
+:::
+
+::: {#def-ffrcistg .theorem}
+## FFRCISTG model
+
+A *[finest fully randomized causally interpretable structured tree graph (FFRCISTG) model](#def-ffrcistg)* is a collection of [NPSEM-IE](#def-npsem-ie) models, one representing the observed distribution and at least one representing a specified intervention. Each [NPSEM-IE](#def-npsem-ie) in the collection satisfies:
+
+1. *[No spillover](#def-no-spillover):* no variable is a [parent](#def-parent-child) of an [equivalent](#def-equivalence) variable in another [observational unit](#def-observational-unit).  
+2. *[No interference](#def-no-interference):* no variable is a [parent](#def-parent-child) of any non-[equivalent](#def-equivalence) variable in another [observational unit](#def-observational-unit).  
+3. *[Identical distributions](#def-identical-distributions):* [equivalent](#def-equivalence) variables share equivalent sets of [parents](#def-parent-child) and identical functional relations with those parents.
+:::
+
+::: {#def-exposure-mapping .theorem}
+## Exposure mapping
+
+Given an [NPSEM-IE](#def-npsem-ie) with $f_{Y_i}$ the structural equation for $Y_i$, and $\mathbf{X}_1,\dots,\mathbf{X}_K \in \{0,1\}^n$ the [parents](#def-parent-child) of $Y_i$, the *[exposure mapping](#def-exposure-mapping) for $f_{Y_i}$* is a function
+
+$$
+g_i : \{0,1\}^{K \times n} \to \mathbb{R}^m
+$$
+
+such that
+
+$$
+Y_i = f_{Y_i}\big(g_i(\mathbf{X}_1,\dots,\mathbf{X}_K), U_{Y_i}\big).
+$$
+:::
+
+::: {#def-separability .theorem}
+## Separability
+
+An [exposure mapping](#def-exposure-mapping) $g_i$ is *[separable](#def-separability)* if it decomposes as
+
+$$
+g_i(\mathbf{X}_1,\dots,\mathbf{X}_K) 
+  = \big[g_{0},\, g_{1i}(\mathbf{X}_1),\, \dots,\, g_{Ki}(\mathbf{X}_K)\big]^T,
+$$
+
+where $g_{0} = [X_{1i}, \dots, X_{Ki}]^T$, and each $g_{ti} : \{0,1\}^n \to \mathbb{R}$ is a *component function* of $g_i$.
+:::
+
+::: {#def-graph .theorem}
+## Graph
+
+A *[graph](#def-graph)* is an ordered pair $\mathscr{G} = (\mathcal{N}, \psi)$ defined by the following conditions:
+
+1. *Nodes:* $\mathcal{N}$ is a finite set of nodes.  
+2. *Adjacency function:* $\psi : \mathcal{N} \times \mathcal{N} \to \mathbb{R}_{\ge 0}$ assigns a nonnegative weight to each ordered pair of nodes.  
+3. *Connectivity:* nodes $i,j \in \mathcal{N}$ are connected if and only if $\psi(i,j) > 0$.
+:::
+
+::: {#def-neighborhood .theorem}
+## Neighborhood
+
+Given a [graph](#def-graph) $\mathscr{G} = (\mathcal{N}, \psi)$, the *[neighborhood](#def-neighborhood)* of a node $i \in \mathcal{N}$ is
+
+$$
+\mathcal{N}_i = \{ j \in \mathcal{N} : \psi(i,j) > 0 \}.
+$$
+:::
+
+::: {#def-network-weights-vector .theorem}
+## Network weights vector
+
+Given a [graph](#def-graph) $\mathscr{G} = (\mathcal{N}, \psi)$, the *[network weights vector](#def-network-weights-vector)* for a node $i \in \mathcal{N}$ is
+
+$$
+\Psi_i = [\psi(i,1), \dots, \psi(i,n)]^T,
+$$
+
+where $n = |\mathcal{N}|$.
+:::
+
+::: {#def-loyalty .theorem}
+## Loyalty
+
+Given a [graph](#def-graph) $\mathscr{G} = (\mathcal{N}, \psi)$, let $\mathcal{N}_i$ denote the [neighborhood](#def-neighborhood) of node $i$. For a vector $\mathbf{X} \in \{0,1\}^n$, write $\mathbf{X}_{\mathcal{N}_i}$ for the subvector of $\mathbf{X}$ consisting of entries indexed by nodes in $\mathcal{N}_i$.
+
+A [component function](#def-separability) $g_{ti}$ is *[loyal](#def-loyalty)* to $\mathscr{G}$ if for all $\mathbf{X}, \mathbf{X}' \in \{0,1\}^n$, such that
+
+$$
+\mathbf{X}_{\mathcal{N}_i} = \mathbf{X}'_{\mathcal{N}_i}
+$$
+
+implies
+
+$$
+g_{ti}(\mathbf{X}) = g_{ti}(\mathbf{X}').
+$$
+:::
+
+::: {#def-positional-invariance .theorem}
+## Positional invariance
+
+Given a [graph](#def-graph) $\mathscr{G} = (\mathcal{N}, \psi)$, let $\mathcal{N}_i$ denote the [neighborhood](#def-neighborhood) of node $i$. For a vector $\mathbf{X} \in \{0,1\}^n$, write $\mathbf{X}_{\mathcal{N}_i}$ for the subvector of $\mathbf{X}$ consisting of entries indexed by nodes in $\mathcal{N}_i$. For a [network weights vector](#def-network-weights-vector) $\Psi_i$, write $\Psi_{i,\mathcal{N}_i}$ for the subvector consisting of adjacency weights $\psi(i,j)$ with $j \in \mathcal{N}_i$.
+
+A [component function](#def-separability) $g_{ti}$ is *[positionally invariant](#def-positional-invariance)* if for nodes $i,j \in \mathcal{N}$, there exists a conformable permutation matrix $\mathbf{M}$ such that
+
+$$
+\mathbf{X}_{\mathcal{N}_i} = \mathbf{M}\mathbf{X}'_{\mathcal{N}_j}, 
+\quad 
+\Psi_{i,\mathcal{N}_i} = \mathbf{M}\Psi_{j,\mathcal{N}_j},
+$$
+
+implies
+
+$$
+g_{ti}(\mathbf{X}) = g_{tj}(\mathbf{X}').
+$$
+:::
+
+::: {#def-boundedness .theorem}
+## Boundedness
+
+A [component function](#def-separability) $g_{ti}$ is *[bounded](#def-boundedness)* if there exists a finite set $\mathcal{D} \subset \mathbb{R}$ and a constant $c \in \mathbb{R}$, independent of the size of the network $|\mathcal{N}|$, such that
+
+$$
+g_{ti}(\mathbf{X}, \mathbf{W}) \in \mathcal{D}, \quad \text{for all } \mathbf{X} \in \{0,1\}^n, \; \mathbf{W} \in \mathbb{R}^n_+,
+$$
+
+and $|\mathcal{D}| < c$.
+:::
+
+::: {#def-homogeneous-network-interference .theorem}
+## Homogeneous network interference
+
+An [NPSEM-IE](#def-npsem-ie) exhibits *[homogeneous network interference](#def-homogeneous-network-interference)* with respect to a [graph](#def-graph) $\mathscr{G}$ if its structural equations satisfy:
+
+1. *[Separability](#def-separability):* the [exposure mapping](#def-exposure-mapping) decomposes into [component functions](#def-separability).  
+2. *[Boundedness](#def-boundedness):* each [component function](#def-separability) takes values in a finite set of fixed size, independent of network size.  
+3. *[Loyalty](#def-loyalty):* for a given [observational unit](#def-observational-unit) $i$, each [component function](#def-separability) depends only on values contained by sampling units in the [neighborhood](#def-neighborhood) of $i$.  
+4. *[Positional invariance](#def-positional-invariance):* [component functions](#def-separability) yield the same values when [neighborhoods](#def-neighborhood) and [weight vectors](#def-network-weights-vector) are conformably permuted.
+:::
+
+::: {#def-network-ffrcistg .theorem}
+## Network FFRCISTG model
+
+A *[network FFRCISTG model](#def-network-ffrcistg)* is a [FFRCISTG model](#def-ffrcistg) in which the underlying [NPSEM-IEs](#def-npsem-ie) satisfy:
+
+1. *[Homogeneous network interference](#def-homogeneous-network-interference).*  
+2. *[Identical distributions](#def-identical-distributions).*
+:::
+
+::: {#def-bipartite-graph .theorem}
+## Bipartite graph
+
+A *[bipartite graph](#def-bipartite-graph)* is a [graph](#def-graph) $\mathscr{G} = (\mathcal{N}, \psi)$ defined by the following conditions:
+
+1. *Partition:* the node set $\mathcal{N}$ is partitioned into two disjoint subsets $V_1$ and $V_2$, with $\mathcal{N} = V_1 \cup V_2$ and $V_1 \cap V_2 = \varnothing$.  
+2. *Restricted adjacency:* the adjacency function $\psi$ is supported only across the partition, i.e. $\psi(i,j) > 0 \implies (i,j) \in V_1 \times V_2 \;\text{or}\; (i,j) \in V_2 \times V_1$.
+:::
+
+::: {#def-random-nodes-bipartite-graph .theorem}
+## Random nodes bipartite graph
+
+A *[random nodes bipartite graph](#def-random-nodes-bipartite-graph)* is a [bipartite graph](#def-bipartite-graph) $\mathscr{G} = (\mathcal{N}, \psi)$ defined by the following conditions:
+
+1. *Fixed node set:* one partition, $V_1 \subseteq \mathcal{N}$, is fixed and represents known entities.  
+2. *Random node set:* the other partition, $V_2 \subseteq \mathcal{N}$, is random and represents sampled units.  
+3. *Random adjacency function:* the adjacency function $\psi : \mathcal{N} \times \mathcal{N} \to \mathbb{R}_{\ge 0}$ is random, and supported only across partitions.
+:::
+
+::: {#def-social-spatial-ffrcistg .theorem}
+## Social and Spatial Network FFRCISTG model
+
+A *[social and spatial network FFRCISTG model](#def-social-spatial-ffrcistg)* is a [network FFRCISTG model](#def-network-ffrcistg) in which the [NPSEM-IEs](#def-npsem-ie) include models for [random nodes bipartite graphs](#def-random-nodes-bipartite-graph) with random adjacency function $\psi$. It is defined by the following conditions:
+
+1. *Random graph modeling* ([Random nodes bipartite graph](#def-random-nodes-bipartite-graph)): the [NPSEM-IE](#def-npsem-ie) includes structural equations that generate the [random nodes bipartite graph](#def-random-nodes-bipartite-graph), specifying both the random node set and the random adjacency function $\psi$.  
+2. *[Homogeneous network interference](#def-homogeneous-network-interference):* the structural equations satisfy [homogeneous network interference](#def-homogeneous-network-interference) with respect to the [random nodes bipartite graphs](#def-random-nodes-bipartite-graph).  
+3. *[Identical distributions](#def-identical-distributions):* [equivalent](#def-equivalence) variables share equivalent sets of [parents](#def-parent-child) and identical functional relations with those parents.
+:::
+
