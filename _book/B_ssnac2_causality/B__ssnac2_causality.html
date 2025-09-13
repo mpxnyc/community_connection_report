@@ -96,7 +96,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-16f0be44cf0b9c8dc4714857273be9e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2eefcf44cc732bfd94eafac87ba0ec34.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-4e7110160ae079472636090239678e02.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -151,12 +151,6 @@ cookieconsent.run({
 });
 </script> 
   
-<script async="" src="https://hypothes.is/embed.js"></script>
-<script>
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    document.body.classList.add('hypothesis-enabled');
-  });
-</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -620,7 +614,8 @@ Y_3^{(a_1, a_2, a_3)} &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_dag</span>(<span class="st">"fully_connected"</span>)         <span class="sc">|&gt;</span> </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-fullly-connected-dag" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -640,9 +635,10 @@ Figure&nbsp;B.1: Fully connected causal DAG
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_swig</span>(<span class="st">"fully_connected"</span>)      <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>, <span class="at">nudge_intervention_labels =</span> <span class="fl">0.18</span>) <span class="sc">+</span> </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"intervention"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-fullly-connected-swig" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -707,7 +703,8 @@ Y_1 \perp Y_3 | L_1, L_2, L_3, A_1, A_2, A_3
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_dag</span>(<span class="st">"full_interference"</span>)      <span class="sc">|&gt;</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"h"</span>), <span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-no-spillover-dag" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -784,7 +781,8 @@ f_Y &amp;= f_{Y_1} = f_{Y_2} = f_{Y_3}  \\
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_dag</span>(<span class="st">"independence"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span> </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"intervention"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-independence-dag" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -821,9 +819,10 @@ Y_i &amp;= f_{Y}( U_{Y_i}, L_i, A_i) \\
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_swig</span>(<span class="st">"independence"</span>)      <span class="sc">|&gt;</span> </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>, <span class="at">nudge_intervention_labels =</span> <span class="fl">0.16</span>) <span class="sc">+</span> </span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"intervention"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-independence-swig" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -889,7 +888,7 @@ E[Y_i^{(a)}]                    &amp;= E \left[ E[Y_i^{(a)} | L_i] \right] \\
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
+<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
 </figure>
 </div>
 </div>
@@ -923,7 +922,8 @@ E[Y_i^{(a)}]                    &amp;= E \left[ E[Y_i^{(a)} | L_i] \right] \\
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_dag</span>(<span class="st">"network_interference"</span>)   <span class="sc">|&gt;</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-interference-dag" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -1033,7 +1033,8 @@ h_{Y}(\mathbf{A}, \Psi_i) &amp;\in \{0, 1\} \\
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_dag</span>(<span class="st">"homogenous_interference"</span>)            <span class="sc">|&gt;</span> </span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-homogenous-dag" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -1069,9 +1070,10 @@ Y_i &amp;= f_{Y}( U_{Y_i},  L_i,  g_{Y}(\textbf{L}, \Psi_i),   A_i,  h_{Y}( \tex
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_swig</span>(<span class="st">"homogenous_interference"</span>)      <span class="sc">|&gt;</span> </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>, <span class="at">nudge_intervention_labels =</span> <span class="fl">0.16</span>) <span class="sc">+</span> </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"intervention"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span> </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-homogenous-interference-swig" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1130,7 +1132,7 @@ E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} ]
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
+<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
 </figure>
 </div>
 </div>
@@ -1152,27 +1154,29 @@ E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} ]
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>structural  <span class="ot">&lt;-</span> <span class="fu">example_dang_2_structural</span>() <span class="sc">|&gt;</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Structural Part"</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Entity type"</span>, <span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Community"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"Individual"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"intervention"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Structural Part"</span>)</span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>relational  <span class="ot">&lt;-</span> <span class="fu">example_dang_2_relational</span>() <span class="sc">|&gt;</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>, <span class="at">node_margin =</span> <span class="dv">0</span>)  <span class="sc">+</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Entity type"</span>, <span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Relational Part"</span>) </span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>figure   <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(structural, relational, <span class="at">ncol=</span><span class="dv">1</span>, <span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>))</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>relational  <span class="ot">&lt;-</span> <span class="fu">example_dang_2_relational</span>() <span class="sc">|&gt;</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>, <span class="at">node_margin =</span> <span class="dv">0</span>)  <span class="sc">+</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Entity type"</span>, <span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Community"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"Individual"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"intervention"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Relational Part"</span>) </span>
 <span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>figure   <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(structural, relational, <span class="at">ncol=</span><span class="dv">1</span>, <span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>))</span>
 <span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>legend_pre  <span class="ot">&lt;-</span> relational <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>legend      <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">get_legend</span>(legend_pre) </span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(figure, legend, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>legend_pre  <span class="ot">&lt;-</span> relational <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>legend      <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">get_legend</span>(legend_pre) </span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(figure, legend, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-example-dang-structural" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -1193,27 +1197,29 @@ Figure&nbsp;B.9: Causal DANG for Week 1 in Example 3
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>structural  <span class="ot">&lt;-</span> <span class="fu">example_swing_structural</span>() <span class="sc">|&gt;</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Structural Part"</span>) </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Community"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"Individual"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"intervention"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Structural Part"</span>) </span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>relational  <span class="ot">&lt;-</span> <span class="fu">example_swing_relational</span>() <span class="sc">|&gt;</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>, <span class="at">node_margin =</span> <span class="dv">0</span>)  <span class="sc">+</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Entity type"</span>, <span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Relational Part"</span>)</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>legend_pre  <span class="ot">&lt;-</span> relational <span class="sc">+</span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>legend      <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">get_legend</span>(legend_pre) </span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>relational  <span class="ot">&lt;-</span> <span class="fu">example_swing_relational</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>, <span class="at">node_margin =</span> <span class="dv">0</span>)  <span class="sc">+</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Entity type"</span>, <span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Community"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"Individual"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"intervention"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Relational Part"</span>)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>legend_pre  <span class="ot">&lt;-</span> relational <span class="sc">+</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>legend      <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">get_legend</span>(legend_pre) </span>
 <span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>figure   <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(structural, relational, <span class="at">ncol=</span><span class="dv">1</span>, <span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>))</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(figure, legend, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>figure   <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(structural, relational, <span class="at">ncol=</span><span class="dv">1</span>, <span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>))</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(figure, legend, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-example-swig-structural" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -1240,9 +1246,11 @@ Figure&nbsp;B.10: SWING for Week 1 in Example 3
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">program_dang</span>() <span class="sc">|&gt;</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">x =</span> x, <span class="at">y =</span> y) <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Community"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"Individual"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"intervention"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-repeated-observations-dang" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1276,15 +1284,17 @@ V_{si} &amp;=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}, V_{\{s-1,i\}}) \\
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">program_swing</span>() <span class="sc">|&gt;</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.5</span>, <span class="at">nudge_intervention_labels =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">x =</span> <span class="fl">1.5</span><span class="sc">*</span>x, <span class="at">y =</span> <span class="dv">2</span><span class="sc">*</span>y) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="dv">1</span>, <span class="at">nudge_intervention_labels =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Community"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"Individual"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"intervention"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-placeintervention-swing" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-placeintervention-swing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="B__ssnac2_causality_files/figure-html/fig-placeintervention-swing-1.png" class="img-fluid figure-img" width="672">
+<img src="B__ssnac2_causality_files/figure-html/fig-placeintervention-swing-1.png" class="img-fluid figure-img" width="768">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-placeintervention-swing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;B.12: SWING for Week 1-3 in Example 3
@@ -1320,7 +1330,7 @@ E[\sum_{i=1}^5 V_{si}^{(\bar{\mathbf{t}})}]
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
+<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
 </figure>
 </div>
 </div>
@@ -1454,62 +1464,36 @@ E \subseteq V_1 \times V_2.
 </section>
 <section id="c.-d-separation" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="c.-d-separation">c.&nbsp;D-separation</h3>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fork <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"fork"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>spoon <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"spoon"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) </span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>chopstick <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"chopstick"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) </span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(fork, spoon, chopstick, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.25</span>), <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="768"></p>
-<figcaption>D-separation triangles: Fork (leftmost), spoon (center), chopstick (rightmost)</figcaption>
-</figure>
-</div>
-</div>
-</div>
 <p>D-separation is a set of rules for translating DAGs into conditional independence statements. A pair of nodes is d-separated if all the paths linking them are closed or if there is no path that links them. A pair of nodes is conditionally d-separated if all the paths linking them are closed after conditioning on some set of nodes.</p>
 <p>A <strong>path</strong> is a sequence of nodes that starts with an origin node and ends with a terminal node. Consecutive entries in the sequence are connected in the DAG. A path of length one is open by definition. A path of length two or more is open if all its triangles are open.</p>
 <p>A <strong>triangle</strong> is a sub-sequence of a path which contains three consecutive nodes from the path. A canonical triangle is one in which we do not condition on the apex node. A conditional triangle is one in which we do condition.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fork <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"fork"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>spoon <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"spoon"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>            <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) </span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>chopstick <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"chopstick"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>                <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>                <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>                <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) </span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(fork, spoon, chopstick, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.25</span>), <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fork <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"fork"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>spoon <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"spoon"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)  <span class="sc">+</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) </span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>chopstick <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"chopstick"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)  <span class="sc">+</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) </span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(fork, spoon, chopstick, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.25</span>), <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="768"></p>
+<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="768"></p>
 <figcaption>D-separation triangles: Fork (leftmost), spoon (center), chopstick (rightmost)</figcaption>
 </figure>
 </div>

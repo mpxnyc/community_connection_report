@@ -2,7 +2,6 @@ mpxnyc_all <- function(n){
   c("#F73C95", 
     "#FF99C5", 
     "#009BE8", 
-    "#41BFFF", 
     "#C5EFFF", 
     "#5D207A", 
     "#7F3F98", 
@@ -19,11 +18,11 @@ mpxnyc_all <- function(n){
 mpxnyc_light <- function(n){
   c(
     "#FF99C5", 
-    "#009BE8", 
+    "#41BFFF", 
+    #"#009BE8", 
     "#C5EFFF", 
-    "#9E7ACC", 
-    "#59C618", 
     "#EA773D", 
+    "#59C618",
     "#FFAA7B", 
     "#D89000", 
     "#FFCD2E"

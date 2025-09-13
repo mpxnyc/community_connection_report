@@ -12,8 +12,10 @@ targets::tar_source("../R_functions")
 
 
 program_dang() |>
-  plot_swig(node_radius = 0.4) +
+  dplyr::mutate(x = x, y = y) |>
+  plot_swig(node_radius = 0.5) +
   scale_fill_mpxnyc(option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("Community" = "black", "Individual" = "black", "intervention" = "black")) +
   theme_mpxnyc_blank()
 
 
