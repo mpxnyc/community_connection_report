@@ -10,8 +10,9 @@ targets::tar_source("../R_functions")
 #| fig-cap: "Fully connected SWIG"
 
 make_swig("fully_connected")      |> 
-  plot_swig(node_radius = 0.2) + 
+  plot_swig(node_radius = 0.2, nudge_intervention_labels = 0.18) + 
   scale_fill_mpxnyc(option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black", "intervention" = "black")) +
   theme_mpxnyc_blank()
 
 ```

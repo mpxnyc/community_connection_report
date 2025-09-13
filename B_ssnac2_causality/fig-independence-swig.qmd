@@ -9,8 +9,9 @@ targets::tar_source("../R_functions")
 #| fig-cap: "SWIG with no interference or spillover"
 #| 
 make_swig("independence")      |> 
-  plot_swig(node_radius = 0.2) + 
+  plot_swig(node_radius = 0.2, nudge_intervention_labels = 0.16) + 
   scale_fill_mpxnyc(option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black", "intervention" = "black")) +
   theme_mpxnyc_blank()
 
 ```

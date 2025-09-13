@@ -12,7 +12,8 @@ targets::tar_source("../R_functions")
 
 structural  <- example_dang_2_structural() |>
                     plot_swig(node_radius = 0.15) +
-                    scale_fill_mpxnyc(option = "light") +
+                    scale_fill_mpxnyc(name = "Entity type", option = "light") +
+                    scale_color_mpxnyc(option = "manual", values = c("Community" = "black", "Individual" = "black", "intervention" = "black")) +
                     theme_mpxnyc_blank() +
                     ggplot2::ggtitle("Structural Part")
 
@@ -20,6 +21,7 @@ structural  <- example_dang_2_structural() |>
 relational  <- example_dang_2_relational() |>
                     plot_swig(node_radius = 0.2, node_margin = 0)  +
                     scale_fill_mpxnyc(name = "Entity type", option = "light") +
+                    scale_color_mpxnyc(option = "manual", values = c("Community" = "black", "Individual" = "black", "intervention" = "black")) +
                     theme_mpxnyc_blank() +
                     ggplot2::ggtitle("Relational Part") 
 
