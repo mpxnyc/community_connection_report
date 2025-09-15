@@ -9,12 +9,15 @@ targets::tar_source("../R_functions")
 #| fig-height: 5
 
 
-program_swing() |>
-  dplyr::mutate(x = 1.5*x, y = 2*y) |>
-  plot_swig(node_radius = 1, nudge_intervention_labels = 0.5, size = 4) +
+program_dang() |>
+  dplyr::mutate(x = x, y = y) |>
+  plot_swig(node_radius = 0.5) +
   scale_fill_mpxnyc(option = "light") +
   scale_color_mpxnyc(option = "manual", values = c("Community" = "black", "Individual" = "black", "intervention" = "black")) +
   theme_mpxnyc_blank()
+
+
+
 
 
 
