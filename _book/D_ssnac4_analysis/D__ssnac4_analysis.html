@@ -427,7 +427,12 @@ window.Quarto = {
   <li><a href="#local-structure" id="toc-local-structure" class="nav-link" data-scroll-target="#local-structure"><span class="header-section-number">C.3</span> Local structure</a></li>
   <li><a href="#global-structure" id="toc-global-structure" class="nav-link" data-scroll-target="#global-structure"><span class="header-section-number">C.4</span> Global structure</a></li>
   <li><a href="#dynamics" id="toc-dynamics" class="nav-link" data-scroll-target="#dynamics"><span class="header-section-number">C.5</span> Dynamics</a></li>
-  <li><a href="#statistical-inference" id="toc-statistical-inference" class="nav-link" data-scroll-target="#statistical-inference"><span class="header-section-number">C.6</span> Statistical inference</a></li>
+  <li><a href="#statistical-inference" id="toc-statistical-inference" class="nav-link" data-scroll-target="#statistical-inference"><span class="header-section-number">C.6</span> Statistical inference</a>
+  <ul class="collapse">
+  <li><a href="#npsem-ie" id="toc-npsem-ie" class="nav-link" data-scroll-target="#npsem-ie"><span class="header-section-number">C.6.1</span> NPSEM-IE</a></li>
+  <li><a href="#random-network-npsem-ie" id="toc-random-network-npsem-ie" class="nav-link" data-scroll-target="#random-network-npsem-ie"><span class="header-section-number">C.6.2</span> (Random) Network NPSEM-IE</a></li>
+  <li><a href="#bipartite-network-npsem-ie" id="toc-bipartite-network-npsem-ie" class="nav-link" data-scroll-target="#bipartite-network-npsem-ie"><span class="header-section-number">C.6.3</span> Bipartite Network NPSEM-IE</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -441,7 +446,7 @@ window.Quarto = {
 
 
 <div id="leading">
-<p>We describe the main data objects of the MPX NYC study – the Person-place graph, the Person graph and the Place graph – as well as the statistics we used to analyze them.</p>
+<p>We describe the main data objects of the MPX NYC study – the Person-place graph, the Person graph and the Place graph – as well as the statistics we used to analyze them. We assume data come from a Bipartite random network NPSEM-IE. We define statistic to describe causal mechanisms relating to mass action in networked space. We end with an outline of our approach to statistical inference and a description of the Bipartite random network NPSEM-IE bootstrap we conducted.</p>
 </div>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
@@ -507,23 +512,23 @@ Table&nbsp;C.1: Sample person-place network data
 </figcaption>
 <div aria-describedby="tbl-nodes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="cojevcbmhf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cojevcbmhf table {
+<div id="ilwpzpevsm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ilwpzpevsm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cojevcbmhf thead, #cojevcbmhf tbody, #cojevcbmhf tfoot, #cojevcbmhf tr, #cojevcbmhf td, #cojevcbmhf th {
+#ilwpzpevsm thead, #ilwpzpevsm tbody, #ilwpzpevsm tfoot, #ilwpzpevsm tr, #ilwpzpevsm td, #ilwpzpevsm th {
   border-style: none;
 }
 
-#cojevcbmhf p {
+#ilwpzpevsm p {
   margin: 0;
   padding: 0;
 }
 
-#cojevcbmhf .gt_table {
+#ilwpzpevsm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -549,12 +554,12 @@ Table&nbsp;C.1: Sample person-place network data
   border-left-color: #D3D3D3;
 }
 
-#cojevcbmhf .gt_caption {
+#ilwpzpevsm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cojevcbmhf .gt_title {
+#ilwpzpevsm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -566,7 +571,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-bottom-width: 0;
 }
 
-#cojevcbmhf .gt_subtitle {
+#ilwpzpevsm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -578,7 +583,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-top-width: 0;
 }
 
-#cojevcbmhf .gt_heading {
+#ilwpzpevsm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -590,13 +595,13 @@ Table&nbsp;C.1: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#cojevcbmhf .gt_bottom_border {
+#ilwpzpevsm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cojevcbmhf .gt_col_headings {
+#ilwpzpevsm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -611,7 +616,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#cojevcbmhf .gt_col_heading {
+#ilwpzpevsm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -631,7 +636,7 @@ Table&nbsp;C.1: Sample person-place network data
   overflow-x: hidden;
 }
 
-#cojevcbmhf .gt_column_spanner_outer {
+#ilwpzpevsm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -643,15 +648,15 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 4px;
 }
 
-#cojevcbmhf .gt_column_spanner_outer:first-child {
+#ilwpzpevsm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cojevcbmhf .gt_column_spanner_outer:last-child {
+#ilwpzpevsm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cojevcbmhf .gt_column_spanner {
+#ilwpzpevsm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -663,11 +668,11 @@ Table&nbsp;C.1: Sample person-place network data
   width: 100%;
 }
 
-#cojevcbmhf .gt_spanner_row {
+#ilwpzpevsm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cojevcbmhf .gt_group_heading {
+#ilwpzpevsm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -693,7 +698,7 @@ Table&nbsp;C.1: Sample person-place network data
   text-align: left;
 }
 
-#cojevcbmhf .gt_empty_group_heading {
+#ilwpzpevsm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -708,15 +713,15 @@ Table&nbsp;C.1: Sample person-place network data
   vertical-align: middle;
 }
 
-#cojevcbmhf .gt_from_md > :first-child {
+#ilwpzpevsm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cojevcbmhf .gt_from_md > :last-child {
+#ilwpzpevsm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cojevcbmhf .gt_row {
+#ilwpzpevsm .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -735,7 +740,7 @@ Table&nbsp;C.1: Sample person-place network data
   overflow-x: hidden;
 }
 
-#cojevcbmhf .gt_stub {
+#ilwpzpevsm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -748,7 +753,7 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 5px;
 }
 
-#cojevcbmhf .gt_stub_row_group {
+#ilwpzpevsm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -762,15 +767,15 @@ Table&nbsp;C.1: Sample person-place network data
   vertical-align: top;
 }
 
-#cojevcbmhf .gt_row_group_first td {
+#ilwpzpevsm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cojevcbmhf .gt_row_group_first th {
+#ilwpzpevsm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cojevcbmhf .gt_summary_row {
+#ilwpzpevsm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -780,16 +785,16 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 5px;
 }
 
-#cojevcbmhf .gt_first_summary_row {
+#ilwpzpevsm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cojevcbmhf .gt_first_summary_row.thick {
+#ilwpzpevsm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cojevcbmhf .gt_last_summary_row {
+#ilwpzpevsm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -799,7 +804,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#cojevcbmhf .gt_grand_summary_row {
+#ilwpzpevsm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -809,7 +814,7 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 5px;
 }
 
-#cojevcbmhf .gt_first_grand_summary_row {
+#ilwpzpevsm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -819,7 +824,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-top-color: #D3D3D3;
 }
 
-#cojevcbmhf .gt_last_grand_summary_row_top {
+#ilwpzpevsm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -829,11 +834,11 @@ Table&nbsp;C.1: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#cojevcbmhf .gt_striped {
+#ilwpzpevsm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cojevcbmhf .gt_table_body {
+#ilwpzpevsm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -842,7 +847,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#cojevcbmhf .gt_footnotes {
+#ilwpzpevsm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -856,7 +861,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#cojevcbmhf .gt_footnote {
+#ilwpzpevsm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -865,7 +870,7 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 5px;
 }
 
-#cojevcbmhf .gt_sourcenotes {
+#ilwpzpevsm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -879,7 +884,7 @@ Table&nbsp;C.1: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#cojevcbmhf .gt_sourcenote {
+#ilwpzpevsm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -887,77 +892,77 @@ Table&nbsp;C.1: Sample person-place network data
   padding-right: 5px;
 }
 
-#cojevcbmhf .gt_left {
+#ilwpzpevsm .gt_left {
   text-align: left;
 }
 
-#cojevcbmhf .gt_center {
+#ilwpzpevsm .gt_center {
   text-align: center;
 }
 
-#cojevcbmhf .gt_right {
+#ilwpzpevsm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cojevcbmhf .gt_font_normal {
+#ilwpzpevsm .gt_font_normal {
   font-weight: normal;
 }
 
-#cojevcbmhf .gt_font_bold {
+#ilwpzpevsm .gt_font_bold {
   font-weight: bold;
 }
 
-#cojevcbmhf .gt_font_italic {
+#ilwpzpevsm .gt_font_italic {
   font-style: italic;
 }
 
-#cojevcbmhf .gt_super {
+#ilwpzpevsm .gt_super {
   font-size: 65%;
 }
 
-#cojevcbmhf .gt_footnote_marks {
+#ilwpzpevsm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cojevcbmhf .gt_asterisk {
+#ilwpzpevsm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cojevcbmhf .gt_indent_1 {
+#ilwpzpevsm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cojevcbmhf .gt_indent_2 {
+#ilwpzpevsm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cojevcbmhf .gt_indent_3 {
+#ilwpzpevsm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cojevcbmhf .gt_indent_4 {
+#ilwpzpevsm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cojevcbmhf .gt_indent_5 {
+#ilwpzpevsm .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cojevcbmhf .katex-display {
+#ilwpzpevsm .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cojevcbmhf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ilwpzpevsm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<div id="tbl-nodes-1" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div id="tbl-nodes-1" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <figure class="quarto-float quarto-subfloat-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-nodes-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Nodes
@@ -1072,23 +1077,23 @@ Table&nbsp;C.2: Sample person-place network data
 </figcaption>
 <div aria-describedby="tbl-edges-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="orsgkbdmqr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#orsgkbdmqr table {
+<div id="ylukncznsy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ylukncznsy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#orsgkbdmqr thead, #orsgkbdmqr tbody, #orsgkbdmqr tfoot, #orsgkbdmqr tr, #orsgkbdmqr td, #orsgkbdmqr th {
+#ylukncznsy thead, #ylukncznsy tbody, #ylukncznsy tfoot, #ylukncznsy tr, #ylukncznsy td, #ylukncznsy th {
   border-style: none;
 }
 
-#orsgkbdmqr p {
+#ylukncznsy p {
   margin: 0;
   padding: 0;
 }
 
-#orsgkbdmqr .gt_table {
+#ylukncznsy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1114,12 +1119,12 @@ Table&nbsp;C.2: Sample person-place network data
   border-left-color: #D3D3D3;
 }
 
-#orsgkbdmqr .gt_caption {
+#ylukncznsy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#orsgkbdmqr .gt_title {
+#ylukncznsy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1131,7 +1136,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-bottom-width: 0;
 }
 
-#orsgkbdmqr .gt_subtitle {
+#ylukncznsy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1143,7 +1148,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-top-width: 0;
 }
 
-#orsgkbdmqr .gt_heading {
+#ylukncznsy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1155,13 +1160,13 @@ Table&nbsp;C.2: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#orsgkbdmqr .gt_bottom_border {
+#ylukncznsy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#orsgkbdmqr .gt_col_headings {
+#ylukncznsy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1176,7 +1181,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#orsgkbdmqr .gt_col_heading {
+#ylukncznsy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1196,7 +1201,7 @@ Table&nbsp;C.2: Sample person-place network data
   overflow-x: hidden;
 }
 
-#orsgkbdmqr .gt_column_spanner_outer {
+#ylukncznsy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1208,15 +1213,15 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 4px;
 }
 
-#orsgkbdmqr .gt_column_spanner_outer:first-child {
+#ylukncznsy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#orsgkbdmqr .gt_column_spanner_outer:last-child {
+#ylukncznsy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#orsgkbdmqr .gt_column_spanner {
+#ylukncznsy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1228,11 +1233,11 @@ Table&nbsp;C.2: Sample person-place network data
   width: 100%;
 }
 
-#orsgkbdmqr .gt_spanner_row {
+#ylukncznsy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#orsgkbdmqr .gt_group_heading {
+#ylukncznsy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1258,7 +1263,7 @@ Table&nbsp;C.2: Sample person-place network data
   text-align: left;
 }
 
-#orsgkbdmqr .gt_empty_group_heading {
+#ylukncznsy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1273,15 +1278,15 @@ Table&nbsp;C.2: Sample person-place network data
   vertical-align: middle;
 }
 
-#orsgkbdmqr .gt_from_md > :first-child {
+#ylukncznsy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#orsgkbdmqr .gt_from_md > :last-child {
+#ylukncznsy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#orsgkbdmqr .gt_row {
+#ylukncznsy .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -1300,7 +1305,7 @@ Table&nbsp;C.2: Sample person-place network data
   overflow-x: hidden;
 }
 
-#orsgkbdmqr .gt_stub {
+#ylukncznsy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1313,7 +1318,7 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 5px;
 }
 
-#orsgkbdmqr .gt_stub_row_group {
+#ylukncznsy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1327,15 +1332,15 @@ Table&nbsp;C.2: Sample person-place network data
   vertical-align: top;
 }
 
-#orsgkbdmqr .gt_row_group_first td {
+#ylukncznsy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#orsgkbdmqr .gt_row_group_first th {
+#ylukncznsy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#orsgkbdmqr .gt_summary_row {
+#ylukncznsy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1345,16 +1350,16 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 5px;
 }
 
-#orsgkbdmqr .gt_first_summary_row {
+#ylukncznsy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#orsgkbdmqr .gt_first_summary_row.thick {
+#ylukncznsy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#orsgkbdmqr .gt_last_summary_row {
+#ylukncznsy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1364,7 +1369,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#orsgkbdmqr .gt_grand_summary_row {
+#ylukncznsy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1374,7 +1379,7 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 5px;
 }
 
-#orsgkbdmqr .gt_first_grand_summary_row {
+#ylukncznsy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1384,7 +1389,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-top-color: #D3D3D3;
 }
 
-#orsgkbdmqr .gt_last_grand_summary_row_top {
+#ylukncznsy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1394,11 +1399,11 @@ Table&nbsp;C.2: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#orsgkbdmqr .gt_striped {
+#ylukncznsy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#orsgkbdmqr .gt_table_body {
+#ylukncznsy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1407,7 +1412,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-bottom-color: #D3D3D3;
 }
 
-#orsgkbdmqr .gt_footnotes {
+#ylukncznsy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1421,7 +1426,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#orsgkbdmqr .gt_footnote {
+#ylukncznsy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1430,7 +1435,7 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 5px;
 }
 
-#orsgkbdmqr .gt_sourcenotes {
+#ylukncznsy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1444,7 +1449,7 @@ Table&nbsp;C.2: Sample person-place network data
   border-right-color: #D3D3D3;
 }
 
-#orsgkbdmqr .gt_sourcenote {
+#ylukncznsy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1452,77 +1457,77 @@ Table&nbsp;C.2: Sample person-place network data
   padding-right: 5px;
 }
 
-#orsgkbdmqr .gt_left {
+#ylukncznsy .gt_left {
   text-align: left;
 }
 
-#orsgkbdmqr .gt_center {
+#ylukncznsy .gt_center {
   text-align: center;
 }
 
-#orsgkbdmqr .gt_right {
+#ylukncznsy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#orsgkbdmqr .gt_font_normal {
+#ylukncznsy .gt_font_normal {
   font-weight: normal;
 }
 
-#orsgkbdmqr .gt_font_bold {
+#ylukncznsy .gt_font_bold {
   font-weight: bold;
 }
 
-#orsgkbdmqr .gt_font_italic {
+#ylukncznsy .gt_font_italic {
   font-style: italic;
 }
 
-#orsgkbdmqr .gt_super {
+#ylukncznsy .gt_super {
   font-size: 65%;
 }
 
-#orsgkbdmqr .gt_footnote_marks {
+#ylukncznsy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#orsgkbdmqr .gt_asterisk {
+#ylukncznsy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#orsgkbdmqr .gt_indent_1 {
+#ylukncznsy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#orsgkbdmqr .gt_indent_2 {
+#ylukncznsy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#orsgkbdmqr .gt_indent_3 {
+#ylukncznsy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#orsgkbdmqr .gt_indent_4 {
+#ylukncznsy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#orsgkbdmqr .gt_indent_5 {
+#ylukncznsy .gt_indent_5 {
   text-indent: 25px;
 }
 
-#orsgkbdmqr .katex-display {
+#ylukncznsy .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#orsgkbdmqr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ylukncznsy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<div id="tbl-edges-1" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div id="tbl-edges-1" class="gt_table do-not-create-environment quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <figure class="quarto-float quarto-subfloat-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-edges-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Nodes
@@ -2004,55 +2009,48 @@ c(k) = \frac{\sum_l{m(l,k)} - \sum_k{m(l,k)}}{\sum_{l,k}{m(l,k)}}
 </section>
 <section id="statistical-inference" class="level2" data-number="C.6">
 <h2 data-number="C.6" class="anchored" data-anchor-id="statistical-inference"><span class="header-section-number">C.6</span> Statistical inference</h2>
-<p>Main idea is:</p>
+<section id="npsem-ie" class="level3" data-number="C.6.1">
+<h3 data-number="C.6.1" class="anchored" data-anchor-id="npsem-ie"><span class="header-section-number">C.6.1</span> NPSEM-IE</h3>
 <ul>
-<li><p>You have some observational nodes that are people</p></li>
-<li><p>You have some observational nodes are are places</p></li>
-<li><p>People have affiliations with places</p></li>
-<li><p>Affiliations are unlimited</p></li>
-<li><p>If a place is a neighborhood, a person node could be affiliated to that place because they have a home there. They could additionally be affiliated to that place because they have attended a gathering there.</p></li>
-<li><p>If a place is a household, a person could be affiliated to the household because they work in the househodl or because they have a friend there, or because they live there.</p></li>
-<li><p>There are quantitative data associated with the people, places and affiliations</p></li>
-<li><p>Data are a realization of law <span class="math inline">\(C_t \in M_{n\times 1}\)</span>, <span class="math inline">\(\Psi_t \in M_{n\times n}\)</span>, and <span class="math inline">\(Q_t \in M_{n^2 \times 1}\)</span> for <span class="math inline">\(t \in [1,k]\)</span>, <span class="math inline">\(k \in \mathbf{Z}\)</span> and arbitrarily large <span class="math inline">\(n \in \mathbf{Z}\)</span></p></li>
-<li><p>Goal is to infer population parameters using a sample.</p>
+<li>Assumptions:
 <ul>
-<li>We begin by defining a variable <span class="math inline">\(\mathbf{s} \in M_{n\times 1}\)</span> such that <span class="math inline">\(s_i\)</span>, the selection indicator for <span class="math inline">\(i^{th}\)</span> observational unit is one when that unit is included in the sample, and zero otherwise
-<ul>
-<li>We make independence and homogeneity assumptions</li>
-<li>We make assumptions about the determinants of <span class="math inline">\(\mathbf{s}\)</span></li>
+<li>no interference</li>
 </ul></li>
-<li>we only see this when <span class="math inline">\(s_i = 1\)</span>: <span class="math inline">\(C_{ti}\)</span></li>
-<li>we only see this when <span class="math inline">\(s_i = 1\)</span> and <span class="math inline">\(s_j = 1\)</span> : <span class="math inline">\(\Psi(i,j)\)</span></li>
-</ul></li>
-<li><p>Queston for the researcher:</p>
+<li>Define whole population DAG</li>
+<li>Missing observation indicator independent of covariates</li>
+<li>Non-parametric estimation of structural functions is feasible</li>
+</ul>
+</section>
+<section id="random-network-npsem-ie" class="level3" data-number="C.6.2">
+<h3 data-number="C.6.2" class="anchored" data-anchor-id="random-network-npsem-ie"><span class="header-section-number">C.6.2</span> (Random) Network NPSEM-IE</h3>
 <ul>
-<li>Are there estimators that you want to prioritize showing? A class? A specific measure?</li>
-<li>Are you willing to read non-parametric efficiency theory to write this section?</li>
-<li>With that in mind, how much effort should you spend on the statistical inference section?</li>
-<li>What will the statistical inference section buy the reader?</li>
-<li>General enough to cover and extend dissertation household setup?</li>
-<li>Can i trust proportion of edge characteristic d?</li>
-</ul></li>
-<li><p>We are interested in population quantities:</p>
+<li>Assumptions:
 <ul>
-<li><p>Node characteristics <span class="math inline">\(m(C, \theta)\)</span></p></li>
-<li><p>Edge characteristics <span class="math inline">\(m(Q, \theta)\)</span></p></li>
-<li><p>Edge formation process <span class="math inline">\(m(\Psi, \theta)\)</span></p></li>
-<li><p>Combinations of characteristics <span class="math inline">\(m(C, Q, \Psi, \theta)\)</span></p></li>
+<li>homogenous network interference according to constant or random network</li>
 </ul></li>
-<li><p>We estimate these based on a random sample of person nodes</p>
+<li>Define whole population homogenous DAG</li>
+<li>Missing observation indicator independent of covariates</li>
+<li>Non-parametric estimation of structural functions is infeasible
 <ul>
-<li><p>Node characteristics <span class="math inline">\(m(\hat C, \theta)\)</span></p></li>
-<li><p>Edge characteristics <span class="math inline">\(m(\hat Q, \theta)\)</span></p></li>
-<li><p>Edge formation process <span class="math inline">\(m(\hat \Psi, \theta)\)</span></p></li>
-<li><p>Combinations of characteristics <span class="math inline">\(m(\hat C, \hat Q, \hat \Psi, \theta)\)</span></p></li>
+<li>network exposure values are censored for each observation</li>
 </ul></li>
-<li><p>We estabilsh assumptions for:</p>
+<li>Need to model censoring mechanism considering random thinning of the network and underlying network topology</li>
+</ul>
+</section>
+<section id="bipartite-network-npsem-ie" class="level3" data-number="C.6.3">
+<h3 data-number="C.6.3" class="anchored" data-anchor-id="bipartite-network-npsem-ie"><span class="header-section-number">C.6.3</span> Bipartite Network NPSEM-IE</h3>
 <ul>
-<li><p>unbiasedness of estimators</p></li>
-<li><p>efficiency bounds</p></li>
+<li>Assumptions:
+<ul>
+<li>homogenous network interference according to constant or random bipartite network</li>
+<li>one partition of the random bipartite network is fully observed</li>
+<li>other partition has missing observation indicator independent of covariates</li>
 </ul></li>
-<li><p>We use the bootstrap to estimate the standard error and use these to estimate confidence intervals</p></li>
+<li>Non-parametric estimation of structural functions is feasible
+<ul>
+<li>network exposure values are fully observed for each observation</li>
+</ul></li>
+<li>Censoring mechanism is independent of network values</li>
 </ul>
 <div id="acknowledgements">
 <p><u>Lead author</u>: Keletso Makofane, MPH, PhD. <u>Editor</u>: Nicholas Diamond, MPH. (Published: June 2025).</p>
@@ -2063,6 +2061,7 @@ c(k) = \frac{\sum_l{m(l,k)} - \sum_k{m(l,k)}}{\sum_{l,k}{m(l,k)}}
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
