@@ -2,73 +2,27 @@
 
 #### Classic causal inference
 
+
+
+
+
+
+
+
 ::: {#def-statistical-model .theorem}
 ## Statistical model
 
 A *[statistical model](#def-statistical-model)* is a collection of probability distributions on a set of random variables.
 
 $$
-\mathcal{M}=\{P_\theta:\theta\in\Theta\}\quad\text{on a common set of random variables }\mathbf V.
+\mathcal{M}=\{P_\theta:\theta\in\Theta\}\quad\text{on set of random variables }\mathbf V.
 $$
-:::
-
-::: {#def-npsem-ie .theorem}
-# NPSEM-IE
-
-A *[nonparametric structural equation model with independent errors (NPSEM-IE)](#def-npsem-ie)* specifies each random variable in a [statistical model](#def-statistical-model) as a deterministic function of a subset of other variables and an independent error. No variable is its own ancestor.
-
-$$
-V=f_V(\mathbf{Pa}(V),U_V),\quad V\in\mathbf V,\qquad
-\{U_V:V\in\mathbf V\}\ \text{mutually independent},\qquad
-V\notin \mathbf{An}(V).
-$$
-:::
-
-::: {#def-intervention .theorem}
-# Intervention
-
-An operation on an NPSEM-IE which amends or replaces some structural equations. Two kinds: a *node intervention* fixes values used by downstream equations; an *edge intervention* replaces one or more structural equations with experimenter-specified functions.
-
-$$
-\text{node: } f_V\mapsto f_V^{\mathrm{do}(x)}\equiv x,
-\qquad
-\text{edge: } f_V\mapsto f_V^{*}.
-$$
-:::
-
-::: {#def-counterfactual-npsem .theorem}
-# Counterfactual NPSEM-IE
-
-A counterfactual NPSEM-IE is an NPSEM-IE that has undergone an intervention.
-
-$$
-\mathscr M^{\mathrm{do}(a)}=\text{the NPSEM-IE obtained by applying intervention }a\text{ to }\mathscr M.
-$$
-:::
-
-::: {#def-parent-child .theorem}
-## Parent/child/ancestor/descendant
-
-In an [NPSEM-IE](#def-npsem-ie), if variable $X$ appears in the structural equation for $Y$, then $X$ is a *parent* of $Y$ and $Y$ is a *child* of $X$. An *ancestor* is any parent (recursively); a *descendant* is any child (recursively).
-
-$$
-X\in \mathbf{Pa}(Y)\Rightarrow X\text{ is a parent of }Y,\qquad
-Y\in \mathbf{Ch}(X)\Rightarrow Y\text{ is a child of }X,
-$$
-
-$$
-\mathbf{An}(Y)=\operatorname{tc}(\mathbf{Pa}(Y)),
-\qquad
-\mathbf{De}(X)=\operatorname{tc}(\mathbf{Ch}(X)),
-$$
-
-where $\operatorname{tc}(\cdot)$ denotes transitive closure.
 :::
 
 ::: {#def-observational-unit .theorem}
 ## Observational unit
 
-An *[observational unit](#def-observational-unit)* is a subset of the random variables in a [statistical model](#def-statistical-model) that originate from the same data source. The collection of observational units forms a partition of the full set of random variables.
+An *[observational unit](#def-observational-unit)* is a subset of the random variables in a [statistical model](#def-statistical-model) that originate from the same data source. The collection of observational units forms a partition of the full set of random variables. Define $n$ as the number of observational units then observations are sets $(V_i)$ such that: 
 
 $$
 \mathbf V=\bigcup_{i=1}^n \mathbf V_i,\qquad \mathbf V_i\cap \mathbf V_j=\varnothing\ (i\ne j).
@@ -81,12 +35,65 @@ $$
 Two random variables are *equivalent* if they belong to different [observational units](#def-observational-unit) but represent the same construct. Two sets of random variables are equivalent if each element in one set has an equivalent in the other set.
 
 $$
-X_i\sim X_j\iff i\ne j,\ X_i\in \mathbf V_i,\ X_j\in \mathbf V_j,\ \text{and they represent the same construct}.
+X_i\sim X_j\iff i\ne j;\ X_i\in \mathbf V_i;\ X_j\in \mathbf V_j,\ X_i, X_j \text{ represent same construct}.
 $$
 :::
 
+::: {#def-npsem-ie .theorem}
+## NPSEM-IE
+
+A *nonparametric structural equation model with independent errors (NPSEM-IE)* specifies each random variable in a model as a deterministic function of other variables along with an error term. Error terms are mutually independent and the system of functions does not admit self-dependence cycles. They can be ordered to each be a function of earlier variables in the ordering. In a model of $p$ random variables. 
+
+$$
+V_{j} \;=\; f_{j}\!\big( V_{1},\dots,V_{j-1},\, U_{j} \big),
+$$
+
+$$
+\{U_i\}_{j=1}^p \ \text{ mutually independent.}
+$$
+:::
+
+::: {#def-parent-child .theorem}
+## Parent/child/ancestor/descendant
+
+In an [NPSEM-IE](#def-npsem-ie), if variable $X$ appears in the structural equation for $Y$, then $X$ is a *parent* of $Y$ and $Y$ is a *child* of $X$. The parent of a parent is an ancestor and the parent of an ancestor is an ancestor. If $X$ is an ancestor of $Y$, then $Y$ is a descendent of $X$. For a given variable $X$, the set of parents, children, ancestors, and descendants are denoted $\mathbf{Pa}(X)$, $\mathbf{Ch}(X)$, $\mathbf{An}(X)$, and $\mathbf{De}(X)$, respectively.
+
+:::
+
+
+
+::: {#def-intervention .theorem}
+# Intervention
+
+An operation on an NPSEM-IE which amends or replaces some structural equations. Two kinds: a *node intervention* fixes values used by downstream equations; an *edge intervention* replaces one or more structural equations with experimenter-specified functions.
+
+$$
+f_V\mapsto f_V^{(\mathrm{g})}
+$$
+:::
+
+::: {#def-counterfactual-npsem .theorem}
+# Counterfactual NPSEM-IE
+
+A counterfactual NPSEM-IE is an NPSEM-IE that has undergone an intervention.
+
+
+$$
+V_{j}^{(\mathbf{g})}  \;=\; f_{j}^*\!\big( V_{1}^{(\mathbf{g})},\dots,V_{j-1}^{(\mathbf{g})},\, U_{j} \big),
+$$
+
+$$
+\{U_j\}_{j=1}^p \ \text{ mutually independent.}
+$$
+
+:::
+
+
+
+
+
 ::: {#def-no-spillover .theorem}
-## No spillover
+## No spillover assumption
 
 In an [NPSEM-IE](#def-npsem-ie), the *no spillover* assumption requires that no variable is a [parent](#def-parent-child) of an [equivalent](#def-equivalence) variable in another [observational unit](#def-observational-unit).
 
@@ -97,7 +104,7 @@ $$
 :::
 
 ::: {#def-no-interference .theorem}
-## No interference
+## No interference assumption
 
 In an [NPSEM-IE](#def-npsem-ie), the *no interference* assumption requires that no variable is a [parent](#def-parent-child) of any non-[equivalent](#def-equivalence) variable in another [observational unit](#def-observational-unit).
 
@@ -108,7 +115,7 @@ $$
 :::
 
 ::: {#def-identical-distributions .theorem}
-## Identical distributions
+## Identical distributions assumption
 
 In an [NPSEM-IE](#def-npsem-ie), the *identical distributions* assumption requires that [equivalent](#def-equivalence) variables have equivalent sets of [parents](#def-parent-child) and identical structural equations.
 
@@ -120,11 +127,9 @@ $$
 ::: {#def-ffrcistg .theorem}
 ## FFRCISTG model
 
-A *[finest fully randomized causally interpretable structured tree graph (FFRCISTG) model](#def-ffrcistg)* is a collection of [NPSEM-IE](#def-npsem-ie) models, one representing the observed distribution and at least one representing a specified intervention. Each [NPSEM-IE](#def-npsem-ie) in the collection satisfies:
+A *[finest fully randomized causally interpretable structured tree graph (FFRCISTG) model](#def-ffrcistg)* is a collection of [NPSEM-IE](#def-npsem-ie) models constructed for the purpose of examinig a causal question. One representing the observed NPSEM-IE and a set representing counterfactual NPSEM-IE derived through intervening on the observed data NPSEM-IE. We assume the error term for each variable is equal, regardless of the model.
 
-1. *[No spillover](#def-no-spillover)*  
-2. *[No interference](#def-no-interference)*  
-3. *[Identical distributions](#def-identical-distributions)*
+Each [NPSEM-IE](#def-npsem-ie) in the collection satisfies the (1) [no spillover](#def-no-spillover), (2) [no interference](#def-no-interference), and (3) [identical distributions](#def-identical-distributions) assumptions. 
 
 $$
 \mathcal C=\{\mathscr M^{(a)}:a\in\mathcal A\},\quad
@@ -135,21 +140,19 @@ $$
 
 #### Network causal inference
 
+
 ::: {#def-graph .theorem}
 ## Graph
 
-A *[graph](#def-graph)* is an ordered pair $\mathscr{G} = (\mathcal{N}, \psi)$ defined by the following conditions:
-
-1. *Nodes:* $\mathcal{N}$ is a finite set of nodes.  
-2. *Adjacency function:* $\psi : \mathcal{N} \times \mathcal{N} \to \mathbb{R}_{\ge 0}$ assigns a nonnegative weight to each ordered pair of nodes.  
-3. *Connectivity:* nodes $i,j \in \mathcal{N}$ are connected if and only if $\psi(i,j) > 0$.
+A *[graph](#def-graph)* is an ordered pair $\mathscr{G} = (\mathcal{N}, \psi)$ with nodeset $\mathcal{N}$ a countable set and adjacency function $\psi : \mathcal{N} \times \mathcal{N} \to \mathbb{R}_{\ge 0}$ which assigns a nonnegative weight to each unordered pair of nodes. Nodes $i,j \in \mathcal{N}$ are connected if and only if $\psi(i,j) > 0$.
 
 $$
 \mathscr G=(\mathcal N,\psi),\qquad
 \psi:\mathcal N\times\mathcal N\to \mathbb R_{\ge 0},\qquad
-(i,j)\text{ adjacent }\Leftrightarrow \psi(i,j)>0.
+\psi(i,j)=\psi(j,i)
 $$
 :::
+
 
 ::: {#def-neighborhood .theorem}
 ## Neighborhood
@@ -208,15 +211,13 @@ g_i(\mathbf{X}_1,\dots,\mathbf{X}_K)
   = \big[g_{0},\, g_{1i}(\mathbf{X}_1),\, \dots,\, g_{Ki}(\mathbf{X}_K)\big]^T,
 $$
 
-where $g_{0} = [X_{1i}, \dots, X_{Ki}]^T$, and each $g_{ti} : \{0,1\}^n \to \mathbb{R}$ is a *component function* of $g_i$.
+where $g_{0} = [X_{1i}, \dots, X_{Ki}]^T$, and each $g_{ti} : \{0,1\}^n \to \mathbb{R}$ is a *component function* of $g_i$. A structural equation is said to be separable if its exposure mapping is separable. 
 :::
 
 ::: {#def-loyalty .theorem}
 ## Loyalty
 
-Given a [graph](#def-graph) $\mathscr{G} = (\mathcal{N}, \psi)$, let $\mathcal{N}_i$ denote the [neighborhood](#def-neighborhood) of node $i$. 
-
-A [component function](#def-separability) $g_{ti}$ is *[loyal](#def-loyalty)* to $\mathscr{G}$ if for all $\mathbf{X}, \mathbf{X}' \in \{0,1\}^n$, such that
+Given a [graph](#def-graph) $\mathscr{G} = (\mathcal{N}, \psi)$, let $\mathcal{N}_i$ denote the [neighborhood](#def-neighborhood) of node $i$. A [component function](#def-separability) $g_{ti}$ is *[loyal](#def-loyalty)* to $\mathscr{G}$ if for all $\mathbf{X}, \mathbf{X}' \in \{0,1\}^n$, such that
 
 $$
 \mathbf{X}_{\mathcal{N}_i} = \mathbf{X}'_{\mathcal{N}_i}
@@ -224,15 +225,13 @@ $$
 g_{ti}(\mathbf{X}) = g_{ti}(\mathbf{X}').
 $$
 
-An exposure mapping is loyal to $\mathscr{G}$ if it is separable and all its component functions are loyal to $\mathscr{G}$.
+An exposure mapping is loyal to $\mathscr{G}$ if it is separable and all its component functions are loyal to $\mathscr{G}$. A structural equation is said to be loyal if its exposure mapping is loyal.
 :::
 
 ::: {#def-positional-invariance .theorem}
 ## Positional invariance
 
-Given a [graph](#def-graph) $\mathscr{G} = (\mathcal{N}, \psi)$, let $\mathcal{N}_i$ denote the [neighborhood](#def-neighborhood) of node $i$. For a vector $\mathbf{X} \in \{0,1\}^n$, write $\mathbf{X}_{\mathcal{N}_i}$ for the subvector of $\mathbf{X}$ consisting of entries indexed by nodes in $\mathcal{N}_i$. For a [network weights vector](#def-network-weights-vector) $\Psi_i$, write $\Psi_{i,\mathcal{N}_i}$ for the subvector consisting of adjacency weights $\psi(i,j)$ with $j \in \mathcal{N}_i$.
-
-A [component function](#def-separability) $g_{ti}$ is *[positionally invariant](#def-positional-invariance)* if for nodes $i,j \in \mathcal{N}$, there exists a conformable permutation matrix $\mathbf{M}$ such that
+Given a [graph](#def-graph) $\mathscr{G} = (\mathcal{N}, \psi)$, let $\mathcal{N}_i$ and vectors $\mathbf{X}, \mathbf{X'} \in \{0,1\}^n$, a [component function](#def-separability) $g_{ti}$ is *[positionally invariant](#def-positional-invariance)* if for nodes $i,j \in \mathcal{N}$, there exists a conformable permutation matrix $\mathbf{M}$ such that
 
 $$
 \mathbf{X}_{\mathcal{N}_i} = \mathbf{M}\mathbf{X}'_{\mathcal{N}_j}, 
@@ -242,7 +241,7 @@ $$
 g_{ti}(\mathbf{X}) = g_{tj}(\mathbf{X}').
 $$
 
-An exposure mapping shows positional invariance with respect to $\mathscr{G}$ if it is separable and all its component functions show positional invariance. 
+An exposure mapping shows positional invariance with respect to $\mathscr{G}$ if it is separable and all its component functions show positional invariance. A structural equation is positionally invariant if its exposure mapping is positionally invariant. 
 :::
 
 ::: {#def-boundedness .theorem}
@@ -259,24 +258,27 @@ An exposure mapping is bounded if it is separable and all its component function
 :::
 
 ::: {#def-homogeneous-network-interference .theorem}
+## Network exposure mappings and values
+
+
+
+:::
+
+::: {#def-homogeneous-network-interference .theorem}
 ## Homogeneous network interference
 
 An exposure mapping exhibits *[homogeneous network interference](#def-homogeneous-network-interference)* with respect to a [graph](#def-graph) $\mathscr{G}$ if it is separable, bounded, positionally invariant, and loyal to $\mathscr{G}$. An NPSEM-IE exhibits homogeneous network interference if all its exposure mappings do.
 
-$$
-\text{HNI on }\mathscr G \iff \text{separable} \wedge \text{bounded} \wedge \text{positional invariance} \wedge \text{loyalty}.
-$$
 :::
+
+
 
 ::: {#def-network-ffrcistg .theorem}
 ## Network FFRCISTG model
 
 A *[network FFRCISTG model](#def-network-ffrcistg)* is a [FFRCISTG model](#def-ffrcistg) in which the underlying [NPSEM-IEs](#def-npsem-ie) exhibit no spillover, homogeneous network interference with respect to $\mathscr{G}$, and identical distributions. 
 
-$$
-\mathcal C=\{\mathscr M^{(a)}\},\qquad
-\forall a:\ \text{no spillover}\ \wedge\ \text{HNI w.r.t. }\mathscr G\ \wedge\ \text{identical distributions}.
-$$
+
 :::
 
 #### Social and spatial inference
@@ -309,9 +311,6 @@ $$
 
 In a random graph NPSEM-IE, an exposure mapping exhibits homogeneous random network interference if it is separable and bounded and each of its component functions is loyal to a random graph included in the model.
 
-$$
-\text{HRNI} \iff \text{separable} \wedge \text{bounded} \wedge \big(\forall t,i:\ g_{ti}\ \text{loyal to generated graphs}\big).
-$$
 :::
 
 ::: {#def-social-spatial-ffrcistg .theorem}
@@ -319,10 +318,7 @@ $$
 
 A FFRCISTG in which the NPSEM-IEs satisfy: (i) no spillover (optionally exempting graph generators), (ii) homogeneous random network interference, and (iii) identical distributions.
 
-$$
-\mathcal C=\{\mathscr M^{(a)}\},\qquad
-\forall a:\ \text{no spillover (w.r.t. variables)} \wedge \text{HRNI} \wedge \text{identical distributions}.
-$$
+
 :::
 
 ::: {#def-bipartite-graph .theorem}
