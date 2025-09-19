@@ -19,15 +19,27 @@ $$
 $$
 :::
 
-::: {#def-npsem-ie .theorem}
-## NPSEM-IE
+::: {#def-npsem .theorem}
+## NPSEM
 
-A nonparametric structural equation model with independent errors (NPSEM-IE) is a [statistical model](#def-statistical-model) in which each random variable is as deterministic function (defined by a structural equation) of other variables along with an error term. Error terms are mutually independent and no variable is direclty or indirectly a function of itself. 
+A nonparametric structural equation model with independent errors (NPSEM-IE) is a [statistical model](#def-statistical-model) in which each random variable is as deterministic function (defined by a structural equation) of other variables along with an error term. 
 
 $$
 \mathscr M=\{f_{j}:V_j\in\mathbf V\}
 $$
 where 
+
+$$
+V_{j} \;=\; f_{j}\!\big( V_{1},\dots,V_{j-1},\, U_{j} \big),
+$$
+
+:::
+
+::: {#def-npsem-ie .theorem}
+## NPSEM-IE
+
+A nonparametric structural equation model with independent errors (NPSEM-IE) is an [NPSEM](#def-npsem) in which all error terms are indpendent. 
+
 
 $$
 V_{j} \;=\; f_{j}\!\big( V_{1},\dots,V_{j-1},\, U_{j} \big),
@@ -112,40 +124,27 @@ X_i\sim X_j\Rightarrow f_{X_i}=f_{X_j}.
 $$
 :::
 
-::: {#def-intervention-ffrcistg .theorem}
-## Intervention
 
 
-An intervention is an ordered pair $(\mathscr{M}, \Gamma)$ which contains a NPSEM-IE $\mathscr{M}$, and a set of deterministic functions  
-$$
-\Gamma = \{ h_V  : V \in \mathbf V \text{ such that } h_V, f_V \text{ have identical arguments}\}
-$$  
+::: {#def-intervention-regime .theorem}
+## Intervention regime
 
-which are each indexed by one of the random variables in the model and have the same arguments as the structural equation $f_V \in \mathscr{M}$ for that variable.
-:::
-
-::: {#def-intervention-set .theorem}
-## Intervention set
-
-Given intervention $(\mathscr{M}, \Gamma)$, the intervention set is the subset of random variables associated with a function in $\Gamma$.
-
+A set of deterministic functions called interventional structural equations which are defined in relation to $\mathbf{E} \subset \mathbf V$ is the subset of the random variables whose structural equations are to be intervened upon. Each interventional structrual equation must have the same domain and range as the structural equation it is to replace. 
 
 $$
-\mathbf V^I = \{V : h_V \in \Gamma\} \subset  \mathbf V
+\Gamma = \{ h_V  : V \in \mathbf \mathbf{E} \text{ such that } h_V, f_V \text{ have identical arguments}\}
 $$
-
-
-
-
 
 
 :::
+
+
 
 
 ::: {#def-counterfactual-npsem .theorem}
 # Counterfactual NPSEM-IE
 
-Given intervention $(\mathscr{M}, \Gamma)$, the counterfactual NPSEM-IE is defined
+Given intervention regime $\Gamma$ and NPSEM-IE $\mathscr{M}$, the counterfactual NPSEM-IE is defined
 
 
 $$
@@ -156,7 +155,7 @@ Where
 
 $$
 f_V^{(\Gamma)} = \begin{cases}
-  h_V & \text{if}  & V \in \mathbf V^I\\
+  h_V & \text{if}  & V \in \mathbf E\\
   f_V & \text{otherwise}
 \end{cases}
 $$
@@ -164,55 +163,43 @@ $$
 
 :::
 
-::: {#def-counterfactual-random-variables .theorem}
-# Counterfactual random variable
 
-Given intervention $(\mathscr{M}, \Gamma)$, with  $\mathscr{M} = \{f_V: V \in \mathbf V\}$ such that 
-
-$$
-V  \;=\; f_V\big( \mathbf{Pa}(V), U_V \big), \quad \{U_V\}_{V \in \mathbf V} \ \text{ mutually independent.}
-$$
-
-the counterfactual random variables are defined:
-
-$$
-V^{(\Gamma)}  \;=\; f_V^{(\Gamma)}\big( \mathbf{Pa}(V)^{(\Gamma)}, U_V \big)
-$$
-
-
-where 
-
-$$ 
-\mathbf{Pa}(V)^{(\Gamma)} = \{ W^{(\Gamma)}: W \in \mathbf{Pa}(V)\}
-$$ 
-
-Note that the $U_V$ represented as an argument for $f_V^{(\Gamma)}$ is identical in value to the $U_V$ represented as an argument for $f_V$. This is the basis of the "consistency" assumption.
-
-:::
 
 ::: {#def-causal-model .theorem}
 ## Causal model
 
-A causal model $\mathscr{C}$ is a statistical model of the observed and counterfactual random variables associated with a given set of interventions $\{(\mathscr{M},\Gamma_k)\}_{k\in \mathbf E }$. In this model, the error term for each counterfactual random variable is set as equal to the error term in the corresponding observed variable. 
-
-
+A causal model $\mathscr{C}$ is a statistical model combining an NPSEM-IE $\mathscr{M}$ with its related counterfactual NPSEM-IEs $\{\mathscr{M}^{(\Gamma)}\}_{\Gamma \in \mathscr{A}}$ defined in relation to a set of intervention regimes $\mathscr{A}$. 
 
 $$
-\mathscr{C} = \mathscr{M} \cup \{\mathscr{M}^{(\Gamma)}\}_{\Gamma \in \mathbf E} 
+\mathscr{C} = \mathscr{M} \cup \{\mathscr{M}^{(\Gamma)}\}_{\Gamma \in \mathscr{A}} 
 $$
-With observed random variables associated with this model being
+The random variables included in the model include two subsets - observed random variables 
 
 $$
-V  \;=\; f_V\big( \mathbf{Pa}(V), U_V \big) \quad \{U_V\}_{V \in \mathbf V} \ \text{ mutually independent.}
+\mathbf V^\mathscr{C} = \mathbf V \cup \{\mathbf V^{(\Gamma)}\}_{\Gamma \in \mathbf E}
 $$
 
+where $V \in \mathbf V$ is defined
+$$
+V  \;=\; f_V\big( \mathbf{Pa}(V), U_V \big)
+$$
 
-and counterfactual random variables
-
+$$
+ \{U_V\}_{V \in \mathbf V} \ \text{ mutually independent.}
+$$
+and for each $\Gamma \in \mathbf E$, $V^{(\Gamma)} \in\mathbf V^{(\Gamma)}$ is defined
 
 $$
 V^{(\Gamma)}  \;=\; f_V^{(\Gamma)}\big( \mathbf{Pa}(V)^{(\Gamma)}, U_V \big)
 $$
+
+By assumption, the error term for each counterfactual random variable is equal to the error term in the corresponding observed variable. 
+
+
+
+
+
+
 
 :::
 
@@ -344,7 +331,7 @@ A network exposure mapping with respect to [graph](#def-graph) $\mathscr{G}_t$  
 ::: {#def-homogeneous-network-interference .theorem}
 ## Homogeneous network interference
 
-An exposure mapping exhibits homogeneous network interference with respect to a [graph set](#def-graph) $\{\mathscr{G}_t\}_{t \in [1:K]}$ if it is separable and all its [component functions](#def-separability) are [network exposure mappings](#def-network-exposure-mapping).
+An exposure mapping exhibits homogeneous network interference with respect to a [graph set](#def-graph) $\{\mathscr{G}_t\}_{t \in [1:K]}$ if it is separable and all its [component functions](#def-separability) are [network exposure mappings](#def-network-exposure-mapping). An NPSEM-IE exhibiits homogenous network interference if all its exposure mappings exhibit homogenous network interference. 
 
 :::
 
@@ -353,50 +340,68 @@ An exposure mapping exhibits homogeneous network interference with respect to a 
 ::: {#def-network-ffrcistg .theorem}
 ##  NFFRCISTG model
 
-A network finest fully randomized causally interpretable structured tree graph (NFFRCISTG) model defined on $\{\mathscr{G}_t\}_{t \in [1:K]}$ is a causal model which satisfies the (1) [no spillover](#def-no-spillover), (2) [homogenous network interference](#def-no-interference) with respect to $\{\mathscr{G}_t\}_{t \in [1:K]}$, and (3) [identical distributions](#def-identical-distributions) assumptions. 
+A network finest fully randomized causally interpretable structured tree graph (NFFRCISTG) model is a causal model which satisfies the (1) [no spillover](#def-no-spillover), (2) [homogenous network interference](#def-no-interference) with respect to $\{\mathscr{G}_t\}_{t \in [1:K]}$, and (3) [identical distributions](#def-identical-distributions) assumptions. 
 
 
 :::
 
 #### Social and spatial inference
 
-::: {#def-random-nodes-bipartite-graph .theorem}
-## Random graph generator
 
-A structural equation that produces the adjacency function (matrix) of a bipartite graph with conformable dimensions.
+::: {#def-graph-generator .theorem}
+# Random graph generator
+
+In an NPSEM, a random edge generator $\psi$ is an $n \times n$ function whose entries $\psi(i,j)$ are each a deterministic function of the other variables in the model along with an error term. 
+
 
 $$
-f_\psi:\mathcal U\to \mathbb R_{\ge 0}^{|V_1|\times |V_2|},
-\qquad
-\psi = f_\psi(U_\psi),\quad \operatorname{supp}(\psi)\subseteq V_1\times V_2 \cup V_2\times V_1.
+\psi(i,j) = f_{\psi_{ij}}(\mathbf{Pa}(\psi(i,j)), U_{\psi_{ij}})
 $$
+To ensure that $\psi(i,j) = \psi(j,i)$ we define
+
+$$
+U_{\psi_{ij}} = U_{\psi_{ji}}
+$$
+
+
 :::
 
-::: {#def-social-spatial-npsem .theorem}
-## Random graph NPSEM-IE
+::: {#def-random-graph-npsem .theorem}
+## Random graph NPSEM
 
-An NPSEM-IE whose structural equations include random graph generators whose component functions are loyal to one or more random graphs included in the model.
+A random graph NPSEM is an NPSEM which includes random graph generators among the structural equations. It has two parts -- the structural part which contains all the structural equations which are not graph generators, and the relationsal part which contains random graph generators.
 
-$$
-\mathscr M=\{f_V:V\in\mathbf V\}\cup\{f_\psi\},\qquad
-\text{each }g_{ti}\text{ in exposure mappings is loyal to the generated graphs.}
-$$
-:::
-
-::: {#def-homogeneous-network-interference .theorem}
-## Homogeneous random network interference
-
-In a random graph NPSEM-IE, an exposure mapping exhibits homogeneous random network interference if it is separable and bounded and each of its component functions is loyal to a random graph included in the model.
+The error terms of the structural part are mutually independent. In the relational part, error terms accross graph generators are independent. 
 
 :::
+
+::: {#def-homogenous-random-network-interference .theorem}
+# Homogenous random network interference
+
+An exposure mapping exhibits homogeneous random network interference with respect to a [random graph set](#def-random-graph) $\{\psi_t\}_{t \in [1:K]}$ if it is separable and all its [component functions](#def-separability) are [network exposure mappings](#def-network-exposure-mapping). An NPSEM-IE exhibiits homogenous random network interference if all its exposure mappings exhibit homogenous randomn network interference. 
+
+:::
+
 
 ::: {#def-social-spatial-ffrcistg .theorem}
 ## RNFFRCISTG
 
-A RNFFRCISTG is a causal model where (1) the interventions in the model were conducted on a random graph NPSEM-IE. The model satisfies the (i) no spillover (exempting graph generators), (ii) homogeneous random network interference with respect to the random networks, and (iii) identical distributions assumptions.
+A random network finest fully randomized causally interpretable structured tree graph (RNFFRCISTG) model is a causal model defined on a [random graph NPSEM-IE](#def-random-graph-npsem ) which satisfies the (1) [no spillover](#def-no-spillover), (2) [homogenous random network interference](#def-homogenous-random-network-interference), and (3) [identical distributions](#def-identical-distributions) assumptions.
+:::
 
+
+::: {#def-random-graph-npsem .theorem}
+## Random bipartite graph NPSEM
+
+A random bipartite graph NPSEM is a random graph NPSEM which whose generators produce bipartite graphs. 
+
+ 
 
 :::
+
+
+
+
 
 
 
@@ -404,7 +409,7 @@ A RNFFRCISTG is a causal model where (1) the interventions in the model were con
 ::: {#def-social-spatial-ffrcistg .theorem}
 ## BRNFFRCISTG model
 
-A BRNFFRCISTG is a causal model where (1) the interventions in the model were conducted on a random graph NPSEM-IE. The model satisfies the (i) no spillover (exempting graph generators), (ii) homogeneous random network interference with respect to the random networks, and (iii) identical distributions assumptions.
+A bipartite random network finest fully randomized causally interpretable structured tree graph (BRNFFRCISTG) model is a causal model defined on a [bipartite random graph NPSEM-IE](#def-bipartite-random-graph-npsem ) which satisfies the (1) [no spillover](#def-no-spillover), (2) [homogenous random network interference](#def-homogenous-random-network-interference), and (3) [identical distributions](#def-identical-distributions) assumptions.
 
 
 :::

@@ -1,9 +1,32 @@
-### Causal reasoning under random interference {.unnumbered}
 
-#### Bipartite graphs
+### Causal reasoning under random interference {#sec-random-interference .unnumbered}
 
-#### Random graphs
+In the previous section we considered interference with a fixed network structure and introduced the simplifying assumption of homogeneity. But in many real-world settings, connections themselves are uncertain or vary across time. For example, when people attend events or move between locations, it is not fixed who interacts with whom. To capture this type of *random interference*, we extend our framework to include stochastic network structures.  
 
+#### Random graphs {#sec-random-graphs}
 
-#### Random network FFRCISTG
+Random graphs bring probability into the network itself. Instead of assuming we know exactly which edges exist, we treat them as random variables. For example, two people may have a certain probability of meeting at a venue, or a person may randomly choose which locations to visit.  
 
+This randomness captures the idea that interference patterns are not fixed in advance, but vary across realizations. Potential outcomes can then be thought of as depending both on treatments and on the random draw of a network.  
+
+#### Homogeneous random interference {#sec-homogeneous-random}
+
+Conditional on a random draw of the network, we often simplify further with the assumption of *homogeneous random interference*. This means that the effect of a neighbor’s treatment on unit $i$ is the same no matter which neighbor it is. What matters is the number or proportion of treated neighbors, not their identity.  
+
+This mirrors the homogeneous assumption from the fixed network setting, but now exposures vary both with treatment assignments and with the random realization of the network.  
+
+#### Bipartite graphs {#sec-bipartite-graphs}
+
+A bipartite graph is one where nodes are divided into two disjoint sets and edges connect only across sets. In random interference problems, it is often useful to model people on one side and places or events on the other. An edge then represents a person visiting a place, and interference arises because multiple people may be connected through the same location.  
+
+This structure allows us to represent exposures that are not purely person-to-person, but mediated by shared environments.  
+
+#### Random bipartite network FFRCISTG {#sec-random-bipartite-ffrcistg}
+
+To combine these ideas, we extend Robins’s FFRCISTG further to a **random bipartite network FFRCISTG**. Here, potential outcomes are indexed not only by treatments and exposure mappings, but also by the realization of a random bipartite network.  
+
+Formally, the counterfactual universe includes outcomes of the form $Y_i(a_i, g_i, G)$, where $G$ denotes a particular draw of the network structure.  
+
+This framework allows us to reason about direct effects, spillover effects, and the uncertainty introduced by random connections. It generalizes the fixed-network NFFRCISTG to settings where links themselves are stochastic, such as mobility-driven or event-based exposures.  
+
+In the next section, we return to the worked example and show how random interference can be represented through a random bipartite network FFRCISTG.  
