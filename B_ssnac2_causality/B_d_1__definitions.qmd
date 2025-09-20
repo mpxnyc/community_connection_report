@@ -4,15 +4,17 @@
 
 
 
+::: {#def-random-variable .theorem}
+# Random variable
 
-
-
+A notional **scalar** quantity assumed to be related to others through a statistical model.
+:::
 
 
 ::: {#def-statistical-model .theorem}
 ## Statistical model
 
-A statistical model is a collection of probability distributions on a set of random variables.
+A collection of probability distributions on a vector of random variables $\mathbf V$. Probability distributions in this model are characterized using a set of parameters $\mathbf \theta$.
 
 $$
 \mathcal{M}=\{P_\theta:\theta\in\Theta\}\quad\text{on set of random variables }\mathbf V.
@@ -20,14 +22,15 @@ $$
 :::
 
 ::: {#def-npsem .theorem}
-## NPSEM
+## Non-parametric structural equation model \[NPSEM\]
 
-A nonparametric structural equation model with independent errors (NPSEM-IE) is a [statistical model](#def-statistical-model) in which each random variable is as deterministic function (defined by a structural equation) of other variables along with an error term. 
+A [statistical model](#def-statistical-model) in which $\theta$ is a set of deterministic functions called structural equations. Each equation $f_V \in \theta$ returns the value of a random variable $V \in \mathbf V$ in the model and is a function of the other random variables $\mathbf V_{-V}$ as well as a random error term $U$. 
 
 $$
-\mathscr M=\{f_{j}:V_j\in\mathbf V\}
+\theta =\{f_{j}:V_j\in\mathbf V\}
 $$
-where 
+
+By definition, no random variable is directly or indirectly a function of itself so we can order the random variables and write each as a function of all past random variables in the order: 
 
 $$
 V_{j} \;=\; f_{j}\!\big( V_{1},\dots,V_{j-1},\, U_{j} \big),
@@ -36,24 +39,20 @@ $$
 :::
 
 ::: {#def-npsem-ie .theorem}
-## NPSEM-IE
+## NPSEM with independent errors \[NPSEM-IE\]
 
-A nonparametric structural equation model with independent errors (NPSEM-IE) is an [NPSEM](#def-npsem) in which all error terms are indpendent. 
+An [NPSEM](#def-npsem) with mutually independent error terms.
 
-
-$$
-V_{j} \;=\; f_{j}\!\big( V_{1},\dots,V_{j-1},\, U_{j} \big),
-$$
 
 $$
-\{U_j\}_{V_j \in \mathbf V} \ \text{ mutually independent.}
+j\neq k  \iff  U_j \perp U_k 
 $$
 :::
 
-::: {#def-parent-child .theorem}
+::: {#def-parent .theorem}
 ## Parent
 
-In an [NPSEM-IE](#def-npsem-ie), if variable $X$ appears in the structural equation for $Y$, then $X$ is a parent of $Y$ and $Y$. The set of parents for $X$ is denoted $\mathbf{Pa}(X)$.
+A random variable $X$ is a parent to random variable $Y$ if $X$ appears in the [structural equation](#def-npsem) for $Y$. The set of parents for $X$ is denoted $\mathbf{Pa}(X)$.
 
 :::
 
@@ -61,25 +60,25 @@ In an [NPSEM-IE](#def-npsem-ie), if variable $X$ appears in the structural equat
 ::: {#def-observational-unit .theorem}
 ## Observational unit
 
-An observational unit is a subset of the random variables in a [statistical model](#def-statistical-model) that originate from the same data source. The collection of observational units forms a partition of the full set of random variables. 
-
-Given a set of variables $\mathbf V_i$ an observational unit is a set $\mathbf V$ such that:
+A sub-vector of the random variables $\mathscr{O} \subset \mathbf V$ in a [statistical model](#def-statistical-model) such that (assuming there are $n$ observational units in the model):
 
 $$
-\mathbf V=\bigcup_{i=1}^n \mathbf V_i,\qquad \mathbf V_i\cap \mathbf V_j=\varnothing\ (i\ne j).
+\mathbf V = \big[ \mathscr{O}_1, ..., \mathscr{O}_n\big]^T
 $$
+
 :::
+
 
 ::: {#def-equivalence .theorem}
 ## Equivalence
 
-Two random variables are equivalent if they belong to different [observational units](#def-observational-unit) but represent the same construct. 
+Two random variables are equivalent accross observations if they belong to different [observational units](#def-observational-unit) but represent the same construct. 
 
 $$
-X_i\sim X_j\iff i\ne j;\ X_i\in \mathbf V_i;\ X_j\in \mathbf V_j,\ X_i, X_j \text{ represent same construct}.
+X_i\sim X_j\iff \ X_i\in  \mathscr{O}_i;\ X_j\in  \mathscr{O}_j,\ X_i \text{ same construct } X_j \ (i\ne j).
 $$
-Two sets of random variables are equivalent if each element in one set has an equivalent in the other set.
-
+ 
+Two random variables are equivalent across models if they belong to different [statitical models](#def-statistical-model) but represent the same construct. 
 
 :::
 
@@ -95,29 +94,33 @@ Two sets of random variables are equivalent if each element in one set has an eq
 ::: {#def-no-spillover .theorem}
 ## No spillover assumption
 
-In an [NPSEM-IE](#def-npsem-ie), the *no spillover* assumption requires that no variable is a [parent](#def-parent-child) of an [equivalent](#def-equivalence) variable in another [observational unit](#def-observational-unit).
+The assumption that no variable is a [parent](#def-parent-child) of an [equivalent](#def-equivalence) variable in another [observational unit](#def-observational-unit).
+
 
 $$
 X\notin \mathbf{Pa}(X')\quad
-\forall\, X\sim X',\ X\in \mathbf V_i,\ X'\in \mathbf V_j,\ i\ne j.
+\forall\, X\sim X',\ X\in \mathscr O_i,\ X'\in \mathscr O_j,\ i\ne j.
 $$
 :::
 
 ::: {#def-no-interference .theorem}
-## No interference assumption
+## No interference assumption 
 
-In an [NPSEM-IE](#def-npsem-ie), the *no interference* assumption requires that no variable is a [parent](#def-parent-child) of any non-[equivalent](#def-equivalence) variable in another [observational unit](#def-observational-unit).
+The assumption that no variable is a [parent](#def-parent-child) of a [non-equivalent](#def-equivalence) variable in another [observational unit](#def-observational-unit).
+
 
 $$
 X\notin \mathbf{Pa}(Y)\quad
-\forall\, X\in \mathbf V_i,\ Y\in \mathbf V_j,\ i\ne j,\ X\not\sim Y.
+\forall\, X\in \mathscr O_i,\ Y\in \mathscr O_j,\ X\not\sim Y \ i\ne j
 $$
 :::
 
 ::: {#def-identical-distributions .theorem}
 ## Identical distributions assumption
 
-In an [NPSEM-IE](#def-npsem-ie), the *identical distributions* assumption requires that [equivalent](#def-equivalence) variables have identical structural equations.
+
+The assumption that [equivalent](#def-equivalence) variables have identical [structural equations](#def-npsem).
+
 
 $$
 X_i\sim X_j\Rightarrow f_{X_i}=f_{X_j}.
@@ -126,13 +129,20 @@ $$
 
 
 
+::: {#def-intervention .theorem}
+## Intervention equation
+
+An intervention equation in relation to random variable $V$ is a deterministic function $h$ with the same domain and co-domain as the structural equation for $V$. 
+:::
+
 ::: {#def-intervention-regime .theorem}
 ## Intervention regime
 
-A set of deterministic functions called interventional structural equations which are defined in relation to $\mathbf{E} \subset \mathbf V$ is the subset of the random variables whose structural equations are to be intervened upon. Each interventional structrual equation must have the same domain and range as the structural equation it is to replace. 
+
+A set of  intervention equations defined on a subset of random variables $\mathbf E \subset \mathbf V$.
 
 $$
-\Gamma = \{ h_V  : V \in \mathbf \mathbf{E} \text{ such that } h_V, f_V \text{ have identical arguments}\}
+\Gamma = \{ h_V \}_{V \in \mathbf{E}} 
 $$
 
 
@@ -141,17 +151,16 @@ $$
 
 
 
-::: {#def-counterfactual-npsem .theorem}
-# Counterfactual NPSEM-IE
+::: {#def-interventional-npsem .theorem}
+# Interventional NPSEM
 
-Given intervention regime $\Gamma$ and NPSEM-IE $\mathscr{M}$, the counterfactual NPSEM-IE is defined
+An NPSEM $\mathscr{M}$ for which a subset of structural equations $\mathbf E$ have been replaced by intervention equations in intervention regime $\Gamma$. 
 
 
 $$
 \mathscr{M}^{(\Gamma)} =  \{f_V^{(\Gamma)}: V \in \mathbf V \}
 $$
 
-Where 
 
 $$
 f_V^{(\Gamma)} = \begin{cases}
@@ -168,35 +177,16 @@ $$
 ::: {#def-causal-model .theorem}
 ## Causal model
 
-A causal model $\mathscr{C}$ is a statistical model combining an NPSEM-IE $\mathscr{M}$ with its related counterfactual NPSEM-IEs $\{\mathscr{M}^{(\Gamma)}\}_{\Gamma \in \mathscr{A}}$ defined in relation to a set of intervention regimes $\mathscr{A}$. 
+A causal model $\mathcal C$ of NPSEM $\mathcal M$ under intervention $\Gamma$ is an NPSEM $\mathcal C (\mathcal M, \Gamma)$ that is generated by combining $\mathcal M$ with its interventional NPSEMs $\mathcal M^{(\Gamma_1)}...\mathcal M^{(\Gamma_q)}$ and setting the error terms equal for variables that are equivalent across models.
 
 $$
-\mathscr{C} = \mathscr{M} \cup \{\mathscr{M}^{(\Gamma)}\}_{\Gamma \in \mathscr{A}} 
-$$
-The random variables included in the model include two subsets - observed random variables 
-
-$$
-\mathbf V^\mathscr{C} = \mathbf V \cup \{\mathbf V^{(\Gamma)}\}_{\Gamma \in \mathbf E}
+\mathcal{C} = \mathcal{M} \cup \mathcal M^{(\Gamma_1)} \cup ... \cup \mathcal M^{(\Gamma_q)}
 $$
 
-where $V \in \mathbf V$ is defined
-$$
-V  \;=\; f_V\big( \mathbf{Pa}(V), U_V \big)
-$$
 
 $$
- \{U_V\}_{V \in \mathbf V} \ \text{ mutually independent.}
+{U_V} = {U}^{(\Gamma_1)}_V = ... = {U}^{(\Gamma_q)}_V, \quad \text { for } V \in \mathbf V
 $$
-and for each $\Gamma \in \mathbf E$, $V^{(\Gamma)} \in\mathbf V^{(\Gamma)}$ is defined
-
-$$
-V^{(\Gamma)}  \;=\; f_V^{(\Gamma)}\big( \mathbf{Pa}(V)^{(\Gamma)}, U_V \big)
-$$
-
-By assumption, the error term for each counterfactual random variable is equal to the error term in the corresponding observed variable. 
-
-
-
 
 
 
@@ -206,7 +196,7 @@ By assumption, the error term for each counterfactual random variable is equal t
 ::: {#def-ffrcistg .theorem}
 ## FFRCISTG model
 
-A finest fully randomized causally interpretable structured tree graph (FFRCISTG) model is a causal model that satisfies the (1) [no spillover](#def-no-spillover), (2) [no interference](#def-no-interference), and (3) [identical distributions](#def-identical-distributions) assumptions. 
+A finest fully randomized causally interpretable structured tree graph (FFRCISTG) model is a causal model of an NPSEM-IE $\mathcal M$ under intervention regime $\Gamma$. By assumption $\mathcal M$ satisfies: (1) [no spillover](#def-no-spillover), (2) [no interference](#def-no-interference), and (3) [identical distributions](#def-identical-distributions). 
 
 
 :::

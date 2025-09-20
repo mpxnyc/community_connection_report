@@ -224,7 +224,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Welcome to RESPND-MI</span></a>
+ <span class="menu-text">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -1463,78 +1463,81 @@ V_{si}^{(\bar{\mathbf{t}})} =  \frac{V_{si} \mathbf{1}_{x = g(t_{\bar{s},N_i}) }
 <h3 class="unnumbered anchored" data-anchor-id="a.-definitions">a. Definitions</h3>
 <section id="classic-causal-inference" class="level4">
 <h4 class="anchored" data-anchor-id="classic-causal-inference">Classic causal inference</h4>
+<div id="def-random-variable" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition B.1 (Random variable)</strong></span> A notional <strong>scalar</strong> quantity assumed to be related to others through a statistical model.</p>
+</div>
 <div id="def-statistical-model" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.1 (Statistical model)</strong></span> A statistical model is a collection of probability distributions on a set of random variables.</p>
+<p><span class="theorem-title"><strong>Definition B.2 (Statistical model)</strong></span> A collection of probability distributions on a vector of random variables <span class="math inline">\(\mathbf V\)</span>. Probability distributions in this model are characterized using a set of parameters <span class="math inline">\(\mathbf \theta\)</span>.</p>
 <p><span class="math display">\[
 \mathcal{M}=\{P_\theta:\theta\in\Theta\}\quad\text{on set of random variables }\mathbf V.
 \]</span></p>
 </div>
 <div id="def-npsem" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.2 (NPSEM)</strong></span> A nonparametric structural equation model with independent errors (NPSEM-IE) is a <a href="#def-statistical-model">statistical model</a> in which each random variable is as deterministic function (defined by a structural equation) of other variables along with an error term.</p>
+<p><span class="theorem-title"><strong>Definition B.3 (Non-parametric structural equation model [NPSEM])</strong></span> A <a href="#def-statistical-model">statistical model</a> in which <span class="math inline">\(\theta\)</span> is a set of deterministic functions called structural equations. Each equation <span class="math inline">\(f_V \in \theta\)</span> returns the value of a random variable <span class="math inline">\(V \in \mathbf V\)</span> in the model and is a function of the other random variables <span class="math inline">\(\mathbf V_{-V}\)</span> as well as a random error term <span class="math inline">\(U\)</span>.</p>
 <p><span class="math display">\[
-\mathscr M=\{f_{j}:V_j\in\mathbf V\}
-\]</span> where</p>
+\theta =\{f_{j}:V_j\in\mathbf V\}
+\]</span></p>
+<p>By definition, no random variable is directly or indirectly a function of itself so we can order the random variables and write each as a function of all past random variables in the order:</p>
 <p><span class="math display">\[
 V_{j} \;=\; f_{j}\!\big( V_{1},\dots,V_{j-1},\, U_{j} \big),
 \]</span></p>
 </div>
 <div id="def-npsem-ie" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.3 (NPSEM-IE)</strong></span> A nonparametric structural equation model with independent errors (NPSEM-IE) is an <a href="#def-npsem">NPSEM</a> in which all error terms are indpendent.</p>
+<p><span class="theorem-title"><strong>Definition B.4 (NPSEM with independent errors [NPSEM-IE])</strong></span> An <a href="#def-npsem">NPSEM</a> with mutually independent error terms.</p>
 <p><span class="math display">\[
-V_{j} \;=\; f_{j}\!\big( V_{1},\dots,V_{j-1},\, U_{j} \big),
-\]</span></p>
-<p><span class="math display">\[
-\{U_j\}_{V_j \in \mathbf V} \ \text{ mutually independent.}
+j\neq k  \iff  U_j \perp U_k
 \]</span></p>
 </div>
-<div id="def-parent-child" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.4 (Parent)</strong></span> In an <a href="#def-npsem-ie">NPSEM-IE</a>, if variable <span class="math inline">\(X\)</span> appears in the structural equation for <span class="math inline">\(Y\)</span>, then <span class="math inline">\(X\)</span> is a parent of <span class="math inline">\(Y\)</span> and <span class="math inline">\(Y\)</span>. The set of parents for <span class="math inline">\(X\)</span> is denoted <span class="math inline">\(\mathbf{Pa}(X)\)</span>.</p>
+<div id="def-parent" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition B.5 (Parent)</strong></span> A random variable <span class="math inline">\(X\)</span> is a parent to random variable <span class="math inline">\(Y\)</span> if <span class="math inline">\(X\)</span> appears in the <a href="#def-npsem">structural equation</a> for <span class="math inline">\(Y\)</span>. The set of parents for <span class="math inline">\(X\)</span> is denoted <span class="math inline">\(\mathbf{Pa}(X)\)</span>.</p>
 </div>
 <div id="def-observational-unit" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.5 (Observational unit)</strong></span> An observational unit is a subset of the random variables in a <a href="#def-statistical-model">statistical model</a> that originate from the same data source. The collection of observational units forms a partition of the full set of random variables.</p>
-<p>Given a set of variables <span class="math inline">\(\mathbf V_i\)</span> an observational unit is a set <span class="math inline">\(\mathbf V\)</span> such that:</p>
+<p><span class="theorem-title"><strong>Definition B.6 (Observational unit)</strong></span> A sub-vector of the random variables <span class="math inline">\(\mathscr{O} \subset \mathbf V\)</span> in a <a href="#def-statistical-model">statistical model</a> such that (assuming there are <span class="math inline">\(n\)</span> observational units in the model):</p>
 <p><span class="math display">\[
-\mathbf V=\bigcup_{i=1}^n \mathbf V_i,\qquad \mathbf V_i\cap \mathbf V_j=\varnothing\ (i\ne j).
+\mathbf V = \big[ \mathscr{O}_1, ..., \mathscr{O}_n\big]^T
 \]</span></p>
 </div>
 <div id="def-equivalence" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.6 (Equivalence)</strong></span> Two random variables are equivalent if they belong to different <a href="#def-observational-unit">observational units</a> but represent the same construct.</p>
+<p><span class="theorem-title"><strong>Definition B.7 (Equivalence)</strong></span> Two random variables are equivalent accross observations if they belong to different <a href="#def-observational-unit">observational units</a> but represent the same construct.</p>
 <p><span class="math display">\[
-X_i\sim X_j\iff i\ne j;\ X_i\in \mathbf V_i;\ X_j\in \mathbf V_j,\ X_i, X_j \text{ represent same construct}.
-\]</span> Two sets of random variables are equivalent if each element in one set has an equivalent in the other set.</p>
+X_i\sim X_j\iff \ X_i\in  \mathscr{O}_i;\ X_j\in  \mathscr{O}_j,\ X_i \text{ same construct } X_j \ (i\ne j).
+\]</span></p>
+<p>Two random variables are equivalent across models if they belong to different <a href="#def-statistical-model">statitical models</a> but represent the same construct.</p>
 </div>
 <div id="def-no-spillover" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.7 (No spillover assumption)</strong></span> In an <a href="#def-npsem-ie">NPSEM-IE</a>, the <em>no spillover</em> assumption requires that no variable is a <a href="#def-parent-child">parent</a> of an <a href="#def-equivalence">equivalent</a> variable in another <a href="#def-observational-unit">observational unit</a>.</p>
+<p><span class="theorem-title"><strong>Definition B.8 (No spillover assumption)</strong></span> The assumption that no variable is a <a href="#def-parent-child">parent</a> of an <a href="#def-equivalence">equivalent</a> variable in another <a href="#def-observational-unit">observational unit</a>.</p>
 <p><span class="math display">\[
 X\notin \mathbf{Pa}(X')\quad
-\forall\, X\sim X',\ X\in \mathbf V_i,\ X'\in \mathbf V_j,\ i\ne j.
+\forall\, X\sim X',\ X\in \mathscr O_i,\ X'\in \mathscr O_j,\ i\ne j.
 \]</span></p>
 </div>
 <div id="def-no-interference" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.8 (No interference assumption)</strong></span> In an <a href="#def-npsem-ie">NPSEM-IE</a>, the <em>no interference</em> assumption requires that no variable is a <a href="#def-parent-child">parent</a> of any non-<a href="#def-equivalence">equivalent</a> variable in another <a href="#def-observational-unit">observational unit</a>.</p>
+<p><span class="theorem-title"><strong>Definition B.9 (No interference assumption)</strong></span> The assumption that no variable is a <a href="#def-parent-child">parent</a> of a <a href="#def-equivalence">non-equivalent</a> variable in another <a href="#def-observational-unit">observational unit</a>.</p>
 <p><span class="math display">\[
 X\notin \mathbf{Pa}(Y)\quad
-\forall\, X\in \mathbf V_i,\ Y\in \mathbf V_j,\ i\ne j,\ X\not\sim Y.
+\forall\, X\in \mathscr O_i,\ Y\in \mathscr O_j,\ X\not\sim Y \ i\ne j
 \]</span></p>
 </div>
 <div id="def-identical-distributions" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.9 (Identical distributions assumption)</strong></span> In an <a href="#def-npsem-ie">NPSEM-IE</a>, the <em>identical distributions</em> assumption requires that <a href="#def-equivalence">equivalent</a> variables have identical structural equations.</p>
+<p><span class="theorem-title"><strong>Definition B.10 (Identical distributions assumption)</strong></span> The assumption that <a href="#def-equivalence">equivalent</a> variables have identical <a href="#def-npsem">structural equations</a>.</p>
 <p><span class="math display">\[
 X_i\sim X_j\Rightarrow f_{X_i}=f_{X_j}.
 \]</span></p>
 </div>
+<div id="def-intervention" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition B.11 (Intervention equation)</strong></span> An intervention equation in relation to random variable <span class="math inline">\(V\)</span> is a deterministic function <span class="math inline">\(h\)</span> with the same domain and co-domain as the structural equation for <span class="math inline">\(V\)</span>.</p>
+</div>
 <div id="def-intervention-regime" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.10 (Intervention regime)</strong></span> A set of deterministic functions called interventional structural equations which are defined in relation to <span class="math inline">\(\mathbf{E} \subset \mathbf V\)</span> is the subset of the random variables whose structural equations are to be intervened upon. Each interventional structrual equation must have the same domain and range as the structural equation it is to replace.</p>
+<p><span class="theorem-title"><strong>Definition B.12 (Intervention regime)</strong></span> A set of intervention equations defined on a subset of random variables <span class="math inline">\(\mathbf E \subset \mathbf V\)</span>.</p>
 <p><span class="math display">\[
-\Gamma = \{ h_V  : V \in \mathbf \mathbf{E} \text{ such that } h_V, f_V \text{ have identical arguments}\}
+\Gamma = \{ h_V \}_{V \in \mathbf{E}}
 \]</span></p>
 </div>
-<div id="def-counterfactual-npsem" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.11 (Counterfactual NPSEM-IE)</strong></span> Given intervention regime <span class="math inline">\(\Gamma\)</span> and NPSEM-IE <span class="math inline">\(\mathscr{M}\)</span>, the counterfactual NPSEM-IE is defined</p>
+<div id="def-interventional-npsem" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition B.13 (Interventional NPSEM)</strong></span> An NPSEM <span class="math inline">\(\mathscr{M}\)</span> for which a subset of structural equations <span class="math inline">\(\mathbf E\)</span> have been replaced by intervention equations in intervention regime <span class="math inline">\(\Gamma\)</span>.</p>
 <p><span class="math display">\[
 \mathscr{M}^{(\Gamma)} =  \{f_V^{(\Gamma)}: V \in \mathbf V \}
 \]</span></p>
-<p>Where</p>
 <p><span class="math display">\[
 f_V^{(\Gamma)} = \begin{cases}
   h_V &amp; \text{if}  &amp; V \in \mathbf E\\
@@ -1543,32 +1546,22 @@ f_V^{(\Gamma)} = \begin{cases}
 \]</span></p>
 </div>
 <div id="def-causal-model" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.12 (Causal model)</strong></span> A causal model <span class="math inline">\(\mathscr{C}\)</span> is a statistical model combining an NPSEM-IE <span class="math inline">\(\mathscr{M}\)</span> with its related counterfactual NPSEM-IEs <span class="math inline">\(\{\mathscr{M}^{(\Gamma)}\}_{\Gamma \in \mathscr{A}}\)</span> defined in relation to a set of intervention regimes <span class="math inline">\(\mathscr{A}\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition B.14 (Causal model)</strong></span> A causal model <span class="math inline">\(\mathcal C\)</span> of NPSEM <span class="math inline">\(\mathcal M\)</span> under intervention <span class="math inline">\(\Gamma\)</span> is an NPSEM <span class="math inline">\(\mathcal C (\mathcal M, \Gamma)\)</span> that is generated by combining <span class="math inline">\(\mathcal M\)</span> with its interventional NPSEMs <span class="math inline">\(\mathcal M^{(\Gamma_1)}...\mathcal M^{(\Gamma_q)}\)</span> and setting the error terms equal for variables that are equivalent across models.</p>
 <p><span class="math display">\[
-\mathscr{C} = \mathscr{M} \cup \{\mathscr{M}^{(\Gamma)}\}_{\Gamma \in \mathscr{A}}
-\]</span> The random variables included in the model include two subsets - observed random variables</p>
-<p><span class="math display">\[
-\mathbf V^\mathscr{C} = \mathbf V \cup \{\mathbf V^{(\Gamma)}\}_{\Gamma \in \mathbf E}
-\]</span></p>
-<p>where <span class="math inline">\(V \in \mathbf V\)</span> is defined <span class="math display">\[
-V  \;=\; f_V\big( \mathbf{Pa}(V), U_V \big)
+\mathcal{C} = \mathcal{M} \cup \mathcal M^{(\Gamma_1)} \cup ... \cup \mathcal M^{(\Gamma_q)}
 \]</span></p>
 <p><span class="math display">\[
-\{U_V\}_{V \in \mathbf V} \ \text{ mutually independent.}
-\]</span> and for each <span class="math inline">\(\Gamma \in \mathbf E\)</span>, <span class="math inline">\(V^{(\Gamma)} \in\mathbf V^{(\Gamma)}\)</span> is defined</p>
-<p><span class="math display">\[
-V^{(\Gamma)}  \;=\; f_V^{(\Gamma)}\big( \mathbf{Pa}(V)^{(\Gamma)}, U_V \big)
+{U_V} = {U}^{(\Gamma_1)}_V = ... = {U}^{(\Gamma_q)}_V, \quad \text { for } V \in \mathbf V
 \]</span></p>
-<p>By assumption, the error term for each counterfactual random variable is equal to the error term in the corresponding observed variable.</p>
 </div>
 <div id="def-ffrcistg" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.13 (FFRCISTG model)</strong></span> A finest fully randomized causally interpretable structured tree graph (FFRCISTG) model is a causal model that satisfies the (1) <a href="#def-no-spillover">no spillover</a>, (2) <a href="#def-no-interference">no interference</a>, and (3) <a href="#def-identical-distributions">identical distributions</a> assumptions.</p>
+<p><span class="theorem-title"><strong>Definition B.15 (FFRCISTG model)</strong></span> A finest fully randomized causally interpretable structured tree graph (FFRCISTG) model is a causal model of an NPSEM-IE <span class="math inline">\(\mathcal M\)</span> under intervention regime <span class="math inline">\(\Gamma\)</span>. By assumption <span class="math inline">\(\mathcal M\)</span> satisfies: (1) <a href="#def-no-spillover">no spillover</a>, (2) <a href="#def-no-interference">no interference</a>, and (3) <a href="#def-identical-distributions">identical distributions</a>.</p>
 </div>
 </section>
 <section id="network-causal-inference-1" class="level4">
 <h4 class="anchored" data-anchor-id="network-causal-inference-1">Network causal inference</h4>
 <div id="def-graph" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.14 (Graph)</strong></span> A <em><a href="#def-graph">graph</a></em> is an ordered pair <span class="math inline">\(\mathscr{G} = (\mathcal{N}, \psi)\)</span> with nodeset <span class="math inline">\(\mathcal{N}\)</span>and adjacency function <span class="math inline">\(\psi\)</span> which assigns a nonnegative weight to each unordered pair of nodes <span class="math inline">\((i,j)\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition B.16 (Graph)</strong></span> A <em><a href="#def-graph">graph</a></em> is an ordered pair <span class="math inline">\(\mathscr{G} = (\mathcal{N}, \psi)\)</span> with nodeset <span class="math inline">\(\mathcal{N}\)</span>and adjacency function <span class="math inline">\(\psi\)</span> which assigns a nonnegative weight to each unordered pair of nodes <span class="math inline">\((i,j)\)</span>.</p>
 <p><span class="math display">\[
 \mathscr G=(\mathcal N,\psi),\qquad
 \psi:\mathcal N\times\mathcal N\to \mathbb R_{\ge 0},\qquad
@@ -1577,26 +1570,26 @@ V^{(\Gamma)}  \;=\; f_V^{(\Gamma)}\big( \mathbf{Pa}(V)^{(\Gamma)}, U_V \big)
 <p>Nodes <span class="math inline">\(i,j \in \mathcal{N}\)</span> are connected if and only if <span class="math inline">\(\psi(i,j) &gt; 0\)</span>.</p>
 </div>
 <div id="def-neighborhood" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.15 (Neighborhood)</strong></span> Given a <a href="#def-graph">graph</a> <span class="math inline">\(\mathscr{G} = (\mathcal{N}, \psi)\)</span>, the <em><a href="#def-neighborhood">neighborhood</a></em> of a node <span class="math inline">\(i \in \mathcal{N}\)</span> is</p>
+<p><span class="theorem-title"><strong>Definition B.17 (Neighborhood)</strong></span> Given a <a href="#def-graph">graph</a> <span class="math inline">\(\mathscr{G} = (\mathcal{N}, \psi)\)</span>, the <em><a href="#def-neighborhood">neighborhood</a></em> of a node <span class="math inline">\(i \in \mathcal{N}\)</span> is</p>
 <p><span class="math display">\[
 \mathcal{N}_i = \{ j \in \mathcal{N} : \psi(i,j) &gt; 0 \}.
 \]</span></p>
 </div>
 <div id="def-network-weights-vector" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.16 (Network weights)</strong></span> Given a <a href="#def-graph">graph</a> <span class="math inline">\(\mathscr{G} = (\mathcal{N}, \psi)\)</span>, the <em><a href="#def-network-weights-vector">network weights vector</a></em> for a node <span class="math inline">\(i \in \mathcal{N}\)</span> is</p>
+<p><span class="theorem-title"><strong>Definition B.18 (Network weights)</strong></span> Given a <a href="#def-graph">graph</a> <span class="math inline">\(\mathscr{G} = (\mathcal{N}, \psi)\)</span>, the <em><a href="#def-network-weights-vector">network weights vector</a></em> for a node <span class="math inline">\(i \in \mathcal{N}\)</span> is</p>
 <p><span class="math display">\[
 \Psi_i = [\psi(i,1), \dots, \psi(i,n)]^T,
 \qquad n=|\mathcal N|.
 \]</span></p>
 </div>
 <div id="def-network-values" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.17 (Network values)</strong></span> Given a <a href="#def-graph">graph</a> <span class="math inline">\(\mathscr{G} = (\mathcal{N}, \psi)\)</span> with <a href="#def-neighborhood">neighborhood</a> <span class="math inline">\(\mathcal N_i\)</span> for each node <span class="math inline">\(i\)</span>, and given a vector <span class="math inline">\(\mathbf X \in \{0,1\}^n\)</span> indexed by nodes in <span class="math inline">\(\mathscr{N}\)</span>, the <em>network values</em> for <span class="math inline">\(i\)</span> with respect to <span class="math inline">\(\mathbf X\)</span> is the subvector of <span class="math inline">\(\mathbf X\)</span> indexed by <span class="math inline">\(\mathscr{N}_i\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition B.19 (Network values)</strong></span> Given a <a href="#def-graph">graph</a> <span class="math inline">\(\mathscr{G} = (\mathcal{N}, \psi)\)</span> with <a href="#def-neighborhood">neighborhood</a> <span class="math inline">\(\mathcal N_i\)</span> for each node <span class="math inline">\(i\)</span>, and given a vector <span class="math inline">\(\mathbf X \in \{0,1\}^n\)</span> indexed by nodes in <span class="math inline">\(\mathscr{N}\)</span>, the <em>network values</em> for <span class="math inline">\(i\)</span> with respect to <span class="math inline">\(\mathbf X\)</span> is the subvector of <span class="math inline">\(\mathbf X\)</span> indexed by <span class="math inline">\(\mathscr{N}_i\)</span>.</p>
 <p><span class="math display">\[
 \mathbf X_{\mathcal N_i}=\big(X_j\big)_{j\in \mathcal N_i}.
 \]</span></p>
 </div>
 <div id="def-exposure-mapping" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.18 (Exposure mapping)</strong></span> Given an <a href="#def-npsem-ie">NPSEM-IE</a> with <span class="math inline">\(f_{Y_i}\)</span> the <a href="#def-npsem-ie">structural equation</a> for <span class="math inline">\(Y_i\)</span>, and <span class="math inline">\(\mathbf{X}_1,\dots,\mathbf{X}_K \in \{0,1\}^n\)</span> the <a href="#def-parent-child">parents</a> of <span class="math inline">\(Y_i\)</span>, the exposure mapping for <span class="math inline">\(f_{Y_i}\)</span>* is a function</p>
+<p><span class="theorem-title"><strong>Definition B.20 (Exposure mapping)</strong></span> Given an <a href="#def-npsem-ie">NPSEM-IE</a> with <span class="math inline">\(f_{Y_i}\)</span> the <a href="#def-npsem-ie">structural equation</a> for <span class="math inline">\(Y_i\)</span>, and <span class="math inline">\(\mathbf{X}_1,\dots,\mathbf{X}_K \in \{0,1\}^n\)</span> the <a href="#def-parent-child">parents</a> of <span class="math inline">\(Y_i\)</span>, the exposure mapping for <span class="math inline">\(f_{Y_i}\)</span>* is a function</p>
 <p><span class="math display">\[
 g_i : \{0,1\}^{K \times n} \to \mathbb{R}^m
 \]</span></p>
@@ -1606,7 +1599,7 @@ Y_i = f_{Y_i}\big(g_i(\mathbf{X}_1,\dots,\mathbf{X}_K), U_{Y_i}\big).
 \]</span></p>
 </div>
 <div id="def-separability" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.19 (Separability)</strong></span> An <a href="#def-exposure-mapping">exposure mapping</a> <span class="math inline">\(g_i\)</span> is <em><a href="#def-separability">separable</a></em> if it can be written:</p>
+<p><span class="theorem-title"><strong>Definition B.21 (Separability)</strong></span> An <a href="#def-exposure-mapping">exposure mapping</a> <span class="math inline">\(g_i\)</span> is <em><a href="#def-separability">separable</a></em> if it can be written:</p>
 <p><span class="math display">\[
 g_i(\mathbf{X}_1,\dots,\mathbf{X}_K)
   = \big[ \begin{pmatrix} X_{1i} \\ \dots \\ X_{Ki} \end{pmatrix},\, g_{1i}(\mathbf{X}_1),\, \dots,\, g_{Ki}(\mathbf{X}_K)\big]^T,
@@ -1615,7 +1608,7 @@ g_i(\mathbf{X}_1,\dots,\mathbf{X}_K)
 <p>A structural equation is said to be separable if its exposure mapping is separable.</p>
 </div>
 <div id="def-positional-invariance" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.20 (Positional invariance)</strong></span> Let <span class="math inline">\(\mathcal{N}_{ti}\)</span> denote the <a href="#def-neighborhood">neighborhood</a> of node <span class="math inline">\(i\)</span> in <a href="#def-graph">graph</a> <span class="math inline">\(\mathscr{G}_t = (\mathcal{N}, \psi_t)\)</span>. A <a href="#def-separability">component function</a> <span class="math inline">\(g_{ti}\)</span> is <em><a href="#def-positional-invariance">positionally invariant</a></em> with respect to <span class="math inline">\(\mathscr{G}_t\)</span> if for all <span class="math inline">\(\mathbf{X}, \mathbf{X}' \in \{0,1\}^n\)</span></p>
+<p><span class="theorem-title"><strong>Definition B.22 (Positional invariance)</strong></span> Let <span class="math inline">\(\mathcal{N}_{ti}\)</span> denote the <a href="#def-neighborhood">neighborhood</a> of node <span class="math inline">\(i\)</span> in <a href="#def-graph">graph</a> <span class="math inline">\(\mathscr{G}_t = (\mathcal{N}, \psi_t)\)</span>. A <a href="#def-separability">component function</a> <span class="math inline">\(g_{ti}\)</span> is <em><a href="#def-positional-invariance">positionally invariant</a></em> with respect to <span class="math inline">\(\mathscr{G}_t\)</span> if for all <span class="math inline">\(\mathbf{X}, \mathbf{X}' \in \{0,1\}^n\)</span></p>
 <p><span class="math display">\[
 \mathbf{X}_{\mathcal{N}_i} = \mathbf{M}\mathbf{X}'_{\mathcal{N}_j},
 \quad
@@ -1626,26 +1619,26 @@ g_{ti}(\mathbf{X}) = g_{tj}(\mathbf{X}').
 <p>An exposure mapping shows positional invariance with respect to <span class="math inline">\(\{\mathscr{G}_t\}_{t \in [1:K]}\)</span> if it is separable and all its component functions show positional invariance with respect to an element of <span class="math inline">\(\{\mathscr{G}_t\}_{t \in [1:K]}\)</span>. A structural equation is positionally invariant if its exposure mapping is positionally invariant.</p>
 </div>
 <div id="def-boundedness" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.21 (Boundedness)</strong></span> A <a href="#def-separability">component function</a> <span class="math inline">\(g_{ti}\)</span> is <em><a href="#def-boundedness">bounded</a></em> if there exists a finite set <span class="math inline">\(\mathcal{D} \subset \mathbb{R}\)</span> and a constant <span class="math inline">\(c \in \mathbb{R}\)</span>, independent of the size of the network <span class="math inline">\(|\mathcal{N}|\)</span>, such that for <span class="math inline">\(\mathbf{X} \in \{0,1\}^n\)</span></p>
+<p><span class="theorem-title"><strong>Definition B.23 (Boundedness)</strong></span> A <a href="#def-separability">component function</a> <span class="math inline">\(g_{ti}\)</span> is <em><a href="#def-boundedness">bounded</a></em> if there exists a finite set <span class="math inline">\(\mathcal{D} \subset \mathbb{R}\)</span> and a constant <span class="math inline">\(c \in \mathbb{R}\)</span>, independent of the size of the network <span class="math inline">\(|\mathcal{N}|\)</span>, such that for <span class="math inline">\(\mathbf{X} \in \{0,1\}^n\)</span></p>
 <p><span class="math display">\[
 g_{ti}(\mathbf{X}) \in \mathcal{D} \quad \text{ for }|\mathcal{D}|&lt; c \in \mathbb{Z}.
 \]</span></p>
 <p>An exposure mapping is bounded if it is <a href="#def-separability">separable</a> and all its component functions are bounded.</p>
 </div>
 <div id="def-network-exposure-mapping" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.22 (Network exposure mapping)</strong></span> A network exposure mapping with respect to <a href="#def-graph">graph</a> <span class="math inline">\(\mathscr{G}_t\)</span> is defined as a <a href="#def-separability">component function</a> which is <a href="#def-boundedness">bounded</a> and <a href="#def-positional-invariance">positionally invariant</a> with respect to <span class="math inline">\(\mathscr{G}_t\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition B.24 (Network exposure mapping)</strong></span> A network exposure mapping with respect to <a href="#def-graph">graph</a> <span class="math inline">\(\mathscr{G}_t\)</span> is defined as a <a href="#def-separability">component function</a> which is <a href="#def-boundedness">bounded</a> and <a href="#def-positional-invariance">positionally invariant</a> with respect to <span class="math inline">\(\mathscr{G}_t\)</span>.</p>
 </div>
 <div id="def-homogeneous-network-interference" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.23 (Homogeneous network interference)</strong></span> An exposure mapping exhibits homogeneous network interference with respect to a <a href="#def-graph">graph set</a> <span class="math inline">\(\{\mathscr{G}_t\}_{t \in [1:K]}\)</span> if it is separable and all its <a href="#def-separability">component functions</a> are <a href="#def-network-exposure-mapping">network exposure mappings</a>. An NPSEM-IE exhibiits homogenous network interference if all its exposure mappings exhibit homogenous network interference.</p>
+<p><span class="theorem-title"><strong>Definition B.25 (Homogeneous network interference)</strong></span> An exposure mapping exhibits homogeneous network interference with respect to a <a href="#def-graph">graph set</a> <span class="math inline">\(\{\mathscr{G}_t\}_{t \in [1:K]}\)</span> if it is separable and all its <a href="#def-separability">component functions</a> are <a href="#def-network-exposure-mapping">network exposure mappings</a>. An NPSEM-IE exhibiits homogenous network interference if all its exposure mappings exhibit homogenous network interference.</p>
 </div>
 <div id="def-network-ffrcistg" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.24 (NFFRCISTG model)</strong></span> A network finest fully randomized causally interpretable structured tree graph (NFFRCISTG) model is a causal model which satisfies the (1) <a href="#def-no-spillover">no spillover</a>, (2) <a href="#def-no-interference">homogenous network interference</a> with respect to <span class="math inline">\(\{\mathscr{G}_t\}_{t \in [1:K]}\)</span>, and (3) <a href="#def-identical-distributions">identical distributions</a> assumptions.</p>
+<p><span class="theorem-title"><strong>Definition B.26 (NFFRCISTG model)</strong></span> A network finest fully randomized causally interpretable structured tree graph (NFFRCISTG) model is a causal model which satisfies the (1) <a href="#def-no-spillover">no spillover</a>, (2) <a href="#def-no-interference">homogenous network interference</a> with respect to <span class="math inline">\(\{\mathscr{G}_t\}_{t \in [1:K]}\)</span>, and (3) <a href="#def-identical-distributions">identical distributions</a> assumptions.</p>
 </div>
 </section>
 <section id="social-and-spatial-inference-1" class="level4">
 <h4 class="anchored" data-anchor-id="social-and-spatial-inference-1">Social and spatial inference</h4>
 <div id="def-graph-generator" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.25 (Random graph generator)</strong></span> In an NPSEM, a random edge generator <span class="math inline">\(\psi\)</span> is an <span class="math inline">\(n \times n\)</span> function whose entries <span class="math inline">\(\psi(i,j)\)</span> are each a deterministic function of the other variables in the model along with an error term.</p>
+<p><span class="theorem-title"><strong>Definition B.27 (Random graph generator)</strong></span> In an NPSEM, a random edge generator <span class="math inline">\(\psi\)</span> is an <span class="math inline">\(n \times n\)</span> function whose entries <span class="math inline">\(\psi(i,j)\)</span> are each a deterministic function of the other variables in the model along with an error term.</p>
 <p><span class="math display">\[
 \psi(i,j) = f_{\psi_{ij}}(\mathbf{Pa}(\psi(i,j)), U_{\psi_{ij}})
 \]</span> To ensure that <span class="math inline">\(\psi(i,j) = \psi(j,i)\)</span> we define</p>
@@ -1654,20 +1647,20 @@ U_{\psi_{ij}} = U_{\psi_{ji}}
 \]</span></p>
 </div>
 <div id="def-random-graph-npsem" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.26 (Random graph NPSEM)</strong></span> A random graph NPSEM is an NPSEM which includes random graph generators among the structural equations. It has two parts – the structural part which contains all the structural equations which are not graph generators, and the relationsal part which contains random graph generators.</p>
+<p><span class="theorem-title"><strong>Definition B.28 (Random graph NPSEM)</strong></span> A random graph NPSEM is an NPSEM which includes random graph generators among the structural equations. It has two parts – the structural part which contains all the structural equations which are not graph generators, and the relationsal part which contains random graph generators.</p>
 <p>The error terms of the structural part are mutually independent. In the relational part, error terms accross graph generators are independent.</p>
 </div>
 <div id="def-homogenous-random-network-interference" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.27 (Homogenous random network interference)</strong></span> An exposure mapping exhibits homogeneous random network interference with respect to a <a href="#def-random-graph">random graph set</a> <span class="math inline">\(\{\psi_t\}_{t \in [1:K]}\)</span> if it is separable and all its <a href="#def-separability">component functions</a> are <a href="#def-network-exposure-mapping">network exposure mappings</a>. An NPSEM-IE exhibiits homogenous random network interference if all its exposure mappings exhibit homogenous randomn network interference.</p>
+<p><span class="theorem-title"><strong>Definition B.29 (Homogenous random network interference)</strong></span> An exposure mapping exhibits homogeneous random network interference with respect to a <a href="#def-random-graph">random graph set</a> <span class="math inline">\(\{\psi_t\}_{t \in [1:K]}\)</span> if it is separable and all its <a href="#def-separability">component functions</a> are <a href="#def-network-exposure-mapping">network exposure mappings</a>. An NPSEM-IE exhibiits homogenous random network interference if all its exposure mappings exhibit homogenous randomn network interference.</p>
 </div>
 <div id="def-social-spatial-ffrcistg" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.28 (RNFFRCISTG)</strong></span> A random network finest fully randomized causally interpretable structured tree graph (RNFFRCISTG) model is a causal model defined on a <a href="#def-random-graph-npsem">random graph NPSEM-IE</a> which satisfies the (1) <a href="#def-no-spillover">no spillover</a>, (2) <a href="#def-homogenous-random-network-interference">homogenous random network interference</a>, and (3) <a href="#def-identical-distributions">identical distributions</a> assumptions.</p>
+<p><span class="theorem-title"><strong>Definition B.30 (RNFFRCISTG)</strong></span> A random network finest fully randomized causally interpretable structured tree graph (RNFFRCISTG) model is a causal model defined on a <a href="#def-random-graph-npsem">random graph NPSEM-IE</a> which satisfies the (1) <a href="#def-no-spillover">no spillover</a>, (2) <a href="#def-homogenous-random-network-interference">homogenous random network interference</a>, and (3) <a href="#def-identical-distributions">identical distributions</a> assumptions.</p>
 </div>
 <div id="def-random-graph-npsem" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.29 (Random bipartite graph NPSEM)</strong></span> A random bipartite graph NPSEM is a random graph NPSEM which whose generators produce bipartite graphs.</p>
+<p><span class="theorem-title"><strong>Definition B.31 (Random bipartite graph NPSEM)</strong></span> A random bipartite graph NPSEM is a random graph NPSEM which whose generators produce bipartite graphs.</p>
 </div>
 <div id="def-social-spatial-ffrcistg" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.30 (BRNFFRCISTG model)</strong></span> A bipartite random network finest fully randomized causally interpretable structured tree graph (BRNFFRCISTG) model is a causal model defined on a <a href="#def-bipartite-random-graph-npsem">bipartite random graph NPSEM-IE</a> which satisfies the (1) <a href="#def-no-spillover">no spillover</a>, (2) <a href="#def-homogenous-random-network-interference">homogenous random network interference</a>, and (3) <a href="#def-identical-distributions">identical distributions</a> assumptions.</p>
+<p><span class="theorem-title"><strong>Definition B.32 (BRNFFRCISTG model)</strong></span> A bipartite random network finest fully randomized causally interpretable structured tree graph (BRNFFRCISTG) model is a causal model defined on a <a href="#def-bipartite-random-graph-npsem">bipartite random graph NPSEM-IE</a> which satisfies the (1) <a href="#def-no-spillover">no spillover</a>, (2) <a href="#def-homogenous-random-network-interference">homogenous random network interference</a>, and (3) <a href="#def-identical-distributions">identical distributions</a> assumptions.</p>
 </div>
 </section>
 </section>

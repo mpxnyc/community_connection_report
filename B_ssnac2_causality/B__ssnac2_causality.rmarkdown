@@ -1,0 +1,1877 @@
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+
+
+
+
+# SSNAC II: Causality {#sec-causal-interpretation}
+
+
+::: {#leading}
+We summarize the leading approach to causal inference in epidemiologic
+studies, extending that approach to accommodate data which are
+characterized by complex patterns of interdependence.
+:::
+
+
+
+
+
+```{r}
+#| fig-width: 2
+#| fig-height: 2
+#| fig-align: center
+
+
+plot_icon(icon_name = "droplets", color = "dark_purple", shape = 0)
+
+```
+
+
+
+
+
+
+
+##  {.unnumbered}
+
+The Social and Spatial Network Analysis with Causal interpretation framework can be used to guide the collection, management, analysis, and causal interpretation of data. It offers guidance on conceptualizing and organizing spatial and social data as networks (@sec-appendix-social-spatial) and provides tools for descriptive and causal analysis (@sec-appendix-network-analysis).
+
+We define SSNAC as a set of straight-forward extensions of the currently dominant framework for conducting causal inference with observational data in epidemiology. We begin by giving an overview of the dominant approach, which we will call "classic causal inference". We extend this system to situations where data are characterized by interdependence of observational units rather than independence, naming this system "social network analysis with causal interpretation". Finally, we accommodate social and spatial data simultaneously in the SSNAC framework. In each case, we describe the assumptions and implications of each system, illustrating with worked examples.
+
+> We re-frame the task of statistical inference from that of learning from a growing collection of identically distributed random vectors to that of learning from a growing random vector whose entries are related through a causal structure… These [SSNAC] assumptions allow our estimates to benefit from having more observational units, even if they collectively contribute to one realization of the statistical model.
+
+Classic causal inference, as elaborated by Robins [-@robins1986], Hernán and Robins [-@hernan2021], and others helps us to sharpen epidemiologic reasoning by providing a template for conducting thought experiments about population health. Typically in these thought experiments, the researcher reasons about the likely effect of some hypothetical intervention on some outcome in a defined population. They define a set of causal estimands -- measures that quantify the impact of the intervention of the outcome -- then, through transparent statistical assumptions, express those estimands in terms of quantities we can calculate by studying the population.
+
+For example, consider a hypothetical intervention where every person in the United States receives free, unlimited access to healthcare. Under classic causal inference, we can ask whether the prevalence of diabetes would change if we implemented such an intervention. We can even ask about the extent of change and estimate that using data that have already been observed. The classic causal inference framework allows this by:
+
+-   making causal assumptions about the relationship between health care access, diabetes prevalence, and any factors that determine both access and prevalence
+
+-   mathematically stating the hypothetical quantities we are interested in and expressing them in terms of quantities we can estimate
+
+-   estimating those quantities using data we have or can collect
+
+**Independence**
+
+A strong assumption made often by practitioners of classic causal inference is that of independence between observational units or groups of observational units. This assumption is usually made with the goal of simplifying the mathematics involved in estimating quantities from data, but it has profound implications for how we think about the causal process under study.
+
+In our opening example, the independence assumption holds that one person's access to healthcare does not affect any other person's diabetes status. It would imply that the diabetes status for a married man who does not know how to cook, for instance, would not at all be affected by improvements in health literacy experienced by his wife who shops and cooks for the household. The assumption of independence runs counter to our intuitions about social life. Humans are deeply networked - our lives are defined by our relationships with one another.
+
+**Homogeneity**
+
+Accompanying the independence assumption are implicit or explicit assumptions about the homogeneity of the causal process under study. Consider two people, Tumi and Thabo, who each toss the same coin once at time 1 and again at time 2. Depending on our homogeneity assumptions, we could say that we are conducting:
+
+-   one experiment called "coin toss" and repeating it four times
+
+-   two experiments called "coin toss by Thabo" and "coin toss by Tumi" and repeating each experiment twice
+
+-   two experiments called "coin toss at time 1" and "coin toss at time 2" and repeating each experiment twice
+
+-   four experiments called "coin toss by Thabo at time 1", "coin toss by Thabo at time 2", "coin toss by Tumi at time 1", and "coin toss by Tumi at time 2" and not repeating any of them.
+
+The choice between these interpretations turns on the experimenters prior beliefs about coin tossing: Does the likelihood of a head or tail change over time? Does it change based on the person tossing the coin? Considerations like this are made routinely in statistical modelling practice, particularly as they relate to longitudinal data. A question researchers do not often ask, however, is whether one person's coin toss affects another's.
+
+**Interdependence**
+
+Consider the experiment "Thabo tosses a coin, then Tumi tosses the coin, then Thabo tossess the coin, then Tumi tosses the coin." Whereas in the above listing, by virtue of calling them separate experiments, we implicitly assumed that each coin toss was self-contained, in this latest iteration, we accommodate the possibility that the results of the coin tosses might be causally related.
+
+We can quantitatively assess this possibility by repeating this sequence of coin tosses over and over, using that data to calculate a correlation coefficient between the outcomes of Thabo and Tumi's coin tosses. Without stating the experiment as this sequence, however, we have no framework with which to ask whether Thabo and Tumi's coin tosses are possibly related.
+
+In epidemiologic practice, the modelling decision to categorize people or groups of people as independent of each other is so well-entrenched that it is often presented as a necessary condition for doing valid causal quantitative research. Unlike it is with coins, however, with humans, there is a mountain of evidence and experience proving interdependence as the rule rather than the exception.
+
+**Towards a causal inference of dependent happenings**
+
+Our goal in this appendix and project is to offer ideas and tools for causal inference that allow researchers to learn from interdependence rather than avoid it in pursuit of clear causal reasoning. We can have both clear reasoning and an understanding enriched by the analysis of dependent happenings.
+
+In crude terms, our approach involves moving to a framework where, as a rule, we consider Thabo and Tumi's coin tosses one experiment. i.e. Rather than define a scalar random variable to represent a measure made on $n$ individuals, we will define a vector-valued random variable of length $n$ and assume that some of the entries in that vector are correlated as a result of being part of the same causal structure.
+
+But why do that when our tools for statistical modelling require as many repetitions as possible for valid inferences? How can we quantify uncertainty when we always have a sample size of one? Regarding the first question: we take this approach because it allows us to investigate and quantify causal in[ter]{.underline}ference rather than assume it away. Regarding the second: SSNAC advocates a shift in perspective.
+
+We re-frame the task of statistical inference from that of learning from a growing collection of identically distributed random vectors to that of learning from a growing random vector whose entries are related through a causal structure. In that causal structure, we distinguish between causal relationships that play out within observational units ("structural") from those that play out across them ("relational"), making homogeneity assumptions about each.
+
+We avail ourselves of asymptotic theory by making the assumption of no spillover between observational units, which is a weaker version of the independence between observational units assumption. These assumptions allow our estimates to benefit from having more observational units, even if they collectively contribute to one realization of the statistical model.
+
+In the sections that follow, we describe classic causal inference, social network analysis with causal interpretation, and the SSNAC framework, each time discussing their assumptions, causal model, and causal estimands and illustrating a causal identification strategy. Finally, we describe the main analysis of the report, which applies the SSNAC framework to RESPND-MI data.
+
+
+
+
+
+```{r}
+#| fig-width: 2
+#| fig-height: 2
+#| fig-align: center
+
+
+plot_icon(icon_name = "droplets", color = "dark_purple", shape = 0)
+
+```
+
+
+
+
+
+
+
+## Classical causal inference
+
+
+
+
+
+#### Example 1: Dress and jobs {.unnumbered}
+
+
+We are interested in settling an argument among friends about the relationship between dressing in formal wear and job offers. One friend thinks that dressing formally brings more job offers; everyone she knows who dresses formally has many more job offers than those who dress casually. 
+
+The other friend thinks that what really brings job offers is currently having a job. In their reasoning, having a job causes people to dress formally and also causes people to receive job offers, but dressing formally does not in itself improve a person's likelihood of receiving job offers. We conduct a study to investigate.
+
+We recruit three people, *Person 1*, *Person 2*, and *Person 3*. *Person 1* and *Person 2* are married to each other. *Person 1* and *Person 3* are acquaintances. 
+
+Say *Person 1* has job status $L_1$, *Person 2* has job status $L_2$ and *Person 3* has job status $L_3$. Each of these variables can only take on two values: “employed vs. unemployed.” Similarly we define $A_i$ as *Person $i$'s* dress (formal vs. informal), and $Y_i$ as their job offers (many vs. few). The job status measurement ($L_i$) precedes dress ($A_i$) in time, and dress precedes job offers ($Y_i$).
+
+In the next few sections, we will use this example to describe the assumptions made under classical causal inference. First we give an overview of the ideas and tools we need to make that description: DAGs and SWIGs.
+
+
+
+
+
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+
+
+
+### Causal reasoning with DAGs and SWIGs {.unnumbered}
+
+
+
+##### NPSEM-IE
+A non-parametric structural equation model with independent errors (NPSEM-IE) is a system of equations that relates all the entries in a given vector-valued random variable to each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown by @eq-fullly-connected-dag. In this set of equations, values that are produced by equations higher up in the list serve as inputs to equations lower down on the list. The functions $f_*$ are deterministic. The arguments $U_*$ represent error terms -- random variables that are independent of each other within and across observational units.
+
+
+
+
+##### Observed and counterfactual data
+At the very least it is a collection of two NPSEM-IEs: a model of the observed data (observed data model) and a model of what the data would be under some intervention (counterfactual data model). Consider a FFRCISTG modelling an intervention where we set formal dress $A_1$ to $a_1$, $A_2$ to $a_2$, and $A_3$ to $a_3$. The observed data model would be:
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}, L_1) \\
+L_3 &= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
+A_2 &= f_{A_2}(U_{A_2}, L_1, L_2, L_3, A_1) \\
+A_3 &= f_{A_3}(U_{A_3}, L_1, L_2, L_3, A_1, A_2) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
+\end{aligned}
+$$ {#eq-fullly-connected-dag}
+
+In the counterfactual data model (shown in @eq-fullly-connected-swig below), the values set by the investigator through intervention supercede the values that would have been generated had the experimenter not intervened. The experimenter-set values are used in subsequent equations in the model. 
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}, L_1) \\
+L_3 &= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
+A_2^{(a_1)} &= f_{A_2}(U_{A_2}, L_1, L_2, L_3, a_1) \\
+A_3^{(a_1, a_2)} &= f_{A_3}(U_{A_3}, L_1, L_2, L_3, a_1, a_2) \\
+Y_1^{(a_1, a_2, a_3)} &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, a_1, a_2, a_3) \\
+Y_2^{(a_1, a_2, a_3)} &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}) \\
+Y_3^{(a_1, a_2, a_3)} &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}, Y_2^{(a_1, a_2, a_3)}   ) \\
+\end{aligned}
+$$ {#eq-fullly-connected-swig}
+
+
+
+ 
+
+
+
+
+##### DAGs and SWIGs
+
+A causal directed acyclic graph (DAG) (@fig-fullly-connected-dag) is a graph whose nodes represent the variables in an observational non-parametric structural equation model with independent errors (@eq-fullly-connected-dag). Directed edges point from the arguments to the result of each structural equation. 
+
+
+
+
+
+
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+```{r }
+#| fig-height: 6
+#| fig-width: 6
+#| fig-align: center
+#| label: fig-fullly-connected-dag
+#| fig-cap: "Fully connected causal DAG"
+
+make_dag("fully_connected")         |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black")) +
+  theme_mpxnyc_blank()
+
+```
+
+
+
+
+
+
+
+
+A single world intervention graph (SWIG) (@fig-fullly-connected-swig) is a DAG whose nodes represent the variables in a counterfactual non-parametric structural equation model with independent errors (@eq-fullly-connected-swig). Directed edges point from the arguments to the result of each structural equation. 
+
+
+
+
+
+
+
+
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+```{r }
+#| fig-height: 6
+#| fig-width: 6
+#| fig-align: center
+#| label: fig-fullly-connected-swig
+#| fig-cap: "Fully connected SWIG"
+
+make_swig("fully_connected")      |> 
+  plot_swig(node_radius = 0.2, nudge_intervention_labels = 0.18) + 
+  scale_fill_mpxnyc(option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black", "intervention" = "black")) +
+  theme_mpxnyc_blank()
+
+```
+
+
+
+
+
+
+
+
+
+DAGs and SWIGs are useful because they encode statistical relationships among the variables in an NPSEM through a set of graphical rules called d-separation. Two variables in an NPSEM are (conditionally) independent if they are (conditionally) d-separated in the causal DAG representing the NPSEM.
+
+
+
+
+
+
+
+##### Model restrictions
+
+Whereas parametric models are characterized by their probability mass or density functions, non-parametric models of this type are usually characterized by model restrictions in the form of conditional independencies. 
+
+Restrictions are crucial: to fully characterize the NPSEM specified in @eq-fullly-connected-dag using observed data, we would need to estimate nine functions using one observation of the nine-dimensional joint distribution that gave rise to the participants' observations. Recruiting an additional person to the study would not ease this problem; it would add three new equations to the model and we would end up with a similar problem than the one we began with. We would have to estimate 12 functions using one observation of a 12-dimensional joint distribution.
+
+We can simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function. These assumptions are called model restrictions because they restrict the set of distributions that could possibly be represented by the NPSEM. For instance, if we add the restriction that all the measures are independent (or equivalently, that the DAG has no arrows), the resulting model would not be able to represent data from a causal system where some of the measures are correlated. By adding the restriction of independence, we would be eliminating the correlated data distribution from consideration as a possibility for how the data we are modelling are truly distributed.
+
+It is possible to deduce the conditional independence restrictions of an NPSEM using the structural equations themselves. For instance, we can check whether two variables are (conditionally) independent by checking whether both variables are a function of the same common error term $U_*$. It turns out that queries like this are much simpler to deduce through a graphical representation of the NPSEM than through the NPSEM itself, however. Directed acyclic graphs allow the efficient communication of conditional independence assumptions that define NPSEMs. 
+
+
+
+
+
+
+##### The FFRCISTG model
+
+At its core, the system epidemiologists increasingly depend on for reasoning about abstract quantities such as causal effects is a statistical model called the Finest Fully Randomized Causally Interpretable Structured Tree Graph (FFRCISTG). A FFRCISTG is a collection of non-parametric structural equation models which mimic the causal process that produced the variables under investigation. 
+
+
+
+
+
+
+
+
+
+```{r}
+targets::tar_source("../R_functions")
+```
+
+
+
+
+
+### Assumptions
+
+Under classic causal inference, we assume that observations are independent and identically distributed. We review these assumptions, naming them slightly differently for the purpose of comparing them with the assumptions made in subsequent sections. In each case, we divide assumptions up into *independence assumptions* (those that delete arrows from the DAG) and *homogeneity assumptions* (those that simplify and equate the structural equations with each other).
+
+##### Independence I: No spillover
+
+
+Under classic causal inference, we make the assumption of no spillover - that measurements taken across participants at the same time (e.g. $L_1$, $L_2$, and $L_3$) are independent of each other given all prior measures. i.e.:
+
+
+$$
+\begin{aligned}
+L_1 \perp L_2 \\
+L_2 \perp L_3 \\
+L_1 \perp L_3 
+\end{aligned}
+$$
+
+
+$$
+\begin{aligned}
+A_1 \perp A_2 | L_1, L_2, L_3\\
+A_2 \perp A_3 | L_1, L_2, L_3 \\
+A_1 \perp A_3 | L_1, L_2, L_3 
+\end{aligned}
+$$
+
+
+$$
+\begin{aligned}
+Y_1 \perp Y_2 | L_1, L_2, L_3, A_1, A_2, A_3\\
+Y_2 \perp Y_3 | L_1, L_2, L_3, A_1, A_2, A_3 \\
+Y_1 \perp Y_3 | L_1, L_2, L_3, A_1, A_2, A_3 
+\end{aligned}
+$$
+
+This is shown in @fig-no-spillover-dag as the removal of arrows that connected the $L_i$'s, $A_i$'s and $Y_i$'s. In @eq-no-spillover-dag, the $L_i$'s are not functions of each other, the $A_i$'s are not functions of each other, and the $Y_i$'s are not functions of each other. i.e. Given all the measurements taken prior to a set of contemporaneous measures, the contemporaneous measures are independent. This follows from the independence of the error terms $U_{L_i}$, the error terms $U_{A_i}$, and the error terms $U_{Y_i}$ across observations $i$.
+
+
+
+
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+```{r}
+#| fig-height: 6
+#| fig-width: 6.5
+#| fig-align: center
+#| label: fig-no-spillover-dag
+#| fig-cap: "Causal DAG with no spillover"
+
+
+make_dag("full_interference")      |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(labels = c("h"), option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black")) + 
+  theme_mpxnyc_blank()
+
+
+```
+
+```{r include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+
+
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}) \\
+L_3 &= f_{L_3}(U_{L_3} ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
+A_2 &= f_{A_2}(U_{A_2}, L_1, L_2, L_3) \\
+A_3 &= f_{A_3}(U_{A_3}, L_1, L_2, L_3) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3) \\
+\end{aligned}
+$$ {#eq-no-spillover-dag}
+
+
+
+##### Independence II: No interference
+
+
+Classic causal inference makes the assumption of no interference. i.e. We assume that measurements made across participants, but not at the same time, are independent of each other. This is shown as the absence of arrows that point from the $L_i$'s to $A_j$'s, the $L_i$'s to the $Y_j$'s and the $A_i$'s to the $Y_j$ for participants $i\neq j$ (see @fig-independence-dag).
+
+This allows us to simplify the structural equation model so that each participant's measures are a function of only measures taken on them.
+
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}) \\
+L_3 &= f_{L_3}(U_{L_3} ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1) \\
+A_2 &= f_{A_2}(U_{A_2}, L_2) \\
+A_3 &= f_{A_3}(U_{A_3}, L_3) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, A_1, ) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_2, A_2) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
+\end{aligned}
+$$ {#eq-independence-dag-full}
+
+
+
+
+
+
+##### Homogeneity I: Identical distributions
+
+Finally, we see above that the functions that generate observations $L_i$ are similar in structure to each other, as are the the functions that generate $A_i$'s and $Y_i$s. We make the homogeneity assumption that the functions are identical to each other. 
+
+$$
+\begin{aligned}
+ f_L &= f_{L_1} = f_{L_2} = f_{L_3} \\
+ f_A &= f_{A_1} = f_{A_2} = f_{A_3} \\
+ f_Y &= f_{Y_1} = f_{Y_2} = f_{Y_3}  \\
+\end{aligned}
+$$
+
+
+### Structural equations
+
+
+
+
+```{r}
+targets::tar_source("../R_functions")
+```
+
+
+
+
+
+#### Observed data model
+
+The homogeneity and independence assumptions allow us to re-write the structural equation model dropping the person subscript from the equations. Since the measures on each person are identically distributed, this model can be used three times to separately generate the measures for *Person 1*, *Person 2*, and *Person 3*. By contrast, the original model produced measures for all three people at one go.
+
+@fig-independence-dag and @eq-independence-dag show the resulting non-parametric structural equation model for our data if we analyse it under classic causal inference. As a consequence of the assumptions stated above, we can represent the model using three equations rather than nine. We retain the person subscript on the random variables in @eq-independence-dag and we keep all nine nodes in the DAG on @fig-independence-dag. This is to remind us that, though our model is for one person, our purpose was always to infer something about the sample of three people.
+
+
+
+
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+```{r}
+#| fig-height: 6
+#| fig-width: 6.5
+#| fig-align: center
+#| label: fig-independence-dag
+#| fig-cap: "Causal DAG with no interference or spillover"
+
+make_dag("independence") |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") + 
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black", "intervention" = "black")) + 
+  theme_mpxnyc_blank()
+
+
+```
+
+
+
+
+
+$$
+\begin{aligned}
+L_i &= f_{L}( U_{L_i}) \\
+A_i &= f_{A}( U_{A_i}, L_i) \\
+Y_i &= f_{Y}( U_{Y_i}, L_i, A_i) \\
+\end{aligned}
+$$ {#eq-independence-dag}
+
+
+
+
+#### Counterfactual data model
+
+We define counterfactual outcomes $Y_1^{(a_1)}$, $Y_2^{(a_2)}$, and $Y_3^{(a_3)}$ which represent the level of job opportunities, *Persons 1*, *2*, and *3*, would have if we set their dress to level $a_1$, $a_2$, and $a_3$, respectively. Then the model for counterfactual variables is given by @eq-independence-swig. 
+
+It is represented using the SWIG pictured in @fig-independence-swig. A SWIG represents a structural equation model where some of the equations are superseded by the value assigned by the experimenter. For so-called “treatment variables,” the diagram separates the value of the variable as it would have been observed with no intervention ($A_i$) from the value that as it will be used in subsequent equations ($a_i$) as a result of the experimenter's intervention. 
+
+Note that because of the assumption of no interference and no spillover, each counterfactual outcome is a function only of the treatment value of the same individual. 
+
+To ensure that counterfactual outcomes are well-defined for all experimental units, we make the assumption of positivity:
+
+$$
+0 < P[A_i = a | L_i] < 1
+$$
+
+for $a \in \{0,1\}$
+
+
+
+
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+```{r}
+#| fig-height: 8
+#| fig-width: 7
+#| label: fig-independence-swig
+#| fig-cap: "SWIG with no interference or spillover"
+#| 
+make_swig("independence")      |> 
+  plot_swig(node_radius = 0.2, nudge_intervention_labels = 0.16) + 
+  scale_fill_mpxnyc(option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black", "intervention" = "black")) +
+  theme_mpxnyc_blank()
+
+```
+
+
+
+
+
+
+$$
+\begin{aligned}
+L_i &= f_{L}( U_{L_i}                       ) \\
+A_i &= f_{A}( U_{A_i}, L_i) \\
+Y_i^{(a_i)} &= f_{Y}(U_{Y_i} , L_i, a_i) \\
+\end{aligned}
+$$ {#eq-independence-swig}
+
+
+
+
+
+
+
+
+
+```{r}
+targets::tar_source("../R_functions")
+```
+
+
+
+
+### Estimands
+
+We are interested in whether changing how formally someone dresses would change their level of job offers, on average, in our population. To determine the answer, we will compare the average counterfactual outcome of job opportunities for formal dress to the average counterfactual outcome of job opportunities for non-formal dress. i.e. We will make the following comparison:
+
+
+$$
+\begin{aligned}
+E \left[ \frac{1}{n} \sum_i Y_i^{(a=1)} - Y_i^{(a=0)} \right]
+\end{aligned}
+$$
+
+
+
+
+
+```{r}
+targets::tar_source("../R_functions")
+```
+
+
+
+
+### Identification
+
+Once we have specified the hypothetical quantities from our thought experiment, we "identify" them, meaning write them in terms of the observed rather than counterfactual model. It is sufficient to identify the quantity:
+
+
+
+
+
+
+$$
+\begin{aligned}
+E[Y_i^{(a)}]                    &= E \left[ E[Y_i^{(a)} | L_i] \right] \\
+                                &= E \left[ E[f_{Y}(U_{Y_i} , L_i, a) | L_i] \right] \\
+                                &= E \left[ E[f_{Y}(U_{Y_i} , L_i, a) | L_i , A_i] \right] \\
+                                &= E \left[ E[f_{Y}(U_{Y_i} , L_i, a) | L_i , A_i = a] \right] \\
+                                &= E \left[ E[Y_i | L_i , A_i = a] \right] \\
+\end{aligned}
+$$
+
+
+
+In the first line, we use the law of iterated expectations. In the second line, we use the definition for counterfactual outcome $Y_i^{(a)}$ as specified in @eq-independence-swig. In the third line, we use the fact that when $L_i$ is fixed, $f_{Y}(U_{Y_i} , L_i, a)$ is a function of random variable $U_{Y_i}$ and $A_i$ is a function of $U_{A_i}$. Since $U_{Y_i}$ and $U_{A_i}$ are independent by definition of the NPSEM-IE, $f_{Y}(U_{Y_i} , L_i, a) \perp A_i | L_i$. In the fourth line we consider the expected value of $f_{Y}(U_{Y_i} , L_i, a)$ when $A_i = a$, in particular. In the fifth line, we use the definition for observed value $Y_i$ as specified in @eq-independence-dag.
+
+
+
+
+
+
+
+
+```{r}
+#| fig-width: 2
+#| fig-height: 2
+#| fig-align: center
+
+
+plot_icon(icon_name = "droplets", color = "dark_purple", shape = 0)
+
+```
+
+
+
+
+
+
+
+## Network causal inference
+
+
+
+
+
+#### Example 2: Marriage and jobs {.unnumbered}
+
+
+We mentioned that in our study sample *Person 1* and *Person 2* are married to each other and *Person 1* and *Person 3* are acquaintances. In the causal system connecting their job status, dress and job offers, an argument could be made that *Person 1*'s job status affects *Person 2*'s dress, since they pool their salaries as a married couple. It could also be argued that *Person 1*'s job status affects *Person 2*'s job opportunities if having a job brings the married couple into contact with other married couples who are connected to job markets. 
+
+Finally, we could argue that *Person 1*'s dress affects *Person 2*'s job opportunities if some aspect of the reputation *Person 2* enjoys among potential colleagues derives from their spouse's appearance. Symmetrically, *Person 2*'s measures could influence *Person 1*'s.
+
+But what about the relationship between *Person 1* and *Person 3*? How does that shape the measurements of either person? We can imagine that the dress of a newly acquainted colleague would not affect the dress and job opportunities of her colleague. Whereas *Person 1* and *Person 2* are causally related, *Person 1* and *Person 3* are not; their relationship is irrelevant to the causal system under investigation. *Person 2* and *Person 3* do not affect each other since they have no relationship at all.
+
+Before specifying a model that can accommodate the interdependence between *Persons* *1* and *2*, we outline some definitions which we will need to describe the network causal inference model. 
+
+
+### Causal reasoning under interference {#sec-causal-interference .unnumbered}
+
+Classical causal inference assumes *no interference*: a person’s outcome depends only on their own treatment, written as $Y_i(a)$. This works when units are independent, but breaks down in real-world settings like [Example 3: Vaccination](#ex-vaccination), where outcomes depend not only on a person’s vaccination status but also on their neighbors’. DAGs, SWIGs, and NPSEM-IE cannot capture such spillovers, so we need additional tools.  
+
+#### Homogeneous network interference {#sec-homogeneous-interference}
+
+To make progress, we introduce the assumption of *homogeneous network interference*. This means that the effect of a neighbor’s treatment on unit $i$ is the same regardless of which neighbor it is. What matters is the *number* or *proportion* of treated neighbors, not their identity. For example, a person with two vaccinated neighbors is assumed to have the same exposure regardless of *which* two neighbors those are.  
+
+This simplifying assumption allows us to summarize complex treatment assignments in a way that can be analyzed with causal models.  
+
+#### Graphs {#sec-graphs}
+
+Graphs give us a language to describe these interference structures. A graph represents units as nodes and possible pathways of influence as edges. The neighborhood of a node is the set of other nodes it is directly connected to.  
+
+Under the homogeneous interference assumption, graphs help us represent who is “eligible” to affect whom, without worrying about differences in identity between neighbors. Potential outcomes can then be thought of as depending both on a unit’s own treatment and on the set of its neighbors’ treatments.  
+
+#### Exposure mappings {#sec-exposure-mapping}
+
+Graphs tell us *who* is connected, but we still need a way to summarize the *pattern* of neighbor treatments. Exposure mappings do this by turning the vector of neighbors’ treatments into a simpler measure, such as the count or proportion of vaccinated neighbors.  
+
+Together with graphs, exposure mappings allow us to formalize how interference operates: graphs define the structure of possible influence, while exposure mappings define how that structure translates into exposures that affect outcomes.  
+
+#### NFFRCISTG {#sec-nffrcistg}
+
+To tie these pieces together, we extend Robins’s FFRCISTG to interference, yielding the **networked FFRCISTG (NFFRCISTG)**. Here, potential outcomes are indexed by both a unit’s own treatment and its exposure mapping, creating a counterfactual framework that incorporates direct and spillover effects.  
+
+The NFFRCISTG extends the interpretability of SWIGs to settings with interference, providing a structured way to reason about interventions in networks. In the next section, we derive a concrete NFFRCISTG using [Example 3: Vaccination](#ex-vaccination) to show how these ideas work in practice.  
+
+
+### Assumptions
+
+##### Independence I: No spillover
+
+We make the assumption of no spillover - that measurements taken across participants at the same time (e.g. $L_1$, $L_2$, and $L_3$) are independent of each other given all prior measures.
+
+This is shown in @fig-interference-dag, as the removal of arrows that connected the $L_i$'s, $A_i$'s and $Y_i$'s in @fig-fullly-connected-dag. In @eq-interference-dag, the $L_i$'s are not functions of each other, the $A_i$'s are not functions of each other, and the $Y_i$'s are not functions of each other, unlike in @eq-fullly-connected-dag. This implies that conditioning all the measurements taken prior to a set of contemporaneous measures, the contemporaneous measures are independent.
+
+##### Independence II: Network interference
+
+
+
+
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+```{r}
+#| fig-height: 6
+#| fig-width: 6.5
+#| fig-align: center
+#| label: fig-interference-dag
+#| fig-cap: "Causal DAG with network interference"
+
+make_dag("network_interference")   |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black")) +
+  theme_mpxnyc_blank()
+
+
+```
+
+
+
+
+
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}) \\
+L_3 &= f_{L_3}(U_{L_3} ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, L_2) \\
+A_2 &= f_{A_2}(U_{A_2}, L_1, L_2) \\
+A_3 &= f_{A_3}(U_{A_3}, L_3) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, A_1, A_2) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, A_1, A_2) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_3,  A_3) \\
+\end{aligned}
+$$ {#eq-interference-dag}
+
+
+
+We make the assumption that interference respects some mapping between individuals - a mapping given by a graph. In @fig-interference-dag, based on their relationships with one another, *Person 1*'s measures are connected with *Person 2*'s, and neither are connected with *Person 3*'s.  
+
+
+##### Homogeneity I: Relational homogeneity
+
+
+We assume that the exposure mapping for each variable in the structural model is separable. i.e. We define $g_{A_i}$, $h_{Y_i}$, and $g_{Y_i}$ as network exposure mappings for $A_i$ with respect to $\mathbf{L}$, for $Y_i$ with respect to $\mathbf{A}$, and for $Y_i$ with respect to $\mathbf{L}$. Seperability allows us to write the model as follows:
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}) \\
+L_3 &= f_{L_3}(U_{L_3} ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, g_{A_1}(\mathbf{L}, \Psi_1)) \\
+A_2 &= f_{A_2}(U_{A_2}, L_2, g_{A_2}(\mathbf{L}, \Psi_2)) \\
+A_3 &= f_{A_3}(U_{A_3}, L_3, g_{A_3}(\mathbf{L}, \Psi_3)) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, A_1, g_{Y_1}(\mathbf{L}, \Psi_1), h_{Y_1}(\mathbf{A}, \Psi_1)) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_2, A_2, g_{Y_2}(\mathbf{L}, \Psi_2), h_{Y_2}(\mathbf{A}, \Psi_2)) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_3,A_3,  g_{Y_2}(\mathbf{L}, \Psi_3), h_{Y_2}(\mathbf{A}, \Psi_3)) \\
+\end{aligned}
+$$
+
+
+Where 
+
+$$
+\begin{aligned}
+\Psi_1 &= [0,1,0] \\
+\Psi_2 &= [1,0,0] \\
+\Psi_3 &= [0,0,0] \\
+\end{aligned}
+$$
+
+We assume that the value of a network exposure mapping is invariant to its position in the network. This allows us to drop the person subscript on the network exposure mappings. 
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}) \\
+L_3 &= f_{L_3}(U_{L_3} ) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, g_{A}(\mathbf{L}, \Psi_1)) \\
+A_2 &= f_{A_2}(U_{A_2}, L_2, g_{A}(\mathbf{L}, \Psi_2)) \\
+A_3 &= f_{A_3}(U_{A_3}, L_3, g_{A}(\mathbf{L}, \Psi_3)) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, A_1, g_{Y}(\mathbf{L}, \Psi_1), h_{Y}(\mathbf{A}, \Psi_1)) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_2, A_2, g_{Y}(\mathbf{L}, \Psi_2), h_{Y}(\mathbf{A}, \Psi_2)) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_3,A_3,  g_{Y}(\mathbf{L}, \Psi_3), h_{Y}(\mathbf{A}, \Psi_3)) \\
+\end{aligned}
+$$
+
+
+##### Homogeneity III: Identical distributions
+
+We assume that the structural equations that produce indivdual measures are identical across individuals. Hence, we can drop the person subscript from the structural equations. 
+
+$$
+\begin{aligned}
+L_1 &= f_{L}(U_{L_1}) \\
+L_2 &= f_{L}(U_{L_2}) \\
+L_3 &= f_{L}(U_{L_3} ) \\
+A_1 &= f_{A}(U_{A_1}, L_1, g_{A}(\mathbf{L}, \Psi_1)) \\
+A_2 &= f_{A}(U_{A_2}, L_2, g_{A}(\mathbf{L}, \Psi_2)) \\
+A_3 &= f_{A}(U_{A_3}, L_3, g_{A}(\mathbf{L}, \Psi_3)) \\
+Y_1 &= f_{Y}(U_{Y_1}, L_1, A_1, g_{Y}(\mathbf{L}, \Psi_1), h_{Y}(\mathbf{A}, \Psi_1)) \\
+Y_2 &= f_{Y}(U_{Y_2}, L_2, A_2, g_{Y}(\mathbf{L}, \Psi_2), h_{Y}(\mathbf{A}, \Psi_2)) \\
+Y_3 &= f_{Y}(U_{Y_3}, L_3,A_3,  g_{Y}(\mathbf{L}, \Psi_3), h_{Y}(\mathbf{A}, \Psi_3)) \\
+\end{aligned}
+$$
+
+
+##### Homogeneity IV: Boundedness
+
+If we assume that the only relevant relationships for the causal structure related to employment, formal dress, and job offers are marriages, the assumption of boundedness holds. Each node in this graph will have either a single network exposure unit, or none at all, even if the graph grows arbitrarily large. 
+
+
+$$
+\begin{aligned}
+g_{A}(\mathbf{L}, \Psi_i) &\in \{0, 1\} \\
+g_{Y}(\mathbf{L}, \Psi_i) &\in \{0, 1\} \\
+h_{Y}(\mathbf{A}, \Psi_i) &\in \{0, 1\} \\
+\end{aligned}
+$$
+
+
+### Structural equations
+
+#### Observed data model
+
+@fig-homogenous-dag and @eq-homogenous-dag show the resulting NPSEM and DAG for our data. Because of the assumption of identical distributions, we can represent the model using three equations rather than nine. We retain the person subscript on the random variables in @eq-homogenous-dag and we keep all nine nodes in the DAG on @fig-homogenous-dag and add six additional nodes to represent network exposure values with respect to $\mathbf{A}$ and $\mathbf{L}$. 
+
+We draw the DAG like this to clarify that though our model is for one person, it represents a part of a system that relates all the people in the sample with each other. Our original purpose, after all, was to infer something about the sample, not any one individual in it.
+
+
+
+
+
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+```{r}
+#| fig-height: 8
+#| fig-width: 7
+#| fig-align: center
+#| label: fig-homogenous-dag
+#| fig-cap: "Causal DAG with homogenous structure"
+
+
+make_dag("homogenous_interference")            |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black")) +
+  theme_mpxnyc_blank()
+
+
+
+
+```
+
+
+
+
+
+
+We can re-write the structural equation model like this:
+
+
+$$
+\begin{aligned}
+L_i &= f_{L}( U_{L_i} ) \\
+A_i &= f_{A}( U_{A_i}, L_i, g_{A}(\textbf{L}, \Psi_i) ) \\
+Y_i &= f_{Y}( U_{Y_i},  L_i,  g_{Y}(\textbf{L}, \Psi_i),   A_i,  h_{Y}( \textbf{A}, \Psi_i ) ) \\
+\end{aligned}
+$$ {#eq-homogenous-dag}
+
+
+
+
+#### Counterfactual data model
+
+
+We define counterfactual outcomes $Y_1^{(a_1, \mathbf{a}_{\mathscr{N}_1})}$, $Y_2^{(a_2, \mathbf{a}_{\mathscr{N}_2})}$, and $Y_3^{(a_3, \mathbf{a}_{\mathscr{N}_3})}$, which represent the level of job opportunities, *Persons 1*, *2*, and *3*, would have if we set their dress to level $a_1$, $a_2$, and $a_3$, respectively. Then the model for counterfactual variable is given by @eq-homogenous-interference-swig. It is represented using a SWIG in @fig-homogenous-interference-swig.
+
+Note that because of the assumption of network interference, the counterfactual outcome for *Person 1* is a function of *Person 2*'s treatment value and vice versa. The counterfactual outcome for *Person 3*, on the other hand, is a function of *Person 3*'s treatment ($a_3$) alone. This is because $\mathscr{N}_1 = \{2\}$, $\mathscr{N}_2 = \{1\}$, and $\mathscr{N}_3 = \{\}$, according to Example 2.
+
+To ensure that counterfactual outcomes are well-defined for all experimental units, we make the assumption of positivity:
+
+$$
+0 < P[A_i = a_i,  h_Y (\mathbf{A}, \Psi_i) =  h_Y(\mathbf{a}, \Psi_i)| L_i,g_{A}(\mathbf{L}, \Psi_i) ] < 1
+$$
+for all $\mathbf{a} \in \{0,1\}^n$
+
+
+
+
+
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+```{r}
+#| fig-height: 8
+#| label: fig-homogenous-interference-swig
+#| fig-width: 7
+#| fig-cap: "SWIG with homogenous"
+#| 
+make_swig("homogenous_interference")      |> 
+  plot_swig(node_radius = 0.2, nudge_intervention_labels = 0.16) + 
+  scale_fill_mpxnyc(option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black", "intervention" = "black")) + 
+  theme_mpxnyc_blank()
+
+```
+
+
+
+
+
+
+
+
+$$
+\begin{aligned}
+L_i &= f_{L}(  U_{L_i}  ) \\
+A_i &= f_{A}( U_{A_i}, L_i, g_{A}(\textbf{L}, \Psi_i) ) \\
+Y_i^{(a_i,\textbf{a}_{\mathscr{N}_i} )} &= f_{Y}(U_{Y_i}, L_i,  a_i,  g_{Y}(\textbf{L}, \Psi_i),      h_{Y}(\textbf{a}, \Psi_i)         ) \\
+\end{aligned} 
+$$ {#eq-homogenous-interference-swig}
+
+
+
+
+
+
+### Estimands
+
+
+We are interested in whether on average, changing someone's dress would change their level of job offers. To determine the answer, we will compare the average counterfactual outcome of job opportunities if everyone were forced to wear formal dress to the average counterfactual outcome of job opportunities if everyone wore non-formal dress. i.e. We will make the following comparison:
+
+
+$$ 
+ATE = \frac{1}{n}\sum_i E[Y_i^{(a = 1, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 1})} - Y_i^{(a = 0, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 0})}]
+$$
+It is possible to decompose this average causal effect into a portion attributable to direct (within individual) causal pathways. This tells us, on average, to what extent one's own dress affects one own's job opportunities. 
+
+
+$$ 
+ADE = \frac{1}{n}\sum_i E[Y_i^{(a = 1, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 0})} - Y_i^{(a = 0, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 0})}]
+$$
+
+We can calculate the portion of the average total effect attributable to spillover (cross-individual) causal pathways. This tells us, on average, to what extent one's spouse's dress affects one's job opportunities. 
+
+
+$$ 
+ASE = \frac{1}{n}\sum_i E[Y_i^{(a = 1, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 1})} - Y_i^{(a = 1, \mathbf{a}_{\mathscr{N}_i} = \textbf{ 0})}]
+$$
+
+
+### Identification
+
+
+
+$$
+\begin{aligned}
+ E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} ] 
+ &=  E[E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} | \mathbf{L}]]   \\
+ &=  E[E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}                                  | L_i , g_Y(\mathbf{L}, \Psi_i)] ] \\
+ &=  E[E[f_{Y}(U_{Y_i}, L_i,  a_i, g_{Y}(\textbf{L}, \Psi_i),  h_{Y}(\textbf{a}, \Psi_i))   | L_i , g_Y(\mathbf{L}, \Psi_i)] ] \\ 
+ &=  E[E[f_{Y}(...)                                                               | L_i , g_Y(\mathbf{L}, \Psi_i), A_i = a_i, h_Y(\textbf{A}, \Psi_i) = h_Y(\textbf{a}, \Psi_i)]] \\
+ &=  E[E[Y_i                                                                      | L_i , g_Y(\mathbf{L}, \Psi_i), A_i = a_i, h_Y(\textbf{A}, \Psi_i) = h_Y(\textbf{a}, \Psi_i)]] \\
+\end{aligned}
+$$
+
+In the first line we use the law of iterated expectations. In the second line, we use the separability of the structural equation for $Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}$. In the third line we replace substitute for the structural equation. In the fourth line, we use the fact that in the counterfactual model, $\mathbf{A}$ is independent of $f_{Y}(...)$ conditional on $\mathbf{L}$. In the final line we use the fact that structural equation for $Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}$ in the counterfactual data NPSEM-IE is identical to the structural equation for $Y_i$ in the observed data NPSEM-IE. 
+
+
+
+### Compact notation with DANGs and SWINGs {.unnumbered}
+
+DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the "structural part" of the DANG and the latter the "relational part." The relational part shows which pairs of observational units have correlated measures with each other. For instance, in @fig-causal-dang-instructions we see that individuals 1 and 2 are related.
+
+
+
+
+```{r}
+#| fig-height: 8
+#| fig-width: 5
+#| label: fig-causal-dang-instructions
+#| fig-cap: Causal DANG
+
+structural <- example_dang_1_structural() |>
+                    plot_swig(node_radius = 0.2) +
+                    scale_fill_mpxnyc(option = "light") +
+                    scale_color_mpxnyc(option = "manual", values = "black") +
+                    theme_mpxnyc_blank()+
+                    ggplot2::ggtitle("Structural Part") 
+
+relational <- example_dang_1_relational() |>
+                    plot_swig(0, 0, node_radius = 0.2)  +
+                    scale_fill_mpxnyc(name = "Entity type", option = "light") +
+                    scale_color_mpxnyc(option = "manual", values = "black") +
+                    theme_mpxnyc_blank() +
+                    ggplot2::ggtitle("Relational Part") 
+
+cowplot::plot_grid(structural, relational, ncol = 1)
+
+```
+
+
+
+
+
+
+The structural part is a DAG of vector-valued variables $\mathbf{L}$, $\mathbf{A}$, and $\mathbf{Y}$ of length equal to the number of people in the sample. It has standard interpretation under d-separation rules. It gives the conditional independencies across these vector-valued random variables. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+#| fig-width: 2
+#| fig-height: 2
+#| fig-align: center
+
+
+plot_icon(icon_name = "droplets", color = "dark_purple", shape = 0)
+
+```
+
+
+
+
+
+
+
+## Social and spatial inference
+
+
+
+
+
+
+
+#### Example 3: Vaccination {.unnumbered}
+
+You are a public health officer at the department of health in Nowhereville and are planning to conduct and assess a three week flu vaccination campaign. None of the townspeople have been vaccinated against flu. There is a population of five residents in the city, and they each live in one of three neighborhoods. In addition, residents visit their friends' homes in other neighborhoods.
+
+*Person 1* lives in *Neighborhood A* and visits *Neighborhood B*. *Person 2* lives in *Neighborhood B*, but visits *Neighborhoods A* and *B*. *Person 3* lives in *Neighborhood C* and visits *Neighborhood B*. *Persons 5* and *6* live in *Neighborhood C* and they do not visit any other neighborhoods.
+
+The city of Nowhereville has a very structured approach to vaccination campaigns. At the beginning of each week, each neighborhood gets a risk rating based on the prevalence of vaccination among its residents and visitors. Based on that rating, each neighborhood decides whether to conduct a local vaccination drive or not. Vaccination drives are conducted in the same way regardless of neighborhood - visitors and residents are offered immediate vaccination at a nearby mobile van through a pop-up message on the local dating app. Not everyone will receive the messages because some will not open the app during the period of the campaign. Those who do will have the choice of getting vaccinated or not. Each person can only get vaccinated once.
+
+Everyone can move every week - vaccination strategy is set neighborhood by neighborhood according to the dag. Dynamic regime.
+
+
+### Social & spatial DANGs and SWINGs {.unnumbered}
+
+We introduce the causal Directed Acyclic Network Graph (causal DANG) - a simple extension of the DAG that allows for the representation of complex causal systems. Like the causal DAG, the causal DANG encodes a non-parametric structural equation model.
+
+*Compact graphic representation*
+
+DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the "structural part" of the DANG and the latter the "relational part." The relational part shows which pairs of observational units have correlated measures with each other. For instance, in @fig-causal-dang-instructions we see that individuals 1 and 2 are related.
+
+The structural part is a DAG of vector-valued variables $\mathbf{L}$, $\mathbf{A}$, and $\mathbf{Y}$ of length equal to the number of people in the sample. It has standard interpretation under d-separation rules. It gives the conditional independencies across these vector-valued random variables. 
+
+
+
+
+
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+```{r}
+#| fig-height: 6
+#| fig-width: 8
+#| fig-align: center
+#| label: fig-example-dang-structural
+#| fig-cap: "Causal DANG for Week 1 in Example 3"
+
+
+structural  <- example_dang_2_structural() |>
+                    plot_swig(node_radius = 0.15) +
+                    scale_fill_mpxnyc(name = "Entity type", option = "light") +
+                    scale_color_mpxnyc(option = "manual", values = c("Community" = "black", "Individual" = "black", "intervention" = "black")) +
+                    theme_mpxnyc_blank() +
+                    ggplot2::ggtitle("Structural Part")
+
+
+relational  <- example_dang_2_relational() |>
+                    plot_swig(node_radius = 0.2, node_margin = 0)  +
+                    scale_fill_mpxnyc(name = "Entity type", option = "light") +
+                    scale_color_mpxnyc(option = "manual", values = c("Community" = "black", "Individual" = "black", "intervention" = "black")) +
+                    theme_mpxnyc_blank() +
+                    ggplot2::ggtitle("Relational Part") 
+
+figure   <- cowplot::plot_grid(structural, relational, ncol=1, rel_heights = c(3,3))
+
+
+
+legend_pre  <- relational + ggplot2::theme(legend.position = "right")
+
+legend      <- cowplot::get_legend(legend_pre) 
+ 
+   
+cowplot::plot_grid(figure, legend, nrow = 1, rel_widths = c(4,1))
+```
+
+
+
+
+
+
+
+We introduce the Single World Intervention Network Graph (SWING) - a simple extension of the SWIG that allows for the representation of the counterfactual outcomes of interventions in complex causal systems.
+
+The SWING has two parts: a structural part and a relational part. Like the causal DANG, the SWING represents vector-valued random variables (rather than scalars) as nodes. Like the SWIG, the SWING splits the nodes that are to be intervened upon by the experimenter. @fig-example-swig-structural shows the counterfactual distribution of the variables in the model under an intervention setting $\mathbf{T}$ to the value $\mathbf{t}$.
+
+
+
+
+
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+```{r}
+#| fig-height: 6
+#| fig-width: 8
+#| fig-align: center
+#| label: fig-example-swig-structural
+#| fig-cap: "SWING for Week 1 in Example 3"
+#| 
+
+
+structural  <- example_swing_structural() |>
+                    plot_swig(node_radius = 0.15) +
+                    scale_fill_mpxnyc(option = "light") +
+                    scale_color_mpxnyc(option = "manual", values = c("Community" = "black", "Individual" = "black", "intervention" = "black")) +
+                    theme_mpxnyc_blank() +
+                    ggplot2::ggtitle("Structural Part") 
+
+
+relational  <- example_swing_relational() |>
+                    plot_swig(node_radius = 0.2, node_margin = 0)  +
+                    scale_fill_mpxnyc(name = "Entity type", option = "light") +
+                    scale_color_mpxnyc(option = "manual", values = c("Community" = "black", "Individual" = "black", "intervention" = "black")) +
+                    ggplot2::theme(legend.position = "right") +
+                    theme_mpxnyc_blank() +
+                    ggplot2::ggtitle("Relational Part")
+
+
+legend_pre  <- relational +
+                    ggplot2::theme(legend.position = "right")
+legend      <- cowplot::get_legend(legend_pre) 
+
+
+
+figure   <- cowplot::plot_grid(structural, relational, ncol=1, rel_heights = c(3,3))
+
+cowplot::plot_grid(figure, legend, nrow = 1, rel_widths = c(4,1))
+
+```
+
+
+
+
+
+
+
+
+
+
+### Causal reasoning under random interference {#sec-random-interference .unnumbered}
+
+In the previous section we considered interference with a fixed network structure and introduced the simplifying assumption of homogeneity. But in many real-world settings, connections themselves are uncertain or vary across time. For example, when people attend events or move between locations, it is not fixed who interacts with whom. To capture this type of *random interference*, we extend our framework to include stochastic network structures.  
+
+#### Random graphs {#sec-random-graphs}
+
+Random graphs bring probability into the network itself. Instead of assuming we know exactly which edges exist, we treat them as random variables. For example, two people may have a certain probability of meeting at a venue, or a person may randomly choose which locations to visit.  
+
+This randomness captures the idea that interference patterns are not fixed in advance, but vary across realizations. Potential outcomes can then be thought of as depending both on treatments and on the random draw of a network.  
+
+#### Homogeneous random interference {#sec-homogeneous-random}
+
+Conditional on a random draw of the network, we often simplify further with the assumption of *homogeneous random interference*. This means that the effect of a neighbor’s treatment on unit $i$ is the same no matter which neighbor it is. What matters is the number or proportion of treated neighbors, not their identity.  
+
+This mirrors the homogeneous assumption from the fixed network setting, but now exposures vary both with treatment assignments and with the random realization of the network.  
+
+#### Bipartite graphs {#sec-bipartite-graphs}
+
+A bipartite graph is one where nodes are divided into two disjoint sets and edges connect only across sets. In random interference problems, it is often useful to model people on one side and places or events on the other. An edge then represents a person visiting a place, and interference arises because multiple people may be connected through the same location.  
+
+This structure allows us to represent exposures that are not purely person-to-person, but mediated by shared environments.  
+
+#### Random bipartite network FFRCISTG {#sec-random-bipartite-ffrcistg}
+
+To combine these ideas, we extend Robins’s FFRCISTG further to a **random bipartite network FFRCISTG**. Here, potential outcomes are indexed not only by treatments and exposure mappings, but also by the realization of a random bipartite network.  
+
+Formally, the counterfactual universe includes outcomes of the form $Y_i(a_i, g_i, G)$, where $G$ denotes a particular draw of the network structure.  
+
+This framework allows us to reason about direct effects, spillover effects, and the uncertainty introduced by random connections. It generalizes the fixed-network NFFRCISTG to settings where links themselves are stochastic, such as mobility-driven or event-based exposures.  
+
+In the next section, we return to the worked example and show how random interference can be represented through a random bipartite network FFRCISTG.  
+
+
+### Assumptions
+
+See @sec-network-causal-inference for a fuller description of the below assumptions.
+
+#### Independence assumptions
+
+
+Under the SSNAC framework, we make the assumption of no spillover: contemporaneous measurements on observational units of a given entity type are independent of each other given all prior measures. The time-ordering of the measurements is given by the structural part of the causal DANG. We further make the assumption of network interference - that interference respects the mapping given by the relational part of a causal DANG. i.e. The exposure mapping for each equation in the structural equation model is loyal to the graph that encodes the relational part of the SWING. 
+
+#### Homogeneity assumptions
+
+We make the relational homogeneity assumption which holds that the exposure mappings for variables in the NPSEM are separable and positionally invariant. The structural homogeneity assumption holds that the structural equations that produce each observational unit's measures are identical across observational units of the same entity type. Finally, we make the boundedness assumption -- all the exposure mappings in the NPSEM take values from a finite set.  In applications with repeated measures, if the structure of the causal DANG allows, the SSNAC framework allows for the assumption of time homogeneity: the structural equations are identical across time. We apply this assumption in Example 3 below. 
+
+
+### Structural equations
+
+#### Observed data model
+
+The causal DANG shown in @fig-repeated-observations-dang represents the three week campaign mentioned in Example 3 (we omit the relational part and show only the structural part). Let $\mathbf{T}_s$ be a $3\times1$ vector whose entries $T_{sj}$ are 1 if *Neighborhood* $j$ is to be vaccinated at time $s$ and $0$ otherwise. $\mathbf{M}_s$ is a $5\times1$ vector whose entries $M_{si}$ indicate whether the $i^{\text{th}}$ person received a campaign message at time $s$ or not. $\mathbf{V}_s$ is a $5\times1$ vector whose entries $V_{si}$ show whether participant $i$ is vaccinated or not at time $s$. Finally, $\mathbf{R}_s$ is a $3\times1$ vector whose entries $R_{si}$ shows the risk rating of neighborhood $j$ at the beginning of time $s$. @eq-placeintervention-dang specifies this model for *Person* $i$ and *Neighborhood* $j$ at time $s$:
+
+
+
+
+
+
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+```{r}
+#| fig-width: 8
+#| fig-height: 5
+#| label: fig-placeintervention-dang
+#| fig-cap: "Causal DANG for Week 1-3 in Example 3"
+
+
+
+program_dang() |>
+  dplyr::mutate(x = x, y = y) |>
+  plot_swig(node_radius = 0.5) +
+  scale_fill_mpxnyc(option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("Community" = "black", "Individual" = "black", "intervention" = "black")) +
+  theme_mpxnyc_blank()
+
+
+
+
+```
+
+
+
+
+
+
+$$
+\begin{aligned}
+\mathbf{\Psi}_{0i} &=   f_{\mathbf{\Psi}_{0i}}(U_{\mathbf{\Psi}_{0i}})\\
+M_{0i} &=  f_{M_0}(U_{M_{0i}}) \\
+V_{0i} &=  f_{V_0}(U_{V_{0i}}) \\
+R_{sj} &=  f_{R}(U_{R_{sj}}, \mathbf{V}_{s-1}) \\
+T_{sj} &=  f_{T}(U_{T_{sj}}, R_{s,j}) \\
+\mathbf{\Psi}_{si} &=   f_{\mathbf{\Psi}_{si}}(U_{\mathbf{\Psi}_{si}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{\{s-1,i\}})\\
+M_{si} &=  f_{M} (U_{M_{\{si\}}} , V_{\{s-1,i\}}, M_{\{s-1,i\}}, \mathbf{T}_{s}, \mathbf{\Psi}_{si})\\
+V_{si} &=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}, V_{\{s-1,i\}}) \\
+\end{aligned}
+$$ {#eq-placeintervention-dang}
+
+
+
+
+According to @eq-placeintervention-dang, $R_{sj}$, the risk rating for *Neighborhood* $j$ at time $s$, is a function of $\mathbf{V}_{s-1}$, the vaccination status of every individual at time $s-1$. $T_{sj}$ - an indicator for whether or not *Neighborhood* $j$ conducted a campaign at time $s$, is a function of the risk rating for *Neighborhood* $j$ at time $s$.
+
+$M_{si}$, which indicates whether or not an *Person* $i$ received a campaign message at time $s$, is a function of whether or not person $i$ was vaccinated at time $s-1$, whether they received a campaign message at time $s-1$, and whether or not one of the neighborhoods they live in or visit conducted a campaign at time $s$. The vaccination status of individual $i$ at time $s$ is a function of whether or not they received a campaign message at time $s$ and whether or not they were vaccinated at time $s-1$.
+
+
+#### Counterfactual data model
+
+Say we want to understand the impact of a vaccination campaign conducted over three weeks on vaccination status. This would be done by setting $\mathbf{T}_1$ to $\mathbf{t}_1$, $\mathbf{T}_2$ to $\mathbf{t}_2$, and $\mathbf{T}_3$ to $\mathbf{t}_3$ and noting the resulting counterfactual vaccination status at the end of week 1 ($\mathbf{V}_1^{(\mathbf{t}_1)}$), week 2 ($\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2)}$), and week 3 ($\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)}$). This counterfactual model is defined @eq-placeintervention-swing as shown in shown in @fig-placeintervention-swing. 
+
+
+
+
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+```{r}
+#| label: fig-placeintervention-swing
+#| fig-cap: "SWING for Week 1-3 in Example 3"
+#| fig-width: 8
+#| fig-height: 5
+
+
+program_dang() |>
+  dplyr::mutate(x = x, y = y) |>
+  plot_swig(node_radius = 0.5) +
+  scale_fill_mpxnyc(option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("Community" = "black", "Individual" = "black", "intervention" = "black")) +
+  theme_mpxnyc_blank()
+
+
+
+
+
+
+```
+
+
+
+
+
+
+
+$$
+\begin{aligned}
+\mathbf{\Psi}_{0i} &=   f_{\mathbf{\Psi}_{0i}}(U_{\mathbf{\Psi}_{0i}})\\
+M_{0i} &=  f_{M_0}(U_{M_{0i}}) \\
+V_{0i} &=  f_{V_0}(U_{V_{0i}}) \\
+R_{sj}^{(\bar{\mathbf{t}})} &=  f_{R}(U_{R_{sj}}, \mathbf{V}_{s-1}^{(\bar{\mathbf{t}})}) \\
+T_{sj}^{(\bar{\mathbf{t}})} &=  f_{T}(U_{T_{sj}}, R_{s,j}^{(\bar{\mathbf{t}})}) \\
+\mathbf{\Psi}_{si} &=   f_{\mathbf{\Psi}_{si}}(U_{\mathbf{\Psi}_{si}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{\{s-1,i\}})\\
+M_{si}^{(\bar{\mathbf{t}})} &=  f_{M} (U_{M_{\{si\}}} , V_{\{s-1,i\}}^{(\bar{\mathbf{t}})}, M_{\{s-1,i\}}^{(\bar{\mathbf{t}})}, \mathbf{t}_{\{s\}}, \mathbf{\Psi}_{si})\\
+V_{si}^{(\bar{\mathbf{t}})} &=  f_{V}(U_{V_{\{si\}}}, M_{\{si\}}^{(\bar{\mathbf{t}})}, V_{\{s-1,i\}}^{(\bar{\mathbf{t}})}) \\
+\end{aligned}
+$$ {#eq-placeintervention-swing}
+
+
+
+
+
+where $\bar{\mathbf{t}}$ is defined as "the history of $\mathbf{t}$". i.e. at time 1, $\bar{\mathbf{t}} =\mathbf{t}_1$. At time 2,   $\bar{\mathbf{t}} = [\mathbf{t}_1, \mathbf{t}_2]$, etc.
+
+
+
+
+### Estimands
+
+We are interested in vaccine coverage throughout the three week campaign. For a given week $s$, this is the sum of the vaccine status outcome $\mathbf{V}$ across individuals.
+
+
+$$
+E[\sum_{i=1}^5 V_{si}^{(\bar{\mathbf{t}})}] 
+$$
+
+
+### Identification
+
+Because individual vaccination status is both a confounder and a mediator of the relationship between neighborhood intervention status and vaccination status, we cannot identify our estimands using conditional expectations of the observed data. We must use a marginal structural model. 
+
+We can estimate the outcome of interest using the inverse probability of treatment weights, noting that the treatment in this case is the network exposure value $g(t_{\bar{s},N_i})$ for $\mathbf{T}$.
+
+$$
+V_{si}^{(\bar{\mathbf{t}})} =  \frac{V_{si} \mathbf{1}_{x = g(t_{\bar{s},N_i}) }(g(T_{\bar{s},N_i})) }{\prod_{q=1}^s P[g(\mathbf{T}_{q,N_i}) = g(\mathbf{t}_{q,N_i}) | \mathbf{R}_{\bar{q}N_i}]}
+$$
+where $\mathbf{R}_{\bar{s}N_i}$ is the "history of $\mathbf{R}_{sN_i}$". e.g.
+
+$$
+\mathbf{R}_{\bar{3}N_i} = [\mathbf{R}_{1N_i}, \mathbf{R}_{2N_i}, \mathbf{R}_{3N_i}]
+$$
+
+
+
+
+
+
+
+```{r}
+#| fig-width: 2
+#| fig-height: 2
+#| fig-align: center
+
+
+plot_icon(icon_name = "droplets", color = "dark_purple", shape = 0)
+
+```
+
+
+
+
+
+
+
+## Notes {.unnumbered}
+
+### a. Definitions {.unnumbered}
+
+#### Classic causal inference
+
+
+
+::: {#def-random-variable .theorem}
+# Random variable
+
+A notional **scalar** quantity assumed to be related to others through a statistical model.
+:::
+
+
+::: {#def-statistical-model .theorem}
+## Statistical model
+
+A collection of probability distributions on a vector of random variables $\mathbf V$. Probability distributions in this model are characterized using a set of parameters $\mathbf \theta$.
+
+$$
+\mathcal{M}=\{P_\theta:\theta\in\Theta\}\quad\text{on set of random variables }\mathbf V.
+$$
+:::
+
+::: {#def-npsem .theorem}
+## Non-parametric structural equation model \[NPSEM\]
+
+A [statistical model](#def-statistical-model) in which $\theta$ is a set of deterministic functions called structural equations. Each equation $f_V \in \theta$ returns the value of a random variable $V \in \mathbf V$ in the model and is a function of the other random variables $\mathbf V_{-V}$ as well as a random error term $U$. 
+
+$$
+\theta =\{f_{j}:V_j\in\mathbf V\}
+$$
+
+By definition, no random variable is directly or indirectly a function of itself so we can order the random variables and write each as a function of all past random variables in the order: 
+
+$$
+V_{j} \;=\; f_{j}\!\big( V_{1},\dots,V_{j-1},\, U_{j} \big),
+$$
+
+:::
+
+::: {#def-npsem-ie .theorem}
+## NPSEM with independent errors \[NPSEM-IE\]
+
+An [NPSEM](#def-npsem) with mutually independent error terms.
+
+
+$$
+j\neq k  \iff  U_j \perp U_k 
+$$
+:::
+
+::: {#def-parent .theorem}
+## Parent
+
+A random variable $X$ is a parent to random variable $Y$ if $X$ appears in the [structural equation](#def-npsem) for $Y$. The set of parents for $X$ is denoted $\mathbf{Pa}(X)$.
+
+:::
+
+
+::: {#def-observational-unit .theorem}
+## Observational unit
+
+A sub-vector of the random variables $\mathscr{O} \subset \mathbf V$ in a [statistical model](#def-statistical-model) such that (assuming there are $n$ observational units in the model):
+
+$$
+\mathbf V = \big[ \mathscr{O}_1, ..., \mathscr{O}_n\big]^T
+$$
+
+:::
+
+
+::: {#def-equivalence .theorem}
+## Equivalence
+
+Two random variables are equivalent accross observations if they belong to different [observational units](#def-observational-unit) but represent the same construct. 
+
+$$
+X_i\sim X_j\iff \ X_i\in  \mathscr{O}_i;\ X_j\in  \mathscr{O}_j,\ X_i \text{ same construct } X_j \ (i\ne j).
+$$
+ 
+Two random variables are equivalent across models if they belong to different [statitical models](#def-statistical-model) but represent the same construct. 
+
+:::
+
+
+
+
+
+
+
+
+
+
+::: {#def-no-spillover .theorem}
+## No spillover assumption
+
+The assumption that no variable is a [parent](#def-parent-child) of an [equivalent](#def-equivalence) variable in another [observational unit](#def-observational-unit).
+
+
+$$
+X\notin \mathbf{Pa}(X')\quad
+\forall\, X\sim X',\ X\in \mathscr O_i,\ X'\in \mathscr O_j,\ i\ne j.
+$$
+:::
+
+::: {#def-no-interference .theorem}
+## No interference assumption 
+
+The assumption that no variable is a [parent](#def-parent-child) of a [non-equivalent](#def-equivalence) variable in another [observational unit](#def-observational-unit).
+
+
+$$
+X\notin \mathbf{Pa}(Y)\quad
+\forall\, X\in \mathscr O_i,\ Y\in \mathscr O_j,\ X\not\sim Y \ i\ne j
+$$
+:::
+
+::: {#def-identical-distributions .theorem}
+## Identical distributions assumption
+
+
+The assumption that [equivalent](#def-equivalence) variables have identical [structural equations](#def-npsem).
+
+
+$$
+X_i\sim X_j\Rightarrow f_{X_i}=f_{X_j}.
+$$
+:::
+
+
+
+::: {#def-intervention .theorem}
+## Intervention equation
+
+An intervention equation in relation to random variable $V$ is a deterministic function $h$ with the same domain and co-domain as the structural equation for $V$. 
+:::
+
+::: {#def-intervention-regime .theorem}
+## Intervention regime
+
+
+A set of  intervention equations defined on a subset of random variables $\mathbf E \subset \mathbf V$.
+
+$$
+\Gamma = \{ h_V \}_{V \in \mathbf{E}} 
+$$
+
+
+:::
+
+
+
+
+::: {#def-interventional-npsem .theorem}
+# Interventional NPSEM
+
+An NPSEM $\mathscr{M}$ for which a subset of structural equations $\mathbf E$ have been replaced by intervention equations in intervention regime $\Gamma$. 
+
+
+$$
+\mathscr{M}^{(\Gamma)} =  \{f_V^{(\Gamma)}: V \in \mathbf V \}
+$$
+
+
+$$
+f_V^{(\Gamma)} = \begin{cases}
+  h_V & \text{if}  & V \in \mathbf E\\
+  f_V & \text{otherwise}
+\end{cases}
+$$
+
+
+:::
+
+
+
+::: {#def-causal-model .theorem}
+## Causal model
+
+A causal model $\mathcal C$ of NPSEM $\mathcal M$ under intervention $\Gamma$ is an NPSEM $\mathcal C (\mathcal M, \Gamma)$ that is generated by combining $\mathcal M$ with its interventional NPSEMs $\mathcal M^{(\Gamma_1)}...\mathcal M^{(\Gamma_q)}$ and setting the error terms equal for variables that are equivalent across models.
+
+$$
+\mathcal{C} = \mathcal{M} \cup \mathcal M^{(\Gamma_1)} \cup ... \cup \mathcal M^{(\Gamma_q)}
+$$
+
+
+$$
+{U_V} = {U}^{(\Gamma_1)}_V = ... = {U}^{(\Gamma_q)}_V, \quad \text { for } V \in \mathbf V
+$$
+
+
+
+
+:::
+
+::: {#def-ffrcistg .theorem}
+## FFRCISTG model
+
+A finest fully randomized causally interpretable structured tree graph (FFRCISTG) model is a causal model of an NPSEM-IE $\mathcal M$ under intervention regime $\Gamma$. By assumption $\mathcal M$ satisfies: (1) [no spillover](#def-no-spillover), (2) [no interference](#def-no-interference), and (3) [identical distributions](#def-identical-distributions). 
+
+
+:::
+
+#### Network causal inference
+
+
+::: {#def-graph .theorem}
+## Graph
+
+A *[graph](#def-graph)* is an ordered pair $\mathscr{G} = (\mathcal{N}, \psi)$ with nodeset $\mathcal{N}$and adjacency function $\psi$ which assigns a nonnegative weight to each unordered pair of nodes $(i,j)$. 
+
+$$
+\mathscr G=(\mathcal N,\psi),\qquad
+\psi:\mathcal N\times\mathcal N\to \mathbb R_{\ge 0},\qquad
+\psi(i,j)=\psi(j,i)
+$$
+
+Nodes $i,j \in \mathcal{N}$ are connected if and only if $\psi(i,j) > 0$.
+:::
+
+
+::: {#def-neighborhood .theorem}
+## Neighborhood
+
+Given a [graph](#def-graph) $\mathscr{G} = (\mathcal{N}, \psi)$, the *[neighborhood](#def-neighborhood)* of a node $i \in \mathcal{N}$ is
+
+$$
+\mathcal{N}_i = \{ j \in \mathcal{N} : \psi(i,j) > 0 \}.
+$$
+:::
+
+::: {#def-network-weights-vector .theorem}
+## Network weights 
+
+Given a [graph](#def-graph) $\mathscr{G} = (\mathcal{N}, \psi)$, the *[network weights vector](#def-network-weights-vector)* for a node $i \in \mathcal{N}$ is
+
+$$
+\Psi_i = [\psi(i,1), \dots, \psi(i,n)]^T,
+\qquad n=|\mathcal N|.
+$$
+:::
+
+::: {#def-network-values .theorem}
+## Network values 
+
+Given a [graph](#def-graph) $\mathscr{G} = (\mathcal{N}, \psi)$ with [neighborhood](#def-neighborhood) $\mathcal N_i$ for each node $i$, and given a vector $\mathbf X \in \{0,1\}^n$ indexed by nodes in $\mathscr{N}$, the *network values* for $i$ with respect to  $\mathbf X$ is the subvector of $\mathbf X$ indexed by $\mathscr{N}_i$.
+
+$$
+\mathbf X_{\mathcal N_i}=\big(X_j\big)_{j\in \mathcal N_i}.
+$$
+:::
+
+::: {#def-exposure-mapping .theorem}
+## Exposure mapping
+
+Given an [NPSEM-IE](#def-npsem-ie) with $f_{Y_i}$ the [structural equation](#def-npsem-ie) for $Y_i$, and $\mathbf{X}_1,\dots,\mathbf{X}_K \in \{0,1\}^n$ the [parents](#def-parent-child) of $Y_i$, the exposure mapping for $f_{Y_i}$* is a function
+
+$$
+g_i : \{0,1\}^{K \times n} \to \mathbb{R}^m
+$$
+
+such that
+
+$$
+Y_i = f_{Y_i}\big(g_i(\mathbf{X}_1,\dots,\mathbf{X}_K), U_{Y_i}\big).
+$$
+:::
+
+::: {#def-separability .theorem}
+## Separability
+
+An [exposure mapping](#def-exposure-mapping) $g_i$ is *[separable](#def-separability)* if it can be written:
+
+$$
+g_i(\mathbf{X}_1,\dots,\mathbf{X}_K) 
+  = \big[ \begin{pmatrix} X_{1i} \\ \dots \\ X_{Ki} \end{pmatrix},\, g_{1i}(\mathbf{X}_1),\, \dots,\, g_{Ki}(\mathbf{X}_K)\big]^T,
+$$
+
+where each $g_{ti} : \{0,1\}^n \to \mathbb{R}$ is a *component function* of $g_i$. 
+
+A structural equation is said to be separable if its exposure mapping is separable. 
+:::
+
+
+
+::: {#def-positional-invariance .theorem}
+## Positional invariance
+Let $\mathcal{N}_{ti}$ denote the [neighborhood](#def-neighborhood) of node $i$ in [graph](#def-graph) $\mathscr{G}_t = (\mathcal{N}, \psi_t)$. A [component function](#def-separability) $g_{ti}$ is *[positionally invariant](#def-positional-invariance)* with respect to $\mathscr{G}_t$ if for all $\mathbf{X}, \mathbf{X}' \in \{0,1\}^n$
+
+
+$$
+\mathbf{X}_{\mathcal{N}_i} = \mathbf{M}\mathbf{X}'_{\mathcal{N}_j}, 
+\quad 
+\Psi_{i,\mathcal{N}_i} = \mathbf{M}\Psi_{j,\mathcal{N}_j}
+\Rightarrow
+g_{ti}(\mathbf{X}) = g_{tj}(\mathbf{X}').
+$$
+
+An exposure mapping shows positional invariance with respect to  $\{\mathscr{G}_t\}_{t \in [1:K]}$ if it is separable and all its component functions show positional invariance with respect to an element of  $\{\mathscr{G}_t\}_{t \in [1:K]}$. A structural equation is positionally invariant if its exposure mapping is positionally invariant. 
+:::
+
+::: {#def-boundedness .theorem}
+## Boundedness
+
+A [component function](#def-separability) $g_{ti}$ is *[bounded](#def-boundedness)* if there exists a finite set $\mathcal{D} \subset \mathbb{R}$ and a constant $c \in \mathbb{R}$, independent of the size of the network $|\mathcal{N}|$, such that for $\mathbf{X} \in \{0,1\}^n$
+
+$$
+g_{ti}(\mathbf{X}) \in \mathcal{D} \quad \text{ for }|\mathcal{D}|< c \in \mathbb{Z}.
+$$
+
+An exposure mapping is bounded if it is [separable](#def-separability) and all its component functions are bounded. 
+:::
+
+::: {#def-network-exposure-mapping .theorem}
+## Network exposure mapping
+
+A network exposure mapping with respect to [graph](#def-graph) $\mathscr{G}_t$  is defined as a [component function](#def-separability) which is [bounded](#def-boundedness) and [positionally invariant](#def-positional-invariance) with respect to  $\mathscr{G}_t$. 
+
+:::
+
+::: {#def-homogeneous-network-interference .theorem}
+## Homogeneous network interference
+
+An exposure mapping exhibits homogeneous network interference with respect to a [graph set](#def-graph) $\{\mathscr{G}_t\}_{t \in [1:K]}$ if it is separable and all its [component functions](#def-separability) are [network exposure mappings](#def-network-exposure-mapping). An NPSEM-IE exhibiits homogenous network interference if all its exposure mappings exhibit homogenous network interference. 
+
+:::
+
+
+
+::: {#def-network-ffrcistg .theorem}
+##  NFFRCISTG model
+
+A network finest fully randomized causally interpretable structured tree graph (NFFRCISTG) model is a causal model which satisfies the (1) [no spillover](#def-no-spillover), (2) [homogenous network interference](#def-no-interference) with respect to $\{\mathscr{G}_t\}_{t \in [1:K]}$, and (3) [identical distributions](#def-identical-distributions) assumptions. 
+
+
+:::
+
+#### Social and spatial inference
+
+
+::: {#def-graph-generator .theorem}
+# Random graph generator
+
+In an NPSEM, a random edge generator $\psi$ is an $n \times n$ function whose entries $\psi(i,j)$ are each a deterministic function of the other variables in the model along with an error term. 
+
+
+$$
+\psi(i,j) = f_{\psi_{ij}}(\mathbf{Pa}(\psi(i,j)), U_{\psi_{ij}})
+$$
+To ensure that $\psi(i,j) = \psi(j,i)$ we define
+
+$$
+U_{\psi_{ij}} = U_{\psi_{ji}}
+$$
+
+
+:::
+
+::: {#def-random-graph-npsem .theorem}
+## Random graph NPSEM
+
+A random graph NPSEM is an NPSEM which includes random graph generators among the structural equations. It has two parts -- the structural part which contains all the structural equations which are not graph generators, and the relationsal part which contains random graph generators.
+
+The error terms of the structural part are mutually independent. In the relational part, error terms accross graph generators are independent. 
+
+:::
+
+::: {#def-homogenous-random-network-interference .theorem}
+# Homogenous random network interference
+
+An exposure mapping exhibits homogeneous random network interference with respect to a [random graph set](#def-random-graph) $\{\psi_t\}_{t \in [1:K]}$ if it is separable and all its [component functions](#def-separability) are [network exposure mappings](#def-network-exposure-mapping). An NPSEM-IE exhibiits homogenous random network interference if all its exposure mappings exhibit homogenous randomn network interference. 
+
+:::
+
+
+::: {#def-social-spatial-ffrcistg .theorem}
+## RNFFRCISTG
+
+A random network finest fully randomized causally interpretable structured tree graph (RNFFRCISTG) model is a causal model defined on a [random graph NPSEM-IE](#def-random-graph-npsem ) which satisfies the (1) [no spillover](#def-no-spillover), (2) [homogenous random network interference](#def-homogenous-random-network-interference), and (3) [identical distributions](#def-identical-distributions) assumptions.
+:::
+
+
+::: {#def-random-graph-npsem .theorem}
+## Random bipartite graph NPSEM
+
+A random bipartite graph NPSEM is a random graph NPSEM which whose generators produce bipartite graphs. 
+
+ 
+
+:::
+
+
+
+
+
+
+
+
+::: {#def-social-spatial-ffrcistg .theorem}
+## BRNFFRCISTG model
+
+A bipartite random network finest fully randomized causally interpretable structured tree graph (BRNFFRCISTG) model is a causal model defined on a [bipartite random graph NPSEM-IE](#def-bipartite-random-graph-npsem ) which satisfies the (1) [no spillover](#def-no-spillover), (2) [homogenous random network interference](#def-homogenous-random-network-interference), and (3) [identical distributions](#def-identical-distributions) assumptions.
+
+
+:::
+
+
+### b. Boundedness {.unnumbered}
+
+The assumption of **boundedness** can obtain in three different ways. It could be as a result of restrictions on the structure of the graph. For example, if the only relationships of interest between individual participants were marriages, each node would have a degree of either 0 or 1, meaning the count of alters with $X_{tj} = 1, j \in \mathscr{N}_i$ is either zero or one.
+
+It might obtain via restrictions on the value of $\mathbf{X}$ itself. It might be the case, for instance, that the count of $i$'s for which $X_{ti}=1$ is very low so that on average, the count of alters for which $X_{tj} = 1, j \in N_i$ will also be low.
+
+Finally, boundedness could obtain as a result of the functional form of $g$ itself. This might happen if $g$ models a network exposure which has a ceiling effect in its dose-response curve with the outcome of interest. For example, if $X$ indicates ownership of a car, and $\mathscr{G}$ encodes close friendships, $g$ would be a network exposure mapping which tells us how each additional friend who has a car shifts the outcome of interest. For most health applications, its likely that beyond some number of friends who have a car, an additional friend who gets a car will not change the outcome.
+
+
+### c. D-separation {.unnumbered}
+
+
+
+
+D-separation is a set of rules for translating DAGs into conditional independence statements. A pair of nodes is d-separated if all the paths linking them are closed or if there is no path that links them. A pair of nodes is conditionally d-separated if all the paths linking them are closed after conditioning on some set of nodes. 
+
+A **path** is a sequence of nodes that starts with an origin node and ends with a terminal node. Consecutive entries in the sequence are connected in the DAG. A path of length one is open by definition. A path of length two or more is open if all its triangles are open.
+
+A **triangle** is a sub-sequence of a path which contains three consecutive nodes from the path. A canonical triangle is one in which we do not condition on the apex node. A conditional triangle is one in which we do condition.
+
+
+
+
+
+
+
+```{r include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+```{r}
+#| fig-height: 3
+#| fig-width: 8
+#| fig-cap: "D-separation triangles: Fork (leftmost), spoon (center), chopstick (rightmost)"
+
+
+
+fork <- make_dag_subgraph("fork") |>
+  plot_swig() +
+  theme_mpxnyc_blank() +
+  scale_fill_mpxnyc(option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black")) 
+
+spoon <- make_dag_subgraph("spoon") |>
+  plot_swig() +
+  theme_mpxnyc_blank() +
+  scale_fill_mpxnyc(option = "light")  +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black")) 
+
+chopstick <- make_dag_subgraph("chopstick") |>
+  plot_swig() +
+  theme_mpxnyc_blank() +
+  scale_fill_mpxnyc(option = "light")  +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black")) 
+
+cowplot::plot_grid(fork, spoon, chopstick, rel_widths = c(1,1,1.25), nrow = 1)
+```
+
+
+
+
+
+
+A **fork** is a triangle whose apex variable has two outgoing edges. A canonical fork is open and a conditional fork is closed. The apex variable of a fork is commonly referred to as a "confounder."
+
+A **spoon** is a triangle whose apex variable has two incoming edges. A canonical spoon is closed and a conditional spoon is open. The apex variable of a spoon is commonly referred to as a "collider."
+
+A **chopstick** is a triangle whose apex variable has one incoming edge and one outgoing edge. A canonical chopstick is open and a conditional chopstick is closed. The apex variable of a chopstick is commonly referred to as a "mediator."
+
+
+
+
+::: {#acknowledgements}
+[Acknowledgements]{.underline}: The statistical framework for SSNAC was
+first presented at the Society for Epidemiologic Research Meeting
+(Boston, June 2025) at a workshop titled "Single World Intervention
+Graphs (SWIGs) for the practicing epidemiologist" organized and taught
+by Aaron Sarvet (University of Massachusetts), Mats J. Stensrud (École
+polytechnique fédérale de Lausanne), and Kerollos Wanis (University of
+Texas), and also taught by Keletso Makofane (Ctrl+F), James M. Robins
+(Harvard University), and Thomas Richardson (University of Washington).
+
+[Lead author]{.underline}: Keletso Makofane, MPH, PhD.
+[Editor]{.underline}: Nicholas Diamond, MPH. (Published: June 2025).
+:::
+
+
