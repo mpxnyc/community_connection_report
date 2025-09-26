@@ -211,7 +211,8 @@ window.Quarto = {
       <img src="../_const/images/image_mpxnyc.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="../"></a> 
+      <a href="../">
+      </a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -471,8 +472,6 @@ window.Quarto = {
   <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a>
   <ul class="collapse">
   <li><a href="#a.-definitions" id="toc-a.-definitions" class="nav-link" data-scroll-target="#a.-definitions">a. Definitions</a></li>
-  <li><a href="#b.-boundedness" id="toc-b.-boundedness" class="nav-link" data-scroll-target="#b.-boundedness">b. Boundedness</a></li>
-  <li><a href="#c.-d-separation" id="toc-c.-d-separation" class="nav-link" data-scroll-target="#c.-d-separation">c.&nbsp;D-separation</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1464,20 +1463,20 @@ V_{si}^{(\bar{\mathbf{t}})} =  \frac{V_{si} \mathbf{1}_{x = g(t_{\bar{s},N_i}) }
 <section id="classic-causal-inference" class="level4">
 <h4 class="anchored" data-anchor-id="classic-causal-inference">Classic causal inference</h4>
 <div id="def-random-variable" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.1 (Random variable)</strong></span> A random <em>scalar</em> quantity assumed to be behave according some unkown probability distribution.</p>
+<p><span class="theorem-title"><strong>Definition B.1 (Random variable)</strong></span> A random <em>scalar</em> quantity assumed to behave according some (unknown) probability distribution.</p>
 </div>
 <div id="def-statistical-model" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.2 (Statistical model)</strong></span> A collection of probability distributions on a vector of random variables <span class="math inline">\(\mathbf V\)</span>. Probability distributions in this model are characterized using a set of parameters <span class="math inline">\(\mathbf \theta\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition B.2 (Statistical model)</strong></span> A collection of probability distributions <span class="math inline">\(\mathcal M\)</span> on a vector of <a href="#def-random-variable">random variables</a> <span class="math inline">\(\mathbf V\)</span>. Probability distributions in this model are characterized using a set of parameters <span class="math inline">\(\mathbf \theta\)</span>.</p>
 <p><span class="math display">\[
 \mathcal{M}=\{P_\theta:\theta\in\Theta\}\quad\text{on set of random variables }\mathbf V.
 \]</span></p>
 </div>
 <div id="def-npsem" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.3 (Non-parametric structural equation model [NPSEM])</strong></span> A <a href="#def-statistical-model">statistical model</a> characterized by a set of deterministic functions called structural equations. Each structural equation <span class="math inline">\(f_V\)</span> returns the value of a random variable <span class="math inline">\(V\)</span> in the model. It is a function of the other random variables as well as a random error term <span class="math inline">\(U\)</span>:</p>
+<p><span class="theorem-title"><strong>Definition B.3 (Non-parametric structural equation model [NPSEM])</strong></span> A <a href="#def-statistical-model">statistical model</a> characterized by a set of deterministic functions called structural equations. Each structural equation <span class="math inline">\(f_V\)</span> returns the value of a <a href="#def-random-variable">random variable</a> <span class="math inline">\(V\)</span> in the model. It is a function of the other random variables as well as a random error term <span class="math inline">\(U\)</span>:</p>
 <p><span class="math display">\[
 \theta =\{f_{V}(\mathbf V_{-V}, U_V):V\in\mathbf V\}.
 \]</span></p>
-<p>By definition, no random variable is directly or indirectly a function of itself. We can order the random variables and write each as a function of prior random variables:</p>
+<p>Where <span class="math inline">\(\mathbf V_{-V}\)</span> denotes the sub-vector of <span class="math inline">\(\mathbf V\)</span> that excludes <span class="math inline">\(V\)</span>. By definition, no random variable is directly or indirectly a function of itself, so we can order the random variables and write each as a function of prior random variables:</p>
 <p><span class="math display">\[
 V_{j} \;=\; f_{V_j}\!\big( V_{1},\dots,V_{j-1},\, U_{V_j} \big).
 \]</span></p>
@@ -1485,20 +1484,20 @@ V_{j} \;=\; f_{V_j}\!\big( V_{1},\dots,V_{j-1},\, U_{V_j} \big).
 <div id="def-npsem-ie" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition B.4 (NPSEM with independent errors [NPSEM-IE])</strong></span> An <a href="#def-npsem">NPSEM</a> with mutually independent error terms.</p>
 <p><span class="math display">\[
-j\neq k  \iff  U_j \perp U_k
+j\neq k  \iff  U_{V_j} \perp U_{V_k}
 \]</span></p>
 </div>
 <div id="def-parent" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.5 (Parent)</strong></span> A random variable <span class="math inline">\(X\)</span> is a parent to random variable <span class="math inline">\(Y\)</span> if <span class="math inline">\(X\)</span> appears in the <a href="#def-npsem">structural equation</a> for <span class="math inline">\(Y\)</span>. The set of parents for <span class="math inline">\(X\)</span> is denoted <span class="math inline">\(\mathbf{Pa}(X)\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition B.5 (Parent)</strong></span> A <a href="#def-random-variable">random variable</a> <span class="math inline">\(X\)</span> is a parent to random variable <span class="math inline">\(Y\)</span> if <span class="math inline">\(X\)</span> appears in the <a href="#def-npsem">structural equation</a> for <span class="math inline">\(Y\)</span>. The set of parents for <span class="math inline">\(X\)</span> is denoted <span class="math inline">\(\mathbf{Pa}(X)\)</span>.</p>
 </div>
 <div id="def-observational-unit" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.6 (Observational unit)</strong></span> A sub-vector of <span class="math inline">\(\mathscr{O}_i, i \in [1,n]\)</span> of the random variables <span class="math inline">\(\mathbf V\)</span> such that:</p>
+<p><span class="theorem-title"><strong>Definition B.6 (Observational unit)</strong></span> A sub-vector <span class="math inline">\(\mathscr{O}_i, i \in [1,n]\)</span> of the random variables <span class="math inline">\(\mathbf V\)</span> such that:</p>
 <p><span class="math display">\[
 \mathbf V = \big[ \mathscr{O}_1, ..., \mathscr{O}_n\big]^T
 \]</span></p>
 </div>
 <div id="def-equivalence" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.7 (Equivalence)</strong></span> Two random variables are equivalent across observations if they belong to different <a href="#def-observational-unit">observational units</a> but represent the same construct.</p>
+<p><span class="theorem-title"><strong>Definition B.7 (Equivalence)</strong></span> Two <a href="#def-random-variable">random variables</a> are equivalent if they belong to different <a href="#def-observational-unit">observational units</a> but represent the same construct.</p>
 <p><span class="math display">\[
 X_i\sim X_j\iff \ X_i\in  \mathscr{O}_i;\ X_j\in  \mathscr{O}_j,\ X_i \text{ same construct } X_j \ (i\ne j).
 \]</span></p>
@@ -1524,7 +1523,7 @@ X_i\sim X_j\Rightarrow f_{X_i}=f_{X_j}.
 \]</span></p>
 </div>
 <div id="def-intervention" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.11 (Intervention equation)</strong></span> An intervention equation in relation to random variable <span class="math inline">\(V\)</span> is a deterministic function <span class="math inline">\(h\)</span> with the same inputs and outputs as the structural equation for <span class="math inline">\(V\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition B.11 (Intervention equation)</strong></span> An intervention equation in relation to random variable <span class="math inline">\(V\)</span> is a deterministic function <span class="math inline">\(h\)</span> with the same inputs and outputs as the <a href="#def-npsem">structural equation</a> for <span class="math inline">\(V\)</span>.</p>
 </div>
 <div id="def-intervention-regime" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition B.12 (Intervention regime)</strong></span> A set of intervention equations defined on a subset of random variables <span class="math inline">\(\mathbf E \subset \mathbf V\)</span>.</p>
@@ -1545,7 +1544,7 @@ f_V^{(\Gamma)} = \begin{cases}
 \]</span></p>
 </div>
 <div id="def-causal-model" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.14 (Causal model)</strong></span> A causal model <span class="math inline">\(\mathcal C\)</span> of NPSEM <span class="math inline">\(\mathcal M\)</span> under intervention <span class="math inline">\(\Gamma\)</span> is an NPSEM that is generated by combining <span class="math inline">\(\mathcal M\)</span> with its interventional NPSEMs <span class="math inline">\(\mathcal M^{(\Gamma_1)}...\mathcal M^{(\Gamma_q)}\)</span> and setting the error terms equal for variables that assume the same role across these models. Assuming <span class="math inline">\(\mathcal M\)</span> is a model of random vector <span class="math inline">\(\mathbf V\)</span>:</p>
+<p><span class="theorem-title"><strong>Definition B.14 (Causal model)</strong></span> A causal model <span class="math inline">\(\mathcal C\)</span> of “observational” NPSEM <span class="math inline">\(\mathcal M\)</span> under intervention <span class="math inline">\(\Gamma\)</span> is an NPSEM that is generated by combining <span class="math inline">\(\mathcal M\)</span> with its interventional NPSEMs <span class="math inline">\(\mathcal M^{(\Gamma_1)}...\mathcal M^{(\Gamma_q)}\)</span> and constraining the error term for each random variable in the interventional NPSEM equations so that it is equal to the error term for the same variable in the observational NPSEM.</p>
 <p><span class="math display">\[
 \mathcal{C} = \mathcal{M} \cup \mathcal M^{(\Gamma_1)} \cup ... \cup \mathcal M^{(\Gamma_q)}
 \]</span></p>
@@ -1560,7 +1559,7 @@ f_V^{(\Gamma)} = \begin{cases}
 <section id="network-causal-inference-1" class="level4">
 <h4 class="anchored" data-anchor-id="network-causal-inference-1">Network causal inference</h4>
 <div id="def-graph" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.16 (Graph)</strong></span> An ordered pair <span class="math inline">\(\mathscr{G} = (\mathcal{N}, \psi)\)</span> with nodeset <span class="math inline">\(\mathcal{N}\)</span>and adjacency function <span class="math inline">\(\psi\)</span>. The adjacecy function assigns a nonnegative weight to each unordered pair of nodes <span class="math inline">\((i,j)\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition B.16 (Graph)</strong></span> An ordered pair <span class="math inline">\(\mathscr{G} = (\mathcal{N}, \psi)\)</span> with node set <span class="math inline">\(\mathcal{N}\)</span>and adjacency function <span class="math inline">\(\psi\)</span>. The adjacecy function assigns a nonnegative weight to each unordered pair of nodes <span class="math inline">\((i,j)\)</span>.</p>
 <p><span class="math display">\[
 \mathscr G=(\mathcal N,\psi),\qquad
 \psi:\mathcal N\times\mathcal N\to \mathbb R_{\ge 0},\qquad
@@ -1593,7 +1592,7 @@ f_V^{(\Gamma)} = \begin{cases}
 <p><span class="math display">\[
 Y_i = f_{Y_i}\big(g_i(\mathbf{X}_1,\dots,\mathbf{X}_K), U_{Y_i}\big).
 \]</span></p>
-<p>where <span class="math inline">\(f_{Y_i}\)</span> is the <a href="#def-npsem">structural equation</a> for <span class="math inline">\(Y_i\)</span>, and <span class="math inline">\(\mathbf{X}_1,\dots,\mathbf{X}_K \in \{0,1\}^n\)</span> are the <a href="#def-parent-child">parents</a> of <span class="math inline">\(Y_i\)</span> in some <a href="#def-npsem">NPSEM</a> <span class="math inline">\(\mathcal{M}\)</span></p>
+<p>where <span class="math inline">\(f_{Y_i}\)</span> is the <a href="#def-npsem">structural equation</a> for <span class="math inline">\(Y_i\)</span>, and are each an equivalence class induced by the <a href="#def-equivalence">equivalence</a> relation among the parents of <span class="math inline">\(Y\)</span>.</p>
 </div>
 <div id="def-separability" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition B.21 (Separability)</strong></span> The assumption that an <a href="#def-exposure-mapping">exposure mapping</a> <span class="math inline">\(g_i\)</span> can be written:</p>
@@ -1601,10 +1600,10 @@ Y_i = f_{Y_i}\big(g_i(\mathbf{X}_1,\dots,\mathbf{X}_K), U_{Y_i}\big).
 g_i(\mathbf{X}_1,\dots,\mathbf{X}_K)
   = \big[ \begin{pmatrix} X_{1i} \\ \dots \\ X_{Ki} \end{pmatrix},\, g_{1i}(\mathbf{X}_1),\, \dots,\, g_{Ki}(\mathbf{X}_K)\big]^T,
 \]</span></p>
-<p>where each <span class="math inline">\(g_{ti} : \{0,1\}^n \to \mathbb{R}\)</span> is a <em>component function</em> of <span class="math inline">\(g_i\)</span>. A structural equation is said to be separable if its exposure mapping is separable.</p>
+<p>where <span class="math inline">\(X_{ki}\)</span> is the <span class="math inline">\(i^{th}\)</span> entry of <span class="math inline">\(\mathbf V_k\)</span> and each <span class="math inline">\(g_{ti} : \{0,1\}^n \to \mathbb{R}\)</span> is a <em>component function</em> of <span class="math inline">\(g_i\)</span>. A structural equation is said to be separable if its exposure mapping is separable.</p>
 </div>
 <div id="def-positional-invariance" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.22 (Positional invariance)</strong></span> The assumption that a <a href="#def-separability">component function</a> <span class="math inline">\(g_{ti}\)</span> obtains the same value up to a re-ordering of its the network value for its inputs related network weights vector. i.e.&nbsp;<span class="math inline">\(g_{ti}\)</span> is <a href="#def-positional-invariance">positionally invariant</a> with respect to <span class="math inline">\(\mathscr{G}_t\)</span> if for all <span class="math inline">\(\mathbf{X}, \mathbf{X}' \in \{0,1\}^n\)</span></p>
+<p><span class="theorem-title"><strong>Definition B.22 (Positional invariance)</strong></span> The assumption that the value of <a href="#def-separability">component function</a> <span class="math inline">\(g_{ti}\)</span> is invariant under a re-ordering of network values and an identical re-ordering of network weights. i.e.&nbsp;<span class="math inline">\(g_{ti}\)</span> is <a href="#def-positional-invariance">positionally invariant</a> with respect to <span class="math inline">\(\mathscr{G}_t\)</span> if for all <span class="math inline">\(\mathbf{X}, \mathbf{X}' \in \{0,1\}^n\)</span></p>
 <p><span class="math display">\[
 \mathbf{X}_{\mathcal{N}_i} = \mathbf{M}\mathbf{X}'_{\mathcal{N}_j},
 \quad
@@ -1612,7 +1611,7 @@ g_i(\mathbf{X}_1,\dots,\mathbf{X}_K)
 \Rightarrow
 g_{ti}(\mathbf{X}) = g_{tj}(\mathbf{X}').
 \]</span></p>
-<p>An exposure mapping shows positional invariance with respect to <span class="math inline">\(\{\mathscr{G}_t\}_{t \in [1:K]}\)</span> if it is separable and all its component functions show positional invariance with respect to an element of <span class="math inline">\(\{\mathscr{G}_t\}_{t \in [1:K]}\)</span>. A structural equation is positionally invariant if its exposure mapping is positionally invariant.</p>
+<p>An exposure mapping shows positional invariance with respect to graph set <span class="math inline">\(\mathcal H = \{\mathscr{G}_t\}_{t \in [1:K]}\)</span> if it is separable and all its component functions show positional invariance with respect to an element of <span class="math inline">\(\{\mathscr{G}_t\}_{t \in [1:K]}\)</span>. A structural equation is positionally invariant if its exposure mapping is positionally invariant.</p>
 </div>
 <div id="def-boundedness" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition B.23 (Boundedness)</strong></span> The assumption that a component function <span class="math inline">\(g_{ti}\)</span> can only take on values from a finite set. i.e.&nbsp;<span class="math inline">\(g_{ti}\)</span> is bounded if there exists a finite set <span class="math inline">\(\mathcal{D}\)</span> and a constant <span class="math inline">\(c\)</span> such that for <span class="math inline">\(\mathbf{X} \in \{0,1\}^n\)</span></p>
@@ -1625,16 +1624,17 @@ g_{ti}(\mathbf{X}) \in \mathcal{D} \quad \text{ for }|\mathcal{D}|&lt; c \in \ma
 <p><span class="theorem-title"><strong>Definition B.24 (Network exposure mapping)</strong></span> A <a href="#def-separability">component function</a> <span class="math inline">\(g_{ti}\)</span> which is <a href="#def-boundedness">bounded</a> and <a href="#def-positional-invariance">positionally invariant</a> with respect to some <a href="#def-graph">graph</a> <span class="math inline">\(\mathscr{G}_t\)</span>.</p>
 </div>
 <div id="def-homogeneous-network-interference" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.25 (Homogeneous network interference)</strong></span> The assumption that an exposure mapping <span class="math inline">\(g_{ti}\)</span> is separable and all its <a href="#def-separability">component functions</a> are <a href="#def-network-exposure-mapping">network exposure mappings</a>. An NPSEM satisfies homogenous network interference if all its exposure mappings satisfy homogenous network interference.</p>
+<p><span class="theorem-title"><strong>Definition B.25 (Homogeneous network interference)</strong></span> The assumption that an exposure mapping <span class="math inline">\(g_{ti}\)</span> is separable and all its <a href="#def-separability">component functions</a> are <a href="#def-network-exposure-mapping">network exposure mappings</a> with respect to some graph set <span class="math inline">\(\mathcal H\)</span>. An NPSEM satisfies homogenous network interference if all its exposure mappings satisfy homogenous network interference.</p>
 </div>
-<div id="def-network-ffrcistg" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.26 (NFFRCISTG model)</strong></span> A network finest fully randomized causally interpretable structured tree graph (NFFRCISTG) is a causal model of an NPSEM-IE <span class="math inline">\(\mathcal M\)</span> under intervention regime <span class="math inline">\(\Gamma\)</span>. By assumption, <span class="math inline">\(\mathcal M\)</span> satisfies: (1) <a href="#def-no-spillover">no spillover</a>, (2) <a href="#def-no-interference">homogenous network interference</a>, and (3) <a href="#def-identical-distributions">identical distributions</a>.</p>
+<div id="def-nffrcistg" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition B.26 (NFFRCISTG model)</strong></span> A network finest fully randomized causally interpretable structured tree graph (NFFRCISTG) is a causal model of an NPSEM-IE <span class="math inline">\(\mathcal M\)</span> under intervention regime <span class="math inline">\(\Gamma\)</span>. By assumption, <span class="math inline">\(\mathcal M\)</span> satisfies: (1) <a href="#def-no-spillover">no spillover</a>, (2) <a href="#def-no-interference">homogenous network interference</a> with respect to some graph set <span class="math inline">\(\mathcal H\)</span>, and (3) <a href="#def-identical-distributions">identical distributions</a>.</p>
 </div>
 </section>
 <section id="social-and-spatial-inference-1" class="level4">
 <h4 class="anchored" data-anchor-id="social-and-spatial-inference-1">Social and spatial inference</h4>
 <div id="def-graph-generator" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.27 (Random graph generator)</strong></span> An <span class="math inline">\(n \times n\)</span> function whose entries <span class="math inline">\(\psi(i,j)\)</span> are each a deterministic symmetric function of the other variables in the model along with an error term.</p>
+<p><span class="theorem-title"><strong>Definition B.27 (Graph generator)</strong></span> An <span class="math inline">\(n \times n\)</span> array of structural equations which collectively model the edges of a random graph.</p>
+<p>An <span class="math inline">\(n \times n\)</span> function <span class="math inline">\([f_{\psi_{ij}}]_{i,j \in \mathcal N}\)</span> whose entries <span class="math inline">\(\psi(i,j)\)</span> are each a deterministic symmetric function of the other variables in the model along with an error term.</p>
 <p><span class="math display">\[
 \psi(i,j) = f_{\psi_{ij}}(\mathbf{Pa}(\psi(i,j)), U_{\psi_{ij}})
 \]</span></p>
@@ -1643,76 +1643,20 @@ g_{ti}(\mathbf{X}) \in \mathcal{D} \quad \text{ for }|\mathcal{D}|&lt; c \in \ma
 U_{\psi_{ij}} = U_{\psi_{ji}} \text{ and } f_{\psi_{ij}} = f_{\psi_{ji}}
 \]</span></p>
 </div>
-<div id="def-random-graph-npsem" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.28 (NPSEM-NI)</strong></span> An NPSEM with networked errors is an NPSEM which includes random graph generators among the structural equations. Error terms are correlated within each graph generator but independent across graph generators, between structural equations and graph generators, and between structural equations.</p>
+<div id="def-npsem-ne" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition B.28 (NPSEM-NE)</strong></span> An NPSEM with networked errors is an NPSEM which includes random graph generators among the structural equations. Error terms are correlated within each graph generator but independent across graph generators, between structural equations and graph generators, and between structural equations.</p>
 </div>
 <div id="def-homogenous-random-network-interference" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.29 (Homogenous random network interference)</strong></span> An exposure mapping exhibits homogeneous random network interference with respect to a <a href="#def-random-graph">random graph set</a> <span class="math inline">\(\{\psi_t\}_{t \in [1:K]}\)</span> if it is separable and all its <a href="#def-separability">component functions</a> are <a href="#def-network-exposure-mapping">network exposure mappings</a>. An NPSEM-IE exhibiits homogenous random network interference if all its exposure mappings exhibit homogenous randomn network interference.</p>
+<p><span class="theorem-title"><strong>Definition B.29 (Homogenous random network interference)</strong></span> An exposure mapping exhibits homogeneous random network interference with respect to a <a href="#def-random-graph">random graph set</a> <span class="math inline">\(\{\psi_t\}_{t \in [1:K]}\)</span> if it is separable and all its <a href="#def-separability">component functions</a> are <a href="#def-network-exposure-mapping">network exposure mappings</a>. An NPSEM exhibiits homogenous random network interference if all its exposure mappings exhibit homogenous randomn network interference.</p>
 </div>
-<div id="def-social-spatial-ffrcistg" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.30 (RNFFRCISTG)</strong></span> A random network finest fully randomized causally interpretable structured tree graph (RNFFRCISTG) model is a causal model defined on a <a href="#def-random-graph-npsem">random graph NPSEM-IE</a> which satisfies the (1) <a href="#def-no-spillover">no spillover</a>, (2) <a href="#def-homogenous-random-network-interference">homogenous random network interference</a>, and (3) <a href="#def-identical-distributions">identical distributions</a> assumptions.</p>
+<div id="def-rnffrcitg" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition B.30 (RNFFRCISTG)</strong></span> A random network finest fully randomized causally interpretable structured tree graph (RNFFRCISTG) model is a causal model defined on a <a href="#def-npsem-ne">random graph NPSEM-NE</a> which satisfies the (1) <a href="#def-no-spillover">no spillover</a>, (2) <a href="#def-homogenous-random-network-interference">homogenous random network interference</a> with respect to random graph set <span class="math inline">\(H \in \mathbf V\)</span>, and (3) <a href="#def-identical-distributions">identical distributions</a> assumptions.</p>
 </div>
-<div id="def-random-graph-npsem" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.31 (Random bipartite graph NPSEM)</strong></span> A random bipartite graph NPSEM is a random graph NPSEM which whose generators produce bipartite graphs.</p>
-</div>
-<div id="def-social-spatial-ffrcistg" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition B.32 (BRNFFRCISTG model)</strong></span> A bipartite random network finest fully randomized causally interpretable structured tree graph (BRNFFRCISTG) model is a causal model defined on a <a href="#def-bipartite-random-graph-npsem">bipartite random graph NPSEM-IE</a> which satisfies the (1) <a href="#def-no-spillover">no spillover</a>, (2) <a href="#def-homogenous-random-network-interference">homogenous random network interference</a>, and (3) <a href="#def-identical-distributions">identical distributions</a> assumptions.</p>
-</div>
-</section>
-</section>
-<section id="b.-boundedness" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="b.-boundedness">b. Boundedness</h3>
-<p>The assumption of <strong>boundedness</strong> can obtain in three different ways. It could be as a result of restrictions on the structure of the graph. For example, if the only relationships of interest between individual participants were marriages, each node would have a degree of either 0 or 1, meaning the count of alters with <span class="math inline">\(X_{tj} = 1, j \in \mathscr{N}_i\)</span> is either zero or one.</p>
-<p>It might obtain via restrictions on the value of <span class="math inline">\(\mathbf{X}\)</span> itself. It might be the case, for instance, that the count of <span class="math inline">\(i\)</span>’s for which <span class="math inline">\(X_{ti}=1\)</span> is very low so that on average, the count of alters for which <span class="math inline">\(X_{tj} = 1, j \in N_i\)</span> will also be low.</p>
-<p>Finally, boundedness could obtain as a result of the functional form of <span class="math inline">\(g\)</span> itself. This might happen if <span class="math inline">\(g\)</span> models a network exposure which has a ceiling effect in its dose-response curve with the outcome of interest. For example, if <span class="math inline">\(X\)</span> indicates ownership of a car, and <span class="math inline">\(\mathscr{G}\)</span> encodes close friendships, <span class="math inline">\(g\)</span> would be a network exposure mapping which tells us how each additional friend who has a car shifts the outcome of interest. For most health applications, its likely that beyond some number of friends who have a car, an additional friend who gets a car will not change the outcome.</p>
-</section>
-<section id="c.-d-separation" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="c.-d-separation">c.&nbsp;D-separation</h3>
-<p>D-separation is a set of rules for translating DAGs into conditional independence statements. A pair of nodes is d-separated if all the paths linking them are closed or if there is no path that links them. A pair of nodes is conditionally d-separated if all the paths linking them are closed after conditioning on some set of nodes.</p>
-<p>A <strong>path</strong> is a sequence of nodes that starts with an origin node and ends with a terminal node. Consecutive entries in the sequence are connected in the DAG. A path of length one is open by definition. A path of length two or more is open if all its triangles are open.</p>
-<p>A <strong>triangle</strong> is a sub-sequence of a path which contains three consecutive nodes from the path. A canonical triangle is one in which we do not condition on the apex node. A conditional triangle is one in which we do condition.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fork <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"fork"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) </span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>spoon <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"spoon"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)  <span class="sc">+</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) </span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>chopstick <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"chopstick"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)  <span class="sc">+</span></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) </span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(fork, spoon, chopstick, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.25</span>), <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="768"></p>
-<figcaption>D-separation triangles: Fork (leftmost), spoon (center), chopstick (rightmost)</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>A <strong>fork</strong> is a triangle whose apex variable has two outgoing edges. A canonical fork is open and a conditional fork is closed. The apex variable of a fork is commonly referred to as a “confounder.”</p>
-<p>A <strong>spoon</strong> is a triangle whose apex variable has two incoming edges. A canonical spoon is closed and a conditional spoon is open. The apex variable of a spoon is commonly referred to as a “collider.”</p>
-<p>A <strong>chopstick</strong> is a triangle whose apex variable has one incoming edge and one outgoing edge. A canonical chopstick is open and a conditional chopstick is closed. The apex variable of a chopstick is commonly referred to as a “mediator.”</p>
-<div id="acknowledgements">
-<p><u>Acknowledgements</u>: The statistical framework for SSNAC was first presented at the Society for Epidemiologic Research Meeting (Boston, June 2025) at a workshop titled “Single World Intervention Graphs (SWIGs) for the practicing epidemiologist” organized and taught by Aaron Sarvet (University of Massachusetts), Mats J. Stensrud (École polytechnique fédérale de Lausanne), and Kerollos Wanis (University of Texas), and also taught by Keletso Makofane (Ctrl+F), James M. Robins (Harvard University), and Thomas Richardson (University of Washington).</p>
-<p><u>Lead author</u>: Keletso Makofane, MPH, PhD. <u>Editor</u>: Nicholas Diamond, MPH. (Published: June 2025).</p>
+<div id="def-bipartite-npsem-ie" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition B.31 (Bipartite NPSEM-IE)</strong></span> A random bipartite graph NPSEM-IE is a random graph NPSEM which whose generators produce bipartite graphs on the same partitioning of V</p>
 </div>
 
-
-
+</section>
 </section>
 </section>
 
@@ -2201,11 +2145,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2025, RESPND-MI</p>
-</div>   
+      <div class="footer-contents">Copyright 2025, RESPND-MI</div>  
+    </div>   
     <div class="nav-footer-center">
-
-<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+      <div class="footer-contents"> </div>  
+    <div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
