@@ -442,7 +442,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section"></a></li>
-  <li><a href="#classical-causal-inference" id="toc-classical-causal-inference" class="nav-link" data-scroll-target="#classical-causal-inference"><span class="header-section-number">B.1</span> Classical causal inference</a>
+  <li><a href="#sec-classical-causal-inference" id="toc-sec-classical-causal-inference" class="nav-link" data-scroll-target="#sec-classical-causal-inference"><span class="header-section-number">B.1</span> Classical causal inference</a>
   <ul class="collapse">
   <li><a href="#causal-reasoning-with-dags-and-swigs" id="toc-causal-reasoning-with-dags-and-swigs" class="nav-link" data-scroll-target="#causal-reasoning-with-dags-and-swigs">Causal reasoning with DAGs and SWIGs</a></li>
   <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">B.1.1</span> Assumptions</a></li>
@@ -557,14 +557,14 @@ Hernán, Miguel, and James M. Robins. 2021. <em>Causal inference</em>. Chapman &
 </div>
 </div>
 </section>
-<section id="classical-causal-inference" class="level2" data-number="B.1">
-<h2 data-number="B.1" class="anchored" data-anchor-id="classical-causal-inference"><span class="header-section-number">B.1</span> Classical causal inference</h2>
+<section id="sec-classical-causal-inference" class="level2" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="sec-classical-causal-inference"><span class="header-section-number">B.1</span> Classical causal inference</h2>
 <section id="sec-example-1" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="sec-example-1">Example 1: Dress and jobs</h4>
 <p>We are interested in settling an argument among friends about the relationship between dressing in formal wear and job offers. One friend thinks that dressing formally brings more job offers; everyone she knows who dresses formally has many more job offers than those who dress casually.</p>
 <p>The other friend thinks that what really brings job offers is currently having a job. In their reasoning, having a job causes people to dress formally and also causes people to receive job offers, but dressing formally does not in itself improve a person’s likelihood of receiving job offers. We conduct a study to investigate.</p>
 <p>We recruit three people, <em>Person 1</em>, <em>Person 2</em>, and <em>Person 3</em>. <em>Person 1</em> and <em>Person 2</em> are married to each other. <em>Person 1</em> and <em>Person 3</em> are acquaintances.</p>
-<p>In the next few sections, we will use this example to describe the assumptions made under classical causal inference. First we give an overview of the ideas and tools we need to make that description: DAGs and SWIGs.</p>
+<p>In the next few sections, we will use this example to describe the assumptions made under classical causal inference. First we give an overview of the ideas and tools we need to make that description: structural equation models and the directed acyclic graph (DAGs) that describe them. We use these to state the basic assumptions of the model currently used to reason about causality in epidemiology - the finest fully randomized causally interpretable structured tree graph (FFRCISTG). Finally, we derive an FFRCISTG model for this example, showing concrete illustrations for each assumption of the FFRCISTG model.</p>
 </section>
 <section id="causal-reasoning-with-dags-and-swigs" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="causal-reasoning-with-dags-and-swigs">Causal reasoning with DAGs and SWIGs</h3>
@@ -572,12 +572,9 @@ Hernán, Miguel, and James M. Robins. 2021. <em>Causal inference</em>. Chapman &
 <h5 class="anchored" data-anchor-id="npsem-ie">NPSEM-IE</h5>
 <p>A non-parametric structural equation model with independent errors (NPSEM-IE) is a system of equations that relates all the entries in a given vector-valued random variable to each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown by <a href="#eq-fullly-connected-dag" class="quarto-xref">Equation&nbsp;<span>B.1</span></a>. In this set of equations, values that are produced by equations higher up in the list serve as inputs to equations lower down on the list. The functions <span class="math inline">\(f_*\)</span> are deterministic. The arguments <span class="math inline">\(U_*\)</span> represent error terms – random variables that are independent of each other within and across observational units.</p>
 </section>
-<section id="the-ffrcistg-model" class="level5">
-<h5 class="anchored" data-anchor-id="the-ffrcistg-model">The FFRCISTG model</h5>
-<p>At its core, the system epidemiologists increasingly depend on for reasoning about abstract quantities such as causal effects is a statistical model called the Finest Fully Randomized Causally Interpretable Structured Tree Graph (FFRCISTG). A FFRCISTG is a collection of non-parametric structural equation models which mimic the causal process that produced the variables under investigation.</p>
-</section>
 <section id="observed-and-counterfactual-data" class="level5">
 <h5 class="anchored" data-anchor-id="observed-and-counterfactual-data">Observed and counterfactual data</h5>
+<p>At its core, the system epidemiologists increasingly depend on for reasoning about abstract quantities such as causal effects is a statistical model called the Finest Fully Randomized Causally Interpretable Structured Tree Graph (FFRCISTG). A FFRCISTG is a collection of non-parametric structural equation models which mimic the causal process that produced the variables under investigation.</p>
 <p>At the very least it is a collection of two NPSEM-IEs: a model of the observed data (observed data model) and a model of what the data would be under some intervention (counterfactual data model). Consider a FFRCISTG modelling an intervention where we set formal dress <span class="math inline">\(A_1\)</span> to <span class="math inline">\(a_1\)</span>, <span class="math inline">\(A_2\)</span> to <span class="math inline">\(a_2\)</span>, and <span class="math inline">\(A_3\)</span> to <span class="math inline">\(a_3\)</span>. The observed data model would be:</p>
 <p><span id="eq-fullly-connected-dag"><span class="math display">\[
 \begin{aligned}
@@ -606,6 +603,7 @@ Y_2^{(a_1, a_2, a_3)} &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^
 Y_3^{(a_1, a_2, a_3)} &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}, Y_2^{(a_1, a_2, a_3)}   ) \\
 \end{aligned}
 \tag{B.2}\]</span></span></p>
+<p>In an FFRCISTG, it is assumed that the structural equation for each variable is identical to that of its counterfactual counterpart and that the error terms for both structural equations are equal.</p>
 </section>
 <section id="dags-and-swigs" class="level5">
 <h5 class="anchored" data-anchor-id="dags-and-swigs">DAGs and SWIGs</h5>
@@ -662,7 +660,7 @@ Figure&nbsp;B.2: Fully connected SWIG
 <p>Whereas parametric models are characterized by their probability mass or density functions, non-parametric models of this type are usually characterized by model restrictions in the form of conditional independencies.</p>
 <p>Restrictions are crucial: to fully characterize the NPSEM specified in <a href="#eq-fullly-connected-dag" class="quarto-xref">Equation&nbsp;<span>B.1</span></a> using observed data, we would need to estimate nine functions using one observation of the nine-dimensional joint distribution that gave rise to the participants’ observations. Recruiting an additional person to the study would not ease this problem; it would add three new equations to the model and we would end up with a similar problem than the one we began with. We would have to estimate 12 functions using one observation of a 12-dimensional joint distribution.</p>
 <p>We can simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function. These assumptions are called model restrictions because they restrict the set of distributions that could possibly be represented by the NPSEM. For instance, if we add the restriction that all the measures are independent (or equivalently, that the DAG has no arrows), the resulting model would not be able to represent data from a causal system where some of the measures are correlated. By adding the restriction of independence, we would be eliminating the correlated data distribution from consideration as a possibility for how the data we are modelling are truly distributed.</p>
-<p>It is possible to deduce the conditional independence restrictions of an NPSEM using the structural equations themselves. For instance, we can check whether two variables are (conditionally) independent by checking whether both variables are a function of the same common error term <span class="math inline">\(U_*\)</span>. It turns out that queries like this are much simpler to deduce through a graphical representation of the NPSEM than through the NPSEM itself, however. Directed acyclic graphs allow the efficient communication of conditional independence assumptions that define NPSEMs.</p>
+<p>It is possible to deduce the conditional independence restrictions of an NPSEM using the structural equations themselves. For instance, we can check whether two variables are (conditionally) independent by checking whether both variables are a function of the same common error term <span class="math inline">\(U_*\)</span>. It turns out that queries like this are much simpler to deduce through a graphical representation of the NPSEM than through the NPSEM itself, however. Directed acyclic graphs allow the efficient communication of conditional independence assumptions that define NPSEMs. In the next section, we derive a FFRCISTG model for Example 1, showing how each assumption simplifies the model equations.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -900,42 +898,37 @@ E[Y_i^{(a)}]                    &amp;= E \left[ E[Y_i^{(a)} | L_i] \right] \\
 </section>
 <section id="network-causal-inference" class="level2" data-number="B.2">
 <h2 data-number="B.2" class="anchored" data-anchor-id="network-causal-inference"><span class="header-section-number">B.2</span> Network causal inference</h2>
-<section id="example-2-marriage-and-jobs" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="example-2-marriage-and-jobs">Example 2: Marriage and jobs</h4>
+<section id="sec-example-2" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="sec-example-2">Example 2: Marriage and jobs</h4>
 <p>We mentioned that in our study sample <em>Person 1</em> and <em>Person 2</em> are married to each other and <em>Person 1</em> and <em>Person 3</em> are acquaintances. In the causal system connecting their job status, dress and job offers, an argument could be made that <em>Person 1</em>’s job status affects <em>Person 2</em>’s dress, since they pool their salaries as a married couple. It could also be argued that <em>Person 1</em>’s job status affects <em>Person 2</em>’s job opportunities if having a job brings the married couple into contact with other married couples who are connected to job markets.</p>
 <p>Finally, we could argue that <em>Person 1</em>’s dress affects <em>Person 2</em>’s job opportunities if some aspect of the reputation <em>Person 2</em> enjoys among potential colleagues derives from their spouse’s appearance. Symmetrically, <em>Person 2</em>’s measures could influence <em>Person 1</em>’s.</p>
 <p>But what about the relationship between <em>Person 1</em> and <em>Person 3</em>? How does that shape the measurements of either person? We can imagine that the dress of a newly acquainted colleague would not affect the dress and job opportunities of her colleague. Whereas <em>Person 1</em> and <em>Person 2</em> are causally related, <em>Person 1</em> and <em>Person 3</em> are not; their relationship is irrelevant to the causal system under investigation. <em>Person 2</em> and <em>Person 3</em> do not affect each other since they have no relationship at all.</p>
-<p>Before specifying a model that can accommodate the interdependence between <em>Persons</em> <em>1</em> and <em>2</em>, we outline some definitions which we will need to describe the network causal inference model.</p>
+<p>Before specifying a model that can accommodate the interdependence between <em>Persons</em> <em>1</em> and <em>2</em>, we outline some definitions. We use these to extend the FFRCISTG model described in <a href="#sec-classical-causal-inference" class="quarto-xref"><span>Section B.1</span></a> to accommodate settings characterized by causal interference. We term the resulting model the network FFRCISTG (NFFRCISTG) – a structured approach to reasoning about interventions in networks. In the next section, we derive a NFFRCISTG.</p>
 </section>
 <section id="sec-causal-interference" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="sec-causal-interference">Causal reasoning under interference</h3>
-<p>Classical causal inference assumes <em>no interference</em>: a person’s outcome depends only on their own treatment, written as <span class="math inline">\(Y_i(a)\)</span>. This works when units are independent, but breaks down in real-world settings like <a href="#ex-vaccination">Example 3: Vaccination</a>, where outcomes depend not only on a person’s vaccination status but also on their neighbors’. DAGs, SWIGs, and NPSEM-IE cannot capture such spillovers, so we need additional tools.</p>
-<section id="sec-homogeneous-interference" class="level4">
-<h4 class="anchored" data-anchor-id="sec-homogeneous-interference">Homogeneous network interference</h4>
-<p>To make progress, we introduce the assumption of <em>homogeneous network interference</em>. This means that the effect of a neighbor’s treatment on unit <span class="math inline">\(i\)</span> is the same regardless of which neighbor it is. What matters is the <em>number</em> or <em>proportion</em> of treated neighbors, not their identity. For example, a person with two vaccinated neighbors is assumed to have the same exposure regardless of <em>which</em> two neighbors those are.</p>
-<p>This simplifying assumption allows us to summarize complex treatment assignments in a way that can be analyzed with causal models.</p>
+<section id="section-1" class="level5">
+<h5 class="anchored" data-anchor-id="section-1"></h5>
+<p>To conduct causal inference under interference, it necessary to have an idea which units can affect which other units, and a function for how that influence shapes the measures taken from each unit.</p>
 </section>
-<section id="sec-graphs" class="level4">
-<h4 class="anchored" data-anchor-id="sec-graphs">Graphs</h4>
-<p>Graphs give us a language to describe these interference structures. A graph represents units as nodes and possible pathways of influence as edges. The neighborhood of a node is the set of other nodes it is directly connected to.</p>
-<p>Under the homogeneous interference assumption, graphs help us represent who is “eligible” to affect whom, without worrying about differences in identity between neighbors. Potential outcomes can then be thought of as depending both on a unit’s own treatment and on the set of its neighbors’ treatments.</p>
+<section id="sec-graphs" class="level5">
+<h5 class="anchored" data-anchor-id="sec-graphs">Graphs</h5>
+<p>Graphs give us a language to describe these interference structures. A graph represents units as nodes and possible pathways of influence between units as edges. Graphs help us represent who is “eligible” to affect whom. Potential outcomes can then be thought of as depending both on a unit’s own treatment and that of the units its directly connected to.</p>
 </section>
-<section id="sec-exposure-mapping" class="level4">
-<h4 class="anchored" data-anchor-id="sec-exposure-mapping">Exposure mappings</h4>
-<p>Graphs tell us <em>who</em> is connected, but we still need a way to summarize the <em>pattern</em> of neighbor treatments. Exposure mappings do this by turning the vector of neighbors’ treatments into a simpler measure, such as the count or proportion of vaccinated neighbors.</p>
-<p>Together with graphs, exposure mappings allow us to formalize how interference operates: graphs define the structure of possible influence, while exposure mappings define how that structure translates into exposures that affect outcomes.</p>
+<section id="sec-exposure-mapping" class="level5">
+<h5 class="anchored" data-anchor-id="sec-exposure-mapping">Network exposure mappings</h5>
+<p>While graphs tell us who is connected, we need a way to incorporate information from the network in order to express counterfactual quantities. Network exposure mappings do this by turning the vector of neighbors’ treatments into a scalar quantity, such as the count or proportion of vaccinated neighbors. Together with graphs, exposure mappings allow us to formalize how interference operates: graphs define the structure of possible influence across units, while exposure mappings define how units incorporate that influence.</p>
 </section>
-<section id="sec-nffrcistg" class="level4">
-<h4 class="anchored" data-anchor-id="sec-nffrcistg">NFFRCISTG</h4>
-<p>To tie these pieces together, we extend Robins’s FFRCISTG to interference, yielding the <strong>networked FFRCISTG (NFFRCISTG)</strong>. Here, potential outcomes are indexed by both a unit’s own treatment and its exposure mapping, creating a counterfactual framework that incorporates direct and spillover effects.</p>
-<p>The NFFRCISTG extends the interpretability of SWIGs to settings with interference, providing a structured way to reason about interventions in networks. In the next section, we derive a concrete NFFRCISTG using <a href="#ex-vaccination">Example 3: Vaccination</a> to show how these ideas work in practice.</p>
+<section id="sec-homogeneous-interference" class="level5">
+<h5 class="anchored" data-anchor-id="sec-homogeneous-interference">Homogeneous network interference</h5>
+<p>We introduce the assumption of <em>homogeneous network interference</em> which reduces the complexity of network exposure mappings. This assumption holds that the effect of a neighbor’s treatment on unit <span class="math inline">\(i\)</span> is the same regardless of which neighbor it is, and regardless of the position of unit <span class="math inline">\(i\)</span> in the network. What matters is the <em>number</em> or <em>proportion</em> of treated neighbors, not their identity. Finally, it restricts the network exposure values so that they are contained by a finite set.</p>
 </section>
 </section>
 <section id="assumptions-1" class="level3" data-number="B.2.1">
 <h3 data-number="B.2.1" class="anchored" data-anchor-id="assumptions-1"><span class="header-section-number">B.2.1</span> Assumptions</h3>
 <section id="independence-i-no-spillover-1" class="level5">
 <h5 class="anchored" data-anchor-id="independence-i-no-spillover-1">Independence I: No spillover</h5>
-<p>We make the assumption of no spillover - that measurements taken across participants at the same time (e.g.&nbsp;<span class="math inline">\(L_1\)</span>, <span class="math inline">\(L_2\)</span>, and <span class="math inline">\(L_3\)</span>) are independent of each other given all prior measures.</p>
+<p>Returning to <a href="#sec-example-2">Example 2</a>, we make the assumption of no spillover - that measurements taken across participants at the same time (e.g.&nbsp;<span class="math inline">\(L_1\)</span>, <span class="math inline">\(L_2\)</span>, and <span class="math inline">\(L_3\)</span>) are independent of each other given all prior measures.</p>
 <p>This is shown in <a href="#fig-interference-dag" class="quarto-xref">Figure&nbsp;<span>B.6</span></a>, as the removal of arrows that connected the <span class="math inline">\(L_i\)</span>’s, <span class="math inline">\(A_i\)</span>’s and <span class="math inline">\(Y_i\)</span>’s in <a href="#fig-fullly-connected-dag" class="quarto-xref">Figure&nbsp;<span>B.1</span></a>. In <a href="#eq-interference-dag" class="quarto-xref">Equation&nbsp;<span>B.7</span></a>, the <span class="math inline">\(L_i\)</span>’s are not functions of each other, the <span class="math inline">\(A_i\)</span>’s are not functions of each other, and the <span class="math inline">\(Y_i\)</span>’s are not functions of each other, unlike in <a href="#eq-fullly-connected-dag" class="quarto-xref">Equation&nbsp;<span>B.1</span></a>. This implies that conditioning all the measurements taken prior to a set of contemporaneous measures, the contemporaneous measures are independent.</p>
 </section>
 <section id="independence-ii-network-interference" class="level5">
@@ -1151,27 +1144,54 @@ E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} ]
 </section>
 <section id="compact-notation-with-dangs-and-swings" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="compact-notation-with-dangs-and-swings">Compact notation with DANGs and SWINGs</h3>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_icon</span>(<span class="at">icon_name =</span> <span class="st">"droplets"</span>, <span class="at">color =</span> <span class="st">"dark_purple"</span>, <span class="at">shape =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="social-and-spatial-inference" class="level2" data-number="B.3">
+<h2 data-number="B.3" class="anchored" data-anchor-id="social-and-spatial-inference"><span class="header-section-number">B.3</span> Social and spatial inference</h2>
+<section id="sec-example-3" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="sec-example-3">Example 3: Vaccination</h4>
+<p>You are a public health officer at the department of health in Nowhereville and are planning to conduct and assess a three week flu vaccination campaign. None of the townspeople have been vaccinated against flu. There is a population of five residents in the city, and they each live in one of three neighborhoods. In addition, residents visit their friends’ homes in other neighborhoods.</p>
+<p><em>Person 1</em> lives in <em>Neighborhood A</em> and visits <em>Neighborhood B</em>. <em>Person 2</em> lives in <em>Neighborhood B</em>, but visits <em>Neighborhoods A</em> and <em>B</em>. <em>Person 3</em> lives in <em>Neighborhood C</em> and visits <em>Neighborhood B</em>. <em>Persons 5</em> and <em>6</em> live in <em>Neighborhood C</em> and they do not visit any other neighborhoods.</p>
+<p>The city of Nowhereville has a very structured approach to vaccination campaigns. At the beginning of each week, each neighborhood gets a risk rating based on the prevalence of vaccination among its residents and visitors. Based on that rating, each neighborhood decides whether to conduct a local vaccination drive or not. Vaccination drives are conducted in the same way regardless of neighborhood - visitors and residents are offered immediate vaccination at a nearby mobile van through a pop-up message on the local dating app. Not everyone will receive the messages because some will not open the app during the period of the campaign. Those who do will have the choice of getting vaccinated or not. Each person can only get vaccinated once.</p>
+<p>Everyone can move every week - vaccination strategy is set neighborhood by neighborhood according to the dag. Dynamic regime.</p>
+</section>
+<section id="social-spatial-dangs-and-swings" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="social-spatial-dangs-and-swings">Social &amp; spatial DANGs and SWINGs</h3>
 <p>We introduce the causal Directed Acyclic Network Graph (causal DANG) - a simple extension of the DAG that allows for the representation of complex causal systems. Like the causal DAG, the causal DANG encodes a non-parametric structural equation model.</p>
-<p><em>Compact graphic representation</em></p>
+<section id="compact-graphic-representation" class="level4">
+<h4 class="anchored" data-anchor-id="compact-graphic-representation">Compact graphic representation</h4>
 <p>DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the “structural part” of the DANG and the latter the “relational part.” The relational part shows which pairs of observational units have correlated measures with each other. For instance, in <a href="#fig-causal-dang-instructions" class="quarto-xref">Figure&nbsp;<span>B.9</span></a> we see that individuals 1 and 2 are related.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>structural <span class="ot">&lt;-</span> <span class="fu">example_dang_1_structural</span>() <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>()<span class="sc">+</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Structural Part"</span>) </span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>relational <span class="ot">&lt;-</span> <span class="fu">example_dang_1_relational</span>() <span class="sc">|&gt;</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="at">node_radius =</span> <span class="fl">0.2</span>)  <span class="sc">+</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Entity type"</span>, <span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Relational Part"</span>) </span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(structural, relational, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>structural <span class="ot">&lt;-</span> <span class="fu">example_dang_1_structural</span>() <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>()<span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Structural Part"</span>) </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>relational <span class="ot">&lt;-</span> <span class="fu">example_dang_1_relational</span>() <span class="sc">|&gt;</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">plot_swig</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="at">node_radius =</span> <span class="fl">0.2</span>)  <span class="sc">+</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">"Entity type"</span>, <span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                    ggplot2<span class="sc">::</span><span class="fu">ggtitle</span>(<span class="st">"Relational Part"</span>) </span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(structural, relational, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-causal-dang-instructions" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1187,32 +1207,9 @@ Figure&nbsp;B.9: Causal DANG
 </div>
 </div>
 <p>The structural part is a DAG of vector-valued variables <span class="math inline">\(\mathbf{L}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{Y}\)</span> of length equal to the number of people in the sample. It has standard interpretation under d-separation rules. It gives the conditional independencies across these vector-valued random variables.</p>
-<div class="cell" data-layout-align="center">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_icon</span>(<span class="at">icon_name =</span> <span class="st">"droplets"</span>, <span class="at">color =</span> <span class="st">"dark_purple"</span>, <span class="at">shape =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
-</figure>
-</div>
-</div>
-</div>
 </section>
-</section>
-<section id="social-and-spatial-inference" class="level2" data-number="B.3">
-<h2 data-number="B.3" class="anchored" data-anchor-id="social-and-spatial-inference"><span class="header-section-number">B.3</span> Social and spatial inference</h2>
-<section id="example-3-vaccination" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="example-3-vaccination">Example 3: Vaccination</h4>
-<p>You are a public health officer at the department of health in Nowhereville and are planning to conduct and assess a three week flu vaccination campaign. None of the townspeople have been vaccinated against flu. There is a population of five residents in the city, and they each live in one of three neighborhoods. In addition, residents visit their friends’ homes in other neighborhoods.</p>
-<p><em>Person 1</em> lives in <em>Neighborhood A</em> and visits <em>Neighborhood B</em>. <em>Person 2</em> lives in <em>Neighborhood B</em>, but visits <em>Neighborhoods A</em> and <em>B</em>. <em>Person 3</em> lives in <em>Neighborhood C</em> and visits <em>Neighborhood B</em>. <em>Persons 5</em> and <em>6</em> live in <em>Neighborhood C</em> and they do not visit any other neighborhoods.</p>
-<p>The city of Nowhereville has a very structured approach to vaccination campaigns. At the beginning of each week, each neighborhood gets a risk rating based on the prevalence of vaccination among its residents and visitors. Based on that rating, each neighborhood decides whether to conduct a local vaccination drive or not. Vaccination drives are conducted in the same way regardless of neighborhood - visitors and residents are offered immediate vaccination at a nearby mobile van through a pop-up message on the local dating app. Not everyone will receive the messages because some will not open the app during the period of the campaign. Those who do will have the choice of getting vaccinated or not. Each person can only get vaccinated once.</p>
-<p>Everyone can move every week - vaccination strategy is set neighborhood by neighborhood according to the dag. Dynamic regime.</p>
-</section>
-<section id="social-spatial-dangs-and-swings" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="social-spatial-dangs-and-swings">Social &amp; spatial DANGs and SWINGs</h3>
+<section id="non-nested-multi-level-causal-modelling" class="level4">
+<h4 class="anchored" data-anchor-id="non-nested-multi-level-causal-modelling">Non-nested multi-level causal modelling</h4>
 <p>DANGs not only allow for compact notation in causal systems characterized by interference, they can describe causal systems that involve more than one kind of observational unit. We focus on systems that involve persons as one unit type and places as the other. In this section we briefly define a DANG for the first week of the campaign mentioned in Example II. Let <span class="math inline">\(\mathbf T\)</span> be the decision to conduct a vaccination campaign or not in each of the three places. <span class="math inline">\(\mathbf M\)</span> indicates whether each of the five people received a vaccination campaign message. <span class="math inline">\(\mathbf V\)</span> indicates whetehr each of the people got vaccinated.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
@@ -1302,35 +1299,28 @@ Figure&nbsp;B.11: SWING for Week 1 in Example 3
 </div>
 </div>
 </section>
+</section>
 <section id="sec-random-interference" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="sec-random-interference">Causal reasoning under random interference</h3>
-<p>In the previous section we considered interference with a fixed network structure and introduced the simplifying assumption of homogeneity. But in many real-world settings, connections themselves are uncertain or vary across time. For example, when people attend events or move between locations, it is not fixed who interacts with whom. To capture this type of <em>random interference</em>, we extend our framework to include stochastic network structures.</p>
+<section id="section-2" class="level4">
+<h4 class="anchored" data-anchor-id="section-2"></h4>
+<p>In the previous section we considered interference with a fixed network structure and introduced the simplifying assumption of homogenous network interference. But in many real-world settings, connections themselves are uncertain or vary across time. To capture this type of random interference, we extend our framework to include stochastic network structures.</p>
+</section>
 <section id="sec-random-graphs" class="level4">
 <h4 class="anchored" data-anchor-id="sec-random-graphs">Random graphs</h4>
-<p>Random graphs bring probability into the network itself. Instead of assuming we know exactly which edges exist, we treat them as random variables. For example, two people may have a certain probability of meeting at a venue, or a person may randomly choose which locations to visit.</p>
-<p>This randomness captures the idea that interference patterns are not fixed in advance, but vary across realizations. Potential outcomes can then be thought of as depending both on treatments and on the random draw of a network.</p>
+<p>Random graphs bring probability into the network itself. Instead of assuming we know exactly which edges exist, we treat them as random variables. In <a href="#sec-example-3">Example 3</a>, for instance, every week the townspeople possibly change their community of residence and/or the communities they visit. Random graph allows us to model a time-varying pattern of interference, or even different patterns of interference for different variables.</p>
 </section>
 <section id="sec-homogeneous-random" class="level4">
 <h4 class="anchored" data-anchor-id="sec-homogeneous-random">Homogeneous random interference</h4>
-<p>Conditional on a random draw of the network, we often simplify further with the assumption of <em>homogeneous random interference</em>. This means that the effect of a neighbor’s treatment on unit <span class="math inline">\(i\)</span> is the same no matter which neighbor it is. What matters is the number or proportion of treated neighbors, not their identity.</p>
-<p>This mirrors the homogeneous assumption from the fixed network setting, but now exposures vary both with treatment assignments and with the random realization of the network.</p>
+<p>We assume that homogenous interference holds, given a set of random draws from the random graph models included.This mirrors the homogeneous assumption from the fixed network setting, but now exposures vary both with treatment assignments and with the random realization of the network.</p>
 </section>
 <section id="sec-bipartite-graphs" class="level4">
 <h4 class="anchored" data-anchor-id="sec-bipartite-graphs">Bipartite graphs</h4>
-<p>A bipartite graph is one where nodes are divided into two disjoint sets and edges connect only across sets. In random interference problems, it is often useful to model people on one side and places or events on the other. An edge then represents a person visiting a place, and interference arises because multiple people may be connected through the same location.</p>
-<p>This structure allows us to represent exposures that are not purely person-to-person, but mediated by shared environments.</p>
-</section>
-<section id="sec-random-bipartite-ffrcistg" class="level4">
-<h4 class="anchored" data-anchor-id="sec-random-bipartite-ffrcistg">Random bipartite network FFRCISTG</h4>
-<p>To combine these ideas, we extend Robins’s FFRCISTG further to a <strong>random bipartite network FFRCISTG</strong>. Here, potential outcomes are indexed not only by treatments and exposure mappings, but also by the realization of a random bipartite network.</p>
-<p>Formally, the counterfactual universe includes outcomes of the form <span class="math inline">\(Y_i(a_i, g_i, G)\)</span>, where <span class="math inline">\(G\)</span> denotes a particular draw of the network structure.</p>
-<p>This framework allows us to reason about direct effects, spillover effects, and the uncertainty introduced by random connections. It generalizes the fixed-network NFFRCISTG to settings where links themselves are stochastic, such as mobility-driven or event-based exposures.</p>
-<p>In the next section, we return to the worked example and show how random interference can be represented through a random bipartite network FFRCISTG.</p>
+<p>A bipartite graph is one where nodes are divided into two disjoint sets and edges connect only across sets. In random interference problems, it is often useful to model people on one side and places or events on the other. An edge then represents a persons affiliation with a place, and interference arises because multiple people may be connected through the same location. This structure allows us to represent exposures that are not purely person-to-person, but mediated by shared environments.</p>
 </section>
 </section>
 <section id="assumptions-2" class="level3" data-number="B.3.1">
 <h3 data-number="B.3.1" class="anchored" data-anchor-id="assumptions-2"><span class="header-section-number">B.3.1</span> Assumptions</h3>
-<p>See <span class="quarto-unresolved-ref">?sec-network-causal-inference</span> for a fuller description of the below assumptions.</p>
 <section id="independence-assumptions" class="level4">
 <h4 class="anchored" data-anchor-id="independence-assumptions">Independence assumptions</h4>
 <p>Under the SSNAC framework, we make the assumption of no spillover: contemporaneous measurements on observational units of a given entity type are independent of each other given all prior measures. The time-ordering of the measurements is given by the structural part of the causal DANG. We further make the assumption of network interference - that interference respects the mapping given by the relational part of a causal DANG. i.e.&nbsp;The exposure mapping for each equation in the structural equation model is loyal to the graph that encodes the relational part of the SWING.</p>
