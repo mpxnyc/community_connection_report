@@ -1,5 +1,17 @@
 ### Social & spatial DANGs and SWINGs {.unnumbered}
 
+We introduce the causal Directed Acyclic Network Graph (causal DANG) - a simple extension of the DAG that allows for the representation of complex causal systems. Like the causal DAG, the causal DANG encodes a non-parametric structural equation model.
+
+#### Compact graphic representation
+
+DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the "structural part" of the DANG and the latter the "relational part." The relational part shows which pairs of observational units have correlated measures with each other. For instance, in @fig-causal-dang-instructions we see that individuals 1 and 2 are related.
+
+{{< include fig-causal-dang-instructions.qmd >}}
+
+The structural part is a DAG of vector-valued variables $\mathbf{L}$, $\mathbf{A}$, and $\mathbf{Y}$ of length equal to the number of people in the sample. It has standard interpretation under d-separation rules. It gives the conditional independencies across these vector-valued random variables. 
+
+#### Non-nested multi-level causal modelling
+
 DANGs not only allow for compact notation in causal systems characterized by interference, they can describe causal systems that involve more than one kind of observational unit. We focus on systems that involve persons as one unit type and places as the other. In this section we briefly define a DANG for the first week of the campaign mentioned in Example II. Let $\mathbf T$ be the decision to conduct a vaccination campaign or not in each of the three places. $\mathbf M$ indicates whether each of the five people received a vaccination campaign message. $\mathbf V$ indicates whetehr each of the people got vaccinated. 
 
 
