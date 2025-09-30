@@ -211,8 +211,7 @@ window.Quarto = {
       <img src="../_const/images/image_mpxnyc.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">
-      </a> 
+      <a href="../"></a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -472,6 +471,8 @@ window.Quarto = {
   <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a>
   <ul class="collapse">
   <li><a href="#a.-definitions" id="toc-a.-definitions" class="nav-link" data-scroll-target="#a.-definitions">a. Definitions</a></li>
+  <li><a href="#b.-boundedness" id="toc-b.-boundedness" class="nav-link" data-scroll-target="#b.-boundedness">b. Boundedness</a></li>
+  <li><a href="#c.-d-separation" id="toc-c.-d-separation" class="nav-link" data-scroll-target="#c.-d-separation">c.&nbsp;D-separation</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -558,12 +559,11 @@ Hernán, Miguel, and James M. Robins. 2021. <em>Causal inference</em>. Chapman &
 </section>
 <section id="classical-causal-inference" class="level2" data-number="B.1">
 <h2 data-number="B.1" class="anchored" data-anchor-id="classical-causal-inference"><span class="header-section-number">B.1</span> Classical causal inference</h2>
-<section id="example-1-dress-and-jobs" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="example-1-dress-and-jobs">Example 1: Dress and jobs</h4>
+<section id="sec-example-1" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="sec-example-1">Example 1: Dress and jobs</h4>
 <p>We are interested in settling an argument among friends about the relationship between dressing in formal wear and job offers. One friend thinks that dressing formally brings more job offers; everyone she knows who dresses formally has many more job offers than those who dress casually.</p>
 <p>The other friend thinks that what really brings job offers is currently having a job. In their reasoning, having a job causes people to dress formally and also causes people to receive job offers, but dressing formally does not in itself improve a person’s likelihood of receiving job offers. We conduct a study to investigate.</p>
 <p>We recruit three people, <em>Person 1</em>, <em>Person 2</em>, and <em>Person 3</em>. <em>Person 1</em> and <em>Person 2</em> are married to each other. <em>Person 1</em> and <em>Person 3</em> are acquaintances.</p>
-<p>Say <em>Person 1</em> has job status <span class="math inline">\(L_1\)</span>, <em>Person 2</em> has job status <span class="math inline">\(L_2\)</span> and <em>Person 3</em> has job status <span class="math inline">\(L_3\)</span>. Each of these variables can only take on two values: “employed vs.&nbsp;unemployed.” Similarly we define <span class="math inline">\(A_i\)</span> as <em>Person <span class="math inline">\(i\)</span>’s</em> dress (formal vs.&nbsp;informal), and <span class="math inline">\(Y_i\)</span> as their job offers (many vs.&nbsp;few). The job status measurement (<span class="math inline">\(L_i\)</span>) precedes dress (<span class="math inline">\(A_i\)</span>) in time, and dress precedes job offers (<span class="math inline">\(Y_i\)</span>).</p>
 <p>In the next few sections, we will use this example to describe the assumptions made under classical causal inference. First we give an overview of the ideas and tools we need to make that description: DAGs and SWIGs.</p>
 </section>
 <section id="causal-reasoning-with-dags-and-swigs" class="level3 unnumbered">
@@ -571,6 +571,10 @@ Hernán, Miguel, and James M. Robins. 2021. <em>Causal inference</em>. Chapman &
 <section id="npsem-ie" class="level5">
 <h5 class="anchored" data-anchor-id="npsem-ie">NPSEM-IE</h5>
 <p>A non-parametric structural equation model with independent errors (NPSEM-IE) is a system of equations that relates all the entries in a given vector-valued random variable to each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown by <a href="#eq-fullly-connected-dag" class="quarto-xref">Equation&nbsp;<span>B.1</span></a>. In this set of equations, values that are produced by equations higher up in the list serve as inputs to equations lower down on the list. The functions <span class="math inline">\(f_*\)</span> are deterministic. The arguments <span class="math inline">\(U_*\)</span> represent error terms – random variables that are independent of each other within and across observational units.</p>
+</section>
+<section id="the-ffrcistg-model" class="level5">
+<h5 class="anchored" data-anchor-id="the-ffrcistg-model">The FFRCISTG model</h5>
+<p>At its core, the system epidemiologists increasingly depend on for reasoning about abstract quantities such as causal effects is a statistical model called the Finest Fully Randomized Causally Interpretable Structured Tree Graph (FFRCISTG). A FFRCISTG is a collection of non-parametric structural equation models which mimic the causal process that produced the variables under investigation.</p>
 </section>
 <section id="observed-and-counterfactual-data" class="level5">
 <h5 class="anchored" data-anchor-id="observed-and-counterfactual-data">Observed and counterfactual data</h5>
@@ -659,10 +663,6 @@ Figure&nbsp;B.2: Fully connected SWIG
 <p>Restrictions are crucial: to fully characterize the NPSEM specified in <a href="#eq-fullly-connected-dag" class="quarto-xref">Equation&nbsp;<span>B.1</span></a> using observed data, we would need to estimate nine functions using one observation of the nine-dimensional joint distribution that gave rise to the participants’ observations. Recruiting an additional person to the study would not ease this problem; it would add three new equations to the model and we would end up with a similar problem than the one we began with. We would have to estimate 12 functions using one observation of a 12-dimensional joint distribution.</p>
 <p>We can simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function. These assumptions are called model restrictions because they restrict the set of distributions that could possibly be represented by the NPSEM. For instance, if we add the restriction that all the measures are independent (or equivalently, that the DAG has no arrows), the resulting model would not be able to represent data from a causal system where some of the measures are correlated. By adding the restriction of independence, we would be eliminating the correlated data distribution from consideration as a possibility for how the data we are modelling are truly distributed.</p>
 <p>It is possible to deduce the conditional independence restrictions of an NPSEM using the structural equations themselves. For instance, we can check whether two variables are (conditionally) independent by checking whether both variables are a function of the same common error term <span class="math inline">\(U_*\)</span>. It turns out that queries like this are much simpler to deduce through a graphical representation of the NPSEM than through the NPSEM itself, however. Directed acyclic graphs allow the efficient communication of conditional independence assumptions that define NPSEMs.</p>
-</section>
-<section id="the-ffrcistg-model" class="level5">
-<h5 class="anchored" data-anchor-id="the-ffrcistg-model">The FFRCISTG model</h5>
-<p>At its core, the system epidemiologists increasingly depend on for reasoning about abstract quantities such as causal effects is a statistical model called the Finest Fully Randomized Causally Interpretable Structured Tree Graph (FFRCISTG). A FFRCISTG is a collection of non-parametric structural equation models which mimic the causal process that produced the variables under investigation.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -674,6 +674,7 @@ Figure&nbsp;B.2: Fully connected SWIG
 <section id="assumptions" class="level3" data-number="B.1.1">
 <h3 data-number="B.1.1" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">B.1.1</span> Assumptions</h3>
 <p>Under classic causal inference, we assume that observations are independent and identically distributed. We review these assumptions, naming them slightly differently for the purpose of comparing them with the assumptions made in subsequent sections. In each case, we divide assumptions up into <em>independence assumptions</em> (those that delete arrows from the DAG) and <em>homogeneity assumptions</em> (those that simplify and equate the structural equations with each other).</p>
+<p>Returning to <a href="#sec-example-1">Example 1</a>, say <em>Person 1</em> has job status <span class="math inline">\(L_1\)</span>, <em>Person 2</em> has job status <span class="math inline">\(L_2\)</span> and <em>Person 3</em> has job status <span class="math inline">\(L_3\)</span>. Each of these variables can only take on two values: “employed vs.&nbsp;unemployed.” Similarly we define <span class="math inline">\(A_i\)</span> as <em>Person <span class="math inline">\(i\)</span>’s</em> dress (formal vs.&nbsp;informal), and <span class="math inline">\(Y_i\)</span> as their job offers (many vs.&nbsp;few). The job status measurement (<span class="math inline">\(L_i\)</span>) precedes dress (<span class="math inline">\(A_i\)</span>) in time, and dress precedes job offers (<span class="math inline">\(Y_i\)</span>).</p>
 <section id="independence-i-no-spillover" class="level5">
 <h5 class="anchored" data-anchor-id="independence-i-no-spillover">Independence I: No spillover</h5>
 <p>Under classic causal inference, we make the assumption of no spillover - that measurements taken across participants at the same time (e.g.&nbsp;<span class="math inline">\(L_1\)</span>, <span class="math inline">\(L_2\)</span>, and <span class="math inline">\(L_3\)</span>) are independent of each other given all prior measures. i.e.:</p>
@@ -1150,6 +1151,8 @@ E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} ]
 </section>
 <section id="compact-notation-with-dangs-and-swings" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="compact-notation-with-dangs-and-swings">Compact notation with DANGs and SWINGs</h3>
+<p>We introduce the causal Directed Acyclic Network Graph (causal DANG) - a simple extension of the DAG that allows for the representation of complex causal systems. Like the causal DAG, the causal DANG encodes a non-parametric structural equation model.</p>
+<p><em>Compact graphic representation</em></p>
 <p>DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the “structural part” of the DANG and the latter the “relational part.” The relational part shows which pairs of observational units have correlated measures with each other. For instance, in <a href="#fig-causal-dang-instructions" class="quarto-xref">Figure&nbsp;<span>B.9</span></a> we see that individuals 1 and 2 are related.</p>
 <div class="cell">
 <details class="code-fold">
@@ -1210,10 +1213,7 @@ Figure&nbsp;B.9: Causal DANG
 </section>
 <section id="social-spatial-dangs-and-swings" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="social-spatial-dangs-and-swings">Social &amp; spatial DANGs and SWINGs</h3>
-<p>We introduce the causal Directed Acyclic Network Graph (causal DANG) - a simple extension of the DAG that allows for the representation of complex causal systems. Like the causal DAG, the causal DANG encodes a non-parametric structural equation model.</p>
-<p><em>Compact graphic representation</em></p>
-<p>DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the “structural part” of the DANG and the latter the “relational part.” The relational part shows which pairs of observational units have correlated measures with each other. For instance, in <a href="#fig-causal-dang-instructions" class="quarto-xref">Figure&nbsp;<span>B.9</span></a> we see that individuals 1 and 2 are related.</p>
-<p>The structural part is a DAG of vector-valued variables <span class="math inline">\(\mathbf{L}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{Y}\)</span> of length equal to the number of people in the sample. It has standard interpretation under d-separation rules. It gives the conditional independencies across these vector-valued random variables.</p>
+<p>DANGs not only allow for compact notation in causal systems characterized by interference, they can describe causal systems that involve more than one kind of observational unit. We focus on systems that involve persons as one unit type and places as the other. In this section we briefly define a DANG for the first week of the campaign mentioned in Example II. Let <span class="math inline">\(\mathbf T\)</span> be the decision to conduct a vaccination campaign or not in each of the three places. <span class="math inline">\(\mathbf M\)</span> indicates whether each of the five people received a vaccination campaign message. <span class="math inline">\(\mathbf V\)</span> indicates whetehr each of the people got vaccinated.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1655,8 +1655,64 @@ U_{\psi_{ij}} = U_{\psi_{ji}} \text{ and } f_{\psi_{ij}} = f_{\psi_{ji}}
 <div id="def-bipartite-npsem-ie" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition B.31 (Bipartite NPSEM-IE)</strong></span> A random bipartite graph NPSEM-IE is a random graph NPSEM which whose generators produce bipartite graphs on the same partitioning of <span class="math inline">\(\mathbf V\)</span>.</p>
 </div>
-
+<div id="def-brnffrcistg" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition B.32 (BRNFFRCISTG model)</strong></span> A bipartite random network finest fully randomized causally interpretable structured tree graph (BRNFFRCISTG) model is a causal model defined on a <a href="#def-bipartite-random-graph-npsem">bipartite random graph NPSEM-IE</a> which satisfies the (1) <a href="#def-no-spillover">no spillover</a>, (2) <a href="#def-homogenous-random-network-interference">homogenous random network interference</a>, and (3) <a href="#def-identical-distributions">identical distributions</a> assumptions.</p>
+</div>
 </section>
+</section>
+<section id="b.-boundedness" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="b.-boundedness">b. Boundedness</h3>
+<p>The assumption of <strong>boundedness</strong> can obtain in three different ways. It could be as a result of restrictions on the structure of the graph. For example, if the only relationships of interest between individual participants were marriages, each node would have a degree of either 0 or 1, meaning the count of alters with <span class="math inline">\(X_{tj} = 1, j \in \mathscr{N}_i\)</span> is either zero or one.</p>
+<p>It might obtain via restrictions on the value of <span class="math inline">\(\mathbf{X}\)</span> itself. It might be the case, for instance, that the count of <span class="math inline">\(i\)</span>’s for which <span class="math inline">\(X_{ti}=1\)</span> is very low so that on average, the count of alters for which <span class="math inline">\(X_{tj} = 1, j \in N_i\)</span> will also be low.</p>
+<p>Finally, boundedness could obtain as a result of the functional form of <span class="math inline">\(g\)</span> itself. This might happen if <span class="math inline">\(g\)</span> models a network exposure which has a ceiling effect in its dose-response curve with the outcome of interest. For example, if <span class="math inline">\(X\)</span> indicates ownership of a car, and <span class="math inline">\(\mathscr{G}\)</span> encodes close friendships, <span class="math inline">\(g\)</span> would be a network exposure mapping which tells us how each additional friend who has a car shifts the outcome of interest. For most health applications, its likely that beyond some number of friends who have a car, an additional friend who gets a car will not change the outcome.</p>
+</section>
+<section id="c.-d-separation" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="c.-d-separation">c.&nbsp;D-separation</h3>
+<p>D-separation is a set of rules for translating DAGs into conditional independence statements. A pair of nodes is d-separated if all the paths linking them are closed or if there is no path that links them. A pair of nodes is conditionally d-separated if all the paths linking them are closed after conditioning on some set of nodes.</p>
+<p>A <strong>path</strong> is a sequence of nodes that starts with an origin node and ends with a terminal node. Consecutive entries in the sequence are connected in the DAG. A path of length one is open by definition. A path of length two or more is open if all its triangles are open.</p>
+<p>A <strong>triangle</strong> is a sub-sequence of a path which contains three consecutive nodes from the path. A canonical triangle is one in which we do not condition on the apex node. A conditional triangle is one in which we do condition.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fork <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"fork"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>spoon <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"spoon"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)  <span class="sc">+</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) </span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>chopstick <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"chopstick"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)  <span class="sc">+</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) </span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(fork, spoon, chopstick, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.25</span>), <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="B__ssnac2_causality_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>D-separation triangles: Fork (leftmost), spoon (center), chopstick (rightmost)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A <strong>fork</strong> is a triangle whose apex variable has two outgoing edges. A canonical fork is open and a conditional fork is closed. The apex variable of a fork is commonly referred to as a “confounder.”</p>
+<p>A <strong>spoon</strong> is a triangle whose apex variable has two incoming edges. A canonical spoon is closed and a conditional spoon is open. The apex variable of a spoon is commonly referred to as a “collider.”</p>
+<p>A <strong>chopstick</strong> is a triangle whose apex variable has one incoming edge and one outgoing edge. A canonical chopstick is open and a conditional chopstick is closed. The apex variable of a chopstick is commonly referred to as a “mediator.”</p>
+<div id="acknowledgements">
+<p><u>Acknowledgements</u>: The statistical framework for SSNAC was first presented at the Society for Epidemiologic Research Meeting (Boston, June 2025) at a workshop titled “Single World Intervention Graphs (SWIGs) for the practicing epidemiologist” organized and taught by Aaron Sarvet (University of Massachusetts), Mats J. Stensrud (École polytechnique fédérale de Lausanne), and Kerollos Wanis (University of Texas), and also taught by Keletso Makofane (Ctrl+F), James M. Robins (Harvard University), and Thomas Richardson (University of Washington).</p>
+<p><u>Lead author</u>: Keletso Makofane, MPH, PhD. <u>Editor</u>: Nicholas Diamond, MPH. (Published: June 2025).</p>
+</div>
+
+
+
 </section>
 </section>
 
@@ -2145,11 +2201,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-      <div class="footer-contents">Copyright 2025, RESPND-MI</div>  
-    </div>   
+<p>Copyright 2025, RESPND-MI</p>
+</div>   
     <div class="nav-footer-center">
-      <div class="footer-contents"> </div>  
-    <div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
