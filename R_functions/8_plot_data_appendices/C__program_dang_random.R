@@ -1,4 +1,4 @@
-program_dang              <- function(){
+program_dang_random              <- function(){
   list_nodes <- list()
   list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M0", label = r"($M_{0}$)", x = -1, y = 6, node_type = "Individual")
   list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V0", label = r"($V_{0}$)", x = 1, y = 8, node_type = "Individual")
@@ -14,7 +14,10 @@ program_dang              <- function(){
   list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T3", label = r"($T_{3}$)", x = 11, y = 4, node_type = "Community")
   list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M3", label = r"($M_{3}$)", x = 12, y = 6, node_type = "Individual")
   list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V3", label = r"($V_{3}$)", x = 13, y = 8, node_type = "Individual")
-
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "G0", label = r"($\Psi_{0}$)", x = 2, y = 10, node_type = "Graph")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "G1", label = r"($\Psi_{1}$)", x = 6, y = 10, node_type = "Graph")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "G2", label = r"($\Psi_{2}$)", x = 10, y = 10, node_type = "Graph")
+  
   
   
   list_edges <- list()
@@ -39,7 +42,16 @@ program_dang              <- function(){
   list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "V1")
   list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "V2")
   list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "V3")
-
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "G0", to = "R1")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "G0", to = "M1")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "G1", to = "R2")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "G1", to = "M2")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "G2", to = "R3")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "G2", to = "M3")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "G1")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "G2")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "G0", to = "G1")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "G1", to = "G2")
   
   
   structural_nodes <- list_nodes |> 
