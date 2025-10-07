@@ -2,7 +2,7 @@
 ## Node characteristics
 
 
-We can examine patterns in the characteristics of participants. These include variables like age and vaccination status. They could also include relations indivdiuals have with places, as long as each person is assigned to one place. In our example, each participant has only one primary residence, and therefore is related to only one of the five communities in this city. 
+We can examine patterns in the characteristics of participants. These include variables like age and vaccination status. It is also useful to include a variable for node type to differentiate person nodes form place nodes.
 
 ```{r}
 #| label: tbl-nodes
@@ -14,7 +14,6 @@ We can examine patterns in the characteristics of participants. These include va
 make_example_network_data() |>
   data.frame() |>
   dplyr::select(-label) |>
-  dplyr::select(-type) |>
   gt::gt() |>
   gt::tab_options(table.font.size =12, data_row.padding = gt::px(1))
 

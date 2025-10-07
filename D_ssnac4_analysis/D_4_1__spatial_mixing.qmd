@@ -43,7 +43,16 @@ unmixed <- make_reach_diagram_data() |>
                   ggraph::scale_edge_color_manual(values = c("black"), na.value = base_color) +
                   theme_mpxnyc_blank( legend.position = "bottom"
                                       ) +
-  ggplot2::coord_fixed()
+  ggplot2::coord_fixed() +
+  ggplot2::theme(
+    legend.text = ggplot2::element_text(size = 20),
+    legend.title = ggplot2::element_text(size = 20),
+    legend.ticks = ggplot2::element_line(size = 20),
+    legend.byrow = TRUE,
+    legend.position = "right"
+  ) +
+  ggplot2::guides(color = ggplot2::guide_legend(override.aes = list(size = 5))) # Adjust legend dot size
+
 
 
 
@@ -88,7 +97,15 @@ scale_color_mpxnyc(name = "Vax", option = "manual", na.value = base_color, value
   ggraph::scale_edge_color_manual(values = c("black"), na.value = base_color) +
   theme_mpxnyc_blank( legend.position = "bottom"
                       ) +
-  ggplot2::coord_fixed() 
+  ggplot2::coord_fixed() +
+  ggplot2::theme(
+    legend.text = ggplot2::element_text(size = 20),
+    legend.title = ggplot2::element_text(size = 20),
+    legend.ticks = ggplot2::element_line(size = 20),
+    legend.byrow = FALSE,
+    legend.position = "right"
+  ) +
+  ggplot2::guides(color = ggplot2::guide_legend(override.aes = list(size = 5, ncol = 1))) # Adjust legend dot size
 
 
 cowplot::plot_grid(mixed, unmixed, rel_widths = c(1,1), nrow = 1)
@@ -103,9 +120,10 @@ community districts they are likely to encounter members of group B. It
 is defined as the ratio of preference to prevalence minus one.
 
 $$
-P_{A \rightarrow B} = \frac{  \sum_i \omega_i E[{\frac{ R_{i \rightarrow B}}{R_i}} |A_i = 1]}{E[B_i] \sum_i \omega_i }  - 1
+P_{A \rightarrow B} = \frac{1}{E[B]} \frac{1}{n} \sum_{i=1}^{n} E[{R_{i \rightarrow B} /R_i} |A_i = 1]  - 1
 $$
 
-where $\omega_i = 1$.
+
+
 
 

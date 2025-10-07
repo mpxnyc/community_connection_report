@@ -396,7 +396,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../D_ssnac4_analysis/D__ssnac4_statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">SSNAC III: Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">SSNAC III: Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -451,7 +451,6 @@ window.Quarto = {
   <li><a href="#structural-equations-1" id="toc-structural-equations-1" class="nav-link" data-scroll-target="#structural-equations-1"><span class="header-section-number">B.2.2</span> Structural equations</a></li>
   <li><a href="#estimands-1" id="toc-estimands-1" class="nav-link" data-scroll-target="#estimands-1"><span class="header-section-number">B.2.3</span> Estimands</a></li>
   <li><a href="#identification-1" id="toc-identification-1" class="nav-link" data-scroll-target="#identification-1"><span class="header-section-number">B.2.4</span> Identification</a></li>
-  <li><a href="#compact-notation-with-dangs-and-swings" id="toc-compact-notation-with-dangs-and-swings" class="nav-link" data-scroll-target="#compact-notation-with-dangs-and-swings">Compact notation with DANGs and SWINGs</a></li>
   </ul></li>
   <li><a href="#social-and-spatial-inference" id="toc-social-and-spatial-inference" class="nav-link" data-scroll-target="#social-and-spatial-inference"><span class="header-section-number">B.3</span> Social and spatial inference</a>
   <ul class="collapse">
@@ -461,6 +460,13 @@ window.Quarto = {
   <li><a href="#structural-equations-2" id="toc-structural-equations-2" class="nav-link" data-scroll-target="#structural-equations-2"><span class="header-section-number">B.3.2</span> Structural equations</a></li>
   <li><a href="#estimands-2" id="toc-estimands-2" class="nav-link" data-scroll-target="#estimands-2"><span class="header-section-number">B.3.3</span> Estimands</a></li>
   <li><a href="#identification-2" id="toc-identification-2" class="nav-link" data-scroll-target="#identification-2"><span class="header-section-number">B.3.4</span> Identification</a></li>
+  </ul></li>
+  <li><a href="#sec-control-intervention" id="toc-sec-control-intervention" class="nav-link" data-scroll-target="#sec-control-intervention"><span class="header-section-number">B.4</span> MPX NYC vaccine model</a>
+  <ul class="collapse">
+  <li><a href="#application-outbreak-control-model-using-respnd-mi-data" id="toc-application-outbreak-control-model-using-respnd-mi-data" class="nav-link" data-scroll-target="#application-outbreak-control-model-using-respnd-mi-data">Application: Outbreak control model using RESPND-MI data</a></li>
+  <li><a href="#assumptions-3" id="toc-assumptions-3" class="nav-link" data-scroll-target="#assumptions-3"><span class="header-section-number">B.4.1</span> Assumptions</a></li>
+  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model"><span class="header-section-number">B.4.2</span> Model</a></li>
+  <li><a href="#estimands-3" id="toc-estimands-3" class="nav-link" data-scroll-target="#estimands-3"><span class="header-section-number">B.4.3</span> Estimands</a></li>
   </ul></li>
   <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a>
   <ul class="collapse">
@@ -498,7 +504,7 @@ window.Quarto = {
 </div>
 <section id="section" class="level2 unnumbered page-columns page-full">
 <h2 class="unnumbered anchored" data-anchor-id="section"></h2>
-<p>The Social and Spatial Network Analysis with Causal interpretation framework can be used to guide the collection, management, analysis, and causal interpretation of data. It offers guidance on conceptualizing and organizing spatial and social data as networks (<a href="../A_ssnac1_context/A__ssnac1_context.html" class="quarto-xref"><span>Appendix A</span></a>) and provides tools for descriptive and causal analysis (<a href="../D_ssnac4_analysis/D__ssnac4_statistics.html" class="quarto-xref"><span>Appendix C</span></a>).</p>
+<p>The Social and Spatial Network Analysis with Causal interpretation framework can be used to guide the collection, management, analysis, and causal interpretation of data. It offers guidance on conceptualizing and organizing spatial and social data as networks (<a href="../A_ssnac1_context/A__ssnac1_context.html" class="quarto-xref"><span>Appendix A</span></a>) and provides tools for descriptive and causal analysis (<span class="quarto-unresolved-ref">?sec-appendix-network-analysis</span>).</p>
 <p>We define SSNAC as a set of straight-forward extensions of the currently dominant framework for conducting causal inference with observational data in epidemiology. We begin by giving an overview of the dominant approach, which we will call “classic causal inference”. We extend this system to situations where data are characterized by interdependence of observational units rather than independence, naming this system “social network analysis with causal interpretation”. Finally, we accommodate social and spatial data simultaneously in the SSNAC framework. In each case, we describe the assumptions and implications of each system, illustrating with worked examples.</p>
 <blockquote class="blockquote">
 <p>We re-frame the task of statistical inference from that of learning from a growing collection of identically distributed random vectors to that of learning from a growing random vector whose entries are related through a causal structure… These [SSNAC] assumptions allow our estimates to benefit from having more observational units, even if they collectively contribute to one realization of the statistical model.</p>
@@ -1135,9 +1141,6 @@ E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} ]
 \end{aligned}
 \]</span></p>
 <p>In the first line we use the law of iterated expectations. In the second line, we use the separability of the structural equation for <span class="math inline">\(Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}\)</span>. In the third line we replace substitute for the structural equation. In the fourth line, we use the fact that in the counterfactual model, <span class="math inline">\(\mathbf{A}\)</span> is independent of <span class="math inline">\(f_{Y}(...)\)</span> conditional on <span class="math inline">\(\mathbf{L}\)</span>. In the final line we use the fact that structural equation for <span class="math inline">\(Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}\)</span> in the counterfactual data NPSEM-IE is identical to the structural equation for <span class="math inline">\(Y_i\)</span> in the observed data NPSEM-IE.</p>
-</section>
-<section id="compact-notation-with-dangs-and-swings" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="compact-notation-with-dangs-and-swings">Compact notation with DANGs and SWINGs</h3>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1412,11 +1415,11 @@ V_{si} &amp;=  f_{V}(U_{V_{si}}, M_{si}, V_{s-1,k}) \\
 </section>
 <section id="counterfactual-data-model-2" class="level4">
 <h4 class="anchored" data-anchor-id="counterfactual-data-model-2">Counterfactual data model</h4>
-<p>In the counterfactual model, we set the value of <span class="math inline">\([\mathbf{R}_1, \mathbf{R}_2, \mathbf{R}_1]\)</span> using the function <span class="math inline">\(h()\)</span> rather than the structural equation <span class="math inline">\(f_R()\)</span>.</p>
+<p>Say we want to understand the impact of a vaccination campaign conducted over three weeks on vaccination status. This would be done by setting <span class="math inline">\(\mathbf{T}_1\)</span> to <span class="math inline">\(\mathbf{t}_1\)</span>, <span class="math inline">\(\mathbf{T}_2\)</span> to <span class="math inline">\(\mathbf{t}_2\)</span>, and <span class="math inline">\(\mathbf{T}_3\)</span> to <span class="math inline">\(\mathbf{t}_3\)</span> and noting the resulting counterfactual vaccination status at the end of week 1 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1)}\)</span>), week 2 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2)}\)</span>), and week 3 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)}\)</span>). This counterfactual model is defined <a href="#eq-placeintervention-swing" class="quarto-xref">Equation&nbsp;<span>B.11</span></a> as shown in shown in <a href="#fig-placeintervention-swing" class="quarto-xref">Figure&nbsp;<span>B.14</span></a>.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">program_dang_random</span>() <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">program_swing_random</span>() <span class="sc">|&gt;</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">x =</span> x, <span class="at">y =</span> y) <span class="sc">|&gt;</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
@@ -1438,14 +1441,15 @@ Figure&nbsp;B.14: SWING for Week 1-3 in Example 3
 </div>
 <p><span id="eq-placeintervention-swing"><span class="math display">\[
 \begin{aligned}
-\mathbf{\Psi}_{0i}^{(h)} &amp;=   f_{\mathbf{\Psi}_{0}}(U_{\mathbf{\Psi}_{0i}})\\
-M_{0i}^{(h)} &amp;=  f_{M_0}(U_{M_{0i}}) \\
-V_{0i}^{(h)} &amp;=  f_{V_0}(U_{V_{0i}}) \\
-R_{sj}^{(h)} &amp;=  h(U_{R_{sj}}, \mathbf{V}_{s-1}^{(h)}, \mathbf{\Psi}_{s-1,j}^{(h)}) \\
-T_{sj}^{(h)} &amp;=  f_{T}(U_{T_{sj}}, R_{s,j}^{(h)}) \\
-\mathbf{\Psi}_{si}^{(h)} &amp;=   f_{\mathbf{\Psi}}(U_{\mathbf{\Psi}_{si}}, \mathbf{V}_{s-1}^{(h)}, \mathbf{\Psi}_{s-1,i}^{(h)})\\
-M_{si}^{(h)} &amp;=  f_{M} (U_{M_{si}} , V_{s-1,i}^{(h)}, M_{s-1,i}^{(h)}, \mathbf{T}_{s}^{(h)}, \mathbf{\Psi}_{si}^{(h)})\\
-V_{si}^{(h)} &amp;=  f_{V}(U_{V_{si}}, M_{si}^{(h)}, V_{s-1,k}^{(h)}) \\
+\mathbf{\Psi}_{0i} &amp;=   f_{\mathbf{\Psi}_{0}}(U_{\mathbf{\Psi}_{0i}})\\
+M_{0i} &amp;=  f_{M_0}(U_{M_{0i}}) \\
+V_{0i} &amp;=  f_{V_0}(U_{V_{0i}}) \\
+R_{sj}^{(\bar{\mathbf t})} &amp;=  h(U_{R_{sj}}, \mathbf{V}_{s-1}^{(\bar{\mathbf t})}, \mathbf{\Psi}_{s-1,j}^{(\bar{\mathbf t})}) \\
+T_{sj}^{(\bar{\mathbf t})} &amp;=  f_{T}(U_{T_{sj}}, R_{s,j}^{(\bar{\mathbf t})}) \\
+t_{sj} &amp;=  t_{sj} \\
+\mathbf{\Psi}_{si}^{(\bar{\mathbf t})} &amp;=   f_{\mathbf{\Psi}}(U_{\mathbf{\Psi}_{si}}, \mathbf{V}_{s-1}^{(\bar{\mathbf t})}, \mathbf{\Psi}_{s-1,i}^{(\bar{\mathbf t})})\\
+M_{si}^{(\bar{\mathbf t})} &amp;=  f_{M} (U_{M_{si}} , V_{s-1,i}^{(\bar{\mathbf t})}, M_{s-1,i}^{(\bar{\mathbf t})}, \mathbf{t}_{s}, \mathbf{\Psi}_{si}^{(\bar{\mathbf t})})\\
+V_{si}^{(\bar{\mathbf t})} &amp;=  f_{V}(U_{V_{si}}, M_{si}^{(\bar{\mathbf t})}, V_{s-1,k}^{(\bar{\mathbf t})}) \\
 \end{aligned}
 \tag{B.11}\]</span></span></p>
 </section>
@@ -1454,7 +1458,7 @@ V_{si}^{(h)} &amp;=  f_{V}(U_{V_{si}}, M_{si}^{(h)}, V_{s-1,k}^{(h)}) \\
 <h3 data-number="B.3.3" class="anchored" data-anchor-id="estimands-2"><span class="header-section-number">B.3.3</span> Estimands</h3>
 <p>We are interested in vaccine coverage throughout the three week campaign. For a given week <span class="math inline">\(s\)</span>, this is the sum of the vaccine status outcome <span class="math inline">\(\mathbf{V}\)</span> across individuals.</p>
 <p><span class="math display">\[
-E[\sum_{i=1}^5 V_{si}^{(h)}]
+E[\sum_{i=1}^5 V_{si}^{(\bar{\mathbf t})}]
 \]</span></p>
 </section>
 <section id="identification-2" class="level3" data-number="B.3.4">
@@ -1480,6 +1484,90 @@ V_{si}^{(\bar{\mathbf{t}})} =  \frac{V_{si} \mathbf{1}_{x = g(t_{\bar{s},N_i}) }
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="sec-control-intervention" class="level2" data-number="B.4">
+<h2 data-number="B.4" class="anchored" data-anchor-id="sec-control-intervention"><span class="header-section-number">B.4</span> MPX NYC vaccine model</h2>
+<p>We used data from RESPND-MI to assess the effectiveness of two approaches to conducting mass vaccination campaigns quickly. MPX NYC is an online survey of about 1300 individuals that was conducted in 2022 in New York City. Study participants were asked to indicate their home on a map and were asked to indicate places they had had social contact in a congregate setting. Spatial coordinates were converted into community district identifiers. Community districts spatially partition the city of New York.</p>
+<section id="application-outbreak-control-model-using-respnd-mi-data" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="application-outbreak-control-model-using-respnd-mi-data">Application: Outbreak control model using RESPND-MI data</h3>
+<p>Under the SSNAC framework, our intervention of interest might not be about setting the value of any particular variable, but setting a policy or a process that produces a set of variables in the causal model. This would be done by changing the structural equations which produce those variables. In the SWING shown in <a href="#fig-edge-intervention-swing" class="quarto-xref">Figure&nbsp;<span>B.15</span></a> and <a href="#eq-edge-intervention-swing" class="quarto-xref">Equation&nbsp;<span>B.12</span></a>, we show an intervention which replaces the function for the risk rating for each community (<span class="math inline">\(\mathbf{R}\)</span>) with the function <span class="math inline">\(h\)</span>. Every variable that is downstream of the first variable created using <span class="math inline">\(h\)</span> is marked with a superscript <span class="math inline">\((h)\)</span> to show that it is partially determined by that function.</p>
+<p>We can now ask what the impact of taking policy <span class="math inline">\(h\)</span> would be on the decision whether or not to vaccinate a neighborhood <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span> (<span class="math inline">\(T_{js}\)</span>). We can also ask what the impact of the policy is on the the exposure of participant <span class="math inline">\(i\)</span> to the campaign message at time <span class="math inline">\(s\)</span> (<span class="math inline">\(M_{is}\)</span>).</p>
+<p>Our interest in RESPND-MI, however, was initially to provide evidence to inform a targeted vaccination campaign, so the main outcomes of interest are the vaccination status of each individual <span class="math inline">\(i\)</span> at time <span class="math inline">\(s\)</span> (<span class="math inline">\(V^{(h)}_{is}\)</span>). We were interested in contrasting two approaches to assigning risk-ratings to community districts: the contact-neutralizing approach and the movement-neutralizing approach.</p>
+<p>Whereas the contact-neutralizing approach ranks community districts by how many individuals are connected to them, the movement-neutralizing approach ranks community districts by how centrally they are connected to other community districts through the exchange of individuals.</p>
+</section>
+<section id="assumptions-3" class="level3" data-number="B.4.1">
+<h3 data-number="B.4.1" class="anchored" data-anchor-id="assumptions-3"><span class="header-section-number">B.4.1</span> Assumptions</h3>
+<p>We make the simplifying assumption that only one neighborhood is vaccinated at a time - the top-ranked one. We make the further simplifying assumptions that every person associated with a community district (either through residence or social activity) receives the campaign message when a community district is vaccinated, and that every person who receives a campaign message gets vaccinated. Once an individual is vaccinated, they remain vaccinated.</p>
+</section>
+<section id="model" class="level3" data-number="B.4.2">
+<h3 data-number="B.4.2" class="anchored" data-anchor-id="model"><span class="header-section-number">B.4.2</span> Model</h3>
+<p>According to the model specified by structural equations <a href="#eq-edge-intervention-swing" class="quarto-xref"><span>B.12</span></a>, no individual <span class="math inline">\(i\)</span> has been vaccinated at time 0, and nobody receives the campaign message. The risk rating for community district <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span> is some function <span class="math inline">\(h\)</span> of the vaccination status at time <span class="math inline">\(s-1\)</span> for each individual who is connected to that community district. An intervention is conducted in community district <span class="math inline">\(j\)</span> as time <span class="math inline">\(s\)</span> if that community district has the highest risk rating. Each individual <span class="math inline">\(i\)</span> is said to have received the campaign message at time <span class="math inline">\(s\)</span> if the intervention was conducted in any of the community districts he is connected to. Finally, we consider individual <span class="math inline">\(i\)</span> vaccinated at time <span class="math inline">\(s\)</span> if they were vaccinated at time <span class="math inline">\(s-1\)</span> or if they received the campaign message in time <span class="math inline">\(s\)</span>. The risk rating is given by the function <span class="math inline">\(h\)</span>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">program_dang_mpx_nyc</span>() <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>(<span class="at">node_radius =</span> <span class="fl">0.5</span>, <span class="at">nudge_intervention_labels =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Community"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"Individual"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"Graph"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-edge-intervention-swing" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-edge-intervention-swing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="B__ssnac2_causality_files/figure-html/fig-edge-intervention-swing-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-edge-intervention-swing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;B.15: SWING for Week 1-3 in RESPND-MI Application of SSNAC framework
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><span id="eq-edge-intervention-swing"><span class="math display">\[
+\begin{aligned}
+M_{0i} &amp;=  0 \\
+V_{0i} &amp;=  0 \\
+R_{sj}^{(h)} &amp;=  h(\mathbf{V}_{s-1}) \\
+T_{sj}^{(h)} &amp;=  \begin{cases} 1 &amp; R_{sj}^{(h)} = max_k R_{sk}^{(h)} \\ 0 &amp; \text{otherwise} \end{cases} \\
+M_{si}^{(h)} &amp;=  \begin{cases} 1 &amp; \mathbf{T}_{s\mathscr{N}_i}^{(h)} \neq \mathbf{0}  \\ 0 &amp; \text{otherwise} \end{cases} \\
+V_{si}^{(h)} &amp;=  \begin{cases} 1 &amp; M_{si}^{(h)} = 1 \text{ or } V_{s-1,i}^{(h)} = 1\\ 0 &amp; \text{otherwise} \end{cases} \\
+\end{aligned}
+\tag{B.12}\]</span></span></p>
+<p>Define <span class="math inline">\(\psi(i, j)\)</span> as an adjacency function - an indicator function that equals to <span class="math inline">\(1\)</span> if Person <span class="math inline">\(i\)</span> lives in or visits neighborhood <span class="math inline">\(j\)</span> and <span class="math inline">\(0\)</span> otherwise. Let <span class="math inline">\(\mathscr{N}_P\)</span> be the indices of all person nodes and <span class="math inline">\(\mathscr{N}_N\)</span> be a set of indices for neighborhood nodes. Under the contact-neutralizing approach:</p>
+<p><span class="math display">\[
+h_{sj}(\mathbf{V}_{s-1}) = \sum_{ i \in \mathscr{N}_P} (1 -V_{(s-1), i}) \times \psi(i, j)   
+\]</span></p>
+<p>and under the movement-neutralizing approach:</p>
+<p><span class="math display">\[
+h_{sj}(\mathbf{V}_{s-1}) =   \sum_{ i \in \mathscr{N}_P} (1 -V_{(s-1), i}) \times \psi(i, j) \sum_{ k \in \mathscr{N}_N} \psi(i, k)
+\]</span></p>
+</section>
+<section id="estimands-3" class="level3" data-number="B.4.3">
+<h3 data-number="B.4.3" class="anchored" data-anchor-id="estimands-3"><span class="header-section-number">B.4.3</span> Estimands</h3>
+<section id="spatial-efficiency" class="level5">
+<h5 class="anchored" data-anchor-id="spatial-efficiency">Spatial efficiency</h5>
+<p>Intervention coverage for the <span class="math inline">\(s^{th}\)</span> community district to be immunized, is defined:</p>
+<p><span class="math display">\[
+C_s^{(h)} = \frac{1}{|\mathscr{N}_p|}\sum_i V_{si}^{(h)}
+\]</span></p>
+<p>The cumulative intervention coverage after immunizing <span class="math inline">\(s\)</span> community districts is therefore:</p>
+<p><span class="math display">\[
+\bar{C_s}^{(h)} = \sum_{v = 1}^s{C_v }^{(h)}
+\]</span></p>
+</section>
+<section id="social-network-impact" class="level5">
+<h5 class="anchored" data-anchor-id="social-network-impact">Social network impact</h5>
+<p>Define graph <span class="math inline">\(G^{s}(N, \psi_s)\)</span> such that:</p>
+<p><span class="math display">\[
+\psi_s(i, j) = \psi(i, j) \times (1 -V_{(s-1), i})
+\]</span></p>
+<p>The cumulative social network impact of immunizing <span class="math inline">\(s\)</span> community districts is measured in terms of the size of the largest of the connected components <span class="math inline">\(LCC_{(s)}\)</span> of the <span class="math inline">\(G^{s}(N, \psi_s)\)</span> network as a proportion of the total number of participants.</p>
+<p><span class="math display">\[
+\frac{LCC_s}{|N_p|}
+\]</span></p>
+</section>
 </section>
 </section>
 <section id="notes" class="level2 unnumbered">
@@ -1700,25 +1788,25 @@ U_{\psi_{ij}} = U_{\psi_{ji}} \text{ and } f_{\psi_{ij}} = f_{\psi_{ji}}
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fork <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"fork"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) </span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>spoon <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"spoon"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)  <span class="sc">+</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) </span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>chopstick <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"chopstick"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)  <span class="sc">+</span></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) </span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(fork, spoon, chopstick, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.25</span>), <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>fork <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"fork"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>spoon <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"spoon"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)  <span class="sc">+</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) </span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>chopstick <span class="ot">&lt;-</span> <span class="fu">make_dag_subgraph</span>(<span class="st">"chopstick"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_swig</span>() <span class="sc">+</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">option =</span> <span class="st">"light"</span>)  <span class="sc">+</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_mpxnyc</span>(<span class="at">option =</span> <span class="st">"manual"</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"covariate"</span> <span class="ot">=</span> <span class="st">"black"</span>)) </span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(fork, spoon, chopstick, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">1.25</span>), <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -2218,8 +2306,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../D_ssnac4_analysis/D__ssnac4_statistics.html" class="pagination-link" aria-label="SSNAC III: Statistics">
-        <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">SSNAC III: Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../D_ssnac4_analysis/D__ssnac4_statistics.html" class="pagination-link" aria-label="SSNAC III: Analysis">
+        <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">SSNAC III: Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
