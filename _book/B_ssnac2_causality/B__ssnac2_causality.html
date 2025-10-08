@@ -572,8 +572,8 @@ Hernán, Miguel, and James M. Robins. 2021. <em>Causal inference</em>. Chapman &
 <h5 class="anchored" data-anchor-id="npsem-ie">NPSEM-IE</h5>
 <p>A non-parametric structural equation model with independent errors (NPSEM-IE) is a system of equations that relates all the entries in a given vector-valued random variable to each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown by <a href="#eq-fullly-connected-dag" class="quarto-xref">Equation&nbsp;<span>B.1</span></a>. In this set of equations, values that are produced by equations higher up in the list serve as inputs to equations lower down on the list. The functions <span class="math inline">\(f_*\)</span> are deterministic. The arguments <span class="math inline">\(U_*\)</span> represent error terms – random variables that are independent of each other within and across observational units.</p>
 </section>
-<section id="observed-and-counterfactual-data" class="level5">
-<h5 class="anchored" data-anchor-id="observed-and-counterfactual-data">Observed and counterfactual data</h5>
+<section id="causal-model" class="level5">
+<h5 class="anchored" data-anchor-id="causal-model">Causal model</h5>
 <p>At its core, the system epidemiologists increasingly depend on for reasoning about abstract quantities such as causal effects is a statistical model called the Finest Fully Randomized Causally Interpretable Structured Tree Graph (FFRCISTG). A FFRCISTG is a collection of non-parametric structural equation models which mimic the causal process that produced the variables under investigation.</p>
 <p>At the very least it is a collection of two NPSEM-IEs: a model of the observed data (observed data model) and a model of what the data would be under some intervention (counterfactual data model). Consider a FFRCISTG modelling an intervention where we set formal dress <span class="math inline">\(A_1\)</span> to <span class="math inline">\(a_1\)</span>, <span class="math inline">\(A_2\)</span> to <span class="math inline">\(a_2\)</span>, and <span class="math inline">\(A_3\)</span> to <span class="math inline">\(a_3\)</span>. The observed data model would be:</p>
 <p><span id="eq-fullly-connected-dag"><span class="math display">\[
@@ -1164,8 +1164,8 @@ E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} ]
 </section>
 <section id="toolkit-c-causal-reasoning-under-random-bipartite-network-interference" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="toolkit-c-causal-reasoning-under-random-bipartite-network-interference">Toolkit C: Causal reasoning under random bipartite network interference</h3>
-<section id="compact-graphic-representation" class="level4">
-<h4 class="anchored" data-anchor-id="compact-graphic-representation">Compact graphic representation</h4>
+<section id="compact-notation" class="level4">
+<h4 class="anchored" data-anchor-id="compact-notation">Compact notation</h4>
 <p>We introduce the causal Directed Acyclic Network Graph (causal DANG) - a simple extension of the DAG that allows for the representation of complex causal systems. Like the causal DAG, the causal DANG encodes a non-parametric structural equation model.</p>
 <p>DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the “structural part” of the DANG and the latter the “relational part.” The relational part shows which pairs of observational units have correlated measures with each other. For instance, in <a href="#fig-causal-dang-instructions" class="quarto-xref">Figure&nbsp;<span>B.9</span></a> we see that individuals 1 and 2 are related.</p>
 <div class="cell">
@@ -1202,8 +1202,8 @@ Figure&nbsp;B.9: Causal DANG
 </div>
 <p>The structural part is a DAG of vector-valued variables <span class="math inline">\(\mathbf{L}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{Y}\)</span> of length equal to the number of people in the sample. It has standard interpretation under d-separation rules. It gives the conditional independencies across these vector-valued random variables.</p>
 </section>
-<section id="non-nested-multi-level-causal-modelling" class="level4">
-<h4 class="anchored" data-anchor-id="non-nested-multi-level-causal-modelling">Non-nested multi-level causal modelling</h4>
+<section id="mixed-graphs" class="level4">
+<h4 class="anchored" data-anchor-id="mixed-graphs">Mixed graphs</h4>
 <p>DANGs not only allow for compact notation in causal systems characterized by interference, they can describe causal systems that involve more than one kind of observational unit. We focus on systems that involve persons as one unit type and places as the other. In this section we briefly define a DANG for the first week of the campaign mentioned in Example II. Let <span class="math inline">\(\mathbf T\)</span> be the decision to conduct a vaccination campaign or not in each of the three places. <span class="math inline">\(\mathbf M\)</span> indicates whether each of the five people received a vaccination campaign message. <span class="math inline">\(\mathbf V\)</span> indicates whetehr each of the people got vaccinated.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
