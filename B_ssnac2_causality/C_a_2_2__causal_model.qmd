@@ -1,38 +1,38 @@
 ##### Causal model
 
-At its core, the system epidemiologists increasingly depend on for reasoning about abstract quantities such as causal effects is a statistical model called the Finest Fully Randomized Causally Interpretable Structured Tree Graph (FFRCISTG). A FFRCISTG is a collection of non-parametric structural equation models which mimic the causal process that produced the variables under investigation.
+A causal model is a nonparametric structural equation model that mimics the causal process that produced the variables under investigation. This is done with the goal of reasoning about the impact of a given intervention regime. It is a combination of two NPSEM-IEs: a model of the observed data and a model of the interventional data—hypothetical data that would be observed under the given intervention regime. In a causal model, the observational and interventional NPSEMs have identical equations and equal error terms.
 
-At the very least it is a collection of two NPSEM-IEs: a model of the observed data (observed data model) and a model of what the data would be under some intervention (counterfactual data model). Consider a FFRCISTG modelling an intervention where we set formal dress $A_1$ to $a_1$, $A_2$ to $a_2$, and $A_3$ to $a_3$. The observed data model would be:
+Consider a causal model for an intervention regime where we set formal dress \(A_1\) to \(a_1\), \(A_2\) to \(a_2\), and \(A_3\) to \(a_3\). The observed data model would be:
 
 $$
 \begin{aligned}
 L_1 &= f_{L_1}(U_{L_1}) \\
 L_2 &= f_{L_2}(U_{L_2}, L_1) \\
-L_3 &= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
+L_3 &= f_{L_3}(U_{L_3}, L_1, L_2) \\
 A_1 &= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
 A_2 &= f_{A_2}(U_{A_2}, L_1, L_2, L_3, A_1) \\
 A_3 &= f_{A_3}(U_{A_3}, L_1, L_2, L_3, A_1, A_2) \\
 Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
 Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1) \\
-Y_3 &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2)
 \end{aligned}
-$$ {#eq-fullly-connected-dag}
+$$ {#eq-fully-connected-dag}
 
-In the counterfactual data model (shown in @eq-fullly-connected-swig below), the values set by the investigator through intervention supercede the values that would have been generated had the experimenter not intervened. The experimenter-set values are used in subsequent equations in the model. 
+In the interventional data model (shown in @eq-fully-connected-swig below), the values set by the investigator supersede the values that would have been generated had the experimenter not intervened. The experimenter-set values are used in subsequent equations in the model.
 
 $$
 \begin{aligned}
 L_1 &= f_{L_1}(U_{L_1}) \\
 L_2 &= f_{L_2}(U_{L_2}, L_1) \\
-L_3 &= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
+L_3 &= f_{L_3}(U_{L_3}, L_1, L_2) \\
 A_1 &= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
 A_2^{(a_1)} &= f_{A_2}(U_{A_2}, L_1, L_2, L_3, a_1) \\
 A_3^{(a_1, a_2)} &= f_{A_3}(U_{A_3}, L_1, L_2, L_3, a_1, a_2) \\
 Y_1^{(a_1, a_2, a_3)} &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, a_1, a_2, a_3) \\
 Y_2^{(a_1, a_2, a_3)} &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}) \\
-Y_3^{(a_1, a_2, a_3)} &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}, Y_2^{(a_1, a_2, a_3)}   ) \\
+Y_3^{(a_1, a_2, a_3)} &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}, Y_2^{(a_1, a_2, a_3)})
 \end{aligned}
-$$ {#eq-fullly-connected-swig}
+$$ {#eq-fully-connected-swig}
 
+To summarize: a causal model is an NPSEM made up of two NPSEMs and an intervention regime. The NPSEMs are the observed data model and the interventional data model. These two models have identical structural equations. In the causal model, the error terms of the interventional data model are restricted so that they are equal to those of the observational model.
 
-In an FFRCISTG, it is assumed that the structural equation for each variable is identical to that of its counterfactual counterpart and that the error terms for both structural equations are equal. 
