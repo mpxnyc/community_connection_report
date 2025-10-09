@@ -438,7 +438,7 @@ window.Quarto = {
   <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section"></a></li>
   <li><a href="#sec-classical-causal-inference" id="toc-sec-classical-causal-inference" class="nav-link" data-scroll-target="#sec-classical-causal-inference"><span class="header-section-number">B.1</span> Classical causal inference</a>
   <ul class="collapse">
-  <li><a href="#toolkit-a-causal-reasoning-under-independence" id="toc-toolkit-a-causal-reasoning-under-independence" class="nav-link" data-scroll-target="#toolkit-a-causal-reasoning-under-independence">Toolkit A: Causal reasoning under independence</a></li>
+  <li><a href="#sec-toolkit-a" id="toc-sec-toolkit-a" class="nav-link" data-scroll-target="#sec-toolkit-a">TOOLKIT A: Causal reasoning under independence</a></li>
   <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">B.1.1</span> Assumptions</a></li>
   <li><a href="#structural-equations" id="toc-structural-equations" class="nav-link" data-scroll-target="#structural-equations"><span class="header-section-number">B.1.2</span> Structural equations</a></li>
   <li><a href="#estimands" id="toc-estimands" class="nav-link" data-scroll-target="#estimands"><span class="header-section-number">B.1.3</span> Estimands</a></li>
@@ -462,7 +462,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-control-intervention" id="toc-sec-control-intervention" class="nav-link" data-scroll-target="#sec-control-intervention"><span class="header-section-number">B.4</span> Vaccine strategy model</a>
   <ul class="collapse">
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
   <li><a href="#assumptions-3" id="toc-assumptions-3" class="nav-link" data-scroll-target="#assumptions-3"><span class="header-section-number">B.4.1</span> Assumptions</a></li>
   <li><a href="#structural-equations-3" id="toc-structural-equations-3" class="nav-link" data-scroll-target="#structural-equations-3"><span class="header-section-number">B.4.2</span> Structural equations</a></li>
   <li><a href="#estimands-3" id="toc-estimands-3" class="nav-link" data-scroll-target="#estimands-3"><span class="header-section-number">B.4.3</span> Estimands</a></li>
@@ -472,7 +472,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#a.-definitions" id="toc-a.-definitions" class="nav-link" data-scroll-target="#a.-definitions">a. Definitions</a></li>
   <li><a href="#b.-boundedness" id="toc-b.-boundedness" class="nav-link" data-scroll-target="#b.-boundedness">b. Boundedness</a></li>
-  <li><a href="#c.-d-separation" id="toc-c.-d-separation" class="nav-link" data-scroll-target="#c.-d-separation">c.&nbsp;D-separation</a></li>
+  <li><a href="#sec-d-separation" id="toc-sec-d-separation" class="nav-link" data-scroll-target="#sec-d-separation">c.&nbsp;D-separation</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -559,55 +559,71 @@ Hernán, Miguel, and James M. Robins. 2021. <em>Causal inference</em>. Chapman &
 </section>
 <section id="sec-classical-causal-inference" class="level2" data-number="B.1">
 <h2 data-number="B.1" class="anchored" data-anchor-id="sec-classical-causal-inference"><span class="header-section-number">B.1</span> Classical causal inference</h2>
+<p>In this first section, we provide an overview of the dominant approach to causal inference in epidemiology.</p>
+<p><em>Learning goals for this section include</em>:<br>
+- Practice using NPSEMs, DAGs, and SWIGs as descriptions of the entire sample rather than an observation within a sample.<br>
+- Practice thinking about “independence” as a combination of “no interference” and “no spillover.”<br>
+- Practice saying “FFRCISTG” out loud.</p>
+<p><em>After reading this, you should be able to</em>:<br>
+- Write an NPSEM of the whole sample based on a DAG.<br>
+- Draw a DAG of the sample based on an NPSEM.<br>
+- Write a causal model based on a DAG and intervention regime.<br>
+- Draw a SWIG based on a DAG and intervention regime.<br>
+- Apply the assumptions of FFRCISTG to a DAG or SWIG.</p>
 <section id="sec-example-1" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="sec-example-1">Example 1: Dress and jobs</h4>
 <p>We are interested in settling an argument among friends about the relationship between dressing in formal wear and job offers. One friend thinks that dressing formally brings more job offers; everyone she knows who dresses formally has many more job offers than those who dress casually.</p>
 <p>The other friend thinks that what really brings job offers is currently having a job. In their reasoning, having a job causes people to dress formally and also causes people to receive job offers, but dressing formally does not in itself improve a person’s likelihood of receiving job offers. We conduct a study to investigate.</p>
 <p>We recruit three people, <em>Person 1</em>, <em>Person 2</em>, and <em>Person 3</em>. <em>Person 1</em> and <em>Person 2</em> are married to each other. <em>Person 1</em> and <em>Person 3</em> are acquaintances.</p>
-<p>In the next few sections, we will use this example to describe the assumptions made under classical causal inference. First we give an overview of the ideas and tools we need to make that description: structural equation models and the directed acyclic graph (DAGs) that describe them. We use these to state the basic assumptions of the model currently used to reason about causality in epidemiology - the finest fully randomized causally interpretable structured tree graph (FFRCISTG). Finally, we derive an FFRCISTG model for this example, showing concrete illustrations for each assumption of the FFRCISTG model.</p>
 </section>
-<section id="toolkit-a-causal-reasoning-under-independence" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="toolkit-a-causal-reasoning-under-independence">Toolkit A: Causal reasoning under independence</h3>
-<section id="npsem-ie" class="level5">
-<h5 class="anchored" data-anchor-id="npsem-ie">NPSEM-IE</h5>
-<p>A non-parametric structural equation model with independent errors (NPSEM-IE) is a system of equations that relates all the entries in a given vector-valued random variable to each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown by <a href="#eq-fullly-connected-dag" class="quarto-xref">Equation&nbsp;<span>B.1</span></a>. In this set of equations, values that are produced by equations higher up in the list serve as inputs to equations lower down on the list. The functions <span class="math inline">\(f_*\)</span> are deterministic. The arguments <span class="math inline">\(U_*\)</span> represent error terms – random variables that are independent of each other within and across observational units.</p>
+<section id="sec-toolkit-a" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="sec-toolkit-a">TOOLKIT A: Causal reasoning under independence</h3>
+<p>In the next few sections, we will use this example to describe the assumptions made under classical causal inference. First we give an overview of the ideas and tools we need to make that description: structural equation models and the directed acyclic graph (DAGs) that describe them. We use these to state the basic assumptions of the model currently used to reason about causality in epidemiology - the finest fully randomized causally interpretable structured tree graph (FFRCISTG). Finally, we derive an FFRCISTG model for this example, showing concrete illustrations for each assumption of the FFRCISTG model.</p>
+<section id="npsem" class="level5">
+<h5 class="anchored" data-anchor-id="npsem">NPSEM</h5>
+<p>A nonparametric structural equation model (NPSEM) is a system of deterministic equations that relates all the entries in a given random vector to each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown by <a href="#eq-fully-connected-dag" class="quarto-xref">Equation&nbsp;<span>B.1</span></a>. In this set of equations <span class="math inline">\((f_*)\)</span>, values that are produced by equations higher up in the list serve as inputs to equations lower down in the list.</p>
+<p>The arguments <span class="math inline">\((U_*)\)</span> represent error terms—random variables that induce the joint distribution of the variables in the model. When error terms are independent of each other within and across observational units, the model is called an NPSEM-IE—a nonparametric structural equation model with independent errors.</p>
+</section>
+<section id="intervention-regime" class="level5">
+<h5 class="anchored" data-anchor-id="intervention-regime">Intervention regime</h5>
+<p>We imagine that in certain types of studies, the investigator is able to “intervene” on an NPSEM by superseding one of the values set by a structural equation with another value. Most commonly, what are termed <em>static interventions</em> set the value to a constant. <em>Dynamic interventions</em> change the form of the structural equation itself. By “superseding,” we mean that the investigator forces structural equations whose parents include some variable of interest to take a value set by the investigator rather than the value that would have been produced by the model had the investigator not intervened. An intervention regime is an intervention where more than one value is intervened on by the investigator.</p>
 </section>
 <section id="causal-model" class="level5">
 <h5 class="anchored" data-anchor-id="causal-model">Causal model</h5>
-<p>At its core, the system epidemiologists increasingly depend on for reasoning about abstract quantities such as causal effects is a statistical model called the Finest Fully Randomized Causally Interpretable Structured Tree Graph (FFRCISTG). A FFRCISTG is a collection of non-parametric structural equation models which mimic the causal process that produced the variables under investigation.</p>
-<p>At the very least it is a collection of two NPSEM-IEs: a model of the observed data (observed data model) and a model of what the data would be under some intervention (counterfactual data model). Consider a FFRCISTG modelling an intervention where we set formal dress <span class="math inline">\(A_1\)</span> to <span class="math inline">\(a_1\)</span>, <span class="math inline">\(A_2\)</span> to <span class="math inline">\(a_2\)</span>, and <span class="math inline">\(A_3\)</span> to <span class="math inline">\(a_3\)</span>. The observed data model would be:</p>
-<p><span id="eq-fullly-connected-dag"><span class="math display">\[
+<p>A causal model is a nonparametric structural equation model that mimics the causal process that produced the variables under investigation. This is done with the goal of reasoning about the impact of a given intervention regime. It is a combination of two NPSEM-IEs: a model of the observed data and a model of the interventional data—hypothetical data that would be observed under the given intervention regime. In a causal model, the observational and interventional NPSEMs have identical equations and equal error terms.</p>
+<p>Consider a causal model for an intervention regime where we set formal dress (A_1) to (a_1), (A_2) to (a_2), and (A_3) to (a_3). The observed data model would be:</p>
+<p><span id="eq-fully-connected-dag"><span class="math display">\[
 \begin{aligned}
 L_1 &amp;= f_{L_1}(U_{L_1}) \\
 L_2 &amp;= f_{L_2}(U_{L_2}, L_1) \\
-L_3 &amp;= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
+L_3 &amp;= f_{L_3}(U_{L_3}, L_1, L_2) \\
 A_1 &amp;= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
 A_2 &amp;= f_{A_2}(U_{A_2}, L_1, L_2, L_3, A_1) \\
 A_3 &amp;= f_{A_3}(U_{A_3}, L_1, L_2, L_3, A_1, A_2) \\
 Y_1 &amp;= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
 Y_2 &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1) \\
-Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2) \\
+Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2)
 \end{aligned}
 \tag{B.1}\]</span></span></p>
-<p>In the counterfactual data model (shown in <a href="#eq-fullly-connected-swig" class="quarto-xref">Equation&nbsp;<span>B.2</span></a> below), the values set by the investigator through intervention supercede the values that would have been generated had the experimenter not intervened. The experimenter-set values are used in subsequent equations in the model.</p>
-<p><span id="eq-fullly-connected-swig"><span class="math display">\[
+<p>In the interventional data model (shown in <a href="#eq-fully-connected-swig" class="quarto-xref">Equation&nbsp;<span>B.2</span></a> below), the values set by the investigator supersede the values that would have been generated had the experimenter not intervened. The experimenter-set values are used in subsequent equations in the model.</p>
+<p><span id="eq-fully-connected-swig"><span class="math display">\[
 \begin{aligned}
 L_1 &amp;= f_{L_1}(U_{L_1}) \\
 L_2 &amp;= f_{L_2}(U_{L_2}, L_1) \\
-L_3 &amp;= f_{L_3}(U_{L_3}, L_1, L_2 ) \\
+L_3 &amp;= f_{L_3}(U_{L_3}, L_1, L_2) \\
 A_1 &amp;= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
 A_2^{(a_1)} &amp;= f_{A_2}(U_{A_2}, L_1, L_2, L_3, a_1) \\
 A_3^{(a_1, a_2)} &amp;= f_{A_3}(U_{A_3}, L_1, L_2, L_3, a_1, a_2) \\
 Y_1^{(a_1, a_2, a_3)} &amp;= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, a_1, a_2, a_3) \\
 Y_2^{(a_1, a_2, a_3)} &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}) \\
-Y_3^{(a_1, a_2, a_3)} &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}, Y_2^{(a_1, a_2, a_3)}   ) \\
+Y_3^{(a_1, a_2, a_3)} &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}, Y_2^{(a_1, a_2, a_3)})
 \end{aligned}
 \tag{B.2}\]</span></span></p>
-<p>In an FFRCISTG, it is assumed that the structural equation for each variable is identical to that of its counterfactual counterpart and that the error terms for both structural equations are equal.</p>
+<p>To summarize: a causal model is an NPSEM made up of two NPSEMs and an intervention regime. The NPSEMs are the observed data model and the interventional data model. These two models have identical structural equations. In the causal model, the error terms of the interventional data model are restricted so that they are equal to those of the observational model.</p>
 </section>
 <section id="dags-and-swigs" class="level5">
 <h5 class="anchored" data-anchor-id="dags-and-swigs">DAGs and SWIGs</h5>
-<p>A causal directed acyclic graph (DAG) (<a href="#fig-fullly-connected-dag" class="quarto-xref">Figure&nbsp;<span>B.1</span></a>) is a graph whose nodes represent the variables in an observational non-parametric structural equation model with independent errors (<a href="#eq-fullly-connected-dag" class="quarto-xref">Equation&nbsp;<span>B.1</span></a>). Directed edges point from the arguments to the result of each structural equation.</p>
+<p>A causal directed acyclic graph (DAG) (<a href="#fig-fully-connected-dag" class="quarto-xref">Figure&nbsp;<span>B.1</span></a>) is a graph whose nodes represent the variables in an NPSEM (<a href="#eq-fully-connected-dag" class="quarto-xref">Equation&nbsp;<span>B.1</span></a>). Directed edges point from the arguments to the result of each structural equation.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -618,19 +634,19 @@ Y_3^{(a_1, a_2, a_3)} &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-fullly-connected-dag" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<div id="fig-fully-connected-dag" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-fullly-connected-dag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="B__ssnac2_causality_files/figure-html/fig-fullly-connected-dag-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576">
+<div aria-describedby="fig-fully-connected-dag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="B__ssnac2_causality_files/figure-html/fig-fully-connected-dag-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fullly-connected-dag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fully-connected-dag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;B.1: Fully connected causal DAG
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>A single world intervention graph (SWIG) (<a href="#fig-fullly-connected-swig" class="quarto-xref">Figure&nbsp;<span>B.2</span></a>) is a DAG whose nodes represent the variables in a counterfactual non-parametric structural equation model with independent errors (<a href="#eq-fullly-connected-swig" class="quarto-xref">Equation&nbsp;<span>B.2</span></a>). Directed edges point from the arguments to the result of each structural equation.</p>
+<p>A single-world intervention graph (SWIG) (<a href="#fig-fully-connected-swig" class="quarto-xref">Figure&nbsp;<span>B.2</span></a>) is a DAG whose nodes represent the variables in the interventional model included in a causal model (<a href="#eq-fully-connected-swig" class="quarto-xref">Equation&nbsp;<span>B.2</span></a>). Directed edges point from the arguments to the result of each structural equation.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -641,26 +657,27 @@ Figure&nbsp;B.1: Fully connected causal DAG
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-fullly-connected-swig" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<div id="fig-fully-connected-swig" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-fullly-connected-swig-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="B__ssnac2_causality_files/figure-html/fig-fullly-connected-swig-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576">
+<div aria-describedby="fig-fully-connected-swig-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="B__ssnac2_causality_files/figure-html/fig-fully-connected-swig-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fullly-connected-swig-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fully-connected-swig-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;B.2: Fully connected SWIG
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>DAGs and SWIGs are useful because they encode statistical relationships among the variables in an NPSEM through a set of graphical rules called d-separation. Two variables in an NPSEM are (conditionally) independent if they are (conditionally) d-separated in the causal DAG representing the NPSEM.</p>
+<p>DAGs and SWIGs are useful because they encode statistical relationships among the variables in an NPSEM through a set of graphical rules called <a href="#sec-d-separation">d-separation</a>. Two variables in an NPSEM are (conditionally) independent if they are (conditionally) <a href="#sec-d-separation">d-separated</a> in the causal DAG representing the NPSEM.</p>
 </section>
 <section id="model-restrictions" class="level5">
 <h5 class="anchored" data-anchor-id="model-restrictions">Model restrictions</h5>
-<p>Whereas parametric models are characterized by their probability mass or density functions, non-parametric models of this type are usually characterized by model restrictions in the form of conditional independencies.</p>
-<p>Restrictions are crucial: to fully characterize the NPSEM specified in <a href="#eq-fullly-connected-dag" class="quarto-xref">Equation&nbsp;<span>B.1</span></a> using observed data, we would need to estimate nine functions using one observation of the nine-dimensional joint distribution that gave rise to the participants’ observations. Recruiting an additional person to the study would not ease this problem; it would add three new equations to the model and we would end up with a similar problem than the one we began with. We would have to estimate 12 functions using one observation of a 12-dimensional joint distribution.</p>
-<p>We can simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function. These assumptions are called model restrictions because they restrict the set of distributions that could possibly be represented by the NPSEM. For instance, if we add the restriction that all the measures are independent (or equivalently, that the DAG has no arrows), the resulting model would not be able to represent data from a causal system where some of the measures are correlated. By adding the restriction of independence, we would be eliminating the correlated data distribution from consideration as a possibility for how the data we are modelling are truly distributed.</p>
-<p>It is possible to deduce the conditional independence restrictions of an NPSEM using the structural equations themselves. For instance, we can check whether two variables are (conditionally) independent by checking whether both variables are a function of the same common error term <span class="math inline">\(U_*\)</span>. It turns out that queries like this are much simpler to deduce through a graphical representation of the NPSEM than through the NPSEM itself, however. Directed acyclic graphs allow the efficient communication of conditional independence assumptions that define NPSEMs. In the next section, we derive a FFRCISTG model for Example 1, showing how each assumption simplifies the model equations.</p>
+<p>Whereas parametric models are characterized by their probability mass or density functions, nonparametric models of this type are usually characterized by model restrictions in the form of conditional independencies.</p>
+<p>Restrictions are crucial: to fully characterize the NPSEM specified in <a href="#eq-fully-connected-dag" class="quarto-xref">Equation&nbsp;<span>B.1</span></a> using observed data, we would need to estimate nine functions using one observation of the nine-dimensional joint distribution that gave rise to the participants’ observations. Recruiting an additional person to the study would not ease this problem; it would add three new equations to the model, and we would end up with a similar problem to the one we began with. We would have to estimate 12 functions using one observation of a 12-dimensional joint distribution.</p>
+<p>We can simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function. These assumptions are called model restrictions because they restrict the set of distributions that could possibly be represented by the NPSEM. For instance, if we add the restriction that all the measures are independent (or equivalently, that the DAG has no arrows), the resulting model would not be able to represent data from a causal system where some of the measures are correlated. By adding the restriction of independence, we eliminate the correlated data distribution from consideration as a possibility for how the data we are modeling are truly distributed.</p>
+<p>It is possible to deduce the conditional independence restrictions of an NPSEM using the structural equations themselves—we can check whether two variables are (conditionally) independent by checking whether both variables are a function of the same common error term.</p>
+<p>It turns out that queries like this are much simpler to answer through a graphical representation of the NPSEM than through the NPSEM itself, however. Directed acyclic graphs allow the efficient communication of conditional independence assumptions that define NPSEMs. In the next section, we derive an FFRCISTG model for <a href="#sec-example-1">Example 1</a>, showing how each assumption (or restriction) simplifies the model equations.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -671,7 +688,6 @@ Figure&nbsp;B.2: Fully connected SWIG
 </section>
 <section id="assumptions" class="level3" data-number="B.1.1">
 <h3 data-number="B.1.1" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">B.1.1</span> Assumptions</h3>
-<p>Under classic causal inference, we assume that observations are independent and identically distributed. We review these assumptions, naming them slightly differently for the purpose of comparing them with the assumptions made in subsequent sections. In each case, we divide assumptions up into <em>independence assumptions</em> (those that delete arrows from the DAG) and <em>homogeneity assumptions</em> (those that simplify and equate the structural equations with each other).</p>
 <p>Returning to <a href="#sec-example-1">Example 1</a>, say <em>Person 1</em> has job status <span class="math inline">\(L_1\)</span>, <em>Person 2</em> has job status <span class="math inline">\(L_2\)</span> and <em>Person 3</em> has job status <span class="math inline">\(L_3\)</span>. Each of these variables can only take on two values: “employed vs.&nbsp;unemployed.” Similarly we define <span class="math inline">\(A_i\)</span> as <em>Person <span class="math inline">\(i\)</span>’s</em> dress (formal vs.&nbsp;informal), and <span class="math inline">\(Y_i\)</span> as their job offers (many vs.&nbsp;few). The job status measurement (<span class="math inline">\(L_i\)</span>) precedes dress (<span class="math inline">\(A_i\)</span>) in time, and dress precedes job offers (<span class="math inline">\(Y_i\)</span>).</p>
 <section id="independence-i-no-spillover" class="level5">
 <h5 class="anchored" data-anchor-id="independence-i-no-spillover">Independence I: No spillover</h5>
@@ -898,26 +914,49 @@ E[Y_i^{(a)}]                    &amp;= E \left[ E[Y_i^{(a)} | L_i] \right] \\
 </section>
 <section id="sec-network-causal-inference" class="level2" data-number="B.2">
 <h2 data-number="B.2" class="anchored" data-anchor-id="sec-network-causal-inference"><span class="header-section-number">B.2</span> Social networks</h2>
+<p>In this section, we provide an overview of an emerging approach to causal inference — <strong>causal social network analysis</strong>.<br>
+Whereas in the standard approach, systems that exhibit causal interference are excluded from study, we extend those tools to situations where observational units influence each other in a pattern that can be encoded using a graph.</p>
+<p><strong>Learning goals for this section include:</strong></p>
+<ul>
+<li>Practice using NPSEMs, DAGs, and SWIGs when there is network interference<br>
+</li>
+<li>Practice manipulating NPSEMs to impose restrictions on the functional form for interference</li>
+</ul>
+<p><strong>After reading this, you should be able to:</strong></p>
+<ul>
+<li>Write an NPSEM of the whole sample for a model that shows network interference<br>
+</li>
+<li>Draw the corresponding DAG and SWIG<br>
+</li>
+<li>Apply the assumption of homogeneous network interference to an NPSEM</li>
+</ul>
 <section id="sec-example-2" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="sec-example-2">Example 2: Marriage and jobs</h4>
-<p>We mentioned that in our study sample <em>Person 1</em> and <em>Person 2</em> are married to each other and <em>Person 1</em> and <em>Person 3</em> are acquaintances. In the causal system connecting their job status, dress and job offers, an argument could be made that <em>Person 1</em>’s job status affects <em>Person 2</em>’s dress, since they pool their salaries as a married couple. It could also be argued that <em>Person 1</em>’s job status affects <em>Person 2</em>’s job opportunities if having a job brings the married couple into contact with other married couples who are connected to job markets.</p>
+<p>We mentioned that in our study sample <em>Person 1</em> and <em>Person 2</em> are married to each other and <em>Person 1</em> and <em>Person 3</em> are acquaintances. In the causal system connecting their job status, dress, and job offers, an argument could be made that <em>Person 1</em>’s job status affects <em>Person 2</em>’s dress, since they pool their salaries as a married couple. It could also be argued that <em>Person 1</em>’s job status affects <em>Person 2</em>’s job opportunities if having a job brings the married couple into contact with other married couples who are connected to job markets.</p>
 <p>Finally, we could argue that <em>Person 1</em>’s dress affects <em>Person 2</em>’s job opportunities if some aspect of the reputation <em>Person 2</em> enjoys among potential colleagues derives from their spouse’s appearance. Symmetrically, <em>Person 2</em>’s measures could influence <em>Person 1</em>’s.</p>
-<p>But what about the relationship between <em>Person 1</em> and <em>Person 3</em>? How does that shape the measurements of either person? We can imagine that the dress of a newly acquainted colleague would not affect the dress and job opportunities of her colleague. Whereas <em>Person 1</em> and <em>Person 2</em> are causally related, <em>Person 1</em> and <em>Person 3</em> are not; their relationship is irrelevant to the causal system under investigation. <em>Person 2</em> and <em>Person 3</em> do not affect each other since they have no relationship at all.</p>
-<p>Before specifying a model that can accommodate the interdependence between <em>Persons</em> <em>1</em> and <em>2</em>, we outline some definitions. We use these to extend the FFRCISTG model described in <a href="#sec-classical-causal-inference" class="quarto-xref"><span>Section B.1</span></a> to accommodate settings characterized by causal interference. We term the resulting model the network FFRCISTG (NFFRCISTG) – a structured approach to reasoning about interventions in networks. In the next section, we derive a NFFRCISTG.</p>
+<p>But what about the relationship between <em>Person 1</em> and <em>Person 3</em>? We can imagine that the dress of a newly acquainted colleague would not affect the dress or job opportunities of her colleague. Whereas <em>Person 1</em> and <em>Person 2</em> are causally related, <em>Person 1</em> and <em>Person 3</em> are not; their relationship is irrelevant to the causal system under investigation. <em>Person 2</em> and <em>Person 3</em> do not affect each other since they have no relationship at all.</p>
 </section>
 <section id="toolkit-b-causal-reasoning-under-network-interference" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="toolkit-b-causal-reasoning-under-network-interference">Toolkit B: Causal reasoning under network interference</h3>
-<section id="sec-graphs" class="level5">
-<h5 class="anchored" data-anchor-id="sec-graphs">Graphs</h5>
-<p>Graphs give us a language to describe these interference structures. A graph represents units as nodes and possible pathways of influence between units as edges. Graphs help us represent who is “eligible” to affect whom. Potential outcomes can then be thought of as depending both on a unit’s own treatment and that of the units its directly connected to.</p>
+<section id="section-1" class="level5">
+<h5 class="anchored" data-anchor-id="section-1"></h5>
+<p>Before specifying a model that can accommodate the interdependence between <em>Persons 1</em> and <em>2</em> in <a href="#sec-example-2">Example 2</a>, we outline some useful definitions. We use these to extend the FFRCISTG model described in <a href="#sec-classical-causal-inference" class="quarto-xref"><span>Section B.1</span></a> to accommodate settings characterized by causal interference.</p>
+<p>Because of the assumptions of <em>no interference</em> and <em>no spillover</em>, FFRCISTG models are unable to incorporate this additional information about the relationships between individuals in <a href="#sec-example-2">Example 2</a>. These relationships cause what is termed <strong>causal interference</strong> — the treatment level of one unit affects the outcome of another unit.</p>
+<p>We make progress by mapping out the structure of interference in order to incorporate it into the model. We introduce a statistical model called the <strong>Network Finest Fully Randomized Causally Interpretable Structured Tree Graph (NFFRCISTG)</strong> — an extension of the FFRCISTG model that uses graphs to encode the pattern of causal interference among a set of observational units.</p>
+<p>Below we build an NFFRCISTG model for <a href="#sec-example-2">Example 2</a>, illustrating the assumptions of the model. Before that, we outline some ideas and language we will need for the illustration.</p>
 </section>
-<section id="sec-exposure-mapping" class="level5">
-<h5 class="anchored" data-anchor-id="sec-exposure-mapping">Network exposure mappings</h5>
-<p>While graphs tell us who is connected, we need a way to incorporate information from the network in order to express counterfactual quantities. Network exposure mappings do this by turning the vector of neighbors’ treatments into a scalar quantity, such as the count or proportion of vaccinated neighbors. Together with graphs, exposure mappings allow us to formalize how interference operates: graphs define the structure of possible influence across units, while exposure mappings define how units incorporate that influence.</p>
+<section id="graphs" class="level5">
+<h5 class="anchored" data-anchor-id="graphs">Graphs</h5>
+<p>A <strong>graph</strong> is a set of elements along with a rule describing whether they are connected or not. Whereas structural equations describe causal structure <em>within</em> observational units, graphs provide a language for describing causal structure <em>across</em> units. A graph represents units as <strong>nodes</strong> and possible pathways of influence between units as <strong>edges</strong>. They help us represent who is <em>eligible</em> to affect whom. Potential outcomes can then be thought of as depending both on a unit’s own treatment values and on those of the units it is directly connected to.</p>
 </section>
-<section id="sec-homogeneous-interference" class="level5">
-<h5 class="anchored" data-anchor-id="sec-homogeneous-interference">Homogeneous network interference</h5>
-<p>We introduce the assumption of <em>homogeneous network interference</em> which reduces the complexity of network exposure mappings. This assumption holds that the effect of a neighbor’s treatment on unit <span class="math inline">\(i\)</span> is the same regardless of which neighbor it is, and regardless of the position of unit <span class="math inline">\(i\)</span> in the network. What matters is the <em>number</em> or <em>proportion</em> of treated neighbors, not their identity. Finally, it restricts the network exposure values so that they are contained by a finite set.</p>
+<section id="network-exposure-mappings" class="level5">
+<h5 class="anchored" data-anchor-id="network-exposure-mappings">Network exposure mappings</h5>
+<p>While graphs tell us <em>who</em> is connected, we need a way to incorporate the information they contain into the structural equations that define the variables of the model. <strong>Network exposure mappings</strong> do this by turning the vector of neighbors’ treatments into a scalar quantity — for example, the count or proportion of treated neighbors. Together with graphs, exposure mappings allow us to formalize how interference operates: graphs define the structure of possible influence across units, while network exposure mappings define how each unit incorporates that influence in its own measures.</p>
+</section>
+<section id="homogeneous-network-interference" class="level5">
+<h5 class="anchored" data-anchor-id="homogeneous-network-interference">Homogeneous network interference</h5>
+<p>We now introduce the <strong>assumption of homogeneous network interference</strong>, which reduces the complexity of network exposure mappings. This assumption holds that for any node (i) in the network, the effect of a neighbor’s treatment is the same regardless of which neighbor it is, and regardless of the position of unit (i) in the network. Under this assumption, network exposure mappings are further restricted so that their values lie in a finite set.</p>
+<p>The result of these assumptions is a model we call the <strong>Network Fully Randomized Causally Interpretable Structured Tree Graph (NFFRCISTG)</strong> — a structured approach to reasoning about interventions in networks. In the section below, we derive an NFFRCISTG model for <a href="#sec-example-2">Example 2</a>, illustrating its central assumption using the corresponding structural equations.</p>
 </section>
 </section>
 <section id="assumptions-1" class="level3" data-number="B.2.1">
@@ -925,7 +964,7 @@ E[Y_i^{(a)}]                    &amp;= E \left[ E[Y_i^{(a)} | L_i] \right] \\
 <section id="independence-i-no-spillover-1" class="level5">
 <h5 class="anchored" data-anchor-id="independence-i-no-spillover-1">Independence I: No spillover</h5>
 <p>Returning to <a href="#sec-example-2">Example 2</a>, we make the assumption of no spillover - that measurements taken across participants at the same time (e.g.&nbsp;<span class="math inline">\(L_1\)</span>, <span class="math inline">\(L_2\)</span>, and <span class="math inline">\(L_3\)</span>) are independent of each other given all prior measures.</p>
-<p>This is shown in <a href="#fig-interference-dag" class="quarto-xref">Figure&nbsp;<span>B.6</span></a>, as the removal of arrows that connected the <span class="math inline">\(L_i\)</span>’s, <span class="math inline">\(A_i\)</span>’s and <span class="math inline">\(Y_i\)</span>’s in <a href="#fig-fullly-connected-dag" class="quarto-xref">Figure&nbsp;<span>B.1</span></a>. In <a href="#eq-interference-dag" class="quarto-xref">Equation&nbsp;<span>B.7</span></a>, the <span class="math inline">\(L_i\)</span>’s are not functions of each other, the <span class="math inline">\(A_i\)</span>’s are not functions of each other, and the <span class="math inline">\(Y_i\)</span>’s are not functions of each other, unlike in <a href="#eq-fullly-connected-dag" class="quarto-xref">Equation&nbsp;<span>B.1</span></a>. This implies that conditioning all the measurements taken prior to a set of contemporaneous measures, the contemporaneous measures are independent.</p>
+<p>This is shown in <a href="#fig-interference-dag" class="quarto-xref">Figure&nbsp;<span>B.6</span></a>, as the removal of arrows that connected the <span class="math inline">\(L_i\)</span>’s, <span class="math inline">\(A_i\)</span>’s and <span class="math inline">\(Y_i\)</span>’s in <span class="quarto-unresolved-ref">?fig-fullly-connected-dag</span>. In <a href="#eq-interference-dag" class="quarto-xref">Equation&nbsp;<span>B.7</span></a>, the <span class="math inline">\(L_i\)</span>’s are not functions of each other, the <span class="math inline">\(A_i\)</span>’s are not functions of each other, and the <span class="math inline">\(Y_i\)</span>’s are not functions of each other, unlike in <span class="quarto-unresolved-ref">?eq-fullly-connected-dag</span>. This implies that conditioning all the measurements taken prior to a set of contemporaneous measures, the contemporaneous measures are independent.</p>
 </section>
 <section id="independence-ii-network-interference" class="level5">
 <h5 class="anchored" data-anchor-id="independence-ii-network-interference">Independence II: Network interference</h5>
@@ -1477,8 +1516,8 @@ V_{si}^{(\bar{\mathbf{t}})} =  \frac{V_{si} \mathbf{1}_{x = g(t_{\bar{s},N_i}) }
 </section>
 <section id="sec-control-intervention" class="level2" data-number="B.4">
 <h2 data-number="B.4" class="anchored" data-anchor-id="sec-control-intervention"><span class="header-section-number">B.4</span> Vaccine strategy model</h2>
-<section id="section-1" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="section-1"></h3>
+<section id="section-2" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="section-2"></h3>
 <p>We used data from RESPND-MI to assess the effectiveness of two approaches to conducting mass vaccination campaigns quickly. MPX NYC is an online survey of about 1300 individuals that was conducted in 2022 in New York City. Study participants were asked to indicate their home on a map and were asked to indicate places they had had social contact in a congregate setting. Spatial coordinates were converted into community district identifiers. Community districts spatially partition the city of New York.</p>
 <p>Under the SSNAC framework, our intervention of interest might not be about setting the value of any particular variable, but setting a policy or a process that produces a set of variables in the causal model. This would be done by changing the structural equations which produce those variables. In the SWING shown in <a href="#fig-edge-intervention-swing" class="quarto-xref">Figure&nbsp;<span>B.15</span></a> and <a href="#eq-edge-intervention-swing" class="quarto-xref">Equation&nbsp;<span>B.12</span></a>, we show an intervention which replaces the function for the risk rating for each community (<span class="math inline">\(\mathbf{R}\)</span>) with the function <span class="math inline">\(h\)</span>. Every variable that is downstream of the first variable created using <span class="math inline">\(h\)</span> is marked with a superscript <span class="math inline">\((h)\)</span> to show that it is partially determined by that function.</p>
 <p>We can now ask what the impact of taking policy <span class="math inline">\(h\)</span> would be on the decision whether or not to vaccinate a neighborhood <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span> (<span class="math inline">\(T_{js}\)</span>). We can also ask what the impact of the policy is on the the exposure of participant <span class="math inline">\(i\)</span> to the campaign message at time <span class="math inline">\(s\)</span> (<span class="math inline">\(M_{is}\)</span>).</p>
@@ -1773,8 +1812,8 @@ U_{\psi_{ij}} = U_{\psi_{ji}} \text{ and } f_{\psi_{ij}} = f_{\psi_{ji}}
 <p>It might obtain via restrictions on the value of <span class="math inline">\(\mathbf{X}\)</span> itself. It might be the case, for instance, that the count of <span class="math inline">\(i\)</span>’s for which <span class="math inline">\(X_{ti}=1\)</span> is very low so that on average, the count of alters for which <span class="math inline">\(X_{tj} = 1, j \in N_i\)</span> will also be low.</p>
 <p>Finally, boundedness could obtain as a result of the functional form of <span class="math inline">\(g\)</span> itself. This might happen if <span class="math inline">\(g\)</span> models a network exposure which has a ceiling effect in its dose-response curve with the outcome of interest. For example, if <span class="math inline">\(X\)</span> indicates ownership of a car, and <span class="math inline">\(\mathscr{G}\)</span> encodes close friendships, <span class="math inline">\(g\)</span> would be a network exposure mapping which tells us how each additional friend who has a car shifts the outcome of interest. For most health applications, its likely that beyond some number of friends who have a car, an additional friend who gets a car will not change the outcome.</p>
 </section>
-<section id="c.-d-separation" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="c.-d-separation">c.&nbsp;D-separation</h3>
+<section id="sec-d-separation" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="sec-d-separation">c.&nbsp;D-separation</h3>
 <p>D-separation is a set of rules for translating DAGs into conditional independence statements. A pair of nodes is d-separated if all the paths linking them are closed or if there is no path that links them. A pair of nodes is conditionally d-separated if all the paths linking them are closed after conditioning on some set of nodes.</p>
 <p>A <strong>path</strong> is a sequence of nodes that starts with an origin node and ends with a terminal node. Consecutive entries in the sequence are connected in the DAG. A path of length one is open by definition. A path of length two or more is open if all its triangles are open.</p>
 <p>A <strong>triangle</strong> is a sub-sequence of a path which contains three consecutive nodes from the path. A canonical triangle is one in which we do not condition on the apex node. A conditional triangle is one in which we do condition.</p>
