@@ -1,3 +1,9 @@
+---
+editor: 
+  markdown: 
+    wrap: 72
+---
+
 ```{r  include=FALSE}
 targets::tar_source("../R_functions")
 
@@ -5,61 +11,103 @@ targets::tar_source("../R_functions")
 
 # SSNAC IV: Measurement {#sec-data}
 
-
-
 ::: {#leading}
-In this appendix, we describe the process of designing and testing a novel survey questionnaire tool we call the MPX NYC person-place mapper. We show the questions participants were presented with in the survey.
-
+We describe the process of designing and testing a novel survey
+questionnaire tool we call the MPX NYC person-place mapper. We show the
+questions participants were presented with in the survey.
 :::
 
-## Person–Place Network Mapper  
+## Person–Place Network Mapper
 
-We designed, tested, and implemented the MPX NYC Person–Place Network Mapper to address practical and ethical challenges in collecting sensitive spatial data in an anonymous survey. Our aim was to capture information on venues participants visited, including those where group sex occurred, while minimizing the risk of re-identification through location data.  
+We designed, tested, and implemented the MPX NYC Person–Place Network
+Mapper to address practical and ethical challenges in collecting
+sensitive spatial data in an anonymous survey. Our aim was to capture
+information on venues participants visited, including those where group
+sex occurred, while minimizing the risk of re-identification through
+location data.
 
-### Place Mapping  
+### Place Mapping
 
-Because participants were unlikely to recall precise addresses or zip codes, we used the Google Maps API to let them identify locations by landmarks, cross-streets, subway stations, and neighborhood names. The map displayed detailed geographic information with standard navigation tools (see Figure D.1).  
+Because participants were unlikely to recall precise addresses or zip
+codes, we used the Google Maps API to let them identify locations by
+landmarks, cross-streets, subway stations, and neighborhood names. The
+map displayed detailed geographic information with standard navigation
+tools (see Figure D.1).
 
-Participants were prompted to identify specific types of places, such as their primary residence, and then to select additional locations where they had physical or sexual contact in group settings. Each tap on the map placed a marker, which triggered follow-up questions about activity at that site and the type of venue.  
+Participants were prompted to identify specific types of places, such as
+their primary residence, and then to select additional locations where
+they had physical or sexual contact in group settings. Each tap on the
+map placed a marker, which triggered follow-up questions about activity
+at that site and the type of venue.
 
-![Map input question format developed for MPX NYC](../_const/images/image_app_graphic.png){#fig-mapinputformat}
+![Map input question format developed for MPX
+NYC](../_const/images/image_app_graphic.png){#fig-mapinputformat}
 
-### Link Tracing  
+### Link Tracing
 
-We developed a referral system to build a network anonymously. At the start of the survey, participants received a unique identifier card containing a QR code and word combination, which they were asked to save.  
+We developed a referral system to build a network anonymously. At the
+start of the survey, participants received a unique identifier card
+containing a QR code and word combination, which they were asked to
+save.
 
-At the end of the survey, participants could share a pre-written invitation with a unique URL. If a contact used the link, an edge was added between the two respondents in the graph database. When a new participant connected with someone who had already completed the survey, the existing participant could confirm their identifier card, allowing the system to link their nodes without revealing identities.  
+At the end of the survey, participants could share a pre-written
+invitation with a unique URL. If a contact used the link, an edge was
+added between the two respondents in the graph database. When a new
+participant connected with someone who had already completed the survey,
+the existing participant could confirm their identifier card, allowing
+the system to link their nodes without revealing identities.
 
 ![Surey share dialogue](/_const/images/share_screen.png)
 
-### Implementation  
+### Implementation
 
-To reduce re-identification risk, spatial data were coarsened before storage. For example, coordinates were converted to census tract identifiers, preventing disclosure of exact locations such as a dormitory or government office.  
+To reduce re-identification risk, spatial data were coarsened before
+storage. For example, coordinates were converted to census tract
+identifiers, preventing disclosure of exact locations such as a
+dormitory or government office.
 
-The tool’s front end was built as a single-page React/NextJS application hosted on Vercel, with design based on the MPX NYC style guide. The back end used a custom Neo4j graph database. Standard survey formats (multiple choice, text, etc.) were integrated alongside the mapping and referral components.  
+The tool’s front end was built as a single-page React/NextJS application
+hosted on Vercel, with design based on the MPX NYC style guide. The back
+end used a custom Neo4j graph database. Standard survey formats
+(multiple choice, text, etc.) were integrated alongside the mapping and
+referral components.
 
-Data flow proceeded as follows: the front end loaded questions from a JSON file, parsed referral identifiers and language settings from the URL, and requested a public identifier from the API. The API generated and stored public/private identifier pairs in a secure table, returned the public identifier and QR code to the participant, and transformed identifiers before sending responses to the graph database.  
+Data flow proceeded as follows: the front end loaded questions from a
+JSON file, parsed referral identifiers and language settings from the
+URL, and requested a public identifier from the API. The API generated
+and stored public/private identifier pairs in a secure table, returned
+the public identifier and QR code to the participant, and transformed
+identifiers before sending responses to the graph database.
 
-For spatial inputs, the front end queried the FCC API, which returned census block identifiers. These were truncated to census tract identifiers before being stored in the study database. Two rounds of user testing with about ten participants each informed refinements to usability and clarity.  
+For spatial inputs, the front end queried the FCC API, which returned
+census block identifiers. These were truncated to census tract
+identifiers before being stored in the study database. Two rounds of
+user testing with about ten participants each informed refinements to
+usability and clarity.
 
-### References  
+### Questionnaire
 
-- Vercel. 2024. *NextJS Documentation*. https://nextjs.org/docs.  
-- Neo4j. 2024. *Neo4j Documentation*. https://neo4j.com/docs.  
-- US Census Bureau. 2022. *Census Geography*.  
-- Federal Communications Commission (FCC). 2022. *API for Census Block Data*.  
-
-
+-   Vercel. 2024. *NextJS Documentation*. https://nextjs.org/docs.\
+-   Neo4j. 2024. *Neo4j Documentation*. https://neo4j.com/docs.\
+-   US Census Bureau. 2022. *Census Geography*.\
+-   Federal Communications Commission (FCC). 2022. *API for Census Block
+    Data*.
 
 ::: {#acknowledgements}
-[Acknowledgements]{.underline}: The survey instrument was designed by Keletso Makofane and coded by Keletso Makofane (front end) and Imran Ansari (back end). Sudipta Saha found the web service that allowed us to safely collect spatial data. Seema Kara wrote the initial technical specifications for the instrument. neo4j granted a concessionary licence for the graph database system we used for the back end. Pedro Carneiro and Nguyen Tran led the development of survey questions. Cody Nolan and Anton Antón Castellanos Usigli conducted translation from English to Spanish. Robert Pitts helped to design questions on suspected mpox symptoms.
+[Acknowledgements]{.underline}: The survey instrument was designed by
+Keletso Makofane and coded by Keletso Makofane (front end) and Imran
+Ansari (back end). Sudipta Saha found the web service that allowed us to
+safely collect spatial data. Seema Kara wrote the initial technical
+specifications for the instrument. neo4j granted a concessionary licence
+for the graph database system we used for the back end. Pedro Carneiro
+and Nguyen Tran led the development of survey questions. Cody Nolan and
+Anton Antón Castellanos Usigli conducted translation from English to
+Spanish. Robert Pitts helped to design questions on suspected mpox
+symptoms.
 
-[Lead author]{.underline}: Keletso Makofane, MPH, PhD. [Editor]{.underline}: Nicholas Diamond, MPH. (Published: June 2025).
+[Lead author]{.underline}: Keletso Makofane, MPH, PhD.
+[Editor]{.underline}: Nicholas Diamond, MPH. (Published: June 2025).
 :::
-
-
-
-
 
 ```{r}
 #| fig-width: 3
@@ -71,9 +119,40 @@ plot_icon(icon_name = "taco", color = "light_purple", shape = 16, alpha = 0,  si
 
 ```
 
+RESPND-MI Web Application Requirements (Narrative) Flowchart Available
+at: https://miro.com/app/board/uXjVOxeP sls=/?share_link_id=384361467333
 
+We want to design a web app which: a) Collects self-reported health and
+demographic information b) Maps out social and sexual networks The app
+must not collect any identifying information from the user. This
+includes name, email, phone number, ip address. For the user, there are
+two pathways to the app: Either you find the link in an ad (scenario 1),
+or you receive the link from a friend / sexual partner who has sent it
+to you (scenario 2). Scenario 1: 1. User goes to the webpage (through
+URL or barcode) 2. User is asked if they have participated in study
+before. 3. If not, presented information about the study and asked if
+they consent to participate 4. If they consent, they are presented with
+a unique ID and prompted to save / screenshot it. (a button that helps
+do this would be great) 5. they are asked some questions about their
+demographics, behaviour, and health 6. When they have completed the
+survey, they are asked to recall their sexual partners over the past X
+weeks. 7. They are presented with a text which contains a URL that they
+are prompted to send to those partners by copying it from the webpage
+and pasting it into the message. They can use any method to send the
+text. (have buttons that open and pre-populate imessenger, whatsapp,
+sms, facebook messenger, twitter message ) 8. They are then asked to
+recall the people they were in close contact with, but who they didnt
+have sex with. 9. They are presented with a text as in point 7. 10. They
+are finally asked if there are friends they have not seen in person that
+they want to share the study with 11. They are presented with a text as
+in point 7.
 
+This is what would happen in the second scenario: 1. User receives text
+from friend 2. User navigates to the page, and is asked if he has
+participated in the study already 3. If they say yes: a. They are asked
+for their unique ID 4. If they say no: a. They follow the steps from the
+first scenario''
 
+![](images/2022 06 19 sketch.pdf)
 
-
-
+![](images/Gantt Chart-2.pdf)

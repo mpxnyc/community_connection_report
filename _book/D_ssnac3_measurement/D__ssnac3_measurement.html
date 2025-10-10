@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-16f0be44cf0b9c8dc4714857273be9e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-7ffac8f087023380d8f550aeeab1d9da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d6d52f470e0b31701ea638efd7180c1d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -397,7 +397,7 @@ cookieconsent.run({
   <li><a href="#place-mapping" id="toc-place-mapping" class="nav-link" data-scroll-target="#place-mapping"><span class="header-section-number">D.1.1</span> Place Mapping</a></li>
   <li><a href="#link-tracing" id="toc-link-tracing" class="nav-link" data-scroll-target="#link-tracing"><span class="header-section-number">D.1.2</span> Link Tracing</a></li>
   <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation"><span class="header-section-number">D.1.3</span> Implementation</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">D.1.4</span> References</a></li>
+  <li><a href="#questionnaire" id="toc-questionnaire" class="nav-link" data-scroll-target="#questionnaire"><span class="header-section-number">D.1.4</span> Questionnaire</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -412,7 +412,7 @@ cookieconsent.run({
 
 
 <div id="leading">
-<p>In this appendix, we describe the process of designing and testing a novel survey questionnaire tool we call the MPX NYC person-place mapper. We show the questions participants were presented with in the survey.</p>
+<p>We describe the process of designing and testing a novel survey questionnaire tool we call the MPX NYC person-place mapper. We show the questions participants were presented with in the survey.</p>
 </div>
 <section id="personplace-network-mapper" class="level2" data-number="D.1">
 <h2 data-number="D.1" class="anchored" data-anchor-id="personplace-network-mapper"><span class="header-section-number">D.1</span> Person–Place Network Mapper</h2>
@@ -450,8 +450,8 @@ Figure&nbsp;D.1: Map input question format developed for MPX NYC
 <p>Data flow proceeded as follows: the front end loaded questions from a JSON file, parsed referral identifiers and language settings from the URL, and requested a public identifier from the API. The API generated and stored public/private identifier pairs in a secure table, returned the public identifier and QR code to the participant, and transformed identifiers before sending responses to the graph database.</p>
 <p>For spatial inputs, the front end queried the FCC API, which returned census block identifiers. These were truncated to census tract identifiers before being stored in the study database. Two rounds of user testing with about ten participants each informed refinements to usability and clarity.</p>
 </section>
-<section id="references" class="level3" data-number="D.1.4">
-<h3 data-number="D.1.4" class="anchored" data-anchor-id="references"><span class="header-section-number">D.1.4</span> References</h3>
+<section id="questionnaire" class="level3" data-number="D.1.4">
+<h3 data-number="D.1.4" class="anchored" data-anchor-id="questionnaire"><span class="header-section-number">D.1.4</span> Questionnaire</h3>
 <ul>
 <li>Vercel. 2024. <em>NextJS Documentation</em>. https://nextjs.org/docs.<br>
 </li>
@@ -478,6 +478,11 @@ Figure&nbsp;D.1: Map input question format developed for MPX NYC
 </div>
 </div>
 </div>
+<p>RESPND-MI Web Application Requirements (Narrative) Flowchart Available at: https://miro.com/app/board/uXjVOxeP sls=/?share_link_id=384361467333</p>
+<p>We want to design a web app which: a) Collects self-reported health and demographic information b) Maps out social and sexual networks The app must not collect any identifying information from the user. This includes name, email, phone number, ip address. For the user, there are two pathways to the app: Either you find the link in an ad (scenario 1), or you receive the link from a friend / sexual partner who has sent it to you (scenario 2). Scenario 1: 1. User goes to the webpage (through URL or barcode) 2. User is asked if they have participated in study before. 3. If not, presented information about the study and asked if they consent to participate 4. If they consent, they are presented with a unique ID and prompted to save / screenshot it. (a button that helps do this would be great) 5. they are asked some questions about their demographics, behaviour, and health 6. When they have completed the survey, they are asked to recall their sexual partners over the past X weeks. 7. They are presented with a text which contains a URL that they are prompted to send to those partners by copying it from the webpage and pasting it into the message. They can use any method to send the text. (have buttons that open and pre-populate imessenger, whatsapp, sms, facebook messenger, twitter message ) 8. They are then asked to recall the people they were in close contact with, but who they didnt have sex with. 9. They are presented with a text as in point 7. 10. They are finally asked if there are friends they have not seen in person that they want to share the study with 11. They are presented with a text as in point 7.</p>
+<p>This is what would happen in the second scenario: 1. User receives text from friend 2. User navigates to the page, and is asked if he has participated in the study already 3. If they say yes: a. They are asked for their unique ID 4. If they say no: a. They follow the steps from the first scenario’’</p>
+<p><embed src="images/2022 06 19 sketch.pdf" class="img-fluid"></p>
+<p><embed src="images/Gantt Chart-2.pdf" class="img-fluid"></p>
 
 
 </section>
