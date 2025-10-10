@@ -96,7 +96,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-16f0be44cf0b9c8dc4714857273be9e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-7ffac8f087023380d8f550aeeab1d9da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d6d52f470e0b31701ea638efd7180c1d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -444,7 +444,6 @@ window.Quarto = {
   <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section"></a></li>
   <li><a href="#sec-classical-causal-inference" id="toc-sec-classical-causal-inference" class="nav-link" data-scroll-target="#sec-classical-causal-inference"><span class="header-section-number">C.1</span> Classical causal inference</a>
   <ul class="collapse">
-  <li><a href="#sec-toolkit-a" id="toc-sec-toolkit-a" class="nav-link" data-scroll-target="#sec-toolkit-a">TOOLKIT A: Causal reasoning under independence</a></li>
   <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">C.1.1</span> Assumptions</a></li>
   <li><a href="#structural-equations" id="toc-structural-equations" class="nav-link" data-scroll-target="#structural-equations"><span class="header-section-number">C.1.2</span> Structural equations</a></li>
   <li><a href="#estimands" id="toc-estimands" class="nav-link" data-scroll-target="#estimands"><span class="header-section-number">C.1.3</span> Estimands</a></li>
@@ -452,7 +451,6 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-network-causal-inference" id="toc-sec-network-causal-inference" class="nav-link" data-scroll-target="#sec-network-causal-inference"><span class="header-section-number">C.2</span> Social networks</a>
   <ul class="collapse">
-  <li><a href="#toolkit-b-causal-reasoning-under-network-interference" id="toc-toolkit-b-causal-reasoning-under-network-interference" class="nav-link" data-scroll-target="#toolkit-b-causal-reasoning-under-network-interference">Toolkit B: Causal reasoning under network interference</a></li>
   <li><a href="#assumptions-1" id="toc-assumptions-1" class="nav-link" data-scroll-target="#assumptions-1"><span class="header-section-number">C.2.1</span> Assumptions</a></li>
   <li><a href="#structural-equations-1" id="toc-structural-equations-1" class="nav-link" data-scroll-target="#structural-equations-1"><span class="header-section-number">C.2.2</span> Structural equations</a></li>
   <li><a href="#estimands-1" id="toc-estimands-1" class="nav-link" data-scroll-target="#estimands-1"><span class="header-section-number">C.2.3</span> Estimands</a></li>
@@ -460,7 +458,6 @@ window.Quarto = {
   </ul></li>
   <li><a href="#social-spatial-networks" id="toc-social-spatial-networks" class="nav-link" data-scroll-target="#social-spatial-networks"><span class="header-section-number">C.3</span> Social-spatial networks</a>
   <ul class="collapse">
-  <li><a href="#toolkit-c-causal-reasoning-under-random-bipartite-network-interference" id="toc-toolkit-c-causal-reasoning-under-random-bipartite-network-interference" class="nav-link" data-scroll-target="#toolkit-c-causal-reasoning-under-random-bipartite-network-interference">Toolkit C: Causal reasoning under random bipartite network interference</a></li>
   <li><a href="#assumptions-2" id="toc-assumptions-2" class="nav-link" data-scroll-target="#assumptions-2"><span class="header-section-number">C.3.1</span> Assumptions</a></li>
   <li><a href="#structural-equations-2" id="toc-structural-equations-2" class="nav-link" data-scroll-target="#structural-equations-2"><span class="header-section-number">C.3.2</span> Structural equations</a></li>
   <li><a href="#estimands-2" id="toc-estimands-2" class="nav-link" data-scroll-target="#estimands-2"><span class="header-section-number">C.3.3</span> Estimands</a></li>
@@ -565,26 +562,49 @@ Hernán, Miguel, and James M. Robins. 2021. <em>Causal inference</em>. Chapman &
 </section>
 <section id="sec-classical-causal-inference" class="level2" data-number="C.1">
 <h2 data-number="C.1" class="anchored" data-anchor-id="sec-classical-causal-inference"><span class="header-section-number">C.1</span> Classical causal inference</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Learning goals
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>After reading this section, you will be equipped to:</p>
+<ul>
+<li><p>Express NPSEMs, DAGs, and SWIGs as descriptions of the entire sample rather than one observation within a sample</p></li>
+<li><p>Write an NPSEM of the whole sample based on a DAG</p></li>
+<li><p>Draw a DAG of the sample based on an NPSEM</p></li>
+<li><p>Write a causal model based on a DAG and intervention regime</p></li>
+<li><p>Draw a SWIG based on a DAG and intervention regime</p></li>
+<li><p>Apply the assumptions of FFRCISTG to a DAG or SWIG</p></li>
+</ul>
+</div>
+</div>
+</div>
 <p>In this first section, we provide an overview of the dominant approach to causal inference in epidemiology.</p>
-<p><em>Learning goals for this section include</em>:<br>
-- Practice using NPSEMs, DAGs, and SWIGs as descriptions of the entire sample rather than an observation within a sample.<br>
-- Practice thinking about “independence” as a combination of “no interference” and “no spillover.”<br>
-- Practice saying “FFRCISTG” out loud.</p>
-<p><em>After reading this, you should be able to</em>:<br>
-- Write an NPSEM of the whole sample based on a DAG.<br>
-- Draw a DAG of the sample based on an NPSEM.<br>
-- Write a causal model based on a DAG and intervention regime.<br>
-- Draw a SWIG based on a DAG and intervention regime.<br>
-- Apply the assumptions of FFRCISTG to a DAG or SWIG.</p>
 <section id="sec-example-1" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="sec-example-1">Example 1: Dress and jobs</h4>
 <p>We are interested in settling an argument among friends about the relationship between dressing in formal wear and job offers. One friend thinks that dressing formally brings more job offers; everyone she knows who dresses formally has many more job offers than those who dress casually.</p>
 <p>The other friend thinks that what really brings job offers is currently having a job. In their reasoning, having a job causes people to dress formally and also causes people to receive job offers, but dressing formally does not in itself improve a person’s likelihood of receiving job offers. We conduct a study to investigate.</p>
 <p>We recruit three people, <em>Person 1</em>, <em>Person 2</em>, and <em>Person 3</em>. <em>Person 1</em> and <em>Person 2</em> are married to each other. <em>Person 1</em> and <em>Person 3</em> are acquaintances.</p>
-</section>
-<section id="sec-toolkit-a" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="sec-toolkit-a">TOOLKIT A: Causal reasoning under independence</h3>
-<p>In the next few sections, we will use this example to describe the assumptions made under classical causal inference. First we give an overview of the ideas and tools we need to make that description: structural equation models and the directed acyclic graph (DAGs) that describe them. We use these to state the basic assumptions of the model currently used to reason about causality in epidemiology - the <a href="#def-ffrcistg">finest fully randomized causally interpretable structured tree graph (FFRCISTG)</a>. Finally, we derive an <a href="#def-ffrcistg">FFRCISTG</a> model for this example, showing concrete illustrations for each assumption of the FFRCISTG model.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+TOOLKIT A: Causal reasoning under independence
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>In the next few sections, we will use <a href="#sec-example-1">Example 1</a> to describe the assumptions made under classical causal inference. First we give an overview of the ideas and tools we need to make that description: structural equation models and the directed acyclic graph (DAGs) that describe them. We use these to state the basic assumptions of the model currently used to reason about causality in epidemiology - the <a href="#def-ffrcistg">finest fully randomized causally interpretable structured tree graph (FFRCISTG)</a>. Finally, we derive an <a href="#def-ffrcistg">FFRCISTG</a> model for this example, showing concrete illustrations for each assumption of the FFRCISTG model.</p>
 <section id="npsem" class="level5">
 <h5 class="anchored" data-anchor-id="npsem">NPSEM</h5>
 <p>A nonparametric structural equation model (NPSEM) is a system of deterministic equations that relates all the entries in a given random vector to each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown by <a href="#eq-fully-connected-dag" class="quarto-xref">Equation&nbsp;<span>C.1</span></a>. In this set of equations <span class="math inline">\((f_*)\)</span>, values that are produced by equations higher up in the list serve as inputs to equations lower down in the list.</p>
@@ -684,13 +704,16 @@ Figure&nbsp;C.2: Fully connected SWIG
 <p>We can simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function. These assumptions are called model restrictions because they restrict the set of distributions that could possibly be represented by the NPSEM. For instance, if we add the restriction that all the measures are independent (or equivalently, that the DAG has no arrows), the resulting model would not be able to represent data from a causal system where some of the measures are correlated. By adding the restriction of independence, we eliminate the correlated data distribution from consideration as a possibility for how the data we are modeling are truly distributed.</p>
 <p>It is possible to deduce the conditional independence restrictions of an NPSEM using the structural equations themselves—we can check whether two variables are (conditionally) independent by checking whether both variables are a function of the same common error term.</p>
 <p>It turns out that queries like this are much simpler to answer through a graphical representation of the NPSEM than through the NPSEM itself, however. Directed acyclic graphs allow the efficient communication of conditional independence assumptions that define NPSEMs. In the next section, we derive an <a href="#def-ffrcistg">FFRCISTG</a> model for <a href="#sec-example-1">Example 1</a>, showing how each assumption (or restriction) simplifies the model equations.</p>
+</section>
+</div>
+</div>
+</div>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_source</span>(<span class="st">"../R_functions"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section>
 </section>
 <section id="assumptions" class="level3" data-number="C.1.1">
 <h3 data-number="C.1.1" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">C.1.1</span> Assumptions</h3>
@@ -920,15 +943,19 @@ E[Y_i^{(a)}]                    &amp;= E \left[ E[Y_i^{(a)} | L_i] \right] \\
 </section>
 <section id="sec-network-causal-inference" class="level2" data-number="C.2">
 <h2 data-number="C.2" class="anchored" data-anchor-id="sec-network-causal-inference"><span class="header-section-number">C.2</span> Social networks</h2>
-<p>In this section, we provide an overview of an emerging approach to causal inference — <strong>causal social network analysis</strong>.<br>
-Whereas in the standard approach, systems that exhibit causal interference are excluded from study, we extend those tools to situations where observational units influence each other in a pattern that can be encoded using a graph.</p>
-<p><strong>Learning goals for this section include:</strong></p>
-<ul>
-<li>Practice using NPSEMs, DAGs, and SWIGs when there is network interference<br>
-</li>
-<li>Practice manipulating NPSEMs to impose restrictions on the functional form for interference</li>
-</ul>
-<p><strong>After reading this, you should be able to:</strong></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Learning goals
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>After reading this, you will be equipped to:</p>
 <ul>
 <li>Write an NPSEM of the whole sample for a model that shows network interference<br>
 </li>
@@ -936,14 +963,27 @@ Whereas in the standard approach, systems that exhibit causal interference are e
 </li>
 <li>Apply the assumption of homogeneous network interference to an NPSEM</li>
 </ul>
+</div>
+</div>
+</div>
+<p>In this section, we provide an overview of an emerging approach to causal inference — <strong>causal social network analysis</strong>. Whereas in the standard approach, systems that exhibit causal interference are excluded from study, we extend those tools to situations where observational units influence each other in a pattern that can be encoded using a graph.</p>
 <section id="sec-example-2" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="sec-example-2">Example 2: Marriage and jobs</h4>
 <p>We mentioned that in our study sample <em>Person 1</em> and <em>Person 2</em> are married to each other and <em>Person 1</em> and <em>Person 3</em> are acquaintances. In the causal system connecting their job status, dress, and job offers, an argument could be made that <em>Person 1</em>’s job status affects <em>Person 2</em>’s dress, since they pool their salaries as a married couple. It could also be argued that <em>Person 1</em>’s job status affects <em>Person 2</em>’s job opportunities if having a job brings the married couple into contact with other married couples who are connected to job markets.</p>
 <p>Finally, we could argue that <em>Person 1</em>’s dress affects <em>Person 2</em>’s job opportunities if some aspect of the reputation <em>Person 2</em> enjoys among potential colleagues derives from their spouse’s appearance. Symmetrically, <em>Person 2</em>’s measures could influence <em>Person 1</em>’s.</p>
 <p>But what about the relationship between <em>Person 1</em> and <em>Person 3</em>? We can imagine that the dress of a newly acquainted colleague would not affect the dress or job opportunities of her colleague. Whereas <em>Person 1</em> and <em>Person 2</em> are causally related, <em>Person 1</em> and <em>Person 3</em> are not; their relationship is irrelevant to the causal system under investigation. <em>Person 2</em> and <em>Person 3</em> do not affect each other since they have no relationship at all.</p>
-</section>
-<section id="toolkit-b-causal-reasoning-under-network-interference" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="toolkit-b-causal-reasoning-under-network-interference">Toolkit B: Causal reasoning under network interference</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Toolkit B: Causal reasoning under network interference
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
 <section id="section-1" class="level5">
 <h5 class="anchored" data-anchor-id="section-1"></h5>
 <p>Before specifying a model that can accommodate the interdependence between <em>Persons 1</em> and <em>2</em> in <a href="#sec-example-2">Example 2</a>, we outline some useful definitions. We use these to extend the <a href="#def-ffrcistg">FFRCISTG</a> model described in <a href="#sec-classical-causal-inference" class="quarto-xref"><span>Section C.1</span></a> to accommodate settings characterized by causal interference.</p>
@@ -964,6 +1004,9 @@ Whereas in the standard approach, systems that exhibit causal interference are e
 <p>We now introduce the <a href="#def-homogenous-network-interference"><strong>assumption of homogeneous network interference</strong></a>, which reduces the complexity of network exposure mappings. This assumption holds that for any node (i) in the network, the effect of a neighbor’s treatment is the same regardless of which neighbor it is, and regardless of the position of unit (i) in the network. Under this assumption, network exposure mappings are further restricted so that their values lie in a finite set.</p>
 <p>The result of these assumptions is a model we call the <a href="#def-nffrcistg"><strong>Network Fully Randomized Causally Interpretable Structured Tree Graph (NFFRCISTG)</strong></a> — a structured approach to reasoning about interventions in networks. In the section below, we derive an NFFRCISTG model for <a href="#sec-example-2">Example 2</a>, illustrating its central assumption using the corresponding structural equations.</p>
 </section>
+</div>
+</div>
+</div>
 </section>
 <section id="assumptions-1" class="level3" data-number="C.2.1">
 <h3 data-number="C.2.1" class="anchored" data-anchor-id="assumptions-1"><span class="header-section-number">C.2.1</span> Assumptions</h3>
@@ -1199,28 +1242,55 @@ E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} ]
 </section>
 <section id="social-spatial-networks" class="level2" data-number="C.3">
 <h2 data-number="C.3" class="anchored" data-anchor-id="social-spatial-networks"><span class="header-section-number">C.3</span> Social-spatial networks</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Learning goals
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>After reading this, you will be equipped to:</p>
+<ul>
+<li>Write an NPSEM of the whole sample for a model that includes network generators<br>
+</li>
+<li>Draw the corresponding DANG<br>
+</li>
+<li>Apply the assumption of homogeneous network interference to an NPSEM that includes network generators</li>
+</ul>
+</div>
+</div>
+</div>
+<p>In this section, we provide an overview of a new approach to causal inference — <strong>causal social-spatial network analysis</strong>. Whereas in causal social network analysis it is complicated to imagine the relationships between the sample and the universe (since the sample units are interrelated), in this approach we keep the simplicity of random sampling while engaging the insights possible to gain from networked analysis.</p>
 <section id="sec-example-3" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="sec-example-3">Example 3: Vaccination</h4>
-<p>You are a public health officer at the department of health in Exampleville and are planning to conduct and assess a three-week flu vaccination campaign. None of the townspeople have been vaccinated against flu. There is a population of six residents in the city, and they each live in one of three neighborhoods.<br>
-In addition, residents visit their friends’ homes in other neighborhoods.</p>
-<p>At time 0, <em>Person 1</em> lives in <em>Neighborhood A</em> and visits <em>Neighborhood B</em>.<br>
-<em>Person 2</em> lives in <em>Neighborhood B</em>, but visits <em>Neighborhoods A</em> and <em>B</em>.<br>
-<em>Person 3</em> lives in <em>Neighborhood C</em> and visits <em>Neighborhood B</em>.<br>
-<em>Persons 5</em> and <em>6</em> live in <em>Neighborhood C</em> and do not visit any other neighborhoods. At the beginning of each week, before any public-health activities, each resident of Exampleville has the opportunity to change the neighborhoods they live in and visit.</p>
-<p>The city of Exampleville has a structured approach to vaccination campaigns.<br>
-At the beginning of each week, each neighborhood gets a risk rating based on the prevalence of vaccination among its residents and visitors. Based on that rating, each neighborhood decides whether to conduct a local vaccination drive.<br>
-Vaccination drives are conducted in the same way regardless of neighborhood — visitors and residents are offered immediate vaccination at a nearby mobile van through a pop-up message on the local dating app. Not everyone will receive the messages because some will not open the app during the campaign period. Those who do will have the choice of getting vaccinated or not. Each person can only get vaccinated once.</p>
-</section>
-<section id="toolkit-c-causal-reasoning-under-random-bipartite-network-interference" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="toolkit-c-causal-reasoning-under-random-bipartite-network-interference">Toolkit C: Causal reasoning under random bipartite network interference</h3>
-<p>In this section of the appendix, we extend the NFFRCISTG model described in <a href="#sec-network-causal-inference" class="quarto-xref"><span>Section C.2</span></a> by allowing for the inclusion of two classes of observational unit — people and places — and by allowing the relationships between people and places to be randomly generated by the <a href="#def-causal-model">causal model</a>. We name this the <a href="#def-brnffrcistg"><strong>Bipartite Random Network FFRCISTG model (BRNFFRCISTG)</strong></a>. It is a <a href="#def-causal-model">causal model</a> that includes one or more <a href="#def-graph-generator"><em>graph generators</em></a> — structural equations that model the network edges as random variables.</p>
-<p>Before outlining the <a href="#def-brnffrcistg">BRNFFRCISTG</a>, we introduce new tools to mirror the shift we advocate from conceiving of statistical inference as the task of inferring something about a probability distribution using a growing number of realizations, to thinking about it as the task of inferring something about the distribution using one growing realization of the model. We introduce the <strong>causal Directed Acyclic Network Graph (DANG)</strong> and the <strong>Single World Intervention Network Graph (SWING)</strong>.</p>
+<p>You are a public health officer at the department of health in Exampleville and are planning to conduct and assess a three-week flu vaccination campaign. None of the townspeople have been vaccinated against flu. There is a population of six residents in the city, and they each live in one of three neighborhoods. In addition, residents visit their friends’ homes in other neighborhoods.</p>
+<p>At time 0, <em>Person 1</em> lives in <em>Neighborhood A</em> and visits <em>Neighborhood B</em>. <em>Person 2</em> lives in <em>Neighborhood B</em>, but visits <em>Neighborhoods A</em> and <em>B</em>. <em>Person 3</em> lives in <em>Neighborhood C</em> and visits <em>Neighborhood B</em>. <em>Persons 5</em> and <em>6</em> live in <em>Neighborhood C</em> and do not visit any other neighborhoods. At the beginning of each week, before any public-health activities, each resident of Exampleville has the opportunity to change the neighborhoods they live in and visit.</p>
+<p>The city of Exampleville has a structured approach to vaccination campaigns. At the beginning of each week, each neighborhood gets a risk rating based on the prevalence of vaccination among its residents and visitors. Based on that rating, each neighborhood decides whether to conduct a local vaccination drive.</p>
+<p>Vaccination drives are conducted in the same way regardless of neighborhood — visitors and residents are offered immediate vaccination at a nearby mobile van through a pop-up message on the local dating app. Not everyone will receive the messages because some will not open the app during the campaign period. Those who do will have the choice of getting vaccinated or not. Each person can only get vaccinated once.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Toolkit C: Causal reasoning under random bipartite network interference
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>In this section of the appendix, we extend the NFFRCISTG model described in <a href="#sec-network-causal-inference" class="quarto-xref"><span>Section C.2</span></a> by allowing for the inclusion of two classes of observational unit — people and places — and by allowing the relationships between people and places to be randomly generated by the <a href="#def-causal-model">causal model</a>. We name this the <a href="#def-brnffrcistg">Bipartite Random Network FFRCISTG model (BRNFFRCISTG)</a>. It is a <a href="#def-causal-model">causal model</a> that includes one or more <a href="#def-graph-generator"><em>graph generators</em></a> — structural equations that model the network edges as random variables.</p>
+<p>Before outlining the <a href="#def-brnffrcistg">BRNFFRCISTG</a>, we introduce new tools to mirror the shift we advocate from conceiving of statistical inference as the task of inferring something about a probability distribution using a growing number of realizations, to thinking about it as the task of inferring something about the distribution using one growing realization of the model. We introduce the causal Directed Acyclic Network Graph (DANG) and the Single World Intervention Network Graph (SWING).</p>
 <section id="dangs" class="level5">
 <h5 class="anchored" data-anchor-id="dangs">DANGs</h5>
 <p>DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the <em>structural part</em> of the DANG and the latter the <em>relational part</em>. The relational part shows which pairs of observational units influence each other. For instance, in <a href="#fig-causal-dang-instructions" class="quarto-xref">Figure&nbsp;<span>C.9</span></a> we see that individuals 1 and 2 are related.</p>
-<p>The structural part is a DAG of vector-valued variables whose length equals the number of observational units in the sample. It has the standard interpretation under <a href="#sec-d-separation">d-separation rules</a>: it gives the conditional independencies across these vector-valued random variables. For instance, below is a DANG of the model we developed for <a href="#sec-example-2">Example 2</a>.<br>
-The structural part is a DAG of vector-valued variables (), (), and () of length equal to the number of people in the sample.<br>
-It shows the relationship between units 1 and 2 separately from the causal structure linking employment, dress, and job opportunities.</p>
+<p>The structural part is a DAG of vector-valued variables whose length equals the number of observational units in the sample. It has the standard interpretation under <a href="#sec-d-separation">d-separation rules</a>: it gives the conditional independencies across these vector-valued random variables. For instance, below is a DANG of the model we developed for <a href="#sec-example-2">Example 2</a>.</p>
+<p>The structural part is a DAG of vector-valued variables <span class="math inline">\(\mathbf{L}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{Y}\)</span> of length equal to the number of people in the sample. It shows the relationship between units 1 and 2 separately from the causal structure linking employment, dress, and job opportunities.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1403,6 +1473,9 @@ Figure&nbsp;C.12: Causal DANG for Week 1 in Example 3
 <h5 class="anchored" data-anchor-id="homogeneous-random-network-interference">Homogeneous random network interference</h5>
 <p>We assume that homogeneous interference holds, given a set of random draws from the random-graph models included. This mirrors the homogeneous-interference assumption from the fixed-network setting, but now exposures vary both with treatment assignments and with the random realization of the network.</p>
 </section>
+</div>
+</div>
+</div>
 </section>
 <section id="assumptions-2" class="level3" data-number="C.3.1">
 <h3 data-number="C.3.1" class="anchored" data-anchor-id="assumptions-2"><span class="header-section-number">C.3.1</span> Assumptions</h3>
