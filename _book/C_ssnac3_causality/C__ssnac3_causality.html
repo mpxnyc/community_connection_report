@@ -96,7 +96,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-16f0be44cf0b9c8dc4714857273be9e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-37ac604b8bdf05d5143cbcd3d504913b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-fc1c21a3cb1179a11d6653a314629e07.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -635,19 +635,16 @@ NPSEM
 </div>
 </div>
 <div class="callout callout-style-default callout-note no-icon callout-titled" data-appearence="minimal">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 Intervention regime
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We imagine that in certain types of studies, the investigator is able to “intervene” on an NPSEM by superseding one of the values set by a structural equation with another value. Most commonly, what are termed <em>static interventions</em> set the value to a constant. <em>Dynamic interventions</em> change the form of the structural equation itself. By “superseding,” we mean that the investigator forces structural equations whose parents include some variable of interest to take a value set by the investigator rather than the value that would have been produced by the model had the investigator not intervened. An intervention regime is an intervention where more than one value is intervened on by the investigator.</p>
-</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note no-icon callout-titled" data-appearence="minimal">
@@ -1044,47 +1041,87 @@ Learning goals
 </div>
 </div>
 <p>In this section, we provide an overview of an emerging approach to causal inference — <strong>causal social network analysis</strong>. Whereas in the standard approach, systems that exhibit causal interference are excluded from study, we extend those tools to situations where observational units influence each other in a pattern that can be encoded using a graph.</p>
-<section id="sec-example-2" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="sec-example-2">Example 2: Marriage and jobs</h4>
+<div class="callout callout-style-simple callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example 2: Marriage and jobs
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>We mentioned that in our study sample <em>Person 1</em> and <em>Person 2</em> are married to each other and <em>Person 1</em> and <em>Person 3</em> are acquaintances. In the causal system connecting their job status, dress, and job offers, an argument could be made that <em>Person 1</em>’s job status affects <em>Person 2</em>’s dress, since they pool their salaries as a married couple. It could also be argued that <em>Person 1</em>’s job status affects <em>Person 2</em>’s job opportunities if having a job brings the married couple into contact with other married couples who are connected to job markets.</p>
 <p>Finally, we could argue that <em>Person 1</em>’s dress affects <em>Person 2</em>’s job opportunities if some aspect of the reputation <em>Person 2</em> enjoys among potential colleagues derives from their spouse’s appearance. Symmetrically, <em>Person 2</em>’s measures could influence <em>Person 1</em>’s.</p>
 <p>But what about the relationship between <em>Person 1</em> and <em>Person 3</em>? We can imagine that the dress of a newly acquainted colleague would not affect the dress or job opportunities of her colleague. Whereas <em>Person 1</em> and <em>Person 2</em> are causally related, <em>Person 1</em> and <em>Person 3</em> are not; their relationship is irrelevant to the causal system under investigation. <em>Person 2</em> and <em>Person 3</em> do not affect each other since they have no relationship at all.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <i class="fa-solid fa-screwdriver-wrench" aria-label="screwdriver-wrench"></i> Toolkit B: Causal reasoning under network interference
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<section id="section-1" class="level5">
+<section id="section-1" class="level5 callout-body-container callout-body">
 <h5 class="anchored" data-anchor-id="section-1"></h5>
 <p>Before specifying a model that can accommodate the interdependence between <em>Persons 1</em> and <em>2</em> in <a href="#sec-example-2">Example 2</a>, we outline some useful definitions. We use these to extend the <a href="#def-ffrcistg">FFRCISTG</a> model described in <a href="#sec-classical-causal-inference" class="quarto-xref"><span>Section C.1</span></a> to accommodate settings characterized by causal interference.</p>
 <p>Because of the assumptions of <em>no interference</em> and <em>no spillover</em>, FFRCISTG models are unable to incorporate this additional information about the relationships between individuals in <a href="#sec-example-2">Example 2</a>. These relationships cause what is termed <em>causal interference</em> — the treatment level of one unit affects the outcome of another unit.</p>
 <p>We make progress by mapping out the structure of interference in order to incorporate it into the model. We introduce a statistical model called the <a href="#def-nffrcistg"><em>Network Finest Fully Randomized Causally Interpretable Structured Tree Graph (NFFRCISTG)</em></a> — an extension of the <a href="#def-ffrcistg">FFRCISTG</a> model that uses graphs to encode the pattern of causal interference among a set of observational units.</p>
 <p>Below we build an <a href="#def-nffrcistg">NFFRCISTG</a> model for <a href="#sec-example-2">Example 2</a>, illustrating the assumptions of the model. Before that, we outline some ideas and language we will need for the illustration.</p>
-</section>
-<section id="graphs" class="level5">
-<h5 class="anchored" data-anchor-id="graphs">Graphs</h5>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Graphs
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>A <a href="#def-graph"><em>graph</em></a> is a set of elements along with a rule describing whether they are connected or not. Whereas structural equations describe causal structure <em>within</em> observational units, graphs provide a language for describing causal structure <em>across</em> units. A graph represents units as *nodes** and possible pathways of influence between units as <em>edges</em>. They help us represent who is <em>eligible</em> to affect whom. Potential outcomes can then be thought of as depending both on a unit’s own treatment values and on those of the units it is directly connected to.</p>
-</section>
-<section id="network-exposure-mappings" class="level5">
-<h5 class="anchored" data-anchor-id="network-exposure-mappings">Network exposure mappings</h5>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Network exposure mappings
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>While <a href="#def-graph">graphs</a> tell us <em>who</em> is connected, we need a way to incorporate the information they contain into the structural equations that define the variables of the model. <a href="#def-network-exposure-mapping"><em>Network exposure mappings</em></a> do this by turning the vector of neighbors’ treatments into a scalar quantity — for example, the count or proportion of treated neighbors. Together with graphs, exposure mappings allow us to formalize how interference operates: graphs define the structure of possible influence across units, while network exposure mappings define how each unit incorporates that influence in its own measures.</p>
-</section>
-<section id="homogeneous-network-interference" class="level5">
-<h5 class="anchored" data-anchor-id="homogeneous-network-interference">Homogeneous network interference</h5>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Homogeneous network interference
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>We now introduce the <a href="#def-homogenous-network-interference"><em>assumption of homogeneous network interference</em></a>, which reduces the complexity of network exposure mappings. This assumption holds that for any node (i) in the network, the effect of a neighbor’s treatment is the same regardless of which neighbor it is, and regardless of the position of unit (i) in the network. Under this assumption, network exposure mappings are further restricted so that their values lie in a finite set.</p>
 <p>The result of these assumptions is a model we call the <a href="#def-nffrcistg"><em>Network Fully Randomized Causally Interpretable Structured Tree Graph (NFFRCISTG)</em></a> — a structured approach to reasoning about interventions in networks. In the section below, we derive an NFFRCISTG model for <a href="#sec-example-2">Example 2</a>, illustrating its central assumption using the corresponding structural equations.</p>
-</section>
 </div>
 </div>
 </div>
 </section>
+</div>
 <section id="assumptions-1" class="level3" data-number="C.2.1">
 <h3 data-number="C.2.1" class="anchored" data-anchor-id="assumptions-1"><span class="header-section-number">C.2.1</span> Assumptions</h3>
 <section id="independence-i-no-spillover-1" class="level5">
@@ -1333,7 +1370,7 @@ E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} ]
 <section id="social-spatial-networks" class="level2" data-number="C.3">
 <h2 data-number="C.3" class="anchored" data-anchor-id="social-spatial-networks"><span class="header-section-number">C.3</span> Social-spatial networks</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1342,7 +1379,7 @@ Learning goals
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>After this section, you will be equipped to:</p>
 <ul>
@@ -1356,28 +1393,46 @@ Learning goals
 </div>
 </div>
 <p>In this section, we provide an overview of a new approach to causal inference — <strong>causal social-spatial network analysis</strong>. Whereas in causal social network analysis it is complicated to imagine the relationships between the sample and the universe (since the sample units are interrelated), in this approach we keep the simplicity of random sampling while engaging the insights possible to gain from networked analysis.</p>
-<section id="sec-example-3" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="sec-example-3">Example 3: Vaccination</h4>
+<div class="callout callout-style-simple callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example 3: Vaccination
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>You are a public health officer at the department of health in Exampleville and are planning to conduct and assess a three-week flu vaccination campaign. None of the townspeople have been vaccinated against flu. There is a population of six residents in the city, and they each live in one of three neighborhoods. In addition, residents visit their friends’ homes in other neighborhoods.</p>
 <p>At time 0, <em>Person 1</em> lives in <em>Neighborhood A</em> and visits <em>Neighborhood B</em>. <em>Person 2</em> lives in <em>Neighborhood B</em>, but visits <em>Neighborhoods A</em> and <em>B</em>. <em>Person 3</em> lives in <em>Neighborhood C</em> and visits <em>Neighborhood B</em>. <em>Persons 5</em> and <em>6</em> live in <em>Neighborhood C</em> and do not visit any other neighborhoods. At the beginning of each week, before any public-health activities, each resident of Exampleville has the opportunity to change the neighborhoods they live in and visit.</p>
 <p>The city of Exampleville has a structured approach to vaccination campaigns. At the beginning of each week, each neighborhood gets a risk rating based on the prevalence of vaccination among its residents and visitors. Based on that rating, each neighborhood decides whether to conduct a local vaccination drive.</p>
 <p>Vaccination drives are conducted in the same way regardless of neighborhood — visitors and residents are offered immediate vaccination at a nearby mobile van through a pop-up message on the local dating app. Not everyone will receive the messages because some will not open the app during the campaign period. Those who do will have the choice of getting vaccinated or not. Each person can only get vaccinated once.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <i class="fa-solid fa-screwdriver-wrench" aria-label="screwdriver-wrench"></i> Toolkit C: Causal reasoning under random bipartite network interference
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>In this section of the appendix, we extend the NFFRCISTG model described in <a href="#sec-network-causal-inference" class="quarto-xref"><span>Section C.2</span></a> by allowing for the inclusion of two classes of observational unit — people and places — and by allowing the relationships between people and places to be randomly generated by the <a href="#def-causal-model">causal model</a>. We name this the <a href="#def-brnffrcistg">Bipartite Random Network FFRCISTG model (BRNFFRCISTG)</a>. It is a <a href="#def-causal-model">causal model</a> that includes one or more <a href="#def-graph-generator"><em>graph generators</em></a> — structural equations that model the network edges as random variables.</p>
 <p>Before outlining the <a href="#def-brnffrcistg">BRNFFRCISTG</a>, we introduce new tools to mirror the shift we advocate from conceiving of statistical inference as the task of inferring something about a probability distribution using a growing number of realizations, to thinking about it as the task of inferring something about the distribution using one growing realization of the model. We introduce the causal Directed Acyclic Network Graph (DANG) and the Single World Intervention Network Graph (SWING).</p>
-<section id="dangs" class="level5">
-<h5 class="anchored" data-anchor-id="dangs">DANGs</h5>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DANGs
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the <em>structural part</em> of the DANG and the latter the <em>relational part</em>. The relational part shows which pairs of observational units influence each other. For instance, in <a href="#fig-causal-dang-instructions" class="quarto-xref">Figure&nbsp;<span>C.9</span></a> we see that individuals 1 and 2 are related.</p>
 <p>The structural part is a DAG of vector-valued variables whose length equals the number of observational units in the sample. It has the standard interpretation under <a href="#sec-d-separation">d-separation rules</a>: it gives the conditional independencies across these vector-valued random variables. For instance, below is a DANG of the model we developed for <a href="#sec-example-2">Example 2</a>.</p>
 <p>The structural part is a DAG of vector-valued variables <span class="math inline">\(\mathbf{L}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{Y}\)</span> of length equal to the number of people in the sample. It shows the relationship between units 1 and 2 separately from the causal structure linking employment, dress, and job opportunities.</p>
@@ -1413,9 +1468,21 @@ Figure&nbsp;C.9: Causal DANG
 </div>
 </div>
 </div>
-</section>
-<section id="mixed-dangs" class="level5">
-<h5 class="anchored" data-anchor-id="mixed-dangs">Mixed DANGs</h5>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Mixed DANGs
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>DANGs not only allow for compact notation in causal systems characterized by interference; they can describe causal systems that involve more than one kind of observational unit. We focus on systems that involve persons as one unit type and places as the other. <a href="#fig-example-dang-structural" class="quarto-xref">Figure&nbsp;<span>C.10</span></a> shows a DANG for the first week of the campaign mentioned in <a href="#sec-example-2">Example 2</a>. Let () be the decision to conduct a vaccination campaign or not in each of the three places. () indicates whether each of the six people received a vaccination-campaign message. () indicates whether each of the people got vaccinated.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
@@ -1459,9 +1526,21 @@ Figure&nbsp;C.10: Causal DANG for Week 1 in Example 3
 </div>
 </div>
 </div>
-</section>
-<section id="swings" class="level5">
-<h5 class="anchored" data-anchor-id="swings">SWINGs</h5>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+SWINGs
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>We introduce the <strong>Single World Intervention Network Graph (SWING)</strong> — an extension of the SWIG that allows for the representation of the counterfactual outcomes of interventions in complex causal systems.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
@@ -1508,9 +1587,21 @@ Figure&nbsp;C.11: SWING for Week 1 in Example 3
 </div>
 <p>Like the DANG, the SWING has two parts: a structural part and a relational part.<br>
 The SWING also represents vector-valued random variables (rather than scalars) as nodes. Like the SWIG, the SWING splits the nodes that are to be intervened upon by the experimenter. <a href="#fig-example-swig-structural" class="quarto-xref">Figure&nbsp;<span>C.11</span></a> shows the counterfactual distribution of the variables in the model under an intervention setting () to the value ().</p>
-</section>
-<section id="random-graphs" class="level5">
-<h5 class="anchored" data-anchor-id="random-graphs">Random graphs</h5>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Random graphs
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>Random graphs bring probability into the network itself. Instead of assuming we know which edges exist, we treat them as random variables. In <a href="#sec-example-3">Example 3</a>, for instance, every week the townspeople possibly change their community of residence and/or the communities they visit. Random graphs allow us to model a time-varying pattern of interference, or even different patterns of interference for different variables.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
@@ -1554,19 +1645,43 @@ Figure&nbsp;C.12: Causal DANG for Week 1 in Example 3
 </div>
 </div>
 </div>
-</section>
-<section id="bipartite-graphs" class="level5">
-<h5 class="anchored" data-anchor-id="bipartite-graphs">Bipartite graphs</h5>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Bipartite graphs
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>A <strong>bipartite graph</strong> is one where nodes are divided into two disjoint sets and edges connect only across sets. In random-interference problems, it is often useful to model people on one side and places or events on the other. An edge then represents a person’s affiliation with a place, and interference arises because multiple people may be connected through the same location. This structure allows us to represent exposures that are not purely person-to-person, but mediated by shared environments.</p>
-</section>
-<section id="homogeneous-random-network-interference" class="level5">
-<h5 class="anchored" data-anchor-id="homogeneous-random-network-interference">Homogeneous random network interference</h5>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Homogeneous random network interference
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>We assume that homogeneous interference holds, given a set of random draws from the random-graph models included. This mirrors the homogeneous-interference assumption from the fixed-network setting, but now exposures vary both with treatment assignments and with the random realization of the network.</p>
-</section>
 </div>
 </div>
 </div>
-</section>
+</div>
+</div>
 <section id="assumptions-2" class="level3" data-number="C.3.1">
 <h3 data-number="C.3.1" class="anchored" data-anchor-id="assumptions-2"><span class="header-section-number">C.3.1</span> Assumptions</h3>
 <section id="independence-assumptions" class="level4">
