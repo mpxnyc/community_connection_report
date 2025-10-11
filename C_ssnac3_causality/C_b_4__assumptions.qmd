@@ -12,13 +12,21 @@ This is shown in @fig-interference-dag, as the removal of arrows that connected 
 
 {{< include eq-interference-dag.qmd >}} 
 
-We make the assumption that interference respects some mapping between individuals - a mapping given by a [graph](#def-graph). In @fig-interference-dag, based on their relationships with one another, *Person 1*'s measures are connected with *Person 2*'s, and neither are connected with *Person 3*'s.  
+We make the assumption that interference respects some mapping between individuals - a mapping given by a [graph](#def-graph) adjacency matrix $\Psi$. In @fig-interference-dag, based on their relationships with one another, *Person 1*'s measures are connected with *Person 2*'s, and neither are connected with *Person 3*'s.  
+
+$$
+\Psi = \begin{bmatrix}
+0,& 1,& 0 \\
+1,& 0,& 0 \\
+0,& 0,& 0 \\
+\end{bmatrix}
+$$
 
 
-##### Homogeneity I: Relational homogeneity
+##### Homogeneity I: Homogenous network interference
 
 
-We assume that the [exposure mapping](#def-exposure-mapping) for each variable in the structural model is [separable](#def-separability). i.e. We define $g_{A_i}$, $h_{Y_i}$, and $g_{Y_i}$ as [network exposure mappings](#def-network-exposure-mapping) for $A_i$ with respect to $\mathbf{L}$, for $Y_i$ with respect to $\mathbf{A}$, and for $Y_i$ with respect to $\mathbf{L}$. [Separability](#def-separability) allows us to write the model as follows:
+We assume that the [exposure mapping](#def-exposure-mapping) for each variable in the structural model is [separable](#def-separability). i.e. We define $g_{A_i}$, $h_{Y_i}$, and $g_{Y_i}$ as [component functions](#def-separability) for $A_i$ with respect to $\mathbf{L}$, for $Y_i$ with respect to $\mathbf{A}$, and for $Y_i$ with respect to $\mathbf{L}$. The assumption of [separability](#def-separability) allows us to write the model as follows:
 
 $$
 \begin{aligned}
@@ -35,17 +43,11 @@ Y_3 &= f_{Y_3}(U_{Y_3}, L_3,A_3,  g_{Y_2}(\mathbf{L}, \Psi_3), h_{Y_2}(\mathbf{A
 $$
 
 
-Where 
+where $\Psi_i$ is the $i^{th}$ row of matrix $\Psi$.
 
-$$
-\begin{aligned}
-\Psi_1 &= [0,1,0] \\
-\Psi_2 &= [1,0,0] \\
-\Psi_3 &= [0,0,0] \\
-\end{aligned}
-$$
 
-We assume that the value of a network exposure mapping is [invariant to its position](#def-positional-invariance) in the network. This allows us to drop the person subscript on the network exposure mappings. 
+
+We assume that the value of a component function is [invariant to its position](#def-positional-invariance) in the network. This allows us to drop the person subscript on the network exposure mappings. 
 
 $$
 \begin{aligned}
@@ -61,8 +63,20 @@ Y_3 &= f_{Y_3}(U_{Y_3}, L_3,A_3,  g_{Y}(\mathbf{L}, \Psi_3), h_{Y}(\mathbf{A}, \
 \end{aligned}
 $$
 
+We also assume its [bounded](#def-boundedness), meaning
 
-##### Homogeneity III: Identical distributions
+$$
+\begin{aligned}
+g_{A}(\mathbf{L}, \Psi_i) &\in \{0, 1\} \\
+g_{Y}(\mathbf{L}, \Psi_i) &\in \{0, 1\} \\
+h_{Y}(\mathbf{A}, \Psi_i) &\in \{0, 1\} \\
+\end{aligned}
+$$
+
+
+
+
+##### Homogeneity II: Identical distributions
 
 We assume that the structural equations that produce individual measures are [identical](#def-identical-distributions) across individuals. Hence, we can drop the person subscript from the structural equations. 
 
@@ -80,16 +94,3 @@ Y_3 &= f_{Y}(U_{Y_3}, L_3,A_3,  g_{Y}(\mathbf{L}, \Psi_3), h_{Y}(\mathbf{A}, \Ps
 \end{aligned}
 $$
 
-
-##### Homogeneity IV: Boundedness
-
-If we assume that the only relevant relationships for the causal structure related to employment, formal dress, and job offers are marriages, the assumption of [boundedness](#def-boundedness) holds. Each node in this graph will have either a single network exposure unit, or none at all, even if the graph grows arbitrarily large. 
-
-
-$$
-\begin{aligned}
-g_{A}(\mathbf{L}, \Psi_i) &\in \{0, 1\} \\
-g_{Y}(\mathbf{L}, \Psi_i) &\in \{0, 1\} \\
-h_{Y}(\mathbf{A}, \Psi_i) &\in \{0, 1\} \\
-\end{aligned}
-$$
