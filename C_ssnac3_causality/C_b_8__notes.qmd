@@ -1,0 +1,10 @@
+### Notes
+
+- We have turned a non-iid situation into a form that is tractible using approaches that usually require IID.
+- The reason this works is that the assumption of IID is stronger than necessary in most applications. For regression modesl, we require conditional independence between observation, not independence. We simply take up the room between the independence and conditional independence assumptions and tame it using graphs. 
+- This is great if we know the entire graph - we can accurately calculate network exposure values for each observation in order to estimate functionals of the structural equations. 
+- But if we only have a random sample of the nodes in a network, which would be the most optimistic scenario in most applications, the average degree will be lower in the sampled network than in the entire network. To the extent network exposure values are correlated, they will be biased, leading to biased estimates of the structural equations.
+- One approach to bridge this situation would be to build into models, both the mechanism generating the network (the graph generators), and the mechanism for censoring the nodes, to generate estimates that account for those.
+- Another approach might be to solicit informatio about the network from the nodes themselves, and calculate network exposure values using measures taken exclusively on each given observation. The measurement error would be significant, and would likely need to be incorporated into the model as well.
+- For linear regression models, for instance, we need only know the mean degree of the graph and each observation's network exposure values to identify the coefficients of a model which exhibits homogenous network interference.
+- In the next section we side-step these issues by focusing on bipartite networks of people and places where we have a full listing of places and a possibly censored listing of people. In this setting, it is possible to accurately observe the network exposure values of the person nodes included in the sample since these values are a function of values taken on place nodes, which are fully observed. 

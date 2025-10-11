@@ -1048,11 +1048,15 @@ $theme-name: null !default;
 // quarto-scss-analysis-annotation { "origin": "Defaults from user-defined SCSS" }
 
 // Colors
- $leading-grey: ;
+ $leading-grey: #bdbdbd;
  $primary: #009BE8;  
  $secondary: #e83e8c;
  //$body-bg: #c71c22;
- $link-color: $primary;
+ $link-color: $secondary;
+ $callout-color-tip: #e83e8c;
+ #$callout-color-note: #bdbdbd;
+ $callout-color-important: #009BE8;
+ 
 // Fonts
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -12569,6 +12573,22 @@ a.external:after:hover {
 // quarto-scss-analysis-annotation { "origin": "'rules' section from user-defined SCSS" }
 
 
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+
 p {
   font-size: 16px;
   line-height: 1.5; // Unitless value, relative to font-size
@@ -12602,6 +12622,7 @@ h2, .h2 {
   text-align: left;
   & .header-section-number {color: $secondary;}
   padding-bottom: 30px;
+  border-bottom: none;
 }
 
 h3, .h3 {
@@ -12613,17 +12634,11 @@ h3, .h3 {
 }
 
 
-section.level2  {
-  margin-bottom: 300px;
-}
-
-section.level3  {
-  margin-bottom: 200px;
-}
-
-section.level4  {
+section  {
   margin-bottom: 100px;
 }
+
+
 
 .definition {
     margin-bottom: 50px;
@@ -12633,13 +12648,15 @@ section.level4  {
 #acknowledgements {
   text-align: justify;
   margin-top: 20px;
-  & p {font-size: 10px;}
+  & p {font-size: 11px;}
 }
 
 #leading {
   margin-top: 25px;
-  font-weight: 600;
-  & p {font-size: 20px;}
+  font-weight: 500;
+  color: $leading-grey;
+  & p {font-size: 20px;};
+  text-align: justify;
 }
 
 #quarto-code-tools-menu {
@@ -12648,5 +12665,14 @@ section.level4  {
   right: 0;
   bottom: 0;
 }
+
+ .after-heading-line {
+    border-bottom: none;
+  }
+  
+  .callout-note {
+    margin-left: 0.5rem;
+  }
+  
 
 // quarto-scss-analysis-annotation { "origin": null }
