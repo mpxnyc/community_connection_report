@@ -96,7 +96,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-16f0be44cf0b9c8dc4714857273be9e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5205d309e5467129dee9d98ceb7431c8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-6ad375d0de9e27e71c56e92b93b844b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -469,7 +469,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-control-intervention" id="toc-sec-control-intervention" class="nav-link" data-scroll-target="#sec-control-intervention"><span class="header-section-number">C.4</span> Vaccine strategy model</a>
   <ul class="collapse">
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
   <li><a href="#assumptions-3" id="toc-assumptions-3" class="nav-link" data-scroll-target="#assumptions-3"><span class="header-section-number">C.4.1</span> Assumptions</a></li>
   <li><a href="#structural-equations-3" id="toc-structural-equations-3" class="nav-link" data-scroll-target="#structural-equations-3"><span class="header-section-number">C.4.2</span> Structural equations</a></li>
   <li><a href="#estimands-3" id="toc-estimands-3" class="nav-link" data-scroll-target="#estimands-3"><span class="header-section-number">C.4.3</span> Estimands</a></li>
@@ -566,7 +566,6 @@ Hernán, Miguel, and James M. Robins. 2021. <em>Causal inference</em>. Chapman &
 </section>
 <section id="sec-classical-causal-inference" class="level2" data-number="C.1">
 <h2 data-number="C.1" class="anchored" data-anchor-id="sec-classical-causal-inference"><span class="header-section-number">C.1</span> Classical causal inference</h2>
-<p>In this first section, we provide an overview of the dominant approach to causal inference in epidemiology, while preparing for the shift in perspective required in the next section on social networks.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -591,6 +590,7 @@ Learning goals
 </div>
 </div>
 </div>
+<p>In the next few sections, we will use <a href="#sec-example-1">Example 1</a> to describe the assumptions made under classical causal inference. First we give an overview of the ideas and tools we need to make that description: structural equation models and the directed acyclic graph (DAGs) that describe them. We use these to state the basic assumptions of the model currently used to reason about causality in epidemiology - the <a href="#def-ffrcistg">finest fully randomized causally interpretable structured tree graph (FFRCISTG)</a>. Finally, we derive an <a href="#def-ffrcistg">FFRCISTG</a> model for this example, showing concrete illustrations for each assumption of the FFRCISTG model.</p>
 <div class="callout callout-style-simple callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -616,7 +616,6 @@ Example 1: Dress and jobs
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In the next few sections, we will use <a href="#sec-example-1">Example 1</a> to describe the assumptions made under classical causal inference. First we give an overview of the ideas and tools we need to make that description: structural equation models and the directed acyclic graph (DAGs) that describe them. We use these to state the basic assumptions of the model currently used to reason about causality in epidemiology - the <a href="#def-ffrcistg">finest fully randomized causally interpretable structured tree graph (FFRCISTG)</a>. Finally, we derive an <a href="#def-ffrcistg">FFRCISTG</a> model for this example, showing concrete illustrations for each assumption of the FFRCISTG model.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled" data-appearence="simple">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -777,7 +776,7 @@ Model restrictions
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -1128,7 +1127,10 @@ E[Y_i^{(a)}]                    &amp;= E \left[ E[Y_i^{(a)} | L_i] \right] \\
 </section>
 <section id="sec-network-causal-inference" class="level2" data-number="C.2">
 <h2 data-number="C.2" class="anchored" data-anchor-id="sec-network-causal-inference"><span class="header-section-number">C.2</span> Social networks</h2>
-<p>In this section, we provide an overview of an emerging approach to causal inference — <em>causal social network analysis</em>. Whereas in the standard approach, systems that exhibit causal interference are excluded from study, we extend those tools to situations where observational units influence each other in a pattern that can be encoded using a graph.</p>
+<p>Before specifying a model that can accommodate the interdependence between <em>Persons 1</em> and <em>2</em> in <a href="#sec-example-2">Example 2</a>, we outline some useful definitions. We use these to extend the <a href="#def-ffrcistg">FFRCISTG</a> model described in <a href="#sec-classical-causal-inference" class="quarto-xref"><span>Section C.1</span></a> to accommodate settings characterized by causal interference.</p>
+<p>Because of the assumptions of <em>no interference</em> and <em>no spillover</em>, FFRCISTG models are unable to incorporate this additional information about the relationships between individuals in <a href="#sec-example-2">Example 2</a>. These relationships cause what is termed <em>causal interference</em> — the treatment level of one unit affects the outcome of another unit.</p>
+<p>We make progress by mapping out the structure of interference in order to incorporate it into the model. We introduce a statistical model called the <a href="#def-nffrcistg"><em>Network Finest Fully Randomized Causally Interpretable Structured Tree Graph (NFFRCISTG)</em></a> — an extension of the <a href="#def-ffrcistg">FFRCISTG</a> model that uses graphs to encode the pattern of causal interference among a set of observational units.</p>
+<p>Below we build an <a href="#def-nffrcistg">NFFRCISTG</a> model for <a href="#sec-example-2">Example 2</a>, illustrating the assumptions of the model. Before that, we outline some ideas and language we will need for the illustration.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1167,7 +1169,7 @@ Example 2: Marriage and jobs
 <p>But what about the relationship between <em>Person 1</em> and <em>Person 3</em>? We can imagine that the dress of a newly acquainted colleague would not affect the dress or job opportunities of her colleague. Whereas <em>Person 1</em> and <em>Person 2</em> are causally related, <em>Person 1</em> and <em>Person 3</em> are not; their relationship is irrelevant to the causal system under investigation. <em>Person 2</em> and <em>Person 3</em> do not affect each other since they have no relationship at all.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -1176,12 +1178,7 @@ Example 2: Marriage and jobs
 <i class="fa-solid fa-screwdriver-wrench" aria-label="screwdriver-wrench"></i> Toolkit B: Causal reasoning under network interference
 </div>
 </div>
-<section id="section-1" class="level5 callout-body-container callout-body">
-<h5 class="anchored" data-anchor-id="section-1"></h5>
-<p>Before specifying a model that can accommodate the interdependence between <em>Persons 1</em> and <em>2</em> in <a href="#sec-example-2">Example 2</a>, we outline some useful definitions. We use these to extend the <a href="#def-ffrcistg">FFRCISTG</a> model described in <a href="#sec-classical-causal-inference" class="quarto-xref"><span>Section C.1</span></a> to accommodate settings characterized by causal interference.</p>
-<p>Because of the assumptions of <em>no interference</em> and <em>no spillover</em>, FFRCISTG models are unable to incorporate this additional information about the relationships between individuals in <a href="#sec-example-2">Example 2</a>. These relationships cause what is termed <em>causal interference</em> — the treatment level of one unit affects the outcome of another unit.</p>
-<p>We make progress by mapping out the structure of interference in order to incorporate it into the model. We introduce a statistical model called the <a href="#def-nffrcistg"><em>Network Finest Fully Randomized Causally Interpretable Structured Tree Graph (NFFRCISTG)</em></a> — an extension of the <a href="#def-ffrcistg">FFRCISTG</a> model that uses graphs to encode the pattern of causal interference among a set of observational units.</p>
-<p>Below we build an <a href="#def-nffrcistg">NFFRCISTG</a> model for <a href="#sec-example-2">Example 2</a>, illustrating the assumptions of the model. Before that, we outline some ideas and language we will need for the illustration.</p>
+<div class="callout-body-container callout-body">
 <div class="callout callout-style-default callout-note no-icon callout-titled" data-appearence="simple">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1231,7 +1228,7 @@ Homogeneous network interference
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -1317,7 +1314,7 @@ g_{ti}(\mathbf{X}) \in \mathcal{D} \quad \text{ for }|\mathcal{D}|&lt; c \in \ma
 </div>
 </div>
 </div>
-</section>
+</div>
 </div>
 <section id="assumptions-1" class="level3" data-number="C.2.1">
 <h3 data-number="C.2.1" class="anchored" data-anchor-id="assumptions-1"><span class="header-section-number">C.2.1</span> Assumptions</h3>
@@ -1563,7 +1560,8 @@ E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} ]
 </section>
 <section id="social-spatial-networks" class="level2" data-number="C.3">
 <h2 data-number="C.3" class="anchored" data-anchor-id="social-spatial-networks"><span class="header-section-number">C.3</span> Social-spatial networks</h2>
-<p>In this section, we provide an overview of a new approach to causal inference — <em>causal social-spatial network analysis</em>. Whereas in causal social network analysis it is complicated to imagine the relationships between the sample and the universe (since the sample units are interrelated), in this approach we keep the simplicity of random sampling while engaging the insights possible to gain from networked analysis.</p>
+<p>In this section of the appendix, we extend the NFFRCISTG model described in <a href="#sec-network-causal-inference" class="quarto-xref"><span>Section C.2</span></a> by allowing for the inclusion of two classes of observational unit — people and places — and by allowing the relationships between people and places to be randomly generated by the <a href="#def-causal-model">causal model</a>. We name this the <a href="#def-brnffrcistg">Bipartite Random Network FFRCISTG model (BRNFFRCISTG)</a>. It is a <a href="#def-causal-model">causal model</a> that includes one or more <a href="#def-graph-generator"><em>graph generators</em></a> — structural equations that model the network edges as random variables.</p>
+<p>Before outlining the <a href="#def-brnffrcistg">BRNFFRCISTG</a>, we introduce new tools to mirror the shift we advocate from conceiving of statistical inference as the task of inferring something about a probability distribution using a growing number of realizations, to thinking about it as the task of inferring something about the distribution using one growing realization of the model. We introduce the causal Directed Acyclic Network Graph (DANG) and the Single World Intervention Network Graph (SWING).</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1603,7 +1601,7 @@ Example 3: Vaccination
 <p>Vaccination drives are conducted in the same way regardless of neighborhood — visitors and residents are offered immediate vaccination at a nearby mobile van through a pop-up message on the local dating app. Not everyone will receive the messages because some will not open the app during the campaign period. Those who do will have the choice of getting vaccinated or not. Each person can only get vaccinated once.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -1613,8 +1611,6 @@ Example 3: Vaccination
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In this section of the appendix, we extend the NFFRCISTG model described in <a href="#sec-network-causal-inference" class="quarto-xref"><span>Section C.2</span></a> by allowing for the inclusion of two classes of observational unit — people and places — and by allowing the relationships between people and places to be randomly generated by the <a href="#def-causal-model">causal model</a>. We name this the <a href="#def-brnffrcistg">Bipartite Random Network FFRCISTG model (BRNFFRCISTG)</a>. It is a <a href="#def-causal-model">causal model</a> that includes one or more <a href="#def-graph-generator"><em>graph generators</em></a> — structural equations that model the network edges as random variables.</p>
-<p>Before outlining the <a href="#def-brnffrcistg">BRNFFRCISTG</a>, we introduce new tools to mirror the shift we advocate from conceiving of statistical inference as the task of inferring something about a probability distribution using a growing number of realizations, to thinking about it as the task of inferring something about the distribution using one growing realization of the model. We introduce the causal Directed Acyclic Network Graph (DANG) and the Single World Intervention Network Graph (SWING).</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled" data-appearence="simple">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1855,7 +1851,7 @@ Homogeneous random network interference
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -1902,75 +1898,119 @@ U_{\psi_{ij}} = U_{\psi_{ji}} \text{ and } f_{\psi_{ij}} = f_{\psi_{ji}}
 <h3 data-number="C.3.1" class="anchored" data-anchor-id="assumptions-2"><span class="header-section-number">C.3.1</span> Assumptions</h3>
 <section id="independence-assumptions" class="level4">
 <h4 class="anchored" data-anchor-id="independence-assumptions">Independence assumptions</h4>
+<section id="networked-errors" class="level5">
+<h5 class="anchored" data-anchor-id="networked-errors">Networked errors</h5>
+<p>We start with an non-parametric structural equation model with networked errors. In this model, each pair of entries in the error terms of structural part of the model is mutually independent. While the entries of <span class="math inline">\(\mathbf U_{\Psi_0}\)</span> and <span class="math inline">\(\mathbf U_{\Psi_s}\)</span> are not independent, <span class="math inline">\(\mathbf U_{\Psi_s} \perp \mathbf U_{\Psi_0}\)</span>, and each are independent of each entry in the error terms of the structural part.</p>
+</section>
+<section id="no-spillover" class="level5">
+<h5 class="anchored" data-anchor-id="no-spillover">No spillover</h5>
+<p>This notation implies no spillover - no arrows among the entries of any vector random variable in the structural part.</p>
 <p><span id="eq-no-spillover-dang"><span class="math display">\[
 \begin{aligned}
-\text{Structural} \\
+\text{Structural }(n \times 1) \\
 &amp;  \mathbf M_{0}                  &amp; &amp;= f_{\mathbf M_0}(\mathbf U_{\mathbf M_{0}})              \\
 &amp;  \mathbf V_{0}                  &amp; &amp;= f_{\mathbf V_0}(\mathbf U_{\mathbf V_{0}})               \\
 &amp;  \mathbf R_{s}                   &amp; &amp;= f_{\mathbf R}(\mathbf U_{\mathbf R_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1}) \\
 &amp;  \mathbf T_{s}                   &amp; &amp;= f_{\mathbf T}(\mathbf U_{\mathbf T_{s}}, \mathbf R_{s})                                 \\
 &amp;  \mathbf M_{s}                  &amp; &amp;=     f_{\mathbf M} (\mathbf U_{\mathbf M_{s}} , \mathbf V_{s-1,i},   \mathbf M_{s-1}, \mathbf{T}_{s}, \mathbf{\Psi}_{s})       \\
 &amp;  \mathbf V_{s}                  &amp; &amp;=     f_{\mathbf V}(\mathbf U_{\mathbf V_{s}}, \mathbf M_{s}, \mathbf V_{s-1})                                                \\
-\text{Relational} \\
+\text{Relational } (n \times n) \\
 &amp;  \mathbf{\Psi}_{0}   &amp; &amp;= f_{\mathbf{\Psi}_{0}}(\mathbf U_{\mathbf{\Psi}_{0}}) \\
 &amp;  \mathbf{\Psi}_{s}   &amp; &amp;= f_{\mathbf{\Psi}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
 \end{aligned}
 \tag{C.10}\]</span></span></p>
 </section>
+</section>
 <section id="homogeneity-assumptions" class="level4">
 <h4 class="anchored" data-anchor-id="homogeneity-assumptions">Homogeneity assumptions</h4>
-<section id="separability-1" class="level5">
-<h5 class="anchored" data-anchor-id="separability-1">Separability</h5>
+<section id="time-homogeneity" class="level5">
+<h5 class="anchored" data-anchor-id="time-homogeneity">Time homogeneity</h5>
 <p><span id="eq-bipartite-dang"><span class="math display">\[
 \begin{aligned}
-\text{Structural} \\
+\text{Structural }(n \times 1) \\
 &amp;  \mathbf M_{0}      &amp; &amp;= f_{\mathbf M_0}(\mathbf U_{\mathbf M_{0}})              \\
 &amp;  \mathbf V_{0}      &amp; &amp;= f_{\mathbf V_0}(\mathbf U_{\mathbf V_{0}})               \\
 &amp;  \mathbf R_{s}      &amp; &amp;= f_{\mathbf R}  (\mathbf U_{\mathbf R_{s}}, \mathbf g_{\mathbf R} (\mathbf V_{s-1},    \mathbf{\Psi}_{s-1})) \\
 &amp;  \mathbf T_{s}      &amp; &amp;= f_{\mathbf T}  (\mathbf U_{\mathbf T_{s}}, \mathbf R_{s})                                 \\
 &amp;  \mathbf M_{s}      &amp; &amp;= f_{\mathbf M}  (\mathbf U_{\mathbf M_{s}}, \mathbf V_{s-1,i},   \mathbf M_{s-1}, g_{\mathbf M} (\mathbf{T}_{s}, \mathbf{\Psi}_{s})  )     \\
 &amp;  \mathbf V_{s}      &amp; &amp;= f_{\mathbf V}  (\mathbf U_{\mathbf V_{s}}, \mathbf M_{s},       \mathbf V_{s-1})                                                \\
-\text{Relational} \\
+\text{Relational } (n \times n) \\
 &amp;  \mathbf{\Psi}_{0}  &amp; &amp;= f_{\mathbf{\Psi}_{0}}(\mathbf U_{\mathbf{\Psi}_{0}}) \\
 &amp;  \mathbf{\Psi}_{s}  &amp; &amp;= f_{\mathbf{\Psi}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
 \end{aligned}
 \tag{C.11}\]</span></span></p>
 </section>
-<section id="bipartite" class="level5">
-<h5 class="anchored" data-anchor-id="bipartite">Bipartite</h5>
-<p><span id="eq-identical-distribution-dang"><span class="math display">\[
+<section id="separability-1" class="level5">
+<h5 class="anchored" data-anchor-id="separability-1">Separability</h5>
+<p>Structural equations in the structural part are separable, but not necessarily graph generators in the relational part.</p>
+<p><span id="eq-bipartite-dang"><span class="math display">\[
 \begin{aligned}
-\text{Structural: People} \\
+\text{Structural }(n \times 1) \\
 &amp;  \mathbf M_{0}      &amp; &amp;= f_{\mathbf M_0}(\mathbf U_{\mathbf M_{0}})              \\
 &amp;  \mathbf V_{0}      &amp; &amp;= f_{\mathbf V_0}(\mathbf U_{\mathbf V_{0}})               \\
-&amp;  \mathbf M_{s}      &amp; &amp;= f_{\mathbf M}  (\mathbf U_{\mathbf M_{s}}, \mathbf V_{s-1,i},   \mathbf M_{s-1}, g_{\mathbf M} (\mathbf{T}_{s}, \mathbf{\Psi}_{s})  )     \\
-&amp;  \mathbf V_{s}      &amp; &amp;= f_{\mathbf V}  (\mathbf U_{\mathbf V_{s}}, \mathbf M_{s},       \mathbf V_{s-1})  \\
-\text{Structural: Places} \\
 &amp;  \mathbf R_{s}      &amp; &amp;= f_{\mathbf R}  (\mathbf U_{\mathbf R_{s}}, \mathbf g_{\mathbf R} (\mathbf V_{s-1},    \mathbf{\Psi}_{s-1})) \\
-&amp;  \mathbf T_{s}      &amp; &amp;= f_{\mathbf T}  (\mathbf U_{\mathbf T_{s}}, \mathbf R_{s})  \\                                              \\
-\text{Relational} \\
+&amp;  \mathbf T_{s}      &amp; &amp;= f_{\mathbf T}  (\mathbf U_{\mathbf T_{s}}, \mathbf R_{s})                                 \\
+&amp;  \mathbf M_{s}      &amp; &amp;= f_{\mathbf M}  (\mathbf U_{\mathbf M_{s}}, \mathbf V_{s-1,i},   \mathbf M_{s-1}, g_{\mathbf M} (\mathbf{T}_{s}, \mathbf{\Psi}_{s})  )     \\
+&amp;  \mathbf V_{s}      &amp; &amp;= f_{\mathbf V}  (\mathbf U_{\mathbf V_{s}}, \mathbf M_{s},       \mathbf V_{s-1})                                                \\
+\text{Relational } (n \times n) \\
 &amp;  \mathbf{\Psi}_{0}  &amp; &amp;= f_{\mathbf{\Psi}_{0}}(\mathbf U_{\mathbf{\Psi}_{0}}) \\
 &amp;  \mathbf{\Psi}_{s}  &amp; &amp;= f_{\mathbf{\Psi}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
 \end{aligned}
 \tag{C.12}\]</span></span></p>
 </section>
-<section id="identical-distributions" class="level5">
-<h5 class="anchored" data-anchor-id="identical-distributions">Identical distributions</h5>
-<p><span id="eq-homogenous-random-interference-dang"><span class="math display">\[
+<section id="bipartite" class="level5">
+<h5 class="anchored" data-anchor-id="bipartite">Bipartite</h5>
+<p><span id="eq-identical-distribution-dang"><span class="math display">\[
 \begin{aligned}
-\text{Structural: People} \\
-&amp;   M_{0i}      &amp; &amp;= f_{ M_0}( U_{ M_{0}})              \\
-&amp;   V_{0i}      &amp; &amp;= f_{ V_0}( U_{ V_{0}})               \\
-&amp;   M_{si}      &amp; &amp;= f_{ M}  ( U_{ M_{s}},  V_{s-1,i},    M_{s-1, i}, g_{\mathbf M} (\mathbf{T}_{s}, \mathbf{\Psi}_{si})  )     \\
-&amp;   V_{si}      &amp; &amp;= f_{ V}  ( U_{ V_{s}},  M_{s},        V_{s-1})  \\
-\text{Structural: Places} \\
-&amp;   R_{sj}      &amp; &amp;= f_{ R}  ( U_{ R_{s}},  g_{ R} (\mathbf V_{s-1},    \mathbf{\Psi}_{s-1, j})) \\
-&amp;   T_{sj}      &amp; &amp;= f_{ T}  ( U_{ T_{s}},  R_{s})  \\                                              \\
-\text{Relational} \\
+\text{Structural: People }(n_p \times 1) \\
+&amp;  \mathbf M_{0}      &amp; &amp;= f_{\mathbf M_0}(\mathbf U_{\mathbf M_{0}})              \\
+&amp;  \mathbf V_{0}      &amp; &amp;= f_{\mathbf V_0}(\mathbf U_{\mathbf V_{0}})               \\
+&amp;  \mathbf M_{s}      &amp; &amp;= f_{\mathbf M}  (\mathbf U_{\mathbf M_{s}}, \mathbf V_{s-1,i},   \mathbf M_{s-1}, g_{\mathbf M} (\mathbf{T}_{s}, \mathbf{\Psi}_{s})  )     \\
+&amp;  \mathbf V_{s}      &amp; &amp;= f_{\mathbf V}  (\mathbf U_{\mathbf V_{s}}, \mathbf M_{s},       \mathbf V_{s-1})  \\
+\text{Structural: Places }(n_q \times 1) \\
+&amp;  \mathbf R_{s}      &amp; &amp;= f_{\mathbf R}  (\mathbf U_{\mathbf R_{s}}, \mathbf g_{\mathbf R} (\mathbf V_{s-1},    \mathbf{\Psi}_{s-1})) \\
+&amp;  \mathbf T_{s}      &amp; &amp;= f_{\mathbf T}  (\mathbf U_{\mathbf T_{s}}, \mathbf R_{s})  \\                                              \\
+\text{Relational }(n_p \times n_q) \\
 &amp;  \mathbf{\Psi}_{0}  &amp; &amp;= f_{\mathbf{\Psi}_{0}}(\mathbf U_{\mathbf{\Psi}_{0}}) \\
 &amp;  \mathbf{\Psi}_{s}  &amp; &amp;= f_{\mathbf{\Psi}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
 \end{aligned}
 \tag{C.13}\]</span></span></p>
+</section>
+<section id="identical-distributions" class="level5">
+<h5 class="anchored" data-anchor-id="identical-distributions">Identical distributions</h5>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Structural: People }(1 \times 1) \\
+&amp;   M_{0i}      &amp; &amp;= f_{ M_0}( U_{ M_{0}})              \\
+&amp;   V_{0i}      &amp; &amp;= f_{ V_0}( U_{ V_{0}})               \\
+&amp;   M_{si}      &amp; &amp;= f_{ M}  ( U_{ M_{s}},  V_{s-1,i},    M_{s-1, i}, g_{\mathbf M_i} (\mathbf{T}_{s}, \mathbf{\Psi}_{si})  )     \\
+&amp;   V_{si}      &amp; &amp;= f_{ V}  ( U_{ V_{s}},  M_{s},        V_{s-1})  \\
+\text{Structural: Places }(1 \times 1) \\
+&amp;   R_{sj}      &amp; &amp;= f_{ R}  ( U_{ R_{s}},  g_{ R_j} (\mathbf V_{s-1},    \mathbf{\Psi}_{s-1, j})) \\
+&amp;   T_{sj}      &amp; &amp;= f_{ T}  ( U_{ T_{s}},  R_{s})  \\                                              \\
+\text{Relational }(n_p \times n_q) \\
+&amp;  \mathbf{\Psi}_{0}  &amp; &amp;= f_{\mathbf{\Psi}_{0}}(\mathbf U_{\mathbf{\Psi}_{0}}) \\
+&amp;  \mathbf{\Psi}_{s}  &amp; &amp;= f_{\mathbf{\Psi}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
+\end{aligned}
+\]</span></p>
+</section>
+<section id="homogenous-random-network-interference-1" class="level5">
+<h5 class="anchored" data-anchor-id="homogenous-random-network-interference-1">Homogenous random network interference</h5>
+<p><span id="eq-homogenous-random-interference-dang"><span class="math display">\[
+\begin{aligned}
+\text{Structural: People }(1 \times 1) \\
+&amp;   M_{0i}      &amp; &amp;= f_{ M_0}( U_{ M_{0}})              \\
+&amp;   V_{0i}      &amp; &amp;= f_{ V_0}( U_{ V_{0}})               \\
+&amp;   M_{si}      &amp; &amp;= f_{ M}  ( U_{ M_{s}},  V_{s-1,i},    M_{s-1, i}, g_{\mathbf M} (\mathbf{T}_{s}, \mathbf{\Psi}_{si})  )     \\
+&amp;   V_{si}      &amp; &amp;= f_{ V}  ( U_{ V_{s}},  M_{s},        V_{s-1})  \\
+\text{Structural: Places }(1 \times 1) \\
+&amp;   R_{sj}      &amp; &amp;= f_{ R}  ( U_{ R_{s}},  g_{ R} (\mathbf V_{s-1},    \mathbf{\Psi}_{s-1, j})) \\
+&amp;   T_{sj}      &amp; &amp;= f_{ T}  ( U_{ T_{s}},  R_{s})  \\                                              \\
+\text{Relational }(n_p \times n_q) \\
+&amp;  \mathbf{\Psi}_{0}  &amp; &amp;= f_{\mathbf{\Psi}_{0}}(\mathbf U_{\mathbf{\Psi}_{0}}) \\
+&amp;  \mathbf{\Psi}_{s}  &amp; &amp;= f_{\mathbf{\Psi}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
+\end{aligned}
+\tag{C.14}\]</span></span></p>
 <p>Under the SSNAC framework, we make the assumption of no spillover: contemporaneous measurements on observational units of a given entity type are independent of each other given all prior measures. The time-ordering of the measurements is given by the structural part of the causal DANG. We further make the assumption of network interference - that interference respects the mapping given by the relational part of a causal DANG. i.e.&nbsp;The exposure mapping for each equation in the structural equation model is loyal to the graph that encodes the relational part of the SWING.</p>
 </section>
 </section>
@@ -1983,7 +2023,7 @@ U_{\psi_{ij}} = U_{\psi_{ji}} \text{ and } f_{\psi_{ij}} = f_{\psi_{ji}}
 <h3 data-number="C.3.2" class="anchored" data-anchor-id="structural-equations-2"><span class="header-section-number">C.3.2</span> Structural equations</h3>
 <section id="observed-data-model-2" class="level4">
 <h4 class="anchored" data-anchor-id="observed-data-model-2">Observed data model</h4>
-<p>The causal DANG shown in <a href="#fig-placeintervention-dang" class="quarto-xref">Figure&nbsp;<span>C.13</span></a> represents the three week campaign mentioned in Example 3. Let <span class="math inline">\(\mathbf{T}_s\)</span> be a <span class="math inline">\(3\times1\)</span> vector whose entries <span class="math inline">\(T_{sj}\)</span> are 1 if <em>Neighborhood</em> <span class="math inline">\(j\)</span> is to be vaccinated at time <span class="math inline">\(s\)</span> and <span class="math inline">\(0\)</span> otherwise. <span class="math inline">\(\mathbf{M}_s\)</span> is a <span class="math inline">\(5\times1\)</span> vector whose entries <span class="math inline">\(M_{si}\)</span> indicate whether the <span class="math inline">\(i^{\text{th}}\)</span> person received a campaign message at time <span class="math inline">\(s\)</span> or not. <span class="math inline">\(\mathbf{V}_s\)</span> is a <span class="math inline">\(5\times1\)</span> vector whose entries <span class="math inline">\(V_{si}\)</span> show whether participant <span class="math inline">\(i\)</span> is vaccinated or not at time <span class="math inline">\(s\)</span>. Finally, <span class="math inline">\(\mathbf{R}_s\)</span> is a <span class="math inline">\(3\times1\)</span> vector whose entries <span class="math inline">\(R_{si}\)</span> shows the risk rating of neighborhood <span class="math inline">\(j\)</span> at the beginning of time <span class="math inline">\(s\)</span>. <a href="#eq-placeintervention-dang" class="quarto-xref">Equation&nbsp;<span>C.14</span></a> specifies this model for <em>Person</em> <span class="math inline">\(i\)</span> and <em>Neighborhood</em> <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span>:</p>
+<p>The causal DANG shown in <a href="#fig-placeintervention-dang" class="quarto-xref">Figure&nbsp;<span>C.13</span></a> represents the three week campaign mentioned in Example 3. Let <span class="math inline">\(\mathbf{T}_s\)</span> be a <span class="math inline">\(3\times1\)</span> vector whose entries <span class="math inline">\(T_{sj}\)</span> are 1 if <em>Neighborhood</em> <span class="math inline">\(j\)</span> is to be vaccinated at time <span class="math inline">\(s\)</span> and <span class="math inline">\(0\)</span> otherwise. <span class="math inline">\(\mathbf{M}_s\)</span> is a <span class="math inline">\(5\times1\)</span> vector whose entries <span class="math inline">\(M_{si}\)</span> indicate whether the <span class="math inline">\(i^{\text{th}}\)</span> person received a campaign message at time <span class="math inline">\(s\)</span> or not. <span class="math inline">\(\mathbf{V}_s\)</span> is a <span class="math inline">\(5\times1\)</span> vector whose entries <span class="math inline">\(V_{si}\)</span> show whether participant <span class="math inline">\(i\)</span> is vaccinated or not at time <span class="math inline">\(s\)</span>. Finally, <span class="math inline">\(\mathbf{R}_s\)</span> is a <span class="math inline">\(3\times1\)</span> vector whose entries <span class="math inline">\(R_{si}\)</span> shows the risk rating of neighborhood <span class="math inline">\(j\)</span> at the beginning of time <span class="math inline">\(s\)</span>. <a href="#eq-placeintervention-dang" class="quarto-xref">Equation&nbsp;<span>C.15</span></a> specifies this model for <em>Person</em> <span class="math inline">\(i\)</span> and <em>Neighborhood</em> <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span>:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -2018,13 +2058,13 @@ T_{sj} &amp;=  f_{T}(U_{T_{sj}}, R_{s,j}) \\
 M_{si} &amp;=  f_{M} (U_{M_{si}} , V_{s-1,i}, M_{s-1,i}, \mathbf{T}_{s}, \mathbf{\Psi}_{si})\\
 V_{si} &amp;=  f_{V}(U_{V_{si}}, M_{si}, V_{s-1,k}) \\
 \end{aligned}
-\tag{C.14}\]</span></span></p>
-<p>According to <a href="#eq-placeintervention-dang" class="quarto-xref">Equation&nbsp;<span>C.14</span></a>, <span class="math inline">\(R_{sj}\)</span>, the risk rating for <em>Neighborhood</em> <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span>, is a function of <span class="math inline">\(\mathbf{V}_{s-1}\)</span>, the vaccination status of every individual at time <span class="math inline">\(s-1\)</span>. <span class="math inline">\(T_{sj}\)</span> - an indicator for whether or not <em>Neighborhood</em> <span class="math inline">\(j\)</span> conducted a campaign at time <span class="math inline">\(s\)</span>, is a function of the risk rating for <em>Neighborhood</em> <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span>.</p>
+\tag{C.15}\]</span></span></p>
+<p>According to <a href="#eq-placeintervention-dang" class="quarto-xref">Equation&nbsp;<span>C.15</span></a>, <span class="math inline">\(R_{sj}\)</span>, the risk rating for <em>Neighborhood</em> <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span>, is a function of <span class="math inline">\(\mathbf{V}_{s-1}\)</span>, the vaccination status of every individual at time <span class="math inline">\(s-1\)</span>. <span class="math inline">\(T_{sj}\)</span> - an indicator for whether or not <em>Neighborhood</em> <span class="math inline">\(j\)</span> conducted a campaign at time <span class="math inline">\(s\)</span>, is a function of the risk rating for <em>Neighborhood</em> <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span>.</p>
 <p><span class="math inline">\(M_{si}\)</span>, which indicates whether or not an <em>Person</em> <span class="math inline">\(i\)</span> received a campaign message at time <span class="math inline">\(s\)</span>, is a function of whether or not person <span class="math inline">\(i\)</span> was vaccinated at time <span class="math inline">\(s-1\)</span>, whether they received a campaign message at time <span class="math inline">\(s-1\)</span>, and whether or not one of the neighborhoods they live in or visit conducted a campaign at time <span class="math inline">\(s\)</span>. The vaccination status of individual <span class="math inline">\(i\)</span> at time <span class="math inline">\(s\)</span> is a function of whether or not they received a campaign message at time <span class="math inline">\(s\)</span> and whether or not they were vaccinated at time <span class="math inline">\(s-1\)</span>.</p>
 </section>
 <section id="counterfactual-data-model-2" class="level4">
 <h4 class="anchored" data-anchor-id="counterfactual-data-model-2">Counterfactual data model</h4>
-<p>Say we want to understand the impact of a vaccination campaign conducted over three weeks on vaccination status. This would be done by setting <span class="math inline">\(\mathbf{T}_1\)</span> to <span class="math inline">\(\mathbf{t}_1\)</span>, <span class="math inline">\(\mathbf{T}_2\)</span> to <span class="math inline">\(\mathbf{t}_2\)</span>, and <span class="math inline">\(\mathbf{T}_3\)</span> to <span class="math inline">\(\mathbf{t}_3\)</span> and noting the resulting counterfactual vaccination status at the end of week 1 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1)}\)</span>), week 2 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2)}\)</span>), and week 3 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)}\)</span>). This counterfactual model is defined <a href="#eq-placeintervention-swing" class="quarto-xref">Equation&nbsp;<span>C.15</span></a> as shown in shown in <a href="#fig-placeintervention-swing" class="quarto-xref">Figure&nbsp;<span>C.14</span></a>.</p>
+<p>Say we want to understand the impact of a vaccination campaign conducted over three weeks on vaccination status. This would be done by setting <span class="math inline">\(\mathbf{T}_1\)</span> to <span class="math inline">\(\mathbf{t}_1\)</span>, <span class="math inline">\(\mathbf{T}_2\)</span> to <span class="math inline">\(\mathbf{t}_2\)</span>, and <span class="math inline">\(\mathbf{T}_3\)</span> to <span class="math inline">\(\mathbf{t}_3\)</span> and noting the resulting counterfactual vaccination status at the end of week 1 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1)}\)</span>), week 2 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2)}\)</span>), and week 3 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)}\)</span>). This counterfactual model is defined <a href="#eq-placeintervention-swing" class="quarto-xref">Equation&nbsp;<span>C.16</span></a> as shown in shown in <a href="#fig-placeintervention-swing" class="quarto-xref">Figure&nbsp;<span>C.14</span></a>.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -2060,7 +2100,7 @@ t_{sj} &amp;=  t_{sj} \\
 M_{si}^{(\bar{\mathbf t})} &amp;=  f_{M} (U_{M_{si}} , V_{s-1,i}^{(\bar{\mathbf t})}, M_{s-1,i}^{(\bar{\mathbf t})}, \mathbf{t}_{s}, \mathbf{\Psi}_{si}^{(\bar{\mathbf t})})\\
 V_{si}^{(\bar{\mathbf t})} &amp;=  f_{V}(U_{V_{si}}, M_{si}^{(\bar{\mathbf t})}, V_{s-1,k}^{(\bar{\mathbf t})}) \\
 \end{aligned}
-\tag{C.15}\]</span></span></p>
+\tag{C.16}\]</span></span></p>
 </section>
 </section>
 <section id="estimands-2" class="level3" data-number="C.3.3">
@@ -2107,10 +2147,10 @@ V_{si}^{(\bar{\mathbf{t}})} =  \frac{V_{si} \mathbf{1}_{x = g(t_{\bar{s},N_i}) }
 </section>
 <section id="sec-control-intervention" class="level2" data-number="C.4">
 <h2 data-number="C.4" class="anchored" data-anchor-id="sec-control-intervention"><span class="header-section-number">C.4</span> Vaccine strategy model</h2>
-<section id="section-2" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="section-2"></h3>
+<section id="section-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="section-1"></h3>
 <p>We used data from RESPND-MI to assess the effectiveness of two approaches to conducting mass vaccination campaigns quickly. MPX NYC is an online survey of about 1300 individuals that was conducted in 2022 in New York City. Study participants were asked to indicate their home on a map and were asked to indicate places they had had social contact in a congregate setting. Spatial coordinates were converted into community district identifiers. Community districts spatially partition the city of New York.</p>
-<p>Under the SSNAC framework, our intervention of interest might not be about setting the value of any particular variable, but setting a policy or a process that produces a set of variables in the causal model. This would be done by changing the structural equations which produce those variables. In the SWING shown in <a href="#fig-edge-intervention-swing" class="quarto-xref">Figure&nbsp;<span>C.15</span></a> and <a href="#eq-edge-intervention-swing" class="quarto-xref">Equation&nbsp;<span>C.16</span></a>, we show an intervention which replaces the function for the risk rating for each community (<span class="math inline">\(\mathbf{R}\)</span>) with the function <span class="math inline">\(h\)</span>. Every variable that is downstream of the first variable created using <span class="math inline">\(h\)</span> is marked with a superscript <span class="math inline">\((h)\)</span> to show that it is partially determined by that function.</p>
+<p>Under the SSNAC framework, our intervention of interest might not be about setting the value of any particular variable, but setting a policy or a process that produces a set of variables in the causal model. This would be done by changing the structural equations which produce those variables. In the SWING shown in <a href="#fig-edge-intervention-swing" class="quarto-xref">Figure&nbsp;<span>C.15</span></a> and <a href="#eq-edge-intervention-swing" class="quarto-xref">Equation&nbsp;<span>C.17</span></a>, we show an intervention which replaces the function for the risk rating for each community (<span class="math inline">\(\mathbf{R}\)</span>) with the function <span class="math inline">\(h\)</span>. Every variable that is downstream of the first variable created using <span class="math inline">\(h\)</span> is marked with a superscript <span class="math inline">\((h)\)</span> to show that it is partially determined by that function.</p>
 <p>We can now ask what the impact of taking policy <span class="math inline">\(h\)</span> would be on the decision whether or not to vaccinate a neighborhood <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span> (<span class="math inline">\(T_{js}\)</span>). We can also ask what the impact of the policy is on the the exposure of participant <span class="math inline">\(i\)</span> to the campaign message at time <span class="math inline">\(s\)</span> (<span class="math inline">\(M_{is}\)</span>).</p>
 <p>Our interest in RESPND-MI, however, was initially to provide evidence to inform a targeted vaccination campaign, so the main outcomes of interest are the vaccination status of each individual <span class="math inline">\(i\)</span> at time <span class="math inline">\(s\)</span> (<span class="math inline">\(V^{(h)}_{is}\)</span>). We were interested in contrasting two approaches to assigning risk-ratings to community districts: the contact-neutralizing approach and the movement-neutralizing approach.</p>
 <p>Whereas the contact-neutralizing approach ranks community districts by how many individuals are connected to them, the movement-neutralizing approach ranks community districts by how centrally they are connected to other community districts through the exchange of individuals.</p>
@@ -2121,7 +2161,7 @@ V_{si}^{(\bar{\mathbf{t}})} =  \frac{V_{si} \mathbf{1}_{x = g(t_{\bar{s},N_i}) }
 </section>
 <section id="structural-equations-3" class="level3" data-number="C.4.2">
 <h3 data-number="C.4.2" class="anchored" data-anchor-id="structural-equations-3"><span class="header-section-number">C.4.2</span> Structural equations</h3>
-<p>According to the model specified by structural equations <a href="#eq-edge-intervention-swing" class="quarto-xref"><span>C.16</span></a>, no individual <span class="math inline">\(i\)</span> has been vaccinated at time 0, and nobody receives the campaign message. The risk rating for community district <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span> is some function <span class="math inline">\(h\)</span> of the vaccination status at time <span class="math inline">\(s-1\)</span> for each individual who is connected to that community district. An intervention is conducted in community district <span class="math inline">\(j\)</span> as time <span class="math inline">\(s\)</span> if that community district has the highest risk rating. Each individual <span class="math inline">\(i\)</span> is said to have received the campaign message at time <span class="math inline">\(s\)</span> if the intervention was conducted in any of the community districts he is connected to. Finally, we consider individual <span class="math inline">\(i\)</span> vaccinated at time <span class="math inline">\(s\)</span> if they were vaccinated at time <span class="math inline">\(s-1\)</span> or if they received the campaign message in time <span class="math inline">\(s\)</span>. The risk rating is given by the function <span class="math inline">\(h\)</span>.</p>
+<p>According to the model specified by structural equations <a href="#eq-edge-intervention-swing" class="quarto-xref"><span>C.17</span></a>, no individual <span class="math inline">\(i\)</span> has been vaccinated at time 0, and nobody receives the campaign message. The risk rating for community district <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span> is some function <span class="math inline">\(h\)</span> of the vaccination status at time <span class="math inline">\(s-1\)</span> for each individual who is connected to that community district. An intervention is conducted in community district <span class="math inline">\(j\)</span> as time <span class="math inline">\(s\)</span> if that community district has the highest risk rating. Each individual <span class="math inline">\(i\)</span> is said to have received the campaign message at time <span class="math inline">\(s\)</span> if the intervention was conducted in any of the community districts he is connected to. Finally, we consider individual <span class="math inline">\(i\)</span> vaccinated at time <span class="math inline">\(s\)</span> if they were vaccinated at time <span class="math inline">\(s-1\)</span> or if they received the campaign message in time <span class="math inline">\(s\)</span>. The risk rating is given by the function <span class="math inline">\(h\)</span>.</p>
 <p><span id="eq-edge-intervention-swing"><span class="math display">\[
 \begin{aligned}
 M_{0i} &amp;=  0 \\
@@ -2131,7 +2171,7 @@ T_{sj}^{(h)} &amp;=  \begin{cases} 1 &amp; R_{sj}^{(h)} = max_k R_{sk}^{(h)} \\ 
 M_{si}^{(h)} &amp;=  \begin{cases} 1 &amp; \mathbf{T}_{s\mathscr{N}_i}^{(h)} \neq \mathbf{0}  \\ 0 &amp; \text{otherwise} \end{cases} \\
 V_{si}^{(h)} &amp;=  \begin{cases} 1 &amp; M_{si}^{(h)} = 1 \text{ or } V_{s-1,i}^{(h)} = 1\\ 0 &amp; \text{otherwise} \end{cases} \\
 \end{aligned}
-\tag{C.16}\]</span></span></p>
+\tag{C.17}\]</span></span></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
