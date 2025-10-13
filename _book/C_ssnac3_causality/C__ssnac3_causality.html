@@ -579,8 +579,8 @@ Learning goals
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li><p>Write a causal model for a vector of random variables representing equivalent measures taken on a group of observational units.</p></li>
-<li><p>Apply the assumptions of FFRCISTG to such a causal model</p></li>
+<li><p>Write a causal model for a vector of random variables representing measures taken on a group of observational units.</p></li>
+<li><p>Apply the assumptions of FFRCISTG to a causal model for a vector of random variables representing measures taken on a group of observational units.</p></li>
 </ul>
 </div>
 </div>
@@ -619,13 +619,26 @@ Example 1: Dress and jobs
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-NPSEM
+NPSEM-IE
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>A nonparametric structural equation model (NPSEM) is a system of deterministic equations that relates all the entries in a given random vector to each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown by <a href="#eq-fully-connected-dag" class="quarto-xref">Equation&nbsp;<span>C.1</span></a>. In this set of equations <span class="math inline">\((f_*)\)</span>, values that are produced by equations higher up in the list serve as inputs to equations lower down in the list.</p>
+<p>A nonparametric structural equation model (NPSEM) is a system of deterministic equations that relates all the entries in a given random vector to each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown below. In this set of equations <span class="math inline">\((f_*)\)</span>, values that are produced by equations higher up in the list serve as inputs to equations lower down in the list.</p>
+<p><span class="math display">\[
+\begin{aligned}
+L_1 &amp;= f_{L_1}(U_{L_1}) \\
+L_2 &amp;= f_{L_2}(U_{L_2}, L_1) \\
+L_3 &amp;= f_{L_3}(U_{L_3}, L_1, L_2) \\
+A_1 &amp;= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
+A_2 &amp;= f_{A_2}(U_{A_2}, L_1, L_2, L_3, A_1) \\
+A_3 &amp;= f_{A_3}(U_{A_3}, L_1, L_2, L_3, A_1, A_2) \\
+Y_1 &amp;= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
+Y_2 &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1) \\
+Y_3 &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2)
+\end{aligned}
+\]</span></p>
 <p>The arguments <span class="math inline">\((U_*)\)</span> represent error terms—random variables that induce the joint distribution of the variables in the model. When error terms are independent of each other within and across observational units, the model is called an NPSEM-IE—a nonparametric structural equation model with independent errors.</p>
 </div>
 </div>
@@ -642,7 +655,7 @@ Intervention regime
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>We imagine that in certain types of studies, the investigator is able to “intervene” on an NPSEM by superseding one of the values set by a structural equation with another value. Most commonly, what are termed <em>static interventions</em> set the value to a constant. <em>Dynamic interventions</em> change the form of the structural equation itself. By “superseding,” we mean that the investigator forces structural equations whose parents include some variable of interest to take a value set by the investigator rather than the value that would have been produced by the model had the investigator not intervened. An intervention regime is an intervention where more than one value is intervened on by the investigator.</p>
+<p>We imagine that in certain types of studies, the investigator is able to “intervene” on an NPSEM by setting the value of a random variable through experiment (a randomized control trial, for instance). In <em>static interventions</em> the value is set to a constant whereas in <em>dynamic interventions</em> the investigator changes the form of one or more structural equation through experimental intervention. An intervention regeime is a collection of interventions.</p>
 </div>
 </div>
 </div>
@@ -703,6 +716,7 @@ DAGs and SWIGs
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p>It is possible to deduce the conditional independence restrictions of an NPSEM using the structural equations themselves—we can check whether two variables are (conditionally) independent by checking whether both variables are a function of the same common error term. It turns out that queries like this are much simpler to answer through a graphical representation of the NPSEM than through the NPSEM itself, however. Directed acyclic graphs allow the efficient communication of conditional independence assumptions that define NPSEMs.</p>
 <p>A causal directed acyclic graph (DAG) (<a href="#fig-fully-connected-dag" class="quarto-xref">Figure&nbsp;<span>C.1</span></a>) is a graph whose nodes represent the variables in an NPSEM (<a href="#eq-fully-connected-dag" class="quarto-xref">Equation&nbsp;<span>C.1</span></a>). Directed edges point from the arguments to the result of each structural equation.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
@@ -759,17 +773,15 @@ Figure&nbsp;C.2: Fully connected SWIG
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Model restrictions
+FFRCISTG
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Whereas parametric models are characterized by their probability mass or density functions, nonparametric models of this type are usually characterized by model restrictions in the form of conditional independencies.</p>
-<p>Restrictions are crucial: to fully characterize the NPSEM specified in <a href="#eq-fully-connected-dag" class="quarto-xref">Equation&nbsp;<span>C.1</span></a> using observed data, we would need to estimate nine functions using one observation of the nine-dimensional joint distribution that gave rise to the participants’ observations. Recruiting an additional person to the study would not ease this problem; it would add three new equations to the model, and we would end up with a similar problem to the one we began with. We would have to estimate 12 functions using one observation of a 12-dimensional joint distribution.</p>
-<p>We can simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function. These assumptions are called model restrictions because they restrict the set of distributions that could possibly be represented by the NPSEM. For instance, if we add the restriction that all the measures are independent (or equivalently, that the DAG has no arrows), the resulting model would not be able to represent data from a causal system where some of the measures are correlated. By adding the restriction of independence, we eliminate the correlated data distribution from consideration as a possibility for how the data we are modeling are truly distributed.</p>
-<p>It is possible to deduce the conditional independence restrictions of an NPSEM using the structural equations themselves—we can check whether two variables are (conditionally) independent by checking whether both variables are a function of the same common error term.</p>
-<p>It turns out that queries like this are much simpler to answer through a graphical representation of the NPSEM than through the NPSEM itself, however. Directed acyclic graphs allow the efficient communication of conditional independence assumptions that define NPSEMs. In the next section, we derive an <a href="#def-ffrcistg">FFRCISTG</a> model for <a href="#sec-example-1">Example 1</a>, showing how each assumption (or restriction) simplifies the model equations.</p>
+<p>To fully characterize the NPSEM specified in <a href="#eq-fully-connected-dag" class="quarto-xref">Equation&nbsp;<span>C.1</span></a> using observed data, we would need to estimate nine functions using one observation of the nine-dimensional joint distribution that gave rise to the participants’ observations. Recruiting an additional person to the study would not ease this problem; it would add three new equations to the model, and we would end up with a similar problem to the one we began with. We would have to estimate 12 functions using one observation of a 12-dimensional joint distribution.</p>
+<p>We can simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function (homogeneity assumptions), and assumptions that simplify the procedure for estimation (independence assumptions).</p>
+<p>In the next section, we derive an <a href="#def-ffrcistg">FFRCISTG</a> model for <a href="#sec-example-1">Example 1</a>, which is a particular approach to simplifying a causal model like the one shown in <a href="#eq-fully-connected-dag" class="quarto-xref">Equation&nbsp;<span>C.1</span></a>. In this approach, observational units cannot influence each other, and have identical internal causal processes.</p>
 </div>
 </div>
 </div>
@@ -1139,7 +1151,7 @@ Learning goals
 <div class="callout-body-container callout-body">
 <ul>
 <li><p>Use graphs to represent an arbitrary but fixed pattern of mutual influence among a group of observational units</p></li>
-<li><p>Apply the assumptions of NFFRCISTG to a causal model for a vector of random variables representing equivalent measures taken on a group of observational units.</p></li>
+<li><p>Apply the assumptions of NFFRCISTG to a causal model for a vector of random variables representing measures taken on a group of observational units.</p></li>
 </ul>
 </div>
 </div>
@@ -1164,7 +1176,7 @@ Example 2: Marriage and jobs
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1173,7 +1185,7 @@ Example 2: Marriage and jobs
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse show">
+<div id="callout-17" class="callout-17-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="callout callout-style-default callout-note no-icon callout-titled" data-appearence="simple">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
@@ -1224,8 +1236,24 @@ Homogeneous network interference
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout callout-style-default callout-note no-icon callout-titled" data-appearence="simple">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Network FFRCISTG
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1234,7 +1262,7 @@ Formal definitions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div id="def-graph" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition C.16 (Graph)</strong></span> An ordered pair <span class="math inline">\(\mathscr{G} = (\mathcal{N}, \psi)\)</span> with node set <span class="math inline">\(\mathcal{N}\)</span>and adjacency function <span class="math inline">\(\psi\)</span>. The adjacecy function assigns a nonnegative weight to each unordered pair of nodes <span class="math inline">\((i,j)\)</span>.</p>
@@ -1558,7 +1586,7 @@ E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} ]
 <section id="social-spatial-networks" class="level2" data-number="C.3">
 <h2 data-number="C.3" class="anchored" data-anchor-id="social-spatial-networks"><span class="header-section-number">C.3</span> Social-spatial networks</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1567,11 +1595,11 @@ Learning goals
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li><p>Use graph generators to represent an arbitrary and random pattern of mutual influence among a group of observational units</p></li>
-<li><p>Apply the assumptions of BRNFFRCISTG to a causal model for a vector of random variables representing equivalent measures taken on a group of observational units with two classes: people and places.</p></li>
+<li><p>Use graph generators to represent arbitrary and random patterns of mutual influence among a group of observational units with two classes: people and places.</p></li>
+<li><p>Apply the assumptions of BRNFFRCISTG to a causal model including graph generators.</p></li>
 </ul>
 </div>
 </div>
@@ -1595,7 +1623,7 @@ Example 3: Vaccination
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1604,19 +1632,19 @@ Example 3: Vaccination
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-26" class="callout-26-contents callout-collapse collapse show">
+<div id="callout-25" class="callout-25-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="callout callout-style-default callout-note no-icon callout-titled" data-appearence="simple">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-DANGs
+Mixed DANGs and SWINGs
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the <em>structural part</em> of the DANG and the latter the <em>relational part</em>. The relational part shows which pairs of observational units influence each other. For instance, in <a href="#fig-causal-dang-instructions" class="quarto-xref">Figure&nbsp;<span>C.9</span></a> we see that individuals 1 and 2 are related.</p>
 <p>The structural part is a DAG of vector-valued variables whose length equals the number of observational units in the sample. It has the standard interpretation under <a href="#sec-d-separation">d-separation rules</a>: it gives the conditional independencies across these vector-valued random variables. For instance, below is a DANG of the model we developed for <a href="#sec-example-2">Example 2</a>.</p>
@@ -1653,21 +1681,8 @@ Figure&nbsp;C.9: Causal DANG
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled" data-appearence="simple">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Mixed DANGs
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-20" class="callout-20-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<section id="mixed-dangs" class="level5">
+<h5 class="anchored" data-anchor-id="mixed-dangs">Mixed DANGs</h5>
 <p>DANGs not only allow for compact notation in causal systems characterized by interference; they can describe causal systems that involve more than one kind of observational unit. We focus on systems that involve persons as one unit type and places as the other. <a href="#fig-example-dang-structural" class="quarto-xref">Figure&nbsp;<span>C.10</span></a> shows a DANG for the first week of the campaign mentioned in <a href="#sec-example-2">Example 2</a>. Let () be the decision to conduct a vaccination campaign or not in each of the three places. () indicates whether each of the six people received a vaccination-campaign message. () indicates whether each of the people got vaccinated.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
@@ -1711,21 +1726,9 @@ Figure&nbsp;C.10: Causal DANG for Week 1 in Example 3
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled" data-appearence="simple">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-SWINGs
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-21" class="callout-21-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+</section>
+<section id="swings" class="level5">
+<h5 class="anchored" data-anchor-id="swings">SWINGs</h5>
 <p>We introduce the <strong>Single World Intervention Network Graph (SWING)</strong> — an extension of the SWIG that allows for the representation of the counterfactual outcomes of interventions in complex causal systems.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
@@ -1772,6 +1775,23 @@ Figure&nbsp;C.11: SWING for Week 1 in Example 3
 </div>
 <p>Like the DANG, the SWING has two parts: a structural part and a relational part.<br>
 The SWING also represents vector-valued random variables (rather than scalars) as nodes. Like the SWIG, the SWING splits the nodes that are to be intervened upon by the experimenter. <a href="#fig-example-swig-structural" class="quarto-xref">Figure&nbsp;<span>C.11</span></a> shows the counterfactual distribution of the variables in the model under an intervention setting () to the value ().</p>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" data-appearence="simple">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+NPSEM-GE and graph generators
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Random graphs bring probability into the network itself. Instead of assuming we know which edges exist, we treat them as random variables. In <a href="#sec-example-3">Example 3</a>, for instance, every week the townspeople possibly change their community of residence and/or the communities they visit. Random graphs allow us to model a time-varying pattern of interference, or even different patterns of interference for different variables.</p>
 </div>
 </div>
 </div>
@@ -1781,13 +1801,13 @@ The SWING also represents vector-valued random variables (rather than scalars) a
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Random graphs
+Random Network FFRCISTG
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Random graphs bring probability into the network itself. Instead of assuming we know which edges exist, we treat them as random variables. In <a href="#sec-example-3">Example 3</a>, for instance, every week the townspeople possibly change their community of residence and/or the communities they visit. Random graphs allow us to model a time-varying pattern of interference, or even different patterns of interference for different variables.</p>
+
 </div>
 </div>
 </div>
@@ -1797,12 +1817,13 @@ Random graphs
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Bipartite graphs
+Bipartite Random Network FFRCISTG
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-23" class="callout-23-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<section id="bipartite-graphs" class="level6 callout-body-container callout-body">
+<h6 class="anchored" data-anchor-id="bipartite-graphs">Bipartite graphs</h6>
 <p>A <strong>bipartite graph</strong> is one where nodes are divided into two disjoint sets and edges connect only across sets. In random-interference problems, it is often useful to model people on one side and places or events on the other. An edge then represents a person’s affiliation with a place, and interference arises because multiple people may be connected through the same location. This structure allows us to represent exposures that are not purely person-to-person, but mediated by shared environments.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
@@ -1827,27 +1848,11 @@ Figure&nbsp;C.12: Example of bipartite graph
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled" data-appearence="simple">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Homogeneous random network interference
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-24" class="callout-24-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>We assume that homogeneous interference holds, given a set of random draws from the random-graph models included. This mirrors the homogeneous-interference assumption from the fixed-network setting, but now exposures vary both with treatment assignments and with the random realization of the network.</p>
-</div>
+</section>
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1856,7 +1861,7 @@ Formal definitions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div id="def-graph-generator" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition C.27 (Graph generator)</strong></span> An <span class="math inline">\(n \times n\)</span> array of structural equations which collectively model the edges of a random graph.</p>
