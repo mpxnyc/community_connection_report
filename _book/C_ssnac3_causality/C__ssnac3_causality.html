@@ -619,7 +619,7 @@ Example 1: Dress and jobs
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-NPSEM-IE
+NPSEM
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -671,7 +671,7 @@ Causal model
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>A causal model is a nonparametric structural equation model that mimics the causal process that produced the variables under investigation. This is done with the goal of reasoning about the impact of a given intervention regime. It is a combination of two NPSEM-IEs: a model of the observed data and a model of the interventional data—hypothetical data that would be observed under the given intervention regime. In a causal model, the observational and interventional NPSEMs have identical equations and equal error terms.</p>
+<p>A causal model is a nonparametric structural equation model that mimics the causal process that produced the variables under investigation. This is done with the goal of reasoning about the impact of a given intervention regime. It is a combination of two NPSEMs: a model of the observed data and a model of the interventional data—hypothetical data that would be observed under the given intervention regime. In a causal model, the observational and interventional NPSEMs have identical equations and equal error terms.</p>
 <p>Consider a causal model for an intervention regime where we set formal dress <span class="math inline">\(A_1\)</span> to <span class="math inline">\(a_1\)</span>, <span class="math inline">\(A_2\)</span> to <span class="math inline">\(a_2\)</span>, and <span class="math inline">\(A_3\)</span> to <span class="math inline">\(a_3\)</span>. The observed data model would be:</p>
 <p><span id="eq-fully-connected-dag"><span class="math display">\[
 \begin{aligned}
@@ -779,9 +779,9 @@ FFRCISTG
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>To fully characterize the NPSEM specified in <a href="#eq-fully-connected-dag" class="quarto-xref">Equation&nbsp;<span>C.1</span></a> using observed data, we would need to estimate nine functions using one observation of the nine-dimensional joint distribution that gave rise to the participants’ observations. Recruiting an additional person to the study would not ease this problem; it would add three new equations to the model, and we would end up with a similar problem to the one we began with. We would have to estimate 12 functions using one observation of a 12-dimensional joint distribution.</p>
+<p>To fully characterize the NPSEM specified above using observed data, we would need to estimate nine functions using one observation of the nine-dimensional joint distribution that gave rise to the participants’ observations. Recruiting an additional person to the study would not ease this problem; it would add three new equations to the model, and we would end up with a similar problem to the one we began with. We would have to estimate 12 functions using one observation of a 12-dimensional joint distribution.</p>
 <p>We can simplify this system of equations by making assumptions that leave us with fewer functions to estimate and more observations per function (homogeneity assumptions), and assumptions that simplify the procedure for estimation (independence assumptions).</p>
-<p>In the next section, we derive an <a href="#def-ffrcistg">FFRCISTG</a> model for <a href="#sec-example-1">Example 1</a>, which is a particular approach to simplifying a causal model like the one shown in <a href="#eq-fully-connected-dag" class="quarto-xref">Equation&nbsp;<span>C.1</span></a>. In this approach, observational units cannot influence each other, and have identical internal causal processes.</p>
+<p>The finest fully randomized causally interpretrable structured tree graph (FFRCISTG) is a causal model defined by the independence assumptions of: i) no interference, and ii) no spillover, and the homogeneity assumption of iii) identical distributions.</p>
 </div>
 </div>
 </div>
@@ -1248,7 +1248,7 @@ Network FFRCISTG
 </div>
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-
+<p>The network finest fully randomized causally interpretrable structured tree graph (NFFRCISTG) is a causal model defined by the independence assumptions of: i) networked interference, and ii) no spillover, and the homogeneity assumptions of iii) homogenous network interference, and iv) identical distributions.</p>
 </div>
 </div>
 </div>
@@ -1646,9 +1646,9 @@ Mixed DANGs and SWINGs
 </div>
 <div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>DANGs encode the structure of the causal process within individuals separately from the structure of the causal process across individuals. The former is termed the <em>structural part</em> of the DANG and the latter the <em>relational part</em>. The relational part shows which pairs of observational units influence each other. For instance, in <a href="#fig-causal-dang-instructions" class="quarto-xref">Figure&nbsp;<span>C.9</span></a> we see that individuals 1 and 2 are related.</p>
-<p>The structural part is a DAG of vector-valued variables whose length equals the number of observational units in the sample. It has the standard interpretation under <a href="#sec-d-separation">d-separation rules</a>: it gives the conditional independencies across these vector-valued random variables. For instance, below is a DANG of the model we developed for <a href="#sec-example-2">Example 2</a>.</p>
-<p>The structural part is a DAG of vector-valued variables <span class="math inline">\(\mathbf{L}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{Y}\)</span> of length equal to the number of people in the sample. It shows the relationship between units 1 and 2 separately from the causal structure linking employment, dress, and job opportunities.</p>
+<section id="dangs" class="level6">
+<h6 class="anchored" data-anchor-id="dangs">DANGs</h6>
+<p>We introduce the causal directed acyclic network graph (DANG). DANGs encode the structure of the causal process within observational units separately from the causal process as it unfolds across them The former is termed the <em>structural part</em> of the DANG and the latter the <em>relational part</em>. The structural part is a DAG representing the relationships among random vectors of length equal to the number of units.The DAG has the standard interpretation under <a href="#sec-d-separation">d-separation rules</a> rules.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1681,6 +1681,8 @@ Figure&nbsp;C.9: Causal DANG
 </div>
 </div>
 </div>
+<p>For example, above is a DANG of the model we developed for <a href="#sec-example-2">Example 2</a>. The relational part of <a href="#fig-causal-dang-instructions" class="quarto-xref">Figure&nbsp;<span>C.9</span></a> shows that <em>Persons 1</em> and <em>2</em> influence each other. The structural part shows a DAG of random vectors <span class="math inline">\(\mathbf{L}\)</span>, <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\mathbf{Y}\)</span>, each of length 3. It shows the marriage between <em>Persons 1</em> and <em>2</em> separately from the causal structure linking employment, dress, and job opportunities within each individual.</p>
+</section>
 <section id="mixed-dangs" class="level5">
 <h5 class="anchored" data-anchor-id="mixed-dangs">Mixed DANGs</h5>
 <p>DANGs not only allow for compact notation in causal systems characterized by interference; they can describe causal systems that involve more than one kind of observational unit. We focus on systems that involve persons as one unit type and places as the other. <a href="#fig-example-dang-structural" class="quarto-xref">Figure&nbsp;<span>C.10</span></a> shows a DANG for the first week of the campaign mentioned in <a href="#sec-example-2">Example 2</a>. Let () be the decision to conduct a vaccination campaign or not in each of the three places. () indicates whether each of the six people received a vaccination-campaign message. () indicates whether each of the people got vaccinated.</p>
@@ -1726,10 +1728,9 @@ Figure&nbsp;C.10: Causal DANG for Week 1 in Example 3
 </div>
 </div>
 </div>
-</section>
-<section id="swings" class="level5">
-<h5 class="anchored" data-anchor-id="swings">SWINGs</h5>
-<p>We introduce the <strong>Single World Intervention Network Graph (SWING)</strong> — an extension of the SWIG that allows for the representation of the counterfactual outcomes of interventions in complex causal systems.</p>
+<section id="swings" class="level6">
+<h6 class="anchored" data-anchor-id="swings">SWINGs</h6>
+<p>We introduce the Single World Intervention Network Graph (SWING) — an extension of the SWIG that allows for the representation of the counterfactual outcomes of interventions in complex causal systems.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1776,6 +1777,7 @@ Figure&nbsp;C.11: SWING for Week 1 in Example 3
 <p>Like the DANG, the SWING has two parts: a structural part and a relational part.<br>
 The SWING also represents vector-valued random variables (rather than scalars) as nodes. Like the SWIG, the SWING splits the nodes that are to be intervened upon by the experimenter. <a href="#fig-example-swig-structural" class="quarto-xref">Figure&nbsp;<span>C.11</span></a> shows the counterfactual distribution of the variables in the model under an intervention setting () to the value ().</p>
 </section>
+</section>
 </div>
 </div>
 </div>
@@ -1791,7 +1793,8 @@ NPSEM-GE and graph generators
 </div>
 <div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Random graphs bring probability into the network itself. Instead of assuming we know which edges exist, we treat them as random variables. In <a href="#sec-example-3">Example 3</a>, for instance, every week the townspeople possibly change their community of residence and/or the communities they visit. Random graphs allow us to model a time-varying pattern of interference, or even different patterns of interference for different variables.</p>
+<p>Random graphs bring probability into the network itself. They allow us to model a time-varying pattern of interference, or even different patterns of interference for different variables. In <a href="#sec-example-3">Example 3</a>, for instance, every week the townspeople possibly change their community of residence and/or the communities they visit. We can model this scenario by including each potential edge in the network as a random variable.</p>
+<p>A graph generator is an array of structural equations, each modelling an edge in the network. The error terms included in a graph generator are not independent of each other, but are independent of error terms not included. A non-parametric structural equation model that includes graph generators is defined as a non-parametric structural equation model with grouped errors (NPSEM-GE).</p>
 </div>
 </div>
 </div>
@@ -1807,7 +1810,7 @@ Random Network FFRCISTG
 </div>
 <div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-
+<p>The random network finest fully randomized causally interpretrable structured tree graph (RNFFRCISTG) is a causal model defined by the independence assumptions of: i) random network interference, and ii) no spillover, and the homogeneity assumptions of homogeneous random network interference with respect to the included random graphs, iii) identical distributions.</p>
 </div>
 </div>
 </div>
@@ -1822,9 +1825,10 @@ Bipartite Random Network FFRCISTG
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-23" class="callout-23-contents callout-collapse collapse">
-<section id="bipartite-graphs" class="level6 callout-body-container callout-body">
+<div class="callout-body-container callout-body">
+<section id="bipartite-graphs" class="level6">
 <h6 class="anchored" data-anchor-id="bipartite-graphs">Bipartite graphs</h6>
-<p>A <strong>bipartite graph</strong> is one where nodes are divided into two disjoint sets and edges connect only across sets. In random-interference problems, it is often useful to model people on one side and places or events on the other. An edge then represents a person’s affiliation with a place, and interference arises because multiple people may be connected through the same location. This structure allows us to represent exposures that are not purely person-to-person, but mediated by shared environments.</p>
+<p>A bipartite graph is one where nodes are divided into two disjoint classes and edges connect only across classes. In random-interference problems, it is often useful to model people on one side and places or events on the other. An edge then represents a person’s affiliation with a place, and interference arises because multiple people may be connected through the same location. This structure allows us to represent exposures that are not purely person-to-person, but mediated by shared environments.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1849,6 +1853,11 @@ Figure&nbsp;C.12: Example of bipartite graph
 </div>
 </div>
 </section>
+<section id="brnffrcistg" class="level6">
+<h6 class="anchored" data-anchor-id="brnffrcistg">BRNFFRCISTG</h6>
+<p>A bipartite RNFFRCISTG is am RNFFRCISTG in which all graph generators produce bipartite graphs with the same partitioning of nodes into the two classes.</p>
+</section>
+</div>
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled">
