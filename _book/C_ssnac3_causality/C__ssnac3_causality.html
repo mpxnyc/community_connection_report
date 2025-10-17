@@ -1358,11 +1358,12 @@ g_i(\mathbf{X}_1,\dots,\mathbf{X}_K)
 <p><span class="theorem-title"><strong>Definition C.22 (Loyalty)</strong></span> We say a component function <span class="math inline">\(g_{ti}\)</span> is loyal to graph <span class="math inline">\(\mathscr{G}\)</span> if for <span class="math inline">\(\mathbf{X}_t,\mathbf{X}'_t \in \{0,1\}^n\)</span></p>
 <p><span class="math display">\[
 \begin{equation}
-\mathbf{X}_{t\mathscr{N}_i} = \mathbf{X'}_{t\mathscr{N}_i}
+\mathbf{X}_{t\mathcal{N}_i} = \mathbf{X'}_{t\mathcal{N}_i}
 \implies
 g_{ti}(\mathbf{X}_t) = g_{ti}( \mathbf{X'}_t)
 \end{equation}
 \]</span></p>
+<p>We say a structural equation is loyal to graph <span class="math inline">\(\mathscr{G}\)</span> if it is separable and all its component functions are loyal to <span class="math inline">\(\mathscr{G}\)</span>.</p>
 </div>
 <div id="def-positional-invariance" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition C.23 (Positional invariance)</strong></span> The assumption that the value of <a href="#def-separability">component function</a> <span class="math inline">\(g_{ti}\)</span> is invariant under a re-ordering of network values and an identical re-ordering of network weights. i.e.&nbsp;<span class="math inline">\(g_{ti}\)</span> is <a href="#def-positional-invariance">positionally invariant</a> with respect to <span class="math inline">\(\mathscr{G}_t\)</span> if for all <span class="math inline">\(\mathbf{X}, \mathbf{X}' \in \{0,1\}^n\)</span></p>
@@ -1980,13 +1981,11 @@ U_{\psi_{ij}} = U_{\psi_{ji}} \text{ and } f_{\psi_{ij}} = f_{\psi_{ji}}
 </div>
 <section id="assumptions-2" class="level3" data-number="C.3.1">
 <h3 data-number="C.3.1" class="anchored" data-anchor-id="assumptions-2"><span class="header-section-number">C.3.1</span> Assumptions</h3>
-<p>Start with NPSEM-NE.</p>
-<p>Let this be that.</p>
-<p><span class="math inline">\(n\)</span> is the total number of nodes. there are <span class="math inline">\(p\)</span> person nodes and <span class="math inline">\(q\)</span> place nodes.</p>
-<p>Under the SSNAC framework, we make the assumption of no spillover: contemporaneous measurements on observational units of a given entity type are independent of each other given all prior measures. The time-ordering of the measurements is given by the structural part of the causal DANG. We further make the assumption of network interference - that interference respects the mapping given by the relational part of a causal DANG. i.e.&nbsp;The exposure mapping for each equation in the structural equation model is loyal to the graph that encodes the relational part of the SWING.</p>
-<p>We make the relational homogeneity assumption which holds that the exposure mappings for variables in the NPSEM are separable and positionally invariant. The structural homogeneity assumption holds that the structural equations that produce each observational unit’s measures are identical across observational units of the same entity type. Finally, we make the boundedness assumption – all the exposure mappings in the NPSEM take values from a finite set. In applications with repeated measures, if the structure of the causal DANG allows, the SSNAC framework allows for the assumption of time homogeneity: the structural equations are identical across time. We apply this assumption in Example 3 below.</p>
+<p>Let <span class="math inline">\(n = p + q\)</span> be the total number of nodes in a graph with <span class="math inline">\(p\)</span> person nodes and <span class="math inline">\(q\)</span> place nodes. Let <span class="math inline">\(\mathbf R_{s}\)</span> be the random vector for the risk ratings of each neighborhood at time <span class="math inline">\(s\)</span>; <span class="math inline">\(\mathbf T_{s}\)</span> be a random vector whose entries indicate if the related neighborhood received a vaccination intervention or not based on the rating, <span class="math inline">\(\mathbf M_{s}\)</span> be a random vector indicating whether each person received a vaccination message through their dating ap, and let <span class="math inline">\(\mathbf V_{s}\)</span> be a random indicator indicating whether each person is vaccinated or not. Each of these vectors is of length <span class="math inline">\(n\)</span>. Finaly, let <span class="math inline">\(\mathbf{\Psi}_{s}\)</span> be an <span class="math inline">\(n \times n\)</span> adjacency matrix for the network at time <span class="math inline">\(s\)</span>. We denote arrays of structural equations using capital <span class="math inline">\(F\)</span> and single structural equations using lower-case <span class="math inline">\(f\)</span>.</p>
+<p>We start with a fully connected NPSEM-GE for random vectors <span class="math inline">\(\mathbf R_{s}\)</span>, <span class="math inline">\(\mathbf T_{s}\)</span>, <span class="math inline">\(\mathbf M_{s}\)</span>, and, <span class="math inline">\(\mathbf R_{s}\)</span>; and graph generator <span class="math inline">\(\mathbf{\Psi}_{s}\)</span>.</p>
 <section id="indepedence-1-no-spillover" class="level4">
 <h4 class="anchored" data-anchor-id="indepedence-1-no-spillover">Indepedence 1: No spillover</h4>
+<p>We assume no spillover: equivalent measurements on observational units are independent of each other given all prior measures. This is implied by the following representation of the model.</p>
 <p><span id="eq-no-spillover-dang"><span class="math display">\[
 \begin{aligned}
 \text{Structural } (\mathbb{R^n}) \\
@@ -1995,7 +1994,7 @@ U_{\psi_{ij}} = U_{\psi_{ji}} \text{ and } f_{\psi_{ij}} = f_{\psi_{ji}}
 &amp;  \mathbf M_{s}                  &amp; &amp;=     f_{\mathbf M_s} (\mathbf U_{\mathbf M_{s}} , \mathbf V_{s-1},   \mathbf M_{s-1}, \mathbf{T}_{s}, \mathbf{\Psi}_{s})       \\
 &amp;  \mathbf V_{s}                  &amp; &amp;=     f_{\mathbf V_s}(\mathbf U_{\mathbf V_{s}}, \mathbf M_{s}, \mathbf V_{s-1})                                                \\
 \text{Relational } (\mathbb{R^{n\times n}}) \\
-&amp;  \mathbf{\Psi}_{s}   &amp; &amp;= f_{\mathbf{\Psi_s}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
+&amp;  \mathbf{\Psi}_{s}   &amp; &amp;= F_{\mathbf{\Psi_s}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
 \end{aligned}
 \tag{C.10}\]</span></span></p>
 <p>where</p>
@@ -2010,7 +2009,8 @@ f_{*_n}(U_{*_n}, \mathbf{Pa}(*_n))\\
 </section>
 <section id="independence-2-random-network-interference" class="level4">
 <h4 class="anchored" data-anchor-id="independence-2-random-network-interference">Independence 2: Random network interference</h4>
-<p>We assume that <span class="math display">\[
+<p>We make the assumption that interference respects a mapping between individuals and neighborhoods as given by random <a href="#def-graph">graph</a> <span class="math inline">\(\mathbf \Psi\)</span>, and the empty graph <span class="math inline">\(\mathbf 0\)</span>.</p>
+<p><span class="math display">\[
 \begin{aligned}
 &amp;  f_{\mathbf R_s}    &amp; &amp;\text{is loyal to} &amp;  \mathbf{\Psi}_{s-1}\\
 &amp;  f_{\mathbf T_s}      &amp; &amp;\text{is loyal to} &amp;  \mathbf{0}\\
@@ -2018,10 +2018,10 @@ f_{*_n}(U_{*_n}, \mathbf{Pa}(*_n))\\
 &amp;  f_{\mathbf V_s}      &amp; &amp;\text{is loyal to} &amp;  \mathbf{0}\\
 \end{aligned}
 \]</span></p>
-<p>where <span class="math inline">\(\mathbf{0}\)</span> is a conformable matrix of zeroes.</p>
 </section>
 <section id="homogeneity-1-homogenous-random-network-interference" class="level4">
 <h4 class="anchored" data-anchor-id="homogeneity-1-homogenous-random-network-interference">Homogeneity 1: Homogenous random network interference</h4>
+<p>We assume that the <a href="#def-exposure-mapping">exposure mapping</a> for each variable in the structural part of the model is <a href="#def-separability">separable</a> with bounded and positionally invariant network exposure mappings.</p>
 <p><span id="eq-homogenous-random-network-interference"><span class="math display">\[
 \begin{aligned}
 \text{Structural } (\mathbb{R^n}) \\
@@ -2030,7 +2030,7 @@ f_{*_n}(U_{*_n}, \mathbf{Pa}(*_n))\\
 &amp;  \mathbf M_{s}                  &amp; &amp;=     f_{\mathbf M_s} (\mathbf U_{\mathbf M_{s}} , \mathbf V_{s-1},   \mathbf M_{s-1}, \mathbf g_{TM}(\mathbf{T}_{s}, \mathbf{\Psi}_{s}))       \\
 &amp;  \mathbf V_{s}                  &amp; &amp;=     f_{\mathbf V_s}(\mathbf U_{\mathbf V_{s}}, \mathbf M_{s}, \mathbf V_{s-1})                                                \\
 \text{Relational } (\mathbb{R^{n\times n}}) \\
-&amp;  \mathbf{\Psi}_{s}   &amp; &amp;= f_{\mathbf{\Psi_s}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
+&amp;  \mathbf{\Psi}_{s}   &amp; &amp;= F_{\mathbf{\Psi_s}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
 \end{aligned}
 \tag{C.11}\]</span></span></p>
 <p>where</p>
@@ -2045,7 +2045,7 @@ g_{*}(\mathbf{V}^*, \Psi^*_n) \\
 </section>
 <section id="homogeneity-2-identical-distributions" class="level4">
 <h4 class="anchored" data-anchor-id="homogeneity-2-identical-distributions">Homogeneity 2: Identical distributions</h4>
-<p>where</p>
+<p>We assume that all structural equations contained in the vector <span class="math inline">\(\mathbf f_{*}\)</span> are identical.</p>
 <p><span class="math display">\[
 \mathbf f_{*}(\mathbf{U}_*, \mathbf{Pa(*)}) = \begin{bmatrix}
 f_{*}(U_{*_1}, \mathbf{Pa}(*_1))\\
@@ -2057,6 +2057,7 @@ f_{*}(U_{*_n}, \mathbf{Pa}(*_n))\\
 </section>
 <section id="homogeneity-3-bipartite-network" class="level4">
 <h4 class="anchored" data-anchor-id="homogeneity-3-bipartite-network">Homogeneity 3: Bipartite network</h4>
+<p>We assume that <span class="math inline">\(\mathbf{\Psi}_{s}\)</span> is bipartite. This means that we can represent it as a <span class="math inline">\(p \times q\)</span> matrix.</p>
 <p><span id="eq-bipartite-network"><span class="math display">\[
 \begin{aligned}
 \text{Structural: Places } (\mathbb{R^q}) \\
@@ -2066,13 +2067,14 @@ f_{*}(U_{*_n}, \mathbf{Pa}(*_n))\\
 &amp;  \mathbf M_{s}                  &amp; &amp;=     f_{\mathbf M_s} (\mathbf U_{\mathbf M_{s}} , \mathbf V_{s-1},   \mathbf M_{s-1}, \mathbf g_{TM}(\mathbf{T}_{s}, \mathbf{\Psi}_{s}))       \\
 &amp;  \mathbf V_{s}                  &amp; &amp;=     f_{\mathbf V_s}(\mathbf U_{\mathbf V_{s}}, \mathbf M_{s}, \mathbf V_{s-1})                                                \\
 \text{Relational } (\mathbb{R^{p \times q}}) \\
-&amp;  \mathbf{\Psi}_{s}   &amp; &amp;= f_{\mathbf{\Psi_s}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
+&amp;  \mathbf{\Psi}_{s}   &amp; &amp;= F_{\mathbf{\Psi_s}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
 \end{aligned}
 \tag{C.12}\]</span></span></p>
 <p>with <span class="math inline">\(g_{VR}\)</span> and <span class="math inline">\(g_{TM}\)</span> redefined to be conformable.</p>
 </section>
 <section id="homogeneity-4-identical-and-independent-attachment" class="level4">
 <h4 class="anchored" data-anchor-id="homogeneity-4-identical-and-independent-attachment">Homogeneity 4: Identical and independent attachment</h4>
+<p>We assume each row of the adjacency matrix <span class="math inline">\({\Psi}_{si}\)</span> is generated by the same <span class="math inline">\(q \times 1\)</span> array of structural equations <span class="math inline">\(f_{{\mathbf \Psi_s}}\)</span>. We further assume that <span class="math inline">\(\mathbf U_{{\Psi}_{si}}\)</span>, the rows of the <span class="math inline">\(p \times q\)</span> matrix of error terms <span class="math inline">\(U_{{\Psi}_{s}}\)</span> are independent. This implies that each person in the model attaches to the selection of places independently of each other, and based on identical structural models.</p>
 <p><span class="math display">\[
 \begin{aligned}
 \text{Structural: Places } (\mathbb{R}) \\
@@ -2082,13 +2084,17 @@ f_{*}(U_{*_n}, \mathbf{Pa}(*_n))\\
 &amp;   M_{si}                  &amp; &amp;=     f_{ M_s} ( U_{ M_{si}} ,  V_{s-1,i},    M_{s-1, i},  g_{TM}(\mathbf{T}_{s}, {\Psi}_{si}))       \\
 &amp;   V_{si}                  &amp; &amp;=     f_{ V_s}( U_{ V_{si}},  M_{si},  V_{s-1, i})                                                \\
 \text{Relational: People in places } (\mathbb{R^{1 \times q}}) \\
-&amp;  {\Psi}_{si}   &amp; &amp;= f_{{\mathbf \Psi_s}}(\mathbf U_{{\Psi}_{si}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
+&amp;  {\Psi}_{si}   &amp; &amp;= F_{{\mathbf \Psi_s}}(\mathbf U_{{\Psi}_{si}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
 \end{aligned}
 \]</span></p>
-<p>where <span class="math inline">\({[\mathbf \Psi^T_s]}_{j}\)</span> is the <span class="math inline">\(j^{th}\)</span> row of the transpose of the adjacency matrix <span class="math inline">\(\mathbf{\Psi}_{s}\)</span>.</p>
+<p>where <span class="math inline">\({[\mathbf \Psi^T_s]}_{j}\)</span> is the <span class="math inline">\(j^{th}\)</span> row of the transpose of the adjacency matrix <span class="math inline">\(\mathbf{\Psi}_{s}\)</span> and</p>
+<p><span class="math display">\[
+\mathbf U_{{\Psi}_{si}} \perp \mathbf U_{{\Psi}_{sj}} \text{ for } i \neq j
+\]</span></p>
 </section>
 <section id="homogeneity-5-time-homogeneity" class="level4">
 <h4 class="anchored" data-anchor-id="homogeneity-5-time-homogeneity">Homogeneity 5: Time homogeneity</h4>
+<p>Finally, we assume that structural equations are identical across time points <span class="math inline">\(s\)</span>, with the exception of the random variables defined for <span class="math inline">\(s = 0\)</span>. Each of these has no parenets.</p>
 <p><span class="math display">\[
 \begin{aligned}
 \text{Structural: Places } (\mathbb{R}) \\
@@ -2102,8 +2108,8 @@ f_{*}(U_{*_n}, \mathbf{Pa}(*_n))\\
 &amp;   M_{si}                  &amp; &amp;=     f_{ M} ( U_{ M_{si}} ,  V_{s-1,i},    M_{s-1, i},  g_{TM}(\mathbf{T}_{s}, {\Psi}_{si}))       \\
 &amp;   V_{si}                  &amp; &amp;=     f_{ V}( U_{ V_{si}},  M_{si},  V_{s-1, i})                                                \\
 \text{Relational: People in places } (\mathbb{R^{1 \times q}}) \\
-&amp;  {\Psi}_{0i}   &amp; &amp;= f_{{\mathbf \Psi_0}}(\mathbf U_{{\Psi}_{0i}})  \\
-&amp;  {\Psi}_{si}   &amp; &amp;= f_{{\mathbf \Psi}}(\mathbf U_{{\Psi}_{si}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
+&amp;  {\Psi}_{0i}   &amp; &amp;= F_{{\mathbf \Psi_0}}(\mathbf U_{{\Psi}_{0i}})  \\
+&amp;  {\Psi}_{si}   &amp; &amp;= F_{{\mathbf \Psi}}(\mathbf U_{{\Psi}_{si}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
 \end{aligned}
 \]</span></p>
 </section>
@@ -2242,8 +2248,8 @@ V_{si}^{(\bar{\mathbf{t}})} =  \frac{V_{si} \mathbf{1}_{x = g(t_{\bar{s},N_i}) }
 <section id="section-1" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="section-1"></h3>
 <p>We used data from RESPND-MI to assess the effectiveness of two approaches to conducting mass vaccination campaigns quickly. MPX NYC is an online survey of about 1300 individuals that was conducted in 2022 in New York City. Study participants were asked to indicate their home on a map and were asked to indicate places they had had social contact in a congregate setting. Spatial coordinates were converted into community district identifiers. Community districts spatially partition the city of New York.</p>
-<p>Under the SSNAC framework, our intervention of interest might not be about setting the value of any particular variable, but setting a policy or a process that produces a set of variables in the causal model. This would be done by changing the structural equations which produce those variables. In the SWING shown in <a href="#fig-edge-intervention-swing" class="quarto-xref">Figure&nbsp;<span>C.15</span></a> and <a href="#eq-edge-intervention-swing" class="quarto-xref">Equation&nbsp;<span>C.15</span></a>, we show an intervention which replaces the function for the risk rating for each community (<span class="math inline">\(\mathbf{R}\)</span>) with the function <span class="math inline">\(h\)</span>. Every variable that is downstream of the first variable created using <span class="math inline">\(h\)</span> is marked with a superscript <span class="math inline">\((h)\)</span> to show that it is partially determined by that function.</p>
-<p>We can now ask what the impact of taking policy <span class="math inline">\(h\)</span> would be on the decision whether or not to vaccinate a neighborhood <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span> (<span class="math inline">\(T_{js}\)</span>). We can also ask what the impact of the policy is on the the exposure of participant <span class="math inline">\(i\)</span> to the campaign message at time <span class="math inline">\(s\)</span> (<span class="math inline">\(M_{is}\)</span>).</p>
+<p>In the SWING shown in <a href="#fig-edge-intervention-swing" class="quarto-xref">Figure&nbsp;<span>C.15</span></a> and <a href="#eq-edge-intervention-swing" class="quarto-xref">Equation&nbsp;<span>C.15</span></a>, we show an intervention which replaces the function for the risk rating for each community (<span class="math inline">\(\mathbf{R}\)</span>) with the function <span class="math inline">\(h\)</span>. Every variable that is downstream of the first variable created using <span class="math inline">\(h\)</span> is marked with a superscript <span class="math inline">\((h)\)</span> to show that it is partially determined by that function.</p>
+<p>We ask what the impact of taking policy <span class="math inline">\(h\)</span> would be on the decision whether or not to vaccinate a neighborhood <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span> (<span class="math inline">\(T_{js}\)</span>). We can also ask what the impact of the policy is on the the exposure of participant <span class="math inline">\(i\)</span> to the campaign message at time <span class="math inline">\(s\)</span> (<span class="math inline">\(M_{is}\)</span>).</p>
 <p>Our interest in RESPND-MI, however, was initially to provide evidence to inform a targeted vaccination campaign, so the main outcomes of interest are the vaccination status of each individual <span class="math inline">\(i\)</span> at time <span class="math inline">\(s\)</span> (<span class="math inline">\(V^{(h)}_{is}\)</span>). We were interested in contrasting two approaches to assigning risk-ratings to community districts: the contact-neutralizing approach and the movement-neutralizing approach.</p>
 <p>Whereas the contact-neutralizing approach ranks community districts by how many individuals are connected to them, the movement-neutralizing approach ranks community districts by how centrally they are connected to other community districts through the exchange of individuals.</p>
 </section>
