@@ -1,154 +1,152 @@
 ### Assumptions
 
+
+Start with NPSEM-NE.
+
+Let this be that. 
+
+$n$ is the total number of nodes. there are $p$ person nodes and $q$ place nodes. 
+
+Under the SSNAC framework, we make the assumption of no spillover: contemporaneous measurements on observational units of a given entity type are independent of each other given all prior measures. The time-ordering of the measurements is given by the structural part of the causal DANG. We further make the assumption of network interference - that interference respects the mapping given by the relational part of a causal DANG. i.e. The exposure mapping for each equation in the structural equation model is loyal to the graph that encodes the relational part of the SWING. 
+
+We make the relational homogeneity assumption which holds that the exposure mappings for variables in the NPSEM are separable and positionally invariant. The structural homogeneity assumption holds that the structural equations that produce each observational unit's measures are identical across observational units of the same entity type. Finally, we make the boundedness assumption -- all the exposure mappings in the NPSEM take values from a finite set.  In applications with repeated measures, if the structure of the causal DANG allows, the SSNAC framework allows for the assumption of time homogeneity: the structural equations are identical across time. We apply this assumption in Example 3 below. 
+
 #### Indepedence 1: No spillover
 
 $$
 \begin{aligned}
-\text{Structural } \\
-&  \mathbf R_{s}                   & &= f_{\mathbf R}(\mathbf U_{\mathbf R_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1}) \\
-&  \mathbf T_{s}                   & &= f_{\mathbf T}(\mathbf U_{\mathbf T_{s}}, \mathbf R_{s})                                 \\
-&  \mathbf M_{s}                  & &=     f_{\mathbf M} (\mathbf U_{\mathbf M_{s}} , \mathbf V_{s-1,i},   \mathbf M_{s-1}, \mathbf{T}_{s}, \mathbf{\Psi}_{s})       \\
-&  \mathbf V_{s}                  & &=     f_{\mathbf V}(\mathbf U_{\mathbf V_{s}}, \mathbf M_{s}, \mathbf V_{s-1})                                                \\
-\text{Relational }  \\
-&  \mathbf{\Psi}_{s}   & &= f_{\mathbf{\Psi}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
+\text{Structural } (\mathbb{R^n}) \\
+&  \mathbf R_{s}                   & &= f_{\mathbf R_s}(\mathbf U_{\mathbf R_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1}) \\
+&  \mathbf T_{s}                   & &= f_{\mathbf T_s}(\mathbf U_{\mathbf T_{s}}, \mathbf R_{s})                                 \\
+&  \mathbf M_{s}                  & &=     f_{\mathbf M_s} (\mathbf U_{\mathbf M_{s}} , \mathbf V_{s-1},   \mathbf M_{s-1}, \mathbf{T}_{s}, \mathbf{\Psi}_{s})       \\
+&  \mathbf V_{s}                  & &=     f_{\mathbf V_s}(\mathbf U_{\mathbf V_{s}}, \mathbf M_{s}, \mathbf V_{s-1})                                                \\
+\text{Relational } (\mathbb{R^{n\times n}}) \\
+&  \mathbf{\Psi}_{s}   & &= f_{\mathbf{\Psi_s}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
 \end{aligned}
 $$ {#eq-no-spillover-dang}
 
+where 
+
+$$
+\mathbf f_{*}(\mathbf{U}_*, \mathbf{Pa(*)}) = \begin{bmatrix}
+f_{*_1}(U_{*_1}, \mathbf{Pa}(*_1))\\
+f_{*_2}(U_{*_2}, \mathbf{Pa}(*_2))\\
+... \\
+f_{*_n}(U_{*_n}, \mathbf{Pa}(*_n))\\
+\end{bmatrix}
+$$
+
 #### Independence 2: Random network interference
 
+We assume that 
+$$
+\begin{aligned}
+&  f_{\mathbf R_s}    & &\text{is loyal to} &  \mathbf{\Psi}_{s-1}\\
+&  f_{\mathbf T_s}      & &\text{is loyal to} &  \mathbf{0}\\
+&  f_{\mathbf M_s}      & &\text{is loyal to} &  \mathbf{\Psi}_{s}\\
+&  f_{\mathbf V_s}      & &\text{is loyal to} &  \mathbf{0}\\
+\end{aligned}
+$$
+
+where $\mathbf{0}$ is a conformable matrix of zeroes. 
 
 #### Homogeneity 1: Homogenous random network interference
 
+$$
+\begin{aligned}
+\text{Structural } (\mathbb{R^n}) \\
+&  \mathbf R_{s}                   & &= f_{\mathbf R_s}(\mathbf U_{\mathbf R_{s}},  \mathbf g_{VR}(\mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1}) ) \\
+&  \mathbf T_{s}                   & &= f_{\mathbf T_s}(\mathbf U_{\mathbf T_{s}}, \mathbf R_{s})                                 \\
+&  \mathbf M_{s}                  & &=     f_{\mathbf M_s} (\mathbf U_{\mathbf M_{s}} , \mathbf V_{s-1},   \mathbf M_{s-1}, \mathbf g_{TM}(\mathbf{T}_{s}, \mathbf{\Psi}_{s}))       \\
+&  \mathbf V_{s}                  & &=     f_{\mathbf V_s}(\mathbf U_{\mathbf V_{s}}, \mathbf M_{s}, \mathbf V_{s-1})                                                \\
+\text{Relational } (\mathbb{R^{n\times n}}) \\
+&  \mathbf{\Psi}_{s}   & &= f_{\mathbf{\Psi_s}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
+\end{aligned}
+$$ {#eq-homogenous-random-network-interference}
+
+
+where 
+
+$$
+\mathbf g_{*}(\mathbf{V}^*, \mathbf{\Psi}^*) = \begin{bmatrix}
+g_{*}(\mathbf{V}^*, \Psi^*_1)\\
+g_{*}(\mathbf{V}^*, \Psi^*_2) \\
+... \\
+g_{*}(\mathbf{V}^*, \Psi^*_n) \\
+\end{bmatrix}
+$$
+and $\Psi^*_k$ is the $k^{th}$ row of the adjacency matrix $\mathbf \Psi^*$. The functions $g_{*}$ are assumed to be positionally invariant and bounded.
 
 #### Homogeneity 2: Identical distributions
 
 
+
+where 
+
+$$
+\mathbf f_{*}(\mathbf{U}_*, \mathbf{Pa(*)}) = \begin{bmatrix}
+f_{*}(U_{*_1}, \mathbf{Pa}(*_1))\\
+f_{*}(U_{*_2}, \mathbf{Pa}(*_2))\\
+... \\
+f_{*}(U_{*_n}, \mathbf{Pa}(*_n))\\
+\end{bmatrix}
+$$
+
 #### Homogeneity 3: Bipartite network
 
+$$
+\begin{aligned}
+\text{Structural: Places } (\mathbb{R^q}) \\
+&  \mathbf R_{s}                   & &= f_{\mathbf R_s}(\mathbf U_{\mathbf R_{s}},  \mathbf g_{VR}(\mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1}) ) \\
+&  \mathbf T_{s}                   & &= f_{\mathbf T_s}(\mathbf U_{\mathbf T_{s}}, \mathbf R_{s})                                 \\
+\text{Structural: People } (\mathbb{R^p}) \\
+&  \mathbf M_{s}                  & &=     f_{\mathbf M_s} (\mathbf U_{\mathbf M_{s}} , \mathbf V_{s-1},   \mathbf M_{s-1}, \mathbf g_{TM}(\mathbf{T}_{s}, \mathbf{\Psi}_{s}))       \\
+&  \mathbf V_{s}                  & &=     f_{\mathbf V_s}(\mathbf U_{\mathbf V_{s}}, \mathbf M_{s}, \mathbf V_{s-1})                                                \\
+\text{Relational } (\mathbb{R^{p \times q}}) \\
+&  \mathbf{\Psi}_{s}   & &= f_{\mathbf{\Psi_s}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
+\end{aligned}
+$$ {#eq-bipartite-network}
 
-#### Homogeneity 4: Independent attachment 
+with $g_{VR}$ and $g_{TM}$ redefined to be conformable.
 
-
-
-
-
-
-
-
-
-
-
-Start with NPSEM-NE.
-
-#### Independence assumptions
-
-##### Networked errors
-
-We start with an non-parametric structural equation model with networked errors. In this model, each pair of entries in the error terms of structural part of the model is mutually independent. While the entries of $\mathbf U_{\Psi_0}$ and $\mathbf U_{\Psi_s}$ are not independent, $\mathbf U_{\Psi_s} \perp \mathbf U_{\Psi_0}$, and each are independent of each entry in the error terms of the structural part.
-
-##### No spillover
- This notation implies no spillover - no arrows among the entries of any vector random variable in the structural part.
-
-
-
-#### Homogeneity assumptions
-
-##### Time homogeneity
+#### Homogeneity 4: Identical and independent attachment 
 
 $$
 \begin{aligned}
-\text{Structural }(n \times 1) \\
-&  \mathbf M_{0}      & &= f_{\mathbf M_0}(\mathbf U_{\mathbf M_{0}})              \\
-&  \mathbf V_{0}      & &= f_{\mathbf V_0}(\mathbf U_{\mathbf V_{0}})               \\
-&  \mathbf R_{s}      & &= f_{\mathbf R}  (\mathbf U_{\mathbf R_{s}}, \mathbf g_{\mathbf R} (\mathbf V_{s-1},    \mathbf{\Psi}_{s-1})) \\
-&  \mathbf T_{s}      & &= f_{\mathbf T}  (\mathbf U_{\mathbf T_{s}}, \mathbf R_{s})                                 \\
-&  \mathbf M_{s}      & &= f_{\mathbf M}  (\mathbf U_{\mathbf M_{s}}, \mathbf V_{s-1,i},   \mathbf M_{s-1}, g_{\mathbf M} (\mathbf{T}_{s}, \mathbf{\Psi}_{s})  )     \\
-&  \mathbf V_{s}      & &= f_{\mathbf V}  (\mathbf U_{\mathbf V_{s}}, \mathbf M_{s},       \mathbf V_{s-1})                                                \\
-\text{Relational } (n \times n) \\
-&  \mathbf{\Psi}_{0}  & &= f_{\mathbf{\Psi}_{0}}(\mathbf U_{\mathbf{\Psi}_{0}}) \\
-&  \mathbf{\Psi}_{s}  & &= f_{\mathbf{\Psi}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
+\text{Structural: Places } (\mathbb{R}) \\
+&   R_{sj}                   & &= f_{ R_s}( U_{ R_{sj}},   g_{VR}(\mathbf{V}_{s-1}, {[\mathbf \Psi^T_s]}_{j}) ) \\
+&   T_{sj}                   & &= f_{ T_s}( U_{ T_{sj}},  R_{sj})                                 \\
+\text{Structural: People } (\mathbb{R}) \\
+&   M_{si}                  & &=     f_{ M_s} ( U_{ M_{si}} ,  V_{s-1,i},    M_{s-1, i},  g_{TM}(\mathbf{T}_{s}, {\Psi}_{si}))       \\
+&   V_{si}                  & &=     f_{ V_s}( U_{ V_{si}},  M_{si},  V_{s-1, i})                                                \\
+\text{Relational: People in places } (\mathbb{R^{1 \times q}}) \\
+&  {\Psi}_{si}   & &= f_{{\mathbf \Psi_s}}(\mathbf U_{{\Psi}_{si}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
 \end{aligned}
-$$ {#eq-bipartite-dang}
+$$
 
-##### Separability
 
-Structural equations in the structural part are separable, but not necessarily graph generators in the relational part. 
+
+
+where ${[\mathbf \Psi^T_s]}_{j}$ is the $j^{th}$ row of the transpose of the adjacency matrix $\mathbf{\Psi}_{s}$.
+
+
+#### Homogeneity 5: Time homogeneity
 
 $$
 \begin{aligned}
-\text{Structural }(n \times 1) \\
-&  \mathbf M_{0}      & &= f_{\mathbf M_0}(\mathbf U_{\mathbf M_{0}})              \\
-&  \mathbf V_{0}      & &= f_{\mathbf V_0}(\mathbf U_{\mathbf V_{0}})               \\
-&  \mathbf R_{s}      & &= f_{\mathbf R}  (\mathbf U_{\mathbf R_{s}}, \mathbf g_{\mathbf R} (\mathbf V_{s-1},    \mathbf{\Psi}_{s-1})) \\
-&  \mathbf T_{s}      & &= f_{\mathbf T}  (\mathbf U_{\mathbf T_{s}}, \mathbf R_{s})                                 \\
-&  \mathbf M_{s}      & &= f_{\mathbf M}  (\mathbf U_{\mathbf M_{s}}, \mathbf V_{s-1,i},   \mathbf M_{s-1}, g_{\mathbf M} (\mathbf{T}_{s}, \mathbf{\Psi}_{s})  )     \\
-&  \mathbf V_{s}      & &= f_{\mathbf V}  (\mathbf U_{\mathbf V_{s}}, \mathbf M_{s},       \mathbf V_{s-1})                                                \\
-\text{Relational } (n \times n) \\
-&  \mathbf{\Psi}_{0}  & &= f_{\mathbf{\Psi}_{0}}(\mathbf U_{\mathbf{\Psi}_{0}}) \\
-&  \mathbf{\Psi}_{s}  & &= f_{\mathbf{\Psi}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
+\text{Structural: Places } (\mathbb{R}) \\
+&   R_{0j}                   & &= f_{ R_0}( U_{ R_{0j}}) \\
+&   T_{0j}                   & &= f_{ T_0}( U_{ T_{0j}})  \\
+&   R_{sj}                   & &= f_{ R}( U_{ R_{sj}},   g_{VR}(\mathbf{V}_{s-1}, {[\mathbf \Psi^T_s]}_{j}) ) \\
+&   T_{sj}                   & &= f_{ T}( U_{ T_{sj}},  R_{sj})                                 \\
+\text{Structural: People } (\mathbb{R}) \\
+&   M_{0i}                  & &=     f_{ M_0} ( U_{ M_{0i}})       \\
+&   V_{0i}                  & &=     f_{ V_0}( U_{ V_{0i}})  \\
+&   M_{si}                  & &=     f_{ M} ( U_{ M_{si}} ,  V_{s-1,i},    M_{s-1, i},  g_{TM}(\mathbf{T}_{s}, {\Psi}_{si}))       \\
+&   V_{si}                  & &=     f_{ V}( U_{ V_{si}},  M_{si},  V_{s-1, i})                                                \\
+\text{Relational: People in places } (\mathbb{R^{1 \times q}}) \\
+&  {\Psi}_{0i}   & &= f_{{\mathbf \Psi_0}}(\mathbf U_{{\Psi}_{0i}})  \\
+&  {\Psi}_{si}   & &= f_{{\mathbf \Psi}}(\mathbf U_{{\Psi}_{si}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
 \end{aligned}
-$$ {#eq-bipartite-dang}
-
-##### Bipartite
-
 $$
-\begin{aligned}
-\text{Structural: People }(n_p \times 1) \\
-&  \mathbf M_{0}      & &= f_{\mathbf M_0}(\mathbf U_{\mathbf M_{0}})              \\
-&  \mathbf V_{0}      & &= f_{\mathbf V_0}(\mathbf U_{\mathbf V_{0}})               \\
-&  \mathbf M_{s}      & &= f_{\mathbf M}  (\mathbf U_{\mathbf M_{s}}, \mathbf V_{s-1,i},   \mathbf M_{s-1}, g_{\mathbf M} (\mathbf{T}_{s}, \mathbf{\Psi}_{s})  )     \\
-&  \mathbf V_{s}      & &= f_{\mathbf V}  (\mathbf U_{\mathbf V_{s}}, \mathbf M_{s},       \mathbf V_{s-1})  \\
-\text{Structural: Places }(n_q \times 1) \\
-&  \mathbf R_{s}      & &= f_{\mathbf R}  (\mathbf U_{\mathbf R_{s}}, \mathbf g_{\mathbf R} (\mathbf V_{s-1},    \mathbf{\Psi}_{s-1})) \\
-&  \mathbf T_{s}      & &= f_{\mathbf T}  (\mathbf U_{\mathbf T_{s}}, \mathbf R_{s})  \\                                              \\
-\text{Relational }(n_p \times n_q) \\
-&  \mathbf{\Psi}_{0}  & &= f_{\mathbf{\Psi}_{0}}(\mathbf U_{\mathbf{\Psi}_{0}}) \\
-&  \mathbf{\Psi}_{s}  & &= f_{\mathbf{\Psi}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
-\end{aligned}
-$$ {#eq-identical-distribution-dang}
 
-##### Identical distributions
-
-$$
-\begin{aligned}
-\text{Structural: People }(1 \times 1) \\
-&   M_{0i}      & &= f_{ M_0}( U_{ M_{0}})              \\
-&   V_{0i}      & &= f_{ V_0}( U_{ V_{0}})               \\
-&   M_{si}      & &= f_{ M}  ( U_{ M_{s}},  V_{s-1,i},    M_{s-1, i}, g_{\mathbf M_i} (\mathbf{T}_{s}, \mathbf{\Psi}_{si})  )     \\
-&   V_{si}      & &= f_{ V}  ( U_{ V_{s}},  M_{s},        V_{s-1})  \\
-\text{Structural: Places }(1 \times 1) \\
-&   R_{sj}      & &= f_{ R}  ( U_{ R_{s}},  g_{ R_j} (\mathbf V_{s-1},    \mathbf{\Psi}_{s-1, j})) \\
-&   T_{sj}      & &= f_{ T}  ( U_{ T_{s}},  R_{s})  \\                                              \\
-\text{Relational }(n_p \times n_q) \\
-&  \mathbf{\Psi}_{0}  & &= f_{\mathbf{\Psi}_{0}}(\mathbf U_{\mathbf{\Psi}_{0}}) \\
-&  \mathbf{\Psi}_{s}  & &= f_{\mathbf{\Psi}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
-\end{aligned}
-$$ 
-
-
-
-##### Homogenous random network interference
-
-
-
-$$
-\begin{aligned}
-\text{Structural: People }(1 \times 1) \\
-&   M_{0i}      & &= f_{ M_0}( U_{ M_{0}})              \\
-&   V_{0i}      & &= f_{ V_0}( U_{ V_{0}})               \\
-&   M_{si}      & &= f_{ M}  ( U_{ M_{s}},  V_{s-1,i},    M_{s-1, i}, g_{\mathbf M} (\mathbf{T}_{s}, \mathbf{\Psi}_{si})  )     \\
-&   V_{si}      & &= f_{ V}  ( U_{ V_{s}},  M_{s},        V_{s-1})  \\
-\text{Structural: Places }(1 \times 1) \\
-&   R_{sj}      & &= f_{ R}  ( U_{ R_{s}},  g_{ R} (\mathbf V_{s-1},    \mathbf{\Psi}_{s-1, j})) \\
-&   T_{sj}      & &= f_{ T}  ( U_{ T_{s}},  R_{s})  \\                                              \\
-\text{Relational }(n_p \times n_q) \\
-&  \mathbf{\Psi}_{0}  & &= f_{\mathbf{\Psi}_{0}}(\mathbf U_{\mathbf{\Psi}_{0}}) \\
-&  \mathbf{\Psi}_{s}  & &= f_{\mathbf{\Psi}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
-\end{aligned}
-$$ {#eq-homogenous-random-interference-dang}
-
-Under the SSNAC framework, we make the assumption of no spillover: contemporaneous measurements on observational units of a given entity type are independent of each other given all prior measures. The time-ordering of the measurements is given by the structural part of the causal DANG. We further make the assumption of network interference - that interference respects the mapping given by the relational part of a causal DANG. i.e. The exposure mapping for each equation in the structural equation model is loyal to the graph that encodes the relational part of the SWING. 
-
-#### Homogeneity assumptions
-
-We make the relational homogeneity assumption which holds that the exposure mappings for variables in the NPSEM are separable and positionally invariant. The structural homogeneity assumption holds that the structural equations that produce each observational unit's measures are identical across observational units of the same entity type. Finally, we make the boundedness assumption -- all the exposure mappings in the NPSEM take values from a finite set.  In applications with repeated measures, if the structure of the causal DANG allows, the SSNAC framework allows for the assumption of time homogeneity: the structural equations are identical across time. We apply this assumption in Example 3 below. 
