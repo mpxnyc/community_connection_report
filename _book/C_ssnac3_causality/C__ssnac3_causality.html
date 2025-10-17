@@ -716,7 +716,7 @@ DAGs and SWIGs
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>It is possible to deduce the conditional independence restrictions of an NPSEM using the structural equations themselves—we can check whether two variables are (conditionally) independent by checking whether both variables are a function of the same common error term. It turns out that queries like this are much simpler to answer through a graphical representation of the NPSEM than through the NPSEM itself, however. Directed acyclic graphs allow the efficient communication of conditional independence assumptions that define NPSEMs.</p>
+<p>In contrast with parametric models, NPSEMs are characterized using the set of conditional indpendencies that hold among their variables. It is possible to deduce these using the structural equations themselves —- we can check whether two variables are (conditionally) independent by checking whether both variables are a function of the same common error term. It turns out that queries like this are much simpler to answer through a graphical representation of the NPSEM than through the NPSEM itself, however. Directed acyclic graphs allow the efficient communication of conditional independence assumptions that define NPSEMs.</p>
 <p>A causal directed acyclic graph (DAG) (<a href="#fig-fully-connected-dag" class="quarto-xref">Figure&nbsp;<span>C.1</span></a>) is a graph whose nodes represent the variables in an NPSEM (<a href="#eq-fully-connected-dag" class="quarto-xref">Equation&nbsp;<span>C.1</span></a>). Directed edges point from the arguments to the result of each structural equation.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
@@ -1158,7 +1158,7 @@ Learning goals
 </div>
 <p>Before specifying a model that can accommodate the interdependence between <em>Persons 1</em> and <em>2</em> in <a href="#sec-example-2">Example 2</a>, we outline some useful definitions. We use these to extend the <a href="#def-ffrcistg">FFRCISTG</a> model described in <a href="#sec-classical-causal-inference" class="quarto-xref"><span>Section C.1</span></a> to accommodate settings characterized by causal interference.</p>
 <p>Because of the assumptions of <em>no interference</em> and <em>no spillover</em>, FFRCISTG models are unable to incorporate this additional information about the relationships between individuals in <a href="#sec-example-2">Example 2</a>. These relationships cause what is termed <em>causal interference</em> — the treatment level of one unit affects the outcome of another unit.</p>
-<p>We make progress by mapping out the structure of interference in order to incorporate it into the model. We introduce a statistical model called the <a href="#def-nffrcistg"><em>Network Finest Fully Randomized Causally Interpretable Structured Tree Graph (NFFRCISTG)</em></a> — an extension of the <a href="#def-ffrcistg">FFRCISTG</a> model that uses graphs to encode the pattern of causal interference among a set of observational units.</p>
+<p>We make progress by mapping out the structure of interference using graphs and incorporate it into the model. We introduce a statistical model called the <a href="#def-nffrcistg"><em>Network Finest Fully Randomized Causally Interpretable Structured Tree Graph (NFFRCISTG)</em></a> — an extension of the <a href="#def-ffrcistg">FFRCISTG</a> model that uses graphs to encode the pattern of causal interference among a set of observational units.</p>
 <p>Below we build an <a href="#def-nffrcistg">NFFRCISTG</a> model for <a href="#sec-example-2">Example 2</a>, illustrating the assumptions of the model. Before that, we outline some ideas and language we will need for the illustration.</p>
 <div class="callout callout-style-simple callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1231,8 +1231,7 @@ Homogeneous network interference
 </div>
 <div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>We introduce the assumption of <a href="#def-homogenous-network-interference"><em>homogeneous network interference</em></a>, which reduces the complexity of network exposure mappings. This achieved through three conditions: i) The structural equation is <a href="#def-separatability">separable</a> into component functions which are ii) <a href="#def-positional-invariance">positionally invariant</a>, and iii) <a href="#def-boundedness">bounded</a>.</p>
-<p>This assumption holds that for any node in the network, the effect of a neighbor’s treatment is the same regardless of which neighbor it is, and regardless of the position of the unit in the network. In addition, network exposure mappings are further restricted so that their values lie in a finite set.</p>
+<p>We introduce the assumption of <a href="#def-homogenous-network-interference"><em>homogeneous network interference</em></a>, which reduces the complexity of network exposure mappings. This assumption holds that for any node in the network, the effect of a neighbor’s treatment is the same regardless of which neighbor it is, and regardless of the position of the unit in the network. In addition, network exposure mappings are restricted so that their values lie in a finite set. A structural equation shows homogenous network interference obtains if it is <a href="#def-separatability">separable</a> with <a href="#def-positional-invariance">positionally invariant</a> and <a href="#def-boundedness">bounded</a> coponent functions.</p>
 </div>
 </div>
 </div>
@@ -1828,7 +1827,7 @@ Bipartite Random Network FFRCISTG
 <div class="callout-body-container callout-body">
 <section id="bipartite-graphs" class="level6">
 <h6 class="anchored" data-anchor-id="bipartite-graphs">Bipartite graphs</h6>
-<p>A bipartite graph is one where nodes are divided into two disjoint classes and edges connect only across classes. In random-interference problems, it is often useful to model people on one side and places or events on the other. An edge then represents a person’s affiliation with a place, and interference arises because multiple people may be connected through the same location. This structure allows us to represent exposures that are not purely person-to-person, but mediated by shared environments.</p>
+<p>A bipartite graph is one where nodes are partitioned into two classes and edges connect only across classes. In random-interference problems, it is often useful to model people on one side and places or events on the other. An edge then represents a person’s affiliation with a place, and interference arises because multiple people may be connected through the same location. This structure allows us to represent exposures that are not purely person-to-person, but mediated by shared environments.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1855,7 +1854,7 @@ Figure&nbsp;C.12: Example of bipartite graph
 </section>
 <section id="brnffrcistg" class="level6">
 <h6 class="anchored" data-anchor-id="brnffrcistg">BRNFFRCISTG</h6>
-<p>A bipartite RNFFRCISTG is am RNFFRCISTG in which all graph generators produce bipartite graphs with the same partitioning of nodes into the two classes.</p>
+<p>A bipartite RNFFRCISTG is am RNFFRCISTG in which all graph generators produce bipartite graphs with the same partitioning.</p>
 </section>
 </div>
 </div>
@@ -1906,7 +1905,36 @@ U_{\psi_{ij}} = U_{\psi_{ji}} \text{ and } f_{\psi_{ij}} = f_{\psi_{ji}}
 </div>
 <section id="assumptions-2" class="level3" data-number="C.3.1">
 <h3 data-number="C.3.1" class="anchored" data-anchor-id="assumptions-2"><span class="header-section-number">C.3.1</span> Assumptions</h3>
+<section id="indepedence-1-no-spillover" class="level4">
+<h4 class="anchored" data-anchor-id="indepedence-1-no-spillover">Indepedence 1: No spillover</h4>
+<p><span id="eq-no-spillover-dang"><span class="math display">\[
+\begin{aligned}
+\text{Structural }(n \times 1) \\
+&amp;  \mathbf R_{s}                   &amp; &amp;= f_{\mathbf R}(\mathbf U_{\mathbf R_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1}) \\
+&amp;  \mathbf T_{s}                   &amp; &amp;= f_{\mathbf T}(\mathbf U_{\mathbf T_{s}}, \mathbf R_{s})                                 \\
+&amp;  \mathbf M_{s}                  &amp; &amp;=     f_{\mathbf M} (\mathbf U_{\mathbf M_{s}} , \mathbf V_{s-1,i},   \mathbf M_{s-1}, \mathbf{T}_{s}, \mathbf{\Psi}_{s})       \\
+&amp;  \mathbf V_{s}                  &amp; &amp;=     f_{\mathbf V}(\mathbf U_{\mathbf V_{s}}, \mathbf M_{s}, \mathbf V_{s-1})                                                \\
+\text{Relational } (n \times n) \\
+&amp;  \mathbf{\Psi}_{s}   &amp; &amp;= f_{\mathbf{\Psi}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
+\end{aligned}
+\tag{C.10}\]</span></span></p>
+</section>
+<section id="independence-2-random-network-interference" class="level4">
+<h4 class="anchored" data-anchor-id="independence-2-random-network-interference">Independence 2: Random network interference</h4>
+</section>
+<section id="homogeneity-1-homogenous-random-network-interference" class="level4">
+<h4 class="anchored" data-anchor-id="homogeneity-1-homogenous-random-network-interference">Homogeneity 1: Homogenous random network interference</h4>
+</section>
+<section id="homogeneity-2-identical-distributions" class="level4">
+<h4 class="anchored" data-anchor-id="homogeneity-2-identical-distributions">Homogeneity 2: Identical distributions</h4>
+</section>
+<section id="homogeneity-3-bipartite-network" class="level4">
+<h4 class="anchored" data-anchor-id="homogeneity-3-bipartite-network">Homogeneity 3: Bipartite network</h4>
+</section>
+<section id="homogeneity-4-independent-attachment" class="level4">
+<h4 class="anchored" data-anchor-id="homogeneity-4-independent-attachment">Homogeneity 4: Independent attachment</h4>
 <p>Start with NPSEM-NE.</p>
+</section>
 <section id="independence-assumptions" class="level4">
 <h4 class="anchored" data-anchor-id="independence-assumptions">Independence assumptions</h4>
 <section id="networked-errors" class="level5">
@@ -1916,20 +1944,6 @@ U_{\psi_{ij}} = U_{\psi_{ji}} \text{ and } f_{\psi_{ij}} = f_{\psi_{ji}}
 <section id="no-spillover" class="level5">
 <h5 class="anchored" data-anchor-id="no-spillover">No spillover</h5>
 <p>This notation implies no spillover - no arrows among the entries of any vector random variable in the structural part.</p>
-<p><span id="eq-no-spillover-dang"><span class="math display">\[
-\begin{aligned}
-\text{Structural }(n \times 1) \\
-&amp;  \mathbf M_{0}                  &amp; &amp;= f_{\mathbf M_0}(\mathbf U_{\mathbf M_{0}})              \\
-&amp;  \mathbf V_{0}                  &amp; &amp;= f_{\mathbf V_0}(\mathbf U_{\mathbf V_{0}})               \\
-&amp;  \mathbf R_{s}                   &amp; &amp;= f_{\mathbf R}(\mathbf U_{\mathbf R_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1}) \\
-&amp;  \mathbf T_{s}                   &amp; &amp;= f_{\mathbf T}(\mathbf U_{\mathbf T_{s}}, \mathbf R_{s})                                 \\
-&amp;  \mathbf M_{s}                  &amp; &amp;=     f_{\mathbf M} (\mathbf U_{\mathbf M_{s}} , \mathbf V_{s-1,i},   \mathbf M_{s-1}, \mathbf{T}_{s}, \mathbf{\Psi}_{s})       \\
-&amp;  \mathbf V_{s}                  &amp; &amp;=     f_{\mathbf V}(\mathbf U_{\mathbf V_{s}}, \mathbf M_{s}, \mathbf V_{s-1})                                                \\
-\text{Relational } (n \times n) \\
-&amp;  \mathbf{\Psi}_{0}   &amp; &amp;= f_{\mathbf{\Psi}_{0}}(\mathbf U_{\mathbf{\Psi}_{0}}) \\
-&amp;  \mathbf{\Psi}_{s}   &amp; &amp;= f_{\mathbf{\Psi}}(\mathbf U_{\mathbf{\Psi}_{s}}, \mathbf{V}_{s-1}, \mathbf{\Psi}_{s-1})  \\
-\end{aligned}
-\tag{C.10}\]</span></span></p>
 </section>
 </section>
 <section id="homogeneity-assumptions" class="level4">
