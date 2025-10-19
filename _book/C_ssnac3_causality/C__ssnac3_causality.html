@@ -1208,6 +1208,8 @@ Learning goals
 <p>Because of the assumptions of <em>no interference</em> and <em>no spillover</em>, FFRCISTG models are unable to incorporate this additional information about the relationships between individuals in <a href="#sec-example-2">Example 2</a>. These relationships cause what is termed <em>causal interference</em> — the treatment level of one unit affects the outcome of another unit.</p>
 <p>We make progress by mapping out the structure of interference using graphs and incorporate it into the model. We introduce a statistical model called the <a href="#def-nffrcistg"><em>Network Finest Fully Randomized Causally Interpretable Structured Tree Graph (NFFRCISTG)</em></a> — an extension of the <a href="#def-ffrcistg">FFRCISTG</a> model that uses graphs to encode the pattern of causal interference among a set of observational units.</p>
 <p>Below we build an <a href="#def-nffrcistg">NFFRCISTG</a> model for <a href="#sec-example-2">Example 2</a>, illustrating the assumptions of the model. Before that, we outline some ideas and language we will need for the illustration.</p>
+<section id="sec-example-2" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="sec-example-2"></h4>
 <div class="callout callout-style-simple callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1417,6 +1419,7 @@ Note on boundedness
 </div>
 </div>
 </div>
+</section>
 <section id="assumptions-1" class="level3" data-number="C.2.1">
 <h3 data-number="C.2.1" class="anchored" data-anchor-id="assumptions-1"><span class="header-section-number">C.2.1</span> Assumptions</h3>
 <section id="independence-i-no-spillover-1" class="level5">
@@ -1724,7 +1727,8 @@ Mixed DANGs and SWINGs
 <div class="callout-body-container callout-body">
 <section id="dangs" class="level6">
 <h6 class="anchored" data-anchor-id="dangs">DANGs</h6>
-<p>We introduce the causal directed acyclic network graph (DANG). DANGs encode the structure of the causal process within observational units separately from the causal process as it unfolds across them The former is termed the <em>structural part</em> of the DANG and the latter the <em>relational part</em>. The structural part is a DAG representing the relationships among random vectors of length equal to the number of units.The DAG has the standard interpretation under <a href="#sec-d-separation">d-separation rules</a> rules.</p>
+<p>We introduce the causal directed acyclic network graph (DANG). A causal DANG encodes a process which exhibits a fixed or random pattern of causal interference across observational units. It represents the process in two parts: the structural part represents the causal process as it unfolds within each unit. The relational part represents the pattern or patterns of influence across units.</p>
+<p>The structural part of a DANG is a DAG representing the relationships among random vectors (rather than random scalar variables). It has standard interpretation under <a href="#sec-d-separation">d-separation rules</a> rules. The relational part is a markov random field. Each node represents an observational unit and undirected edges represent mutual causal influence. Observational units admit the Markov property: conditional on any connected units, a given unit is independent of other units in the graph.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
