@@ -1,3 +1,9 @@
+---
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
 ```{r update_mpxnyc_package}
 #pat  <- tidyjson::read_json("_config.json")[["..JSON"]][[1]][["settings"]][["github-token"]] # update packages
 #remotes::install_github("KeletsoMakofane/mpxnyc", auth_token = pat)
@@ -16,30 +22,26 @@ targets::tar_source("R_functions") # Access custom defined functions
 targets::tar_make(reporter = "silent") # Run data pipeline
 ```
 
+### Welcome {.unnumbered}
 
+![](images/clipboard-0.png)
 
+Welcome to RESPND-MI: the Rapid Epidemiologic Study of Prevalence, Network, and Demographics of Mpox Infection.
+This anonymous, online study explores the social and sexual connections among LGBTQ+ New Yorkers during the first global mpox outbreak in the summer of 2022.
 
-
-
-
-### Welcome {.unnumbered} 
-Welcome to RESPND-MI: the Rapid Epidemiologic Study of Prevalence, Network, and Demographics of Mpox Infection. This anonymous, online study explores the social and sexual connections among LGBTQ+ New Yorkers during the first global mpox outbreak in the summer of 2022.
-
-Since that outbreak transitioned into an epidemic, we have refined novel epidemiologic methods to analyze and interpret these data rigorously. Our analysis follows a framework called Social and Spatial Network Analysis with Causal interpretation (SSNAC), which we introduce in @sec-appendix-social-spatial and formalize in @sec-causal-interpretation.
-
+Since that outbreak transitioned into an epidemic, we have refined novel epidemiologic methods to analyze and interpret these data rigorously.
+Our analysis follows a framework called Social and Spatial Network Analysis with Causal interpretation (SSNAC), which we introduce in @sec-appendix-social-spatial and formalize in @sec-causal-interpretation.
 
 ### Who We Are {.unnumbered}
+
 Lead Author: Keletso Makofane, MPH, PhD
 
 Co-authors: Nicholas Diamond, MPH, Jennifer Barnes-Balenciaga; Elle Lett, MA, MBiostat, PhD; Ken Mayer, MD; Nguyen Tran, MPH, PhD
 
-
 ### Why this work matters {.unnumbered}
 
-As support for LGBTQ+ health declines, research and surveillance increasingly depend on collaborations between academics and community activists. Through RESPND-MI, we aim not just to publish findings but to build tools and partnerships that can address urgent community needs — including health, housing, violence, and access to care.
-
-
-
+As support for LGBTQ+ health declines, research and surveillance increasingly depend on collaborations between academics and community activists.
+Through RESPND-MI, we aim not just to publish findings but to build tools and partnerships that can address urgent community needs — including health, housing, violence, and access to care.
 
 ```{r}
 #| fig-width: 2
@@ -51,29 +53,36 @@ plot_icon(icon_name = "peach", color = "dark_orange", shape = 0)
 
 ```
 
-
-
-
 ::: {#acknowledgements}
-**RESPND-MI** 
-[Principal investigator]{.underline}: Keletso Makofane, MPH, PhD. 
-[Co-investigators]{.underline}: Jennifer Barnes-Balenciaga, Nicholas Diamond, MPH, Elle Lett, PhD, MA, MBiostat, Cody Nolan, MD, Martez Smith, LMSW, PhD, Nguyen Tran, MPH, PhD. 
-[Former investigators]{.underline}: Pedro Botti Careneiro, MPH, PhD, Seema Kara, MPH, James Krellenstein, Ken Nadolski, MPH, Joseph Osmundson, PhD, Robert Pitts, MD, Grant Roth, MPH, Sudipta Saha, MS, Christian Urrutia, MBA, Chris Wyman. 
-[Translator]{.underline}: Antón Castellanos Usigli, MPH, DrPH.
-[Reference group]{.underline}: Judith D. Auerbach, PhD (*University of California, San Francisco*), Lisa Berkman, PhD (*Harvard University*), Forrest W. Crawford, PhD (*Yale University*), William C. Goedel, PhD (*Brown University*), Gregg Gonsalves, PhD (*Yale University*), Ian W. Holloway, PhD, LCSW, MPH (*University of California, Los Angeles*), Louise Ivers, MB, BCh, MD, MPH, DTMH (*Massachusetts General Hospital*), Lawrence C. Long, MCom, PhD (*Boston University)*, Kenneth Mayer, MD (*The Fenway Institute*), Gregorio Millett, MPH (*amfAR*), Eric J. Tchetgen Tchetgen, PhD (*University of Pennsylvania*). 
-[Research sponsors and funders]{.underline}: amfAR; Harvard Center for AIDS Research; National Institutes of Health;  neo4j, New York State Department of Health. [Marketing sponsors and funders]{.underline}: Grindr; Hub for Health Intervention, UCLA Luskin School of Public Affairs. [Administration]{.underline}: Christian Urrutia, MBA (PrEP4All); James Krellenstein (PrEP4All).
+**RESPND-MI** [Principal investigator]{.underline}: Keletso Makofane, MPH, PhD. [Co-investigators]{.underline}: Jennifer Barnes-Balenciaga, Nicholas Diamond, MPH, Elle Lett, PhD, MA, MBiostat, Cody Nolan, MD, Martez Smith, LMSW, PhD, Nguyen Tran, MPH, PhD. [Former investigators]{.underline}: Pedro Botti Careneiro, MPH, PhD, Seema Kara, MPH, James Krellenstein, Ken Nadolski, MPH, Joseph Osmundson, PhD, Robert Pitts, MD, Grant Roth, MPH, Sudipta Saha, MS, Christian Urrutia, MBA, Chris Wyman.
+[Translator]{.underline}: Antón Castellanos Usigli, MPH, DrPH. [Reference group]{.underline}: Judith D. Auerbach, PhD (*University of California, San Francisco*), Lisa Berkman, PhD (*Harvard University*), Forrest W. Crawford, PhD (*Yale University*), William C. Goedel, PhD (*Brown University*), Gregg Gonsalves, PhD (*Yale University*), Ian W. Holloway, PhD, LCSW, MPH (*University of California, Los Angeles*), Louise Ivers, MB, BCh, MD, MPH, DTMH (*Massachusetts General Hospital*), Lawrence C. Long, MCom, PhD (*Boston University)*, Kenneth Mayer, MD (*The Fenway Institute*), Gregorio Millett, MPH (*amfAR*), Eric J. Tchetgen Tchetgen, PhD (*University of Pennsylvania*).
+[Research sponsors and funders]{.underline}: amfAR; Harvard Center for AIDS Research; National Institutes of Health; neo4j, New York State Department of Health.
+[Marketing sponsors and funders]{.underline}: Grindr; Hub for Health Intervention, UCLA Luskin School of Public Affairs.
+[Administration]{.underline}: Christian Urrutia, MBA (PrEP4All); James Krellenstein (PrEP4All).
 
-**OPEN SCIENCE** All the code we developed as a part of this project, including the code for this website, will be publicly available. Our hope is that alliances of LGBTQ+ activists and researchers will use these methods to answer the pressing questions of their communities: housing, nutrition, violence, access to care, employment, health, and others. As government support for LGBTQ+ health diminishes, we will need to take it upon ourselves to conduct research and surveillance and use what we learn to respond to the needs of our communities. We include in this report a brief account of the steps we implemented to coordinate the volunteer work of over a dozen activists, academics, and community leaders.
+**OPEN SCIENCE** All the code we developed as a part of this project, including the code for this website, will be publicly available.
+Our hope is that alliances of LGBTQ+ activists and researchers will use these methods to answer the pressing questions of their communities: housing, nutrition, violence, access to care, employment, health, and others.
+As government support for LGBTQ+ health diminishes, we will need to take it upon ourselves to conduct research and surveillance and use what we learn to respond to the needs of our communities.
+We include in this report a brief account of the steps we implemented to coordinate the volunteer work of over a dozen activists, academics, and community leaders.
 
-**CONTACT** Keletso Makofane (keletso@controlf.info). Nicholas Diamond (nick@controlf.info). [Ctrl+F](https://www.controlf.info){target="_blank"}.
+**CONTACT** Keletso Makofane (keletso\@controlf.info).
+Nicholas Diamond (nick\@controlf.info).
+[Ctrl+F](https://www.controlf.info){target="_blank"}.
 
-
-**SUGGESTED CITATION** Makofane, K., Diamond, N., Barnes-Balenciaga, J., Lett, E., Mayer, K., Tran, N. (2025). *Community and connection: A study on social connection among LGBTQ+ New Yorkers*. Ctrl+F on behalf of RESPND-MI. New York City. Available: https://mpxresponse.org
+**SUGGESTED CITATION** Makofane, K., Diamond, N., Barnes-Balenciaga, J., Lett, E., Mayer, K., Tran, N.
+(2025).
+*Community and connection: A study on social connection among LGBTQ+ New Yorkers*.
+Ctrl+F on behalf of RESPND-MI.
+New York City.
+Available: https://mpxresponse.org
 :::
 
+![](images/clipboard-356854725.png)
 
-We thank PrEP4All for generously providing administrative support, and we thank our many individual donors who contributed funds (and encouragement) to the project. Our sincere thanks to members of the RESPND-MI Community Forum and Reference Group for their thoughtful suggestions on matters ranging from fundraising strategy to study design. Finally, we thank all the individual LGBTQ people who dedicated time and energy towards taking care of our community at a time of crisis. We dedicate this work to them, to all who have responded to past crises, and to those who will respond to the crises to come.
-
+We thank PrEP4All for generously providing administrative support, and we thank our many individual donors who contributed funds (and encouragement) to the project.
+Our sincere thanks to members of the RESPND-MI Community Forum and Reference Group for their thoughtful suggestions on matters ranging from fundraising strategy to study design.
+Finally, we thank all the individual LGBTQ people who dedicated time and energy towards taking care of our community at a time of crisis.
+We dedicate this work to them, to all who have responded to past crises, and to those who will respond to the crises to come.
 
 Seema Kara, MPH
 
@@ -114,8 +123,6 @@ CO-INVESTIGATOR
 Chris Wyman
 
 CO-INVESTIGATOR
-
-
 
 Judith D. Auerbach, PhD
 
@@ -159,15 +166,6 @@ amfAR
 
 Eric J. Tchetgen Tchetgen, PhD
 
-University of Pennsylvania 
-
-
-
+University of Pennsylvania
 
 # Welcome to RESPND-MI {.unnumbered .hidden}
-
-
-
-
-
-
