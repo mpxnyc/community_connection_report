@@ -2,22 +2,13 @@
 
 
 
-::: {.card}
-
-`r targets::tar_read(config_list)[[1]][["variables"]][[3]]["label"]`
-
-`r targets::tar_read(config_list)[[1]][["variables"]][[3]][["question"]]`
-
-`r paste(targets::tar_read(config_list)[[1]][["variables"]][[3]][["response_options"]], collapse = "; ")`
-
-:::
 
 
 ```{r, output='asis'}
 targets::tar_read(config_list)[[1]][["variables"]] |>
   purrr::map(
     function(x) return(paste0(
-                              "::: {.card}\n\n", 
+                              "::: {.callout }\n\n# ", 
                               x[["label"]], 
                               "\n\n",
                                x[["question"]],

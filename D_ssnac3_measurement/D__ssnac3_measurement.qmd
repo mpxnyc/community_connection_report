@@ -12,93 +12,134 @@ targets::tar_source("../R_functions")
 # SSNAC IV: Measurement {#sec-data}
 
 ::: {#leading}
-We describe the process of designing and testing a novel survey
-questionnaire tool we call the MPX NYC person-place mapper. We show the
-questions participants were presented with in the survey.
+As part of the MPX NYC survey, we developed a digital tool called the
+**MPX NYC Person–Place Network Mapper**. We describe its design,
+functionality, and implementation.
 :::
 
-## Person–Place Network Mapper
+## Person–Place Network Mapper {.unnumbered}
 
 We designed, tested, and implemented the MPX NYC Person–Place Network
-Mapper to address practical and ethical challenges in collecting
-sensitive spatial data in an anonymous survey. Our aim was to capture
-information on venues participants visited, including those where group
-sex occurred, while minimizing the risk of re-identification through
-location data.
+Mapper to meet practical and ethical challenges in collecting sensitive
+spatial data within an anonymous survey. Our goal was to capture
+information on venues visited by participants—including those where
+sexual activity occurred—while minimizing the risk of reidentification
+through location data.
 
-### Requirements
+### Requirements {.unnumbered}
 
-We engaged a web-developer to create a survey tool which: a) collects
-self-reported health and demographic information, b) collects
-information on sexual and social networks through link tracing, c)
-collects information on important geographic locations without burdening
-the user, d) does not collect any identifying information from the user
-including name, email, phone number, ip adress, or spatial coordinates.
+Working in partnership with a back-end web developer, we led the design
+of a survey tool capable of collecting:
+
+1.  Self-reported health and demographic information through multiple
+    question types;
+2.  Sexual and social network data through link tracing; and
+3.  Information on relevant geographic locations.
+
+Throughout, we sought to reduce participant burden and ensure that no
+identifying information was collected.
 
 ![Example of a user prompt for a forced-response question in the custom
-designed MPX NYC survey instrument](images/clipboard-3128943148.png)
+designed MPX NYC survey
+instrument](images/clipboard-3128943148.png){fig-align="center"
+width="498"}
 
-### Place Mapping
+### Place Mapping {.unnumbered}
 
-Because participants were unlikely to recall precise addresses or zip
-codes, we used the Google Maps API to allow them to identify locations
-by landmarks, cross-streets, subway stations, neighborhood names, etc.
-The map displayed detailed geographic information with standard
-navigation tools (see Figure D.1).
+Because participants were unlikely to recall precise addresses or ZIP
+codes, we integrated the Google Maps API to allow them to identify
+locations by business name, landmark, cross-street, subway station, or
+neighborhood. The map displayed standard navigation tools and detailed
+geographic information to aid orientation (see @fig-mapinputformat).
 
 ![Map input question format developed for MPX
-NYC](../_const/images/image_app_graphic.png){#fig-mapinputformat}
+NYC](../_const/images/image_app_graphic.png){#fig-mapinputformat
+fig-align="center" width="488"}
 
-Participants were prompted to identify specific types of places, such as
-their primary residence, and then to select additional locations where
-they had physical or sexual contact in group settings. Each tap on the
-map placed a marker, which triggered follow-up questions about activity
-at that site and the type of venue.
+At the beginning of the survey, participants were asked to locate their
+primary residence on the map. Later, they identified venues where they
+had physical or sexual contact in group settings. Each map tap placed a
+marker and triggered follow-up questions about the type of venue and
+activities that occurred there.
 
-### Link Tracing
+### Link Tracing {#sec-link-tracing .unnumbered}
 
-Using URL parameters, we developed a link tracing system to anonymously
-build a network of participants. At the start of the survey, each
-participant received a unique identifier card containing a QR code and
-word combination, which they were asked to save.
+We developed an anonymous link-tracing system using URL parameters to
+construct a participant network. At survey initiation, each respondent
+received a unique identifier card containing a QR code and word
+combination.
 
 ![Survey dialogue for sharing pre-written study recruitment messages
-with social/sexual contact](/_const/images/share_screen.png)
+with social/sexual
+contact](/_const/images/share_screen.png){fig-align="center"
+width="489"}
 
-Towards the end of the survey, participants were prompted to share a
-pre-written invitation with a unique URL with social or sexual contacts.
-If a contact used the link, an edge was added between the two
-respondents in the graph database. When a new participant connected with
-someone who had already completed the survey, the existing participant
-could confirm their identity using information shown on their identifier
-card, allowing the system to link their nodes without revealing their
-identities.
+At the end of the survey, participants were invited to share a
+pre-written recruitment message containing their unique URL with social
+or sexual contacts. When a contact completed the survey using this link,
+an edge was automatically added between the two respondents in the Neo4j
+graph database. If a new participant shared a link with someone who had
+already completed the survey, the latter could confirm the connection by
+entering the code from their identifier card, linking their nodes
+without revealing identities.
 
-### Implementation
+### Implementation {.unnumbered}
 
-To reduce the risk of identifying participants through their responses,
-spatial data were coarsened before storage. Spatial coordinates were
-converted to census tract identifiers before being transmitted from the
-participant's device to the study database.
+The tool’s front end was developed by the principal investigator as a
+single-page React/Next.js application hosted on Vercel, with design
+elements based on the MPX NYC style guide. Standard survey question
+formats (e.g., multiple choice, free text) were combined with the custom
+place-mapping and link-tracing components. The back end comprised a
+custom Neo4j graph database connected to the front end through a study
+API.
 
-The tool’s front end was built as a single-page React/NextJS application
-hosted on Vercel, with design based on the MPX NYC style guide. The back
-end used a custom Neo4j graph database. Standard survey formats
-(multiple choice, text, etc.) were integrated alongside the place
-mapping and link tracing components.
+### Safety {.unnumbered}
 
-Data flow proceeded as follows: the front end loaded questions from a
-JSON file, parsed referral identifiers and language settings from the
-URL, and requested a public identifier from the API. The API generated
-and stored public/private identifier pairs in a secure table, returned
-the public identifier and QR code to the participant, and transformed
-identifiers before sending responses to the graph database.
+####  {.unnumbered}
 
-For spatial inputs, the front end queried the FCC API, which returned
-census block identifiers. These were truncated to census tract
-identifiers before being stored in the study database. We conducted two
-rounds of user testing with about ten participants each time to improve
-usability.
+Survey questions were carefully designed to avoid collecting any direct
+or indirect identifiers, such as names, email addresses, IP addresses,
+or exact geographic coordinates. Age was recorded as a categorical
+variable rather than an integer to further reduce identifiability.
+
+To protect participant privacy, geographic coordinates were converted
+into census tract identifiers on the participant’s device before
+transmission to the database. Census tracts represent U.S. geographic
+areas containing 2,500–8,000 residents.
+
+#### Public and Private Identifiers
+
+When a participant began the survey, the front end parsed referral
+identifiers and language settings from the access URL. This information
+was sent to the study API, which generated a public–private identifier
+pair and stored it in a secure table. The API then returned the public
+identifier to the participant.
+
+Upon survey completion, responses were transmitted to the API, which
+replaced public identifiers with private ones before saving the data to
+the database. The identifier-pair table was stored separately and
+deleted after data collection concluded.
+
+#### Sensitive Spatial Data
+
+Each spatial input generated precise coordinates through the Google Maps
+API. These were immediately processed on the front end through the FCC
+API to obtain census block identifiers, which were then truncated to
+census tracts. Only the census tract identifiers were transmitted to the
+study database.
+
+#### Testing and Ethical Review
+
+We conducted two rounds of usability testing with approximately ten
+participants each to refine the survey interface and workflow. The final
+instrument and study protocol were reviewed and approved by the Harvard
+T.H. Chan School of Public Health Institutional Review Board
+(IRB22-0761).
+
+
+
+{{< include C_2__questionnaire.qmd >}}
+
 
 ## References
 
@@ -107,6 +148,10 @@ usability.
 -   US Census Bureau. 2022. *Census Geography*.\
 -   Federal Communications Commission (FCC). 2022. *API for Census Block
     Data*.
+
+
+
+
 
 ::: {#acknowledgements}
 [Acknowledgements]{.underline}: The survey instrument was designed by
