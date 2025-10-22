@@ -175,7 +175,7 @@ cookieconsent.run({
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Community and Connection</span></a>
+ <span class="menu-text">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -469,81 +469,36 @@ Show Table 7.4: Gatherings
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-{{&lt; include tbl-gatherings&gt;}}
-</div>
-</div>
-</div>
-</section>
-<section id="sexual-contact-and-distance-from-home" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="sexual-contact-and-distance-from-home">Sexual contact and distance from home</h3>
-<p>About a quarter of all gatherings happened within the same community district as the participant’s home, one-third were in another borough, and the remainder were in a different community district within the same borough.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_plotdata_placetype_bar_grid</span>() <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_bar_stratified2</span>() <span class="sc">+</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_axis_mpxnyc</span>() <span class="sc">+</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_bar_places</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_tabledata_places</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">draw_table_by_placeSex</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div id="fig-placetype-bar-grid" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-placetype-bar-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="3_2__results_gatherings_files/figure-html/fig-placetype-bar-grid-1.png" class="img-fluid figure-img" width="768">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-placetype-bar-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual contact
+<div id="tbl-places-descriptives" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-places-descriptives-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.2: Gatherings by place and contact type
 </figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Gatherings that involved sexual contact were overwhelmingly private residences, whereas non-sexual physical gatherings—such as parties, performances, or sports events—were mostly dance parties (<a href="#fig-placetype-bar-grid" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>). The closer a venue was to a participant’s home, the more likely it was to be a private residence and to include sexual contact. Conversely, the farther the venue, the more likely it was a dance party.</p>
-</section>
-<section id="gayborhoods" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="gayborhoods">Gayborhoods</h3>
-<p>The neighborhoods most frequently mentioned as gathering locations included Hell’s Kitchen and Chelsea in Manhattan, and East Williamsburg, Bushwick, and Bedford-Stuyvesant in Brooklyn.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>table_data <span class="ot">&lt;-</span> <span class="fu">make_tabledata_gatherings</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(count <span class="sc">&gt;</span> <span class="dv">16</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(neighborhood, community, borough, count, proportion) </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>labelled<span class="sc">::</span><span class="fu">var_label</span>(table_data<span class="sc">$</span>neighborhood) <span class="ot">&lt;-</span> <span class="st">"Neighborhood"</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>labelled<span class="sc">::</span><span class="fu">var_label</span>(table_data<span class="sc">$</span>community) <span class="ot">&lt;-</span> <span class="st">"Community district"</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>labelled<span class="sc">::</span><span class="fu">var_label</span>(table_data<span class="sc">$</span>borough) <span class="ot">&lt;-</span> <span class="st">"Borough"</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>labelled<span class="sc">::</span><span class="fu">var_label</span>(table_data<span class="sc">$</span>count) <span class="ot">&lt;-</span> <span class="st">"Count of gatherings"</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>labelled<span class="sc">::</span><span class="fu">var_label</span>(table_data<span class="sc">$</span>proportion) <span class="ot">&lt;-</span> <span class="st">"Proportion of gatherings"</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>table_data <span class="sc">|&gt;</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()<span class="sc">|&gt;</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">tab_header</span>(</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Most popular neighborhoods for gatherings"</span>,</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"MPX NYC 2022"</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>   gt<span class="sc">::</span><span class="fu">fmt_percent</span>(proportion, <span class="at">decimals =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div aria-describedby="tbl-places-descriptives-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="oowjgpbwhg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#oowjgpbwhg table {
+<div id="tnlepsuxtn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tnlepsuxtn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#oowjgpbwhg thead, #oowjgpbwhg tbody, #oowjgpbwhg tfoot, #oowjgpbwhg tr, #oowjgpbwhg td, #oowjgpbwhg th {
+#tnlepsuxtn thead, #tnlepsuxtn tbody, #tnlepsuxtn tfoot, #tnlepsuxtn tr, #tnlepsuxtn td, #tnlepsuxtn th {
   border-style: none;
 }
 
-#oowjgpbwhg p {
+#tnlepsuxtn p {
   margin: 0;
   padding: 0;
 }
 
-#oowjgpbwhg .gt_table {
+#tnlepsuxtn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -569,12 +524,12 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   border-left-color: #D3D3D3;
 }
 
-#oowjgpbwhg .gt_caption {
+#tnlepsuxtn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#oowjgpbwhg .gt_title {
+#tnlepsuxtn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -586,7 +541,7 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   border-bottom-width: 0;
 }
 
-#oowjgpbwhg .gt_subtitle {
+#tnlepsuxtn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -598,7 +553,7 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   border-top-width: 0;
 }
 
-#oowjgpbwhg .gt_heading {
+#tnlepsuxtn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -610,13 +565,13 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   border-right-color: #D3D3D3;
 }
 
-#oowjgpbwhg .gt_bottom_border {
+#tnlepsuxtn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#oowjgpbwhg .gt_col_headings {
+#tnlepsuxtn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -631,7 +586,7 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   border-right-color: #D3D3D3;
 }
 
-#oowjgpbwhg .gt_col_heading {
+#tnlepsuxtn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -651,7 +606,7 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   overflow-x: hidden;
 }
 
-#oowjgpbwhg .gt_column_spanner_outer {
+#tnlepsuxtn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -663,15 +618,15 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   padding-right: 4px;
 }
 
-#oowjgpbwhg .gt_column_spanner_outer:first-child {
+#tnlepsuxtn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#oowjgpbwhg .gt_column_spanner_outer:last-child {
+#tnlepsuxtn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#oowjgpbwhg .gt_column_spanner {
+#tnlepsuxtn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -683,11 +638,11 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   width: 100%;
 }
 
-#oowjgpbwhg .gt_spanner_row {
+#tnlepsuxtn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#oowjgpbwhg .gt_group_heading {
+#tnlepsuxtn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -713,7 +668,7 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   text-align: left;
 }
 
-#oowjgpbwhg .gt_empty_group_heading {
+#tnlepsuxtn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -728,15 +683,15 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   vertical-align: middle;
 }
 
-#oowjgpbwhg .gt_from_md > :first-child {
+#tnlepsuxtn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#oowjgpbwhg .gt_from_md > :last-child {
+#tnlepsuxtn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#oowjgpbwhg .gt_row {
+#tnlepsuxtn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -755,7 +710,7 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   overflow-x: hidden;
 }
 
-#oowjgpbwhg .gt_stub {
+#tnlepsuxtn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -768,7 +723,7 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   padding-right: 5px;
 }
 
-#oowjgpbwhg .gt_stub_row_group {
+#tnlepsuxtn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -782,15 +737,15 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   vertical-align: top;
 }
 
-#oowjgpbwhg .gt_row_group_first td {
+#tnlepsuxtn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#oowjgpbwhg .gt_row_group_first th {
+#tnlepsuxtn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#oowjgpbwhg .gt_summary_row {
+#tnlepsuxtn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -800,16 +755,16 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   padding-right: 5px;
 }
 
-#oowjgpbwhg .gt_first_summary_row {
+#tnlepsuxtn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#oowjgpbwhg .gt_first_summary_row.thick {
+#tnlepsuxtn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#oowjgpbwhg .gt_last_summary_row {
+#tnlepsuxtn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -819,7 +774,7 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   border-bottom-color: #D3D3D3;
 }
 
-#oowjgpbwhg .gt_grand_summary_row {
+#tnlepsuxtn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -829,7 +784,7 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   padding-right: 5px;
 }
 
-#oowjgpbwhg .gt_first_grand_summary_row {
+#tnlepsuxtn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -839,7 +794,7 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   border-top-color: #D3D3D3;
 }
 
-#oowjgpbwhg .gt_last_grand_summary_row_top {
+#tnlepsuxtn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -849,11 +804,11 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   border-bottom-color: #D3D3D3;
 }
 
-#oowjgpbwhg .gt_striped {
+#tnlepsuxtn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#oowjgpbwhg .gt_table_body {
+#tnlepsuxtn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -862,7 +817,7 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   border-bottom-color: #D3D3D3;
 }
 
-#oowjgpbwhg .gt_footnotes {
+#tnlepsuxtn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -876,7 +831,7 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   border-right-color: #D3D3D3;
 }
 
-#oowjgpbwhg .gt_footnote {
+#tnlepsuxtn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -885,7 +840,7 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   padding-right: 5px;
 }
 
-#oowjgpbwhg .gt_sourcenotes {
+#tnlepsuxtn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -899,7 +854,7 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   border-right-color: #D3D3D3;
 }
 
-#oowjgpbwhg .gt_sourcenote {
+#tnlepsuxtn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -907,72 +862,717 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
   padding-right: 5px;
 }
 
-#oowjgpbwhg .gt_left {
+#tnlepsuxtn .gt_left {
   text-align: left;
 }
 
-#oowjgpbwhg .gt_center {
+#tnlepsuxtn .gt_center {
   text-align: center;
 }
 
-#oowjgpbwhg .gt_right {
+#tnlepsuxtn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#oowjgpbwhg .gt_font_normal {
+#tnlepsuxtn .gt_font_normal {
   font-weight: normal;
 }
 
-#oowjgpbwhg .gt_font_bold {
+#tnlepsuxtn .gt_font_bold {
   font-weight: bold;
 }
 
-#oowjgpbwhg .gt_font_italic {
+#tnlepsuxtn .gt_font_italic {
   font-style: italic;
 }
 
-#oowjgpbwhg .gt_super {
+#tnlepsuxtn .gt_super {
   font-size: 65%;
 }
 
-#oowjgpbwhg .gt_footnote_marks {
+#tnlepsuxtn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#oowjgpbwhg .gt_asterisk {
+#tnlepsuxtn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#oowjgpbwhg .gt_indent_1 {
+#tnlepsuxtn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#oowjgpbwhg .gt_indent_2 {
+#tnlepsuxtn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#oowjgpbwhg .gt_indent_3 {
+#tnlepsuxtn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#oowjgpbwhg .gt_indent_4 {
+#tnlepsuxtn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#oowjgpbwhg .gt_indent_5 {
+#tnlepsuxtn .gt_indent_5 {
   text-indent: 25px;
 }
 
-#oowjgpbwhg .katex-display {
+#tnlepsuxtn .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#oowjgpbwhg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tnlepsuxtn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="true" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings gt_spanner_row">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="label"><span data-qmd-base64="KipWYXJpYWJsZSoq"><span class="gt_from_md"><strong>Variable</strong></span></span></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="level 1; stat_1">
+        <div class="gt_column_spanner"><span data-qmd-base64="KipQaHlzaWNhbCBvciBzZXh1YWwgY29udGFjdCBpbiBncm91cCBzZXR0aW5nIGluIHBhc3QgNCB3ZWVrcyoq"><span class="gt_from_md"><strong>Physical or sexual contact in group setting in past 4 weeks</strong></span></span></div>
+      </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" scope="col" id="p.value"><span data-qmd-base64="KipwLXZhbHVlKio="><span class="gt_from_md"><strong>p-value</strong></span></span></th>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="stat_1"><span data-qmd-base64="KipEaWQgbm90IGhhdmUgc2V4KiogIApOID0gMjY0"><span class="gt_from_md"><strong>Did not have sex</strong><br>
+N = 264</span></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="stat_2"><span data-qmd-base64="KipIYWQgc2V4KiogIApOID0gMzUy"><span class="gt_from_md"><strong>Had sex</strong><br>
+N = 352</span></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="stat_0"><span data-qmd-base64="KipPdmVyYWxsKiogIApOID0gNjE2"><span class="gt_from_md"><strong>Overall</strong><br>
+N = 616</span></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Place type</td>
+<td headers="stat_1" class="gt_row gt_center"><br></td>
+<td headers="stat_2" class="gt_row gt_center"><br></td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Concert/Theatre/Show</td>
+<td headers="stat_1" class="gt_row gt_center">63 (24%)</td>
+<td headers="stat_2" class="gt_row gt_center">4 (1.1%)</td>
+<td headers="stat_0" class="gt_row gt_center">67 (11%)</td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Dance Party</td>
+<td headers="stat_1" class="gt_row gt_center">110 (42%)</td>
+<td headers="stat_2" class="gt_row gt_center">33 (9.4%)</td>
+<td headers="stat_0" class="gt_row gt_center">143 (23%)</td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Dark Room/Sex Party</td>
+<td headers="stat_1" class="gt_row gt_center">10 (3.8%)</td>
+<td headers="stat_2" class="gt_row gt_center">52 (15%)</td>
+<td headers="stat_0" class="gt_row gt_center">62 (10%)</td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Private Residence</td>
+<td headers="stat_1" class="gt_row gt_center">28 (11%)</td>
+<td headers="stat_2" class="gt_row gt_center">222 (63%)</td>
+<td headers="stat_0" class="gt_row gt_center">250 (41%)</td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Something Else</td>
+<td headers="stat_1" class="gt_row gt_center">40 (15%)</td>
+<td headers="stat_2" class="gt_row gt_center">40 (11%)</td>
+<td headers="stat_0" class="gt_row gt_center">80 (13%)</td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Sport Game</td>
+<td headers="stat_1" class="gt_row gt_center">13 (4.9%)</td>
+<td headers="stat_2" class="gt_row gt_center">1 (0.3%)</td>
+<td headers="stat_0" class="gt_row gt_center">14 (2.3%)</td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Place borough</td>
+<td headers="stat_1" class="gt_row gt_center"><br></td>
+<td headers="stat_2" class="gt_row gt_center"><br></td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Bronx</td>
+<td headers="stat_1" class="gt_row gt_center">6 (2.3%)</td>
+<td headers="stat_2" class="gt_row gt_center">18 (5.1%)</td>
+<td headers="stat_0" class="gt_row gt_center">24 (3.9%)</td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Brooklyn</td>
+<td headers="stat_1" class="gt_row gt_center">84 (32%)</td>
+<td headers="stat_2" class="gt_row gt_center">96 (27%)</td>
+<td headers="stat_0" class="gt_row gt_center">180 (29%)</td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Manhattan</td>
+<td headers="stat_1" class="gt_row gt_center">144 (55%)</td>
+<td headers="stat_2" class="gt_row gt_center">188 (53%)</td>
+<td headers="stat_0" class="gt_row gt_center">332 (54%)</td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Queens</td>
+<td headers="stat_1" class="gt_row gt_center">29 (11%)</td>
+<td headers="stat_2" class="gt_row gt_center">48 (14%)</td>
+<td headers="stat_0" class="gt_row gt_center">77 (13%)</td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Staten Island</td>
+<td headers="stat_1" class="gt_row gt_center">1 (0.4%)</td>
+<td headers="stat_2" class="gt_row gt_center">2 (0.6%)</td>
+<td headers="stat_0" class="gt_row gt_center">3 (0.5%)</td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Distance from home</td>
+<td headers="stat_1" class="gt_row gt_center"><br></td>
+<td headers="stat_2" class="gt_row gt_center"><br></td>
+<td headers="stat_0" class="gt_row gt_center"><br></td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Same Community District</td>
+<td headers="stat_1" class="gt_row gt_center">42 (16%)</td>
+<td headers="stat_2" class="gt_row gt_center">144 (41%)</td>
+<td headers="stat_0" class="gt_row gt_center">186 (30%)</td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Same Borough</td>
+<td headers="stat_1" class="gt_row gt_center">116 (44%)</td>
+<td headers="stat_2" class="gt_row gt_center">114 (32%)</td>
+<td headers="stat_0" class="gt_row gt_center">230 (37%)</td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Different Borough</td>
+<td headers="stat_1" class="gt_row gt_center">106 (40%)</td>
+<td headers="stat_2" class="gt_row gt_center">94 (27%)</td>
+<td headers="stat_0" class="gt_row gt_center">200 (32%)</td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="5"><span data-qmd-base64="KkRhdGEgc291cmNlOiBNUFggTllDIDIwMjIq"><span class="gt_from_md"><em>Data source: MPX NYC 2022</em></span></span></td>
+    </tr>
+  </tfoot>
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="5"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span data-qmd-base64="biAoJSk="><span class="gt_from_md">n (%)</span></span></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sexual-contact-and-distance-from-home" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="sexual-contact-and-distance-from-home">Sexual contact and distance from home</h3>
+<p>About a quarter of all gatherings happened within the same community district as the participant’s home, one-third were in another borough, and the remainder were in a different community district within the same borough.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_plotdata_placetype_bar_grid</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">proportion =</span> <span class="fu">abs</span>(proportion)) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_bar_stratified2</span>() <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">coord_polar</span>() <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_axis_mpxnyc</span>() <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.3</span>, <span class="fl">0.84</span>)) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_label</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">label =</span> scales<span class="sc">::</span><span class="fu">percent</span>(proportion, <span class="at">accuracy =</span> <span class="dv">1</span>), <span class="at">x =</span> level, <span class="at">y =</span> <span class="fl">0.5</span> ), <span class="at">border.color =</span> <span class="st">"white"</span>, <span class="at">label.size =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_bar_places</span>(</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.margin =</span> ggplot2<span class="sc">::</span><span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="st">"cm"</span>), </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.spacing =</span> ggplot2<span class="sc">::</span><span class="fu">unit</span>(<span class="dv">0</span>, <span class="st">"cm"</span>),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major.y =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major.x =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text.x =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text.y.left =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">#theme_mpxnyc_bar_places(</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">#    plot.margin = ggplot2::unit(c(0,0,0,0), "cm"), </span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">#    panel.spacing = ggplot2::unit(0, "cm")</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="co">#    ) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-placetype-bar-grid" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-placetype-bar-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="3_2__results_gatherings_files/figure-html/fig-placetype-bar-grid-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-placetype-bar-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual contact
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Gatherings that involved sexual contact were overwhelmingly private residences, whereas non-sexual physical gatherings—such as parties, performances, or sports events—were mostly dance parties (<a href="#fig-placetype-bar-grid" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>). The closer a venue was to a participant’s home, the more likely it was to be a private residence and to include sexual contact. Conversely, the farther the venue, the more likely it was a dance party.</p>
+</section>
+<section id="gayborhoods" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="gayborhoods">Gayborhoods</h3>
+<p>The neighborhoods most frequently mentioned as gathering locations included Hell’s Kitchen and Chelsea in Manhattan, and East Williamsburg, Bushwick, and Bedford-Stuyvesant in Brooklyn.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>table_data <span class="ot">&lt;-</span> <span class="fu">make_tabledata_gatherings</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(count <span class="sc">&gt;</span> <span class="dv">16</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(neighborhood, community, borough, count, proportion) </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>labelled<span class="sc">::</span><span class="fu">var_label</span>(table_data<span class="sc">$</span>neighborhood) <span class="ot">&lt;-</span> <span class="st">"Neighborhood"</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>labelled<span class="sc">::</span><span class="fu">var_label</span>(table_data<span class="sc">$</span>community) <span class="ot">&lt;-</span> <span class="st">"Community district"</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>labelled<span class="sc">::</span><span class="fu">var_label</span>(table_data<span class="sc">$</span>borough) <span class="ot">&lt;-</span> <span class="st">"Borough"</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>labelled<span class="sc">::</span><span class="fu">var_label</span>(table_data<span class="sc">$</span>count) <span class="ot">&lt;-</span> <span class="st">"Count of gatherings"</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>labelled<span class="sc">::</span><span class="fu">var_label</span>(table_data<span class="sc">$</span>proportion) <span class="ot">&lt;-</span> <span class="st">"Proportion of gatherings"</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>table_data <span class="sc">|&gt;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()<span class="sc">|&gt;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">tab_header</span>(</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Most popular neighborhoods for gatherings"</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"MPX NYC 2022"</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>   gt<span class="sc">::</span><span class="fu">fmt_percent</span>(proportion, <span class="at">decimals =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="bpqulzcqdo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bpqulzcqdo table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#bpqulzcqdo thead, #bpqulzcqdo tbody, #bpqulzcqdo tfoot, #bpqulzcqdo tr, #bpqulzcqdo td, #bpqulzcqdo th {
+  border-style: none;
+}
+
+#bpqulzcqdo p {
+  margin: 0;
+  padding: 0;
+}
+
+#bpqulzcqdo .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bpqulzcqdo .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#bpqulzcqdo .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bpqulzcqdo .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bpqulzcqdo .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bpqulzcqdo .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bpqulzcqdo .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bpqulzcqdo .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bpqulzcqdo .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bpqulzcqdo .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bpqulzcqdo .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bpqulzcqdo .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bpqulzcqdo .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bpqulzcqdo .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#bpqulzcqdo .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bpqulzcqdo .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bpqulzcqdo .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bpqulzcqdo .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bpqulzcqdo .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bpqulzcqdo .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#bpqulzcqdo .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#bpqulzcqdo .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#bpqulzcqdo .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bpqulzcqdo .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#bpqulzcqdo .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#bpqulzcqdo .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bpqulzcqdo .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bpqulzcqdo .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bpqulzcqdo .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bpqulzcqdo .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bpqulzcqdo .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bpqulzcqdo .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bpqulzcqdo .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bpqulzcqdo .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bpqulzcqdo .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bpqulzcqdo .gt_left {
+  text-align: left;
+}
+
+#bpqulzcqdo .gt_center {
+  text-align: center;
+}
+
+#bpqulzcqdo .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bpqulzcqdo .gt_font_normal {
+  font-weight: normal;
+}
+
+#bpqulzcqdo .gt_font_bold {
+  font-weight: bold;
+}
+
+#bpqulzcqdo .gt_font_italic {
+  font-style: italic;
+}
+
+#bpqulzcqdo .gt_super {
+  font-size: 65%;
+}
+
+#bpqulzcqdo .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#bpqulzcqdo .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#bpqulzcqdo .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#bpqulzcqdo .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#bpqulzcqdo .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bpqulzcqdo .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bpqulzcqdo .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#bpqulzcqdo .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#bpqulzcqdo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1073,7 +1673,7 @@ Figure&nbsp;8.1: MPX NYC contact venue type by distance from home and sexual con
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_icon</span>(<span class="at">icon_name =</span> <span class="st">"taco"</span>, <span class="at">color =</span> <span class="st">"dark_green"</span>, <span class="at">shape =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_icon</span>(<span class="at">icon_name =</span> <span class="st">"taco"</span>, <span class="at">color =</span> <span class="st">"dark_green"</span>, <span class="at">shape =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
