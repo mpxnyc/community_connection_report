@@ -1,0 +1,134 @@
+
+
+# Gatherings {#sec-venues}
+
+```{r include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+
+
+
+### {.unnumbered}
+
+
+```{r}
+#| tbl-cap: Gatherings attended by MPX NYC participants
+#| label: tbl-gatherings
+
+make_tabledata_gatherings <- function(){
+  targets::tar_read(data_bipartite_graph_collected) |>
+    tidygraph::activate(edges)|>
+    data.frame() |>
+    dplyr::group_by(place_borough, place_community, place_neighborhood) |>
+    dplyr::summarize(count = dplyr::n()) |>
+    dplyr::rename(borough = place_borough, community = place_community, neighborhood = place_neighborhood) |>
+    dplyr::arrange(-count) |>
+    dplyr::ungroup() |>
+    dplyr::filter(!is.na(borough)) |>
+    dplyr::mutate(proportion = count / sum(count))
+}
+
+
+scale_labels <- c("0", "1-10", "11-20", "21-30", "31+")
+
+mpxnyc::neighborhood_sf_obj |>
+   sf::st_as_sf() |>
+  dplyr::left_join(make_tabledata_gatherings(), by = "neighborhood") |>
+  dplyr::mutate(count = ifelse(is.na(count), 0, count)) |>
+  dplyr::mutate(count_cat = cut(count, c(-1,0,10,20,30,100), scale_labels)) |>
+  dplyr::arrange(-count) |>
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(data = mpxnyc::community_sf_obj, fill = "white", linewidth = 0, color = NA) +
+  ggplot2::geom_sf(data = mpxnyc::community_sf_obj, fill = "#F73C95", linewidth = 0, color = NA, alpha = 0.1) +
+  ggplot2::geom_sf(ggplot2::aes(alpha = count_cat), linewidth = 0, fill = "#F73C95", color = "#FF99C5") +
+  ggplot2::geom_sf(data = mpxnyc::community_sf_obj, fill = NA, linewidth = 0.3, color = "black") +
+  ggplot2::scale_alpha_discrete("Gatherings\ncount") +
+  theme_mpxnyc_blank(
+    plot.background = ggplot2::element_rect(fill = "white"),
+    legend.position = "right"
+    )
+```
+
+MPX NYC participants reported 604 total locations where they had physical or sexual contact in a group setting—what we call *gatherings*. Nearly two in five gatherings occurred in private residences, and about a quarter took place at dance parties. Over half of gatherings were in Manhattan, while roughly one-third occurred in Brooklyn.  
+
+
+
+::: {.callout-note collapse=true icon=false}
+# Show Table 7.4: Gatherings
+
+{{< include tbl-gatherings>}}
+:::
+
+
+
+
+
+
+### Sexual contact and distance from home {.unnumbered}
+
+About a quarter of all gatherings happened within the same community district as the participant’s home, one-third were in another borough, and the remainder were in a different community district within the same borough.
+
+
+```{r}
+#| fig-cap: !expr 'get_figure_details("fig-places-distance-sexcontact")'
+#| label: fig-placetype-bar-grid
+#| fig-width: 8
+#| fig-height: 9
+
+make_plotdata_placetype_bar_grid() |>
+  plot_bar_stratified2() +
+  scale_axis_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_bar_places() 
+
+
+```
+
+Gatherings that involved sexual contact were overwhelmingly private residences, whereas non-sexual physical gatherings—such as parties, performances, or sports events—were mostly dance parties (@fig-placetype-bar-grid).
+The closer a venue was to a participant’s home, the more likely it was to be a private residence and to include sexual contact. Conversely, the farther the venue, the more likely it was a dance party.
+
+
+### Gayborhoods {.unnumbered} 
+
+The neighborhoods most frequently mentioned as gathering locations included Hell’s Kitchen and Chelsea in Manhattan, and East Williamsburg, Bushwick, and Bedford-Stuyvesant in Brooklyn.
+
+
+
+
+
+
+
+```{r}
+
+table_data <- make_tabledata_gatherings() |>
+  dplyr::filter(count > 16) |>
+  dplyr::ungroup() |>
+  dplyr::select(neighborhood, community, borough, count, proportion) 
+
+labelled::var_label(table_data$neighborhood) <- "Neighborhood"
+labelled::var_label(table_data$community) <- "Community district"
+labelled::var_label(table_data$borough) <- "Borough"
+labelled::var_label(table_data$count) <- "Count of gatherings"
+labelled::var_label(table_data$proportion) <- "Proportion of gatherings"
+
+table_data |>
+  gt::gt()|>
+  gt::tab_header(
+    title = "Most popular neighborhoods for gatherings",
+    subtitle = "MPX NYC 2022"
+  ) |>
+   gt::fmt_percent(proportion, decimals = 0)
+
+```
+
+
+
+```{r}
+#| fig-width: 2
+#| fig-height: 2
+#| fig-align: center
+
+
+plot_icon(icon_name = "taco", color = "dark_green", shape = 4)
+```
