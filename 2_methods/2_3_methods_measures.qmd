@@ -4,86 +4,107 @@
 targets::tar_source("../R_functions")
 ```
 
+## Data: MPX NYC Participant–Community Network
 
+### {.unnumbered}
 
+The **MPX NYC Participant–Community Network** links individuals in the study to the community districts of New York City. In this **bipartite network**, nodes represent either **individual participants** or **community districts**, and ties connect each person to the districts with which they have a relationship.
 
+Spatial data were originally collected at the **census tract** level but aggregated to **community districts** for analysis. Census tracts are geographic units that typically contain **2,500 to 8,000 residents**, while community districts divide New York City into administrative areas nested within its five boroughs and encompassing multiple census tracts.
 
-## Data: MPX NYC participant-community network
+A tie between an individual and a community district indicates either **residence** or **attendance at a gathering** in that district. Two related network views are derived from this structure: the *Community District Network* and the *Participant Network*, each described below.
 
-The MPX NYC participant community network is a network with community districts and individuals as nodes, and ties between pairs consisting of one individual and one community district. While spatial data were collected using census tract identifiers, the unit of spatial analysis is the community district. Community districts are spatial units that divide New York City into regions which are nested by the five boroughs of New York City, and which in turn nest census tracts.
+### MPX NYC Community District Network  {.unnumbered}
 
-A tie indicates that the individual as some relation with the community district. This relation can be because of a residence or attended gathering in that community district. Related to this network are the community district network and participant network, described below.
+The **MPX NYC Community District Network** represents connections among New York City community districts based on participants’ reported residences and gatherings. In this network, **nodes** correspond to community districts, and a **weighted tie** between any two districts indicates that at least one participant reported locations in both. The **edge weight** equals the number of participants linking the two districts through shared activity or residence.
 
-### MPX NYC community district network
+This structure allows us to examine how districts are connected through participants’ movement and social activity, offering insight into how local dynamics may shape city-wide outbreak patterns.\
+Each district’s role is characterized by its **social reach** and **spatial reach**, measures described in later sections.
 
+### MPX NYC Participant Network  {.unnumbered}
 
-The MPX NYC community district network is a network with community districts as nodes. A weighted tie between two nodes indicates that the two community districts both have at least one MPX NYX participant who had a residence or gathering in both places. The weight is given by the count of such individuals. Of interest is the influence each community district has in city-wide outbreak dynamics. It is measured using community district social and spatial reach.
+The **MPX NYC Participant Network** captures how survey participants are linked through shared physical contexts within the city. In this network, **nodes** represent individual participants, and a **weighted edge** connects any two participants who share at least one community district—either through residence or through gatherings they both attended. The **edge weight** corresponds to the number of community districts that the pair have in common.
 
-### MPX NYC participant network
+Analyzing this network allows us to assess how participants are connected through shared spaces and to explore patterns of connectedness across demographic and behavioral subgroups.
 
+## Node Characteristics
 
-We examined the patterning of shared physical context among participants using the MPX NYC participant network. In this network, survey participants are represented as nodes. A weighted edge indicates that the individuals represented by the nodes have at least one residence or gathering in a common community district. The edge weight is given by the count of community districts the pair share. Of interest are the overall connectedness of the network and the pattern of connection across different subgroups.
+### Individual Measures  {.unnumbered}
 
-## Node characteristics
+We collected detailed information on participants’ demographics, health, and patterns of social and sexual connection.
 
-### Individual measures
+**Demographic measures** included age, race, sex assigned at birth, gender identity, sexual orientation, and community district of residence.
 
-We measured participant demographics age, race, sex assigned at birth, gender identity, sexual orientation, and community district of residence; health-related questions on HIV status, viral suppression, STI-related symptoms, PrEP use, and mpox vaccination status; and questions related to social and sexual connection with queer and transgender communities: count of recent individual sex contacts, count of recent individual physical (non-sexual) contacts, count of recent important social contacts, and any recent physical or sexual contact in a group setting.
+**Health-related measures** covered HIV status, viral suppression, STI-related symptoms, use of pre-exposure prophylaxis (PrEP), and mpox vaccination status.
 
-#### Gender modality
+**Connection measures** captured each participant’s degree of engagement within queer and transgender communities, including:
 
-Gender modality was measured using a two-step approach: first, we solicited the participant’s current gender (man, woman, trans man, trans woman, non-binary, other), and then sex assigned at birth (male, female, other). We then constructed a gender modality variable as follows:
+-   The number of recent individual sexual contacts,
 
+-   The number of recent individual physical (non-sexual) contacts,
+
+-   The number of important social contacts, and
+
+-   Whether the participant reported any recent physical or sexual contact in a group setting.
+
+#### Gender Modality
+
+Gender modality was measured using a **two-step approach**. Participants were first asked to indicate their **current gender** (options: man, woman, trans man, trans woman, non-binary, or other) and then their **sex assigned at birth** (male, female, or other). Combining these two responses, we constructed a **gender modality variable**, which distinguishes between cisgender and transgender participants and captures additional gender diversity in the sample.
 
 {{< include tbl-gender-modality.qmd >}}
 
+The table above summarizes how gender modality was derived from these responses.
 
+#### Race–Gender
 
+Building on the gender modality variable, we created a **race–gender variable** to capture intersectional differences within the sample. This categorical variable mirrors the gender modality categories but provides additional resolution among cisgender men. Rather than grouping all cisgender men together, we divided this category into **white cisgender men**, **Latinx cisgender men**, **Black cisgender men**, and **Other cisgender men**—the latter combining Asian, Pacific Islander, and other racial identities.
 
-#### Race-gender
+### Community District Measures  {.unnumbered}
 
-We created a Race-gender variable which is a categorical variable with levels identical to the gender modality with one modification: instead of having all cisgender men in one level we divided the group up into white cisgender men, Latinx cisgender men, Black cisgender men, and under the category Other cisgender men, we grouped Asian, Pacific Islander and other cisgender men.
+#### Social Reach
 
-### Community district measures
+For each community district, **social reach** is defined as the sum of the edge weights connecting that district to individual participants in the **MPX NYC Participant–Community Network**. It reflects the **overall level of participant contact or engagement** associated with a given district, capturing how intensively individuals in the study population are socially linked to that area.
 
-#### Social reach
+#### Spatial Reach
 
-For a given community district, social reach is defined as the sum of edge weights for edges connecting that community district to individuals (in the MPX NYC spatial participant network). It quantifies the volume or level of contact in the community district.
+For each community district, **spatial reach** is defined as the sum of the edge weights connecting that district to other community districts in the **MPX NYC Community District Network**. It represents the **extent of participant movement or overlap** between districts, capturing how frequently individuals in the study population reported activity or residence across multiple areas of the city.
 
-#### Spatial reach
+## Edge Characteristics
 
-For a given community district spatial reach is defined as the sum of edge weights for edges connecting that community district to others (in the MPX NYC community district network. It quantifies the volume or level of exchange of individuals between a particular community district and others.
+#### Residence Edges
 
-## Edge characteristics
+Each participant reported the location of their residence using the **Person–Place Network Map** question.\
+In the **MPX NYC Participant–Community Network**, each residence is represented as an **edge** linking the participant to the community district that contains their home.
 
-### Residence edges
+#### Gathering Edges
 
-All participants were asked the location of their residence through the Person-Place Network Map question. Each participant's residences is represented as an edge between the participant and the community district containing their residence.
+Participants who reported recent physical or sexual contact at a **gathering** were asked to identify the locations of each event where that contact occurred. In the **MPX NYC Participant–Community Network**, each gathering is represented as an **edge** connecting the participant to the community district in which the event took place.
 
-### Gathering edges
+#### Event Type
 
-Participants who indicated recent physical or sexual contact at a gathering were asked for the locations of each of gatherings where the contact happened. They are each represented as an edge between the participant and the community district containing the gathering.
+To contextualize the settings of reported gatherings, participants were asked to select the **type of event** for each location where physical or sexual contact occurred. Response options included *dance party, sex party, darkroom, sports event, concert, theatre or show, private residence, sex club, bathhouse, park,* or *another type of event*.
 
-#### Event type
+#### Sexual Contact
 
-Participants were asked the type of event each gathering was (dance party, sex party, darkroom, sport game, concert, theatre/show, private residence, sex club, bathhouse, park, something else).
+For each reported gathering, participants indicated whether **sexual contact** occurred. This measure helps distinguish between gatherings that primarily served social functions and those involving sexual activity, allowing for comparisons across event types and contexts.
 
-#### Sexual contact
+#### Distance from Home
 
-Participants were also asked if they had sexual contact at each gathering.
+We constructed an approximate measure of **distance from home** to describe how far participants traveled between their residence and each gathering location. Gatherings were categorized as:\
+1. **Same community district** as the participant’s residence,\
+2. **Different community district but within the same borough**, or\
+3. **Different borough** entirely.
 
-#### Distance from home
+This measure provides insight into how spatial mobility shapes opportunities for contact and potential transmission.
 
-We constructed an approximate measure of the distance between residence and gathering by categorizing gatherings into those that are in the same community district as the residence; in a different community district but the same borough; or in a different borough. We refer to this measure as distance from home.
+## Network Characteristics
 
-## Network characteristics
+#### Size of the Largest Connected Component
 
-#### Size of largest connected component
+In the **MPX NYC Participant Network**, overall connectedness was measured using the **largest connected component (LCC)**—the subset of nodes in which every participant can be reached from every other participant through one or more existing network ties. The proportion of all nodes contained in the LCC serves as a measure of how cohesively the network is connected: a larger LCC indicates greater overall connectedness among participants.
 
-We measure connectedness using the proportion of nodes in the largest connected component (LCC) of the MPX NYC participant network. In a network, a connected component is a subset of nodes such that each node in the subset is reachable from any other node in the subset, and such that there are no nodes outside the subset which are reachable from a node inside it. By "reachable", we mean possible to reach by tracing a path from one node to another over existing network ties. We consider a network with a larger LCC to be better connected than a network with a smaller LCC.
+#### Spatial Mixing Ratio
 
-#### Spatial mixing ratio
+We assessed spatial patterns of interaction between **distinct subgroups** of participants using the **spatial mixing ratio**. This measure quantifies the extent to which individuals from one group tend to live or gather in the same community districts as individuals from another group.
 
-We measure patterns of mixing between a pair of distict subgroups of participants using the spatial mixing ratio. It is a positive real number which is greater than 1 if individuals in the first subgroup tend to live and play in community districts that individuals in the second subgroup do. It is defined as the average (calculated across individuals) spatial preference of the first group for the second group, divided by the prevalence of the second group. For a given individual, spatial preference for a given group is defined as the sum of the weights of the edges connecting to nodes of the second group, divided by the total sum weights.
-
-
+Formally, the spatial mixing ratio is a positive real number greater than 1 when members of the first subgroup are more likely than expected to share community districts with members of the second subgroup. It is calculated as the average (across all individuals) of each person’s **spatial preference** for the second group—defined as the proportion of their total edge weights that connect to members of that group—divided by the group’s overall prevalence in the network.
