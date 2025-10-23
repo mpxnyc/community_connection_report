@@ -452,7 +452,7 @@ window.Quarto = {
   <li><a href="#structural-equations-1" id="toc-structural-equations-1" class="nav-link" data-scroll-target="#structural-equations-1"><span class="header-section-number">C.2.2</span> Structural equations</a></li>
   <li><a href="#estimands-1" id="toc-estimands-1" class="nav-link" data-scroll-target="#estimands-1"><span class="header-section-number">C.2.3</span> Estimands</a></li>
   <li><a href="#identification-1" id="toc-identification-1" class="nav-link" data-scroll-target="#identification-1"><span class="header-section-number">C.2.4</span> Identification</a></li>
-  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes"><span class="header-section-number">C.2.5</span> Notes</a></li>
+  <li><a href="#remarks-1" id="toc-remarks-1" class="nav-link" data-scroll-target="#remarks-1"><span class="header-section-number">C.2.5</span> Remarks</a></li>
   </ul></li>
   <li><a href="#social-spatial-networks" id="toc-social-spatial-networks" class="nav-link" data-scroll-target="#social-spatial-networks"><span class="header-section-number">C.3</span> Social-spatial networks</a>
   <ul class="collapse">
@@ -460,7 +460,7 @@ window.Quarto = {
   <li><a href="#structural-equations-2" id="toc-structural-equations-2" class="nav-link" data-scroll-target="#structural-equations-2"><span class="header-section-number">C.3.2</span> Structural equations</a></li>
   <li><a href="#estimands-2" id="toc-estimands-2" class="nav-link" data-scroll-target="#estimands-2"><span class="header-section-number">C.3.3</span> Estimands</a></li>
   <li><a href="#identification-2" id="toc-identification-2" class="nav-link" data-scroll-target="#identification-2"><span class="header-section-number">C.3.4</span> Identification</a></li>
-  <li><a href="#notes-1" id="toc-notes-1" class="nav-link" data-scroll-target="#notes-1"><span class="header-section-number">C.3.5</span> Notes</a></li>
+  <li><a href="#remarks-2" id="toc-remarks-2" class="nav-link" data-scroll-target="#remarks-2"><span class="header-section-number">C.3.5</span> Remarks</a></li>
   </ul></li>
   <li><a href="#sec-control-intervention" id="toc-sec-control-intervention" class="nav-link" data-scroll-target="#sec-control-intervention"><span class="header-section-number">C.4</span> Vaccine strategy model</a>
   <ul class="collapse">
@@ -1626,19 +1626,11 @@ E[Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})} ]
 \]</span></p>
 <p>In the first line we use the law of iterated expectations. In the second line, we use the separability of the structural equation for <span class="math inline">\(Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}\)</span>. In the third line we replace substitute for the structural equation. In the fourth line, we use the fact that in the counterfactual model, <span class="math inline">\(\mathbf{A}\)</span> is independent of <span class="math inline">\(f_{Y}(...)\)</span> conditional on <span class="math inline">\(\mathbf{L}\)</span>. In the final line we use the fact that structural equation for <span class="math inline">\(Y_i^{(a_i, \mathbf{a}_{\mathscr{N}_i})}\)</span> in the counterfactual data NPSEM-IE is identical to the structural equation for <span class="math inline">\(Y_i\)</span> in the observed data NPSEM-IE.</p>
 </section>
-<section id="notes" class="level3" data-number="C.2.5">
-<h3 data-number="C.2.5" class="anchored" data-anchor-id="notes"><span class="header-section-number">C.2.5</span> Notes</h3>
-<p>[<strong>under development</strong>]</p>
-<ul>
-<li>We have turned a non-iid situation into a form that is tractible using approaches that usually require IID.</li>
-<li>The reason this works is that the assumption of IID is stronger than necessary in most applications. For regression modesl, we require conditional independence between observation, not independence. We simply take up the room between the independence and conditional independence assumptions and tame it using graphs.</li>
-<li>This is great if we know the entire graph - we can accurately calculate network exposure values for each observation in order to estimate functionals of the structural equations.</li>
-<li>But if we only have a random sample of the nodes in a network, which would be the most optimistic scenario in most applications, the average degree will be lower in the sampled network than in the entire network. To the extent network exposure values are correlated, they will be biased, leading to biased estimates of the structural equations.</li>
-<li>One approach to bridge this situation would be to build into models, both the mechanism generating the network (the graph generators), and the mechanism for censoring the nodes, to generate estimates that account for those.</li>
-<li>Another approach might be to solicit informatio about the network from the nodes themselves, and calculate network exposure values using measures taken exclusively on each given observation. The measurement error would be significant, and would likely need to be incorporated into the model as well.</li>
-<li>For linear regression models, for instance, we need only know the mean degree of the graph and each observation’s network exposure values to identify the coefficients of a model which exhibits homogenous network interference.</li>
-<li>In the next section we side-step these issues by focusing on bipartite networks of people and places where we have a full listing of places and a possibly censored listing of people. In this setting, it is possible to accurately observe the network exposure values of the person nodes included in the sample since these values are a function of values taken on place nodes, which are fully observed.</li>
-</ul>
+<section id="remarks-1" class="level3" data-number="C.2.5">
+<h3 data-number="C.2.5" class="anchored" data-anchor-id="remarks-1"><span class="header-section-number">C.2.5</span> Remarks</h3>
+<p>This section extended the classical framework by relaxing the assumption of independence across observational units. By introducing <strong>homogeneous network interference</strong>, we allowed observational units to affect one another through a fixed, structured pattern of connections, while assuming that the mechanism of influence is identical across all relationships.</p>
+<p>Homogeneous network interference makes it possible to represent interference formally and to study its causal implications analytically. Under this assumption, we can summarize the influence of the network on each unit through <strong>exposure mappings</strong>, which translate complex interdependence into measurable quantities that can be modeled within standard causal frameworks.</p>
+<p>This homogeneous interference model -— the <strong>Network FFRCISTG</strong> —- preserves the tractability of the classical FFRCISTG while acknowledging the presence of spillover effects. In the next section, we generalize further to consider <strong>random network interference</strong>, in which the network itself is treated as a random structure rather than a fixed pattern of relationships.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -2154,7 +2146,6 @@ Figure&nbsp;C.13: Causal DANG for Week 1-3 in Example 3
 <section id="counterfactual-data-model-2" class="level4">
 <h4 class="anchored" data-anchor-id="counterfactual-data-model-2">Counterfactual data model</h4>
 <p>[<strong>under development</strong>]</p>
-<p>Say we want to understand the impact of a vaccination campaign conducted over three weeks on vaccination status. This would be done by setting <span class="math inline">\(\mathbf{T}_1\)</span> to <span class="math inline">\(\mathbf{t}_1\)</span>, <span class="math inline">\(\mathbf{T}_2\)</span> to <span class="math inline">\(\mathbf{t}_2\)</span>, and <span class="math inline">\(\mathbf{T}_3\)</span> to <span class="math inline">\(\mathbf{t}_3\)</span> and noting the resulting counterfactual vaccination status at the end of week 1 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1)}\)</span>), week 2 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2)}\)</span>), and week 3 (<span class="math inline">\(\mathbf{V}_1^{(\mathbf{t}_1, \mathbf{t}_2, \mathbf{t}_3)}\)</span>). This counterfactual model is defined <a href="#eq-placeintervention-swing" class="quarto-xref">Equation&nbsp;<span>C.14</span></a> as shown in shown in <a href="#fig-placeintervention-swing" class="quarto-xref">Figure&nbsp;<span>C.14</span></a>.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -2197,33 +2188,17 @@ Figure&nbsp;C.14: SWING for Week 1-3 in Example 3
 <section id="estimands-2" class="level3" data-number="C.3.3">
 <h3 data-number="C.3.3" class="anchored" data-anchor-id="estimands-2"><span class="header-section-number">C.3.3</span> Estimands</h3>
 <p>[<strong>under development</strong>]</p>
-<p>We are interested in vaccine coverage throughout the three week campaign. For a given week <span class="math inline">\(s\)</span>, this is the sum of the vaccine status outcome <span class="math inline">\(\mathbf{V}\)</span> across individuals.</p>
-<p><span class="math display">\[
-E[\sum_{i=1}^5 V_{si}^{(\bar{\mathbf t})}]
-\]</span></p>
 </section>
 <section id="identification-2" class="level3" data-number="C.3.4">
 <h3 data-number="C.3.4" class="anchored" data-anchor-id="identification-2"><span class="header-section-number">C.3.4</span> Identification</h3>
 <p>[<strong>under development</strong>]</p>
-<p>Because individual vaccination status is both a confounder and a mediator of the relationship between neighborhood intervention status and vaccination status, we cannot identify our estimands using conditional expectations of the observed data. We must use a marginal structural model.</p>
-<p>We can estimate the outcome of interest using the inverse probability of treatment weights, noting that the treatment in this case is the network exposure value <span class="math inline">\(g(t_{\bar{s},N_i})\)</span> for <span class="math inline">\(\mathbf{T}\)</span>.</p>
-<p><span class="math display">\[
-V_{si}^{(\bar{\mathbf{t}})} =  \frac{V_{si} \mathbf{1}_{x = g(t_{\bar{s},N_i}) }(g(T_{\bar{s},N_i})) }{\prod_{q=1}^s P[g(\mathbf{T}_{q,N_i}) = g(\mathbf{t}_{q,N_i}) | \mathbf{R}_{\bar{q}N_i}]}
-\]</span> where <span class="math inline">\(\mathbf{R}_{\bar{s}N_i}\)</span> is the “history of <span class="math inline">\(\mathbf{R}_{sN_i}\)</span>”. e.g.</p>
-<p><span class="math display">\[
-\mathbf{R}_{\bar{3}N_i} = [\mathbf{R}_{1N_i}, \mathbf{R}_{2N_i}, \mathbf{R}_{3N_i}]
-\]</span></p>
 </section>
-<section id="notes-1" class="level3" data-number="C.3.5">
-<h3 data-number="C.3.5" class="anchored" data-anchor-id="notes-1"><span class="header-section-number">C.3.5</span> Notes</h3>
-<p>[<strong>under development</strong>]</p>
-<ul>
-<li>We have turned the bipartite graph situation into one which approcimates IID sampling.</li>
-<li>Each observation comes with its own measures as well as the network exposure values</li>
-<li>It is possible to fully ascertain the measures on included observations</li>
-<li>It is possible to imagine a super-populaton consisting of individuals independently censored from the sample, but each with fully observed network exposure values since it is a bipartite network and since all places are fully ascertained.</li>
-<li>In the next section we show how a model like this can be used to coordinate a real outbreak response whetehr it be vaccination or referral for screening, or intensified information.</li>
-</ul>
+<section id="remarks-2" class="level3" data-number="C.3.5">
+<h3 data-number="C.3.5" class="anchored" data-anchor-id="remarks-2"><span class="header-section-number">C.3.5</span> Remarks</h3>
+<p>This section introduced the <strong>Random Bipartite Network FFRCISTG</strong>, extending the framework to settings where both the network structure and the relationships between units are treated as random variables. By doing so, we transformed the fixed-network setting of homogeneous interference into one that approximates <strong>independent and identically distributed (IID)</strong> sampling.</p>
+<p>In this formulation, each observation corresponds to an individual node with its own set of <strong>measures</strong> and <strong>network exposure values</strong>. Because the underlying structure is <strong>bipartite</strong>, linking individuals and places, and because all places are fully ascertained, it is possible to determine the complete set of exposure values for every included <strong>person</strong> (as opposed to <strong>place</strong>) observation.</p>
+<p>This structure makes it possible to imagine a <strong>super-population</strong> in which individuals are independently censored from the observed sample but would each have fully observed exposure mappings. In this sense, the random bipartite model recovers many of the inferential properties of IID sampling while preserving the dependencies that define network-based causal processes.</p>
+<p>In the next section, we show how a model of this form can be used to coordinate a real outbreak response—whether through <strong>targeted vaccination</strong>, <strong>screening referral</strong>, or <strong>intensified information dissemination</strong>—demonstrating how network-based causal models can inform efficient and equitable public health intervention.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
