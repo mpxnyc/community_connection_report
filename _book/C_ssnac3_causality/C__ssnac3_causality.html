@@ -96,7 +96,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-16f0be44cf0b9c8dc4714857273be9e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-f8195e851402d162888842971be7a35a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f148101fbccc5eb53de08e901415c93c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -500,7 +500,7 @@ window.Quarto = {
 </div>
 <section id="section" class="level2 unnumbered page-columns page-full">
 <h2 class="unnumbered anchored" data-anchor-id="section"></h2>
-<p>The Social and Spatial Network Analysis with Causal interpretation framework can be used to guide the collection, management, analysis, and causal interpretation of data. It offers guidance on conceptualizing and organizing spatial and social data as networks (<a href="../A_ssnac1_context/A__ssnac1_context.html" class="quarto-xref"><span>Appendix A</span></a>) and provides tools for descriptive and causal analysis (<span class="quarto-unresolved-ref">?sec-appendix-network-analysis</span>).</p>
+<p>The Social and Spatial Network Analysis with Causal interpretation framework can be used to guide the collection, management, analysis, and causal interpretation of data. It offers guidance on conceptualizing and organizing spatial and social data as networks (<a href="../A_ssnac1_context/A__ssnac1_context.html" class="quarto-xref"><span>Appendix A</span></a>) and provides tools for descriptive (<a href="../B_ssnac2_description/B__ssnac2_description.html" class="quarto-xref"><span>Appendix B</span></a>) and causal analysis .</p>
 <p>We define SSNAC as a set of straight-forward extensions of the currently dominant framework for conducting causal inference with observational data in epidemiology. We begin by giving an overview of the dominant approach, which we will call “classic causal inference”. We extend this system to situations where data are characterized by interdependence of observational units rather than independence, naming this system “social network analysis with causal interpretation”. Finally, we accommodate social and spatial data simultaneously in the SSNAC framework. In each case, we describe the assumptions and implications of each system, illustrating with worked examples.</p>
 <blockquote class="blockquote">
 <p>We re-frame the task of statistical inference from that of learning from a growing collection of identically distributed random vectors to that of learning from a growing random vector whose entries are related through a causal structure… These [SSNAC] assumptions allow our estimates to benefit from having more observational units, even if they collectively contribute to one realization of the statistical model.</p>
@@ -1158,11 +1158,10 @@ E[Y_i^{(a)}]                    &amp;= E \left[ E[Y_i^{(a)} | L_i] \right] \\
 </section>
 <section id="remarks" class="level3" data-number="C.1.5">
 <h3 data-number="C.1.5" class="anchored" data-anchor-id="remarks"><span class="header-section-number">C.1.5</span> Remarks</h3>
-<p>[<strong>under development</strong>]</p>
-<ul>
-<li>See how identification assumptions (conditional exchangeability, consistency) are consequences of model assumptions.</li>
-<li>In the next section we will relax the no-interference assumption, make some homogeneity assumptions, and show how situations in which SUTVA is violated might still exhibit Network SUTVA, leading to analytically tractible models which deal with interference.</li>
-</ul>
+<p>This section illustrated the model assumptions of the <strong>FFRCISTG</strong>—the foundation of modern causal inference in epidemiology—namely, <strong>independence</strong> and <strong>identical distributions</strong>. We decomposed the assumption of independence into two components: <strong>no spillover</strong> and <strong>no interference</strong>. We showed that the assumption of identical distributions is a statement about the structural equations that govern the causal process as it plays out within each observational unit.</p>
+<p>Students of causal inference might be surprised that the identification assumptions—<strong>exchangeability</strong> and <strong>consistency</strong>—are not mentioned explicitly. That is because, within the FFRCISTG framework, these assumptions are not external requirements but direct consequences of the model itself.</p>
+<p><strong>Consistency</strong> follows from the equality of the structural functions and error terms that define counterfactual and observed outcomes within a causal model. <strong>Exchangeability</strong>, in turn, arises from the independence of error terms and the recursive structure of the <strong>NPSEM</strong>.</p>
+<p>In the next section, we relax the assumption of no interference, introduce <strong>homogeneity</strong> assumptions about the process of interference, and arrive at a model called the <strong>Network FFRCISTG</strong>, which allows us to reason about causality in the presence of a fixed pattern of interference.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
