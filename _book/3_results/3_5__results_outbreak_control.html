@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-16f0be44cf0b9c8dc4714857273be9e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-f8195e851402d162888842971be7a35a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f148101fbccc5eb53de08e901415c93c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -411,41 +411,13 @@ cookieconsent.run({
 </div>
 <section id="section" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="section"></h2>
-<p>This section models how different vaccination strategies could disrupt transmission by targeting the most influential community districts in the MPX NYC network. Two strategies were compared: a contact-neutralizing strategy, which prioritizes districts with the highest density of direct contacts, and a movement-neutralizing strategy, which targets districts most connected by participants’ movement across neighborhoods.</p>
-</section>
-<section id="spatial-efficiency" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="spatial-efficiency"><span class="header-section-number">11.1</span> Spatial efficiency</h2>
-<p><a href="#fig-hiimpact-communities-bar" class="quarto-xref">Figure&nbsp;<span>11.1</span></a> and <a href="#fig-hiimpact-communities-map" class="quarto-xref">Figure&nbsp;<span>11.2</span></a> show which community districts would need to be immunized to reach one-third and two-thirds of the study population under each strategy. Under the <strong>contact-neutralizing strategy</strong>, just five community districts—Hell’s Kitchen–Chelsea (MN04), Williamsburg–Greenpoint (BK01), Central Harlem North (MN10), Bedford-Stuyvesant West (BK03), and Astoria (QN01)—would together cover roughly 33 percent of participants.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_plotdata_coverage_approach_bar</span>() <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_coverage_bar</span>() <span class="sc">+</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">""</span>, <span class="at">na.translate =</span> <span class="cn">FALSE</span>, <span class="at">option =</span> <span class="st">"light"</span>)  <span class="sc">+</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_axis_mpxnyc</span>() <span class="sc">+</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_bar</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="fig-hiimpact-communities-bar" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-hiimpact-communities-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="3_5__results_outbreak_control_files/figure-html/fig-hiimpact-communities-bar-1.png" class="img-fluid figure-img" width="864">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hiimpact-communities-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.1: High-coverage community districts under contact- vs movement-neutralizing strategies (33 % coverage)
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Expanding to 13 districts would reach 66 percent, adding Washington Heights South (MN12), Bushwick (BK04), West Village–SoHo–Tribeca (MN02), Crown Heights North (BK08), Upper West Side Central (MN07), Hamilton Heights–Sugar Hill (MN09), Brooklyn Heights–Downtown (BK02), and Midtown–Times Square–Flatiron (MN05).</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_plotdata_coverage_approach_choro</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">plot_coverage_map</span>()  <span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">""</span>, <span class="at">na.translate =</span> <span class="cn">FALSE</span>, <span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                <span class="fu">theme_mpxnyc_blank</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_plotdata_coverage_approach_choro</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">plot_coverage_map</span>()  <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">""</span>, <span class="at">na.translate =</span> <span class="cn">FALSE</span>, <span class="at">option =</span> <span class="st">"light"</span>) <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                <span class="fu">theme_mpxnyc_blank</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-hiimpact-communities-map" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -454,12 +426,40 @@ Figure&nbsp;11.1: High-coverage community districts under contact- vs movement-n
 <img src="3_5__results_outbreak_control_files/figure-html/fig-hiimpact-communities-map-1.png" class="img-fluid figure-img" width="864">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hiimpact-communities-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.2: High-coverage community districts under both strategies (66 % coverage).
+Figure&nbsp;11.1: High-coverage community districts under both strategies (66 % coverage).
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p>This section models how different vaccination strategies could disrupt transmission by targeting the most influential community districts in the MPX NYC network. Two strategies were compared: a contact-neutralizing strategy, which prioritizes districts with the highest density of direct contacts, and a movement-neutralizing strategy, which targets districts most connected by participants’ movement across neighborhoods.</p>
+</section>
+<section id="spatial-efficiency" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="spatial-efficiency"><span class="header-section-number">11.1</span> Spatial efficiency</h2>
+<p><a href="#fig-hiimpact-communities-bar" class="quarto-xref">Figure&nbsp;<span>11.2</span></a> and <a href="#fig-hiimpact-communities-map" class="quarto-xref">Figure&nbsp;<span>11.1</span></a> show which community districts would need to be immunized to reach one-third and two-thirds of the study population under each strategy. Under the <strong>contact-neutralizing strategy</strong>, just five community districts—Hell’s Kitchen–Chelsea (MN04), Williamsburg–Greenpoint (BK01), Central Harlem North (MN10), Bedford-Stuyvesant West (BK03), and Astoria (QN01)—would together cover roughly 33 percent of participants.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_plotdata_coverage_approach_bar</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_coverage_bar</span>() <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">""</span>, <span class="at">na.translate =</span> <span class="cn">FALSE</span>, <span class="at">option =</span> <span class="st">"light"</span>)  <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_axis_mpxnyc</span>() <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_bar</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-hiimpact-communities-bar" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hiimpact-communities-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="3_5__results_outbreak_control_files/figure-html/fig-hiimpact-communities-bar-1.png" class="img-fluid figure-img" width="864">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hiimpact-communities-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.2: High-coverage community districts under contact- vs movement-neutralizing strategies (33 % coverage)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Expanding to 13 districts would reach 66 percent, adding Washington Heights South (MN12), Bushwick (BK04), West Village–SoHo–Tribeca (MN02), Crown Heights North (BK08), Upper West Side Central (MN07), Hamilton Heights–Sugar Hill (MN09), Brooklyn Heights–Downtown (BK02), and Midtown–Times Square–Flatiron (MN05).</p>
 <p>Under the <strong>movement-neutralizing strategy</strong>, six districts would be needed to reach 33 percent—Hell’s Kitchen–Chelsea (MN04), Williamsburg–Greenpoint (BK01), Midtown–Times Square–Flatiron (MN05), Bushwick (BK04), West Village–SoHo–Tribeca (MN02), and Bedford-Stuyvesant West (BK03).</p>
 <p>To reach 66 percent, 16 districts would need to be included, adding Central Park–Upper East Side (MN64), Central Harlem North (MN10), Astoria (QN01), Crown Heights North (BK08), Hamilton Heights–Sugar Hill (MN09), Ridgewood–Maspeth (QN05), Crown Heights South (BK09), East Harlem (MN11), Flatbush–Ditmas Park (BK14), and Sunset Park (BK07).</p>
 </section>
