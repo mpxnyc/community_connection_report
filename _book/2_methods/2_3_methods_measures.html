@@ -414,43 +414,16 @@ cookieconsent.run({
 </header>
 
 
-<div class="cell" data-layout-align="center">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"bipartite"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_example_network</span>(targets<span class="sc">::</span><span class="fu">tar_read</span>(config_list)) <span class="sc">+</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_cartesian</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">3</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.2</span>,<span class="fl">1.2</span>)) <span class="sc">+</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() <span class="sc">+</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> ggplot2<span class="sc">::</span><span class="fu">margin</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 <section id="data-mpx-nyc-participant-community-network" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="data-mpx-nyc-participant-community-network"><span class="header-section-number">5.1</span> Data: MPX NYC participant-community network</h2>
 <p>The MPX NYC participant community network is a network with community districts and individuals as nodes, and ties between pairs consisting of one individual and one community district. While spatial data were collected using census tract identifiers, the unit of spatial analysis is the community district. Community districts are spatial units that divide New York City into regions which are nested by the five boroughs of New York City, and which in turn nest census tracts.</p>
 <p>A tie indicates that the individual as some relation with the community district. This relation can be because of a residence or attended gathering in that community district. Related to this network are the community district network and participant network, described below.</p>
 <section id="mpx-nyc-community-district-network" class="level3" data-number="5.1.1">
 <h3 data-number="5.1.1" class="anchored" data-anchor-id="mpx-nyc-community-district-network"><span class="header-section-number">5.1.1</span> MPX NYC community district network</h3>
-<div class="cell" data-layout-align="center">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_example_network</span>(<span class="fu">make_example_network_data</span>(<span class="st">"places"</span>), targets<span class="sc">::</span><span class="fu">tar_read</span>(config_list))  <span class="sc">+</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 <p>The MPX NYC community district network is a network with community districts as nodes. A weighted tie between two nodes indicates that the two community districts both have at least one MPX NYX participant who had a residence or gathering in both places. The weight is given by the count of such individuals. Of interest is the influence each community district has in city-wide outbreak dynamics. It is measured using community district social and spatial reach.</p>
 </section>
 <section id="mpx-nyc-participant-network" class="level3" data-number="5.1.2">
 <h3 data-number="5.1.2" class="anchored" data-anchor-id="mpx-nyc-participant-network"><span class="header-section-number">5.1.2</span> MPX NYC participant network</h3>
-<div class="cell" data-layout-align="center">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_example_network_data</span>(<span class="st">"people"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_example_network</span>(targets<span class="sc">::</span><span class="fu">tar_read</span>(config_list)) <span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 <p>We examined the patterning of shared physical context among participants using the MPX NYC participant network. In this network, survey participants are represented as nodes. A weighted edge indicates that the individuals represented by the nodes have at least one residence or gathering in a common community district. The edge weight is given by the count of community districts the pair share. Of interest are the overall connectedness of the network and the pattern of connection across different subgroups.</p>
 </section>
 </section>
@@ -465,30 +438,30 @@ cookieconsent.run({
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Level =</span> <span class="fu">c</span>(</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Cisgender man"</span>, </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Cisgender woman"</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Transgender man"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Transgender woman"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Transgender man"</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Transgender woman"</span>,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Non-binary"</span>,</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Another demographic"</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>              ),</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Condition =</span> <span class="fu">c</span>(</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gender is 'man' and assigned sex is 'male' "</span>, </span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gender is 'woman' and assigned sex is 'female'"</span>,</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gender is 'man' and assigned sex is 'female'"</span>,</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gender is 'woman' and assigned sex is 'male'"</span>,</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gender is 'trans man' and sex is any value"</span>,</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gender is 'trans woman' and sex is any value"</span>,</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gender is 'non-binary' and sex is any value"</span>,</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gender is 'other' and sex is any value"</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>             </span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Level =</span> <span class="fu">c</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Cisgender man"</span>, </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Cisgender woman"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Transgender man"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Transgender woman"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Transgender man"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Transgender woman"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Non-binary"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Another demographic"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>              ),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Condition =</span> <span class="fu">c</span>(</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gender is 'man' and assigned sex is 'male' "</span>, </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gender is 'woman' and assigned sex is 'female'"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gender is 'man' and assigned sex is 'female'"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gender is 'woman' and assigned sex is 'male'"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gender is 'trans man' and sex is any value"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gender is 'trans woman' and sex is any value"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gender is 'non-binary' and sex is any value"</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gender is 'other' and sex is any value"</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="tbl-gendermodality" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -497,23 +470,23 @@ Table&nbsp;5.1: _construction of gender modality variable
 </figcaption>
 <div aria-describedby="tbl-gendermodality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="ucvcgjreoo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ucvcgjreoo table {
+<div id="jyiegrdppa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jyiegrdppa table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ucvcgjreoo thead, #ucvcgjreoo tbody, #ucvcgjreoo tfoot, #ucvcgjreoo tr, #ucvcgjreoo td, #ucvcgjreoo th {
+#jyiegrdppa thead, #jyiegrdppa tbody, #jyiegrdppa tfoot, #jyiegrdppa tr, #jyiegrdppa td, #jyiegrdppa th {
   border-style: none;
 }
 
-#ucvcgjreoo p {
+#jyiegrdppa p {
   margin: 0;
   padding: 0;
 }
 
-#ucvcgjreoo .gt_table {
+#jyiegrdppa .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -539,12 +512,12 @@ Table&nbsp;5.1: _construction of gender modality variable
   border-left-color: #D3D3D3;
 }
 
-#ucvcgjreoo .gt_caption {
+#jyiegrdppa .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ucvcgjreoo .gt_title {
+#jyiegrdppa .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -556,7 +529,7 @@ Table&nbsp;5.1: _construction of gender modality variable
   border-bottom-width: 0;
 }
 
-#ucvcgjreoo .gt_subtitle {
+#jyiegrdppa .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -568,7 +541,7 @@ Table&nbsp;5.1: _construction of gender modality variable
   border-top-width: 0;
 }
 
-#ucvcgjreoo .gt_heading {
+#jyiegrdppa .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -580,13 +553,13 @@ Table&nbsp;5.1: _construction of gender modality variable
   border-right-color: #D3D3D3;
 }
 
-#ucvcgjreoo .gt_bottom_border {
+#jyiegrdppa .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ucvcgjreoo .gt_col_headings {
+#jyiegrdppa .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -601,7 +574,7 @@ Table&nbsp;5.1: _construction of gender modality variable
   border-right-color: #D3D3D3;
 }
 
-#ucvcgjreoo .gt_col_heading {
+#jyiegrdppa .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -621,7 +594,7 @@ Table&nbsp;5.1: _construction of gender modality variable
   overflow-x: hidden;
 }
 
-#ucvcgjreoo .gt_column_spanner_outer {
+#jyiegrdppa .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -633,15 +606,15 @@ Table&nbsp;5.1: _construction of gender modality variable
   padding-right: 4px;
 }
 
-#ucvcgjreoo .gt_column_spanner_outer:first-child {
+#jyiegrdppa .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ucvcgjreoo .gt_column_spanner_outer:last-child {
+#jyiegrdppa .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ucvcgjreoo .gt_column_spanner {
+#jyiegrdppa .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -653,11 +626,11 @@ Table&nbsp;5.1: _construction of gender modality variable
   width: 100%;
 }
 
-#ucvcgjreoo .gt_spanner_row {
+#jyiegrdppa .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ucvcgjreoo .gt_group_heading {
+#jyiegrdppa .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -683,7 +656,7 @@ Table&nbsp;5.1: _construction of gender modality variable
   text-align: left;
 }
 
-#ucvcgjreoo .gt_empty_group_heading {
+#jyiegrdppa .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -698,15 +671,15 @@ Table&nbsp;5.1: _construction of gender modality variable
   vertical-align: middle;
 }
 
-#ucvcgjreoo .gt_from_md > :first-child {
+#jyiegrdppa .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ucvcgjreoo .gt_from_md > :last-child {
+#jyiegrdppa .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ucvcgjreoo .gt_row {
+#jyiegrdppa .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -725,7 +698,7 @@ Table&nbsp;5.1: _construction of gender modality variable
   overflow-x: hidden;
 }
 
-#ucvcgjreoo .gt_stub {
+#jyiegrdppa .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -738,7 +711,7 @@ Table&nbsp;5.1: _construction of gender modality variable
   padding-right: 5px;
 }
 
-#ucvcgjreoo .gt_stub_row_group {
+#jyiegrdppa .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -752,15 +725,15 @@ Table&nbsp;5.1: _construction of gender modality variable
   vertical-align: top;
 }
 
-#ucvcgjreoo .gt_row_group_first td {
+#jyiegrdppa .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ucvcgjreoo .gt_row_group_first th {
+#jyiegrdppa .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ucvcgjreoo .gt_summary_row {
+#jyiegrdppa .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -770,16 +743,16 @@ Table&nbsp;5.1: _construction of gender modality variable
   padding-right: 5px;
 }
 
-#ucvcgjreoo .gt_first_summary_row {
+#jyiegrdppa .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ucvcgjreoo .gt_first_summary_row.thick {
+#jyiegrdppa .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ucvcgjreoo .gt_last_summary_row {
+#jyiegrdppa .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -789,7 +762,7 @@ Table&nbsp;5.1: _construction of gender modality variable
   border-bottom-color: #D3D3D3;
 }
 
-#ucvcgjreoo .gt_grand_summary_row {
+#jyiegrdppa .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -799,7 +772,7 @@ Table&nbsp;5.1: _construction of gender modality variable
   padding-right: 5px;
 }
 
-#ucvcgjreoo .gt_first_grand_summary_row {
+#jyiegrdppa .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -809,7 +782,7 @@ Table&nbsp;5.1: _construction of gender modality variable
   border-top-color: #D3D3D3;
 }
 
-#ucvcgjreoo .gt_last_grand_summary_row_top {
+#jyiegrdppa .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -819,11 +792,11 @@ Table&nbsp;5.1: _construction of gender modality variable
   border-bottom-color: #D3D3D3;
 }
 
-#ucvcgjreoo .gt_striped {
+#jyiegrdppa .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ucvcgjreoo .gt_table_body {
+#jyiegrdppa .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -832,7 +805,7 @@ Table&nbsp;5.1: _construction of gender modality variable
   border-bottom-color: #D3D3D3;
 }
 
-#ucvcgjreoo .gt_footnotes {
+#jyiegrdppa .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -846,7 +819,7 @@ Table&nbsp;5.1: _construction of gender modality variable
   border-right-color: #D3D3D3;
 }
 
-#ucvcgjreoo .gt_footnote {
+#jyiegrdppa .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -855,7 +828,7 @@ Table&nbsp;5.1: _construction of gender modality variable
   padding-right: 5px;
 }
 
-#ucvcgjreoo .gt_sourcenotes {
+#jyiegrdppa .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -869,7 +842,7 @@ Table&nbsp;5.1: _construction of gender modality variable
   border-right-color: #D3D3D3;
 }
 
-#ucvcgjreoo .gt_sourcenote {
+#jyiegrdppa .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -877,72 +850,72 @@ Table&nbsp;5.1: _construction of gender modality variable
   padding-right: 5px;
 }
 
-#ucvcgjreoo .gt_left {
+#jyiegrdppa .gt_left {
   text-align: left;
 }
 
-#ucvcgjreoo .gt_center {
+#jyiegrdppa .gt_center {
   text-align: center;
 }
 
-#ucvcgjreoo .gt_right {
+#jyiegrdppa .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ucvcgjreoo .gt_font_normal {
+#jyiegrdppa .gt_font_normal {
   font-weight: normal;
 }
 
-#ucvcgjreoo .gt_font_bold {
+#jyiegrdppa .gt_font_bold {
   font-weight: bold;
 }
 
-#ucvcgjreoo .gt_font_italic {
+#jyiegrdppa .gt_font_italic {
   font-style: italic;
 }
 
-#ucvcgjreoo .gt_super {
+#jyiegrdppa .gt_super {
   font-size: 65%;
 }
 
-#ucvcgjreoo .gt_footnote_marks {
+#jyiegrdppa .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ucvcgjreoo .gt_asterisk {
+#jyiegrdppa .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ucvcgjreoo .gt_indent_1 {
+#jyiegrdppa .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ucvcgjreoo .gt_indent_2 {
+#jyiegrdppa .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ucvcgjreoo .gt_indent_3 {
+#jyiegrdppa .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ucvcgjreoo .gt_indent_4 {
+#jyiegrdppa .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ucvcgjreoo .gt_indent_5 {
+#jyiegrdppa .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ucvcgjreoo .katex-display {
+#jyiegrdppa .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ucvcgjreoo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jyiegrdppa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
