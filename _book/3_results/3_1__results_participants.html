@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-16f0be44cf0b9c8dc4714857273be9e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9f1658c7eb80442a8b04b387062a56a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f8195e851402d162888842971be7a35a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -410,619 +410,46 @@ cookieconsent.run({
 </section>
 <section id="home-neighborhood" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="home-neighborhood"><span class="header-section-number">7.1</span> Home neighborhood</h2>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>make_tabledata_residence <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  targets<span class="sc">::</span><span class="fu">tar_read</span>(data_bipartite_graph_collected) <span class="sc">|&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    tidygraph<span class="sc">::</span><span class="fu">activate</span>(nodes)<span class="sc">|&gt;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>() <span class="sc">|&gt;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(type) <span class="sc">|&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(borough, community, neighborhood) <span class="sc">|&gt;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">count =</span> dplyr<span class="sc">::</span><span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="sc">-</span>count) <span class="sc">|&gt;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">proportion =</span> count <span class="sc">/</span> <span class="fu">sum</span>(count))</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>scale_labels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1-10"</span>, <span class="st">"11-20"</span>, <span class="st">"21-30"</span>, <span class="st">"31+"</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>mpxnyc<span class="sc">::</span>neighborhood_sf_obj <span class="sc">|&gt;</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>   sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(<span class="fu">make_tabledata_residence</span>(), <span class="at">by =</span> <span class="st">"neighborhood"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(count), <span class="dv">0</span>, count)) <span class="sc">|&gt;</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">count_cat =</span> <span class="fu">cut</span>(count, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">76</span>), scale_labels)) <span class="sc">|&gt;</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="sc">-</span>count) <span class="sc">|&gt;</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(<span class="at">data =</span> mpxnyc<span class="sc">::</span>community_sf_obj, <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(<span class="at">data =</span> mpxnyc<span class="sc">::</span>community_sf_obj, <span class="at">fill =</span> <span class="st">"#009BE8"</span>, <span class="at">linewidth =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">alpha =</span> count_cat), <span class="at">linewidth =</span> <span class="dv">0</span>, <span class="at">fill =</span> <span class="st">"#009BE8"</span>, <span class="at">color =</span> <span class="st">"#C5EFFF"</span>) <span class="sc">+</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(<span class="at">data =</span> mpxnyc<span class="sc">::</span>community_sf_obj, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_alpha_discrete</span>(<span class="st">"Participant</span><span class="sc">\n</span><span class="st">count"</span>) <span class="sc">+</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>(</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>),</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>scale_labels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1-10"</span>, <span class="st">"11-20"</span>, <span class="st">"21-30"</span>, <span class="st">"31+"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mpxnyc<span class="sc">::</span>neighborhood_sf_obj <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>   sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(<span class="fu">make_tabledata_residence</span>(), <span class="at">by =</span> <span class="st">"neighborhood"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(count), <span class="dv">0</span>, count)) <span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">count_cat =</span> <span class="fu">cut</span>(count, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">76</span>), scale_labels)) <span class="sc">|&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="sc">-</span>count) <span class="sc">|&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(<span class="at">data =</span> mpxnyc<span class="sc">::</span>community_sf_obj, <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(<span class="at">data =</span> mpxnyc<span class="sc">::</span>community_sf_obj, <span class="at">fill =</span> <span class="st">"#009BE8"</span>, <span class="at">linewidth =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">alpha =</span> count_cat), <span class="at">linewidth =</span> <span class="dv">0</span>, <span class="at">fill =</span> <span class="st">"#009BE8"</span>, <span class="at">color =</span> <span class="st">"#C5EFFF"</span>) <span class="sc">+</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>(<span class="at">data =</span> mpxnyc<span class="sc">::</span>community_sf_obj, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_alpha_discrete</span>(<span class="st">"Participant</span><span class="sc">\n</span><span class="st">count"</span>) <span class="sc">+</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_blank</span>(</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>),</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="3_1__results_participants_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-home-map" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-home-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="3_1__results_participants_files/figure-html/fig-home-map-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-home-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.1: Number of participants by neighborhood in New York City
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>The distribution of home neighborhoods reveals the geographic heart of queer New York during the mpox outbreak. Most participants lived in Manhattan and Brooklyn, with notable concentrations in historically queer and culturally mixed areas like Hell’s Kitchen, Harlem, Crown Heights, and Bedford-Stuyvesant. This clustering suggests that mpox risk—and opportunities for outreach—were shaped not only by individual behavior but also by neighborhood networks of nightlife, social connection, and shared spaces.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>table_data <span class="ot">&lt;-</span> <span class="fu">make_tabledata_residence</span>()</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>labelled<span class="sc">::</span><span class="fu">var_label</span>(table_data<span class="sc">$</span>neighborhood) <span class="ot">&lt;-</span> <span class="st">"Neighborhood"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>labelled<span class="sc">::</span><span class="fu">var_label</span>(table_data<span class="sc">$</span>community) <span class="ot">&lt;-</span> <span class="st">"Community district"</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>labelled<span class="sc">::</span><span class="fu">var_label</span>(table_data<span class="sc">$</span>borough) <span class="ot">&lt;-</span> <span class="st">"Borough"</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>labelled<span class="sc">::</span><span class="fu">var_label</span>(table_data<span class="sc">$</span>count) <span class="ot">&lt;-</span> <span class="st">"Count of participants"</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>labelled<span class="sc">::</span><span class="fu">var_label</span>(table_data<span class="sc">$</span>proportion) <span class="ot">&lt;-</span> <span class="st">"Proportion of participants"</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a> table_data <span class="sc">|&gt;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(count <span class="sc">&gt;</span> <span class="dv">29</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>   dplyr<span class="sc">::</span><span class="fu">select</span>(neighborhood, community, borough, count, proportion) <span class="sc">|&gt;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>     gt<span class="sc">::</span><span class="fu">tab_header</span>(</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Most popular neighborhoods for primary residence"</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"MPX NYC 2022"</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>   gt<span class="sc">::</span><span class="fu">fmt_percent</span>(proportion, <span class="at">decimals =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div id="jxlylcqoyh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jxlylcqoyh table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#jxlylcqoyh thead, #jxlylcqoyh tbody, #jxlylcqoyh tfoot, #jxlylcqoyh tr, #jxlylcqoyh td, #jxlylcqoyh th {
-  border-style: none;
-}
-
-#jxlylcqoyh p {
-  margin: 0;
-  padding: 0;
-}
-
-#jxlylcqoyh .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#jxlylcqoyh .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#jxlylcqoyh .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#jxlylcqoyh .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#jxlylcqoyh .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#jxlylcqoyh .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#jxlylcqoyh .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#jxlylcqoyh .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#jxlylcqoyh .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#jxlylcqoyh .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#jxlylcqoyh .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#jxlylcqoyh .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#jxlylcqoyh .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#jxlylcqoyh .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#jxlylcqoyh .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#jxlylcqoyh .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#jxlylcqoyh .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#jxlylcqoyh .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#jxlylcqoyh .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#jxlylcqoyh .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#jxlylcqoyh .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#jxlylcqoyh .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#jxlylcqoyh .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#jxlylcqoyh .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#jxlylcqoyh .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#jxlylcqoyh .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#jxlylcqoyh .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#jxlylcqoyh .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#jxlylcqoyh .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#jxlylcqoyh .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#jxlylcqoyh .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#jxlylcqoyh .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#jxlylcqoyh .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#jxlylcqoyh .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#jxlylcqoyh .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#jxlylcqoyh .gt_left {
-  text-align: left;
-}
-
-#jxlylcqoyh .gt_center {
-  text-align: center;
-}
-
-#jxlylcqoyh .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#jxlylcqoyh .gt_font_normal {
-  font-weight: normal;
-}
-
-#jxlylcqoyh .gt_font_bold {
-  font-weight: bold;
-}
-
-#jxlylcqoyh .gt_font_italic {
-  font-style: italic;
-}
-
-#jxlylcqoyh .gt_super {
-  font-size: 65%;
-}
-
-#jxlylcqoyh .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#jxlylcqoyh .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#jxlylcqoyh .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#jxlylcqoyh .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#jxlylcqoyh .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#jxlylcqoyh .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#jxlylcqoyh .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#jxlylcqoyh .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#jxlylcqoyh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_heading header">
-<th colspan="5" class="gt_heading gt_title gt_font_normal">Most popular neighborhoods for primary residence</th>
-</tr>
-<tr class="gt_heading even">
-<th colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">MPX NYC 2022</th>
-</tr>
-<tr class="gt_col_headings header">
-<th id="neighborhood" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Neighborhood</th>
-<th id="community" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Community district</th>
-<th id="borough" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Borough</th>
-<th id="count" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Count of participants</th>
-<th id="proportion" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Proportion of participants</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="neighborhood">Hell's Kitchen</td>
-<td class="gt_row gt_left" headers="community">MN04</td>
-<td class="gt_row gt_left" headers="borough">Manhattan</td>
-<td class="gt_row gt_right" headers="count">76</td>
-<td class="gt_row gt_right" headers="proportion">6%</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="neighborhood">Bedford-Stuyvesant (West)</td>
-<td class="gt_row gt_left" headers="community">BK03</td>
-<td class="gt_row gt_left" headers="borough">Brooklyn</td>
-<td class="gt_row gt_right" headers="count">50</td>
-<td class="gt_row gt_right" headers="proportion">4%</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="neighborhood">Harlem (North)</td>
-<td class="gt_row gt_left" headers="community">MN10</td>
-<td class="gt_row gt_left" headers="borough">Manhattan</td>
-<td class="gt_row gt_right" headers="count">49</td>
-<td class="gt_row gt_right" headers="proportion">4%</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="neighborhood">Crown Heights (North)</td>
-<td class="gt_row gt_left" headers="community">BK08</td>
-<td class="gt_row gt_left" headers="borough">Brooklyn</td>
-<td class="gt_row gt_right" headers="count">45</td>
-<td class="gt_row gt_right" headers="proportion">3%</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="neighborhood">Hamilton Heights-Sugar Hill</td>
-<td class="gt_row gt_left" headers="community">MN09</td>
-<td class="gt_row gt_left" headers="borough">Manhattan</td>
-<td class="gt_row gt_right" headers="count">39</td>
-<td class="gt_row gt_right" headers="proportion">3%</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="neighborhood">Chelsea-Hudson Yards</td>
-<td class="gt_row gt_left" headers="community">MN04</td>
-<td class="gt_row gt_left" headers="borough">Manhattan</td>
-<td class="gt_row gt_right" headers="count">38</td>
-<td class="gt_row gt_right" headers="proportion">3%</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="neighborhood">Washington Heights (South)</td>
-<td class="gt_row gt_left" headers="community">MN12</td>
-<td class="gt_row gt_left" headers="borough">Manhattan</td>
-<td class="gt_row gt_right" headers="count">36</td>
-<td class="gt_row gt_right" headers="proportion">3%</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="neighborhood">Astoria (Central)</td>
-<td class="gt_row gt_left" headers="community">QN01</td>
-<td class="gt_row gt_left" headers="borough">Queens</td>
-<td class="gt_row gt_right" headers="count">36</td>
-<td class="gt_row gt_right" headers="proportion">3%</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="neighborhood">Bushwick (East)</td>
-<td class="gt_row gt_left" headers="community">BK04</td>
-<td class="gt_row gt_left" headers="borough">Brooklyn</td>
-<td class="gt_row gt_right" headers="count">35</td>
-<td class="gt_row gt_right" headers="proportion">3%</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="neighborhood">Upper West Side (Central)</td>
-<td class="gt_row gt_left" headers="community">MN07</td>
-<td class="gt_row gt_left" headers="borough">Manhattan</td>
-<td class="gt_row gt_right" headers="count">30</td>
-<td class="gt_row gt_right" headers="proportion">2%</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
 </section>
 <section id="demographics" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="demographics"><span class="header-section-number">7.2</span> Demographics</h2>
-<p>MPX NYC participants were demographically diverse (see <a href="#tbl-demographics" class="quarto-xref">Table&nbsp;<span>7.1</span></a> and <a href="#fig-racegender-radar-grid" class="quarto-xref">Figure&nbsp;<span>7.1</span></a>). Over half were aged 18–34. About two-fifths were white cisgender men, 15 percent Latinx cisgender men, 10 percent Black cisgender men. Roughly 5 percent were transgender (half trans men) and 7 percent non-binary. Two-thirds identified as gay, 14 percent bisexual, 12 percent queer.</p>
+<p>MPX NYC participants were demographically diverse (see <a href="#tbl-demographics" class="quarto-xref">Table&nbsp;<span>7.1</span></a> and <a href="#fig-racegender-radar-grid" class="quarto-xref">Figure&nbsp;<span>7.2</span></a>). Over half were aged 18–34. About two-fifths were white cisgender men, 15 percent Latinx cisgender men, 10 percent Black cisgender men. Roughly 5 percent were transgender (half trans men) and 7 percent non-binary. Two-thirds identified as gay, 14 percent bisexual, 12 percent queer.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1038,8 +465,8 @@ Show Table 7.1: Demographics
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_tabledata_demographics</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_table_by_groupSex</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_tabledata_demographics</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_table_by_groupSex</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="tbl-demographics" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -1048,23 +475,23 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
 </figcaption>
 <div aria-describedby="tbl-demographics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tzzrvjblga" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tzzrvjblga table {
+<div id="iksfnkodtb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iksfnkodtb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tzzrvjblga thead, #tzzrvjblga tbody, #tzzrvjblga tfoot, #tzzrvjblga tr, #tzzrvjblga td, #tzzrvjblga th {
+#iksfnkodtb thead, #iksfnkodtb tbody, #iksfnkodtb tfoot, #iksfnkodtb tr, #iksfnkodtb td, #iksfnkodtb th {
   border-style: none;
 }
 
-#tzzrvjblga p {
+#iksfnkodtb p {
   margin: 0;
   padding: 0;
 }
 
-#tzzrvjblga .gt_table {
+#iksfnkodtb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1090,12 +517,12 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-left-color: #D3D3D3;
 }
 
-#tzzrvjblga .gt_caption {
+#iksfnkodtb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tzzrvjblga .gt_title {
+#iksfnkodtb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1107,7 +534,7 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-bottom-width: 0;
 }
 
-#tzzrvjblga .gt_subtitle {
+#iksfnkodtb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1119,7 +546,7 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-top-width: 0;
 }
 
-#tzzrvjblga .gt_heading {
+#iksfnkodtb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1131,13 +558,13 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-right-color: #D3D3D3;
 }
 
-#tzzrvjblga .gt_bottom_border {
+#iksfnkodtb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tzzrvjblga .gt_col_headings {
+#iksfnkodtb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1152,7 +579,7 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-right-color: #D3D3D3;
 }
 
-#tzzrvjblga .gt_col_heading {
+#iksfnkodtb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1172,7 +599,7 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   overflow-x: hidden;
 }
 
-#tzzrvjblga .gt_column_spanner_outer {
+#iksfnkodtb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1184,15 +611,15 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 4px;
 }
 
-#tzzrvjblga .gt_column_spanner_outer:first-child {
+#iksfnkodtb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tzzrvjblga .gt_column_spanner_outer:last-child {
+#iksfnkodtb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tzzrvjblga .gt_column_spanner {
+#iksfnkodtb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1204,11 +631,11 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   width: 100%;
 }
 
-#tzzrvjblga .gt_spanner_row {
+#iksfnkodtb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tzzrvjblga .gt_group_heading {
+#iksfnkodtb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1234,7 +661,7 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   text-align: left;
 }
 
-#tzzrvjblga .gt_empty_group_heading {
+#iksfnkodtb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1249,15 +676,15 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   vertical-align: middle;
 }
 
-#tzzrvjblga .gt_from_md > :first-child {
+#iksfnkodtb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tzzrvjblga .gt_from_md > :last-child {
+#iksfnkodtb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tzzrvjblga .gt_row {
+#iksfnkodtb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1276,7 +703,7 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   overflow-x: hidden;
 }
 
-#tzzrvjblga .gt_stub {
+#iksfnkodtb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1289,7 +716,7 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#tzzrvjblga .gt_stub_row_group {
+#iksfnkodtb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1303,15 +730,15 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   vertical-align: top;
 }
 
-#tzzrvjblga .gt_row_group_first td {
+#iksfnkodtb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tzzrvjblga .gt_row_group_first th {
+#iksfnkodtb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tzzrvjblga .gt_summary_row {
+#iksfnkodtb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1321,16 +748,16 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#tzzrvjblga .gt_first_summary_row {
+#iksfnkodtb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tzzrvjblga .gt_first_summary_row.thick {
+#iksfnkodtb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tzzrvjblga .gt_last_summary_row {
+#iksfnkodtb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1340,7 +767,7 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-bottom-color: #D3D3D3;
 }
 
-#tzzrvjblga .gt_grand_summary_row {
+#iksfnkodtb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1350,7 +777,7 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#tzzrvjblga .gt_first_grand_summary_row {
+#iksfnkodtb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1360,7 +787,7 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-top-color: #D3D3D3;
 }
 
-#tzzrvjblga .gt_last_grand_summary_row_top {
+#iksfnkodtb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1370,11 +797,11 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-bottom-color: #D3D3D3;
 }
 
-#tzzrvjblga .gt_striped {
+#iksfnkodtb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tzzrvjblga .gt_table_body {
+#iksfnkodtb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1383,7 +810,7 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-bottom-color: #D3D3D3;
 }
 
-#tzzrvjblga .gt_footnotes {
+#iksfnkodtb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1397,7 +824,7 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-right-color: #D3D3D3;
 }
 
-#tzzrvjblga .gt_footnote {
+#iksfnkodtb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1406,7 +833,7 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#tzzrvjblga .gt_sourcenotes {
+#iksfnkodtb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1420,7 +847,7 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-right-color: #D3D3D3;
 }
 
-#tzzrvjblga .gt_sourcenote {
+#iksfnkodtb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1428,72 +855,72 @@ Table&nbsp;7.1: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#tzzrvjblga .gt_left {
+#iksfnkodtb .gt_left {
   text-align: left;
 }
 
-#tzzrvjblga .gt_center {
+#iksfnkodtb .gt_center {
   text-align: center;
 }
 
-#tzzrvjblga .gt_right {
+#iksfnkodtb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tzzrvjblga .gt_font_normal {
+#iksfnkodtb .gt_font_normal {
   font-weight: normal;
 }
 
-#tzzrvjblga .gt_font_bold {
+#iksfnkodtb .gt_font_bold {
   font-weight: bold;
 }
 
-#tzzrvjblga .gt_font_italic {
+#iksfnkodtb .gt_font_italic {
   font-style: italic;
 }
 
-#tzzrvjblga .gt_super {
+#iksfnkodtb .gt_super {
   font-size: 65%;
 }
 
-#tzzrvjblga .gt_footnote_marks {
+#iksfnkodtb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tzzrvjblga .gt_asterisk {
+#iksfnkodtb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tzzrvjblga .gt_indent_1 {
+#iksfnkodtb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tzzrvjblga .gt_indent_2 {
+#iksfnkodtb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tzzrvjblga .gt_indent_3 {
+#iksfnkodtb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tzzrvjblga .gt_indent_4 {
+#iksfnkodtb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tzzrvjblga .gt_indent_5 {
+#iksfnkodtb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tzzrvjblga .katex-display {
+#iksfnkodtb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tzzrvjblga div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#iksfnkodtb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1670,11 +1097,11 @@ N = 1,304</span></span><span class="gt_footnote_marks" style="white-space:nowrap
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_plotdata_racegender_radar_grid</span>() <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_radar_grid</span>() <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_radial_mpxnyc</span>() <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_radar_people</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_plotdata_racegender_radar_grid</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_radar_grid</span>() <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_mpxnyc</span>(<span class="at">name =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_radial_mpxnyc</span>() <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mpxnyc_radar_people</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-racegender-radar-grid" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1683,7 +1110,7 @@ N = 1,304</span></span><span class="gt_footnote_marks" style="white-space:nowrap
 <img src="3_1__results_participants_files/figure-html/fig-racegender-radar-grid-1.png" class="img-fluid figure-img" width="768">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-racegender-radar-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.1: Sexual orientation of MPX NYC participants by race and gender
+Figure&nbsp;7.2: Sexual orientation of MPX NYC participants by race and gender
 </figcaption>
 </figure>
 </div>
@@ -1709,8 +1136,8 @@ Show Table 7.2: Connection
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_tabledata_connection</span>() <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_table_by_groupSex</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_tabledata_connection</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_table_by_groupSex</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="tbl-connection" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -1719,23 +1146,23 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
 </figcaption>
 <div aria-describedby="tbl-connection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="uhaxpsecih" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uhaxpsecih table {
+<div id="kfyhbejelq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kfyhbejelq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uhaxpsecih thead, #uhaxpsecih tbody, #uhaxpsecih tfoot, #uhaxpsecih tr, #uhaxpsecih td, #uhaxpsecih th {
+#kfyhbejelq thead, #kfyhbejelq tbody, #kfyhbejelq tfoot, #kfyhbejelq tr, #kfyhbejelq td, #kfyhbejelq th {
   border-style: none;
 }
 
-#uhaxpsecih p {
+#kfyhbejelq p {
   margin: 0;
   padding: 0;
 }
 
-#uhaxpsecih .gt_table {
+#kfyhbejelq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1761,12 +1188,12 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-left-color: #D3D3D3;
 }
 
-#uhaxpsecih .gt_caption {
+#kfyhbejelq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uhaxpsecih .gt_title {
+#kfyhbejelq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1778,7 +1205,7 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-bottom-width: 0;
 }
 
-#uhaxpsecih .gt_subtitle {
+#kfyhbejelq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1790,7 +1217,7 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-top-width: 0;
 }
 
-#uhaxpsecih .gt_heading {
+#kfyhbejelq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1802,13 +1229,13 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-right-color: #D3D3D3;
 }
 
-#uhaxpsecih .gt_bottom_border {
+#kfyhbejelq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uhaxpsecih .gt_col_headings {
+#kfyhbejelq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1823,7 +1250,7 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-right-color: #D3D3D3;
 }
 
-#uhaxpsecih .gt_col_heading {
+#kfyhbejelq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1843,7 +1270,7 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   overflow-x: hidden;
 }
 
-#uhaxpsecih .gt_column_spanner_outer {
+#kfyhbejelq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1855,15 +1282,15 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 4px;
 }
 
-#uhaxpsecih .gt_column_spanner_outer:first-child {
+#kfyhbejelq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uhaxpsecih .gt_column_spanner_outer:last-child {
+#kfyhbejelq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uhaxpsecih .gt_column_spanner {
+#kfyhbejelq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1875,11 +1302,11 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   width: 100%;
 }
 
-#uhaxpsecih .gt_spanner_row {
+#kfyhbejelq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uhaxpsecih .gt_group_heading {
+#kfyhbejelq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1905,7 +1332,7 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   text-align: left;
 }
 
-#uhaxpsecih .gt_empty_group_heading {
+#kfyhbejelq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1920,15 +1347,15 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   vertical-align: middle;
 }
 
-#uhaxpsecih .gt_from_md > :first-child {
+#kfyhbejelq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uhaxpsecih .gt_from_md > :last-child {
+#kfyhbejelq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uhaxpsecih .gt_row {
+#kfyhbejelq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1947,7 +1374,7 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   overflow-x: hidden;
 }
 
-#uhaxpsecih .gt_stub {
+#kfyhbejelq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1960,7 +1387,7 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#uhaxpsecih .gt_stub_row_group {
+#kfyhbejelq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1974,15 +1401,15 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   vertical-align: top;
 }
 
-#uhaxpsecih .gt_row_group_first td {
+#kfyhbejelq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uhaxpsecih .gt_row_group_first th {
+#kfyhbejelq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uhaxpsecih .gt_summary_row {
+#kfyhbejelq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1992,16 +1419,16 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#uhaxpsecih .gt_first_summary_row {
+#kfyhbejelq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uhaxpsecih .gt_first_summary_row.thick {
+#kfyhbejelq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uhaxpsecih .gt_last_summary_row {
+#kfyhbejelq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2011,7 +1438,7 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-bottom-color: #D3D3D3;
 }
 
-#uhaxpsecih .gt_grand_summary_row {
+#kfyhbejelq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2021,7 +1448,7 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#uhaxpsecih .gt_first_grand_summary_row {
+#kfyhbejelq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2031,7 +1458,7 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-top-color: #D3D3D3;
 }
 
-#uhaxpsecih .gt_last_grand_summary_row_top {
+#kfyhbejelq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2041,11 +1468,11 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-bottom-color: #D3D3D3;
 }
 
-#uhaxpsecih .gt_striped {
+#kfyhbejelq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uhaxpsecih .gt_table_body {
+#kfyhbejelq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2054,7 +1481,7 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-bottom-color: #D3D3D3;
 }
 
-#uhaxpsecih .gt_footnotes {
+#kfyhbejelq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2068,7 +1495,7 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-right-color: #D3D3D3;
 }
 
-#uhaxpsecih .gt_footnote {
+#kfyhbejelq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2077,7 +1504,7 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#uhaxpsecih .gt_sourcenotes {
+#kfyhbejelq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2091,7 +1518,7 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-right-color: #D3D3D3;
 }
 
-#uhaxpsecih .gt_sourcenote {
+#kfyhbejelq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2099,72 +1526,72 @@ Table&nbsp;7.2: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#uhaxpsecih .gt_left {
+#kfyhbejelq .gt_left {
   text-align: left;
 }
 
-#uhaxpsecih .gt_center {
+#kfyhbejelq .gt_center {
   text-align: center;
 }
 
-#uhaxpsecih .gt_right {
+#kfyhbejelq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uhaxpsecih .gt_font_normal {
+#kfyhbejelq .gt_font_normal {
   font-weight: normal;
 }
 
-#uhaxpsecih .gt_font_bold {
+#kfyhbejelq .gt_font_bold {
   font-weight: bold;
 }
 
-#uhaxpsecih .gt_font_italic {
+#kfyhbejelq .gt_font_italic {
   font-style: italic;
 }
 
-#uhaxpsecih .gt_super {
+#kfyhbejelq .gt_super {
   font-size: 65%;
 }
 
-#uhaxpsecih .gt_footnote_marks {
+#kfyhbejelq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uhaxpsecih .gt_asterisk {
+#kfyhbejelq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uhaxpsecih .gt_indent_1 {
+#kfyhbejelq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uhaxpsecih .gt_indent_2 {
+#kfyhbejelq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uhaxpsecih .gt_indent_3 {
+#kfyhbejelq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uhaxpsecih .gt_indent_4 {
+#kfyhbejelq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uhaxpsecih .gt_indent_5 {
+#kfyhbejelq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#uhaxpsecih .katex-display {
+#kfyhbejelq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#uhaxpsecih div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kfyhbejelq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2355,8 +1782,8 @@ Show Table 7.3: Health
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_tabledata_health</span>() <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_table_by_groupSex</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_tabledata_health</span>() <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_table_by_groupSex</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="tbl-health" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -2365,23 +1792,23 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
 </figcaption>
 <div aria-describedby="tbl-health-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="cohyvvvjwg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cohyvvvjwg table {
+<div id="gpaniuvqxj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gpaniuvqxj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cohyvvvjwg thead, #cohyvvvjwg tbody, #cohyvvvjwg tfoot, #cohyvvvjwg tr, #cohyvvvjwg td, #cohyvvvjwg th {
+#gpaniuvqxj thead, #gpaniuvqxj tbody, #gpaniuvqxj tfoot, #gpaniuvqxj tr, #gpaniuvqxj td, #gpaniuvqxj th {
   border-style: none;
 }
 
-#cohyvvvjwg p {
+#gpaniuvqxj p {
   margin: 0;
   padding: 0;
 }
 
-#cohyvvvjwg .gt_table {
+#gpaniuvqxj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2407,12 +1834,12 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-left-color: #D3D3D3;
 }
 
-#cohyvvvjwg .gt_caption {
+#gpaniuvqxj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cohyvvvjwg .gt_title {
+#gpaniuvqxj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2424,7 +1851,7 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-bottom-width: 0;
 }
 
-#cohyvvvjwg .gt_subtitle {
+#gpaniuvqxj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2436,7 +1863,7 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-top-width: 0;
 }
 
-#cohyvvvjwg .gt_heading {
+#gpaniuvqxj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2448,13 +1875,13 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-right-color: #D3D3D3;
 }
 
-#cohyvvvjwg .gt_bottom_border {
+#gpaniuvqxj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cohyvvvjwg .gt_col_headings {
+#gpaniuvqxj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2469,7 +1896,7 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-right-color: #D3D3D3;
 }
 
-#cohyvvvjwg .gt_col_heading {
+#gpaniuvqxj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2489,7 +1916,7 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   overflow-x: hidden;
 }
 
-#cohyvvvjwg .gt_column_spanner_outer {
+#gpaniuvqxj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2501,15 +1928,15 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 4px;
 }
 
-#cohyvvvjwg .gt_column_spanner_outer:first-child {
+#gpaniuvqxj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cohyvvvjwg .gt_column_spanner_outer:last-child {
+#gpaniuvqxj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cohyvvvjwg .gt_column_spanner {
+#gpaniuvqxj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2521,11 +1948,11 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   width: 100%;
 }
 
-#cohyvvvjwg .gt_spanner_row {
+#gpaniuvqxj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cohyvvvjwg .gt_group_heading {
+#gpaniuvqxj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2551,7 +1978,7 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   text-align: left;
 }
 
-#cohyvvvjwg .gt_empty_group_heading {
+#gpaniuvqxj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2566,15 +1993,15 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   vertical-align: middle;
 }
 
-#cohyvvvjwg .gt_from_md > :first-child {
+#gpaniuvqxj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cohyvvvjwg .gt_from_md > :last-child {
+#gpaniuvqxj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cohyvvvjwg .gt_row {
+#gpaniuvqxj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2593,7 +2020,7 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   overflow-x: hidden;
 }
 
-#cohyvvvjwg .gt_stub {
+#gpaniuvqxj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2606,7 +2033,7 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#cohyvvvjwg .gt_stub_row_group {
+#gpaniuvqxj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2620,15 +2047,15 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   vertical-align: top;
 }
 
-#cohyvvvjwg .gt_row_group_first td {
+#gpaniuvqxj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cohyvvvjwg .gt_row_group_first th {
+#gpaniuvqxj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cohyvvvjwg .gt_summary_row {
+#gpaniuvqxj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2638,16 +2065,16 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#cohyvvvjwg .gt_first_summary_row {
+#gpaniuvqxj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cohyvvvjwg .gt_first_summary_row.thick {
+#gpaniuvqxj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cohyvvvjwg .gt_last_summary_row {
+#gpaniuvqxj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2657,7 +2084,7 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-bottom-color: #D3D3D3;
 }
 
-#cohyvvvjwg .gt_grand_summary_row {
+#gpaniuvqxj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2667,7 +2094,7 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#cohyvvvjwg .gt_first_grand_summary_row {
+#gpaniuvqxj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2677,7 +2104,7 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-top-color: #D3D3D3;
 }
 
-#cohyvvvjwg .gt_last_grand_summary_row_top {
+#gpaniuvqxj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2687,11 +2114,11 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-bottom-color: #D3D3D3;
 }
 
-#cohyvvvjwg .gt_striped {
+#gpaniuvqxj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cohyvvvjwg .gt_table_body {
+#gpaniuvqxj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2700,7 +2127,7 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-bottom-color: #D3D3D3;
 }
 
-#cohyvvvjwg .gt_footnotes {
+#gpaniuvqxj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2714,7 +2141,7 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-right-color: #D3D3D3;
 }
 
-#cohyvvvjwg .gt_footnote {
+#gpaniuvqxj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2723,7 +2150,7 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#cohyvvvjwg .gt_sourcenotes {
+#gpaniuvqxj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2737,7 +2164,7 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-right-color: #D3D3D3;
 }
 
-#cohyvvvjwg .gt_sourcenote {
+#gpaniuvqxj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2745,72 +2172,72 @@ Table&nbsp;7.3: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#cohyvvvjwg .gt_left {
+#gpaniuvqxj .gt_left {
   text-align: left;
 }
 
-#cohyvvvjwg .gt_center {
+#gpaniuvqxj .gt_center {
   text-align: center;
 }
 
-#cohyvvvjwg .gt_right {
+#gpaniuvqxj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cohyvvvjwg .gt_font_normal {
+#gpaniuvqxj .gt_font_normal {
   font-weight: normal;
 }
 
-#cohyvvvjwg .gt_font_bold {
+#gpaniuvqxj .gt_font_bold {
   font-weight: bold;
 }
 
-#cohyvvvjwg .gt_font_italic {
+#gpaniuvqxj .gt_font_italic {
   font-style: italic;
 }
 
-#cohyvvvjwg .gt_super {
+#gpaniuvqxj .gt_super {
   font-size: 65%;
 }
 
-#cohyvvvjwg .gt_footnote_marks {
+#gpaniuvqxj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cohyvvvjwg .gt_asterisk {
+#gpaniuvqxj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cohyvvvjwg .gt_indent_1 {
+#gpaniuvqxj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cohyvvvjwg .gt_indent_2 {
+#gpaniuvqxj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cohyvvvjwg .gt_indent_3 {
+#gpaniuvqxj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cohyvvvjwg .gt_indent_4 {
+#gpaniuvqxj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cohyvvvjwg .gt_indent_5 {
+#gpaniuvqxj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cohyvvvjwg .katex-display {
+#gpaniuvqxj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cohyvvvjwg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gpaniuvqxj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2941,8 +2368,8 @@ Show Table 7.4: Recruitment
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_table_data_recruitment</span>()  <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_table_by_groupSex</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_table_data_recruitment</span>()  <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_table_by_groupSex</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="tbl-recruitment" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -2951,23 +2378,23 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
 </figcaption>
 <div aria-describedby="tbl-recruitment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="aveqofeqix" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#aveqofeqix table {
+<div id="nhzsrmtsye" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nhzsrmtsye table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#aveqofeqix thead, #aveqofeqix tbody, #aveqofeqix tfoot, #aveqofeqix tr, #aveqofeqix td, #aveqofeqix th {
+#nhzsrmtsye thead, #nhzsrmtsye tbody, #nhzsrmtsye tfoot, #nhzsrmtsye tr, #nhzsrmtsye td, #nhzsrmtsye th {
   border-style: none;
 }
 
-#aveqofeqix p {
+#nhzsrmtsye p {
   margin: 0;
   padding: 0;
 }
 
-#aveqofeqix .gt_table {
+#nhzsrmtsye .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2993,12 +2420,12 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-left-color: #D3D3D3;
 }
 
-#aveqofeqix .gt_caption {
+#nhzsrmtsye .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aveqofeqix .gt_title {
+#nhzsrmtsye .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3010,7 +2437,7 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-bottom-width: 0;
 }
 
-#aveqofeqix .gt_subtitle {
+#nhzsrmtsye .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3022,7 +2449,7 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-top-width: 0;
 }
 
-#aveqofeqix .gt_heading {
+#nhzsrmtsye .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3034,13 +2461,13 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-right-color: #D3D3D3;
 }
 
-#aveqofeqix .gt_bottom_border {
+#nhzsrmtsye .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#aveqofeqix .gt_col_headings {
+#nhzsrmtsye .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3055,7 +2482,7 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-right-color: #D3D3D3;
 }
 
-#aveqofeqix .gt_col_heading {
+#nhzsrmtsye .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3075,7 +2502,7 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   overflow-x: hidden;
 }
 
-#aveqofeqix .gt_column_spanner_outer {
+#nhzsrmtsye .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3087,15 +2514,15 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 4px;
 }
 
-#aveqofeqix .gt_column_spanner_outer:first-child {
+#nhzsrmtsye .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aveqofeqix .gt_column_spanner_outer:last-child {
+#nhzsrmtsye .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aveqofeqix .gt_column_spanner {
+#nhzsrmtsye .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3107,11 +2534,11 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   width: 100%;
 }
 
-#aveqofeqix .gt_spanner_row {
+#nhzsrmtsye .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#aveqofeqix .gt_group_heading {
+#nhzsrmtsye .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3137,7 +2564,7 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   text-align: left;
 }
 
-#aveqofeqix .gt_empty_group_heading {
+#nhzsrmtsye .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3152,15 +2579,15 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   vertical-align: middle;
 }
 
-#aveqofeqix .gt_from_md > :first-child {
+#nhzsrmtsye .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aveqofeqix .gt_from_md > :last-child {
+#nhzsrmtsye .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aveqofeqix .gt_row {
+#nhzsrmtsye .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3179,7 +2606,7 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   overflow-x: hidden;
 }
 
-#aveqofeqix .gt_stub {
+#nhzsrmtsye .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3192,7 +2619,7 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#aveqofeqix .gt_stub_row_group {
+#nhzsrmtsye .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3206,15 +2633,15 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   vertical-align: top;
 }
 
-#aveqofeqix .gt_row_group_first td {
+#nhzsrmtsye .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aveqofeqix .gt_row_group_first th {
+#nhzsrmtsye .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#aveqofeqix .gt_summary_row {
+#nhzsrmtsye .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3224,16 +2651,16 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#aveqofeqix .gt_first_summary_row {
+#nhzsrmtsye .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#aveqofeqix .gt_first_summary_row.thick {
+#nhzsrmtsye .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aveqofeqix .gt_last_summary_row {
+#nhzsrmtsye .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3243,7 +2670,7 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-bottom-color: #D3D3D3;
 }
 
-#aveqofeqix .gt_grand_summary_row {
+#nhzsrmtsye .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3253,7 +2680,7 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#aveqofeqix .gt_first_grand_summary_row {
+#nhzsrmtsye .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3263,7 +2690,7 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-top-color: #D3D3D3;
 }
 
-#aveqofeqix .gt_last_grand_summary_row_top {
+#nhzsrmtsye .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3273,11 +2700,11 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-bottom-color: #D3D3D3;
 }
 
-#aveqofeqix .gt_striped {
+#nhzsrmtsye .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#aveqofeqix .gt_table_body {
+#nhzsrmtsye .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3286,7 +2713,7 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-bottom-color: #D3D3D3;
 }
 
-#aveqofeqix .gt_footnotes {
+#nhzsrmtsye .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3300,7 +2727,7 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-right-color: #D3D3D3;
 }
 
-#aveqofeqix .gt_footnote {
+#nhzsrmtsye .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3309,7 +2736,7 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#aveqofeqix .gt_sourcenotes {
+#nhzsrmtsye .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3323,7 +2750,7 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   border-right-color: #D3D3D3;
 }
 
-#aveqofeqix .gt_sourcenote {
+#nhzsrmtsye .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3331,72 +2758,72 @@ Table&nbsp;7.4: Participants in MPX NYC Study by Sex / Physical Contact in Congr
   padding-right: 5px;
 }
 
-#aveqofeqix .gt_left {
+#nhzsrmtsye .gt_left {
   text-align: left;
 }
 
-#aveqofeqix .gt_center {
+#nhzsrmtsye .gt_center {
   text-align: center;
 }
 
-#aveqofeqix .gt_right {
+#nhzsrmtsye .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aveqofeqix .gt_font_normal {
+#nhzsrmtsye .gt_font_normal {
   font-weight: normal;
 }
 
-#aveqofeqix .gt_font_bold {
+#nhzsrmtsye .gt_font_bold {
   font-weight: bold;
 }
 
-#aveqofeqix .gt_font_italic {
+#nhzsrmtsye .gt_font_italic {
   font-style: italic;
 }
 
-#aveqofeqix .gt_super {
+#nhzsrmtsye .gt_super {
   font-size: 65%;
 }
 
-#aveqofeqix .gt_footnote_marks {
+#nhzsrmtsye .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#aveqofeqix .gt_asterisk {
+#nhzsrmtsye .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aveqofeqix .gt_indent_1 {
+#nhzsrmtsye .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aveqofeqix .gt_indent_2 {
+#nhzsrmtsye .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aveqofeqix .gt_indent_3 {
+#nhzsrmtsye .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aveqofeqix .gt_indent_4 {
+#nhzsrmtsye .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aveqofeqix .gt_indent_5 {
+#nhzsrmtsye .gt_indent_5 {
   text-indent: 25px;
 }
 
-#aveqofeqix .katex-display {
+#nhzsrmtsye .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#aveqofeqix div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nhzsrmtsye div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3529,12 +2956,12 @@ N = 1,304</span></span><span class="gt_footnote_marks" style="white-space:nowrap
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_icon</span>(<span class="at">icon_name =</span> <span class="st">"peach"</span>, <span class="at">color =</span> <span class="st">"light_green"</span>, <span class="at">shape =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_icon</span>(<span class="at">icon_name =</span> <span class="st">"peach"</span>, <span class="at">color =</span> <span class="st">"light_green"</span>, <span class="at">shape =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="3_1__results_participants_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
+<p><img src="3_1__results_participants_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
 </figure>
 </div>
 </div>

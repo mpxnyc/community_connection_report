@@ -8,72 +8,28 @@ targets::tar_source("../R_functions")
 ```
 
 
-```{r}
-#| fig-cap: Spatial mixing matrix by age
-#| label: fig-age-mixing-matrix
-#| fig-width: 9
-#| fig-height: 9
 
-make_plotdata_age_mixing_matrix() |>
-  plot_matrix_mixing() +
-  scale_fill_mpxnyc_gradient() +
-  scale_color_mpxnyc_gradient() +
-  theme_mpxnyc_mixing(
-    plot.margin = ggplot2::unit(10*c(10,10,10,10), "pt")
-    ) 
-```
+{{< include fig-age-mixing-matrix.qmd >}}
 
 
 Patterns of mixing reveal how social worlds overlapped—and where they stayed distinct—within queer and trans New York. Using spatial selection coefficients, we measured the degree to which participants who shared certain characteristics (such as race, gender, sexual orientation, or age) tended to live or play in the same neighborhoods.
 
 
-```{r}
-#| fig-cap: Spatial mixing matrix by race and gender.
-#| label: fig-racegender-mixing-matrix
-#| fig-width: 9
-#| fig-height: 9
 
-make_plotdata_racegender_mixing_matrix() |>
-  plot_matrix_mixing() +
-  scale_fill_mpxnyc_gradient() +
-  scale_color_mpxnyc_gradient() +
-  theme_mpxnyc_mixing()
-```
+
+{{< include fig-racegender-mixing-matrix.qmd >}}
 
 
 
 Across all categories, participants showed **spatial homophily**—people were more likely to live or go out in community districts where others shared their demographic traits. Yet the pattern was not uniform. **Black cisgender men** and **non-binary participants** tended to visit or reside in different neighborhoods than **white cisgender men**, indicating parallel but distinct social geographies. **Non-binary people** also showed spatial proximity to **transgender men**, suggesting overlapping community spaces.  
 
 
-```{r }
-#| fig-cap: Spatial mixing matrix by sexual orientation
-#| label: fig-sexorientation-mixing-matrix
-#| fig-width: 9
-#| fig-height: 9
-
-
-make_plotdata_sexorientation_mixing_matrix() |>
-  plot_matrix_mixing() +
-  scale_fill_mpxnyc_gradient() +
-  scale_color_mpxnyc_gradient() +
-  theme_mpxnyc_mixing(
-    plot.margin = ggplot2::unit(10*c(10,10,10,10), "pt")
-    ) 
-```
+{{< include fig-sexorientation-mixing-matrix.qmd >}}
 
 When stratified by sexual orientation, **gay-identified participants** clustered in neighborhoods where **bisexual, straight, and queer-identified** participants were less present—and those groups, in turn, avoided the gay-identified clusters. These mirrored preferences underscore how social identity, geography, and nightlife intertwine to shape opportunity for connection—and risk for infection.
 
 
 
 
+{{< include plot-icon-3.qmd >}}
 
-
-```{r}
-#| fig-width: 2
-#| fig-height: 2
-#| fig-align: center
-
-
-plot_icon(icon_name = "bear", color = "light_brown", shape = 8)
-
-```
