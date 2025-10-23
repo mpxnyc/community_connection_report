@@ -1,0 +1,24 @@
+```{r}
+#| tbl-cap: Popular neighborhoods for gatherings
+#| label: tbl-gatherings-neighborhoods
+#| 
+table_data <- make_tabledata_gatherings() |>
+  dplyr::filter(count > 16) |>
+  dplyr::ungroup() |>
+  dplyr::select(neighborhood, community, borough, count, proportion) 
+
+labelled::var_label(table_data$neighborhood) <- "Neighborhood"
+labelled::var_label(table_data$community) <- "Community district"
+labelled::var_label(table_data$borough) <- "Borough"
+labelled::var_label(table_data$count) <- "Count of gatherings"
+labelled::var_label(table_data$proportion) <- "Proportion of gatherings"
+
+table_data |>
+  gt::gt()|>
+  gt::tab_header(
+    title = "Most popular neighborhoods for gatherings",
+    subtitle = "MPX NYC 2022"
+  ) |>
+   gt::fmt_percent(proportion, decimals = 0)
+
+```

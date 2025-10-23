@@ -1,0 +1,24 @@
+```{r}
+#| tbl-cap: MPX NYC popular residential neighborhoods
+#| label: tbl-home-map
+
+table_data <- make_tabledata_residence()
+
+labelled::var_label(table_data$neighborhood) <- "Neighborhood"
+labelled::var_label(table_data$community) <- "Community district"
+labelled::var_label(table_data$borough) <- "Borough"
+labelled::var_label(table_data$count) <- "Count of participants"
+labelled::var_label(table_data$proportion) <- "Proportion of participants"
+
+ table_data |>
+  dplyr::ungroup() |>
+  dplyr::filter(count > 29) |>
+   dplyr::select(neighborhood, community, borough, count, proportion) |>
+  gt::gt() |>
+     gt::tab_header(
+    title = "Most popular neighborhoods for primary residence",
+    subtitle = "MPX NYC 2022"
+  ) |>
+   gt::fmt_percent(proportion, decimals = 0)
+
+```

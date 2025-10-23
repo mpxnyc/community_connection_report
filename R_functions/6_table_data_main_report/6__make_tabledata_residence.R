@@ -6,5 +6,6 @@ make_tabledata_residence <- function(){
     dplyr::group_by(borough, community, neighborhood) |>
     dplyr::summarize(count = dplyr::n()) |>
     dplyr::arrange(-count) |>
-    dplyr::ungroup()
+    dplyr::ungroup() |>
+    dplyr::mutate(proportion = count / sum(count))
 }
