@@ -1,8 +1,4 @@
----
-editor: 
-  markdown: 
-    wrap: 72
----
+
 
 ```{r  include=FALSE}
 targets::tar_source("../R_functions")
@@ -12,12 +8,12 @@ targets::tar_source("../R_functions")
 # SSNAC IV: Measurement {#sec-data}
 
 ::: {#leading}
-As part of the MPX NYC survey, we developed a digital tool called the
-**MPX NYC Person–Place Network Mapper**. We describe its design,
-functionality, and implementation.
+As part of the MPX NYC survey, we developed a digital tool called the MPX NYC Person–Place Network Mapper. We describe its design, functionality, and implementation.
 :::
 
-## Person–Place Network Mapper {.unnumbered}
+{{< include /C_ssnac3_causality/fig-plot-icon-droplets.qmd >}} 
+
+## Person–Place Network Mapper 
 
 We designed, tested, and implemented the MPX NYC Person–Place Network
 Mapper to meet practical and ethical challenges in collecting sensitive
@@ -93,9 +89,9 @@ place-mapping and link-tracing components. The back end comprised a
 custom Neo4j graph database connected to the front end through a study
 API.
 
-### Safety {.unnumbered}
+## Safety 
 
-####  {.unnumbered}
+###  {.unnumbered}
 
 Survey questions were carefully designed to avoid collecting any direct
 or indirect identifiers, such as names, email addresses, IP addresses,
@@ -107,7 +103,7 @@ into census tract identifiers on the participant’s device before
 transmission to the database. Census tracts represent U.S. geographic
 areas containing 2,500–8,000 residents.
 
-#### Public and Private Identifiers
+### Public and Private Identifiers  {.unnumbered}
 
 When a participant began the survey, the front end parsed referral
 identifiers and language settings from the access URL. This information
@@ -120,7 +116,7 @@ replaced public identifiers with private ones before saving the data to
 the database. The identifier-pair table was stored separately and
 deleted after data collection concluded.
 
-#### Sensitive Spatial Data
+### Sensitive Spatial Data  {.unnumbered}
 
 Each spatial input generated precise coordinates through the Google Maps
 API. These were immediately processed on the front end through the FCC
@@ -128,7 +124,7 @@ API to obtain census block identifiers, which were then truncated to
 census tracts. Only the census tract identifiers were transmitted to the
 study database.
 
-#### Testing and Ethical Review
+### Testing and Ethical Review  {.unnumbered}
 
 We conducted two rounds of usability testing with approximately ten
 participants each to refine the survey interface and workflow. The final
