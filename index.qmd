@@ -11,7 +11,6 @@ remotes::install_github("KeletsoMakofane/mpxtools")
 
 ```
 
-
 ```{r process_data}
 targets::tar_source("R_functions") # Access custom defined functions
 targets::tar_make(reporter = "silent") # Run data pipeline
@@ -29,49 +28,28 @@ A rapid, community-led study of mpox, networks, and care—built by queer and tr
 
 # Welcome
 
-This book presents the **MPX NYC** study, an anonymous, web-based research project that maps how LGBTQ+ people and places are connected across the city. Using a survey platform we whipped up from scratch, we asked participants to show us where in New York they hanged out (both 🪩🕺, and 😈💦) in the preceding four weeks. We captured only the census tract labels for those places and used those to make a giant network of people and census tracts. This book presents what we learn from analyzing that network. 
+This book presents the **MPX NYC** study, an anonymous, web-based survey that maps how LGBTQ+ people are connected through the places we inhabit together in the city. Using a survey platform we whipped up from scratch, we asked folks to show us where they hanged out (both 🪩🕺, and 🧑🧑🧑😈💦) in the month before. (For safety, we captured only the census tract labels for those places). We constructed a giant network of people and places in NYC. This book presents what we learned from analyzing that network.
 
-[**ACTIONABLE INSIGHTS**]{.emphasize}:
-We found that all participants belonged to one interconnected network of people and places. We had a diverse group of participants. 
+[ACTIONABLE INSIGHTS]{.emphasize}: 1. We found that almost all participants belonged to **one interconnected network of people and places** -- though different sub-groups tended to congregate in different places. If a new infectious disease comes it is likely to spread through the community unevenly, depending on which places and people it affects first. 2. The strategy usually used in an outbreak -- targeting sex-positive public venues with mobile outreach services -- is unlikely to contain it. Most **contact happens in private** residences. 3. There are neighborhoods and regions of the city which form **local and city-wide hubs for contact** and connection. These could be part of a data-driven response to new outbreaks. 4. We found evidence that in a choice between vaccinating with the goal of a) limiting the geographic spread of a new outbreak in the city, or b) **vaccinating as many people as quickly as possible**, b) is the better option.
 
-[**LOCAL = GLOBAL HEALTH ACTIVISM**]{.emphasize}:
-The work was conducted under  the Rapid Epidemiologic Study of Sexual Networks, Demography, and Mpox Infection (**RESPND-MI**), an **LGBTQ community-led collaboration** formed during the 2022 mpox outbreak among queer and trans New Yorkers. It convened activists, organizers, and researchers to share information quickly and act. 
+[LOCAL 🤝 GLOBAL HEALTH ACTIVISM]{.emphasize}: The work was conducted under the **Rapid Epidemiologic Study of Sexual Networks, Demography, and mpox Infection (RESPND-MI)**, an **LGBTQ community-led collaboration** formed during the 2022 mpox outbreak among queer and trans New Yorkers. It convened activists, organizers, and researchers to share information quickly and act using tools and approaches developed by **activists in the global response to HIV**.
 
+[CAUSAL INFERENCE FOR AN INTERCONNECTED WORLD]{.emphasize}: We introduce a **SSNAC** – **framework for causal inference in social and spatial epidemiology**. SSNAC guides the collection, management, analysis, and causal interpretation of data from complex causal systems. It re-interprets and extends widely used ideas and methods in epidemiology to enable researchers to study networks rather than individuals.
 
-[**CAUSAL INFERENCE FOR AN INTERCONNECTED WORLD**]{.emphasize}:
-We introduce a framework for causal inference in social and spatial epidemiology called **SSNAC**. SSNAC guides the collection, management, analysis, and causal interpretation of data from complex causal systems using tools that are already widely validated.
+[OPEN SCIENCE]{.emphasize}: Along with the study results, we share all the code that generated this book, code for the MPX NYC person-place network mapper, and a detailed set of appendices **for students, data activists, and researchers** who wish to adapt and use these methods.
 
-
-[**OPEN SCIENCE**]{.emphasize}:
-Along with the study results, we share all the code that generated this book, the MPX NYC person-place network mapper, as well as a detailed set of appendices **for students, data activists, and researchers** who wish to learn and use these methods. 
-
-
-
-
-MPX NYC mapped the social and spatial connections of queer and trans New Yorkers to inform the mpox response. What we found affirms joy, connection, and offers new insights into the structure of the LGBTQ+ community in New York City.
-
+MPX NYC was part of an effort to map the social and spatial connections of queer and trans New Yorkers to inform the mpox response. What we found affirms joy, connection, and offers new insights into the structure of the LGBTQ+ life in New York City.
 
 # At a glance {.unnumbered}
 
-
-
-::::::::::::::: {.grid .g-6 .mt-1}
-
-
-
-
+::::::::::: {.grid .g-6 .mt-1}
 :::: {.g-col-12 .g-col-md-12 .g-col-xl-12}
 ::: {.card .h-100 .shadow-sm}
 [MPX NYC RESULTS]{.emphasize}
 
 Participants’ residences and gatherings cluster in Manhattan and North Brooklyn; mixing shows strong homophily by race–gender and orientation; simulated strategies trade off rapid coverage vs. faster network fragmentation.
 
-[People](#sec-participants){.btn .btn-sm .btn-outline-secondary} 
-[Gatherings](#sec-venues){.btn .btn-sm .btn-outline-secondary} 
-[Going out](#sec-movement){.btn .btn-sm .btn-outline-secondary}
-[Mixing](#sec-mixing){.btn .btn-sm .btn-outline-secondary}
-[Outbreaks](#sec-intervention){.btn .btn-sm .btn-outline-secondary}
-[Supplementary results](#sec-appendixresults){.btn .btn-sm .btn-outline-primary}
+[People](#sec-participants){.btn .btn-sm .btn-outline-secondary} [Gatherings](#sec-venues){.btn .btn-sm .btn-outline-secondary} [Going out](#sec-movement){.btn .btn-sm .btn-outline-secondary} [Mixing](#sec-mixing){.btn .btn-sm .btn-outline-secondary} [Outbreaks](#sec-intervention){.btn .btn-sm .btn-outline-secondary} [Supplementary results](#sec-appendixresults){.btn .btn-sm .btn-outline-primary}
 :::
 ::::
 
@@ -81,11 +59,7 @@ Participants’ residences and gatherings cluster in Manhattan and North Brookly
 
 How we safely collected spatial and network data: on-device coarsening to census tracts, anonymous link tracing, and a Neo4j backend.
 
-[Data](#sec-data){.btn .btn-sm .btn-outline-secondary} 
-[Measures](#sec-measures){.btn .btn-sm .btn-outline-secondary} 
-[Analysis](#sec-analysis){.btn .btn-sm .btn-outline-secondary} 
-[Measurement](#sec-measurement){.btn .btn-sm .btn-outline-primary} 
-
+[Data](#sec-data){.btn .btn-sm .btn-outline-secondary} [Measures](#sec-measures){.btn .btn-sm .btn-outline-secondary} [Analysis](#sec-analysis){.btn .btn-sm .btn-outline-secondary} [Measurement](#sec-measurement){.btn .btn-sm .btn-outline-primary}
 :::
 ::::
 
@@ -95,13 +69,9 @@ How we safely collected spatial and network data: on-device coarsening to census
 
 SSNAC extends causal inference to people–place networks. We pair it with an anonymous, bilingual survey and a custom Person–Place Network Mapper.
 
-[Context](#sec-appendix-social-spatial){.btn .btn-sm .btn-outline-primary} 
-[Description](#sec-appendix-analysis){.btn .btn-sm .btn-outline-primary} 
-[Causality](#sec-causal-interpretation){.btn .btn-sm .btn-outline-primary}
-
+[Context](#sec-appendix-social-spatial){.btn .btn-sm .btn-outline-primary} [Description](#sec-appendix-analysis){.btn .btn-sm .btn-outline-primary} [Causality](#sec-causal-interpretation){.btn .btn-sm .btn-outline-primary}
 :::
 ::::
-
 
 :::: {.g-col-12 .g-col-md-6 .g-col-xl-6}
 ::: {.card .h-100 .shadow-sm}
@@ -109,37 +79,35 @@ SSNAC extends causal inference to people–place networks. We pair it with an an
 
 How we organized around research through RESPND-MI. Weekly LGBTQ+ Community Forum, distributed leadership, and small, shared tasks by design—redundancy as resilience.
 
-[Organizing](#sec-organizing){.btn .btn-sm .btn-outline-primary} 
-[Marketing](#sec-marketing){.btn .btn-sm .btn-outline-primary}
+[Organizing](#sec-organizing){.btn .btn-sm .btn-outline-primary} [Marketing](#sec-marketing){.btn .btn-sm .btn-outline-primary}
 :::
 ::::
+:::::::::::
 
+# Open science {.unnumbered}
 
-
-
-
-:::::::::::::::
+All code and analytic frameworks developed for this project—including the code that powers this site—are publicly available. We hope these methods can be adapted by alliances of LGBTQ+ researchers and activists to answer urgent questions on housing, nutrition, violence, access to care, employment, and health.
 
 # Why this work matters {.unnumbered}
 
-As support for LGBTQ+ health services and research declines, and thousands of talented queer people are laid off, it is crucial to develop and  
+As support for LGBTQ+ health services and research declines, and thousands of talented queer people are laid off their global health jobs, it is crucial to find new ways to organize ourselves and use our hard-earned knowledge and skills. These skills are useful - we have the ability to help our folks survive epidemics. That was evident in the early phase of this project, where queer and trans people from all walks of life joined hands to make sense of this new threat and to do something about it.
 
-this project shows that **rigorous epidemiology and community organizing can coexist**. Through the weekly **RESPND-MI LGBTQ+ Community Forum**, activists, clinicians, and researchers co-designed the study—refining language to avoid stigma, choosing outreach venues, and building bilingual campaigns.
-
-The project became not only a study *of* networks, but a network *itself*: a model of participatory, queer-led science built from abundance, care, and trust.
+This project shows that rigorous epidemiology and community organizing can, and must, coexist. Through the weekly RESPND-MI LGBTQ+ Community Forum, activists, clinicians, and researchers co-designed the study—refining language to avoid stigma, choosing outreach venues, and building bilingual campaigns. The project became not only a study *of* networks, but a network *itself*: a model of participatory, queer-led science built from abundance, care, and trust.
 
 # Who we are {.unnumbered}
 
 **Lead author:** Keletso Makofane, MPH, PhD\
 **Co-authors:** Nicholas Diamond, MPH; Jennifer Barnes-Balenciaga; Elle Lett, MA, MBiostat, PhD; Ken Mayer, MD; Nguyen Tran, MPH, PhD
 
-[Full team & partners →](f_organizing/f__organizing#who-we-are)
+# Why self-publish
 
-# Open science {.unnumbered}
+Because the project is unfunded, we have focused all our energy on creating a high-quality resource that responds to the needs of this political moment and that responds to the reproducibility crisis. We have published our work in a way where any researcher can download our code and data and reproduce the report. We invite academic journals who would like to commission articles based on this work to contact us.
 
-All code and analytic frameworks developed for this project—including the code that powers this site—are publicly available. We hope these methods can be adapted by **alliances of LGBTQ+ researchers and activists** to answer urgent questions on housing, care, and health.
+# How to support
 
-[Access code & resources →](d_ssnac4_measurement/d__ssnac4_measurement)
+This website and related resources were developed by CTRL+F – an LGBTQ+ led consultancy that started to form a safe space to do radical data-driven activism away from the routine workplace violence of the university or large NGO. We are in our infancy and need all the support we need to get off the ground.
+
+[Here is how you can help]{.strong}: [Sign up]{.emphasize} to [join our upcoming lecture series entitled "The People's Department of Health"]{.emphasize}, where Dr Keletso Makofane will talk through the work in conversation with activists and researchers who do public health work for LGBTQ+ people. Please ask your colleagues and friends to do the same!
 
 ```{r}
 #| fig-width: 2
@@ -152,33 +120,11 @@ plot_icon(icon_name = "peach", color = "dark_orange", shape = 0)
 ```
 
 ::: {#acknowledgements}
-**RESPND-MI** [Principal investigator]{.underline}: Keletso Makofane, MPH, PhD. [Co-investigators]{.underline}: Jennifer Barnes-Balenciaga, Nicholas Diamond, MPH, Elle Lett, PhD, MA, MBiostat, Cody Nolan, MD, Martez Smith, LMSW, PhD, Nguyen Tran, MPH, PhD. [Former investigators]{.underline}: Pedro Botti Careneiro, MPH, PhD, Seema Kara, MPH, James Krellenstein, Ken Nadolski, MPH, Joseph Osmundson, PhD, Robert Pitts, MD, Grant Roth, MPH, Sudipta Saha, MS, Christian Urrutia, MBA, Chris Wyman. [Translator]{.underline}: Antón Castellanos Usigli, MPH, DrPH. [Reference group]{.underline}: Judith D. Auerbach, PhD (*University of California, San Francisco*), Lisa Berkman, PhD (*Harvard University*), Forrest W. Crawford, PhD (*Yale University*), William C. Goedel, PhD (*Brown University*), Gregg Gonsalves, PhD (*Yale University*), Ian W. Holloway, PhD, LCSW, MPH (*University of California, Los Angeles*), Louise Ivers, MB, BCh, MD, MPH, DTMH (*Massachusetts General Hospital*), Lawrence C. Long, MCom, PhD (*Boston University)*, Kenneth Mayer, MD (*The Fenway Institute*), Gregorio Millett, MPH (*amfAR*), Eric J. Tchetgen Tchetgen, PhD (*University of Pennsylvania*). [Research sponsors and funders]{.underline}: amfAR; Harvard Center for AIDS Research; National Institutes of Health; neo4j, New York State Department of Health. [Marketing sponsors and funders]{.underline}: Grindr; Hub for Health Intervention, UCLA Luskin School of Public Affairs. [Administration]{.underline}: Christian Urrutia, MBA (PrEP4All); James Krellenstein (PrEP4All).
-
-**OPEN SCIENCE** All the code we developed as a part of this project, including the code for this website, will be publicly available. Our hope is that alliances of LGBTQ+ activists and researchers will use these methods to answer the pressing questions of their communities: housing, nutrition, violence, access to care, employment, health, and others. As government support for LGBTQ+ health diminishes, we will need to take it upon ourselves to conduct research and surveillance and use what we learn to respond to the needs of our communities. We include in this report a brief account of the steps we implemented to coordinate the volunteer work of over a dozen activists, academics, and community leaders.
+**RESPND-MI** [Principal investigator]{.underline}: Keletso Makofane, MPH, PhD. [Co-investigators]{.underline}: Jennifer Barnes-Balenciaga, Nicholas Diamond, MPH, Elle Lett, PhD, MA, MBiostat, Cody Nolan, MD, Martez Smith, LMSW, PhD, Nguyen Tran, MPH, PhD. [Former investigators]{.underline}: Pedro Botti Careneiro, MPH, PhD, Seema Kara, MPH, James Krellenstein, Ken Nadolski, MPH, Joseph Osmundson, PhD, Robert Pitts, MD, Grant Roth, MPH, Sudipta Saha, MS, Christian Urrutia, MBA, Chris Wyman. [Translator]{.underline}: Antón Castellanos Usigli, MPH, DrPH. [Reference group]{.underline}: Judith D. Auerbach, PhD (*University of California, San Francisco*), Lisa Berkman, PhD (*Harvard University*), Forrest W. Crawford, PhD (*Yale University*), William C. Goedel, PhD (*Brown University*), Gregg Gonsalves, PhD (*Yale University*), Ian W. Holloway, PhD, LCSW, MPH (*University of California, Los Angeles*), Louise Ivers, MB, BCh, MD, MPH, DTMH (*Massachusetts General Hospital*), Lawrence C. Long, MCom, PhD (*Boston University)*, Kenneth Mayer, MD (*The Fenway Institute*), Gregorio Millett, MPH (*amfAR*), Eric J. Tchetgen Tchetgen, PhD (*University of Pennsylvania*). [Research sponsors and funders]{.underline}: amfAR; Harvard Center for AIDS Research; National Institutes of Health; Neo4j, New York State Department of Health. [Marketing sponsors and funders]{.underline}: Grindr; Hub for Health Intervention, UCLA Luskin School of Public Affairs. [Administration]{.underline}: Christian Urrutia, MBA (PrEP4All); James Krellenstein (PrEP4All).
 
 **CONTACT** Keletso Makofane (keletso\@controlf.info). Nicholas Diamond (nick\@controlf.info). [Ctrl+F](https://www.controlf.info){target="_blank"}.
 
 **SUGGESTED CITATION** Makofane, K., Diamond, N., Barnes-Balenciaga, J., Lett, E., Mayer, K., Tran, N. (2025). *Community and connection: A study on social connection among LGBTQ+ New Yorkers*. Ctrl+F on behalf of RESPND-MI. New York City. Available: https://mpxresponse.org
 
-**ACKNOWLEDGEMENTS** We thank PrEP4All for generously providing administrative support, and we thank our many individual donors who contributed funds (and encouragement) to the project; Eric Tchetgen Tchetgen, who nurtured this work; members of the RESPND-MI Community Forum and Reference Group for their thoughtful suggestions on matters ranging from fundraising strategy to study design; and all the individual LGBTQ people who dedicated time and energy towards taking care of our community at a time of crisis. We dedicate this work to those who responded to the crisis, and to those who will respond to the crises to come.
-:::
-
-![](images/clipboard-356854725.png){fig-align="center" width="469"}
-
-::: {.emphasize}
-
--   "Access codes & resources" link is broken on the front page
-
--   "Full team & partners" link takes you to the wrong place, but I think we can delete this anyways because below we have everyone's names (I have another similar comment about this below)
-
--   Should we add logos for NIH, neo4j, and Hub for Health Intervention?
-
--   I don't know what Hub for Health Intervention is, and I don't remember NIH supporting the work.
-
--   Capitalize "Neo4j"
-
--   Consider changing to: "We hope these methods can be adapted by alliances of LGBTQ+ researchers and activists to answer urgent questions on housing, nutrition, violence, access to care, employment, and health."
-
--   Remove comma after crisis: "We dedicate this work to those who responded to the crisis and to those who will respond to the crises to come.
-
+**ACKNOWLEDGEMENTS** We thank PrEP4All for generously providing administrative support, and we thank our many individual donors who contributed funds (and encouragement) to the project; Kenneth Mayer, Eric Tchetgen Tchetgen, and John Diamond who created the conditions for this work to happen; members of the RESPND-MI Community Forum and Reference Group for their thoughtful suggestions on matters ranging from fundraising strategy to study design; and all the individual LGBTQ people who dedicated time and energy towards taking care of our community at a time of crisis. We dedicate this work to those who responded to the crisis and to those who will respond to the crises to come.
 :::
