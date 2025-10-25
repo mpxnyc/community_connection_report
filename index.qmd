@@ -11,6 +11,7 @@ remotes::install_github("KeletsoMakofane/mpxtools")
 
 ```
 
+
 ```{r process_data}
 targets::tar_source("R_functions") # Access custom defined functions
 targets::tar_make(reporter = "silent") # Run data pipeline
@@ -30,9 +31,22 @@ A rapid, community-led study of mpox, networks, and care—built by queer and tr
 
 This book presents the **MPX NYC** study, an anonymous, web-based research project that maps how LGBTQ+ people and places are connected across the city. Using a survey platform we whipped up from scratch, we asked participants to show us where in New York they hanged out (both 🪩🕺, and 😈💦) in the preceding four weeks. We captured only the census tract labels for those places and used those to make a giant network of people and census tracts. This book presents what we learn from analyzing that network. 
 
-Along with the study results, we provide all the code that generated the book as well as a detailed set of appendices for students, activists, and researchers who wish to learn or use these methods. We introduce a new framework for causal inference in epidemiology called **SSNAC**. SSNAC guides the collection, management, analysis, and causal interpretation of data from complex causal systems. We release the survey instrument we developed -- the **MPX NYC person-place network mapper**.  
+[**ACTIONABLE INSIGHTS**]{.emphasize}:
+We found that all participants belonged to one interconnected network of people and places. We had a diverse group of participants. 
 
-The work was conducted under **RESPND-MI** (Rapid Epidemiologic Study of Sexual Networks, Demography, and Mpox Infection), a community-led collaboration formed during the 2022 mpox outbreak among queer and trans New Yorkers. It convened activists, organizers, and researchers to share information quickly and act. 
+[**LOCAL = GLOBAL HEALTH ACTIVISM**]{.emphasize}:
+The work was conducted under  the Rapid Epidemiologic Study of Sexual Networks, Demography, and Mpox Infection (**RESPND-MI**), an **LGBTQ community-led collaboration** formed during the 2022 mpox outbreak among queer and trans New Yorkers. It convened activists, organizers, and researchers to share information quickly and act. 
+
+
+[**CAUSAL INFERENCE FOR AN INTERCONNECTED WORLD**]{.emphasize}:
+We introduce a framework for causal inference in social and spatial epidemiology called **SSNAC**. SSNAC guides the collection, management, analysis, and causal interpretation of data from complex causal systems using tools that are already widely validated.
+
+
+[**OPEN SCIENCE**]{.emphasize}:
+Along with the study results, we share all the code that generated this book, the MPX NYC person-place network mapper, as well as a detailed set of appendices **for students, data activists, and researchers** who wish to learn and use these methods. 
+
+
+
 
 MPX NYC mapped the social and spatial connections of queer and trans New Yorkers to inform the mpox response. What we found affirms joy, connection, and offers new insights into the structure of the LGBTQ+ community in New York City.
 
@@ -42,9 +56,13 @@ MPX NYC mapped the social and spatial connections of queer and trans New Yorkers
 
 
 ::::::::::::::: {.grid .g-6 .mt-1}
-:::: {.g-col-12 .g-col-md-6 .g-col-xl-6}
+
+
+
+
+:::: {.g-col-12 .g-col-md-12 .g-col-xl-12}
 ::: {.card .h-100 .shadow-sm}
-[FINDINGS]{.emphasize}
+[MPX NYC RESULTS]{.emphasize}
 
 Participants’ residences and gatherings cluster in Manhattan and North Brooklyn; mixing shows strong homophily by race–gender and orientation; simulated strategies trade off rapid coverage vs. faster network fragmentation.
 
@@ -53,6 +71,21 @@ Participants’ residences and gatherings cluster in Manhattan and North Brookly
 [Going out](#sec-movement){.btn .btn-sm .btn-outline-secondary}
 [Mixing](#sec-mixing){.btn .btn-sm .btn-outline-secondary}
 [Outbreaks](#sec-intervention){.btn .btn-sm .btn-outline-secondary}
+[Supplementary results](#sec-appendixresults){.btn .btn-sm .btn-outline-primary}
+:::
+::::
+
+:::: {.g-col-12 .g-col-md-12 .g-col-xl-12}
+::: {.card .h-100 .shadow-sm}
+[MPX NYC METHODS]{.emphasize}
+
+How we safely collected spatial and network data: on-device coarsening to census tracts, anonymous link tracing, and a Neo4j backend.
+
+[Data](#sec-data){.btn .btn-sm .btn-outline-secondary} 
+[Measures](#sec-measures){.btn .btn-sm .btn-outline-secondary} 
+[Analysis](#sec-analysis){.btn .btn-sm .btn-outline-secondary} 
+[Measurement](#sec-measurement){.btn .btn-sm .btn-outline-primary} 
+
 :::
 ::::
 
@@ -62,36 +95,25 @@ Participants’ residences and gatherings cluster in Manhattan and North Brookly
 
 SSNAC extends causal inference to people–place networks. We pair it with an anonymous, bilingual survey and a custom Person–Place Network Mapper.
 
-[Context](#sec-appendix-social-spatial){.btn .btn-sm .btn-outline-secondary} 
-[Description](#sec-appendix-analysis){.btn .btn-sm .btn-outline-secondary} 
-[Causality](#sec-causal-interpretation){.btn .btn-sm .btn-outline-secondary}
-[Measurement](#sec-measurement){.btn .btn-sm .btn-outline-secondary} 
+[Context](#sec-appendix-social-spatial){.btn .btn-sm .btn-outline-primary} 
+[Description](#sec-appendix-analysis){.btn .btn-sm .btn-outline-primary} 
+[Causality](#sec-causal-interpretation){.btn .btn-sm .btn-outline-primary}
 
 :::
 ::::
+
 
 :::: {.g-col-12 .g-col-md-6 .g-col-xl-6}
 ::: {.card .h-100 .shadow-sm}
-[MEASUREMENT & TOOLS]{.emphasize}
+[RESPND-MI]{.emphasize}
 
-How we safely collected spatial and network data: on-device coarsening to census tracts, anonymous link tracing, and a Neo4j backend.
+How we organized around research through RESPND-MI. Weekly LGBTQ+ Community Forum, distributed leadership, and small, shared tasks by design—redundancy as resilience.
 
-[Data](#sec-data){.btn .btn-sm .btn-outline-secondary} 
-[Measurement](#sec-measurement){.btn .btn-sm .btn-outline-secondary} 
-
+[Organizing](#sec-organizing){.btn .btn-sm .btn-outline-primary} 
+[Marketing](#sec-marketing){.btn .btn-sm .btn-outline-primary}
 :::
 ::::
 
-:::: {.g-col-12 .g-col-md-6 .g-col-xl-6}
-::: {.card .h-100 .shadow-sm}
-[COMMUNITY ORGANIZING]{.emphasize}
-
-Weekly LGBTQ+ Community Forum, distributed leadership, and small, shared tasks by design—redundancy as resilience.
-
-[Organizing](#sec-organizing){.btn .btn-sm .btn-outline-secondary} 
-[Marketing](#sec-marketing){.btn .btn-sm .btn-outline-secondary}
-:::
-::::
 
 
 
@@ -100,7 +122,9 @@ Weekly LGBTQ+ Community Forum, distributed leadership, and small, shared tasks b
 
 # Why this work matters {.unnumbered}
 
-As public support for LGBTQ+ health declines, this project shows that **rigorous epidemiology and community organizing can coexist**. Through the weekly **RESPND-MI LGBTQ+ Community Forum**, activists, clinicians, and researchers co-designed the study—refining language to avoid stigma, choosing outreach venues, and building bilingual campaigns.
+As support for LGBTQ+ health services and research declines, and thousands of talented queer people are laid off, it is crucial to develop and  
+
+this project shows that **rigorous epidemiology and community organizing can coexist**. Through the weekly **RESPND-MI LGBTQ+ Community Forum**, activists, clinicians, and researchers co-designed the study—refining language to avoid stigma, choosing outreach venues, and building bilingual campaigns.
 
 The project became not only a study *of* networks, but a network *itself*: a model of participatory, queer-led science built from abundance, care, and trust.
 
