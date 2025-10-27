@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -334,16 +368,10 @@ cookieconsent.run({
    
   <ul>
   <li><a href="#guiding-principles" id="toc-guiding-principles" class="nav-link active" data-scroll-target="#guiding-principles"><span class="header-section-number">D.1</span> Guiding Principles</a></li>
-  <li><a href="#practices" id="toc-practices" class="nav-link" data-scroll-target="#practices"><span class="header-section-number">D.2</span> Practices</a>
-  <ul class="collapse">
-  <li><a href="#people-management" id="toc-people-management" class="nav-link" data-scroll-target="#people-management"><span class="header-section-number">D.2.1</span> People management</a></li>
-  <li><a href="#consultation" id="toc-consultation" class="nav-link" data-scroll-target="#consultation"><span class="header-section-number">D.2.2</span> Consultation</a></li>
-  <li><a href="#project-management" id="toc-project-management" class="nav-link" data-scroll-target="#project-management"><span class="header-section-number">D.2.3</span> Project management</a></li>
-  <li><a href="#amplifying-the-work" id="toc-amplifying-the-work" class="nav-link" data-scroll-target="#amplifying-the-work">Amplifying the Work</a></li>
-  <li><a href="#coordinating-the-response" id="toc-coordinating-the-response" class="nav-link" data-scroll-target="#coordinating-the-response">Coordinating the Response</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
-  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">Reflection</a></li>
-  </ul></li>
+  <li><a href="#structures" id="toc-structures" class="nav-link" data-scroll-target="#structures"><span class="header-section-number">D.2</span> Structures</a></li>
+  <li><a href="#consultation" id="toc-consultation" class="nav-link" data-scroll-target="#consultation"><span class="header-section-number">D.3</span> Consultation</a></li>
+  <li><a href="#dissemination" id="toc-dissemination" class="nav-link" data-scroll-target="#dissemination"><span class="header-section-number">D.4</span> Dissemination</a></li>
+  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection"><span class="header-section-number">D.5</span> Reflection</a></li>
   </ul>
 </nav>
     </div>
@@ -351,64 +379,58 @@ cookieconsent.run({
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../A_ssnac1_context/A__ssnac1_context.html">Appendices</a></li><li class="breadcrumb-item"><a href="../F_organizing/F__organizing.html"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">RESPND-MI: Organizing</span></a></li></ol></nav><h1 class="title display-7"><span id="sec-organizing" class="quarto-section-identifier">D - RESPND-MI: Organizing</span></h1></header>
 
 <header id="title-block-header">
-
+<div class="quarto-title-block d-none d-lg-block"><div><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
 
 </header>
 
 
+<div id="leading">
+<p>An overview of our approach to organizing RESPND-MI to prepare for the MPX NYC study.</p>
+</div>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_icon</span>(<span class="at">icon_name =</span> <span class="st">"droplets"</span>, <span class="at">color =</span> <span class="st">"dark_purple"</span>, <span class="at">shape =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="F__organizing_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="192"></p>
+</figure>
+</div>
+</div>
+</div>
 <section id="guiding-principles" class="level2" data-number="D.1">
 <h2 data-number="D.1" class="anchored" data-anchor-id="guiding-principles"><span class="header-section-number">D.1</span> Guiding Principles</h2>
-<p>The MPX NYC (RESPND-MI) study was built on a set of deeply held principles that shaped every decision. At its core was a belief in <strong>community power</strong>—that queer and trans people already hold the expertise to understand and respond to their own health challenges. Rather than treating participants as data sources, the study recognized them as <strong>co-investigators and decision-makers</strong>, shaping research design, communication, and interpretation.</p>
-<p>The project drew from <strong>Global South traditions of health activism</strong>, particularly HIV activism and community-led monitoring. Data were collected to serve the community—not institutions. Transparency and accountability anchored this commitment.</p>
-<p>Participation was designed to bring joy in learning and problem-solving together, not obligation or burnout. Experimentation and imperfection were welcomed as part of learning in crisis. Democracy and adaptability guided decisions, allowing the group to “<strong>build as we flew</strong>” while staying grounded in care and creativity.</p>
+<p>The MPX NYC (RESPND-MI) study was built on a set of principles that shaped every decision. At its core was a belief in <strong>community power</strong>—that queer and trans people already hold the expertise to understand and respond to their own health challenges. Rather than treating participants as data sources, the study recognized them as <strong>co-investigators and decision-makers</strong>, shaping research design, communication, and interpretation.</p>
 <p>The culture emphasized <strong>making things quickly and collectively</strong>. Instead of waiting for perfection, teams prioritized timely outputs—policy briefs, safer-sex guides, vaccination finders, and educational op-eds that met community needs in real time.</p>
-<p>RESPND-MI translated its principles into practice through <strong>co-design, distributed leadership,</strong> and <strong>tight, flexible project management</strong>.</p>
+<p>The project drew from <strong>Global South traditions of health activism</strong>, particularly HIV activism and community-led monitoring. Data were collected to serve the community—not institutions. Transparency and accountability anchored this commitment.</p>
+<p>Participation was designed to bring <strong>joy in learning</strong> and problem-solving, not obligation or burnout. We intentionally built an <strong>over-supply of volunteers and investigators</strong>, knowing people would cycle in and out with competing work demands. Tasks were small and widely distributed, enabling <strong>many people to do small things</strong> and letting others pick up unfinished work without taking on too much. We approached <strong>abundance</strong> as a form of resilience.</p>
+<p>We <strong>built as we flew</strong>—raising money as the project unfolded, but not waiting for funding to begin the work or set ambitious targets.</p>
+<p>Leadership was <strong>distributed, not hierarchical</strong>. Functional leads coordinated areas like communications, web development, translation, and questionnaire development while staying accountable to the collective. The Principal Investigator grounded the project’s vision; the Research Coordinator kept its rhythm. This structure prevented bottlenecks and maintained momentum.</p>
 </section>
-<section id="practices" class="level2" data-number="D.2">
-<h2 data-number="D.2" class="anchored" data-anchor-id="practices"><span class="header-section-number">D.2</span> Practices</h2>
-<section id="people-management" class="level3" data-number="D.2.1">
-<h3 data-number="D.2.1" class="anchored" data-anchor-id="people-management"><span class="header-section-number">D.2.1</span> People management</h3>
-<p>Internally, coordination was structured but adaptive. Teams shared transparent task lists with clear responsibilities and timelines. Weekly investigator calls aligned work across domains and sustained mutual trust under pressure. Ad-hoc meetings were left to functional areas.</p>
-<p>We intentionally built an <strong>over-supply of volunteers and investigators</strong>. We knew availability would fluctuate, so we designed for abundance. Tasks were small and distributed widely, allowing many people to do small things rather than a few doing everything, and allowing people to pick up tasks that were left undone without having to do too much.</p>
-<p>Leadership was <strong>distributed, not hierarchical</strong>. Functional leads coordinated areas like communications, web development, translation, and questionnaire development, while staying accountable to the collective. The Principal Investigator grounded the project’s vision; the Research Coordinator kept its rhythm. This structure prevented bottlenecks and maintained momentum.</p>
-<p>Participation was voluntary. Pay was offered to time-intensive roles like study coordinator, or translator, and we honoraria were offere to people who i) did substantial work on the project, ii) were students or not currently earning a salary.</p>
+<section id="structures" class="level2" data-number="D.2">
+<h2 data-number="D.2" class="anchored" data-anchor-id="structures"><span class="header-section-number">D.2</span> Structures</h2>
+<p>We formed three groups to prepare the study: a technical group, an administration group, and an external engagement group.</p>
+<p>The <strong>technical group</strong> prepared the questionnaire (Pedro Carneiro, Nguyen Tran, Robert Pitts, Keletso Makofane); developed the survey instrument (Seema Kara, Keletso Makofane, Sudipta Saha); managed translation into Spanish (Cody Nolan); and coordinated testing of the survey instrument (Keletso Makofane).</p>
+<p>The <strong>administration group</strong> wrote IRB applications and funding proposals (Keletso Makofane, Sudipta Saha); developed the fundraising strategy (Keletso Makofane, Ken Nadolski); managed the marketing-agency contract (Nick Diamond, Christian Urrutia); completed financial and narrative grant reporting (Keletso Makofane, Christian Urrutia); and managed timelines and dependencies across all work streams (Keletso Makofane, Sudipta Saha).</p>
+<p>The <strong>external engagement group</strong> invited stakeholders to the initial Community Forum (Grant Roth, Chris Wyman, Keletso Makofane); facilitated and participated in the CF (Keletso Makofane, Joe Osmundson, Elle Lett, Jennifer McQueen, Martez Smith); managed a project newsletter (Nick Diamond); coordinated the marketing campaign (Nick Diamond); and conducted study-related workshops for members of the ballroom community in Harlem (Martez Smith, Jennifer McQueen, Keletso Makofane).</p>
 </section>
-<section id="consultation" class="level3" data-number="D.2.2">
-<h3 data-number="D.2.2" class="anchored" data-anchor-id="consultation"><span class="header-section-number">D.2.2</span> Consultation</h3>
-<p>The <strong>LGBTQ+ Community Forum (CF)</strong>, launched in May 2022, became the heart of the work. Initially conceived as a once-off consultative call, it evolved into a coordination hub linking activists, health professionals, and researchers. Over eighty participants shaped study design decisions in real time—broadening inclusion to trans participants, refining language to avoid stigma, and expanding translation into Spanish. The CF blurred the line between community organizing and epidemiologic investigation.</p>
+<section id="consultation" class="level2" data-number="D.3">
+<h2 data-number="D.3" class="anchored" data-anchor-id="consultation"><span class="header-section-number">D.3</span> Consultation</h2>
+<p>At the start, we prioritized establishing whether there was a need for the study by consulting with stakeholders working in LGBTQ+ health in New York City. The <strong>LGBTQ+ Community Forum (CF)</strong> began as a consultation call with these stakeholders. We held the initial call in May 2022 and concluded there was a clear need for the study—<strong>and established an open, standing call</strong> to continue coordination.</p>
+<p><strong>The CF</strong> became the heart of the collective work, linking activists, health professionals, and researchers. More than eighty participants shaped design decisions in real time—broadening inclusion to trans participants, refining language to avoid stigma, and expanding translation into Spanish. The CF blurred the line between community organizing and epidemiologic investigation. Meetings opened with updates on publicly available epidemiology (initially case counts and etiologic studies) and invited participants to share insights from clinical and program experience.</p>
+<p>Together, the <strong>Community Forum</strong> and <strong>Investigator Group</strong> formed a responsive ecosystem. The Forum served as an open sphere for collective decision-making; the Investigator Group translated input into operations. This structure enabled speed without sacrificing inclusiveness or rigor.</p>
 </section>
-<section id="project-management" class="level3" data-number="D.2.3">
-<h3 data-number="D.2.3" class="anchored" data-anchor-id="project-management"><span class="header-section-number">D.2.3</span> Project management</h3>
-</section>
-<section id="amplifying-the-work" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="amplifying-the-work">Amplifying the Work</h3>
-<p>Dissemination was central to the organizing model. Through a coordinated press strategy, the team’s advocacy and research reached audiences across major media: <em>The New York Times, The Atlantic, TIME, PBS NewsHour, CBS News, NPR, The Washington Post,</em> and <em>STAT,</em> as well as queer media such as <em>The Body</em> and <em>POZ Magazine.</em> International coverage in <em>PLOS Global Public Health, Out,</em> and <em>The Sunday Times</em> further extended the reach.</p>
+<section id="dissemination" class="level2" data-number="D.4">
+<h2 data-number="D.4" class="anchored" data-anchor-id="dissemination"><span class="header-section-number">D.4</span> Dissemination</h2>
+<p>Dissemination was central to the organizing model. Through a coordinated press strategy, our advocacy and research reached audiences across major media—<em>The New York Times, The Atlantic, TIME, PBS NewsHour, CBS News, NPR, The Washington Post,</em> and <em>STAT</em>—as well as queer media such as <em>The Body</em> and <em>POZ Magazine.</em> International coverage in <em>PLOS Global Public Health, Out,</em> and <em>The Sunday Times</em> extended the reach.</p>
 <p>These stories shaped national conversations on health equity, stigma, and queer-led public health—positioning RESPND-MI as a trusted voice bridging science, activism, and policy in real time during the mpox emergency.</p>
+<p>Partnerships spanned scales. Locally, we collaborated with the NYC Department of Health, community organizations, and ballroom networks. Nationally, we supported efforts like The Choice Agenda and AVAC’s mpox and HIV activism panels. Internationally, we presented at the WHO and International AIDS Society as a model for rapid, community-led response.</p>
 </section>
-<section id="coordinating-the-response" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="coordinating-the-response">Coordinating the Response</h3>
-<p>Beneath the creative energy lay clear <strong>organizational scaffolding</strong>. The investigator group organized its work around four functions:</p>
-<ul>
-<li><strong>Coordination:</strong> Aligning partners, documenting activities, and maintaining shared situational awareness.<br>
-</li>
-<li><strong>Surveillance:</strong> Identifying data gaps, synthesizing information, and making it accessible.<br>
-</li>
-<li><strong>Health communication:</strong> Producing and amplifying community-driven messages.<br>
-</li>
-<li><strong>Resourcing:</strong> Mobilizing support from companies, donors, and agencies.</li>
-</ul>
-<p>Together, the <strong>Community Forum</strong> and <strong>Investigator Group</strong> formed a responsive ecosystem. The Forum served as an open sphere for collective decision-making; the Investigator Group translated input into operations. This structure enabled speed without sacrificing inclusivity or rigor.</p>
-<p>Partnerships extended across scales. Locally, RESPND-MI collaborated with the NYC Department of Health, community organizations, and ballroom networks. Nationally, it supported advocacy efforts like The Choice Agenda and AVAC’s mpox and HIV activism panels. Internationally, the project was presented at the WHO and International AIDS Society as a model for rapid, community-led response.</p>
-</section>
-<section id="section" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="section"></h3>
-</section>
-<section id="reflection" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="reflection">Reflection</h3>
-<p>RESPND-MI showed that community organizing can function as public health infrastructure. Its guiding principles created purpose; its collaborative practices generated action; and its structures sustained impact under crisis.</p>
-<p>It modeled a new form of <strong>community-led epidemiologic inquiry</strong>—one that not only produced data but transformed the conditions under which data are made, shared, and acted upon.</p>
-<p>In doing so, RESPND-MI proved that when community power is structured with care, it yields both <strong>scientific insight and collective liberation.</strong></p>
-<div class="callout callout-style-default callout-note no-icon callout-titled" data-appearence="simple">
+<section id="reflection" class="level2" data-number="D.5">
+<h2 data-number="D.5" class="anchored" data-anchor-id="reflection"><span class="header-section-number">D.5</span> Reflection</h2>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -418,12 +440,25 @@ Key Outputs
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>LGBTQ+ Community Forum:</strong> Hosted weekly participatory hub connecting over eighty partners. <strong>Collaborative infrastructure:</strong> Shared task system balancing autonomy, accountability, and care. <strong>Volunteer and investigator network:</strong> Designed for abundance, enabling broad participation with minimal burden. <strong>Community-informed outputs:</strong> Policy briefs, harm-reduction guides, vaccination locators, and op-eds produced and deployed in real time. <strong>Media and advocacy impact:</strong> Coverage across major and queer outlets amplified the model of community-led public health. <strong>Global recognition:</strong> Presented internationally as an example of participatory epidemic response.</p>
+<ul>
+<li><strong>LGBTQ+ Community Forum:</strong> Weekly participatory hub connecting more than eighty members.<br>
+</li>
+<li><strong>Collaborative infrastructure:</strong> Shared task system balancing autonomy, accountability, and care.<br>
+</li>
+<li><strong>Volunteer and investigator network:</strong> Designed for abundance, enabling broad participation with minimal burden.<br>
+</li>
+<li><strong>Community-informed outputs:</strong> Policy briefs, harm-reduction guides, vaccination locators, and op-eds produced in real time.<br>
+</li>
+<li><strong>Media and advocacy impact:</strong> Coverage across major and queer outlets amplified community-led public health.<br>
+</li>
+<li><strong>Global recognition:</strong> Presented internationally as a participatory epidemic-response model.</li>
+</ul>
 </div>
 </div>
+<p>RESPND-MI showed that community organizing can function as public-health infrastructure. Its guiding principles created purpose; its collaborative practices generated action; and its structures sustained impact under crisis.</p>
+<p>It modeled a form of <strong>community-led epidemiologic inquiry</strong>—one that not only produced data but transformed the conditions under which data are made, shared, and acted upon.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
