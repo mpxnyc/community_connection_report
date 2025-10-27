@@ -4,43 +4,54 @@
 targets::tar_source("../R_functions")
 ```
 
-## Descriptive Statistics  
-We first summarized participant characteristics in relation to **group contact** and visualized how categories of **sexual orientation** were distributed across levels of the **race–gender** variable. We then cross-tabulated **event type** by both **sexual contact** and **distance from home** to describe how types of gatherings related to sexual activity and travel patterns.  
+## Descriptive Statistics
 
-To explore spatial behavior, we compared the **home community district** of each participant to the **districts where gatherings occurred**. This produced a matrix showing patterns of movement across New York City. To identify which districts tended to **receive** participants from outside their home areas and which tended to **send** participants elsewhere, we calculated the difference between the proportion of gatherings and the proportion of residences in each district. These results were visualized as a bar graph.  
+We first summarized participant characteristics in relation to **group contact** and visualized how categories of **sexual orientation** were distributed across levels of the **race–gender** variable. We then cross-tabulated **event type** by both **sexual contact** and **distance from home** to describe how types of gatherings related to sexual activity and travel patterns.
 
-Finally, we computed the **spatial mixing coefficient** for subgroups defined by **age**, **sexual orientation**, and **race–gender** to quantify how these groups interacted across space. Together, these descriptive analyses provided the empirical foundation for a subsequent simulation of outbreak control strategies.  
+To explore spatial behavior, we compared the **home community district** of each participant to the **districts where gatherings occurred**. This produced a matrix showing patterns of movement across New York City. To identify which districts tended to **receive** participants from outside their home areas and which tended to **send** participants elsewhere, we calculated the difference between the proportion of gatherings and the proportion of residences in each district. These results were visualized as a bar graph.
 
-## Outbreak Control Strategies  
-### {.unnumbered}
+Finally, we computed the **spatial mixing coefficient** for subgroups defined by **age**, **sexual orientation**, and **race–gender** to quantify how these groups interacted across space. Together, these descriptive analyses provided the empirical foundation for a subsequent simulation of outbreak control strategies.
 
-Building on the spatial patterns observed in the descriptive analysis, we modeled a **hypothetical intervention** in which community districts were immunized sequentially according to priority rankings. To immunize a district was to immunize all individuals who had either a residence or a gathering in that district. Once immunized, individuals were assumed to be fully protected from acquiring or transmitting infection, and each person could only be immunized once.  
+## Outbreak Control Strategies
 
-We evaluated two alternative strategies for prioritizing districts: a **contact-neutralizing strategy**, which targets areas of high contact density, and a **movement-neutralizing strategy**, which targets districts that are highly connected across space.  
-
-### Contact-Neutralizing Strategy    {.unnumbered}
-In the **contact-neutralizing strategy**, community districts were ranked by the number of **gatherings** and **residences** they contained, counting only residences of participants who reported **group contact** and had **not yet been immunized**. This approach prioritizes districts with the highest concentration of sexual or physical contact, aiming to immunize as many individuals as possible while focusing on a minimal number of locations.  
-
-### Movement-Neutralizing Strategy   {.unnumbered}
-In the **movement-neutralizing strategy**, community districts were ranked according to their **spatial centrality**—a measure of how strongly each district is connected to others across the city. This strategy prioritizes districts that function as **spatial hubs** for participant movement, targeting them early in the immunization sequence to contain potential city-wide spread.  
-
-## Outbreak Control Outcomes 
 ###  {.unnumbered}
 
-After each community district was immunized, the **MPX NYC Participant Network** was updated by removing nodes representing immunized individuals. Following each update, we recalculated two key outcome measures: **spatial efficiency** and **spatial network impact**, each reflecting a different dimension of intervention performance.  
+Building on the spatial patterns observed in the descriptive analysis, we modeled a **hypothetical intervention** in which community districts were immunized sequentially according to priority rankings. To immunize a district was to immunize all individuals who had either a residence or a gathering in that district. Once immunized, individuals were assumed to be fully protected from acquiring or transmitting infection, and each person could only be immunized once.
 
-### Spatial Efficiency   {.unnumbered}
-**Spatial efficiency** was defined as the total number of immunized individuals divided by the number of community districts immunized. This measure captures how effectively an intervention converts each immunized district into individual-level protection. To compare the two intervention strategies, we visualized the number of community districts required to reach approximately 33% and 66% of the total population.  
+We evaluated two alternative strategies for prioritizing districts: a **contact-neutralizing strategy**, which targets areas of high contact density, and a **movement-neutralizing strategy**, which targets districts that are highly connected across space.
 
-### Spatial Network Impact   {.unnumbered}
-**Spatial network impact** was defined as the proportion of individuals belonging to the **largest connected component** of the MPX NYC Participant Network. This measure reflects the extent to which unimmunized individuals remain embedded within the same transmission-relevant network after each intervention step. To compare strategies, we plotted, for each additional community district immunized, the proportions of individuals who were **immunized**, **unimmunized and still within the largest component**, and **unimmunized but outside of it**.  
+### Contact-Neutralizing Strategy {.unnumbered}
 
-## Statistical Inference  
+In the **contact-neutralizing strategy**, community districts were ranked by the number of **gatherings** and **residences** they contained, counting only residences of participants who reported **group contact** and had **not yet been immunized**. This approach prioritizes districts with the highest concentration of sexual or physical contact, aiming to immunize as many individuals as possible while focusing on a minimal number of locations.
+
+### Movement-Neutralizing Strategy {.unnumbered}
+
+In the **movement-neutralizing strategy**, community districts were ranked according to their **spatial centrality**—a measure of how strongly each district is connected to others across the city. This strategy prioritizes districts that function as **spatial hubs** for participant movement, targeting them early in the immunization sequence to contain potential city-wide spread.
+
+## Outbreak Control Outcomes
+
+###  {.unnumbered}
+
+After each community district was immunized, the **MPX NYC Participant Network** was updated by removing nodes representing immunized individuals. Following each update, we recalculated two key outcome measures: **spatial efficiency** and **spatial network impact**, each reflecting a different dimension of intervention performance.
+
+### Spatial Efficiency {.unnumbered}
+
+**Spatial efficiency** was defined as the total number of immunized individuals divided by the number of community districts immunized. This measure captures how effectively an intervention converts each immunized district into individual-level protection. To compare the two intervention strategies, we visualized the number of community districts required to reach approximately 33% and 66% of the total population.
+
+### Spatial Network Impact {.unnumbered}
+
+**Spatial network impact** was defined as the proportion of individuals belonging to the **largest connected component** of the MPX NYC Participant Network. This measure reflects the extent to which unimmunized individuals remain embedded within the same transmission-relevant network after each intervention step. To compare strategies, we plotted, for each additional community district immunized, the proportions of individuals who were **immunized**, **unimmunized and still within the largest component**, and **unimmunized but outside of it**.
+
+## Statistical Inference
 
 ```{r}
 number_reps <- targets::tar_read(config_list)[[1]][["settings"]][["n_reps_graph"]]
 ```
 
-To quantify uncertainty around our network-based estimates, we used the **bootstrap** to calculate confidence intervals, resampling participants `r number_reps` times with replacement. This approach provides robust, nonparametric inference by repeatedly drawing samples from the observed data to approximate sampling variability.  
+To quantify uncertainty around our network-based estimates, we used the **bootstrap** to calculate confidence intervals, assuming that the underlying data are a realization of a **Bipartite Random Network Finest Fully Randomized Causally Interpretable Structured Tree Graph (BRNFFRCISTG)** model (see @sec-social-spatial-networks).
+
+Recalling that the MPX NYC person-place graph includes participant observations and community district observations as nodes, we resampled participant observations `r number_reps` times with replacement. An observation was defined as the complement of measures on a particular **participant as well as all the edges that connect that participant to their community districts** of residence and gatherings.
+
+This approach provides robust, nonparametric inference by repeatedly drawing samples from the observed data to approximate sampling variability.
 
 {{< include fig-plot-icon.qmd >}}
