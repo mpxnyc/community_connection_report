@@ -1,0 +1,251 @@
+/*-- scss:defaults --*/
+// Colors
+ $bold-text-grey: #373737;
+ $leading-grey: #bdbdbd;
+ $primary: #009BE8;
+ $primary-light: #C5EFFF;
+ $secondary: #e83e8c;
+ $secondary-light: #FF99C5;
+ //$body-bg: #c71c22;
+ $link-color: $primary;
+ $callout-color-tip: #5D207A;
+ $callout-color-note: #e83e8c;
+ $callout-color-important: #009BE8;
+ 
+
+
+ 
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+ $font-family-sans-serif: "Montserrat", sans-serif;
+ $font-family-monospace: "Source Code Pro", monospace;
+
+/*-- scss:mixins --*/
+// This is empty by default -- add your mixins here
+
+
+/*-- scss:rules --*/
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5; // Unitless value, relative to font-size
+}
+
+details>summary {
+    padding: 4px;
+    width: 100%;
+    background-color: #fffffff;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    font-size: 0;
+}
+
+h1, .h1 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  font-weight: 500;
+  line-height: 2;
+  color: $primary;
+  text-align: center;
+}
+
+header, .header {
+    line-height: 2;
+    padding: 0px;
+}
+
+.subtitle {
+  text-align: center;
+}
+
+header > h1 {
+  font-size: 2em; /* Adjust this value as needed */
+  padding: 0em;
+  margin: 0em 0em 0em 0em;
+}
+
+
+h2, .h2 {
+  font-weight: 500;
+  color: $primary;
+  text-align: left;
+  & .header-section-number {color: $secondary;}
+  border-bottom: none;
+}
+
+h3, .h3 {
+  font-weight: 500;
+  color: #343a40;
+  text-align: left;
+  padding-bottom: 10px;
+  & .header-section-number {color: $secondary;}
+}
+
+h4, .h4 {
+  font-weight: 400;
+  color: #343a40;
+  text-align: left;
+  padding-bottom: 20px;
+  padding-top: 0px;
+  & .header-section-number {color: $secondary;}
+} 
+
+section  {
+  margin-bottom: 200px;
+}
+
+
+
+.definition {
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+#acknowledgements {
+  text-align: justify;
+  margin-top: 20px;
+  & p {font-size: 11px;}
+}
+
+#leading {
+  margin-top: 25px;
+  font-weight: 500;
+  color: $leading-grey;
+  & p {font-size: 20px;};
+  text-align: justify;
+}
+
+#quarto-code-tools-menu {
+  position: fixed;
+  margin: 0px 40px 20px 40px;
+  right: 0;
+  bottom: 0;
+}
+
+@media screen and (max-width: 600px) {
+  #quarto-code-tools-menu  {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+  }
+}
+ .after-heading-line {
+    border-bottom: none;
+  }
+  
+  .callout-note {
+    margin-left: 0.1rem;  
+  }
+  
+  .callout-important {
+      margin-bottom: 200px;
+padding: 1em;
+   
+  }
+  
+  .callout-warning {
+      margin-bottom: 200px;
+    padding-bottom: 1rem;  
+  }
+  
+    .callout-tip {
+      margin-top: 200px;
+    padding-bottom: 1rem;  
+  }
+  
+
+.callout-important .callout {
+      margin-left: 0.1rem;  
+}
+
+.btn, .btn-sm, .btn-outline-primary, .btn-primary {
+display: inline-block;
+margin: 0.25rem;
+text-align: center;
+}
+
+/* Center text inside hero banner, grid, and cards */
+.hero-banner, .grid, .card {
+text-align: center;
+}
+
+/* Center card headings */
+.card h3, .card h4, .card h5, .card h6 {
+text-align: center;
+width: 100%;
+margin-left: auto;
+margin-right: auto;
+}
+
+/* Ensure card contents are centered vertically and horizontally */
+.card {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+text-align: center;
+padding: 1rem;
+border-radius: 0.75rem;
+border: 2px solid #009BE8;   /* ✅ Pink outline */
+box-shadow: 0 2px 4px rgba(247, 60, 149, 0.1); /* subtle pink shadow */
+font-size: 0.8rem;            /* ✅ Slightly smaller text */
+line-height: 1.4;             /* keeps readability */
+}
+
+/* Center buttons */
+.hero-banner .btn,
+.grid .btn,
+.card .btn {
+margin-left: auto;
+margin-right: auto;
+display: inline-block;
+}
+
+.hero-banner {
+  border: 2px solid $secondary;   /* ✅ Pink outline */
+}
+
+
+strong {
+  font-weight: 600; /* Example: a semi-bold weight */
+  color:   $bold-text-grey;
+}
+
+thead > strong {
+  color: "#000000";
+}
+
+.emphasize {
+    font-weight: 700; /* Example: a semi-bold weight */
+    color: $secondary;
+}
+
+
+.quarto-secondary-nav {
+  background-color: $secondary-light !important; /* Apply a new background color */
+  color: "#000000";
+}
+
+

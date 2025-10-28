@@ -1,0 +1,21 @@
+##### NPSEM
+
+A nonparametric structural equation model (NPSEM) is a system of deterministic equations that relates all the entries in a given random vector to each other. It does so without specifying parametric functions for each equation in the system. An example of such a model is shown below. In this set of equations $(f_*)$, values that are produced by equations higher up in the list serve as inputs to equations lower down in the list.
+
+
+$$
+\begin{aligned}
+L_1 &= f_{L_1}(U_{L_1}) \\
+L_2 &= f_{L_2}(U_{L_2}, L_1) \\
+L_3 &= f_{L_3}(U_{L_3}, L_1, L_2) \\
+A_1 &= f_{A_1}(U_{A_1}, L_1, L_2, L_3) \\
+A_2 &= f_{A_2}(U_{A_2}, L_1, L_2, L_3, A_1) \\
+A_3 &= f_{A_3}(U_{A_3}, L_1, L_2, L_3, A_1, A_2) \\
+Y_1 &= f_{Y_1}(U_{Y_1}, L_1, L_2, L_3, A_1, A_2, A_3) \\
+Y_2 &= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1) \\
+Y_3 &= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, A_1, A_2, A_3, Y_1, Y_2)
+\end{aligned}
+$$
+
+The arguments $(U_*)$ represent error terms—random variables that induce the joint distribution of the variables in the model. When error terms are independent of each other within and across observational units, the model is called an NPSEM-IE—a nonparametric structural equation model with independent errors. 
+

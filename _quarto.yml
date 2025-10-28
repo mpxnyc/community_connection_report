@@ -3,6 +3,7 @@ project:
   
 pdf-engine: pdflatex
 
+    
 execute: 
   messages: false
   warning: false
@@ -12,21 +13,34 @@ execute:
 preview: 
   watch-inputs: true
     
+    
+    
+    
 format:
   html:
+    include-in-header:
+      text: |
+        <style>
+        .quarto-title-meta-heading { display: none; }
+        .quarto-title-meta-contents { display: none; }
+        </style>
+    title-block-style: none
+    embed-resources: false
     font: "Helvetica Neue"
-    theme: "_const/custom_theme.css"
+    grid: 
+      gutter-width: 3.5em
+    theme: "_const/custom_theme.scss"
     code-fold: true
     code-overflow: wrap
     code-tools: 
       source: false
+      toggle: true
     code-block-bg: true
     code-block-border-left: "#FF99C5"
     code-link: true
     number-depth: 3
-    
-comments:
-  hypothesis: true
+    crossrefs-hover: true
+
   
 
 bibliography: "_const/bibliography.bib"
@@ -41,16 +55,16 @@ crossref:
 
 
 book:
-  title: "community and connection"
-  subtitle: "a study on social connection among LGBTQ+ New Yorkers"
+  bread-crumbs: true
   google-analytics: "G-8EDGL4274R"
   cookie-consent: true
   page-footer: 
     left: "Copyright 2025, RESPND-MI" 
     right: 
       - icon: github
-        href: https://github.com/
+        href: https://github.com/KeletsoMakofane/mpxnyc_data_analysis# Items to be placed on the right side of the navbar
   sidebar:
+    search: true
     title: " "
     style: floating
     collapse-level: 1
@@ -58,43 +72,35 @@ book:
     
   chapters:
   - "index.qmd"
-  # - part: "Background"
-  #   chapters: 
-  #   - "1_introduction/1_1__intro_outbreak_to_epidemic.qmd"
-  #   - "1_introduction/1_2__intro_our_response.qmd"
-  #   - "1_introduction/1_3__intro_related_research.qmd"
-  # - part: "Methods"
-  #   chapters:
-  #   - "2_methods/2_2_methods_data.qmd"
-  #   - "2_methods/2_3_methods_measures.qmd"
-  #   - "2_methods/2_4_methods_statistical_analysis.qmd"
-  # - part: "Results"
-  #   chapters:
-  #     - "3_results/3_1__results_participants.qmd"
-  #     - "3_results/3_3__results_movement.qmd"
-  #     - "3_results/3_2__results_contact_venues.qmd"
-  #     - "3_results/3_4__results_mixing.qmd"
-  #     - "3_results/3_5__results_outbreak_control.qmd"
-  #     - "3_results/3_6__results_disparities.qmd"
-  # - part: "Discussion"
-  #   chapters:
-  #     - "4_discussion/4_discussion.qmd"
-  #     - "4_discussion/4_discussion_recommendations.qmd"
-  # - part: "Endnotes"
-  #   chapters:
-  #     - "6_endnotes/6_1__references.qmd"
-  #     - "6_endnotes/6_2__about.qmd"
+  - part: "Background"
+    chapters:
+    - "1_introduction/1_1__introduction_part2.qmd"
+    - "1_introduction/1_0__introduction_part_1.qmd"
+  - part: "Methods"
+    chapters:
+    - "2_methods/2_2_methods_data.qmd"
+    - "2_methods/2_3_methods_measures.qmd"
+    - "2_methods/2_4_methods_statistical_analysis.qmd"
+  - part: "Results"
+    chapters:
+      - "3_results/3_1__results_participants.qmd"
+      - "3_results/3_2__results_gatherings.qmd"
+      - "3_results/3_3__results_movement.qmd"
+      - "3_results/3_4__results_mixing.qmd"
+      - "3_results/3_5__results_outbreak_control.qmd"
+  - part: "Discussion"
+    chapters:
+      - "4_discussion/4_discussion.qmd"
   appendices: 
-      - "A_ssnac1_social_spatial_context/A__ssnac1_social_spatial_context.qmd"
-      - "C_sscan3_causal_interpretation/C__sscan3_causal_interpretation.qmd"
-      - "D_survey_instrument/D__survey_instrument.qmd"
-      - "B_ssnac2_network_analysis/B__ssnac2_network_analysis.qmd"
-      #- "F_community_engagement/F__community_engagement.qmd"
-      #- "E_marketing_comm/E__marketing_comm.qmd"
-      #- "G_supplementary_results/G__supplementary_results.qmd"
+      - "A_ssnac1_context/A__ssnac1_context.qmd"
+      - "B_ssnac2_description/B__ssnac2_description.qmd"
+      - "C_ssnac3_causality/C__ssnac3_causality.qmd"
+      - "F_organizing/F__organizing.qmd"
+      - "E_marketing_comm/E__marketing_comm.qmd"
+      - "D_ssnac3_measurement/D__ssnac3_measurement.qmd"
+      - "G_supplementary_results/G__supplementary_results.qmd"
 
 
-  
-      
 
+    
 

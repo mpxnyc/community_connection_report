@@ -1,0 +1,23 @@
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+
+```{r}
+#| fig-height: 8
+#| fig-width: 7
+#| fig-align: center
+#| label: fig-homogenous-dag
+#| fig-cap: "Causal DAG with homogenous structure"
+
+
+make_dag("homogenous_interference")            |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black")) +
+  theme_mpxnyc_blank()
+
+
+
+
+```
