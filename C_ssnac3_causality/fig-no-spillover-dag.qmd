@@ -1,0 +1,20 @@
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+```{r}
+#| fig-height: 6
+#| fig-width: 6.5
+#| fig-align: center
+#| label: fig-no-spillover-dag
+#| fig-cap: "Causal DAG with no spillover"
+
+
+make_dag("full_interference")      |> 
+  plot_swig(node_radius = 0.2) + 
+  scale_fill_mpxnyc(labels = c("h"), option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black")) + 
+  theme_mpxnyc_blank()
+
+
+```

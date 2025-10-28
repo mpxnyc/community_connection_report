@@ -1,0 +1,140 @@
+##### Spatial mixing
+
+Spatial mixing is the extent to which person nodes with a given set of characteristics are connected to a common set of place nodes with person nodes with some other set of characteristics. 
+
+```{r}
+#| fig-cap: Sample person-place network visualization
+#| label: fig-example-participant-place-5
+#| fig-width: 3
+#| fig-height: 3
+
+    base_color = "black"
+    reached_color = "#009BE8"
+    intermediate_color = "#C5EFFF"
+    focal_color = "black"
+
+        group_affiliation <- data.frame(
+      name = c(paste("Person", 1:8)),
+      group = c(
+                "Group B", 
+                "Group A", 
+                "Group A", 
+                "Group B", 
+                "Group A", 
+                "Group B", 
+                "Group B", 
+                "Group A"
+                )
+    )
+    
+unmixed <- make_reach_diagram_data() |> 
+  tidygraph::mutate(type_color = NA) |>
+  tidygraph::activate(nodes) |>
+  tidygraph::left_join(group_affiliation) |>
+  tidygraph::mutate(group = ifelse(type == "Place", "Place", group)) |>
+  ggraph::ggraph(layout = "kk") +
+    ggforce::geom_circle(ggplot2::aes(x0 = 0.5, y0 = 0, r = 2.3), data = data.frame(xmin = -3, xmax = 3, ymin = -1, ymax = 5), linewidth = 0, fill = "#FF99C5", alpha = 0.3) +
+                  ggraph::geom_edge_fan(ggplot2::aes(color = type_color), show.legend = FALSE) +
+                  ggraph::geom_node_point(ggplot2::aes( size = group), color = base_color) +
+                  ggraph::geom_node_point(ggplot2::aes(color = age, size = group)) +
+                  ggraph::geom_node_text(ggplot2::aes(label = label, size = group, filter = type == "Place"), color = "#FF99C5", show.legend = FALSE) +
+                  ggplot2::scale_size_manual(name = "Size", values = c(7,7, 12), guide = "none") +
+                scale_color_mpxnyc( name = "Age", option = "manual", na.value = base_color, values = c( "18-25" = "#F73C95",  "26-50" = "#009BE8", "Place" = "black"), na.translate = FALSE) +
+                  ggraph::scale_edge_color_manual(values = c("black"), na.value = base_color) +
+                  theme_mpxnyc_blank( legend.position = "bottom"
+                                      ) +
+  ggplot2::coord_fixed() +
+  ggplot2::theme(
+    legend.text = ggplot2::element_text(size = 20),
+    legend.title = ggplot2::element_text(size = 20),
+    legend.ticks = ggplot2::element_line(size = 20),
+    legend.byrow = TRUE,
+    legend.position = "right"
+  ) +
+  ggplot2::guides(color = ggplot2::guide_legend(override.aes = list(size = 5))) # Adjust legend dot size
+
+
+
+
+
+```
+
+```{r}
+#| fig-cap: Sample person-place network visualization
+#| label: fig-example-participant-place-6
+#| fig-width: 15
+#| fig-height: 9
+
+    base_color = "black"
+    reached_color = "#009BE8"
+    intermediate_color = "#C5EFFF"
+    focal_color = "black"
+
+    
+    group_affiliation <- data.frame(
+      name = c(paste("Person", 1:8)),
+      group = c("Group B", "Group B", "Group B", "Group B", "Group A", "Group A", "Group A", "Group A")
+    )
+    
+mixed <- make_reach_diagram_data(
+  focal_node = "Community c", 
+  alter_nodes = c("Community d", "Community b", "Community e"),
+  intermediate_nodes = c("Person 8", "Person 4")
+  ) |> 
+  tidygraph::mutate(type_color = NA) |>
+  tidygraph::activate(nodes) |>
+  tidygraph::left_join(group_affiliation) |>
+  tidygraph::mutate(group = ifelse(is.na(group), "Place", group)) |>
+  ggraph::ggraph(layout = "kk") +
+  ggforce::geom_circle(ggplot2::aes(x0 = 0.5, y0 = 0, r = 2.3), data = data.frame(xmin = -3, xmax = 3, ymin = -1, ymax = 5), linewidth = 0, fill = "#FF99C5", alpha = 0.3) +
+
+  ggraph::geom_edge_fan(ggplot2::aes(color = type_color), show.legend = FALSE) +
+  ggraph::geom_node_point(ggplot2::aes( size = group), color = base_color) +
+  ggraph::geom_node_point(ggplot2::aes(color = vax, size = group)) +
+  ggraph::geom_node_text(ggplot2::aes(label = label, size = group, filter = type == "Place"), color = "#FF99C5", show.legend = FALSE) +
+  ggplot2::scale_size_manual(name = "Size", values = c(7,7, 12), guide = "none") +
+scale_color_mpxnyc(name = "Vax", option = "manual", na.value = base_color, values = c( "No" = "#F73C95",  "Yes" = "#009BE8", "Place" = "black"), na.translate = FALSE) +
+  ggraph::scale_edge_color_manual(values = c("black"), na.value = base_color) +
+  theme_mpxnyc_blank( legend.position = "bottom"
+                      ) +
+  ggplot2::coord_fixed() +
+  ggplot2::theme(
+    legend.text = ggplot2::element_text(size = 20),
+    legend.title = ggplot2::element_text(size = 20),
+    legend.ticks = ggplot2::element_line(size = 20),
+    legend.byrow = FALSE,
+    legend.position = "right"
+  ) +
+  ggplot2::guides(color = ggplot2::guide_legend(override.aes = list(size = 5, ncol = 1))) # Adjust legend dot size
+
+
+cowplot::plot_grid(mixed, unmixed, rel_widths = c(1,1), nrow = 1)
+
+```
+
+
+
+The spatial mixing coefficient from A to B quantifies the degree to
+which egos in group A preferentially live in or attend gatherings in
+community districts they are likely to encounter members of group B. 
+
+We define **preference** of group A for group B (for $A, B \subset \mathscr{N}_p$) as the average proportion of alters from group B among egos from group A.
+
+$$
+\Phi(A,B) = \frac{1}{|A|}\sum_{i \in A}{\frac{ R_{i \rightarrow B}}{R_i}}
+$$
+
+The **prevalence** of group B is the size of the group divided by the total number of participants.
+
+$$
+ \frac{|B|}{|\mathscr{N}_p|}
+$$
+
+The **spatial mixing coefficient** is the ratio of preference to prevalence minus one. 
+
+$$
+\phi(A,B) = \frac{|\mathscr{N}_p|}{|B|} \Phi(A,B) - 1
+$$
+
+
+

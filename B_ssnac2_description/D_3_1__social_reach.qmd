@@ -1,0 +1,43 @@
+```{r include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+##### Social reach
+
+Social reach is a person-node characteristic which measures the potential for interaction with other people through shared relations to places. It counts the number of minimal paths that link the focal node with other person nodes in the graph. Note that the number of paths that link two person nodes who are connected through a given place node is the product of the number of relations each person node has with the given place node.
+
+```{r}
+#| fig-cap: Sample person-place network visualization
+#| label: fig-example-social-reach
+#| fig-width: 8
+#| fig-height: 5
+
+
+make_reach_diagram_data(
+                        alter_nodes = c("Person 8", "Person 4", "Person 3"), 
+                        intermediate_nodes = c("Community d", "Community e")
+                        ) |>
+  plot_reach_diagram(reached_color = "#F73C95", intermediate_color = "darkgrey") +
+  theme_mpxnyc_blank( 
+                      plot.margin     = ggplot2::margin(40,20,40,20),
+                      legend.position = "right"
+                      ) 
+
+
+
+
+```
+
+
+
+Let $\psi(i,j)$ be the number of edges connecting person $i$ and place $j$ in the
+person-place graph. Social reach of person $i$ among subgroup $A$ is the number of
+person nodes in set $A \subset \mathscr{N}_P$ that are connected to
+person node $i$ through shared places. i.e. either because both nodes
+have a residence or gathering in at least one common community.
+Social reach of person $i$ is defined as
+$R_{i} = R_{i\rightarrow \mathscr{N}_P}$
+
+$$
+R_{i\rightarrow A} = \sum_{j}{\sum_{k }{ \Psi(i,j) {\Psi(k,j)} A_k}}  
+$$

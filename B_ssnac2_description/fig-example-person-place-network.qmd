@@ -1,0 +1,22 @@
+
+
+
+```{r}
+#| fig-cap: Sample person-place network visualization
+#| label: fig-example-person-place-network
+#| fig-width: 6
+#| fig-height: 5.5
+
+
+make_example_network_data("bipartite") |>
+  plot_example_bipartite_network() +
+  scale_color_mpxnyc(name = "Node type", option = "dark") +
+  ggplot2::labs(fill = "Node type") +
+  ggplot2::scale_size_manual(name = "Node type", values = c(7,10)) +
+  theme_mpxnyc_blank(
+    plot.margin = ggplot2::margin(0,0,0,0),
+    legend.position = "bottom"
+    ) 
+
+
+```

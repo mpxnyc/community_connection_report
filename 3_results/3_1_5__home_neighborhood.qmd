@@ -4,64 +4,11 @@
 targets::tar_source("../R_functions")
 ```
 
-```{r}
-
-make_tabledata_residence <- function(){
-  targets::tar_read(data_bipartite_graph_collected) |>
-    tidygraph::activate(nodes)|>
-    data.frame() |>
-    dplyr::filter(type) |>
-    dplyr::group_by(borough, community, neighborhood) |>
-    dplyr::summarize(count = dplyr::n()) |>
-    dplyr::arrange(-count) |>
-    dplyr::ungroup() |>
-    dplyr::mutate(proportion = count / sum(count))
-}
-
-scale_labels <- c("0", "1-10", "11-20", "21-30", "31+")
-
-mpxnyc::neighborhood_sf_obj |>
-   sf::st_as_sf() |>
-  dplyr::left_join(make_tabledata_residence(), by = "neighborhood") |>
-  dplyr::mutate(count = ifelse(is.na(count), 0, count)) |>
-  dplyr::mutate(count_cat = cut(count, c(-1,0,10,20,30,76), scale_labels)) |>
-  dplyr::arrange(-count) |>
-  ggplot2::ggplot() +
-  ggplot2::geom_sf(data = mpxnyc::community_sf_obj, fill = "white", linewidth = 0, color = NA) +
-  ggplot2::geom_sf(data = mpxnyc::community_sf_obj, fill = "#009BE8", linewidth = 0, color = NA, alpha = 0.1) +
-  ggplot2::geom_sf(ggplot2::aes(alpha = count_cat), linewidth = 0, fill = "#009BE8", color = "#C5EFFF") +
-  ggplot2::geom_sf(data = mpxnyc::community_sf_obj, fill = NA, linewidth = 0.3, color = "black") +
-  ggplot2::scale_alpha_discrete("Participant\ncount") +
-  theme_mpxnyc_blank(
-    plot.background = ggplot2::element_rect(fill = "white"),
-    legend.position = "right"
-    )
 
 
-```
+The distribution of home neighborhoods reveals the geographic heart of queer New York during the mpox outbreak. Most participants lived in Manhattan and Brooklyn, with notable concentrations in historically queer and culturally mixed areas like Hell’s Kitchen, Harlem, Crown Heights, and Bedford-Stuyvesant. This clustering suggests that mpox risk—and opportunities for outreach—were shaped not only by individual behavior but also by neighborhood networks of nightlife, social connection, and shared spaces.
 
 
 
-```{r}
 
 
-table_data <- make_tabledata_residence()
-
-labelled::var_label(table_data$neighborhood) <- "Neighborhood"
-labelled::var_label(table_data$community) <- "Community district"
-labelled::var_label(table_data$borough) <- "Borough"
-labelled::var_label(table_data$count) <- "Count of participants"
-labelled::var_label(table_data$proportion) <- "Proportion of participants"
-
- table_data |>
-  dplyr::ungroup() |>
-  dplyr::filter(count > 29) |>
-   dplyr::select(neighborhood, community, borough, count, proportion) |>
-  gt::gt() |>
-     gt::tab_header(
-    title = "Most popular neighborhoods for primary residence",
-    subtitle = "MPX NYC 2022"
-  ) |>
-   gt::fmt_percent(proportion, decimals = 0)
-
-```

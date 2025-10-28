@@ -1,0 +1,38 @@
+```{r include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+## {.unnumbered}
+
+
+The Social and Spatial Network Analysis with Causal interpretation (SNACC) framework is an approach to collecting, analyzing, and interpreting data which explicitly accounts for causal relations among people, among places, and across people and places. It is applicable in two situations: when investigators want to describe patterns in how people interact with each other and/or with shared spaces; or when investigators are interested in understanding or intervening on the causal system formed by these components.
+
+
+To motivate the framework, we consider a study investigating the risk of acquiring a cold among individuals (pictured as dots in physical space in each frame of @fig-context) in a setting where there is only one infected person. Since colds are transmitted through close contact among infected and susceptible people, we can conceptualize the risk of an individual as a characteristic of the physical context they share with other (possibly infected) people.
+
+The simplest approach (first frame, @fig-context) would be to assign the average risk of acquiring a cold to each individual based on knowledge about the total number of susceptible people, and the number of infected people. The problem with this strategy, though, would be that those who are more likely to interact closely with the infected person have higher risk, and not all people are equally likely to interact.
+
+
+```{r}
+#| layout-nrow: 1
+#| fig-height: 8
+#| fig-width: 10
+#| fig-cap: Approaches to incorporating context in studies of individual health
+#| label: fig-context
+
+
+
+
+plot_context_figure()
+
+
+
+```
+
+We could improve on this analysis using a **social network analysis** (second frame, @fig-context). In this approach, we would use knowledge about relationships to gain a more granular understanding of risk. We could assume, for instance, that people who are in relationships that cause them to physically interact have higher risk than those who are not in such relationships. We could further assign different levels of risk to different connected components of the network. In @fig-context, relationships are shown using lines connecting the dots.
+
+An **ecologic** **analysis** (third frame, @fig-context) would use knowledge about patterns of interaction in space to group people into categories. We could divide people into households, for instance. Assuming that people physically interact with household members significantly more than they do with non-members, households could be assigned differing levels of risk. In @fig-context, households are marked using a fence surrounding each household.
+
+A **spatial analysis** (fourth frame, @fig-context) would also use knowledge about patterns of interaction in space to group people into categories. Unlike in the ecologic approach, in a spatial analysis, we assume that some pairs of categories influence each other as a result of their adjacency in physical space. We could assume that the risk of acquiring a cold is a function of i.) interactions with one’s own household members; and ii.) interactions with members of neighboring households. In @fig-context, household adjacency is shown as a gap in the boundary separating households.
+
+A **SSNAC analysis** (final frame, @fig-context) would integrate knowledge about patterns of interaction between individuals, within spatial units, and across spatial units to gain a granular understanding of risk. We could assume that the risk of acquiring a cold is a function of i.) interactions with one’s own household members; ii.) interactions with members of neighboring households; and iii.) interactions in personal relationships within and across households.
