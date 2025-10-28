@@ -1,0 +1,34 @@
+
+
+```{r include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+
+```{r}
+#| fig-height: 3
+#| fig-width: 8
+#| fig-cap: "D-separation triangles: Fork (leftmost), spoon (center), chopstick (rightmost)"
+
+
+
+fork <- make_dag_subgraph("fork") |>
+  plot_swig() +
+  theme_mpxnyc_blank() +
+  scale_fill_mpxnyc(option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black")) 
+
+spoon <- make_dag_subgraph("spoon") |>
+  plot_swig() +
+  theme_mpxnyc_blank() +
+  scale_fill_mpxnyc(option = "light")  +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black")) 
+
+chopstick <- make_dag_subgraph("chopstick") |>
+  plot_swig() +
+  theme_mpxnyc_blank() +
+  scale_fill_mpxnyc(option = "light")  +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black")) 
+
+cowplot::plot_grid(fork, spoon, chopstick, rel_widths = c(1,1,1.25), nrow = 1)
+```

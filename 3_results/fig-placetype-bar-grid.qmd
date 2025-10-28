@@ -1,0 +1,33 @@
+```{r}
+#| fig-cap: MPX NYC contact venue type by distance from home and sexual contact
+#| label: fig-placetype-bar-grid
+#| fig-width: 8
+#| fig-height: 10
+
+
+make_plotdata_placetype_bar_grid() |>
+  dplyr::mutate(proportion = abs(proportion)) |>
+  plot_bar_stratified2() +
+    ggplot2::coord_polar() +
+  scale_axis_mpxnyc() +
+  ggplot2::scale_y_continuous(limits = c(-0.3, 0.84)) +
+  scale_fill_mpxnyc(name = "") +
+  ggplot2::geom_label(ggplot2::aes(label = scales::percent(proportion, accuracy = 1), x = level, y = 0.5 ), border.color = "white", label.size = 0, size = 3.5) +
+  theme_mpxnyc_bar_places(
+      plot.margin = ggplot2::unit(c(0,0,0,0), "cm"), 
+      panel.spacing = ggplot2::unit(0, "cm"),
+      legend.position = "bottom",
+      panel.grid.major.y = ggplot2::element_blank(),
+      panel.grid.major.x = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_blank(),
+      strip.text.y.left = ggplot2::element_text(angle = 90)
+      )
+
+  #theme_mpxnyc_bar_places(
+  #    plot.margin = ggplot2::unit(c(0,0,0,0), "cm"), 
+  #    panel.spacing = ggplot2::unit(0, "cm")
+  #    ) 
+
+
+
+```

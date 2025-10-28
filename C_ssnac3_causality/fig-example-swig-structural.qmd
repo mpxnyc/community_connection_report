@@ -1,0 +1,41 @@
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+```{r}
+#| fig-height: 6
+#| fig-width: 8
+#| fig-align: center
+#| label: fig-example-swig-structural
+#| fig-cap: "SWING for Week 1 in Example 3"
+#| 
+
+
+structural  <- example_swing_structural() |>
+                    plot_swig(node_radius = 0.15) +
+                    scale_fill_mpxnyc(option = "light") +
+                    scale_color_mpxnyc(option = "manual", values = c("Community" = "black", "Individual" = "black", "intervention" = "black")) +
+                    theme_mpxnyc_blank() +
+                    ggplot2::ggtitle("Structural Part") 
+
+
+relational  <- example_swing_relational() |>
+                    plot_swig(node_radius = 0.2, node_margin = 0)  +
+                    scale_fill_mpxnyc(name = "Entity type", option = "light") +
+                    scale_color_mpxnyc(option = "manual", values = c("Community" = "black", "Individual" = "black", "intervention" = "black")) +
+                    ggplot2::theme(legend.position = "right") +
+                    theme_mpxnyc_blank() +
+                    ggplot2::ggtitle("Relational Part")
+
+
+legend_pre  <- relational +
+                    ggplot2::theme(legend.position = "right")
+legend      <- cowplot::get_legend(legend_pre) 
+
+
+
+figure   <- cowplot::plot_grid(structural, relational, ncol=1, rel_heights = c(3,3))
+
+cowplot::plot_grid(figure, legend, nrow = 1, rel_widths = c(4,1))
+
+```

@@ -1,4 +1,4 @@
-plot_swig <- function(data, arrow_length_head = 0.2, arrow_length_tail = 0.05, edge_width = 0.2, node_radius = 0.3, node_margin = 0.4, nudge_intervention_labels = 0.1){
+plot_swig <- function(data, arrow_length_head = 0.2, arrow_length_tail = 0.05, edge_width = 0.2, node_radius = 0.5, node_margin = 0.4, nudge_intervention_labels = 0.1, size = 5){
   
   variable_names <- data |>
     tidygraph::activate(edges) |>
@@ -44,38 +44,40 @@ plot_swig <- function(data, arrow_length_head = 0.2, arrow_length_tail = 0.05, e
     ggforce::geom_arc_bar(
       mapping     = ggplot2::aes(x0 = x, y0 = y, r = node_radius + 0.05, fill = node_type, start = 0, end = 1*pi, r0 = 0), 
       data        = node_characteristics |> dplyr::filter(node_shape == "intervention"), 
-      position    = ggplot2::position_nudge(x = 0.25 * nudge_intervention_labels)
+      position    = ggplot2::position_nudge(x = 0.25 * nudge_intervention_labels),
+      linewidth = 0
     ) +
     ggforce::geom_arc_bar(
       mapping     = ggplot2::aes(x0 = x, y0 = y, r = node_radius + 0.05, fill = node_type, start = pi, end = 2*pi, r0 = 0), 
       data        = node_characteristics |> dplyr::filter(node_shape == "preintervention"), 
-      position    = ggplot2::position_nudge(x = - 0.25 * nudge_intervention_labels)
+      position    = ggplot2::position_nudge(x = - 0.25 * nudge_intervention_labels),
+      linewidth = 0
     ) +
     ggforce::geom_circle(
-      mapping     = ggplot2::aes(x0 = x, y0 = y, r = node_radius + 0.05, fill = node_type), data = node_characteristics |> dplyr::filter(node_shape == "covariate")
+      mapping     = ggplot2::aes(x0 = x, y0 = y, r = node_radius + 0.05, fill = node_type), data = node_characteristics |> dplyr::filter(node_shape == "covariate"), linewidth = 0
     ) +
     ggraph::geom_node_text(
-      mapping     = ggplot2::aes(label = label),
-      color       = "black",
-      size        = 3.5,
+      mapping     = ggplot2::aes(label = label, color = node_type),
+      size        = size,
       parse       = TRUE,
       data        = node_characteristics |> dplyr::filter(node_shape == "preintervention"),
-      nudge_x     = -nudge_intervention_labels
+      nudge_x     = -nudge_intervention_labels,
+      fontface = "bold"
     ) +
     ggraph::geom_node_text(
-      mapping     = ggplot2::aes(label = label),
-      color       = "black",
-      size        = 3.5,
+      mapping     = ggplot2::aes(label = label, color = node_type),
+      size        = size,
       parse       = TRUE,
       data        = node_characteristics |> dplyr::filter(node_shape == "intervention"),
-      nudge_x     = nudge_intervention_labels
+      nudge_x     = nudge_intervention_labels,
+      fontface = "bold"
     ) +
     ggraph::geom_node_text(
-      mapping     = ggplot2::aes(label = label),
-      color       = "black",
-      size        = 3.5,
+      mapping     = ggplot2::aes(label = label, color = node_type),
+      size        = size,
       parse       = TRUE,
-      data        = node_characteristics |> dplyr::filter(node_shape == "covariate")
+      data        = node_characteristics |> dplyr::filter(node_shape == "covariate"),
+      fontface = "bold"
     ) +
     ggplot2::coord_fixed()
 }
