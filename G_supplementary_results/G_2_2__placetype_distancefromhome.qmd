@@ -1,0 +1,36 @@
+### Type of venue for contact vs. distance from home  {.unnumbered}
+
+::: {.panel-tabset}
+
+
+
+#### Show plot 
+
+
+```{r plot_radar_facet_placetype_distancefromhome}
+#| fig-width: 8
+#| fig-height: 6
+
+
+
+make_table_freq2(placeType, distanceFromHome, person_analysis = FALSE) |>
+  plot_radar_stratified() +
+  scale_fill_mpxnyc(name = "") +
+  scale_radial_mpxnyc() +
+  theme_mpxnyc_radar_places() 
+
+
+
+```
+
+
+#### Show data
+
+```{r table_radar_facet_placetype_distancefromhome}
+
+
+make_table_freq2(placeType, distanceFromHome, person_analysis = FALSE) |>
+  draw_table_2("Venue type vs. distance from home")
+```
+
+:::

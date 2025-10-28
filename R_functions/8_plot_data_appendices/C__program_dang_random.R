@@ -1,0 +1,65 @@
+program_dang_random              <- function(){
+  list_nodes <- list()
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M0", label = r"($M_{0}$)", x = -1, y = 6, node_type = "Individual")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V0", label = r"($V_{0}$)", x = 1, y = 8, node_type = "Individual")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R1", label = r"($R_{1}$)", x = 2, y = 2, node_type = "Community")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T1", label = r"($T_{1}$)", x = 3, y = 4, node_type = "Community")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M1", label = r"($M_{1}$)", x = 4, y = 6, node_type = "Individual")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V1", label = r"($V_{1}$)", x = 5, y = 8, node_type = "Individual")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R2", label = r"($R_{2}$)", x = 6, y = 2, node_type = "Community")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T2", label = r"($T_{2}$)", x = 7, y = 4, node_type = "Community")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M2", label = r"($M_{2}$)", x = 8, y = 6, node_type = "Individual")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V2", label = r"($V_{2}$)", x = 9, y = 8, node_type = "Individual")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "R3", label = r"($R_{3}$)", x = 10, y = 2, node_type = "Community")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "T3", label = r"($T_{3}$)", x = 11, y = 4, node_type = "Community")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "M3", label = r"($M_{3}$)", x = 12, y = 6, node_type = "Individual")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "V3", label = r"($V_{3}$)", x = 13, y = 8, node_type = "Individual")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "G0", label = r"($\Psi_{0}$)", x = 2, y = 10, node_type = "Graph")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "G1", label = r"($\Psi_{1}$)", x = 6, y = 10, node_type = "Graph")
+  list_nodes[[length(list_nodes) + 1]] <- data.frame(name = "G2", label = r"($\Psi_{2}$)", x = 10, y = 10, node_type = "Graph")
+  
+  
+  
+  list_edges <- list()
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "M0", to = "M1")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "R1")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "M1")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "R1", to = "T1")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "T1", to = "M1")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "M1", to = "V1")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "R2", to = "T2")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "T2", to = "M2")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "M2", to = "V2")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "R3", to = "T3")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "T3", to = "M3")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "M3", to = "V3")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "R2")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "R3")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "M1", to = "M2")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "M2", to = "M3")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "M2")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "M3")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "V0", to = "V1")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "V2")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "V3")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "G0", to = "R1")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "G0", to = "M1")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "G1", to = "R2")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "G1", to = "M2")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "G2", to = "R3")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "G2", to = "M3")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "V1", to = "G1")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "V2", to = "G2")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "G0", to = "G1")
+  list_edges[[length(list_edges) + 1]] <- data.frame(from = "G1", to = "G2")
+  
+  
+  structural_nodes <- list_nodes |> 
+    dplyr::bind_rows() |> 
+    dplyr::mutate(label = latex2exp::TeX(label, output = "character", bold = TRUE)) |>
+    dplyr::mutate(node_shape = "covariate")
+  
+  structural_edges <- list_edges |> dplyr::bind_rows()
+  
+  tidygraph::tbl_graph(nodes = structural_nodes, edges = structural_edges)
+}

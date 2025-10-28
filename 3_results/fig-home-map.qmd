@@ -1,0 +1,27 @@
+```{r}
+#| fig-align: center
+#| label: fig-home-map
+#| fig-cap: "Number of participants by neighborhood in New York City"
+
+
+scale_labels <- c("0", "1-10", "11-20", "21-30", "31+")
+
+mpxnyc::neighborhood_sf_obj |>
+   sf::st_as_sf() |>
+  dplyr::left_join(make_tabledata_residence(), by = "neighborhood") |>
+  dplyr::mutate(count = ifelse(is.na(count), 0, count)) |>
+  dplyr::mutate(count_cat = cut(count, c(-1,0,10,20,30,76), scale_labels)) |>
+  dplyr::arrange(-count) |>
+  ggplot2::ggplot() +
+  ggplot2::geom_sf(data = mpxnyc::community_sf_obj, fill = "white", linewidth = 0, color = NA) +
+  ggplot2::geom_sf(data = mpxnyc::community_sf_obj, fill = "#009BE8", linewidth = 0, color = NA, alpha = 0.1) +
+  ggplot2::geom_sf(ggplot2::aes(alpha = count_cat), linewidth = 0, fill = "#009BE8", color = "#C5EFFF") +
+  ggplot2::geom_sf(data = mpxnyc::community_sf_obj, fill = NA, linewidth = 0.3, color = "black") +
+  ggplot2::scale_alpha_discrete("Participant\ncount") +
+  theme_mpxnyc_blank(
+    plot.background = ggplot2::element_rect(fill = "white"),
+    legend.position = "right"
+    )
+
+
+```

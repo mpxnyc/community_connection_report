@@ -1,0 +1,31 @@
+## SSNAC V: Statistics
+
+### NPSEM-IE
+- Assumptions:
+  - no interference
+- Define whole population DAG 
+- Missing observation indicator independent of covariates
+- Non-parametric estimation of structural functions is feasible
+
+### (Random) Network NPSEM-IE
+- Assumptions:
+  - homogenous network interference according to constant or random network
+- Define whole population homogenous DAG 
+- Missing observation indicator independent of covariates
+- Non-parametric estimation of structural functions is infeasible
+  - network exposure values are censored for each observation
+- Need to model censoring mechanism considering random thinning of the network and underlying network topology
+
+### Bipartite Network NPSEM-IE
+- Assumptions:
+  - homogenous network interference according to constant or random bipartite network
+  - one partition of the random bipartite network is fully observed 
+  - other partition has missing observation indicator independent of covariates
+- Non-parametric estimation of structural functions is feasible
+  - network exposure values are fully observed for each observation 
+- Censoring mechanism is independent of network values
+
+
+### Estimation
+
+We simulated the intervention outlined above using RESPND-MI data by calculating the $G^{s}(N, \psi_s)$ where $s$ ranges from $1$ to the total number of community districts. We measured the uncertainty of our estimates by re-sampling study participants with replacement.
