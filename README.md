@@ -50,7 +50,6 @@ Each numbered or lettered folder corresponds to a section of the published MPX N
 | `E_marketing_comm/` | Communication and outreach materials |
 | `F_organizing/` | Study organization and governance |
 | `G_supplementary_results/` | Supplementary analyses |
-| `H_project_management/` | Internal project tracking and coordination |
 | `images/` | Figures, diagrams, and static image assets |
 
 ### Entry points
@@ -65,7 +64,36 @@ Each numbered or lettered folder corresponds to a section of the published MPX N
 ### 1. Install Dependencies
 
 ``` r
-install.packages(c("targets", "tidygraph", "ggraph", "gt", "gtsummary", "labelled"))
+install.packages(c(
+  "cowplot",
+  "dplyr",
+  "ggforce",
+  "ggimage",
+  "ggplot2",
+  "ggraph",
+  "grid",
+  "gt",
+  "gtsummary",
+  "here",
+  "igraph",
+  "knitr",
+  "labelled",
+  "latex2exp",
+  "lubridate",
+  "magick",
+  "purrr",
+  "remotes",
+  "rlang",
+  "scales",
+  "sf",
+  "stringr",
+  "targets",
+  "tidygraph",
+  "tidyjson",
+  "tidyr",
+  "uuid"
+))
+
 remotes::install_github("KeletsoMakofane/mpxnyc")
 remotes::install_github("KeletsoMakofane/mpxtools")
 ```
@@ -73,7 +101,7 @@ remotes::install_github("KeletsoMakofane/mpxtools")
 ### 2. Rebuild the Data Pipeline
 
 ``` r
-Run all the code in the index.qmd file.
+Run targets::tar_make() in the root folder
 ```
 
 This command regenerates all intermediate objects, figures, and derived data required by the Quarto report.
