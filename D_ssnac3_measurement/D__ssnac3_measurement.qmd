@@ -8,12 +8,18 @@ targets::tar_source("../R_functions")
 # MPX NYC: Measurement {#sec-measurement}
 
 ::: {#leading}
-As part of the MPX NYC survey, we developed a digital tool called the MPX NYC Person–Place Network Mapper. We describe its design, functionality, and implementation.
+As part of the MPX NYC survey, we developed a digital tool called the
+MPX NYC Person–Place Network Mapper. We describe its design,
+functionality, and implementation.
 :::
 
-{{< include /C_ssnac3_causality/fig-plot-icon-droplets.qmd >}} 
 
-## Person–Place Network Mapper 
+
+{{< include /C_ssnac3_causality/fig-plot-icon-droplets.qmd >}}
+
+
+
+## Person–Place Network Mapper
 
 We designed, tested, and implemented the MPX NYC Person–Place Network
 Mapper to meet practical and ethical challenges in collecting sensitive
@@ -89,7 +95,9 @@ place-mapping and link-tracing components. The back end comprised a
 custom Neo4j graph database connected to the front end through a study
 API.
 
-## Safety 
+
+
+## Safety
 
 ###  {.unnumbered}
 
@@ -103,7 +111,7 @@ into census tract identifiers on the participant’s device before
 transmission to the database. Census tracts represent U.S. geographic
 areas containing 2,500–8,000 residents.
 
-### Public and Private Identifiers  {.unnumbered}
+### Public and Private Identifiers {.unnumbered}
 
 When a participant began the survey, the front end parsed referral
 identifiers and language settings from the access URL. This information
@@ -116,7 +124,7 @@ replaced public identifiers with private ones before saving the data to
 the database. The identifier-pair table was stored separately and
 deleted after data collection concluded.
 
-### Sensitive Spatial Data  {.unnumbered}
+### Sensitive Spatial Data {.unnumbered}
 
 Each spatial input generated precise coordinates through the Google Maps
 API. These were immediately processed on the front end through the FCC
@@ -124,7 +132,7 @@ API to obtain census block identifiers, which were then truncated to
 census tracts. Only the census tract identifiers were transmitted to the
 study database.
 
-### Testing and Ethical Review  {.unnumbered}
+### Testing and Ethical Review {.unnumbered}
 
 We conducted two rounds of usability testing with approximately ten
 participants each to refine the survey interface and workflow. The final
@@ -132,11 +140,7 @@ instrument and study protocol were reviewed and approved by the Harvard
 T.H. Chan School of Public Health Institutional Review Board
 (IRB22-0761).
 
-
-
-
 {{< include C_2__questionnaire.qmd >}}
-
 
 ## References
 
@@ -145,10 +149,6 @@ T.H. Chan School of Public Health Institutional Review Board
 -   US Census Bureau. 2022. *Census Geography*.\
 -   Federal Communications Commission (FCC). 2022. *API for Census Block
     Data*.
-
-
-
-
 
 ::: {#acknowledgements}
 [Acknowledgements]{.underline}: The survey instrument was designed by
