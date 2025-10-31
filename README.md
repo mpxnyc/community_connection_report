@@ -25,7 +25,7 @@ The repository doubles as both a **Quarto publication** and a **computational an
 ### Analytical and support folders
 
 | Folder | Purpose |
-|----------------------------------|--------------------------------------|
+|----|----|
 | `R_functions/` | Custom R functions for data processing, visualization, and network generation |
 | `targets/` | Pipeline objects and cache produced by `{targets}` |
 | `_data/` | Survey data |
@@ -37,7 +37,7 @@ The repository doubles as both a **Quarto publication** and a **computational an
 Each numbered or lettered folder corresponds to a section of the published MPX NYC Report.
 
 | Folder | Section |
-|----------------------------------|--------------------------------------|
+|----|----|
 | `1_introduction/` | Project background and study overview |
 | `2_methods/` | Survey design, measures, and analytic approach |
 | `3_results/` | Main study findings |
