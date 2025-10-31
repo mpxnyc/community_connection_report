@@ -95,7 +95,6 @@ install.packages(c(
 ))
 
 remotes::install_github("KeletsoMakofane/mpxnyc")
-remotes::install_github("KeletsoMakofane/mpxtools")
 ```
 
 ### 2. Rebuild the Data Pipeline
