@@ -94,7 +94,7 @@ install.packages(c(
   "uuid"
 ))
 
-remotes::install_github("KeletsoMakofane/mpxnyc")
+remotes::install_github("mpxnyc/mpxnyc")
 ```
 
 ### 2. Rebuild the Data Pipeline
