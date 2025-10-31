@@ -1,108 +1,130 @@
-# MPX NYC: A Community-Led Study of Networks, Outbreaks, and Connection
+# MPX NYC: Reproducible Research Repository
 
-> This repository contains the full source code, data-processing pipeline, and documentation for **MPX NYC (RESPND-MI)** — a rapid, community-led study of the 2022 mpox outbreak among queer and trans people in New York City. It includes the open-source **Person–Place Network Mapper**, the analytic **SSNAC framework** (Social and Spatial Network Analysis with Causal interpretation), and all materials used to generate the public report at [mpxnycreport.netlify.app](https://mpxnycreport.netlify.app).
+> Source code and analytical workflow for the MPX NYC / RESPND-MI study — a rapid, community-led response to the 2022 mpox outbreak among queer and trans New Yorkers.  
+> This repository contains the Quarto book, data-processing pipeline, and supporting R functions used to generate the public report at [https://mpxnycreport.netlify.app](https://mpxnycreport.netlify.app).
 
-## 🧭 Overview
+## Overview
 
-MPX NYC was built to answer an urgent question: **How do the social and spatial networks of LGBTQ+ people shape vulnerability and resilience during an outbreak?**
+This repository integrates documentation, data processing, and analytical code in one reproducible research environment.  
+It was built with the following goals:
 
-Conducted under the **RESPND-MI** collective, the project combines:
-- Anonymous, web-based network survey
-- Spatially aggregated mapping (to census tract level)
-- Community-led organizing and dissemination
-- Open-source analytic and visualization tools
+- Combine **narrative and analysis** in a single Quarto book project  
+- Support **reproducible pipelines** through the `targets` package  
+- Enable **open collaboration** among community, academic, and technical partners  
+- Provide **modular building blocks** for reuse in other outbreak or network studies  
 
-The study was designed and executed **by and for** the communities most affected — demonstrating that rigorous epidemiologic research can be rooted in collaboration, transparency, and care.
+The repository doubles as both a **Quarto publication** and a **computational analysis project**.
 
-## 📦 Repository Contents
+## Directory Structure
 
-| Directory | Description |
-|------------|-------------|
-| `R_functions/` | Core functions sourced by the Quarto report (e.g., data cleaning, simulation, plotting) |
-| `data/` | Survey data (anonymized and/or simulated) |
-| `targets/` | Reproducible data pipeline built with [`targets`](https://docs.ropensci.org/targets/) |
+### Core analytical and configuration files
+| Path | Description |
+|------|--------------|
+| `_quarto.yml` | Master Quarto configuration for book rendering |
+| `_targets.yaml` | Defines the reproducible data pipeline via `{targets}` |
+| `_config.json` | Local constants for deployment or package authentication |
+| `mpxnyc_data_analysis.Rproj` | RStudio project file |
+| `.gitignore` | Standard Git ignore patterns |
+| `.Rproj.user/` | Local RStudio settings (ignored) |
 
+### Analytical and support folders
+| Folder | Purpose |
+|---------|----------|
+| `R_functions/` | Custom R functions for data processing, visualization, and network generation |
+| `targets/` | Pipeline objects and cache produced by `{targets}` |
+| `_data/` | Intermediate and derived data (anonymized or synthetic) |
+| `_extensions/` | Quarto extensions and custom shortcodes |
+| `_const/` | Constants and small lookup tables used across chapters |
 
-## ⚙️ Installation
+### Quarto content
+Each numbered or lettered folder corresponds to a section of the published MPX NYC Report.
 
-To install and run the analytic environment locally:
+| Folder | Section |
+|---------|----------|
+| `1_introduction/` | Project background and study overview |
+| `2_methods/` | Survey design, measures, and analytic approach |
+| `3_results/` | Main study findings |
+| `4_discussion/` | Interpretation and implications |
+| `6_endnotes/` | Notes and references |
+| `8_acknowledgements/` | Contributor acknowledgments |
+| `10_references/` | Bibliography and citation list |
+| `A_ssnac1_context/` | SSNAC framework: conceptual foundations |
+| `B_ssnac2_description/` | SSNAC framework: definitions and notation |
+| `C_ssnac3_causality/` | SSNAC framework: causal inference extensions |
+| `D_ssnac3_measurement/` | SSNAC framework: data structures and measurement |
+| `E_ssnac5_statistics/` | SSNAC framework: statistical estimation |
+| `E_marketing_comm/` | Communication and outreach materials |
+| `F_organizing/` | Study organization and governance |
+| `G_supplementary_results/` | Supplementary analyses |
+| `H_project_management/` | Internal project tracking and coordination |
+| `images/` | Figures, diagrams, and static image assets |
 
+### Generated or build folders
+| Folder | Description |
+|---------|-------------|
+| `_book/` | Rendered Quarto output (HTML) |
+| `index_files/` and `index_cache/` | Cache created by Quarto during rendering |
+| `README_files/` and `README.html` | Output from rendering `README.qmd` |
+| `404.qmd` | Custom not-found page for Netlify deployment |
+
+### Entry points
+| File | Description |
+|------|-------------|
+| `index.qmd` | Main entry point for the Quarto site |
+| `README.md` | Overview for collaborators (this file) |
+| `__readme.rtf` | Legacy documentation or notes |
+
+## Running the Analysis
+
+### 1. Install Dependencies
 ```r
-# install dependencies
 install.packages(c("targets", "tidygraph", "ggraph", "gt", "gtsummary", "labelled"))
-
-# install project packages from GitHub
 remotes::install_github("KeletsoMakofane/mpxnyc")
 remotes::install_github("KeletsoMakofane/mpxtools")
-
-# run data pipeline
-targets::tar_make()
 ```
 
-The pipeline will rebuild all derived datasets and figures required to compile the Quarto report.
+### 2. Rebuild the Data Pipeline
+```r
+library(targets)
+tar_make()
+```
+This command regenerates all intermediate objects, figures, and derived data required by the Quarto report.
 
-## 📘 Reproducing the Report
-
-The MPX NYC report is written in [**Quarto**](https://quarto.org). To compile locally:
-
+### 3. Render the Report
+From the project root:
 ```bash
 quarto render .
 ```
+The compiled HTML files will appear under `_book/` (or `docs/` if configured for GitHub Pages).
 
-This will produce a static site under `docs/`, which can be viewed locally or published to Netlify.
+## Reproducibility
 
-## 🧩 SSNAC Framework
+All analytical steps are defined in `_targets.yaml` and associated scripts in `R_functions/`.  
+Each Quarto chapter can be compiled independently or as part of the complete book.  
+Dependencies are managed through `targets` and `renv` (optional) for environment control.
 
-The **Social and Spatial Network Analysis with Causal interpretation (SSNAC)** framework extends classical causal inference (NPSEM-IE, DAGs, SWIGs) to networked data. Key sections of the report describe:
-- Network exposure mappings
-- Homogeneous and heterogeneous interference
-- Bipartite and random graph formulations
-- Causal contrasts under interference
+## Collaboration
 
-These methods are implemented through the `mpxtools` package and demonstrated throughout the SSNAC chapter.
+To contribute:
+1. Fork the repository and create a new branch.  
+2. Add or modify Quarto sections, R functions, or documentation.  
+3. Ensure the Quarto book compiles without errors (`quarto render`).  
+4. Submit a pull request describing the changes.  
 
-## 🌐 The Person–Place Network Mapper
+All contributions should follow the principles of **community accountability**, **transparency**, and **reproducibility**.
 
-The **Mapper** is a web-based survey component that allows participants to anonymously link themselves to venues or places they visit (mapped to census tracts). The tool was designed to:
-- Capture meaningful social–spatial structure without collecting identifying data
-- Support outbreak modeling and vaccine targeting analyses
-- Be reusable by other research coalitions
+## Citation
 
-Source code and documentation for the Mapper can be found in `inst/mapper/`.
+Makofane K, et al. *MPX NYC: A Community-Led Study of Networks, Outbreaks, and Connection.*  
+RESPND-MI, 2025. [https://mpxnycreport.netlify.app](https://mpxnycreport.netlify.app)
 
-## 🧠 Citation
-
-If you use any part of this repository or its methods, please cite:
-
-> Makofane K, et al. *MPX NYC: A Community-Led Study of Networks, Outbreaks, and Connection.* RESPND-MI, 2025. [https://mpxnycreport.netlify.app](https://mpxnycreport.netlify.app)
-
-## 🤝 Contributing
-
-We welcome contributions from collaborators, community members, and researchers. You can:
-- Submit pull requests for documentation or code improvements
-- File issues for bugs or suggestions
-- Adapt our framework for your own community or outbreak study
-
-Before contributing, please review the `CODE_OF_CONDUCT.md` and ensure your work aligns with our principles of **community accountability** and **open science**.
-
-## 📢 Related Projects
-
-- [RESPND-MI Collective](https://respnd-mi.org) – the umbrella initiative for rapid community-led outbreak studies
-- [ControlF](https://www.controlf.info) – training and consulting based on SSNAC methods
-- [The People’s Department of Health Seminar Series](https://www.controlf.info/seminar-series) – a 4-part seminar translating these insights into practice
-
-## 📄 License
-
-All code in this repository is released under the **MIT License**. Text, figures, and non-code materials are licensed under **CC BY-NC-SA 4.0**.
-
-## 🧩 Maintainers
+## Maintainers
 
 **Principal Investigator:** [Keletso Makofane, MPH, PhD](https://keletsomakofane.com)  
-**RESPND-MI Collective** — LGBTQ+ community researchers, developers, and organizers  
+**RESPND-MI Collective:** LGBTQ+ community researchers, developers, and organizers  
 **Contact:** admin@controlf.info
 
-## 🌈 Acknowledgments
+## Acknowledgments
 
-We thank the thousands of queer and trans New Yorkers who made this project possible, and the collaborators who built and maintained the infrastructure for community-led science.
-
-> *“Community is a form of infrastructure. This project shows what happens when we treat it that way.”*
+We thank the participants and collaborators whose work and trust made this project possible.  
+*“Community is a form of infrastructure. This project shows what happens when we treat it that way.”*
