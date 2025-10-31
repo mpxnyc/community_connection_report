@@ -1,53 +1,47 @@
 # MPX NYC: Reproducible Research Repository
 
-> Source code and analytical workflow for the MPX NYC / RESPND-MI study — a rapid, community-led response to the 2022 mpox outbreak among queer and trans New Yorkers.  
-> This repository contains the Quarto book, data-processing pipeline, and supporting R functions used to generate the public report at [https://mpxnycreport.netlify.app](https://mpxnycreport.netlify.app).
+> Source code and analytical workflow for the MPX NYC / RESPND-MI study — a rapid, community-led response to the 2022 mpox outbreak among queer and trans New Yorkers. This repository contains the Quarto book, data-processing pipeline, and supporting R functions used to generate the public report at [https://mpxresponse.org.](https://mpxresponse.org)
 
 ## Overview
 
-This repository integrates documentation, data processing, and analytical code in one reproducible research environment.  
-It was built with the following goals:
+This repository integrates documentation, data processing, and analytical code in one reproducible research environment. It was built with the following goals:
 
-- Combine **narrative and analysis** in a single Quarto book project  
-- Support **reproducible pipelines** through the `targets` package  
-- Enable **open collaboration** among community, academic, and technical partners  
-- Provide **modular building blocks** for reuse in other outbreak or network studies  
+-   Combine **narrative and analysis** in a single Quarto book project\
+-   Support **reproducible pipelines** through the `targets` package\
+-   Enable **open collaboration** among community, academic, and technical partners\
 
 The repository doubles as both a **Quarto publication** and a **computational analysis project**.
 
 ## Directory Structure
 
 ### Core analytical and configuration files
-| Path | Description |
-|------|--------------|
-| `_quarto.yml` | Master Quarto configuration for book rendering |
+
+| Path            | Description                                            |
+|-----------------|--------------------------------------------------------|
+| `_quarto.yml`   | Master Quarto configuration for book rendering         |
 | `_targets.yaml` | Defines the reproducible data pipeline via `{targets}` |
-| `_config.json` | Local constants for deployment or package authentication |
-| `mpxnyc_data_analysis.Rproj` | RStudio project file |
-| `.gitignore` | Standard Git ignore patterns |
-| `.Rproj.user/` | Local RStudio settings (ignored) |
+| `_config.json`  | Settings for computation and rendering, data filepaths |
 
 ### Analytical and support folders
+
 | Folder | Purpose |
-|---------|----------|
+|----------------------------------|--------------------------------------|
 | `R_functions/` | Custom R functions for data processing, visualization, and network generation |
 | `targets/` | Pipeline objects and cache produced by `{targets}` |
-| `_data/` | Intermediate and derived data (anonymized or synthetic) |
+| `_data/` | Survey data |
 | `_extensions/` | Quarto extensions and custom shortcodes |
-| `_const/` | Constants and small lookup tables used across chapters |
+| `_const/` | Graphics, emojis, bibliography, scss file |
 
 ### Quarto content
+
 Each numbered or lettered folder corresponds to a section of the published MPX NYC Report.
 
 | Folder | Section |
-|---------|----------|
+|----------------------------------|--------------------------------------|
 | `1_introduction/` | Project background and study overview |
 | `2_methods/` | Survey design, measures, and analytic approach |
 | `3_results/` | Main study findings |
 | `4_discussion/` | Interpretation and implications |
-| `6_endnotes/` | Notes and references |
-| `8_acknowledgements/` | Contributor acknowledgments |
-| `10_references/` | Bibliography and citation list |
 | `A_ssnac1_context/` | SSNAC framework: conceptual foundations |
 | `B_ssnac2_description/` | SSNAC framework: definitions and notation |
 | `C_ssnac3_causality/` | SSNAC framework: causal inference extensions |
@@ -59,72 +53,69 @@ Each numbered or lettered folder corresponds to a section of the published MPX N
 | `H_project_management/` | Internal project tracking and coordination |
 | `images/` | Figures, diagrams, and static image assets |
 
-### Generated or build folders
-| Folder | Description |
-|---------|-------------|
-| `_book/` | Rendered Quarto output (HTML) |
-| `index_files/` and `index_cache/` | Cache created by Quarto during rendering |
-| `README_files/` and `README.html` | Output from rendering `README.qmd` |
-| `404.qmd` | Custom not-found page for Netlify deployment |
-
 ### Entry points
-| File | Description |
-|------|-------------|
-| `index.qmd` | Main entry point for the Quarto site |
+
+| File        | Description                            |
+|-------------|----------------------------------------|
+| `index.qmd` | Main entry point for the Quarto site   |
 | `README.md` | Overview for collaborators (this file) |
-| `__readme.rtf` | Legacy documentation or notes |
 
 ## Running the Analysis
 
 ### 1. Install Dependencies
-```r
+
+``` r
 install.packages(c("targets", "tidygraph", "ggraph", "gt", "gtsummary", "labelled"))
 remotes::install_github("KeletsoMakofane/mpxnyc")
 remotes::install_github("KeletsoMakofane/mpxtools")
 ```
 
 ### 2. Rebuild the Data Pipeline
-```r
-library(targets)
-tar_make()
+
+``` r
+Run all the code in the index.qmd file.
 ```
+
 This command regenerates all intermediate objects, figures, and derived data required by the Quarto report.
 
 ### 3. Render the Report
+
 From the project root:
-```bash
+
+``` bash
 quarto render .
 ```
+
 The compiled HTML files will appear under `_book/` (or `docs/` if configured for GitHub Pages).
 
 ## Reproducibility
 
-All analytical steps are defined in `_targets.yaml` and associated scripts in `R_functions/`.  
-Each Quarto chapter can be compiled independently or as part of the complete book.  
+All analytical steps are defined in `_targets.yaml` and associated scripts in `R_functions/`.\
+Each Quarto chapter can be compiled independently or as part of the complete book.\
 Dependencies are managed through `targets` and `renv` (optional) for environment control.
 
 ## Collaboration
 
 To contribute:
-1. Fork the repository and create a new branch.  
-2. Add or modify Quarto sections, R functions, or documentation.  
-3. Ensure the Quarto book compiles without errors (`quarto render`).  
-4. Submit a pull request describing the changes.  
+
+1\. Fork the repository and create a new branch.\
+2. Add or modify Quarto sections, R functions, or documentation.\
+3. Ensure the Quarto book compiles without errors (`quarto render`).\
+4. Submit a pull request describing the changes.
 
 All contributions should follow the principles of **community accountability**, **transparency**, and **reproducibility**.
 
 ## Citation
 
-Makofane K, et al. *MPX NYC: A Community-Led Study of Networks, Outbreaks, and Connection.*  
-RESPND-MI, 2025. [https://mpxnycreport.netlify.app](https://mpxnycreport.netlify.app)
+Makofane K, et al. *MPX NYC: A Community-Led Study of Networks, Outbreaks, and Connection.*\
+RESPND-MI, 2025. <https://mpxnycreport.netlify.app>
 
 ## Maintainers
 
-**Principal Investigator:** [Keletso Makofane, MPH, PhD](https://keletsomakofane.com)  
-**RESPND-MI Collective:** LGBTQ+ community researchers, developers, and organizers  
-**Contact:** admin@controlf.info
+**Principal Investigator:** [Keletso Makofane, MPH, PhD](https://keletsomakofane.com)\
+**Contact:** admin\@controlf.info
 
 ## Acknowledgments
 
-We thank the participants and collaborators whose work and trust made this project possible.  
+We thank the participants and collaborators whose work and trust made this project possible.\
 *“Community is a form of infrastructure. This project shows what happens when we treat it that way.”*
