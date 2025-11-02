@@ -1091,7 +1091,6 @@ Example 2: Marriage and jobs
 <p>But what about the relationship between <em>Person 1</em> and <em>Person 3</em>? We can imagine that the dress of a newly acquainted colleague would not affect the dress or job opportunities of her colleague. Whereas <em>Person 1</em> and <em>Person 2</em> are causally related, <em>Person 1</em> and <em>Person 3</em> are not; their relationship is irrelevant to the causal system under investigation. <em>Person 2</em> and <em>Person 3</em> do not affect each other since they have no relationship at all.</p>
 </div>
 </div>
-<p>Before specifying a model that can accommodate the interdependence between <em>Persons 1</em> and <em>2</em> in <a href="#sec-example-2">Example 2</a>, we outline some useful definitions. We use these to extend the <a href="#def-ffrcistg">FFRCISTG</a> model described in <a href="#sec-classical-causal-inference" class="quarto-xref"><span>Section C.1</span></a> to accommodate settings characterized by causal interference.</p>
 <p>Because of the assumptions of <em>no interference</em> and <em>no spillover</em>, FFRCISTG models are unable to incorporate this additional information about the relationships between individuals in <a href="#sec-example-2">Example 2</a>. These relationships cause what is termed <em>causal interference</em> — the treatment level of one unit affects the outcome of another unit.</p>
 <p>We make progress by mapping out the structure of interference using graphs and incorporate it into the model. We introduce a statistical model called the <a href="#def-nffrcistg"><em>Network Finest Fully Randomized Causally Interpretable Structured Tree Graph (NFFRCISTG)</em></a> — an extension of the <a href="#def-ffrcistg">FFRCISTG</a> model that uses graphs to encode the pattern of causal interference among a set of observational units.</p>
 <p>Below we build an <a href="#def-nffrcistg">NFFRCISTG</a> model for <a href="#sec-example-2">Example 2</a>, illustrating the assumptions of the model. Before that, we outline some ideas and language we will need for the illustration.</p>
@@ -1151,7 +1150,7 @@ Homogeneous network interference
 </div>
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>We introduce the assumption of <a href="#def-homogenous-network-interference"><em>homogeneous network interference</em></a>, which reduces the complexity of network exposure mappings. This assumption holds that for any node in the network, the effect of a neighbor’s treatment is the same regardless of which neighbor it is, and regardless of the position of the unit in the network. In addition, network exposure mappings are restricted so that their values lie in a finite set. A structural equation shows homogenous network interference obtains if it is <a href="#def-separatability">separable</a> with <a href="#def-positional-invariance">positionally invariant</a> and <a href="#def-boundedness">bounded</a> coponent functions.</p>
+<p>The assumption of <a href="#def-homogenous-network-interference"><em>homogeneous network interference</em></a> holds that for any node in the network, the effect of a neighbor’s treatment is the same regardless of which neighbor it is, and regardless of the position of the unit in the network. In addition, network exposure mappings are restricted so that their values lie in a finite set.</p>
 </div>
 </div>
 </div>
@@ -1217,7 +1216,7 @@ Formal definitions
 <p><span class="math display">\[
 Y_i = f_{Y_i}\big(g_i(\mathbf{X}_1,\dots,\mathbf{X}_K), U_{Y_i}\big).
 \]</span></p>
-<p>where <span class="math inline">\(f_{Y_i}\)</span> is the <a href="#def-npsem">structural equation</a> for <span class="math inline">\(Y_i\)</span>, and are each an equivalence class induced by the <a href="#def-equivalence">equivalence</a> relation among the parents of <span class="math inline">\(Y\)</span>.</p>
+<p>where <span class="math inline">\(f_{Y_i}\)</span> is the <a href="#def-npsem">structural equation</a> for <span class="math inline">\(Y_i\)</span>, and vectors <span class="math inline">\(\mathbf X_t\)</span> are each an equivalence class induced by the <a href="#def-equivalence">equivalence</a> relation among the parents of <span class="math inline">\(Y\)</span>.</p>
 </div>
 <div id="def-separability" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition C.21 (Separability)</strong></span> The assumption that an <a href="#def-exposure-mapping">exposure mapping</a> <span class="math inline">\(g_i\)</span> can be written:</p>
@@ -1225,7 +1224,7 @@ Y_i = f_{Y_i}\big(g_i(\mathbf{X}_1,\dots,\mathbf{X}_K), U_{Y_i}\big).
 g_i(\mathbf{X}_1,\dots,\mathbf{X}_K)
   = \big[ \begin{pmatrix} X_{1i} \\ \dots \\ X_{Ki} \end{pmatrix},\, g_{1i}(\mathbf{X}_1),\, \dots,\, g_{Ki}(\mathbf{X}_K)\big]^T,
 \]</span></p>
-<p>where <span class="math inline">\(X_{ki}\)</span> is the <span class="math inline">\(i^{th}\)</span> entry of <span class="math inline">\(\mathbf V_k\)</span> and each <span class="math inline">\(g_{ti} : \{0,1\}^n \to \mathbb{R}\)</span> is a <em>component function</em> of <span class="math inline">\(g_i\)</span>. A structural equation is said to be separable if its exposure mapping is separable.</p>
+<p>where <span class="math inline">\(X_{ki} \in \mathcal O_i\)</span> is the <span class="math inline">\(i^{th}\)</span> entry of <span class="math inline">\(\mathbf V_k\)</span> and each <span class="math inline">\(g_{ti} : \{0,1\}^n \to \mathbb{R}\)</span> is a <em>component function</em> of <span class="math inline">\(g_i\)</span>. A structural equation is said to be separable if its exposure mapping is separable.</p>
 </div>
 <div id="def-loyalty" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition C.22 (Loyalty)</strong></span> We say a component function <span class="math inline">\(g_{ti}\)</span> is loyal to graph <span class="math inline">\(\mathscr{G}\)</span> if for <span class="math inline">\(\mathbf{X}_t,\mathbf{X}'_t \in \{0,1\}^n\)</span></p>
