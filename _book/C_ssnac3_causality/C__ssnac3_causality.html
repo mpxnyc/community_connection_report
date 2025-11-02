@@ -591,7 +591,7 @@ Intervention regime
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>We imagine that in certain types of studies, the investigator is able to “intervene” on an NPSEM by setting the value of a random variable through experiment (a randomized control trial, for instance). In <em>static interventions</em> the value is set to a constant whereas in <em>dynamic interventions</em> the investigator changes the form of one or more structural equation through experimental intervention. An intervention regeime is a collection of interventions.</p>
+<p>We imagine that in certain types of studies, the investigator is able to “intervene” on an NPSEM by setting the value of a random variable through experiment (a randomized control trial, for instance). In <em>static interventions</em> the value is set to a constant whereas in <em>dynamic interventions</em> the investigator changes the form of the structural equation that usually produces that random variable. An intervention regime is a collection of interventions.</p>
 </div>
 </div>
 </div>
@@ -636,7 +636,7 @@ Y_2^{(a_1, a_2, a_3)} &amp;= f_{Y_2}(U_{Y_2}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^
 Y_3^{(a_1, a_2, a_3)} &amp;= f_{Y_3}(U_{Y_3}, L_1, L_2, L_3, a_1, a_2, a_3, Y_1^{(a_1, a_2, a_3)}, Y_2^{(a_1, a_2, a_3)})
 \end{aligned}
 \tag{C.2}\]</span></span></p>
-<p>To summarize: a causal model is an NPSEM made up of two NPSEMs and an intervention regime. The NPSEMs are the observed data model and the interventional data model. These two models have identical structural equations. In the causal model, the error terms of the interventional data model are restricted so that they are equal to those of the observational model.</p>
+<p>To summarize: a causal model is an NPSEM made up of two NPSEMs. The NPSEMs are the observed data model and the interventional data model. The interventional data model is produced by applying the intervention regime to the observed data model. The error terms of the interventional data model are restricted so that they are equal to those of the observed data model.</p>
 </div>
 </div>
 </div>
@@ -652,7 +652,7 @@ DAGs and SWIGs
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>In contrast with parametric models, NPSEMs are characterized using the set of conditional indpendencies that hold among their variables. It is possible to deduce these using the structural equations themselves —- we can check whether two variables are (conditionally) independent by checking whether both variables are a function of the same common error term. It turns out that queries like this are much simpler to answer through a graphical representation of the NPSEM than through the NPSEM itself, however. Directed acyclic graphs allow the efficient communication of conditional independence assumptions that define NPSEMs.</p>
+<p>NPSEMs are characterized using the set of conditional indpendencies that hold among their random variables. It is possible to deduce these using the structural equations themselves —- we can check whether two variables are (conditionally) independent by checking whether both are a function of the same error term. It turns out that queries like this are much simpler to answer through a graphical representation of the NPSEM than through the NPSEM itself, however. Directed acyclic graphs allow the efficient communication of conditional independence assumptions that define NPSEMs.</p>
 <p>A causal directed acyclic graph (DAG) (<a href="#fig-fully-connected-dag" class="quarto-xref">Figure&nbsp;<span>C.1</span></a>) is a graph whose nodes represent the variables in an NPSEM (<a href="#eq-fully-connected-dag" class="quarto-xref">Equation&nbsp;<span>C.1</span></a>). Directed edges point from the arguments to the result of each structural equation.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_dag</span><span class="op">(</span><span class="st">"fully_connected"</span><span class="op">)</span>         <span class="op">|&gt;</span> </span>
@@ -671,7 +671,7 @@ Figure&nbsp;C.1: Fully connected causal DAG
 </div>
 </div>
 </div>
-<p>A single-world intervention graph (SWIG) (<a href="#fig-fully-connected-swig" class="quarto-xref">Figure&nbsp;<span>C.2</span></a>) is a DAG whose nodes represent the variables in the interventional model included in a causal model (<a href="#eq-fully-connected-swig" class="quarto-xref">Equation&nbsp;<span>C.2</span></a>). Directed edges point from the arguments to the result of each structural equation.</p>
+<p>A single-world intervention graph (SWIG) (<a href="#fig-fully-connected-swig" class="quarto-xref">Figure&nbsp;<span>C.2</span></a>) is a DAG whose nodes represent the variables in the interventional data model included in a causal model (<a href="#eq-fully-connected-swig" class="quarto-xref">Equation&nbsp;<span>C.2</span></a>). Directed edges point from the arguments to the result of each structural equation.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_swig</span><span class="op">(</span><span class="st">"fully_connected"</span><span class="op">)</span>      <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">plot_swig</span><span class="op">(</span>node_radius <span class="op">=</span> <span class="fl">0.2</span>, nudge_intervention_labels <span class="op">=</span> <span class="fl">0.18</span><span class="op">)</span> <span class="op">+</span> </span>
