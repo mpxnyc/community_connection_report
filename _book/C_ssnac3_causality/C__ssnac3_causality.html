@@ -383,12 +383,7 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li>
-<a href="#social-and-spatial-network-analysis-with-causal-interpretation" id="toc-social-and-spatial-network-analysis-with-causal-interpretation" class="nav-link active" data-scroll-target="#social-and-spatial-network-analysis-with-causal-interpretation">Social and Spatial Network Analysis with Causal Interpretation</a>
-  <ul class="collapse">
-<li><a href="#classic-causal-inference" id="toc-classic-causal-inference" class="nav-link" data-scroll-target="#classic-causal-inference">Classic causal inference</a></li>
-  </ul>
-</li>
+<li><a href="#social-and-spatial-network-analysis-with-causal-interpretation" id="toc-social-and-spatial-network-analysis-with-causal-interpretation" class="nav-link active" data-scroll-target="#social-and-spatial-network-analysis-with-causal-interpretation">Social and Spatial Network Analysis with Causal Interpretation</a></li>
   <li>
 <a href="#sec-classical-causal-inference" id="toc-sec-classical-causal-inference" class="nav-link" data-scroll-target="#sec-classical-causal-inference"><span class="header-section-number">C.1</span> Classical causal inference</a>
   <ul class="collapse">
@@ -450,7 +445,7 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>“We re-frame the task of statistical inference from that of learning from a growing collection of identically distributed random vectors to that of learning from a growing random vector whose entries are related through a causal structure. These assumptions allow our estimates to benefit from having more observational units, even if they collectively contribute to one realization of the statistical model.”</p>
 </blockquote>
-<section id="classic-causal-inference" class="level3 unnumbered page-columns page-full"><h3 class="unnumbered anchored" data-anchor-id="classic-causal-inference">Classic causal inference</h3>
+<section id="classic-causal-inference" class="level4 unnumbered page-columns page-full"><h4 class="unnumbered anchored" data-anchor-id="classic-causal-inference">Classic causal inference</h4>
 <p>Classic causal inference, as elaborated by Robins <span class="citation" data-cites="robins1986">(<a href="#ref-robins1986" role="doc-biblioref">1986</a>)</span>, Hernán and Robins <span class="citation" data-cites="hernan2021">(<a href="#ref-hernan2021" role="doc-biblioref">2021</a>)</span>, and others, sharpens epidemiologic reasoning by providing a template for conducting thought experiments about population health. Typically, the researcher reasons about the likely effect of some hypothetical intervention on an outcome in a defined population. They define a set of <strong>causal estimands</strong>—quantities that describe how the outcome would differ under the intervention—and, through transparent statistical assumptions, express those estimands in terms of quantities we can calculate using observed data.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-robins1986" class="csl-entry" role="listitem">
 Robins, James. 1986. <span>“A New Approach to Causal Inference in Mortality Studies with a Sustained Exposure Period<span></span>application to Control of the Healthy Worker Survivor Effect.”</span> <em>Mathematical Modelling</em> 7 (9-12): 13931512.
@@ -461,8 +456,7 @@ Hernán, Miguel, and James M. Robins. 2021. <em>Causal inference</em>. Chapman &
 <li>making causal assumptions about the relationship between healthcare access, diabetes prevalence, and any factors that determine both</li>
 <li>mathematically defining the hypothetical quantities of interest and expressing them in terms of estimable quantities</li>
 <li>estimating those quantities using data we have collected (or can collect)</li>
-</ul>
-<section id="independence" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="independence">Independence</h4>
+</ul></section><section id="independence" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="independence">Independence</h4>
 <p>A strong assumption made often by practitioners of classic causal inference is that of <strong>independence</strong> between observational units or groups of observational units. This assumption simplifies the mathematics involved in estimating quantities from data, but it also has profound implications for how we think about the causal process under study.</p>
 <p>In our opening example, the independence assumption holds that one person’s access to healthcare does not affect any other person’s diabetes status. It would imply that the diabetes status for a married man who does not know how to cook would not be affected by improvements in health literacy experienced by his wife who shops and cooks for the household. This assumption runs counter to our intuitions about social life. Humans are deeply networked—our lives are defined by our relationships with one another.</p>
 </section><section id="homogeneity" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="homogeneity">Homogeneity</h4>
@@ -499,7 +493,7 @@ Regarding the second: SSNAC advocates a shift in perspective.</p>
 </div>
 </div>
 </div>
-</section></section></section><section id="sec-classical-causal-inference" class="level2" data-number="C.1"><h2 data-number="C.1" class="anchored" data-anchor-id="sec-classical-causal-inference">
+</section></section><section id="sec-classical-causal-inference" class="level2" data-number="C.1"><h2 data-number="C.1" class="anchored" data-anchor-id="sec-classical-causal-inference">
 <span class="header-section-number">C.1</span> Classical causal inference</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -761,14 +755,14 @@ X_i\sim X_j\iff \ X_i\in  \mathscr{O}_i;\ X_j\in  \mathscr{O}_j,\ X_i \text{ sam
 \]</span></p>
 </div>
 <div id="def-no-spillover" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition C.8 (No spillover assumption)</strong></span> The assumption that no variable in a given observation is a <a href="#def-parent-child">parent</a> of an <a href="#def-equivalence">equivalent</a> variable in another <a href="#def-observational-unit">observational unit</a>.</p>
+<p><span class="theorem-title"><strong>Definition C.8 (No spillover assumption)</strong></span> The assumption that no variable in a given <a href="#def-observational-unit">observational unit</a> is a <a href="#def-parent-child">parent</a> of an <a href="#def-equivalence">equivalent</a> variable in another unit.</p>
 <p><span class="math display">\[
 X\notin \mathbf{Pa}(X')\quad
 \forall\, X\sim X',\ X\in \mathscr O_i,\ X'\in \mathscr O_j,\ i\ne j.
 \]</span></p>
 </div>
 <div id="def-no-interference" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition C.9 (No interference assumption)</strong></span> The assumption that no variable is a <a href="#def-parent-child">parent</a> of a <a href="#def-equivalence">non-equivalent</a> variable in another <a href="#def-observational-unit">observational unit</a>.</p>
+<p><span class="theorem-title"><strong>Definition C.9 (No interference assumption)</strong></span> The assumption that no variable in a given <a href="#def-observational-unit">observational unit</a> is a <a href="#def-parent-child">parent</a> of a <a href="#def-equivalence">non-equivalent</a> variable in another unit.</p>
 <p><span class="math display">\[
 X\notin \mathbf{Pa}(Y)\quad
 \forall\, X\in \mathscr O_i,\ Y\in \mathscr O_j,\ X\not\sim Y \ i\ne j
@@ -802,12 +796,12 @@ f_V^{(\Gamma)} = \begin{cases}
 \]</span></p>
 </div>
 <div id="def-causal-model" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition C.14 (Causal model)</strong></span> A causal model <span class="math inline">\(\mathcal C\)</span> of “observational” NPSEM <span class="math inline">\(\mathcal M\)</span> under intervention <span class="math inline">\(\Gamma\)</span> is an NPSEM that is generated by combining <span class="math inline">\(\mathcal M\)</span> with its interventional NPSEMs <span class="math inline">\(\mathcal M^{(\Gamma_1)}...\mathcal M^{(\Gamma_q)}\)</span> and constraining the error term for each random variable in the interventional NPSEM equations so that it is equal to the error term for the same variable in the observational NPSEM.</p>
+<p><span class="theorem-title"><strong>Definition C.14 (Causal model)</strong></span> A causal model <span class="math inline">\(\mathcal C\)</span> of “observational” NPSEM <span class="math inline">\(\mathcal M\)</span> under intervention <span class="math inline">\(\Gamma\)</span> is an NPSEM that is generated by combining <span class="math inline">\(\mathcal M\)</span> with its interventional NPSEM <span class="math inline">\(\mathcal M^{(\Gamma)}\)</span> and constraining the error term for each random variable in the interventional NPSEM equations so that it is equal to the error term for the same variable in the observational NPSEM.</p>
 <p><span class="math display">\[
-\mathcal{C} = \mathcal{M} \cup \mathcal M^{(\Gamma_1)} \cup ... \cup \mathcal M^{(\Gamma_q)}
+\mathcal{C} = \mathcal{M} \cup \mathcal M^{(\Gamma)}
 \]</span></p>
 <p><span class="math display">\[
-\text{for all } V \in \mathbf V, \quad {U_V} = {U}^{(\Gamma_1)}_V = ... = {U}^{(\Gamma_q)}_V
+\text{for all } V \in \mathbf V, \quad {U_V} = {U}^{(\Gamma)}_V
 \]</span></p>
 </div>
 <div id="def-ffrcistg" class="theorem definition">
