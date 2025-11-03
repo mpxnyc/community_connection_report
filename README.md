@@ -120,7 +120,7 @@ The compiled HTML files will appear under `_book/` (or `docs/` if configured for
 
 All analytical steps are defined in `_targets.yaml` and associated scripts in `R_functions/`.\
 Each Quarto chapter can be compiled independently or as part of the complete book.\
-Dependencies are managed through `targets` and `renv` (optional) for environment control.
+Dependencies are managed through `targets`.
 
 ## Collaboration
 
