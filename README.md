@@ -1,6 +1,6 @@
 # MPX NYC: Reproducible Research Repository
 
-> Source code and analytical workflow for the MPX NYC / RESPND-MI study — a rapid, community-led response to the 2022 mpox outbreak among queer and trans New Yorkers. This repository contains the Quarto book, data-processing pipeline, and supporting R functions used to generate the public report at [https://mpxresponse.org.](https://mpxresponse.org)
+> Source code and analytic workflow for the MPX NYC / RESPND-MI study — a rapid, community-led response to the 2022 mpox outbreak among queer and trans New Yorkers. This repository contains the Quarto book, data-processing pipeline, and supporting R functions used to generate the public report at [https://mpxresponse.org.](https://mpxresponse.org)
 
 ## Overview
 
@@ -36,21 +36,20 @@ The repository doubles as both a **Quarto publication** and a **computational an
 
 Each numbered or lettered folder corresponds to a section of the published MPX NYC Report.
 
-| Folder | Section |
+| Folder                     | Section                                        |
 |------------------------------------|------------------------------------|
-| `1_introduction/` | Project background and study overview |
-| `2_methods/` | Survey design, measures, and analytic approach |
-| `3_results/` | Main study findings |
-| `4_discussion/` | Interpretation and implications |
-| `A_ssnac1_context/` | SSNAC framework: conceptual foundations |
-| `B_ssnac2_description/` | SSNAC framework: definitions and notation |
-| `C_ssnac3_causality/` | SSNAC framework: causal inference extensions |
-| `D_ssnac3_measurement/` | SSNAC framework: data structures and measurement |
-| `E_ssnac5_statistics/` | SSNAC framework: statistical estimation |
-| `E_marketing_comm/` | Communication and outreach materials |
-| `F_organizing/` | Study organization and governance |
-| `G_supplementary_results/` | Supplementary analyses |
-| `images/` | Figures, diagrams, and static image assets |
+| `1_introduction/`          | Project background and study overview          |
+| `2_methods/`               | Survey design, measures, and analytic approach |
+| `3_results/`               | Main study findings                            |
+| `4_discussion/`            | Interpretation and implications                |
+| `A_ssnac1_context/`        | SSNAC I: Context                               |
+| `B_ssnac2_description/`    | SSNAC II: Description                          |
+| `C_ssnac3_causality/`      | SSNAC III: Causality                           |
+| `F_organizing/`            | RESPND-MI: Organizing                          |
+| `E_marketing_comm/`        | RESPND-MI: Marketing                           |
+| `D_ssnac3_measurement/`    | MPX NYC: Measurement                           |
+| `G_supplementary_results/` | MPX NYC: Results                               |
+| `images/`                  | Figures, diagrams, and static image assets     |
 
 ### Entry points
 
@@ -118,18 +117,18 @@ The compiled HTML files will appear under `_book/` (or `docs/` if configured for
 
 ## Reproducibility
 
-All analytical steps are defined in `_targets.yaml` and associated scripts in `R_functions/`.\
+All analytic steps are defined in `_targets.yaml` and associated scripts in `R_functions/`.\
 Each Quarto chapter can be compiled independently or as part of the complete book.\
-Dependencies are managed through `targets` and `renv` (optional) for environment control.
+Dependencies are managed through `targets`.
 
 ## Collaboration
 
 To contribute:
 
-1\. Fork the repository and create a new branch.\
-2. Add or modify Quarto sections, R functions, or documentation.\
-3. Ensure the Quarto book compiles without errors (`quarto render`).\
-4. Submit a pull request describing the changes.
+1.  Fork the repository and create a new branch.
+2.  Add or modify Quarto sections, R functions, or documentation.
+3.  Ensure the Quarto book compiles without errors (`quarto render`).
+4.  Submit a pull request describing the changes.
 
 All contributions should follow the principles of **community accountability**, **transparency**, and **reproducibility**.
 
