@@ -6,6 +6,8 @@
  $primary-light: #C5EFFF;
  $secondary: #e83e8c;
  $secondary-light: #FF99C5;
+ $tertiary: #EA773D;
+ $tertiary-light: #FFAA7B;
  //$body-bg: #c71c22;
  $link-color: $primary;
  $callout-color-tip: #5D207A;
@@ -208,11 +210,13 @@ justify-content: space-between;
 text-align: center;
 padding: 1rem;
 border-radius: 0.75rem;
-border: 2px solid #009BE8;   /* ✅ Pink outline */
+border: 2px solid $secondary;   /* ✅ Pink outline */
 box-shadow: 0 2px 4px rgba(247, 60, 149, 0.1); /* subtle pink shadow */
 font-size: 0.8rem;            /* ✅ Slightly smaller text */
 line-height: 1.4;             /* keeps readability */
 }
+
+
 
 /* Center buttons */
 .hero-banner .btn,
@@ -221,11 +225,18 @@ line-height: 1.4;             /* keeps readability */
 margin-left: auto;
 margin-right: auto;
 display: inline-block;
+
 }
 
 .hero-banner {
   border: 2px solid $secondary;   /* ✅ Pink outline */
+  &.hero-banner-orange {
+  border: 2px solid $tertiary;   /* ✅ Pink outline */
+  scroll-margin-top: 4rem;
+};
 }
+
+
 
 
 strong {
@@ -241,6 +252,18 @@ thead > strong {
     font-weight: 700; /* Example: a semi-bold weight */
     color: $secondary;
 }
+
+.emphasize-orange {
+  font-weight: 700;
+  color: $tertiary;
+}
+
+
+.titletext {
+    font-weight: 700; /* Example: a semi-bold weight */
+    color: $secondary;
+}
+
 
 
 .quarto-secondary-nav {
@@ -266,3 +289,9 @@ thead > strong {
   font-size: 0;            /* ✅ Slightly smaller text */
 }
 
+
+.alert-banner {
+  background-color: #FFFFFF;
+  border: 2px solid $tertiary;   /* ✅ Pink outline */
+  padding: 40px;
+}
