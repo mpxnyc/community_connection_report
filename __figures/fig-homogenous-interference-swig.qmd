@@ -1,0 +1,18 @@
+```{r  include=FALSE}
+targets::tar_source("../R_functions")
+```
+
+```{r}
+#| fig-height: 8
+#| label: fig-homogenous-interference-swig
+#| fig-width: 7
+#| fig-cap: "SWIG with homogenous"
+#| 
+make_swig("homogenous_interference")      |> 
+  plot_swig(node_radius = 0.2, nudge_intervention_labels = 0.16) + 
+  scale_fill_mpxnyc(option = "light") +
+  scale_color_mpxnyc(option = "manual", values = c("covariate" = "black", "intervention" = "black")) + 
+  theme_mpxnyc_blank()
+
+```
+
