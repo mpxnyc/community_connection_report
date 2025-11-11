@@ -835,5 +835,60 @@
       "Appendices",
       "<span class='chapter-number'>G</span>  <span class='chapter-title'>MPX NYC: Results</span>"
     ]
+  },
+  {
+    "objectID": "D_measurement.html",
+    "href": "D_measurement.html",
+    "title": "D - MPX NYC: Measurement",
+    "section": "",
+    "text": "D.1 Person–Place Network Mapper\nWe designed, tested, and implemented the MPX NYC Person–Place Network Mapper to meet practical and ethical challenges in collecting sensitive spatial data within an anonymous survey. Our goal was to capture information on venues visited by participants—including those where sexual activity occurred—while minimizing the risk of reidentification through location data.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>MPX NYC: Measurement</span>"
+    ]
+  },
+  {
+    "objectID": "D_measurement.html#personplace-network-mapper",
+    "href": "D_measurement.html#personplace-network-mapper",
+    "title": "D - MPX NYC: Measurement",
+    "section": "",
+    "text": "Requirements\nWorking in partnership with a back-end web developer, we led the design of a survey tool capable of collecting:\n\nSelf-reported health and demographic information through multiple question types;\nSexual and social network data through link tracing; and\nInformation on relevant geographic locations.\n\nThroughout, we sought to reduce participant burden and ensure that no identifying information was collected.\n\n\nExample of a user prompt for a forced-response question in the custom designed MPX NYC survey instrument\n\nPlace Mapping\nBecause participants were unlikely to recall precise addresses or ZIP codes, we integrated the Google Maps API to allow them to identify locations by business name, landmark, cross-street, subway station, or neighborhood. The map displayed standard navigation tools and detailed geographic information to aid orientation (see Figure D.1).\n\n\n\n\n\nFigure D.1: Map input question format developed for MPX NYC\n\n\nAt the beginning of the survey, participants were asked to locate their primary residence on the map. Later, they identified venues where they had physical or sexual contact in group settings. Each map tap placed a marker and triggered follow-up questions about the type of venue and activities that occurred there.\nLink Tracing\nWe developed an anonymous link-tracing system using URL parameters to construct a participant network. At survey initiation, each respondent received a unique identifier card containing a QR code and word combination.\n\n\nSurvey dialogue for sharing pre-written study recruitment messages with social/sexual contact\n\nAt the end of the survey, participants were invited to share a pre-written recruitment message containing their unique URL with social or sexual contacts. When a contact completed the survey using this link, an edge was automatically added between the two respondents in the Neo4j graph database. If a new participant shared a link with someone who had already completed the survey, the latter could confirm the connection by entering the code from their identifier card, linking their nodes without revealing identities.\nImplementation\nThe tool’s front end was developed by the principal investigator as a single-page React/Next.js application hosted on Vercel, with design elements based on the MPX NYC style guide. Standard survey question formats (e.g., multiple choice, free text) were combined with the custom place-mapping and link-tracing components. The back end comprised a custom Neo4j graph database connected to the front end through a study API.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>MPX NYC: Measurement</span>"
+    ]
+  },
+  {
+    "objectID": "D_measurement.html#safety",
+    "href": "D_measurement.html#safety",
+    "title": "D - MPX NYC: Measurement",
+    "section": "\nD.2 Safety",
+    "text": "D.2 Safety\n\nSurvey questions were carefully designed to avoid collecting any direct or indirect identifiers, such as names, email addresses, IP addresses, or exact geographic coordinates. Age was recorded as a categorical variable rather than an integer to further reduce identifiability.\nTo protect participant privacy, geographic coordinates were converted into census tract identifiers on the participant’s device before transmission to the database. Census tracts represent U.S. geographic areas containing 2,500–8,000 residents.\nPublic and Private Identifiers\nWhen a participant began the survey, the front end parsed referral identifiers and language settings from the access URL. This information was sent to the study API, which generated a public–private identifier pair and stored it in a secure table. The API then returned the public identifier to the participant.\nUpon survey completion, responses were transmitted to the API, which replaced public identifiers with private ones before saving the data to the database. The identifier-pair table was stored separately and deleted after data collection concluded.\nSensitive Spatial Data\nEach spatial input generated precise coordinates through the Google Maps API. These were immediately processed on the front end through the FCC API to obtain census block identifiers, which were then truncated to census tracts. Only the census tract identifiers were transmitted to the study database.\nTesting and Ethical Review\nWe conducted two rounds of usability testing with approximately ten participants each to refine the survey interface and workflow. The final instrument and study protocol were reviewed and approved by the Harvard T.H. Chan School of Public Health Institutional Review Board (IRB22-0761).",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>MPX NYC: Measurement</span>"
+    ]
+  },
+  {
+    "objectID": "D_measurement.html#sec-appendixquestionnaire",
+    "href": "D_measurement.html#sec-appendixquestionnaire",
+    "title": "D - MPX NYC: Measurement",
+    "section": "\nD.3 Study questionnaire",
+    "text": "D.3 Study questionnaire\nCodetargets::tar_read(config_list)[[1]][[\"variables\"]] |&gt;\n  purrr::map(\n    function(x) return(paste0(\n                              \"::: {.callout }\\n\\n# \", \n                              x[[\"label\"]], \n                              \"\\n\\n\",\n                               x[[\"question\"]],\n                              \"\\n\\n\",\n                              paste(x[[\"response_options\"]], collapse = \"; \"),\n                              \"\\n\\n:::\"\n                              ))\n  ) |&gt;\n  paste(collapse = \"\\n\\n\") |&gt;\n  cat()\n\n\n\n\n\n\nHome census tract\n\n\n\nWhere in the city do you live? Tap on the map to show your home.\n\n\n\n\n\n\n\n\nAge\n\n\n\nHow old are you?\n&lt;18; 18-24; 25-34; 35-44; 45-54; 55+; 55+\n\n\n\n\n\n\n\n\nParticipant question\n\n\n\nWhat question do you wish we had asked in the survey?\n\n\n\n\n\n\n\n\nAssigned sex\n\n\n\nWhat is your sex assigned at birth?\nMale; Female; Other\n\n\n\n\n\n\n\n\nRecruitment channel\n\n\n\nRecruitment channel\nGrindr; Partner toolkit; Instagram; Twitter; Unknown\n\n\n\n\n\n\n\n\nRecent important social contacts\n\n\n\nHow many queer and trans friends do you have who are important to you for any reason? Count only those you have been in touch with over the past 4 weeks.\n\n\n\n\n\n\n\n\nRecent physical contacts\n\n\n\nHow many individuals have you had prolonged physical contact (but no sexual contact) with in the past 4 weeks, excluding group settings?\n\n\n\n\n\n\n\n\nRecent individual sex contacts\n\n\n\nHow many individuals have you had sex with in the past 4 weeks, excluding group sex partners?\n\n\n\n\n\n\n\n\nRecent covid diagnosis\n\n\n\nIn the past 4 weeks, did you test positive for COVID-19?\nYes; No; Did not test\n\n\n\n\n\n\n\n\nSurvey date\n\n\n\nSurvey date\n\n\n\n\n\n\n\n\nCurrent gender\n\n\n\nWhat is your gender identity?\nMan; Woman; Trans man; Trans woman; Non-binary; Other\n\n\n\n\n\n\n\n\nGroup contact\n\n\n\nOver the past 4 weeks, have you had sex with two or more people at the same time or had close physical contact with multiple people at the same time? (like at a party, sport game, concert, show)\nYes; No\n\n\n\n\n\n\n\n\nPrEP user\n\n\n\nAre you on PrEP?\nYes; No\n\n\n\n\n\n\n\n\nHIV status\n\n\n\nWhat is your HIV status?\nLiving with HIV; Not living with HIV; Unsure\n\n\n\n\n\n\n\n\nHIV supressed\n\n\n\nHave you been told that your viral load is suppressed or undetectable?\nYes; No; Unsure\n\n\n\n\n\n\n\n\nMonkeypox care\n\n\n\nDid you receive care by a medical provider for your symptoms?\nYes; No\n\n\n\n\n\n\n\n\nMpox testing\n\n\n\nIn the past 4 weeks, did you receive testing for mpox?\nYes; No\n\n\n\n\n\n\n\n\nMpox vaccine\n\n\n\nHave you received at least 1 dose of the monkeypox vaccine?\nYes; No; Unsure\n\n\n\n\n\n\n\n\nSexual orientation\n\n\n\nWhat is your sexual orientation?\nGay; Bisexual; Straight; Queer; Something Else\n\n\n\n\n\n\n\n\nGender identity\n\n\n\nGender identity\nCisgender Man; Non Binary; Transgender Man; Transgender Woman; Cisgender Woman; Another Demographic; Another Demographic\n\n\n\n\n\n\n\n\nRace\n\n\n\nRace\nWhite; Latinx; Black; Asian; Multi Racial; Another Group\n\n\n\n\n\n\n\n\nHookup travel time\n\n\n\nBy the way, how long are you willing to travel to hook up?\n\n\n\n\n\n\n\n\nNumber of symptoms (calculated)\n\n\n\nNumber of symptoms (calculated)\n\n\n\n\n\n\n\n\nPlace type\n\n\n\nWhat kind of place is this?\nConcert/Theatre/Show; Concert/Theatre/Show; Dark Room/Sex Party; Dark Room/Sex Party; Dance Party; Sport Game; Private Residence; Something Else\n\n\n\n\n\n\n\n\nSexual contact at place\n\n\n\nDid you have sexual contact while at this venue?\nDid not have sex; Had sex; Did not have sex",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>MPX NYC: Measurement</span>"
+    ]
+  },
+  {
+    "objectID": "D_measurement.html#references",
+    "href": "D_measurement.html#references",
+    "title": "D - MPX NYC: Measurement",
+    "section": "\nD.4 References",
+    "text": "D.4 References\n\nVercel. 2024. NextJS Documentation. https://nextjs.org/docs.\nNeo4j. 2024. Neo4j Documentation. https://neo4j.com/docs.\nUS Census Bureau. 2022. Census Geography.\n\nFederal Communications Commission (FCC). 2022. API for Census Block Data.\n\n\nAcknowledgements: The survey instrument was designed by Keletso Makofane and coded by Keletso Makofane (front end) and Imran Ansari (back end). Sudipta Saha found the web service that allowed us to safely collect spatial data. Seema Kara wrote the initial technical specifications for the instrument. neo4j granted a concessionary licence for the graph database system we used for the back end. Pedro Carneiro and Nguyen Tran led the development of survey questions. Cody Nolan and Anton Antón Castellanos Usigli conducted translation from English to Spanish. Robert Pitts helped to design questions on suspected mpox symptoms.\nLead author: Keletso Makofane, MPH, PhD. Editor: Nicholas Diamond, MPH. (Published: June 2025).",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>MPX NYC: Measurement</span>"
+    ]
   }
 ]
