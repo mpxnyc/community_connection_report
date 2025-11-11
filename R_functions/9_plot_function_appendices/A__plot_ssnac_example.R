@@ -9,7 +9,7 @@ plot_ssnac_example <- function(data){
   )
   
   ggraph::ggraph(example_snacc_graph, coords) +
-    ggraph::geom_edge_link2(ggplot2::aes(edge_linetype = edge_type, edge_width = edge_type, edge_color = edge_type)) +
-    ggraph::geom_node_circle(ggplot2::aes(r = 0.1, color = node_type, filter = node_type == "Person"), fill = "white") + 
-    ggraph::geom_node_circle(ggplot2::aes(r = 0.1, color = node_type, filter = node_type == "Place"), fill = "grey")
+    ggraph::geom_edge_link(ggplot2::aes(edge_linetype = edge_type, width = edge_width)) +
+    ggraph::geom_node_circle(ggplot2::aes(r = 0.1, color = node_color, filter = node_type == "Person"), fill = "white") + 
+    ggraph::geom_node_circle(ggplot2::aes(r = 0.1, color = node_color, filter = node_type == "Place"), fill = "grey")
 }

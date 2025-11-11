@@ -10,7 +10,6 @@ style_ssnac_example <- function(plot){
   plot +
     ggplot2::theme_void() +
     ggplot2::coord_fixed() +
-    ggraph::scale_edge_width_manual("Edge type", values = edge_width_key) +
     ggraph::scale_edge_linetype_manual("Edge type", values = edge_linetype_key ) +
     ggplot2::scale_color_manual("Node type", values = node_color_key) +
     ggraph::scale_edge_color_manual("Edge type", values =edge_color_key ) +
