@@ -8,10 +8,7 @@ format:
 
 ---
 
-```{r include=FALSE}
-targets::tar_source("R_functions") # Access custom defined functions
-knitr::opts_chunk$set(cache = TRUE, cache.path = "_cache/index/")
-```
+
 
 
 ```{r packages, eval = FALSE}
@@ -56,7 +53,10 @@ targets::tar_make(reporter = "silent") # Run data pipeline
 ```
 
 
-
+```{r include=FALSE}
+targets::tar_source("R_functions") # Access custom defined functions
+knitr::opts_chunk$set(cache = TRUE, cache.path = "_cache/index/")
+```
 
 
 
