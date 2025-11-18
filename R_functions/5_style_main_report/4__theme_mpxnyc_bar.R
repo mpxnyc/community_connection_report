@@ -4,7 +4,8 @@ theme_mpxnyc_bar <- function(...){
       panel.grid.major.y  = ggplot2::element_line(),
       axis.title.y        = ggplot2::element_text(),
       axis.text.y         = ggplot2::element_text(),
-      legend.position     = "right"
+      axis.text.x         = ggplot2::element_text(angle = 45, hjust = 1),
+      legend.position     = "none"
     ) +
     ggplot2::theme(...)
 }
