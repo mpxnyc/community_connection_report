@@ -322,12 +322,7 @@ cookieconsent.run({
    
   <ul>
 <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link active" data-scroll-target="#descriptive-statistics"><span class="header-section-number">5.1</span> Descriptive Statistics</a></li>
-  <li>
-<a href="#vaccine-strategy-model" id="toc-vaccine-strategy-model" class="nav-link" data-scroll-target="#vaccine-strategy-model"><span class="header-section-number">5.2</span> Vaccine strategy model</a>
-  <ul class="collapse">
-<li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
-  </ul>
-</li>
+  <li><a href="#vaccine-strategy-model" id="toc-vaccine-strategy-model" class="nav-link" data-scroll-target="#vaccine-strategy-model"><span class="header-section-number">5.2</span> Vaccine strategy model</a></li>
   <li><a href="#statistical-inference" id="toc-statistical-inference" class="nav-link" data-scroll-target="#statistical-inference"><span class="header-section-number">5.3</span> Statistical Inference</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/mpxnyc/community_connection_report/blob/production/5_analysis.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -342,16 +337,13 @@ cookieconsent.run({
 <p>Finally, we computed the spatial mixing coefficient for subgroups defined by age, sexual orientation, and race–gender to quantify how these groups interacted across space.</p>
 </section><section id="vaccine-strategy-model" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="vaccine-strategy-model">
 <span class="header-section-number">5.2</span> Vaccine strategy model</h2>
-<section id="section" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="section"></h3>
 <p>Building on the spatial patterns observed in the descriptive analysis, we modeled a hypothetical intervention in which community districts were immunized sequentially according to priority rankings. To immunize a district was to immunize all individuals who had either a residence or a gathering in that district. Once immunized, individuals were assumed to be fully protected from acquiring or transmitting infection, and each person could only be immunized once.</p>
 <p>We evaluated two alternative strategies for ordering community districts for vaccination: a contact-neutralizing strategy, and a movement-neutralizing strategy. Each time a community district is immunized, we recalculate two key outcome measures: spatial efficiency and spatial network impact, each reflecting a different dimension of intervention performance.</p>
-<p><u>Control strategies</u></p>
-<p>In the contact-neutralizing strategy, community districts were ranked by social catchment (the number of gatherings and residences they contained), counting only residences of participants who reported group contact and had not yet been immunized. This approach prioritizes districts with the highest concentration of sexual or physical contact, aiming to immunize as many individuals as possible while focusing on a minimal number of locations.</p>
+<p><u>Control strategies</u>: In the contact-neutralizing strategy, community districts were ranked by social catchment (the number of gatherings and residences they contained), counting only residences of participants who reported group contact and had not yet been immunized. This approach prioritizes districts with the highest concentration of sexual or physical contact, aiming to immunize as many individuals as possible while focusing on a minimal number of locations.</p>
 <p>In the movement-neutralizing strategy, community districts were ranked according to their spatial centrality—a measure of how strongly each district is connected to others across the city. This strategy prioritizes districts that function as spatial hubs for participant movement, targeting them early in the immunization sequence to contain potential city-wide spread.</p>
-<p><u>Public health outcomes</u></p>
-<p>Spatial efficiency is defined as the total number of immunized individuals divided by the number of community districts immunized. To compare the two intervention strategies, we visualized the number of community districts required to immunize approximately 33% and 66% of the total population.</p>
+<p><u>Public health outcomes</u>: Spatial efficiency is defined as the total number of immunized individuals divided by the number of community districts immunized. To compare the two intervention strategies, we visualized the number of community districts required to immunize approximately 33% and 66% of the total population.</p>
 <p>Spatial network impact was defined as the proportion of individuals belonging to the largest connected component of the MPX NYC Participant Network. This measure reflects the extent to which susceptiuble individuals remain embedded within the same transmission-relevant network after each intervention step. To compare strategies, we plotted, for each additional community district immunized, the proportions of individuals who were immunized, susceptible and still within the largest component, and susceptible but outside of the largest component.</p>
-</section></section><section id="statistical-inference" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="statistical-inference">
+</section><section id="statistical-inference" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="statistical-inference">
 <span class="header-section-number">5.3</span> Statistical Inference</h2>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">number_reps</span> <span class="op">&lt;-</span> <span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">config_list</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"settings"</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"n_reps_graph"</span><span class="op">]</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
