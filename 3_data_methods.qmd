@@ -1,54 +1,56 @@
 # Data {#sec-data}
 
-```{r  include=FALSE}
+```{r include=FALSE}
 targets::tar_source("R_functions")
 ```
 
-
 ## MPX NYC Person–Place Network Mapper
-
-
-
 
 {{< include ___videos/vid_data.qmd >}}
 
-Data were collected using the [MPX NYC Person–Place Network Mapper](https://survey-instrument.vercel.app){target="blank}, a web survey tool designed to elicit sensitive spatial and social data under conditions of anonymity. The Mapper displayed an interactive city map where participants identified key places—such as homes, parties, or social venues—by tapping on the map (see @fig-map-input). Each tap generated a marker and a short sequence of questions about that location.
+Data were collected using the [MPX NYC Person–Place Network Mapper](https://survey-instrument.vercel.app){target="blank"}, a custom web survey tool designed to elicit sensitive spatial, social, and sexual-network information **under strict anonymity**. The Mapper displayed an interactive map of New York City where participants identified key places—such as homes, parties, social venues, or neighborhoods—by tapping on the map (see @fig-map-input). Each tap created a temporary marker and triggered a brief sequence of questions about the role of that location in their recent social or sexual life.
 
-To preserve confidentiality, the tool automatically transformed geographic coordinates into U.S. Census Tract identifiers before transmission. These tracts, which partition the United States into units of roughly 2,500 – 8,000 residents, ensured that no identifying spatial data entered the study database. The resulting dataset represents a **bipartite person–place graph**, where people and places are nodes and their reported connections (residence, social contact, or sexual contact) form edges. This graph structure defines the analytic foundation for SSNAC, supporting causal reasoning under network interference.
+To protect participant confidentiality, the tool **never stored raw latitude–longitude coordinates**. All coordinates were converted on-device into **U.S. Census Tract identifiers** before transmission. Census tracts, which typically contain 2,500–8,000 residents, provided a stable spatial unit for analysis while preventing the capture of identifying geographic information.
+
+Participants also used the Mapper to identify recent partners and close contacts. Importantly, the web application **never collected names, phone numbers, email addresses, IP addresses, messaging identifiers, or any other personal information**. Instead, respondents were prompted to send a pre-written recruitment link to contacts **through their own phones or messaging apps**, ensuring that all referral activity occurred outside the study platform.
+
+The resulting dataset represents a **bipartite person–place graph**, in which people and places are nodes and their reported connections (residence, social contact, sexual contact, or shared presence) form edges. This social–spatial graph is the analytic foundation for SSNAC, enabling the study of clustering, network centrality, and causal reasoning under conditions of network interference.
 
 {{< include ___figures/fig-map-input.qmd >}}
 
-
-
-
 ## Marketing and communication
 
-To support recruitment, we developed a bilingual, community-centered communication campaign in collaboration with a marketing agency. The campaign was guided by the RESPND-MI LGBTQ+ Community Forum, which emphasized visual language rooted in queer and trans culture—emojis with sexual connotations, humor, and peer-to-peer tone.
+To support recruitment, we developed a bilingual, community-centered communication campaign in collaboration with a marketing agency. Messaging and design were guided by the RESPND-MI LGBTQ+ Community Forum, which emphasized visual language rooted in queer and trans culture—sexual and nightlife emojis, humor, and a peer-to-peer tone that reflected how health information actually travels in these networks.
 
 {{< include ___figures/fig-options.qmd >}}
 
-Paid and donated advertising was distributed through Grindr, Twitter (X), Instagram, and outdoor digital billboards across New York City. The campaign’s creative concepts (see @fig-options) combined scientific credibility with cultural familiarity, fostering trust and broad participation while maintaining visual distinctiveness in a crowded media environment.
+Paid and donated advertisements were distributed through Grindr, Instagram, Twitter (X), and outdoor digital billboards across New York City. All recruitment and survey materials were produced in **English and Spanish**, translated professionally, and reviewed by six bilingual public health practitioners whose first language is Spanish to ensure linguistic accuracy and cultural appropriateness.
+
+The campaign’s creative concepts (see @fig-options) combined scientific credibility with familiar cultural cues, helping establish trust amid an evolving outbreak and enabling rapid uptake in a crowded media environment.
 
 ## Study implementation
 
 ### Inclusion Criteria {.unnumbered}
 
-Eligible participants were: \
-- At least 18 years old,\
-- Living in or recently present in New York City, and\
-- Identifying as transgender, gay, bisexual, queer, or as men who have sex with men.
+Eligible participants were:
+- 18 years or older,\
+- Living in or recently present in the New York City metropolitan area, and\
+- Identifying as transgender, gay, bisexual, queer, or as men who have sex with men (including those who reported sexual activity with a man in the prior four weeks).
 
-Eligibility required informed consent before participation. Individuals younger than 18 or who declined consent were excluded.
+Eligibility required electronic informed consent. Individuals younger than 18 or who declined consent were automatically prevented from participating.
 
 ### Translation {.unnumbered}
 
-All study materials were professionally translated from English to Spanish and reviewed by six bilingual professionals in health-related fields whose first language is Spanish. This ensured linguistic accuracy and cultural appropriateness across recruitment, consent, and survey materials.
+All recruitment, consent, and survey materials were professionally translated into Spanish and reviewed by six bilingual experts in health-related fields. This process ensured clarity, cultural relevance, and accessibility across diverse communities in New York City.
 
 ### Consent and Ethical Approval {.unnumbered}
 
-Participants provided informed consent electronically before beginning the survey. The study protocol—including recruitment materials, web application, and data-collection procedures—was reviewed and approved by the *Harvard T.H. Chan School of Public Health Institutional Review Board* (IRB22-0761).
+Participants provided informed consent electronically before beginning the survey. The study protocol—including recruitment materials, the custom web application, translation process, and all data-collection procedures—was reviewed and approved by the **Harvard T.H. Chan School of Public Health Institutional Review Board** (*IRB22-0761*).
 
+To maintain participant privacy:
+- No identifying data (names, phone numbers, emails, IP addresses, or contact lists) were collected.  
+- Unique participant identifiers were encrypted and stored separately from survey responses.  
+- All data were stored on a secure server with controlled, credentialed access.  
+- Daily and weekly data-quality checks monitored adherence to consent flow, instrument logic, and recruitment procedures.
 
-
-
-
+This design enabled the rapid construction of a large, richly structured social–spatial dataset while minimizing risk and upholding the highest standards of participant confidentiality.
