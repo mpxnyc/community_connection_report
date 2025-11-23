@@ -322,9 +322,10 @@ cookieconsent.run({
    
   <ul>
 <li><a href="#mpx-nyc-personplace-network-mapper" id="toc-mpx-nyc-personplace-network-mapper" class="nav-link active" data-scroll-target="#mpx-nyc-personplace-network-mapper"><span class="header-section-number">3.1</span> MPX NYC Person–Place Network Mapper</a></li>
-  <li><a href="#marketing-and-communication" id="toc-marketing-and-communication" class="nav-link" data-scroll-target="#marketing-and-communication"><span class="header-section-number">3.2</span> Marketing and communication</a></li>
+  <li><a href="#mpx-nyc-link-tracer" id="toc-mpx-nyc-link-tracer" class="nav-link" data-scroll-target="#mpx-nyc-link-tracer"><span class="header-section-number">3.2</span> MPX NYC Link Tracer</a></li>
+  <li><a href="#marketing-and-communication" id="toc-marketing-and-communication" class="nav-link" data-scroll-target="#marketing-and-communication"><span class="header-section-number">3.3</span> Marketing and communication</a></li>
   <li>
-<a href="#study-implementation" id="toc-study-implementation" class="nav-link" data-scroll-target="#study-implementation"><span class="header-section-number">3.3</span> Study implementation</a>
+<a href="#study-implementation" id="toc-study-implementation" class="nav-link" data-scroll-target="#study-implementation"><span class="header-section-number">3.4</span> Study implementation</a>
   <ul class="collapse">
 <li><a href="#inclusion-criteria" id="toc-inclusion-criteria" class="nav-link" data-scroll-target="#inclusion-criteria">Inclusion Criteria</a></li>
   <li><a href="#translation" id="toc-translation" class="nav-link" data-scroll-target="#translation">Translation</a></li>
@@ -338,26 +339,33 @@ cookieconsent.run({
 
 </header><section id="mpx-nyc-personplace-network-mapper" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="mpx-nyc-personplace-network-mapper">
 <span class="header-section-number">3.1</span> MPX NYC Person–Place Network Mapper</h2>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1137365639?h=e70ee2c368" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>Data were collected using the <a href="https://survey-instrument.vercel.app" target="blank">MPX NYC Person–Place Network Mapper</a>, a custom web survey tool designed to elicit sensitive spatial, social, and sexual-network information <strong>under strict anonymity</strong>. The Mapper displayed an interactive map of New York City where participants identified key places—such as homes, parties, social venues, or neighborhoods—by tapping on the map (see <a href="#fig-map-input" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>). Each tap created a temporary marker and triggered a brief sequence of questions about the role of that location in their recent social or sexual life.</p>
-<p>To protect participant confidentiality, the tool <strong>never stored raw latitude–longitude coordinates</strong>. All coordinates were converted on-device into <strong>U.S. Census Tract identifiers</strong> before transmission. Census tracts, which typically contain 2,500–8,000 residents, provided a stable spatial unit for analysis while preventing the capture of identifying geographic information.</p>
-<p>Participants also used the Mapper to identify recent partners and close contacts. Importantly, the web application <strong>never collected names, phone numbers, email addresses, IP addresses, messaging identifiers, or any other personal information</strong>. Instead, respondents were prompted to send a pre-written recruitment link to contacts <strong>through their own phones or messaging apps</strong>, ensuring that all referral activity occurred outside the study platform.</p>
-<p>The resulting dataset represents a <strong>bipartite person–place graph</strong>, in which people and places are nodes and their reported connections (residence, social contact, sexual contact, or shared presence) form edges. This social–spatial graph is the analytic foundation for SSNAC, enabling the study of clustering, network centrality, and causal reasoning under conditions of network interference.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div id="fig-map-input" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-map-input-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="_const/images/image_app_graphic.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+<p>Data were collected using the <a href="https://survey-instrument.vercel.app" target="blank">MPX NYC Person–Place Network Mapper</a>, a web survey tool designed to elicit sensitive spatial and social data anonymously.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="_const/images/person_place_mapper_prompt.png" class="img-fluid figure-img" width="492"></p>
+<figcaption>MPX NYC Person-place mapper – prompt asking participant to identify locations of interest</figcaption></figure>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-map-input-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.1: Map input question format developed for MPX NYC.
-</figcaption></figure>
+<p>The Mapper displayed an interactive city map where participants identified key places—such as homes, parties, or social venues—by tapping on the map.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="_const/images/person_place_mapper_map.png" class="img-fluid figure-img" width="492"></p>
+<figcaption>MPX NYC Person-place mapper: map used by participants to search for and input locations</figcaption></figure>
 </div>
+<p>Each tap generated a marker and a short sequence of questions about that location.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="_const/images/person_place_mapper_questions.png" class="img-fluid figure-img" width="492"></p>
+<figcaption>MPX NYC Person-place mapper: question relating to location</figcaption></figure>
 </div>
+<p>To preserve confidentiality, the survey instrument automatically transformed geographic coordinates into U.S. Census Tract identifiers before transmission. These tracts, which partition the United States into units of roughly 2,500–8,000 residents, ensured that no identifying spatial data entered the study database. The resulting dataset represents a <strong>bipartite person–place graph</strong>, where people and places are nodes and their reported connections (residence, social contact, or sexual contact) form edges. This graph structure defines the analytic foundation for SSNAC, supporting causal reasoning under network interference.</p>
+</section><section id="mpx-nyc-link-tracer" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="mpx-nyc-link-tracer">
+<span class="header-section-number">3.2</span> MPX NYC Link Tracer</h2>
+<p>In addition to the Person–Place Network Mapper, we piloted an optional <strong>Link Tracer</strong> feature designed to support anonymous chain-referral recruitment. After completing the survey, participants were invited to share a pre-written message containing a study link with recent friends or partners using their own phones or messaging apps. This design ensured that the study platform never accessed or stored phone numbers, email addresses, usernames, or any other identifying information.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="_const/images/link_tracer.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="492"></p>
+</figure>
 </div>
-</section><section id="marketing-and-communication" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="marketing-and-communication">
-<span class="header-section-number">3.2</span> Marketing and communication</h2>
-<p>To support recruitment, we developed a bilingual, community-centered communication campaign in collaboration with a marketing agency. Messaging and design were guided by the RESPND-MI LGBTQ+ Community Forum, which emphasized visual language rooted in queer and trans culture—sexual and nightlife emojis, humor, and a peer-to-peer tone that reflected how health information actually travels in these networks.</p>
+<p>Uptake was low: <strong>fewer than five people used the referral feature during the study period</strong>. In keeping with our privacy protections and data-governance commitments—and because such a small number could not support meaningful analysis—we <strong>discarded these data</strong>. No link-tracing information is included in the analytic dataset.</p>
+</section><section id="marketing-and-communication" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="marketing-and-communication">
+<span class="header-section-number">3.3</span> Marketing and communication</h2>
+<p>To support recruitment, we developed a bilingual, community-centered communication campaign in collaboration with a marketing agency. The campaign was guided by the RESPND-MI LGBTQ+ Community Forum, which emphasized visual language rooted in queer and trans culture—emojis with sexual connotations, humor, and peer-to-peer tone.</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#| label: fig-options</span></span>
 <span><span class="co">#| fig-cap: "Map input question format developed for MPX NYC."</span></span>
@@ -373,23 +381,28 @@ Figure&nbsp;3.1: Map input question format developed for MPX NYC.
 </div>
 </div>
 </div>
-<p>Paid and donated advertisements were distributed through Grindr, Instagram, Twitter (X), and outdoor digital billboards across New York City. All recruitment and survey materials were produced in <strong>English and Spanish</strong>, translated professionally, and reviewed by six bilingual public health practitioners whose first language is Spanish to ensure linguistic accuracy and cultural appropriateness.</p>
-<p>The campaign’s creative concepts (see <a href="E_marketing.html#fig-options" class="quarto-xref">Figure&nbsp;<span>E.1</span></a>) combined scientific credibility with familiar cultural cues, helping establish trust amid an evolving outbreak and enabling rapid uptake in a crowded media environment.</p>
-</section><section id="study-implementation" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="study-implementation">
-<span class="header-section-number">3.3</span> Study implementation</h2>
+<p>Paid and donated advertising was distributed through Grindr, Twitter (X), Instagram, and outdoor digital billboards across New York City. The campaign’s creative concepts (see <a href="E_marketing.html#fig-options" class="quarto-xref">Figure&nbsp;<span>E.1</span></a>) combined scientific credibility with cultural familiarity, fostering trust and broad participation while maintaining visual distinctiveness in a crowded media environment.</p>
+</section><section id="study-implementation" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="study-implementation">
+<span class="header-section-number">3.4</span> Study implementation</h2>
 <section id="inclusion-criteria" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="inclusion-criteria">Inclusion Criteria</h3>
-<p>Eligible participants were: - 18 years or older,<br>
-- Living in or recently present in the New York City metropolitan area, and<br>
-- Identifying as transgender, gay, bisexual, queer, or as men who have sex with men (including those who reported sexual activity with a man in the prior four weeks).</p>
-<p>Eligibility required electronic informed consent. Individuals younger than 18 or who declined consent were automatically prevented from participating.</p>
+<p>Eligible participants were:</p>
+<ul>
+<li><p>At least 18 years old,</p></li>
+<li><p>Living in or recently present in New York City, and</p></li>
+<li><p>Identifying as transgender, gay, bisexual, queer, or as men who have sex with men.</p></li>
+</ul>
+<p>Eligibility required informed consent before participation. Individuals younger than 18 or who declined consent were excluded.</p>
 </section><section id="translation" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="translation">Translation</h3>
-<p>All recruitment, consent, and survey materials were professionally translated into Spanish and reviewed by six bilingual experts in health-related fields. This process ensured clarity, cultural relevance, and accessibility across diverse communities in New York City.</p>
+<p>All study materials were professionally translated from English to Spanish and reviewed by six bilingual professionals in health‑related fields whose first language is Spanish. This ensured linguistic accuracy and cultural appropriateness across recruitment, consent, and survey materials.</p>
 </section><section id="consent-and-ethical-approval" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="consent-and-ethical-approval">Consent and Ethical Approval</h3>
-<p>Participants provided informed consent electronically before beginning the survey. The study protocol—including recruitment materials, the custom web application, translation process, and all data-collection procedures—was reviewed and approved by the <strong>Harvard T.H. Chan School of Public Health Institutional Review Board</strong> (<em>IRB22-0761</em>).</p>
-<p>To maintain participant privacy: - No identifying data (names, phone numbers, emails, IP addresses, or contact lists) were collected.<br>
-- Unique participant identifiers were encrypted and stored separately from survey responses.<br>
-- All data were stored on a secure server with controlled, credentialed access.<br>
-- Daily and weekly data-quality checks monitored adherence to consent flow, instrument logic, and recruitment procedures.</p>
+<p>Participants provided informed consent electronically before beginning the survey. The study protocol—including recruitment materials, web application, and all data‑collection procedures—was reviewed and approved by the <em>Harvard T.H. Chan School of Public Health Institutional Review Board</em> (IRB22‑0761).</p>
+<p>To maintain participant privacy:</p>
+<ul>
+<li><p>No identifying information—such as names, phone numbers, email addresses, IP addresses, or contact lists—was collected at any stage.</p></li>
+<li><p>To support data integrity while preserving anonymity, each participant was assigned two independent unique identifiers (a public and a private ID). The encrypted cross-walk linking these identifiers was stored in a separate, access-restricted database.</p></li>
+<li><p>All study data were maintained on a secure, credential-protected server, with access limited to authorized research staff.</p></li>
+<li><p>To ensure completeness and protocol fidelity, the study team conducted routine data-quality monitoring, including daily checks of consent flow and survey logic, and weekly reviews of recruitment patterns and instrument performance.</p></li>
+</ul>
 <p>This design enabled the rapid construction of a large, richly structured social–spatial dataset while minimizing risk and upholding the highest standards of participant confidentiality.</p>
 
 
