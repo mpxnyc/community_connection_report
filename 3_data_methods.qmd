@@ -6,7 +6,6 @@ targets::tar_source("R_functions")
 
 ##  {.unnumbered}
 
-
 We did an annonymous, online, cross-sectional study in New York City from August to November of 2022. To be eligible for participation, individuals had to be at least 18 years old, living in or recently present in New York City, and identify as transgender, gay, bisexual, queer, or as men who have sex with men. Individuals younger than 18 or who declined consent were excluded.
 
 ## Marketing and communication
@@ -34,7 +33,8 @@ Each tap generated a marker and a short sequence of questions about that locatio
 
 To preserve confidentiality, the survey instrument automatically transformed geographic coordinates into U.S. Census Tract identifiers before transmission. These tracts, which partition the United States into units of roughly 2,500–8,000 residents, ensured that no identifying spatial data entered the study database.
 
-The resulting dataset represents a bipartite person–place graph, where people and places are nodes and their reported connections (residence, social contact, or sexual contact) form edges. This graph structure defines the analytic foundation for SSNAC, supporting causal reasoning under network interference.
+Spatial data were originally collected at the census tract level but aggregated to community districts for analysis. Community districts divide New York City into administrative areas nested within its five boroughs and each nesting census tracts.
+
 
 ## MPX NYC Link Tracer
 
@@ -77,8 +77,8 @@ This design enabled the rapid construction of a large, richly structured social�
 
 ## Data: MPX NYC Participant–Community Network
 
-The MPX NYC Participant–Community Network links individuals in the study to the community districts of New York City. In this bipartite network, nodes represent either individual participants or community districts, and a tie between an individual and a community district indicates either residence or attendance at a gathering in that district.
+The resulting dataset represents a bipartite person–place data graph, where people and places are nodes and their reported connections (residence, social contact, or sexual contact) form edges. The graph is bipartite since the only edges are between one person and one place. We call it a data graph since each person node is associated with a record in the study data. This graph structure defines the analytic foundation for SSNAC, supporting causal reasoning under network interference.
+
 
 {{< include ___figures/fig-example-person-place-network.qmd >}}
 
-Spatial data were originally collected at the census tract level but aggregated to community districts for analysis. Community districts divide New York City into administrative areas nested within its five boroughs and each nesting census tracts.

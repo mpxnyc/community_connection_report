@@ -377,7 +377,7 @@ cookieconsent.run({
 <figcaption>MPX NYC Person-place mapper: question relating to location</figcaption></figure>
 </div>
 <p>To preserve confidentiality, the survey instrument automatically transformed geographic coordinates into U.S. Census Tract identifiers before transmission. These tracts, which partition the United States into units of roughly 2,500–8,000 residents, ensured that no identifying spatial data entered the study database.</p>
-<p>The resulting dataset represents a bipartite person–place graph, where people and places are nodes and their reported connections (residence, social contact, or sexual contact) form edges. This graph structure defines the analytic foundation for SSNAC, supporting causal reasoning under network interference.</p>
+<p>Spatial data were originally collected at the census tract level but aggregated to community districts for analysis. Community districts divide New York City into administrative areas nested within its five boroughs and each nesting census tracts.</p>
 </section><section id="mpx-nyc-link-tracer" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="mpx-nyc-link-tracer">
 <span class="header-section-number">3.3</span> MPX NYC Link Tracer</h2>
 <p>In addition to the Person–Place Network Mapper, we piloted a Link Tracer feature designed to support anonymous chain-referral recruitment. Participants were invited to share a pre-written message (with unique survey link) with recent friends or sexual partners.</p>
@@ -407,7 +407,7 @@ cookieconsent.run({
 <p>This design enabled the rapid construction of a large, richly structured social–spatial dataset while minimizing risk and upholding the highest standards of participant confidentiality.</p>
 </section></section><section id="data-mpx-nyc-participantcommunity-network" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="data-mpx-nyc-participantcommunity-network">
 <span class="header-section-number">3.5</span> Data: MPX NYC Participant–Community Network</h2>
-<p>The MPX NYC Participant–Community Network links individuals in the study to the community districts of New York City. In this bipartite network, nodes represent either individual participants or community districts, and a tie between an individual and a community district indicates either residence or attendance at a gathering in that district.</p>
+<p>The resulting dataset represents a bipartite person–place data graph, where people and places are nodes and their reported connections (residence, social contact, or sexual contact) form edges. The graph is bipartite since the only edges are between one person and one place. We call it a data graph since each person node is associated with a record in the study data. This graph structure defines the analytic foundation for SSNAC, supporting causal reasoning under network interference.</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"bipartite"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_example_bipartite_network</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -429,7 +429,6 @@ Figure&nbsp;3.1: Sample person-place network visualization
 </div>
 </div>
 </div>
-<p>Spatial data were originally collected at the census tract level but aggregated to community districts for analysis. Community districts divide New York City into administrative areas nested within its five boroughs and each nesting census tracts.</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
