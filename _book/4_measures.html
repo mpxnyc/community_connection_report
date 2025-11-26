@@ -321,49 +321,22 @@ cookieconsent.run({
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#data-mpx-nyc-participantcommunity-network" id="toc-data-mpx-nyc-participantcommunity-network" class="nav-link active" data-scroll-target="#data-mpx-nyc-participantcommunity-network"><span class="header-section-number">4.1</span> Data: MPX NYC Participant–Community Network</a></li>
-  <li><a href="#node-characteristics" id="toc-node-characteristics" class="nav-link" data-scroll-target="#node-characteristics"><span class="header-section-number">4.2</span> Node Characteristics</a></li>
-  <li><a href="#edge-characteristics" id="toc-edge-characteristics" class="nav-link" data-scroll-target="#edge-characteristics"><span class="header-section-number">4.3</span> Edge Characteristics</a></li>
-  <li><a href="#network-characteristics" id="toc-network-characteristics" class="nav-link" data-scroll-target="#network-characteristics"><span class="header-section-number">4.4</span> Network Characteristics</a></li>
+<li><a href="#node-characteristics" id="toc-node-characteristics" class="nav-link active" data-scroll-target="#node-characteristics"><span class="header-section-number">4.1</span> Node Characteristics</a></li>
+  <li><a href="#edge-characteristics" id="toc-edge-characteristics" class="nav-link" data-scroll-target="#edge-characteristics"><span class="header-section-number">4.2</span> Edge Characteristics</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/mpxnyc/community_connection_report/blob/production/4_measures.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3_data_methods.html">Methods</a></li><li class="breadcrumb-item"><a href="./4_measures.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Measures</span></a></li></ol></nav><h1 class="title display-7"><span id="sec-measures" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Measures</span></span></h1></header><header id="title-block-header"><div class="quarto-title-block d-none d-lg-block"><div><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
 
-</header><section id="data-mpx-nyc-participantcommunity-network" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="data-mpx-nyc-participantcommunity-network">
-<span class="header-section-number">4.1</span> Data: MPX NYC Participant–Community Network</h2>
-<p>The MPX NYC Participant–Community Network links individuals in the study to the community districts of New York City. In this bipartite network, nodes represent either individual participants or community districts, and a tie between an individual and a community district indicates either residence or attendance at a gathering in that district.</p>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_example_network_data</span><span class="op">(</span><span class="st">"bipartite"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">plot_example_bipartite_network</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_color_mpxnyc</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Node type"</span>, option <span class="op">=</span> <span class="st">"dark"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Node type"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_size_manual</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Node type"</span>, values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">7</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span></span>
-<span>    plot.margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>,</span>
-<span>    legend.position <span class="op">=</span> <span class="st">"bottom"</span></span>
-<span>    <span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<div id="fig-example-person-place-network" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-example-person-place-network-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="4_measures_files/figure-html/fig-example-person-place-network-1.png" class="img-fluid figure-img" width="576">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-example-person-place-network-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.1: Sample person-place network visualization
-</figcaption></figure>
-</div>
-</div>
-</div>
-<p>Spatial data were originally collected at the census tract level but aggregated to community districts for analysis. Community districts divide New York City into administrative areas nested within its five boroughs and each nesting census tracts.</p>
-</section><section id="node-characteristics" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="node-characteristics">
-<span class="header-section-number">4.2</span> Node Characteristics</h2>
+</header><section id="node-characteristics" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="node-characteristics">
+<span class="header-section-number">4.1</span> Node Characteristics</h2>
 <p>We collected detailed information on participants’ demographics, health, and patterns of social and sexual connection.</p>
 <p><u>Demographic measures</u> included age, race, sex assigned at birth, gender identity, sexual orientation, and community district of residence.</p>
 <p><u>Health-related measures</u> covered HIV status, viral suppression, STI-related symptoms, use of pre-exposure prophylaxis (PrEP), and mpox vaccination status.</p>
 <p><u>Connection measures</u> captured each participant’s degree of engagement within queer and transgender communities, including counts of recent individual sexual contacts, recent individual physical (non-sexual) contacts, important social contacts, and including whether the participant reported recent physical or sexual contact in a group setting.</p>
 <p><u>Gender modality</u> : Gender modality was measured using a two-step approach. Participants were first asked to indicate their current gender (options: man, woman, trans man, trans woman, non-binary, or other) and then their sex assigned at birth (male, female, or other). <a href="#tbl-gendermodality" class="quarto-xref">Table&nbsp;<span>4.1</span></a> summarizes how gender modality was derived by combining these responses.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  Level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>              <span class="st">"Cisgender man"</span>, </span>
 <span>              <span class="st">"Cisgender woman"</span>,</span>
@@ -392,23 +365,23 @@ Figure&nbsp;4.1: Sample person-place network visualization
 Table&nbsp;4.1: Construction of gender modality variable
 </figcaption><div aria-describedby="tbl-gendermodality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="pyclsgttmk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pyclsgttmk table {
+<div id="jhdynolnpq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jhdynolnpq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pyclsgttmk thead, #pyclsgttmk tbody, #pyclsgttmk tfoot, #pyclsgttmk tr, #pyclsgttmk td, #pyclsgttmk th {
+#jhdynolnpq thead, #jhdynolnpq tbody, #jhdynolnpq tfoot, #jhdynolnpq tr, #jhdynolnpq td, #jhdynolnpq th {
   border-style: none;
 }
 
-#pyclsgttmk p {
+#jhdynolnpq p {
   margin: 0;
   padding: 0;
 }
 
-#pyclsgttmk .gt_table {
+#jhdynolnpq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -434,12 +407,12 @@ Table&nbsp;4.1: Construction of gender modality variable
   border-left-color: #D3D3D3;
 }
 
-#pyclsgttmk .gt_caption {
+#jhdynolnpq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pyclsgttmk .gt_title {
+#jhdynolnpq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -451,7 +424,7 @@ Table&nbsp;4.1: Construction of gender modality variable
   border-bottom-width: 0;
 }
 
-#pyclsgttmk .gt_subtitle {
+#jhdynolnpq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -463,7 +436,7 @@ Table&nbsp;4.1: Construction of gender modality variable
   border-top-width: 0;
 }
 
-#pyclsgttmk .gt_heading {
+#jhdynolnpq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -475,13 +448,13 @@ Table&nbsp;4.1: Construction of gender modality variable
   border-right-color: #D3D3D3;
 }
 
-#pyclsgttmk .gt_bottom_border {
+#jhdynolnpq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pyclsgttmk .gt_col_headings {
+#jhdynolnpq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -496,7 +469,7 @@ Table&nbsp;4.1: Construction of gender modality variable
   border-right-color: #D3D3D3;
 }
 
-#pyclsgttmk .gt_col_heading {
+#jhdynolnpq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -516,7 +489,7 @@ Table&nbsp;4.1: Construction of gender modality variable
   overflow-x: hidden;
 }
 
-#pyclsgttmk .gt_column_spanner_outer {
+#jhdynolnpq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -528,15 +501,15 @@ Table&nbsp;4.1: Construction of gender modality variable
   padding-right: 4px;
 }
 
-#pyclsgttmk .gt_column_spanner_outer:first-child {
+#jhdynolnpq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pyclsgttmk .gt_column_spanner_outer:last-child {
+#jhdynolnpq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pyclsgttmk .gt_column_spanner {
+#jhdynolnpq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -548,11 +521,11 @@ Table&nbsp;4.1: Construction of gender modality variable
   width: 100%;
 }
 
-#pyclsgttmk .gt_spanner_row {
+#jhdynolnpq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pyclsgttmk .gt_group_heading {
+#jhdynolnpq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -578,7 +551,7 @@ Table&nbsp;4.1: Construction of gender modality variable
   text-align: left;
 }
 
-#pyclsgttmk .gt_empty_group_heading {
+#jhdynolnpq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -593,15 +566,15 @@ Table&nbsp;4.1: Construction of gender modality variable
   vertical-align: middle;
 }
 
-#pyclsgttmk .gt_from_md > :first-child {
+#jhdynolnpq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pyclsgttmk .gt_from_md > :last-child {
+#jhdynolnpq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pyclsgttmk .gt_row {
+#jhdynolnpq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -620,7 +593,7 @@ Table&nbsp;4.1: Construction of gender modality variable
   overflow-x: hidden;
 }
 
-#pyclsgttmk .gt_stub {
+#jhdynolnpq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -633,7 +606,7 @@ Table&nbsp;4.1: Construction of gender modality variable
   padding-right: 5px;
 }
 
-#pyclsgttmk .gt_stub_row_group {
+#jhdynolnpq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -647,15 +620,15 @@ Table&nbsp;4.1: Construction of gender modality variable
   vertical-align: top;
 }
 
-#pyclsgttmk .gt_row_group_first td {
+#jhdynolnpq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pyclsgttmk .gt_row_group_first th {
+#jhdynolnpq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pyclsgttmk .gt_summary_row {
+#jhdynolnpq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -665,16 +638,16 @@ Table&nbsp;4.1: Construction of gender modality variable
   padding-right: 5px;
 }
 
-#pyclsgttmk .gt_first_summary_row {
+#jhdynolnpq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pyclsgttmk .gt_first_summary_row.thick {
+#jhdynolnpq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pyclsgttmk .gt_last_summary_row {
+#jhdynolnpq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -684,7 +657,7 @@ Table&nbsp;4.1: Construction of gender modality variable
   border-bottom-color: #D3D3D3;
 }
 
-#pyclsgttmk .gt_grand_summary_row {
+#jhdynolnpq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -694,7 +667,7 @@ Table&nbsp;4.1: Construction of gender modality variable
   padding-right: 5px;
 }
 
-#pyclsgttmk .gt_first_grand_summary_row {
+#jhdynolnpq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -704,7 +677,7 @@ Table&nbsp;4.1: Construction of gender modality variable
   border-top-color: #D3D3D3;
 }
 
-#pyclsgttmk .gt_last_grand_summary_row_top {
+#jhdynolnpq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -714,11 +687,11 @@ Table&nbsp;4.1: Construction of gender modality variable
   border-bottom-color: #D3D3D3;
 }
 
-#pyclsgttmk .gt_striped {
+#jhdynolnpq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pyclsgttmk .gt_table_body {
+#jhdynolnpq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -727,7 +700,7 @@ Table&nbsp;4.1: Construction of gender modality variable
   border-bottom-color: #D3D3D3;
 }
 
-#pyclsgttmk .gt_footnotes {
+#jhdynolnpq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -741,7 +714,7 @@ Table&nbsp;4.1: Construction of gender modality variable
   border-right-color: #D3D3D3;
 }
 
-#pyclsgttmk .gt_footnote {
+#jhdynolnpq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -750,7 +723,7 @@ Table&nbsp;4.1: Construction of gender modality variable
   padding-right: 5px;
 }
 
-#pyclsgttmk .gt_sourcenotes {
+#jhdynolnpq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -764,7 +737,7 @@ Table&nbsp;4.1: Construction of gender modality variable
   border-right-color: #D3D3D3;
 }
 
-#pyclsgttmk .gt_sourcenote {
+#jhdynolnpq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -772,72 +745,72 @@ Table&nbsp;4.1: Construction of gender modality variable
   padding-right: 5px;
 }
 
-#pyclsgttmk .gt_left {
+#jhdynolnpq .gt_left {
   text-align: left;
 }
 
-#pyclsgttmk .gt_center {
+#jhdynolnpq .gt_center {
   text-align: center;
 }
 
-#pyclsgttmk .gt_right {
+#jhdynolnpq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pyclsgttmk .gt_font_normal {
+#jhdynolnpq .gt_font_normal {
   font-weight: normal;
 }
 
-#pyclsgttmk .gt_font_bold {
+#jhdynolnpq .gt_font_bold {
   font-weight: bold;
 }
 
-#pyclsgttmk .gt_font_italic {
+#jhdynolnpq .gt_font_italic {
   font-style: italic;
 }
 
-#pyclsgttmk .gt_super {
+#jhdynolnpq .gt_super {
   font-size: 65%;
 }
 
-#pyclsgttmk .gt_footnote_marks {
+#jhdynolnpq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pyclsgttmk .gt_asterisk {
+#jhdynolnpq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pyclsgttmk .gt_indent_1 {
+#jhdynolnpq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pyclsgttmk .gt_indent_2 {
+#jhdynolnpq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pyclsgttmk .gt_indent_3 {
+#jhdynolnpq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pyclsgttmk .gt_indent_4 {
+#jhdynolnpq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pyclsgttmk .gt_indent_5 {
+#jhdynolnpq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#pyclsgttmk .katex-display {
+#jhdynolnpq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#pyclsgttmk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jhdynolnpq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -890,26 +863,13 @@ Table&nbsp;4.1: Construction of gender modality variable
 <p><u>Race–Gender</u> : Starting with the gender modality variable, we created a race–gender variable by dividing cisgender men into white cisgender men, Latinx cisgender men, Black cisgender men, and Other cisgender men—the latter combining Asian, Pacific Islander, and other racial identities.</p>
 <p><u>Social Catchment</u>: Social reach is defined as the number of edges connected to a particular community district in the MPX NYC Person-place graph. It reflects the overall level of participant contact associated with a given district. (<em>For example in <a href="B_description.html#fig-example-person-place-network" class="quarto-xref">Figure&nbsp;<span>B.1</span></a>, Community District B has a social reach of three, since it has one connection each with participants 2, 3, and 4.</em>)</p>
 <p><u>Spatial Catchment</u>: Spatial reach is defined as the number of paths connecting a given community district to other community districts. It represents the geographic centrality of a community district. (<em>For example in <a href="B_description.html#fig-example-person-place-network" class="quarto-xref">Figure&nbsp;<span>B.1</span></a>, Community District C has a spatial reach of five, since it there are four posible paths connecting C with D and there is one path connecting C with E.</em>)</p>
-</section><section id="edge-characteristics" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="edge-characteristics">
-<span class="header-section-number">4.3</span> Edge Characteristics</h2>
+</section><section id="edge-characteristics" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="edge-characteristics">
+<span class="header-section-number">4.2</span> Edge Characteristics</h2>
 <p>Each participant reported the location of their residence. Additionally, those who reported recent physical or sexual contact in a group setting reported the locations where that contact happened. Each residence or gathering is represented as an edge linking a participant to the community district containing the residence or gathering. Each edge was associated with the following characteristics:</p>
 <p><u>Edge type</u> : Each edge was categorized as either a <em>residence</em> edge or a <em>gathering</em> edge.</p>
 <p><u>Gathering type</u> : Response options included <em>dance party, sex party, darkroom, sports event, concert, theatre or show, private residence, sex club, bathhouse, park,</em> or <em>another type of event</em>. This variable is null for residence edges.</p>
 <p><u>Sexual Contact</u> : Response options included <em>yes</em> — indicating that sexual contact occurred at a given gathering — or <em>no</em>. This variable is null for residence edges.</p>
 <p><u>Distance from home</u> : We constructed an approximate measure of distance from home to each gathering. This variable is null for residence edges. Distances fell into the categories: same community district as the participant’s residence; different community district but within the same borough; or different borough entirely.</p>
-</section><section id="network-characteristics" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="network-characteristics">
-<span class="header-section-number">4.4</span> Network Characteristics</h2>
-<p><u>Size of the Largest Connected Component</u> : In the MPX NYC Participant Network, overall connectedness was measured using the largest connected component (LCC)—the subset of nodes in which every participant can be reached from every other participant through one or more existing network ties. The proportion of all nodes contained in the LCC serves as a measure of how cohesively the network is connected: a larger LCC indicates greater overall connectedness among participants.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="_const/images/perc_lcc.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="400"></p>
-</figure>
-</div>
-<p><u>Spatial Mixing Ratio</u> : We assessed spatial patterns of interaction between distinct subgroups of participants using the spatial mixing ratio. This measure quantifies the extent to which individuals from one group tend to live or gather in the same community districts as individuals from another group.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="_const/images/spatial_mixing_coefficient.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="400"></p>
-</figure>
-</div>
-<p>Formally, the spatial mixing ratio is a positive real number greater than 1 when members of the first subgroup are more likely than random to share community districts with members of the second subgroup, and between 0 and 1 otherwise. It is calculated as the average (across all individuals) of each person’s spatial preference for the second group divided by the second group’s overall prevalence in the sample. Preference is defined as the number of connections to individuals of the second subgroup as a proportion of total number of connections.</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

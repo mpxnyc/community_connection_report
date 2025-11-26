@@ -4,13 +4,6 @@
 targets::tar_source("R_functions")
 ```
 
-## Data: MPX NYC Participant–Community Network
-
-The MPX NYC Participant–Community Network links individuals in the study to the community districts of New York City. In this bipartite network, nodes represent either individual participants or community districts, and a tie between an individual and a community district indicates either residence or attendance at a gathering in that district.
-
-{{< include ___figures/fig-example-person-place-network.qmd >}}
-
-Spatial data were originally collected at the census tract level but aggregated to community districts for analysis. Community districts divide New York City into administrative areas nested within its five boroughs and each nesting census tracts.
 
 ## Node Characteristics
 
@@ -44,18 +37,3 @@ Each participant reported the location of their residence. Additionally, those w
 
 <u>Distance from home</u> : We constructed an approximate measure of distance from home to each gathering. This variable is null for residence edges. Distances fell into the categories: same community district as the participant’s residence; different community district but within the same borough; or different borough entirely.
 
-## Network Characteristics
-
-[Size of the Largest Connected Component]{.underline} : In the MPX NYC Participant Network, overall connectedness was measured using the largest connected component (LCC)—the subset of nodes in which every participant can be reached from every other participant through one or more existing network ties. The proportion of all nodes contained in the LCC serves as a measure of how cohesively the network is connected: a larger LCC indicates greater overall connectedness among participants.
-
-
-
-![](_const/images/perc_lcc.png){fig-align="center" width="400"}
-
-[Spatial Mixing Ratio]{.underline} : We assessed spatial patterns of interaction between distinct subgroups of participants using the spatial mixing ratio. This measure quantifies the extent to which individuals from one group tend to live or gather in the same community districts as individuals from another group.
-
-![](_const/images/spatial_mixing_coefficient.png){fig-align="center" width="400"}
-
-
-
-Formally, the spatial mixing ratio is a positive real number greater than 1 when members of the first subgroup are more likely than random to share community districts with members of the second subgroup, and between 0 and 1 otherwise. It is calculated as the average (across all individuals) of each person’s spatial preference for the second group divided by the second group’s overall prevalence in the sample. Preference is defined as the number of connections to individuals of the second subgroup as a proportion of total number of connections.
