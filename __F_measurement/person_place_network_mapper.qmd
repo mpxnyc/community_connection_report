@@ -1,0 +1,82 @@
+---
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+## Person–Place Network Mapper
+
+We designed, tested, and implemented the [MPX NYC Person–Place Network
+Mapper](https://survey-instrument.vercel.app/){target="blank"} to meet
+practical and ethical challenges in collecting sensitive spatial data
+within an anonymous survey. Our goal was to capture information on
+venues visited by participants—including those where sexual activity
+occurred—while minimizing the risk of reidentification through location
+data.
+
+### Requirements {.unnumbered}
+
+Working in partnership with a back-end web developer, we led the design
+of a survey tool capable of collecting:
+
+1.  Self-reported health and demographic information through multiple
+    question types;
+2.  Sexual and social network data through link tracing; and
+3.  Information on relevant geographic locations.
+
+Throughout, we sought to reduce participant burden and ensure that no
+identifying information was collected.
+
+![Example of a user prompt for a forced-response question in the custom
+designed MPX NYC survey
+instrument](/_const/images/forced_response.png){fig-align="center"
+width="554"}
+
+### Place Mapping {.unnumbered}
+
+Because participants were unlikely to recall precise addresses or ZIP
+codes, we integrated the Google Maps API to allow them to identify
+locations by business name, landmark, cross-street, subway station, or
+neighborhood. The map displayed standard navigation tools and detailed
+geographic information to aid orientation.
+
+![](_const/images/person_place_mapper_prompt.png){ fig-align="center" width="492"}
+
+![](_const/images/person_place_mapper_map.png){ fig-align="center" width="492"}
+
+![](_const/images/person_place_mapper_questions.png){ fig-align="center" width="492"}
+
+At the beginning of the survey, participants were asked to locate their
+primary residence on the map. Later, they identified venues where they
+had physical or sexual contact in group settings. Each map tap placed a
+marker and triggered follow-up questions about the type of venue and
+activities that occurred there.
+
+### Link Tracing {#sec-link-tracing .unnumbered}
+
+We developed an anonymous link-tracing system using URL parameters to
+construct a participant network. At survey initiation, each respondent
+received a unique identifier card containing a QR code and word
+combination.
+
+![](_const/images/link_tracer.png){fig-align="center" width="492"}
+
+
+At the end of the survey, participants were invited to share a
+pre-written recruitment message containing their unique URL with social
+or sexual contacts. When a contact completed the survey using this link,
+an edge was automatically added between the two respondents in the Neo4j
+graph database. If a new participant shared a link with someone who had
+already completed the survey, the latter could confirm the connection by
+entering the code from their identifier card, linking their nodes
+without revealing identities.
+
+### Implementation {.unnumbered}
+
+The tool’s front end was developed by the principal investigator as a
+single-page React/Next.js application hosted on Vercel, with design
+elements based on the MPX NYC style guide. Standard survey question
+formats (e.g., multiple choice, free text) were combined with the custom
+place-mapping and link-tracing components. The back end comprised a
+custom Neo4j graph database connected to the front end through a study
+API.

@@ -1,0 +1,48 @@
+# Measures {#sec-measures}
+
+```{r  include=FALSE}
+targets::tar_source("R_functions")
+```
+
+## Node Characteristics
+
+### Participants {.unnumbered}
+We collected detailed information on participants’ demographics, health, and patterns of social and sexual connection.
+
+*Measured*\
+<u>Demographic measures</u> included age, race, sex assigned at birth, gender identity, sexual orientation, and community district of residence.
+
+<u>Health-related measures</u> covered HIV status, viral suppression, STI-related symptoms, use of pre-exposure prophylaxis (PrEP), and mpox vaccination status.
+
+<u>Connection measures</u> captured each participant’s degree of engagement within queer and transgender communities, including counts of recent individual sexual contacts, recent individual physical (non-sexual) contacts, important social contacts, and including whether the participant reported recent physical or sexual contact in a group setting.
+
+*Calculated*\
+<u>Gender modality</u> : Gender modality was constructed using a two-step approach. Participants were first asked to indicate their current gender (options: man, woman, trans man, trans woman, non-binary, or other) and then their sex assigned at birth (male, female, or other). @tbl-gendermodality summarizes how gender modality was derived by combining these responses.
+
+{{< include ___tables/tbl-gender-modality.qmd >}}
+
+<u>Race–Gender</u> : Starting with the gender modality variable, we created a race–gender variable by dividing cisgender men into white cisgender men, Latinx cisgender men, Black cisgender men, and Other cisgender men—the latter combining Asian, Pacific Islander, and other racial identities.
+
+
+### Community districts {.unnumbered}
+*Calculated*\
+<u>Social Catchment</u>: Social catchment is defined as the number of edges connected to a particular community district in the MPX NYC Person-place graph. It is the number of residences and gatherings contained by the district. It reflects the overall level of participant contact. 
+
+<u>Spatial Catchment</u>: Spatial catchment is defined as the number of paths connecting a given community district to other community districts in the MPX NYC Person-place graph (or node degree in the bipartite projection of the person-place graph onto place nodes). It represents the number of people the community district shares with others -- the geographic centrality of a community district. 
+
+
+## Edge Characteristics
+
+
+Each participant reported the location of their residence. Additionally, those who reported recent physical or sexual contact in a group setting reported the locations where that contact happened. Each residence or gathering is represented as an edge linking a participant to the community district containing the residence or gathering. Each edge was associated with the following characteristics:
+
+*Measured*\
+<u>Edge type</u> : Each edge was categorized as either a *residence* edge or a *gathering* edge.
+
+<u>Gathering type</u> : Response options included *dance party, sex party, darkroom, sports event, concert, theatre or show, private residence, sex club, bathhouse, park,* or *another type of event*. This variable is null for residence edges.
+
+<u>Sexual Contact</u> : Response options included *yes* — indicating that sexual contact occurred at a given gathering — or *no*. This variable is null for residence edges.
+
+*Calculated*\
+<u>Distance from home</u> : We constructed an approximate measure of distance from home to each gathering. This variable is null for residence edges. Distances fell into the categories: same community district as the participant’s residence; different community district but within the same borough; or different borough entirely.
+
