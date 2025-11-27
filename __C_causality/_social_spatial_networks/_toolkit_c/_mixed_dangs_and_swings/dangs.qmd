@@ -1,0 +1,11 @@
+
+######  DANGs
+We introduce the causal directed acyclic network graph (DANG). A causal DANG encodes a process which exhibits a fixed or random pattern of causal interference across observational units. It represents the process in two parts: the structural part represents the causal process as it unfolds within each unit. The relational part represents the pattern or patterns of influence across units.
+
+The structural part of a DANG is a DAG representing the relationships among random vectors (rather than random scalar variables). It has standard interpretation under [d-separation rules](#sec-d-separation) rules. The relational part is a Markov random field. Each node represents an observational unit and undirected edges represent mutual causal influence. Observational units admit the Markov property: conditional on neighboring units, a given unit is independent of others in the graph. 
+
+{{< include ___figures/fig-causal-dang-instructions.qmd >}}
+
+For example, above is a DANG of the model we developed for [Example 2](#sec-example-2). The relational part of @fig-causal-dang-instructions shows that *Persons 1* and *2* influence each other. The structural part shows a DAG of random vectors $\mathbf{L}$, $\mathbf{A}$, and $\mathbf{Y}$, each of length 3. It shows the marriage between *Persons 1* and *2* separately from the causal structure linking employment, dress, and job opportunities within each individual.
+
+
