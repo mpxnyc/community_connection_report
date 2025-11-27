@@ -362,21 +362,25 @@ cookieconsent.run({
 <figcaption>Example of a user prompt for a forced-response question in the custom designed MPX NYC survey instrument</figcaption></figure>
 </div>
 </section><section id="place-mapping" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="place-mapping">Place Mapping</h3>
-<p>Because participants were unlikely to recall precise addresses or ZIP codes, we integrated the Google Maps API to allow them to identify locations by business name, landmark, cross-street, subway station, or neighborhood. The map displayed standard navigation tools and detailed geographic information to aid orientation (see <a href="#fig-mapinputformat" class="quarto-xref">Figure&nbsp;<span>F.1</span></a>).</p>
-<div id="fig-mapinputformat" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-mapinputformat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../_const/images/image_app_graphic.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="488">
+<p>Because participants were unlikely to recall precise addresses or ZIP codes, we integrated the Google Maps API to allow them to identify locations by business name, landmark, cross-street, subway station, or neighborhood. The map displayed standard navigation tools and detailed geographic information to aid orientation.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="_const/images/person_place_mapper_prompt.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="492"></p>
+</figure>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mapinputformat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;F.1: Map input question format developed for MPX NYC
-</figcaption></figure>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="_const/images/person_place_mapper_map.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="492"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="_const/images/person_place_mapper_questions.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="492"></p>
+</figure>
 </div>
 <p>At the beginning of the survey, participants were asked to locate their primary residence on the map. Later, they identified venues where they had physical or sexual contact in group settings. Each map tap placed a marker and triggered follow-up questions about the type of venue and activities that occurred there.</p>
 </section><section id="sec-link-tracing" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="sec-link-tracing">Link Tracing</h3>
 <p>We developed an anonymous link-tracing system using URL parameters to construct a participant network. At survey initiation, each respondent received a unique identifier card containing a QR code and word combination.</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="./_const/images/share_screen.png" class="img-fluid figure-img" width="489"></p>
-<figcaption>Survey dialogue for sharing pre-written study recruitment messages with social/sexual contact</figcaption></figure>
+<figure class="figure"><p><img src="_const/images/link_tracer.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="492"></p>
+</figure>
 </div>
 <p>At the end of the survey, participants were invited to share a pre-written recruitment message containing their unique URL with social or sexual contacts. When a contact completed the survey using this link, an edge was automatically added between the two respondents in the Neo4j graph database. If a new participant shared a link with someone who had already completed the survey, the latter could confirm the connection by entering the code from their identifier card, linking their nodes without revealing identities.</p>
 </section><section id="implementation" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="implementation">Implementation</h3>
