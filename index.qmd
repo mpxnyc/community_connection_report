@@ -10,7 +10,6 @@ format:
 
 
 
-
 ```{r packages, eval = FALSE}
 
 install.packages(c(
@@ -47,55 +46,48 @@ remotes::install_github("mpxnyc/mpxnyc")
 ```
 
 ```{r process_data}
-targets::tar_source("R_functions") # Access custom defined functions
+
 targets::tar_make(reporter = "silent") # Run data pipeline
+
 ```
 
 
+```{r}
+targets::tar_source("R_functions") # Access custom defined functions
+```
 
+```{r cache, include=FALSE, eval=TRUE}
+
+knitr::opts_chunk$set(cache = TRUE, cache.path = "_cache/index/")
+```
 
 
 
 # Home {.hidden .unnumbered}
 
-{{< include 0_index/0_0__hero.qmd >}}
-
-{{< include 0_index/0_1__welcome.qmd >}}
-
-{{< include 0_index/0_0__banner_seminar.qmd >}}
-
-{{< include 0_index/0_2__at_a_glance.qmd >}}
-
-{{< include 0_index/0_8__peoples_department.qmd >}}
-
-{{< include 0_index/0_3__open_science.qmd >}}
-
-{{< include 0_index/0_4__why_matters.qmd >}}
-
-{{< include 0_index/0_5__who_we_are.qmd >}}
-
-{{< include 0_index/0_6__why_self_publish.qmd >}}
-
-{{< include 0_index/0_7__impact.qmd >}}
+{{< include __0_index/hero.qmd >}}
 
 
 
 
+{{< include __0_index/welcome.qmd >}}
+
+{{< include __0_index/peoples_department.qmd >}}
+
+{{< include __0_index/open_science.qmd >}}
+
+{{< include __0_index/why_matters.qmd >}}
+
+{{< include __0_index/who_we_are.qmd >}}
+
+{{< include __0_index/why_self_publish.qmd >}}
+
+{{< include __0_index/impact.qmd >}}
 
 
+{{< include ___misc/banner_seminar.qmd >}}
 
+{{< include __0_index/fine_text.qmd >}}
 
-
-
-
-```{r}
-#| fig-width: 2
-#| fig-height: 2
-#| fig-align: center
-plot_icon(icon_name = "peach", color = "dark_orange", shape = 0)
-```
-
-
-{{< include 0_index/0_9__fine_text.qmd >}}
 
 
