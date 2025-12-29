@@ -9,7 +9,7 @@
 #| fig-width: 4
 #| fig-align: center
 
-  make_table_freq1(age) |>
+  targets::tar_read(plotdata_age) |>
     plot_bar() +
     theme_mpxnyc_bar() +
     scale_axis_mpxnyc() +
@@ -21,8 +21,7 @@
 
 ```{r table_bar_age}
 
-
-make_table_freq1(age) |>
+targets::tar_read(plotdata_age) |>
   draw_table_1("Age")
 ```
 

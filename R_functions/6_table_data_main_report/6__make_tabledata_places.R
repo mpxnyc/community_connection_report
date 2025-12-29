@@ -1,5 +1,5 @@
-make_tabledata_places <- function(){
-  targets::tar_read(data_bipartite_graph_collected) |>
+make_tabledata_places <- function(data_bipartite_graph_collected = targets::tar_read(data_bipartite_graph_collected) ){
+  data_bipartite_graph_collected |>
     tidygraph::activate(edges) |>
     data.frame() |>
     dplyr::filter(!home) |>

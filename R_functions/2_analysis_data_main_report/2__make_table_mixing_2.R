@@ -1,4 +1,4 @@
-make_table_mixing_2       <- function(variable){
+make_table_mixing_2       <- function(variable, data_bipartite_graph_simulated = targets::tar_read(data_bipartite_graph_simulated)){
   
   helper_breakdown_into_graph_list <- function(current_rep){
 
@@ -56,7 +56,7 @@ make_table_mixing_2       <- function(variable){
       dplyr::select(rep, ego_level, alter_level, selection_coef)
   }
   
-  working_graph_simulation                <- targets::tar_read(data_bipartite_graph_simulated) 
+  working_graph_simulation                <- data_bipartite_graph_simulated 
     
   reps_vector                             <- working_graph_simulation |>
                                                 tidygraph::activate(nodes) |>

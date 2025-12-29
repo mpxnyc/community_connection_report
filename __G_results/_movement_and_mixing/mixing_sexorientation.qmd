@@ -4,18 +4,7 @@
 
 #### Show plot
 
-```{r }
-#| fig-width: 9
-#| fig-height: 9
-
-
-make_plotdata_sexorientation_mixing_matrix() |>
-  plot_matrix_mixing() +
-  scale_fill_mpxnyc_gradient() +
-  scale_color_mpxnyc_gradient() +
-  theme_mpxnyc_mixing(plot.margin = ggplot2::unit(10*c(10,10,10,10), "pt")) 
-
-```
+{{< include ___figures/fig-sexorientation-mixing-matrix.qmd >}}
 
 #### Show data
 
@@ -24,7 +13,7 @@ make_plotdata_sexorientation_mixing_matrix() |>
 #| fig-height: 10
 
 
-make_table_mixing_2(sexOrientation) |>
+targets::tar_read(plotdata_sexorientation_mixing_matrix)  |>
  draw_table_matrix_mixing("Sexual orientation")  
 
 

@@ -4,17 +4,7 @@
 
 #### Show plot
 
-```{r plot_matrix_mixing_demo_group}
-#| fig-width: 9
-#| fig-height: 9
-
-make_plotdata_racegender_mixing_matrix() |>
-  plot_matrix_mixing() +
-  scale_fill_mpxnyc_gradient() +
-  scale_color_mpxnyc_gradient() +
-  theme_mpxnyc_mixing()
-```
-
+{{< include ___figures/fig-racegender-mixing-matrix.qmd >}}
 
 
 #### Show data
@@ -24,7 +14,7 @@ make_plotdata_racegender_mixing_matrix() |>
 #| fig-height: 10
 
 
-make_table_mixing_2(demo_group) |>
+targets::tar_read(plotdata_racegender_mixing_matrix) |>
  draw_table_matrix_mixing("Race-gender")  
 
 

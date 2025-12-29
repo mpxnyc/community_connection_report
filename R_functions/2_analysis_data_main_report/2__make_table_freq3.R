@@ -28,7 +28,7 @@ make_table_freq3                <- function(
       tidygraph::activate(edges)  |> 
       tidygraph::filter(placeType != "home")
     
-    simulated_data_raw <- targets::tar_read(data_bipartite_graph_simulated) |>
+    simulated_data_raw <- data_bipartite_graph_simulated |>
       tidygraph::activate(edges) |> 
       tidygraph::filter(placeType != "home")
   }

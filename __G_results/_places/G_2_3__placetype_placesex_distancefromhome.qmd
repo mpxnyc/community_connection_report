@@ -5,21 +5,7 @@
 
 #### Show plot
 
-
-```{r plot_radar_facet_placetype_placesex_distancefromhome}
-#| fig-width: 8
-#| fig-height: 12
-#| fig-align: center
-
-make_table_freq3( placeType, distanceFromHome, placeSex, person_analysis = FALSE) |>
-  plot_radar_stratified2()  +
-  scale_fill_mpxnyc(name = "") +
-  scale_radial_mpxnyc() +
-  theme_mpxnyc_radar_places() +
-  theme_mpxnyc_nomargin()
-
-
-```
+{{< include ___figures/fig-placetype-bar-grid.qmd >}}
 
 
 #### Show data
@@ -28,7 +14,7 @@ make_table_freq3( placeType, distanceFromHome, placeSex, person_analysis = FALSE
 ```{r table_radar_facet_placetype_placesex_distancefromhome}
 
 
-make_table_freq3( placeType, distanceFromHome, placeSex, person_analysis = FALSE)  |>
+targets::tar_read(plotdata_placetype_distancefromhome_placeSex)  |>
   draw_table_3("Venue type by home distance and sexual contact")
 
 

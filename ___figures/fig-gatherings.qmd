@@ -4,25 +4,13 @@
 #| fig-cap: Popular neighborhoods for gatherings, MPX NYC, 2022
 #| label: fig-gatherings-neighborhoods
 
-make_tabledata_gatherings <- function(){
-  targets::tar_read(data_bipartite_graph_collected) |>
-    tidygraph::activate(edges)|>
-    data.frame() |>
-    dplyr::group_by(place_borough, place_community, place_neighborhood) |>
-    dplyr::summarize(count = dplyr::n()) |>
-    dplyr::rename(borough = place_borough, community = place_community, neighborhood = place_neighborhood) |>
-    dplyr::arrange(-count) |>
-    dplyr::ungroup() |>
-    dplyr::filter(!is.na(borough)) |>
-    dplyr::mutate(proportion = count / sum(count))
-}
-
+tabledata_gatherings <- targets::tar_read(tabledata_gatherings)
 
 scale_labels <- c("0", "1-10", "11-20", "21-30", "31+")
 
 mpxnyc::neighborhood_sf_obj |>
    sf::st_as_sf() |>
-  dplyr::left_join(make_tabledata_gatherings(), by = "neighborhood") |>
+  dplyr::left_join(tabledata_gatherings, by = "neighborhood") |>
   dplyr::mutate(count = ifelse(is.na(count), 0, count)) |>
   dplyr::mutate(count_cat = cut(count, c(-1,0,10,20,30,100), scale_labels)) |>
   dplyr::arrange(-count) |>
