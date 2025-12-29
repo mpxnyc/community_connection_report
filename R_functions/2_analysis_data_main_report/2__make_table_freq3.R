@@ -1,4 +1,11 @@
-make_table_freq3                <- function(variable = overall, stratum_variable_a = overall, stratum_variable_b = overall, person_analysis = TRUE){
+make_table_freq3                <- function(
+                                            variable = overall, 
+                                            stratum_variable_a = overall, 
+                                            stratum_variable_b = overall, 
+                                            person_analysis = TRUE,
+                                            data_bipartite_graph_collected = targets::tar_read(data_bipartite_graph_collected),
+                                            data_bipartite_graph_simulated = targets::tar_read(data_bipartite_graph_simulated)
+                                            ){
   variable                           <- rlang::enquo(variable)
   stratum_variable_a                 <- rlang::enquo(stratum_variable_a)
   stratum_variable_b                 <- rlang::enquo(stratum_variable_b)
@@ -9,15 +16,15 @@ make_table_freq3                <- function(variable = overall, stratum_variable
   
   
   if (person_analysis){
-    original_data_raw    <- targets::tar_read(data_bipartite_graph_collected) |>
+    original_data_raw    <- data_bipartite_graph_collected  |>
       tidygraph::activate(nodes) |>
       tidygraph::filter(type == TRUE) 
     
-    simulated_data_raw   <- targets::tar_read(data_bipartite_graph_simulated) |>
+    simulated_data_raw   <- data_bipartite_graph_simulated  |>
       tidygraph::activate(nodes) |>
       tidygraph::filter(type == TRUE) 
   } else {
-    original_data_raw  <- targets::tar_read(data_bipartite_graph_collected) |>
+    original_data_raw  <- data_bipartite_graph_collected |>
       tidygraph::activate(edges)  |> 
       tidygraph::filter(placeType != "home")
     

@@ -53,11 +53,18 @@ list(
                         name      = data_intervention_results_coverage_simulated,
                         command   = make_intervention_results_coverage(data_bipartite_graph_simulated)
                       ),
-  
   targets::tar_target(
                       name        = data_intervention_results_centrality_collected,
                       command     = make_intervention_results_centrality(data_bipartite_graph_collected, data_intervention_results_coverage_collected)
-                    )
+                    ),
+  targets::tar_target(
+                      name        = plotdata_racegender_radar_grid,
+                      command     = make_plotdata_racegender_radar_grid(data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                      ),
+  targets::tar_target(
+    name        = plotdata_movement_matrix,
+    command     = make_plotdata_movement_matrix(data_bipartite_graph_collected = data_bipartite_graph_collected)
+  )
 )
 
 

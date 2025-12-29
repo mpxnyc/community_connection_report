@@ -1,6 +1,8 @@
-make_table_movement_travel        <- function(){
+make_table_movement_travel        <- function(
+    data_bipartite_graph_collected = targets::tar_read(data_bipartite_graph_collected
+                                                       )){
   
-  home_data                 <-  targets::tar_read(data_bipartite_graph_collected) |>
+  home_data                 <-   data_bipartite_graph_collected |>
                                         tidygraph::activate(edges) |>
                                         tidygraph::filter(home) |>
                                         tidygraph::mutate(person_name = tidygraph::.N()$name[from]) |>
@@ -11,7 +13,7 @@ make_table_movement_travel        <- function(){
                                         dplyr::transmute(home_name, person_name, home_borough) |>
     dplyr::tibble()
   
-  place_data                <-  targets::tar_read(data_bipartite_graph_collected) |>
+  place_data                <-  data_bipartite_graph_collected  |>
                                         tidygraph::activate(edges) |>
                                         tidygraph::filter(!home) |>
                                         tidygraph::mutate(person_name = tidygraph::.N()$name[from]) |>

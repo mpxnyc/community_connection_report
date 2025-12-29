@@ -25,6 +25,6 @@ plot_radar_stratified   <- function(data){
       face  = "bold", 
       alpha = 0.7
     ) +
-    ggplot2::facet_grid( . ~ stratum, switch = "y") +
+    ggplot2::facet_grid( stratum ~ ., switch = "y") +
     ggplot2::coord_polar(clip = FALSE) 
 }
