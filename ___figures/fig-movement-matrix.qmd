@@ -10,8 +10,10 @@
 targets::tar_read(plotdata_movement_matrix) |>
   plot_matrix_movement() +
   scale_fill_mpxnyc(name = "From Borough", option = "dark") +
-  scale_color_mpxnyc(name = "To Borough", option = "dark") +
-  scale_size_mpxnyc() +
+  scale_color_mpxnyc(name = "Borough", option = "dark") +
+  scale_size_mpxnyc("Number of Gatherings") +
+  ggplot2::scale_y_discrete("HOME COMMUNITY DISTRICT") +
+  ggplot2::scale_x_discrete("GATHERING COMMUNITY DISTRICT") +
   theme_mpxnyc_matrix_movement() 
 
 ```

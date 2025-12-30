@@ -6,7 +6,7 @@ theme_mpxnyc_home_vs_place <- function(...){
       panel.grid.major.x = ggplot2::element_line(size = 0.2, color = "darkgrey"),
       panel.grid.minor.x = ggplot2::element_line(size = 0.2, color = "darkgrey"),
       legend.margin      = ggplot2::margin(40, 40, 40, 40),
-      legend.position    = "right"
+      legend.position    = "bottom"
     ) +
     ggplot2::theme(...)
 }

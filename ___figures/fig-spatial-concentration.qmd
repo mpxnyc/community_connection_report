@@ -8,8 +8,13 @@ targets::tar_read(plotdata_spatial_concentration_bar) |>
   plot_home_vs_residence_dbn_bar() +
   scale_alpha_mpxnyc() +
   scale_fill_mpxnyc(name = "Borough", option = "dark") +
-  scale_axis_mpxnyc() +
-  theme_mpxnyc_home_vs_place() 
+  scale_axis_mpxnyc("SPATIAL CONCENTRATION") +
+  theme_mpxnyc_matrix_movement(
+    panel.grid.major.y = ggplot2::element_line(color = "#636363", size = 0.3),
+    panel.grid.minor.y = ggplot2::element_line(color = "#636363", size = 0.1),
+    axis.text.y = ggplot2::element_text(size = 10)
+  ) +
+  ggplot2::scale_x_discrete("COMMUNITY DISTRICT")
 
 
 ```

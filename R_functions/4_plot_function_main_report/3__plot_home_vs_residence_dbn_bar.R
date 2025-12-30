@@ -1,5 +1,8 @@
 plot_home_vs_residence_dbn_bar <- function(data){
   
+  data <- data |>
+    dplyr::mutate(borough = stringr::str_replace(borough, "Staten Island", "SI")) 
+  
   ggplot2::ggplot(data) +
     ggplot2::geom_bar(
       ggplot2::aes(x = community, y = weight, fill = borough, alpha = highlight), 
@@ -9,6 +12,6 @@ plot_home_vs_residence_dbn_bar <- function(data){
       color = "white",
       position = "dodge"
     ) +
-    ggplot2::coord_flip() 
+    ggplot2::facet_grid( . ~ borough, scales = "free", space = "free", switch = "x")
   
 }
