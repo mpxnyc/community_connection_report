@@ -58,8 +58,8 @@ list(
                       command     = make_intervention_results_centrality(data_bipartite_graph_collected, data_intervention_results_coverage_collected)
                     ),
   targets::tar_target(
-                      name        = plotdata_racegender_radar_grid,
-                      command     = make_plotdata_racegender_radar_grid(data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                      name        = plotdata_sexorientation_by_racegender_radar_grid,
+                      command     = make_plotdata_racegender_radar_grid(sexOrientation,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
                       ),
   targets::tar_target(
                     name        = plotdata_movement_matrix,
@@ -179,6 +179,24 @@ list(
                                            data_bipartite_graph_collected = data_bipartite_graph_collected,
                                            data_bipartite_graph_simulated = data_bipartite_graph_simulated
             )
+          ),
+  targets::tar_target(
+            name        = plotdata_coverage_approach_choro,
+            command     = make_plotdata_coverage_approach_choro(
+            data_intervention_results_coverage_simulated_place_coverage = data_intervention_results_coverage_simulated[["place_coverage"]],
+            data_intervention_results_coverage_collected_place_coverage = data_intervention_results_coverage_collected[["place_coverage"]]
+            )
+          ),
+  targets::tar_target(
+            name        = plotdata_coverage_approach_bar,
+            command     = make_plotdata_coverage_approach_bar(
+            data_intervention_results_coverage_simulated_place_coverage = data_intervention_results_coverage_simulated[["place_coverage"]],
+            data_intervention_results_coverage_collected_place_coverage = data_intervention_results_coverage_collected[["place_coverage"]]
+            )
+          ),
+  targets::tar_target(
+            name        = plotdata_net_impact_profile,
+            command     = make_plotdata_net_impact_profile(data_intervention_results_centrality_collected)
           )
   
   

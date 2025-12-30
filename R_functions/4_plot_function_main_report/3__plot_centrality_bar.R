@@ -9,5 +9,5 @@ plot_centrality_bar             <- function(data){
           ggplot2::geom_vline(ggplot2::aes(xintercept = 10), size = 1, color = "white") +
           ggplot2::geom_vline(ggplot2::aes(xintercept = 20), size = 1, color = "white") +
           ggplot2::geom_vline(ggplot2::aes(xintercept = 30), size = 1, color = "white") +
-          ggplot2::facet_grid( . ~ intervention_priority )
+          ggplot2::facet_wrap( . ~ intervention_priority, ncol = 1 )
 }

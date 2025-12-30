@@ -337,14 +337,16 @@ cookieconsent.run({
 </div>
 <section id="section" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="section"></h2>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_plotdata_coverage_approach_choro</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">plotdata_coverage_approach_choro</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>                <span class="fu">plot_coverage_map</span><span class="op">(</span><span class="op">)</span>  <span class="op">+</span></span>
 <span>                <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>name <span class="op">=</span> <span class="st">""</span>, na.translate <span class="op">=</span> <span class="cn">FALSE</span>, option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>                <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                <span class="fu">theme_mpxnyc_blank</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span>,</span>
+<span>                                strip.text.y.left <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">14</span>, angle <span class="op">=</span> <span class="fl">65</span>, margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"#636363"</span><span class="op">)</span>,</span>
+<span>                                strip.clip <span class="op">=</span> <span class="st">"off"</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div id="fig-hiimpact-communities-map" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-hiimpact-communities-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="10_outbreaks_files/figure-html/fig-hiimpact-communities-map-1.png" class="img-fluid figure-img" width="864">
+<img src="10_outbreaks_files/figure-html/fig-hiimpact-communities-map-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hiimpact-communities-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;10.1: High-coverage community districts under both strategies (66 % coverage).
@@ -357,15 +359,25 @@ Figure&nbsp;10.1: High-coverage community districts under both strategies (66 % 
 <span class="header-section-number">10.1</span> Spatial efficiency</h2>
 <p><a href="#fig-hiimpact-communities-bar" class="quarto-xref">Figure&nbsp;<span>10.2</span></a> and <a href="#fig-hiimpact-communities-map" class="quarto-xref">Figure&nbsp;<span>10.1</span></a> show which community districts would need to be immunized to reach one-third and two-thirds of the study population under each strategy. Under the <strong>contact-neutralizing strategy</strong>, just five community districts—Hell’s Kitchen–Chelsea (MN04), Williamsburg–Greenpoint (BK01), Central Harlem North (MN10), Bedford-Stuyvesant West (BK03), and Astoria (QN01)—would together cover roughly 33 percent of participants.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_plotdata_coverage_approach_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">plotdata_coverage_approach_bar</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_coverage_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>name <span class="op">=</span> <span class="st">""</span>, na.translate <span class="op">=</span> <span class="cn">FALSE</span>, option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span>  <span class="op">+</span></span>
-<span>  <span class="fu">scale_axis_mpxnyc</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc_bar</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">scale_axis_mpxnyc</span><span class="op">(</span></span>
+<span>    <span class="st">"Proportion of MPX NYC sample"</span>,</span>
+<span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.08</span>, <span class="fl">0.15</span><span class="op">)</span>,</span>
+<span>    breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span>, <span class="fl">0.15</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc_bar</span><span class="op">(</span></span>
+<span>    legend.position <span class="op">=</span> <span class="st">"bottom"</span>,</span>
+<span>    strip.text <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">14</span><span class="op">)</span>,</span>
+<span>    strip.placement <span class="op">=</span> <span class="st">"outside"</span>,</span>
+<span>    axis.text.x <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    axis.text.y <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">20</span>,<span class="fl">20</span>,<span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div id="fig-hiimpact-communities-bar" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-hiimpact-communities-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="10_outbreaks_files/figure-html/fig-hiimpact-communities-bar-1.png" class="img-fluid figure-img" width="864">
+<img src="10_outbreaks_files/figure-html/fig-hiimpact-communities-bar-1.png" class="img-fluid figure-img" width="576">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hiimpact-communities-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;10.2: High-coverage community districts under contact- vs movement-neutralizing strategies (33 % coverage)
@@ -380,16 +392,21 @@ Figure&nbsp;10.2: High-coverage community districts under contact- vs movement-n
 <span class="header-section-number">10.2</span> Network impact</h2>
 <p>In the MPX NYX Person-place graph, participants connected to a common set of places form a network. <a href="#fig-netimpact" class="quarto-xref">Figure&nbsp;<span>10.3</span></a> shows how the different vaccination strategies affect connectivity in that network. Before any intervention, nearly every participant belonged to a single large connected component, meaning potential transmission paths linked most of the population. As immunization expanded, this component fragmented—more sharply under the movement-neutralizing approach than under the contact-based one.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">make_plotdata_net_impact_profile</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">targets</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_read.html">tar_read</a></span><span class="op">(</span><span class="va">plotdata_net_impact_profile</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">plot_centrality_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_fill_mpxnyc</span><span class="op">(</span>name <span class="op">=</span> <span class="st">""</span>, option <span class="op">=</span> <span class="st">"light"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_axis_mpxnyc</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_x_continuous_mpxnyc</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_mpxnyc_netimpact</span><span class="op">(</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">scale_x_continuous_mpxnyc</span><span class="op">(</span><span class="st">"Count of vacicnated community districts"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_mpxnyc_netimpact</span><span class="op">(</span></span>
+<span>    axis.text <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
+<span>    strip.text <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">14</span><span class="op">)</span>,</span>
+<span>    axis.title.x <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">30</span>,<span class="fl">30</span>,<span class="fl">30</span>,<span class="fl">30</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    axis.title.y <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>margin <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span><span class="fl">30</span>,<span class="fl">30</span>,<span class="fl">30</span>,<span class="fl">30</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div id="fig-netimpact" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-netimpact-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="10_outbreaks_files/figure-html/fig-netimpact-1.png" class="img-fluid figure-img" width="768">
+<img src="10_outbreaks_files/figure-html/fig-netimpact-1.png" class="img-fluid figure-img" width="576">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-netimpact-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;10.3: Network connectivity after sequential immunization, comparing the two strategies.

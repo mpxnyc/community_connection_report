@@ -17,6 +17,6 @@ plot_coverage_map        <- function(data){
     ggplot2::ggplot() +
     ggplot2::geom_sf(fill = "grey", color = "white") +
     ggplot2::geom_sf(ggplot2::aes(fill = group), color = "white", linewidth = 0.5) + 
-    ggplot2::facet_grid(. ~ stratum)
+    ggplot2::facet_wrap(stratum ~ ., strip.position = "left", ncol = 1)
 
 }

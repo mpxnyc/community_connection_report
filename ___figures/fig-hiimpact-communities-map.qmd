@@ -1,11 +1,14 @@
 ```{r}
 #| fig-cap: High-coverage community districts under both strategies (66 % coverage). 
 #| label: fig-hiimpact-communities-map
-#| fig-width: 9
+#| fig-width: 7
 #| fig-height: 9
 
-make_plotdata_coverage_approach_choro() |>
+targets::tar_read(plotdata_coverage_approach_choro) |>
                 plot_coverage_map()  +
                 scale_fill_mpxnyc(name = "", na.translate = FALSE, option = "light") +
-                theme_mpxnyc_blank(legend.position = "bottom") 
+                theme_mpxnyc_blank(legend.position = "bottom",
+                                strip.text.y.left = ggplot2::element_text(size = 14, angle = 65, margin = ggplot2::margin(0,0,0,0), color = "#636363"),
+                                strip.clip = "off")  
+
 ```

@@ -18,6 +18,6 @@ plot_coverage_bar            <- function(data){
                       width = 1
                     ) +
     ggplot2::geom_text(ggplot2::aes(x = rank, y = -0.03, label = name), angle = 90) +
-    ggplot2::facet_grid(. ~ stratum, scales = "free_x")
+    ggplot2::facet_wrap(. ~ stratum, strip.position = "top", ncol = 1)
   
 }

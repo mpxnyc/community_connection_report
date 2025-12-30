@@ -1,15 +1,20 @@
 ```{r }
 #| fig-cap: Network connectivity after sequential immunization, comparing the two strategies.
 #| label: fig-netimpact
-#| fig-width: 8
+#| fig-width: 6
 #| fig-height: 9
 
-make_plotdata_net_impact_profile() |>
+targets::tar_read(plotdata_net_impact_profile) |>
   plot_centrality_bar() +
   scale_fill_mpxnyc(name = "", option = "light") +
   scale_axis_mpxnyc() +
-  scale_x_continuous_mpxnyc() +
-  theme_mpxnyc_netimpact() 
+  scale_x_continuous_mpxnyc("Count of vacicnated community districts") +
+  theme_mpxnyc_netimpact(
+    axis.text = ggplot2::element_text(size = 10),
+    strip.text = ggplot2::element_text(size = 14),
+    axis.title.x = ggplot2::element_text(margin = ggplot2::margin(30,30,30,30)),
+    axis.title.y = ggplot2::element_text(margin = ggplot2::margin(30,30,30,30))
+  ) 
   
 
 

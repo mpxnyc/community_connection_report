@@ -1,3 +1,3 @@
-make_plotdata_net_impact_profile <- function(){
-  make_table_centrality()
+make_plotdata_net_impact_profile <- function(data_intervention_results_centrality_collected = targets::tar_read(data_intervention_results_centrality_collected)){
+  make_table_centrality(data_intervention_results_centrality_collected = data_intervention_results_centrality_collected)
 }

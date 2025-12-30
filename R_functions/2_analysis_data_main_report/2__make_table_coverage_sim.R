@@ -1,7 +1,11 @@
-make_table_coverage_sim         <- function(intervention_priority_input = "contact", intervention_stratification_input = "overall"){
+make_table_coverage_sim         <- function(
+    intervention_priority_input = "contact", 
+    intervention_stratification_input = "overall",
+    data_intervention_results_coverage_simulated_place_coverage = targets::tar_read(data_intervention_results_coverage_simulated)[["place_coverage"]]
+    ){
   
   
-  targets::tar_read(data_intervention_results_coverage_simulated)[["place_coverage"]] |>
+  data_intervention_results_coverage_simulated_place_coverage  |>
     dplyr::filter(
       intervention_priority == intervention_priority_input, 
       strata == intervention_stratification_input

@@ -1,13 +1,23 @@
 ```{r}
 #| fig-cap: High-coverage community districts under contact- vs movement-neutralizing strategies (33 % coverage)
 #| label: 'fig-hiimpact-communities-bar'
-#| fig-width: 9
-#| fig-height: 7
+#| fig-width: 6
+#| fig-height: 9
 
-make_plotdata_coverage_approach_bar() |>
+targets::tar_read(plotdata_coverage_approach_bar) |>
   plot_coverage_bar() +
   scale_fill_mpxnyc(name = "", na.translate = FALSE, option = "light")  +
-  scale_axis_mpxnyc() +
-  theme_mpxnyc_bar(legend.position = "bottom")
+  scale_axis_mpxnyc(
+    "Proportion of MPX NYC sample",
+    limits = c(-0.08, 0.15),
+    breaks = c(0, 0.05, 0.1, 0.15)
+  ) +
+  theme_mpxnyc_bar(
+    legend.position = "bottom",
+    strip.text = ggplot2::element_text(size = 14),
+    strip.placement = "outside",
+    axis.text.x = ggplot2::element_blank(),
+    axis.text.y = ggplot2::element_text(margin = ggplot2::margin(20, 20,20,20))
+    )
 
 ```
