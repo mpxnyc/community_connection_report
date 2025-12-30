@@ -140,24 +140,17 @@ list(
               ),
   targets::tar_target(
                 name        = plotdata_sexorientation_racegender,
-                command     = make_table_freq2(sexOrientation, demo_group, person_analysis = TRUE,
-                                               data_bipartite_graph_collected = data_bipartite_graph_collected,
-                                               data_bipartite_graph_simulated = data_bipartite_graph_simulated
-                )
+                command     = make_plotdata_racegender_radar_grid(sexOrientation,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                
               ),
   targets::tar_target(
                 name        = plotdata_hivprep_racegender,
-                command     = make_table_freq2(hivPrep, demo_group, person_analysis = TRUE,
-                                               data_bipartite_graph_collected = data_bipartite_graph_collected,
-                                               data_bipartite_graph_simulated = data_bipartite_graph_simulated
-                )
+                command     = make_plotdata_racegender_radar_grid(hivPrep,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
               ),
   targets::tar_target(
               name        = plotdata_mpoxvax_racegender,
-              command     = make_table_freq2(monkeypoxVaccine, demo_group, person_analysis = TRUE,
-                                             data_bipartite_graph_collected = data_bipartite_graph_collected,
-                                             data_bipartite_graph_simulated = data_bipartite_graph_simulated
-              )
+              command     = make_plotdata_racegender_radar_grid(monkeypoxVaccine,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+              
             ),
   targets::tar_target(
             name        = plotdata_placetype_distancefromhome_placeSex,
@@ -190,14 +183,22 @@ list(
   targets::tar_target(
             name        = plotdata_coverage_approach_bar,
             command     = make_plotdata_coverage_approach_bar(
-            data_intervention_results_coverage_simulated_place_coverage = data_intervention_results_coverage_simulated[["place_coverage"]],
-            data_intervention_results_coverage_collected_place_coverage = data_intervention_results_coverage_collected[["place_coverage"]]
+                data_intervention_results_coverage_simulated_place_coverage = data_intervention_results_coverage_simulated[["place_coverage"]],
+                data_intervention_results_coverage_collected_place_coverage = data_intervention_results_coverage_collected[["place_coverage"]]
             )
           ),
   targets::tar_target(
             name        = plotdata_net_impact_profile,
             command     = make_plotdata_net_impact_profile(data_intervention_results_centrality_collected)
+          ),
+  targets::tar_target(
+            name        = plotdata_placetype_bar_grid,
+            command     = make_plotdata_placetype_bar_grid(
+              data_bipartite_graph_collected = data_bipartite_graph_collected,
+              data_bipartite_graph_simulated = data_bipartite_graph_simulated
+            )
           )
+  
   
   
   

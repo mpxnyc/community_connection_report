@@ -5,7 +5,7 @@
 #| fig-height: 10
 
 
-make_plotdata_placetype_bar_grid() |>
+targets::tar_read(plotdata_placetype_bar_grid) |>
   dplyr::mutate(proportion = abs(proportion)) |>
   plot_bar_stratified2() +
     ggplot2::coord_polar() +
