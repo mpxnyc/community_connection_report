@@ -218,7 +218,31 @@ list(
               data_bipartite_graph_collected = data_bipartite_graph_collected,
               data_bipartite_graph_simulated = data_bipartite_graph_simulated
             )
-          )
+          ),
+  targets::tar_target(
+    name        = plotdata_place_census_age,
+    command     = make_edge_census_data(
+      stratum_variable = age, 
+      bipartite_graph = data_bipartite_graph_collected, 
+      spatial_unit_label = place_community
+    )
+  ),
+  targets::tar_target(
+    name        = plotdata_place_census_sexorientation,
+    command     = make_edge_census_data(
+      stratum_variable = sexOrientation, 
+      bipartite_graph = data_bipartite_graph_collected, 
+      spatial_unit_label = place_community
+    )
+  ),
+  targets::tar_target(
+    name        = plotdata_place_census_racegender,
+    command     = make_edge_census_data(
+      stratum_variable = demo_group, 
+      bipartite_graph = data_bipartite_graph_collected, 
+      spatial_unit_label = place_community
+    )
+  )
   
   
   

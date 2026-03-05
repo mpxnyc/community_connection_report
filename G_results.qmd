@@ -12,3 +12,55 @@ targets::tar_source("R_functions")
 
 
 
+
+```{r eval=FALSE}
+#| fig-width: 7
+#| fig-height: 9
+#| 
+data <- targets::tar_read(plotdata_place_census_age)  
+
+jnk <- classInt::classIntervals(data$proportion, n = 5, style = "jenks")
+
+data |> dplyr::mutate(proportion = cut(proportion, breaks = jnk$brks, include.lowest = TRUE)) |>
+  plot_placecensus_map() +
+                  ggplot2::scale_fill_brewer(name = "", na.translate = FALSE) +
+                theme_mpxnyc_blank(legend.position = "bottom",
+                                strip.text.y.left = ggplot2::element_text(size = 14, angle = 65, margin = ggplot2::margin(0,0,0,0), color = "#636363"),
+                                strip.clip = "off")  
+```
+
+
+
+```{r eval=FALSE}
+#| fig-width: 7
+#| fig-height: 9
+#| 
+data <- targets::tar_read(plotdata_place_census_sexorientation)  
+
+jnk <- classInt::classIntervals(data$proportion, n = 5, style = "jenks")
+
+data |> dplyr::mutate(proportion = cut(proportion, breaks = jnk$brks, include.lowest = TRUE)) |>
+  plot_placecensus_map() +
+                  ggplot2::scale_fill_brewer(name = "", na.translate = FALSE) +
+                theme_mpxnyc_blank(legend.position = "bottom",
+                                strip.text.y.left = ggplot2::element_text(size = 14, angle = 65, margin = ggplot2::margin(0,0,0,0), color = "#636363"),
+                                strip.clip = "off")  
+```
+
+```{r eval=FALSE}
+#| fig-width: 7
+#| fig-height: 18
+#| 
+data <- targets::tar_read(plotdata_place_census_racegender)  
+
+jnk <- classInt::classIntervals(data$proportion, n = 5, style = "jenks")
+
+data |> dplyr::mutate(proportion = cut(proportion, breaks = jnk$brks, include.lowest = TRUE)) |>
+  plot_placecensus_map() +
+                  ggplot2::scale_fill_brewer(name = "", na.translate = FALSE) +
+                theme_mpxnyc_blank(legend.position = "bottom",
+                                strip.text.y.left = ggplot2::element_text(size = 14, angle = 65, margin = ggplot2::margin(0,0,0,0), color = "#636363"),
+                                strip.clip = "off")  
+```
+
+
