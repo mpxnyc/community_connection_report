@@ -2,7 +2,7 @@
 ### Sexual Orientation  {.unnumbered}
 
 ::: {.panel-tabset}
-#### Show plot
+#### Bar
 
 ```{r plot_bar_sexorientation}
 #| fig-height: 5
@@ -18,14 +18,46 @@ targets::tar_read(plotdata_sexorientation) |>
   theme_mpxnyc_nomargin()
 ```
 
-
-#### Show data
-
-```{r draw_table_sexorientation}
+#### Radar 
 
 
-targets::tar_read(plotdata_sexorientation)  |>
-  draw_table_1("Sexual Orientation")
+```{r plot_radar_sexorientation}
+#| fig-width: 5
+#| fig-height: 5
+#| fig-align: center
+
+targets::tar_read(plotdata_sexorientation) |>    
+  plot_radar_grid()   +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people(strip.text = ggplot2::element_blank()) +
+  theme_mpxnyc_nomargin()
+
+```
+
+#### Stratified
+
+
+```{r plot_radar_grid_sexorientation_racegender}
+#| fig-width: 4.5
+#| fig-height: 9
+#| fig-align: center
+
+targets::tar_read(plotdata_sexorientation_racegender) |>
+  plot_radar_grid()   +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people() +
+  theme_mpxnyc_nomargin()
+
+```
+
+#### Data
+
+```{r draw_radar_grid_sexorientation_racegender}
+
+targets::tar_read(plotdata_sexorientation_racegender)   |>
+  draw_table_2("Sexual Orientation by Race-Gender") 
 ```
 
 :::

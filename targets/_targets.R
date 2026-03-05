@@ -110,6 +110,7 @@ list(
                                                    data_bipartite_graph_simulated = data_bipartite_graph_simulated
                     )
                   ),
+  
   targets::tar_target(
                     name        = plotdata_sexorientation,
                     command     = make_table_freq1(sexOrientation, person_analysis = TRUE,
@@ -144,9 +145,22 @@ list(
                 
               ),
   targets::tar_target(
+    name        = plotdata_hivprep,
+    command     = make_table_freq1(hivPrep, person_analysis = TRUE,
+                                   data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                   data_bipartite_graph_simulated = data_bipartite_graph_simulated)
+    ),
+  targets::tar_target(
                 name        = plotdata_hivprep_racegender,
                 command     = make_plotdata_racegender_radar_grid(hivPrep,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
               ),
+  targets::tar_target(
+    name        = plotdata_mpoxvax,
+    command     = make_table_freq1(monkeypoxVaccine, person_analysis = TRUE,
+                                   data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                   data_bipartite_graph_simulated = data_bipartite_graph_simulated
+    )
+  ),
   targets::tar_target(
               name        = plotdata_mpoxvax_racegender,
               command     = make_plotdata_racegender_radar_grid(monkeypoxVaccine,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
@@ -159,6 +173,13 @@ list(
                                            data_bipartite_graph_simulated = data_bipartite_graph_simulated
             )
           ),
+  targets::tar_target(
+    name        = plotdata_placetype,
+    command     = make_table_freq1(placeType, person_analysis = FALSE,
+                                   data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                   data_bipartite_graph_simulated = data_bipartite_graph_simulated
+    )
+    ),
   targets::tar_target(
             name        = plotdata_placetype_distancefromhome,
             command     = make_table_freq2(placeType, distanceFromHome, person_analysis = FALSE,

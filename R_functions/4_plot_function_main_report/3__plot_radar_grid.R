@@ -1,5 +1,13 @@
 plot_radar_grid       <- function(data){
-  data |>
+  
+  if (is.null(data[["stratum"]])) {
+    working_data <- data |>
+      dplyr::mutate(stratum = "overall")
+  } else {
+    working_data <- data
+  }
+  
+  working_data |>
     dplyr::filter(!is.na(stratum)) |>
     ggplot2::ggplot() +
     ggplot2::geom_bar(

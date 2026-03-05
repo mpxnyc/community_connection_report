@@ -1,8 +1,8 @@
-### Sexual or physical contact with more than two other people at the same time  {.unnumbered}
+### Sexual or physical contact (in preceding four weeks) with two or more people at the same time  {.unnumbered}
 
 
 ::: {.panel-tabset}
-#### Show plot
+#### Bar
 
 ```{r plot_bar_groupsex}
 #| fig-height: 5
@@ -18,7 +18,25 @@ targets::tar_read(plotdata_groupsex) |>
 
 ```
 
-#### Show data
+
+#### Radar 
+
+
+```{r plot_radar_demogroup}
+#| fig-width: 5
+#| fig-height: 5
+#| fig-align: center
+
+targets::tar_read(plotdata_groupsex) |>    
+  plot_radar_grid()   +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people(strip.text = ggplot2::element_blank()) +
+  theme_mpxnyc_nomargin()
+
+```
+
+#### Data
 
 ```{r table_bar_groupsex}
 #| fig-width: 7
