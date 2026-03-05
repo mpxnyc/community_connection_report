@@ -1,0 +1,1212 @@
+```{r include=FALSE}
+targets::tar_source("R_functions")
+
+```
+
+
+
+
+
+#  MPX NYC: Results {#sec-appendixresults}
+
+
+
+
+## People
+
+
+
+
+### Age {.unnumbered}
+
+::: {.panel-tabset}
+#### Bar
+
+
+
+
+
+```{r plot_bar_age}
+#| fig-height: 5
+#| fig-width: 4
+#| fig-align: center
+
+  targets::tar_read(plotdata_age) |>
+    plot_bar() +
+    theme_mpxnyc_bar() +
+    scale_axis_mpxnyc() +
+    scale_fill_mpxnyc(name = "Age group") +
+    theme_mpxnyc_nomargin()
+```
+
+
+
+
+
+
+#### Radar 
+
+
+
+
+
+
+```{r plot_radar_age}
+#| fig-width: 5
+#| fig-height: 5
+#| fig-align: center
+
+targets::tar_read(plotdata_age) |>    
+  plot_radar_grid()   +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people(strip.text = ggplot2::element_blank()) +
+  theme_mpxnyc_nomargin()
+
+```
+
+
+
+
+
+
+
+#### Data
+
+
+
+
+```{r table_bar_age}
+
+targets::tar_read(plotdata_age) |>
+  draw_table_1("Age")
+```
+
+
+
+
+:::
+
+
+### Gender modality {.unnumbered}
+
+::: {.panel-tabset}
+#### Bar
+
+
+
+
+
+```{r plot_bar_gendermodality}
+#| fig-height: 5
+#| fig-width: 5
+#| fig-align: center
+
+targets::tar_read(plotdata_genderid) |>  
+  plot_bar() +
+  theme_mpxnyc_bar() +
+  scale_axis_mpxnyc("MPX NYC sample proportion") +
+  scale_fill_mpxnyc(name = "Gender\nmodality") +
+    theme_mpxnyc_nomargin()
+
+```
+
+
+
+
+
+
+#### Radar 
+
+
+
+
+```{r plot_radar_gendermodality}
+#| fig-width: 5
+#| fig-height: 5
+#| fig-align: center
+
+targets::tar_read(plotdata_genderid) |>    
+  plot_radar_grid()   +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people(strip.text = ggplot2::element_blank()) +
+  theme_mpxnyc_nomargin()
+
+```
+
+
+
+
+
+
+
+#### Data
+
+
+
+
+
+```{r table_bar_gender}
+
+
+
+targets::tar_read(plotdata_genderid) |>
+  draw_table_1("Gender")
+```
+
+
+
+:::
+
+
+
+
+### PrEP user  {.unnumbered}
+
+
+::: {.panel-tabset}
+
+#### Bar
+
+
+
+
+
+```{r plot_bar_hivprep}
+#| fig-height: 5
+#| fig-width: 4
+#| fig-align: center
+
+  targets::tar_read(plotdata_hivprep) |>
+    plot_bar() +
+    theme_mpxnyc_bar() +
+    scale_axis_mpxnyc() +
+    scale_fill_mpxnyc(name = "Age group") +
+    theme_mpxnyc_nomargin()
+```
+
+
+
+
+
+
+
+#### Radar
+
+
+
+
+
+```{r plot_radar_hivprep}
+#| fig-width: 5
+#| fig-height: 5
+#| fig-align: center
+
+targets::tar_read(plotdata_hivprep) |>    
+  plot_radar_grid()   +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people(strip.text = ggplot2::element_blank()) +
+  theme_mpxnyc_nomargin()
+
+```
+
+
+
+
+
+
+#### Stratified
+
+
+
+
+```{r plot_radar_grid_hivprep_racegender}
+#| fig-width: 4.5
+#| fig-height: 9
+#| fig-align: center
+
+targets::tar_read(plotdata_hivprep_racegender) |>
+  plot_radar_grid()  +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people()  +
+  theme_mpxnyc_nomargin()
+```
+
+
+
+
+
+
+
+#### Data
+
+
+
+
+
+```{r table_radar_grid_hivPrep_demo_group}
+#| fig-width: 10
+#| fig-height: 10
+
+
+targets::tar_read(plotdata_hivprep_racegender) |>
+  draw_table_2("HIV and PrEP Status by Race-Gender") 
+```
+
+
+
+
+:::
+
+
+
+###  MPOX vaccination status  {.unnumbered}
+
+
+::: {.panel-tabset}
+#### Bar
+
+
+
+
+
+```{r plot_bar_mpoxvax}
+#| fig-height: 5
+#| fig-width: 4
+#| fig-align: center
+
+  targets::tar_read(plotdata_mpoxvax) |>
+    plot_bar() +
+    theme_mpxnyc_bar() +
+    scale_axis_mpxnyc() +
+    scale_fill_mpxnyc(name = "Mpox vaccination") +
+    theme_mpxnyc_nomargin()
+```
+
+
+
+
+
+
+#### Radar
+
+
+
+
+
+```{r plot_radar_mpoxvax}
+#| fig-height: 5
+#| fig-width: 4
+#| fig-align: center
+
+  targets::tar_read(plotdata_mpoxvax) |>
+  plot_radar_grid()   +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people(strip.text = ggplot2::element_blank()) +
+  theme_mpxnyc_nomargin()
+```
+
+
+
+
+
+
+#### Stratified
+
+
+
+
+
+```{r plot_radar_grid_monkeypoxVaccine_demo_group}
+#| fig-width: 4.5
+#| fig-height: 9
+#| fig-align: center
+
+targets::tar_read(plotdata_mpoxvax_racegender) |>
+  plot_radar_grid()  +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people() +
+  theme_mpxnyc_nomargin()
+
+```
+
+
+
+
+#### Data
+
+
+
+
+```{r table_radar_grid_monkeypoxVaccine_demo_group}
+
+targets::tar_read(plotdata_mpoxvax_racegender) |>
+  draw_table_2( "Mpox Vax Status by Race-Gender") 
+```
+
+
+
+
+:::
+
+
+### Race  {.unnumbered}
+
+::: {.panel-tabset}
+#### Bar
+
+
+
+
+
+```{r plot_bar_race}
+#| fig-height: 5
+#| fig-width: 4
+#| fig-align: center
+
+targets::tar_read(plotdata_race)  |>
+  plot_bar()  +
+  theme_mpxnyc_bar() +
+  scale_axis_mpxnyc() +
+  scale_fill_mpxnyc(name = "Race") +
+  theme_mpxnyc_nomargin()
+
+```
+
+
+
+
+
+
+#### Radar
+
+
+
+
+```{r plot_radar_race}
+#| fig-width: 5
+#| fig-height: 5
+#| fig-align: center
+
+targets::tar_read(plotdata_race) |>    
+  plot_radar_grid()   +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people(strip.text = ggplot2::element_blank()) +
+  theme_mpxnyc_nomargin()
+
+```
+
+
+
+
+
+
+
+#### Data
+
+
+
+
+
+```{r table_bar_race}
+
+
+targets::tar_read(plotdata_race) |>
+  draw_table_1("Race")
+```
+
+
+
+
+
+:::
+
+
+
+
+### Race and gender {.unnumbered}
+
+
+::: {.panel-tabset}
+#### Bar
+
+
+
+
+```{r plot_bar_racegender}
+#| fig-height: 5
+#| fig-width: 5
+#| fig-align: center
+
+targets::tar_read(plotdata_racegender) |>  
+  plot_bar() +
+  theme_mpxnyc_bar() +
+  scale_axis_mpxnyc() +
+  scale_fill_mpxnyc(name = "Race / gender") +
+  theme_mpxnyc_nomargin()
+
+```
+
+
+
+
+
+
+#### Radar 
+
+
+
+
+
+```{r plot_radar_racegender}
+#| fig-width: 5
+#| fig-height: 5
+#| fig-align: center
+
+targets::tar_read(plotdata_racegender) |>    
+  plot_radar_grid()   +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people(strip.text = ggplot2::element_blank()) +
+  theme_mpxnyc_nomargin()
+
+```
+
+
+
+
+
+
+#### Data
+
+
+
+
+```{r table_bar_demogroup}
+
+
+targets::tar_read(plotdata_racegender)  |>
+  draw_table_1("Race-Gender")
+```
+
+
+
+
+:::
+
+
+### Recruitment Channel  {.unnumbered}
+
+::: {.panel-tabset}
+#### Bar
+
+
+
+
+
+
+```{r plot_bar_recruitment}
+#| fig-height: 5
+#| fig-width: 4
+#| fig-align: center
+
+targets::tar_read(plotdata_channel) |>
+  plot_bar()  +
+  theme_mpxnyc_bar() +
+  scale_axis_mpxnyc() +
+  scale_fill_mpxnyc(name = "Recruitment\nchannel") +
+    theme_mpxnyc_nomargin()
+```
+
+
+
+
+
+
+
+#### Radar 
+
+
+
+
+
+```{r plot_radar_recruitment}
+#| fig-width: 5
+#| fig-height: 5
+#| fig-align: center
+
+targets::tar_read(plotdata_channel) |>    
+  plot_radar_grid()   +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people(strip.text = ggplot2::element_blank()) +
+  theme_mpxnyc_nomargin()
+
+```
+
+
+
+
+
+
+
+#### Data
+
+
+
+
+```{r table_bar_channel}
+
+
+targets::tar_read(plotdata_channel)  |>
+  draw_table_1("Channel")
+```
+
+
+
+
+
+:::
+
+
+
+### Sexual Orientation  {.unnumbered}
+
+::: {.panel-tabset}
+#### Bar
+
+
+
+
+```{r plot_bar_sexorientation}
+#| fig-height: 5
+#| fig-width: 5
+#| fig-align: center
+
+
+targets::tar_read(plotdata_sexorientation) |>    
+  plot_bar() +
+  theme_mpxnyc_bar() +
+  scale_axis_mpxnyc() +
+  scale_fill_mpxnyc(name = "Sexual\norientation") +
+  theme_mpxnyc_nomargin()
+```
+
+
+
+
+#### Radar 
+
+
+
+
+
+```{r plot_radar_sexorientation}
+#| fig-width: 5
+#| fig-height: 5
+#| fig-align: center
+
+targets::tar_read(plotdata_sexorientation) |>    
+  plot_radar_grid()   +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people(strip.text = ggplot2::element_blank()) +
+  theme_mpxnyc_nomargin()
+
+```
+
+
+
+
+#### Stratified
+
+
+
+
+
+```{r plot_radar_grid_sexorientation_racegender}
+#| fig-width: 4.5
+#| fig-height: 9
+#| fig-align: center
+
+targets::tar_read(plotdata_sexorientation_racegender) |>
+  plot_radar_grid()   +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people() +
+  theme_mpxnyc_nomargin()
+
+```
+
+
+
+
+#### Data
+
+
+
+
+```{r draw_radar_grid_sexorientation_racegender}
+
+targets::tar_read(plotdata_sexorientation_racegender)   |>
+  draw_table_2("Sexual Orientation by Race-Gender") 
+```
+
+
+
+
+:::
+
+
+### Sexual or physical contact (in preceding four weeks) with two or more people at the same time  {.unnumbered}
+
+
+::: {.panel-tabset}
+#### Bar
+
+
+
+
+```{r plot_bar_groupsex}
+#| fig-height: 5
+#| fig-width: 3
+#| fig-align: center
+
+targets::tar_read(plotdata_groupsex) |>  
+  plot_bar()  +
+  theme_mpxnyc_bar() +
+  scale_axis_mpxnyc() +
+  scale_fill_mpxnyc(name = "Group contact") +
+  theme_mpxnyc_nomargin()
+
+```
+
+
+
+
+
+#### Radar 
+
+
+
+
+
+```{r plot_radar_demogroup}
+#| fig-width: 5
+#| fig-height: 5
+#| fig-align: center
+
+targets::tar_read(plotdata_groupsex) |>    
+  plot_radar_grid()   +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people(strip.text = ggplot2::element_blank()) +
+  theme_mpxnyc_nomargin()
+
+```
+
+
+
+
+#### Data
+
+
+
+
+```{r table_bar_groupsex}
+#| fig-width: 7
+#| fig-height: 7
+
+
+targets::tar_read(plotdata_groupsex) |> 
+  draw_table_1("Group Sex / Contact past 4 weeks") 
+```
+
+
+
+
+:::
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Places
+
+### Place type {.unnumbered}
+
+
+::: {.panel-tabset}
+
+#### Bar
+
+
+
+
+```{r plot_bar_placetype}
+#| fig-height: 5
+#| fig-width: 4
+#| fig-align: center
+
+  targets::tar_read(plotdata_placetype) |>
+    plot_bar() +
+    theme_mpxnyc_bar() +
+    scale_axis_mpxnyc() +
+    scale_fill_mpxnyc(name = "Place type") +
+    theme_mpxnyc_nomargin()
+```
+
+
+
+
+
+
+#### Radar
+
+
+
+
+
+```{r plot_radar_placetype}
+#| fig-width: 5
+#| fig-height: 5
+#| fig-align: center
+
+targets::tar_read(plotdata_placetype) |>    
+  plot_radar_grid()   +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people(strip.text = ggplot2::element_blank()) +
+  theme_mpxnyc_nomargin()
+
+```
+
+
+
+
+
+
+####  By sex contact
+
+
+
+
+```{r}
+#| fig-cap: MPX NYC contact venue type by distance from home and sexual contact
+#| label: fig-placetype-bar-grid
+#| fig-width: 8
+#| fig-height: 10
+
+
+targets::tar_read(plotdata_placetype_placesex) |>
+  dplyr::mutate(proportion = abs(proportion)) |>
+  plot_radar_stratified() +
+    ggplot2::coord_polar() +
+  scale_axis_mpxnyc() +
+  ggplot2::scale_y_continuous(limits = c(-0.3, 0.84)) +
+  scale_fill_mpxnyc(name = "") +
+  ggplot2::geom_label(ggplot2::aes(label = scales::percent(proportion, accuracy = 1), x = level, y = 0.5 ), border.color = "white", label.size = 0, size = 3.5) +
+  theme_mpxnyc_bar_places(
+      plot.margin = ggplot2::unit(c(0,0,0,0), "cm"), 
+      panel.spacing = ggplot2::unit(0, "cm"),
+      legend.position = "bottom",
+      panel.grid.major.y = ggplot2::element_blank(),
+      panel.grid.major.x = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_blank(),
+      strip.text.y.left = ggplot2::element_text(angle = 90)
+      )
+
+
+
+```
+
+
+
+
+
+#### By distance
+
+
+
+
+```{r}
+#| fig-cap: MPX NYC contact venue type by distance from home and sexual contact
+#| label: fig-placetype-bar-grid2
+#| fig-width: 8
+#| fig-height: 10
+
+
+targets::tar_read(plotdata_placetype_distancefromhome) |>
+  dplyr::mutate(proportion = abs(proportion)) |>
+  plot_radar_stratified() +
+    ggplot2::coord_polar() +
+  scale_axis_mpxnyc() +
+  ggplot2::scale_y_continuous(limits = c(-0.3, 0.84)) +
+  scale_fill_mpxnyc(name = "") +
+  ggplot2::geom_label(ggplot2::aes(label = scales::percent(proportion, accuracy = 1), x = level, y = 0.5 ), border.color = "white", label.size = 0, size = 3.5) +
+  theme_mpxnyc_bar_places(
+      plot.margin = ggplot2::unit(c(0,0,0,0), "cm"), 
+      panel.spacing = ggplot2::unit(0, "cm"),
+      legend.position = "bottom",
+      panel.grid.major.y = ggplot2::element_blank(),
+      panel.grid.major.x = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_blank(),
+      strip.text.y.left = ggplot2::element_text(angle = 90)
+      )
+
+
+
+```
+
+
+
+
+
+####  By distance + sex contact
+
+
+
+
+```{r}
+#| fig-cap: MPX NYC contact venue type by distance from home and sexual contact
+#| label: fig-placetype-bar-grid0
+#| fig-width: 8
+#| fig-height: 10
+
+
+targets::tar_read(plotdata_placetype_bar_grid) |>
+  dplyr::mutate(proportion = abs(proportion)) |>
+  plot_bar_stratified2() +
+    ggplot2::coord_polar() +
+  scale_axis_mpxnyc() +
+  ggplot2::scale_y_continuous(limits = c(-0.3, 0.84)) +
+  scale_fill_mpxnyc(name = "") +
+  ggplot2::geom_label(ggplot2::aes(label = scales::percent(proportion, accuracy = 1), x = level, y = 0.5 ), border.color = "white", label.size = 0, size = 3.5) +
+  theme_mpxnyc_bar_places(
+      plot.margin = ggplot2::unit(c(0,0,0,0), "cm"), 
+      panel.spacing = ggplot2::unit(0, "cm"),
+      legend.position = "bottom",
+      panel.grid.major.y = ggplot2::element_blank(),
+      panel.grid.major.x = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_blank(),
+      strip.text.y.left = ggplot2::element_text(angle = 90)
+      )
+
+
+
+```
+
+
+
+
+
+
+
+
+
+#### Data
+
+
+
+
+
+```{r table_radar_facet_placetype_placesex_distancefromhome}
+
+
+targets::tar_read(plotdata_placetype_distancefromhome_placeSex)  |>
+  draw_table_3("Venue type by home distance and sexual contact")
+
+
+
+```
+
+
+
+
+
+
+:::
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Spatial mixing 
+
+
+
+
+
+
+
+
+
+
+
+```{r }
+#| fig-width: 7
+#| fig-height: 9
+#| 
+data <- targets::tar_read(plotdata_place_census_age)  
+
+jnk <- classInt::classIntervals(data$proportion, n = 5, style = "jenks")
+
+data |> dplyr::mutate(proportion = cut(proportion, breaks = jnk$brks, include.lowest = TRUE)) |>
+  plot_placecensus_map() +
+                  ggplot2::scale_fill_brewer(name = "", na.translate = FALSE) +
+                theme_mpxnyc_blank(legend.position = "bottom",
+                                strip.text.y.left = ggplot2::element_text(size = 14, angle = 65, margin = ggplot2::margin(0,0,0,0), color = "#636363"),
+                                strip.clip = "off")  
+```
+
+```{r}
+#| fig-cap: Spatial mixing matrix by age
+#| label: fig-age-mixing-matrix
+#| fig-width: 5
+#| fig-height: 6
+
+targets::tar_read(plotdata_age_mixing_matrix) |>
+  plot_matrix_mixing() +
+  scale_fill_mpxnyc_gradient("Spatial\nmixing\ncoefficient", labels = scales::label_percent(), breaks = c(-0.5, 0, 0.5, 1), limits = c(-0.5, 1)) +
+  scale_color_mpxnyc_gradient() +
+  ggplot2::scale_alpha_discrete(guide = "none") +
+  theme_mpxnyc_mixing() 
+```
+
+```{r }
+#| fig-width: 7
+#| fig-height: 9
+#| 
+data <- targets::tar_read(plotdata_place_census_sexorientation)  
+
+jnk <- classInt::classIntervals(data$proportion, n = 5, style = "jenks")
+
+data |> dplyr::mutate(proportion = cut(proportion, breaks = jnk$brks, include.lowest = TRUE)) |>
+  plot_placecensus_map() +
+                  ggplot2::scale_fill_brewer(name = "", na.translate = FALSE) +
+                theme_mpxnyc_blank(legend.position = "bottom",
+                                strip.text.y.left = ggplot2::element_text(size = 14, angle = 65, margin = ggplot2::margin(0,0,0,0), color = "#636363"),
+                                strip.clip = "off")  
+```
+
+```{r }
+#| fig-cap: Spatial mixing matrix by sexual orientation
+#| label: fig-sexorientation-mixing-matrix
+#| fig-width: 6
+#| fig-height: 6
+
+
+targets::tar_read(plotdata_sexorientation_mixing_matrix) |>
+  dplyr::filter(ego_level != "Something Else", alter_level != "Something Else") |> 
+  plot_matrix_mixing() +
+  scale_fill_mpxnyc_gradient("Spatial\nmixing\ncoefficient", labels = scales::label_percent(), breaks = c(-0.5, 0, 0.5, 1), limits = c(-0.5,  1.2)) +
+  scale_color_mpxnyc_gradient() +
+  ggplot2::scale_alpha_discrete(guide = "none") +
+  theme_mpxnyc_mixing() 
+
+```
+
+```{r }
+#| fig-width: 7
+#| fig-height: 18
+#| 
+data <- targets::tar_read(plotdata_place_census_racegender)  
+
+jnk <- classInt::classIntervals(data$proportion, n = 5, style = "jenks")
+
+data |> dplyr::mutate(proportion = cut(proportion, breaks = jnk$brks, include.lowest = TRUE)) |>
+  plot_placecensus_map() +
+                  ggplot2::scale_fill_brewer(name = "", na.translate = FALSE) +
+                theme_mpxnyc_blank(legend.position = "bottom",
+                                strip.text.y.left = ggplot2::element_text(size = 14, angle = 65, margin = ggplot2::margin(0,0,0,0), color = "#636363"),
+                                strip.clip = "off")  
+```
+
+```{r}
+#| fig-cap: Spatial mixing matrix by race and gender.
+#| label: fig-racegender-mixing-matrix
+#| fig-width: 9
+#| fig-height: 9
+
+targets::tar_read(plotdata_racegender_mixing_matrix) |>
+    dplyr::filter(ego_level != "Another demographic", alter_level != "Another demographic") |> 
+  plot_matrix_mixing() +
+  scale_fill_mpxnyc_gradient("Spatial\nmixing\ncoefficient", labels = scales::label_percent(), breaks = c(-2, 0,  2), limits = c(-2, 2)) +
+  scale_color_mpxnyc_gradient() +
+  ggplot2::scale_alpha_discrete(guide = "none") +
+  theme_mpxnyc_mixing()
+```
+

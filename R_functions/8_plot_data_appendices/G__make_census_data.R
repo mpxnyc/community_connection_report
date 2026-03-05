@@ -6,7 +6,6 @@ make_edge_census_data             <- function(stratum_variable, bipartite_graph 
     tidygraph::mutate(stratum = tidygraph::.N()$stratum[from]) |>
     tidygraph::mutate(name = {{spatial_unit_label}}) |>
     data.frame() |>
-    dplyr::filter(placeType != "home") |>
     dplyr::group_by(stratum, name) |>
     dplyr::summarize(count = dplyr::n()) |>
     dplyr::group_by(stratum) |>
