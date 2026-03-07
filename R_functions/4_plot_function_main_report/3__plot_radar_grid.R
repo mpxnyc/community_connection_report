@@ -16,7 +16,9 @@ plot_radar_grid       <- function(data){
       width = 1, 
       color = "black"
     ) +
-    ggplot2::facet_wrap(. ~ stratum, labeller = ggplot2::label_wrap_gen(width = 10)) +
+    #ggplot2::facet_wrap(. ~ stratum, labeller = ggplot2::label_wrap_gen(width = 10)) +
+    gganimate::transition_states(stratum) +
     ggplot2::coord_polar() +
-    ggplot2::theme_void()  
+    ggplot2::theme_void()  +
+    ggplot2::labs(title = "{closest_state}") 
 }

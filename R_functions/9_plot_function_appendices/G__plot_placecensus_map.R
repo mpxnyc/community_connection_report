@@ -1,6 +1,6 @@
 plot_placecensus_map        <- function(data){
   
-  data |>
+data |>
     dplyr::pull(stratum) |>
     unique() |>
     purrr::map(
@@ -16,7 +16,9 @@ plot_placecensus_map        <- function(data){
     dplyr::bind_rows() |>
     ggplot2::ggplot() +
     ggplot2::geom_sf(fill = "grey", color = "white") +
-    ggplot2::geom_sf(ggplot2::aes(fill = group), color = "white", linewidth = 0.5) + 
-    ggplot2::facet_wrap(stratum ~ .)
+    ggplot2::geom_sf(ggplot2::aes(fill = group, group = name), color = "white", linewidth = 0.5) + 
+    gganimate::transition_states(stratum, state_length = 30, transition_length = 1) +
+    ggplot2::labs(title = "{closest_state}") 
   
+
 }
