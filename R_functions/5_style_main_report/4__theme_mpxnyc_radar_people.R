@@ -3,7 +3,8 @@ theme_mpxnyc_radar_people <- function(...){
       legend.position = "bottom",
       panel.spacing = ggplot2::unit(0, "cm"),
       strip.clip = "off",
-      strip.text = ggplot2::element_text(size = 10)
+      strip.text = ggplot2::element_text(size = 10),
+      plot.title = ggplot2::element_text(hjust = 0.5, size = 16)
     ) +
     ggplot2::theme(...)
 }

@@ -1,0 +1,105 @@
+
+## Data tables
+
+
+### Age
+
+```{r table_bar_age}
+
+targets::tar_read(plotdata_age) |>
+  draw_table_1("Age")
+```
+
+### Gender identity
+
+
+```{r table_bar_gender}
+
+
+
+targets::tar_read(plotdata_genderid) |>
+  draw_table_1("Gender")
+```
+
+
+
+### Physical contact in group setting
+
+```{r table_bar_groupsex}
+#| fig-width: 7
+#| fig-height: 7
+
+
+targets::tar_read(plotdata_groupsex) |> 
+  draw_table_1("Group Sex / Contact past 4 weeks") 
+```
+
+
+
+
+
+### PrEP user
+
+
+```{r table_radar_grid_hivPrep_demo_group}
+#| fig-width: 10
+#| fig-height: 10
+
+
+targets::tar_read(plotdata_hivprep_racegender) |>
+  draw_table_2("HIV and PrEP Status by Race-Gender") 
+```
+
+
+
+### Mpox vaccination
+
+```{r table_radar_grid_monkeypoxVaccine_demo_group}
+
+targets::tar_read(plotdata_mpoxvax_racegender) |>
+  draw_table_2( "Mpox Vax Status by Race-Gender") 
+```
+
+
+
+
+### Race
+
+
+```{r table_bar_race}
+
+
+targets::tar_read(plotdata_race) |>
+  draw_table_1("Race")
+```
+
+
+### Race and gender
+
+```{r table_bar_demogroup}
+
+
+targets::tar_read(plotdata_racegender)  |>
+  draw_table_1("Race-Gender")
+```
+
+
+### Recruitment
+
+```{r table_bar_channel}
+
+
+targets::tar_read(plotdata_channel)  |>
+  draw_table_1("Channel")
+```
+
+
+### Sexual orientation
+
+```{r draw_radar_grid_sexorientation_racegender}
+
+targets::tar_read(plotdata_sexorientation_racegender)   |>
+  draw_table_2("Sexual Orientation by Race-Gender") 
+```
+
+
