@@ -42,6 +42,7 @@ working_data |>
     gganimate::transition_states(stratum, state_length = 100, transition_length = 1) +
     ggplot2::coord_polar() +
     ggplot2::theme_void()  +
-    ggplot2::labs(title = "{previous_state}") 
+    ggplot2::labs(title = "{previous_state}")  +
+    ggplot2::guides(fill = ggplot2::guide_legend(nrow = 2))
 
 }

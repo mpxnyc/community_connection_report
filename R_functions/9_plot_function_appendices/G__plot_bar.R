@@ -11,7 +11,8 @@ plot_bar                 <- function(data){
       ggplot2::aes(x = level, y = proportion + 0.05, label = count), 
       alpha = 0.1,
       size = 8
-    ) 
+    ) +
+    ggplot2::guides(fill = ggplot2::guide_legend(nrow = 2))
   
   
 }
