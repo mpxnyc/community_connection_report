@@ -58,6 +58,238 @@ list(
                       command     = make_intervention_results_centrality(data_bipartite_graph_collected, data_intervention_results_coverage_collected)
                     ),
   targets::tar_target(
+                    name        = plotdata_age,
+                    command     = make_table_freq1(
+                                                  age, person_analysis = TRUE,
+                                                  data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                                  data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                                  )
+                    ),  
+  targets::tar_target(
+                    name        = plotdata_censustract_home,
+                    command     = make_table_freq1(
+                                                  censusTractHome, person_analysis = TRUE,
+                                                  data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                                  data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                                )
+                    ),   
+  targets::tar_target(
+                  name        = plotdata_channel,
+                  command     = make_table_freq1(
+                                                channel, person_analysis = TRUE,
+                                                data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                                data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                              )
+  ),
+  targets::tar_target(
+                  name        = plotdata_countfriends,
+                  command     = make_table_freq1(
+                                                countFriendsCut, person_analysis = TRUE,
+                                                data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                                data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                              )
+  ),  
+  targets::tar_target(
+                  name        = plotdata_countphysical,
+                  command     = make_table_freq1(
+                                                countPhysicalCut, person_analysis = TRUE,
+                                                data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                                data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                              )
+  ),   
+  targets::tar_target(
+                  name        = plotdata_countsex,
+                  command     = make_table_freq1(
+                                                countSex, person_analysis = TRUE,
+                                                data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                                data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                              )
+  ),   
+  targets::tar_target(
+                name        = plotdata_covidtestpositive,
+                command     = make_table_freq1(
+                                              covidTestPositive, person_analysis = TRUE,
+                                              data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                              data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                            )
+  ),  
+  targets::tar_target(
+              name        = plotdata_genderid,
+              command     = make_table_freq1(
+                                              genderId, person_analysis = TRUE,
+                                              data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                              data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                            )
+  ), 
+  targets::tar_target(
+              name        = plotdata_groupsex,
+              command     = make_table_freq1(
+                                              groupSex, person_analysis = TRUE,
+                                              data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                              data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                            )
+  ), 
+  targets::tar_target(
+            name        = plotdata_hivprep,
+            command     = make_table_freq1(
+                                              hivPrep, person_analysis = TRUE,
+                                              data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                              data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                            )
+  ),   
+  targets::tar_target(
+            name        = plotdata_hivstatus,
+            command     = make_table_freq1(
+                                            hivStatus, person_analysis = TRUE,
+                                            data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                            data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                          )
+  ),   
+  targets::tar_target(
+            name        = plotdata_hivsuppressed,
+            command     = make_table_freq1(
+                                            hivSuppressed, person_analysis = TRUE,
+                                            data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                            data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                          )
+  ),  
+  targets::tar_target(
+            name        = plotdata_mpoxcare,
+            command     = make_table_freq1(
+                                            monkeypoxCare, person_analysis = TRUE,
+                                            data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                            data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                          )
+  ),    
+  targets::tar_target(
+            name        = plotdata_mpoxtest,
+            command     = make_table_freq1(
+                                            monkeypoxTest, person_analysis = TRUE,
+                                            data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                            data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                          )
+  ),
+  targets::tar_target(
+            name        = plotdata_mpoxvax,
+            command     = make_table_freq1(
+                                            monkeypoxVaccine, person_analysis = TRUE,
+                                            data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                            data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                          )
+  ),  
+  targets::tar_target(
+            name        = plotdata_stisymptoms,
+            command     = make_table_freq1(
+                                            num_symptomsCut, person_analysis = TRUE,
+                                            data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                            data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                          )
+  ),  
+  targets::tar_target(
+            name        = plotdata_race,
+            command     = make_table_freq1(
+                                            race, person_analysis = TRUE,
+                                            data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                            data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                          )
+  ),
+  targets::tar_target(
+            name        = plotdata_sexorientation,
+            command     = make_table_freq1(
+                                            sexOrientation, person_analysis = TRUE,
+                                            data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                            data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                          )
+  ), 
+  targets::tar_target(
+            name        = plotdata_traveltime,
+            command     = make_table_freq1(
+                                          travelTimeCut, person_analysis = TRUE,
+                                          data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                          data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                        )
+  ),  
+  targets::tar_target(
+          name        = plotdata_racegender,
+          command     = make_table_freq1(demo_group, person_analysis = TRUE,
+                                         data_bipartite_graph_collected = data_bipartite_graph_collected,
+                                         data_bipartite_graph_simulated = data_bipartite_graph_simulated
+                                         )
+  ),
+  
+  
+  
+  
+  targets::tar_target(
+                    name        = plotdata_age_racegender,
+                    command     = make_plotdata_racegender_radar_grid(age, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                  ),
+  targets::tar_target(
+                    name        = plotdata_censustract_home_racegender,
+                    command     = make_plotdata_racegender_radar_grid(censusTractHome, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                  ),
+  targets::tar_target(
+                      name        = plotdata_channel_racegender,
+                      command     = make_plotdata_racegender_radar_grid(channel, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                    ),
+  targets::tar_target(
+                      name        = plotdata_countfriends_racegender,
+                      command     = make_plotdata_racegender_radar_grid(countFriends, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                    ),
+  targets::tar_target(
+                      name        = plotdata_countphysical_racegender,
+                      command     = make_plotdata_racegender_radar_grid(countPhysical, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                    ),
+  targets::tar_target(
+                      name        = plotdata_countsex_racegender,
+                      command     = make_plotdata_racegender_radar_grid(countSex, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                    ),
+  targets::tar_target(
+                      name        = plotdata_covidtestpositive_racegender,
+                      command     = make_plotdata_racegender_radar_grid(covidTestPositive, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                    ),
+  targets::tar_target(
+                      name        = plotdata_groupsex_racegender,
+                      command     = make_plotdata_racegender_radar_grid(groupSex, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                    ),
+  targets::tar_target(
+                      name        = plotdata_hivprep_racegender,
+                      command     = make_plotdata_racegender_radar_grid(hivPrep,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                    ), 
+  targets::tar_target(
+                      name        = plotdata_hivstatus_racegender,
+                      command     = make_plotdata_racegender_radar_grid(hivStatus,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                    ),   
+  targets::tar_target(
+                      name        = plotdata_hivsuppressed_racegender,
+                      command     = make_plotdata_racegender_radar_grid(hivSuppressed,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                    ),   
+  targets::tar_target(
+                        name        = plotdata_mpoxcare_racegender,
+                        command     = make_plotdata_racegender_radar_grid(monkeypoxCare,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                      ), 
+  targets::tar_target(
+                        name        = plotdata_mpoxtest_racegender,
+                        command     = make_plotdata_racegender_radar_grid(monkeypoxTest,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                      ), 
+  targets::tar_target(
+                        name        = plotdata_mpoxvax_racegender,
+                        command     = make_plotdata_racegender_radar_grid(monkeypoxVaccine,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                      ), 
+  targets::tar_target(
+                        name        = plotdata_numsymptoms_racegender,
+                        command     = make_plotdata_racegender_radar_grid(num_symptomsCut,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                      ),                    
+  targets::tar_target(
+                      name        = plotdata_sexorientation_racegender,
+                      command     = make_plotdata_racegender_radar_grid(sexOrientation, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                    ), 
+  targets::tar_target(
+                      name        = plotdata_traveltime_racegender,
+                      command     = make_plotdata_racegender_radar_grid(travelTime, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                    ),
+  
+  targets::tar_target(
                       name        = plotdata_sexorientation_by_racegender_radar_grid,
                       command     = make_plotdata_racegender_radar_grid(sexOrientation,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
                       ),
@@ -89,83 +321,7 @@ list(
                     name        = plotdata_age_mixing_matrix,
                     command     = make_table_mixing_2(age, data_bipartite_graph_simulated)
                   ),
-  targets::tar_target(
-                    name        = plotdata_age,
-                    command     = make_table_freq1(age, person_analysis = TRUE,
-                                                   data_bipartite_graph_collected = data_bipartite_graph_collected,
-                                                   data_bipartite_graph_simulated = data_bipartite_graph_simulated
-                                                   )
-                  ),
-  targets::tar_target(
-                  name        = plotdata_channel,
-                  command     = make_table_freq1(channel, person_analysis = TRUE,
-                                                 data_bipartite_graph_collected = data_bipartite_graph_collected,
-                                                 data_bipartite_graph_simulated = data_bipartite_graph_simulated
-                    )
-                  ),
-  targets::tar_target(
-                    name        = plotdata_genderid,
-                    command     = make_table_freq1(genderId, person_analysis = TRUE,
-                                                   data_bipartite_graph_collected = data_bipartite_graph_collected,
-                                                   data_bipartite_graph_simulated = data_bipartite_graph_simulated
-                    )
-                  ),
-  
-  targets::tar_target(
-                    name        = plotdata_sexorientation,
-                    command     = make_table_freq1(sexOrientation, person_analysis = TRUE,
-                                                   data_bipartite_graph_collected = data_bipartite_graph_collected,
-                                                   data_bipartite_graph_simulated = data_bipartite_graph_simulated
-                    )
-                  ),
-  targets::tar_target(
-                  name        = plotdata_groupsex,
-                  command     = make_table_freq1(groupSex, person_analysis = TRUE,
-                                                 data_bipartite_graph_collected = data_bipartite_graph_collected,
-                                                 data_bipartite_graph_simulated = data_bipartite_graph_simulated
-                  )
-                ),
-  targets::tar_target(
-                name        = plotdata_race,
-                command     = make_table_freq1(race, person_analysis = TRUE,
-                                               data_bipartite_graph_collected = data_bipartite_graph_collected,
-                                               data_bipartite_graph_simulated = data_bipartite_graph_simulated
-                )
-              ),
-  targets::tar_target(
-                name        = plotdata_racegender,
-                command     = make_table_freq1(demo_group, person_analysis = TRUE,
-                                               data_bipartite_graph_collected = data_bipartite_graph_collected,
-                                               data_bipartite_graph_simulated = data_bipartite_graph_simulated
-                )
-              ),
-  targets::tar_target(
-                name        = plotdata_sexorientation_racegender,
-                command     = make_plotdata_racegender_radar_grid(sexOrientation,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
-                
-              ),
-  targets::tar_target(
-    name        = plotdata_hivprep,
-    command     = make_table_freq1(hivPrep, person_analysis = TRUE,
-                                   data_bipartite_graph_collected = data_bipartite_graph_collected,
-                                   data_bipartite_graph_simulated = data_bipartite_graph_simulated)
-    ),
-  targets::tar_target(
-                name        = plotdata_hivprep_racegender,
-                command     = make_plotdata_racegender_radar_grid(hivPrep,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
-              ),
-  targets::tar_target(
-    name        = plotdata_mpoxvax,
-    command     = make_table_freq1(monkeypoxVaccine, person_analysis = TRUE,
-                                   data_bipartite_graph_collected = data_bipartite_graph_collected,
-                                   data_bipartite_graph_simulated = data_bipartite_graph_simulated
-    )
-  ),
-  targets::tar_target(
-              name        = plotdata_mpoxvax_racegender,
-              command     = make_plotdata_racegender_radar_grid(monkeypoxVaccine,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
-              
-            ),
+
   targets::tar_target(
             name        = plotdata_placetype_distancefromhome_placeSex,
             command     = make_table_freq3(placeType, distanceFromHome, placeSex, person_analysis = FALSE,
