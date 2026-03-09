@@ -398,6 +398,14 @@ list(
       bipartite_graph = data_bipartite_graph_collected, 
       spatial_unit_label = place_community
     )
+  ),
+  targets::tar_target(
+    name        = plotdata_place_census_overall,
+    command     = make_edge_census_data(
+      stratum_variable = overall, 
+      bipartite_graph = data_bipartite_graph_collected, 
+      spatial_unit_label = place_community
+    )
   )
   
   

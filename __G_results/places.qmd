@@ -1,4 +1,50 @@
 
-## Gatherings
+## Gathering community districts
+
+### Gathering locations {.unnumbered}
+
+::: {.panel-tabset}
+
+#### Overall
+```{r }
+#| fig-width: 5
+#| fig-height: 5
+#| fig-cap: Community districts reported by participants as places of residence or gathering were ranked by frequency and divided into three groups, each representing approximately one third of all reported locations. Group A contains the most frequently reported districts, followed by Groups B and C.
+
+
+
+targets::tar_read(plotdata_place_census_overall)  |> 
+  plot_placecensus_map() +
+  scale_fill_mpxnyc(name = "", na.translate = FALSE, option = "light") +
+  theme_mpxnyc_blank(
+                      legend.position = "bottom", 
+                      strip.text.y.left = ggplot2::element_text(size = 14, angle = 65, margin = ggplot2::margin(0,0,0,0), color = "#636363"),
+                      strip.clip = "off"
+                      )  
+
+```
+
+
+#### Stratified
+```{r }
+#| fig-width: 5
+#| fig-height: 5
+#| fig-cap: Community districts reported by participants in the race and gender group of interest as places of residence or gathering were ranked by frequency and divided into three groups, each representing approximately one third of all reported locations. Group A contains the most frequently reported districts, followed by Groups B and C.
+
+
+
+targets::tar_read(plotdata_place_census_racegender)  |> 
+  plot_placecensus_map() +
+  scale_fill_mpxnyc(name = "", na.translate = FALSE, option = "light") +
+  theme_mpxnyc_blank(
+                      legend.position = "bottom", 
+                      strip.text.y.left = ggplot2::element_text(size = 14, angle = 65, margin = ggplot2::margin(0,0,0,0), color = "#636363"),
+                      strip.clip = "off"
+                      )  
+
+```
+
+:::
+
 
 {{< include __G_results/_places/place_type.qmd >}}
