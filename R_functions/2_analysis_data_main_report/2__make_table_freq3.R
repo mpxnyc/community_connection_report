@@ -43,11 +43,11 @@ make_table_freq3                <- function(
       stratum_b       = {{stratum_variable_b}}
     ) |>
     dplyr::filter(!is.na(level)) |>
-    dplyr::mutate(
-      level = as.character(level),
-      stratum_a = as.character(stratum_a),
-      stratum_b = as.character(stratum_b)
-    ) |>
+    # dplyr::mutate(
+    #   level = as.character(level),
+    #   stratum_a = as.character(stratum_a),
+    #   stratum_b = as.character(stratum_b)
+    # ) |>
     dplyr::group_by(level, stratum_a, stratum_b) |>
     dplyr::summarize(count = dplyr::n()) |>
     dplyr::ungroup() |>
@@ -63,11 +63,11 @@ make_table_freq3                <- function(
       stratum_a       = {{stratum_variable_a}},
       stratum_b       = {{stratum_variable_b}}
     ) |>
-    dplyr::mutate(
-      level = as.character(level),
-      stratum_a = as.character(stratum_a),
-      stratum_b = as.character(stratum_b)
-    ) |>
+    # dplyr::mutate(
+    #   level = as.character(level),
+    #   stratum_a = as.character(stratum_a),
+    #   stratum_b = as.character(stratum_b)
+    # ) |>
     dplyr::group_by(rep, level, stratum_a, stratum_b) |>
     dplyr::summarize(count = dplyr::n()) |>
     dplyr::ungroup() |>
