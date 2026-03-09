@@ -277,7 +277,7 @@ list(
                         command     = make_plotdata_racegender_radar_grid(monkeypoxVaccine,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
                       ), 
   targets::tar_target(
-                        name        = plotdata_numsymptoms_racegender,
+                        name        = plotdata_stisymptoms_racegender,
                         command     = make_plotdata_racegender_radar_grid(num_symptomsCut,data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
                       ),                    
   targets::tar_target(

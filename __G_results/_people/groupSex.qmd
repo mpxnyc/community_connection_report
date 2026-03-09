@@ -1,39 +1,16 @@
-### Sexual or physical contact (in preceding four weeks) with two or more people at the same time  {.unnumbered}
+###  Recent physical or sexual contact in group setting  {.unnumbered}
 
+`r targets::tar_read(config_list)[[1]][["variables"]][["groupSex"]][["question"]]`
 
 ::: {.panel-tabset}
-#### Bar
+#### Overall
 
-```{r plot_bar_groupsex}
-#| fig-height: 5
-#| fig-width: 3
-#| fig-align: center
-
-targets::tar_read(plotdata_groupsex) |>  
-  plot_bar()  +
-  theme_mpxnyc_bar() +
-  scale_axis_mpxnyc() +
-  scale_fill_mpxnyc(name = "Group contact") +
-  theme_mpxnyc_nomargin()
-
-```
+{{< include ___figures/fig-bar-groupsex.qmd >}}
 
 
-#### Radar 
+#### Stratified
 
+{{< include ___figures/fig-stratified-radar-groupsex.qmd >}}
 
-```{r plot_radar_demogroup}
-#| fig-width: 5
-#| fig-height: 5
-#| fig-align: center
-
-targets::tar_read(plotdata_groupsex) |>    
-  plot_radar_grid()   +
-  scale_radial_mpxnyc() +
-  scale_fill_mpxnyc(name = "") +
-  theme_mpxnyc_radar_people(strip.text = ggplot2::element_blank()) +
-  theme_mpxnyc_nomargin()
-
-```
 
 :::

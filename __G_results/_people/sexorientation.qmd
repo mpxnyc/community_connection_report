@@ -1,56 +1,16 @@
+###  Sexual orientation  {.unnumbered}
 
-### Sexual Orientation  {.unnumbered}
+`r targets::tar_read(config_list)[[1]][["variables"]][["sexOrientation"]][["question"]]`
 
 ::: {.panel-tabset}
-#### Bar
+#### Overall
 
-```{r plot_bar_sexorientation}
-#| fig-height: 5
-#| fig-width: 5
-#| fig-align: center
+{{< include ___figures/fig-bar-sexorientation.qmd >}}
 
-
-targets::tar_read(plotdata_sexorientation) |>    
-  plot_bar() +
-  theme_mpxnyc_bar() +
-  scale_axis_mpxnyc() +
-  scale_fill_mpxnyc(name = "Sexual\norientation") +
-  theme_mpxnyc_nomargin()
-```
-
-#### Radar 
-
-
-```{r plot_radar_sexorientation}
-#| fig-width: 5
-#| fig-height: 5
-#| fig-align: center
-
-targets::tar_read(plotdata_sexorientation) |>    
-  plot_radar_grid()   +
-  scale_radial_mpxnyc() +
-  scale_fill_mpxnyc(name = "") +
-  theme_mpxnyc_radar_people(strip.text = ggplot2::element_blank()) +
-  theme_mpxnyc_nomargin()
-
-```
 
 #### Stratified
 
-
-```{r plot_radar_grid_sexorientation_racegender}
-#| fig-width: 4.5
-#| fig-height: 9
-#| fig-align: center
-
-targets::tar_read(plotdata_sexorientation_racegender) |>
-  plot_radar_grid()   +
-  scale_radial_mpxnyc() +
-  scale_fill_mpxnyc(name = "") +
-  theme_mpxnyc_radar_people() +
-  theme_mpxnyc_nomargin()
-
-```
+{{< include ___figures/fig-stratified-radar-sexorientation.qmd >}}
 
 
 :::
