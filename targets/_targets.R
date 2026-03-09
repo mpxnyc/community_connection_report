@@ -100,7 +100,7 @@ list(
   targets::tar_target(
                   name        = plotdata_countsex,
                   command     = make_table_freq1(
-                                                countSex, person_analysis = TRUE,
+                                                countSexCut, person_analysis = TRUE,
                                                 data_bipartite_graph_collected = data_bipartite_graph_collected,
                                                 data_bipartite_graph_simulated = data_bipartite_graph_simulated
                                               )
@@ -234,15 +234,15 @@ list(
                     ),
   targets::tar_target(
                       name        = plotdata_countfriends_racegender,
-                      command     = make_plotdata_racegender_radar_grid(countFriends, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                      command     = make_plotdata_racegender_radar_grid(countFriendsCut, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
                     ),
   targets::tar_target(
                       name        = plotdata_countphysical_racegender,
-                      command     = make_plotdata_racegender_radar_grid(countPhysical, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                      command     = make_plotdata_racegender_radar_grid(countPhysicalCut, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
                     ),
   targets::tar_target(
                       name        = plotdata_countsex_racegender,
-                      command     = make_plotdata_racegender_radar_grid(countSex, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                      command     = make_plotdata_racegender_radar_grid(countSexCut, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
                     ),
   targets::tar_target(
                       name        = plotdata_covidtestpositive_racegender,
@@ -286,7 +286,7 @@ list(
                     ), 
   targets::tar_target(
                       name        = plotdata_traveltime_racegender,
-                      command     = make_plotdata_racegender_radar_grid(travelTime, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
+                      command     = make_plotdata_racegender_radar_grid(travelTimeCut, data_bipartite_graph_collected = data_bipartite_graph_collected, data_bipartite_graph_simulated = data_bipartite_graph_simulated )
                     ),
   
   targets::tar_target(
