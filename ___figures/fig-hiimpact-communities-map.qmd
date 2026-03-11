@@ -1,14 +1,35 @@
 ```{r}
-#| fig-cap: High-coverage community districts under both strategies (66 % coverage). 
-#| label: fig-hiimpact-communities-map
+#| fig-cap: High-coverage community districts under contact neutralizing strategy (66 % coverage). 
+#| label: fig-hiimpact-communities-map-contact
 #| fig-width: 7
 #| fig-height: 9
 
 targets::tar_read(plotdata_coverage_approach_choro) |>
+  dplyr::filter(intervention_priority == "contact") |>
                 plot_coverage_map()  +
                 scale_fill_mpxnyc(name = "", na.translate = FALSE, option = "light") +
                 theme_mpxnyc_blank(legend.position = "bottom",
-                                strip.text.y.left = ggplot2::element_text(size = 14, angle = 65, margin = ggplot2::margin(0,0,0,0), color = "#636363"),
+                                strip.text.y.left = ggplot2::element_blank(),
                                 strip.clip = "off")  
+
+
+
+```
+
+```{r}
+#| fig-cap: High-coverage community districts under movement neutralizing strategy (66 % coverage). 
+#| label: fig-hiimpact-communities-map-movement
+#| fig-width: 7
+#| fig-height: 9
+
+targets::tar_read(plotdata_coverage_approach_choro) |>
+  dplyr::filter(intervention_priority == "movement") |>
+                plot_coverage_map()  +
+                scale_fill_mpxnyc(name = "", na.translate = FALSE, option = "light") +
+                theme_mpxnyc_blank(legend.position = "bottom",
+                                strip.text.y.left = ggplot2::element_blank(),
+                                strip.clip = "off")  
+
+
 
 ```
