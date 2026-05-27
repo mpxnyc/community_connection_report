@@ -8,7 +8,7 @@ plot_radar_grid       <- function(data){
   }
   
   
-  strata <- working_data$stratum |> as.character() |> unique()
+  strata <- working_data$stratum |> as.character() |> na.omit() |> unique()
   
   overall_data <- strata |>
     purrr::map(

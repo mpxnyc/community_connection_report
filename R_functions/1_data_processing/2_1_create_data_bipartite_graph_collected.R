@@ -2,19 +2,25 @@ create_data_bipartite_graph_collected <- function(place_data, participant_data, 
   
   analytic_scale = config_list[[1]][["settings"]][["analytic_scale"]]
   
+  place_sex_levels <- c("home", place_data$placeSex |> levels())
+  place_type_levels <- c("home", place_data$placeType |> levels())
   
   place_edges                 <- place_data |>
     dplyr::rename(from = userId) |>
-    dplyr::mutate(home = FALSE)
+    dplyr::mutate(home = FALSE) |>
+    dplyr::mutate(placeSex = factor(placeSex, place_sex_levels)) |>
+    dplyr::mutate(placeType = factor(placeType, place_type_levels)) 
   
   home_edges                  <- participant_data |>
+    dplyr::rename(from = userId) |>
     dplyr::mutate(
-      from                 = userId, 
       intervention_setting = "home", 
-      placeSex             = "home", 
-      placeType            = "home"
+      placeSex = "home",
+      placeType = "home"
     )  |>
-    dplyr::mutate(home = TRUE)
+    dplyr::mutate(home = TRUE) |>
+    dplyr::mutate(placeSex = factor(placeSex, place_sex_levels)) |>
+    dplyr::mutate(placeType = factor(placeType, place_type_levels))     
   
   
   

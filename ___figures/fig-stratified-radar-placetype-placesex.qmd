@@ -1,0 +1,18 @@
+
+```{r plot_stratified_radar_placetype_placesex, gganimate = list(nframes = 70, fps = 2)}
+#| fig-width: 5
+#| fig-height: 7
+#| fig-align: center
+
+
+targets::tar_read(plotdata_placetype_placesex) |>
+  dplyr::filter(stratum != "home") |>
+  dplyr::mutate(stratum = factor(stratum, levels(stratum)[levels(stratum) != "home"])) |>
+  plot_radar_grid() +
+  scale_radial_mpxnyc() +
+  scale_fill_mpxnyc(name = "") +
+  theme_mpxnyc_radar_people() +
+  theme_mpxnyc_nomargin()
+
+```
+

@@ -338,17 +338,24 @@ list(
     ),
   targets::tar_target(
             name        = plotdata_placetype_distancefromhome,
-            command     = make_table_freq2(placeType, distanceFromHome, person_analysis = FALSE,
-                                           data_bipartite_graph_collected = data_bipartite_graph_collected,
-                                           data_bipartite_graph_simulated = data_bipartite_graph_simulated
-            )
+            command     = make_plotdata_stratified_radar_grid(
+                                                              variable = placeType, 
+                                                              stratifying_variable = distanceFromHome,
+                                                              person_analysis = FALSE,
+                                                              data_bipartite_graph_collected = data_bipartite_graph_collected, 
+                                                              data_bipartite_graph_simulated = data_bipartite_graph_simulated 
+                                                              )
           ),
+  
   targets::tar_target(
             name        = plotdata_placetype_placesex,
-            command     = make_table_freq2(placeType, placeSex, person_analysis = FALSE,
-                                           data_bipartite_graph_collected = data_bipartite_graph_collected,
-                                           data_bipartite_graph_simulated = data_bipartite_graph_simulated
-            )
+            command     = make_plotdata_stratified_radar_grid(
+                                                              variable = placeType, 
+                                                              stratifying_variable = placeSex,
+                                                              person_analysis = FALSE,
+                                                              data_bipartite_graph_collected = data_bipartite_graph_collected, 
+                                                              data_bipartite_graph_simulated = data_bipartite_graph_simulated 
+                                                            )
           ),
   targets::tar_target(
             name        = plotdata_coverage_approach_choro,
